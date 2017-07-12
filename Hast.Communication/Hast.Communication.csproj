@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71B55241-A31C-43F5-9B46-40B53099DF56}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hast.Communication</RootNamespace>
+    <AssemblyName>Hast.Communication</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Constants\CommandTypes.cs" />
+    <Compile Include="Constants\CommunicationConstants.cs" />
+    <Compile Include="Exceptions\EthernetCommunicationException.cs" />
+    <Compile Include="Exceptions\HardwareExecutionResultMismatchException.cs" />
+    <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
+    <Compile Include="Extensibility\Events\IMemberHardwareExecutionContext.cs" />
+    <Compile Include="Extensibility\Events\IMemberInvocationEventHandler.cs" />
+    <Compile Include="Extensibility\IMemberInvocationContext.cs" />
+    <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStep.cs" />
+    <Compile Include="Extensibility\Pipeline\IMemberInvocationPipelineStepContext.cs" />
+    <Compile Include="Extensibility\Pipeline\ISerialPortConfigurator.cs" />
+    <Compile Include="Extensions\UdpClientExtensions.cs" />
+    <Compile Include="Extensions\TcpClientExtensions.cs" />
+    <Compile Include="Extensions\SerialPortExtensions.cs" />
+    <Compile Include="Extensions\ByteArrayExtensions.cs" />
+    <Compile Include="Helpers\EthernetCommunicationHelpers.cs" />
+    <Compile Include="IMemberInvocationHandlerFactory.cs" />
+    <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\FpgaEndpoint.cs" />
+    <Compile Include="Models\HardwareExecutionInformation.cs" />
+    <Compile Include="IProxyGenerator.cs" />
+    <Compile Include="MemberInvocationHandlerFactory.cs" />
+    <Compile Include="Models\IHardwareExecutionContext.cs" />
+    <Compile Include="Models\IPooledDevice.cs" />
+    <Compile Include="Models\IReservedDevice.cs" />
+    <Compile Include="Models\IDevice.cs" />
+    <Compile Include="Models\IFpgaEndpoint.cs" />
+    <Compile Include="Models\PooledDevice.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProxyGenerator.cs" />
+    <Compile Include="Services\DevicePoolManager.cs" />
+    <Compile Include="Services\DevicePoolPopulator.cs" />
+    <Compile Include="Services\FpgaIpEndpointFinder.cs" />
+    <Compile Include="Services\IDevicePoolManager.cs" />
+    <Compile Include="Services\IDevicePoolPopulator.cs" />
+    <Compile Include="Services\IFpgaIpEndpointFinder.cs" />
+    <Compile Include="Services\ICommunicationServiceSelector.cs" />
+    <Compile Include="Services\EthernetCommunicationService.cs" />
+    <Compile Include="Services\CommunicationServiceSelector.cs" />
+    <Compile Include="Services\CommunicationServiceBase.cs" />
+    <Compile Include="Services\SerialPortCommunicationService.cs" />
+    <Compile Include="Services\ICommunicationService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
+      <Project>{9DEE53C2-83AC-4048-ADAB-2993FAFFE4EA}</Project>
+      <Name>Hast.Transformer.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Common\Hast.Common.csproj">
+      <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
+      <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
+      <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
+      <Name>Orchard.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7249D1E5-ABEC-40BB-9238-5E54AB0E1E94}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hast.Samples.Consumer</RootNamespace>
+    <AssemblyName>Hast.Samples.Consumer</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sample.cs" />
+    <Compile Include="SampleRunners\GenomeMatcherSampleRunner.cs" />
+    <Compile Include="SampleRunners\ParallelAlgorithmSampleRunner.cs" />
+    <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
+    <Compile Include="SampleRunners\MonteCarloAlgorithmSampleRunner.cs" />
+    <Compile Include="SampleRunners\ObjectOrientedShowcaseSampleRunner.cs" />
+    <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
+    <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
+    <Compile Include="SampleRunners\SimdCalculatorSampleRunner.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
+      <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
+      <Name>Hast.Transformer.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
+      <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
+      <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
+      <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
+      <Name>Hast.Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj">
+      <Project>{0d13986f-fa33-4898-a0de-c173764663f0}</Project>
+      <Name>Hast.Transformer.Vhdl.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Remote.Client\Hast.Remote.Client.csproj">
+      <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
+      <Name>Hast.Remote.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
+      <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
+      <Name>Hast.Samples.SampleAssembly</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fpga.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
