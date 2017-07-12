@@ -5,6 +5,7 @@ using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using System.Linq;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using System.IO;
 
 namespace Hast.Samples.Consumer
 {
@@ -20,14 +21,14 @@ namespace Hast.Samples.Consumer
         /// is relative (like the default) then the file will be saved along this project's executable in the bin output
         /// directory. If an empty string or null is specified then no file will be generated.
         /// </summary>
-        public static string VhdlOutputFilePath = @"Hast_IP.vhd";
+        public static string VhdlOutputFilePath = @"Tömörítő.vhd";
 
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one. Currently the following samples are not up-to-date
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.PrimeCalculator;
+        public static Sample SampleToRun = Sample.LzmaCompressor;
     }
 
 
@@ -35,6 +36,25 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
+            var test = false;
+
+            if (test)
+            {
+                const string UncompressedTextFilePath = "LongTextFile.txt";
+                const string CompressedTextFilePath = "Compressed.txt.lzma";
+                var lzmaCompressor = new LzmaCompressor();
+
+                if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
+
+                var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
+
+                var outputFileBytes = lzmaCompressor.CompressBytes(inputFileBytes);
+
+                File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
+
+                return;
+            }
+
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
             Task.Run(async () =>
@@ -96,6 +116,9 @@ namespace Hast.Samples.Consumer
                             case Sample.ImageProcessingAlgorithms:
                                 ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.LzmaCompressor:
+                                LzmaCompressorSampleRunner.Configure(configuration);
+                                break;
                             case Sample.MonteCarloAlgorithm:
                                 MonteCarloAlgorithmSampleRunner.Configure(configuration);
                                 break;
@@ -134,6 +157,8 @@ namespace Hast.Samples.Consumer
                             await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
                         }
 
+                        // Temporary return to only test transformation.
+                        return;
 
                         // Running samples.
                         switch (Configuration.SampleToRun)
@@ -146,6 +171,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.ImageProcessingAlgorithms:
                                 await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.LzmaCompressor:
+                                await LzmaCompressorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.MonteCarloAlgorithm:
                                 await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);

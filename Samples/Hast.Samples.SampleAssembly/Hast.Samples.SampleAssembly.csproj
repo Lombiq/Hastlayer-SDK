@@ -43,6 +43,20 @@
   <ItemGroup>
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="GenomeMatcher.cs" />
+    <Compile Include="LzmaCompressor.cs" />
+    <Compile Include="Lzma\Helpers\LzmaHelpers.cs" />
+    <Compile Include="Lzma\Models\EncoderProperties.cs" />
+    <Compile Include="Lzma\RangeCoder\BitEncoder.cs" />
+    <Compile Include="Lzma\RangeCoder\BitTreeEncoder.cs" />
+    <Compile Include="Lzma\Constants\BaseConstants.cs" />
+    <Compile Include="Lzma\Constants\RangeEncoderConstants.cs" />
+    <Compile Include="Lzma\CRC.cs" />
+    <Compile Include="Lzma\EncoderState.cs" />
+    <Compile Include="Lzma\Exceptions\LzmaDataErrorException.cs" />
+    <Compile Include="Lzma\Exceptions\LzmaInvalidParamException.cs" />
+    <Compile Include="Lzma\BinTree.cs" />
+    <Compile Include="Lzma\LzmaEncoder.cs" />
+    <Compile Include="Lzma\RangeCoder\RangeEncoder.cs" />
     <Compile Include="ParallelAlgorithm.cs" />
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />
@@ -53,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecursiveAlgorithms.cs" />
     <Compile Include="SimdCalculator.cs" />
+    <Compile Include="Models\SimpleMemoryStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
