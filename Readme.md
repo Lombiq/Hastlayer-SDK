@@ -23,3 +23,4 @@ These text files should only serve as a starting point. On how to use Hastlayer 
 - [Getting started](Docs/GettingStarted.md)
 - [Working with Hastlayer](Docs/WorkingWithHastlayer.md)
 - [Developing Hastlayer](Docs/DevelopingHastlayer.md)
+- [Release notes](Docs/ReleaseNotes.md)
