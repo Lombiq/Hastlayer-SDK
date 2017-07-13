@@ -5,11 +5,11 @@
         GenomeMatcher,
         ParallelAlgorithm,
         ImageProcessingAlgorithms,
+        LzmaCompressor,
         MonteCarloAlgorithm,
         ObjectOrientedShowcase,
         PrimeCalculator,
         RecursiveAlgorithms,
-        SimdCalculator,
-        LzmaCompressor
+        SimdCalculator
     }
 }
