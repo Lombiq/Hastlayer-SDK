@@ -23,6 +23,11 @@ Some general constraints you have to keep in mind:
 - Note that you can write unsupported code in a member of a type that will be transformed if that member won't be accessed on the hardware (since unused code is removed from transformation). So e.g. you can implement `ToString()`.
 
 
+## Running your code on hardware
+
+Once you've written some Hastlayer-compatible algorithm and successfully generated hardware from it you'll be able to execute it on an FPGA as hardware. At the moment this needs to be configured manually, so check out the docs of the Hastlayer Hardware repo on how to get started with that.
+
+
 ## Performance-optimizing your code
 
 Some simplified basics first on the properties of FPGAs first:
