@@ -2,6 +2,12 @@
 
 
 
+## v1.0.0.1, 13.07.2017
+
+- Improving documentation.
+- Improving the stability of the Remote Worker that does remote transformations.
+
+
 ## v1.0, 12.07.2017
 
 - Custom property support.
