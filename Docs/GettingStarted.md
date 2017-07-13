@@ -23,6 +23,7 @@ These would be your first steps on starting to work with Hastlayer:
     `hg clone --verbose https://bitbucket.org/Lombiq/hastlayer .\Hastlayer -r client`
 
     `hg clone --verbose https://bitbucket.org/Lombiq/hastlayer-hardware .\HastlayerHardware -r client`
+
 2. Set up a Vivado and Xilinx SDK project in the Hardware project as documented there, power up and program a compatible FPGA board.
 3. Open the Visual Studio project corresponding to your flavor of Hastlayer.
 4. Set the `Hast.Samples.Consumer` project (under the *Samples* folder) as the startup project here. If you're working in the *client* flavor then you'll need to configure your credentials, see the that project's documentation.
