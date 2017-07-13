@@ -80,8 +80,9 @@ namespace Hast.Samples.Consumer
 
                         // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                         // here after uncommenting the code:
-                        configuration.RemoteClientConfiguration().AppId = "TestApp";
-                        configuration.RemoteClientConfiguration().AppSecret = "appsecret";
+                        var remoteClientConfiguration  = configuration.RemoteClientConfiguration();
+                        remoteClientConfiguration.AppId = "TestApp";
+                        remoteClientConfiguration.AppSecret = "appsecret";
 
 
                         // Letting the configuration of samples run. Check out those methods too!
