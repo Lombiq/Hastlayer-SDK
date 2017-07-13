@@ -8,7 +8,6 @@ using Autofac;
 using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
-using Hast.Synthesis;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
 using Hast.Xilinx.Abstractions;
@@ -200,7 +199,7 @@ namespace Hast.Layer
             // (as opposed to a solution).
             if (!string.IsNullOrEmpty(abstractionsPath))
             {
-                moduleFolderPaths.Add(abstractionsPath); 
+                moduleFolderPaths.Add(abstractionsPath);
             }
 
             if (_configuration.Flavor == HastlayerFlavor.Developer)
@@ -210,27 +209,25 @@ namespace Hast.Layer
                     null;
 
                 if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
-                else
-                {
-                    _configuration = new HastlayerConfiguration(_configuration) { Flavor = HastlayerFlavor.Client };
-                }
             }
 
             var importedExtensions = new[]
-                {
-                    typeof(Hastlayer).Assembly,
-                    typeof(IProxyGenerator).Assembly,
-                    typeof(IHardwareImplementationComposer).Assembly,
-                    typeof(ITransformer).Assembly,
-                    typeof(Nexys4DdrManifestProvider).Assembly
-                }
-                .Union(_configuration.Extensions)
-                .ToList();
+            {
+                typeof(Hastlayer).Assembly,
+                typeof(IProxyGenerator).Assembly,
+                typeof(IHardwareImplementationComposer).Assembly,
+                typeof(ITransformer).Assembly,
+                typeof(Nexys4DdrManifestProvider).Assembly
+            }
+            .ToList();
 
             if (_configuration.Flavor == HastlayerFlavor.Client)
             {
                 importedExtensions.Add(typeof(Remote.Client.RemoteTransformer).Assembly);
             }
+
+            // Adding imported extensions last so they can override anything.
+            importedExtensions.AddRange(_configuration.Extensions);
 
             var settings = new AppHostSettings
             {

@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8043A55-8
 		Docs\DevelopingHastlayer.md = Docs\DevelopingHastlayer.md
 		Docs\GettingStarted.md = Docs\GettingStarted.md
 		Readme.md = Readme.md
+		Docs\ReleaseNotes.md = Docs\ReleaseNotes.md
 		Docs\WorkingWithHastlayer.md = Docs\WorkingWithHastlayer.md
 	EndProjectSection
 EndProject
@@ -50,6 +51,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Xilinx.Abstractions", "Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj", "{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drivers", "Drivers", "{B88EC5D8-5D8A-4C87-81B3-F4F8C7FB2BF8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5BF98C7-CE64-4E2E-B083-F987B33182D6}"
+	ProjectSection(SolutionItems) = preProject
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
