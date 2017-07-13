@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="GenomeMatcher.cs" />
     <Compile Include="ParallelAlgorithm.cs" />
