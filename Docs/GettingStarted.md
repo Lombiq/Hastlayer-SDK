@@ -7,7 +7,7 @@
 The Hastlayer components come in two "flavors" with corresponding branches in their repositories:
 
 - Developer (*dev* branch): This is used by developers of Hastlayer itself. It includes the full source code.
-- Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
+- Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service. *Hast.Core* encompasses those components of Hastlayer that do the heavy lifting of software to hardware transformation.
 
 You'll see this terminology be used further on.
 
@@ -23,6 +23,7 @@ These would be your first steps on starting to work with Hastlayer:
     `hg clone --verbose https://bitbucket.org/Lombiq/hastlayer .\Hastlayer -r client`
 
     `hg clone --verbose https://bitbucket.org/Lombiq/hastlayer-hardware .\HastlayerHardware -r client`
+
 2. Set up a Vivado and Xilinx SDK project in the Hardware project as documented there, power up and program a compatible FPGA board.
 3. Open the Visual Studio project corresponding to your flavor of Hastlayer.
 4. Set the `Hast.Samples.Consumer` project (under the *Samples* folder) as the startup project here. If you're working in the *client* flavor then you'll need to configure your credentials, see the that project's documentation.

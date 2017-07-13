@@ -2,7 +2,14 @@
 
 
 
-## v1.0, 11.07.2017
+## v1.0.0.1, 13.07.2017
+
+- Improving documentation.
+- Improving the stability of the Remote Worker that does remote transformations.
+
+
+## v1.0, 12.07.2017
+
 - Custom property support.
 - `ImmutableArray` support.
 - Support for `break` statements in loops too.
