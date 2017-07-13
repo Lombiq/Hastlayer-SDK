@@ -7,7 +7,7 @@
 The Hastlayer components come in two "flavors" with corresponding branches in their repositories:
 
 - Developer (*dev* branch): This is used by developers of Hastlayer itself. It includes the full source code.
-- Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
+- Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service. *Hast.Core* encompasses those components of Hastlayer that do the heavy lifting of software to hardware transformation.
 
 You'll see this terminology be used further on.
 
