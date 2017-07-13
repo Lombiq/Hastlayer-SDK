@@ -45,11 +45,16 @@
     </Compile>
     <Compile Include="Nexys4DdrManifestProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerialPortConfigurator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</Project>
       <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj">
+      <Project>{71B55241-A31C-43F5-9B46-40B53099DF56}</Project>
+      <Name>Hast.Communication</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj">
       <Project>{2D1D92BB-4555-4CBE-8D0E-63563D6CE4C6}</Project>
