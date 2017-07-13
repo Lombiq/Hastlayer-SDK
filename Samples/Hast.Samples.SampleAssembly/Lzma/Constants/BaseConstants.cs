@@ -4,9 +4,9 @@ namespace Hast.Samples.SampleAssembly.Lzma.Constants
 	{
 		public const uint RepeatDistances = 4;
 		public const uint States = 12;
-        public const int SlotPositionBits = 6;
-        public const int LengthToStatesPositionBits = 2;
-        public const uint LengthToPositionStates = 1 << LengthToStatesPositionBits;
+        public const int PositionSlotBits = 6;
+        public const int LengthToPositionStatesBits = 2;
+        public const uint LengthToPositionStates = 1 << LengthToPositionStatesBits;
         public const uint MinMatchLength = 2;
         public const int AlignBits = 4;
         public const uint AlignTableSize = 1 << AlignBits;
@@ -19,15 +19,15 @@ namespace Hast.Samples.SampleAssembly.Lzma.Constants
         public const uint MaxLiteralContextBits = 8;
         public const int MaxPositionStatesBits = 4;
         public const uint MaxPositionStates = (1 << MaxPositionStatesBits);
-        public const int MaxPositionStatesEncodingBits = 4;
-        public const uint MaxPositionStatesEncoding = (1 << MaxPositionStatesEncodingBits);
+        public const int MaxEncodingPositionStatesBits = 4;
+        public const uint MaxEncodingPositionStates = (1 << MaxEncodingPositionStatesBits);
         public const int LowLengthBits = 3;
         public const int MidLengthBits = 3;
         public const int HighLengthBits = 8;
-        public const uint LowLengthSymbols = 1 << LowLengthBits;
-        public const uint MidLengthSymbols = 1 << MidLengthBits;
-        public const uint LenSymbols = LowLengthSymbols + MidLengthSymbols + (1 << HighLengthBits);
-        public const uint MaxMatchLength = MinMatchLength + LenSymbols - 1;
+        public const uint LowLength = 1 << LowLengthBits;
+        public const uint MidLength = 1 << MidLengthBits;
+        public const uint SymbolLength = LowLength + MidLength + (1 << HighLengthBits);
+        public const uint MaxMatchLength = MinMatchLength + SymbolLength - 1;
         public const uint OptimumNumber = 1 << 12;
         public const uint MaxDictionarySize = 1 << 7;
         public const uint MaxHashSize = (1 << 17) + (1 << 10);
@@ -36,7 +36,7 @@ namespace Hast.Samples.SampleAssembly.Lzma.Constants
         public const uint MaxBlockLength = MaxBlockLengthHelper + (MaxBlockLengthHelper / 2 + 256);
 
 
-        public static uint GetLengthToStatePosition(uint length)
+        public static uint GetLengthToPositionState(uint length)
 		{
 			length -= MinMatchLength;
 

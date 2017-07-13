@@ -18,10 +18,10 @@
         public void UpdateMatch() =>
             Index = (uint)(Index < 7 ? 7 : 10);
 
-        public void UpdateRep() =>
+        public void UpdateRepeat() =>
             Index = (uint)(Index < 7 ? 8 : 11);
 
-        public void UpdateShortRep() =>
+        public void UpdateShortRepeat() =>
             Index = (uint)(Index < 7 ? 9 : 11);
 
         public bool IsCharState() =>

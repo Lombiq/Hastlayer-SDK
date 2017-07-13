@@ -52,8 +52,6 @@
     <Compile Include="Lzma\Constants\RangeEncoderConstants.cs" />
     <Compile Include="Lzma\CRC.cs" />
     <Compile Include="Lzma\EncoderState.cs" />
-    <Compile Include="Lzma\Exceptions\LzmaDataErrorException.cs" />
-    <Compile Include="Lzma\Exceptions\LzmaInvalidParamException.cs" />
     <Compile Include="Lzma\BinTree.cs" />
     <Compile Include="Lzma\LzmaEncoder.cs" />
     <Compile Include="Lzma\RangeCoder\RangeEncoder.cs" />

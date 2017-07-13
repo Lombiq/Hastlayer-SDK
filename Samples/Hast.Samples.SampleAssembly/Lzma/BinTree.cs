@@ -122,9 +122,6 @@ namespace Hast.Samples.SampleAssembly.Lzma
             uint maxMatchLength,
             uint keepAddBufferAfter)
         {
-            // Should throw an Exception when it becomes supported.
-            // if (historySize > MaxValueForNormalize - 256)
-
             _count = 16 + (maxMatchLength >> 1);
 
             var windowReservSize = (dictionarySize + keepAddBufferBefore + maxMatchLength + keepAddBufferAfter) / 2 + 256;
@@ -146,7 +143,9 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 _hashSizeSum |= (_hashSizeSum >> 8);
                 _hashSizeSum >>= 1;
                 _hashSizeSum |= 0xFFFF;
+
                 if (_hashSizeSum > (1 << 24)) _hashSizeSum >>= 1;
+
                 _hashMask = _hashSizeSum;
                 _hashSizeSum++;
                 _hashSizeSum += _fixHashSize;
