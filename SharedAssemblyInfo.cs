@@ -13,7 +13,7 @@ using System.Reflection;
 #if DEBUG
     [assembly: AssemblyConfiguration("Debug")]
 #else
-    [assembly: AssemblyConfiguration("Release")]
+[assembly: AssemblyConfiguration("Release")]
 #endif
 
 // Version information for an assembly consists of the following four values:

@@ -8,7 +8,6 @@ using Autofac;
 using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
-using Hast.Synthesis;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
 using Hast.Xilinx.Abstractions;

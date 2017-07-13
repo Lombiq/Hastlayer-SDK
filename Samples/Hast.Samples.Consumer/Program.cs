@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
-using System.Linq;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer
