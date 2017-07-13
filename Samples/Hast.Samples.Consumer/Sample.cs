@@ -9,6 +9,7 @@
         ObjectOrientedShowcase,
         PrimeCalculator,
         RecursiveAlgorithms,
-        SimdCalculator
+        SimdCalculator,
+        UnumCalculator
     }
 }

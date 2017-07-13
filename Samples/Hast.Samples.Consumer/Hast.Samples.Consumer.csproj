@@ -36,6 +36,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,7 @@
     <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\SimdCalculatorSampleRunner.cs" />
+    <Compile Include="SampleRunners\UnumCalculatorSampleRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
