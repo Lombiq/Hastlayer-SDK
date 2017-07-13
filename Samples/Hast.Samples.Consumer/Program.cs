@@ -79,7 +79,7 @@ namespace Hast.Samples.Consumer
                         var configuration = new HardwareGenerationConfiguration(devices.First().Name);
 
                         // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
-                        // here after uncommenting the code:
+                        // here:
                         var remoteClientConfiguration  = configuration.RemoteClientConfiguration();
                         remoteClientConfiguration.AppId = "TestApp";
                         remoteClientConfiguration.AppSecret = "appsecret";
