@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="ApiClientFactory.cs" />
     <Compile Include="Configuration\RemoteClientConfigurationTransformerExtensions.cs" />
     <Compile Include="Configuration\RemoteClientConfiguration.cs" />

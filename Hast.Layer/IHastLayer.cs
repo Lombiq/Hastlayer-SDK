@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Layer.Extensibility.Events;
-using System.Linq;
 
 namespace Hast.Layer
 {

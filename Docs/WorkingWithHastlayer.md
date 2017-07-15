@@ -8,7 +8,7 @@ Take a look at the sample projects in the Sample solution folder. Those are ther
 
 Some general constraints you have to keep in mind:
 
-- Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside, i.e. can be hardware entry points.
+- Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside, i.e. can be hardware entry points. Elsewhere any other kind of methods can be used.
 - Always use the smallest data type necessary, e.g. `short` instead of `int` if 16b is enough (or even `byte`), and unsigned types like `uint` if you don't need negative numbers.
 - Supported primitive types: `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `bool`.  Floating-point numbers like `float` and `double` and numbers bigger than 64b are not yet supported.
 - The most important language constructs like `if` and `else` statements, `while` and `for` loops, type casting, binary operations (e.g. arithmetic, in/equality operators...), conditional expressions (ternary operator) on allowed types are supported.
@@ -16,11 +16,17 @@ Some general constraints you have to keep in mind:
 - Single-dimensional arrays having their size possible to determine compile-time are supported. So apart from instantiating arrays with their sizes specified as constants you can also use variables, fields, properties for array sizes, as well as expressions (and a combination of these), just in the end the size of the array needs to be resolvable at compile-time. If Hastlayer can't figure out the array size for some reason you can configure it manually, see the `UnumCalculator` sample.
 - To a limited degree `Array.Copy()` is also supported: only the `Copy(Array sourceArray, Array destinationArray, int length)` override and only with a constant `length`. Furthermore, `ImmutableArray` is also supported to a limited degree by converting objects of that type to standard arrays in the background (see the `Lombiq.Unum` project for examples).
 - Using objects created of custom classes and structs are supported. Using these objects as usual (e.g. passing them as method arguments, storing them in arrays) is also supported. However hardware entry point types can only contain methods. Static members apart from methods are not supported (so e.g. while you can't use static fields, you can have static methods). Also, be careful not to mix reference types (like arrays) into structs' members (fields and properties), keep structs purely value types (this is a good practice any way).
+- Operator overloading on custom types is supported.
 - Task-based parallelism is with TPL is supported to a limited degree. Lambda expression are supported to an extent needed to use tasks (see the `ParallelAlgorithm` sample in the `Hast.Samples.Consumer` project).
 - Operation-level, SIMD-like parallelism is supported, see the `SimdCalculator` sample.
 - Recursion is supported but recursive code is not really something for Hastlayer. Nevertheless if a method call is recursive, even if indirectly, you need to manually configure the recursion depths (see the `RecursiveAlgorithms` sample).
 - Exceptions are not supported and `throw` statements will be handled as a no-op (they won't do anything). The latter is so you can keep throwing exceptions on invalid arguments from methods and utilize them when the code is executed in the standard way; however you need to take special care on not to actually have invalid arguments on hardware.
 - Note that you can write unsupported code in a member of a type that will be transformed if that member won't be accessed on the hardware (since unused code is removed from transformation). So e.g. you can implement `ToString()`.
+
+
+## Running your code on hardware
+
+Once you've written some Hastlayer-compatible algorithm and successfully generated hardware from it you'll be able to execute it on an FPGA as hardware. At the moment this needs to be configured manually, so check out the docs of the Hastlayer Hardware repo on how to get started with that.
 
 
 ## Performance-optimizing your code

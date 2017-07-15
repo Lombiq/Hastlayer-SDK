@@ -71,7 +71,9 @@ namespace Hast.Communication.Services
                     }
                     catch (IOException ex)
                     {
-                        throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.", ex);
+                        throw new SerialPortCommunicationException(
+                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.", 
+                            ex);
                     }
 
                     if (serialPort.IsOpen)
@@ -80,7 +82,9 @@ namespace Hast.Communication.Services
                     }
                     else
                     {
-                        throw new SerialPortCommunicationException("Communication with the FPGA board through the serial port failed. The " + serialPort.PortName + " exists but it's used by another process.");
+                        throw new SerialPortCommunicationException(
+                            "Communication with the FPGA board through the serial port failed. The " + 
+                            serialPort.PortName + " exists but it's used by another process.");
                     }
 
                     // Here we put together the data stream.
@@ -131,7 +135,9 @@ namespace Hast.Communication.Services
                                     }
                                     else
                                     {
-                                        throw new SerialPortCommunicationException("Awaited a ping signal from the FPGA after it finished but received the following byte instead: " + receivedByte);
+                                        throw new SerialPortCommunicationException(
+                                            "Awaited a ping signal from the FPGA after it finished but received the following byte instead: " + 
+                                            receivedByte);
                                     }
                                     break;
                                 case CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation:
@@ -173,7 +179,8 @@ namespace Hast.Communication.Services
                                     {
                                         simpleMemory.Memory = outputBytes;
 
-                                        // Serial communication can give more data than we actually await, so need to set this.
+                                        // Serial communication can give more data than we actually await, so need to 
+                                        // set this.
                                         communicationState = CommunicationConstants.Serial.CommunicationState.Finished;
                                         serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
 
@@ -227,7 +234,8 @@ namespace Hast.Communication.Services
             // If no serial ports were detected, then we can't do anything else.
             if (ports.Length == 0)
             {
-                throw new SerialPortCommunicationException("No serial port detected (no serial ports are open).");
+                throw new SerialPortCommunicationException(
+                    "No serial port detected (no serial ports are open). Is and FPGA board connected and is it powered up?");
             }
 
             var fpgaPortNames = new ConcurrentBag<string>();
@@ -269,7 +277,8 @@ namespace Hast.Communication.Services
 
             if (!fpgaPortNames.Any())
             {
-                throw new SerialPortCommunicationException("No compatible FPGA board connected to any serial port.");
+                throw new SerialPortCommunicationException(
+                    "No compatible FPGA board connected to any serial port or a connected FPGA is not answering. Is and FPGA board connected and is it powered up? If yes, is the SDK software running on it?");
             }
 
             return fpgaPortNames;
