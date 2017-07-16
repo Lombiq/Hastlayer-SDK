@@ -1,7 +1,6 @@
 ﻿using System;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
-using Orchard;
 
 namespace Hast.Layer.Extensibility.Events
 {

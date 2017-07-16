@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
-using System.Linq;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System.Numerics;
 
@@ -64,7 +64,7 @@ namespace Hast.Samples.Consumer
                     // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need
                     // the Client flavor: This will let you connect to a remote Hastlayer service to run the software
                     // to hardware transformation.
-                    var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
+                    var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer };
 
                     // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object 
                     // while the program runs and re-use it continuously. No need to always wrap it into a using() like 
@@ -93,9 +93,10 @@ namespace Hast.Samples.Consumer
                         var configuration = new HardwareGenerationConfiguration(devices.First().Name);
 
                         // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
-                        // here after uncommenting the code:
-                        configuration.RemoteClientConfiguration().AppId = "TestApp";
-                        configuration.RemoteClientConfiguration().AppSecret = "appsecret";
+                        // here:
+                        var remoteClientConfiguration  = configuration.RemoteClientConfiguration();
+                        remoteClientConfiguration.AppId = "TestApp";
+                        remoteClientConfiguration.AppSecret = "appsecret";
 
 
                         // Letting the configuration of samples run. Check out those methods too!

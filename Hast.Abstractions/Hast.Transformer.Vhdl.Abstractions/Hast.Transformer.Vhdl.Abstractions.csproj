@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Configuration\HardwareGenerationConfigurationTransformerExtensions.cs" />
     <Compile Include="Configuration\VhdlTransformerConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

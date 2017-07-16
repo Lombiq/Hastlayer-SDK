@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8043A55-8
 		Docs\DevelopingHastlayer.md = Docs\DevelopingHastlayer.md
 		Docs\GettingStarted.md = Docs\GettingStarted.md
 		Readme.md = Readme.md
+		Docs\ReleaseNotes.md = Docs\ReleaseNotes.md
 		Docs\WorkingWithHastlayer.md = Docs\WorkingWithHastlayer.md
 	EndProjectSection
 EndProject
@@ -90,6 +91,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Remote.Worker.Console", "Hast.Core\Hast.Remote.Worker.Console\Hast.Remote.Worker.Console.csproj", "{1F634A84-040D-42A0-B12A-8F9CD0038189}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Remote.Worker.Daemon", "Hast.Core\Hast.Remote.Worker.Daemon\Hast.Remote.Worker.Daemon.csproj", "{9AB5BFDC-72D9-4DC3-BDFE-493CC536E011}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5BF98C7-CE64-4E2E-B083-F987B33182D6}"
+	ProjectSection(SolutionItems) = preProject
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lombiq.Unum", "Lombiq.Unum\Lombiq.Unum.csproj", "{6CFE69A4-04A3-4427-818C-C0832D197A62}"
 EndProject
