@@ -72,7 +72,7 @@ namespace Hast.Remote.Client
             if (transformationResult.Errors?.Any() == true)
             {
                 throw new Exception(
-                     exceptionMessageBase + "The following error(s) happened: " + 
+                     exceptionMessageBase + "The following error(s) happened: " + Environment.NewLine +
                      string.Join(Environment.NewLine, transformationResult.Errors));
             }
 

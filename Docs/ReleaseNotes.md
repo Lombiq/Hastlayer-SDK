@@ -7,6 +7,7 @@
 - Improving support for unary increment/decrement operators (e.g. `number++`). Handling more cases now.
 - Support for multi-assignments (e.g. `number1 = number2 = 4`).
 - Improved exception messages.
+- Improved Remote Worker stability and exception messages.
 - Various smaller bugfixes and improvements.
 
 
