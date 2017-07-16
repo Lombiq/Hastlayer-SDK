@@ -38,10 +38,10 @@ namespace Hast.Layer
 
         /// <summary>
         /// Gets or sets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
-        /// will happen. Defaults to <c>true</c>. Note that this will have an affect only on client-side caching when
+        /// will happen. Defaults to <c>false</c>. Note that this will have an affect only on client-side caching when
         /// using the Client flavor.
         /// </summary>
-        public bool EnableCaching { get; set; } = true;
+        public bool EnableCaching { get; set; }
 
         /// <summary>
         /// Gets the name of the FPGA device (board) to transform for. Device-specific configurations are determined
