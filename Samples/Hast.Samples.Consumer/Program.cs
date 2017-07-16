@@ -6,6 +6,7 @@ using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System.Numerics;
+using Lombiq.Unum;
 
 namespace Hast.Samples.Consumer
 {
@@ -142,7 +143,8 @@ namespace Hast.Samples.Consumer
                             new[]
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
-                                typeof(PrimeCalculator).Assembly
+                                typeof(PrimeCalculator).Assembly,
+                                typeof(Unum).Assembly
                             },
                             configuration);
 
