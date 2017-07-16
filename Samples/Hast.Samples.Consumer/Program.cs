@@ -7,6 +7,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System.Numerics;
 using Lombiq.Unum;
+using System.Collections.Immutable;
 
 namespace Hast.Samples.Consumer
 {
@@ -144,7 +145,11 @@ namespace Hast.Samples.Consumer
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
                                 typeof(PrimeCalculator).Assembly,
-                                typeof(Unum).Assembly
+                                // Note that the assemblies used by code to be transformed also need to be added
+                                // separately. E.g. Unum is used by Hast.Samples.SampleAssembly which in turn also uses
+                                // ImmutableArray.
+                                typeof(Unum).Assembly,
+                                typeof(ImmutableArray).Assembly
                             },
                             configuration);
 
