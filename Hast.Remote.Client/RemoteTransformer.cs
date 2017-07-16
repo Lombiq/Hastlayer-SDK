@@ -19,7 +19,7 @@ namespace Hast.Remote.Client
             var assemblyContainers = assemblyPaths
                 .Select(path => new AssemblyContainer
                 {
-                    Id = Sha2456Helper.ComputeHash(path),
+                    Name = Path.GetFileNameWithoutExtension(path),
                     FileContent = File.ReadAllBytes(path)
                 });
 
