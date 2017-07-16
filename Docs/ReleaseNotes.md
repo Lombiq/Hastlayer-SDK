@@ -2,6 +2,14 @@
 
 
 
+## vNext
+
+- Improving support for unary increment/decrement operators (e.g. `number++`). Handling more cases now.
+- Support for multi-assignments (e.g. `number1 = number2 = 4`).
+- Improved exception messages.
+- Various smaller bugfixes and improvements.
+
+
 ## v1.0.0.1, 13.07.2017
 
 - Improving documentation.
