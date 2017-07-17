@@ -21,7 +21,7 @@ namespace Hast.Samples.Consumer
         /// is relative (like the default) then the file will be saved along this project's executable in the bin output
         /// directory. If an empty string or null is specified then no file will be generated.
         /// </summary>
-        public static string VhdlOutputFilePath = @"Tömörítő.vhd";
+        public static string VhdlOutputFilePath = @"Hast_IP.vhd";
 
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one. Currently the following samples are not up-to-date
@@ -36,25 +36,6 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            var test = false;
-
-            if (test)
-            {
-                const string UncompressedTextFilePath = "LongTextFile.txt";
-                const string CompressedTextFilePath = "Compressed.txt.lzma";
-                var lzmaCompressor = new LzmaCompressor();
-
-                if (File.Exists(CompressedTextFilePath)) File.Delete(CompressedTextFilePath);
-
-                var inputFileBytes = File.ReadAllBytes(UncompressedTextFilePath);
-
-                var outputFileBytes = lzmaCompressor.CompressBytes(inputFileBytes);
-
-                File.WriteAllBytes(CompressedTextFilePath, outputFileBytes);
-
-                return;
-            }
-
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
             Task.Run(async () =>
