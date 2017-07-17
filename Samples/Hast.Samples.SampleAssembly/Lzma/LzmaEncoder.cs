@@ -20,7 +20,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         #region Private Fields
         
-        private CoderState _coderState = new CoderState();
+        private EncoderState _coderState = new EncoderState();
         private byte _previousByte;
         private BinTree _matchFinder = null;
         private RangeEncoder _rangeEncoder = new RangeEncoder();
@@ -522,12 +522,12 @@ namespace Hast.Samples.SampleAssembly.Lzma
             }
         }
 
-        private uint GetRepeatLength1Price(CoderState state, uint posState) =>
+        private uint GetRepeatLength1Price(EncoderState state, uint posState) =>
             _isRepeatG0[state.Index].GetPrice0() +
                 _isRepeat0Long[(state.Index << BaseConstants.MaxPositionStatesBits) +
                     posState].GetPrice0();
 
-        private uint GetPureRepeatPrice(uint repeatIndex, CoderState state, uint posState)
+        private uint GetPureRepeatPrice(uint repeatIndex, EncoderState state, uint posState)
         {
             uint price;
             if (repeatIndex == 0)
@@ -550,7 +550,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
             return price;
         }
 
-        private uint GetRepeatPrice(uint repeatIndex, uint length, CoderState state, uint positionState)
+        private uint GetRepeatPrice(uint repeatIndex, uint length, EncoderState state, uint positionState)
         {
             var price = _repeatedMatchLengthEncoder.GetPrice(length - BaseConstants.MinMatchLength, positionState);
 
@@ -840,7 +840,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
                                         position++;
                                         var previousPosition = _optimum[current].PreviousPosition;
-                                        CoderState state;
+                                        EncoderState state;
                                         if (_optimum[current].Previous1IsChar)
                                         {
                                             previousPosition--;
@@ -1604,7 +1604,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         private class Optimal
         {
-            public CoderState State;
+            public EncoderState State;
             public bool Previous1IsChar;
             public bool Previous2;
             public uint PreviousPosition2;
