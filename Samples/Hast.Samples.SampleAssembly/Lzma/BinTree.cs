@@ -18,8 +18,6 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _cyclicBufferPosition;
         private uint _cyclicBufferSize = 0;
         private uint _maxMatchLength;
-        private uint[] _son;
-        private uint[] _hash;
         private uint _count = 0xFF;
         private uint _hashMask;
         private uint _hashSizeSum = 0;
@@ -29,6 +27,9 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _fixHashSize = Hash2Size + Hash3Size;
         private CRC _crc;
 
+        private uint[] _son = new uint[(BaseConstants.MaxDictionarySize + 1) * 2];
+        private uint[] _hash = new uint[BaseConstants.MaxHashSize];
+
         #region LZ Input Window fields
 
         private SimpleMemoryStream _stream;
@@ -37,11 +38,12 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _keepSizeBefore; // How many bytess must be kept in buffer before _position.
         private uint _keepSizeAfter; // How many bytess must be kept in buffer after _position.
         private uint _pointerToLastSafePosition;
-        private byte[] _bufferBase; // Pointer to buffer with data.
         private uint _blockSize; // Size of Allocated memory block.
         private uint _position; // Offset (from _buffer) of curent byte.
         private uint _streamPosition; // Offset (from _buffer) of first not read byte from Stream.
         private uint _bufferOffset;
+
+        private byte[] _bufferBase = new byte[BaseConstants.MaxBlockLength]; // Pointer to buffer with data.
 
         #endregion
 
@@ -71,9 +73,6 @@ namespace Hast.Samples.SampleAssembly.Lzma
         public void Init()
         {
             InitLzInputWindow();
-
-            _hash = new uint[BaseConstants.MaxHashSize];
-            _son = new uint[(BaseConstants.MaxDictionarySize + 1) * 2];
 
             _crc = new CRC();
 
@@ -462,8 +461,6 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         private void InitLzInputWindow()
         {
-            _bufferBase = new byte[BaseConstants.MaxBlockLength];
-
             _bufferOffset = 0;
             _position = 0;
             _streamPosition = 0;

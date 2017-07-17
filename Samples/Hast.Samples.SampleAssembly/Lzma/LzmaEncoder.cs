@@ -8,32 +8,26 @@ namespace Hast.Samples.SampleAssembly.Lzma
 {
     public class LzmaEncoder
     {
+        #region Private Constants
+
         private const uint InfinityPrice = 0xFFFFFFF;
         private const int DefaultDictionaryLogSize = 22;
         private const uint DefaultFastBytesCount = 0x20;
         private const uint SpecialSymbolLengthCount = BaseConstants.LowLength + BaseConstants.MidLength;
         private const int PropertySize = 5;
 
+        #endregion
 
+        #region Private Fields
+        
         private CoderState _coderState = new CoderState();
         private byte _previousByte;
-        private uint[] _repeatDistances = new uint[BaseConstants.RepeatDistances];
-        private Optimal[] _optimum = new Optimal[BaseConstants.OptimumNumber];
         private BinTree _matchFinder = null;
         private RangeEncoder _rangeEncoder = new RangeEncoder();
-        private BitEncoder[] _isMatch = new BitEncoder[BaseConstants.States << BaseConstants.MaxPositionStatesBits];
-        private BitEncoder[] _isRepeat = new BitEncoder[BaseConstants.States];
-        private BitEncoder[] _isRepeatG0 = new BitEncoder[BaseConstants.States];
-        private BitEncoder[] _isRepeatG1 = new BitEncoder[BaseConstants.States];
-        private BitEncoder[] _isRepeatG2 = new BitEncoder[BaseConstants.States];
-        private BitEncoder[] _isRepeat0Long = new BitEncoder[BaseConstants.States << BaseConstants.MaxPositionStatesBits];
-        private BitTreeEncoder[] _slotEncoderPosition = new BitTreeEncoder[BaseConstants.LengthToPositionStates];
-        private BitEncoder[] _encodersPosition = new BitEncoder[BaseConstants.FullDistances - BaseConstants.EndPositionModelIndex];
         private BitTreeEncoder _alignEncoderPosition = new BitTreeEncoder(BaseConstants.AlignBits);
         private LengthPriceTableEncoder _lengthEncoder = new LengthPriceTableEncoder();
         private LengthPriceTableEncoder _repeatedMatchLengthEncoder = new LengthPriceTableEncoder();
         private LiteralEncoder _literalEncoder = new LiteralEncoder();
-        private uint[] _matchDistances = new uint[BaseConstants.MaxMatchLength * 2 + 2];
         private uint _fastBytesCount = DefaultFastBytesCount;
         private uint _longestMatchLength;
         private uint _distancePairsCount;
@@ -41,9 +35,6 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _optimumEndIndex;
         private uint _optimumCurrentIndex;
         private bool _longestMatchWasFound;
-        private uint[] _slotPricesPosition = new uint[1 << (BaseConstants.PositionSlotBits + BaseConstants.LengthToPositionStatesBits)];
-        private uint[] _distancesPrices = new uint[BaseConstants.FullDistances << BaseConstants.LengthToPositionStatesBits];
-        private uint[] _alignPrices = new uint[BaseConstants.AlignTableSize];
         private uint _alignPriceCount;
         private uint _distanceTableSize = (DefaultDictionaryLogSize * 2);
         private int _positionStateBits = 2;
@@ -59,14 +50,37 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private uint _matchFinderHashBytesCount = 4;
         private bool _writeEndMarker = false;
         private bool _needReleaseMatchFinderStream;
-        private byte[] _properties = new byte[PropertySize];
-        private uint[] _tempPrices = new uint[BaseConstants.FullDistances];
         private uint _matchPriceCount;
         private uint _trainSize = 0;
+
+        #endregion
+
+        #region Private Static Arrays
+
+        private uint[] _repeatDistances = new uint[BaseConstants.RepeatDistances];
+        private Optimal[] _optimum = new Optimal[BaseConstants.OptimumNumber];
+        private BitEncoder[] _isMatch = new BitEncoder[BaseConstants.States << BaseConstants.MaxPositionStatesBits];
+        private BitEncoder[] _isRepeat = new BitEncoder[BaseConstants.States];
+        private BitEncoder[] _isRepeatG0 = new BitEncoder[BaseConstants.States];
+        private BitEncoder[] _isRepeatG1 = new BitEncoder[BaseConstants.States];
+        private BitEncoder[] _isRepeatG2 = new BitEncoder[BaseConstants.States];
+        private BitEncoder[] _isRepeat0Long = new BitEncoder[BaseConstants.States << BaseConstants.MaxPositionStatesBits];
+        private BitTreeEncoder[] _slotEncoderPosition = new BitTreeEncoder[BaseConstants.LengthToPositionStates];
+        private BitEncoder[] _encodersPosition = new BitEncoder[BaseConstants.FullDistances - BaseConstants.EndPositionModelIndex];
+        private uint[] _matchDistances = new uint[BaseConstants.MaxMatchLength * 2 + 2];
+        private uint[] _slotPricesPosition = new uint[1 << (BaseConstants.PositionSlotBits + BaseConstants.LengthToPositionStatesBits)];
+        private uint[] _distancesPrices = new uint[BaseConstants.FullDistances << BaseConstants.LengthToPositionStatesBits];
+        private uint[] _alignPrices = new uint[BaseConstants.AlignTableSize];
+        private byte[] _properties = new byte[PropertySize];
+        private uint[] _tempPrices = new uint[BaseConstants.FullDistances];
         private uint[] _repeats = new uint[BaseConstants.RepeatDistances];
         private uint[] _repeatLengths = new uint[BaseConstants.RepeatDistances];
         private byte[] _fastPosition = new byte[1 << 11];
 
+        #endregion
+
+
+        #region Constructor
 
         public LzmaEncoder()
         {
@@ -91,6 +105,10 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 _slotEncoderPosition[i] = new BitTreeEncoder(BaseConstants.PositionSlotBits);
         }
 
+        #endregion
+
+
+        #region Public Methods
 
         public bool CodeOneBlock()
         {
@@ -349,6 +367,10 @@ namespace Hast.Samples.SampleAssembly.Lzma
             outputStream.Write(_properties, 0, PropertySize);
         }
 
+        #endregion
+
+
+        #region Private Methods
 
         private uint GetPositionSlot(uint position)
         {
@@ -1315,6 +1337,10 @@ namespace Hast.Samples.SampleAssembly.Lzma
             _alignPriceCount = 0;
         }
 
+        #endregion
+
+
+        #region Private Classes
 
         private class LiteralEncoder
         {
@@ -1608,10 +1634,12 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 PreviousBack == 0;
         };
 
-        public class OutResult
+        private class OutResult
         {
             public uint ReturnValue { get; set; }
             public uint OutValue { get; set; }
         }
+
+        #endregion
     }
 }

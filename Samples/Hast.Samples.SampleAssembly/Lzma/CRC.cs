@@ -2,8 +2,9 @@ namespace Hast.Samples.SampleAssembly.Lzma
 {
 	public class CRC
 	{
-        private readonly uint[] _table;
         private uint _value = 0xFFFFFFFF;
+
+        private readonly uint[] _table = new uint[256];
 
 
         public uint[] Table => _table;
@@ -11,8 +12,6 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
         public CRC()
         {
-            _table = new uint[256];
-
             const uint kPoly = 0xEDB88320;
             for (uint i = 0; i < 256; i++)
             {

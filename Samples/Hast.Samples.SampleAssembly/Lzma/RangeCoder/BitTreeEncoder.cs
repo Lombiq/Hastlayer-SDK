@@ -3,10 +3,11 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
     internal class BitTreeEncoder
     {
         private const int MaxLevelsBits = 8;
+        
 
-
-        private BitEncoder[] _models;
         private int _levelsBits;
+
+        private BitEncoder[] _models = new BitEncoder[1 << MaxLevelsBits];
 
 
         public BitTreeEncoder(int levelsBits)
@@ -17,8 +18,6 @@ namespace Hast.Samples.SampleAssembly.Lzma.RangeCoder
 
         public void Init(uint[] probabilityPrices)
         {
-            _models = new BitEncoder[1 << MaxLevelsBits];
-
             for (var i = 1; i < (1 << _levelsBits); i++)
             {
                 _models[i] = new BitEncoder();
