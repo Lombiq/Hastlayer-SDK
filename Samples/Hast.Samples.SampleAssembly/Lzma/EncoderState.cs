@@ -1,6 +1,6 @@
 ﻿namespace Hast.Samples.SampleAssembly.Lzma
 {
-    internal struct EncoderState
+    public struct EncoderState
     {
         public uint Index { get; set; }
 
