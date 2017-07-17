@@ -61,7 +61,7 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 _fixHashSize = 0;
             }
         }
-        
+
         public void SetStream(SimpleMemoryStream stream) =>
             _stream = stream;
 
@@ -205,8 +205,8 @@ namespace Hast.Samples.SampleAssembly.Lzma
                 {
                     if (_bufferBase[_bufferOffset + currentMatch3] == _bufferBase[current])
                     {
-                        if (currentMatch3 == currentMatch2)
-                            offset -= 2;
+                        if (currentMatch3 == currentMatch2) offset -= 2;
+
                         distances[offset++] = maxLength = 3;
                         distances[offset++] = _position - currentMatch3 - 1;
                         currentMatch2 = currentMatch3;
@@ -242,62 +242,58 @@ namespace Hast.Samples.SampleAssembly.Lzma
 
             var count = _count;
 
-            var run = true;
-            while (run)
+            while (true)
             {
                 if (currentMatch <= minMatchPosition || count == 0)
                 {
                     _son[pointer0] = _son[pointer1] = EmptyHashValue;
-                    run = false;
+
+                    count--;
+
+                    break;
+                }
+
+                var delta = _position - currentMatch;
+                var cyclicPosition = ((delta <= _cyclicBufferPosition) ?
+                    (_cyclicBufferPosition - delta) :
+                    (_cyclicBufferPosition - delta + _cyclicBufferSize)) << 1;
+
+                var pby1 = _bufferOffset + currentMatch;
+                var len = LzmaHelpers.GetMinValue(length0, length1);
+                if (_bufferBase[pby1 + len] == _bufferBase[current + len])
+                {
+                    while (++len != lenLimit)
+                    {
+                        if (_bufferBase[pby1 + len] != _bufferBase[current + len]) break;
+                    }
+
+                    if (maxLength < len)
+                    {
+                        distances[offset++] = maxLength = len;
+                        distances[offset++] = delta - 1;
+                        if (len == lenLimit)
+                        {
+                            _son[pointer1] = _son[cyclicPosition];
+                            _son[pointer0] = _son[cyclicPosition + 1];
+
+                            break;
+                        }
+                    }
+                }
+
+                if (_bufferBase[pby1 + len] < _bufferBase[current + len])
+                {
+                    _son[pointer1] = currentMatch;
+                    pointer1 = cyclicPosition + 1;
+                    currentMatch = _son[pointer1];
+                    length1 = len;
                 }
                 else
                 {
-                    var delta = _position - currentMatch;
-                    var cyclicPosition = ((delta <= _cyclicBufferPosition) ?
-                        (_cyclicBufferPosition - delta) :
-                        (_cyclicBufferPosition - delta + _cyclicBufferSize)) << 1;
-
-                    var pby1 = _bufferOffset + currentMatch;
-                    var len = LzmaHelpers.GetMinValue(length0, length1);
-                    if (_bufferBase[pby1 + len] == _bufferBase[current + len])
-                    {
-                        var run2 = true;
-                        while (run2 && ++len != lenLimit)
-                        {
-                            if (_bufferBase[pby1 + len] != _bufferBase[current + len]) run2 = false;
-                        }
-
-                        if (maxLength < len)
-                        {
-                            distances[offset++] = maxLength = len;
-                            distances[offset++] = delta - 1;
-                            if (len == lenLimit)
-                            {
-                                _son[pointer1] = _son[cyclicPosition];
-                                _son[pointer0] = _son[cyclicPosition + 1];
-
-                                run = false;
-                            }
-                        }
-                    }
-
-                    if (run)
-                    {
-                        if (_bufferBase[pby1 + len] < _bufferBase[current + len])
-                        {
-                            _son[pointer1] = currentMatch;
-                            pointer1 = cyclicPosition + 1;
-                            currentMatch = _son[pointer1];
-                            length1 = len;
-                        }
-                        else
-                        {
-                            _son[pointer0] = currentMatch;
-                            pointer0 = cyclicPosition;
-                            currentMatch = _son[pointer0];
-                            length0 = len;
-                        }
-                    }
+                    _son[pointer0] = currentMatch;
+                    pointer0 = cyclicPosition;
+                    currentMatch = _son[pointer0];
+                    length0 = len;
                 }
 
                 count--;
@@ -355,58 +351,51 @@ namespace Hast.Samples.SampleAssembly.Lzma
                     len0 = len1 = _hashDirectBytes;
 
                     var count = _count;
-                    var run = true;
-                    while (run)
+                    while (true)
                     {
                         if (currentMatch <= minMatchPosition || count == 0)
                         {
                             _son[ptr0] = _son[ptr1] = EmptyHashValue;
 
-                            run = false;
+                            break;
+                        }
+
+                        var delta = _position - currentMatch;
+                        var cyclicPosition = ((delta <= _cyclicBufferPosition) ?
+                            (_cyclicBufferPosition - delta) :
+                            (_cyclicBufferPosition - delta + _cyclicBufferSize)) << 1;
+
+                        var pby1 = _bufferOffset + currentMatch;
+                        var len = LzmaHelpers.GetMinValue(len0, len1);
+                        if (_bufferBase[pby1 + len] == _bufferBase[current + len])
+                        {
+                            while (++len != lenLimit)
+                            {
+                                if (_bufferBase[pby1 + len] != _bufferBase[current + len]) break;
+                            }
+
+                            if (len == lenLimit)
+                            {
+                                _son[ptr1] = _son[cyclicPosition];
+                                _son[ptr0] = _son[cyclicPosition + 1];
+
+                                break;
+                            }
+                        }
+
+                        if (_bufferBase[pby1 + len] < _bufferBase[current + len])
+                        {
+                            _son[ptr1] = currentMatch;
+                            ptr1 = cyclicPosition + 1;
+                            currentMatch = _son[ptr1];
+                            len1 = len;
                         }
                         else
                         {
-                            var delta = _position - currentMatch;
-                            var cyclicPosition = ((delta <= _cyclicBufferPosition) ?
-                                (_cyclicBufferPosition - delta) :
-                                (_cyclicBufferPosition - delta + _cyclicBufferSize)) << 1;
-
-                            var pby1 = _bufferOffset + currentMatch;
-                            var len = LzmaHelpers.GetMinValue(len0, len1);
-                            if (_bufferBase[pby1 + len] == _bufferBase[current + len])
-                            {
-                                var run2 = true;
-                                while (run2 && ++len != lenLimit)
-                                {
-                                    if (_bufferBase[pby1 + len] != _bufferBase[current + len]) run2 = false;
-                                }
-
-                                if (len == lenLimit)
-                                {
-                                    _son[ptr1] = _son[cyclicPosition];
-                                    _son[ptr0] = _son[cyclicPosition + 1];
-
-                                    run = false;
-                                }
-                            }
-
-                            if (run)
-                            {
-                                if (_bufferBase[pby1 + len] < _bufferBase[current + len])
-                                {
-                                    _son[ptr1] = currentMatch;
-                                    ptr1 = cyclicPosition + 1;
-                                    currentMatch = _son[ptr1];
-                                    len1 = len;
-                                }
-                                else
-                                {
-                                    _son[ptr0] = currentMatch;
-                                    ptr0 = cyclicPosition;
-                                    currentMatch = _son[ptr0];
-                                    len0 = len;
-                                }
-                            }
+                            _son[ptr0] = currentMatch;
+                            ptr0 = cyclicPosition;
+                            currentMatch = _son[ptr0];
+                            len0 = len;
                         }
                     }
 
@@ -487,34 +476,28 @@ namespace Hast.Samples.SampleAssembly.Lzma
         {
             if (!_streamEndWasReached)
             {
-                var run = true;
-
-                while (run)
+                while (true)
                 {
                     var size = (int)((0 - _bufferOffset) + _blockSize - _streamPosition);
-                    if (size == 0) run = false;
-                    else
+                    if (size == 0) break;
+                    var bytesRead = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPosition), size);
+                    if (bytesRead == 0)
                     {
-                        var bytesRead = _stream.Read(_bufferBase, (int)(_bufferOffset + _streamPosition), size);
-                        if (bytesRead == 0)
-                        {
-                            _positionLimit = _streamPosition;
-                            var pointerToPostion = _bufferOffset + _positionLimit;
-                            if (pointerToPostion > _pointerToLastSafePosition)
-                                _positionLimit = _pointerToLastSafePosition - _bufferOffset;
+                        _positionLimit = _streamPosition;
+                        var pointerToPostion = _bufferOffset + _positionLimit;
+                        if (pointerToPostion > _pointerToLastSafePosition)
+                            _positionLimit = _pointerToLastSafePosition - _bufferOffset;
 
-                            _streamEndWasReached = true;
+                        _streamEndWasReached = true;
 
-                            run = false;
-                        }
-                        else
-                        {
-                            _streamPosition += (uint)bytesRead;
-
-                            if (_streamPosition >= _position + _keepSizeAfter)
-                                _positionLimit = _streamPosition - _keepSizeAfter;
-                        }
+                        break;
                     }
+
+                    _streamPosition += (uint)bytesRead;
+
+                    if (_streamPosition >= _position + _keepSizeAfter)
+                        _positionLimit = _streamPosition - _keepSizeAfter;
+                    
                 }
             }
         }
@@ -543,12 +526,12 @@ namespace Hast.Samples.SampleAssembly.Lzma
         private void MoveBlockLzInputWindow()
         {
             var offset = _bufferOffset + _position - _keepSizeBefore;
-            
+
             // We need one additional byte, since MovePosition moves on 1 byte.
             if (offset > 0) offset--;
 
             var bytesCount = _bufferOffset + _streamPosition - offset;
-            
+
             for (uint i = 0; i < bytesCount; i++) _bufferBase[i] = _bufferBase[offset + i];
 
             _bufferOffset -= offset;
