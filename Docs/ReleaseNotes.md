@@ -2,10 +2,21 @@
 
 
 
+## v1.0.1, 17.07.2017
+
+- Improved support for unary increment/decrement operators (e.g. `number++`). Handling more cases now.
+- Support for multi-assignments (e.g. `number1 = number2 = 4`).
+- Improved exception messages.
+- Improved Remote Worker stability and exception messages.
+- Improved caching allowing full caching of generated hardware descriptions and thus faster repeated transformations.
+- Improved documentation.
+- Various smaller bugfixes and improvements.
+
+
 ## v1.0.0.1, 13.07.2017
 
-- Improving documentation.
-- Improving the stability of the Remote Worker that does remote transformations.
+- Improved documentation.
+- Improved the stability of the Remote Worker that does remote transformations.
 
 
 ## v1.0, 12.07.2017
