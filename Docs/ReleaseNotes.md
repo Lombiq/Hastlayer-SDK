@@ -2,6 +2,14 @@
 
 
 
+## v1.0.2, 19.07.2017
+
+- More reliable serial port selection.
+- Remote Worker is sending telemetry to Azure Application Insights, allowing better production diagnostics.
+- Improved documentation.
+- Various smaller bugfixes and improvements.
+
+
 ## v1.0.1, 17.07.2017
 
 - Improved support for unary increment/decrement operators (e.g. `number++`). Handling more cases now.
