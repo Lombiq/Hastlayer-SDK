@@ -5,6 +5,24 @@ using System.Threading.Tasks;
 namespace Hast.Layer
 {
     /// <summary>
+    /// A warning (i.e. an issue that doesn't necessarily make the result wrong but you should know about it) during 
+    /// transformation.
+    /// </summary>
+    public interface ITransformationWarning
+    {
+        /// <summary>
+        /// Gets the code, i.e. the identifier of the warning's type.
+        /// </summary>
+        string Code { get; }
+
+        /// <summary>
+        /// Gets the message describing the issue behind the warning.
+        /// </summary>
+        string Message { get; }
+    }
+
+
+    /// <summary>
     /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented 
     /// logic.
     /// </summary>
@@ -27,6 +45,12 @@ namespace Hast.Layer
         /// </summary>
         /// <param name="stream">A <see cref="Stream"/> to write the source code to.</param>
         Task WriteSource(Stream stream);
+
+        /// <summary>
+        /// Gets warnings noted during transformation (i.e. issues that don't necessarily make the result wrong but you 
+        /// should know about them). 
+        /// </summary>
+        IEnumerable<ITransformationWarning> Warnings { get; }
     }
 
 
