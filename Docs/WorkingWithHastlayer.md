@@ -70,7 +70,9 @@ The `ParallelAlgorithm` sample does exactly this.
 
 If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
 
-If you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `saveSyntaxTree`.
+If during transformation there's a warning (i.e. some issue that doesn't necessarily make the result wrong but you should know about it) then that will be added to the result of the *IHastlayer.GenerateHardware()* call (inside `HardwareDescription`).
+
+When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `saveSyntaxTree`.
 
 
 ## Extensibility
