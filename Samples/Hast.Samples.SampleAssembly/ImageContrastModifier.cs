@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Threading.Tasks;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -8,7 +9,7 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ImageContrastModifier
     {
-        private const int Multiplier = 1000;
+        private const ushort Multiplier = 1000;
 
         public const int ChangeContrast_ImageHeightIndex = 0;
         public const int ChangeContrast_ImageWidthIndex = 1;
@@ -25,19 +26,23 @@ namespace Hast.Samples.SampleAssembly
             ushort imageWidth = (ushort)memory.ReadUInt32(ChangeContrast_ImageWidthIndex);
             ushort imageHeight = (ushort)memory.ReadUInt32(ChangeContrast_ImageHeightIndex);
             int contrastValue = memory.ReadInt32(ChangeContrast_ContrastValueIndex);
-            ushort pixel = 0;
 
-            if (contrastValue > 100)
-                contrastValue = 100;
-            else if (contrastValue < -100)
-                contrastValue = -100;
+            if (contrastValue > 100) contrastValue = 100;
+            else if (contrastValue < -100) contrastValue = -100;
 
             contrastValue = (100 + contrastValue * Multiplier) / 100;
 
-            for (int i = 0; i < imageHeight * imageWidth * 3; i++)
+            for (int i = 0; i < imageHeight * imageWidth; i++)
             {
-                pixel = (ushort)memory.ReadUInt32(i + ChangeContrast_ImageStartIndex);
-                memory.WriteUInt32(i + ChangeContrast_ImageStartIndex, ChangePixelValue(pixel, contrastValue));
+                var pixelBytes = memory.Read4Bytes(i + ChangeContrast_ImageStartIndex);
+                memory.Write4Bytes(
+                    i + ChangeContrast_ImageStartIndex,
+                    new[]
+                    {
+                        ChangePixelValue(pixelBytes[0], contrastValue),
+                        ChangePixelValue(pixelBytes[1], contrastValue),
+                        ChangePixelValue(pixelBytes[2], contrastValue)
+                    });
             }
         }
 
@@ -48,9 +53,9 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="pixel">The current pixel value.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The pixel value after changing the contrast.</returns>
-        private ushort ChangePixelValue(ushort pixel, int contrastValue)
+        private byte ChangePixelValue(byte pixel, int contrastValue)
         {
-            int correctedPixel = pixel * Multiplier / 255;
+            var correctedPixel = pixel * Multiplier / 255;
             correctedPixel -= (int)(0.5 * Multiplier); 
             correctedPixel *= contrastValue;
             correctedPixel /= Multiplier;
@@ -61,7 +66,7 @@ namespace Hast.Samples.SampleAssembly
             if (correctedPixel < 0) correctedPixel = 0;
             if (correctedPixel > 255) correctedPixel = 255;
 
-            return (ushort)correctedPixel;
+            return (byte)correctedPixel;
         }
     }
 
@@ -104,9 +109,12 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var pixel = image.GetPixel(y, x);
 
-                    memory.WriteUInt32((x * image.Width + y) * 3 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.R);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.G);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + ImageContrastModifier.ChangeContrast_ImageStartIndex, pixel.B);
+                    // This leaves 1 byte unused in each memory cell, but that would make the whole logic a lot more
+                    // complicated, so good enough for a sample; if we'd want to optimize memory usage, that would be
+                    // needed.
+                    memory.Write4Bytes(
+                        x * image.Width + y + ImageContrastModifier.ChangeContrast_ImageStartIndex, 
+                        new[] { pixel.R, pixel.G, pixel.B });
                 }
             }
 
@@ -121,19 +129,14 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns the processed image.</returns>
         private static Bitmap CreateImage(SimpleMemory memory, Bitmap image)
         {
-            Bitmap newImage = new Bitmap(image);
-
-            int r, g, b;
+            var newImage = new Bitmap(image);
 
             for (int x = 0; x < newImage.Height; x++)
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    r = memory.ReadInt32((x * newImage.Width + y) * 3 + ImageContrastModifier.ChangeContrast_ImageStartIndex);
-                    g = memory.ReadInt32((x * newImage.Width + y) * 3 + 1 + ImageContrastModifier.ChangeContrast_ImageStartIndex);
-                    b = memory.ReadInt32((x * newImage.Width + y) * 3 + 2 + ImageContrastModifier.ChangeContrast_ImageStartIndex);
-
-                    newImage.SetPixel(y, x, Color.FromArgb(r, g, b));
+                    var bytes = memory.Read4Bytes(x * newImage.Width + y + ImageContrastModifier.ChangeContrast_ImageStartIndex);
+                    newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
                 }
             }
 
