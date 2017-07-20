@@ -2,6 +2,11 @@
 
 
 
+## vNext
+
+- Improved caching and thus smaller response time for repeated transformations.
+
+
 ## v1.0.2, 19.07.2017
 
 - More reliable serial port selection.
