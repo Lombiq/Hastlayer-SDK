@@ -5,6 +5,8 @@
 ## vNext
 
 - Improved caching and thus smaller response time for repeated transformations.
+- Cleaning up and parallelizing the ImageFilter sample.
+- Various smaller bugfixes and improvements.
 
 
 ## v1.0.2, 19.07.2017
