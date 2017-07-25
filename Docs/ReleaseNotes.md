@@ -6,6 +6,7 @@
 
 - Improved caching and thus smaller response time for repeated transformations.
 - Cleaning up and parallelizing the ImageFilter sample.
+- Improved documentation.
 - Various smaller bugfixes and improvements.
 
 
