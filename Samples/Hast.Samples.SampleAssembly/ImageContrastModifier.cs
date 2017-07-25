@@ -57,7 +57,7 @@ namespace Hast.Samples.SampleAssembly
                     // Using an input class to also pass contrastValue because it's currently not supported to access
                     // variables from the parent scope from inside Tasks (you need to explicitly pass in all inputs).
                     // Using an output class to pass the pixel values back because returning an array from Tasks is not
-                    // supported at the time either..
+                    // supported at the time either.
                     tasks[t] = Task.Factory.StartNew(
                         inputObject =>
                         {
