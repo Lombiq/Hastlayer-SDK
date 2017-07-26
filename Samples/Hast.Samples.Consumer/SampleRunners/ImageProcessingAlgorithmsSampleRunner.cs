@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 var imageContrastModifier = await hastlayer
                     .GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
-                // This takes about 2s on an i7 CPU and net 150ms on an FPGA.
+                // This takes about 160ms on an i7 CPU and net 150ms on an FPGA.
                 var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
                 modifiedImage.Save("contrast.bmp");
 
