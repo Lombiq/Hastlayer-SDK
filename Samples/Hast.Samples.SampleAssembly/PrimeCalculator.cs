@@ -30,10 +30,17 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void IsPrimeNumber(SimpleMemory memory)
         {
-            // Reading out the input parameter.
-            var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
-            // Writing back the output.
-            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
+            var number = (short)memory.ReadInt32(IsPrimeNumber_InputUInt32Index);
+
+            memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex, (byte)number);
+            memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 1, (sbyte)number);
+            memory.WriteUInt32(IsPrimeNumber_OutputBooleanIndex + 2, (uint)number);
+            memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 3, (int)number);
+
+            //memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex, number / 255);
+            //memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 1, 255 / number);
+            //memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 2, number / number);
+            //memory.Write4Bytes(IsPrimeNumber_OutputBooleanIndex + 3, new byte[] { (byte)(number / 255), (byte)(255 / number), (byte)(number / number) });
         }
 
         public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
@@ -130,14 +137,14 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public static class PrimeCalculatorExtensions
     {
-        public static bool IsPrimeNumber(this PrimeCalculator primeCalculator, uint number)
+        public static bool IsPrimeNumber(this PrimeCalculator primeCalculator, int number)
         {
             return RunIsPrimeNumber(number, memory => Task.Run(() => primeCalculator.IsPrimeNumber(memory))).Result;
         }
 
         public static Task<bool> IsPrimeNumberAsync(this PrimeCalculator primeCalculator, uint number)
         {
-            return RunIsPrimeNumber(number, memory => primeCalculator.IsPrimeNumberAsync(memory));
+            return RunIsPrimeNumber((int)number, memory => primeCalculator.IsPrimeNumberAsync(memory));
         }
 
         public static bool[] ArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
@@ -155,11 +162,11 @@ namespace Hast.Samples.SampleAssembly
             return results.CutToLength(numbers.Length);
         }
 
-        private static async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
+        private static async Task<bool> RunIsPrimeNumber(int number, Func<SimpleMemory, Task> methodRunner)
         {
             // One memory cell is enough for data exchange.
-            var memory = new SimpleMemory(1);
-            memory.WriteUInt32(PrimeCalculator.IsPrimeNumber_InputUInt32Index, number);
+            var memory = new SimpleMemory(10);
+            memory.WriteInt32(PrimeCalculator.IsPrimeNumber_InputUInt32Index, number);
 
             await methodRunner(memory);
 

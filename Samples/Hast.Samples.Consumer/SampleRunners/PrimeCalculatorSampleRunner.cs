@@ -10,7 +10,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
             // You can add complete types whose methods you'd like to invoke on the hardware from the outside like this.
-            configuration.AddHardwareEntryPointType<PrimeCalculator>();
+            configuration.AddHardwareEntryPointMethod<PrimeCalculator>(p => p.IsPrimeNumber(null));
             // A not statically typed way of doing the same as above would be:
             //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
             // Note that the bottom version can also be used to add multiple types from under a namespace.
@@ -26,7 +26,14 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
 
-            var isPrime = primeCalculator.IsPrimeNumber(15);
+            primeCalculator.IsPrimeNumber(145);
+            primeCalculator.IsPrimeNumber(-145);
+            primeCalculator.IsPrimeNumber(255);
+            primeCalculator.IsPrimeNumber(84);
+            primeCalculator.IsPrimeNumber(-84);
+
+            System.Diagnostics.Debugger.Break();
+
             var isPrime2 = primeCalculator.IsPrimeNumber(13);
             var isPrime3 = await primeCalculator.IsPrimeNumberAsync(21);
             // Only 2341 is prime.
