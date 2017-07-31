@@ -36,6 +36,7 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 1, (sbyte)number);
             memory.WriteUInt32(IsPrimeNumber_OutputBooleanIndex + 2, (uint)number);
             memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 3, (int)number);
+            memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 4, (ushort)number);
 
             //memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex, number / 255);
             //memory.WriteInt32(IsPrimeNumber_OutputBooleanIndex + 1, 255 / number);

@@ -28,9 +28,11 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             primeCalculator.IsPrimeNumber(145);
             primeCalculator.IsPrimeNumber(-145);
-            primeCalculator.IsPrimeNumber(255);
             primeCalculator.IsPrimeNumber(84);
             primeCalculator.IsPrimeNumber(-84);
+            primeCalculator.IsPrimeNumber(255);
+            primeCalculator.IsPrimeNumber(1500);
+            primeCalculator.IsPrimeNumber(-1500);
 
             System.Diagnostics.Debugger.Break();
 
