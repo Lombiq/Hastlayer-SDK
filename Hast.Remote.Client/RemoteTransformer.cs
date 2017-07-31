@@ -76,11 +76,14 @@ namespace Hast.Remote.Client
                      string.Join(Environment.NewLine, transformationResult.Errors));
             }
 
+            var hardwareDescription = transformationResult.HardwareDescription;
             return new RemoteHardwareDescription
             {
-                HardwareEntryPointNamesToMemberIdMappings = transformationResult.HardwareDescription.HardwareEntryPointNamesToMemberIdMappings,
-                Language = transformationResult.HardwareDescription.Language,
-                Source = transformationResult.HardwareDescription.Source
+                HardwareEntryPointNamesToMemberIdMappings = hardwareDescription.HardwareEntryPointNamesToMemberIdMappings,
+                Language = hardwareDescription.Language,
+                Source = hardwareDescription.Source,
+                Warnings = hardwareDescription.Warnings.Select(warning =>
+                    new Common.Models.TransformationWarning { Code = warning.Code, Message = warning.Message })
             };
         }
 
@@ -90,6 +93,7 @@ namespace Hast.Remote.Client
             public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; set; }
             public string Language { get; set; }
             public string Source { get; set; }
+            public IEnumerable<ITransformationWarning> Warnings { get; set; }
 
 
             public Task WriteSource(Stream stream)

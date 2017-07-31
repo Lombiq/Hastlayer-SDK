@@ -13,7 +13,7 @@
 
 Generally the *client* branch should be only merged to, but never from, the *dev* branch.
 
-There are separate solution files for the two flavors that only differ in whether they include *Hast.Core*. Should the solution change then make the changes in the dev solution file, copy it over the client one and remove the *Hast.Core* solution folder. If you switch between the two solutions while on the *dev* branch then temporarily configure the Hastlayer shell used for the Client flavor (see `IHastlayerConfiguration`).
+There are separate solution files for the two flavors that only differ in whether they include *Hast.Core*. Should the solution change then make the changes in the dev solution file, copy it over the client one and remove the *Hast.Core* solution folder. If you switch between the two solutions while on the *dev* branch then temporarily configure the Hastlayer shell to use the Client flavor (see `IHastlayerConfiguration`).
 
 To allow the same code in the samples and elsewhere to support both scenarios Orchard's dynamic module loading needs to be utilized. For this to work *Hast.Core* projects should adhere to the following:
 
@@ -21,9 +21,11 @@ To allow the same code in the samples and elsewhere to support both scenarios Or
 - They should include a *Module.txt* file (can be empty or can contain the usual Orchard configuration like `Dependencies`).
 - Both the Debug and Release build output directories should be set just to *bin\\*.
 
-If a Hast.Core projects needs to have types accessible in the Client flavor then create a corresponding `Abstractions` project. Such projects should follow the same rules listed above as *Hast.Core* projects with the only difference being that they should be located in a subfolder of *Hast.Abstractions*. Exceptions are projects that are directly added as imported extensions in `Hast.Layer`: Those can be just normal projects (like `Hast.Transformer.Abstractions`).
+If a *Hast.Core* projects needs to have types accessible in the Client flavor then create a corresponding `Abstractions` project. Such projects should follow the same rules listed above as *Hast.Core* projects with the only difference being that they should be located in a subfolder of *Hast.Abstractions*. Exceptions are projects that are directly added as imported extensions in `Hast.Layer`: Those can be just normal projects (like `Hast.Transformer.Abstractions`).
 
 Note that if either kinds of projects reference another project that should be treated in the same way, with a manifest file and build output directories set (see e.g. `Hast.VhdlBuilder`).
+
+When merging from the `dev` to the `client` branch make sure to remove newly added *Hast.Core* subrepos after the merge.
 
 
 ## When creating a new project
