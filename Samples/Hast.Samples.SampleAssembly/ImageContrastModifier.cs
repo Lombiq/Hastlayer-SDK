@@ -95,6 +95,9 @@ namespace Hast.Samples.SampleAssembly
         private byte ChangePixelValue(byte pixel, int contrastValue)
         {
             var correctedPixel = pixel * Multiplier / 255;
+            // While floats/doubles are not supported yet, you can still use them in constant expressions like the one
+            // below. This is because these will be evaluated during transformation, thus only the result (500 in this
+            // case) will end up on hardware.
             correctedPixel -= (int)(0.5 * Multiplier);
             correctedPixel *= contrastValue;
             correctedPixel /= Multiplier;
