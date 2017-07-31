@@ -11,8 +11,7 @@
 - Improved documentation.
 - Various smaller bugfixes and improvements.
 
-**Note** that since Hastlayer Hardware changed as well you'll need to run the `reset_project` TCL command from the Tcl Console in Vivado if you pull in changes to an already generated Vivado project. (Alternatively you can purge or re-clone that repo and regenerate the Vivado and SDK project.)
-
+**Note** that since Hastlayer Hardware changed as well you'll need to either regenerate the Vivado and SDK projects (after purging or re-cloning the Hardware repo) or manually upgrade Hast_IP (in Vivado go to Tools/Report/Report IP Status, then after Hast_IP is listed in the IP Status window as changed you'll need to follow the steps under the Hardware docs' "Running hardware designs" page).
 
 ## v1.0.2, 19.07.2017
 
