@@ -140,7 +140,6 @@ namespace Hast.Samples.Consumer
 
                         Console.WriteLine("VHDL source written to file, starting hardware execution.");
 
-                        return;
                         // Running samples.
                         switch (Configuration.SampleToRun)
                         {
@@ -175,7 +174,7 @@ namespace Hast.Samples.Consumer
                 }).Wait();
 
             Console.WriteLine("Press any key to exit.");
-            //Console.ReadKey();
+            Console.ReadKey();
         }
     }
 }
