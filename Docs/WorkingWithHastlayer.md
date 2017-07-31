@@ -2,6 +2,20 @@
 
 
 
+## Creating a Hastlayer-using application
+
+The Hastlayer developer story is not ideal yet - we're working on improving it. For now the below one is the easiest approach to add Hastlayer to your application:
+
+1. Clone the Hastlayer repository into a subfolder of your application (if you aren't using Mercurial for you app's source control then you can also add the whole directory to your own repository; however be careful to exclude compiled binaries like how the *.hgignore* file does in the Hastlayer repo).
+2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
+3. Instruct NuGet to use the *Orchard\src\packages* folder under the Hastlayer folder. You can do this by adding a *NuGet.config* file to the same folder where your solution file is ([this example](Attachments/NuGet.config) again uses the *Hastlayer* subfolder).
+4. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
+
+When Hastlayer is updated you can just pull in changes from the official Hastlayer repository, but you'll need to keep your solution file up to date by hand.
+
+We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications.
+
+
 ## Writing Hastlayer-compatible .NET code
 
 Take a look at the sample projects in the Sample solution folder. Those are there to give you a general idea how Hastlayer-compatible code looks like, and they're thoroughly documented. If some language construct is not present in the samples then it is probably not supported. The `PrimeCalculator` is a good starting point with a basic sample algorithm.
@@ -17,7 +31,7 @@ Some general constraints you have to keep in mind:
 - To a limited degree `Array.Copy()` is also supported: only the `Copy(Array sourceArray, Array destinationArray, int length)` override and only with a constant `length`. Furthermore, `ImmutableArray` is also supported to a limited degree by converting objects of that type to standard arrays in the background (see the `Lombiq.Unum` project for examples).
 - Using objects created of custom classes and structs are supported. Using these objects as usual (e.g. passing them as method arguments, storing them in arrays) is also supported. However hardware entry point types can only contain methods. Static members apart from methods are not supported (so e.g. while you can't use static fields, you can have static methods). Also, be careful not to mix reference types (like arrays) into structs' members (fields and properties), keep structs purely value types (this is a good practice any way).
 - Operator overloading on custom types is supported.
-- Task-based parallelism is with TPL is supported to a limited degree. Lambda expression are supported to an extent needed to use tasks (see the `ParallelAlgorithm` sample in the `Hast.Samples.Consumer` project).
+- Task-based parallelism is with TPL is supported to a limited degree, lambda expression are supported as well to an extent needed to use tasks. See the `ParallelAlgorithm` sample in the `Hast.Samples.Consumer` project and the `ImageContrastModifier` sample on how parallel code can look like.
 - Operation-level, SIMD-like parallelism is supported, see the `SimdCalculator` sample.
 - Recursion is supported but recursive code is not really something for Hastlayer. Nevertheless if a method call is recursive, even if indirectly, you need to manually configure the recursion depths (see the `RecursiveAlgorithms` sample).
 - Exceptions are not supported and `throw` statements will be handled as a no-op (they won't do anything). The latter is so you can keep throwing exceptions on invalid arguments from methods and utilize them when the code is executed in the standard way; however you need to take special care on not to actually have invalid arguments on hardware.
@@ -55,6 +69,10 @@ The `ParallelAlgorithm` sample does exactly this.
 ## Troubleshooting
 
 If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
+
+If during transformation there's a warning (i.e. some issue that doesn't necessarily make the result wrong but you should know about it) then that will be added to the result of the *IHastlayer.GenerateHardware()* call (inside `HardwareDescription`).
+
+When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `saveSyntaxTree`.
 
 
 ## Extensibility

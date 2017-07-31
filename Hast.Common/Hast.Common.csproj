@@ -65,6 +65,7 @@
     <Compile Include="Models\IHardwareDescription.cs" />
     <Compile Include="Models\IHardwareImplementation.cs" />
     <Compile Include="Models\IHardwareRepresentation.cs" />
+    <Compile Include="Models\TransformationWarning.cs" />
     <Compile Include="Numerics\SimdOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

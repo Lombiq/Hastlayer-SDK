@@ -4,17 +4,38 @@
 
 ## vNext
 
-- Improving support for unary increment/decrement operators (e.g. `number++`). Handling more cases now.
+- Improved caching and thus smaller response time for repeated transformations.
+- Cleaning up and parallelizing the ImageFilter sample.
+- Fixing casting/type conversions so now all casts result in hardware code that produces binary compatible results with .NET.
+- Moving VHDL libraries to the .NET Transformer, thus allowing easier library updates.
+- Improved documentation.
+- Various smaller bugfixes and improvements.
+
+**Note** that since Hastlayer Hardware changed as well you'll need to either regenerate the Vivado and SDK projects (after purging or re-cloning the Hardware repo) or manually upgrade Hast_IP (in Vivado go to Tools/Report/Report IP Status, then after Hast_IP is listed in the IP Status window as changed you'll need to follow the steps under the Hardware docs' "Running hardware designs" page).
+
+## v1.0.2, 19.07.2017
+
+- More reliable serial port selection.
+- Remote Worker is sending telemetry to Azure Application Insights, allowing better production diagnostics.
+- Improved documentation.
+- Various smaller bugfixes and improvements.
+
+
+## v1.0.1, 17.07.2017
+
+- Improved support for unary increment/decrement operators (e.g. `number++`). Handling more cases now.
 - Support for multi-assignments (e.g. `number1 = number2 = 4`).
 - Improved exception messages.
 - Improved Remote Worker stability and exception messages.
+- Improved caching allowing full caching of generated hardware descriptions and thus faster repeated transformations.
+- Improved documentation.
 - Various smaller bugfixes and improvements.
 
 
 ## v1.0.0.1, 13.07.2017
 
-- Improving documentation.
-- Improving the stability of the Remote Worker that does remote transformations.
+- Improved documentation.
+- Improved the stability of the Remote Worker that does remote transformations.
 
 
 ## v1.0, 12.07.2017
