@@ -6,8 +6,12 @@
 
 - Improved caching and thus smaller response time for repeated transformations.
 - Cleaning up and parallelizing the ImageFilter sample.
+- Fixing casting/type conversions so now all casts result in hardware code that produces binary compatible results with .NET.
+- Moving VHDL libraries to the .NET Transformer, thus allowing easier library updates.
 - Improved documentation.
 - Various smaller bugfixes and improvements.
+
+**Note** that since Hastlayer Hardware changed as well you'll need to run the `reset_project` TCL command from the Tcl Console in Vivado if you pull in changes to an already generated Vivado project. (Alternatively you can purge or re-clone that repo and regenerate the Vivado and SDK project.)
 
 
 ## v1.0.2, 19.07.2017
