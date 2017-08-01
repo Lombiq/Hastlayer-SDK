@@ -235,7 +235,7 @@ namespace Hast.Communication.Services
             if (ports.Length == 0)
             {
                 throw new SerialPortCommunicationException(
-                    "No serial port detected (no serial ports are open). Is and FPGA board connected and is it powered up?");
+                    "No serial port detected (no serial ports are open). Is an FPGA board connected and is it powered up?");
             }
 
             var fpgaPortNames = new ConcurrentBag<string>();
