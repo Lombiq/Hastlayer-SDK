@@ -120,6 +120,8 @@ namespace Hast.Samples.Consumer
                         // create.
                         configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
 
+                        Console.WriteLine("Hardware generation starts.");
+
                         // Generating hardware from the sample assembly with the given configuration.
                         var hardwareRepresentation = await hastlayer.GenerateHardware(
                             new[]
@@ -129,12 +131,14 @@ namespace Hast.Samples.Consumer
                             },
                             configuration);
 
+                        Console.WriteLine("Hardware generation finished, writing VHDL source to file.");
 
                         if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
                         {
                             await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
                         }
 
+                        Console.WriteLine("VHDL source written to file, starting hardware execution.");
 
                         // Running samples.
                         switch (Configuration.SampleToRun)
