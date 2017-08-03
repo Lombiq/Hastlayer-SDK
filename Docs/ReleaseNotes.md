@@ -2,6 +2,12 @@
 
 
 
+## vNext
+
+- Improved documentation.
+- Various smaller bugfixes and improvements.
+
+
 ## 1.0.3, 02.08.2017
 
 - Improved caching and thus smaller response time for repeated transformations.
