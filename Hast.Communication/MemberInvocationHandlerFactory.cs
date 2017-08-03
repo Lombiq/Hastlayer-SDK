@@ -116,7 +116,7 @@ namespace Hast.Communication
 
                                 SimpleMemory softMemory = null;
 
-                                if (configuration.ValidateHardwareResults)
+                                if (configuration.VerifyHardwareResults)
                                 {
                                     softMemory = new SimpleMemory(memory.CellCount);
                                     memory.Memory.CopyTo(softMemory.Memory, 0);
@@ -149,7 +149,7 @@ namespace Hast.Communication
                                         memberId, 
                                         new HardwareExecutionContext { ProxyGenerationConfiguration = configuration, HardwareRepresentation = hardwareRepresentation });
 
-                                if (configuration.ValidateHardwareResults)
+                                if (configuration.VerifyHardwareResults)
                                 {
                                     var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
                                     for (int i = 0; i < memory.CellCount; i++)

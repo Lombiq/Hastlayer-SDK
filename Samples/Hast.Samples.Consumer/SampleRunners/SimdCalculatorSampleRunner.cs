@@ -29,7 +29,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         // Checking if the hardware result is correct by running it against the software implementation. Note that this
         // can be also done by Hastlayer automatically on the SimpleMemory level by setting 
-        // ProxyGenerationConfiguration.ValidateHardwareResults to true when calling GenerateProxy().
+        // ProxyGenerationConfiguration.VerifyHardwareResults to true when calling GenerateProxy().
         private static int[] ThrowIfNotCorrect(SimdCalculator proxied, Func<SimdCalculator, int[]> operation)
         {
             var hardwareResult = operation(proxied);
