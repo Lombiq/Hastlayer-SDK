@@ -15,6 +15,8 @@ When Hastlayer is updated you can just pull in changes from the official Hastlay
 
 We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications.
 
+Since it's possible that due to bugs with some corner cases the hardware code will produce incorrect results it's good to configure Hastlayer to verify the hardware output while testing (and do tell Lombiq if you've found issues): You can do this by setting `ProxyGenerationConfiguration.VerifyHardwareResults` when generating proxy objects.
+
 
 ## Writing Hastlayer-compatible .NET code
 
