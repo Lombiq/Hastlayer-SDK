@@ -47,7 +47,7 @@ Once you've written some Hastlayer-compatible algorithm and successfully generat
 
 ## Performance-optimizing your code
 
-Some simplified basics first on the properties of FPGAs first:
+Some simplified basics on the properties of FPGAs first:
 
 - FPGAs are low-power devices running on small clock frequencies (few 100Mhz at most), so we need to be cautious with clock cycles.
 - On an FPGA you can do a lot of simpler operations (like variable assignments, arithmetic on smaller numbers) in a single clock cycle even without parallelization.
