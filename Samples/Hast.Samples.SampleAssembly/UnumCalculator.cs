@@ -49,6 +49,7 @@ namespace Hast.Samples.SampleAssembly
         public static readonly string[] ManuallySizedArrays = new[]
         {
             "System.UInt32[] Lombiq.Unum.BitMask::Segments()",
+            "System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32,System.UInt16).array",
             "System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32[],System.UInt16).segments",
             "System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean).array",
             "System.Void Hast.Samples.SampleAssembly.UnumCalculator::CalculateSumOfPowersofTwo(Hast.Transformer.SimpleMemory.SimpleMemory).array",
@@ -60,7 +61,9 @@ namespace Hast.Samples.SampleAssembly
             "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseAnd(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
             "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32).array",
             "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32).array",
-            "System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray().array"
+            "System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray().array",
+            "System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean).value",
+            "System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.Int32).array"
         };
 
 
