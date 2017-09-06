@@ -4,8 +4,8 @@
     {
         /// <summary>
         /// The generated VHDL code will be more readable and will contain debug-level information, though it will be 
-        /// significantly slower to create. The hardware will however run with the same performance as with
-        /// <see cref="Compact"/>.
+        /// significantly slower to create. Also, since the identifiers in code are shortened for readability there can
+        /// be naming clashes. The hardware will however run with the same performance as with <see cref="Compact"/>.
         /// </summary>
         Debug,
 
