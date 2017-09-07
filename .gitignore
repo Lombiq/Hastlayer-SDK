@@ -1,4 +1,3 @@
-syntax: glob
 desktop.ini
 *.suo
 *.sln.cache
@@ -8,4 +7,3 @@ desktop.ini
 bin/
 obj/
 packages/
-Hast.Core
