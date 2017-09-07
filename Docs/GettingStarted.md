@@ -34,7 +34,7 @@ These would be your first steps on starting to work with Hastlayer:
 
         Since both repos contain multiple branches you need to make sure to clone them to the branch corresponding to the flavor you want to use, the `client` or `dev` branch. This is easiest done by using the following commands from a Windows command window (these will clone both repos on the `client` branch to the folder where the command line is opened):
 
-        `hg clone --verbose https://bitbucket.org/Lombiq/hastlayer-sdk .\HastlayerSDK -r client`
+        `hg clone --verbose https://bitbucket.org/Lombiq/hastlayer-sdk .\Hastlayer.SDK -r client`
 
         `hg clone --verbose https://bitbucket.org/Lombiq/hastlayer-hardware-framework-xilinx .\HastlayerHardwareFramework-Xilinx -r client`
     - Using Git: Clone the [Hastlayer SDK repo](https://github.com/Lombiq/Hastlayer-SDK) and the [Hastlayer Hardware Framework - Xilinx repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Xilinx) from GitHub and checkout the `client` or `dev` branch corresponding to your flavor. Make sure to allow Git to initialize submodules!
