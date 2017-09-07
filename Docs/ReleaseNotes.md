@@ -4,6 +4,12 @@
 
 ## vNext
 
+- Improved documentation.
+- Various smaller bugfixes and improvements.
+
+
+## 1.0.3, 02.08.2017
+
 - Improved caching and thus smaller response time for repeated transformations.
 - Cleaning up and parallelizing the ImageFilter sample.
 - Fixing casting/type conversions so now all casts result in hardware code that produces binary compatible results with .NET.
@@ -11,7 +17,8 @@
 - Improved documentation.
 - Various smaller bugfixes and improvements.
 
-**Note** that since Hastlayer Hardware changed as well you'll need to either regenerate the Vivado and SDK projects (after purging or re-cloning the Hardware repo) or manually upgrade Hast_IP (in Vivado go to Tools/Report/Report IP Status, then after Hast_IP is listed in the IP Status window as changed you'll need to follow the steps under the Hardware docs' "Running hardware designs" page).
+**Note** that since Hastlayer Hardware changed as well you'll need to either regenerate the Vivado and SDK projects (after purging or re-cloning the Hardware repo) or manually upgrade Hast_IP if you want to run the sample hardware (in Vivado go to Tools/Report/Report IP Status, then after Hast_IP is listed in the IP Status window as changed you'll need to follow the steps under the Hardware docs' "Running hardware designs" page). Otherwise you'll be able to run your own custom generated hardware as usual, but you'll need to re-generate them after pulling in updates from both repos.
+
 
 ## v1.0.2, 19.07.2017
 

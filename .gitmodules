@@ -1,0 +1,12 @@
+[submodule "Hast.Remote.Bridge"]
+	path = Hast.Remote.Bridge
+	url = https://github.com/Lombiq/Hastlayer-Remote-Bridge.git
+	branch = dev
+[submodule "Lombiq.OrchardAppHost"]
+	path = Lombiq.OrchardAppHost
+	url = https://github.com/Lombiq/Orchard-Application-Host.git
+	branch = dev
+[submodule "Orchard"]
+	path = Orchard
+	url = https://github.com/OrchardCMS/Orchard.git
+	branch = master
