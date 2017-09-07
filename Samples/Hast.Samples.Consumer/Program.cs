@@ -27,7 +27,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.PrimeCalculator;
+        public static Sample SampleToRun = Sample.ParallelAlgorithm;
     }
 
 
@@ -83,6 +83,12 @@ namespace Hast.Samples.Consumer
                         var remoteClientConfiguration  = configuration.RemoteClientConfiguration();
                         remoteClientConfiguration.AppId = "TestApp";
                         remoteClientConfiguration.AppSecret = "appsecret";
+                        if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
+                            remoteClientConfiguration.AppSecret == "appsecret")
+                        {
+                            throw new InvalidOperationException(
+                                "You haven't changed the default remote credentials! Write to guys@hastlayer.com to receive access if you don't have yet.");
+                        }
 
 
                         // Letting the configuration of samples run. Check out those methods too!

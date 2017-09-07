@@ -2,6 +2,14 @@
 
 
 
+## 1.0.4, 08.09.2017
+
+- The SDK and Hardware Framework for Xilinx FPGAs is open source.
+- Fixing transformed shift operator behavior.
+- Improved documentation.
+- Various smaller bugfixes and improvements.
+
+
 ## 1.0.3, 02.08.2017
 
 - Improved caching and thus smaller response time for repeated transformations.
