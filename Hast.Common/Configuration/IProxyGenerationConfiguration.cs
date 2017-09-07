@@ -15,7 +15,7 @@ namespace Hast.Layer
         string CommunicationChannelName { get; }
 
         /// <summary>
-        /// Gets or whether the results coming from the hardware implementation should be validated against a software 
+        /// Gets or whether the results coming from the hardware implementation should be checked against a software 
         /// execution. If set to <c>true</c> then both a hardware and software invocation will happen and the result of 
         /// the two compared. If there is a mismatch then an exception will be thrown.
         /// </summary>
