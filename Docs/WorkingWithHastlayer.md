@@ -7,7 +7,7 @@
 The Hastlayer developer story is not ideal yet - we're working on improving it. For now the below one is the easiest approach to add Hastlayer to your application:
 
 1. Clone the Hastlayer repository into a subfolder of your application (if you aren't using Mercurial for you app's source control then you can also add the whole directory to your own repository; however be careful to exclude compiled binaries like how the *.hgignore* file does in the Hastlayer repo).
-2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
+2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.SDK.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
 3. Instruct NuGet to use the *Orchard\src\packages* folder under the Hastlayer folder. You can do this by adding a *NuGet.config* file to the same folder where your solution file is ([this example](Attachments/NuGet.config) again uses the *Hastlayer* subfolder).
 4. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
 
@@ -55,7 +55,7 @@ Some simplified basics on the properties of FPGAs first:
 
 - FPGAs are low-power devices running on small clock frequencies (few 100Mhz at most), so we need to be cautious with clock cycles.
 - On an FPGA you can do a lot of simpler operations (like variable assignments, arithmetic on smaller numbers) in a single clock cycle even without parallelization.
-- However it's only useful to look at FPGAs for performance enhancements if your code can be massively parallelized on a `Task` level.
+- However it's only useful to look at FPGAs for performance enhancements if your code is compute-bound and can be massively parallelized on a `Task` level.
 
 So to write fast code with Hastlayer you need implement massively parallel algorithms and avoid code that adds unnecessary clock cycles. What are the clock cycle sinks to avoid?
 
