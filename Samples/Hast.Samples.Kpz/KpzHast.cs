@@ -46,7 +46,7 @@ namespace Hast.Samples.Kpz
             if (kpzTarget == KpzTarget.Fpga)
             {
                 ProxyGenerationConfiguration proxyConf = new ProxyGenerationConfiguration();
-                proxyConf.ValidateHardwareResults = _verifyOutput;
+                proxyConf.VerifyHardwareResults = _verifyOutput;
                 Kernels = await hastlayer.GenerateProxy<KpzKernelsInterface>(hardwareRepresentation, new KpzKernelsInterface(), proxyConf);
                 LogItFunction("FPGA target detected");
             }
