@@ -27,6 +27,7 @@ These text files should only serve as a starting point. On how to use Hastlayer 
 - [Developing Hastlayer](Docs/DevelopingHastlayer.md)
 - [Release notes](Docs/ReleaseNotes.md)
 - [Roadmap](Docs/Roadmap.md)
+- [Support](Docs/Support.md)
 
 
 ## Repositories and contributions

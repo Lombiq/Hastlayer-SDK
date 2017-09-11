@@ -16,6 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8043A55-8
 		Readme.md = Readme.md
 		Docs\ReleaseNotes.md = Docs\ReleaseNotes.md
 		Docs\Roadmap.md = Docs\Roadmap.md
+		Docs\Support.md = Docs\Support.md
 		Docs\WorkingWithHastlayer.md = Docs\WorkingWithHastlayer.md
 	EndProjectSection
 EndProject
