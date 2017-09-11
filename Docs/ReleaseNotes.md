@@ -2,6 +2,11 @@
 
 
 
+## vNext
+
+- Improved documentation.
+
+
 ## 1.0.4, 08.09.2017
 
 - The SDK and Hardware Framework for Xilinx FPGAs is open source.
