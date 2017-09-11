@@ -65,6 +65,7 @@
     <Compile Include="Kpz.cs" />
     <Compile Include="KpzHast.cs" />
     <Compile Include="KpzKernels.cs" />
+    <Compile Include="KpzKernelsG.cs" />
     <Compile Include="KpzStateLogger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
