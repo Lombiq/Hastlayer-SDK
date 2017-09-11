@@ -36,7 +36,8 @@ The project's source is available in two public source repositories, automatical
 - [https://bitbucket.org/Lombiq/hastlayer-sdk](https://bitbucket.org/Lombiq/hastlayer-sdk) (Mercurial repository)
 - [https://github.com/Lombiq/Hastlayer-SDK](https://github.com/Lombiq/Hastlayer-SDK) (Git repository)
 
-Bug reports, feature requests and comments are warmly welcome, **please do so via GitHub**.
-Feel free to send pull requests too, no matter which source repository you choose for this purpose.
+(Note that due to a repository purge the repo history doesn't contain anything from before July 2017 though development has been ongoing more or less actively from 2015.)
+
+Bug reports, feature requests and comments are warmly welcome, **please do so via GitHub**. Feel free to send pull requests too, no matter which source repository you choose for this purpose.
 
 This project is developed by [Lombiq Technologies Ltd](https://lombiq.com/). Commercial-grade support is available through Lombiq.
