@@ -17,6 +17,8 @@ namespace Hast.Samples.Kpz
     {
         public bool[] bramDx;
         public bool[] bramDy;
+        public ulong taskRandomState1;
+        public ulong taskRandomState2;
     }
 
     public class KpzKernelsInterface
@@ -61,7 +63,6 @@ namespace Hast.Samples.Kpz
     {
         public const int GridWidth = 8;
         public const int GridHeight = 8;
-        public const int SmallGridSize = 8;
         uint[] gridRaw = new uint[GridWidth * GridHeight];
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         public bool TestMode = false;
