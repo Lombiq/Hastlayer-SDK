@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartKPZ = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
@@ -66,20 +66,20 @@
             // 
             // chartKPZ
             // 
-            chartArea3.AxisY.IsLogarithmic = true;
-            chartArea3.Name = "ChartArea1";
-            this.chartKPZ.ChartAreas.Add(chartArea3);
+            chartArea1.AxisY.IsLogarithmic = true;
+            chartArea1.Name = "ChartArea1";
+            this.chartKPZ.ChartAreas.Add(chartArea1);
             this.chartKPZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend3.Name = "Legend1";
-            this.chartKPZ.Legends.Add(legend3);
+            legend1.Name = "Legend1";
+            this.chartKPZ.Legends.Add(legend1);
             this.chartKPZ.Location = new System.Drawing.Point(0, 0);
             this.chartKPZ.Name = "chartKPZ";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.IsVisibleInLegend = false;
-            series3.Legend = "Legend1";
-            series3.Name = "defaultSeries";
-            this.chartKPZ.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "defaultSeries";
+            this.chartKPZ.Series.Add(series1);
             this.chartKPZ.Size = new System.Drawing.Size(617, 219);
             this.chartKPZ.TabIndex = 0;
             this.chartKPZ.Text = "chart1";
@@ -193,8 +193,10 @@
             this.comboTarget.FormattingEnabled = true;
             this.comboTarget.Items.AddRange(new object[] {
             "Original algorithm (CPU)",
-            "Hastlayer simulation (CPU)",
-            "Hastlayer accelerated (FPGA)"});
+            "Hastlayer simulation #1 (CPU)",
+            "Hastlayer accelerated #1 (FPGA)",
+            "Hastlayer simulation #2 (CPU) ",
+            "Hastlayer simulation #2 (FPGA) "});
             this.comboTarget.Location = new System.Drawing.Point(202, 125);
             this.comboTarget.Name = "comboTarget";
             this.comboTarget.Size = new System.Drawing.Size(408, 31);

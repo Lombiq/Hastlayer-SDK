@@ -10,7 +10,7 @@ namespace Hast.Samples.Kpz
 
     public enum KpzTarget
     {
-        Cpu, Fpga, FpgaSimulation
+        Cpu, Fpga, FpgaSimulation, FpgaG, FpgaSimulationG
     }
 
     /// <summary>

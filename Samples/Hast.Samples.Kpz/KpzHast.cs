@@ -13,6 +13,7 @@ namespace Hast.Samples.Kpz
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
         public KpzKernelsInterface Kernels;
+        public KpzKernelsGInterface KernelsG;
         private bool _verifyOutput;
 
         public async Task InitializeHastlayer(bool verifyOutput)
@@ -43,24 +44,41 @@ namespace Hast.Samples.Kpz
             await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);
 
             LogItFunction("Generating proxy...");
-            if (kpzTarget == KpzTarget.Fpga)
+            if (kpzTarget == KpzTarget.Fpga || kpzTarget == KpzTarget.FpgaG)
             {
                 ProxyGenerationConfiguration proxyConf = new ProxyGenerationConfiguration();
                 proxyConf.VerifyHardwareResults = _verifyOutput;
-                Kernels = await hastlayer.GenerateProxy<KpzKernelsInterface>(hardwareRepresentation, new KpzKernelsInterface(), proxyConf);
+                if(kpzTarget == KpzTarget.Fpga)
+                {
+                    Kernels = await hastlayer.GenerateProxy<KpzKernelsInterface>(
+                        hardwareRepresentation, 
+                        new KpzKernelsInterface(), 
+                        proxyConf);
+                }
+                else //if(kpzTarget == KpzTarget.FpgaG) 
+                {
+                    KernelsG = await hastlayer.GenerateProxy<KpzKernelsGInterface>(
+                        hardwareRepresentation, 
+                        new KpzKernelsGInterface(), 
+                        proxyConf);
+                }
                 LogItFunction("FPGA target detected");
             }
             else //if (kpzTarget == KpzTarget.FPGASimulation)
             {
                 Kernels = new KpzKernelsInterface();
+                KernelsG = new KpzKernelsGInterface();
                 LogItFunction("Simulation target detected");
             }
 
-            LogItFunction("Running TestAdd...");
-            uint resultFpga = Kernels.TestAddWrapper(4313,123);
-            uint resultCpu  = 4313+123;
-            if(resultCpu == resultFpga) LogItFunction(String.Format("Success: {0} == {1}", resultFpga, resultCpu));
-            else LogItFunction(String.Format("Fail: {0} != {1}", resultFpga, resultCpu));
+            if(kpzTarget == KpzTarget.Fpga || kpzTarget == KpzTarget.FpgaSimulation)
+            {
+                LogItFunction("Running TestAdd...");
+                uint resultFpga = Kernels.TestAddWrapper(4313,123);
+                uint resultCpu  = 4313+123;
+                if(resultCpu == resultFpga) LogItFunction(String.Format("Success: {0} == {1}", resultFpga, resultCpu));
+                else LogItFunction(String.Format("Fail: {0} != {1}", resultFpga, resultCpu));
+            }
 
             /*
             LogItFunction("Running TestPrng...");

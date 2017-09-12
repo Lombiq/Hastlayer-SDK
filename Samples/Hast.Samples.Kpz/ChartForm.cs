@@ -46,7 +46,7 @@ namespace Hast.Samples.Kpz
             _backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(
                 backgroundWorker_RunWorkerCompleted
             );
-            comboTarget.SelectedIndex = 1;
+            comboTarget.SelectedIndex = 3;
         }
 
         /// <summary>It adds a line to the log.</summary>
@@ -221,9 +221,14 @@ namespace Hast.Samples.Kpz
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
             checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2;
-            if (comboTarget.SelectedIndex > 0)
+            if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex < 2)
             {
                 nudTableWidth.Value = nudTableHeight.Value = 8;
+                nudIterations.Value = 1;
+            }
+            else if (comboTarget.SelectedIndex >= 2)
+            {
+                nudTableWidth.Value = nudTableHeight.Value = 4096;
                 nudIterations.Value = 1;
             }
         }
@@ -236,6 +241,8 @@ namespace Hast.Samples.Kpz
                     case 0: return KpzTarget.Cpu;
                     case 1: return KpzTarget.FpgaSimulation;
                     case 2: return KpzTarget.Fpga;
+                    case 3: return KpzTarget.FpgaSimulationG;
+                    case 4: return KpzTarget.FpgaG;
                 }
                 return KpzTarget.Cpu;
             }

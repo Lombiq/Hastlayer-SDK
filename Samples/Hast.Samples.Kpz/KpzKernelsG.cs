@@ -15,7 +15,7 @@ namespace Hast.Samples.Kpz
         public ulong taskRandomState2;
     }
 
-    public class KpzKernelsG
+    public class KpzKernelsGInterface
     {
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         ulong randomState0;
@@ -46,10 +46,10 @@ namespace Hast.Samples.Kpz
                 TaskLocals[TaskLocalsIndex].bramDy = new bool[LocalGridSize * LocalGridSize];
             }
 
-            //What is IterationGroupIndex good for? 
+            //What is IterationGroupIndex good for?
             //IterationPerTask needs to be between 0.5 and 1 based on the e-mail of Mate.
             //If we want 10 iterations, and starting a full series of tasks makes half iteration on the full table,
-            //then we need to start it 20 times (thus IterationGroupSize will be 20). 
+            //then we need to start it 20 times (thus IterationGroupSize will be 20).
 
             int ParallelTaskRandomIndex = 0;
 
@@ -214,23 +214,23 @@ namespace Hast.Samples.Kpz
     }
     public static class KpzKernelsGExtensions
     {
-        public static void CopyTo(this KpzKernelsG kernels, SimpleMemory memoryDst, KpzNode[,] gridSrc)
+        public static void CopyTo(this KpzKernelsGInterface kernels, SimpleMemory memoryDst, KpzNode[,] gridSrc)
         {
             for (int x = 0; x < KpzKernels.GridHeight; x++)
             {
-                for (int y = 0; y < KpzKernelsG.GridSize; y++)
+                for (int y = 0; y < KpzKernelsGInterface.GridSize; y++)
                 {
                     KpzNode node = gridSrc[x, y];
-                    memoryDst.WriteUInt32(y * KpzKernelsG.GridSize + x, node.SerializeToUInt32());
+                    memoryDst.WriteUInt32(y * KpzKernelsGInterface.GridSize + x, node.SerializeToUInt32());
                 }
             }
 
-            uint NumberOfRandomSeedValues = ((KpzKernelsG.GridSize * KpzKernelsG.GridSize) / (KpzKernelsG.LocalGridSize * KpzKernelsG.LocalGridSize) * KpzKernelsG.NumberOfIterations + 1) * 2;
+            uint NumberOfRandomSeedValues = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize) * KpzKernelsGInterface.NumberOfIterations + 1) * 2;
             Random random = new Random();
             for (int RandomSeedCopyIndex = 0; RandomSeedCopyIndex < NumberOfRandomSeedValues; RandomSeedCopyIndex++)
             {
                 uint randomNumber = (uint)random.Next();
-                memoryDst.WriteUInt32(KpzKernelsG.GridSize * KpzKernelsG.GridSize + RandomSeedCopyIndex, randomNumber);
+                memoryDst.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + RandomSeedCopyIndex, randomNumber);
             }
         }
     }
