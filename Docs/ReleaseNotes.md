@@ -4,6 +4,7 @@
 
 ## vNext
 
+- Fixing `HardwareGenerationConfiguration.AddHardwareEntryPointType()`, it now only adds the actual type as an entry point, not other types with similar names too.
 - Improved documentation.
 
 
