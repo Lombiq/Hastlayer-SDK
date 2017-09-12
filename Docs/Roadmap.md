@@ -1,0 +1,11 @@
+# Hastlayer roadmap
+
+
+
+Everything is about allowing software engineers to make their programs faster easily by leveraging the power of FPGAs. You can get an up-to-date glimpse of what's in focus from the [issues](https://github.com/Lombiq/Hastlayer-SDK/issues) and the [project cards](https://github.com/Lombiq/Hastlayer-SDK/projects/1). Feel free to open issues yourself for bugreports and feature requests!
+
+On a high level this is what we have outlined for the future:
+
+1. Find partners for field testing and test applications that can be compared with other implementations. We need results that can be showcased.
+2. Implement [Unum support](https://github.com/Lombiq/Hastlayer-SDK/issues/1).
+3. Find a suitable direction to support more serious workloads where the Nexys 4 DDR is too small.
