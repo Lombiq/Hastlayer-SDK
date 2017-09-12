@@ -7,6 +7,14 @@ using System;
 
 namespace Hast.Samples.Kpz
 {
+    public class KpzKernelsIndexObject
+    {
+        public bool[] bramDx;
+        public bool[] bramDy;
+        public ulong taskRandomState1;
+        public ulong taskRandomState2;
+    }
+
     public class KpzKernelsG
     {
         uint integerProbabilityP = 32767, integerProbabilityQ = 32767;

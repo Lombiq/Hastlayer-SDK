@@ -13,14 +13,6 @@ namespace Hast.Samples.Kpz
         public static int height(this KpzNode[,] grid) { return grid.GetLength(1); }
     }
     */
-    public class KpzKernelsIndexObject
-    {
-        public bool[] bramDx;
-        public bool[] bramDy;
-        public ulong taskRandomState1;
-        public ulong taskRandomState2;
-    }
-
     public class KpzKernelsInterface
     {
         public virtual void DoIterations(SimpleMemory memory)
