@@ -36,10 +36,21 @@ namespace Hast.Samples.Kpz
             configuration.EnableCaching = false;
 
             LogItFunction("Generating hardware...");
-            var hardwareRepresentation = await hastlayer.GenerateHardware( new[] {
-                typeof(KpzKernelsInterface).Assembly,
-             //   typeof(Hast.Algorithms.MWC64X).Assembly
-            }, configuration);
+            IHardwareRepresentation hardwareRepresentation;
+            if (kpzTarget == KpzTarget.FpgaG || kpzTarget == KpzTarget.FpgaSimulationG)
+            {
+                hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
+                    typeof(KpzKernelsGInterface).Assembly,
+                 //   typeof(Hast.Algorithms.MWC64X).Assembly
+                }, configuration);
+            }
+            else
+            {
+                hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
+                    typeof(KpzKernelsInterface).Assembly,
+                 //   typeof(Hast.Algorithms.MWC64X).Assembly
+                }, configuration);
+            }
 
             await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);
 

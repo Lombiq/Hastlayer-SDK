@@ -220,15 +220,15 @@ namespace Hast.Samples.Kpz
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
-            checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2;
+            checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4;
             if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex < 2)
             {
                 nudTableWidth.Value = nudTableHeight.Value = 8;
                 nudIterations.Value = 1;
             }
-            else if (comboTarget.SelectedIndex >= 2)
+            else if (comboTarget.SelectedIndex > 2)
             {
-                nudTableWidth.Value = nudTableHeight.Value = 4096;
+                nudTableWidth.Value = nudTableHeight.Value = KpzKernelsGInterface.GridSize;
                 nudIterations.Value = 1;
             }
         }
