@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Hast.Layer
 {
@@ -79,8 +80,15 @@ namespace Hast.Layer
         /// implementation.
         /// </summary>
         /// <typeparam name="T">The type of the object that will be later fed to the proxy generator.</typeparam>
-        public static void AddHardwareEntryPointType<T>(this IHardwareGenerationConfiguration configuration) =>
-            configuration.HardwareEntryPointMemberNamePrefixes.Add(typeof(T).FullName);
+        public static void AddHardwareEntryPointType<T>(this IHardwareGenerationConfiguration configuration)
+        {
+            // If we'd just add the type's name to HardwareEntryPointMemberNamePrefixes then types with just a different
+            // suffix in their names would still be included.
+            foreach (var method in typeof(T).GetMethods())
+            {
+                configuration.HardwareEntryPointMemberFullNames.Add(method.GetFullName());
+            }
+        }
 
         // Properties could be added similarly once properties are supported for direct hardware invocation. This is
         // unlikely (since it wouldn't be of much use), though properties inside the generated hardware is already

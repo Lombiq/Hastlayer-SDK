@@ -4,6 +4,14 @@
 
 ## vNext
 
+- Fixing `HardwareGenerationConfiguration.AddHardwareEntryPointType()`, it now only adds the actual type as an entry point, not other types with similar names too.
+- Improved documentation.
+
+
+## 1.0.4, 08.09.2017
+
+- The SDK and Hardware Framework for Xilinx FPGAs is open source.
+- Fixing transformed shift operator behavior.
 - Improved documentation.
 - Various smaller bugfixes and improvements.
 
