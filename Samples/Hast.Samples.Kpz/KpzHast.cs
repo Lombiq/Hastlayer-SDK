@@ -31,7 +31,6 @@ namespace Hast.Samples.Kpz
             };
 
             var configuration = new HardwareGenerationConfiguration((await hastlayer.GetSupportedDevices()).First().Name);
-            configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernels");
             configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
             configuration.EnableCaching = false;
 
@@ -39,6 +38,7 @@ namespace Hast.Samples.Kpz
             IHardwareRepresentation hardwareRepresentation;
             if (kpzTarget == KpzTarget.FpgaG || kpzTarget == KpzTarget.FpgaSimulationG)
             {
+                configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernelsGInterface");
                 hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
                     typeof(KpzKernelsGInterface).Assembly,
                  //   typeof(Hast.Algorithms.MWC64X).Assembly
@@ -46,6 +46,7 @@ namespace Hast.Samples.Kpz
             }
             else
             {
+                configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernelsInterface");
                 hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
                     typeof(KpzKernelsInterface).Assembly,
                  //   typeof(Hast.Algorithms.MWC64X).Assembly
