@@ -17,8 +17,7 @@ namespace Hast.Samples.Kpz
 
     public class KpzKernelsGInterface
     {
-        uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
-        ulong randomState0;
+        const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         //These parameters are fixed, locked into VHDL code for simplicity
         public const int GridSize = 4096; //Full grid width and height
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
@@ -31,13 +30,14 @@ namespace Hast.Samples.Kpz
 
         public virtual void ScheduleIterations(SimpleMemory memory)
         {
-            int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
-            int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
+            const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
+            const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
             const float IterationsPerTask = 0.5F;
-            int IterationGroupSize = (int)(NumberOfIterations / IterationsPerTask);
-            int PokesInsideTask = (int)(LocalGridSize * LocalGridSize * IterationsPerTask);
-            int LocalGridPartitions = GridSize / LocalGridSize;
-            int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations;
+            const int IterationGroupSize = (int)(NumberOfIterations / IterationsPerTask);
+            const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize * IterationsPerTask);
+            const int LocalGridPartitions = GridSize / LocalGridSize;
+            const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations;
+            ulong randomState0;
 
             KpzKernelsIndexObject[] TaskLocals = new KpzKernelsIndexObject[ParallelTasks];
             for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
@@ -59,7 +59,17 @@ namespace Hast.Samples.Kpz
 
             for (int IterationGroupIndex = 0; IterationGroupIndex < IterationGroupSize; IterationGroupIndex++)
             {
-                uint RandomValue = GetNextRandom0();
+                //GetNextRandom0
+                uint c0 = (uint)(randomState0 >> 32);
+                ulong x0l = randomState0 & (0xFFFFFFFFUL);
+                uint x0 = (uint)x0l;
+                // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
+                // https://github.com/icsharpcode/ILSpy/issues/807
+                uint z01 = 0xFFFE;
+                uint z02 = 0xB81B;
+                uint z0 = (0 << 32) | (z01 << 16) | z02;
+                randomState0 = x0 * z0 + c0;
+                uint RandomValue = x0 ^ c0;
                 int RandomXOffset = LocalGridSize, RandomYOffset = 0;
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
@@ -196,22 +206,8 @@ namespace Hast.Samples.Kpz
                 }
             }
         }
-
-        public uint GetNextRandom0()
-        {
-            uint c = (uint)(randomState0 >> 32);
-            ulong xl = randomState0 & (0xFFFFFFFFUL);
-            uint x = (uint)xl;
-            // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint z1 = 0xFFFE;
-            uint z2 = 0xB81B;
-            uint z = (0 << 32) | (z1 << 16) | z2;
-            randomState0 = x * z + c;
-            return x ^ c;
-        }
-
     }
+
     public static class KpzKernelsGExtensions
     {
         public static void CopyTo(this KpzKernelsGInterface kernels, SimpleMemory memoryDst, KpzNode[,] gridSrc)
