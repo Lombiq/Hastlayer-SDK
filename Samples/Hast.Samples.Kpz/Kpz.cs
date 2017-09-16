@@ -283,7 +283,10 @@ namespace Hast.Samples.Kpz
             var numberOfStepsInIteration = gridWidth * gridHeight;
             KpzNode[,] gridBefore = (KpzNode[,])grid.Clone();
             if (enableStateLogger) StateLogger.NewKpzIteration();
-            Kernels.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed, false, random.NextUInt64(), random.NextUInt64(), numberOfIterations);
+            if (kpzTarget == KpzTarget.FpgaG || kpzTarget == KpzTarget.FpgaSimulationG)
+                KernelsG.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed);
+            else
+                Kernels.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed, false, random.NextUInt64(), random.NextUInt64(), numberOfIterations);
             if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", grid, gridBefore);
             //HastlayerGridAlreadyPushed = true; //If commented out, push always
         }

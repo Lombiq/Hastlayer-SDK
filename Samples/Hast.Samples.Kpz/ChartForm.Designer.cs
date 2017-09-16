@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartKPZ = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
@@ -68,20 +68,20 @@
             // 
             // chartKPZ
             // 
-            chartArea1.AxisY.IsLogarithmic = true;
-            chartArea1.Name = "ChartArea1";
-            this.chartKPZ.ChartAreas.Add(chartArea1);
+            chartArea2.AxisY.IsLogarithmic = true;
+            chartArea2.Name = "ChartArea1";
+            this.chartKPZ.ChartAreas.Add(chartArea2);
             this.chartKPZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartKPZ.Legends.Add(legend1);
+            legend2.Name = "Legend1";
+            this.chartKPZ.Legends.Add(legend2);
             this.chartKPZ.Location = new System.Drawing.Point(0, 0);
             this.chartKPZ.Name = "chartKPZ";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "defaultSeries";
-            this.chartKPZ.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "defaultSeries";
+            this.chartKPZ.Series.Add(series2);
             this.chartKPZ.Size = new System.Drawing.Size(617, 219);
             this.chartKPZ.TabIndex = 0;
             this.chartKPZ.Text = "chart1";
@@ -382,8 +382,6 @@
             // checkWriteToFile
             // 
             this.checkWriteToFile.AutoSize = true;
-            this.checkWriteToFile.Checked = true;
-            this.checkWriteToFile.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkWriteToFile.Location = new System.Drawing.Point(595, 15);
             this.checkWriteToFile.Name = "checkWriteToFile";
             this.checkWriteToFile.Size = new System.Drawing.Size(15, 14);

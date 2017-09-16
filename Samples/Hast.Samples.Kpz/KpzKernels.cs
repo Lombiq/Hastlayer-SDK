@@ -1,6 +1,3 @@
-using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Algorithms;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.Kpz
@@ -251,6 +248,7 @@ namespace Hast.Samples.Kpz
             kernels.DoIterations(sm);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
+
 
         /// <summary>Push table into FPGA.</summary>
         public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)

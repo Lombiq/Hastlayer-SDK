@@ -1,7 +1,5 @@
 ﻿
 using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Algorithms;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 
@@ -36,14 +34,24 @@ namespace Hast.Samples.Kpz
             const int IterationGroupSize = (int)(NumberOfIterations / IterationsPerTask);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize * IterationsPerTask);
             const int LocalGridPartitions = GridSize / LocalGridSize;
-            const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations;
+            //const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
             ulong randomState0;
+            int ParallelTaskRandomIndex = 0;
+            uint RandomSeedTemp;
 
             KpzKernelsIndexObject[] TaskLocals = new KpzKernelsIndexObject[ParallelTasks];
             for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
             {
+                TaskLocals[TaskLocalsIndex] = new KpzKernelsIndexObject();
                 TaskLocals[TaskLocalsIndex].bramDx = new bool[LocalGridSize * LocalGridSize];
                 TaskLocals[TaskLocalsIndex].bramDy = new bool[LocalGridSize * LocalGridSize];
+                TaskLocals[TaskLocalsIndex].taskRandomState1 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) << 32;
+
+                TaskLocals[TaskLocalsIndex].taskRandomState2 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) << 32;
             }
 
             //What is IterationGroupIndex good for?
@@ -51,10 +59,9 @@ namespace Hast.Samples.Kpz
             //If we want 10 iterations, and starting a full series of tasks makes half iteration on the full table,
             //then we need to start it 20 times (thus IterationGroupSize will be 20).
 
-            int ParallelTaskRandomIndex = 0;
 
             randomState0 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-            uint RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+            RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
             randomState0 |= ((ulong)RandomSeedTemp) << 32;
 
             for (int IterationGroupIndex = 0; IterationGroupIndex < IterationGroupSize; IterationGroupIndex++)
@@ -95,14 +102,6 @@ namespace Hast.Samples.Kpz
                                 TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] = (value & 2) == 2;
                             }
                         }
-
-                        TaskLocals[ParallelTaskIndex].taskRandomState1 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                        RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                        TaskLocals[ParallelTaskIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) << 32;
-
-                        TaskLocals[ParallelTaskIndex].taskRandomState2 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                        RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                        TaskLocals[ParallelTaskIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) << 32;
 
                         tasks[ParallelTaskIndex] = Task.Factory.StartNew(
                         rawIndexObject =>
@@ -229,6 +228,22 @@ namespace Hast.Samples.Kpz
                 memoryDst.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + RandomSeedCopyIndex, randomNumber);
             }
         }
-    }
 
+        public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga)
+        {
+            int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) * KpzKernelsGInterface.NumberOfIterations;
+            int numRandomUints = 2 + (numTasks * 4);
+            SimpleMemory sm = new SimpleMemory(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + numRandomUints);
+
+            if (pushToFpga) KpzKernelsExtensions.CopyFromGridToSimpleMemory(hostGrid, sm);
+
+            Random rnd = new Random();
+            for (int randomWriteIndex=0; randomWriteIndex<numTasks; randomWriteIndex++)
+                sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + randomWriteIndex, (uint)rnd.Next());
+
+            kernels.ScheduleIterations(sm);
+
+            KpzKernelsExtensions.CopyFromSimpleMemoryToGrid(hostGrid, sm);
+        }
+    }
 }
