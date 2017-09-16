@@ -76,8 +76,9 @@ namespace Hast.Samples.Kpz
                 uint z02 = 0xB81B;
                 uint z0 = (0 << 32) | (z01 << 16) | z02;
                 randomState0 = x0 * z0 + c0;
-                uint RandomValue = x0 ^ c0;
-                int RandomXOffset = LocalGridSize, RandomYOffset = 0;
+                uint RandomValue0 = x0 ^ c0;
+                int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
+                int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0>>16));
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsIndexObject>[ParallelTasks];
@@ -96,7 +97,7 @@ namespace Hast.Samples.Kpz
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = (BaseY + CopyDstY) % GridSize;
+                                int CopySrcY = (BaseY + CopyDstY) / GridSize;
                                 uint value = memory.ReadUInt32(CopySrcX + CopySrcY * GridSize);
                                 TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] = (value & 1) == 1;
                                 TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] = (value & 2) == 2;
@@ -194,7 +195,7 @@ namespace Hast.Samples.Kpz
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = (BaseY + CopyDstY) % GridSize;
+                                int CopySrcY = (BaseY + CopyDstY) / GridSize;
                                 uint value =
                                     (TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
                                     (TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
