@@ -167,5 +167,30 @@ namespace Hast.Samples.Kpz
                 HighlightedCoords = highlightedCoords
             });
         }
+
+        public void WriteToFiles(string path)
+        {
+            if (!path.EndsWith("\\")) path += "\\";
+            int iterationIndex = 0;
+            foreach (var iteration in Iterations)
+            {
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(path + (iterationIndex++).ToString() + ".txt"))
+                {
+                    foreach (var action in iteration.Actions)
+                    {
+                        file.WriteLine(action.Description);
+                        for (int y = 0; y < action.Grid.GetLength(1); y++)
+                        {
+                            string line = "";
+                            for (int x = 0; x < action.Grid.GetLength(0); x++)
+                            {
+                                line += ((action.Grid[x, y].dx) ? "1" : "0") + ((action.Grid[x, y].dy) ? "1" : "0") + " ";
+                            }
+                            file.WriteLine(line);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

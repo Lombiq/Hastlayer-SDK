@@ -52,6 +52,8 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listLog = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.checkWriteToFile = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartKPZ)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -106,6 +108,8 @@
             // panelTop
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panelTop, 2);
+            this.panelTop.Controls.Add(this.checkWriteToFile);
+            this.panelTop.Controls.Add(this.label5);
             this.panelTop.Controls.Add(this.checkVerifyOutput);
             this.panelTop.Controls.Add(this.labelVerifyOutput);
             this.panelTop.Controls.Add(this.labelStepByStep);
@@ -129,7 +133,7 @@
             // checkVerifyOutput
             // 
             this.checkVerifyOutput.AutoSize = true;
-            this.checkVerifyOutput.Location = new System.Drawing.Point(482, 93);
+            this.checkVerifyOutput.Location = new System.Drawing.Point(449, 93);
             this.checkVerifyOutput.Name = "checkVerifyOutput";
             this.checkVerifyOutput.Size = new System.Drawing.Size(15, 14);
             this.checkVerifyOutput.TabIndex = 14;
@@ -160,7 +164,7 @@
             // checkStep
             // 
             this.checkStep.AutoSize = true;
-            this.checkStep.Location = new System.Drawing.Point(482, 54);
+            this.checkStep.Location = new System.Drawing.Point(449, 54);
             this.checkStep.Name = "checkStep";
             this.checkStep.Size = new System.Drawing.Size(15, 14);
             this.checkStep.TabIndex = 11;
@@ -170,7 +174,7 @@
             // 
             this.labelShowInspector.AutoSize = true;
             this.labelShowInspector.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelShowInspector.Location = new System.Drawing.Point(309, 6);
+            this.labelShowInspector.Location = new System.Drawing.Point(309, 8);
             this.labelShowInspector.Name = "labelShowInspector";
             this.labelShowInspector.Size = new System.Drawing.Size(134, 23);
             this.labelShowInspector.TabIndex = 10;
@@ -208,7 +212,7 @@
             this.checkShowInspector.AutoSize = true;
             this.checkShowInspector.Checked = true;
             this.checkShowInspector.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkShowInspector.Location = new System.Drawing.Point(482, 13);
+            this.checkShowInspector.Location = new System.Drawing.Point(449, 15);
             this.checkShowInspector.Name = "checkShowInspector";
             this.checkShowInspector.Size = new System.Drawing.Size(15, 14);
             this.checkShowInspector.TabIndex = 6;
@@ -284,7 +288,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(9, 6);
+            this.label1.Location = new System.Drawing.Point(9, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(162, 23);
             this.label1.TabIndex = 1;
@@ -365,6 +369,27 @@
             this.listLog.Size = new System.Drawing.Size(617, 186);
             this.listLog.TabIndex = 0;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(470, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(104, 23);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Write to file:";
+            // 
+            // checkWriteToFile
+            // 
+            this.checkWriteToFile.AutoSize = true;
+            this.checkWriteToFile.Checked = true;
+            this.checkWriteToFile.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkWriteToFile.Location = new System.Drawing.Point(595, 15);
+            this.checkWriteToFile.Name = "checkWriteToFile";
+            this.checkWriteToFile.Size = new System.Drawing.Size(15, 14);
+            this.checkWriteToFile.TabIndex = 16;
+            this.checkWriteToFile.UseVisualStyleBackColor = true;
+            // 
             // ChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -412,5 +437,7 @@
         private System.Windows.Forms.Label labelStepByStep;
         private System.Windows.Forms.CheckBox checkVerifyOutput;
         private System.Windows.Forms.Label labelVerifyOutput;
+        private System.Windows.Forms.CheckBox checkWriteToFile;
+        private System.Windows.Forms.Label label5;
     }
 }

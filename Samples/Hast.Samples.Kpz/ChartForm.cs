@@ -17,6 +17,7 @@ namespace Hast.Samples.Kpz
         private int _kpzWidth { get { return (int)nudTableWidth.Value; } }
         private int _kpzHeight { get { return (int)nudTableHeight.Value; } }
         private bool _showInspector { get { return checkShowInspector.Checked; } }
+        private bool _writeToFile { get { return checkWriteToFile.Checked; } }
         private bool _verifyOutput { get { return checkVerifyOutput.Checked; } }
         private bool _stepByStep { get { return checkStep.Checked; } }
 
@@ -101,11 +102,23 @@ namespace Hast.Samples.Kpz
             else LogIt("Operation finished.");
             buttonStart.Enabled = false;
             progressBar.Visible = false;
+
             if (_showInspector)
             {
+
+                if(_writeToFile)
+                {
+                    LogIt("Writing KpzStateLogger to file...");
+                    var kpzStateLoggerPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+@"\kpzStateLogger\";
+                    if(!System.IO.Directory.Exists(kpzStateLoggerPath)) System.IO.Directory.CreateDirectory(kpzStateLoggerPath);
+                    _kpz.StateLogger.WriteToFiles(kpzStateLoggerPath);
+                }
+
+                LogIt("Opening KpzStateLogger window...");
                 _inspectForm = new InspectForm(_kpz.StateLogger);
                 _inspectForm.Show();
             }
+            LogIt("Done.");
         }
 
         /// <summary>

@@ -17,6 +17,8 @@ namespace Hast.Samples.Kpz
     public partial class InspectForm : Form
     {
         KpzStateLogger _stateLogger;
+        const int maxGridDisplayWidth = 128;
+        const int maxGridDisplayHeight = 128;
 
         /// <summary>
         /// When the form is loaded, <see cref="listIterations"/> is initialized with the interations available in
@@ -41,11 +43,13 @@ namespace Hast.Samples.Kpz
         private void DgvShowIntArray(int[,] arr)
         {
             dgv.Rows.Clear();
-            dgv.ColumnCount = arr.GetLength(0);
-            for (int y = 0; y < arr.GetLength(1); y++)
+            int gridDisplayWidth = Math.Min(maxGridDisplayWidth, arr.GetLength(0));
+            int gridDisplayHeight = Math.Min(maxGridDisplayHeight, arr.GetLength(1));
+            dgv.ColumnCount = gridDisplayWidth;
+            for (int y = 0; y < gridDisplayHeight; y++)
             {
                 var dgvRow = new DataGridViewRow();
-                for (int x = 0; x < arr.GetLength(0); x++)
+                for (int x = 0; x < gridDisplayWidth; x++)
                 {
                     dgvRow.Cells.Add(new DataGridViewTextBoxCell() { Value = arr[x, y] });
                 }
@@ -62,11 +66,13 @@ namespace Hast.Samples.Kpz
         private void DgvShowKpzNodeArray(KpzNode[,] arr)
         {
             dgv.Rows.Clear();
-            dgv.ColumnCount = arr.GetLength(0);
-            for (int y = 0; y < arr.GetLength(1); y++)
+            int gridDisplayWidth = Math.Min(maxGridDisplayWidth, arr.GetLength(0));
+            int gridDisplayHeight = Math.Min(maxGridDisplayHeight, arr.GetLength(1));
+            dgv.ColumnCount = gridDisplayWidth;
+            for (int y = 0; y < gridDisplayHeight; y++)
             {
                 var dgvRow = new DataGridViewRow();
-                for (int x = 0; x < arr.GetLength(0); x++)
+                for (int x = 0; x < gridDisplayWidth; x++)
                 {
                     dgvRow.Cells.Add(new DataGridViewTextBoxCell()
                     {
