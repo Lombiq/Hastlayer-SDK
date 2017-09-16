@@ -17,7 +17,7 @@ namespace Hast.Samples.Kpz
     {
         const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         //These parameters are fixed, locked into VHDL code for simplicity
-        public const int GridSize = 4096; //Full grid width and height
+        public const int GridSize = 64; //Full grid width and height
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
         public const int LocalGridSize = 8;
         public const int ParallelTasks = 8; //Number of parallel execution engines
@@ -97,7 +97,7 @@ namespace Hast.Samples.Kpz
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = (BaseY + CopyDstY) / GridSize;
+                                int CopySrcY = ((BaseY + CopyDstY) / GridSize) % GridSize; //Prevent going out of grid memory area (e.g. reading into random seed)
                                 uint value = memory.ReadUInt32(CopySrcX + CopySrcY * GridSize);
                                 TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] = (value & 1) == 1;
                                 TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] = (value & 2) == 2;
@@ -195,7 +195,7 @@ namespace Hast.Samples.Kpz
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = (BaseY + CopyDstY) / GridSize;
+                                int CopySrcY = ((BaseY + CopyDstY) / GridSize) % GridSize;
                                 uint value =
                                     (TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
                                     (TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
@@ -236,7 +236,7 @@ namespace Hast.Samples.Kpz
             int numRandomUints = 2 + (numTasks * 4);
             SimpleMemory sm = new SimpleMemory(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + numRandomUints);
 
-            if (pushToFpga) KpzKernelsExtensions.CopyFromGridToSimpleMemory(hostGrid, sm);
+            if (pushToFpga) KpzKernelsGExtensions.CopyFromGridToSimpleMemory(hostGrid, sm);
 
             Random rnd = new Random();
             for (int randomWriteIndex=0; randomWriteIndex<numTasks; randomWriteIndex++)
@@ -244,7 +244,32 @@ namespace Hast.Samples.Kpz
 
             kernels.ScheduleIterations(sm);
 
-            KpzKernelsExtensions.CopyFromSimpleMemoryToGrid(hostGrid, sm);
+            KpzKernelsGExtensions.CopyFromSimpleMemoryToGrid(hostGrid, sm);
+        }
+
+       /// <summary>Push table into FPGA.</summary>
+        public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
+        {
+            for (int x = 0; x < KpzKernelsGInterface.GridSize; x++)
+            {
+                for (int y = 0; y < KpzKernelsGInterface.GridSize; y++)
+                {
+                    KpzNode node = gridSrc[x, y];
+                    memoryDst.WriteUInt32(y * KpzKernels.GridWidth + x, node.SerializeToUInt32());
+                }
+            }
+        }
+
+        /// <summary>Pull table from the FPGA.</summary>
+        public static void CopyFromSimpleMemoryToGrid(KpzNode[,] gridDst, SimpleMemory memorySrc)
+        {
+            for (int x = 0; x < KpzKernelsGInterface.GridSize; x++)
+            {
+                for (int y = 0; y < KpzKernelsGInterface.GridSize; y++)
+                {
+                    gridDst[x, y] = KpzNode.DeserializeFromUInt32(memorySrc.ReadUInt32(y * KpzKernels.GridWidth + x));
+                }
+            }
         }
     }
 }
