@@ -21,7 +21,7 @@ namespace Hast.Samples.Kpz
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
         public const int LocalGridSize = 8;
         public const int ParallelTasks = 8; //Number of parallel execution engines
-        public const int NumberOfIterations = 10;
+        public const int NumberOfIterations = 10; //TODO
 
         //public int MemStartOfRandomValues() { return GridSize * GridSize;  }
         //public int MemStartOfParameters() { return GridSize * GridSize + TasksPerIteration * NumberOfIterations + 1; }
@@ -30,7 +30,7 @@ namespace Hast.Samples.Kpz
         {
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
-            const float IterationsPerTask = 10F;// 0.5F;
+            const float IterationsPerTask = 10F;// 0.5F; //TODO: change back to 0.5F
             const int IterationGroupSize = (int)(NumberOfIterations / IterationsPerTask);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize * IterationsPerTask);
             const int LocalGridPartitions = GridSize / LocalGridSize;
@@ -75,11 +75,11 @@ namespace Hast.Samples.Kpz
                 uint z01 = 0xFFFE;
                 uint z02 = 0xB81B;
                 uint z0 = (0 << 32) | (z01 << 16) | z02;
-                randomState0 = x0 * z0 + c0;
+                randomState0 = (ulong)x0 * (ulong)z0 + (ulong)c0;
                 uint RandomValue0 = x0 ^ c0;
                 int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0>>16));
-                RandomXOffset = RandomYOffset = 0;
+                RandomXOffset = RandomYOffset = 0; //TODO: remove this
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsIndexObject>[ParallelTasks];
@@ -137,7 +137,7 @@ namespace Hast.Samples.Kpz
                                 uint z21 = 0xFFFE;
                                 uint z22 = 0xB81B;
                                 uint z2 = (0 << 32) | (z21 << 16) | z22;
-                                TaskLocal.taskRandomState2 = x2 * z2 + c2;
+                                TaskLocal.taskRandomState2 = (ulong)x2 * (ulong)z2 + (ulong)c2;
                                 uint taskRandomNumber2 = x2 ^ c2;
 
                                 int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1)); //The existstence of var-1 in code is a good indicator of that it is asumed to be 2^N
