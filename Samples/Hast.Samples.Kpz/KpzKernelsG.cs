@@ -21,7 +21,7 @@ namespace Hast.Samples.Kpz
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
         public const int LocalGridSize = 8;
         public const int ParallelTasks = 8; //Number of parallel execution engines
-        public const int NumberOfIterations = 1;
+        public const int NumberOfIterations = 10;
 
         //public int MemStartOfRandomValues() { return GridSize * GridSize;  }
         //public int MemStartOfParameters() { return GridSize * GridSize + TasksPerIteration * NumberOfIterations + 1; }
@@ -30,7 +30,7 @@ namespace Hast.Samples.Kpz
         {
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
-            const float IterationsPerTask = 1F;// 0.5F;
+            const float IterationsPerTask = 10F;// 0.5F;
             const int IterationGroupSize = (int)(NumberOfIterations / IterationsPerTask);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize * IterationsPerTask);
             const int LocalGridPartitions = GridSize / LocalGridSize;
@@ -79,6 +79,7 @@ namespace Hast.Samples.Kpz
                 uint RandomValue0 = x0 ^ c0;
                 int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0>>16));
+                RandomXOffset = RandomYOffset = 0;
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsIndexObject>[ParallelTasks];
@@ -125,7 +126,7 @@ namespace Hast.Samples.Kpz
                                 uint z11 = 0xFFFE;
                                 uint z12 = 0xB81B;
                                 uint z1 = (0 << 32) | (z11 << 16) | z12;
-                                TaskLocal.taskRandomState1 = x1 * z1 + c1;
+                                TaskLocal.taskRandomState1 = (ulong)x1 * (ulong)z1 + (ulong)c1;
                                 uint taskRandomNumber1 = x1 ^ c1;
 
                                 //GetNextRandom2
@@ -139,7 +140,7 @@ namespace Hast.Samples.Kpz
                                 TaskLocal.taskRandomState2 = x2 * z2 + c2;
                                 uint taskRandomNumber2 = x2 ^ c2;
 
-                                int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1));
+                                int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1)); //The existstence of var-1 in code is a good indicator of that it is asumed to be 2^N
                                 int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
                                 int pokeCenterIndex = pokeCenterX + pokeCenterY * LocalGridSize;
                                 uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
@@ -162,11 +163,11 @@ namespace Hast.Samples.Kpz
                                     // If we get the pattern {01, 01} we have a pyramid:
                                     ((TaskLocal.bramDx[pokeCenterIndex] && !TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (TaskLocal.bramDy[pokeCenterIndex] && !TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (randomVariable1 < integerProbabilityP)) ||
+                                    (true || randomVariable1 < integerProbabilityP)) || /*TODO: remove true! */
                                     // If we get the pattern {10, 10} we have a hole:
                                     ((!TaskLocal.bramDx[pokeCenterIndex] && TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (!TaskLocal.bramDy[pokeCenterIndex] && TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (randomVariable2 < integerProbabilityQ))
+                                    (true || randomVariable2 < integerProbabilityQ)) /*TODO: remove true! */
                                 )
                                 {
                                     // We make a hole into a pyramid, and a pyramid into a hole.
@@ -202,8 +203,12 @@ namespace Hast.Samples.Kpz
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
                                 int CopySrcY = (BaseY + CopyDstY) % GridSize;
                                 uint value =
-                                    (TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
-                                    (TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
+                                    (tasks[ParallelTaskIndex].Result.bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
+                                    (tasks[ParallelTaskIndex].Result.bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
+                                //uint value =
+                                //    (TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
+                                //    (TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
+                                //(Either solution to pass TaskLocals does work.)
                                 memory.WriteUInt32(CopySrcX + CopySrcY * GridSize, value);
                             }
                         }
