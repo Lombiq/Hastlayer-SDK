@@ -97,7 +97,7 @@ namespace Hast.Samples.Kpz
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = ((BaseY + CopyDstY) / GridSize) % GridSize; //Prevent going out of grid memory area (e.g. reading into random seed)
+                                int CopySrcY = (BaseY + CopyDstY) % GridSize; //Prevent going out of grid memory area (e.g. reading into random seed)
                                 uint value = memory.ReadUInt32(CopySrcX + CopySrcY * GridSize);
                                 TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] = (value & 1) == 1;
                                 TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] = (value & 2) == 2;
@@ -155,6 +155,7 @@ namespace Hast.Samples.Kpz
                                 bottomNeighbourIndex = bottomNeighbourY * LocalGridSize + bottomNeighbourX;
 
                                 // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
+                                /*
                                 if (
                                     // If we get the pattern {01, 01} we have a pyramid:
                                     ((TaskLocal.bramDx[pokeCenterIndex] && !TaskLocal.bramDx[rightNeighbourIndex]) &&
@@ -172,6 +173,7 @@ namespace Hast.Samples.Kpz
                                     TaskLocal.bramDx[rightNeighbourIndex] = !TaskLocal.bramDx[rightNeighbourIndex];
                                     TaskLocal.bramDy[bottomNeighbourIndex] = !TaskLocal.bramDy[bottomNeighbourIndex];
                                 }
+                                */
                                 // ==== </Now randomly switch four cells> ====
                             }
                             return TaskLocal; //TODO: do we need this at all?
@@ -195,7 +197,7 @@ namespace Hast.Samples.Kpz
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = ((BaseY + CopyDstY) / GridSize) % GridSize;
+                                int CopySrcY = (BaseY + CopyDstY) % GridSize;
                                 uint value =
                                     (TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
                                     (TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
