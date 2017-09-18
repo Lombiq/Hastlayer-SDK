@@ -21,7 +21,7 @@ namespace Hast.Samples.Kpz
             uint constantHighShort = 0xFFFE;
             uint constantLowShort = 0xB81B;
             uint constantWord = (0 << 32) | (constantHighShort << 16) | constantLowShort;
-            ulong randomState = stateLowWord * constantWord + stateHighWord;
+            ulong randomState = (ulong)stateLowWord * (ulong)constantWord + (ulong)stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
             memory.WriteUInt32(0, (uint)randomState); //LE: 1 is high byte, 0 is low byte
