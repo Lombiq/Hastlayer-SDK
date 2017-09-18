@@ -30,7 +30,7 @@ namespace Hast.Samples.Kpz
         {
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
-            const float IterationsPerTask = 10F;// 0.5F; //TODO: change back to 0.5F
+            const float IterationsPerTask = 0.5F;// 0.5F; //TODO: change back to 0.5F
             const int IterationGroupSize = (int)(NumberOfIterations / IterationsPerTask);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize * IterationsPerTask);
             const int LocalGridPartitions = GridSize / LocalGridSize;
@@ -79,7 +79,7 @@ namespace Hast.Samples.Kpz
                 uint RandomValue0 = x0 ^ c0;
                 int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0>>16));
-                RandomXOffset = RandomYOffset = 0; //TODO: remove this
+                //RandomXOffset = RandomYOffset = 0; //TODO: remove this
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsIndexObject>[ParallelTasks];
@@ -163,11 +163,11 @@ namespace Hast.Samples.Kpz
                                     // If we get the pattern {01, 01} we have a pyramid:
                                     ((TaskLocal.bramDx[pokeCenterIndex] && !TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (TaskLocal.bramDy[pokeCenterIndex] && !TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (true || randomVariable1 < integerProbabilityP)) || /*TODO: remove true! */
+                                    (false || randomVariable1 < integerProbabilityP)) || /*TODO: remove true! */
                                     // If we get the pattern {10, 10} we have a hole:
                                     ((!TaskLocal.bramDx[pokeCenterIndex] && TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (!TaskLocal.bramDy[pokeCenterIndex] && TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (true || randomVariable2 < integerProbabilityQ)) /*TODO: remove true! */
+                                    (false || randomVariable2 < integerProbabilityQ)) /*TODO: remove true! */
                                 )
                                 {
                                     // We make a hole into a pyramid, and a pyramid into a hole.
