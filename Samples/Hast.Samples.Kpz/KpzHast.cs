@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System.Linq;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.Kpz
 {
@@ -112,14 +113,14 @@ namespace Hast.Samples.Kpz
 
                 PrngTestInterface KernelsCpu = new PrngTestInterface();
                 ulong randomSeed = 0x37a92d76a96ef210UL;
-                KernelsP.PushRandomSeed(randomSeed);
-                KernelsCpu.PushRandomSeed(randomSeed);
+                SimpleMemory smCpu = KernelsCpu.PushRandomSeed(randomSeed);
+                SimpleMemory smFpga = KernelsP.PushRandomSeed(randomSeed);
                 LogItFunction("PRNG results:");
                 bool success = true;
                 for (int PrngTestIndex = 0; PrngTestIndex < 10; PrngTestIndex++)
                 {
-                    uint prngCpuResult = KernelsCpu.GetNextRandom();
-                    uint prngFpgaResult = KernelsP.GetNextRandom();
+                    uint prngCpuResult = KernelsCpu.GetNextRandom(smCpu);
+                    uint prngFpgaResult = KernelsP.GetNextRandom(smFpga);
                     if (prngCpuResult != prngFpgaResult) { success = false; }
                     LogItFunction(String.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
                 }
