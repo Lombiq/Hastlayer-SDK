@@ -235,7 +235,7 @@ namespace Hast.Samples.Kpz
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
-            checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4;
+            checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4 || comboTarget.SelectedIndex == 5;
             if (comboTarget.SelectedIndex == 5) checkVerifyOutput.Checked = true;
             if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex < 2)
             {

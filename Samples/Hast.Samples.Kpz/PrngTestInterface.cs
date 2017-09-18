@@ -39,17 +39,17 @@ namespace Hast.Samples.Kpz
 
     public static class PrngTestExtensions
     {
+        static SimpleMemory sm;
 
         public static void PushRandomSeed(this PrngTestInterface kernels, ulong seed)
         {
-            SimpleMemory sm = new SimpleMemory(3);
+            sm = new SimpleMemory(3);
             sm.WriteUInt32(0, (uint)(seed & 0xFFFFFFFFUL)); //LE: 0 is low byte, 1 is high byte
             sm.WriteUInt32(1, (uint)(seed >> 32)); 
         }
 
         public static uint GetNextRandom(this PrngTestInterface kernels)
         {
-            SimpleMemory sm = new SimpleMemory(3);
             kernels.MWC64X(sm);
             return sm.ReadUInt32(2);
         }
