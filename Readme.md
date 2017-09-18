@@ -6,7 +6,7 @@
 
 [Hastlayer](https://hastlayer.com/) - Be the hardware. Automatically transforming [.NET](https://www.microsoft.com/net/) assemblies into computer chips to improve performance and lower power consumption.
 
-Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (chips that can be "re-wired" on the fly): You just need to select the compute-bound part of your .NET program and Hastlayer will seamlessly swap it out with a generated FPGA implementation. 
+Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (chips that can be "re-wired" on the fly): You just need to select the compute-bound part of your .NET program and Hastlayer will seamlessly swap it out with a generated FPGA implementation. Since not C#, VisualBasic or other code but .NET Intermediate Language assemblies are transformed in theory any .NET language can be used, including C#, F#, VB, C++, Python, PHP, JavaScript...
  
 This is the PC-side component of Hastlayer, the one that transforms .NET assemblies, programs attached FPGAs and communicates with said FPGAs.
 
