@@ -197,6 +197,8 @@ namespace Hast.Samples.Kpz
                 _kpz.InitializeHastlayer(_verifyOutput).Wait();
             }
 
+            if(ComputationTarget == KpzTarget.PrngTest) return; //Already done test inside InitializeHastlayer
+
             var sw = System.Diagnostics.Stopwatch.StartNew();
             AsyncLogIt("Starting KPZ iterations...");
 
@@ -234,6 +236,7 @@ namespace Hast.Samples.Kpz
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
             checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4;
+            if (comboTarget.SelectedIndex == 5) checkVerifyOutput.Checked = true;
             if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex < 2)
             {
                 nudTableWidth.Value = nudTableHeight.Value = 8;
@@ -256,6 +259,7 @@ namespace Hast.Samples.Kpz
                     case 2: return KpzTarget.Fpga;
                     case 3: return KpzTarget.FpgaSimulationG;
                     case 4: return KpzTarget.FpgaG;
+                    case 5: return KpzTarget.PrngTest;
                 }
                 return KpzTarget.Cpu;
             }

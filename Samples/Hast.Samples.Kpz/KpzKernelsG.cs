@@ -13,6 +13,13 @@ namespace Hast.Samples.Kpz
         public ulong taskRandomState2;
     }
 
+    //SimpleMemory map:
+    // * 0 .. GridSize^2-1  (GridSize^2 addresses)  :  
+    //      The input KPZ nodes as 32 bit numbers, with bit 0 as dx and bit 1 as dy.
+    // * GridSize^2 .. GridSize^2+(ParallelTasks+1)*2-1  ((ParallelTasks+1)*2 addresses)  :
+    //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler level.
+    //      Each random seed number is 64-bit (2 uints)
+
     public class KpzKernelsGInterface
     {
         const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;

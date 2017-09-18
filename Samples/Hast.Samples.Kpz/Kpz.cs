@@ -8,16 +8,37 @@ using System.Threading.Tasks;
 namespace Hast.Samples.Kpz
 {
 
-    public enum KpzTarget
+    public enum  KpzTarget
     {
-        Cpu, Fpga, FpgaSimulation, FpgaG, FpgaSimulationG
+        Cpu, Fpga, FpgaSimulation, FpgaG, FpgaSimulationG, PrngTest
+    }
+
+    public static class KpzTargetExtensions
+    {
+        //AFAIK C# does not have extension properties yet. 
+        public static bool HastlayerSimulation(this KpzTarget target)
+        {
+            return target == KpzTarget.FpgaSimulation || target == KpzTarget.FpgaSimulationG;
+        }
+        public static bool HastlayerOnFpga(this KpzTarget target)
+        {
+            return target == KpzTarget.Fpga || target == KpzTarget.FpgaG || target == KpzTarget.PrngTest;
+        }
+        public static bool HastlayerGAlgorithm(this KpzTarget target)
+        {
+            return target == KpzTarget.FpgaG || target == KpzTarget.FpgaSimulationG;
+        }
+        public static bool HastlayerPlainAlgorithm(this KpzTarget target)
+        {
+            return target == KpzTarget.Fpga || target == KpzTarget.FpgaSimulation;
+        }
     }
 
     /// <summary>
     /// This struct is used to built the grid that the KPZ algorithm works on.
     /// Every node on the grid stores the derivatives of a 2D function in X and Y direction.
     /// </summary>
-    public class KpzNode 
+    public class KpzNode
     {
         public bool dx; // Right
         public bool dy; // Bottom
@@ -99,10 +120,10 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public Kpz
         (
-            int newGridWidth, 
-            int newGridHeight, 
-            double probabilityP, 
-            double probabilityQ, 
+            int newGridWidth,
+            int newGridHeight,
+            double probabilityP,
+            double probabilityQ,
             bool enableStateLogger,
             KpzTarget target
         )

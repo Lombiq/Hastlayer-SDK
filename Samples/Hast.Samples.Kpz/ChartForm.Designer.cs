@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartKPZ = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.checkWriteToFile = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.checkVerifyOutput = new System.Windows.Forms.CheckBox();
             this.labelVerifyOutput = new System.Windows.Forms.Label();
             this.labelStepByStep = new System.Windows.Forms.Label();
@@ -52,8 +54,6 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listLog = new System.Windows.Forms.ListBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.checkWriteToFile = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartKPZ)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -68,20 +68,20 @@
             // 
             // chartKPZ
             // 
-            chartArea2.AxisY.IsLogarithmic = true;
-            chartArea2.Name = "ChartArea1";
-            this.chartKPZ.ChartAreas.Add(chartArea2);
+            chartArea1.AxisY.IsLogarithmic = true;
+            chartArea1.Name = "ChartArea1";
+            this.chartKPZ.ChartAreas.Add(chartArea1);
             this.chartKPZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend2.Name = "Legend1";
-            this.chartKPZ.Legends.Add(legend2);
+            legend1.Name = "Legend1";
+            this.chartKPZ.Legends.Add(legend1);
             this.chartKPZ.Location = new System.Drawing.Point(0, 0);
             this.chartKPZ.Name = "chartKPZ";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.IsVisibleInLegend = false;
-            series2.Legend = "Legend1";
-            series2.Name = "defaultSeries";
-            this.chartKPZ.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "defaultSeries";
+            this.chartKPZ.Series.Add(series1);
             this.chartKPZ.Size = new System.Drawing.Size(617, 219);
             this.chartKPZ.TabIndex = 0;
             this.chartKPZ.Text = "chart1";
@@ -129,6 +129,25 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(617, 159);
             this.panelTop.TabIndex = 4;
+            // 
+            // checkWriteToFile
+            // 
+            this.checkWriteToFile.AutoSize = true;
+            this.checkWriteToFile.Location = new System.Drawing.Point(595, 15);
+            this.checkWriteToFile.Name = "checkWriteToFile";
+            this.checkWriteToFile.Size = new System.Drawing.Size(15, 14);
+            this.checkWriteToFile.TabIndex = 16;
+            this.checkWriteToFile.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label5.Location = new System.Drawing.Point(470, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(104, 23);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Write to file:";
             // 
             // checkVerifyOutput
             // 
@@ -200,7 +219,8 @@
             "Hastlayer simulation #1 (CPU)",
             "Hastlayer accelerated #1 (FPGA)",
             "Hastlayer simulation #2 (CPU) ",
-            "Hastlayer simulation #2 (FPGA) "});
+            "Hastlayer simulation #2 (FPGA) ",
+            "PRNG test (FPGA)"});
             this.comboTarget.Location = new System.Drawing.Point(202, 125);
             this.comboTarget.Name = "comboTarget";
             this.comboTarget.Size = new System.Drawing.Size(408, 31);
@@ -368,25 +388,6 @@
             this.listLog.Name = "listLog";
             this.listLog.Size = new System.Drawing.Size(617, 186);
             this.listLog.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(470, 8);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 23);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Write to file:";
-            // 
-            // checkWriteToFile
-            // 
-            this.checkWriteToFile.AutoSize = true;
-            this.checkWriteToFile.Location = new System.Drawing.Point(595, 15);
-            this.checkWriteToFile.Name = "checkWriteToFile";
-            this.checkWriteToFile.Size = new System.Drawing.Size(15, 14);
-            this.checkWriteToFile.TabIndex = 16;
-            this.checkWriteToFile.UseVisualStyleBackColor = true;
             // 
             // ChartForm
             // 

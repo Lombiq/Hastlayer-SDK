@@ -67,6 +67,7 @@
     <Compile Include="KpzKernels.cs" />
     <Compile Include="KpzKernelsG.cs" />
     <Compile Include="KpzStateLogger.cs" />
+    <Compile Include="PrngTestInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ChartForm.resx">
