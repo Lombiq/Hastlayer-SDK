@@ -14,7 +14,7 @@ namespace Hast.Samples.Kpz
     }
 
     //SimpleMemory map:
-    // * 0 .. GridSize^2-1  (GridSize^2 addresses)  :  
+    // * 0 .. GridSize^2-1  (GridSize^2 addresses)  :
     //      The input KPZ nodes as 32 bit numbers, with bit 0 as dx and bit 1 as dy.
     // * GridSize^2 .. GridSize^2+(ParallelTasks+1)*2-1  ((ParallelTasks+1)*2 addresses)  :
     //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler level.
@@ -74,16 +74,15 @@ namespace Hast.Samples.Kpz
             for (int IterationGroupIndex = 0; IterationGroupIndex < IterationGroupSize; IterationGroupIndex++)
             {
                 //GetNextRandom0
-                uint c0 = (uint)(randomState0 >> 32);
-                ulong x0l = randomState0 & (0xFFFFFFFFUL);
-                uint x0 = (uint)x0l;
+                uint prngC0 = (uint)(randomState0 >> 32);
+                uint prngX0 = (uint)randomState0;
                 // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
                 // https://github.com/icsharpcode/ILSpy/issues/807
-                uint z01 = 0xFFFE;
-                uint z02 = 0xB81B;
-                uint z0 = (0 << 32) | (z01 << 16) | z02;
-                randomState0 = (ulong)x0 * (ulong)z0 + (ulong)c0;
-                uint RandomValue0 = x0 ^ c0;
+                uint prngZLow0 = 0xFFFE;
+                uint prngZHigh0 = 0xB81B;
+                uint prngZ0 = (0 << 32) | (prngZLow0 << 16) | prngZHigh0;
+                randomState0 = (ulong)prngX0 * (ulong)prngZ0 + (ulong)prngC0;
+                uint RandomValue0 = prngX0 ^ prngC0;
                 int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0>>16));
                 //RandomXOffset = RandomYOffset = 0; //TODO: remove this
@@ -126,26 +125,26 @@ namespace Hast.Samples.Kpz
                                 //Generating two random numbers:
 
                                 //GetNextRandom1
-                                uint c1 = (uint)(TaskLocal.taskRandomState1 >> 32);
-                                uint x1 = (uint)(TaskLocal.taskRandomState1 & 0xFFFFFFFFUL);
+                                uint prngC1 = (uint)(TaskLocal.taskRandomState1 >> 32);
+                                uint prngX1 = (uint)TaskLocal.taskRandomState1;
                                 // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
                                 // https://github.com/icsharpcode/ILSpy/issues/807
-                                uint z11 = 0xFFFE;
-                                uint z12 = 0xB81B;
-                                uint z1 = (0 << 32) | (z11 << 16) | z12;
-                                TaskLocal.taskRandomState1 = (ulong)x1 * (ulong)z1 + (ulong)c1;
-                                uint taskRandomNumber1 = x1 ^ c1;
+                                uint prngZLow1 = 0xFFFE;
+                                uint prngZHigh1 = 0xB81B;
+                                uint prngZ1 = (0 << 32) | (prngZLow1 << 16) | prngZHigh1;
+                                TaskLocal.taskRandomState1 = (ulong)prngX1 * (ulong)prngZ1 + (ulong)prngC1;
+                                uint taskRandomNumber1 = prngX1 ^ prngC1;
 
                                 //GetNextRandom2
-                                uint c2 = (uint)(TaskLocal.taskRandomState2 >> 32);
-                                uint x2 = (uint)(TaskLocal.taskRandomState2 & 0xFFFFFFFFUL);
+                                uint prngC2 = (uint)(TaskLocal.taskRandomState2 >> 32);
+                                uint prngX2 = (uint)TaskLocal.taskRandomState2;
                                 // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
                                 // https://github.com/icsharpcode/ILSpy/issues/807
-                                uint z21 = 0xFFFE;
-                                uint z22 = 0xB81B;
-                                uint z2 = (0 << 32) | (z21 << 16) | z22;
-                                TaskLocal.taskRandomState2 = (ulong)x2 * (ulong)z2 + (ulong)c2;
-                                uint taskRandomNumber2 = x2 ^ c2;
+                                uint prngZLow2 = 0xFFFE;
+                                uint prngZHigh2 = 0xB81B;
+                                uint prngZ2 = (0 << 32) | (prngZLow2 << 16) | prngZHigh2;
+                                TaskLocal.taskRandomState2 = (ulong)prngX2 * (ulong)prngZ2 + (ulong)prngC2;
+                                uint taskRandomNumber2 = prngX2 ^ prngC2;
 
                                 int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1)); //The existstence of var-1 in code is a good indicator of that it is asumed to be 2^N
                                 int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
