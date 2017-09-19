@@ -23,7 +23,7 @@ namespace Hast.Samples.Kpz
 
         /// <summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
-        /// so that the GUI keeps responding while the algortithm is running.
+        /// so that the GUI keeps responding while the algorithm is running.
         /// </summary>
         BackgroundWorker _backgroundWorker;
 
@@ -97,7 +97,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (e.Cancelled) LogIt("Operation was cancelled.");
+            if (e.Cancelled) LogIt("Operation was canceled.");
             else if (e.Error != null) LogIt(String.Format("An error occurred: {0}", e.Error.Message));
             else LogIt("Operation finished.");
             buttonStart.Enabled = false;
