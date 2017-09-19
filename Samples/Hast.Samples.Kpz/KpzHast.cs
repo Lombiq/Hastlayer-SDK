@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System.Linq;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.Configuration;
 
 namespace Hast.Samples.Kpz
 {
@@ -37,29 +38,30 @@ namespace Hast.Samples.Kpz
             configuration.EnableCaching = false;
 
             LogItFunction("Generating hardware...");
-            IHardwareRepresentation hardwareRepresentation;
             if (kpzTarget.HastlayerGAlgorithm())
             {
-                configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernelsGInterface");
-                hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
-                    typeof(KpzKernelsGInterface).Assembly,
-                 //   typeof(Hast.Algorithms.MWC64X).Assembly
-                }, configuration);
+                configuration.AddHardwareEntryPointType<KpzKernelsGInterface>();
+
+                configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+                    new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsGInterface>(k => k.ScheduleIterations(null), 0)
+                    {
+                        MaxDegreeOfParallelism = KpzKernelsGInterface.ParallelTasks
+                    });
             }
             else if (kpzTarget.HastlayerPlainAlgorithm())
             {
-                configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.KpzKernelsInterface");
-                hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
-                    typeof(KpzKernelsInterface).Assembly
-                }, configuration);
+                configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
             }
             else // if (kpzTarget == KpzTarget.PrngTest)
             {
-                configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.Kpz.PrngTestInterface");
-                hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
-                    typeof(PrngTestInterface).Assembly
-                }, configuration);
+                configuration.AddHardwareEntryPointType<PrngTestInterface>();
             }
+
+
+            var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
+                    typeof(KpzKernelsGInterface).Assembly,
+                 //   typeof(Hast.Algorithms.MWC64X).Assembly
+                }, configuration);
 
             await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);
 
