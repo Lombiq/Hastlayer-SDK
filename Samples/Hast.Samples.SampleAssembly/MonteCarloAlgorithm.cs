@@ -5,6 +5,8 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     ///  Algorithm to find the weight and centre of mass of a section of torus with varying density.
+    ///  
+    /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
     /// <remarks>
     /// Implementation taken from here: http://www.codeproject.com/Articles/767997/Parallelised-Monte-Carlo-Algorithms-sharp
