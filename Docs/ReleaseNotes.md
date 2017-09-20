@@ -2,10 +2,11 @@
 
 
 
-## vNext
+## 1.0.5, 20.09.2017
 
 - Fixing `HardwareGenerationConfiguration.AddHardwareEntryPointType()`, it now only adds the actual type as an entry point, not other types with similar names too.
 - Improved documentation.
+- Various smaller bugfixes and improvements
 
 
 ## 1.0.4, 08.09.2017
