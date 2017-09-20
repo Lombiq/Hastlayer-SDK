@@ -93,6 +93,7 @@ namespace Hast.Samples.Kpz
         {
             foreach (var coord in HighlightedCoords)
             {
+                if (coord.x >= dgv.ColumnCount || coord.y >= dgv.RowCount) continue;
                 dgv.Rows[coord.y].Cells[coord.x].Style.BackColor = HighlightColor;
             }
         }

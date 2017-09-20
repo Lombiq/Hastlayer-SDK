@@ -152,12 +152,12 @@ namespace Hast.Samples.Kpz
         /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the
         /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>
         /// </summary>
-        private void AsyncUpdateChart(int iteration)
+        private void AsyncUpdateChart(int iteration, bool forceUpdate = false)
         {
             // The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g.
             // in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
             int iterationNext10Pow = (int)Math.Pow(10, Math.Floor(Math.Log10(iteration) + 1));
-            bool updateChartInThisIteartion = iteration < 10 || ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
+            bool updateChartInThisIteartion = forceUpdate || iteration < 10 || ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
             if (updateChartInThisIteartion)
             {
                 double mean;
@@ -202,21 +202,40 @@ namespace Hast.Samples.Kpz
             var sw = System.Diagnostics.Stopwatch.StartNew();
             AsyncLogIt("Starting KPZ iterations...");
 
-            for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
+            if(!ComputationTarget.HastlayerGAlgorithm())
             {
-                if (ComputationTarget == KpzTarget.Cpu)
+                for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
                 {
-                    _kpz.DoIteration();
+                    if (ComputationTarget == KpzTarget.Cpu)
+                    {
+                        _kpz.DoIteration();
+                    }
+                    else
+                    {
+                        if (_stepByStep) _kpz.DoHastIterationDebug();
+                        else { _kpz.DoHastIterations((uint)_numKpzIterations); break; }
+                    }
+                    AsyncUpdateProgressBar(currentIteration);
+                    AsyncUpdateChart(currentIteration);
+                    if (bw.CancellationPending) return;
                 }
-                else
+            }
+            else
+            {
+                int currentIteration = 1;
+                int lastIteration = 0;
+                for(;;)
                 {
-                    if (_stepByStep) _kpz.DoHastIterationDebug();
-                    else { _kpz.DoHastIterations((uint)_numKpzIterations); break; }
-
+                    int iterationsToDo = currentIteration - lastIteration;
+                    AsyncLogIt(String.Format("Doing {0} iterations at once...", iterationsToDo));
+                    _kpz.DoHastIterations((uint)iterationsToDo);
+                    AsyncUpdateProgressBar(currentIteration);
+                    AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations); //force update if current iteration is the last
+                    if (currentIteration >= _numKpzIterations) break;
+                    lastIteration = currentIteration;
+                    currentIteration *= 10;
+                    if (currentIteration > _numKpzIterations) currentIteration = _numKpzIterations;
                 }
-                AsyncUpdateProgressBar(currentIteration);
-                AsyncUpdateChart(currentIteration);
-                if (bw.CancellationPending) return;
             }
             sw.Stop();
             AsyncLogIt("Done. Total time measured: "+sw.ElapsedMilliseconds+" ms");

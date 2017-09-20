@@ -16,7 +16,9 @@ namespace Hast.Samples.Kpz
     //SimpleMemory map:
     // * 0 .. GridSize^2-1  (GridSize^2 addresses)  :
     //      The input KPZ nodes as 32 bit numbers, with bit 0 as dx and bit 1 as dy.
-    // * GridSize^2 .. GridSize^2+(ParallelTasks+1)*2-1  ((ParallelTasks+1)*2 addresses)  :
+    // * GridSize^2  (1 address)  :
+    //      The number of iterations to perform (NumberOfIterations). 
+    // * GridSize^2+1 .. GridSize^2+ParallelTasks*4+2  ParallelTasks*4+2 addresses)  :
     //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler level.
     //      Each random seed number is 64-bit (2 uints)
 
@@ -24,26 +26,27 @@ namespace Hast.Samples.Kpz
     {
         const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         //These parameters are fixed, locked into VHDL code for simplicity
-        public const int GridSize = 64; //Full grid width and height
+        public const int GridSize = 256; //Full grid width and height
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
         public const int LocalGridSize = 8;
-        public const int ParallelTasks = 8; //Number of parallel execution engines
-        public const int NumberOfIterations = 10; //TODO
+        public const int ParallelTasks = 16; //Number of parallel execution engines
 
         //public int MemStartOfRandomValues() { return GridSize * GridSize;  }
         //public int MemStartOfParameters() { return GridSize * GridSize + TasksPerIteration * NumberOfIterations + 1; }
 
         public virtual void ScheduleIterations(SimpleMemory memory)
         {
+            int NumberOfIterations = memory.ReadInt32(GridSize * GridSize);
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
-            const float IterationsPerTask = 0.5F;// 0.5F; //TODO: change back to 0.5F
-            const int IterationGroupSize = (int)(NumberOfIterations / IterationsPerTask);
-            const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize * IterationsPerTask);
+            //const float IterationsPerTask = 0.5F;// 0.5F; //TODO: change back to 0.5F
+            const int ReschedulesPerTaskIteration = 2; //reciprocal
+            int IterationGroupSize = (int)(NumberOfIterations * ReschedulesPerTaskIteration);
+            const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration);
             const int LocalGridPartitions = GridSize / LocalGridSize;
             //const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
             ulong randomState0;
-            int ParallelTaskRandomIndex = 0;
+            int ParallelTaskRandomIndex = 1;
             uint RandomSeedTemp;
 
             KpzKernelsIndexObject[] TaskLocals = new KpzKernelsIndexObject[ParallelTasks];
@@ -226,17 +229,20 @@ namespace Hast.Samples.Kpz
 
     public static class KpzKernelsGExtensions
     {
-        public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga)
+        public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, uint numberOfIterations)
         {
-            int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) * KpzKernelsGInterface.NumberOfIterations;
-            int numRandomUints = 2 + (numTasks * 4);
-            SimpleMemory sm = new SimpleMemory(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + numRandomUints);
+            //int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) * KpzKernelsGInterface.NumberOfIterations;
+            //int numRandomUints = 2 + (numTasks * 4);
+            int numRandomUints = 2 + KpzKernelsGInterface.ParallelTasks * 4;
+            SimpleMemory sm = new SimpleMemory(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + numRandomUints + 1);
 
             if (pushToFpga) KpzKernelsGExtensions.CopyFromGridToSimpleMemory(hostGrid, sm);
 
+            sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize, numberOfIterations);
+
             Random rnd = new Random();
-            for (int randomWriteIndex=0; randomWriteIndex<numTasks; randomWriteIndex++)
-                sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + randomWriteIndex, (uint)rnd.Next());
+            for (int randomWriteIndex=0; randomWriteIndex<numRandomUints; randomWriteIndex++)
+                sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + 1 + randomWriteIndex, (uint)rnd.Next());
 
             kernels.ScheduleIterations(sm);
 
