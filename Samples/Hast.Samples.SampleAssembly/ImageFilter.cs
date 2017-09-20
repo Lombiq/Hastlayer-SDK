@@ -5,6 +5,8 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Algorithm for running convolution image processing on images.
+    /// 
+    /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
     public class ImageFilter
     {

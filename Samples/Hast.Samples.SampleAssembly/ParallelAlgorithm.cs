@@ -6,10 +6,6 @@ namespace Hast.Samples.SampleAssembly
     /// <summary>
     /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer.
     /// </summary>
-    /// <remarks>
-    /// This is the same code as in Hast.Samples.Demo (https://github.com/Lombiq/Hastlayer-Demo) but also added here for
-    /// convenience.
-    /// </remarks>
     public class ParallelAlgorithm
     {
         public const int Run_InputUInt32Index = 0;

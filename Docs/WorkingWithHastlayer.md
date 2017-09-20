@@ -55,7 +55,10 @@ Some simplified basics on the properties of FPGAs first:
 
 - FPGAs are low-power devices running on small clock frequencies (few 100Mhz at most), so we need to be cautious with clock cycles.
 - On an FPGA you can do a lot of simpler operations (like variable assignments, arithmetic on smaller numbers) in a single clock cycle even without parallelization.
-- However it's only useful to look at FPGAs for performance enhancements if your code is compute-bound and can be massively parallelized on a `Task` level.
+- However it's only useful to look at FPGAs for performance enhancements if your code is compute-bound and can be massively parallelized. Hastlayer supports three types of parallelism:
+    - `Task`-level: this is the most important you need to utilize (elaborated above).
+    - Operation-level: can be useful for certain algorithms where it makes sense to run e.g. hundreds of multiplications in parallel (also elaborated above).
+    - Device-level: this means that you can use multiple FPGAs which all host the same algorithm and Hastlayer will automatically select the one idle to push work to. This way you can execute the same hardware algorithm in parallel on multiple devices.
 
 So to write fast code with Hastlayer you need implement massively parallel algorithms and avoid code that adds unnecessary clock cycles. What are the clock cycle sinks to avoid?
 
