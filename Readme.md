@@ -6,7 +6,7 @@
 
 [Hastlayer](https://hastlayer.com/) - Be the hardware. Automatically transforming [.NET](https://www.microsoft.com/net/) assemblies into computer chips to improve performance and lower power consumption.
 
-Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (chips that can be "re-wired" on the fly): You just need to select the compute-bound part of your .NET program and Hastlayer will seamlessly swap it out with a generated FPGA implementation. 
+Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (chips that can be "re-wired" on the fly): You just need to select the compute-bound part of your .NET program and Hastlayer will seamlessly swap it out with a generated FPGA implementation. Since not C#, VisualBasic or other code but .NET Intermediate Language assemblies are transformed in theory any .NET language can be used, including C#, F#, VB, C++, Python, PHP, JavaScript...
  
 This is the PC-side component of Hastlayer, the one that transforms .NET assemblies, programs attached FPGAs and communicates with said FPGAs.
 
@@ -27,6 +27,7 @@ These text files should only serve as a starting point. On how to use Hastlayer 
 - [Developing Hastlayer](Docs/DevelopingHastlayer.md)
 - [Release notes](Docs/ReleaseNotes.md)
 - [Roadmap](Docs/Roadmap.md)
+- [Support](Docs/Support.md)
 
 
 ## Repositories and contributions
@@ -36,7 +37,8 @@ The project's source is available in two public source repositories, automatical
 - [https://bitbucket.org/Lombiq/hastlayer-sdk](https://bitbucket.org/Lombiq/hastlayer-sdk) (Mercurial repository)
 - [https://github.com/Lombiq/Hastlayer-SDK](https://github.com/Lombiq/Hastlayer-SDK) (Git repository)
 
-Bug reports, feature requests and comments are warmly welcome, **please do so via GitHub**.
-Feel free to send pull requests too, no matter which source repository you choose for this purpose.
+(Note that due to a repository purge the repo history doesn't contain anything from before July 2017 though development has been ongoing more or less actively from 2015.)
+
+Bug reports, feature requests and comments are warmly welcome, **please do so via GitHub**. Feel free to send pull requests too, no matter which source repository you choose for this purpose.
 
 This project is developed by [Lombiq Technologies Ltd](https://lombiq.com/). Commercial-grade support is available through Lombiq.
