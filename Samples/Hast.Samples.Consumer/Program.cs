@@ -5,6 +5,9 @@ using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using System.Numerics;
+using Lombiq.Unum;
+using System.Collections.Immutable;
 
 namespace Hast.Samples.Consumer
 {
@@ -27,7 +30,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.ParallelAlgorithm;
+        public static Sample SampleToRun = Sample.UnumCalculator;
     }
 
 
@@ -35,6 +38,19 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
+            var resultUintArray = new UnumCalculator().CalculateSumOfPowersofTwo(65);
+            var resultBytes = new byte[resultUintArray.Length * 4];
+
+            Buffer.BlockCopy(resultUintArray, 0, resultBytes, 0, resultUintArray.Length * 4);
+            var resultBigInteger = new BigInteger(resultBytes);
+
+            Console.WriteLine(resultBigInteger.ToString());
+
+
+
+
+
+
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
             Task.Run(async () =>
@@ -118,6 +134,9 @@ namespace Hast.Samples.Consumer
                             case Sample.SimdCalculator:
                                 SimdCalculatorSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.UnumCalculator:
+                                UnumCalculatorSampleRunner.Configure(configuration);
+                                break;
                             default:
                                 break;
                         }
@@ -133,7 +152,12 @@ namespace Hast.Samples.Consumer
                             new[]
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
-                                typeof(PrimeCalculator).Assembly
+                                typeof(PrimeCalculator).Assembly,
+                                // Note that the assemblies used by code to be transformed also need to be added
+                                // separately. E.g. Unum is used by Hast.Samples.SampleAssembly which in turn also uses
+                                // ImmutableArray.
+                                typeof(Unum).Assembly,
+                                typeof(ImmutableArray).Assembly
                             },
                             configuration);
 
@@ -172,6 +196,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.SimdCalculator:
                                 await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.UnumCalculator:
+                                await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             default:
                                 break;

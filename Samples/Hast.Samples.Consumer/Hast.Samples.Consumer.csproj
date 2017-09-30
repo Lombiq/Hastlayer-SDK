@@ -34,8 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,9 +62,11 @@
     <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\SimdCalculatorSampleRunner.cs" />
+    <Compile Include="SampleRunners\UnumCalculatorSampleRunner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +89,10 @@
     <ProjectReference Include="..\..\Hast.Remote.Client\Hast.Remote.Client.csproj">
       <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
       <Name>Hast.Remote.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Lombiq.Unum\Lombiq.Unum.csproj">
+      <Project>{6cfe69a4-04a3-4427-818c-c0832d197a62}</Project>
+      <Name>Lombiq.Unum</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
       <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
