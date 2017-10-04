@@ -2,6 +2,11 @@
 
 
 
+## vNext
+
+- Transformation warnings are logged (and sent to the Debug console) so they can be detected easier.
+
+
 ## 1.0.5, 20.09.2017
 
 - Fixing `HardwareGenerationConfiguration.AddHardwareEntryPointType()`, it now only adds the actual type as an entry point, not other types with similar names too.
