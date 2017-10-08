@@ -37,8 +37,8 @@ namespace Hast.Samples.SampleAssembly
         }
 
         // Needed so UnumCalculatorSampleRunner can retrieve BitMask.SegmentCount.
-        // On the Nexys 4 DDR only a total of 10b environment will fit.
-        public static UnumEnvironment EnvironmentFactory() => new UnumEnvironment(4, 6);
+        // On the Nexys 4 DDR only a total of 9b environment will fit.
+        public static UnumEnvironment EnvironmentFactory() => new UnumEnvironment(4, 5);
     }
 
 
