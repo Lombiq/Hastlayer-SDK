@@ -2,6 +2,13 @@
 
 
 
+## vNext
+
+- Transformation warnings are logged (and sent to the Debug console) so they can be detected easier.
+- The decompiled .NET code is added to the VHDL output for debugging purposes in `Debug` mode, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/19).
+- Fixing that if methods of an object instance called each other the call was wrongly transformed.
+
+
 ## 1.0.5, 20.09.2017
 
 - Fixing `HardwareGenerationConfiguration.AddHardwareEntryPointType()`, it now only adds the actual type as an entry point, not other types with similar names too.

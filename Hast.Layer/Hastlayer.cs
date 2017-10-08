@@ -85,10 +85,18 @@ namespace Hast.Layer
                 HardwareRepresentation hardwareRepresentation = null;
 
                 await _host
-                    .Run<ITransformer, IHardwareImplementationComposer, IDeviceManifestSelector>(
-                        async (transformer, hardwareImplementationComposer, deviceManifestSelector) =>
+                    .Run<ITransformer, IHardwareImplementationComposer, IDeviceManifestSelector, ILoggerService>(
+                        async (transformer, hardwareImplementationComposer, deviceManifestSelector, loggerService) =>
                         {
                             var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
+
+                            foreach (var warning in hardwareDescription.Warnings)
+                            {
+                                loggerService.Warning(
+                                    "Hastlayer transformation warning (code: {0}): {1}",
+                                    warning.Code,
+                                    warning.Message);
+                            }
 
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
