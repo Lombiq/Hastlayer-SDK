@@ -6,11 +6,13 @@
 
 [Hastlayer](https://hastlayer.com/) - Be the hardware. Automatically transforming [.NET](https://www.microsoft.com/net/) assemblies into computer chips to improve performance and lower power consumption.
 
-Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (chips that can be "re-wired" on the fly): You just need to select the compute-bound part of your .NET program and Hastlayer will seamlessly swap it out with a generated FPGA implementation. Since not C#, VisualBasic or other code but .NET Intermediate Language assemblies are transformed in theory any .NET language can be used, including C#, F#, VB, C++, Python, PHP, JavaScript...
+Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (chips that can be "re-wired" on the fly): You just need to select the compute-bound part of your .NET program and Hastlayer will seamlessly swap it out with a generated FPGA implementation. Since not C#, VisualBasic or other code but .NET Intermediate Language assemblies are transformed in theory any .NET language can be used, including C#, VB, F#, C++, Python, PHP, JavaScript...
+
+Hastlayer was also featured on [.NET Conf 2017](https://channel9.msdn.com/events/dotnetConf/2017/T212); the [recorded session](https://channel9.msdn.com/events/dotnetConf/2017/T212) covers most of what's interesting about Hastlayer (it's also on [YouTube](https://www.youtube.com/watch?v=03Sq5m3eUSs)).
  
 This is the PC-side component of Hastlayer, the one that transforms .NET assemblies, programs attached FPGAs and communicates with said FPGAs.
 
-Created by [Lombiq Technologies](https://lombiq.com/).
+Created by [Lombiq Technologies](https://lombiq.com/), an open source .NET web development company.
 
 Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](https://github.com/Lombiq/Orchard-Application-Host) to utilize [Orchard](http://orchardproject.net/) as the application framework.
 

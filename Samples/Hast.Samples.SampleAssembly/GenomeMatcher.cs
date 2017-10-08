@@ -6,6 +6,8 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Algorithm for running Smith-Waterman Genome Matcher.
+    /// 
+    /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
     public class GenomeMatcher
     {

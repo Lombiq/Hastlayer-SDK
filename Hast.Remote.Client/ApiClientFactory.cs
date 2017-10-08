@@ -16,7 +16,7 @@ namespace Hast.Remote.Client
 
             api.Authorization = new AuthenticationHeaderValue(
                 "Basic",
-                Convert.ToBase64String(Encoding.ASCII.GetBytes(configuration.AppId + ":" + configuration.AppSecret)));
+                Convert.ToBase64String(Encoding.ASCII.GetBytes(configuration.AppName + ":" + configuration.AppSecret)));
 
             return api;
         }

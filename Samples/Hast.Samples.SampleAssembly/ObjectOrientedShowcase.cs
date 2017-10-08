@@ -29,6 +29,7 @@ namespace Hast.Samples.SampleAssembly
             // Array elements can be accessed and modified as usual.
             numberContainers1[0].NumberPlusFive = inputNumber + 10;
             numberContainers1[1].IncreaseNumber(5);
+            numberContainers1[2].IncreaseNumberBy10();
 
 
             // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
@@ -104,6 +105,9 @@ namespace Hast.Samples.SampleAssembly
             WasIncreased = true;
             return (Number += increaseBy);
         }
+
+        // Methods can call each other as usual.
+        public uint IncreaseNumberBy10() => IncreaseNumber(10);
     }
 
 
