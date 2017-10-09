@@ -26,7 +26,7 @@ namespace Hast.Samples.Kpz
     {
         const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         //These parameters are fixed, locked into VHDL code for simplicity
-        public const int GridSize = 256; //Full grid width and height
+        public const int GridSize = 512; //Full grid width and height
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
         public const int LocalGridSize = 8;
         public const int ParallelTasks = 16; //Number of parallel execution engines
@@ -221,6 +221,10 @@ namespace Hast.Samples.Kpz
                                 memory.WriteUInt32(CopySrcX + CopySrcY * GridSize, value);
                             }
                         }
+
+                        //Take PRNG current state from Result to feed it to input next time
+                        TaskLocals[ParallelTaskIndex].taskRandomState1 = tasks[ParallelTaskIndex].Result.taskRandomState1;
+                        TaskLocals[ParallelTaskIndex].taskRandomState2 = tasks[ParallelTaskIndex].Result.taskRandomState2;
                     }
                 }
             }
