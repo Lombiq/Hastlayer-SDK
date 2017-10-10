@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Constants;
 using Hast.Communication.Exceptions;
@@ -13,6 +14,15 @@ using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
+
+namespace Hast
+{
+    public static class DebugGlobals
+    {
+        //public static Hast.Communication.Constants.CommunicationConstants communicationState;
+        public static int communicationState;
+    }
+}
 
 namespace Hast.Communication.Services
 {
@@ -72,7 +82,7 @@ namespace Hast.Communication.Services
                     catch (IOException ex)
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.", 
+                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.",
                             ex);
                     }
 
@@ -83,7 +93,7 @@ namespace Hast.Communication.Services
                     else
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. The " + 
+                            "Communication with the FPGA board through the serial port failed. The " +
                             serialPort.PortName + " exists but it's used by another process.");
                     }
 
@@ -104,6 +114,9 @@ namespace Hast.Communication.Services
                     // of 4 bytes. This seems to have no negative impact on performance compared to using
                     // serialPort.Write() once.
                     var maxBytesToSendAtOnce = 4;
+                    serialPort.WriteTimeout = SerialPort.InfiniteTimeout;
+                    serialPort.ReadTimeout = SerialPort.InfiniteTimeout;
+                    //serialPort.Write(outputBuffer, 0, outputBuffer.Length);
                     for (int i = 0; i < (int)Math.Ceiling(outputBuffer.Length / (decimal)maxBytesToSendAtOnce); i++)
                     {
                         var remainingBytes = outputBuffer.Length - i * maxBytesToSendAtOnce;
@@ -115,6 +128,7 @@ namespace Hast.Communication.Services
                     // Processing the response.
                     var taskCompletionSource = new TaskCompletionSource<bool>();
                     var communicationState = CommunicationConstants.Serial.CommunicationState.WaitForFirstResponse;
+                    Hast.DebugGlobals.communicationState = (int)communicationState;
                     var outputByteCountBytes = new byte[4];
                     var outputByteCountByteCounter = 0;
                     var outputByteCount = 0; // The incoming byte buffer size.
@@ -131,12 +145,13 @@ namespace Hast.Communication.Services
                                     if (receivedByte == CommunicationConstants.Serial.Signals.Ping)
                                     {
                                         communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation;
+                                        Hast.DebugGlobals.communicationState = (int)communicationState;
                                         serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
                                     }
                                     else
                                     {
                                         throw new SerialPortCommunicationException(
-                                            "Awaited a ping signal from the FPGA after it finished but received the following byte instead: " + 
+                                            "Awaited a ping signal from the FPGA after it finished but received the following byte instead: " +
                                             receivedByte);
                                     }
                                     break;
@@ -148,8 +163,10 @@ namespace Hast.Communication.Services
                                         var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
                                         SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+                                        Debug.WriteLine(String.Format("Execution finished, {0} cycles", executionTimeClockCycles));
 
                                         communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
+                                        Hast.DebugGlobals.communicationState = (int)communicationState;
                                         serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
                                     }
                                     break;
@@ -168,22 +185,25 @@ namespace Hast.Communication.Services
                                         Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
                                         communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOuput;
+                                        Hast.DebugGlobals.communicationState = (int)communicationState;
                                         serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
                                     }
                                     break;
                                 case CommunicationConstants.Serial.CommunicationState.ReceivingOuput:
                                     outputBytes[outputBytesReceivedCount] = receivedByte;
                                     outputBytesReceivedCount++;
+                                    if (outputBytesReceivedCount > 1048800 || (outputBytesReceivedCount % 10000 == 0)) Debug.WriteLine(String.Format("{0} out of {1}", outputBytesReceivedCount, outputByteCount));
 
                                     if (outputByteCount == outputBytesReceivedCount)
                                     {
                                         simpleMemory.Memory = outputBytes;
 
-                                        // Serial communication can give more data than we actually await, so need to 
+                                        // Serial communication can give more data than we actually await, so need to
                                         // set this.
                                         communicationState = CommunicationConstants.Serial.CommunicationState.Finished;
+                                        Hast.DebugGlobals.communicationState = (int)communicationState;
                                         serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
-
+                                        Debug.WriteLine("COMM FINISHED!");
                                         taskCompletionSource.SetResult(true);
                                     }
                                     break;
@@ -292,7 +312,8 @@ namespace Hast.Communication.Services
             serialPort.BaudRate = CommunicationConstants.Serial.DefaultBaudRate;
             serialPort.Parity = CommunicationConstants.Serial.DefaultParity;
             serialPort.StopBits = CommunicationConstants.Serial.DefaultStopBits;
-            serialPort.WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds;
+            //serialPort.WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds;
+            serialPort.WriteTimeout = SerialPort.InfiniteTimeout;
 
             _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort, executionContext));
 
