@@ -38,7 +38,7 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            var resultUintArray = new UnumCalculator().CalculateSumOfPowersofTwo(65);
+            var resultUintArray = new UnumCalculator().CalculateSumOfPowersofTwo(9);
             var resultBytes = new byte[resultUintArray.Length * 4];
 
             Buffer.BlockCopy(resultUintArray, 0, resultBytes, 0, resultUintArray.Length * 4);
