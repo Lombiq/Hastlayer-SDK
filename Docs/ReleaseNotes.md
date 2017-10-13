@@ -8,6 +8,7 @@
 - The decompiled .NET code is added to the VHDL output for debugging purposes in `Debug` mode, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/19).
 - Fixing that if methods of an object instance called each other the call was wrongly transformed.
 - Fixing that for void methods (and constructors) the transformed invocation wasn't properly awaited.
+- Fixing that the hardware result was wrong if binary operations were done with <32b types.
 - Improved documentation.
 
 
