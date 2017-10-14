@@ -9,6 +9,7 @@
 - Fixing that if methods of an object instance called each other the call was wrongly transformed.
 - Fixing that for void methods (and constructors) the transformed invocation wasn't properly awaited.
 - Fixing that the hardware result was wrong if binary operations were done with <32b types.
+- Fixing a constant substitution edge-case for nested if and while statements.
 - Improved documentation.
 
 
