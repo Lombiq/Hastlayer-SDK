@@ -18,10 +18,12 @@ namespace Hast.Samples.Kpz
         public KpzKernelsGInterface KernelsG;
         public PrngTestInterface KernelsP;
         private bool _verifyOutput;
+        private bool _randomSeedEnable;
 
-        public async Task InitializeHastlayer(bool verifyOutput)
+        public async Task InitializeHastlayer(bool verifyOutput, bool randomSeedEnable)
         {
             _verifyOutput = verifyOutput;
+            _randomSeedEnable = randomSeedEnable;
 
             LogItFunction("Creating Hastlayer Factory...");
             var hastlayer = await Hastlayer.Create();
