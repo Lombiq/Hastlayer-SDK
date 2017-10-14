@@ -35,7 +35,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.checkWriteToFile = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelWriteToFile = new System.Windows.Forms.Label();
             this.checkVerifyOutput = new System.Windows.Forms.CheckBox();
             this.labelVerifyOutput = new System.Windows.Forms.Label();
             this.labelStepByStep = new System.Windows.Forms.Label();
@@ -54,6 +54,8 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listLog = new System.Windows.Forms.ListBox();
+            this.labelRandomSeed = new System.Windows.Forms.Label();
+            this.checkRandomSeed = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartKPZ)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -108,8 +110,10 @@
             // panelTop
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.panelTop, 2);
+            this.panelTop.Controls.Add(this.checkRandomSeed);
+            this.panelTop.Controls.Add(this.labelRandomSeed);
             this.panelTop.Controls.Add(this.checkWriteToFile);
-            this.panelTop.Controls.Add(this.label5);
+            this.panelTop.Controls.Add(this.labelWriteToFile);
             this.panelTop.Controls.Add(this.checkVerifyOutput);
             this.panelTop.Controls.Add(this.labelVerifyOutput);
             this.panelTop.Controls.Add(this.labelStepByStep);
@@ -139,15 +143,15 @@
             this.checkWriteToFile.TabIndex = 16;
             this.checkWriteToFile.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // labelWriteToFile
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label5.Location = new System.Drawing.Point(470, 8);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 23);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Write to file:";
+            this.labelWriteToFile.AutoSize = true;
+            this.labelWriteToFile.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelWriteToFile.Location = new System.Drawing.Point(470, 8);
+            this.labelWriteToFile.Name = "labelWriteToFile";
+            this.labelWriteToFile.Size = new System.Drawing.Size(104, 23);
+            this.labelWriteToFile.TabIndex = 15;
+            this.labelWriteToFile.Text = "Write to file:";
             // 
             // checkVerifyOutput
             // 
@@ -389,6 +393,25 @@
             this.listLog.Size = new System.Drawing.Size(617, 186);
             this.listLog.TabIndex = 0;
             // 
+            // labelRandomSeed
+            // 
+            this.labelRandomSeed.AutoSize = true;
+            this.labelRandomSeed.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelRandomSeed.Location = new System.Drawing.Point(470, 47);
+            this.labelRandomSeed.Name = "labelRandomSeed";
+            this.labelRandomSeed.Size = new System.Drawing.Size(119, 23);
+            this.labelRandomSeed.TabIndex = 17;
+            this.labelRandomSeed.Text = "Random seed:";
+            // 
+            // checkRandomSeed
+            // 
+            this.checkRandomSeed.AutoSize = true;
+            this.checkRandomSeed.Location = new System.Drawing.Point(595, 54);
+            this.checkRandomSeed.Name = "checkRandomSeed";
+            this.checkRandomSeed.Size = new System.Drawing.Size(15, 14);
+            this.checkRandomSeed.TabIndex = 18;
+            this.checkRandomSeed.UseVisualStyleBackColor = true;
+            // 
             // ChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,6 +460,8 @@
         private System.Windows.Forms.CheckBox checkVerifyOutput;
         private System.Windows.Forms.Label labelVerifyOutput;
         private System.Windows.Forms.CheckBox checkWriteToFile;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelWriteToFile;
+        private System.Windows.Forms.CheckBox checkRandomSeed;
+        private System.Windows.Forms.Label labelRandomSeed;
     }
 }

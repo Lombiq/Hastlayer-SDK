@@ -26,7 +26,7 @@ namespace Hast.Samples.Kpz
     {
         const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         //These parameters are fixed, locked into VHDL code for simplicity
-        public const int GridSize = 512; //Full grid width and height
+        public const int GridSize = 64; //Full grid width and height
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
         public const int LocalGridSize = 8;
         public const int ParallelTasks = 16; //Number of parallel execution engines
@@ -233,8 +233,44 @@ namespace Hast.Samples.Kpz
 
     public static class KpzKernelsGExtensions
     {
-        public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, uint numberOfIterations)
+        public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, bool randomSeedEnable, uint numberOfIterations)
         {
+            var notRandomSeed = new int[]{
+                -2122284207, -805426534, -296351199, 1082586369, -864339821,
+                331357875, 1192493543, -851078246, -1091834350, -671234217,
+                -1623097030, -100086504, -1516943165, 1569609717, 1695030944,
+                -888770401, 341459416, -1970567826, 794279071, 1480098339,
+                -2057457019, -257344031, -850635314, -210624876, -678618985,
+                -232192458, 2099559718, 1809993314, -43947016, -1478372364,
+                -1049983320, -827693764,
+                541247270, -762735333, 1201597916, 63792507, 572540375,
+                372071952, -1908453570, -79328169, -792331270, -499848108,
+                -824609528, -1798425884, 1921971887, 334688140, -1210315495,
+                303879804, -854493128, 168364778, 1153057767, 1892111935,
+                -1121887497, -411064952, -1153708605, -1236973870, 1909433338,
+                840379860, 648328296, 815910809, 1054583403, 641704477,
+                -751562304, 1514065758, -1503136866, -290638406, -1465068879,
+                -480074650, -1189373896, 1628987870, -1801471129, 1149055452,
+                -1213044536, 1501859543, 1766766693, -11506391, 1354826834,
+                -1605994989, 1371816845, -1806325888, 899112301, -1972685877,
+                -1351549709, 1989386170, -1745931254, -1294330993, -280576358,
+                -1135040353, 2064141162, -1550762441, 206482802, -208760219,
+                -1763282295, -1559411916, 212239689, -1713858924, 1957674632,
+                399597100, -1822066773, -521605668, 442732461, 2139235466,
+                1949728360, -1333355612, -1523271090, 1873782401, 109175483,
+                1455879393, -1508517739, 22132201, 1503847013, 1121324155,
+                -1149836541, -174007501, 1742754517, 514371316, -1438578033,
+                605535816, 1415254613, 1944255343, -1057195252, 1981414947,
+                -356281736, -589212081, 1146701526, 224674108, 2035824054,
+                292251866, 1396937563, 1323024996, -1196314790, 1566610809,
+                928352174, 1714994319, -799030393, -462839450, -418035901,
+                -1286542568, -1534707733, 985188849, -1960744352, -1463825054,
+                -1344050653, 1279472494, -1840938918, 1248877495, 861602743,
+                844790112, -1844342060, 1945398439, 309808498, -239141205,
+                -54120626, 499261195, -1761618908, 966279259, 217571661,
+                93473713, -937734760, -279968717
+            }; //generate with python expression: print [random.randint(-2147483648, 2147483647) for x in range(32)]
+
             //int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) * KpzKernelsGInterface.NumberOfIterations;
             //int numRandomUints = 2 + (numTasks * 4);
             int numRandomUints = 2 + KpzKernelsGInterface.ParallelTasks * 4;
@@ -246,7 +282,7 @@ namespace Hast.Samples.Kpz
 
             Random rnd = new Random();
             for (int randomWriteIndex=0; randomWriteIndex<numRandomUints; randomWriteIndex++)
-                sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + 1 + randomWriteIndex, (uint)rnd.Next());
+                sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + 1 + randomWriteIndex, (randomSeedEnable)?(uint)rnd.Next():(uint)notRandomSeed[randomWriteIndex]);
 
             kernels.ScheduleIterations(sm);
 

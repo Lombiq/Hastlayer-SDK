@@ -20,6 +20,7 @@ namespace Hast.Samples.Kpz
         private bool _writeToFile { get { return checkWriteToFile.Checked; } }
         private bool _verifyOutput { get { return checkVerifyOutput.Checked; } }
         private bool _stepByStep { get { return checkStep.Checked; } }
+        private bool _randomSeedEnable { get { return checkRandomSeed.Checked; } }
 
         /// <summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
@@ -194,7 +195,7 @@ namespace Hast.Samples.Kpz
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
-                _kpz.InitializeHastlayer(_verifyOutput).Wait();
+                _kpz.InitializeHastlayer(_verifyOutput, _randomSeedEnable).Wait();
             }
 
             if(ComputationTarget == KpzTarget.PrngTest) return; //Already done test inside InitializeHastlayer
