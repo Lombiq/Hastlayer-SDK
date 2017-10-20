@@ -55,13 +55,15 @@ namespace Hast.Samples.Kpz
                 TaskLocals[TaskLocalsIndex] = new KpzKernelsIndexObject();
                 TaskLocals[TaskLocalsIndex].bramDx = new bool[LocalGridSize * LocalGridSize];
                 TaskLocals[TaskLocalsIndex].bramDy = new bool[LocalGridSize * LocalGridSize];
-                TaskLocals[TaskLocalsIndex].taskRandomState1 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) << 32;
+                //TaskLocals[TaskLocalsIndex].taskRandomState1 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                //RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                //TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) << 32;
 
-                TaskLocals[TaskLocalsIndex].taskRandomState2 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) << 32;
+                //TaskLocals[TaskLocalsIndex].taskRandomState2 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                //RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                //TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) << 32;
+                TaskLocals[TaskLocalsIndex].taskRandomState1 = (ulong)0xCAFE;
+                TaskLocals[TaskLocalsIndex].taskRandomState2 = (ulong)0xCAFE;
             }
 
             //What is IterationGroupIndex good for?
@@ -70,9 +72,10 @@ namespace Hast.Samples.Kpz
             //then we need to start it 20 times (thus IterationGroupSize will be 20).
 
 
-            randomState0 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-            RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-            randomState0 |= ((ulong)RandomSeedTemp) << 32;
+            //randomState0 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+            //RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+            //randomState0 |= ((ulong)RandomSeedTemp) << 32;
+            randomState0 = (ulong)0xCAFE;
 
             for (int IterationGroupIndex = 0; IterationGroupIndex < IterationGroupSize; IterationGroupIndex++)
             {
