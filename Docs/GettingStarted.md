@@ -30,7 +30,7 @@ These would be your first steps on starting to work with Hastlayer:
 1. Clone the necessary repositories with either Mercurial or Git:
     - Using Mercurial: Clone the [Hastlayer SDK repo](https://bitbucket.org/Lombiq/hastlayer-sdk) and the [Hastlayer Hardware Framework - Xilinx repo](https://bitbucket.org/Lombiq/hastlayer-hardware-framework-xilinx) from Bitbucket (these are Mercurial repositories, similar to Git, that you can interact with via a GUI with e.g. [TortoiseHg](https://tortoisehg.bitbucket.io/); if you're unfamiliar with TortoiseHg check out [our video tutorial](https://www.youtube.com/watch?v=sbRxMXVEDc0)).
 
-        Make sure to have the *eol* and *hggit* Mercurial extensions enabled!
+        Because the repo uses Git subrepos make sure to have the built-in *eol* and *hggit* Mercurial extensions enabled! You'll also need Git to be installed (if you haven't the just install the latest [GitExtensions release](https://github.com/gitextensions/gitextensions/releases) from the *SetupComplete* executable by leaving everything on default).
 
         Since both repos contain multiple branches you need to make sure to clone them to the branch corresponding to the flavor you want to use, the `client` or `dev` branch. This is easiest done by using the following commands from a Windows command window (these will clone both repos on the `client` branch to the folder where the command line is opened):
 
@@ -40,7 +40,7 @@ These would be your first steps on starting to work with Hastlayer:
     - Using Git: Clone the [Hastlayer SDK repo](https://github.com/Lombiq/Hastlayer-SDK) and the [Hastlayer Hardware Framework - Xilinx repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Xilinx) from GitHub and checkout the `client` or `dev` branch corresponding to your flavor. Make sure to allow Git to initialize submodules!
 
 2. Set up a Vivado and Xilinx SDK project in the Hardware Framework project as documented there, power up and program a compatible FPGA board.
-3. Open the Visual Studio project corresponding to your flavor of Hastlayer.
+3. Open the Visual Studio solution corresponding to your flavor of Hastlayer.
 4. Set the `Hast.Samples.Consumer` project (under the *Samples* folder) as the startup project here. If you're working in the *client* flavor then you'll need to configure your credentials, see the that project's documentation.
 5. Start the sample project. That will by default run the sample that is also added by default to the Hardware project.
 6. You should be able to see the results of the sample in its console window.
