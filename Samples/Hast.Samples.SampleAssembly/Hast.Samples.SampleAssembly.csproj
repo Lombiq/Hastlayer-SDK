@@ -67,9 +67,9 @@
       <Project>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</Project>
       <Name>Hast.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Lombiq.Unum\Lombiq.Unum.csproj">
+    <ProjectReference Include="..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj">
       <Project>{6cfe69a4-04a3-4427-818c-c0832d197a62}</Project>
-      <Name>Lombiq.Unum</Name>
+      <Name>Lombiq.Arithmetics</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

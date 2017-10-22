@@ -6,7 +6,7 @@ using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System.Numerics;
-using Lombiq.Unum;
+using Lombiq.Arithmetics;
 using System.Collections.Immutable;
 
 namespace Hast.Samples.Consumer

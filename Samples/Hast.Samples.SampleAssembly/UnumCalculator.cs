@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Lombiq.Unum;
+using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -52,23 +52,23 @@ namespace Hast.Samples.SampleAssembly
         // ones manually. See UnumCalculatorSampleRunner.
         public static readonly string[] ManuallySizedArrays = new[]
         {
-            "System.UInt32[] Lombiq.Unum.BitMask::Segments()",
-            "System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32,System.UInt16).array",
-            "System.Void Lombiq.Unum.BitMask::.ctor(System.UInt32[],System.UInt16).segments",
-            "System.Void Lombiq.Unum.BitMask::.ctor(System.UInt16,System.Boolean).array",
+            "System.UInt32[] Lombiq.Arithmetics.BitMask::Segments()",
+            "System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32,System.UInt16).array",
+            "System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16).segments",
+            "System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt16,System.Boolean).array",
             "System.Void Hast.Samples.SampleAssembly.UnumCalculator::CalculateSumOfPowersofTwo(Hast.Transformer.SimpleMemory.SimpleMemory).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask, Lombiq.Unum.BitMask).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Addition(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_Subtraction(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseOr(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_ExclusiveOr(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_BitwiseAnd(Lombiq.Unum.BitMask,Lombiq.Unum.BitMask).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_RightShift(Lombiq.Unum.BitMask,System.Int32).array",
-            "Lombiq.Unum.BitMask Lombiq.Unum.BitMask::op_LeftShift(Lombiq.Unum.BitMask,System.Int32).array",
-            "System.UInt32[] Lombiq.Unum.Unum::FractionToUintArray().array",
-            "System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32[],System.Boolean).value",
-            "System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.Int32).array",
-            "System.Void Lombiq.Unum.Unum::.ctor(Lombiq.Unum.UnumEnvironment,System.UInt32).array"
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask, Lombiq.Arithmetics.BitMask).array",
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Addition(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask).array",
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_Subtraction(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask).array",
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseOr(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask).array",
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_ExclusiveOr(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask).array",
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_BitwiseAnd(Lombiq.Arithmetics.BitMask,Lombiq.Arithmetics.BitMask).array",
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_RightShift(Lombiq.Arithmetics.BitMask,System.Int32).array",
+            "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32).array",
+            "System.UInt32[] Lombiq.Arithmetics.Unum::FractionToUintArray().array",
+            "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32[],System.Boolean).value",
+            "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.Int32).array",
+            "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32).array"
         };
 
 
