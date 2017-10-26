@@ -2,6 +2,11 @@
 
 
 
+## vNext
+
+- Fixing behavior of binary operator expressions were the operands were cast.
+
+
 ## 1.0.6, 21.10.2017
 
 - Transformation warnings are logged (and sent to the Debug console) so they can be detected easier.
