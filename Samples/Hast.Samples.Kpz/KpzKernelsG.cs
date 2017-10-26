@@ -39,8 +39,7 @@ namespace Hast.Samples.Kpz
             int NumberOfIterations = memory.ReadInt32(GridSize * GridSize);
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
-            //const float IterationsPerTask = 0.5F;// 0.5F; //TODO: change back to 0.5F
-            const int ReschedulesPerTaskIteration = 1; //reciprocal
+            const int ReschedulesPerTaskIteration = 1; //reciprocal //PRNGUNDO: 2
             int IterationGroupSize = (int)(NumberOfIterations * ReschedulesPerTaskIteration);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration);
             const int LocalGridPartitions = GridSize / LocalGridSize;
@@ -60,12 +59,13 @@ namespace Hast.Samples.Kpz
                 TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) * 4294967296UL;
                 //TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) << 32;
 
-                //TaskLocals[TaskLocalsIndex].taskRandomState2 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                //RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                TaskLocals[TaskLocalsIndex].taskRandomState2 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) * 4294967296UL;
                 //TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) << 32;
 
                 //TaskLocals[TaskLocalsIndex].taskRandomState1 = (ulong)0xCAFE;
-                TaskLocals[TaskLocalsIndex].taskRandomState2 = (ulong)0xCAFE;
+                //TaskLocals[TaskLocalsIndex].taskRandomState2 = (ulong)0xCAFE;
             }
 
             //What is IterationGroupIndex good for?
@@ -74,10 +74,11 @@ namespace Hast.Samples.Kpz
             //then we need to start it 20 times (thus IterationGroupSize will be 20).
 
 
-            //randomState0 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-            //RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+            randomState0 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+            RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
             //randomState0 |= ((ulong)RandomSeedTemp) << 32;
-            randomState0 = (ulong)0xCAFE;
+            randomState0 |= ((ulong)RandomSeedTemp) * 4294967296UL;
+            //randomState0 = (ulong)0xCAFE;
 
             for (int IterationGroupIndex = 0; IterationGroupIndex < IterationGroupSize; IterationGroupIndex++)
             {
@@ -91,9 +92,9 @@ namespace Hast.Samples.Kpz
                 uint prngZ0 = (0 << 32) | (prngZLow0 << 16) | prngZHigh0;
                 randomState0 = (ulong)prngX0 * (ulong)prngZ0 + (ulong)prngC0;
                 uint RandomValue0 = prngX0 ^ prngC0;
-                //int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
+                //int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N //PRNGUNDO: uncomment these
                 //int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0>>16));
-                int RandomXOffset = 0, RandomYOffset = 0; //TODO: remove this
+                int RandomXOffset = 0, RandomYOffset = 0; //PRNGUNDO: remove this
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsIndexObject>[ParallelTasks];
@@ -177,11 +178,11 @@ namespace Hast.Samples.Kpz
                                     // If we get the pattern {01, 01} we have a pyramid:
                                     ((TaskLocal.bramDx[pokeCenterIndex] && !TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (TaskLocal.bramDy[pokeCenterIndex] && !TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (true || randomVariable1 < integerProbabilityP)) || /*TODO: remove true! */
+                                    (true || randomVariable1 < integerProbabilityP)) || //PRNGUNDO: change true to false
                                     // If we get the pattern {10, 10} we have a hole:
                                     ((!TaskLocal.bramDx[pokeCenterIndex] && TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (!TaskLocal.bramDy[pokeCenterIndex] && TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (true || randomVariable2 < integerProbabilityQ)) /*TODO: remove true! */
+                                    (true || randomVariable2 < integerProbabilityQ)) //PRNGUNDO: change true to false
                                 )
                                 {
                                     // We make a hole into a pyramid, and a pyramid into a hole.
@@ -193,7 +194,7 @@ namespace Hast.Samples.Kpz
 
                                 // ==== </Now randomly switch four cells> ====
                             }
-                            return TaskLocal; //TODO: do we need this at all?
+                            return TaskLocal; 
                         }, TaskLocals[ParallelTaskIndex]);
                     }
 
