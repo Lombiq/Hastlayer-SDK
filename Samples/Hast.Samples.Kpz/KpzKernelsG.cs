@@ -29,7 +29,7 @@ namespace Hast.Samples.Kpz
         public const int GridSize = 64; //Full grid width and height
         //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
         public const int LocalGridSize = 8;
-        public const int ParallelTasks = 1; //Number of parallel execution engines
+        public const int ParallelTasks = 16; //Number of parallel execution engines
 
         //public int MemStartOfRandomValues() { return GridSize * GridSize;  }
         //public int MemStartOfParameters() { return GridSize * GridSize + TasksPerIteration * NumberOfIterations + 1; }
@@ -39,7 +39,7 @@ namespace Hast.Samples.Kpz
             int NumberOfIterations = memory.ReadInt32(GridSize * GridSize);
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
-            const int ReschedulesPerTaskIteration = 1; //reciprocal //PRNGUNDO: 2
+            const int ReschedulesPerTaskIteration = 2; //reciprocal
             int IterationGroupSize = (int)(NumberOfIterations * ReschedulesPerTaskIteration);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration);
             const int LocalGridPartitions = GridSize / LocalGridSize;
