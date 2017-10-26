@@ -92,9 +92,8 @@ namespace Hast.Samples.Kpz
                 uint prngZ0 = (0 << 32) | (prngZLow0 << 16) | prngZHigh0;
                 randomState0 = (ulong)prngX0 * (ulong)prngZ0 + (ulong)prngC0;
                 uint RandomValue0 = prngX0 ^ prngC0;
-                //int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N //PRNGUNDO: uncomment these
-                //int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0>>16));
-                int RandomXOffset = 0, RandomYOffset = 0; //PRNGUNDO: remove this
+                int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N 
+                int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0 >> 16));
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsIndexObject>[ParallelTasks];
@@ -178,11 +177,11 @@ namespace Hast.Samples.Kpz
                                     // If we get the pattern {01, 01} we have a pyramid:
                                     ((TaskLocal.bramDx[pokeCenterIndex] && !TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (TaskLocal.bramDy[pokeCenterIndex] && !TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (true || randomVariable1 < integerProbabilityP)) || //PRNGUNDO: change true to false
+                                    (false || randomVariable1 < integerProbabilityP)) || 
                                     // If we get the pattern {10, 10} we have a hole:
                                     ((!TaskLocal.bramDx[pokeCenterIndex] && TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (!TaskLocal.bramDy[pokeCenterIndex] && TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (true || randomVariable2 < integerProbabilityQ)) //PRNGUNDO: change true to false
+                                    (false || randomVariable2 < integerProbabilityQ))
                                 )
                                 {
                                     // We make a hole into a pyramid, and a pyramid into a hole.
