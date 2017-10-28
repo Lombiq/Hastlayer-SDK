@@ -274,6 +274,8 @@ namespace Hast.Samples.Kpz
             }
         }
 
+        /// <summary>This property of the <see cref="ChartForm"/> maps the selected item in <see cref="comboTarget"/> to 
+        /// <see cref="KpzTarget"/> values.</summary>
         private KpzTarget CurrentComputationTarget {
             get
             {
@@ -292,14 +294,49 @@ namespace Hast.Samples.Kpz
 
         KpzTarget ComputationTarget;
 
+        /// <summary>
+        /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
+        /// that's why we need to use an external label for it.)
+        /// </summary>
         private void labelVerifyOutput_Click(object sender, EventArgs e)
         {
             if (checkVerifyOutput.Enabled) checkVerifyOutput.Checked = !checkVerifyOutput.Checked;
         }
 
+        /// <summary>
+        /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
+        /// that's why we need to use an external label for it.)
+        /// </summary>
         private void labelStepByStep_Click(object sender, EventArgs e)
         {
             if (checkStep.Enabled) checkStep.Checked = !checkStep.Checked;
+        }
+
+        /// <summary>
+        /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
+        /// that's why we need to use an external label for it.)
+        /// </summary>
+        private void labelShowInspector_Click_1(object sender, EventArgs e)
+        {
+            if (checkShowInspector.Enabled) checkShowInspector.Checked = !checkShowInspector.Checked;
+        }
+
+        /// <summary>
+        /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
+        /// that's why we need to use an external label for it.)
+        /// </summary>
+        private void labelWriteToFile_Click(object sender, EventArgs e)
+        {
+            if (checkWriteToFile.Enabled) checkWriteToFile.Checked = !checkWriteToFile.Checked;
+        }
+
+        /// <summary>
+        /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
+        /// that's why we need to use an external label for it.)
+        /// </summary>
+        private void labelRandomSeed_Click(object sender, EventArgs e)
+        {
+            if (checkRandomSeed.Enabled) checkRandomSeed.Checked = !checkRandomSeed.Checked;
         }
     }
 }

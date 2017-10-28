@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartKPZ = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.checkRandomSeed = new System.Windows.Forms.CheckBox();
+            this.labelRandomSeed = new System.Windows.Forms.Label();
             this.checkWriteToFile = new System.Windows.Forms.CheckBox();
             this.labelWriteToFile = new System.Windows.Forms.Label();
             this.checkVerifyOutput = new System.Windows.Forms.CheckBox();
@@ -54,8 +56,6 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listLog = new System.Windows.Forms.ListBox();
-            this.labelRandomSeed = new System.Windows.Forms.Label();
-            this.checkRandomSeed = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartKPZ)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -70,20 +70,20 @@
             // 
             // chartKPZ
             // 
-            chartArea1.AxisY.IsLogarithmic = true;
-            chartArea1.Name = "ChartArea1";
-            this.chartKPZ.ChartAreas.Add(chartArea1);
+            chartArea4.AxisY.IsLogarithmic = true;
+            chartArea4.Name = "ChartArea1";
+            this.chartKPZ.ChartAreas.Add(chartArea4);
             this.chartKPZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend1.Name = "Legend1";
-            this.chartKPZ.Legends.Add(legend1);
+            legend4.Name = "Legend1";
+            this.chartKPZ.Legends.Add(legend4);
             this.chartKPZ.Location = new System.Drawing.Point(0, 0);
             this.chartKPZ.Name = "chartKPZ";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.IsVisibleInLegend = false;
-            series1.Legend = "Legend1";
-            series1.Name = "defaultSeries";
-            this.chartKPZ.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "defaultSeries";
+            this.chartKPZ.Series.Add(series4);
             this.chartKPZ.Size = new System.Drawing.Size(617, 219);
             this.chartKPZ.TabIndex = 0;
             this.chartKPZ.Text = "chart1";
@@ -134,6 +134,26 @@
             this.panelTop.Size = new System.Drawing.Size(617, 159);
             this.panelTop.TabIndex = 4;
             // 
+            // checkRandomSeed
+            // 
+            this.checkRandomSeed.AutoSize = true;
+            this.checkRandomSeed.Location = new System.Drawing.Point(595, 54);
+            this.checkRandomSeed.Name = "checkRandomSeed";
+            this.checkRandomSeed.Size = new System.Drawing.Size(15, 14);
+            this.checkRandomSeed.TabIndex = 18;
+            this.checkRandomSeed.UseVisualStyleBackColor = true;
+            // 
+            // labelRandomSeed
+            // 
+            this.labelRandomSeed.AutoSize = true;
+            this.labelRandomSeed.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelRandomSeed.Location = new System.Drawing.Point(470, 47);
+            this.labelRandomSeed.Name = "labelRandomSeed";
+            this.labelRandomSeed.Size = new System.Drawing.Size(119, 23);
+            this.labelRandomSeed.TabIndex = 17;
+            this.labelRandomSeed.Text = "Random seed:";
+            this.labelRandomSeed.Click += new System.EventHandler(this.labelRandomSeed_Click);
+            // 
             // checkWriteToFile
             // 
             this.checkWriteToFile.AutoSize = true;
@@ -152,6 +172,7 @@
             this.labelWriteToFile.Size = new System.Drawing.Size(104, 23);
             this.labelWriteToFile.TabIndex = 15;
             this.labelWriteToFile.Text = "Write to file:";
+            this.labelWriteToFile.Click += new System.EventHandler(this.labelWriteToFile_Click);
             // 
             // checkVerifyOutput
             // 
@@ -202,6 +223,7 @@
             this.labelShowInspector.Size = new System.Drawing.Size(134, 23);
             this.labelShowInspector.TabIndex = 10;
             this.labelShowInspector.Text = "Show inspector:";
+            this.labelShowInspector.Click += new System.EventHandler(this.labelShowInspector_Click_1);
             // 
             // label4
             // 
@@ -392,25 +414,6 @@
             this.listLog.Name = "listLog";
             this.listLog.Size = new System.Drawing.Size(617, 186);
             this.listLog.TabIndex = 0;
-            // 
-            // labelRandomSeed
-            // 
-            this.labelRandomSeed.AutoSize = true;
-            this.labelRandomSeed.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelRandomSeed.Location = new System.Drawing.Point(470, 47);
-            this.labelRandomSeed.Name = "labelRandomSeed";
-            this.labelRandomSeed.Size = new System.Drawing.Size(119, 23);
-            this.labelRandomSeed.TabIndex = 17;
-            this.labelRandomSeed.Text = "Random seed:";
-            // 
-            // checkRandomSeed
-            // 
-            this.checkRandomSeed.AutoSize = true;
-            this.checkRandomSeed.Location = new System.Drawing.Point(595, 54);
-            this.checkRandomSeed.Name = "checkRandomSeed";
-            this.checkRandomSeed.Size = new System.Drawing.Size(15, 14);
-            this.checkRandomSeed.TabIndex = 18;
-            this.checkRandomSeed.UseVisualStyleBackColor = true;
             // 
             // ChartForm
             // 
