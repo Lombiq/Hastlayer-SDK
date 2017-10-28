@@ -19,8 +19,8 @@ namespace Hast.Samples.Kpz
     // * GridSize^2  (1 address)  :
     //      The number of iterations to perform (NumberOfIterations).
     // * GridSize^2+1 .. GridSize^2+ParallelTasks*4+2  ParallelTasks*4+2 addresses)  :
-    //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler level.
-    //      Each random seed number is 64-bit (2 uints)
+    //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler 
+    //      level. Each random seed number is 64-bit (2 uints)
 
     public class KpzKernelsGInterface
     {
@@ -43,7 +43,8 @@ namespace Hast.Samples.Kpz
             int IterationGroupSize = (int)(NumberOfIterations * ReschedulesPerTaskIteration);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration);
             const int LocalGridPartitions = GridSize / LocalGridSize;
-            //const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
+            //const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == 
+            //  ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
             ulong randomState0;
             int ParallelTaskRandomIndex = 1;
             uint RandomSeedTemp;
@@ -54,12 +55,14 @@ namespace Hast.Samples.Kpz
                 TaskLocals[TaskLocalsIndex] = new KpzKernelsTaskState();
                 TaskLocals[TaskLocalsIndex].bramDx = new bool[LocalGridSize * LocalGridSize];
                 TaskLocals[TaskLocalsIndex].bramDy = new bool[LocalGridSize * LocalGridSize];
-                TaskLocals[TaskLocalsIndex].taskRandomState1 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                TaskLocals[TaskLocalsIndex].taskRandomState1 = 
+                    memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
                 RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
                 //TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) * 4294967296UL;
                 TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) << 32;
 
-                TaskLocals[TaskLocalsIndex].taskRandomState2 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+                TaskLocals[TaskLocalsIndex].taskRandomState2 = 
+                    memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
                 RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
                 //TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) * 4294967296UL;
                 TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) << 32;
@@ -92,18 +95,22 @@ namespace Hast.Samples.Kpz
                 uint prngZ0 = (0 << 32) | (prngZLow0 << 16) | prngZHigh0;
                 randomState0 = (ulong)prngX0 * (ulong)prngZ0 + (ulong)prngC0;
                 uint RandomValue0 = prngX0 ^ prngC0;
-                int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
+                //This supposes that LocalGridSize is 2^N:
+                int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); 
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0 >> 16));
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
                     for (int ParallelTaskIndex = 0; ParallelTaskIndex < ParallelTasks; ParallelTaskIndex++)
                     {
-                        //Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex (and the random added value)
+                        //Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex 
+                        //(and the random added value)
                         int LocalGridIndex = ParallelTaskIndex + ScheduleIndex * ParallelTasks;
-                        int PartitionX = LocalGridIndex % LocalGridPartitions; //The X and Y coordinate within the small table (local grid)
+                        //The X and Y coordinate within the small table (local grid):
+                        int PartitionX = LocalGridIndex % LocalGridPartitions; 
                         int PartitionY = LocalGridIndex / LocalGridPartitions;
-                        int BaseX = PartitionX * LocalGridSize + RandomXOffset; //The X and Y coordinate within the big table (grid)
+                        //The X and Y coordinate within the big table (grid):
+                        int BaseX = PartitionX * LocalGridSize + RandomXOffset; 
                         int BaseY = PartitionY * LocalGridSize + RandomYOffset;
 
                         //Console.WriteLine("CopyTo | Task={0}, From: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
@@ -113,11 +120,14 @@ namespace Hast.Samples.Kpz
                         {
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
+                                //Prevent going out of grid memory area (e.g. reading into random seed):
                                 int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = (BaseY + CopyDstY) % GridSize; //Prevent going out of grid memory area (e.g. reading into random seed)
+                                int CopySrcY = (BaseY + CopyDstY) % GridSize; 
                                 uint value = memory.ReadUInt32(CopySrcX + CopySrcY * GridSize);
-                                TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] = (value & 1) == 1;
-                                TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] = (value & 2) == 2;
+                                TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] = 
+                                    (value & 1) == 1;
+                                TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] = 
+                                    (value & 2) == 2;
                             }
                         }
 
@@ -135,7 +145,8 @@ namespace Hast.Samples.Kpz
                                 //GetNextRandom1
                                 uint prngC1 = (uint)(TaskLocal.taskRandomState1 >> 32);
                                 uint prngX1 = (uint)TaskLocal.taskRandomState1;
-                                // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
+                                // Creating the value 0xFFFEB81BUL. 
+                                // This literal can't be directly used due to an ILSpy bug, see:
                                 // https://github.com/icsharpcode/ILSpy/issues/807
                                 uint prngZLow1 = 0xFFFE;
                                 uint prngZHigh1 = 0xB81B;
@@ -146,24 +157,26 @@ namespace Hast.Samples.Kpz
                                 //GetNextRandom2
                                 uint prngC2 = (uint)(TaskLocal.taskRandomState2 >> 32);
                                 uint prngX2 = (uint)TaskLocal.taskRandomState2;
-                                // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
+                                // Creating the value 0xFFFEB81BUL. 
+                                // This literal can't be directly used due to an ILSpy bug, see:
                                 // https://github.com/icsharpcode/ILSpy/issues/807
                                 uint prngZLow2 = 0xFFFE;
                                 uint prngZHigh2 = 0xB81B;
                                 uint prngZ2 = (0 << 32) | (prngZLow2 << 16) | prngZHigh2;
                                 TaskLocal.taskRandomState2 = (ulong)prngX2 * (ulong)prngZ2 + (ulong)prngC2;
                                 uint taskRandomNumber2 = prngX2 ^ prngC2;
-
-                                int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1)); //The existstence of var-1 in code is a good indicator of that it is asumed to be 2^N
+                                //The existstence of var-1 in code is a good indicator of that it is asumed to be 2^N:
+                                int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1)); 
                                 int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
                                 int pokeCenterIndex = pokeCenterX + pokeCenterY * LocalGridSize;
                                 uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
                                 uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
 
+                                //get neighbour indexes:
                                 int rightNeighbourIndex;
                                 int bottomNeighbourIndex;
-                                //get neighbour indexes:
-                                if (pokeCenterX >= LocalGridSize - 1 || pokeCenterY >= LocalGridSize - 1) continue; //We skip if neighbours would fall out of the local grid
+                                //We skip if neighbours would fall out of the local grid:
+                                if (pokeCenterX >= LocalGridSize - 1 || pokeCenterY >= LocalGridSize - 1) continue; 
                                 int rightNeighbourX = pokeCenterX + 1;
                                 int rightNeighbourY = pokeCenterY;
                                 int bottomNeighbourX = pokeCenterX;
@@ -204,9 +217,11 @@ namespace Hast.Samples.Kpz
                     {
                         //calculate these things again
                         int LocalGridIndex = ParallelTaskIndex + ScheduleIndex * ParallelTasks;
-                        int PartitionX = LocalGridIndex % LocalGridPartitions; //The X and Y coordinate within the small table (local grid)
+                        //The X and Y coordinate within the small table (local grid):
+                        int PartitionX = LocalGridIndex % LocalGridPartitions; 
                         int PartitionY = LocalGridIndex / LocalGridPartitions;
-                        int BaseX = PartitionX * LocalGridSize + RandomXOffset; //The X and Y coordinate within the big table (grid)
+                        //The X and Y coordinate within the big table (grid):
+                        int BaseX = PartitionX * LocalGridSize + RandomXOffset; 
                         int BaseY = PartitionY * LocalGridSize + RandomYOffset;
                         //Console.WriteLine("CopyBack | Task={0}, To: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
 
@@ -238,8 +253,10 @@ namespace Hast.Samples.Kpz
 
     public static class KpzKernelsGExtensions
     {
-        public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, bool randomSeedEnable, uint numberOfIterations)
+        public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, 
+            bool randomSeedEnable, uint numberOfIterations)
         {
+            //Use this is random seed is disabled in GUI. This makes the result more preictable while debugging.
             var notRandomSeed = new int[]{
                 -2122284207, -805426534, -296351199, 1082586369, -864339821,
                 331357875, 1192493543, -851078246, -1091834350, -671234217,
@@ -276,10 +293,13 @@ namespace Hast.Samples.Kpz
                 93473713, -937734760, -279968717
             }; //generate with python expression: print [random.randint(-2147483648, 2147483647) for x in range(32)]
 
-            //int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) * KpzKernelsGInterface.NumberOfIterations;
+            //int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / 
+            //  (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) *
+            //  KpzKernelsGInterface.NumberOfIterations;
             //int numRandomUints = 2 + (numTasks * 4);
             int numRandomUints = 2 + KpzKernelsGInterface.ParallelTasks * 4;
-            SimpleMemory sm = new SimpleMemory(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + numRandomUints + 1);
+            SimpleMemory sm = new SimpleMemory(
+                KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + numRandomUints + 1);
 
             if (pushToFpga) KpzKernelsGExtensions.CopyFromGridToSimpleMemory(hostGrid, sm);
 
@@ -287,7 +307,10 @@ namespace Hast.Samples.Kpz
 
             Random rnd = new Random();
             for (int randomWriteIndex=0; randomWriteIndex<numRandomUints; randomWriteIndex++)
-                sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + 1 + randomWriteIndex, (randomSeedEnable)?(uint)rnd.Next():(uint)notRandomSeed[randomWriteIndex]);
+            {
+                sm.WriteUInt32(KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize + 1 + randomWriteIndex, 
+                    (randomSeedEnable)?(uint)rnd.Next():(uint)notRandomSeed[randomWriteIndex]);
+            }
 
             kernels.ScheduleIterations(sm);
 
@@ -314,7 +337,8 @@ namespace Hast.Samples.Kpz
             {
                 for (int y = 0; y < KpzKernelsGInterface.GridSize; y++)
                 {
-                    gridDst[x, y] = KpzNode.DeserializeFromUInt32(memorySrc.ReadUInt32(y * KpzKernelsGInterface.GridSize + x));
+                    gridDst[x, y] = KpzNode.DeserializeFromUInt32(
+                        memorySrc.ReadUInt32(y * KpzKernelsGInterface.GridSize + x));
                 }
             }
         }

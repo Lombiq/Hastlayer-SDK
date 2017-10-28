@@ -110,8 +110,10 @@ namespace Hast.Samples.Kpz
                 if(_writeToFile)
                 {
                     LogIt("Writing KpzStateLogger to file...");
-                    var kpzStateLoggerPath = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)+@"\kpzStateLogger\";
-                    if(!System.IO.Directory.Exists(kpzStateLoggerPath)) System.IO.Directory.CreateDirectory(kpzStateLoggerPath);
+                    var kpzStateLoggerPath = System.IO.Path.GetDirectoryName(
+                        System.Reflection.Assembly.GetExecutingAssembly().Location)+@"\kpzStateLogger\";
+                    if(!System.IO.Directory.Exists(kpzStateLoggerPath))
+                        System.IO.Directory.CreateDirectory(kpzStateLoggerPath);
                     _kpz.StateLogger.WriteToFiles(kpzStateLoggerPath);
                 }
 
@@ -158,7 +160,8 @@ namespace Hast.Samples.Kpz
             // The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g.
             // in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
             int iterationNext10Pow = (int)Math.Pow(10, Math.Floor(Math.Log10(iteration) + 1));
-            bool updateChartInThisIteartion = forceUpdate || iteration < 10 || ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
+            bool updateChartInThisIteartion = forceUpdate || iteration < 10 || 
+                ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
             if (updateChartInThisIteartion)
             {
                 double mean;
@@ -231,7 +234,8 @@ namespace Hast.Samples.Kpz
                     AsyncLogIt(String.Format("Doing {0} iterations at once...", iterationsToDo));
                     _kpz.DoHastIterations((uint)iterationsToDo);
                     AsyncUpdateProgressBar(currentIteration);
-                    AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations); //force update if current iteration is the last
+                    //Force update if current iteration is the last:
+                    AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations); 
                     if (currentIteration >= _numKpzIterations) break;
                     lastIteration = currentIteration;
                     currentIteration *= 10;
@@ -255,7 +259,8 @@ namespace Hast.Samples.Kpz
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
-            checkVerifyOutput.Enabled = comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4 || comboTarget.SelectedIndex == 5;
+            checkVerifyOutput.Enabled = 
+                comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4 || comboTarget.SelectedIndex == 5;
             if (comboTarget.SelectedIndex == 5) checkVerifyOutput.Checked = true;
             if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex < 2)
             {

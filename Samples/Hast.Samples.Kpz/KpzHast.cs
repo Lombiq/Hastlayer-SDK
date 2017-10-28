@@ -45,7 +45,8 @@ namespace Hast.Samples.Kpz
                 configuration.AddHardwareEntryPointType<KpzKernelsGInterface>();
 
                 configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                    new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsGInterface>(k => k.ScheduleIterations(null), 0)
+                    new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsGInterface>(
+                        k => k.ScheduleIterations(null), 0)
                     {
                         MaxDegreeOfParallelism = KpzKernelsGInterface.ParallelTasks
                     });

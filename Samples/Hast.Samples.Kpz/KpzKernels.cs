@@ -182,10 +182,12 @@ namespace Hast.Samples.Kpz
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
-                ((getGridDx(centerIndex) && !getGridDx(rightNeighbourIndex)) && (getGridDy(centerIndex) && !getGridDy(bottomNeighbourIndex)) &&
+                ((getGridDx(centerIndex) && !getGridDx(rightNeighbourIndex)) &&
+                (getGridDy(centerIndex) && !getGridDy(bottomNeighbourIndex)) &&
                 (forceSwitch || randomVariable1 < integerProbabilityP)) ||
                 // If we get the pattern {10, 10} we have a hole:
-                ((!getGridDx(centerIndex) && getGridDx(rightNeighbourIndex)) && (!getGridDy(centerIndex) && getGridDy(bottomNeighbourIndex)) &&
+                ((!getGridDx(centerIndex) && getGridDx(rightNeighbourIndex)) && 
+                (!getGridDy(centerIndex) && getGridDy(bottomNeighbourIndex)) &&
                 (forceSwitch || randomVariable2 < integerProbabilityQ))
             )
             {
@@ -227,7 +229,8 @@ namespace Hast.Samples.Kpz
             return numbers;
         }
 
-        public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1, ulong randomSeed2, uint numberOfIterations)
+        public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1, 
+            ulong randomSeed2, uint numberOfIterations)
         {
             memoryDst.WriteUInt32(KpzKernels.CellIndexOfRandomStates(), (uint)(randomSeed1&0xFFFFFFFFUL));
             memoryDst.WriteUInt32(KpzKernels.CellIndexOfRandomStates()+1, (uint)((randomSeed1>>32)&0xFFFFFFFFUL));
@@ -237,7 +240,8 @@ namespace Hast.Samples.Kpz
             memoryDst.WriteUInt32(KpzKernels.CellIndexOfNumberOfIterations(), numberOfIterations);
         }
 
-        public static void DoIterationsWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, bool testMode, ulong randomSeed1, ulong randomSeed2, uint numberOfIterations)
+        public static void DoIterationsWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, 
+            bool testMode, ulong randomSeed1, ulong randomSeed2, uint numberOfIterations)
         {
             SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory());
             if (pushToFpga)
