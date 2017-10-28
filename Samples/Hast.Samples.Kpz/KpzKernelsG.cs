@@ -17,7 +17,7 @@ namespace Hast.Samples.Kpz
     // * 0 .. GridSize^2-1  (GridSize^2 addresses)  :
     //      The input KPZ nodes as 32 bit numbers, with bit 0 as dx and bit 1 as dy.
     // * GridSize^2  (1 address)  :
-    //      The number of iterations to perform (NumberOfIterations). 
+    //      The number of iterations to perform (NumberOfIterations).
     // * GridSize^2+1 .. GridSize^2+ParallelTasks*4+2  ParallelTasks*4+2 addresses)  :
     //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler level.
     //      Each random seed number is 64-bit (2 uints)
@@ -92,7 +92,7 @@ namespace Hast.Samples.Kpz
                 uint prngZ0 = (0 << 32) | (prngZLow0 << 16) | prngZHigh0;
                 randomState0 = (ulong)prngX0 * (ulong)prngZ0 + (ulong)prngC0;
                 uint RandomValue0 = prngX0 ^ prngC0;
-                int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N 
+                int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); //This supposes that LocalGridSize is 2^N
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0 >> 16));
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
@@ -177,7 +177,7 @@ namespace Hast.Samples.Kpz
                                     // If we get the pattern {01, 01} we have a pyramid:
                                     ((TaskLocal.bramDx[pokeCenterIndex] && !TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (TaskLocal.bramDy[pokeCenterIndex] && !TaskLocal.bramDy[bottomNeighbourIndex]) &&
-                                    (false || randomVariable1 < integerProbabilityP)) || 
+                                    (false || randomVariable1 < integerProbabilityP)) ||
                                     // If we get the pattern {10, 10} we have a hole:
                                     ((!TaskLocal.bramDx[pokeCenterIndex] && TaskLocal.bramDx[rightNeighbourIndex]) &&
                                     (!TaskLocal.bramDy[pokeCenterIndex] && TaskLocal.bramDy[bottomNeighbourIndex]) &&
@@ -193,7 +193,7 @@ namespace Hast.Samples.Kpz
 
                                 // ==== </Now randomly switch four cells> ====
                             }
-                            return TaskLocal; 
+                            return TaskLocal;
                         }, TaskLocals[ParallelTaskIndex]);
                     }
 
@@ -210,20 +210,20 @@ namespace Hast.Samples.Kpz
                         int BaseY = PartitionY * LocalGridSize + RandomYOffset;
                         //Console.WriteLine("CopyBack | Task={0}, To: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
 
-                        for (int CopyDstX = 0; CopyDstX < LocalGridSize; CopyDstX++)
+                        for (int CopySrcX = 0; CopySrcX < LocalGridSize; CopySrcX++)
                         {
-                            for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
+                            for (int CopySrcY = 0; CopySrcY < LocalGridSize; CopySrcY++)
                             {
-                                int CopySrcX = (BaseX + CopyDstX) % GridSize;
-                                int CopySrcY = (BaseY + CopyDstY) % GridSize;
+                                int CopyDstX = (BaseX + CopySrcX) % GridSize;
+                                int CopyDstY = (BaseY + CopySrcY) % GridSize;
                                 uint value =
-                                    (tasks[ParallelTaskIndex].Result.bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
-                                    (tasks[ParallelTaskIndex].Result.bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
+                                    (tasks[ParallelTaskIndex].Result.bramDx[CopySrcX + CopySrcY * LocalGridSize] ? 1U : 0U) |
+                                    (tasks[ParallelTaskIndex].Result.bramDy[CopySrcX + CopySrcY * LocalGridSize] ? 2U : 0U);
                                 //uint value =
-                                //    (TaskLocals[ParallelTaskIndex].bramDx[CopyDstX + CopyDstY * LocalGridSize] ? 1U : 0U) |
-                                //    (TaskLocals[ParallelTaskIndex].bramDy[CopyDstX + CopyDstY * LocalGridSize] ? 2U : 0U);
+                                //    (TaskLocals[ParallelTaskIndex].bramDx[CopySrcX + CopySrcY * LocalGridSize] ? 1U : 0U) |
+                                //    (TaskLocals[ParallelTaskIndex].bramDy[CopySrcX + CopySrcY * LocalGridSize] ? 2U : 0U);
                                 //(Either solution to pass TaskLocals does work.)
-                                memory.WriteUInt32(CopySrcX + CopySrcY * GridSize, value);
+                                memory.WriteUInt32(CopyDstX + CopyDstY * GridSize, value);
                             }
                         }
 
