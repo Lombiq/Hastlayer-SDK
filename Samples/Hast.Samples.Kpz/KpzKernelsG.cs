@@ -5,7 +5,7 @@ using System;
 
 namespace Hast.Samples.Kpz
 {
-    public class KpzKernelsIndexObject
+    public class KpzKernelsTaskState
     {
         public bool[] bramDx;
         public bool[] bramDy;
@@ -48,10 +48,10 @@ namespace Hast.Samples.Kpz
             int ParallelTaskRandomIndex = 1;
             uint RandomSeedTemp;
 
-            KpzKernelsIndexObject[] TaskLocals = new KpzKernelsIndexObject[ParallelTasks];
+            KpzKernelsTaskState[] TaskLocals = new KpzKernelsTaskState[ParallelTasks];
             for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
             {
-                TaskLocals[TaskLocalsIndex] = new KpzKernelsIndexObject();
+                TaskLocals[TaskLocalsIndex] = new KpzKernelsTaskState();
                 TaskLocals[TaskLocalsIndex].bramDx = new bool[LocalGridSize * LocalGridSize];
                 TaskLocals[TaskLocalsIndex].bramDy = new bool[LocalGridSize * LocalGridSize];
                 TaskLocals[TaskLocalsIndex].taskRandomState1 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
@@ -96,7 +96,7 @@ namespace Hast.Samples.Kpz
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0 >> 16));
                 for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
                 {
-                    var tasks = new Task<KpzKernelsIndexObject>[ParallelTasks];
+                    var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
                     for (int ParallelTaskIndex = 0; ParallelTaskIndex < ParallelTasks; ParallelTaskIndex++)
                     {
                         //Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex (and the random added value)
@@ -122,10 +122,10 @@ namespace Hast.Samples.Kpz
                         }
 
                         tasks[ParallelTaskIndex] = Task.Factory.StartNew(
-                        rawIndexObject =>
+                        rawTaskState =>
                         {
                             //Then do TasksPerIteration iterations
-                            KpzKernelsIndexObject TaskLocal = (KpzKernelsIndexObject)rawIndexObject;
+                            KpzKernelsTaskState TaskLocal = (KpzKernelsTaskState)rawTaskState;
                             for (int PokeIndex = 0; PokeIndex < PokesInsideTask; PokeIndex++)
                             {
                                 // ==== <Now randomly switch four cells> ====
