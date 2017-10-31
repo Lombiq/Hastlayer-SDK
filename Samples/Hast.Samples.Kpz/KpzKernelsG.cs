@@ -6,6 +6,9 @@ using Hast.Algorithms;
 
 namespace Hast.Samples.Kpz
 {
+    /// <summary>
+    /// It contains the state of each Task instantiated within KpzKernelsG.ScheduleIterations.
+    /// </summary>
     public class KpzKernelsTaskState
     {
         public bool[] bramDx;
@@ -23,14 +26,42 @@ namespace Hast.Samples.Kpz
     //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler 
     //      level. Each random seed number is 64-bit (2 uints)
 
+    /// <summary>
+    /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, with an architecture
+    /// similar to GPUs. It makes use of a given number of Tasks as parallel execution engines 
+    /// (see <see cref="ReschedulesPerTaskIteration">).
+    /// 
+    /// For each iteration:
+    /// <list type="bullet">
+    /// <item>it loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks,</item>
+    /// <item>it runs the algorithm on these local tables,</item>
+    /// <item>it loads back the local tables into the original grid.</item>
+    /// </list>
+    /// 
+    /// It changes the offset of the local grids within the global grid a given number of times for each iteration 
+    /// (see <see cref="ReschedulesPerTaskIteration"/>). 
+    /// </summary>
     public class KpzKernelsGInterface
     {
-        const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
-        //These parameters are fixed, locked into VHDL code for simplicity
-        public const int GridSize = 64; //Full grid width and height
-        //Local grid width and height (GridSize^2)/(LocalGridSize^2) need to be an integer for simplicity
+        // ==== <CONFIGURABLE PARAMETERS> ====
+        //Full grid width and height.
+        public const int GridSize = 64;
+        //Local grid width and height. Each Task has a local grid, on which it works. 
         public const int LocalGridSize = 8;
-        public const int ParallelTasks = 16; //Number of parallel execution engines
+        //Furthermore, for LocalGridSize and GridSize the following expressions should have an integer result:
+        //    (GridSize^2)/(LocalGridSize^2)
+        //    GridSize/LocalGridSize
+        //(Here the ^ operator means power.)
+        //Also both GridSize and LocalGridSize should be a power of two.
+        //The probability of turning a pyramid into a hole (integerProbabilityP),
+        //or a hole into a pyramid (integerProbabilityQ).
+        const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
+        //Number of parallel execution engines. (Should be a power of two.)
+        public const int ParallelTasks = 16; 
+        //The number of reschedules (thus global grid offset changing) within one iteration.
+        public const int ReschedulesPerTaskIteration = 2; 
+        //This should be 1 or 2 (the latter if you want to be very careful). 
+        // ==== </CONFIGURABLE PARAMETERS> ====
 
         //public int MemStartOfRandomValues() { return GridSize * GridSize;  }
         //public int MemStartOfParameters() { return GridSize * GridSize + TasksPerIteration * NumberOfIterations + 1; }
@@ -40,7 +71,6 @@ namespace Hast.Samples.Kpz
             int NumberOfIterations = memory.ReadInt32(GridSize * GridSize);
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
-            const int ReschedulesPerTaskIteration = 2; //reciprocal
             int IterationGroupSize = (int)(NumberOfIterations * ReschedulesPerTaskIteration);
             const int PokesInsideTask = (int)(LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration);
             const int LocalGridPartitions = GridSize / LocalGridSize;
@@ -226,6 +256,17 @@ namespace Hast.Samples.Kpz
 
     public static class KpzKernelsGExtensions
     {
+        /// <summary>
+        /// Wrapper for calling <see cref="KpzKernelsG.ScheduleIterations"/>.
+        /// </summary>
+        /// <param name="hostGrid">The grid that we work on.</param>
+        /// <param name="pushToFpga">Force pushing the grid into the FPGA (or work on the grid already there).</param>
+        /// <param name="randomSeedEnable">
+        /// If it is disabled, preprogrammed random numbers will be written into 
+        /// SimpleMemory instead of real random generated numbers. This helps debugging, keeping the output more
+        /// consistent across runs.
+        /// </param>
+        /// <param name="numberOfIterations">The number of iterations to perform.</param>
         public static void DoIterationsWrapper(this KpzKernelsGInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, 
             bool randomSeedEnable, uint numberOfIterations)
         {
