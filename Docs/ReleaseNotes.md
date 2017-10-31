@@ -5,6 +5,8 @@
 ## vNext
 
 - Fixing behavior of binary operator expressions were the operands were cast.
+- Fixing exception when using public fields in certain cases.
+- More helpful exception when a type was not found.
 
 
 ## 1.0.6, 21.10.2017
