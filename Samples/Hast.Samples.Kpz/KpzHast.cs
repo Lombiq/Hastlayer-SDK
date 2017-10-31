@@ -63,7 +63,7 @@ namespace Hast.Samples.Kpz
 
             var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
                     typeof(KpzKernelsGInterface).Assembly,
-                 //   typeof(Hast.Algorithms.MWC64X).Assembly
+                    typeof(Hast.Algorithms.PrngMWC64X).Assembly
                 }, configuration);
 
             await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);

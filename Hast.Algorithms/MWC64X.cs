@@ -4,15 +4,21 @@ namespace Hast.Algorithms
     /// Implementation of the MWC64X random number generator algorithm.
     /// <see href="http://cas.ee.ic.ac.uk/people/dt10/research/rngs-gpu-mwc64x.html"/>
     /// </summary>
-    public class MWC64X
+    public class PrngMWC64X
     {
-        ulong state = 7215152093156152310UL; // Random seed.
+        public ulong state; // Random seed.
 
-        public uint GetNextRandom()
+        public PrngMWC64X(ulong seed) { state = seed; }
+        public PrngMWC64X() { state = 0xCAFEUL; }
+
+        public uint NextUInt32()
         {
             uint c = (uint)(state >> 32);
-            uint x = (uint)(state & 0xFFFFFFFFUL);
-            state = x * 4294883355UL + c;
+            uint x = (uint)state;
+            uint zLow  = 0xFFFE;
+            uint zHigh = 0xB81B;
+            uint z = (0 << 32) | (zLow << 16) | zHigh; //workaround due to ILSpy bug
+            state = (ulong)x * (ulong)z + (ulong)c;
             return x ^ c;
         }
     }

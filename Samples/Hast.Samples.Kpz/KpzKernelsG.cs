@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
+using Hast.Algorithms;
 
 namespace Hast.Samples.Kpz
 {
@@ -9,8 +10,8 @@ namespace Hast.Samples.Kpz
     {
         public bool[] bramDx;
         public bool[] bramDy;
-        public ulong taskRandomState1;
-        public ulong taskRandomState2;
+        public PrngMWC64X prng1;
+        public PrngMWC64X prng2;
     }
 
     //SimpleMemory map:
@@ -45,9 +46,9 @@ namespace Hast.Samples.Kpz
             const int LocalGridPartitions = GridSize / LocalGridSize;
             //const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == 
             //  ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
-            ulong randomState0;
             int ParallelTaskRandomIndex = 1;
             uint RandomSeedTemp;
+            PrngMWC64X prng0 = new PrngMWC64X();
 
             KpzKernelsTaskState[] TaskLocals = new KpzKernelsTaskState[ParallelTasks];
             for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
@@ -55,17 +56,19 @@ namespace Hast.Samples.Kpz
                 TaskLocals[TaskLocalsIndex] = new KpzKernelsTaskState();
                 TaskLocals[TaskLocalsIndex].bramDx = new bool[LocalGridSize * LocalGridSize];
                 TaskLocals[TaskLocalsIndex].bramDy = new bool[LocalGridSize * LocalGridSize];
-                TaskLocals[TaskLocalsIndex].taskRandomState1 = 
+                TaskLocals[TaskLocalsIndex].prng1 = new PrngMWC64X();
+                TaskLocals[TaskLocalsIndex].prng1.state = 
                     memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
                 RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                //TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) * 4294967296UL;
-                TaskLocals[TaskLocalsIndex].taskRandomState1 |= ((ulong)RandomSeedTemp) << 32;
+                //TaskLocals[TaskLocalsIndex].prng1.state |= ((ulong)RandomSeedTemp) * 4294967296UL;
+                TaskLocals[TaskLocalsIndex].prng1.state |= ((ulong)RandomSeedTemp) << 32;
 
-                TaskLocals[TaskLocalsIndex].taskRandomState2 = 
+                TaskLocals[TaskLocalsIndex].prng2 = new PrngMWC64X();
+                TaskLocals[TaskLocalsIndex].prng2.state = 
                     memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
                 RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-                //TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) * 4294967296UL;
-                TaskLocals[TaskLocalsIndex].taskRandomState2 |= ((ulong)RandomSeedTemp) << 32;
+                //TaskLocals[TaskLocalsIndex].prng2.state |= ((ulong)RandomSeedTemp) * 4294967296UL;
+                TaskLocals[TaskLocalsIndex].prng2.state |= ((ulong)RandomSeedTemp) << 32;
 
                 //TaskLocals[TaskLocalsIndex].taskRandomState1 = (ulong)0xCAFE;
                 //TaskLocals[TaskLocalsIndex].taskRandomState2 = (ulong)0xCAFE;
@@ -76,25 +79,16 @@ namespace Hast.Samples.Kpz
             //If we want 10 iterations, and starting a full series of tasks makes half iteration on the full table,
             //then we need to start it 20 times (thus IterationGroupSize will be 20).
 
-
-            randomState0 = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
+            prng0.state = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
             RandomSeedTemp = memory.ReadUInt32(GridSize * GridSize + ParallelTaskRandomIndex++);
-            randomState0 |= ((ulong)RandomSeedTemp) << 32;
+            prng0.state |= ((ulong)RandomSeedTemp) << 32;
             //randomState0 |= ((ulong)RandomSeedTemp) * 4294967296UL;
             //randomState0 = (ulong)0xCAFE;
 
             for (int IterationGroupIndex = 0; IterationGroupIndex < IterationGroupSize; IterationGroupIndex++)
             {
                 //GetNextRandom0
-                uint prngC0 = (uint)(randomState0 >> 32);
-                uint prngX0 = (uint)randomState0;
-                // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
-                // https://github.com/icsharpcode/ILSpy/issues/807
-                uint prngZLow0 = 0xFFFE;
-                uint prngZHigh0 = 0xB81B;
-                uint prngZ0 = (0 << 32) | (prngZLow0 << 16) | prngZHigh0;
-                randomState0 = (ulong)prngX0 * (ulong)prngZ0 + (ulong)prngC0;
-                uint RandomValue0 = prngX0 ^ prngC0;
+                uint RandomValue0 = prng0.NextUInt32();
                 //This supposes that LocalGridSize is 2^N:
                 int RandomXOffset = (int)((LocalGridSize - 1) & RandomValue0); 
                 int RandomYOffset = (int)((LocalGridSize - 1) & (RandomValue0 >> 16));
@@ -141,30 +135,9 @@ namespace Hast.Samples.Kpz
                                 // ==== <Now randomly switch four cells> ====
 
                                 //Generating two random numbers:
+                                uint taskRandomNumber1 = TaskLocal.prng1.NextUInt32();
+                                uint taskRandomNumber2 = TaskLocal.prng2.NextUInt32();
 
-                                //GetNextRandom1
-                                uint prngC1 = (uint)(TaskLocal.taskRandomState1 >> 32);
-                                uint prngX1 = (uint)TaskLocal.taskRandomState1;
-                                // Creating the value 0xFFFEB81BUL. 
-                                // This literal can't be directly used due to an ILSpy bug, see:
-                                // https://github.com/icsharpcode/ILSpy/issues/807
-                                uint prngZLow1 = 0xFFFE;
-                                uint prngZHigh1 = 0xB81B;
-                                uint prngZ1 = (0 << 32) | (prngZLow1 << 16) | prngZHigh1;
-                                TaskLocal.taskRandomState1 = (ulong)prngX1 * (ulong)prngZ1 + (ulong)prngC1;
-                                uint taskRandomNumber1 = prngX1 ^ prngC1;
-
-                                //GetNextRandom2
-                                uint prngC2 = (uint)(TaskLocal.taskRandomState2 >> 32);
-                                uint prngX2 = (uint)TaskLocal.taskRandomState2;
-                                // Creating the value 0xFFFEB81BUL. 
-                                // This literal can't be directly used due to an ILSpy bug, see:
-                                // https://github.com/icsharpcode/ILSpy/issues/807
-                                uint prngZLow2 = 0xFFFE;
-                                uint prngZHigh2 = 0xB81B;
-                                uint prngZ2 = (0 << 32) | (prngZLow2 << 16) | prngZHigh2;
-                                TaskLocal.taskRandomState2 = (ulong)prngX2 * (ulong)prngZ2 + (ulong)prngC2;
-                                uint taskRandomNumber2 = prngX2 ^ prngC2;
                                 //The existstence of var-1 in code is a good indicator of that it is asumed to be 2^N:
                                 int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1)); 
                                 int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
@@ -243,8 +216,8 @@ namespace Hast.Samples.Kpz
                         }
 
                         //Take PRNG current state from Result to feed it to input next time
-                        TaskLocals[ParallelTaskIndex].taskRandomState1 = tasks[ParallelTaskIndex].Result.taskRandomState1;
-                        TaskLocals[ParallelTaskIndex].taskRandomState2 = tasks[ParallelTaskIndex].Result.taskRandomState2;
+                        TaskLocals[ParallelTaskIndex].prng1.state = tasks[ParallelTaskIndex].Result.prng1.state;
+                        TaskLocals[ParallelTaskIndex].prng2.state = tasks[ParallelTaskIndex].Result.prng2.state;
                     }
                 }
             }
