@@ -21,7 +21,7 @@ namespace Hast.Algorithms
             uint zLow  = 0xFFFE;
             uint zHigh = 0xB81B;
             uint z = (0 << 32) | (zLow << 16) | zHigh;
-            state = (ulong)x * (ulong)z + (ulong)c;
+            state = x * z + c;
             return x ^ c;
         }
     }
