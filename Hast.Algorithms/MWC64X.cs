@@ -15,9 +15,12 @@ namespace Hast.Algorithms
         {
             uint c = (uint)(state >> 32);
             uint x = (uint)state;
+            // Creating the value 0xFFFEB81BUL. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
             uint zLow  = 0xFFFE;
             uint zHigh = 0xB81B;
-            uint z = (0 << 32) | (zLow << 16) | zHigh; //workaround due to ILSpy bug
+            uint z = (0 << 32) | (zLow << 16) | zHigh;
             state = (ulong)x * (ulong)z + (ulong)c;
             return x ^ c;
         }
