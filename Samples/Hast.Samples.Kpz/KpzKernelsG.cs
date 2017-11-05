@@ -56,8 +56,8 @@ namespace Hast.Samples.Kpz
         //The probability of turning a pyramid into a hole (integerProbabilityP),
         //or a hole into a pyramid (integerProbabilityQ).
         const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
-        //Number of parallel execution engines. (Should be a power of two.)
-        public const int ParallelTasks = 16; 
+        //Number of parallel execution engines. (Should be a power of two.) Only 8 will fully fit on the Nexys 4 DDR.
+        public const int ParallelTasks = 8; 
         //The number of reschedules (thus global grid offset changing) within one iteration.
         public const int ReschedulesPerTaskIteration = 2; 
         //This should be 1 or 2 (the latter if you want to be very careful). 
