@@ -1,4 +1,5 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Algorithms;
 
 namespace Hast.Samples.Kpz
 {
@@ -52,7 +53,7 @@ namespace Hast.Samples.Kpz
             var numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                memory.WriteUInt32(i, kernels.GetNextRandom1());
+                memory.WriteUInt32(i, kernels.prng1.NextUInt32());
             }
         }
     }
@@ -77,9 +78,7 @@ namespace Hast.Samples.Kpz
         public bool TestMode = false;
         public uint NumberOfIterations = 1;
 
-        //ulong randomState1 = 7215152093156152310UL; //random seed
-        //ulong randomState2 = 8322404672673255311UL; //random seed
-        ulong randomState1, randomState2;
+        public PrngMWC64X prng1, prng2;
 
         public const int MemIndexNumberOfIterations = 0;
         public const int MemIndexStepMode = 1;
@@ -94,28 +93,13 @@ namespace Hast.Samples.Kpz
         /// <param name="memory"></param>
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
-            randomState1 = (((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
-                memory.ReadUInt32(MemIndexRandomStates+1);
-            randomState2 = (((ulong)memory.ReadUInt32(MemIndexRandomStates+2)) << 32) |
-                memory.ReadUInt32(MemIndexRandomStates+3);
+
+            prng1 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
+                memory.ReadUInt32(MemIndexRandomStates + 1));
+            prng2 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates+2)) << 32) |
+                memory.ReadUInt32(MemIndexRandomStates+3));
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);
-        }
-
-        public uint GetNextRandom1()
-        {
-            uint c = (uint)(randomState1 >> 32);
-            uint x = (uint)(randomState1 & 0xFFFFFFFFUL);
-            randomState1 = x * ((ulong)4294883355UL) + c;
-            return x ^ c;
-        }
-
-        public uint GetNextRandom2()
-        {
-            uint c = (uint)(randomState2 >> 32);
-            uint x = (uint)(randomState2 & 0xFFFFFFFFUL);
-            randomState2 = x * ((ulong)4294883355UL) + c;
-            return x ^ c;
         }
 
         /// <summary>
@@ -198,11 +182,11 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void RandomlySwitchFourCells(bool forceSwitch)
         {
-            var randomNumber1 = GetNextRandom1();
+            uint randomNumber1 = prng1.NextUInt32();
             var centerX = (int)(randomNumber1 & (GridWidth - 1));
             var centerY = (int)((randomNumber1 >> 16) & (GridHeight - 1));
             int centerIndex = getIndexFromXY(centerX, centerY);
-            uint randomNumber2 = GetNextRandom2();
+            uint randomNumber2 = prng2.NextUInt32();
             uint randomVariable1 = randomNumber2 & ((1 << 16) - 1);
             uint randomVariable2 = (randomNumber2 >> 16) & ((1 << 16) - 1);
             int rightNeighbourIndex;
