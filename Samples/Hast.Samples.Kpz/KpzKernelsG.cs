@@ -257,6 +257,9 @@ namespace Hast.Samples.Kpz
         }
     }
 
+    /// <summary>
+    /// These are host-side functions for <see cref="KpzKernelsGInterface"/>.
+    /// </summary>
     public static class KpzKernelsGExtensions
     {
         /// <summary>

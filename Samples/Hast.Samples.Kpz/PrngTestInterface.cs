@@ -9,6 +9,10 @@ namespace Hast.Samples.Kpz
     // * 2  :
     //      32-bit random output
 
+    /// <summary>
+    /// This class was used to debug the problems we experienced while trying to get the MWC64X PRNG working 
+    /// on the hardware. It is the class used when selecting "PRNG test (FPGA)" on the GUI.
+    /// </summary>
     public class PrngTestInterface
     {
 
@@ -30,8 +34,14 @@ namespace Hast.Samples.Kpz
         }
     }
 
+    /// <summary>
+    /// These are host-side functions for <see cref="PrngTestExtensions"/>.
+    /// </summary>
     public static class PrngTestExtensions
     {
+        /// <summary>
+        /// This copies random seed from the host to the FPGA.
+        /// </summary>
         public static SimpleMemory PushRandomSeed(this PrngTestInterface kernels, ulong seed)
         {
             SimpleMemory sm = new SimpleMemory(3);
@@ -40,6 +50,7 @@ namespace Hast.Samples.Kpz
             return sm;
         }
 
+        /// <summary>It runs the PRNG on the FPGA and returns a random 32-bit uint.</summary>
         public static uint GetNextRandom(this PrngTestInterface kernels, SimpleMemory memory)
         {
             kernels.MWC64X(memory);

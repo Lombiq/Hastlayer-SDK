@@ -368,6 +368,9 @@ namespace Hast.Samples.Kpz
         }
     }
 
+    /// <summary>
+    /// This class extends the built-in Random class with convenience functions.
+    /// </summary>
     static class RandomExtensions
     {
         public static ulong NextUInt64(this Random random)
