@@ -155,7 +155,7 @@ namespace Hast.Samples.Kpz
         /// they are highlighted with a green color, else they are highlighted with a red color, based on the parameter
         /// value of <see cref="ChangedGrid" />.
         /// </summary>
-        public void AddKpzAction(string Description, KpzNode[,] Grid, KpzCoords Center, 
+        public void AddKpzAction(string Description, KpzNode[,] Grid, KpzCoords Center,
             KpzNeighbours Neighbours, bool ChangedGrid)
         {
             List<KpzCoords> highlightedCoords = new List<KpzCoords>();
@@ -178,7 +178,7 @@ namespace Hast.Samples.Kpz
             int iterationIndex = 0;
             foreach (var iteration in Iterations)
             {
-                using (System.IO.StreamWriter file = 
+                using (System.IO.StreamWriter file =
                     new System.IO.StreamWriter(path + (iterationIndex++).ToString() + ".txt"))
                 {
                     foreach (var action in iteration.Actions)
@@ -189,7 +189,7 @@ namespace Hast.Samples.Kpz
                             string line = "";
                             for (int x = 0; x < action.Grid.GetLength(0); x++)
                             {
-                                line += ((action.Grid[x, y].dx) ? "1" : "0") + 
+                                line += ((action.Grid[x, y].dx) ? "1" : "0") +
                                     ((action.Grid[x, y].dy) ? "1" : "0") + " ";
                             }
                             file.WriteLine(line);

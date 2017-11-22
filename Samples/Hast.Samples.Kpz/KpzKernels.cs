@@ -96,8 +96,8 @@ namespace Hast.Samples.Kpz
 
             prng1 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
                 memory.ReadUInt32(MemIndexRandomStates + 1));
-            prng2 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates+2)) << 32) |
-                memory.ReadUInt32(MemIndexRandomStates+3));
+            prng2 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates + 2)) << 32) |
+                memory.ReadUInt32(MemIndexRandomStates + 3));
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);
         }
@@ -172,7 +172,7 @@ namespace Hast.Samples.Kpz
                 for (int y = 0; y < GridHeight; y++)
                 {
                     int index = y * GridWidth + x;
-                    gridRaw[index] = memory.ReadUInt32(MemIndexGrid+index);
+                    gridRaw[index] = memory.ReadUInt32(MemIndexGrid + index);
                 }
             }
         }
@@ -205,7 +205,7 @@ namespace Hast.Samples.Kpz
                 (getGridDy(centerIndex) && !getGridDy(bottomNeighbourIndex)) &&
                 (forceSwitch || randomVariable1 < integerProbabilityP)) ||
                 // If we get the pattern {10, 10} we have a hole:
-                ((!getGridDx(centerIndex) && getGridDx(rightNeighbourIndex)) && 
+                ((!getGridDx(centerIndex) && getGridDx(rightNeighbourIndex)) &&
                 (!getGridDy(centerIndex) && getGridDy(bottomNeighbourIndex)) &&
                 (forceSwitch || randomVariable2 < integerProbabilityQ))
             )
@@ -243,14 +243,14 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public static uint[] TestPrngWrapper(this KpzKernelsInterface kernels)
         {
-            uint[] numbers = new uint[KpzKernels.GridWidth*KpzKernels.GridHeight];
+            uint[] numbers = new uint[KpzKernels.GridWidth * KpzKernels.GridHeight];
             SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
 
             CopyParametersToMemory(sm, false, 0x5289a3b89ac5f211, 0x5289a3b89ac5f211, 0);
 
             kernels.TestPrng(sm);
 
-            for (int i = 0; i < KpzKernels.GridWidth*KpzKernels.GridHeight; i++)
+            for (int i = 0; i < KpzKernels.GridWidth * KpzKernels.GridHeight; i++)
             {
                 numbers[i] = sm.ReadUInt32(i);
             }
@@ -266,14 +266,14 @@ namespace Hast.Samples.Kpz
         /// <param name="randomSeed1"></param>
         /// <param name="randomSeed2"></param>
         /// <param name="numberOfIterations"></param>
-        public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1, 
+        public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1,
             ulong randomSeed2, uint numberOfIterations)
         {
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1&0xFFFFFFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates+1, (uint)((randomSeed1>>32)&0xFFFFFFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates+2, (uint)(randomSeed2&0xFFFFFFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates+3, (uint)((randomSeed2>>32)&0xFFFFFFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, (testMode)?1U:0U);
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 2, (uint)(randomSeed2 & 0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)((randomSeed2 >> 32) & 0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, (testMode) ? 1U : 0U);
             memoryDst.WriteUInt32(KpzKernels.MemIndexNumberOfIterations, numberOfIterations);
         }
 
@@ -304,7 +304,7 @@ namespace Hast.Samples.Kpz
         /// <param name="randomSeed1">is a random seed for the algorithm.</param>
         /// <param name="randomSeed2">is a random seed for the algorithm.</param>
         /// <param name="numberOfIterations">is the number of iterations to perform.</param>
-        public static void DoIterationsWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga, 
+        public static void DoIterationsWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga,
             bool testMode, ulong randomSeed1, ulong randomSeed2, uint numberOfIterations)
         {
             SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);

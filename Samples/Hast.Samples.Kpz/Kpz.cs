@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Hast.Samples.Kpz
 {
 
-    public enum  KpzTarget
+    public enum KpzTarget
     {
         Cpu, Fpga, FpgaSimulation, FpgaG, FpgaSimulationG, PrngTest
     }
@@ -45,7 +45,7 @@ namespace Hast.Samples.Kpz
 
         public uint SerializeToUInt32() //TODO: lehet hogy ennek megis structnak kellene lennie, metodusok nelkul?
         {
-            return ((dx)?1U:0)|((dy)?2U:0);
+            return ((dx) ? 1U : 0) | ((dy) ? 2U : 0);
         }
 
         public static KpzNode DeserializeFromUInt32(uint value)
@@ -307,7 +307,7 @@ namespace Hast.Samples.Kpz
             if (kpzTarget == KpzTarget.FpgaG || kpzTarget == KpzTarget.FpgaSimulationG)
                 KernelsG.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed, _randomSeedEnable, numberOfIterations);
             else
-                Kernels.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed, false, 
+                Kernels.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed, false,
                     random.NextUInt64(), random.NextUInt64(), numberOfIterations);
             if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", grid, gridBefore);
             //HastlayerGridAlreadyPushed = true; //If commented out, push always
