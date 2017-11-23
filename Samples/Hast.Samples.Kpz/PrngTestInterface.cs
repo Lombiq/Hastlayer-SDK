@@ -12,6 +12,8 @@ namespace Hast.Samples.Kpz
     /// <summary>
     /// This class was used to debug the problems we experienced while trying to get the MWC64X PRNG working 
     /// on the hardware. It is the class used when selecting "PRNG test (FPGA)" on the GUI.
+    /// I'm not replacing it with Hast.Algorithms.PrngMWC64X on reason, to allow us to play with PRNG implementations 
+    /// later (without screwing up other algorithms.)
     /// </summary>
     public class PrngTestInterface
     {
