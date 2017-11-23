@@ -262,7 +262,7 @@ namespace Hast.Samples.Kpz
             checkVerifyOutput.Enabled = 
                 comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4 || comboTarget.SelectedIndex == 5;
             if (comboTarget.SelectedIndex == 5) checkVerifyOutput.Checked = true;
-            if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex < 2)
+            if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex <= 2)
             {
                 nudTableWidth.Value = nudTableHeight.Value = 8;
                 nudIterations.Value = 1;
