@@ -202,8 +202,7 @@ namespace Hast.Samples.Kpz
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
-                Task<IHastlayer> hastlayerInitializationTask = _kpz.InitializeHastlayer(_verifyOutput, _randomSeedEnable);
-                hastlayerInitializationTask.Wait();
+                var hastlayerInitializationTask = _kpz.InitializeHastlayer(_verifyOutput, _randomSeedEnable);
                 hastlayer = hastlayerInitializationTask.Result;
             }
 
