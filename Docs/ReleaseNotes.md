@@ -4,6 +4,7 @@
 
 ## vNext
 
+- Adding sample with an implementation of the 3D [Kardar-Parisi-Zhang](https://en.wikipedia.org/wiki/Kardar%E2%80%93Parisi%E2%80%93Zhang_equation) surface growth simulation algorithm. Made in collaboration with the [Wigner Research Centre for Physics](http://wigner.mta.hu/en/) to test against an existing GPU implementation (testing is upcoming).
 - Fixing behavior of binary operator expressions were the operands were cast.
 - Fixing exception when using public fields in certain cases.
 - More helpful exception when a type was not found.
