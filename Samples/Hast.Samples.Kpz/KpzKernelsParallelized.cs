@@ -129,7 +129,7 @@ namespace Hast.Samples.Kpz
                         // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex 
                         // (and the random added value)
                         int localGridIndex = parallelTaskIndex + ScheduleIndex * ParallelTasks;
-                        //The X and Y coordinate within the small table (local grid):
+                        // The X and Y coordinate within the small table (local grid):
                         int partitionX = localGridIndex % LocalGridPartitions;
                         int partitionY = localGridIndex / LocalGridPartitions;
                         // The X and Y coordinate within the big table (grid):
@@ -161,21 +161,21 @@ namespace Hast.Samples.Kpz
                             {
                                 // ==== <Now randomly switch four cells> ====
 
-                                //Generating two random numbers:
+                                // Generating two random numbers:
                                 uint taskRandomNumber1 = taskLocal.prng1.NextUInt32();
                                 uint taskRandomNumber2 = taskLocal.prng2.NextUInt32();
 
-                                //The existence of var-1 in code is a good indicator of that it is assumed to be 2^N:
+                                // The existence of var-1 in code is a good indicator of that it is assumed to be 2^N:
                                 int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1));
                                 int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
                                 int pokeCenterIndex = pokeCenterX + pokeCenterY * LocalGridSize;
                                 uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
                                 uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
 
-                                //get neighbour indexes:
+                                // get neighbour indexes:
                                 int rightNeighbourIndex;
                                 int bottomNeighbourIndex;
-                                //We skip if neighbours would fall out of the local grid:
+                                // We skip if neighbours would fall out of the local grid:
                                 if (pokeCenterX >= LocalGridSize - 1 || pokeCenterY >= LocalGridSize - 1) continue;
                                 int rightNeighbourX = pokeCenterX + 1;
                                 int rightNeighbourY = pokeCenterY;
@@ -268,11 +268,11 @@ namespace Hast.Samples.Kpz
         public static void DoIterationsWrapper(this KpzKernelsParallelizedInterface kernels, KpzNode[,] hostGrid, bool pushToFpga,
             bool randomSeedEnable, uint numberOfIterations)
         {
-            //The following numbers will be used when random seed is disabled in GUI. 
-            //This makes the result more preictable while debugging.
-            //Add more random numbers manually if you get an out of bounds exception on notRandomSeed. 
-            //This might happen if you increase KpzKernelsGInterface.ParallelTasks.
-            //You can generate these with the following python expression:
+            // The following numbers will be used when random seed is disabled in GUI. 
+            // This makes the result more predictable while debugging.
+            // Add more random numbers manually if you get an out of bounds exception on notRandomSeed. 
+            // This might happen if you increase KpzKernelsGInterface.ParallelTasks.
+            // You can generate these with the following python expression:
             //    print [random.randint(-2147483648, 2147483647) for x in range(32)]
             var notRandomSeed = new int[]{
                 -2122284207, -805426534, -296351199, 1082586369, -864339821,
