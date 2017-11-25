@@ -2,12 +2,16 @@
 
 
 
-## vNext
+Note that the hardware framework projects have their own release cycle and release notes.
+
+
+## 1.0.7, 25.11.2017
 
 - Adding sample with an implementation of the 3D [Kardar-Parisi-Zhang](https://en.wikipedia.org/wiki/Kardar%E2%80%93Parisi%E2%80%93Zhang_equation) surface growth simulation algorithm. Made in collaboration with the [Wigner Research Centre for Physics](http://wigner.mta.hu/en/) to test against an existing GPU implementation (testing is upcoming).
 - Fixing behavior of binary operator expressions were the operands were cast.
 - Fixing exception when using public fields in certain cases.
 - More helpful exception when a type was not found.
+- The [Hastlayer Hardware Framework - Xilinx project](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Xilinx) got some scripts to automate updating the Vivado project with a new generated hardware design and to program the FPGA and launch the Xilinx SDK. From now on the project has a release cycle independent of the SDK.
 
 
 ## 1.0.6, 21.10.2017
