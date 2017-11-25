@@ -3,32 +3,27 @@
 
 namespace Hast.Samples.Kpz
 {
-
     public enum KpzTarget
     {
         Cpu, Fpga, FpgaSimulation, FpgaG, FpgaSimulationG, PrngTest
     }
 
+
     public static class KpzTargetExtensions
     {
-        //AFAIK C# does not have extension properties yet. 
-        public static bool HastlayerSimulation(this KpzTarget target)
-        {
-            return target == KpzTarget.FpgaSimulation || target == KpzTarget.FpgaSimulationG;
-        }
-        public static bool HastlayerOnFpga(this KpzTarget target)
-        {
-            return target == KpzTarget.Fpga || target == KpzTarget.FpgaG || target == KpzTarget.PrngTest;
-        }
-        public static bool HastlayerGAlgorithm(this KpzTarget target)
-        {
-            return target == KpzTarget.FpgaG || target == KpzTarget.FpgaSimulationG;
-        }
-        public static bool HastlayerPlainAlgorithm(this KpzTarget target)
-        {
-            return target == KpzTarget.Fpga || target == KpzTarget.FpgaSimulation;
-        }
+        public static bool HastlayerSimulation(this KpzTarget target) =>
+            target == KpzTarget.FpgaSimulation || target == KpzTarget.FpgaSimulationG;
+
+        public static bool HastlayerOnFpga(this KpzTarget target) =>
+            target == KpzTarget.Fpga || target == KpzTarget.FpgaG || target == KpzTarget.PrngTest;
+
+        public static bool HastlayerGAlgorithm(this KpzTarget target) => 
+            target == KpzTarget.FpgaG || target == KpzTarget.FpgaSimulationG;
+
+        public static bool HastlayerPlainAlgorithm(this KpzTarget target) =>
+            target == KpzTarget.Fpga || target == KpzTarget.FpgaSimulation;
     }
+
 
     /// <summary>
     /// This struct is used to built the grid that the KPZ algorithm works on.
@@ -38,6 +33,7 @@ namespace Hast.Samples.Kpz
     {
         public bool dx; // Right
         public bool dy; // Bottom
+
 
         public uint SerializeToUInt32() //TODO: lehet hogy ennek megis structnak kellene lennie, metodusok nelkul?
         {
@@ -82,20 +78,29 @@ namespace Hast.Samples.Kpz
     /// </summary>
     public partial class Kpz
     {
-        /// <summary>It returns the width of the grid.</summary>
-        public int gridWidth { get { return grid.GetLength(0); } }
-        /// <summary>It returns the height of the grid.</summary>
-        public int gridHeight { get { return grid.GetLength(1); } }
-        /// <summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>
-        public KpzNode[,] grid;
         /// <summary>The probability of pyramid to hole change.</summary>
-        private double probabilityP = 0.5d;
+        private double _probabilityP = 0.5d;
+
         /// <summary>The probability of hole to pyramid change.</summary>
-        private double probabilityQ = 0.5d;
+        private double _probabilityQ = 0.5d;
+
         /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
-        private Random random = new Random();
+        private Random _random = new Random();
+
         /// <summary>See <see cref="StateLogger" /></summary>
-        private bool enableStateLogger = false;
+        private bool _enableStateLogger = false;
+
+        private KpzTarget _kpzTarget = KpzTarget.Cpu;
+
+        /// <summary>It returns the width of the grid.</summary>
+        public int GridWidth { get { return Grid.GetLength(0); } }
+
+        /// <summary>It returns the height of the grid.</summary>
+        public int GridHeight { get { return Grid.GetLength(1); } }
+
+        /// <summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>
+        public KpzNode[,] Grid;
+
         /// <summary>
         /// The <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
         /// given steps during its execution. This object can be later passed on to <see cref="InspectForm" />
@@ -106,12 +111,11 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public KpzStateLogger StateLogger;
 
-        private KpzTarget kpzTarget = KpzTarget.Cpu;
 
         /// <summary>
         /// The constructor initializes the parameters of <see cref="Kpz" />, see:
-        /// <see cref="gridWidth" />, <see cref="gridHeight" />,
-        /// <see cref="probabilityP" />, <see cref="probabilityQ" />,
+        /// <see cref="GridWidth" />, <see cref="GridHeight" />,
+        /// <see cref="_probabilityP" />, <see cref="_probabilityQ" />,
         /// <see cref="StateLogger" />.
         /// </summary>
         public Kpz
@@ -124,27 +128,29 @@ namespace Hast.Samples.Kpz
             KpzTarget target
         )
         {
-            grid = new KpzNode[newGridWidth, newGridHeight];
-            this.probabilityP = probabilityP;
-            this.probabilityQ = probabilityQ;
-            this.enableStateLogger = enableStateLogger;
-            if (this.enableStateLogger) StateLogger = new KpzStateLogger();
-            kpzTarget = target;
+            Grid = new KpzNode[newGridWidth, newGridHeight];
+            _probabilityP = probabilityP;
+            _probabilityQ = probabilityQ;
+            _enableStateLogger = enableStateLogger;
+            if (_enableStateLogger) StateLogger = new KpzStateLogger();
+            _kpzTarget = target;
         }
 
-        /// <summary>It fills the <see cref="grid" /> with random data.</summary>
+
+        /// <summary>It fills the <see cref="Grid" /> with random data.</summary>
         public void RandomizeGrid()
         {
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < GridWidth; x++)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int y = 0; y < GridHeight; y++)
                 {
-                    grid[x, y] = new KpzNode();
-                    grid[x, y].dx = random.Next(0, 2) == 0;
-                    grid[x, y].dy = random.Next(0, 2) == 0;
+                    Grid[x, y] = new KpzNode();
+                    Grid[x, y].dx = _random.Next(0, 2) == 0;
+                    Grid[x, y].dy = _random.Next(0, 2) == 0;
                 }
             }
-            if (enableStateLogger) StateLogger.AddKpzAction("RandomizeGrid", grid);
+
+            if (_enableStateLogger) StateLogger.AddKpzAction("RandomizeGrid", Grid);
         }
 
         /// <summary>
@@ -152,16 +158,16 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void InitializeGrid()
         {
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < GridWidth; x++)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int y = 0; y < GridHeight; y++)
                 {
-                    grid[x, y] = new KpzNode();
-                    grid[x, y].dx = (bool)((x & 1) != 0);
-                    grid[x, y].dy = (bool)((y & 1) != 0);
+                    Grid[x, y] = new KpzNode();
+                    Grid[x, y].dx = (bool)((x & 1) != 0);
+                    Grid[x, y].dy = (bool)((y & 1) != 0);
                 }
             }
-            if (enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", grid);
+            if (_enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", Grid);
         }
 
         /// <summary>
@@ -169,17 +175,14 @@ namespace Hast.Samples.Kpz
         /// It converts <see cref="KpzNode.dx" /> and <see cref="KpzNode.dy" /> boolean values to +1 and -1 integer
         /// values.
         /// </summary>
-        static int Bool2Delta(bool what)
-        {
-            return (what) ? 1 : -1;
-        }
+        static int Bool2Delta(bool what) => (what) ? 1 : -1;
 
         /// <summary>
-        /// It generates a heightmap from the <see cref="grid" />.
+        /// It generates a heightmap from the <see cref="Grid" />.
         /// </summary>
         /// <param name="mean"> output is the mean of the heightmap to be used in statistic calculations later.</param>
         /// <param name="periodicityValid">
-        /// output is true if the periodicity of <see cref="grid" /> is correct at the boundaries.
+        /// output is true if the periodicity of <see cref="Grid" /> is correct at the boundaries.
         /// </param>
         /// <param name="periodicityInvalidXCount">
         /// output is the number of periodicity errors counted at the borders in the X direction
@@ -199,38 +202,43 @@ namespace Hast.Samples.Kpz
         )
         {
             const bool doVerboseLoggingToConsole = true;
-            int[,] heightMap = new int[gridWidth, gridHeight];
+            int[,] heightMap = new int[GridWidth, GridHeight];
             int heightNow = 0;
             mean = 0;
             periodicityValid = true;
             periodicityInvalidXCount = periodicityInvalidYCount = 0;
-            for (int y = 0; y < gridHeight; y++)
+
+            for (int y = 0; y < GridHeight; y++)
             {
-                for (int x = 0; x < gridWidth; x++)
+                for (int x = 0; x < GridWidth; x++)
                 {
-                    heightNow += Bool2Delta(grid[(x + 1) % gridWidth, y].dx);
+                    heightNow += Bool2Delta(Grid[(x + 1) % GridWidth, y].dx);
                     heightMap[x, y] = heightNow;
                     mean += heightNow;
                 }
-                if (heightNow + Bool2Delta(grid[1, y].dx) != heightMap[0, y])
+                if (heightNow + Bool2Delta(Grid[1, y].dx) != heightMap[0, y])
                 {
                     periodicityValid = false;
                     periodicityInvalidXCount++;
                     if (doVerboseLoggingToConsole)
                         Console.WriteLine(String.Format("periodicityInvalidX at line {0}", y));
                 }
-                heightNow += Bool2Delta(grid[0, (y + 1) % gridHeight].dy);
+                heightNow += Bool2Delta(Grid[0, (y + 1) % GridHeight].dy);
             }
-            if (heightMap[0, gridHeight - 1] + Bool2Delta(grid[0, 0].dy) != heightMap[0, 0])
+
+            if (heightMap[0, GridHeight - 1] + Bool2Delta(Grid[0, 0].dy) != heightMap[0, 0])
             {
                 periodicityValid = false;
                 periodicityInvalidYCount++;
                 if (doVerboseLoggingToConsole)
-                    Console.WriteLine(String.Format("periodicityInvalidY {0} + {1} != {2}", heightMap[0, gridHeight - 1],
-                        Bool2Delta(grid[0, 0].dy), heightMap[0, 0]));
+                    Console.WriteLine(String.Format("periodicityInvalidY {0} + {1} != {2}", heightMap[0, GridHeight - 1],
+                        Bool2Delta(Grid[0, 0].dy), heightMap[0, 0]));
             }
-            if (enableStateLogger) StateLogger.AddKpzAction("GenerateHeightMap", heightMap);
-            mean /= gridWidth * gridHeight;
+
+            if (_enableStateLogger) StateLogger.AddKpzAction("GenerateHeightMap", heightMap);
+
+            mean /= GridWidth * GridHeight;
+
             return heightMap;
         }
 
@@ -243,40 +251,45 @@ namespace Hast.Samples.Kpz
         public double HeightMapStandardDeviation(int[,] inputHeightMap, double mean)
         {
             double variance = 0;
-            for (int y = 0; y < gridHeight; y++)
+
+            for (int y = 0; y < GridHeight; y++)
             {
-                for (int x = 0; x < gridWidth; x++)
+                for (int x = 0; x < GridWidth; x++)
                 {
                     variance += Math.Pow(inputHeightMap[x, y] - mean, 2);
                 }
             }
-            variance /= gridWidth * gridHeight - 1;
+
+            variance /= GridWidth * GridHeight - 1;
             double standardDeviation = Math.Sqrt(variance);
-            if (enableStateLogger)
+
+            if (_enableStateLogger)
                 StateLogger.AddKpzAction(String.Format("HeightMapStandardDeviation: {0}", standardDeviation));
+
             return standardDeviation;
         }
 
         /// <summary>
-        /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="grid" />, and randomly switch
-        /// between pyramid and hole, based on <see cref="probabilityP" /> and <see cref="probabilityQ" /> parameters.
+        /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="Grid" />, and randomly switch
+        /// between pyramid and hole, based on <see cref="_probabilityP" /> and <see cref="_probabilityQ" /> parameters.
         /// </summary>
         /// <param name="p">
-        /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="grid" />.
+        /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="Grid" />.
         /// </param>
         private void RandomlySwitchFourCells(KpzNode[,] grid, KpzCoords p)
         {
             var neighbours = GetNeighbours(grid, p);
             var currentPoint = grid[p.x, p.y];
             bool changedGrid = false;
+
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
                 ((currentPoint.dx && !neighbours.nx.dx) && (currentPoint.dy && !neighbours.ny.dy) &&
-                (random.NextDouble() < probabilityP)) ||
+                (_random.NextDouble() < _probabilityP)) ||
                 // If we get the pattern {10, 10} we have a hole:
                 ((!currentPoint.dx && neighbours.nx.dx) && (!currentPoint.dy && neighbours.ny.dy) &&
-                (random.NextDouble() < probabilityQ))
+                (_random.NextDouble() < _probabilityQ))
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
@@ -286,88 +299,101 @@ namespace Hast.Samples.Kpz
                 neighbours.ny.dy = !neighbours.ny.dy;
                 changedGrid = true;
             }
-            if (enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
+
+            if (_enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
         }
 
         bool HastlayerGridAlreadyPushed = false;
 
 
         /// <summary>
-        /// Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
+        /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// </summary>
         public void DoHastIterations(uint numberOfIterations)
         {
-            var numberOfStepsInIteration = gridWidth * gridHeight;
-            KpzNode[,] gridBefore = (KpzNode[,])grid.Clone();
-            if (enableStateLogger) StateLogger.NewKpzIteration();
-            if (kpzTarget == KpzTarget.FpgaG || kpzTarget == KpzTarget.FpgaSimulationG)
-                KernelsG.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed, _randomSeedEnable, numberOfIterations);
+            var numberOfStepsInIteration = GridWidth * GridHeight;
+            KpzNode[,] gridBefore = (KpzNode[,])Grid.Clone();
+
+            if (_enableStateLogger) StateLogger.NewKpzIteration();
+
+            if (_kpzTarget == KpzTarget.FpgaG || _kpzTarget == KpzTarget.FpgaSimulationG)
+                KernelsG.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, _randomSeedEnable, numberOfIterations);
             else
-                Kernels.DoIterationsWrapper(grid, !HastlayerGridAlreadyPushed, false,
-                    random.NextUInt64(), random.NextUInt64(), numberOfIterations);
-            if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", grid, gridBefore);
+                Kernels.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, false,
+                    _random.NextUInt64(), _random.NextUInt64(), numberOfIterations);
+
+            if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
             //HastlayerGridAlreadyPushed = true; //If commented out, push always
         }
 
         /// <summary>
-        /// Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
+        /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// It allows us to debug the steps of the algorithms one by one.
         /// </summary>
         public void DoHastIterationDebug()
         {
-            var numberOfStepsInIteration = gridWidth * gridHeight;
-            KpzNode[,] gridBefore = (KpzNode[,])grid.Clone();
-            if (enableStateLogger) StateLogger.NewKpzIteration();
+            var numberOfStepsInIteration = GridWidth * GridHeight;
+            KpzNode[,] gridBefore = (KpzNode[,])Grid.Clone();
+
+            if (_enableStateLogger) StateLogger.NewKpzIteration();
+
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                Kernels.DoIterationsWrapper(grid, true, true, random.NextUInt64(), random.NextUInt64(), 1);
-                if (enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", grid, gridBefore);
+                Kernels.DoIterationsWrapper(Grid, true, true, _random.NextUInt64(), _random.NextUInt64(), 1);
+                if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", Grid, gridBefore);
             }
         }
 
         /// <summary>
-        /// Runs an iteration of the KPZ algorithm (with <see cref="gridWidth"/> × <see cref="gridHeight"/> steps).
+        /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// </summary>
         public void DoIteration()
         {
-            var numberOfStepsInIteration = gridWidth * gridHeight;
-            if (enableStateLogger) StateLogger.NewKpzIteration();
+            var numberOfStepsInIteration = GridWidth * GridHeight;
+
+            if (_enableStateLogger) StateLogger.NewKpzIteration();
+
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
                 // We randomly choose a point on the grid.
                 // If there is a pyramid or hole, we randomly switch them.
-                var randomPoint = new KpzCoords { x = random.Next(0, gridWidth), y = random.Next(0, gridHeight) };
-                RandomlySwitchFourCells(grid, randomPoint);
+                var randomPoint = new KpzCoords { x = _random.Next(0, GridWidth), y = _random.Next(0, GridHeight) };
+                RandomlySwitchFourCells(Grid, randomPoint);
             }
         }
 
         /// <summary>
         /// Gets the right and bottom neighbours of the point given with the coordinates <see cref="p" />
-        /// in the <see cref="grid" />.
+        /// in the <see cref="Grid" />.
         /// </summary>
         private KpzNeighbours GetNeighbours(KpzNode[,] grid, KpzCoords p)
         {
             KpzNeighbours toReturn;
+
             toReturn.nxCoords = new KpzCoords
             {
-                x = (p.x < gridWidth - 1) ? p.x + 1 : 0,
+                x = (p.x < GridWidth - 1) ? p.x + 1 : 0,
                 y = p.y
             };
+
             toReturn.nyCoords = new KpzCoords
             {
                 x = p.x,
-                y = (p.y < gridHeight - 1) ? p.y + 1 : 0
+                y = (p.y < GridHeight - 1) ? p.y + 1 : 0
             };
+
             toReturn.nx = grid[toReturn.nxCoords.x, toReturn.nxCoords.y];
             toReturn.ny = grid[toReturn.nyCoords.x, toReturn.nyCoords.y];
+
             return toReturn;
         }
     }
 
+
     /// <summary>
     /// This class extends the built-in Random class with convenience functions.
     /// </summary>
-    static class RandomExtensions
+    internal static class RandomExtensions
     {
         public static ulong NextUInt64(this Random random)
         {

@@ -3,7 +3,6 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.Kpz
 {
-
     /// <summary>
     /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM
     /// or LUT RAM of the FPGA, thus it can only handle small table sizes.
@@ -16,7 +15,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public virtual void DoIterations(SimpleMemory memory)
         {
-            KpzKernels kernels = new KpzKernels();
+            var kernels = new KpzKernels();
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
             kernels.InitializeParametersFromMemory(memory);
             //assume that GridWidth and GridHeight are 2^N
@@ -30,6 +29,7 @@ namespace Hast.Samples.Kpz
                     kernels.RandomlySwitchFourCells(kernels.TestMode);
                 }
             }
+
             kernels.CopyToSimpleMemoryFromRawGrid(memory);
         }
 
@@ -48,15 +48,16 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void TestPrng(SimpleMemory memory)
         {
-            KpzKernels kernels = new KpzKernels();
+            var kernels = new KpzKernels();
             kernels.InitializeParametersFromMemory(memory);
             var numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                memory.WriteUInt32(i, kernels.prng1.NextUInt32());
+                memory.WriteUInt32(i, kernels.Prng1.NextUInt32());
             }
         }
     }
+
 
     /// <summary>
     /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM
@@ -66,25 +67,26 @@ namespace Hast.Samples.Kpz
     public class KpzKernels
     {
         // ==== <CONFIGURABLE PARAMETERS> ====
-        //GridWidth and GridHeight should be 2^n
+        // GridWidth and GridHeight should be 2^n
         public const int GridWidth = 8;
         public const int GridHeight = 8;
-        //The probability of turning a pyramid into a hole (integerProbabilityP),
-        //or a hole into a pyramid (integerProbabilityQ).
-        uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
+        // The probability of turning a pyramid into a hole (integerProbabilityP),
+        // or a hole into a pyramid (integerProbabilityQ).
+        public const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
         // ==== </CONFIGURABLE PARAMETERS> ====
-
-        uint[] gridRaw = new uint[GridWidth * GridHeight];
-        public bool TestMode = false;
-        public uint NumberOfIterations = 1;
-
-        public PrngMWC64X prng1, prng2;
 
         public const int MemIndexNumberOfIterations = 0;
         public const int MemIndexStepMode = 1;
         public const int MemIndexRandomStates = 2;
         public const int MemIndexGrid = 6;
         public const int SizeOfSimpleMemory = GridWidth * GridHeight + 6;
+
+        private uint[] _gridRaw = new uint[GridWidth * GridHeight];
+
+        public PrngMWC64X Prng1, Prng2;
+        public bool TestMode = false;
+        public uint NumberOfIterations = 1;
+
 
         /// <summary>
         /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at
@@ -94,57 +96,12 @@ namespace Hast.Samples.Kpz
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
 
-            prng1 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
+            Prng1 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
                 memory.ReadUInt32(MemIndexRandomStates + 1));
-            prng2 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates + 2)) << 32) |
+            Prng2 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates + 2)) << 32) |
                 memory.ReadUInt32(MemIndexRandomStates + 3));
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);
-        }
-
-        /// <summary>
-        /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for 
-        /// the item's place in the grid.
-        /// </summary>
-        private int getIndexFromXY(int x, int y)
-        {
-            return x + y * GridWidth;
-        }
-
-        /// <summary>
-        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-        /// This function returns the dx value of the <see cref="KpzNode"/> from its serialized form.
-        /// </summary>
-        private bool getGridDx(int index)
-        {
-            return (gridRaw[index] & 1) > 0;
-        }
-
-        /// <summary>
-        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-        /// This function returns the dy value of the <see cref="KpzNode"/> from its serialized form.
-        /// </summary>
-        private bool getGridDy(int index)
-        {
-            return (gridRaw[index] & 2) > 0;
-        }
-
-        /// <summary>
-        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-        /// This function sets the dx value of the <see cref="KpzNode"/> in its serialized form.
-        /// </summary>
-        private void setGridDx(int index, bool value)
-        {
-            gridRaw[index] = (gridRaw[index] & ~1U) | (value ? 1U : 0);
-        }
-
-        /// <summary>
-        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-        /// This function sets the dy value of the <see cref="KpzNode"/> in its serialized form.
-        /// </summary>
-        private void setGridDy(int index, bool value)
-        {
-            gridRaw[index] = (gridRaw[index] & ~2U) | (value ? 2U : 0);
         }
 
         /// <summary>
@@ -157,7 +114,7 @@ namespace Hast.Samples.Kpz
                 for (int x = 0; x < GridWidth; x++)
                 {
                     int index = y * GridWidth + x;
-                    memory.WriteUInt32(MemIndexGrid + index, gridRaw[index]);
+                    memory.WriteUInt32(MemIndexGrid + index, _gridRaw[index]);
                 }
             }
         }
@@ -172,7 +129,7 @@ namespace Hast.Samples.Kpz
                 for (int y = 0; y < GridHeight; y++)
                 {
                     int index = y * GridWidth + x;
-                    gridRaw[index] = memory.ReadUInt32(MemIndexGrid + index);
+                    _gridRaw[index] = memory.ReadUInt32(MemIndexGrid + index);
                 }
             }
         }
@@ -182,11 +139,11 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void RandomlySwitchFourCells(bool forceSwitch)
         {
-            uint randomNumber1 = prng1.NextUInt32();
+            uint randomNumber1 = Prng1.NextUInt32();
             var centerX = (int)(randomNumber1 & (GridWidth - 1));
             var centerY = (int)((randomNumber1 >> 16) & (GridHeight - 1));
-            int centerIndex = getIndexFromXY(centerX, centerY);
-            uint randomNumber2 = prng2.NextUInt32();
+            int centerIndex = GetIndexFromXY(centerX, centerY);
+            uint randomNumber2 = Prng2.NextUInt32();
             uint randomVariable1 = randomNumber2 & ((1 << 16) - 1);
             uint randomVariable2 = (randomNumber2 >> 16) & ((1 << 16) - 1);
             int rightNeighbourIndex;
@@ -201,23 +158,70 @@ namespace Hast.Samples.Kpz
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
-                ((getGridDx(centerIndex) && !getGridDx(rightNeighbourIndex)) &&
-                (getGridDy(centerIndex) && !getGridDy(bottomNeighbourIndex)) &&
+                ((GetGridDx(centerIndex) && !GetGridDx(rightNeighbourIndex)) &&
+                (GetGridDy(centerIndex) && !GetGridDy(bottomNeighbourIndex)) &&
                 (forceSwitch || randomVariable1 < integerProbabilityP)) ||
                 // If we get the pattern {10, 10} we have a hole:
-                ((!getGridDx(centerIndex) && getGridDx(rightNeighbourIndex)) &&
-                (!getGridDy(centerIndex) && getGridDy(bottomNeighbourIndex)) &&
+                ((!GetGridDx(centerIndex) && GetGridDx(rightNeighbourIndex)) &&
+                (!GetGridDy(centerIndex) && GetGridDy(bottomNeighbourIndex)) &&
                 (forceSwitch || randomVariable2 < integerProbabilityQ))
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
-                setGridDx(centerIndex, !getGridDx(centerIndex));
-                setGridDy(centerIndex, !getGridDy(centerIndex));
-                setGridDx(rightNeighbourIndex, !getGridDx(rightNeighbourIndex));
-                setGridDy(bottomNeighbourIndex, !getGridDy(bottomNeighbourIndex));
+                SetGridDx(centerIndex, !GetGridDx(centerIndex));
+                SetGridDy(centerIndex, !GetGridDy(centerIndex));
+                SetGridDx(rightNeighbourIndex, !GetGridDx(rightNeighbourIndex));
+                SetGridDy(bottomNeighbourIndex, !GetGridDy(bottomNeighbourIndex));
             }
         }
+
+
+        /// <summary>
+        /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for 
+        /// the item's place in the grid.
+        /// </summary>
+        private int GetIndexFromXY(int x, int y)
+        {
+            return x + y * GridWidth;
+        }
+
+        /// <summary>
+        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
+        /// This function returns the dx value of the <see cref="KpzNode"/> from its serialized form.
+        /// </summary>
+        private bool GetGridDx(int index)
+        {
+            return (_gridRaw[index] & 1) > 0;
+        }
+
+        /// <summary>
+        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
+        /// This function returns the dy value of the <see cref="KpzNode"/> from its serialized form.
+        /// </summary>
+        private bool GetGridDy(int index)
+        {
+            return (_gridRaw[index] & 2) > 0;
+        }
+
+        /// <summary>
+        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
+        /// This function sets the dx value of the <see cref="KpzNode"/> in its serialized form.
+        /// </summary>
+        private void SetGridDx(int index, bool value)
+        {
+            _gridRaw[index] = (_gridRaw[index] & ~1U) | (value ? 1U : 0);
+        }
+
+        /// <summary>
+        /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
+        /// This function sets the dy value of the <see cref="KpzNode"/> in its serialized form.
+        /// </summary>
+        private void SetGridDy(int index, bool value)
+        {
+            _gridRaw[index] = (_gridRaw[index] & ~2U) | (value ? 2U : 0);
+        }
     }
+
 
     /// <summary>
     /// These are host-side helper functions for <see cref="KpzKernels"/>.
@@ -230,7 +234,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public static uint TestAddWrapper(this KpzKernelsInterface kernels, uint a, uint b)
         {
-            SimpleMemory sm = new SimpleMemory(3);
+            var sm = new SimpleMemory(3);
             sm.WriteUInt32(0, a);
             sm.WriteUInt32(1, b);
             kernels.TestAdd(sm);
@@ -243,8 +247,8 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public static uint[] TestPrngWrapper(this KpzKernelsInterface kernels)
         {
-            uint[] numbers = new uint[KpzKernels.GridWidth * KpzKernels.GridHeight];
-            SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
+            var numbers = new uint[KpzKernels.GridWidth * KpzKernels.GridHeight];
+            var sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
 
             CopyParametersToMemory(sm, false, 0x5289a3b89ac5f211, 0x5289a3b89ac5f211, 0);
 
@@ -308,11 +312,13 @@ namespace Hast.Samples.Kpz
             bool testMode, ulong randomSeed1, ulong randomSeed2, uint numberOfIterations)
         {
             SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
+
             if (pushToFpga)
             {
                 CopyParametersToMemory(sm, testMode, randomSeed1, randomSeed2, numberOfIterations);
                 CopyFromGridToSimpleMemory(hostGrid, sm);
             }
+
             kernels.DoIterations(sm);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }

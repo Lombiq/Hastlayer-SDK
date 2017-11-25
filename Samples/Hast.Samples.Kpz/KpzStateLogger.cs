@@ -10,6 +10,7 @@ namespace Hast.Samples.Kpz
         public List<KpzAction> Actions = new List<KpzAction>();
     }
 
+
     /// <summary>
     /// A KPZ action consists of a description, the full grid or heightmap and the highlight in it.
     /// There are three typical types of KPZ actions:
@@ -31,6 +32,7 @@ namespace Hast.Samples.Kpz
         public Color HightlightColor;
     }
 
+
     /// <summary>
     /// It logs the state of the KPZ algorithm at particular steps.
     /// <note type="caution">As it stores the full KPZ grid at every step, it can use up a lot of memory.</note>
@@ -40,39 +42,16 @@ namespace Hast.Samples.Kpz
         /// <summary>The KPZ iteration list.</summary>
         public List<KpzIteration> Iterations = new List<KpzIteration>();
 
+
         /// <summary>We add an iteration when the constructor is called, so actions can be added right away.</summary>
         public KpzStateLogger()
         {
-            this.NewKpzIteration();
+            NewKpzIteration();
         }
+
 
         /// <summary>Add a new <see cref="KpzIteration" />.</summary>
-        public void NewKpzIteration()
-        {
-            Iterations.Add(new KpzIteration());
-        }
-
-        /// <summary>Make a deep copy of a heightmap (2D int array).</summary>
-        static int[,] CopyOfHeightMap(int[,] HeightMap)
-        {
-            return (int[,])HeightMap.Clone();
-        }
-
-        /// <summary>Make a deep copy of a grid (2D <see cref="KpzNode" /> array).</summary>
-        static KpzNode[,] CopyOfGrid(KpzNode[,] Grid)
-        {
-            KpzNode[,] toReturn = new KpzNode[Grid.GetLength(0), Grid.GetLength(1)];
-            for (int x = 0; x < Grid.GetLength(0); x++)
-            {
-                for (int y = 0; y < Grid.GetLength(1); y++)
-                {
-                    toReturn[x, y] = new KpzNode();
-                    toReturn[x, y].dx = Grid[x, y].dx;
-                    toReturn[x, y].dy = Grid[x, y].dy;
-                }
-            }
-            return toReturn;
-        }
+        public void NewKpzIteration() => Iterations.Add(new KpzIteration());
 
         /// <summary>
         /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration.
@@ -109,7 +88,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void AddKpzAction(string Description)
         {
-            // Adds a deep copy of the grid into the current interation
+            // Adds a deep copy of the grid into the current iteration
             Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
             {
                 Description = Description,
@@ -126,7 +105,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void AddKpzAction(string Description, KpzNode[,] Grid, KpzNode[,] GridBefore)
         {
-            List<KpzCoords> highlightedCoords = new List<KpzCoords>();
+            var highlightedCoords = new List<KpzCoords>();
 
             for (int x = 0; x < Grid.GetLength(0); x++)
             {
@@ -158,10 +137,11 @@ namespace Hast.Samples.Kpz
         public void AddKpzAction(string Description, KpzNode[,] Grid, KpzCoords Center,
             KpzNeighbours Neighbours, bool ChangedGrid)
         {
-            List<KpzCoords> highlightedCoords = new List<KpzCoords>();
+            var highlightedCoords = new List<KpzCoords>();
             highlightedCoords.Add(new KpzCoords { x = Center.x, y = Center.y });
             highlightedCoords.Add(new KpzCoords { x = Neighbours.nxCoords.x, y = Neighbours.nxCoords.y });
             highlightedCoords.Add(new KpzCoords { x = Neighbours.nyCoords.x, y = Neighbours.nyCoords.y });
+
             Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
             {
                 Description = Description,
@@ -175,7 +155,9 @@ namespace Hast.Samples.Kpz
         public void WriteToFiles(string path)
         {
             if (!path.EndsWith("\\")) path += "\\";
+
             int iterationIndex = 0;
+
             foreach (var iteration in Iterations)
             {
                 using (System.IO.StreamWriter file =
@@ -184,19 +166,42 @@ namespace Hast.Samples.Kpz
                     foreach (var action in iteration.Actions)
                     {
                         file.WriteLine(action.Description);
+
                         for (int y = 0; y < action.Grid.GetLength(1); y++)
                         {
                             string line = "";
+
                             for (int x = 0; x < action.Grid.GetLength(0); x++)
                             {
                                 line += ((action.Grid[x, y].dx) ? "1" : "0") +
                                     ((action.Grid[x, y].dy) ? "1" : "0") + " ";
                             }
+
                             file.WriteLine(line);
                         }
                     }
                 }
             }
+        }
+
+
+        /// <summary>Make a deep copy of a heightmap (2D int array).</summary>
+        private static int[,] CopyOfHeightMap(int[,] HeightMap) => (int[,])HeightMap.Clone();
+
+        /// <summary>Make a deep copy of a grid (2D <see cref="KpzNode" /> array).</summary>
+        private static KpzNode[,] CopyOfGrid(KpzNode[,] Grid)
+        {
+            KpzNode[,] toReturn = new KpzNode[Grid.GetLength(0), Grid.GetLength(1)];
+            for (int x = 0; x < Grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < Grid.GetLength(1); y++)
+                {
+                    toReturn[x, y] = new KpzNode();
+                    toReturn[x, y].dx = Grid[x, y].dx;
+                    toReturn[x, y].dy = Grid[x, y].dy;
+                }
+            }
+            return toReturn;
         }
     }
 }
