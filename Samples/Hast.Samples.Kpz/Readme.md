@@ -10,6 +10,10 @@ Jeffrey Kelling, Géza Ódor, Sibylle Gemming: *Bit-Vectorized GPU Implementatio
 
 https://arxiv.org/pdf/1606.00310.pdf
 
+## Screenshot
+
+![KPZ](screenshot.png)
+
 ## Brief, informal description of the algorithm
 
 We have a 2D grid, with 2-bit information in each node: derivatives in *x* and *y* directions.
