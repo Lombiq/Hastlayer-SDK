@@ -21,7 +21,7 @@ namespace Hast.Samples.Kpz
         public PrngTestInterface KernelsP;
 
 
-        public async Task InitializeHastlayer(bool verifyOutput, bool randomSeedEnable)
+        public async Task<IHastlayer> InitializeHastlayer(bool verifyOutput, bool randomSeedEnable)
         {
             _verifyOutput = verifyOutput;
             _randomSeedEnable = randomSeedEnable;
@@ -143,6 +143,7 @@ namespace Hast.Samples.Kpz
                 if (success) LogItFunction("TestPrng succeeded!");
                 else LogItFunction("TestPrng failed!");
             }
+            return hastlayer;
         }
     }
 }
