@@ -254,7 +254,7 @@ namespace Hast.Samples.Kpz
             }
             finally
             {
-                if (hastlayer != null) hastlayer.Dispose();
+                hastlayer?.Dispose();
             }
         }
 
