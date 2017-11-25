@@ -102,6 +102,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Readme.md" />
     <None Include="Resources\kpzinspector-simple-bar.png" />
   </ItemGroup>
   <ItemGroup>
