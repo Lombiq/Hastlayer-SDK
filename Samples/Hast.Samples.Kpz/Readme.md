@@ -42,7 +42,7 @@ We repeat this process N times to complete a single iteration, where N is the nu
 
 * `probabilityP` is the probability of changing a hole into a pyramid.
 * `probabilityQ` is the probability of changing a pyramid into a hole.
-* The also need to specify the number of iterations.
+* You also need to specify the number of iterations.
 
 Some parameters of the algorithms can only be set in the code, in `KpzKernels.cs` and `KpzKernelsParallelized.cs`.
 
