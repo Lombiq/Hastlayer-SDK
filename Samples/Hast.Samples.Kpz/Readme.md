@@ -1,6 +1,9 @@
-# KPZ algorithm sample
+# Hastlayer KPZ algorithm sample
+
+
 
 This is an FPGA implementation of the 3D [Kardar-Parisi-Zhang](https://en.wikipedia.org/wiki/Kardar%E2%80%93Parisi%E2%80%93Zhang_equation) surface growth simulation algorithm. Made in collaboration with the [Wigner Research Centre for Physics](http://wigner.mta.hu/en/) to test against an existing GPU implementation (testing is upcoming).
+
 
 ## Related papers
 
@@ -10,9 +13,11 @@ Jeffrey Kelling, Géza Ódor, Sibylle Gemming: *Bit-Vectorized GPU Implementatio
 
 https://arxiv.org/pdf/1606.00310.pdf
 
+
 ## Screenshot
 
 ![KPZ](screenshot.png)
+
 
 ## Brief, informal description of the algorithm
 
@@ -38,6 +43,7 @@ Periodic boundary conditions are applied on all edges when looking for these pat
 
 We repeat this process N times to complete a single iteration, where N is the number of nodes in the grid.
 
+
 ## Parameters and output
 
 * `probabilityP` is the probability of changing a hole into a pyramid.
@@ -49,6 +55,7 @@ Some parameters of the algorithms can only be set in the code, in `KpzKernels.cs
 The output of the algorithm is an *i-S* graph, where *i* is the number of iterations, and *S* is the roughness of the surface (the standard deviation of heights of points on the surface). 
 
 The graph is expected to show a line (on logarithmic axes), unless the size of the grid is very low.
+
 
 ## Implementations 
 
