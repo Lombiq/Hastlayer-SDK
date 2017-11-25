@@ -42,7 +42,7 @@ We repeat this process N times to complete a single iteration, where N is the nu
 
 Some parameters of the algorithms can only be set in the code, in `KpzKernels.cs` and `KpzKernelsParallelized.cs`.
 
-The output of the algorithm is an *i-S* graph, where *i* is the number of iterations, and *S* is the roughness of the surface (the square root of the variance of heights of points on the surface). 
+The output of the algorithm is an *i-S* graph, where *i* is the number of iterations, and *S* is the roughness of the surface (the standard deviation of heights of points on the surface). 
 
 The graph is expected to show a line (on logarithmic axes), unless the size of the grid is very low.
 
