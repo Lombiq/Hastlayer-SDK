@@ -9,24 +9,27 @@ namespace Hast.Samples.Kpz
     /// This form allows us to inspect the KPZ algorithm step by step.
     /// It relies heavily on the <see cref="KpzStateLogger"/> class.
     /// For large grids, it does not display the whole grid (due to speed limitations of <see cref="DataGridView"/>)
-    /// only a part of it, which can be configured with <see cref="maxGridDisplayWidth"/> and 
-    /// <see cref="maxGridDisplayHeight"/>.
+    /// only a part of it, which can be configured with <see cref="MaxGridDisplayWidth"/> and 
+    /// <see cref="MaxGridDisplayHeight"/>.
     /// </summary>
     public partial class InspectForm : Form
     {
+        const int MaxGridDisplayWidth = 128;
+        const int MaxGridDisplayHeight = 128;
+
         KpzStateLogger _stateLogger;
-        const int maxGridDisplayWidth = 128;
-        const int maxGridDisplayHeight = 128;
+
 
         /// <summary>
-        /// When the form is loaded, <see cref="listIterations"/> is initialized with the interations available in
+        /// When the form is loaded, <see cref="listIterations"/> is initialized with the iterations available in
         /// <see cref="_stateLogger"/>.
         /// </summary>
         /// <param name="StateLogger">is the data source to be displayed on the form.</param>
         public InspectForm(KpzStateLogger StateLogger)
         {
             InitializeComponent();
-            this._stateLogger = StateLogger;
+            _stateLogger = StateLogger;
+
             for (int i = 0; i < _stateLogger.Iterations.Count; i++)
             {
                 listIterations.Items.Add(i);
@@ -41,16 +44,19 @@ namespace Hast.Samples.Kpz
         private void DgvShowIntArray(int[,] arr)
         {
             dgv.Rows.Clear();
-            int gridDisplayWidth = Math.Min(maxGridDisplayWidth, arr.GetLength(0));
-            int gridDisplayHeight = Math.Min(maxGridDisplayHeight, arr.GetLength(1));
+            int gridDisplayWidth = Math.Min(MaxGridDisplayWidth, arr.GetLength(0));
+            int gridDisplayHeight = Math.Min(MaxGridDisplayHeight, arr.GetLength(1));
             dgv.ColumnCount = gridDisplayWidth;
+
             for (int y = 0; y < gridDisplayHeight; y++)
             {
                 var dgvRow = new DataGridViewRow();
+
                 for (int x = 0; x < gridDisplayWidth; x++)
                 {
                     dgvRow.Cells.Add(new DataGridViewTextBoxCell() { Value = arr[x, y] });
                 }
+
                 dgv.Rows.Add(dgvRow);
             }
         }
@@ -64,12 +70,14 @@ namespace Hast.Samples.Kpz
         private void DgvShowKpzNodeArray(KpzNode[,] arr)
         {
             dgv.Rows.Clear();
-            int gridDisplayWidth = Math.Min(maxGridDisplayWidth, arr.GetLength(0));
-            int gridDisplayHeight = Math.Min(maxGridDisplayHeight, arr.GetLength(1));
+            int gridDisplayWidth = Math.Min(MaxGridDisplayWidth, arr.GetLength(0));
+            int gridDisplayHeight = Math.Min(MaxGridDisplayHeight, arr.GetLength(1));
             dgv.ColumnCount = gridDisplayWidth;
+
             for (int y = 0; y < gridDisplayHeight; y++)
             {
                 var dgvRow = new DataGridViewRow();
+
                 for (int x = 0; x < gridDisplayWidth; x++)
                 {
                     dgvRow.Cells.Add(new DataGridViewTextBoxCell()
@@ -77,6 +85,7 @@ namespace Hast.Samples.Kpz
                         Value = String.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0")
                     });
                 }
+
                 dgv.Rows.Add(dgvRow);
             }
         }
@@ -123,6 +132,7 @@ namespace Hast.Samples.Kpz
                 KpzAction action = _stateLogger
                     .Iterations[listIterations.SelectedIndex]
                     .Actions[listActions.SelectedIndex];
+
                 if (action.Grid.GetLength(0) > 0)
                 {
                     DgvShowKpzNodeArray(action.Grid);
@@ -135,6 +145,7 @@ namespace Hast.Samples.Kpz
                 {
                     dgv.Rows.Clear();
                 }
+
                 if (action.HighlightedCoords.Count > 0)
                 {
                     DgvAddHighlight(action.HighlightedCoords, action.HightlightColor);

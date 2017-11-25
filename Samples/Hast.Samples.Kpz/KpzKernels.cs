@@ -70,9 +70,9 @@ namespace Hast.Samples.Kpz
         // GridWidth and GridHeight should be 2^n
         public const int GridWidth = 8;
         public const int GridHeight = 8;
-        // The probability of turning a pyramid into a hole (integerProbabilityP),
-        // or a hole into a pyramid (integerProbabilityQ).
-        public const uint integerProbabilityP = 32767, integerProbabilityQ = 32767;
+        // The probability of turning a pyramid into a hole (IntegerProbabilityP),
+        // or a hole into a pyramid (IntegerProbabilityQ).
+        public const uint IntegerProbabilityP = 32767, IntegerProbabilityQ = 32767;
         // ==== </CONFIGURABLE PARAMETERS> ====
 
         public const int MemIndexNumberOfIterations = 0;
@@ -160,11 +160,11 @@ namespace Hast.Samples.Kpz
                 // If we get the pattern {01, 01} we have a pyramid:
                 ((GetGridDx(centerIndex) && !GetGridDx(rightNeighbourIndex)) &&
                 (GetGridDy(centerIndex) && !GetGridDy(bottomNeighbourIndex)) &&
-                (forceSwitch || randomVariable1 < integerProbabilityP)) ||
+                (forceSwitch || randomVariable1 < IntegerProbabilityP)) ||
                 // If we get the pattern {10, 10} we have a hole:
                 ((!GetGridDx(centerIndex) && GetGridDx(rightNeighbourIndex)) &&
                 (!GetGridDy(centerIndex) && GetGridDy(bottomNeighbourIndex)) &&
-                (forceSwitch || randomVariable2 < integerProbabilityQ))
+                (forceSwitch || randomVariable2 < IntegerProbabilityQ))
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.

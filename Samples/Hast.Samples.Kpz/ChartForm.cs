@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz
 {
-    ///<summary>The main form showing the log and and the output graph of the algorithm.</summary>
+    ///<summary>The main form showing the log and the output graph of the algorithm.</summary>
     public partial class ChartForm : Form
     {
         private int _numKpzIterations { get { return (int)nudIterations.Value; } }
@@ -36,10 +36,12 @@ namespace Hast.Samples.Kpz
         public ChartForm()
         {
             InitializeComponent();
-            _backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            _backgroundWorker.WorkerSupportsCancellation = true;
-            _backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(backgroundWorker_DoWork);
-            _backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(
+            _backgroundWorker = new BackgroundWorker
+            {
+                WorkerSupportsCancellation = true
+            };
+            _backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+            _backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
                 backgroundWorker_RunWorkerCompleted
             );
             comboTarget.SelectedIndex = 3;
@@ -100,13 +102,12 @@ namespace Hast.Samples.Kpz
 
             if (_showInspector)
             {
-
-                if(_writeToFile)
+                if (_writeToFile)
                 {
                     LogIt("Writing KpzStateLogger to file...");
                     var kpzStateLoggerPath = System.IO.Path.GetDirectoryName(
-                        System.Reflection.Assembly.GetExecutingAssembly().Location)+@"\kpzStateLogger\";
-                    if(!System.IO.Directory.Exists(kpzStateLoggerPath))
+                        System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\kpzStateLogger\";
+                    if (!System.IO.Directory.Exists(kpzStateLoggerPath))
                         System.IO.Directory.CreateDirectory(kpzStateLoggerPath);
                     _kpz.StateLogger.WriteToFiles(kpzStateLoggerPath);
                 }
@@ -127,7 +128,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         private void AsyncLogIt(string what)
         {
-            this.Invoke(new Action(() =>
+            Invoke(new Action(() =>
             {
                 LogIt(what);
             }));
@@ -139,7 +140,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         private void AsyncUpdateProgressBar(int progress)
         {
-            this.Invoke(new Action(() =>
+            Invoke(new Action(() =>
             {
                 progressBar.Value = progress;
             }));
@@ -154,8 +155,9 @@ namespace Hast.Samples.Kpz
             // The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g.
             // in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
             int iterationNext10Pow = (int)Math.Pow(10, Math.Floor(Math.Log10(iteration) + 1));
-            bool updateChartInThisIteartion = forceUpdate || iteration < 10 || 
+            bool updateChartInThisIteartion = forceUpdate || iteration < 10 ||
                 ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
+
             if (updateChartInThisIteartion)
             {
                 double mean;
@@ -164,13 +166,16 @@ namespace Hast.Samples.Kpz
                 int periodicityInvalidYCount;
                 int[,] heightMap = _kpz.GenerateHeightMap(
                     out mean, out periodicityValid, out periodicityInvalidXCount, out periodicityInvalidYCount);
+
                 if (!periodicityValid)
                 {
                     AsyncLogIt(String.Format("Warning: Periodicity invalid (x: {0}, y: {1})",
                         periodicityInvalidXCount, periodicityInvalidYCount));
                 }
+
                 double surfaceRoughness = _kpz.HeightMapStandardDeviation(heightMap, mean);
-                this.Invoke(new Action(() =>
+
+                Invoke(new Action(() =>
                 {
                     LogIt(String.Format("iteration: {0}, surfaceRoughness: {1}", iteration, surfaceRoughness));
                     chartKPZ.Series[0].Points.AddXY(iteration + 1, surfaceRoughness);
@@ -188,19 +193,20 @@ namespace Hast.Samples.Kpz
             _kpz = new Kpz(_kpzWidth, _kpzHeight, 0.5, 0.5, _showInspector, ComputationTarget);
             AsyncLogIt("Filling grid with initial data...");
             _kpz.InitializeGrid();
-            if(ComputationTarget!=KpzTarget.Cpu)
+
+            if (ComputationTarget != KpzTarget.Cpu)
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
                 _kpz.InitializeHastlayer(_verifyOutput, _randomSeedEnable).Wait();
             }
 
-            if(ComputationTarget == KpzTarget.PrngTest) return; //Already done test inside InitializeHastlayer
+            if (ComputationTarget == KpzTarget.PrngTest) return; //Already done test inside InitializeHastlayer
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
             AsyncLogIt("Starting KPZ iterations...");
 
-            if(!ComputationTarget.HastlayerGAlgorithm())
+            if (!ComputationTarget.HastlayerParallelizedAlgorithm())
             {
                 for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
                 {
@@ -222,22 +228,24 @@ namespace Hast.Samples.Kpz
             {
                 int currentIteration = 1;
                 int lastIteration = 0;
-                for(;;)
+                for (; ; )
                 {
                     int iterationsToDo = currentIteration - lastIteration;
                     AsyncLogIt(String.Format("Doing {0} iterations at once...", iterationsToDo));
                     _kpz.DoHastIterations((uint)iterationsToDo);
                     AsyncUpdateProgressBar(currentIteration);
                     //Force update if current iteration is the last:
-                    AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations); 
+                    AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations);
                     if (currentIteration >= _numKpzIterations) break;
                     lastIteration = currentIteration;
                     currentIteration *= 10;
                     if (currentIteration > _numKpzIterations) currentIteration = _numKpzIterations;
                 }
             }
+
             sw.Stop();
-            AsyncLogIt("Done. Total time measured: "+sw.ElapsedMilliseconds+" ms");
+
+            AsyncLogIt("Done. Total time measured: " + sw.ElapsedMilliseconds + " ms");
         }
 
         /// <summary>
@@ -253,7 +261,7 @@ namespace Hast.Samples.Kpz
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
-            checkVerifyOutput.Enabled = 
+            checkVerifyOutput.Enabled =
                 comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4 || comboTarget.SelectedIndex == 5;
             if (comboTarget.SelectedIndex == 5) checkVerifyOutput.Checked = true;
             if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex <= 2)
@@ -263,23 +271,24 @@ namespace Hast.Samples.Kpz
             }
             else if (comboTarget.SelectedIndex > 2)
             {
-                nudTableWidth.Value = nudTableHeight.Value = KpzKernelsGInterface.GridSize;
+                nudTableWidth.Value = nudTableHeight.Value = KpzKernelsParallelizedInterface.GridSize;
                 nudIterations.Value = 1;
             }
         }
 
         /// <summary>This property of the <see cref="ChartForm"/> maps the selected item in <see cref="comboTarget"/> to 
         /// <see cref="KpzTarget"/> values.</summary>
-        private KpzTarget CurrentComputationTarget {
+        private KpzTarget CurrentComputationTarget
+        {
             get
             {
-                switch(comboTarget.SelectedIndex)
+                switch (comboTarget.SelectedIndex)
                 {
                     case 0: return KpzTarget.Cpu;
                     case 1: return KpzTarget.FpgaSimulation;
                     case 2: return KpzTarget.Fpga;
-                    case 3: return KpzTarget.FpgaSimulationG;
-                    case 4: return KpzTarget.FpgaG;
+                    case 3: return KpzTarget.FpgaSimulationParallelized;
+                    case 4: return KpzTarget.FpgaParallelized;
                     case 5: return KpzTarget.PrngTest;
                 }
                 return KpzTarget.Cpu;

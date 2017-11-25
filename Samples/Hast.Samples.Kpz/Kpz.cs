@@ -5,20 +5,20 @@ namespace Hast.Samples.Kpz
 {
     public enum KpzTarget
     {
-        Cpu, Fpga, FpgaSimulation, FpgaG, FpgaSimulationG, PrngTest
+        Cpu, Fpga, FpgaSimulation, FpgaParallelized, FpgaSimulationParallelized, PrngTest
     }
 
 
     public static class KpzTargetExtensions
     {
         public static bool HastlayerSimulation(this KpzTarget target) =>
-            target == KpzTarget.FpgaSimulation || target == KpzTarget.FpgaSimulationG;
+            target == KpzTarget.FpgaSimulation || target == KpzTarget.FpgaSimulationParallelized;
 
         public static bool HastlayerOnFpga(this KpzTarget target) =>
-            target == KpzTarget.Fpga || target == KpzTarget.FpgaG || target == KpzTarget.PrngTest;
+            target == KpzTarget.Fpga || target == KpzTarget.FpgaParallelized || target == KpzTarget.PrngTest;
 
-        public static bool HastlayerGAlgorithm(this KpzTarget target) => 
-            target == KpzTarget.FpgaG || target == KpzTarget.FpgaSimulationG;
+        public static bool HastlayerParallelizedAlgorithm(this KpzTarget target) => 
+            target == KpzTarget.FpgaParallelized || target == KpzTarget.FpgaSimulationParallelized;
 
         public static bool HastlayerPlainAlgorithm(this KpzTarget target) =>
             target == KpzTarget.Fpga || target == KpzTarget.FpgaSimulation;
@@ -316,14 +316,14 @@ namespace Hast.Samples.Kpz
 
             if (_enableStateLogger) StateLogger.NewKpzIteration();
 
-            if (_kpzTarget == KpzTarget.FpgaG || _kpzTarget == KpzTarget.FpgaSimulationG)
-                KernelsG.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, _randomSeedEnable, numberOfIterations);
+            if (_kpzTarget == KpzTarget.FpgaParallelized || _kpzTarget == KpzTarget.FpgaSimulationParallelized)
+                KernelsParallelized.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, _randomSeedEnable, numberOfIterations);
             else
                 Kernels.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, false,
                     _random.NextUInt64(), _random.NextUInt64(), numberOfIterations);
 
             if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
-            //HastlayerGridAlreadyPushed = true; //If commented out, push always
+            //HastlayerGridAlreadyPushed = true; // If commented out, push always
         }
 
         /// <summary>
