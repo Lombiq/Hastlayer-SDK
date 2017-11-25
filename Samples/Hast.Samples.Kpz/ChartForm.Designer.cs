@@ -242,10 +242,10 @@
             this.comboTarget.FormattingEnabled = true;
             this.comboTarget.Items.AddRange(new object[] {
             "Original algorithm (CPU)",
-            "Hastlayer simulation #1 (CPU)",
-            "Hastlayer accelerated #1 (FPGA)",
-            "Hastlayer simulation #2 (CPU) ",
-            "Hastlayer accelerated #2 (FPGA) ",
+            "Hastlayer simulation, sequential (CPU)",
+            "Hastlayer accelerated, sequential (FPGA)",
+            "Hastlayer simulation, parallelized (CPU) ",
+            "Hastlayer accelerated, parallelized (FPGA) ",
             "PRNG test (FPGA)"});
             this.comboTarget.Location = new System.Drawing.Point(202, 125);
             this.comboTarget.Name = "comboTarget";
