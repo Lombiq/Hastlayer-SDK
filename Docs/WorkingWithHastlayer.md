@@ -37,7 +37,7 @@ Some general constraints you have to keep in mind:
   - Static members apart from methods are not supported (so e.g. while you can't use static fields, you can have static methods).
   - Be careful not to mix reference types (like arrays) into structs' members (fields and properties), keep structs purely value types (this is a good practice any way).
 - Operator overloading on custom types is supported.
-- Task-based parallelism is with TPL is supported to a limited degree, lambda expression are supported as well to an extent needed to use tasks. See the `ParallelAlgorithm` sample in the `Hast.Samples.Consumer` project and the `ImageContrastModifier` sample on how parallel code can look like.
+- Task-based parallelism with TPL is supported to a limited degree, lambda expression are supported as well to an extent needed to use tasks. See the `ParallelAlgorithm` sample in the `Hast.Samples.Consumer` project and the `ImageContrastModifier` sample on how parallel code can look like.
 - Operation-level, SIMD-like parallelism is supported, see the `SimdCalculator` sample.
 - Recursion is supported but recursive code is not really something for Hastlayer. Nevertheless if a method call is recursive, even if indirectly, you need to manually configure the recursion depths (see the `RecursiveAlgorithms` sample).
 - Exceptions are not supported and `throw` statements will be handled as a no-op (they won't do anything). The latter is so you can keep throwing exceptions on invalid arguments from methods and utilize them when the code is executed in the standard way; however you need to take special care on not to actually have invalid arguments on hardware.
@@ -64,6 +64,7 @@ So to write fast code with Hastlayer you need implement massively parallel algor
 
 - Method invocation and access to custom properties (i.e. properties that have a custom getter or setter, so not auto-properties) cost multiple clock cycles as a baseline. Try to avoid having many small methods (Hastlayer will eventually inline small methods to cut down on such waste automatically) and custom properties.
 - Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `short` instead of `int` if its range is enough).
+- Use constants where applicable to the constant values can be substituted instead of keeping read-only variables.
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
 
 In the ideal case your algorithm will do the following (can happen repeatedly of course):
