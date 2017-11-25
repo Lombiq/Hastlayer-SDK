@@ -35,7 +35,7 @@ namespace Hast.Samples.Kpz
         public bool dy; // Bottom
 
 
-        public uint SerializeToUInt32() //TODO: lehet hogy ennek megis structnak kellene lennie, metodusok nelkul?
+        public uint SerializeToUInt32() 
         {
             return ((dx) ? 1U : 0) | ((dy) ? 2U : 0);
         }
@@ -323,7 +323,7 @@ namespace Hast.Samples.Kpz
                     _random.NextUInt64(), _random.NextUInt64(), numberOfIterations);
 
             if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
-            //HastlayerGridAlreadyPushed = true; // If commented out, push always
+            //HastlayerGridAlreadyPushed = true; // If not commented out, push always
         }
 
         /// <summary>

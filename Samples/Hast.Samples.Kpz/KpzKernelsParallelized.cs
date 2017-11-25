@@ -64,8 +64,6 @@ namespace Hast.Samples.Kpz
         // This should be 1 or 2 (the latter if you want to be very careful). 
         // ==== </CONFIGURABLE PARAMETERS> ====
 
-        //public int MemStartOfRandomValues() { return GridSize * GridSize;  }
-        //public int MemStartOfParameters() { return GridSize * GridSize + TasksPerIteration * NumberOfIterations + 1; }
         public const int MemIndexNumberOfIterations = 0;
         public const int MemIndexRandomSeed = MemIndexNumberOfIterations + 1;
         public const int MemIndexGrid = MemIndexRandomSeed + ParallelTasks * 4 + 2;
@@ -79,7 +77,7 @@ namespace Hast.Samples.Kpz
             int iterationGroupSize = numberOfIterations * ReschedulesPerTaskIteration;
             const int PokesInsideTask = LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration;
             const int LocalGridPartitions = GridSize / LocalGridSize;
-            //const int TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == 
+            //Note: TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == 
             //  ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
             int parallelTaskRandomIndex = 0;
             uint randomSeedTemp;
@@ -98,7 +96,6 @@ namespace Hast.Samples.Kpz
                     }
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                //TaskLocals[TaskLocalsIndex].prng1.state |= ((ulong)RandomSeedTemp) * 4294967296UL;
                 taskLocals[TaskLocalsIndex].prng1.state |= ((ulong)randomSeedTemp) << 32;
 
                 taskLocals[TaskLocalsIndex].prng2 = new PrngMWC64X
@@ -106,11 +103,7 @@ namespace Hast.Samples.Kpz
                     state = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                //TaskLocals[TaskLocalsIndex].prng2.state |= ((ulong)RandomSeedTemp) * 4294967296UL;
                 taskLocals[TaskLocalsIndex].prng2.state |= ((ulong)randomSeedTemp) << 32;
-
-                //TaskLocals[TaskLocalsIndex].taskRandomState1 = (ulong)0xCAFE;
-                //TaskLocals[TaskLocalsIndex].taskRandomState2 = (ulong)0xCAFE;
             }
 
             // What is IterationGroupIndex good for?
@@ -121,12 +114,9 @@ namespace Hast.Samples.Kpz
             prng0.state = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
             randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
             prng0.state |= ((ulong)randomSeedTemp) << 32;
-            //randomState0 |= ((ulong)RandomSeedTemp) * 4294967296UL;
-            //randomState0 = (ulong)0xCAFE;
 
             for (int IterationGroupIndex = 0; IterationGroupIndex < iterationGroupSize; IterationGroupIndex++)
             {
-                //GetNextRandom0
                 uint randomValue0 = prng0.NextUInt32();
                 // This assumes that LocalGridSize is 2^N:
                 int RandomXOffset = (int)((LocalGridSize - 1) & randomValue0);
@@ -145,8 +135,6 @@ namespace Hast.Samples.Kpz
                         // The X and Y coordinate within the big table (grid):
                         int baseX = partitionX * LocalGridSize + RandomXOffset;
                         int baseY = partitionY * LocalGridSize + RandomYOffset;
-
-                        //Console.WriteLine("CopyTo | Task={0}, From: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
 
                         // Copy to local memory
                         for (int copyDstX = 0; copyDstX < LocalGridSize; copyDstX++)
@@ -246,10 +234,8 @@ namespace Hast.Samples.Kpz
                                 uint value =
                                     (tasks[parallelTaskIndex].Result.bramDx[copySrcX + copySrcY * LocalGridSize] ? 1U : 0U) |
                                     (tasks[parallelTaskIndex].Result.bramDy[copySrcX + copySrcY * LocalGridSize] ? 2U : 0U);
-                                //uint value =
-                                //    (TaskLocals[ParallelTaskIndex].bramDx[CopySrcX + CopySrcY * LocalGridSize] ? 1U : 0U) |
-                                //    (TaskLocals[ParallelTaskIndex].bramDy[CopySrcX + CopySrcY * LocalGridSize] ? 2U : 0U);
-                                //(Either solution to pass TaskLocals does work.)
+                                //Note: use (tasks[parallelTaskIndex].Result), because 
+                                //    (TaskLocals[ParallelTaskIndex]) won't work.
                                 memory.WriteUInt32(MemIndexGrid + copyDstX + copyDstY * GridSize, value);
                             }
                         }
@@ -324,10 +310,6 @@ namespace Hast.Samples.Kpz
                 93473713, -937734760, -279968717
             }; 
 
-            //int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / 
-            //  (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) *
-            //  KpzKernelsGInterface.NumberOfIterations;
-            //int numRandomUints = 2 + (numTasks * 4);
             int numRandomUints = 2 + KpzKernelsParallelizedInterface.ParallelTasks * 4;
             var sm = new SimpleMemory(
                 KpzKernelsParallelizedInterface.GridSize * KpzKernelsParallelizedInterface.GridSize + numRandomUints + 1);
