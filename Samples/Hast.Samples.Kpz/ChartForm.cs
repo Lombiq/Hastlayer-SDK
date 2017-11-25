@@ -209,7 +209,7 @@ namespace Hast.Samples.Kpz
 
             try
             {
-                if (ComputationTarget == KpzTarget.PrngTest) return; //Already done test inside InitializeHastlayer
+                if (ComputationTarget == KpzTarget.PrngTest) return; // Already done test inside InitializeHastlayer
 
                 var sw = System.Diagnostics.Stopwatch.StartNew();
                 AsyncLogIt("Starting KPZ iterations...");
@@ -242,7 +242,7 @@ namespace Hast.Samples.Kpz
                         AsyncLogIt(String.Format("Doing {0} iterations at once...", iterationsToDo));
                         _kpz.DoHastIterations((uint)iterationsToDo);
                         AsyncUpdateProgressBar(currentIteration);
-                        //Force update if current iteration is the last:
+                        // Force update if current iteration is the last:
                         AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations);
                         if (currentIteration >= _numKpzIterations) break;
                         lastIteration = currentIteration;
