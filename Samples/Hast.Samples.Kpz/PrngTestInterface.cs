@@ -1,5 +1,4 @@
-﻿using System;
-using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.Kpz
 {

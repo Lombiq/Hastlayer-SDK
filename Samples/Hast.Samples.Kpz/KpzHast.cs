@@ -1,11 +1,10 @@
-﻿using Hast.Layer;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
+﻿using System;
 using System.Linq;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Kpz
 {
