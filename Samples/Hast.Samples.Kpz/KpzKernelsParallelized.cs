@@ -282,7 +282,12 @@ namespace Hast.Samples.Kpz
         public static void DoIterationsWrapper(this KpzKernelsParallelizedInterface kernels, KpzNode[,] hostGrid, bool pushToFpga,
             bool randomSeedEnable, uint numberOfIterations)
         {
-            // Use this is random seed is disabled in GUI. This makes the result more predictable while debugging.
+            //The following numbers will be used when random seed is disabled in GUI. 
+            //This makes the result more preictable while debugging.
+            //Add more random numbers manually if you get an out of bounds exception on notRandomSeed. 
+            //This might happen if you increase KpzKernelsGInterface.ParallelTasks.
+            //You can generate these with the following python expression:
+            //    print [random.randint(-2147483648, 2147483647) for x in range(32)]
             var notRandomSeed = new int[]{
                 -2122284207, -805426534, -296351199, 1082586369, -864339821,
                 331357875, 1192493543, -851078246, -1091834350, -671234217,
@@ -317,7 +322,7 @@ namespace Hast.Samples.Kpz
                 844790112, -1844342060, 1945398439, 309808498, -239141205,
                 -54120626, 499261195, -1761618908, 966279259, 217571661,
                 93473713, -937734760, -279968717
-            }; // Generated with Python expression: print [random.randint(-2147483648, 2147483647) for x in range(32)]
+            }; 
 
             //int numTasks = ((KpzKernelsGInterface.GridSize * KpzKernelsGInterface.GridSize) / 
             //  (KpzKernelsGInterface.LocalGridSize * KpzKernelsGInterface.LocalGridSize)) *
@@ -336,6 +341,7 @@ namespace Hast.Samples.Kpz
             {
                 sm.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexRandomSeed + randomWriteIndex,
                     (randomSeedEnable) ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
+                //See comment on notRandomSeed if you get an index out of bounds error here.
             }
 
             kernels.ScheduleIterations(sm);
