@@ -11,6 +11,12 @@ namespace Hast.Samples.Demo
     {
         static void Main(string[] args)
         {
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var cpuOutput = new ParallelAlgorithm().Run(234234);
+            sw.Stop();
+            Console.WriteLine("ParallelAlgorithm took " + sw.ElapsedMilliseconds + "ms.");
+            Console.ReadKey();
+
             Task.Run(async () =>
             {
                 using (var hastlayer = await Hastlayer.Create())
@@ -60,11 +66,6 @@ namespace Hast.Samples.Demo
                     var output1 = parallelAlgorithm.Run(234234);
                     var output2 = parallelAlgorithm.Run(123);
                     var output3 = parallelAlgorithm.Run(9999);
-
-                    var sw = System.Diagnostics.Stopwatch.StartNew();
-                    var cpuOutput = new ParallelAlgorithm().Run(234234);
-                    sw.Stop();
-                    Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + "ms.");
                     #endregion
                 }
             }).Wait();
