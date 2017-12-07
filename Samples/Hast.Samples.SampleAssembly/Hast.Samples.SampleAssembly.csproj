@@ -52,6 +52,7 @@
     <Compile Include="MonteCarloAlgorithm.cs" />
     <Compile Include="MonteCarloResult.cs" />
     <Compile Include="ObjectOrientedShowcase.cs" />
+    <Compile Include="PositCalculator.cs" />
     <Compile Include="PrimeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecursiveAlgorithms.cs" />

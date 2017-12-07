@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.UnumCalculator;
+        public static Sample SampleToRun = Sample.PositCalculator;
     }
 
 
@@ -38,19 +38,10 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            var resultUintArray = new UnumCalculator().CalculateSumOfPowersofTwo(9);
-            var resultBytes = new byte[resultUintArray.Length * 4];
+            var result = new PositCalculator().CountUpToNumber(100000);
 
-            Buffer.BlockCopy(resultUintArray, 0, resultBytes, 0, resultUintArray.Length * 4);
-            var resultBigInteger = new BigInteger(resultBytes);
-
-            Console.WriteLine(resultBigInteger.ToString());
-
-
-
-
-
-
+            Console.WriteLine(result);
+            
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
             Task.Run(async () =>
@@ -96,7 +87,7 @@ namespace Hast.Samples.Consumer
 
                         // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                         // here:
-                        var remoteClientConfiguration  = configuration.RemoteClientConfiguration();
+                        var remoteClientConfiguration = configuration.RemoteClientConfiguration();
                         remoteClientConfiguration.AppName = "TestApp";
                         remoteClientConfiguration.AppSecret = "appsecret";
                         if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
@@ -199,6 +190,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.UnumCalculator:
                                 await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.PositCalculator:
+                                await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             default:
                                 break;

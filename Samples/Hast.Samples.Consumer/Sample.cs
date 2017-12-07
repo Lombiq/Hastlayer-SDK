@@ -10,6 +10,7 @@
         PrimeCalculator,
         RecursiveAlgorithms,
         SimdCalculator,
-        UnumCalculator
+        UnumCalculator,
+        PositCalculator
     }
 }
