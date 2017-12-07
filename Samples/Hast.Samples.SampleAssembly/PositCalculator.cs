@@ -12,6 +12,7 @@ namespace Hast.Samples.SampleAssembly
     {
         public const int CalculateLargeIntegerSum_InputInt32Index = 0;
         public const int CalculateLargeIntegerSum_OutputInt32Index = 0;
+
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
             var number = memory.ReadUInt32(CalculateLargeIntegerSum_InputInt32Index);
@@ -20,6 +21,7 @@ namespace Hast.Samples.SampleAssembly
 
             var a = new Posit(environment, 1);
             var b = a;
+
             for (var i = 1; i < number; i++)
             {
                 a += b;
@@ -31,6 +33,8 @@ namespace Hast.Samples.SampleAssembly
 
         public static PositEnvironment EnvironmentFactory() => new PositEnvironment(32, 3);
     }
+
+
     public static class PositCalculatorExtensions
     {
         // While Hastlayer can figure out if an array is statically sized most of the time we need to specify the below
@@ -51,16 +55,15 @@ namespace Hast.Samples.SampleAssembly
             "Lombiq.Arithmetics.BitMask Lombiq.Arithmetics.BitMask::op_LeftShift(Lombiq.Arithmetics.BitMask,System.Int32).array",
         };
 
+
         public static int CountUpToNumber(this PositCalculator positCalculator, int number)
         {
             var memory = new SimpleMemory(1);
+
             memory.WriteInt32(PositCalculator.CalculateLargeIntegerSum_InputInt32Index, number);
             positCalculator.CalculateIntegerSumUpToNumber(memory);
-         
-            return   memory.ReadInt32(PositCalculator.CalculateLargeIntegerSum_OutputInt32Index);
-            
-          
+
+            return memory.ReadInt32(PositCalculator.CalculateLargeIntegerSum_OutputInt32Index);
         }
-       
     }
 }
