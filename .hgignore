@@ -8,3 +8,4 @@ desktop.ini
 bin/
 obj/
 packages/
+.vs/
