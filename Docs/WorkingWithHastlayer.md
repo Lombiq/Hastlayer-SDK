@@ -64,6 +64,7 @@ So to write fast code with Hastlayer you need implement massively parallel algor
 
 - Method invocation and access to custom properties (i.e. properties that have a custom getter or setter, so not auto-properties) cost multiple clock cycles as a baseline. Try to avoid having many small methods (Hastlayer will eventually inline small methods to cut down on such waste automatically) and custom properties.
 - Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `short` instead of `int` if its range is enough).
+- Use constants where applicable to the constant values can be substituted instead of keeping read-only variables.
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
 
 In the ideal case your algorithm will do the following (can happen repeatedly of course):
