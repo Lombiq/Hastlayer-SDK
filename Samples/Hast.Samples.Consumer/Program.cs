@@ -116,6 +116,9 @@ namespace Hast.Samples.Consumer
                             case Sample.ObjectOrientedShowcase:
                                 ObjectOrientedShowcaseSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.PositCalculator:
+                                PositCalculatorSampleRunner.Configure(configuration);
+                                break;
                             case Sample.PrimeCalculator:
                                 PrimeCalculatorSampleRunner.Configure(configuration);
                                 break;
@@ -179,6 +182,9 @@ namespace Hast.Samples.Consumer
                             case Sample.ObjectOrientedShowcase:
                                 await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
+                            case Sample.PositCalculator:
+                                await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
                             case Sample.PrimeCalculator:
                                 await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
@@ -190,9 +196,6 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.UnumCalculator:
                                 await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                break;
-                            case Sample.PositCalculator:
-                                await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             default:
                                 break;
