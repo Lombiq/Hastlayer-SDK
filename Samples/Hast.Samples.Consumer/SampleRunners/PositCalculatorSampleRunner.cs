@@ -16,7 +16,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             configuration.TransformerConfiguration().AddLengthForMultipleArrays(
                 PositCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
-            PositCalculatorExtensions.ManuallySizedArrays);
+                PositCalculatorExtensions.ManuallySizedArrays);
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
