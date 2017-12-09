@@ -26,7 +26,7 @@ namespace Hast.Samples.Demo
                             MaxDegreeOfParallelism = ParallelAlgorithm.MaxDegreeOfParallelism
                         });
 
-                    configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
+                    configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
                     hastlayer.ExecutedOnHardware += (sender, e) =>
                     {
