@@ -60,6 +60,8 @@ Some simplified basics on the properties of FPGAs first:
     - Operation-level: can be useful for certain algorithms where it makes sense to run e.g. hundreds of multiplications in parallel (also elaborated above).
     - Device-level: this means that you can use multiple FPGAs which all host the same algorithm and Hastlayer will automatically select the one idle to push work to. This way you can execute the same hardware algorithm in parallel on multiple devices.
 
+As a simple rule of thumb if your code has a loop that works on elements of an array, does a lot of work in the loop body and the order in which the elements are processed doesn't matter (i.e. one loop execution doesn't depend on a previous one) then it's a good candidate for `Task`-based parallelization.
+
 So to write fast code with Hastlayer you need implement massively parallel algorithms and avoid code that adds unnecessary clock cycles. What are the clock cycle sinks to avoid?
 
 - Method invocation and access to custom properties (i.e. properties that have a custom getter or setter, so not auto-properties) cost multiple clock cycles as a baseline. Try to avoid having many small methods (Hastlayer will eventually inline small methods to cut down on such waste automatically) and custom properties.
