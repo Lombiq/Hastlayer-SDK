@@ -39,7 +39,7 @@ namespace Hast.Samples.Kpz
             };
 
             var configuration = new HardwareGenerationConfiguration((await hastlayer.GetSupportedDevices()).First().Name);
-            configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
+            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;
 
             LogItFunction("Generating hardware...");
