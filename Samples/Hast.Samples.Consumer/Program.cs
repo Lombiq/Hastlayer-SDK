@@ -148,9 +148,9 @@ namespace Hast.Samples.Consumer
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
                                 typeof(PrimeCalculator).Assembly,
                                 // Note that the assemblies used by code to be transformed also need to be added
-                                // separately. E.g. Unum is used by Hast.Samples.SampleAssembly which in turn also uses
+                                // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
                                 // ImmutableArray.
-                                typeof(Unum).Assembly,
+                                typeof(Posit).Assembly,
                                 typeof(ImmutableArray).Assembly
                             },
                             configuration);
