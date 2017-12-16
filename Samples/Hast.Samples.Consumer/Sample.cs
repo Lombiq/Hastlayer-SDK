@@ -11,6 +11,6 @@
         RecursiveAlgorithms,
         SimdCalculator,
         UnumCalculator,
-        PositCalculator
+        Posit32Calculator
     }
 }

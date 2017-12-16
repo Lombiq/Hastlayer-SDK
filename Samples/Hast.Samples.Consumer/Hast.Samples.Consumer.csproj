@@ -59,7 +59,7 @@
     <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\MonteCarloAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ObjectOrientedShowcaseSampleRunner.cs" />
-    <Compile Include="SampleRunners\PositCalculatorSampleRunner.cs" />
+    <Compile Include="SampleRunners\Posit32CalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\SimdCalculatorSampleRunner.cs" />
