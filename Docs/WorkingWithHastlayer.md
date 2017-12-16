@@ -20,6 +20,8 @@ Since it's possible that due to bugs with some corner cases the hardware code wi
 
 ## Writing Hastlayer-compatible .NET code
 
+While Hastlayer supports a lot of features of .NET, it can't support everything (also due to the fundamental differences between executing a program on a CPU and creating hardware logic). Thus limitations apply.
+
 Take a look at the sample projects in the Sample solution folder. Those are there to give you a general idea how Hastlayer-compatible code looks like, and they're thoroughly documented. If some language construct is not present in the samples then it is probably not supported. The `PrimeCalculator` is a good starting point with a basic sample algorithm.
 
 Some general constraints you have to keep in mind:
