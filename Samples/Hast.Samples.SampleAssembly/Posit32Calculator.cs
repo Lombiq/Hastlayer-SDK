@@ -10,7 +10,7 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// A sample showing how floating point numbers of type Posit (<see href="https://posithub.org" />) can be used 
-    /// with Hastlayer. Using the statically-types <see cref="Posit32"/> variant here.
+    /// with Hastlayer. Using the statically-typed <see cref="Posit32"/> variant here.
     /// </summary>
     public class Posit32Calculator
     {
