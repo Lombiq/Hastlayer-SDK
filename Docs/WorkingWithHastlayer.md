@@ -20,6 +20,8 @@ Since it's possible that due to bugs with some corner cases the hardware code wi
 
 ## Writing Hastlayer-compatible .NET code
 
+While Hastlayer supports a lot of features of .NET, it can't support everything (also due to the fundamental differences between executing a program on a CPU and creating hardware logic). Thus limitations apply.
+
 Take a look at the sample projects in the Sample solution folder. Those are there to give you a general idea how Hastlayer-compatible code looks like, and they're thoroughly documented. If some language construct is not present in the samples then it is probably not supported. The `PrimeCalculator` is a good starting point with a basic sample algorithm.
 
 Some general constraints you have to keep in mind:
@@ -59,6 +61,8 @@ Some simplified basics on the properties of FPGAs first:
     - `Task`-level: this is the most important you need to utilize (elaborated above).
     - Operation-level: can be useful for certain algorithms where it makes sense to run e.g. hundreds of multiplications in parallel (also elaborated above).
     - Device-level: this means that you can use multiple FPGAs which all host the same algorithm and Hastlayer will automatically select the one idle to push work to. This way you can execute the same hardware algorithm in parallel on multiple devices.
+
+As a simple rule of thumb if your code has a loop that works on elements of an array, does a lot of work in the loop body and the order in which the elements are processed doesn't matter (i.e. one loop execution doesn't depend on a previous one) then it's a good candidate for `Task`-based parallelization.
 
 So to write fast code with Hastlayer you need implement massively parallel algorithms and avoid code that adds unnecessary clock cycles. What are the clock cycle sinks to avoid?
 
