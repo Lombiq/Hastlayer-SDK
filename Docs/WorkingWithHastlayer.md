@@ -42,6 +42,7 @@ Some general constraints you have to keep in mind:
 - Task-based parallelism with TPL is supported to a limited degree, lambda expression are supported as well to an extent needed to use tasks. See the `ParallelAlgorithm` sample in the `Hast.Samples.Consumer` project and the `ImageContrastModifier` sample on how parallel code can look like.
 - Operation-level, SIMD-like parallelism is supported, see the `SimdCalculator` sample.
 - Recursion is supported but recursive code is not really something for Hastlayer. Nevertheless if a method call is recursive, even if indirectly, you need to manually configure the recursion depths (see the `RecursiveAlgorithms` sample).
+- Method inlining with the `[MethodImpl(MethodImplOptions.AggressiveInlining)]` attribute as usual in .NET is supported. It's recommended to inline small methods to cut down on the overhead of method calls. Keep in mind though that inlining has its drawbacks, pretty much [the same as in .NET](https://softwareengineering.stackexchange.com/questions/245802/is-there-a-downside-to-using-aggressiveinlining-on-simple-properties): the size of the hardware design will be bigger (and hardware generation will be slower). This, however can be acceptable for a potentially much greater performance. Note that inlining is only supported for methods having a single `return` statement.
 - Exceptions are not supported and `throw` statements will be handled as a no-op (they won't do anything). The latter is so you can keep throwing exceptions on invalid arguments from methods and utilize them when the code is executed in the standard way; however you need to take special care on not to actually have invalid arguments on hardware.
 - Note that you can write unsupported code in a member of a type that will be transformed if that member won't be accessed on the hardware (since unused code is removed from transformation). So e.g. you can implement `ToString()`.
 
@@ -66,7 +67,7 @@ As a simple rule of thumb if your code has a loop that works on elements of an a
 
 So to write fast code with Hastlayer you need implement massively parallel algorithms and avoid code that adds unnecessary clock cycles. What are the clock cycle sinks to avoid?
 
-- Method invocation and access to custom properties (i.e. properties that have a custom getter or setter, so not auto-properties) cost multiple clock cycles as a baseline. Try to avoid having many small methods (Hastlayer will eventually inline small methods to cut down on such waste automatically) and custom properties.
+- Method invocation and access to custom properties (i.e. properties that have a custom getter or setter, so not auto-properties) cost multiple clock cycles as a baseline. Try to avoid having many small methods and custom properties (or methods you can also inline, see the "Writing Hastlayer-compatible .NET code" section).
 - Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `short` instead of `int` if its range is enough).
 - Use constants where applicable to the constant values can be substituted instead of keeping read-only variables.
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
