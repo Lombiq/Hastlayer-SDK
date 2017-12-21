@@ -71,6 +71,7 @@ So to write fast code with Hastlayer you need implement massively parallel algor
 - Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `short` instead of `int` if its range is enough).
 - Use constants where applicable to the constant values can be substituted instead of keeping read-only variables.
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
+- Loops with a large number of iterations but with some very basic computation inside them: this is because every iteration is at least one clock cycle, so again multiple operations can't be packed into a single clock cycle. Until Hastlayer does [loop unrolling](https://github.com/Lombiq/Hastlayer-SDK/issues/14) manual unrolling [can help](https://stackoverflow.com/questions/2349211/when-if-ever-is-loop-unrolling-still-useful).
 
 In the ideal case your algorithm will do the following (can happen repeatedly of course):
 
