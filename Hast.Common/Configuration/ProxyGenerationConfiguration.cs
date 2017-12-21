@@ -20,7 +20,7 @@ namespace Hast.Layer
         /// software execution. If set to <c>true</c> then both a hardware and software invocation will happen and the
         /// result of the two compared. If there is a mismatch then an exception will be thrown.
         /// </summary>
-        public bool VerifyHardwareResults { get; set; }
+        public bool VerifyHardwareResults { get; set; } = true;
 
 
         private static IProxyGenerationConfiguration _default;

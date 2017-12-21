@@ -7,6 +7,7 @@ Note that the hardware framework projects have their own release cycle and relea
 
 ## vNext
 
+- Adding ability to inline methods to improve performance.
 - Various smaller bugfixes and improvements.
 
 
