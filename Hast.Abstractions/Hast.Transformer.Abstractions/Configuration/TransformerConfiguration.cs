@@ -34,9 +34,17 @@ namespace Hast.Transformer.Abstractions.Configuration
 
         /// <summary>
         /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
-        /// array.
+        /// array. Defaults to <c>true</c>.
         /// </summary>
         public bool UseSimpleMemory { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets whether inlining methods on the hardware is enabled. Defaults to <c>true</c>. Inlining methods
+        /// eliminates the performance impact of method calls (and is thus advised for small, frequently invoked methods),
+        /// but causes the hardware design to be larger. Be aware that inlining, even if enabled, doesn't happen 
+        /// automatically, check the documentation.
+        /// </summary>
+        public bool EnableMethodInlining { get; set; } = true;
 
         /// <summary>
         /// The lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer 

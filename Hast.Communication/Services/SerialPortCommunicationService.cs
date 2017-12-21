@@ -287,12 +287,13 @@ namespace Hast.Communication.Services
 
         private SerialPort CreateSerialPort(IHardwareExecutionContext executionContext)
         {
-            var serialPort = new SerialPort();
-
-            serialPort.BaudRate = CommunicationConstants.Serial.DefaultBaudRate;
-            serialPort.Parity = CommunicationConstants.Serial.DefaultParity;
-            serialPort.StopBits = CommunicationConstants.Serial.DefaultStopBits;
-            serialPort.WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds;
+            var serialPort = new SerialPort
+            {
+                BaudRate = CommunicationConstants.Serial.DefaultBaudRate,
+                Parity = CommunicationConstants.Serial.DefaultParity,
+                StopBits = CommunicationConstants.Serial.DefaultStopBits,
+                WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds
+            };
 
             _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort, executionContext));
 
