@@ -41,8 +41,8 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// <summary>
         /// Gets or sets whether inlining methods on the hardware is enabled. Defaults to <c>true</c>. Inlining methods
         /// eliminates the performance impact of method calls (and is thus advised for small, frequently invoked methods),
-        /// but causes the hardware design to be larger. Be aware that inlining, even if enabled, doesn't happen 
-        /// automatically, check the documentation.
+        /// but causes the hardware design to be larger (and hardware generation to be slower). Be aware that inlining,
+        /// even if enabled, doesn't happen automatically, check the documentation.
         /// </summary>
         public bool EnableMethodInlining { get; set; } = true;
 

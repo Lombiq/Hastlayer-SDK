@@ -77,7 +77,7 @@ namespace Hast.Samples.Consumer
                                     e.MemberFullName +
                                     " on hardware took " +
                                     e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                                    "ms (net) " +
+                                    " milliseconds (net) " +
                                     e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                                     " milliseconds (all together)");
                             };
