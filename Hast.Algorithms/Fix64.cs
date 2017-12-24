@@ -1,15 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Hast.Algorithms
 {
-    // <summary>
+    /// <summary>
     /// Represents a Q31.32 fixed-point number.
     /// </summary>
-    public partial struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
+    /// Taken from https://github.com/asik/FixedMath.Net and modified to be Hastlayer-compatible. See the original 
+    /// license below:
+    /// 
+    /// Copyright 2012 André Slupik
+    /// 
+    /// Licensed under the Apache License, Version 2.0 (the "License");
+    /// you may not use this file except in compliance with the License.
+    /// You may obtain a copy of the License at
+    /// 
+    ///     http://www.apache.org/licenses/LICENSE-2.0
+    /// 
+    /// Unless required by applicable law or agreed to in writing, software
+    /// distributed under the License is distributed on an "AS IS" BASIS,
+    /// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    /// See the License for the specific language governing permissions and
+    /// limitations under the License.
+    /// 
+    /// This project uses code from the libfixmath library, which is under the following license:
+    /// 
+    /// Copyright (C) 2012 Petteri Aimonen
+    /// 
+    /// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    /// 
+    /// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    /// 
+    /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    /// <remarks
+    public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     {
         readonly long m_rawValue;
 
@@ -484,200 +512,6 @@ namespace Hast.Algorithms
             return new Fix64((long)result);
         }
 
-        /// <summary>
-        /// Returns the Sine of x.
-        /// This function has about 9 decimals of accuracy for small values of x.
-        /// It may lose accuracy as the value of x grows.
-        /// Performance: about 25% slower than Math.Sin() in x64, and 200% slower in x86.
-        /// </summary>
-        public static Fix64 Sin(Fix64 x)
-        {
-            bool flipHorizontal, flipVertical;
-            var clampedL = ClampSinValue(x.m_rawValue, out flipHorizontal, out flipVertical);
-            var clamped = new Fix64(clampedL);
-
-            // Find the two closest values in the LUT and perform linear interpolation
-            // This is what kills the performance of this function on x86 - x64 is fine though
-            var rawIndex = FastMul(clamped, LutInterval);
-            var roundedIndex = Round(rawIndex);
-            var indexError = FastSub(rawIndex, roundedIndex);
-
-            var nearestValue = new Fix64(SinLut[flipHorizontal ?
-                SinLut.Length - 1 - (int)roundedIndex :
-                (int)roundedIndex]);
-            var secondNearestValue = new Fix64(SinLut[flipHorizontal ?
-                SinLut.Length - 1 - (int)roundedIndex - Sign(indexError) :
-                (int)roundedIndex + Sign(indexError)]);
-
-            var delta = FastMul(indexError, FastAbs(FastSub(nearestValue, secondNearestValue))).m_rawValue;
-            var interpolatedValue = nearestValue.m_rawValue + (flipHorizontal ? -delta : delta);
-            var finalValue = flipVertical ? -interpolatedValue : interpolatedValue;
-            return new Fix64(finalValue);
-        }
-
-        /// <summary>
-        /// Returns a rough approximation of the Sine of x.
-        /// This is at least 3 times faster than Sin() on x86 and slightly faster than Math.Sin(),
-        /// however its accuracy is limited to 4-5 decimals, for small enough values of x.
-        /// </summary>
-        public static Fix64 FastSin(Fix64 x)
-        {
-            bool flipHorizontal, flipVertical;
-            var clampedL = ClampSinValue(x.m_rawValue, out flipHorizontal, out flipVertical);
-
-            // Here we use the fact that the SinLut table has a number of entries
-            // equal to (PI_OVER_2 >> 15) to use the angle to index directly into it
-            var rawIndex = (uint)(clampedL >> 15);
-            if (rawIndex >= LUT_SIZE)
-            {
-                rawIndex = LUT_SIZE - 1;
-            }
-            var nearestValue = SinLut[flipHorizontal ?
-                SinLut.Length - 1 - (int)rawIndex :
-                (int)rawIndex];
-            return new Fix64(flipVertical ? -nearestValue : nearestValue);
-        }
-
-
-
-        [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        static long ClampSinValue(long angle, out bool flipHorizontal, out bool flipVertical)
-        {
-            // Clamp value to 0 - 2*PI using modulo; this is very slow but there's no better way AFAIK
-            var clamped2Pi = angle % PI_TIMES_2;
-            if (angle < 0)
-            {
-                clamped2Pi += PI_TIMES_2;
-            }
-
-            // The LUT contains values for 0 - PiOver2; every other value must be obtained by
-            // vertical or horizontal mirroring
-            flipVertical = clamped2Pi >= PI;
-            // obtain (angle % PI) from (angle % 2PI) - much faster than doing another modulo
-            var clampedPi = clamped2Pi;
-            while (clampedPi >= PI)
-            {
-                clampedPi -= PI;
-            }
-            flipHorizontal = clampedPi >= PI_OVER_2;
-            // obtain (angle % PI_OVER_2) from (angle % PI) - much faster than doing another modulo
-            var clampedPiOver2 = clampedPi;
-            if (clampedPiOver2 >= PI_OVER_2)
-            {
-                clampedPiOver2 -= PI_OVER_2;
-            }
-            return clampedPiOver2;
-        }
-
-        /// <summary>
-        /// Returns the cosine of x.
-        /// See Sin() for more details.
-        /// </summary>
-        public static Fix64 Cos(Fix64 x)
-        {
-            var xl = x.m_rawValue;
-            var rawAngle = xl + (xl > 0 ? -PI - PI_OVER_2 : PI_OVER_2);
-            return Sin(new Fix64(rawAngle));
-        }
-
-        /// <summary>
-        /// Returns a rough approximation of the cosine of x.
-        /// See FastSin for more details.
-        /// </summary>
-        public static Fix64 FastCos(Fix64 x)
-        {
-            var xl = x.m_rawValue;
-            var rawAngle = xl + (xl > 0 ? -PI - PI_OVER_2 : PI_OVER_2);
-            return FastSin(new Fix64(rawAngle));
-        }
-
-        /// <summary>
-        /// Returns the tangent of x.
-        /// </summary>
-        /// <remarks>
-        /// This function is not well-tested. It may be wildly inaccurate.
-        /// </remarks>
-        public static Fix64 Tan(Fix64 x)
-        {
-            var clampedPi = x.m_rawValue % PI;
-            var flip = false;
-            if (clampedPi < 0)
-            {
-                clampedPi = -clampedPi;
-                flip = true;
-            }
-            if (clampedPi > PI_OVER_2)
-            {
-                flip = !flip;
-                clampedPi = PI_OVER_2 - (clampedPi - PI_OVER_2);
-            }
-
-            var clamped = new Fix64(clampedPi);
-
-            // Find the two closest values in the LUT and perform linear interpolation
-            var rawIndex = FastMul(clamped, LutInterval);
-            var roundedIndex = Round(rawIndex);
-            var indexError = FastSub(rawIndex, roundedIndex);
-
-            var nearestValue = new Fix64(TanLut[(int)roundedIndex]);
-            var secondNearestValue = new Fix64(TanLut[(int)roundedIndex + Sign(indexError)]);
-
-            var delta = FastMul(indexError, FastAbs(FastSub(nearestValue, secondNearestValue))).m_rawValue;
-            var interpolatedValue = nearestValue.m_rawValue + delta;
-            var finalValue = flip ? -interpolatedValue : interpolatedValue;
-            return new Fix64(finalValue);
-        }
-
-        public static Fix64 Atan2(Fix64 y, Fix64 x)
-        {
-            var yl = y.m_rawValue;
-            var xl = x.m_rawValue;
-            if (xl == 0)
-            {
-                if (yl > 0)
-                {
-                    return PiOver2;
-                }
-                if (yl == 0)
-                {
-                    return Zero;
-                }
-                return -PiOver2;
-            }
-            Fix64 atan;
-            var z = y / x;
-
-            // Deal with overflow
-            if (One + (Fix64)0.28M * z * z == MaxValue)
-            {
-                return y < Zero ? -PiOver2 : PiOver2;
-            }
-
-            if (Abs(z) < One)
-            {
-                atan = z / (One + (Fix64)0.28M * z * z);
-                if (xl < 0)
-                {
-                    if (yl < 0)
-                    {
-                        return atan - Pi;
-                    }
-                    return atan + Pi;
-                }
-            }
-            else
-            {
-                atan = PiOver2 - z / (z * z + (Fix64)0.28M);
-                if (yl < 0)
-                {
-                    return atan - Pi;
-                }
-            }
-            return atan;
-        }
-
-
-
         public static explicit operator Fix64(long value)
         {
             return new Fix64(value * ONE);
@@ -741,75 +575,13 @@ namespace Hast.Algorithms
             return new Fix64(rawValue);
         }
 
-        internal static void GenerateSinLut()
-        {
-            using (var writer = new StreamWriter("Fix64SinLut.cs"))
-            {
-                writer.Write(
-@"namespace FixMath.NET {
-    partial struct Fix64 {
-        public static readonly long[] SinLut = new[] {");
-                int lineCounter = 0;
-                for (int i = 0; i < LUT_SIZE; ++i)
-                {
-                    var angle = i * Math.PI * 0.5 / (LUT_SIZE - 1);
-                    if (lineCounter++ % 8 == 0)
-                    {
-                        writer.WriteLine();
-                        writer.Write("            ");
-                    }
-                    var sin = Math.Sin(angle);
-                    var rawValue = ((Fix64)sin).m_rawValue;
-                    writer.Write(string.Format("0x{0:X}L, ", rawValue));
-                }
-                writer.Write(
-@"
-        };
-    }
-}");
-            }
-        }
-
-        internal static void GenerateTanLut()
-        {
-            using (var writer = new StreamWriter("Fix64TanLut.cs"))
-            {
-                writer.Write(
-@"namespace FixMath.NET {
-    partial struct Fix64 {
-        public static readonly long[] TanLut = new[] {");
-                int lineCounter = 0;
-                for (int i = 0; i < LUT_SIZE; ++i)
-                {
-                    var angle = i * Math.PI * 0.5 / (LUT_SIZE - 1);
-                    if (lineCounter++ % 8 == 0)
-                    {
-                        writer.WriteLine();
-                        writer.Write("            ");
-                    }
-                    var tan = Math.Tan(angle);
-                    if (tan > (double)MaxValue || tan < 0.0)
-                    {
-                        tan = (double)MaxValue;
-                    }
-                    var rawValue = (((decimal)tan > (decimal)MaxValue || tan < 0.0) ? MaxValue : (Fix64)tan).m_rawValue;
-                    writer.Write(string.Format("0x{0:X}L, ", rawValue));
-                }
-                writer.Write(
-@"
-        };
-    }
-}");
-            }
-        }
-
         /// <summary>
         /// The underlying integer representation
         /// </summary>
         public long RawValue { get { return m_rawValue; } }
 
         /// <summary>
-        /// This is the constructor from raw value; it can only be used interally.
+        /// This is the constructor from raw value; it can only be used internally.
         /// </summary>
         /// <param name="rawValue"></param>
         Fix64(long rawValue)
