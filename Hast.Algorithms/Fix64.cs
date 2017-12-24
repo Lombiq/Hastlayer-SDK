@@ -570,8 +570,24 @@ namespace Hast.Algorithms
             return ((decimal)this).ToString();
         }
 
+        public int[] ToIntegers()
+        {
+            var low = (int)(m_rawValue & uint.MaxValue);
+            int high = (int)(m_rawValue >> 32);
+            return new int[] { low, high };
+        }
+
         public static Fix64 FromRaw(long rawValue)
         {
+            return new Fix64(rawValue);
+        }
+
+        public static Fix64 FromRawInts(int[] integers)
+        {
+            long rawValue = integers[1];
+            rawValue = rawValue << 32;
+            rawValue = rawValue | (uint)integers[0];
+
             return new Fix64(rawValue);
         }
 

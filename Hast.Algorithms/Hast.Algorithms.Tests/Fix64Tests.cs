@@ -453,5 +453,14 @@ namespace Hast.Algorithms.Tests
             Array.Sort(numsDecimal);
             Assert.True(nums.Select(t => (decimal)t).SequenceEqual(numsDecimal));
         }
+
+        [Test]
+        public void SerializationToAndFromIntegers()
+        {
+            foreach (var testCase in m_testCases.Select(Fix64.FromRaw))
+            {
+                Assert.AreEqual(testCase, Fix64.FromRawInts(testCase.ToIntegers()));
+            }
+        }
     }
 }

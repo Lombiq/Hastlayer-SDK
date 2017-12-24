@@ -21,20 +21,28 @@ namespace Hast.Samples.SampleAssembly
             var number = new Fix64(input);
             number *= new Fix64(3);
 
-            memory.WriteInt32(Run_OutputUInt32Index, (int)number.RawValue << 32);
-            memory.WriteInt32(Run_OutputUInt32Index, (int)number.RawValue);
+            var integers = number.ToIntegers();
+            memory.WriteInt32(Run_OutputUInt32Index, integers[0]);
+            memory.WriteInt32(Run_OutputUInt32Index + 1, integers[1]);
         }
     }
 
 
     public static class Fix64ShowcaseeExtensions
     {
-        public static uint Run(this Fix64Showcase algorithm, uint input)
+        public static Fix64 Run(this Fix64Showcase algorithm, int input)
         {
             var memory = new SimpleMemory(2);
-            memory.WriteUInt32(Fix64Showcase.Run_InputUInt32Index, input);
+
+            memory.WriteInt32(Fix64Showcase.Run_InputUInt32Index, input);
+
             algorithm.Run(memory);
-            return memory.ReadUInt32(Fix64Showcase.Run_OutputUInt32Index);
+
+            return Fix64.FromRawInts(new[]
+            {
+                memory.ReadInt32(Fix64Showcase.Run_OutputUInt32Index),
+                memory.ReadInt32(Fix64Showcase.Run_OutputUInt32Index + 1)
+            });
         }
     }
 }
