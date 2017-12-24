@@ -2,6 +2,7 @@
 {
     internal enum Sample
     {
+        Fix64Showcase,
         GenomeMatcher,
         ParallelAlgorithm,
         ImageProcessingAlgorithms,
