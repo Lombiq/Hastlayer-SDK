@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Hast.Algorithms.Tests
 {
     public class Fix64Tests
     {
-
         long[] m_testCases = new[] {
             // Small numbers
             0L, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -44,13 +45,13 @@ namespace Hast.Algorithms.Tests
             -376, 435, -311, 116, 715, -1024, -487, 59, 724, 993
         };
 
-        [Fact]
+        [Test]
         public void Precision()
         {
-            Assert.Equal(Fix64.Precision, 0.00000000023283064365386962890625m);
+            Assert.Equals(Fix64.Precision, 0.00000000023283064365386962890625m);
         }
 
-        [Fact]
+        [Test]
         public void LongToFix64AndBack()
         {
             var sources = new[] { long.MinValue, int.MinValue - 1L, int.MinValue, -1L, 0L, 1L, int.MaxValue, int.MaxValue + 1L, long.MaxValue };
@@ -60,11 +61,11 @@ namespace Hast.Algorithms.Tests
                 var expected = expecteds[i];
                 var f = (Fix64)sources[i];
                 var actual = (long)f;
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void DoubleToFix64AndBack()
         {
             var sources = new[] {
@@ -96,12 +97,12 @@ namespace Hast.Algorithms.Tests
             Assert.True(Math.Abs(value2 - value1) < (double)Fix64.Precision);
         }
 
-        [Fact]
+        [Test]
         public void DecimalToFix64AndBack()
         {
 
-            Assert.Equal(Fix64.MaxValue, (Fix64)(decimal)Fix64.MaxValue);
-            Assert.Equal(Fix64.MinValue, (Fix64)(decimal)Fix64.MinValue);
+            Assert.Equals(Fix64.MaxValue, (Fix64)(decimal)Fix64.MaxValue);
+            Assert.Equals(Fix64.MinValue, (Fix64)(decimal)Fix64.MinValue);
 
             var sources = new[] {
                 int.MinValue,
@@ -122,7 +123,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact]
+        [Test]
         public void Addition()
         {
             var terms1 = new[] { Fix64.MinValue, (Fix64)(-1), Fix64.Zero, Fix64.One, Fix64.MaxValue };
@@ -132,11 +133,11 @@ namespace Hast.Algorithms.Tests
             {
                 var actual = terms1[i] + terms2[i];
                 var expected = expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void Substraction()
         {
             var terms1 = new[] { Fix64.MinValue, (Fix64)(-1), Fix64.Zero, Fix64.One, Fix64.MaxValue };
@@ -146,11 +147,11 @@ namespace Hast.Algorithms.Tests
             {
                 var actual = terms1[i] - terms2[i];
                 var expected = expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void BasicMultiplication()
         {
             var term1s = new[] { 0m, 1m, -1m, 5m, -5m, 0.5m, -0.5m, -1.0m };
@@ -160,11 +161,11 @@ namespace Hast.Algorithms.Tests
             {
                 var expected = expecteds[i];
                 var actual = (long)((Fix64)term1s[i] * (Fix64)term2s[i]);
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void MultiplicationTestCases()
         {
             var sw = new Stopwatch();
@@ -207,7 +208,7 @@ namespace Hast.Algorithms.Tests
 
         static void Ignore<T>(T value) { }
 
-        [Fact]
+        [Test]
         public void DivisionTestCases()
         {
             var sw = new Stopwatch();
@@ -257,7 +258,7 @@ namespace Hast.Algorithms.Tests
 
 
 
-        [Fact]
+        [Test]
         public void Sign()
         {
             var sources = new[] { Fix64.MinValue, (Fix64)(-1), Fix64.Zero, Fix64.One, Fix64.MaxValue };
@@ -266,39 +267,39 @@ namespace Hast.Algorithms.Tests
             {
                 var actual = Fix64.Sign(sources[i]);
                 var expected = expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void Abs()
         {
-            Assert.Equal(Fix64.MaxValue, Fix64.Abs(Fix64.MinValue));
+            Assert.Equals(Fix64.MaxValue, Fix64.Abs(Fix64.MinValue));
             var sources = new[] { -1, 0, 1, int.MaxValue };
             var expecteds = new[] { 1, 0, 1, int.MaxValue };
             for (int i = 0; i < sources.Length; ++i)
             {
                 var actual = Fix64.Abs((Fix64)sources[i]);
                 var expected = (Fix64)expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void FastAbs()
         {
-            Assert.Equal(Fix64.MinValue, Fix64.FastAbs(Fix64.MinValue));
+            Assert.Equals(Fix64.MinValue, Fix64.FastAbs(Fix64.MinValue));
             var sources = new[] { -1, 0, 1, int.MaxValue };
             var expecteds = new[] { 1, 0, 1, int.MaxValue };
             for (int i = 0; i < sources.Length; ++i)
             {
                 var actual = Fix64.FastAbs((Fix64)sources[i]);
                 var expected = (Fix64)expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void Floor()
         {
             var sources = new[] { -5.1m, -1, 0, 1, 5.1m };
@@ -307,11 +308,11 @@ namespace Hast.Algorithms.Tests
             {
                 var actual = (decimal)Fix64.Floor((Fix64)sources[i]);
                 var expected = expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
         }
 
-        [Fact]
+        [Test]
         public void Ceiling()
         {
             var sources = new[] { -5.1m, -1, 0, 1, 5.1m };
@@ -320,13 +321,13 @@ namespace Hast.Algorithms.Tests
             {
                 var actual = (decimal)Fix64.Ceiling((Fix64)sources[i]);
                 var expected = expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
 
-            Assert.Equal(Fix64.MaxValue, Fix64.Ceiling(Fix64.MaxValue));
+            Assert.Equals(Fix64.MaxValue, Fix64.Ceiling(Fix64.MaxValue));
         }
 
-        [Fact]
+        [Test]
         public void Round()
         {
             var sources = new[] { -5.5m, -5.1m, -4.5m, -4.4m, -1, 0, 1, 4.5m, 4.6m, 5.4m, 5.5m };
@@ -335,13 +336,13 @@ namespace Hast.Algorithms.Tests
             {
                 var actual = (decimal)Fix64.Round((Fix64)sources[i]);
                 var expected = expecteds[i];
-                Assert.Equal(expected, actual);
+                Assert.Equals(expected, actual);
             }
-            Assert.Equal(Fix64.MaxValue, Fix64.Round(Fix64.MaxValue));
+            Assert.Equals(Fix64.MaxValue, Fix64.Round(Fix64.MaxValue));
         }
 
 
-        [Fact]
+        [Test]
         public void Sqrt()
         {
             for (int i = 0; i < m_testCases.Length; ++i)
@@ -361,7 +362,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact]
+        [Test]
         public void Modulus()
         {
             var deltas = new List<decimal>();
@@ -393,7 +394,7 @@ namespace Hast.Algorithms.Tests
             Console.WriteLine("failed: {0}%", deltas.Count(d => d > Fix64.Precision) * 100.0 / deltas.Count);
         }
 
-        //[Fact]
+        //[Test]
         //public void SinBenchmark()
         //{
         //    var deltas = new List<double>();
@@ -421,7 +422,7 @@ namespace Hast.Algorithms.Tests
         //    Console.WriteLine("Fix64.Sin time = {0}ms, Math.Sin time = {1}ms", swf.ElapsedMilliseconds, swd.ElapsedMilliseconds);
         //}
 
-        [Fact]
+        [Test]
         public void Sin()
         {
             Assert.True(Fix64.Sin(Fix64.Zero) == Fix64.Zero);
@@ -463,7 +464,7 @@ namespace Hast.Algorithms.Tests
             }));
         }
 
-        [Fact]
+        [Test]
         public void FastSin()
         {
             for (double angle = -2 * Math.PI; angle <= 2 * Math.PI; angle += 0.0001)
@@ -485,7 +486,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact]
+        [Test]
         public void Cos()
         {
             Assert.True(Fix64.Cos(Fix64.Zero) == Fix64.One);
@@ -520,7 +521,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact]
+        [Test]
         public void FastCos()
         {
             for (double angle = -2 * Math.PI; angle <= 2 * Math.PI; angle += 0.0001)
@@ -542,7 +543,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact]
+        [Test]
         public void Tan()
         {
             Assert.True(Fix64.Tan(Fix64.Zero) == Fix64.Zero);
@@ -559,7 +560,7 @@ namespace Hast.Algorithms.Tests
                 var f = (Fix64)angle;
                 var actualF = Fix64.Tan(f);
                 var expected = (decimal)Math.Tan(angle);
-                Assert.Equal(actualF > Fix64.Zero, expected > 0);
+                Assert.Equals(actualF > Fix64.Zero, expected > 0);
                 //TODO figure out a real way to test this function
             }
 
@@ -572,16 +573,16 @@ namespace Hast.Algorithms.Tests
             //}
         }
 
-        [Fact]
+        [Test]
         public void Atan2()
         {
             var deltas = new List<decimal>();
             // Identities
-            Assert.Equal(Fix64.Atan2(Fix64.Zero, -Fix64.One), Fix64.Pi);
-            Assert.Equal(Fix64.Atan2(Fix64.Zero, Fix64.Zero), Fix64.Zero);
-            Assert.Equal(Fix64.Atan2(Fix64.Zero, Fix64.One), Fix64.Zero);
-            Assert.Equal(Fix64.Atan2(Fix64.One, Fix64.Zero), Fix64.PiOver2);
-            Assert.Equal(Fix64.Atan2(-Fix64.One, Fix64.Zero), -Fix64.PiOver2);
+            Assert.Equals(Fix64.Atan2(Fix64.Zero, -Fix64.One), Fix64.Pi);
+            Assert.Equals(Fix64.Atan2(Fix64.Zero, Fix64.Zero), Fix64.Zero);
+            Assert.Equals(Fix64.Atan2(Fix64.Zero, Fix64.One), Fix64.Zero);
+            Assert.Equals(Fix64.Atan2(Fix64.One, Fix64.Zero), Fix64.PiOver2);
+            Assert.Equals(Fix64.Atan2(-Fix64.One, Fix64.Zero), -Fix64.PiOver2);
 
             // Precision
             for (var y = -1.0; y < 1.0; y += 0.01)
@@ -617,7 +618,7 @@ namespace Hast.Algorithms.Tests
         }
 
 
-        //[Fact]
+        //[Test]
         public void Atan2Benchmark()
         {
             var deltas = new List<decimal>();
@@ -648,7 +649,7 @@ namespace Hast.Algorithms.Tests
             Console.WriteLine("Fix64.Atan2 time = {0}ms, Math.Atan2 time = {1}ms", swf.ElapsedMilliseconds, swd.ElapsedMilliseconds);
         }
 
-        [Fact]
+        [Test]
         public void Negation()
         {
             foreach (var operand1 in m_testCases)
@@ -656,18 +657,18 @@ namespace Hast.Algorithms.Tests
                 var f = Fix64.FromRaw(operand1);
                 if (f == Fix64.MinValue)
                 {
-                    Assert.Equal(-f, Fix64.MaxValue);
+                    Assert.Equals(-f, Fix64.MaxValue);
                 }
                 else
                 {
                     var expected = -((decimal)f);
                     var actual = (decimal)(-f);
-                    Assert.Equal(expected, actual);
+                    Assert.Equals(expected, actual);
                 }
             }
         }
 
-        [Fact]
+        [Test]
         public void Equals()
         {
             foreach (var op1 in m_testCases)
@@ -681,7 +682,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact]
+        [Test]
         public void EqualityAndInequalityOperators()
         {
             var sources = m_testCases.Select(Fix64.FromRaw).ToList();
@@ -698,7 +699,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact]
+        [Test]
         public void CompareTo()
         {
             var nums = m_testCases.Select(Fix64.FromRaw).ToArray();
