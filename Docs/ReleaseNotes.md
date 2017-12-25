@@ -8,6 +8,7 @@ Note that the hardware framework projects have their own release cycle and relea
 ## vNext
 
 - Adding ability to inline methods to vastly improve performance if the method is small but called a lot of times.
+- Adding support for `ref` and `out` parameters, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/15).
 - Various smaller bugfixes and improvements.
 
 
