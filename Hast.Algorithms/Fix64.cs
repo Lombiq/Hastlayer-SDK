@@ -41,22 +41,32 @@ namespace Hast.Algorithms
     {
         readonly long m_rawValue;
 
+        // Original static fields commented out because those are not yet supported by Hastlayer, see: 
+        // https://github.com/Lombiq/Hastlayer-SDK/issues/24
+        // Precision is left in because due to decimal it won't be possible to transform any way, but can be used on
+        // CPU still.
+
         // Precision of this type is 2^-32, that is 2,3283064365386962890625E-10
         public static readonly decimal Precision = (decimal)(new Fix64(1L));//0.00000000023283064365386962890625m;
-        public static readonly Fix64 MaxValue = new Fix64(MAX_VALUE);
-        public static readonly Fix64 MinValue = new Fix64(MIN_VALUE);
-        public static readonly Fix64 One = new Fix64(ONE);
-        public static readonly Fix64 Zero = new Fix64();
-        /// <summary>
-        /// The value of Pi
-        /// </summary>
-        public static readonly Fix64 Pi = new Fix64(PI);
-        public static readonly Fix64 PiOver2 = new Fix64(PI_OVER_2);
-        public static readonly Fix64 PiTimes2 = new Fix64(PI_TIMES_2);
-        public static readonly Fix64 PiInv = (Fix64)0.3183098861837906715377675267M;
-        public static readonly Fix64 PiOver2Inv = (Fix64)0.6366197723675813430755350535M;
+        //public static readonly Fix64 MaxValue = new Fix64(MAX_VALUE);
+        //public static readonly Fix64 MinValue = new Fix64(MIN_VALUE);
+        //public static readonly Fix64 One = new Fix64(ONE);
+        //public static readonly Fix64 Zero = new Fix64();
+        ///// <summary>
+        ///// The value of Pi
+        ///// </summary>
+        //public static readonly Fix64 Pi = new Fix64(PI);
+        //public static readonly Fix64 PiOver2 = new Fix64(PI_OVER_2);
+        //public static readonly Fix64 PiTimes2 = new Fix64(PI_TIMES_2);
+        //public static readonly Fix64 PiInv = (Fix64)0.3183098861837906715377675267M;
+        //public static readonly Fix64 PiOver2Inv = (Fix64)0.6366197723675813430755350535M;
 
-        static readonly Fix64 LutInterval = (Fix64)(LUT_SIZE - 1) / PiOver2;
+        public static Fix64 MaxValue() => new Fix64(MAX_VALUE);
+        public static Fix64 MinValue() => new Fix64(MIN_VALUE);
+        public static Fix64 One() => new Fix64(ONE);
+        public static Fix64 Zero() => new Fix64();
+
+        //static readonly Fix64 LutInterval = (Fix64)(LUT_SIZE - 1) / PiOver2;
         const long MAX_VALUE = long.MaxValue;
         const long MIN_VALUE = long.MinValue;
         const int NUM_BITS = 64;
@@ -88,7 +98,7 @@ namespace Hast.Algorithms
         {
             if (value.m_rawValue == MIN_VALUE)
             {
-                return MaxValue;
+                return MaxValue();
             }
 
             // branchless implementation, see http://www.strchr.com/optimized_abs_function
@@ -123,7 +133,7 @@ namespace Hast.Algorithms
         public static Fix64 Ceiling(Fix64 value)
         {
             var hasFractionalPart = (value.m_rawValue & 0x00000000FFFFFFFF) != 0;
-            return hasFractionalPart ? Floor(value) + One : value;
+            return hasFractionalPart ? Floor(value) + One() : value;
         }
 
         /// <summary>
@@ -140,13 +150,13 @@ namespace Hast.Algorithms
             }
             if (fractionalPart > 0x80000000)
             {
-                return integralPart + One;
+                return integralPart + One();
             }
             // if number is halfway between two values, round to the nearest even number
             // this is the method used by System.Math.Round().
             return (integralPart.m_rawValue & ONE) == 0
                        ? integralPart
-                       : integralPart + One;
+                       : integralPart + One();
         }
 
         /// <summary>
@@ -242,14 +252,14 @@ namespace Hast.Algorithms
             {
                 if (sum < 0 || (overflow && xl > 0))
                 {
-                    return MaxValue;
+                    return MaxValue();
                 }
             }
             else
             {
                 if (sum > 0)
                 {
-                    return MinValue;
+                    return MinValue();
                 }
             }
 
@@ -258,7 +268,7 @@ namespace Hast.Algorithms
             var topCarry = hihi >> FRACTIONAL_PLACES;
             if (topCarry != 0 && topCarry != -1 /*&& xl != -17 && yl != -17*/)
             {
-                return opSignsEqual ? MaxValue : MinValue;
+                return opSignsEqual ? MaxValue() : MinValue();
             }
 
             // If signs differ, both operands' magnitudes are greater than 1,
@@ -278,7 +288,7 @@ namespace Hast.Algorithms
                 }
                 if (sum > negOp && negOp < -ONE && posOp > ONE)
                 {
-                    return MinValue;
+                    return MinValue();
                 }
             }
 
@@ -363,7 +373,7 @@ namespace Hast.Algorithms
                 // Detect overflow
                 if ((div & ~(0xFFFFFFFFFFFFFFFF >> bitPos)) != 0)
                 {
-                    return ((xl ^ yl) & MIN_VALUE) == 0 ? MaxValue : MinValue;
+                    return ((xl ^ yl) & MIN_VALUE) == 0 ? MaxValue() : MinValue();
                 }
 
                 remainder <<= 1;
@@ -400,7 +410,7 @@ namespace Hast.Algorithms
 
         public static Fix64 operator -(Fix64 x)
         {
-            return x.m_rawValue == MIN_VALUE ? MaxValue : new Fix64(-x.m_rawValue);
+            return x.m_rawValue == MIN_VALUE ? MaxValue() : new Fix64(-x.m_rawValue);
         }
 
         public static bool operator ==(Fix64 x, Fix64 y)
