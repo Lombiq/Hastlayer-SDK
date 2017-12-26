@@ -18,7 +18,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
             var fixed64Showcase = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Showcase());
-            var sum = fixed64Showcase.Run(23);
+            var sum = fixed64Showcase.CalculateIntegerSumUpToNumber(100000);
         }
     }
 }
