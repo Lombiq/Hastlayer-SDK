@@ -8,6 +8,10 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
+    /// <summary>
+    /// Sample using the <see cref="Fix64"/> 64 fixed-point number type. This is useful if you need more involved
+    /// calculations with fractions where simply scaling the numbers up and down is not enough.
+    /// </summary>
     public class Fix64Calculator
     {
         public const int CalculateLargeIntegerSum_InputInt32Index = 0;
