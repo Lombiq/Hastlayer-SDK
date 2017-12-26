@@ -41,7 +41,7 @@ namespace Hast.Samples.SampleAssembly
     {
         public static Fix64 CalculateIntegerSumUpToNumber(this Fix64Calculator algorithm, int input)
         {
-            var memory = new SimpleMemory(30);
+            var memory = new SimpleMemory(2);
 
             memory.WriteInt32(Fix64Calculator.CalculateLargeIntegerSum_InputInt32Index, input);
 
