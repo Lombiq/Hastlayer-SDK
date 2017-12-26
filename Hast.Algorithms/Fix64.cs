@@ -226,7 +226,7 @@ namespace Hast.Algorithms
         }
 
         /// <summary>
-        /// Subtracts y from x. Performs saturating substraction, i.e. in case of overflow, 
+        /// Subtracts y from x. Performs saturating subtraction, i.e. in case of overflow, 
         /// rounds to MinValue or MaxValue depending on sign of operands.
         /// </summary>
         public static Fix64 operator -(Fix64 x, Fix64 y)
@@ -243,7 +243,7 @@ namespace Hast.Algorithms
         }
 
         /// <summary>
-        /// Subtracts y from x witout performing overflow checking. Should be inlined by the CLR.
+        /// Subtracts y from x without performing overflow checking. Should be inlined by the CLR.
         /// </summary>
         public static Fix64 FastSub(Fix64 x, Fix64 y)
         {
@@ -258,14 +258,14 @@ namespace Hast.Algorithms
             return sum;
         }
 
-        public static int[] ToIntegers(ulong number)
+        private static int[] ToIntegers(ulong number)
         {
             var low = (int)(number & uint.MaxValue);
             int high = (int)(number >> 32);
             return new int[] { low, high };
         }
 
-        public static int[] ToIntegers(long number)
+        private static int[] ToIntegers(long number)
         {
             var low = (int)(number & uint.MaxValue);
             int high = (int)(number >> 32);
@@ -366,7 +366,6 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 FastMul(Fix64 x, Fix64 y)
         {
-
             var xl = x.m_rawValue;
             var yl = y.m_rawValue;
 
