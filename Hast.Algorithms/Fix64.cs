@@ -125,7 +125,15 @@ namespace Hast.Algorithms
         public static Fix64 Floor(Fix64 value)
         {
             // Just zero out the fractional part
-            return new Fix64((long)((ulong)value.m_rawValue & 0xFFFFFFFF00000000));
+
+            // Creating the value 0xFFFFFFFF00000000. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            ulong mask = 0xFFFFFFFF;
+            mask <<= 32;
+            mask |= 0x00000000;
+
+            return new Fix64((long)((ulong)value.m_rawValue & mask));
         }
 
         /// <summary>
@@ -133,7 +141,14 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 Ceiling(Fix64 value)
         {
-            var hasFractionalPart = (value.m_rawValue & 0x00000000FFFFFFFF) != 0;
+            // Creating the value 0x00000000FFFFFFFF. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            long mask = 0x00000000;
+            mask <<= 32;
+            mask |= 0xFFFFFFFF;
+
+            var hasFractionalPart = (value.m_rawValue & mask) != 0;
             return hasFractionalPart ? Floor(value) + One() : value;
         }
 
@@ -143,13 +158,26 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 Round(Fix64 value)
         {
-            var fractionalPart = value.m_rawValue & 0x00000000FFFFFFFF;
+            // Creating the value 0x00000000FFFFFFFF. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            long mask = 0x00000000;
+            mask <<= 32;
+            mask |= 0xFFFFFFFF;
+
+            var fractionalPart = value.m_rawValue & mask;
             var integralPart = Floor(value);
-            if (fractionalPart < 0x80000000)
+
+            // Creating the value 0x80000000.
+            uint fractionalPartMask = 0x8000;
+            fractionalPartMask <<= 16;
+            fractionalPartMask |= 0x0000;
+
+            if (fractionalPart < fractionalPartMask)
             {
                 return integralPart;
             }
-            if (fractionalPart > 0x80000000)
+            if (fractionalPart > fractionalPartMask)
             {
                 return integralPart + One();
             }
@@ -218,15 +246,34 @@ namespace Hast.Algorithms
             return sum;
         }
 
+        public static int[] ToIntegers(ulong number)
+        {
+            var low = (int)(number & uint.MaxValue);
+            int high = (int)(number >> 32);
+            return new int[] { low, high };
+        }
+
+        public static int[] ToIntegers(long number)
+        {
+            var low = (int)(number & uint.MaxValue);
+            int high = (int)(number >> 32);
+            return new int[] { low, high };
+        }
+
         public static Fix64 operator *(Fix64 x, Fix64 y)
         {
-
             var xl = x.m_rawValue;
             var yl = y.m_rawValue;
 
-            var xlo = (ulong)(xl & 0x00000000FFFFFFFF);
+            // Creating the value 0x00000000FFFFFFFF. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            long mask = 0x00000000;
+            mask <<= 32;
+            mask |= 0xFFFFFFFF;
+            var xlo = (ulong)(xl & mask);
             var xhi = xl >> FRACTIONAL_PLACES;
-            var ylo = (ulong)(yl & 0x00000000FFFFFFFF);
+            var ylo = (ulong)(yl & mask);
             var yhi = yl >> FRACTIONAL_PLACES;
 
             var lolo = xlo * ylo;
@@ -306,9 +353,15 @@ namespace Hast.Algorithms
             var xl = x.m_rawValue;
             var yl = y.m_rawValue;
 
-            var xlo = (ulong)(xl & 0x00000000FFFFFFFF);
+            // Creating the value 0x00000000FFFFFFFF. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            long mask = 0x00000000;
+            mask <<= 32;
+            mask |= 0xFFFFFFFF;
+            var xlo = (ulong)(xl & mask);
             var xhi = xl >> FRACTIONAL_PLACES;
-            var ylo = (ulong)(yl & 0x00000000FFFFFFFF);
+            var ylo = (ulong)(yl & mask);
             var yhi = yl >> FRACTIONAL_PLACES;
 
             var lolo = xlo * ylo;
@@ -329,8 +382,24 @@ namespace Hast.Algorithms
         static int CountLeadingZeroes(ulong x)
         {
             int result = 0;
-            while ((x & 0xF000000000000000) == 0) { result += 4; x <<= 4; }
-            while ((x & 0x8000000000000000) == 0) { result += 1; x <<= 1; }
+
+            // Creating the value 0xF000000000000000. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            ulong mask1 = 0xF0000000;
+            mask1 <<= 32;
+            mask1 |= 0x00000000;
+            while ((x & mask1) == 0) { result += 4; x <<= 4; }
+
+            // Creating the value 0x8000000000000000. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            ulong mask2 = 0x80000000;
+            mask2 <<= 32;
+            mask2 |= 0x00000000;
+            while ((x & mask2) == 0) { result += 1; x <<= 1; }
+
+
             return result;
         }
 
@@ -357,6 +426,13 @@ namespace Hast.Algorithms
                 bitPos -= 4;
             }
 
+            // Creating the value 0xFFFFFFFFFFFFFFFF. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            ulong mask = 0xFFFFFFFF;
+            mask <<= 32;
+            mask |= 0xFFFFFFFF;
+
             while (remainder != 0 && bitPos >= 0)
             {
                 int shift = CountLeadingZeroes(remainder);
@@ -372,7 +448,7 @@ namespace Hast.Algorithms
                 quotient += div << bitPos;
 
                 // Detect overflow
-                if ((div & ~(0xFFFFFFFFFFFFFFFF >> bitPos)) != 0)
+                if ((div & ~(mask >> bitPos)) != 0)
                 {
                     return ((xl ^ yl) & MIN_VALUE) == 0 ? MaxValue() : MinValue();
                 }
@@ -471,6 +547,13 @@ namespace Hast.Algorithms
             {
                 bit >>= 2;
             }
+
+            // Creating the value 0x80000000UL. 
+            // This literal can't be directly used due to an ILSpy bug, see:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            ulong mask = 0x00000000;
+            mask <<= 32;
+            mask |= 0x80000000;
 
             // The main part is executed twice, in order to avoid
             // using 128 bit values in computations.
