@@ -155,7 +155,7 @@ namespace Hast.Samples.Consumer
                         switch (Configuration.SampleToRun)
                         {
                             case Sample.Fix64Showcase:
-                                Fix64ShowcaseSampleRunner.Configure(configuration);
+                                await Fix64ShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.GenomeMatcher:
                                 await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
