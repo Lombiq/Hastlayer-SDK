@@ -123,74 +123,74 @@ namespace Hast.Communication.Services
                     var executionTimeBytes = new byte[8];
                     var executionTimeByteCounter = 0;
 
-                    Action<byte, bool> processReceivedByte = (receivedByte, isLastOfBatch) =>
+                    void processReceivedByte(byte receivedByte, bool isLastOfBatch)
+                    {
+                        switch (communicationState)
                         {
-                            switch (communicationState)
-                            {
-                                case CommunicationConstants.Serial.CommunicationState.WaitForFirstResponse:
-                                    if (receivedByte == CommunicationConstants.Serial.Signals.Ping)
-                                    {
-                                        communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation;
-                                        serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
-                                    }
-                                    else
-                                    {
-                                        throw new SerialPortCommunicationException(
-                                            "Awaited a ping signal from the FPGA after it finished but received the following byte instead: " + 
-                                            receivedByte);
-                                    }
-                                    break;
-                                case CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation:
-                                    executionTimeBytes[executionTimeByteCounter] = receivedByte;
-                                    executionTimeByteCounter++;
-                                    if (executionTimeByteCounter == 8)
-                                    {
-                                        var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
+                            case CommunicationConstants.Serial.CommunicationState.WaitForFirstResponse:
+                                if (receivedByte == CommunicationConstants.Serial.Signals.Ping)
+                                {
+                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation;
+                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                }
+                                else
+                                {
+                                    throw new SerialPortCommunicationException(
+                                        "Awaited a ping signal from the FPGA after it finished but received the following byte instead: " +
+                                        receivedByte);
+                                }
+                                break;
+                            case CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation:
+                                executionTimeBytes[executionTimeByteCounter] = receivedByte;
+                                executionTimeByteCounter++;
+                                if (executionTimeByteCounter == 8)
+                                {
+                                    var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
 
-                                        SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+                                    SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                                        communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
-                                        serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
-                                    }
-                                    break;
-                                case CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount:
-                                    outputByteCountBytes[outputByteCountByteCounter] = receivedByte;
-                                    outputByteCountByteCounter++;
+                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
+                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                }
+                                break;
+                            case CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount:
+                                outputByteCountBytes[outputByteCountByteCounter] = receivedByte;
+                                outputByteCountByteCounter++;
 
-                                    if (outputByteCountByteCounter == 4)
-                                    {
-                                        outputByteCount = BitConverter.ToInt32(outputByteCountBytes, 0);
+                                if (outputByteCountByteCounter == 4)
+                                {
+                                    outputByteCount = BitConverter.ToInt32(outputByteCountBytes, 0);
 
-                                        // Since the output's size can differ from the input size for optimization reasons,
-                                        // we take the explicit size into account.
-                                        outputBytes = new byte[outputByteCount];
+                                    // Since the output's size can differ from the input size for optimization reasons,
+                                    // we take the explicit size into account.
+                                    outputBytes = new byte[outputByteCount];
 
-                                        Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
+                                    Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
-                                        communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOuput;
-                                        serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
-                                    }
-                                    break;
-                                case CommunicationConstants.Serial.CommunicationState.ReceivingOuput:
-                                    outputBytes[outputBytesReceivedCount] = receivedByte;
-                                    outputBytesReceivedCount++;
+                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOuput;
+                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                }
+                                break;
+                            case CommunicationConstants.Serial.CommunicationState.ReceivingOuput:
+                                outputBytes[outputBytesReceivedCount] = receivedByte;
+                                outputBytesReceivedCount++;
 
-                                    if (outputByteCount == outputBytesReceivedCount)
-                                    {
-                                        simpleMemory.Memory = outputBytes;
+                                if (outputByteCount == outputBytesReceivedCount)
+                                {
+                                    simpleMemory.Memory = outputBytes;
 
-                                        // Serial communication can give more data than we actually await, so need to 
-                                        // set this.
-                                        communicationState = CommunicationConstants.Serial.CommunicationState.Finished;
-                                        serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    // Serial communication can give more data than we actually await, so need to 
+                                    // set this.
+                                    communicationState = CommunicationConstants.Serial.CommunicationState.Finished;
+                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
 
-                                        taskCompletionSource.SetResult(true);
-                                    }
-                                    break;
-                                default:
-                                    break;
-                            }
-                        };
+                                    taskCompletionSource.SetResult(true);
+                                }
+                                break;
+                            default:
+                                break;
+                        }
+                    }
 
                     // In this event we are receiving the useful data coming from the FPGA board.
                     serialPort.DataReceived += (s, e) =>
