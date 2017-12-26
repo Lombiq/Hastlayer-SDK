@@ -8,7 +8,7 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
-    public class Fix64Showcase
+    public class Fix64Calculator
     {
         public const int CalculateLargeIntegerSum_InputInt32Index = 0;
         public const int CalculateLargeIntegerSum_OutputInt32Index = 0;
@@ -33,20 +33,20 @@ namespace Hast.Samples.SampleAssembly
     }
 
 
-    public static class Fix64ShowcaseeExtensions
+    public static class Fix64CalculatorExtensions
     {
-        public static Fix64 CalculateIntegerSumUpToNumber(this Fix64Showcase algorithm, int input)
+        public static Fix64 CalculateIntegerSumUpToNumber(this Fix64Calculator algorithm, int input)
         {
             var memory = new SimpleMemory(30);
 
-            memory.WriteInt32(Fix64Showcase.CalculateLargeIntegerSum_InputInt32Index, input);
+            memory.WriteInt32(Fix64Calculator.CalculateLargeIntegerSum_InputInt32Index, input);
 
             algorithm.CalculateIntegerSumUpToNumber(memory);
 
             return Fix64.FromRawInts(new[]
             {
-                memory.ReadInt32(Fix64Showcase.CalculateLargeIntegerSum_OutputInt32Index),
-                memory.ReadInt32(Fix64Showcase.CalculateLargeIntegerSum_OutputInt32Index + 1)
+                memory.ReadInt32(Fix64Calculator.CalculateLargeIntegerSum_OutputInt32Index),
+                memory.ReadInt32(Fix64Calculator.CalculateLargeIntegerSum_OutputInt32Index + 1)
             });
         }
     }

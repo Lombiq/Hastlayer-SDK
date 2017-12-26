@@ -28,7 +28,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.Fix64Showcase;
+        public static Sample SampleToRun = Sample.Fix64Calculator;
     }
 
 
@@ -95,8 +95,8 @@ namespace Hast.Samples.Consumer
                         // Letting the configuration of samples run. Check out those methods too!
                         switch (Configuration.SampleToRun)
                         {
-                            case Sample.Fix64Showcase:
-                                Fix64ShowcaseSampleRunner.Configure(configuration);
+                            case Sample.Fix64Calculator:
+                                Fix64CalculatorSampleRunner.Configure(configuration);
                                 break;
                             case Sample.GenomeMatcher:
                                 GenomeMatcherSampleRunner.Configure(configuration);
@@ -154,8 +154,8 @@ namespace Hast.Samples.Consumer
                         // Running samples.
                         switch (Configuration.SampleToRun)
                         {
-                            case Sample.Fix64Showcase:
-                                await Fix64ShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            case Sample.Fix64Calculator:
+                                await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.GenomeMatcher:
                                 await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);

@@ -45,7 +45,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Extensions\ArrayExtensions.cs" />
-    <Compile Include="Fix64Showcase.cs" />
+    <Compile Include="Fix64Calculator.cs" />
     <Compile Include="GenomeMatcher.cs" />
     <Compile Include="ParallelAlgorithm.cs" />
     <Compile Include="ImageContrastModifier.cs" />
