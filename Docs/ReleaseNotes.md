@@ -12,6 +12,8 @@ Note that the hardware framework projects have their own release cycle and relea
 - `Fix64` fixed-point number type added for computations with fractions.
 - Various smaller bugfixes and improvements.
 
+For all publicly tracked issues resolved with this release [see GitHub](https://github.com/Lombiq/Hastlayer-SDK/milestone/1?closed=1).
+
 
 ## 1.0.7, 25.11.2017
 
