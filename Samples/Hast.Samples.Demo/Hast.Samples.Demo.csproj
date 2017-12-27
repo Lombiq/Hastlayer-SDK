@@ -59,6 +59,10 @@
       <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
       <Name>Hast.Transformer.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj">
+      <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
+      <Name>Hast.Algorithms</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>

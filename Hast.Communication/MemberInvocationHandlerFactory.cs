@@ -43,7 +43,7 @@ namespace Hast.Communication
                     }
 
 
-                    Func<Task> invocationHandler = async () =>
+                    async Task invocationHandler()
                     {
                         using (var workContext = _wca.CreateWorkContextScope())
                         {
@@ -145,8 +145,8 @@ namespace Hast.Communication
                                     .Resolve<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)
                                     .Execute(
-                                        memory, 
-                                        memberId, 
+                                        memory,
+                                        memberId,
                                         new HardwareExecutionContext { ProxyGenerationConfiguration = configuration, HardwareRepresentation = hardwareRepresentation });
 
                                 if (configuration.VerifyHardwareResults)
@@ -177,7 +177,7 @@ namespace Hast.Communication
 
                             eventHandler.MemberExecutedOnHardware(invocationContext);
                         }
-                    };
+                    }
 
 
                     if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
