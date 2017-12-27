@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Hast.Algorithms;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
@@ -27,7 +28,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.ParallelAlgorithm;
+        public static Sample SampleToRun = Sample.Fix64Calculator;
     }
 
 
@@ -94,6 +95,9 @@ namespace Hast.Samples.Consumer
                         // Letting the configuration of samples run. Check out those methods too!
                         switch (Configuration.SampleToRun)
                         {
+                            case Sample.Fix64Calculator:
+                                Fix64CalculatorSampleRunner.Configure(configuration);
+                                break;
                             case Sample.GenomeMatcher:
                                 GenomeMatcherSampleRunner.Configure(configuration);
                                 break;
@@ -133,7 +137,8 @@ namespace Hast.Samples.Consumer
                             new[]
                             {
                                 // Selecting any type from the sample assembly here just to get its Assembly object.
-                                typeof(PrimeCalculator).Assembly
+                                typeof(PrimeCalculator).Assembly,
+                                typeof(Fix64).Assembly
                             },
                             configuration);
 
@@ -149,6 +154,9 @@ namespace Hast.Samples.Consumer
                         // Running samples.
                         switch (Configuration.SampleToRun)
                         {
+                            case Sample.Fix64Calculator:
+                                await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
                             case Sample.GenomeMatcher:
                                 await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
