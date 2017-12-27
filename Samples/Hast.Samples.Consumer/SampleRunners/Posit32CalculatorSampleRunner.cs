@@ -12,15 +12,12 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.AddHardwareEntryPointType<PositCalculator>();
-            configuration.TransformerConfiguration().AddLengthForMultipleArrays(
-    PositCalculator.EnvironmentFactory().EmptyBitMask.SegmentCount,
-    PositCalculatorExtensions.ManuallySizedArrays);
+            configuration.AddHardwareEntryPointType<Posit32Calculator>();
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator());
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator());
 
             var result = positCalculator.CountUpToNumber(100000);
         }
