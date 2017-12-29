@@ -4,7 +4,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    ///  Algorithm to find the weight and centre of mass of a section of torus with varying density.
+    /// Algorithm to find the weight and center of mass of a section of torus with varying density. Also see 
+    /// <see cref="MonteCarloAlgorithmSampleRunner"/> on what to configure to make this work.
     ///  
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>

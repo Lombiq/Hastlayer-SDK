@@ -20,12 +20,6 @@ namespace Hast.Samples.Demo
 
                     configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
-                    configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                        new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
-                        {
-                            MaxDegreeOfParallelism = ParallelAlgorithm.MaxDegreeOfParallelism
-                        });
-
                     configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
                     hastlayer.ExecutedOnHardware += (sender, e) =>

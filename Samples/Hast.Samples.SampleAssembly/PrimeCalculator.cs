@@ -5,7 +5,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Example for a SimpleMemory-using algorithm.
+    /// Example for a SimpleMemory-using algorithm. Also see <see cref="PrimeCalculatorSampleRunner"/> on what to 
+    /// configure to make this work.
     /// </summary>
     public class PrimeCalculator
     {

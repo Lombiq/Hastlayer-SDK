@@ -10,7 +10,8 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Sample using the <see cref="Fix64"/> 64 fixed-point number type. This is useful if you need more involved
-    /// calculations with fractions where simply scaling the numbers up and down is not enough.
+    /// calculations with fractions where simply scaling the numbers up and down is not enough. Also see 
+    /// <see cref="Fix64CalculatorSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class Fix64Calculator
     {
