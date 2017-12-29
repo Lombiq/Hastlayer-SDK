@@ -26,9 +26,9 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// member, then it calls itself (depth 1), then it calls itself (depth 2), then it calls itself (depth 3)
         /// before returning.
         /// </example>
-        public ushort MaxRecursionDepth { get; set; }
+        public int MaxRecursionDepth { get; set; }
 
-        private ushort _maxDegreeOfParallelism;
+        private int _maxDegreeOfParallelism;
         /// <summary>
         /// Gets or sets the maximal degree of parallelism that will be attempted to build into the generated hardware
         /// when constructs suitable for hardware-level parallelisation are found.
@@ -36,7 +36,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// <example>
         /// A value of 3 would mean that maximally 3 instances will be able to be executed in parallel.
         /// </example>
-        public ushort MaxDegreeOfParallelism
+        public int MaxDegreeOfParallelism
         {
             get { return _maxDegreeOfParallelism; }
             set
@@ -50,7 +50,6 @@ namespace Hast.Transformer.Abstractions.Configuration
             }
         }
 
-        // But why do I need to cast to uint? http://stackoverflow.com/questions/10065287/why-is-ushort-ushort-equal-to-int#comment58098182_10157517
         public int MaxInvocationInstanceCount { get { return (MaxRecursionDepth + 1) * MaxDegreeOfParallelism; } }
 
 
@@ -65,6 +64,13 @@ namespace Hast.Transformer.Abstractions.Configuration
             MemberNamePrefix = memberNamePrefix;
             MaxDegreeOfParallelism = 1;
         }
+
+
+        /// <summary>
+        /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix
+        /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
+        public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
+            simpleName + ".LambdaExpression." + lambdaExpressionIndex.ToString();
     }
 
 
@@ -95,6 +101,6 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </param>
         public MemberInvocationInstanceCountConfigurationForMethod(
             Expression<Action<T>> expression, int lambdaExpressionIndex)
-            : base(expression.GetMethodSimpleName() + ".LambdaExpression." + lambdaExpressionIndex.ToString()) { }
+            : base(AddLambdaExpressionIndexToSimpleName(expression.GetMethodSimpleName(), lambdaExpressionIndex)) { }
     }
 }

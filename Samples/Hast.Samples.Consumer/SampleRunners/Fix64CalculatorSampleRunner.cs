@@ -14,12 +14,6 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Fix64Calculator>();
-
-            configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                new MemberInvocationInstanceCountConfigurationForMethod<Fix64Calculator>(f => f.ParallelizedCalculateIntegerSumUpToNumber(null), 0)
-                {
-                    MaxDegreeOfParallelism = Fix64Calculator.MaxDegreeOfParallelism
-                });
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
