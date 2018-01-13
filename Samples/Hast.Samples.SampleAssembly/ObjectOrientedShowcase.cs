@@ -4,6 +4,7 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Object-oriented code can be written with Hastlayer as usual. This will also be directly mapped to hardware.
+    /// Also see <see cref="ObjectOrientedShowcaseSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class ObjectOrientedShowcase
     {
@@ -31,13 +32,21 @@ namespace Hast.Samples.SampleAssembly
             numberContainers1[1].IncreaseNumber(5);
             numberContainers1[2].IncreaseNumberBy10();
 
+            // Using ref and out.
+            uint increaseBy = 10;
+            uint originalNumber;
+            numberContainers1[3].IncreaseNumberByParameterTimes10(ref increaseBy, out originalNumber);
+            numberContainers1[3].IncreaseNumber(increaseBy + originalNumber);
+
 
             // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
             // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a 
             // variable then its value should be computable from all other values at compile-time).
             var numberContainers2 = new NumberContainer[1];
-            var numberContainer = new NumberContainer();
-            numberContainer.Number = 5;
+            var numberContainer = new NumberContainer
+            {
+                Number = 5
+            };
             numberContainer.Number = numberContainer.NumberPlusFive;
             if (!numberContainer.WasIncreased)
             {
@@ -108,6 +117,14 @@ namespace Hast.Samples.SampleAssembly
 
         // Methods can call each other as usual.
         public uint IncreaseNumberBy10() => IncreaseNumber(10);
+
+        // Ref and out parameters are supported. Sorry for the forced example!
+        public void IncreaseNumberByParameterTimes10(ref uint increaseBy, out uint originalNumber)
+        {
+            originalNumber = Number;
+            increaseBy *= 10;
+            IncreaseNumber(increaseBy);
+        }
     }
 
 
@@ -132,7 +149,7 @@ namespace Hast.Samples.SampleAssembly
     {
         public static uint Run(this ObjectOrientedShowcase algorithm, uint input)
         {
-            var memory = new SimpleMemory(1);
+            var memory = new SimpleMemory(10);
             memory.WriteUInt32(ObjectOrientedShowcase.Run_InputUInt32Index, input);
             algorithm.Run(memory);
             return memory.ReadUInt32(ObjectOrientedShowcase.Run_OutputUInt32Index);

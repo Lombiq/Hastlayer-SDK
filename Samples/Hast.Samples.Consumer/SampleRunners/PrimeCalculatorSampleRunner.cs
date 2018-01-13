@@ -14,13 +14,6 @@ namespace Hast.Samples.Consumer.SampleRunners
             // A not statically typed way of doing the same as above would be:
             //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
             // Note that the bottom version can also be used to add multiple types from under a namespace.
-
-            // The degree of parallelism for parallel constructs need to be configured by hand at the moment.
-            configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                new MemberInvocationInstanceCountConfigurationForMethod<PrimeCalculator>(p => p.ParallelizedArePrimeNumbers(null), 0)
-                {
-                    MaxDegreeOfParallelism = PrimeCalculator.MaxDegreeOfParallelism
-                });
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
