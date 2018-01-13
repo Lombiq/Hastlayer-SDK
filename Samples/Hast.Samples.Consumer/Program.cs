@@ -45,7 +45,8 @@ namespace Hast.Samples.Consumer
             var result = new Posit32Calculator().CountUpToNumber(100000);
             sw.Stop();
 
-            Console.WriteLine(sw.ElapsedMilliseconds + "ms" + result);
+            Console.WriteLine("Result: " + result);
+            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
 
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
