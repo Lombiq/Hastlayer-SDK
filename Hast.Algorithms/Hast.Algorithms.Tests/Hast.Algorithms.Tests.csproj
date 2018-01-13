@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CB4A8CF6-7DD4-4493-B5CD-E5E51EE5C73B}</ProjectGuid>
+    <ProjectGuid>{EB781B61-C535-4A9B-A039-E28B56ACCB64}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Samples.SampleAssembly</RootNamespace>
-    <AssemblyName>Hast.Samples.SampleAssembly</AssemblyName>
+    <RootNamespace>Hast.Algorithms.Tests</RootNamespace>
+    <AssemblyName>Hast.Algorithms.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,57 +30,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.mocks, Version=2.5.10.11092, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\NUnit.2.5.10.11092\lib\nunit.mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="pnunit.framework, Version=1.0.4109.34242, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\NUnit.2.5.10.11092\lib\pnunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Extensions\ArrayExtensions.cs" />
-    <Compile Include="Fix64Calculator.cs" />
-    <Compile Include="GenomeMatcher.cs" />
-    <Compile Include="ParallelAlgorithm.cs" />
-    <Compile Include="ImageContrastModifier.cs" />
-    <Compile Include="ImageFilter.cs" />
-    <Compile Include="MonteCarloAlgorithm.cs" />
-    <Compile Include="MonteCarloResult.cs" />
-    <Compile Include="ObjectOrientedShowcase.cs" />
-    <Compile Include="PrimeCalculator.cs" />
+    <Compile Include="Fix64Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecursiveAlgorithms.cs" />
-    <Compile Include="SimdCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
-      <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
-      <Name>Hast.Transformer.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj">
-      <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
+    <ProjectReference Include="..\Hast.Algorithms.csproj">
+      <Project>{0dc6fd30-4c53-4805-996b-e34a98efebaa}</Project>
       <Name>Hast.Algorithms</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
-      <Project>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</Project>
-      <Name>Hast.Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Readme.md" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
