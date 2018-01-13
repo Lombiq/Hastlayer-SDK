@@ -5,7 +5,7 @@
 Note that the hardware framework projects have their own release cycle and release notes.
 
 
-## vNext
+## 1.0.8, 13.01.2017
 
 - Adding ability to inline methods to vastly improve performance if the method is small but called a lot of times.
 - Adding support for `ref` and `out` parameters, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/15).
@@ -13,7 +13,7 @@ Note that the hardware framework projects have their own release cycle and relea
 - Simplified configuration of parallelized code: no need to manually specify the degree of parallelism any more in most cases (see `ParallelAlgorithmSampleRunner` for example: `Configure()` is just one line now).
 - Various smaller bugfixes and improvements.
 
-For all publicly tracked issues resolved with this release [see GitHub](https://github.com/Lombiq/Hastlayer-SDK/milestone/1?closed=1).
+For all publicly tracked issues resolved with this release [see the corresponding milestone](https://github.com/Lombiq/Hastlayer-SDK/milestone/1?closed=1).
 
 
 ## 1.0.7, 25.11.2017
