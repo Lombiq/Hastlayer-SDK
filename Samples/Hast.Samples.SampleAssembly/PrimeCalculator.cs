@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
@@ -94,21 +95,10 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var currentNumber = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
 
+                    // Note that you can just call (thread-safe) methods from inside Tasks as usual. In hardware those
+                    // invoked methods will be copied together with the Tasks' bodies too.
                     tasks[m] = Task.Factory.StartNew(
-                        numberObject =>
-                        {
-                            // This is a copy of the body of IsPrimeNumberInternal(). We could also call that method
-                            // from this lambda but it's more efficient to just do it directly, not adding indirection.
-                            var number = (uint)numberObject;
-                            uint factor = number / 2;
-
-                            for (uint x = 2; x <= factor; x++)
-                            {
-                                if ((number % x) == 0) return false;
-                            }
-
-                            return true;
-                        },
+                        numberObject => IsPrimeNumberInternal((uint)numberObject),
                         currentNumber);
                 }
 
@@ -131,17 +121,35 @@ namespace Hast.Samples.SampleAssembly
         /// Because when you want to pass data between methods you can freely use supported types as arguments, you 
         /// don't need to pass data through SimpleMemory.
         /// </summary>
+        /// <remarks>
+        /// Note the usage of the AggressiveInlining option, which tells Hastlayer that the method can be inlined, i.e.
+        /// basically its implementation can be copied over to where it is called. This is a performance optimization:
+        /// this way the overhead of method calls is eliminated and thus execution will be faster (very useful if you 
+        /// have small methods called frequently, like this one from ParallelizedArePrimeNumbers()) but the hardware 
+        /// implementation will most possibly use more resources from the FPGA (though not always; since the method 
+        /// invocation was cut out it can even utilize less resources, check for your program).
+        /// 
+        /// In the case of the PrimeCalculator sample inlining this method had the following effects:
+        /// - Execution time went down: ArePrimeNumbers() took 1151ms without and 1069ms with inlining (-7%), 
+        ///   ParallelizedArePrimeNumbers() took 64ms without and 60ms with inlining (-6%).
+        /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that 
+        ///   limits further use).
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsPrimeNumberInternal(uint number)
         {
             uint factor = number / 2;
             //uint factor = Math.Sqrt(number); // Math.Sqrt() can't be processed because it's not a managed method.
 
-            for (uint i = 2; i <= factor; i++)
+            // i mustn't be an int, because due to the mismatch with the uint number and factor all of these would be
+            // cast to long by the C# compiler, resulting in much slower hardware.
+            uint i = 2;
+            while (i <= factor && number % i != 0)
             {
-                if ((number % i) == 0) return false;
+                i++;
             }
 
-            return true;
+            return i == factor + 1;
         }
     }
 
