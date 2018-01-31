@@ -4,14 +4,15 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer.
+    /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer. Also see 
+    /// <see cref="ParallelAlgorithmSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class ParallelAlgorithm
     {
+        private const int MaxDegreeOfParallelism = 280;
+
         public const int Run_InputUInt32Index = 0;
         public const int Run_OutputUInt32Index = 0;
-
-        public const int MaxDegreeOfParallelism = 280;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -19,6 +20,9 @@ namespace Hast.Samples.SampleAssembly
             var input = memory.ReadUInt32(Run_InputUInt32Index);
             var tasks = new Task<uint>[MaxDegreeOfParallelism];
 
+            // Hastlayer will figure out how many Tasks you want to start if you kick them off in a loop like this.
+            // If this is more involved then you'll need to tell Hastlayer the level of parallelism, see the comment in
+            // ParallelAlgorithmSampleRunner.
             for (uint i = 0; i < MaxDegreeOfParallelism; i++)
             {
                 tasks[i] = Task.Factory.StartNew(

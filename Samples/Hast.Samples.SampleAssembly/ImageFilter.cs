@@ -4,7 +4,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running convolution image processing on images.
+    /// Algorithm for running convolution image processing on images. Also see <see cref="ImageFilterSampleRunner"/> on
+    /// what to configure to make this work.
     /// 
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>

@@ -13,12 +13,6 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
-            configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                new MemberInvocationInstanceCountConfigurationForMethod<ImageContrastModifier>(i => i.ChangeContrast(null), 0)
-                {
-                    MaxDegreeOfParallelism = ImageContrastModifier.MaxDegreeOfParallelism
-                });
-
             // ImageFilter is not parallelized, so not including it not to take away FPGA resources from 
             // ImageContrastModifier.
             //configuration.AddHardwareEntryPointType<ImageFilter>();

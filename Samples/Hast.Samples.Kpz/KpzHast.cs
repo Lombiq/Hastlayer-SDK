@@ -47,13 +47,6 @@ namespace Hast.Samples.Kpz
             if (_kpzTarget.HastlayerParallelizedAlgorithm())
             {
                 configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
-
-                configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                    new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(
-                        k => k.ScheduleIterations(null), 0)
-                    {
-                        MaxDegreeOfParallelism = KpzKernelsParallelizedInterface.ParallelTasks
-                    });
             }
             else if (_kpzTarget.HastlayerPlainAlgorithm())
             {

@@ -10,7 +10,8 @@ namespace Hast.Algorithms.Tests
 {
     public class Fix64Tests
     {
-        long[] m_testCases = new[] {
+        private long[] _testCases = new[]
+        {
             // Small numbers
             0L, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
             -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,
@@ -44,6 +45,7 @@ namespace Hast.Algorithms.Tests
             -359, 491, 844, 158, -413, -422, -737, -575, -330,
             -376, 435, -311, 116, 715, -1024, -487, 59, 724, 993
         };
+
 
         [Test]
         public void Precision()
@@ -85,16 +87,6 @@ namespace Hast.Algorithms.Tests
             {
                 AreEqualWithinPrecision(value, (double)(Fix64)value);
             }
-        }
-
-        static void AreEqualWithinPrecision(decimal value1, decimal value2)
-        {
-            Assert.True(Math.Abs(value2 - value1) < Fix64.Precision);
-        }
-
-        static void AreEqualWithinPrecision(double value1, double value2)
-        {
-            Assert.True(Math.Abs(value2 - value1) < (double)Fix64.Precision);
         }
 
         [Test]
@@ -170,12 +162,12 @@ namespace Hast.Algorithms.Tests
         {
             var sw = new Stopwatch();
             int failures = 0;
-            for (int i = 0; i < m_testCases.Length; ++i)
+            for (int i = 0; i < _testCases.Length; ++i)
             {
-                for (int j = 0; j < m_testCases.Length; ++j)
+                for (int j = 0; j < _testCases.Length; ++j)
                 {
-                    var x = Fix64.FromRaw(m_testCases[i]);
-                    var y = Fix64.FromRaw(m_testCases[j]);
+                    var x = Fix64.FromRaw(_testCases[i]);
+                    var y = Fix64.FromRaw(_testCases[j]);
                     var xM = (decimal)x;
                     var yM = (decimal)y;
                     var expected = xM * yM;
@@ -193,36 +185,33 @@ namespace Hast.Algorithms.Tests
                     if (Math.Abs(actualM - expected) > maxDelta)
                     {
                         Console.WriteLine("Failed for FromRaw({0}) * FromRaw({1}): expected {2} but got {3}",
-                                          m_testCases[i],
-                                          m_testCases[j],
+                                          _testCases[i],
+                                          _testCases[j],
                                           (Fix64)expected,
                                           actualM);
                         ++failures;
                     }
                 }
             }
-            Console.WriteLine("{0} total, {1} per multiplication", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (m_testCases.Length * m_testCases.Length));
+            Console.WriteLine("{0} total, {1} per multiplication", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
-
-
-        static void Ignore<T>(T value) { }
 
         [Test]
         public void DivisionTestCases()
         {
             var sw = new Stopwatch();
             int failures = 0;
-            for (int i = 0; i < m_testCases.Length; ++i)
+            for (int i = 0; i < _testCases.Length; ++i)
             {
-                for (int j = 0; j < m_testCases.Length; ++j)
+                for (int j = 0; j < _testCases.Length; ++j)
                 {
-                    var x = Fix64.FromRaw(m_testCases[i]);
-                    var y = Fix64.FromRaw(m_testCases[j]);
+                    var x = Fix64.FromRaw(_testCases[i]);
+                    var y = Fix64.FromRaw(_testCases[j]);
                     var xM = (decimal)x;
                     var yM = (decimal)y;
 
-                    if (m_testCases[j] == 0)
+                    if (_testCases[j] == 0)
                     {
                         Assert.Throws<DivideByZeroException>(() => Ignore(x / y));
                     }
@@ -243,8 +232,8 @@ namespace Hast.Algorithms.Tests
                         if (Math.Abs(actualM - expected) > maxDelta)
                         {
                             Console.WriteLine("Failed for FromRaw({0}) / FromRaw({1}): expected {2} but got {3}",
-                                              m_testCases[i],
-                                              m_testCases[j],
+                                              _testCases[i],
+                                              _testCases[j],
                                               (Fix64)expected,
                                               actualM);
                             ++failures;
@@ -252,11 +241,9 @@ namespace Hast.Algorithms.Tests
                     }
                 }
             }
-            Console.WriteLine("{0} total, {1} per division", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (m_testCases.Length * m_testCases.Length));
+            Console.WriteLine("{0} total, {1} per division", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
-
-
 
         [Test]
         public void Sign()
@@ -345,9 +332,9 @@ namespace Hast.Algorithms.Tests
         [Test]
         public void Sqrt()
         {
-            for (int i = 0; i < m_testCases.Length; ++i)
+            for (int i = 0; i < _testCases.Length; ++i)
             {
-                var f = Fix64.FromRaw(m_testCases[i]);
+                var f = Fix64.FromRaw(_testCases[i]);
                 if (Fix64.Sign(f) < 0)
                 {
                     Assert.Throws<ArgumentOutOfRangeException>(() => Fix64.Sqrt(f));
@@ -366,9 +353,9 @@ namespace Hast.Algorithms.Tests
         public void Modulus()
         {
             var deltas = new List<decimal>();
-            foreach (var operand1 in m_testCases)
+            foreach (var operand1 in _testCases)
             {
-                foreach (var operand2 in m_testCases)
+                foreach (var operand2 in _testCases)
                 {
                     var f1 = Fix64.FromRaw(operand1);
                     var f2 = Fix64.FromRaw(operand2);
@@ -397,7 +384,7 @@ namespace Hast.Algorithms.Tests
         [Test]
         public void Negation()
         {
-            foreach (var operand1 in m_testCases)
+            foreach (var operand1 in _testCases)
             {
                 var f = Fix64.FromRaw(operand1);
                 if (f == Fix64.MinValue())
@@ -416,9 +403,9 @@ namespace Hast.Algorithms.Tests
         [Test]
         public void Equals()
         {
-            foreach (var op1 in m_testCases)
+            foreach (var op1 in _testCases)
             {
-                foreach (var op2 in m_testCases)
+                foreach (var op2 in _testCases)
                 {
                     var d1 = (decimal)op1;
                     var d2 = (decimal)op2;
@@ -430,7 +417,7 @@ namespace Hast.Algorithms.Tests
         [Test]
         public void EqualityAndInequalityOperators()
         {
-            var sources = m_testCases.Select(Fix64.FromRaw).ToList();
+            var sources = _testCases.Select(Fix64.FromRaw).ToList();
             foreach (var op1 in sources)
             {
                 foreach (var op2 in sources)
@@ -448,7 +435,7 @@ namespace Hast.Algorithms.Tests
         [Test, Ignore]
         public void CompareTo()
         {
-            var nums = m_testCases.Select(Fix64.FromRaw).ToArray();
+            var nums = _testCases.Select(Fix64.FromRaw).ToArray();
             var numsDecimal = nums.Select(t => (decimal)t).ToArray();
             Array.Sort(nums);
             Array.Sort(numsDecimal);
@@ -458,10 +445,23 @@ namespace Hast.Algorithms.Tests
         [Test]
         public void SerializationToAndFromIntegers()
         {
-            foreach (var testCase in m_testCases.Select(Fix64.FromRaw))
+            foreach (var testCase in _testCases.Select(Fix64.FromRaw))
             {
                 Assert.AreEqual(testCase, Fix64.FromRawInts(testCase.ToIntegers()));
             }
+        }
+
+
+        static void Ignore<T>(T value) { }
+
+        static void AreEqualWithinPrecision(decimal value1, decimal value2)
+        {
+            Assert.True(Math.Abs(value2 - value1) < Fix64.Precision);
+        }
+
+        static void AreEqualWithinPrecision(double value1, double value2)
+        {
+            Assert.True(Math.Abs(value2 - value1) < (double)Fix64.Precision);
         }
     }
 }
