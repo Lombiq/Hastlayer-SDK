@@ -34,8 +34,7 @@ namespace Hast.Samples.SampleAssembly
 
             // Using ref and out.
             uint increaseBy = 10;
-            uint originalNumber;
-            numberContainers1[3].IncreaseNumberByParameterTimes10(ref increaseBy, out originalNumber);
+            numberContainers1[3].IncreaseNumberByParameterTimes10(ref increaseBy, out uint originalNumber);
             numberContainers1[3].IncreaseNumber(increaseBy + originalNumber);
 
 

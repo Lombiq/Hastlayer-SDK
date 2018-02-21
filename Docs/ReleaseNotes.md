@@ -5,6 +5,11 @@
 Note that the hardware framework projects have their own release cycle and release notes.
 
 
+## vNext
+
+Note that running Hastlayer now requires Visual Studio 2017 or greater (any edition will work).
+
+
 ## 1.0.8, 13.01.2017
 
 - Adding ability to inline methods to vastly improve performance if the method is small but called a lot of times.
