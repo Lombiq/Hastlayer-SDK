@@ -5,7 +5,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running Smith-Waterman Genome Matcher.
+    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <see cref="GenomeMatcherSampleRunner"/> on what 
+    /// to configure to make this work.
     /// 
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>

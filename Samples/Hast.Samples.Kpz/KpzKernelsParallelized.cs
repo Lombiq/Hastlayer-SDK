@@ -106,7 +106,7 @@ namespace Hast.Samples.Kpz
                 taskLocals[TaskLocalsIndex].prng2.state |= ((ulong)randomSeedTemp) << 32;
             }
 
-            // What is IterationGroupIndex good for?
+            // What is iterationGroupIndex good for?
             // IterationPerTask needs to be between 0.5 and 1 based on the e-mail of Mate.
             // If we want 10 iterations, and starting a full series of tasks makes half iteration on the full table,
             // then we need to start it 20 times (thus IterationGroupSize will be 20).
@@ -115,26 +115,26 @@ namespace Hast.Samples.Kpz
             randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
             prng0.state |= ((ulong)randomSeedTemp) << 32;
 
-            for (int IterationGroupIndex = 0; IterationGroupIndex < iterationGroupSize; IterationGroupIndex++)
+            for (int iterationGroupIndex = 0; iterationGroupIndex < iterationGroupSize; iterationGroupIndex++)
             {
                 uint randomValue0 = prng0.NextUInt32();
                 // This assumes that LocalGridSize is 2^N:
-                int RandomXOffset = (int)((LocalGridSize - 1) & randomValue0);
-                int RandomYOffset = (int)((LocalGridSize - 1) & (randomValue0 >> 16));
-                for (int ScheduleIndex = 0; ScheduleIndex < SchedulesPerIteration; ScheduleIndex++)
+                int randomXOffset = (int)((LocalGridSize - 1) & randomValue0);
+                int randomYOffset = (int)((LocalGridSize - 1) & (randomValue0 >> 16));
+                for (int scheduleIndex = 0; scheduleIndex < SchedulesPerIteration; scheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
                     for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
                     {
                         // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex 
                         // (and the random added value)
-                        int localGridIndex = parallelTaskIndex + ScheduleIndex * ParallelTasks;
+                        int localGridIndex = parallelTaskIndex + scheduleIndex * ParallelTasks;
                         // The X and Y coordinate within the small table (local grid):
                         int partitionX = localGridIndex % LocalGridPartitions;
                         int partitionY = localGridIndex / LocalGridPartitions;
                         // The X and Y coordinate within the big table (grid):
-                        int baseX = partitionX * LocalGridSize + RandomXOffset;
-                        int baseY = partitionY * LocalGridSize + RandomYOffset;
+                        int baseX = partitionX * LocalGridSize + randomXOffset;
+                        int baseY = partitionY * LocalGridSize + randomYOffset;
 
                         // Copy to local memory
                         for (int copyDstX = 0; copyDstX < LocalGridSize; copyDstX++)
@@ -216,13 +216,13 @@ namespace Hast.Samples.Kpz
                     for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
                     {
                         // Calculate these things again
-                        int localGridIndex = parallelTaskIndex + ScheduleIndex * ParallelTasks;
+                        int localGridIndex = parallelTaskIndex + scheduleIndex * ParallelTasks;
                         // The X and Y coordinate within the small table (local grid):
                         int partitionX = localGridIndex % LocalGridPartitions;
                         int partitionY = localGridIndex / LocalGridPartitions;
                         // The X and Y coordinate within the big table (grid):
-                        int baseX = partitionX * LocalGridSize + RandomXOffset;
-                        int baseY = partitionY * LocalGridSize + RandomYOffset;
+                        int baseX = partitionX * LocalGridSize + randomXOffset;
+                        int baseY = partitionY * LocalGridSize + randomYOffset;
                         //Console.WriteLine("CopyBack | Task={0}, To: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
 
                         for (int copySrcX = 0; copySrcX < LocalGridSize; copySrcX++)

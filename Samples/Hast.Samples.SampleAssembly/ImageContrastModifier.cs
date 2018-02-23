@@ -5,7 +5,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for changing the contrast of an image.
+    /// Algorithm for changing the contrast of an image. Also see <see cref="ImageContrastModifiermSampleRunner"/> on
+    /// what to configure to make this work.
     /// </summary>
     public class ImageContrastModifier
     {

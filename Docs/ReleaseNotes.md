@@ -5,6 +5,22 @@
 Note that the hardware framework projects have their own release cycle and release notes.
 
 
+## vNext
+
+Note that running Hastlayer now requires Visual Studio 2017 or greater (any edition will work).
+
+
+## 1.0.8, 13.01.2017
+
+- Adding ability to inline methods to vastly improve performance if the method is small but called a lot of times.
+- Adding support for `ref` and `out` parameters, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/15).
+- `Fix64` fixed-point number type added for computations with fractions.
+- Simplified configuration of parallelized code: no need to manually specify the degree of parallelism any more in most cases (see `ParallelAlgorithmSampleRunner` for example: `Configure()` is just one line now).
+- Various smaller bugfixes and improvements.
+
+For all publicly tracked issues resolved with this release [see the corresponding milestone](https://github.com/Lombiq/Hastlayer-SDK/milestone/1?closed=1).
+
+
 ## 1.0.7, 25.11.2017
 
 - Adding sample with an implementation of the 3D [Kardar-Parisi-Zhang](https://en.wikipedia.org/wiki/Kardar%E2%80%93Parisi%E2%80%93Zhang_equation) surface growth simulation algorithm. Made in collaboration with the [Wigner Research Centre for Physics](http://wigner.mta.hu/en/) to test against an existing GPU implementation (testing is upcoming).
@@ -29,7 +45,7 @@ Note that the hardware framework projects have their own release cycle and relea
 
 - Fixing `HardwareGenerationConfiguration.AddHardwareEntryPointType()`, it now only adds the actual type as an entry point, not other types with similar names too.
 - Improved documentation.
-- Various smaller bugfixes and improvements
+- Various smaller bugfixes and improvements.
 
 
 ## 1.0.4, 08.09.2017

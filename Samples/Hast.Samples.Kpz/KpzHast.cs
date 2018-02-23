@@ -39,7 +39,7 @@ namespace Hast.Samples.Kpz
             };
 
             var configuration = new HardwareGenerationConfiguration((await hastlayer.GetSupportedDevices()).First().Name);
-            configuration.VhdlTransformerConfiguration().VhdlGenerationMode = VhdlGenerationMode.Debug;
+            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;
 
             LogItFunction("Generating hardware...");
@@ -47,13 +47,6 @@ namespace Hast.Samples.Kpz
             if (_kpzTarget.HastlayerParallelizedAlgorithm())
             {
                 configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
-
-                configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-                    new MemberInvocationInstanceCountConfigurationForMethod<KpzKernelsParallelizedInterface>(
-                        k => k.ScheduleIterations(null), 0)
-                    {
-                        MaxDegreeOfParallelism = KpzKernelsParallelizedInterface.ParallelTasks
-                    });
             }
             else if (_kpzTarget.HastlayerPlainAlgorithm())
             {
