@@ -25,9 +25,9 @@ If a *Hast.Core* projects needs to have types accessible in the Client flavor th
 
 Note that if either kinds of projects reference another project that should be treated in the same way, with a manifest file and build output directories set (see e.g. `Hast.VhdlBuilder`).
 
-When merging from the `dev` to the `client` branch make sure to remove newly added *Hast.Core* subrepos after the merge.
+When merging from the `dev` to the `client` branch make sure to not merge entries for newly added *Hast.Core* subrepos (or remove them after the merge).
 
 
 ## When creating a new project
 
-If you add a new project to the solution make sure link the *SharedAssemblyInfo.cs* file from the root to it. See the comments in the file on what that is.
+If you add a new project to the solution make sure link the *SharedAssemblyInfo.cs* file from the root to its Properties node. See the comments in the file on what that is.

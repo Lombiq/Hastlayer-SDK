@@ -77,7 +77,7 @@ namespace Hast.Samples.Consumer
                         var devices = await hastlayer.GetSupportedDevices();
                         // Let's just use the first one that is available. However you might want to use a specific
                         // device, not just any first one.
-                        var configuration = new HardwareGenerationConfiguration(devices.First().Name);
+                        var configuration = new HardwareGenerationConfiguration(devices.First(device => device.Name == "Catapult").Name);
 
                         // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                         // here:

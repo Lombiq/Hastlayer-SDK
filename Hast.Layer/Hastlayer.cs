@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Autofac;
+using Hast.Catapult.Abstractions;
 using Hast.Communication;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
@@ -225,7 +226,8 @@ namespace Hast.Layer
                 typeof(IProxyGenerator).Assembly,
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
-                typeof(Nexys4DdrManifestProvider).Assembly
+                typeof(Nexys4DdrManifestProvider).Assembly,
+                typeof(CatapultManifestProvider).Assembly
             }
             .ToList();
 
