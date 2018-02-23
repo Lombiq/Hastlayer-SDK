@@ -91,15 +91,17 @@ namespace Hast.Samples.SampleAssembly
             int i = 0;
             while (i < numberCount)
             {
+                // Note that you can read/write multiple values to SimpleMemory at once. On capable platforms this will
+                // correspond to batched read/writes, which are much faster than doing them one by one.
+                var numbers = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, MaxDegreeOfParallelism);
+
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    var currentNumber = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
-
                     // Note that you can just call (thread-safe) methods from inside Tasks as usual. In hardware those
                     // invoked methods will be copied together with the Tasks' bodies too.
                     tasks[m] = Task.Factory.StartNew(
                         numberObject => IsPrimeNumberInternal((uint)numberObject),
-                        currentNumber);
+                        numbers[m]);
                 }
 
                 // Hastlayer doesn't support async code at the moment since ILSpy doesn't handle the new Roslyn-compiled

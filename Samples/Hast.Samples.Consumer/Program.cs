@@ -28,7 +28,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
         /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.ParallelAlgorithm;
+        public static Sample SampleToRun = Sample.PrimeCalculator;
     }
 
 
