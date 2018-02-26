@@ -13,7 +13,8 @@ namespace Hast.Xilinx.Abstractions
                 Name = DeviceName,
                 ClockFrequencyHz = 100000000, // 100 Mhz
                 SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
-                AvailableMemoryBytes = 115343360 // 110MB
+                AvailableMemoryBytes = 115343360, // 110MB
+                DataBusWidthBytes = 4
             };
     }
 }

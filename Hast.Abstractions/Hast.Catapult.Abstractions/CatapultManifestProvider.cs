@@ -19,7 +19,8 @@ namespace Hast.Catapult.Abstractions
                 ClockFrequencyHz = 150000000, // 150 Mhz
                 // Since it's completely Catapult-specific, not using e.g. "PCIe" here.
                 SupportedCommunicationChannelNames = new[] { DeviceName },
-                AvailableMemoryBytes = 4 * 1024 * 1024
+                AvailableMemoryBytes = 4 * 1024 * 1024,
+                DataBusWidthBytes = 64
             };
     }
 }
