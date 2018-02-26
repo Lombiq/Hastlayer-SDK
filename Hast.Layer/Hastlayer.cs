@@ -63,7 +63,7 @@ namespace Hast.Layer
 
 
         public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
-            _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
+            _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupportedDevices()));
 
         public async Task<IHardwareRepresentation> GenerateHardware(
             IEnumerable<string> assembliesPaths,
@@ -102,7 +102,7 @@ namespace Hast.Layer
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
                             var deviceManifest = deviceManifestSelector
-                                .GetSupporteDevices()
+                                .GetSupportedDevices()
                                 .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
 
                             if (deviceManifest == null)
