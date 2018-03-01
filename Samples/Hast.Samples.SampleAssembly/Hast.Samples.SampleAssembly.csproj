@@ -47,6 +47,7 @@
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Fix64Calculator.cs" />
     <Compile Include="GenomeMatcher.cs" />
+    <Compile Include="Loopback.cs" />
     <Compile Include="ParallelAlgorithm.cs" />
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />
