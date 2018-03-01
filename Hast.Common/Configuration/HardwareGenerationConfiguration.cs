@@ -44,10 +44,10 @@ namespace Hast.Layer
         public bool EnableCaching { get; set; }
 
         /// <summary>
-        /// Gets the name of the FPGA device (board) to transform for. Device-specific configurations are determined
-        /// by device drivers.
+        /// Gets or sets the name of the FPGA device (board) to transform for. Device-specific configurations are 
+        /// determined by device drivers.
         /// </summary>
-        public string DeviceName { get; }
+        public string DeviceName { get; set; }
 
 
         /// <summary>
