@@ -39,10 +39,13 @@ namespace Hast.Samples.Consumer
     {
         static void Main(string[] args)
         {
-            new Posit32Calculator().CountUpToNumber(1);
+            var positCalculator = new Posit32Calculator();
+
+            // Not to run the benchmark below the first time, because JIT compiling can affect it.
+            positCalculator.CountUpToNumber(100000);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var result = new Posit32Calculator().CountUpToNumber(100000);
+            var result = positCalculator.CountUpToNumber(100000);
             sw.Stop();
 
             Console.WriteLine("Result: " + result);
