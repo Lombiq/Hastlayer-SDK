@@ -6,6 +6,7 @@
         GenomeMatcher,
         ParallelAlgorithm,
         ImageProcessingAlgorithms,
+        Loopback,
         MonteCarloAlgorithm,
         ObjectOrientedShowcase,
         PrimeCalculator,
