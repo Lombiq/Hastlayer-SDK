@@ -58,7 +58,7 @@ namespace Hast.Samples.Consumer
             var result2 = positCalculator.AddPositsInArray(posit32Array);
             sw2.Stop();
 
-            Console.WriteLine("Resultof counting up to 100000: " + result);
+            Console.WriteLine("Result of counting up to 100000: " + result);
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
 
             Console.WriteLine("Result of addition of posits in array: " + result2);

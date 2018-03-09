@@ -20,6 +20,7 @@ namespace Hast.Samples.SampleAssembly
         public const int AddPositsInArray_InputPosit32sStartIndex = 1;
         public const int AddPositsInArray_OutputPosit32Index = 2;
 
+
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
             var number = memory.ReadUInt32(CalculateLargeIntegerSum_InputInt32Index);
@@ -31,6 +32,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 a += b;
             }
+
             var result = (int)a;
             memory.WriteInt32(CalculateLargeIntegerSum_OutputInt32Index, result);
         }
@@ -38,15 +40,19 @@ namespace Hast.Samples.SampleAssembly
         public virtual void AddPositsInArray(SimpleMemory memory)
         {
             uint numberCount = memory.ReadUInt32(AddPositsInArray_InputPosit32CountIndex);
+
             var result = new Posit32(memory.ReadUInt32(AddPositsInArray_InputPosit32sStartIndex), true);
+
             for (int i = 1; i < numberCount; i++)
             {
                 result += new Posit32(memory.ReadUInt32(AddPositsInArray_InputPosit32sStartIndex + i), true);
 
             }
+
             memory.WriteUInt32(AddPositsInArray_OutputPosit32Index, result.PositBits);
         }
     }
+
 
     public static class Posit32CalculatorExtensions
     {
@@ -70,7 +76,9 @@ namespace Hast.Samples.SampleAssembly
             {
                 memory.WriteUInt32(Posit32Calculator.AddPositsInArray_InputPosit32sStartIndex + i, posit32Array[i]);
             }
+
             posit32Calculator.AddPositsInArray(memory);
+
             return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.AddPositsInArray_OutputPosit32Index), true);
         }
     }

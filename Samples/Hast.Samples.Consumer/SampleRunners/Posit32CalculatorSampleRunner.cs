@@ -22,6 +22,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var result = positCalculator.CountUpToNumber(100000);
 
+
             var posit32Array = new uint[100000];
 
             for (var i = 0; i < 100000; i++)
@@ -29,6 +30,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 if (i % 2 == 0) posit32Array[i] = new Posit32((float)0.25 * 2 * i).PositBits;
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
             }
+
             var result2 = positCalculator.AddPositsInArray(posit32Array);
         }
     }
