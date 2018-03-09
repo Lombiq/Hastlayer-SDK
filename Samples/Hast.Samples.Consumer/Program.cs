@@ -34,7 +34,6 @@ namespace Hast.Samples.Consumer
         public static Sample SampleToRun = Sample.Posit32Calculator;
     }
 
-
     class Program
     {
         static void Main(string[] args)
@@ -45,7 +44,7 @@ namespace Hast.Samples.Consumer
             positCalculator.CountUpToNumber(100000);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var result = positCalculator.CountUpToNumber(100000);            
+            var result = positCalculator.CountUpToNumber(100000);
             sw.Stop();
             var posit32Array = new uint[100000];
 
