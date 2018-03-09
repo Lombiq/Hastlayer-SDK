@@ -45,11 +45,25 @@ namespace Hast.Samples.Consumer
             positCalculator.CountUpToNumber(100000);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var result = positCalculator.CountUpToNumber(100000);
+            var result = positCalculator.CountUpToNumber(100000);            
             sw.Stop();
+            var posit32Array = new uint[100000];
 
-            Console.WriteLine("Result: " + result);
+            for (var i = 0; i < 100000; i++)
+            {
+                if (i % 2 == 0) posit32Array[i] = new Posit32((float)0.25 * 2 * i).PositBits;
+                else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
+            }
+
+            var sw2 = System.Diagnostics.Stopwatch.StartNew();
+            var result2 = positCalculator.AddPositsInArray(posit32Array);
+            sw2.Stop();
+
+            Console.WriteLine("Resultof counting up to 100000: " + result);
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+
+            Console.WriteLine("Result of addition of posits in array: " + result2);
+            Console.WriteLine("Elapsed: " + sw2.ElapsedMilliseconds + "ms");
 
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
