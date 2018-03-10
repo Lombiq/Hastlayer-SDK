@@ -88,7 +88,7 @@ namespace Hast.Samples.Consumer
                             remoteClientConfiguration.AppSecret == "appsecret")
                         {
                             throw new InvalidOperationException(
-                                "You haven't changed the default remote credentials! Write to guys@hastlayer.com to receive access if you don't have yet.");
+                                "You haven't changed the default remote credentials! Write to crew@hastlayer.com to receive access if you don't have yet.");
                         }
 
 
