@@ -20,7 +20,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator());
 
-            var result = positCalculator.CountUpToNumber(100000);
+            var result = positCalculator.CalculateIntegerSumUpToNumber(100000);
 
 
             var posit32Array = new uint[100000];

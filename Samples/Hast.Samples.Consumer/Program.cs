@@ -41,10 +41,10 @@ namespace Hast.Samples.Consumer
             var positCalculator = new Posit32Calculator();
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
-            positCalculator.CountUpToNumber(100000);
+            positCalculator.CalculateIntegerSumUpToNumber(100000);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var result = positCalculator.CountUpToNumber(100000);
+            var result = positCalculator.CalculateIntegerSumUpToNumber(100000);
             sw.Stop();
             var posit32Array = new uint[100000];
 
