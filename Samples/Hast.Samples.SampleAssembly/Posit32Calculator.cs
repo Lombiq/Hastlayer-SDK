@@ -46,7 +46,6 @@ namespace Hast.Samples.SampleAssembly
             for (int i = 1; i < numberCount; i++)
             {
                 result += new Posit32(memory.ReadUInt32(AddPositsInArray_InputPosit32sStartIndex + i), true);
-
             }
 
             memory.WriteUInt32(AddPositsInArray_OutputPosit32Index, result.PositBits);
