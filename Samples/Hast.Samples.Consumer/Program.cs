@@ -25,8 +25,8 @@ namespace Hast.Samples.Consumer
 
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one. Currently the following samples are not up-to-date
-        /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
-        /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
+        /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher,
+        /// MonteCarloAlgorithm.
         /// </summary>
         public static Sample SampleToRun = Sample.ParallelAlgorithm;
     }
