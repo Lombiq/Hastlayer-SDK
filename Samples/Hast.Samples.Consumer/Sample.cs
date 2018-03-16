@@ -9,10 +9,11 @@
         Loopback,
         MonteCarloAlgorithm,
         ObjectOrientedShowcase,
+        PositCalculator,
+        Posit32Calculator,
         PrimeCalculator,
         RecursiveAlgorithms,
         SimdCalculator,
-        UnumCalculator,
-        Posit32Calculator
+        UnumCalculator
     }
 }

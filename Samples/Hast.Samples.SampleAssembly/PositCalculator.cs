@@ -65,7 +65,7 @@ namespace Hast.Samples.SampleAssembly
         };
 
 
-        public static int CountUpToNumber(this PositCalculator positCalculator, int number)
+        public static int CalculateIntegerSumUpToNumber(this PositCalculator positCalculator, int number)
         {
             var memory = new SimpleMemory(1);
 
