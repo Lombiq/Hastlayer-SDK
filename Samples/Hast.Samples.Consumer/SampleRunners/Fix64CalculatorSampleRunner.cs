@@ -23,11 +23,19 @@ namespace Hast.Samples.Consumer.SampleRunners
             var sum = fixed64Showcase.CalculateIntegerSumUpToNumber(10000000);
 
             // This takes about 264ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with 
-            // a MaxDegreeOfParallelism of 10 while the device is about 60% utilized). With a higher degree of 
+            // a MaxDegreeOfParallelism of 10 while the device is about 51% utilized). With a higher degree of 
             // parallelism it won't fit on the Nexys 4 DDR board's FPGA.
             // Since this basically does what the single-threaded sample but in multiple copies on multiple threads
             // the single-threaded sample takes the same amount of time on the FPGA.
-            var sums = fixed64Showcase.ParallelizedCalculateIntegerSumUpToNumber(10000000);
+
+            // Creating an array of numbers alternating between 9999999 and 10000001 so we can also see that threads
+            // don't step on each other's feet.
+            var numbers = new int[Fix64Calculator.MaxDegreeOfParallelism];
+            for (int i = 1; i < Fix64Calculator.MaxDegreeOfParallelism; i++)
+            {
+                numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1); 
+            }
+            var sums = fixed64Showcase.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
         }
     }
 }
