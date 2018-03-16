@@ -28,7 +28,7 @@ namespace Hast.Samples.SampleAssembly
             var a = new Posit32(1);
             var b = a;
 
-            for (var i = 1; i < number; i++)
+            for (uint i = 1; i < number; i++)
             {
                 a += b;
             }
