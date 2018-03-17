@@ -16,9 +16,15 @@ namespace Hast.Samples.SampleAssembly
     {
         public const int CalculateLargeIntegerSum_InputInt32Index = 0;
         public const int CalculateLargeIntegerSum_OutputInt32Index = 0;
+        public const int ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex = 0;
+        public const int ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex = 0;
         public const int AddPositsInArray_InputPosit32CountIndex = 0;
         public const int AddPositsInArray_InputPosit32sStartIndex = 1;
         public const int AddPositsInArray_OutputPosit32Index = 2;
+
+        // This takes about 75% of a Nexys 4 DDR's FPGA. 6 fits with 91%, and appears to be working as well, but above
+        // 80% designs can be unstable.
+        public const int MaxDegreeOfParallelism = 5;
 
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
@@ -35,6 +41,39 @@ namespace Hast.Samples.SampleAssembly
 
             var result = (int)a;
             memory.WriteInt32(CalculateLargeIntegerSum_OutputInt32Index, result);
+        }
+
+        public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
+        {
+            var numbers = new int[MaxDegreeOfParallelism];
+
+            var tasks = new Task<int>[MaxDegreeOfParallelism];
+
+            for (int i = 0; i < MaxDegreeOfParallelism; i++)
+            {
+                var upToNumber = memory.ReadInt32(ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex + i);
+
+                tasks[i] = Task.Factory.StartNew(
+                    upToNumberObject =>
+                    {
+                        var a = new Posit32(1);
+                        var b = a;
+
+                        for (int j = 1; j < (int)upToNumberObject; j++)
+                        {
+                            a += b;
+                        }
+
+                        return (int)a;
+                    }, upToNumber);
+            }
+
+            Task.WhenAll(tasks).Wait();
+
+            for (int i = 0; i < MaxDegreeOfParallelism; i++)
+            {
+                memory.WriteInt32(ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex + i, tasks[i].Result);
+            }
         }
 
         public virtual void AddPositsInArray(SimpleMemory memory)
@@ -63,6 +102,34 @@ namespace Hast.Samples.SampleAssembly
             positCalculator.CalculateIntegerSumUpToNumber(memory);
 
             return memory.ReadInt32(Posit32Calculator.CalculateLargeIntegerSum_OutputInt32Index);
+        }
+
+        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this Posit32Calculator positCalculator, int[] numbers)
+        {
+            if (numbers.Length != Posit32Calculator.MaxDegreeOfParallelism)
+            {
+                throw new ArgumentException(
+                    "Provide as many numbers as the degree of parallelism of Posit32Calculator is (" +
+                    Posit32Calculator.MaxDegreeOfParallelism + ")");
+            }
+
+            var memory = new SimpleMemory(Posit32Calculator.MaxDegreeOfParallelism);
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                memory.WriteInt32(Posit32Calculator.ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex + i, numbers[i]);
+            }
+
+            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(memory);
+
+            var results = new int[Posit32Calculator.MaxDegreeOfParallelism];
+
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                results[i] = memory.ReadInt32(Posit32Calculator.ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex + i);
+            }
+
+            return results;
         }
 
         public static float AddPositsInArray(this Posit32Calculator posit32Calculator, uint[] posit32Array)

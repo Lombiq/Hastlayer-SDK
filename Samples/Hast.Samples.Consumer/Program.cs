@@ -9,6 +9,7 @@ using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System.Numerics;
 using Lombiq.Arithmetics;
 using System.Collections.Immutable;
+using System.Diagnostics;
 
 namespace Hast.Samples.Consumer
 {
@@ -43,9 +44,26 @@ namespace Hast.Samples.Consumer
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
             positCalculator.CalculateIntegerSumUpToNumber(100000);
 
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            var result = positCalculator.CalculateIntegerSumUpToNumber(100000);
+            var sw = Stopwatch.StartNew();
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
             sw.Stop();
+
+            Console.WriteLine("Result of counting up to 100000: " + integerSumUpToNumber);
+            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+
+            var numbers = new int[Posit32Calculator.MaxDegreeOfParallelism];
+            for (int i = 0; i < Posit32Calculator.MaxDegreeOfParallelism; i++)
+            {
+                numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
+            }
+
+            sw = Stopwatch.StartNew();
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
+            sw.Stop();
+
+            Console.WriteLine("Result of counting up to ~100000 parallelized: " + string.Join(", ", integerSumsUpToNumbers));
+            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+
             var posit32Array = new uint[100000];
 
             for (var i = 0; i < 100000; i++)
@@ -54,15 +72,12 @@ namespace Hast.Samples.Consumer
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
             }
 
-            var sw2 = System.Diagnostics.Stopwatch.StartNew();
-            var result2 = positCalculator.AddPositsInArray(posit32Array);
-            sw2.Stop();
+            sw = Stopwatch.StartNew();
+            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array);
+            sw.Stop();
 
-            Console.WriteLine("Result of counting up to 100000: " + result);
+            Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
-
-            Console.WriteLine("Result of addition of posits in array: " + result2);
-            Console.WriteLine("Elapsed: " + sw2.ElapsedMilliseconds + "ms");
 
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.

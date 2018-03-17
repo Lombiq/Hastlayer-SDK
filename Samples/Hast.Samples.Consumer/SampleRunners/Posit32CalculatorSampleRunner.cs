@@ -20,7 +20,16 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator());
 
-            var result = positCalculator.CalculateIntegerSumUpToNumber(100000);
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
+
+
+            var numbers = new int[Posit32Calculator.MaxDegreeOfParallelism];
+            for (int i = 0; i < Posit32Calculator.MaxDegreeOfParallelism; i++)
+            {
+                numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
+            }
+
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
 
 
             var posit32Array = new uint[100000];
@@ -31,7 +40,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
             }
 
-            var result2 = positCalculator.AddPositsInArray(posit32Array);
+            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array);
         }
     }
 }
