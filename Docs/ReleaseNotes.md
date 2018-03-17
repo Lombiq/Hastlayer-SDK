@@ -11,6 +11,7 @@ Note that the hardware framework projects have their own release cycle and relea
 - Fixing that binary operator expressions (like  `1 + 2`) calculated with wrongly sized number types and could cause different results on the hardware than in software.
 - Fixing remainder calculations (`9 % 4`).
 - Various smaller bugfixes and improvements.
+- Improved documentation.
 
 Note that running Hastlayer now requires Visual Studio 2017 or greater (any edition will work).
 
