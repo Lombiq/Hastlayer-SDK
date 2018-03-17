@@ -25,7 +25,8 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             // This takes about 252ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with 
             // a MaxDegreeOfParallelism of 10 while the device is about 58% utilized). With a higher degree of 
-            // parallelism it won't fit on the Nexys 4 DDR board's FPGA.
+            // parallelism it won't produce correct results on the Nexys 4 DDR board's FPGA (although it will fit with
+            // a parallelism degree of 13 with 80% resource usage too).
             // Since this basically does what the single-threaded sample but in multiple copies on multiple threads
             // the single-threaded sample takes the same amount of time on the FPGA.
 
