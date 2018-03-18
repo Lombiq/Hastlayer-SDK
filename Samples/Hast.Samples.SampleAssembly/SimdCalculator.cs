@@ -14,7 +14,8 @@ namespace Hast.Samples.SampleAssembly
 
     /// <summary>
     /// Sample to showcase SIMD (Simple Instruction Multiple Data) processing usage, i.e. operations executed in parallel
-    /// on multiple elements of vectors. Also see <see cref="SimdCalculatorSampleRunner"/> on what to configure to make this work.
+    /// on multiple elements of vectors. Also see <see cref="SimdCalculatorSampleRunner"/> on what to configure to make 
+    /// this work.
     /// </summary>
     /// <remarks>
     /// System.Numerics.Vectors (including the NuGet package version of it: http://www.nuget.org/packages/System.Numerics.Vectors)

@@ -25,8 +25,8 @@ namespace Hast.Samples.Consumer
 
         /// <summary>
         /// Which sample algorithm to transform and run? Choose one. Currently the following samples are not up-to-date
-        /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher, 
-        /// ImageProcessingAlgorithms, MonteCarloAlgorithm.
+        /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher,
+        /// MonteCarloAlgorithm.
         /// </summary>
         public static Sample SampleToRun = Sample.ParallelAlgorithm;
     }
@@ -88,7 +88,7 @@ namespace Hast.Samples.Consumer
                             remoteClientConfiguration.AppSecret == "appsecret")
                         {
                             throw new InvalidOperationException(
-                                "You haven't changed the default remote credentials! Write to guys@hastlayer.com to receive access if you don't have yet.");
+                                "You haven't changed the default remote credentials! Write to crew@hastlayer.com to receive access if you don't have yet.");
                         }
 
 
@@ -106,6 +106,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.ImageProcessingAlgorithms:
                                 ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
+                                break;
+                            case Sample.Loopback:
+                                LoopbackSampleRunner.Configure(configuration);
                                 break;
                             case Sample.MonteCarloAlgorithm:
                                 MonteCarloAlgorithmSampleRunner.Configure(configuration);
@@ -165,6 +168,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.ImageProcessingAlgorithms:
                                 await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.Loopback:
+                                await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.MonteCarloAlgorithm:
                                 await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
