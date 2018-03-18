@@ -13,7 +13,6 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            RunSoftwareBenchmark();
             configuration.AddHardwareEntryPointType<Fix64Calculator>();
         }
 
