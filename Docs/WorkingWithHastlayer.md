@@ -15,7 +15,7 @@ When Hastlayer is updated you can just pull in changes from the official Hastlay
 
 We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications.
 
-Since it's possible that due to bugs with some corner cases the hardware code will produce incorrect results it's good to configure Hastlayer to verify the hardware output while testing (and do tell Lombiq if you've found issues): You can do this by setting `ProxyGenerationConfiguration.VerifyHardwareResults` when generating proxy objects.
+Since it's possible that due to bugs with some corner cases the hardware code will produce incorrect results it's good to configure Hastlayer to verify the hardware output while testing (and do tell Lombiq if you've found issues): You can do this by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects.
 
 
 ## Writing Hastlayer-compatible .NET code
@@ -69,7 +69,7 @@ As a simple rule of thumb if your code has a loop that works on elements of an a
 So to write fast code with Hastlayer you need implement massively parallel algorithms and avoid code that adds unnecessary clock cycles. What are the clock cycle sinks to avoid?
 
 - Method invocation and access to custom properties (i.e. properties that have a custom getter or setter, so not auto-properties) cost multiple clock cycles as a baseline. Try to avoid having many small methods and custom properties (or methods you can also inline, see the "Writing Hastlayer-compatible .NET code" section).
-- Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `short` instead of `int` if its range is enough).
+- Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `int` instead of `long` if its range is enough). This only applies to data types larger than 32b since smaller number types will be cast to `int` any way. However smaller data types lower the resource usage on the FPGA, so it's still beneficial to use them.
 - Use constants where applicable to the constant values can be substituted instead of keeping read-only variables.
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
 - Loops with a large number of iterations but with some very basic computation inside them: this is because every iteration is at least one clock cycle, so again multiple operations can't be packed into a single clock cycle. Until Hastlayer does [loop unrolling](https://github.com/Lombiq/Hastlayer-SDK/issues/14) manual unrolling [can help](https://stackoverflow.com/questions/2349211/when-if-ever-is-loop-unrolling-still-useful).
@@ -82,12 +82,16 @@ In the ideal case your algorithm will do the following (can happen repeatedly of
 
 The `ParallelAlgorithm` sample does exactly this.
 
+Note that FPGAs have a finite amount of resources that you can utilize, and the more complex your algorithm, the more resources it will take. With simpler algorithms you can achieve a higher degree of parallelism on a given FPGA, since more copies of it will fit. So you can either have more complex pieces of logic parallelized to a lower degree, or simpler logic parallelized to a higher degree.
+
 
 ## Troubleshooting
 
 If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
 
 If during transformation there's a warning (i.e. some issue that doesn't necessarily make the result wrong but you should know about it) then that will be added to the result of the *IHastlayer.GenerateHardware()* call (inside `HardwareDescription`) as well as to the logs and to Visual's Studio's Debug window when run in Debug mode.
+
+You can configure Hastlayer to check whether the hardware execution's results are correct by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects. This will also run everything as software, compare the software output with the hardware output and throw exceptions if they're off.
 
 If the result of the hardware execution is wrong then you can use `SimpleMemory` to write out intermediate values and check where the execution goes wrong. Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys 4 DDR you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
 
