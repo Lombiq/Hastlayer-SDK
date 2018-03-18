@@ -38,7 +38,10 @@ namespace Hast.Samples.Consumer
         static void Main(string[] args)
         {
             // Just temporarily here during active posit development.
-            Posit32CalculatorSampleRunner.RunSoftwareBenchmarks();
+            if (Configuration.SampleToRun == Sample.Posit32Calculator)
+            {
+                Posit32CalculatorSampleRunner.RunSoftwareBenchmarks(); 
+            }
 
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
             // inside a console app.
