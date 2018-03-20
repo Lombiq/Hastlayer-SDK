@@ -21,6 +21,9 @@ namespace Hast.Samples.SampleAssembly
         public const int AddPositsInArray_InputPosit32CountIndex = 0;
         public const int AddPositsInArray_InputPosit32sStartIndex = 1;
         public const int AddPositsInArray_OutputPosit32Index = 2;
+        public const int CalculatePowerOfReal_InputInt32Index = 0;
+        public const int CalculatePowerOfReal_InputPosit32Index = 1;
+        public const int CalculatePowerOfReal_OutputPosit32Index = 0;
 
         // This takes about 75% of a Nexys 4 DDR's FPGA. 6 fits with 91%, and appears to be working as well, but above
         // 80% designs can be unstable.
@@ -41,6 +44,23 @@ namespace Hast.Samples.SampleAssembly
 
             var result = (int)a;
             memory.WriteInt32(CalculateLargeIntegerSum_OutputInt32Index, result);
+        }
+
+        public virtual void CalculatePowerOfReal(SimpleMemory memory)
+        {
+            var number = memory.ReadInt32(CalculatePowerOfReal_InputInt32Index);
+            var positToMultiply = memory.ReadUInt32(CalculatePowerOfReal_InputPosit32Index);
+
+            var a = new Posit32(positToMultiply,true);
+            var b = a;
+
+            for (uint i = 0; i < number; i++)
+            {
+                a *= b;
+            }
+
+            var result = a.PositBits;
+            memory.WriteUInt32(CalculatePowerOfReal_OutputPosit32Index, result);
         }
 
         public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
@@ -102,6 +122,18 @@ namespace Hast.Samples.SampleAssembly
             positCalculator.CalculateIntegerSumUpToNumber(memory);
 
             return memory.ReadInt32(Posit32Calculator.CalculateLargeIntegerSum_OutputInt32Index);
+        }
+
+        public static float CalculatePowerOfReal(this Posit32Calculator positCalculator, int number, float real)
+        {
+            var memory = new SimpleMemory(2);
+
+            memory.WriteInt32(Posit32Calculator.CalculatePowerOfReal_InputInt32Index, number);
+            memory.WriteUInt32(Posit32Calculator.CalculatePowerOfReal_InputPosit32Index, new Posit32(real).PositBits);
+
+            positCalculator.CalculatePowerOfReal(memory);
+
+            return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.CalculatePowerOfReal_OutputPosit32Index), true);
         }
 
         public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this Posit32Calculator positCalculator, int[] numbers)

@@ -93,6 +93,13 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+
+            sw = Stopwatch.StartNew();
+            var powerOfReal = positCalculator.CalculatePowerOfReal(100000,(float) 1.0001);
+            sw.Stop();
+
+            Console.WriteLine("Result of power of real number: " + powerOfReal);
+            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
         }
     }
 }
