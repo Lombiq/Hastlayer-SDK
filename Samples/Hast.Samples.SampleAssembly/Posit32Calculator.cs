@@ -51,7 +51,7 @@ namespace Hast.Samples.SampleAssembly
             var number = memory.ReadInt32(CalculatePowerOfReal_InputInt32Index);
             var positToMultiply = memory.ReadUInt32(CalculatePowerOfReal_InputPosit32Index);
 
-            var a = new Posit32(positToMultiply,true);
+            var a = new Posit32(positToMultiply, true);
             var b = a;
 
             for (uint i = 0; i < number; i++)
