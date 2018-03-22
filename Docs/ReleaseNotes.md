@@ -5,6 +5,11 @@
 Note that the hardware framework projects have their own release cycle and release notes.
 
 
+## vNext
+
+- Updating and fixing hardware timing values, making hardware execution more reliable.
+
+
 ## 1.0.9, 18.03.2017
 
 - New Loopback sample to test FPGA connectivity and Hastlayer Hardware Framework resource usage.
