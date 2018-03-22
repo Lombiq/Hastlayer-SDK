@@ -5,9 +5,14 @@
 Note that the hardware framework projects have their own release cycle and release notes.
 
 
-## vNext
+## 1.0.9, 18.03.2017
 
 - New Loopback sample to test FPGA connectivity and Hastlayer Hardware Framework resource usage.
+- Fixing that binary operator expressions (like  `1 + 2`) calculated with wrongly sized number types and could cause different results on the hardware than in software.
+- Fixing remainder calculations (`9 % 4`).
+- Making the lack of support for certain language features more apparent with specific exceptions.
+- Various smaller bugfixes and improvements.
+- Improved documentation.
 
 Note that running Hastlayer now requires Visual Studio 2017 or greater (any edition will work).
 

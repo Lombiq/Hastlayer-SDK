@@ -21,7 +21,10 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var output1 = loopback.Run(123);
             var output2 = loopback.Run(1234);
-            var output3 = loopback.Run(12345);
+            var output3 = loopback.Run(-9);
+            var output4 = loopback.Run(0);
+            var output5 = loopback.Run(-19);
+            var output6 = loopback.Run(1);
         }
     }
 }

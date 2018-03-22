@@ -280,7 +280,7 @@ namespace Hast.Communication.Services
             if (!fpgaPortNames.Any())
             {
                 throw new SerialPortCommunicationException(
-                    "No compatible FPGA board connected to any serial port or a connected FPGA is not answering. Is and FPGA board connected and is it powered up? If yes, is the SDK software running on it?");
+                    "No compatible FPGA board connected to any serial port or a connected FPGA is not answering. Is an FPGA board connected and is it powered up? If yes, is the SDK software running on it?");
             }
 
             return fpgaPortNames;
