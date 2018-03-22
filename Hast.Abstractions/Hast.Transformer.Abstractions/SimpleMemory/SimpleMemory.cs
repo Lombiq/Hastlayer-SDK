@@ -21,6 +21,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     {
         public const uint MemoryCellSizeBytes = 4;
 
+
         /// <summary>
         /// Gets or sets the contents of the memory representation.
         /// </summary>
