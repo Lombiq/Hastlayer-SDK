@@ -7,6 +7,11 @@ Note that the hardware framework projects have their own release cycle and relea
 
 ## vNext
 
+- Fixing that hardware description caching didn't work with certain programs.
+
+
+## 1.0.9, 18.03.2017
+
 - New Loopback sample to test FPGA connectivity and Hastlayer Hardware Framework resource usage.
 - Fixing that binary operator expressions (like  `1 + 2`) calculated with wrongly sized number types and could cause different results on the hardware than in software.
 - Fixing remainder calculations (`9 % 4`).
