@@ -70,7 +70,7 @@ So to write fast code with Hastlayer you need implement massively parallel algor
 
 - Method invocation and access to custom properties (i.e. properties that have a custom getter or setter, so not auto-properties) cost multiple clock cycles as a baseline. Try to avoid having many small methods and custom properties (or methods you can also inline, see the "Writing Hastlayer-compatible .NET code" section).
 - Arithmetic operations take longer with larger number types so always use the smallest data type necessary (e.g. use `int` instead of `long` if its range is enough). This only applies to data types larger than 32b since smaller number types will be cast to `int` any way. However smaller data types lower the resource usage on the FPGA, so it's still beneficial to use them.
-- Use constants where applicable to the constant values can be substituted instead of keeping read-only variables.
+- Use constants where applicable so the constant values can be substituted instead of keeping read-only variables.
 - Memory access with `SimpleMemory` is relatively slow, so keep memory access to the minimum (use local variables and objects as temporary storage instead).
 - Loops with a large number of iterations but with some very basic computation inside them: this is because every iteration is at least one clock cycle, so again multiple operations can't be packed into a single clock cycle. Until Hastlayer does [loop unrolling](https://github.com/Lombiq/Hastlayer-SDK/issues/14) manual unrolling [can help](https://stackoverflow.com/questions/2349211/when-if-ever-is-loop-unrolling-still-useful).
 
@@ -83,6 +83,8 @@ In the ideal case your algorithm will do the following (can happen repeatedly of
 The `ParallelAlgorithm` sample does exactly this.
 
 Note that FPGAs have a finite amount of resources that you can utilize, and the more complex your algorithm, the more resources it will take. With simpler algorithms you can achieve a higher degree of parallelism on a given FPGA, since more copies of it will fit. So you can either have more complex pieces of logic parallelized to a lower degree, or simpler logic parallelized to a higher degree.
+
+Very broadly speaking if you performance-optimize your .NET code and it executes faster as software then most possibly it will also execute faster as hardware. But do measure if your optimizations have the desired effect.
 
 
 ## Troubleshooting
