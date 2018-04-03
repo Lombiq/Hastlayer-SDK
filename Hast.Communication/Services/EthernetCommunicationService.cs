@@ -43,7 +43,8 @@ namespace Hast.Communication.Services
         }
 
 
-        public override async Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory,
+        public override async Task<IHardwareExecutionInformation> Execute(
+            SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
         {
