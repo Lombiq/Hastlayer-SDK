@@ -7,7 +7,7 @@ Note that the hardware framework projects have their own release cycle and relea
 
 ## vNext
 
-- Updating and fixing hardware timing values, making hardware execution more reliable.
+- Updating and fixing hardware timing values, making hardware execution more reliable, but in certain cases slightly slower.
 - Fixing that hardware description caching didn't work with certain programs.
 - Improved documentation.
 
