@@ -3,7 +3,7 @@ using Orchard;
 
 namespace Hast.Synthesis.Abstractions
 {
-    public interface IDeviceManifestProvider : IDependency
+    public interface IDeviceManifestProvider : ISingletonDependency
     {
         IDeviceManifest DeviceManifest { get; }
     }
