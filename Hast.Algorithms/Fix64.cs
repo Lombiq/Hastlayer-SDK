@@ -38,8 +38,7 @@ namespace Hast.Algorithms
     /// 
     /// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     /// </remarks>
-    // Implemented interfaces removed so Hastlayer transformation is quicker, without having to also process mscorlib.
-    public struct Fix64 //: IEquatable<Fix64>, IComparable<Fix64>
+    public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     {
         private readonly long _rawValue;
 
