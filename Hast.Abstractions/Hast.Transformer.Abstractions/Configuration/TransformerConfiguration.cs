@@ -57,6 +57,13 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         public IDictionary<string, int> ArrayLengths { get; set; } = new Dictionary<string, int>();
 
+        /// <summary>
+        /// Gets or sets whether interfaces that are implemented by transformed types are processed. Currently such 
+        /// interfaces don't affect the resulting hardware implementation, but the assemblies of all referenced
+        /// interfaces need to be loaded. If set to <c>false</c> such loading is not necessary. Defaults to <c>false</c>.
+        /// </summary>
+        public bool ProcessImplementedInterfaces { get; set; } = false;
+
 
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)
         {
