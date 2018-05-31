@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher,
         /// MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.Posit32Calculator;
+        public static Sample SampleToRun = Sample.Posit32FusedCalculator;
     }
 
     class Program
@@ -38,9 +38,9 @@ namespace Hast.Samples.Consumer
         static void Main(string[] args)
         {
             // Just temporarily here during active posit development.
-            if (Configuration.SampleToRun == Sample.Posit32Calculator)
+            if (Configuration.SampleToRun == Sample.Posit32FusedCalculator)
             {
-                Posit32CalculatorSampleRunner.RunSoftwareBenchmarks(); 
+                Posit32FusedCalculatorSampleRunner.RunSoftwareBenchmarks(); 
             }
 
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
@@ -129,6 +129,9 @@ namespace Hast.Samples.Consumer
                             case Sample.Posit32Calculator:
                                 Posit32CalculatorSampleRunner.Configure(configuration);
                                 break;
+                            case Sample.Posit32FusedCalculator:
+                                Posit32FusedCalculatorSampleRunner.Configure(configuration);
+                                break;
                             case Sample.PrimeCalculator:
                                 PrimeCalculatorSampleRunner.Configure(configuration);
                                 break;
@@ -204,6 +207,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.Posit32Calculator:
                                 await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.Posit32FusedCalculator:
+                                await Posit32FusedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.PrimeCalculator:
                                 await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);

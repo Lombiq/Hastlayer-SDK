@@ -11,6 +11,7 @@
         ObjectOrientedShowcase,
         PositCalculator,
         Posit32Calculator,
+        Posit32FusedCalculator,
         PrimeCalculator,
         RecursiveAlgorithms,
         SimdCalculator,
