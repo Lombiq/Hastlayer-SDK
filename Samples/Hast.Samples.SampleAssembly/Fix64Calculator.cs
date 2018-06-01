@@ -20,7 +20,7 @@ namespace Hast.Samples.SampleAssembly
         public const int ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex = 0;
         public const int ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex = 0;
 
-        public const int MaxDegreeOfParallelism = 10;
+        public const int MaxDegreeOfParallelism = 13;
 
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)

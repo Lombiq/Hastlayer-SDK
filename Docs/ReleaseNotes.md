@@ -7,6 +7,7 @@ Note that the hardware framework projects have their own release cycle and relea
 
 ## vNext
 
+- Updating and fixing hardware timing values, making hardware execution more reliable, but in certain cases slightly slower, however also causing lower FPGA resource usage.
 - Fixing that hardware description caching didn't work with certain programs.
 - Improved documentation.
 
@@ -29,6 +30,7 @@ Note that running Hastlayer now requires Visual Studio 2017 or greater (any edit
 - Adding support for `ref` and `out` parameters, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/15).
 - `Fix64` fixed-point number type added for computations with fractions.
 - Simplified configuration of parallelized code: no need to manually specify the degree of parallelism any more in most cases (see `ParallelAlgorithmSampleRunner` for example: `Configure()` is just one line now).
+- Improving the speed of hardware generation by a few percent.
 - Various smaller bugfixes and improvements.
 
 For all publicly tracked issues resolved with this release [see the corresponding milestone](https://github.com/Lombiq/Hastlayer-SDK/milestone/1?closed=1).

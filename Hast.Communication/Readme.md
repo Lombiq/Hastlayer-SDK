@@ -34,3 +34,5 @@ Also tried but don't recommend [Tftpd32](http://tftpd32.jounin.net/) (needs manu
 Serial is set as the default communication channel so Hastlayer will use it if you don't change anything. But when generating proxies for you hardware-accelerated objects you can also set `"Serial"` as the `CommunicationChannelName` to select this communication channel.
 
 Connect the device(s) to the host PC with an USB cable to use USB UART as the communication channel.
+
+Be aware that for the serial communication to work it might be necessary to run the application (or Visual Studio if you're running it from source) as administrator, otherwise it won't be able to access the serial port. Also if other applications have COM ports open (like a Bluetooth dongle) then you may need to switch them temporarily off for the serial port detection to work. Alternatively you can specify the name of the COM port to use by hand in `SerialPortCommunicationService`.
