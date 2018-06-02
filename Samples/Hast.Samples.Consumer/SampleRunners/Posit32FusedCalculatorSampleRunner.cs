@@ -15,6 +15,10 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Posit32FusedCalculator>();
+
+            configuration.TransformerConfiguration().AddLengthForMultipleArrays(
+               Posit32.QuireSize >> 6,
+               Posit32FusedCalculatorExtensions.ManuallySizedArrays);
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
@@ -22,7 +26,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
 
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator());
-                       
+
 
 
             var posit32Array = new uint[100000];
@@ -47,10 +51,10 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var posit32Array = new uint[100000];
             // All positive integers smaller than this value ("pintmax") can be exactly represented with 32-bit Posits.
-            posit32Array[0] = new Posit32(4194304).PositBits; 
+            posit32Array[0] = new Posit32(4194304).PositBits;
             for (var i = 1; i < 100000; i++)
             {
-                 posit32Array[i] = new Posit32(1).PositBits;                
+                posit32Array[i] = new Posit32(1).PositBits;
             }
 
             positCalculator.CalculateFusedSum(posit32Array);
