@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Abstractions.Configuration;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Demo
