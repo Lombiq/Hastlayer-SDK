@@ -7,7 +7,7 @@
 To begin working with Hastlayer you'll need the following:
 
 - The SDK and Hardware Framework repositories cloned.
-- Access to Hastlayer Remote Services, which does the actual .NET to hardware transformation. Evaluation access is currently free and you can request it via [guys@hastlayer.com](mailto:guys@hastlayer.com).
+- Access to Hastlayer Remote Services, which does the actual .NET to hardware transformation. Evaluation access is currently free and you can sign up on [hastlayer.com](https://hastlayer.com).
 - A compatible FPGA board. Currently only the [Nexys 4 DDR](http://store.digilentinc.com/nexys-4-ddr-artix-7-fpga-trainer-board-recommended-for-ece-curriculum/) board (which is **NOT** the same as the non-DDR Nexys 4, be sure to purchase the linked board!) is supported, so you'll need to purchase one. Note that this is a relatively low-end development board that can't fit huge algorithms and it only supports slow communication channels. So with this board Hastlayer is only suitable for simpler algorithms that only need to exchange small amount of data.
 - [Visual Studio 2017 or later](https://www.visualstudio.com/downloads/) installed (and edition will work).
 
@@ -42,7 +42,7 @@ These would be your first steps on starting to work with Hastlayer:
 
 2. Set up a Vivado and Xilinx SDK project in the Hardware Framework project as documented there, power up and program a compatible FPGA board.
 3. Open the Visual Studio solution corresponding to your flavor of Hastlayer.
-4. Set the `Hast.Samples.Consumer` project (under the *Samples* folder) as the startup project here. If you're working in the *client* flavor then you'll need to configure your credentials, see the that project's documentation.
+4. Set the `Hast.Samples.Consumer` project (under the *Samples* folder) as the startup project here. If you're working in the *client* flavor then you'll need to configure your credentials, see that project's documentation.
 5. Start the sample project. That will by default run the sample that is also added by default to the Hardware project.
 6. You should be able to see the results of the sample in its console window.
 
