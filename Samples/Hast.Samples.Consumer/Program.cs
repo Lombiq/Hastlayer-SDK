@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher,
         /// MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.Posit32FusedCalculator;
+        public static Sample SampleToRun = Sample.Posit32Calculator;
     }
 
     class Program
