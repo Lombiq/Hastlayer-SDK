@@ -30,7 +30,9 @@ namespace Hast.Samples.SampleAssembly
             {
                 posit32Array[i] = new Posit32(memory.ReadUInt32(CalculateFusedSum_InputPosit32StartIndex + i), true);
             }
+
             for (var i = numberCount; i < MaxInputArraySize; i++) posit32Array[i] = new Posit32(0);
+
             var result = Posit32.FusedSum(posit32Array);
             memory.WriteUInt32(CalculateFusedSum_OutputPosit32Index, result.PositBits);
         }
@@ -42,7 +44,11 @@ namespace Hast.Samples.SampleAssembly
 
         public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array)
         {
-            if (posit32Array.Length > Posit32FusedCalculator.MaxInputArraySize) throw new IndexOutOfRangeException("The maximum number of posits to be summed with the fused sum operation can not exceed the MaxInPutArraySize specified in the Posit32FusedCalculator class.");
+            if (posit32Array.Length > Posit32FusedCalculator.MaxInputArraySize)
+            {
+                throw new IndexOutOfRangeException("The maximum number of posits to be summed with the fused sum operation can not exceed the MaxInPutArraySize specified in the Posit32FusedCalculator class.");
+            }
+
             var memory = new SimpleMemory(posit32Array.Length + 1);
 
             memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32CountIndex, (uint)posit32Array.Length);
