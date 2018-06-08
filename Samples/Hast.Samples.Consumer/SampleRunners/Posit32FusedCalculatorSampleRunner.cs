@@ -27,11 +27,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator());
 
+            var posit32Array = new uint[Posit32FusedCalculator.MaxInputArraySize];
 
-
-            var posit32Array = new uint[100000];
-
-            for (var i = 0; i < 100000; i++)
+            for (var i = 0; i < Posit32FusedCalculator.MaxInputArraySize; i++)
             {
                 if (i % 2 == 0) posit32Array[i] = new Posit32((float)0.25 * 2 * i).PositBits;
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
@@ -44,19 +42,15 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var positCalculator = new Posit32FusedCalculator();
 
-
-            // Not to run the benchmark below the first time, because JIT compiling can affect it.           
-
-            Console.WriteLine();
-
-            var posit32Array = new uint[100000];
+            var posit32Array = new uint[Posit32FusedCalculator.MaxInputArraySize];
             // All positive integers smaller than this value ("pintmax") can be exactly represented with 32-bit Posits.
             posit32Array[0] = new Posit32(4194304).PositBits;
-            for (var i = 1; i < 100000; i++)
+            for (var i = 1; i < Posit32FusedCalculator.MaxInputArraySize; i++)
             {
                 posit32Array[i] = new Posit32(1).PositBits;
             }
 
+            // Not to run the benchmark below the first time, because JIT compiling can affect it.           
             positCalculator.CalculateFusedSum(posit32Array);
             var sw = Stopwatch.StartNew();
             var positsInArrayFusedSum = positCalculator.CalculateFusedSum(posit32Array);
