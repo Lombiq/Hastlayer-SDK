@@ -145,14 +145,31 @@ namespace Hast.Samples.Consumer
                             },
                             configuration);
 
-                        Console.WriteLine("Hardware generation finished, writing VHDL source to file.");
+                        Console.WriteLine("Hardware generation finished.");
+                        Console.WriteLine();
+
+                        // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't
+                        // cause any problems, but sometimes they can.
+                        if (hardwareRepresentation.HardwareDescription.Warnings.Any())
+                        {
+                            Console.WriteLine(
+                                "There were the following transformation warnings, which may hint on issues that can cause the hardware implementation to produce incorrect results:" +
+                                Environment.NewLine +
+                                string.Join(Environment.NewLine, hardwareRepresentation.HardwareDescription.Warnings.Select(warning => "* " + warning.ToString())));
+                            Console.WriteLine();
+                        }
 
                         if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
                         {
+                            Console.WriteLine("Writing VHDL source to file.");
+
                             await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
+
+                            Console.WriteLine("VHDL source written to file.");
+                            Console.WriteLine();
                         }
 
-                        Console.WriteLine("VHDL source written to file, starting hardware execution.");
+                        Console.WriteLine("Starting hardware execution.");
 
                         // Running samples.
                         switch (Configuration.SampleToRun)
