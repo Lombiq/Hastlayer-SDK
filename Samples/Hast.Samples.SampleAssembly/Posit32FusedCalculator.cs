@@ -18,7 +18,7 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculateFusedDotProduct_InputPosit32sStartIndex = 1;
         public const int CalculateFusedDotProduct_OutputPosit32Index = 2;
 
-        public const int MaxInputArraySize = 100000;
+        public const int MaxInputArraySize = 200;
 
         public virtual void CalculateFusedSum(SimpleMemory memory)
         {
