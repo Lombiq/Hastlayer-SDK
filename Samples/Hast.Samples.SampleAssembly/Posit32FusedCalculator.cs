@@ -15,7 +15,6 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculateFusedSum_InputPosit32CountIndex = QuireSizeIn32BitChunks;
         public const int CalculateFusedSum_InputPosit32StartIndex = QuireSizeIn32BitChunks + 1;
         public const int CalculateFusedSum_OutputQuireIndex = 0;
-        //public const int CalculateFusedSum_OutputPosit32Index = QuireSizeIn32BitChunks;
         public const int CalculateFusedDotProduct_InputPosit32CountIndex = 0;
         public const int CalculateFusedDotProduct_InputPosit32sStartIndex = 1;
         public const int CalculateFusedDotProduct_OutputPosit32Index = 2;
@@ -63,42 +62,54 @@ namespace Hast.Samples.SampleAssembly
     public static class Posit32FusedCalculatorExtensions
     {
 
-        public static Quire CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array, Quire quireStartingValue)
+        public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array)
         {
-            if (posit32Array.Length > Posit32FusedCalculator.MaxInputArraySize)
+            var memory = new SimpleMemory(Posit32FusedCalculator.MaxInputArraySize + Posit32FusedCalculator.QuireSizeIn32BitChunks + 1);
+
+            var quireStartingValue = (Quire)new Posit32(0);
+            var batchCount = posit32Array.Length / Posit32FusedCalculator.MaxInputArraySize;
+            if (posit32Array.Length % Posit32FusedCalculator.MaxInputArraySize != 0)
             {
-                throw new IndexOutOfRangeException("The maximum number of posits to be summed with the fused sum operation can not exceed the MaxInPutArraySize specified in the Posit32FusedCalculator class.");
+                batchCount += 1;
             }
 
-            var memory = new SimpleMemory(posit32Array.Length + Posit32FusedCalculator.QuireSizeIn32BitChunks + 1);
-
-            for (var i = 0; i < quireStartingValue.SegmentCount; i++)
-            {
-                memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputQuireStartIndex + (i * 2), (uint)(quireStartingValue.Segments[i] >> 32));
-                memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputQuireStartIndex + (i * 2) + 1, (uint)quireStartingValue.Segments[i]);
-            }
-
-            memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32CountIndex, (uint)posit32Array.Length);
-
-            for (var i = 0; i < posit32Array.Length; i++)
-            {
-                memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32StartIndex + i, posit32Array[i]);
-            }
-
-            posit32FusedCalculator.CalculateFusedSum(memory);
+            var posit32ArrayChunk = new uint[Posit32FusedCalculator.MaxInputArraySize];
 
             var resultQuireSegments = new ulong[Posit32FusedCalculator.QuireSizeIn64BitChunks];
 
-            for (var i = 0; i < Posit32FusedCalculator.QuireSizeIn64BitChunks; i++)
+            for (int i = 0; i < batchCount; i++)
             {
-                resultQuireSegments[i] = memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSum_OutputQuireIndex + i * 2);
-                resultQuireSegments[i] <<= 32;
-                resultQuireSegments[i] += memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSum_OutputQuireIndex + i * 2 + 1);
+                for (var j = 0; j < quireStartingValue.SegmentCount; j++)
+                {
+                    memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputQuireStartIndex + (j * 2), (uint)(quireStartingValue.Segments[j] >> 32));
+                    memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputQuireStartIndex + (j * 2) + 1, (uint)quireStartingValue.Segments[j]);
+                }
+
+                memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32CountIndex, (uint)posit32ArrayChunk.Length);
+
+                for (var j = 0; j < posit32ArrayChunk.Length; j++)
+                {
+                    if (i * Posit32FusedCalculator.MaxInputArraySize + j < posit32Array.Length)
+                    {
+                        memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32StartIndex + j, posit32Array[i * Posit32FusedCalculator.MaxInputArraySize + j]);
+                    }
+                    else memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32StartIndex + j, (uint)0);
+
+                }
+                posit32FusedCalculator.CalculateFusedSum(memory);
+
+                for (var j = 0; j < Posit32FusedCalculator.QuireSizeIn64BitChunks; j++)
+                {
+                    resultQuireSegments[j] = memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSum_OutputQuireIndex + j * 2);
+                    resultQuireSegments[j] <<= 32;
+                    resultQuireSegments[j] += memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSum_OutputQuireIndex + j * 2 + 1);
+                }
+
+                quireStartingValue = new Quire(resultQuireSegments);
+
             }
 
-            var resultQuire = new Quire(resultQuireSegments);
-
-            return resultQuire;
+            return (float)new Posit32(quireStartingValue);
         }
 
         public static readonly string[] ManuallySizedArrays = new[]

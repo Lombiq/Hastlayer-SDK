@@ -33,25 +33,22 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var positCalculator = new Posit32FusedCalculator();
 
-            var posit32ArrayChunk = new uint[Posit32FusedCalculator.MaxInputArraySize];
+            var posit32Array = new uint[100000];
             // All positive integers smaller than this value ("pintmax") can be exactly represented with 32-bit Posits.
-            var quireStartingValue = (Quire)new Posit32(8388608);
+            posit32Array[0] = new Posit32(8388608).PositBits;
 
-            for (var i = 0; i < Posit32FusedCalculator.MaxInputArraySize; i++)
+            for (var i = 1; i < posit32Array.Length; i++)
             {
-                posit32ArrayChunk[i] = new Posit32(1).PositBits;
+                posit32Array[i] = new Posit32(1).PositBits;
             }
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.           
             var sw = Stopwatch.StartNew();
-            for (var i = 0; i < 500; i++)
-            {
-                quireStartingValue = positCalculator.CalculateFusedSum(posit32ArrayChunk, quireStartingValue);
-            }
-            var positsInArrayFusedSum = new Posit32(quireStartingValue);
+            var result = positCalculator.CalculateFusedSum(posit32Array);
+
             sw.Stop();
 
-            Console.WriteLine("Result of Fused addition of posits in array: " + (float)positsInArrayFusedSum);
+            Console.WriteLine("Result of Fused addition of posits in array: " + result);
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
 
             Console.WriteLine();
