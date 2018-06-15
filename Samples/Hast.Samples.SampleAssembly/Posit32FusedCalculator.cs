@@ -24,7 +24,6 @@ namespace Hast.Samples.SampleAssembly
         public const int QuireSizeIn64BitChunks = Posit32.QuireSize >> 6;
 
 
-
         public virtual void CalculateFusedSum(SimpleMemory memory)
         {
             uint numberCount = memory.ReadUInt32(CalculateFusedSum_InputPosit32CountIndex);
@@ -54,14 +53,12 @@ namespace Hast.Samples.SampleAssembly
                 memory.WriteUInt32(CalculateFusedSum_OutputQuireIndex + i * 2, (uint)(resultQuire.Segments[i] >> 32));
                 memory.WriteUInt32(CalculateFusedSum_OutputQuireIndex + i * 2 + 1, (uint)resultQuire.Segments[i]);
             }
-
         }
     }
 
 
     public static class Posit32FusedCalculatorExtensions
     {
-
         public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array)
         {
             var memory = new SimpleMemory(Posit32FusedCalculator.MaxInputArraySize + Posit32FusedCalculator.QuireSizeIn32BitChunks + 1);

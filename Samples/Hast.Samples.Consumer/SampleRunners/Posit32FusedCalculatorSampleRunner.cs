@@ -26,7 +26,6 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
 
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator());
-
         }
 
         public static void RunSoftwareBenchmarks()
