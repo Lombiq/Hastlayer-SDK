@@ -18,7 +18,7 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculateFusedDotProduct_InputPosit32sStartIndex = 1;
         public const int CalculateFusedDotProduct_OutputPosit32Index = 2;
 
-        public const int MaxArrayChunkSize = 200;
+        public const int MaxArrayChunkSize = 160;
         public const int QuireSizeIn32BitChunks = Posit32.QuireSize >> 5;
         public const int QuireSizeIn64BitChunks = Posit32.QuireSize >> 6;
 
