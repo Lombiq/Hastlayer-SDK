@@ -25,15 +25,17 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void CalculateFusedSum(SimpleMemory memory)
         {
-            uint numberCount = memory.ReadUInt32(CalculateFusedSum_InputPosit32CountIndex);
+            var numberCount = memory.ReadUInt32(CalculateFusedSum_InputPosit32CountIndex);
             var posit32ArrayChunk = new Posit32[MaxArrayChunkSize];
 
-            var quireStartingValue = (Quire)new Posit32(0);
+            var quire = (Quire)new Posit32(0);
             var batchCount = numberCount / MaxArrayChunkSize;
+
             if (numberCount % MaxArrayChunkSize != 0)
             {
                 batchCount += 1;
             }
+
             for (int i = 0; i < batchCount; i++)
             {
                 for (var j = 0; j < posit32ArrayChunk.Length; j++)
@@ -44,9 +46,11 @@ namespace Hast.Samples.SampleAssembly
                     }
                     else posit32ArrayChunk[j] = new Posit32(0);
                 }
-                quireStartingValue = Posit32.FusedSum(posit32ArrayChunk, quireStartingValue);
+
+                quire = Posit32.FusedSum(posit32ArrayChunk, quire);
             }
-            var result = new Posit32(quireStartingValue);
+
+            var result = new Posit32(quire);
             memory.WriteUInt32(CalculateFusedSum_OutputPosit32Index, result.PositBits);
         }
     }
@@ -57,8 +61,10 @@ namespace Hast.Samples.SampleAssembly
         {
             if (posit32Array.Length > Posit32FusedCalculator.MaxInputArraySize)
             {
-                throw new IndexOutOfRangeException("The maximum number of posits to be summed with the fused sum operation can not exceed the MaxInPutArraySize specified in the Posit32FusedCalculator class.");
+                throw new IndexOutOfRangeException(
+                    $"The maximum number of posits to be summed with the fused sum operation can not exceed the {nameof(Posit32FusedCalculator.MaxInputArraySize)} specified in the {nameof(Posit32FusedCalculator)} class (currently: {Posit32FusedCalculator.MaxInputArraySize}).");
             }
+
             var memory = new SimpleMemory(Posit32FusedCalculator.MaxInputArraySize + 1);
 
             memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32CountIndex, (uint)posit32Array.Length);
