@@ -22,6 +22,7 @@ namespace Hast.Samples.SampleAssembly
         public const int QuireSizeIn32BitChunks = Posit32.QuireSize >> 5;
         public const int QuireSizeIn64BitChunks = Posit32.QuireSize >> 6;
 
+
         public virtual void CalculateFusedSum(SimpleMemory memory)
         {
             var numberCount = memory.ReadUInt32(CalculateFusedSum_InputPosit32CountIndex);
