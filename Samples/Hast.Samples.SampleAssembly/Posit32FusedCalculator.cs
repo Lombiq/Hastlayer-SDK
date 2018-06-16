@@ -19,7 +19,6 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculateFusedDotProduct_OutputPosit32Index = 2;
 
         public const int MaxArrayChunkSize = 200;
-        public const int MaxInputArraySize = 1000000;
         public const int QuireSizeIn32BitChunks = Posit32.QuireSize >> 5;
         public const int QuireSizeIn64BitChunks = Posit32.QuireSize >> 6;
 
@@ -58,14 +57,8 @@ namespace Hast.Samples.SampleAssembly
     public static class Posit32FusedCalculatorExtensions
     {
         public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array)
-        {
-            if (posit32Array.Length > Posit32FusedCalculator.MaxInputArraySize)
-            {
-                throw new IndexOutOfRangeException(
-                    $"The maximum number of posits to be summed with the fused sum operation can not exceed the {nameof(Posit32FusedCalculator.MaxInputArraySize)} specified in the {nameof(Posit32FusedCalculator)} class (currently: {Posit32FusedCalculator.MaxInputArraySize}).");
-            }
-
-            var memory = new SimpleMemory(Posit32FusedCalculator.MaxInputArraySize + 1);
+        {          
+            var memory = new SimpleMemory(posit32Array.Length + 1);
 
             memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32CountIndex, (uint)posit32Array.Length);
 
