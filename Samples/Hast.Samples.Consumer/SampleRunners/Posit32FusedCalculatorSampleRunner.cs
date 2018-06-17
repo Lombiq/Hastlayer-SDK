@@ -51,7 +51,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         private static uint[] CreateTestPosit32BitsArray()
         {
-            var posit32Array = new uint[200];
+            var posit32Array = new uint[201];
             // All positive integers smaller than this value ("pintmax") can be exactly represented with 32-bit Posits.
             posit32Array[0] = new Posit32(8388608).PositBits;
 
