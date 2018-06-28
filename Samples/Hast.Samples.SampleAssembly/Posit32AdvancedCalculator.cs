@@ -35,7 +35,7 @@ namespace Hast.Samples.SampleAssembly
     }
 
     public static class Posit32AdvancedCalculatorExtensions
-    {       
+    {
         public static float RepeatedDivision(this Posit32AdvancedCalculator positCalculator, int number, float dividend, float divisor)
         {
             var memory = new SimpleMemory(3);
@@ -47,6 +47,6 @@ namespace Hast.Samples.SampleAssembly
             positCalculator.RepeatedDivision(memory);
 
             return (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.RepeatedDivision_OutputPosit32Index), true);
-        }      
+        }
     }
 }
