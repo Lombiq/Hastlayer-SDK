@@ -44,6 +44,7 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Posit32AdvancedCalculator.cs" />
     <Compile Include="Posit32FusedCalculator.cs" />
     <Compile Include="PositCalculator.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />

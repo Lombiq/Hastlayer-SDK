@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer
         /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher,
         /// MonteCarloAlgorithm.
         /// </summary>
-        public static Sample SampleToRun = Sample.Posit32FusedCalculator;
+        public static Sample SampleToRun = Sample.Posit32AdvancedCalculator;
     }
 
     class Program
@@ -125,6 +125,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.PositCalculator:
                                 PositCalculatorSampleRunner.Configure(configuration);
+                                break;
+                            case Sample.Posit32AdvancedCalculator:
+                                Posit32AdvancedCalculatorSampleRunner.Configure(configuration);
                                 break;
                             case Sample.Posit32Calculator:
                                 Posit32CalculatorSampleRunner.Configure(configuration);
@@ -221,6 +224,9 @@ namespace Hast.Samples.Consumer
                                 break;
                             case Sample.PositCalculator:
                                 await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.Posit32AdvancedCalculator:
+                                await Posit32AdvancedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.Posit32Calculator:
                                 await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);

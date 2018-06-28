@@ -10,6 +10,7 @@
         MonteCarloAlgorithm,
         ObjectOrientedShowcase,
         PositCalculator,
+        Posit32AdvancedCalculator,
         Posit32Calculator,
         Posit32FusedCalculator,
         PrimeCalculator,
