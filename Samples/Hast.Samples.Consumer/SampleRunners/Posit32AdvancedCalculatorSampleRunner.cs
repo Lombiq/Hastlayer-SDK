@@ -23,12 +23,19 @@ namespace Hast.Samples.Consumer.SampleRunners
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator());
 
             positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+
+            var sqrtInputArray = new uint[10];
+            for (int i = 0; i < 10; i++)
+            {
+                sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
+            }
+
+            positCalculator.SqrtOfPositsInArray(sqrtInputArray);
         }
 
         public static void RunSoftwareBenchmarks()
         {
             var positCalculator = new Posit32AdvancedCalculator();
-
 
             positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
             var sw = Stopwatch.StartNew();
@@ -37,7 +44,23 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             Console.WriteLine("Result of repeated division: " + resultOfDivision);
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
-        }
 
+            var sqrtInputArray = new uint[10];
+            for (int i = 0; i < 10; i++)
+            {
+                sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
+            }
+            sw = Stopwatch.StartNew();
+            var resultOfSqrt = positCalculator.SqrtOfPositsInArray(sqrtInputArray);
+            sw.Stop();
+
+            Console.WriteLine("Result of sqrt: ");
+            for (int i = 0; i < resultOfSqrt.Length; i++)
+            {
+                Console.Write(resultOfSqrt[i] + ", ");
+            }
+            Console.WriteLine();
+            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+        }
     }
 }
