@@ -7,6 +7,11 @@ Note that the hardware framework projects have their own release cycle and relea
 
 ## vNext
 
+- Adding transformation warning for too large arrays and displaying such arrays in the Consumer sample.
+
+
+## 1.0.10, 08.06.2017
+
 - Updating and fixing hardware timing values, making hardware execution more reliable, but in certain cases slightly slower, however also causing lower FPGA resource usage.
 - Fixing that hardware description caching didn't work with certain programs.
 - Improved documentation.
