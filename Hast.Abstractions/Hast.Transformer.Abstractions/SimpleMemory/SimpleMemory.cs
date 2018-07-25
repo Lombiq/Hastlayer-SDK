@@ -169,16 +169,16 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             return bytes[0] != 0 || bytes[1] != 0 || bytes[2] != 0 || bytes[3] != 0;
         }
 
-        public uint[] ReadBoolean(int startCellIndex, int count)
+        public bool[] ReadBoolean(int startCellIndex, int count)
         {
-            var numbers = new uint[count];
+            var booleans = new bool[count];
 
             for (int i = 0; i < count; i++)
             {
-                numbers[i] = ReadUInt32(startCellIndex + i);
+                booleans[i] = ReadBoolean(startCellIndex + i);
             }
 
-            return numbers;
+            return booleans;
         }
     }
 }
