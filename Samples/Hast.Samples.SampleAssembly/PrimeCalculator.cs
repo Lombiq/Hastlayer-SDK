@@ -108,10 +108,13 @@ namespace Hast.Samples.SampleAssembly
                 // code. See: https://github.com/icsharpcode/ILSpy/issues/502
                 Task.WhenAll(tasks).Wait();
 
+                var results = new bool[MaxDegreeOfParallelism];
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i + m, tasks[m].Result);
+                    results[m] = tasks[m].Result;
                 }
+
+                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, results);
 
                 i += MaxDegreeOfParallelism;
             }
