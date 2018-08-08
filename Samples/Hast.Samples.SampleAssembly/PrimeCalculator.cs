@@ -91,8 +91,8 @@ namespace Hast.Samples.SampleAssembly
             int i = 0;
             while (i < numberCount)
             {
-                // Note that you can read/write multiple values to SimpleMemory at once. On capable platforms this will
-                // correspond to batched read/writes, which are much faster than doing them one by one.
+                // Note that you can read/write multiple values from/to SimpleMemory at once. On capable platforms this 
+                // will correspond to batched read/writes, which are much faster than doing them one by one.
                 var numbers = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, MaxDegreeOfParallelism);
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
