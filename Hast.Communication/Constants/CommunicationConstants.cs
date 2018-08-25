@@ -4,6 +4,11 @@ namespace Hast.Communication.Constants
 {
     public static class CommunicationConstants
     {
+        public static class Catapult
+        {
+            public const string ChannelName = nameof(Catapult);
+        }
+
         public static class Ethernet
         {
             public const string ChannelName = "Ethernet";
