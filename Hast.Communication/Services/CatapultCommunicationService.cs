@@ -9,6 +9,8 @@ using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
 
+using Catapult = Hast.Communication.Constants.CommunicationConstants.Catapult;
+
 namespace Hast.Communication.Services
 {
     public class CatapultCommunicationService : CommunicationServiceBase
