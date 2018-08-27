@@ -20,6 +20,7 @@ namespace Hast.Communication.Constants
             public const int SoftResetRole = 14;
             public const double WaitOutputBufferTimeoutDefaultSeconds = 10.0;
             public const int PcieHipNumber = 0;
+            public const int MaxBufferSizeBytes = 65536;
             #endregion
 
             #region grouped constants from header files
@@ -121,7 +122,7 @@ namespace Hast.Communication.Constants
                 Warn = 0x20,
             }
 
-            public class HandleFlag
+            public static class HandleFlag
             {
                 public const uint None = 0x0000000u;
                 public const uint Verbose = 0x0000001u;
@@ -140,11 +141,11 @@ namespace Hast.Communication.Constants
                 Dram0UncorrectedErrors = 13,
             }
 
-            public enum ConfigDram
+            public static class ConfigDram
             {
-                Channel0 = 600,
-                Channel1 = 700,
-                Interleaved = 800,
+                public const uint Channel0 = 600;
+                public const uint Channel1 = 700;
+                public const uint Interleaved = 800;
             }
             #endregion
         }

@@ -1,4 +1,5 @@
 ﻿using AdvancedDLSupport;
+using IcIWare.NamedIndexers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,8 +89,32 @@ namespace Hast.Communication.Services
         public string VersionManifestFile { get; private set; }
         public CatapultLogFunction LogFunction { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the value of the Soft Register. Indexed by memory address.
+        /// </summary>
+        public readonly NamedIndexer<uint, ulong> SoftRegister;
+
+        /// <summary>
+        /// Gets or sets the value of the Shell Register. Indexed by register number.
+        /// </summary>
+        public readonly NamedIndexer<uint, uint> ShellRegister;
+
         public CatapultLibrary(string libraryPath, string versionDefinitionsFile = null, string versionManifestFile = null, CatapultLogFunction logFunction = null)
         {
+            VersionDefinitionsFile = versionDefinitionsFile;
+            VersionManifestFile = versionManifestFile;
+            LogFunction = logFunction;
+
+            SoftRegister = new NamedIndexer<uint, ulong>(
+                (address) => { ulong value; VerifyResult(Native.ReadSoftRegister(_handle, address, out value)); return value; },
+                (address, value) => { VerifyResult(Native.WriteSoftRegister(_handle, address, value)); }
+            );
+
+            ShellRegister = new NamedIndexer<uint, uint>(
+                (registerNumber) => { uint value; VerifyResult(Native.ReadShellRegister(_handle, registerNumber, out value)); return value; },
+                (registerNumber, value) => { VerifyResult(Native.WriteShellRegister(_handle, registerNumber, value)); }
+            );
+
             Native = NativeLibraryBuilder.Default.ActivateInterface<ICatapultLibrary>(libraryPath);
 
             var create_status = Native.CreateHandle(out _handle,
@@ -100,9 +125,9 @@ namespace Hast.Communication.Services
                 logFunction);
             VerifyResult(create_status);
 
-            VersionDefinitionsFile = versionDefinitionsFile;
-            VersionManifestFile = versionManifestFile;
-            LogFunction = logFunction;
+            // Configure hardware settings & enable hardware
+            SoftRegister[Catapult.ConfigDram.Channel0] = 0;
+            SetPcieEnabled(true);
         }
 
         /// <summary>
@@ -123,35 +148,10 @@ namespace Hast.Communication.Services
             throw new CatapultFunctionResultException(status, errorMessage.ToString());
         }
 
-        #region registers
-        public void WriteSoftRegister(uint address, ulong value) =>
-            VerifyResult(Native.WriteSoftRegister(_handle, address, value));
-        public void WriteSoftRegister(Catapult.ConfigDram address, uint value) =>
-            VerifyResult(Native.WriteSoftRegister(_handle, (uint)address, value));
-
-        public ulong ReadSoftRegister(uint address)
-        {
-            ulong value;
-            VerifyResult(Native.ReadSoftRegister(_handle, address, out value));
-            return value;
-        }
-        public ulong ReadSoftRegister(Catapult.ConfigDram address) =>
-            ReadSoftRegister((uint)address);
-
-        public void WriteShellRegister(uint registerNumber, uint value) =>
-            VerifyResult(Native.WriteShellRegister(_handle, registerNumber, value));
-        public uint ReadShellregister(uint registerNumber)
-        {
-            uint value;
-            VerifyResult(Native.ReadShellregister(_handle, registerNumber, out value));
-            return value;
-        }
-        #endregion
-
         public void SetPcieEnabled(bool enable)
         {
             uint pcie;
-            Native.ReadShellRegister(_handle, 0, out pcie);
+            VerifyResult(Native.ReadShellRegister(_handle, 0, out pcie));
 
             // set control_register[6]
             if (enable)
@@ -159,12 +159,13 @@ namespace Hast.Communication.Services
             else
                 pcie &= ~Catapult.RegisterMaskPcieEnabled;
 
-            Native.WriteShellRegister(_handle, 0, pcie);
+            VerifyResult(Native.WriteShellRegister(_handle, 0, pcie));
         }
 
         public void Dispose()
         {
             if (_isDisposed) return;
+            SetPcieEnabled(false);
             Native.Dispose();
         }
     }
