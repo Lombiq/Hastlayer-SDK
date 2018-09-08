@@ -9,6 +9,8 @@ namespace Hast.Communication.Constants
         {
             public const string ChannelName = nameof(Catapult);
 
+            public const string DefaultLibraryPath = "FpgaCoreLib";
+
             /// <summary>
             /// The binary mask for the PCIe enable flag in the shell register.
             /// </summary>
@@ -18,6 +20,15 @@ namespace Hast.Communication.Constants
             /// The minimum length of a message sent to the input buffer. (32B)
             /// </summary>
             public const int BufferMessageSizeMin = 32;
+
+
+            public static class ConfigKeys
+            {
+                public const string LibraryPath = nameof(LibraryPath);
+                public const string VersionDefinitionsFile = nameof(VersionDefinitionsFile);
+                public const string VersionManifestFile = nameof(VersionManifestFile);
+            }
+
 
             #region unique constants from header files
             public const int DefaultFlashAccessTimeoutInMilliseconds = (5 * 60 * 1000);

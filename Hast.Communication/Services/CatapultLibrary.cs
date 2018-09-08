@@ -105,7 +105,7 @@ namespace Hast.Communication.Services
         /// Optional logging function that takes flag values from Hast.Communication.Constants.Catapult.Log as its
         /// first parameter and a string as its second. Note that the strings all end with newline character.
         /// </param>
-        public CatapultLibrary(string libraryPath = "FpgaCoreLib",
+        public CatapultLibrary(string libraryPath = Catapult.DefaultLibraryPath,
             string versionDefinitionsFile = null,
             string versionManifestFile = null,
             CatapultLogFunction logFunction = null)
@@ -236,10 +236,13 @@ namespace Hast.Communication.Services
 
             // if the input message is too short, pad it with zeroes
             if (inputData.Length < Catapult.BufferMessageSizeMin)
+                Array.Resize<byte>(ref inputData, Catapult.BufferMessageSizeMin);
+
+            // if the input message isn't 16B aligned, pad it with zeroes
+            if (inputData.Length % 16 != 0)
             {
-                var old = inputData;
-                inputData = new byte[Catapult.BufferMessageSizeMin];
-                Array.Copy(old, inputData, old.Length);
+                int paddedLength = (int)Math.Ceiling(inputData.Length / 16.0) * 16;
+                Array.Resize<byte>(ref inputData, paddedLength);
             }
 
             // acquire I/O buffer addresses

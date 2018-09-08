@@ -43,8 +43,15 @@ namespace Hast.Communication.Services
                 {
                     try
                     {
-                        // add configuration for manifest location and logging?
-                        return new CatapultLibrary();
+                        var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
+                        var libraryPath = config.ContainsKey(Catapult.ConfigKeys.LibraryPath) ?
+                            config[Catapult.ConfigKeys.LibraryPath] ?? Catapult.DefaultLibraryPath : Catapult.DefaultLibraryPath;
+                        var versionDefinitionsFile = config.ContainsKey(Catapult.ConfigKeys.VersionDefinitionsFile) ?
+                            config[Catapult.ConfigKeys.VersionDefinitionsFile] : null;
+                        var versionManifestFile = config.ContainsKey(Catapult.ConfigKeys.VersionManifestFile) ?
+                            config[Catapult.ConfigKeys.VersionManifestFile] : null;
+
+                        return new CatapultLibrary((string)libraryPath, (string)versionDefinitionsFile, (string)versionManifestFile);
                     }
                     catch (CatapultFunctionResultException ex)
                     {
@@ -65,18 +72,26 @@ namespace Hast.Communication.Services
                 if (simpleMemory.Memory.Length < Catapult.BufferMessageSizeMin)
                     Logger.Warning("Incoming data is {0}B! Padding with zeroes to reach the minimum of {1}B...",
                         simpleMemory.Memory.Length, Catapult.BufferMessageSizeMin);
+                else if (simpleMemory.Memory.Length % 16 != 0)
+                    Logger.Warning("Incoming data ({0}B) must be aligned to 16B! Padding for {1}B...",
+                        simpleMemory.Memory.Length, 16 - (simpleMemory.Memory.Length % 16));
 
                 // Sending the data.
                 var outputBuffer = await lib.ExecuteJob(memberId, simpleMemory.Memory);
 
                 // Processing the response.
 
-                // TODO get execution time somehow?
-                // SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles:)
-
-                Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
+                // TODO get execution time
+                //var executionTimeClockCycles = BitConverter.ToUInt64(outputBuffer, 0);
+                //SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
                 simpleMemory.Memory = outputBuffer;
+                // TODO take only the indicated length from the response
+                //var outputByteCount = BitConverter.ToUInt32(outputBuffer, 8);
+                //byte[] outputData = new byte[outputByteCount];
+                //Array.Copy(outputBuffer, sizeof(ulong) + sizeof(uint), outputData, 0, outputByteCount);
+                //simpleMemory.Memory = outputData;
+                Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
                 EndExecution(context);
 
