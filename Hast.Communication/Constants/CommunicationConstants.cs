@@ -9,7 +9,15 @@ namespace Hast.Communication.Constants
         {
             public const string ChannelName = nameof(Catapult);
 
+            /// <summary>
+            /// The binary mask for the PCIe enable flag in the shell register.
+            /// </summary>
             public const uint RegisterMaskPcieEnabled = (1 << 6);
+
+            /// <summary>
+            /// The minimum length of a message sent to the input buffer. (32B)
+            /// </summary>
+            public const int BufferMessageSizeMin = 32;
 
             #region unique constants from header files
             public const int DefaultFlashAccessTimeoutInMilliseconds = (5 * 60 * 1000);
@@ -24,6 +32,10 @@ namespace Hast.Communication.Constants
             #endregion
 
             #region grouped constants from header files
+            /// <summary>
+            /// The return value of the functions in the native Catapult FPGA library.
+            /// It indicates the success or error state of the function call.
+            /// </summary>
             public enum Status
             {
                 Success = 0,
@@ -111,6 +123,10 @@ namespace Hast.Communication.Constants
                 UnknownError = 10000,
             }
 
+            /// <summary>
+            /// The type flags used in the logger function.
+            /// </summary>
+            [Flags]
             public enum Log
             {
                 None = 0x00,
@@ -127,8 +143,14 @@ namespace Hast.Communication.Constants
                 public const uint None = 0x0000000u;
                 public const uint Verbose = 0x0000001u;
                 public const uint Diagnostics = 0x0000002u;
-                public const uint Exclusive = 0x0001000u; // Must be passed to use functions in FPGAManagementLib.h (e.g., flash write, reconfig).
-                public const uint Writegolden = 0x0002000u; // Must be passed in when updating the golden image.
+                /// <summary>
+                /// Must be passed to use functions in FPGAManagementLib.h (e.g., flash write, reconfig).
+                /// </summary>
+                public const uint Exclusive = 0x0001000u;
+                /// <summary>
+                /// Must be passed in when updating the golden image.
+                /// </summary>
+                public const uint Writegolden = 0x0002000u;
             }
 
             public enum Stat

@@ -39,53 +39,48 @@ namespace Hast.Communication.Services
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
             {
-                // TODO set up devices
-                return new IDevice[0];
+                var device = await Task.Run(() =>
+                {
+                    try
+                    {
+                        // add configuration for manifest location and logging?
+                        return new CatapultLibrary();
+                    }
+                    catch (CatapultFunctionResultException ex)
+                    {
+                        Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary.");
+                        return null;
+                    }
+                });
+                return device is null ? new Device[0] :
+                    new[] { new Device { Identifier = Catapult.ChannelName, Metadata = device } };
             });
 
             using (var device = await _devicePoolManager.ReserveDevice())
             {
                 var context = BeginExecution();
+                CatapultLibrary lib = device.Metadata;
 
+                // This actually happens inside lib.ExecuteJob.
+                if (simpleMemory.Memory.Length < Catapult.BufferMessageSizeMin)
+                    Logger.Warning("Incoming data is {0}B! Padding with zeroes to reach the minimum of {1}B...",
+                        simpleMemory.Memory.Length, Catapult.BufferMessageSizeMin);
 
-                //using (var serialPort = CreateSerialPort(executionContext))
-                {
-                    // TODO configure device
-                    
+                // Sending the data.
+                var outputBuffer = await lib.ExecuteJob(memberId, simpleMemory.Memory);
 
-                    // Here we put together the data stream.
+                // Processing the response.
 
-                    // Execute Order 66.
-                    var outputBuffer = new byte[] { (byte)CommandTypes.Execution }
-                        // Copying the input length, represented as bytes, to the output buffer.
-                        .Append(BitConverter.GetBytes(simpleMemory.Memory.Length))
-                        // Copying the member ID, represented as bytes, to the output buffer.
-                        .Append(BitConverter.GetBytes(memberId))
-                        // Copying the simple memory.
-                        .Append(simpleMemory.Memory);
+                // TODO get execution time somehow?
+                // SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles:)
 
-                    // Sending the data.
-                    // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
-                    // we need to create batches. Since the FPGA receives data in the multiples of 4 bytes we use a batch
-                    // of 4 bytes. This seems to have no negative impact on performance compared to using
-                    // serialPort.Write() once.
-                    var maxBytesToSendAtOnce = 4;
-                    for (int i = 0; i < (int)Math.Ceiling(outputBuffer.Length / (decimal)maxBytesToSendAtOnce); i++)
-                    {
-                        // TODO send out data
-                    }
+                Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
+                simpleMemory.Memory = outputBuffer;
 
-                    // Processing the response.
+                EndExecution(context);
 
-                    // In this event we are receiving the useful data coming from the FPGA board.
-
-                    //await taskCompletionSource.Task;
-
-                    EndExecution(context);
-
-                    return context.HardwareExecutionInformation;
-                }
+                return context.HardwareExecutionInformation;
             }
         }
     }
