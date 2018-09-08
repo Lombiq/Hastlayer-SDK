@@ -3,6 +3,7 @@ using Hast.Communication.Exceptions;
 using IcIWare.NamedIndexers;
 using System;
 using System.Collections.Concurrent;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -221,8 +222,8 @@ namespace Hast.Communication.Services
         private async Task<byte[]> RunJob(int slotId, byte[] inputData)
         {
             LogFunction?.Invoke((uint)(Catapult.Log.Info | Catapult.Log.Verbose), $"Job on slot #{slotId} starting...\n");
-            System.Diagnostics.Debug.Assert(slotId < BufferCount);
-            System.Diagnostics.Debug.Assert(inputData.Length <= BufferSize);
+            Debug.Assert(slotId < BufferCount);
+            Debug.Assert(inputData.Length <= BufferSize);
             var slot = (uint)slotId;
 
             // make sure the buffer is ready to be written
@@ -263,7 +264,7 @@ namespace Hast.Communication.Services
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
                 return (int)bytesReceived;
             });
-            System.Diagnostics.Debug.Assert(resultSize == inputData.Length);
+            Debug.Assert(resultSize == inputData.Length);
             var result = new byte[resultSize];
             Marshal.Copy(outputBuffer, result, 0, resultSize);
 
