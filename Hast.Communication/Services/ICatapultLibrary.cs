@@ -9,7 +9,7 @@ using Catapult = Hast.Communication.Constants.CommunicationConstants.Catapult;
 namespace Hast.Communication.Services
 {
     /// <summary>
-    /// The function used by logging in FpgaCoreLib.dll and the CatapultLibrary class
+    /// The function used by logging in FpgaCoreLib.dll and the CatapultLibrary class.
     /// </summary>
     /// <param name="logflag">
     /// The value of a Hast.Communication.Constants.Catapult.Log flag enum converted into uint.
@@ -193,7 +193,7 @@ namespace Hast.Communication.Services
         /// </remarks>
         Catapult.Status CreateHandle(out IntPtr fpgaHandle, uint endpointNumber, uint flags, [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVerDefnsFile, [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVersionManifestFile, [MarshalAs(UnmanagedType.FunctionPtr)]CatapultLogFunction logFunc = null);
         /// <summary>
-        /// This function allows the library user to query the version of both software and hardware componetns.
+        /// This function allows the library user to query the version of both software and hardware components.
         /// All queryable version keys are defined in the 'pchVerDefnsFile' argument of FPGA_CreateHandle. 
         /// By default, the definitions are listed in VersionDefinitions.ini.
         /// </summary>
@@ -278,7 +278,7 @@ namespace Hast.Communication.Services
         /// The user must provide storage for the FPGA-generated PCIe header, and must also specify whether an interrupt is
         /// expected or polling should be used.  If an interrupt is expected, a previous interrupt-enabled call to
         /// FPGA_SendInputBuffer must have been made to the same corresponding input buffer number. 
-        /// The timeout parameter, when overriden from the default, will cause the calling thread to unblock
+        /// The timeout parameter, when overridden from the default, will cause the calling thread to unblock
         /// after a specified duration (in seconds). Setting the timeout to zero will result in an INFINITE wait.
         /// </summary>
         /// <remarks>
