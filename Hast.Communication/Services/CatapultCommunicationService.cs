@@ -51,7 +51,32 @@ namespace Hast.Communication.Services
                         var versionManifestFile = config.ContainsKey(Catapult.ConfigKeys.VersionManifestFile) ?
                             config[Catapult.ConfigKeys.VersionManifestFile] : null;
 
-                        return new CatapultLibrary((string)libraryPath, (string)versionDefinitionsFile, (string)versionManifestFile);
+                        return new CatapultLibrary(
+                            (string)libraryPath,
+                            (string)versionDefinitionsFile,
+                            (string)versionManifestFile,
+                            logFunction: (flagValue, text) =>
+                            {
+                                var flag = (Catapult.Log)flagValue;
+                                #if DEBUG
+                                if (flag == Catapult.Log.None) return;
+                                #else
+                                if (flag == Catapult.Log.None || flag.HasFlag(Catapult.Log.Verbose)) return;
+                                #endif
+
+                                if (flag.HasFlag(Catapult.Log.Info))
+                                    Logger.Information(text);
+                                else if (flag.HasFlag(Catapult.Log.Debug))
+                                    Logger.Debug(text);
+                                else if (flag.HasFlag(Catapult.Log.Error))
+                                    Logger.Error(text);
+                                else if (flag.HasFlag(Catapult.Log.Error))
+                                    Logger.Error(text);
+                                else if (flag.HasFlag(Catapult.Log.Fatal))
+                                    Logger.Fatal(text);
+                                else if (flag.HasFlag(Catapult.Log.Warn))
+                                    Logger.Warning(text);
+                            });
                     }
                     catch (CatapultFunctionResultException ex)
                     {
@@ -69,9 +94,9 @@ namespace Hast.Communication.Services
                 CatapultLibrary lib = device.Metadata;
 
                 // This actually happens inside lib.ExecuteJob.
-                if (simpleMemory.Memory.Length < Catapult.BufferMessageSizeMin)
-                    Logger.Warning("Incoming data is {0}B! Padding with zeroes to reach the minimum of {1}B...",
-                        simpleMemory.Memory.Length, Catapult.BufferMessageSizeMin);
+                if (simpleMemory.Memory.Length < Catapult.BufferMessageSizeMinByte)
+                    Logger.Warning("Incoming data is {0}B! Padding with zeros to reach the minimum of {1}B...",
+                        simpleMemory.Memory.Length, Catapult.BufferMessageSizeMinByte);
                 else if (simpleMemory.Memory.Length % 16 != 0)
                     Logger.Warning("Incoming data ({0}B) must be aligned to 16B! Padding for {1}B...",
                         simpleMemory.Memory.Length, 16 - (simpleMemory.Memory.Length % 16));

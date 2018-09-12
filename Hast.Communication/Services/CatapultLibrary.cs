@@ -31,7 +31,7 @@ namespace Hast.Communication.Services
         public ICatapultLibrary NativeLibrary { get; private set; }
 
         /// <summary>
-        /// Gets the device handle handle utilized by the functions in NativeLibrary.
+        /// Gets the device handle utilized by the functions in NativeLibrary.
         /// </summary>
         public IntPtr Handle { get => _handle; }
 
@@ -47,8 +47,8 @@ namespace Hast.Communication.Services
         public int ShellRegisterCount { get; private set; }
 
         /// <summary>
-        /// Gets the number of buffers. When selecting an input buffer (slot)
-        /// index must be between 0 and (InputBufferCount - 1) inclusive.
+        /// Gets the number of buffers. When selecting an input buffer the slot index must be between 0 and
+        /// (InputBufferCount - 1) inclusive.
         /// </summary>
         public int BufferCount { get; private set; }
 
@@ -71,7 +71,7 @@ namespace Hast.Communication.Services
             {
                 VerifyResult(NativeLibrary.ReadShellRegister(_handle, 0, out uint pcie));
 
-                // set control_register[6]
+                // Set control_register[6]
                 if (value)
                     pcie |= Catapult.RegisterMaskPcieEnabled;
                 else
@@ -96,15 +96,16 @@ namespace Hast.Communication.Services
         /// </summary>
         /// <param name="libraryPath">The path of the FPGACoreLib DLL file without the extension.</param>
         /// <param name="versionDefinitionsFile">
-        /// The location of the version definitions file. If left as null, then
-        /// "FPGAVersionDefinitions.ini" is expected in the current working directory.</param>
+        /// The location of the version definitions file. If left as null, then "FPGAVersionDefinitions.ini" is expected
+        /// in the current working directory.
+        /// </param>
         /// <param name="versionManifestFile">
-        /// The location of the version manifest file. If left as null, then
-        /// "FPGADefaultVersionManifest.ini" is expected in the current working directory.
+        /// The location of the version manifest file. If left as null, then "FPGADefaultVersionManifest.ini" is expected
+        /// in the current working directory.
         /// </param>
         /// <param name="logFunction">
-        /// Optional logging function that takes flag values from Hast.Communication.Constants.Catapult.Log as its
-        /// first parameter and a string as its second. Note that the strings all end with newline character.
+        /// Optional logging function that takes flag values from Hast.Communication.Constants.Catapult.Log as its first
+        /// parameter and a string as its second. Note that the strings all end with newline character.
         /// </param>
         public CatapultLibrary(string libraryPath = Catapult.DefaultLibraryPath,
             string versionDefinitionsFile = null,
@@ -113,32 +114,32 @@ namespace Hast.Communication.Services
         {
             LogFunction = logFunction;
 
-            // indexer register access
+            // Indexer register access
             SoftRegister = new NamedIndexer<uint, ulong>(
                 (address) => { VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value)); return value; },
                 (address, value) => { VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value)); }
             );
             ShellRegister = new NamedIndexer<uint, uint>(
-                (registerNumber) => { VerifyResult(NativeLibrary.ReadShellRegister(_handle, registerNumber, out uint value)); return value; },
-                (registerNumber, value) => { VerifyResult(NativeLibrary.WriteShellRegister(_handle, registerNumber, value)); }
+                (register) => { VerifyResult(NativeLibrary.ReadShellRegister(_handle, register, out uint value)); return value; },
+                (register, value) => { VerifyResult(NativeLibrary.WriteShellRegister(_handle, register, value)); }
             );
 
-            // initialize FPGA library and device
+            // Initialize FPGA library and device
             NativeLibrary = NativeLibraryBuilder.Default.ActivateInterface<ICatapultLibrary>(libraryPath);
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
-            var create_status = NativeLibrary.CreateHandle(out _handle,
+            var createStatus = NativeLibrary.CreateHandle(out _handle,
                 endpointNumber: Catapult.PcieHipNumber,
                 flags: 0,
                 pchVerDefnsFile: string.IsNullOrEmpty(versionDefinitionsFile) ? null : new StringBuilder(versionDefinitionsFile),
                 pchVersionManifestFile: string.IsNullOrEmpty(versionManifestFile) ? null : new StringBuilder(versionManifestFile),
                 logFunc: logFunction);
-            VerifyResult(create_status);
+            VerifyResult(createStatus);
 
-            // configure hardware settings & enable hardware
+            // Configure hardware settings & enable hardware
             SoftRegister[Catapult.ConfigDram.Channel0] = 0;
             PcieEnabled = true;
 
-            // query device info
+            // Query device info
             VerifyResult(NativeLibrary.GetNumberShellRegisters(_handle, out uint count));
             ShellRegisterCount = (int)count;
             VerifyResult(NativeLibrary.GetNumberBuffers(_handle, out count));
@@ -146,7 +147,7 @@ namespace Hast.Communication.Services
             VerifyResult(NativeLibrary.GetBufferSize(_handle, out count));
             BufferSize = (int)count;
 
-            // set up the task-based per-slot queuing mechanism
+            // Set up the task-based per-slot queuing mechanism
             _slotDispatch = new ConcurrentQueue<Task>[BufferCount];
             for (int i = 0; i < BufferCount; i++)
                 _slotDispatch[i] = new ConcurrentQueue<Task>();
@@ -171,15 +172,14 @@ namespace Hast.Communication.Services
 
 
         /// <summary>
-        /// Verifies the result of an ICatapultLibrary function call. If the result is SUCCESS then nothing happens.
-        /// Otherwise CatapultFunctionResultException is thrown with the error message form the library.
+        /// Verifies the result of an ICatapultLibrary function call. If the result is SUCCESS or WAIT_TIMEOUT then
+        /// nothing happens. Otherwise CatapultFunctionResultException is thrown with the error message form the library.
         /// </summary>
         /// <param name="status">The return value from the library function.</param>
-        /// <exception cref="CatapultFunctionResultException">This exception is thrown when the status isn't SUCCESS.</exception>
+        /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
         public void VerifyResult(Catapult.Status status)
         {
-            if (status == Catapult.Status.Success)
-                return;
+            if (status == Catapult.Status.Success || status == Catapult.Status.WaitTimeout) return;
 
             var errorMessage = new StringBuilder(512);
             NativeLibrary.GetLastError();
@@ -193,17 +193,17 @@ namespace Hast.Communication.Services
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// But first it checks if there are any other jobs in queue and awaits them if there are any.
         /// </summary>
-        /// <param name="slotId">The numeric ID of the slot that contains the called program. (between 0 and BufferCount)</param>
+        /// <param name="slotId">The numeric ID of the slot that contains the called program. (0 - BufferCount)</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
         public async Task<byte[]> ExecuteJob(int slotId, byte[] inputData)
         {
-            // this job will contain the current call
+            // This job will contain the current call
             Task<byte[]> job = null;
 
             lock (_slotDispatch[slotId])
             {
-                // check if there was a previous job we have to await
+                // Check if there was a previous job we have to await
                 if (!_slotDispatch[slotId].TryDequeue(out Task previousJob))
                     previousJob = Task.CompletedTask;
                 job = previousJob.ContinueWith(_ => { return RunJob(slotId, inputData).Result; });
@@ -216,7 +216,7 @@ namespace Hast.Communication.Services
         /// <summary>
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// </summary>
-        /// <param name="slotId">The numeric ID of the slot that contains the called program. (between 0 and BufferCount)</param>
+        /// <param name="slotId">The numeric ID of the slot that contains the called program. (0 - BufferCount)</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
         private async Task<byte[]> RunJob(int slotId, byte[] inputData)
@@ -226,7 +226,7 @@ namespace Hast.Communication.Services
             Debug.Assert(inputData.Length <= BufferSize);
             var slot = (uint)slotId;
 
-            // make sure the buffer is ready to be written
+            // Make sure the buffer is ready to be written
             bool isInputBufferFull;
             do
             {
@@ -235,30 +235,31 @@ namespace Hast.Communication.Services
                 if (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
-            // if the input message is too short, pad it with zeroes
-            if (inputData.Length < Catapult.BufferMessageSizeMin)
-                Array.Resize<byte>(ref inputData, Catapult.BufferMessageSizeMin);
+            // If the input message is too short, pad it with zeros
+            if (inputData.Length < Catapult.BufferMessageSizeMinByte)
+                Array.Resize<byte>(ref inputData, Catapult.BufferMessageSizeMinByte);
 
-            // if the input message isn't 16B aligned, pad it with zeroes
+            // If the input message isn't 16B aligned, pad it with zeros
             if (inputData.Length % 16 != 0)
             {
                 int paddedLength = (int)Math.Ceiling(inputData.Length / 16.0) * 16;
                 Array.Resize<byte>(ref inputData, paddedLength);
             }
 
-            // acquire I/O buffer addresses
+            // Acquire I/O buffer addresses
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
 
 #if DEBUG
-            LogFunction?.Invoke((uint)Catapult.Log.Debug, $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
+            LogFunction?.Invoke((uint)Catapult.Log.Debug,
+                $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
 #endif
 
-            // upload data into input buffer
+            // Upload data into input buffer
             Marshal.Copy(inputData, 0, inputBuffer, inputData.Length);
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
-            // wait for the interrupt and download results from output buffer
+            // Wait for the interrupt and download results from output buffer
             var resultSize = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
@@ -269,10 +270,11 @@ namespace Hast.Communication.Services
             Marshal.Copy(outputBuffer, result, 0, resultSize);
 
 #if DEBUG
-            LogFunction?.Invoke((uint)Catapult.Log.Debug, $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}\n");
+            LogFunction?.Invoke((uint)Catapult.Log.Debug,
+                $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}\n");
 #endif
 
-            // signal that we are done
+            // Signal that we are done
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
             LogFunction?.Invoke((uint)(Catapult.Log.Info | Catapult.Log.Verbose), $"Job on slot #{slotId} finished!\n");

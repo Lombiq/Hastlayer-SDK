@@ -14,12 +14,12 @@ namespace Hast.Communication.Constants
             /// <summary>
             /// The binary mask for the PCIe enable flag in the shell register.
             /// </summary>
-            public const uint RegisterMaskPcieEnabled = (1 << 6);
+            public const uint RegisterMaskPcieEnabled = 1 << 6;
 
             /// <summary>
             /// The minimum length of a message sent to the input buffer. (32B)
             /// </summary>
-            public const int BufferMessageSizeMin = 32;
+            public const int BufferMessageSizeMinByte = 32;
 
 
             public static class ConfigKeys
@@ -30,8 +30,8 @@ namespace Hast.Communication.Constants
             }
 
 
-            #region unique constants from header files
-            public const int DefaultFlashAccessTimeoutInMilliseconds = (5 * 60 * 1000);
+            #region Unique constants from header files
+            public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1000;
             public const string ErrorLabels = "hr:min:sec:ms,cycles,pid,tid,filename,line,errmsg,";
             public const string DefaultVersionManifestFile = "FPGADefaultVersionManifest.ini";
             public const string VersionDefinitionsFile = "FPGAVersionDefinitions.ini";
@@ -42,7 +42,7 @@ namespace Hast.Communication.Constants
             public const int MaxBufferSizeBytes = 65536;
             #endregion
 
-            #region grouped constants from header files
+            #region Grouped constants from header files
             /// <summary>
             /// The return value of the functions in the native Catapult FPGA library.
             /// It indicates the success or error state of the function call.
@@ -131,7 +131,7 @@ namespace Hast.Communication.Constants
                 FlashMutexTimeout = 79,
                 EnumerationMoreDevices = 80,
                 EnumerationNoList = 81,
-                UnknownError = 10000,
+                UnknownError = 10000
             }
 
             /// <summary>
@@ -161,7 +161,7 @@ namespace Hast.Communication.Constants
                 /// <summary>
                 /// Must be passed in when updating the golden image.
                 /// </summary>
-                public const uint Writegolden = 0x0002000u;
+                public const uint WriteGolden = 0x0002000u;
             }
 
             public enum Stat
