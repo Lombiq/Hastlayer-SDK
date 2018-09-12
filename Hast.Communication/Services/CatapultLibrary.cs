@@ -99,7 +99,7 @@ namespace Hast.Communication.Services
         /// The location of the version definitions file. If left as null, then
         /// "FPGAVersionDefinitions.ini" is expected in the current working directory.</param>
         /// <param name="versionManifestFile">
-        /// The location of the version manifest fil. If left as null, then
+        /// The location of the version manifest file. If left as null, then
         /// "FPGADefaultVersionManifest.ini" is expected in the current working directory.
         /// </param>
         /// <param name="logFunction">
@@ -146,7 +146,7 @@ namespace Hast.Communication.Services
             VerifyResult(NativeLibrary.GetBufferSize(_handle, out count));
             BufferSize = (int)count;
 
-            // set up the task-based per-slot queueing mechanism
+            // set up the task-based per-slot queuing mechanism
             _slotDispatch = new ConcurrentQueue<Task>[BufferCount];
             for (int i = 0; i < BufferCount; i++)
                 _slotDispatch[i] = new ConcurrentQueue<Task>();
