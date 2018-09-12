@@ -28,7 +28,7 @@ namespace Hast.Communication.Services
         /// <summary>
         /// Gets the interface containing the functions exposed by the native FPGA library.
         /// </summary>
-        public ICatapultLibrary NativeLibrary { get; private set; }
+        public ICatapultNativeLibrary NativeLibrary { get; private set; }
 
         /// <summary>
         /// Gets the device handle utilized by the functions in NativeLibrary.
@@ -125,7 +125,7 @@ namespace Hast.Communication.Services
             );
 
             // Initialize FPGA library and device
-            NativeLibrary = NativeLibraryBuilder.Default.ActivateInterface<ICatapultLibrary>(libraryPath);
+            NativeLibrary = NativeLibraryBuilder.Default.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
             var createStatus = NativeLibrary.CreateHandle(out _handle,
                 endpointNumber: Catapult.PcieHipNumber,

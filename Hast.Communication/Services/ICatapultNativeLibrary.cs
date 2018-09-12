@@ -24,7 +24,7 @@ namespace Hast.Communication.Services
     /// From the c headers "FPGACoreLib.h" and "FPGAManagementLib.h".
     /// </summary>
     [NativeSymbols(Prefix = "FPGA_")]
-    public interface ICatapultLibrary : IDisposable
+    public interface ICatapultNativeLibrary : IDisposable
     {
         #region FPGAManagementLib
         /// <summary>

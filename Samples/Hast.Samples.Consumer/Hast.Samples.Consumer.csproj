@@ -63,12 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="FPGADefaultVersionManifest.ini">
+    <Content Include="FPGADefaultVersionManifest.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="FPGAVersionDefinitions.ini">
+    </Content>
+    <Content Include="FPGAVersionDefinitions.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>

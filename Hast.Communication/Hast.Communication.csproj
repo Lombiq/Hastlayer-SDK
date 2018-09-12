@@ -107,7 +107,7 @@
     <Compile Include="Services\DevicePoolPopulator.cs" />
     <Compile Include="Services\CatapultCommunicationService.cs" />
     <Compile Include="Services\FpgaIpEndpointFinder.cs" />
-    <Compile Include="Services\ICatapultLibrary.cs" />
+    <Compile Include="Services\ICatapultNativeLibrary.cs" />
     <Compile Include="Services\IDevicePoolManager.cs" />
     <Compile Include="Services\IDevicePoolPopulator.cs" />
     <Compile Include="Services\IFpgaIpEndpointFinder.cs" />
