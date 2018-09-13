@@ -1,5 +1,5 @@
 ﻿using System;
-using Catapult = Hast.Communication.Constants.CommunicationConstants.Catapult;
+using Hast.Communication.Constants.CommunicationConstants;
 
 namespace Hast.Communication.Exceptions
 {

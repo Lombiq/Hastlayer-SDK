@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Constants;
+using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
@@ -26,7 +27,7 @@ namespace Hast.Communication.Services
         {
             get
             {
-                return CommunicationConstants.Serial.ChannelName;
+                return Serial.ChannelName;
             }
         }
 
@@ -115,7 +116,7 @@ namespace Hast.Communication.Services
 
                     // Processing the response.
                     var taskCompletionSource = new TaskCompletionSource<bool>();
-                    var communicationState = CommunicationConstants.Serial.CommunicationState.WaitForFirstResponse;
+                    var communicationState = Serial.CommunicationState.WaitForFirstResponse;
                     var outputByteCountBytes = new byte[4];
                     var outputByteCountByteCounter = 0;
                     var outputByteCount = 0; // The incoming byte buffer size.
@@ -128,11 +129,11 @@ namespace Hast.Communication.Services
                     {
                         switch (communicationState)
                         {
-                            case CommunicationConstants.Serial.CommunicationState.WaitForFirstResponse:
-                                if (receivedByte == CommunicationConstants.Serial.Signals.Ping)
+                            case Serial.CommunicationState.WaitForFirstResponse:
+                                if (receivedByte == Serial.Signals.Ping)
                                 {
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.ReceivingExecutionInformation;
+                                    serialPort.Write(Serial.Signals.Ready);
                                 }
                                 else
                                 {
@@ -141,7 +142,7 @@ namespace Hast.Communication.Services
                                         receivedByte);
                                 }
                                 break;
-                            case CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation:
+                            case Serial.CommunicationState.ReceivingExecutionInformation:
                                 executionTimeBytes[executionTimeByteCounter] = receivedByte;
                                 executionTimeByteCounter++;
                                 if (executionTimeByteCounter == 8)
@@ -150,11 +151,11 @@ namespace Hast.Communication.Services
 
                                     SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.ReceivingOutputByteCount;
+                                    serialPort.Write(Serial.Signals.Ready);
                                 }
                                 break;
-                            case CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount:
+                            case Serial.CommunicationState.ReceivingOutputByteCount:
                                 outputByteCountBytes[outputByteCountByteCounter] = receivedByte;
                                 outputByteCountByteCounter++;
 
@@ -168,11 +169,11 @@ namespace Hast.Communication.Services
 
                                     Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOuput;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.ReceivingOuput;
+                                    serialPort.Write(Serial.Signals.Ready);
                                 }
                                 break;
-                            case CommunicationConstants.Serial.CommunicationState.ReceivingOuput:
+                            case Serial.CommunicationState.ReceivingOuput:
                                 outputBytes[outputBytesReceivedCount] = receivedByte;
                                 outputBytesReceivedCount++;
 
@@ -182,8 +183,8 @@ namespace Hast.Communication.Services
 
                                     // Serial communication can give more data than we actually await, so need to 
                                     // set this.
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.Finished;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.Finished;
+                                    serialPort.Write(Serial.Signals.Ready);
 
                                     taskCompletionSource.SetResult(true);
                                 }
@@ -205,7 +206,7 @@ namespace Hast.Communication.Services
                             {
                                 processReceivedByte(inputBuffer[i], i == inputBuffer.Length - 1);
 
-                                if (communicationState == CommunicationConstants.Serial.CommunicationState.Finished)
+                                if (communicationState == Serial.CommunicationState.Finished)
                                 {
                                     return;
                                 }
@@ -252,7 +253,7 @@ namespace Hast.Communication.Services
 
                             serialPort.DataReceived += (sender, e) =>
                             {
-                                if (serialPort.ReadByte() == CommunicationConstants.Serial.Signals.Ready)
+                                if (serialPort.ReadByte() == Serial.Signals.Ready)
                                 {
                                     fpgaPortNames.Add(serialPort.PortName);
                                     taskCompletionSource.SetResult(true);
@@ -290,10 +291,10 @@ namespace Hast.Communication.Services
         {
             var serialPort = new SerialPort
             {
-                BaudRate = CommunicationConstants.Serial.DefaultBaudRate,
-                Parity = CommunicationConstants.Serial.DefaultParity,
-                StopBits = CommunicationConstants.Serial.DefaultStopBits,
-                WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds
+                BaudRate = Serial.DefaultBaudRate,
+                Parity = Serial.DefaultParity,
+                StopBits = Serial.DefaultStopBits,
+                WriteTimeout = Serial.DefaultWriteTimeoutMilliseconds
             };
 
             _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort, executionContext));

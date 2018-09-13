@@ -71,8 +71,10 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Constants\Catapult.cs" />
     <Compile Include="Constants\CommandTypes.cs" />
-    <Compile Include="Constants\CommunicationConstants.cs" />
+    <Compile Include="Constants\Ethernet.cs" />
+    <Compile Include="Constants\Serial.cs" />
     <Compile Include="Exceptions\CatapultFunctionResultException.cs" />
     <Compile Include="Exceptions\EthernetCommunicationException.cs" />
     <Compile Include="Exceptions\HardwareExecutionResultMismatchException.cs" />

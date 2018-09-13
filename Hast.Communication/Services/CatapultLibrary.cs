@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-using Catapult = Hast.Communication.Constants.CommunicationConstants.Catapult;
+using Hast.Communication.Constants.CommunicationConstants;
 
 namespace Hast.Communication.Services
 {

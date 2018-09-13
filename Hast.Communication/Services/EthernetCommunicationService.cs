@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Hast.Communication.Constants;
+using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Models;
 using Hast.Layer;
@@ -27,7 +28,7 @@ namespace Hast.Communication.Services
         {
             get
             {
-                return CommunicationConstants.Ethernet.ChannelName;
+                return Ethernet.ChannelName;
             }
         }
 
@@ -90,7 +91,7 @@ namespace Hast.Communication.Services
 
                             var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
 
-                            if (executionCommandTypeResponseByte[0] != CommunicationConstants.Ethernet.Signals.Ready)
+                            if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
                             {
                                 throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
                             }

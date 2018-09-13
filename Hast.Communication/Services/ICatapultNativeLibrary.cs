@@ -3,7 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using Catapult = Hast.Communication.Constants.CommunicationConstants.Catapult;
+using Hast.Communication.Constants.CommunicationConstants;
 
 
 namespace Hast.Communication.Services

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Net.Sockets;
-using System.Threading.Tasks;
-using Hast.Communication.Constants;
+﻿using System.Threading.Tasks;
+using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
-
-using Catapult = Hast.Communication.Constants.CommunicationConstants.Catapult;
 
 namespace Hast.Communication.Services
 {
@@ -19,8 +14,7 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolManager _devicePoolManager;
 
 
-        public override string ChannelName =>
-            CommunicationConstants.Catapult.ChannelName;
+        public override string ChannelName => Catapult.ChannelName;
 
 
         public CatapultCommunicationService(
