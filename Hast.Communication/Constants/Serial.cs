@@ -2,7 +2,6 @@
 
 namespace Hast.Communication.Constants.CommunicationConstants
 {
-
     public static class Serial
     {
         public const int DefaultBaudRate = 9600;

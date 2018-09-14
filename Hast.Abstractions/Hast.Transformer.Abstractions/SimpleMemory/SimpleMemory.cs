@@ -33,7 +33,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <summary>
         /// Gets the number of cells of this memory allocation, indicating memory cells of size <see cref="MemoryCellSizeBytes"/>.
         /// </summary>
-        public int CellCount { get; private set; }
+        public int CellCount { get => Memory.Length / (int)MemoryCellSizeBytes; }
 
 
         /// <summary>
@@ -48,7 +48,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public SimpleMemory(int cellCount)
         {
             Memory = new byte[cellCount * MemoryCellSizeBytes];
-            CellCount = cellCount;
         }
 
 
@@ -78,6 +77,18 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             }
         }
 
+        public void WriteOverAllBytes(int cellIndex, byte[] bytes)
+        {
+            int offset = cellIndex * (int)MemoryCellSizeBytes;
+
+            if (offset + bytes.Length > Memory.Length)
+                Memory = new byte[bytes.Length + MemoryCellSizeBytes - (bytes.Length % MemoryCellSizeBytes)];
+
+            Array.Copy(bytes, 0, Memory, offset, bytes.Length);
+            if (offset + bytes.Length < Memory.Length)
+                Array.Clear(Memory, offset + bytes.Length, Memory.Length - offset - bytes.Length);
+        }
+
         public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
@@ -100,6 +111,16 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             }
 
             return bytesMatrix;
+        }
+
+        public byte[] ReadAllBytes(int cellIndex = 0)
+        {
+            int offset = cellIndex * (int)MemoryCellSizeBytes;
+            var output = new byte[Memory.Length - offset];
+
+            Array.Copy(Memory, offset, output, 0, output.Length);
+            
+            return output;
         }
 
         public void WriteUInt32(int cellIndex, uint number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));

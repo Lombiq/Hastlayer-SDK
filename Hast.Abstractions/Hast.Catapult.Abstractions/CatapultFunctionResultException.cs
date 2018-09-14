@@ -1,7 +1,7 @@
 ﻿using System;
 using Hast.Communication.Constants.CommunicationConstants;
 
-namespace Hast.Communication.Exceptions
+namespace Hast.Catapult.Abstractions
 {
     /// <summary>
     /// An exception which is fired when an FpgaCoreLib function returns something other than the SUCCESS status.
@@ -12,11 +12,11 @@ namespace Hast.Communication.Exceptions
         /// <summary>
         /// Gets the status returned by the native function call.
         /// </summary>
-        public Catapult.Status Status { get; private set; }
+        public Constants.Status Status { get; private set; }
 
         public CatapultFunctionResultException() { }
 
-        public CatapultFunctionResultException(Catapult.Status status, string message)
+        public CatapultFunctionResultException(Constants.Status status, string message)
             : this(String.IsNullOrWhiteSpace(message) ? status.ToString() : message)
         { Status = status; }
         

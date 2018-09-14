@@ -8,9 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-using Hast.Communication.Constants.CommunicationConstants;
-
-namespace Hast.Communication.Services
+namespace Hast.Catapult.Abstractions
 {
     /// <summary>
     /// Job and configuration manager for the Catapult FPGA driver.
@@ -65,7 +63,7 @@ namespace Hast.Communication.Services
             get
             {
                 VerifyResult(NativeLibrary.ReadShellRegister(_handle, 0, out uint pcie));
-                return (pcie & Catapult.RegisterMaskPcieEnabled) != 0;
+                return (pcie & Constants.RegisterMaskPcieEnabled) != 0;
             }
             private set
             {
@@ -73,9 +71,9 @@ namespace Hast.Communication.Services
 
                 // Set control_register[6]
                 if (value)
-                    pcie |= Catapult.RegisterMaskPcieEnabled;
+                    pcie |= Constants.RegisterMaskPcieEnabled;
                 else
-                    pcie &= ~Catapult.RegisterMaskPcieEnabled;
+                    pcie &= ~Constants.RegisterMaskPcieEnabled;
 
                 VerifyResult(NativeLibrary.WriteShellRegister(_handle, 0, pcie));
             }
@@ -104,10 +102,10 @@ namespace Hast.Communication.Services
         /// in the current working directory.
         /// </param>
         /// <param name="logFunction">
-        /// Optional logging function that takes flag values from Hast.Communication.Constants.Catapult.Log as its first
+        /// Optional logging function that takes flag values from Hast.Communication.Constants.Constants.Log as its first
         /// parameter and a string as its second. Note that the strings all end with newline character.
         /// </param>
-        public CatapultLibrary(string libraryPath = Catapult.DefaultLibraryPath,
+        public CatapultLibrary(string libraryPath = Constants.DefaultLibraryPath,
             string versionDefinitionsFile = null,
             string versionManifestFile = null,
             CatapultLogFunction logFunction = null)
@@ -128,7 +126,7 @@ namespace Hast.Communication.Services
             NativeLibrary = NativeLibraryBuilder.Default.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
             var createStatus = NativeLibrary.CreateHandle(out _handle,
-                endpointNumber: Catapult.PcieHipNumber,
+                endpointNumber: Constants.PcieHipNumber,
                 flags: 0,
                 pchVerDefnsFile: string.IsNullOrEmpty(versionDefinitionsFile) ? null : new StringBuilder(versionDefinitionsFile),
                 pchVersionManifestFile: string.IsNullOrEmpty(versionManifestFile) ? null : new StringBuilder(versionManifestFile),
@@ -136,7 +134,7 @@ namespace Hast.Communication.Services
             VerifyResult(createStatus);
 
             // Configure hardware settings & enable hardware
-            SoftRegister[Catapult.ConfigDram.Channel0] = 0;
+            SoftRegister[Constants.ConfigDram.Channel0] = 0;
             PcieEnabled = true;
 
             // Query device info
@@ -160,12 +158,12 @@ namespace Hast.Communication.Services
         {
             if (_isDisposed) return;
 
-            LogFunction?.Invoke((uint)(Catapult.Log.Info | Catapult.Log.Verbose), "Closing down the FPGA...\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA...\n");
             PcieEnabled = false;
             NativeLibrary.CloseHandle(Handle);
 
             NativeLibrary.Dispose();
-            LogFunction?.Invoke((uint)(Catapult.Log.Info | Catapult.Log.Verbose), "Closed down the FPGA...\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closed down the FPGA...\n");
 
             _isDisposed = true;
         }
@@ -177,9 +175,9 @@ namespace Hast.Communication.Services
         /// </summary>
         /// <param name="status">The return value from the library function.</param>
         /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
-        public void VerifyResult(Catapult.Status status)
+        public void VerifyResult(Constants.Status status)
         {
-            if (status == Catapult.Status.Success || status == Catapult.Status.WaitTimeout) return;
+            if (status == Constants.Status.Success || status == Constants.Status.WaitTimeout) return;
 
             var errorMessage = new StringBuilder(512);
             NativeLibrary.GetLastError();
@@ -221,7 +219,7 @@ namespace Hast.Communication.Services
         /// <returns>The resulting output from the FPGA.</returns>
         private async Task<byte[]> RunJob(int slotId, byte[] inputData)
         {
-            LogFunction?.Invoke((uint)(Catapult.Log.Info | Catapult.Log.Verbose), $"Job on slot #{slotId} starting...\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slotId} starting...\n");
             Debug.Assert(slotId < BufferCount);
             Debug.Assert(inputData.Length <= BufferSize);
             var slot = (uint)slotId;
@@ -236,8 +234,8 @@ namespace Hast.Communication.Services
             } while (isInputBufferFull);
 
             // If the input message is too short, pad it with zeros
-            if (inputData.Length < Catapult.BufferMessageSizeMinByte)
-                Array.Resize<byte>(ref inputData, Catapult.BufferMessageSizeMinByte);
+            if (inputData.Length < Constants.BufferMessageSizeMinByte)
+                Array.Resize<byte>(ref inputData, Constants.BufferMessageSizeMinByte);
 
             // If the input message isn't 16B aligned, pad it with zeros
             if (inputData.Length % 16 != 0)
@@ -251,7 +249,7 @@ namespace Hast.Communication.Services
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
 
 #if DEBUG
-            LogFunction?.Invoke((uint)Catapult.Log.Debug,
+            LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
 #endif
 
@@ -270,14 +268,14 @@ namespace Hast.Communication.Services
             Marshal.Copy(outputBuffer, result, 0, resultSize);
 
 #if DEBUG
-            LogFunction?.Invoke((uint)Catapult.Log.Debug,
+            LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}\n");
 #endif
 
             // Signal that we are done
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
-            LogFunction?.Invoke((uint)(Catapult.Log.Info | Catapult.Log.Verbose), $"Job on slot #{slotId} finished!\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slotId} finished!\n");
             return result;
         }
     }

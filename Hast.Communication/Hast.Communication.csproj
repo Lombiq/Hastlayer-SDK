@@ -71,11 +71,9 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Constants\Catapult.cs" />
     <Compile Include="Constants\CommandTypes.cs" />
     <Compile Include="Constants\Ethernet.cs" />
     <Compile Include="Constants\Serial.cs" />
-    <Compile Include="Exceptions\CatapultFunctionResultException.cs" />
     <Compile Include="Exceptions\EthernetCommunicationException.cs" />
     <Compile Include="Exceptions\HardwareExecutionResultMismatchException.cs" />
     <Compile Include="Exceptions\SerialPortCommunicationException.cs" />
@@ -104,12 +102,9 @@
     <Compile Include="Models\PooledDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyGenerator.cs" />
-    <Compile Include="Services\CatapultLibrary.cs" />
     <Compile Include="Services\DevicePoolManager.cs" />
     <Compile Include="Services\DevicePoolPopulator.cs" />
-    <Compile Include="Services\CatapultCommunicationService.cs" />
     <Compile Include="Services\FpgaIpEndpointFinder.cs" />
-    <Compile Include="Services\ICatapultNativeLibrary.cs" />
     <Compile Include="Services\IDevicePoolManager.cs" />
     <Compile Include="Services\IDevicePoolPopulator.cs" />
     <Compile Include="Services\IFpgaIpEndpointFinder.cs" />

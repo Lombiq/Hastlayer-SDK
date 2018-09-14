@@ -3,17 +3,15 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-using Hast.Communication.Constants.CommunicationConstants;
 
-
-namespace Hast.Communication.Services
+namespace Hast.Catapult.Abstractions
 {
     /// <summary>
     /// The function used by logging in FpgaCoreLib.dll and the CatapultLibrary class.
     /// </summary>
     /// <param name="logflag">
-    /// The value of a Hast.Communication.Constants.Catapult.Log flag enum converted into uint.
-    /// This can be used to filter out specific types of messages, eg Catapult.Log.Verbose.
+    /// The value of a <see cref="Constants.Log"/> flag enum converted into uint.
+    /// This can be used to filter out specific types of messages, eg <see cref="Constants.Log.Verbose"/>.
     /// </param>
     /// <param name="pchString">The log message. Ends with newline so Write should be used instead of WriteLine.</param>
     [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -30,37 +28,37 @@ namespace Hast.Communication.Services
         /// <summary>
         /// This function retrieves the total number of shell registers.
         /// </summary>
-        Catapult.Status GetNumberShellRegisters(IntPtr fpgaHandle, out uint numShellRegs);
+        Constants.Status GetNumberShellRegisters(IntPtr fpgaHandle, out uint numShellRegs);
 
         /// <summary>
         /// This function allows users to read shell registers.  It is both multithreaded- and multiprocesss-safe.
         /// </summary>
-        Catapult.Status ReadShellRegister(IntPtr fpgaHandle, uint registerNumber, out uint readValue);
+        Constants.Status ReadShellRegister(IntPtr fpgaHandle, uint registerNumber, out uint readValue);
 
         /// <summary>
         /// This function allows users to write shell registers. It is both multithreaded- and multiprocess-safe.
         /// </summary>
-        Catapult.Status WriteShellRegister(IntPtr fpgaHandle, uint registerNumber, uint writeValue);
+        Constants.Status WriteShellRegister(IntPtr fpgaHandle, uint registerNumber, uint writeValue);
 
         /// <summary>
         /// This functions returns whether the loaded FPGA image is a Golden image or not.
         /// </summary>
-        Catapult.Status IsGoldenImage(IntPtr fpgaHandle, out bool isGolden, out uint roleID, out uint roleVersion);
+        Constants.Status IsGoldenImage(IntPtr fpgaHandle, out bool isGolden, out uint roleID, out uint roleVersion);
 
         /// <summary>
         /// This function returns the RSU Image ID 
         /// </summary>
-        Catapult.Status ReadRsuImageId(IntPtr fpgaHandle, out uint pImageId);
+        Constants.Status ReadRsuImageId(IntPtr fpgaHandle, out uint pImageId);
 
         /// <summary>
         /// This function forces FPGA reconfiguration. It is not multithreaded- or multiprocess-safe.
         /// The act of re-configuration will cause the existing FPGA handles to be closed.
         /// </summary>
-        Catapult.Status Reconfig(IntPtr[] fpgaHandles, uint numHandles, bool reconfigToGolden);
+        Constants.Status Reconfig(IntPtr[] fpgaHandles, uint numHandles, bool reconfigToGolden);
 
         /// <summary>
         /// This function is used to update the flash images on the FPGA. It can either be used to update the golden or
-        /// app image. Writing to the golden image requires explicitly passing in <see cref="Catapult.HandleFlag.WriteGolden"/>
+        /// app image. Writing to the golden image requires explicitly passing in <see cref="Constants.HandleFlag.WriteGolden"/>
         /// during handle creation. WARNING: writing a bad golden image to the FPGA is a career-limiting move and can 
         /// cause irreparable damage.
         /// This function is protected by an internal mutex against other calls to <see cref="WriteFlashImage(IntPtr,
@@ -71,18 +69,18 @@ namespace Hast.Communication.Services
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according
         /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the timeout.
         /// </param>
-        /// <returns>When a timeout is triggered, it returns <see cref="Catapult.Status.FlashMutexTimeout"/></returns>
-        Catapult.Status WriteFlashImageEx(IntPtr fpgaHandle,
+        /// <returns>When a timeout is triggered, it returns <see cref="Constants.Status.FlashMutexTimeout"/></returns>
+        Constants.Status WriteFlashImageEx(IntPtr fpgaHandle,
             bool writeToGolden,
             string RpdFilename,
-            uint timeoutInMs = Catapult.DefaultFlashAccessTimeoutInMilliseconds);
+            uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
 
         // Excluded from managed API since it's deprecated.
         // /// <summary>
         // /// This function is preserved for backwards compatibility. Unlike <see cref="WriteFlashImageEx(IntPtr, bool, string, uint)"/>,
         // /// this function requires an exclusive handle.
         // /// </summary>
-        // Catapult.Status WriteFlashImage(IntPtr fpgaHandle, bool writeToGolden, string RpdFilename);
+        // Constants.Status WriteFlashImage(IntPtr fpgaHandle, bool writeToGolden, string RpdFilename);
 
         /// <summary>
         /// This function is used to read the flash images from the FPGA to a file. It can either be used to read the
@@ -95,84 +93,84 @@ namespace Hast.Communication.Services
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according
         /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the timeout.
         /// </param>
-        Catapult.Status CaptureFlashImageEx(IntPtr fpgaHandle,
+        Constants.Status CaptureFlashImageEx(IntPtr fpgaHandle,
             bool isGolden,
             string RpdFilename,
-            uint timeoutInMs = Catapult.DefaultFlashAccessTimeoutInMilliseconds);
+            uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
 
         // Excluded from managed API since it's deprecated.
         // /// <summary>
         // /// This function is preserved for backwards compatibility. Unlike
         // /// <see cref="CaptureFlashImageEx(IntPtr, bool, string, uint)"/>, this function requires an exclusive handle.
         // /// </summary>
-        // Catapult.Status CaptureFlashImage(IntPtr fpgaHandle, bool isGolden, string RpdFilename);
+        // Constants.Status CaptureFlashImage(IntPtr fpgaHandle, bool isGolden, string RpdFilename);
 
         /// <summary>
         /// Disable non-maskable interrupt error reporting.  Needed during FPGA reconfiguration. It is not multithreaded-
         /// or multiprocess-safe.
         /// </summary>
-        Catapult.Status DisableNMI(IntPtr fpgaHandle);
+        Constants.Status DisableNMI(IntPtr fpgaHandle);
 
         /// <summary>
         /// Sanity check: FPGA reconfig often fails simply because the FPGA vendor/device ID changed after reconfig
         /// Will need to use RSU -rootportReload first in order to restore the ability to open an FPGA handle
         /// </summary>
-        Catapult.Status ReadVendorDeviceId(IntPtr fpgaHandle, out uint vendorId, out uint deviceId);
+        Constants.Status ReadVendorDeviceId(IntPtr fpgaHandle, out uint vendorId, out uint deviceId);
 
         /// <summary>
         /// Disables and re-enables instances of only the port filter driver that are believed to be upstream of the FPGA.
         /// May not target all needed instances, but this should definitely not target network or GPU or other things that
         /// sometimes make <see cref="CycleRootportEnabledNoDriver"/> crash the machine.
         /// </summary>
-        Catapult.Status ReviveRootportNoDriver();
+        Constants.Status ReviveRootportNoDriver();
 
         /// <summary>
         /// Disables and re-enables all instances of the root port filter driver.
         /// Useful if the FPGA device fails to start after reconfig, potentially saves a reboot
         /// </summary>
-        Catapult.Status CycleRootportEnabledNoDriver();
+        Constants.Status CycleRootportEnabledNoDriver();
 
         /// <summary>
         /// Disables and re-enables the FPGA in device manager with no driver installed (?).  It is not multithreaded-
         /// or multiprocess-safe.
         /// </summary>
-        Catapult.Status CycleDeviceEnabledNoDriver();
+        Constants.Status CycleDeviceEnabledNoDriver();
 
         /// <summary>
         /// Used in JTAG-based reconfiguration. Call this function before JTAG reconfiguration to disable AER and error
         /// reporting. It is not multithreaded- or multiprocess-safe.
         /// </summary>
-        Catapult.Status PrepForReconfig(IntPtr[] fpgaHandles, uint numHandles);
+        Constants.Status PrepForReconfig(IntPtr[] fpgaHandles, uint numHandles);
 
         /// <summary>
         /// Used in JTAG-based reconfiguration. Call this function after JTAG reconfiguration to re-enable AER and error
         /// reporting. It is not multithreaded- or multiprocess-safe.
         /// </summary>
-        Catapult.Status ResetAfterReconfig(IntPtr[] fpgaHandles, uint numHandles);
+        Constants.Status ResetAfterReconfig(IntPtr[] fpgaHandles, uint numHandles);
 
         /// <summary>
         /// Retrieves FPGA shell statistics.
         /// </summary>
-        Catapult.Status ReadStatistic(IntPtr fpgaHandle, uint statType, out uint value);
+        Constants.Status ReadStatistic(IntPtr fpgaHandle, uint statType, out uint value);
 
         /// <summary>
         /// This function enables or disables network bypass mode
         /// Setting 'forceBypass' to TRUE will disable the soft shell network and cause all network traffic to go through
         /// the shell bridge.
         /// </summary>
-        Catapult.Status SetNetworkBypass(IntPtr fpgaHandle, bool forceBypass);
+        Constants.Status SetNetworkBypass(IntPtr fpgaHandle, bool forceBypass);
 
         /// <summary>
         /// Trigger soft reset.
         /// </summary>
-        Catapult.Status TriggerSoftReset(IntPtr fpgaHandle, uint resetType);
+        Constants.Status TriggerSoftReset(IntPtr fpgaHandle, uint resetType);
 
         /// <summary>
         /// Attempt to set the slot size and number of slots. Will fail if requested settings are invalid or cannot be
         /// attained. Bytes per slot must be a multiple of 4096. Number of slots cannot be larger than that supported
         /// by the hardware.
         /// </summary>
-        Catapult.Status SetSlotSize(IntPtr[] fpgaHandles, uint numHandles, uint bytesPerSlot, uint numSlots);
+        Constants.Status SetSlotSize(IntPtr[] fpgaHandles, uint numHandles, uint bytesPerSlot, uint numSlots);
 
         #endregion
 
@@ -182,7 +180,7 @@ namespace Hast.Communication.Services
         //     per process, per end-point.
         //   - CloseHandle has the same constraints as CreateHandle.
         // 
-        // All functions return an Catapult.Status code that should be checked for Catapult.Status.Success by the user.
+        // All functions return an Constants.Status code that should be checked for Constants.Status.Success by the user.
 
 
         /// <summary>
@@ -199,14 +197,14 @@ namespace Hast.Communication.Services
         /// The optional last argument allows the user to specify a logging callback function. The user-defined function
         /// must accept a 'loglevel' argument, which classifies the log entry (e.g., verbose, informational, debug, etc)
         /// and an ANSI string, which contains a single log entry.
-        /// The <see cref="Catapult.Log"/> enumeration is derived from the FPGA_LOG_* flags in the original library
+        /// The <see cref="Constants.Log"/> enumeration is derived from the FPGA_LOG_* flags in the original library
         /// define all the possible (and non-mutually-exclusive) severity levels.
         /// </param>
         /// <returns>
-        /// <see cref="Catapult.Status.Success"/> if the device is present or
-        /// <see cref="Catapult.Status.HardwareNotPresent"/> if the device is not present.
+        /// <see cref="Constants.Status.Success"/> if the device is present or
+        /// <see cref="Constants.Status.HardwareNotPresent"/> if the device is not present.
         /// </returns>
-        Catapult.Status IsDevicePresent(string pchVerManifestFile,
+        Constants.Status IsDevicePresent(string pchVerManifestFile,
             [MarshalAs(UnmanagedType.FunctionPtr)]CatapultLogFunction logFunc);
 
         /// <summary>
@@ -232,7 +230,7 @@ namespace Hast.Communication.Services
         /// <param name="logFunc">
         /// Optional <see cref="CatapultLogFunction"/> logging callback function.
         /// </param>
-        Catapult.Status CreateHandle(out IntPtr fpgaHandle,
+        Constants.Status CreateHandle(out IntPtr fpgaHandle,
             uint endpointNumber,
             uint flags,
             [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVerDefnsFile,
@@ -245,38 +243,38 @@ namespace Hast.Communication.Services
         /// uint, uint, StringBuilder, StringBuilder, CatapultLogFunction)"/>. By default, the definitions are listed in
         /// VersionDefinitions.ini.
         /// </summary>
-        Catapult.Status GetVersion(IntPtr fpgaHandle, string pchVerKey, out uint pVersion);
+        Constants.Status GetVersion(IntPtr fpgaHandle, string pchVerKey, out uint pVersion);
 
         /// <summary>
         /// This function should be called to release and close an FPGA handle.
         /// </summary>
-        Catapult.Status CloseHandle(IntPtr fpgaHandle);
+        Constants.Status CloseHandle(IntPtr fpgaHandle);
 
         // Not presently supported by the native API.
         // /// <summary>
         // /// This function retrieves the total number of available PCIe endpoints on an FPGA.
         // /// </summary>
-        // Catapult.Status GetNumberEndpoints(IntPtr fpgaHandle, out uint numEndpoints);
+        // Constants.Status GetNumberEndpoints(IntPtr fpgaHandle, out uint numEndpoints);
 
         /// <summary>
         /// This function retrieves the total number of PCIe buffers available for host-to-FPGA communication.
         /// </summary>
-        Catapult.Status GetNumberBuffers(IntPtr fpgaHandle, out uint numBuffers);
+        Constants.Status GetNumberBuffers(IntPtr fpgaHandle, out uint numBuffers);
 
         /// <summary>
         /// This function retrieves the total number of bytes available to use, per FPGA PCIe buffer.
         /// </summary>
-        Catapult.Status GetBufferSize(IntPtr fpgaHandle, out uint bufferBytes);
+        Constants.Status GetBufferSize(IntPtr fpgaHandle, out uint bufferBytes);
 
         /// <summary>
         /// Returns the last error occurred.
         /// </summary>
-        Catapult.Status GetLastError();
+        Constants.Status GetLastError();
 
         /// <summary>
         /// Provides error string for the last error occurred.
         /// </summary>
-        Catapult.Status GetLastErrorText([MarshalAs(UnmanagedType.LPStr)]StringBuilder pErrorTextBuf, int cbBufSize);
+        Constants.Status GetLastErrorText([MarshalAs(UnmanagedType.LPStr)]StringBuilder pErrorTextBuf, int cbBufSize);
 
         /// <summary>
         /// This function retrieves a user-mapped pointer to a pinned region of kernel memory that is typically written
@@ -284,14 +282,14 @@ namespace Hast.Communication.Services
         /// <see cref="GetBufferSize(IntPtr, out uint)"/>. The total number of buffers available can be queried using
         /// <see cref="GetNumberBuffers(IntPtr, out uint)"/>. 
         /// </summary>
-        Catapult.Status GetInputBufferPointer(IntPtr fpgaHandle, uint whichBuffer, out IntPtr inputBufferPtr);
+        Constants.Status GetInputBufferPointer(IntPtr fpgaHandle, uint whichBuffer, out IntPtr inputBufferPtr);
 
         /// <summary>
         /// This function retrieves a user-mapped pointer to a pinned region of kernel memory that is typically written
         /// by the FPGA, and read by the host system. The available buffer capacity is finite and should be queried
         /// using <see cref="GetBufferSize(IntPtr, out uint)"/>.
         /// </summary>
-        Catapult.Status GetOutputBufferPointer(IntPtr fpgaHandle, uint whichBuffer, out IntPtr outputBufferPtr);
+        Constants.Status GetOutputBufferPointer(IntPtr fpgaHandle, uint whichBuffer, out IntPtr outputBufferPtr);
 
         /// <summary>
         /// This function retrieves a user-mapped pointer to a pinned region of kernel memory that is typically written
@@ -299,30 +297,30 @@ namespace Hast.Communication.Services
         /// message received on the output buffer. Currently, the result buffer will store the total number of bytes
         /// received from the FPGA.
         /// </summary>
-        Catapult.Status GetResultBufferPointer(IntPtr fpgaHandle, uint whichBuffer, out IntPtr resultBufferPtr);
+        Constants.Status GetResultBufferPointer(IntPtr fpgaHandle, uint whichBuffer, out IntPtr resultBufferPtr);
 
         /// <summary>
         /// This function allows users to read soft shell registers. This function is thread- and multiprocess-safe;
         /// however the current implementation of this API uses multiple non-atomic PIOs to the shell protected by a
         /// software named global mutex.
         /// </summary>
-        Catapult.Status ReadSoftRegister(IntPtr fpgaHandle, uint address, out ulong readValue);
+        Constants.Status ReadSoftRegister(IntPtr fpgaHandle, uint address, out ulong readValue);
 
         /// <summary>
         /// This function allows users to write soft shell registers. The same conditions described in
         /// <see cref="ReadSoftRegister(IntPtr, uint, out ulong)"/> apply here as well.
         /// </summary>
-        Catapult.Status WriteSoftRegister(IntPtr fpgaHandle, uint address, ulong writeValue);
+        Constants.Status WriteSoftRegister(IntPtr fpgaHandle, uint address, ulong writeValue);
 
         /// <summary>
         /// This function indicates whether an input buffer is full and unavailable for writing by the host.
         /// </summary>
-        Catapult.Status GetInputBufferFull(IntPtr fpgaHandle, uint whichBuffer, out bool isFull);
+        Constants.Status GetInputBufferFull(IntPtr fpgaHandle, uint whichBuffer, out bool isFull);
 
         /// <summary>
         /// This function indicates whether an output buffer was written by the FPGA and available for reading by the host.
         /// </summary>
-        Catapult.Status GetOutputBufferDone(IntPtr fpgaHandle, uint whichBuffer, out bool isDone);
+        Constants.Status GetOutputBufferDone(IntPtr fpgaHandle, uint whichBuffer, out bool isDone);
 
         /// <summary>
         /// This function initiates a send operation that transfers the contents of a specified input buffer to the FPGA.
@@ -334,7 +332,7 @@ namespace Hast.Communication.Services
         /// Users are responsible for verifying that the input buffer is available for use prior to calling this function, 
         /// e.g., by checking the return value of <see cref="GetInputBufferFull(IntPtr, uint, out bool)"/>. 
         /// </summary>
-        Catapult.Status SendInputBuffer(IntPtr fpgaHandle, uint whichBuffer, uint sizeBytes, bool useInterrupt = true);
+        Constants.Status SendInputBuffer(IntPtr fpgaHandle, uint whichBuffer, uint sizeBytes, bool useInterrupt = true);
 
         /// <summary>
         /// This function blocks the calling thread until a message is received from the FPGA for a given output buffer. 
@@ -348,13 +346,13 @@ namespace Hast.Communication.Services
         /// specified duration (in seconds). Setting the timeout to zero will result in an INFINITE wait.
         /// </param>
         /// <returns>
-        /// <see cref="Catapult.Status.WaitTimeout"/> if on timeout, otherwise <see cref="Catapult.Status.Success"/>.
+        /// <see cref="Constants.Status.WaitTimeout"/> if on timeout, otherwise <see cref="Constants.Status.Success"/>.
         /// </returns>
-        Catapult.Status WaitOutputBuffer(IntPtr fpgaHandle,
+        Constants.Status WaitOutputBuffer(IntPtr fpgaHandle,
             uint whichBuffer,
             out uint pBytesReceived,
             bool useInterrupt = true,
-            double timeoutInSeconds = Catapult.WaitOutputBufferTimeoutDefaultSeconds);
+            double timeoutInSeconds = Constants.WaitOutputBufferTimeoutDefaultSeconds);
 
         /// <summary>
         /// This function allows a user to discard a particular output buffer after its contents have already been
@@ -362,7 +360,7 @@ namespace Hast.Communication.Services
         /// after waiting on an output buffer using <see cref="WaitOutputBuffer(IntPtr, uint, out uint, bool, double)"/>.
         /// It is harmless to call this function even if no data is expected from the FPGA. 
         /// </summary>
-        Catapult.Status DiscardOutputBuffer(IntPtr fpgaHandle, uint whichBuffer);
+        Constants.Status DiscardOutputBuffer(IntPtr fpgaHandle, uint whichBuffer);
 
         #endregion
     }
