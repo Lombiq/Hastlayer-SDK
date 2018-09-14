@@ -248,10 +248,8 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
 
-#if DEBUG
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
-#endif
 
             // Upload data into input buffer
             Marshal.Copy(inputData, 0, inputBuffer, inputData.Length);
@@ -267,10 +265,8 @@ namespace Hast.Catapult.Abstractions
             var result = new byte[resultSize];
             Marshal.Copy(outputBuffer, result, 0, resultSize);
 
-#if DEBUG
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}\n");
-#endif
 
             // Signal that we are done
             NativeLibrary.DiscardOutputBuffer(_handle, slot);

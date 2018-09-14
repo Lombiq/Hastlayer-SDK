@@ -52,18 +52,12 @@ namespace Hast.Catapult.Abstractions
                             logFunction: (flagValue, text) =>
                             {
                                 var flag = (Constants.Log)flagValue;
-#if DEBUG
                                 if (flag == Constants.Log.None) return;
-#else
-                                if (flag == Constants.Log.None || flag.HasFlag(Constants.Log.Verbose)) return;
-#endif
-
-                                if (flag.HasFlag(Constants.Log.Info))
-                                    Logger.Information(text);
-                                else if (flag.HasFlag(Constants.Log.Debug))
+                                
+                                if (flag.HasFlag(Constants.Log.Debug) || flag.HasFlag(Constants.Log.Verbose))
                                     Logger.Debug(text);
-                                else if (flag.HasFlag(Constants.Log.Error))
-                                    Logger.Error(text);
+                                else if (flag.HasFlag(Constants.Log.Info))
+                                    Logger.Information(text);
                                 else if (flag.HasFlag(Constants.Log.Error))
                                     Logger.Error(text);
                                 else if (flag.HasFlag(Constants.Log.Fatal))
