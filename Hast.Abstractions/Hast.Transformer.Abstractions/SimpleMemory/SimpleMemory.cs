@@ -77,16 +77,16 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             }
         }
 
-        public void WriteOverAllBytes(int cellIndex, byte[] bytes)
+        public void WriteOverAllBytes(int cellIndex, Span<byte> bytes)
         {
             int offset = cellIndex * (int)MemoryCellSizeBytes;
 
             if (offset + bytes.Length > Memory.Length)
-                Memory = new byte[bytes.Length + MemoryCellSizeBytes - (bytes.Length % MemoryCellSizeBytes)];
-
-            Array.Copy(bytes, 0, Memory, offset, bytes.Length);
-            if (offset + bytes.Length < Memory.Length)
+                Memory = new byte[bytes.Length];
+            else
                 Array.Clear(Memory, offset + bytes.Length, Memory.Length - offset - bytes.Length);
+
+            bytes.CopyTo(new Span<byte>(Memory, 0, bytes.Length));
         }
 
         public byte[] Read4Bytes(int cellIndex)

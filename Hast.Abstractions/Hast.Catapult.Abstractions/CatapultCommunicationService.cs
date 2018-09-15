@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
@@ -95,17 +96,17 @@ namespace Hast.Catapult.Abstractions
 
                 // Processing the response.
 
-                // TODO get execution time
-                //var executionTimeClockCycles = BitConverter.ToUInt64(outputBuffer, 0);
-                //SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+                /*// TODO get execution time
+                var executionTimeClockCycles = BitConverter.ToUInt64(outputBuffer, 0);
+                SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+                */
 
-                var memory = outputBuffer;
-                // TODO take only the indicated length from the response
-                //var outputByteCount = BitConverter.ToUInt32(outputBuffer, 8);
-                //byte[] outputData = new byte[outputByteCount];
-                //Array.Copy(outputBuffer, sizeof(ulong) + sizeof(uint), outputData, 0, outputByteCount);
-                //memory = outputData;
-                simpleMemory.WriteOverAllBytes(0, memory);
+                Memory<byte> memory = outputBuffer;
+                /*// TODO take only the indicated length from the response
+                var outputByteCount = (int)BitConverter.ToUInt32(outputBuffer, sizeof(ulong));
+                memory = memory.Slice(sizeof(ulong) + sizeof(uint), outputByteCount);
+                */
+                simpleMemory.WriteOverAllBytes(0, memory.Span);
                 Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
                 EndExecution(context);
