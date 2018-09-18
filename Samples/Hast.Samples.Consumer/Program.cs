@@ -72,18 +72,16 @@ namespace Hast.Samples.Consumer
 
                 // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
                 var devices = await hastlayer.GetSupportedDevices();
-                if (devices == null || devices.Count() == 0)
-                    throw new Exception($"No devices are available!");
+                if (devices == null || devices.Count() == 0) throw new Exception($"No devices are available!");
 
                 // Let's just use the first one that is available, unless the user specified the -d command line flag.
-                string targetDeviceName = args.Contains("-d") ? args[(args as IList<string>).IndexOf("-d") + 1] : devices.First().Name;
+                var targetDeviceName = args.Contains("-d") ? args[(args as IList<string>).IndexOf("-d") + 1] : devices.First().Name;
                 var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
-                if (selectedDevice == null)
-                    throw new Exception($"Target device '{targetDeviceName}' not found!");
+                if (selectedDevice == null)  throw new Exception($"Target device '{targetDeviceName}' not found!");
+
                 var configuration = new HardwareGenerationConfiguration(selectedDevice.Name);
 
-                // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
-                // here:
+                // If you're running Hastlayer in the Client flavor, you also need to configure some credentials here:
                 var remoteClientConfiguration = configuration.RemoteClientConfiguration();
                 remoteClientConfiguration.AppName = "TestApp";
                 remoteClientConfiguration.AppSecret = "appsecret";
@@ -132,8 +130,7 @@ namespace Hast.Samples.Consumer
                         break;
                 }
 
-                // The generated VHDL code will contain debug-level information, though it will be slower to
-                // create.
+                // The generated VHDL code will contain debug-level information, though it will be slower to create.
                 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
                 Console.WriteLine("Hardware generation starts.");
@@ -151,8 +148,8 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine("Hardware generation finished.");
                 Console.WriteLine();
 
-                // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't
-                // cause any problems, but sometimes they can.
+                // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause 
+                // any problems, but sometimes they can.
                 if (hardwareRepresentation.HardwareDescription.Warnings.Any())
                 {
                     Console.WriteLine(
