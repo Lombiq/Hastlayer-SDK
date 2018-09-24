@@ -70,10 +70,8 @@ namespace Hast.Catapult.Abstractions
                 VerifyResult(NativeLibrary.ReadShellRegister(_handle, 0, out uint pcie));
 
                 // Set control_register[6]
-                if (value)
-                    pcie |= Constants.RegisterMaskPcieEnabled;
-                else
-                    pcie &= ~Constants.RegisterMaskPcieEnabled;
+                if (value) pcie |= Constants.RegisterMaskPcieEnabled;
+                else pcie &= ~Constants.RegisterMaskPcieEnabled;
 
                 VerifyResult(NativeLibrary.WriteShellRegister(_handle, 0, pcie));
             }
@@ -150,6 +148,11 @@ namespace Hast.Catapult.Abstractions
             for (int i = 0; i < BufferCount; i++)
                 _slotDispatch[i] = new ConcurrentQueue<Task>();
         }
+
+        /// <summary>
+        /// Finalizer to ensure the instance is disposed at some point after the end of its lifecycle.
+        /// </summary>
+        ~CatapultLibrary() => Dispose();
 
         /// <summary>
         /// Turns off PCIe, cleans up the access handle and the library.
