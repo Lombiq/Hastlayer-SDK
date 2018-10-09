@@ -77,18 +77,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             }
         }
 
-        public void WriteOverAllBytes(int cellIndex, Span<byte> bytes)
-        {
-            int offset = cellIndex * (int)MemoryCellSizeBytes;
-
-            if (offset + bytes.Length > Memory.Length)
-                Memory = new byte[bytes.Length];
-            else
-                Array.Clear(Memory, offset + bytes.Length, Memory.Length - offset - bytes.Length);
-
-            bytes.CopyTo(new Span<byte>(Memory, 0, bytes.Length));
-        }
-
         public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
@@ -111,16 +99,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             }
 
             return bytesMatrix;
-        }
-
-        public byte[] ReadAllBytes(int cellIndex = 0)
-        {
-            int offset = cellIndex * (int)MemoryCellSizeBytes;
-            var output = new byte[Memory.Length - offset];
-
-            Array.Copy(Memory, offset, output, 0, output.Length);
-            
-            return output;
         }
 
         public void WriteUInt32(int cellIndex, uint number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));

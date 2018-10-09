@@ -82,6 +82,9 @@ namespace Hast.Catapult.Abstractions
                 var context = BeginExecution();
                 CatapultLibrary lib = device.Metadata;
 
+                var simpleMemoryInternal = simpleMemory.GetType().GetProperty("Memory");
+
+
                 // This actually happens inside lib.ExecuteJob.
                 int memoryLength = simpleMemory.CellCount * (int)SimpleMemory.MemoryCellSizeBytes;
                 if (memoryLength < Constants.BufferMessageSizeMinByte)
@@ -92,7 +95,7 @@ namespace Hast.Catapult.Abstractions
                         memoryLength, 16 - (memoryLength % 16));
 
                 // Sending the data.
-                var outputBuffer = await lib.ExecuteJob(memberId, simpleMemory.ReadAllBytes());
+                var outputBuffer = await lib.ExecuteJob(memberId, simpleMemoryInternal.GetValue(simpleMemory) as byte[]);
 
                 // Processing the response.
 
@@ -106,7 +109,7 @@ namespace Hast.Catapult.Abstractions
                 var outputByteCount = (int)BitConverter.ToUInt32(outputBuffer, sizeof(ulong));
                 memory = memory.Slice(sizeof(ulong) + sizeof(uint), outputByteCount);
                 */
-                simpleMemory.WriteOverAllBytes(0, memory.Span);
+                simpleMemoryInternal.SetValue(simpleMemory, memory.ToArray());
                 Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
                 EndExecution(context);

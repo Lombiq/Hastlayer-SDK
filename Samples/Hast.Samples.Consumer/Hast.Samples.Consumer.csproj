@@ -63,12 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Content Include="FPGADefaultVersionManifest.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FPGAVersionDefinitions.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
@@ -103,9 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="fpga.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="FpgaCoreLib.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
