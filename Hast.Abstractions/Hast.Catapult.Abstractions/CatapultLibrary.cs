@@ -4,6 +4,7 @@ using IcIWare.NamedIndexers;
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -121,6 +122,12 @@ namespace Hast.Catapult.Abstractions
             );
 
             // Initialize FPGA library and device
+            if (!File.Exists(libraryPath + ".dll") && Directory.Exists(@"E:\catapult\v1.2\Driver\Bin"))
+            {
+                File.Copy(string.Format(@"E:\catapult\v1.2\Driver\Bin\{0}.dll", libraryPath), libraryPath + ".dll");
+                File.Copy(@"E:\catapult\v1.2\Driver\Bin\FPGADefaultVersionManifest.ini", "FPGADefaultVersionManifest.ini");
+                File.Copy(@"E:\catapult\v1.2\Driver\Bin\FPGAVersionDefinitions.ini", "FPGAVersionDefinitions.ini");
+            }
             NativeLibrary = NativeLibraryBuilder.Default.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
             var createStatus = NativeLibrary.CreateHandle(out _handle,
