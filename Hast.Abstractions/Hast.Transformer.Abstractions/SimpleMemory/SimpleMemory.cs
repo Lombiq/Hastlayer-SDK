@@ -1,9 +1,5 @@
 ﻿using System;
 
-// This is so the Memory property can be read when handling communication with the FPGA but not by user code.
-// This could be supposedly also in AssemblyInfo.cs but there it doesn't work.
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Hast.Communication")]
-
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
     /// <summary>

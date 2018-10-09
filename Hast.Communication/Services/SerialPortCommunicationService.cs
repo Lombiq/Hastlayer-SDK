@@ -91,14 +91,17 @@ namespace Hast.Communication.Services
 
                     // Here we put together the data stream.
 
+                    // preare memory
+                    var dma = new DirectSimpleMemoryAccess(simpleMemory);
+
                     // Execute Order 66.
                     var outputBuffer = new byte[] { (byte)CommandTypes.Execution }
                         // Copying the input length, represented as bytes, to the output buffer.
-                        .Append(BitConverter.GetBytes(simpleMemory.Memory.Length))
+                        .Append(BitConverter.GetBytes(dma.Read().Length))
                         // Copying the member ID, represented as bytes, to the output buffer.
                         .Append(BitConverter.GetBytes(memberId))
                         // Copying the simple memory.
-                        .Append(simpleMemory.Memory);
+                        .Append(dma.Read());
 
                     // Sending the data.
                     // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
@@ -179,7 +182,7 @@ namespace Hast.Communication.Services
 
                                 if (outputByteCount == outputBytesReceivedCount)
                                 {
-                                    simpleMemory.Memory = outputBytes;
+                                    dma.Write(outputBytes);
 
                                     // Serial communication can give more data than we actually await, so need to 
                                     // set this.

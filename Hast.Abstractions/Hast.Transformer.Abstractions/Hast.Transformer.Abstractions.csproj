@@ -63,6 +63,7 @@
     <Compile Include="Extensions\AssembliesEnumerableExtensions.cs" />
     <Compile Include="ITransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleMemory\DirectSimpleMemoryAccess.cs" />
     <Compile Include="SimpleMemory\SimpleMemory.cs" />
     <Compile Include="SimpleMemory\SimpleMemoryDeviceManifestExtensions.cs" />
   </ItemGroup>
