@@ -128,7 +128,10 @@ namespace Hast.Catapult.Abstractions
                 File.Copy(@"E:\catapult\v1.2\Driver\Bin\FPGADefaultVersionManifest.ini", "FPGADefaultVersionManifest.ini");
                 File.Copy(@"E:\catapult\v1.2\Driver\Bin\FPGAVersionDefinitions.ini", "FPGAVersionDefinitions.ini");
             }
-            NativeLibrary = NativeLibraryBuilder.Default.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
+            // We don't use dllmap so create ALD without it
+            var builderWithoutDllMap = new NativeLibraryBuilder(NativeLibraryBuilder.Default.Options & ~ImplementationOptions.EnableDllMapSupport);
+            NativeLibrary = builderWithoutDllMap.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
+            // Check if device is available and connect
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
             var createStatus = NativeLibrary.CreateHandle(out _handle,
                 endpointNumber: Constants.PcieHipNumber,
