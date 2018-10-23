@@ -18,7 +18,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             _simpleMemory = simpleMemory;
         }
 
-        public byte[] Read() => _simpleMemory.Memory;
-        public void Write(byte[] data) => _simpleMemory.Memory = data;
+        public byte[] Get() => _simpleMemory.Memory;
+        public void Set(byte[] data) => _simpleMemory.Memory = data;
     }
 }

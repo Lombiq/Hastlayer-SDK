@@ -119,8 +119,8 @@ namespace Hast.Communication
                                 if (configuration.VerifyHardwareResults)
                                 {
                                     softMemory = new SimpleMemory(memory.CellCount);
-                                    var memoryBytes = new DirectSimpleMemoryAccess(memory).Read();
-                                    memoryBytes.CopyTo(new DirectSimpleMemoryAccess(softMemory).Read(), 0);
+                                    var memoryBytes = new DirectSimpleMemoryAccess(memory).Get();
+                                    memoryBytes.CopyTo(new DirectSimpleMemoryAccess(softMemory).Get(), 0);
 
                                     var memoryArgumentIndex = invocation.Arguments
                                         .Select((argument, index) => new { Argument = argument, Index = index })
