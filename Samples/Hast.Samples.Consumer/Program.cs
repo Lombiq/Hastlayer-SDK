@@ -38,12 +38,12 @@ namespace Hast.Samples.Consumer
         static async Task MainTask(string[] args)
         {
             /*
-                     * On a high level these are the steps to use Hastlayer:
-                     * 1. Create the Hastlayer shell.
-                     * 2. Configure hardware generation and generate FPGA hardware representation of the given .NET code.
-                     * 3. Generate proxies for hardware-transformed types and use these proxies to utilize hardware
-                     *    implementations. (You can see this inside the SampleRunners.)
-                     */
+            * On a high level these are the steps to use Hastlayer:
+            * 1. Create the Hastlayer shell.
+            * 2. Configure hardware generation and generate FPGA hardware representation of the given .NET code.
+            * 3. Generate proxies for hardware-transformed types and use these proxies to utilize hardware
+            *    implementations. (You can see this inside the SampleRunners.)
+            */
 
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need
             // the Client flavor: This will let you connect to a remote Hastlayer service to run the software
