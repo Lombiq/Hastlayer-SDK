@@ -123,12 +123,6 @@ namespace Hast.Catapult.Abstractions
             );
 
             // Initialize FPGA library and device
-            if (!File.Exists(libraryPath + ".dll") && Directory.Exists(@"E:\catapult\v1.2\Driver\Bin"))
-            {
-                File.Copy(string.Format(@"E:\catapult\v1.2\Driver\Bin\{0}.dll", libraryPath), libraryPath + ".dll");
-                File.Copy(@"E:\catapult\v1.2\Driver\Bin\FPGADefaultVersionManifest.ini", "FPGADefaultVersionManifest.ini");
-                File.Copy(@"E:\catapult\v1.2\Driver\Bin\FPGAVersionDefinitions.ini", "FPGAVersionDefinitions.ini");
-            }
             // We don't use dllmap so create ALD without it
             var builderWithoutDllMap = new NativeLibraryBuilder(NativeLibraryBuilder.Default.Options & ~ImplementationOptions.EnableDllMapSupport);
             NativeLibrary = builderWithoutDllMap.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
