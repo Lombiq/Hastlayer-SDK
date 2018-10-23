@@ -72,7 +72,7 @@ namespace Hast.Samples.Consumer
 
                 // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
                 var devices = await hastlayer.GetSupportedDevices();
-                if (devices == null || devices.Count() == 0) throw new Exception($"No devices are available!");
+                if (devices == null || devices.Count() == 0) throw new Exception("No devices are available!");
 
                 // Let's just use the first one that is available, unless the user specified the -d command line flag.
                 var targetDeviceName = args.Contains("-d") ? args[(args as IList<string>).IndexOf("-d") + 1] : devices.First().Name;
