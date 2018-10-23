@@ -104,7 +104,8 @@ namespace Hast.Catapult.Abstractions
         /// Optional logging function that takes flag values from Hast.Communication.Constants.Constants.Log as its first
         /// parameter and a string as its second. Note that the strings all end with newline character.
         /// </param>
-        public CatapultLibrary(string libraryPath = Constants.DefaultLibraryPath,
+        public CatapultLibrary(
+            string libraryPath = Constants.DefaultLibraryPath,
             string versionDefinitionsFile = null,
             string versionManifestFile = null,
             CatapultLogFunction logFunction = null)

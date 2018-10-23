@@ -33,7 +33,7 @@ namespace Hast.Catapult.Abstractions
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
             {
-                var device = await Task.Run(() =>
+                var deviceLibrary = await Task.Run(() =>
                 {
                     try
                     {
@@ -73,8 +73,8 @@ namespace Hast.Catapult.Abstractions
                         return null;
                     }
                 });
-                return device is null ? new Device[0] :
-                    new[] { new Device { Identifier = Constants.ChannelName, Metadata = device } };
+                return deviceLibrary is null ? new Device[0] :
+                    new[] { new Device { Identifier = Constants.ChannelName, Metadata = deviceLibrary } };
             });
 
             using (var device = await _devicePoolManager.ReserveDevice())
@@ -83,7 +83,6 @@ namespace Hast.Catapult.Abstractions
                 CatapultLibrary lib = device.Metadata;
 
                 var dma = new DirectSimpleMemoryAccess(simpleMemory);
-                ;
 
                 // This actually happens inside lib.ExecuteJob.
                 int memoryLength = simpleMemory.CellCount * (int)SimpleMemory.MemoryCellSizeBytes;
