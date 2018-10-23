@@ -98,15 +98,17 @@ namespace Hast.Communication.Services
 
                             // Here we put together the data stream.
                             var dma = new DirectSimpleMemoryAccess(simpleMemory);
-                            var lengthBytes = BitConverter.GetBytes(dma.Read().Length);
+                            var memory = dma.Get();
+
+                            var lengthBytes = BitConverter.GetBytes(memory.Length);
                             var memberIdBytes = BitConverter.GetBytes(memberId);
 
                             // Copying the input length, represented as bytes, to the output buffer.
-                            var outputBuffer = BitConverter.GetBytes(dma.Read().Length)
+                            var outputBuffer = BitConverter.GetBytes(memory.Length)
                                 // Copying the member ID, represented as bytes, to the output buffer.
                                 .Append(BitConverter.GetBytes(memberId))
                                 // Copying the simple memory.
-                                .Append(dma.Read());
+                                .Append(memory);
 
                             // Sending data to the FPGA board.
                             stream.Write(outputBuffer, 0, outputBuffer.Length);
@@ -129,7 +131,7 @@ namespace Hast.Communication.Services
                             // Finally read the memory itself.
                             var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount);
 
-                            dma.Write(outputBytes);
+                            dma.Set(outputBytes);
                         }
                     }
                 }

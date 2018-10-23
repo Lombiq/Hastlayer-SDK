@@ -94,7 +94,7 @@ namespace Hast.Catapult.Abstractions
                         memoryLength, 16 - (memoryLength % 16));
 
                 // Sending the data.
-                var outputBuffer = await lib.ExecuteJob(memberId, dma.Read());
+                var outputBuffer = await lib.ExecuteJob(memberId, dma.Get());
 
                 // Processing the response.
 
@@ -108,7 +108,7 @@ namespace Hast.Catapult.Abstractions
                 var outputByteCount = (int)BitConverter.ToUInt32(outputBuffer, sizeof(ulong));
                 memory = memory.Slice(sizeof(ulong) + sizeof(uint), outputByteCount);
                 */
-                dma.Write(memory.ToArray());
+                dma.Set(memory.ToArray());
                 Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
                 EndExecution(context);
