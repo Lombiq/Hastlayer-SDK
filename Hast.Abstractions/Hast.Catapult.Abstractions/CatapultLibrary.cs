@@ -199,21 +199,21 @@ namespace Hast.Catapult.Abstractions
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// But first it checks if there are any other jobs in queue and awaits them if there are any.
         /// </summary>
-        /// <param name="slotId">The numeric ID of the slot that contains the called program. (0 - BufferCount)</param>
+        /// <param name="bufferIndex">The numeric ID of the buffer (called "slot" in the documentation) that the hardware uses for interaction. (ranges from 0 up to BufferCount)</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public async Task<byte[]> ExecuteJob(int slotId, byte[] inputData)
+        public async Task<byte[]> ExecuteJob(int bufferIndex, byte[] inputData)
         {
             // This job will contain the current call
             Task<byte[]> job = null;
 
-            lock (_slotDispatch[slotId])
+            lock (_slotDispatch[bufferIndex])
             {
                 // Check if there was a previous job we have to await
-                if (!_slotDispatch[slotId].TryDequeue(out Task previousJob))
+                if (!_slotDispatch[bufferIndex].TryDequeue(out Task previousJob))
                     previousJob = Task.CompletedTask;
-                job = previousJob.ContinueWith(_ => { return RunJob(slotId, inputData).Result; });
-                _slotDispatch[slotId].Enqueue(job);
+                job = previousJob.ContinueWith(_ => { return RunJob(bufferIndex, inputData).Result; });
+                _slotDispatch[bufferIndex].Enqueue(job);
             }
 
             return await job;
@@ -222,15 +222,15 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// </summary>
-        /// <param name="slotId">The numeric ID of the slot that contains the called program. (0 - BufferCount)</param>
+        /// <param name="bufferIndex">The numeric ID of the buffer (called "slot" in the documentation) that the hardware uses for interaction. (ranges from 0 up to BufferCount)</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        private async Task<byte[]> RunJob(int slotId, byte[] inputData)
+        private async Task<byte[]> RunJob(int bufferIndex, byte[] inputData)
         {
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slotId} starting...\n");
-            Debug.Assert(slotId < BufferCount);
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} starting...\n");
+            Debug.Assert(bufferIndex < BufferCount);
             Debug.Assert(inputData.Length <= BufferSize);
-            var slot = (uint)slotId;
+            var slot = (uint)bufferIndex;
 
             // Make sure the buffer is ready to be written
             bool isInputBufferFull;
@@ -279,7 +279,7 @@ namespace Hast.Catapult.Abstractions
             // Signal that we are done
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slotId} finished!\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} finished!\n");
             return result;
         }
     }
