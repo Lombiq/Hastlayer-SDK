@@ -15,7 +15,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// </remarks>
     public class SimpleMemory
     {
-        public const uint MemoryCellSizeBytes = 4;
+        public const int MemoryCellSizeBytes = 4;
 
 
         /// <summary>
@@ -24,7 +24,12 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <remarks>
         /// This is internal so the property can be read when handling communication with the FPGA but not by user code.
         /// </remarks>
-        internal byte[] Memory { get; set; }
+        internal Memory<byte> Memory { get; set; }
+
+        public Span<byte> this[int index]
+        {
+            get => Memory.Slice(index * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
+        }
 
         /// <summary>
         /// Gets the number of cells of this memory allocation, indicating memory cells of size <see cref="MemoryCellSizeBytes"/>.
@@ -49,20 +54,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public void Write4Bytes(int cellIndex, byte[] bytes)
         {
-            if (bytes.Length > MemoryCellSizeBytes)
-            {
-                throw new ArgumentException("The byte array to be written to memory should be shorter than " + MemoryCellSizeBytes + ".");
-            }
+            var target = this[cellIndex];
 
-            for (uint i = 0; i < bytes.Length; i++)
-            {
-                Memory[i + cellIndex * MemoryCellSizeBytes] = bytes[i];
-            }
-
-            for (uint i = (uint)bytes.Length; i < MemoryCellSizeBytes; i++)
-            {
-                Memory[i + cellIndex * MemoryCellSizeBytes] = 0;
-            }
+            for (int i = 0; i < bytes.Length; i++) target[i] = bytes[i];
+            for (int i = bytes.Length; i < MemoryCellSizeBytes; i++) target[i] = 0;
         }
 
         public void Write4Bytes(int startCellIndex, params byte[][] bytesMatrix)
@@ -77,10 +72,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         {
             var output = new byte[MemoryCellSizeBytes];
 
-            for (uint i = 0; i < MemoryCellSizeBytes; i++)
-            {
-                output[i] = Memory[i + cellIndex * MemoryCellSizeBytes];
-            }
+            this[cellIndex].CopyTo(output);
 
             return output;
         }
