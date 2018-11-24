@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
@@ -15,7 +16,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// </remarks>
     public class SimpleMemory
     {
-        public const int MemoryCellSizeBytes = 4;
+        public const int MemoryCellSizeBytes = sizeof(int);
 
 
         /// <summary>
@@ -26,16 +27,20 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </remarks>
         internal Memory<byte> Memory { get; set; }
 
-        public Span<byte> this[int index]
-        {
-            get => Memory.Slice(index * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
-        }
-
         /// <summary>
         /// Gets the number of cells of this memory allocation, indicating memory cells of size <see cref="MemoryCellSizeBytes"/>.
         /// </summary>
-        public int CellCount { get => Memory.Length / (int)MemoryCellSizeBytes; }
+        public int CellCount { get => Memory.Length / MemoryCellSizeBytes; }
 
+        /// <summary>
+        /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.
+        /// </summary>
+        /// <param name="cellIndex">The cell index where the memory span starts.</param>
+        /// <returns>A span starting at cellIndex * MemoryCellSizeBytes.</returns>
+        public Span<byte> this[int cellIndex]
+        {
+            get => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
+        }
 
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
@@ -51,8 +56,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             Memory = new byte[cellCount * MemoryCellSizeBytes];
         }
 
-
-        public void Write4Bytes(int cellIndex, byte[] bytes)
+        public void Write4Bytes(int cellIndex, Span<byte> bytes)
         {
             var target = this[cellIndex];
 
@@ -63,11 +67,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public void Write4Bytes(int startCellIndex, params byte[][] bytesMatrix)
         {
             for (int i = 0; i < bytesMatrix.Length; i++)
-            {
                 Write4Bytes(startCellIndex + i, bytesMatrix[i]);
-            }
         }
 
+        [Obsolete("Use the indexer to get the span of this the 4 bytes at this cell index.")]
         public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
@@ -77,29 +80,21 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             return output;
         }
 
-        public byte[][] Read4Bytes(int startCellIndex, int count)
+        public Memory<byte>[] Read4Bytes(int startCellIndex, int count)
         {
-            var bytesMatrix = new byte[count][];
-
-            for (int i = 0; i < count; i++)
-            {
-                bytesMatrix[i] = Read4Bytes(startCellIndex + i);
-            }
-
-            return bytesMatrix;
+            var matrix = new Memory<byte>[count];
+            int offset = startCellIndex * MemoryCellSizeBytes;
+            for (int i = 0; i < count; i++) matrix[i] = Memory.Slice(offset + i * MemoryCellSizeBytes, MemoryCellSizeBytes);
+            return matrix;
         }
 
-        public void WriteUInt32(int cellIndex, uint number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
+        public void WriteUInt32(int cellIndex, uint number) => MemoryMarshal.Write(this[cellIndex], ref number);
 
-        public void WriteUInt32(int startCellIndex, params uint[] numbers)
-        {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                WriteUInt32(startCellIndex + i, numbers[i]);
-            }
-        }
+        public void WriteUInt32(int startCellIndex, params uint[] numbers) =>
+            MemoryMarshal.Cast<uint, byte>(numbers)
+                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, sizeof(uint)).Span);
 
-        public uint ReadUInt32(int cellIndex) => BitConverter.ToUInt32(Read4Bytes(cellIndex), 0);
+        public uint ReadUInt32(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]);
 
         public uint[] ReadUInt32(int startCellIndex, int count)
         {
@@ -123,7 +118,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             }
         }
 
-        public int ReadInt32(int cellIndex) => BitConverter.ToInt32(Read4Bytes(cellIndex), 0);
+        public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
 
         public int[] ReadInt32(int startCellIndex, int count)
         {
@@ -150,11 +145,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             }
         }
 
-        public bool ReadBoolean(int cellIndex)
-        {
-            var bytes = Read4Bytes(cellIndex);
-            return bytes[0] != 0 || bytes[1] != 0 || bytes[2] != 0 || bytes[3] != 0;
-        }
+        public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]) != 0;
 
         public bool[] ReadBoolean(int startCellIndex, int count)
         {
