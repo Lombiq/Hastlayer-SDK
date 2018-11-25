@@ -53,7 +53,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int t = 0; t < MaxDegreeOfParallelism; t++)
                 {
-                    var pixelBytes = memory.Read4Bytes(i * MaxDegreeOfParallelism + t + ChangeContrast_ImageStartIndex);
+                    var pixelBytes = memory[i * MaxDegreeOfParallelism + t + ChangeContrast_ImageStartIndex].ToArray();
 
                     // Using an input class to also pass contrastValue because it's currently not supported to access
                     // variables from the parent scope from inside Tasks (you need to explicitly pass in all inputs).
@@ -197,7 +197,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    var bytes = memory.Read4Bytes(x * newImage.Width + y + ImageContrastModifier.ChangeContrast_ImageStartIndex);
+                    var bytes = memory[x * newImage.Width + y + ImageContrastModifier.ChangeContrast_ImageStartIndex];
                     newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
                 }
             }
