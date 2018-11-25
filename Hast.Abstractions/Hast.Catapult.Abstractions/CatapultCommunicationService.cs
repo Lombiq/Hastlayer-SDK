@@ -108,7 +108,7 @@ namespace Hast.Catapult.Abstractions
                 var outputByteCount = (int)BitConverter.ToUInt32(outputBuffer, sizeof(ulong));
                 memory = memory.Slice(sizeof(ulong) + sizeof(uint), outputByteCount);
                 */
-                dma.Set(memory.ToArray());
+                dma.SetMemory(memory);
                 Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
                 EndExecution(context);
