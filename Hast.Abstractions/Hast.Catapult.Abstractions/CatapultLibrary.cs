@@ -202,10 +202,10 @@ namespace Hast.Catapult.Abstractions
         /// <param name="bufferIndex">The numeric ID of the buffer (called "slot" in the documentation) that the hardware uses for interaction. (ranges from 0 up to BufferCount)</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public async Task<byte[]> ExecuteJob(int bufferIndex, byte[] inputData)
+        public async Task<Memory<byte>> ExecuteJob(int bufferIndex, Memory<byte> inputData)
         {
             // This job will contain the current call
-            Task<byte[]> job = null;
+            Task<Memory<byte>> job = null;
 
             lock (_slotDispatch[bufferIndex])
             {
@@ -225,7 +225,7 @@ namespace Hast.Catapult.Abstractions
         /// <param name="bufferIndex">The numeric ID of the buffer (called "slot" in the documentation) that the hardware uses for interaction. (ranges from 0 up to BufferCount)</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        private async Task<byte[]> RunJob(int bufferIndex, byte[] inputData)
+        private async Task<Memory<byte>> RunJob(int bufferIndex, Memory<byte> inputData)
         {
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} starting...\n");
             Debug.Assert(bufferIndex < BufferCount);
@@ -243,13 +243,18 @@ namespace Hast.Catapult.Abstractions
 
             // If the input message is too short, pad it with zeros
             if (inputData.Length < Constants.BufferMessageSizeMinByte)
-                Array.Resize<byte>(ref inputData, Constants.BufferMessageSizeMinByte);
-
+            {
+                var padded = new byte[Constants.BufferMessageSizeMinByte];
+                inputData.CopyTo(padded);
+                inputData = padded;
+            }
             // If the input message isn't 16B aligned, pad it with zeros
-            if (inputData.Length % 16 != 0)
+            else if (inputData.Length % 16 != 0)
             {
                 int paddedLength = (int)Math.Ceiling(inputData.Length / 16.0) * 16;
-                Array.Resize<byte>(ref inputData, paddedLength);
+                var padded = new byte[paddedLength];
+                inputData.CopyTo(padded);
+                inputData = padded;
             }
 
             // Acquire I/O buffer addresses
@@ -260,7 +265,10 @@ namespace Hast.Catapult.Abstractions
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
 
             // Upload data into input buffer
-            Marshal.Copy(inputData, 0, inputBuffer, inputData.Length);
+            unsafe
+            {
+                inputData.Span.CopyTo(new Span<byte>(inputBuffer.ToPointer(), inputData.Length));
+            }
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
             // Wait for the interrupt and download results from output buffer
@@ -269,9 +277,12 @@ namespace Hast.Catapult.Abstractions
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
                 return (int)bytesReceived;
             });
-            Debug.Assert(resultSize == inputData.Length);
-            var result = new byte[resultSize];
-            Marshal.Copy(outputBuffer, result, 0, resultSize);
+
+            Memory<byte> resultMemory = new byte[resultSize];
+            unsafe
+            {
+                new Span<byte>(outputBuffer.ToPointer(), resultSize).CopyTo(resultMemory.Span);
+            }
 
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}\n");
@@ -280,7 +291,7 @@ namespace Hast.Catapult.Abstractions
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} finished!\n");
-            return result;
+            return resultMemory;
         }
     }
 }
