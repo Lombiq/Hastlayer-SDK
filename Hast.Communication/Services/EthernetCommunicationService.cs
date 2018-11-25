@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
@@ -98,17 +99,19 @@ namespace Hast.Communication.Services
 
                             // Here we put together the data stream.
                             var dma = new DirectSimpleMemoryAccess(simpleMemory);
-                            var memory = dma.Get();
+                            var memory = dma.GetMemory();
+                            var memoryLength = memory.Length; // necessary because of "ref" in MemoryMarshal.Write
 
                             var lengthBytes = BitConverter.GetBytes(memory.Length);
                             var memberIdBytes = BitConverter.GetBytes(memberId);
 
+                            var outputBuffer = new byte[2 * sizeof(int) + memory.Length];
                             // Copying the input length, represented as bytes, to the output buffer.
-                            var outputBuffer = BitConverter.GetBytes(memory.Length)
-                                // Copying the member ID, represented as bytes, to the output buffer.
-                                .Append(BitConverter.GetBytes(memberId))
-                                // Copying the simple memory.
-                                .Append(memory);
+                            MemoryMarshal.Write(outputBuffer, ref memoryLength);
+                            // Copying the member ID, represented as bytes, to the output buffer.
+                            MemoryMarshal.Write(outputBuffer.AsSpan().Slice(sizeof(int)), ref memberId);
+                            // Copying the simple memory.
+                            memory.Span.CopyTo(outputBuffer.AsSpan().Slice(2 * sizeof(int)));
 
                             // Sending data to the FPGA board.
                             stream.Write(outputBuffer, 0, outputBuffer.Length);

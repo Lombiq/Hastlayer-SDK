@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Constants;
@@ -93,16 +94,19 @@ namespace Hast.Communication.Services
 
                     // preare memory
                     var dma = new DirectSimpleMemoryAccess(simpleMemory);
-                    var memory = dma.Get(); 
+                    var memory = dma.GetMemory();
+                    var memoryLength = memory.Length;
 
                     // Execute Order 66.
-                    var outputBuffer = new byte[] { (byte)CommandTypes.Execution }
-                        // Copying the input length, represented as bytes, to the output buffer.
-                        .Append(BitConverter.GetBytes(memory.Length))
-                        // Copying the member ID, represented as bytes, to the output buffer.
-                        .Append(BitConverter.GetBytes(memberId))
-                        // Copying the simple memory.
-                        .Append(memory);
+
+                    var outputBuffer = new byte[sizeof(byte) + sizeof(int) + sizeof(int) + memoryLength];
+                    outputBuffer[0] = (byte)CommandTypes.Execution;
+                    // Copying the input length, represented as bytes, to the output buffer.
+                    MemoryMarshal.Write(outputBuffer.AsSpan().Slice(1, sizeof(int)), ref memoryLength);
+                    // Copying the member ID, represented as bytes, to the output buffer.
+                    MemoryMarshal.Write(outputBuffer.AsSpan().Slice(1 + sizeof(int), sizeof(int)), ref memberId);
+                    // Copying the simple memory.
+                    memory.Span.CopyTo(outputBuffer.AsSpan().Slice(1 + sizeof(int) + sizeof(int)));
 
                     // Sending the data.
                     // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
