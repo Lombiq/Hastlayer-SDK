@@ -92,69 +92,44 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public void WriteUInt32(int startCellIndex, params uint[] numbers) =>
             MemoryMarshal.Cast<uint, byte>(numbers)
-                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, sizeof(uint)).Span);
+                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(uint)).Span);
 
         public uint ReadUInt32(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]);
 
-        public uint[] ReadUInt32(int startCellIndex, int count)
-        {
-            var numbers = new uint[count];
-
-            for (int i = 0; i < count; i++)
-            {
-                numbers[i] = ReadUInt32(startCellIndex + i);
-            }
-
-            return numbers;
-        }
+        public Span<uint> ReadUInt32(int startCellIndex, int count) =>
+            MemoryMarshal.Cast<byte, uint>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(uint)).Span);
 
         public void WriteInt32(int cellIndex, int number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
-        public void WriteInt32(int startCellIndex, params int[] numbers)
-        {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                WriteInt32(startCellIndex + i, numbers[i]);
-            }
-        }
+        public void WriteInt32(int startCellIndex, params int[] numbers) =>
+            MemoryMarshal.Cast<int, byte>(numbers)
+                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(int)).Span);
 
         public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
 
-        public int[] ReadInt32(int startCellIndex, int count)
-        {
-            var numbers = new int[count];
-
-            for (int i = 0; i < count; i++)
-            {
-                numbers[i] = ReadInt32(startCellIndex + i);
-            }
-
-            return numbers;
-        }
+        public Span<int> ReadInt32(int startCellIndex, int count) =>
+            MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span);
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
             // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
             // so on the FPGA-side we can depend on it.
-            Write4Bytes(cellIndex, boolean ? new byte[] { 255, 255, 255, 255 } : new byte[] { 0, 0, 0, 0 });
+            WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue); // would call MemoryMarshal.Write directly if not for the "ref"
 
         public void WriteBoolean(int startCellIndex, params bool[] booleans)
         {
             for (int i = 0; i < booleans.Length; i++)
-            {
                 WriteBoolean(startCellIndex + i, booleans[i]);
-            }
         }
 
-        public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]) != 0;
+        public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
 
         public bool[] ReadBoolean(int startCellIndex, int count)
         {
+            var source = ReadUInt32(startCellIndex, count);
             var booleans = new bool[count];
 
             for (int i = 0; i < count; i++)
-            {
-                booleans[i] = ReadBoolean(startCellIndex + i);
-            }
+                booleans[i] = source[i] == uint.MaxValue;
 
             return booleans;
         }
