@@ -28,7 +28,8 @@ namespace Hast.Communication.Services
         /// An <see cref="IHardwareExecutionInformation"/> object containing debug and runtime information about the 
         /// hardware execution.
         /// </returns>
-        Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory,
+        Task<IHardwareExecutionInformation> Execute(
+            SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext);
     }
