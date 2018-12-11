@@ -1,7 +1,7 @@
 ﻿namespace Hast.Communication.Models
 {
     /// <summary>
-    /// Represents a compatible device for hardware exeuction.
+    /// Represents a compatible device for hardware execution.
     /// </summary>
     public interface IDevice
     {
