@@ -70,7 +70,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                 Write4Bytes(startCellIndex + i, bytesMatrix[i]);
         }
 
-        [Obsolete("Use the indexer to get the span of this the 4 bytes at this cell index.")]
         public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
@@ -96,8 +95,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public uint ReadUInt32(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]);
 
-        public Span<uint> ReadUInt32(int startCellIndex, int count) =>
+        public Span<uint> ReadUInt32Span(int startCellIndex, int count) =>
             MemoryMarshal.Cast<byte, uint>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(uint)).Span);
+
+        public uint[] ReadUInt32(int startCellIndex, int count) => ReadUInt32Span(startCellIndex, count).ToArray();
+
 
         public void WriteInt32(int cellIndex, int number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
@@ -107,8 +109,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
 
-        public Span<int> ReadInt32(int startCellIndex, int count) =>
+        public Span<int> ReadInt32Span(int startCellIndex, int count) =>
             MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span);
+
+        public int[] ReadInt32(int startCellIndex, int count) => ReadInt32Span(startCellIndex, count).ToArray();
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
             // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
