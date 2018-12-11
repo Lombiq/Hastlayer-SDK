@@ -109,9 +109,21 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
 
+        /// <summary>
+        /// Takes count integers at cellIndex.
+        /// </summary>
+        /// <param name="startCellIndex">The cell of the first integer</param>
+        /// <param name="count">The amount of integers</param>
+        /// <returns>The memory pointer as Span.</returns>
         public Span<int> ReadInt32Span(int startCellIndex, int count) =>
             MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span);
 
+        /// <summary>
+        /// Takes count integers at cellIndex. This version makes a copy of the data as array so only use it when Span isn't applicable!
+        /// </summary>
+        /// <param name="startCellIndex">The cell of the first integer</param>
+        /// <param name="count">The amount of integers</param>
+        /// <returns>The numbers in an array.</returns>
         public int[] ReadInt32(int startCellIndex, int count) => ReadInt32Span(startCellIndex, count).ToArray();
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
