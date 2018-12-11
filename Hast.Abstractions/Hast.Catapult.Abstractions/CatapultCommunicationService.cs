@@ -99,17 +99,13 @@ namespace Hast.Catapult.Abstractions
 
                 // Processing the response.
 
-                /*// TODO get execution time
-                var outputByteCount = MemoryMarshal.Read<uint>(outputBuffer.Span);
-                outputBuffer = outputBuffer.Slice(sizeof(uint), outputByteCount);
-                // */
-                dma.Set(outputBuffer);
+                var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
+                SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                /*// TODO take only the indicated length from the response
-                var outputByteCount = (int)BitConverter.ToUInt32(outputBuffer, sizeof(ulong));
-                memory = memory.Slice(sizeof(ulong) + sizeof(uint), outputByteCount);
-                // */
-                dma.Set(outputBuffer);
+                //var outputByteCount = MemoryMarshal.Read<uint>(outputBuffer.Slice(sizeof(ulong)).Span);
+                //outputBuffer = outputBuffer.Slice(0, sizeof(ulong) + sizeof(uint) + (int)outputByteCount);
+
+                dma.Set(outputBuffer, (sizeof(ulong) + sizeof(uint)) / SimpleMemory.MemoryCellSizeBytes);
                 Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
                 EndExecution(context);

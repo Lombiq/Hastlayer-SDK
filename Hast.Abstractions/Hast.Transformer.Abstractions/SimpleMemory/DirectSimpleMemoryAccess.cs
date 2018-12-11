@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
@@ -18,7 +14,23 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             _simpleMemory = simpleMemory;
         }
 
-        public Memory<byte> Get() => _simpleMemory.Memory.ToArray();
-        public void Set(Memory<byte> data) => _simpleMemory.Memory = data;
+        public Memory<byte> Get() => _simpleMemory.Memory;
+
+        public Memory<byte> Get(int prefixCells)
+        {
+            if (prefixCells > _simpleMemory.PrefixCellCount || prefixCells < 0)
+                throw new ArgumentOutOfRangeException($"You can use 0-{_simpleMemory.PrefixCellCount} cells for prefix!");
+
+            return _simpleMemory.PrefixedMemory.Slice(_simpleMemory.PrefixCellCount - prefixCells);
+        }
+
+        public void Set(Memory<byte> data, int prefixCells = 0)
+        {
+            if (prefixCells > _simpleMemory.PrefixCellCount || prefixCells < 0)
+                throw new ArgumentOutOfRangeException($"You can use 0-{_simpleMemory.PrefixCellCount} cells for prefix!");
+
+            _simpleMemory.PrefixedMemory = data;
+            if (prefixCells < _simpleMemory.PrefixCellCount) _simpleMemory.PrefixCellCount = prefixCells;
+        }
     }
 }

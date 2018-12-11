@@ -10,6 +10,7 @@ using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Communication.Services
 {
@@ -19,11 +20,11 @@ namespace Hast.Communication.Services
         // This has to be maximum the number set for the TCP MSS in the Hastlayer hardware project.
         private const int ReceiveBufferSize = 1460;
 
+        private const int MemoryPrefixLength = 2 * sizeof(int);
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IFpgaIpEndpointFinder _fpgaIpEndpointFinder;
-
 
         public override string ChannelName
         {
@@ -99,35 +100,25 @@ namespace Hast.Communication.Services
 
                             // Here we put together the data stream.
                             var dma = new DirectSimpleMemoryAccess(simpleMemory);
-                            var memory = dma.Get();
-                            var memoryLength = memory.Length; // necessary because of "ref" in MemoryMarshal.Write
+                            var memory = dma.Get(MemoryPrefixLength); // this way memory doesn't have to be copied
+                            var memoryDataLength = memory.Length - MemoryPrefixLength;
 
-                            var lengthBytes = BitConverter.GetBytes(memory.Length);
-                            var memberIdBytes = BitConverter.GetBytes(memberId);
-
-                            var outputBuffer = new byte[2 * sizeof(int) + memory.Length];
                             // Copying the input length, represented as bytes, to the output buffer.
-                            MemoryMarshal.Write(outputBuffer, ref memoryLength);
+                            MemoryMarshal.Write(memory.Span, ref memoryDataLength);
                             // Copying the member ID, represented as bytes, to the output buffer.
-                            MemoryMarshal.Write(outputBuffer.AsSpan().Slice(sizeof(int)), ref memberId);
-                            // Copying the simple memory.
-                            memory.Span.CopyTo(outputBuffer.AsSpan().Slice(2 * sizeof(int)));
+                            MemoryMarshal.Write(memory.Span.Slice(sizeof(int)), ref memberId);
 
                             // Sending data to the FPGA board.
-                            stream.Write(outputBuffer, 0, outputBuffer.Length);
+                            stream.Write(memory.GetUnderlyingArray().Array, 0, memory.Length); //
 
 
                             // Read the first batch of the TcpServer response bytes that will represent the execution time.
-                            var executionTimeBytes = await GetBytesFromStream(stream, 8);
-
+                            var executionTimeBytes = await GetBytesFromStream(stream, sizeof(ulong));
                             var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
-
                             SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
                             // Read the bytes representing the length of the simple memory.
-                            var outputByteCountBytes = await GetBytesFromStream(stream, 4);
-
-                            var outputByteCount = BitConverter.ToUInt32(outputByteCountBytes, 0);
+                            var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStream(stream, sizeof(uint)), 0);
 
                             Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 

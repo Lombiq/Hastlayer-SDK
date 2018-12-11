@@ -18,6 +18,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     {
         public const int MemoryCellSizeBytes = sizeof(int);
 
+        public int PrefixCellCount { get; internal set; } = 3;
+
+        internal Memory<byte> PrefixedMemory { get; set; }
 
         /// <summary>
         /// Gets or sets the contents of the memory representation.
@@ -53,7 +56,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </param>
         public SimpleMemory(int cellCount)
         {
-            Memory = new byte[cellCount * MemoryCellSizeBytes];
+            PrefixedMemory = new byte[(cellCount + PrefixCellCount) * MemoryCellSizeBytes];
+            Memory = PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
         }
 
         public void Write4Bytes(int cellIndex, Span<byte> bytes)
@@ -148,6 +152,19 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                 booleans[i] = source[i] == uint.MaxValue;
 
             return booleans;
+        }
+    }
+
+    /// <summary>
+    /// Memory extensions for framework versions that do not support the new Memory overloads on various framework methods.
+    /// </summary>
+    public static class MemoryExtensions
+    {
+        public static ArraySegment<byte> GetUnderlyingArray(this Memory<byte> bytes) => GetUnderlyingArray((ReadOnlyMemory<byte>)bytes);
+        public static ArraySegment<byte> GetUnderlyingArray(this ReadOnlyMemory<byte> bytes)
+        {
+            if (!MemoryMarshal.TryGetArray(bytes, out var arraySegment)) throw new NotSupportedException("This Memory does not support exposing the underlying array.");
+            return arraySegment;
         }
     }
 }
