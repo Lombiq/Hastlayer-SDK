@@ -64,7 +64,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             for (int i = bytes.Length; i < MemoryCellSizeBytes; i++) target[i] = 0;
         }
 
-        public void Write4Bytes(int startCellIndex, params byte[][] bytesMatrix)
+        public void Write4Bytes(int startCellIndex, byte[][] bytesMatrix)
         {
             for (int i = 0; i < bytesMatrix.Length; i++)
                 Write4Bytes(startCellIndex + i, bytesMatrix[i]);

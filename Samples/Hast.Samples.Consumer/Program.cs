@@ -92,6 +92,8 @@ namespace Hast.Samples.Consumer
                         "You haven't changed the default remote credentials! Write to crew@hastlayer.com to receive access if you don't have yet.");
                 }
 
+                if (args.Contains("-s"))
+                    Configuration.SampleToRun = (Sample)Enum.Parse(typeof(Sample), args[(args as IList<string>).IndexOf("-s") + 1], true);
 
                 // Letting the configuration of samples run. Check out those methods too!
                 switch (Configuration.SampleToRun)
