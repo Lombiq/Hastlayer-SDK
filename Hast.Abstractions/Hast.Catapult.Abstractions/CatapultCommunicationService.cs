@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
@@ -85,7 +86,7 @@ namespace Hast.Catapult.Abstractions
                 var dma = new DirectSimpleMemoryAccess(simpleMemory);
 
                 // This actually happens inside lib.ExecuteJob.
-                int memoryLength = simpleMemory.CellCount * (int)SimpleMemory.MemoryCellSizeBytes;
+                int memoryLength = simpleMemory.CellCount * SimpleMemory.MemoryCellSizeBytes;
                 if (memoryLength < Constants.BufferMessageSizeMinByte)
                     Logger.Warning("Incoming data is {0}B! Padding with zeros to reach the minimum of {1}B...",
                         memoryLength, Constants.BufferMessageSizeMinByte);
@@ -99,16 +100,16 @@ namespace Hast.Catapult.Abstractions
                 // Processing the response.
 
                 /*// TODO get execution time
-                var executionTimeClockCycles = BitConverter.ToUInt64(outputBuffer, 0);
-                SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
-                */
+                var outputByteCount = MemoryMarshal.Read<uint>(outputBuffer.Span);
+                outputBuffer = outputBuffer.Slice(sizeof(uint), outputByteCount);
+                // */
+                dma.Set(outputBuffer);
 
-                Memory<byte> memory = outputBuffer;
                 /*// TODO take only the indicated length from the response
                 var outputByteCount = (int)BitConverter.ToUInt32(outputBuffer, sizeof(ulong));
                 memory = memory.Slice(sizeof(ulong) + sizeof(uint), outputByteCount);
-                */
-                dma.Set(memory.ToArray());
+                // */
+                dma.Set(outputBuffer);
                 Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
 
                 EndExecution(context);
