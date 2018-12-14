@@ -20,7 +20,7 @@ namespace Hast.Communication.Services
         // This has to be maximum the number set for the TCP MSS in the Hastlayer hardware project.
         private const int ReceiveBufferSize = 1460;
 
-        private const int MemoryPrefixLength = 2 * sizeof(int);
+        private const int MemoryPrefixLength = 2;
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
@@ -123,9 +123,9 @@ namespace Hast.Communication.Services
                             Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
                             // Finally read the memory itself.
-                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount);
+                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixLength * SimpleMemory.MemoryCellSizeBytes);
 
-                            dma.Set(outputBytes);
+                            dma.Set(outputBytes, MemoryPrefixLength);
                         }
                     }
                 }
@@ -141,12 +141,12 @@ namespace Hast.Communication.Services
         }
 
 
-        public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length)
+        public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length, int offset = 0)
         {
-            var outputBytes = new byte[length];
+            var outputBytes = new byte[length + offset];
 
-            var readPosition = 0;
-            var remaining = length;
+            var readPosition = offset;
+            var remaining = outputBytes.Length;
             while (readPosition < length)
             {
                 readPosition += await stream.ReadAsync(outputBytes, readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining);
