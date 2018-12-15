@@ -11,6 +11,9 @@ namespace Hast.Catapult.Abstractions
 {
     public class CatapultCommunicationService : CommunicationServiceBase
     {
+        private const int InputMemoryPrefixCellCount = 1;
+
+
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
 
@@ -57,6 +60,9 @@ namespace Hast.Catapult.Abstractions
                 CatapultLibrary lib = device.Metadata;
 
                 var dma = new DirectSimpleMemoryAccess(simpleMemory);
+                // Get input data, add member id as prefix. schema: (int memberId, byte[] data) where data[0..4] is (int bufferIndex)
+                var memory = dma.Get(InputMemoryPrefixCellCount);
+                MemoryMarshal.Write(memory.Span, ref memberId);
 
                 // This actually happens inside lib.ExecuteJob.
                 int memoryLength = simpleMemory.CellCount * SimpleMemory.MemoryCellSizeBytes;
@@ -68,18 +74,19 @@ namespace Hast.Catapult.Abstractions
                         memoryLength, 16 - (memoryLength % 16));
 
                 // Sending the data.
-                var outputBuffer = await lib.ExecuteJob(memberId, dma.Get());
+                var outputBuffer = await lib.ExecuteJob(simpleMemory.ReadInt32(0), memory);
 
-                // Processing the response.
+                // Processing the response. schema: (ulong time, uint length, byte[] data)
 
                 var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
                 SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                //var outputByteCount = MemoryMarshal.Read<uint>(outputBuffer.Slice(sizeof(ulong)).Span);
+                // TODO uncomment this when the FPGA side implements the above response format
+                var outputByteCount = outputBuffer.Length; //MemoryMarshal.Read<uint>(outputBuffer.Slice(sizeof(ulong)).Span);
                 //outputBuffer = outputBuffer.Slice(0, sizeof(ulong) + sizeof(uint) + (int)outputByteCount);
 
                 dma.Set(outputBuffer, (sizeof(ulong) + sizeof(uint)) / SimpleMemory.MemoryCellSizeBytes);
-                Logger.Information("Incoming data size in bytes: {0}", outputBuffer.Length);
+                Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
                 EndExecution(context);
 
