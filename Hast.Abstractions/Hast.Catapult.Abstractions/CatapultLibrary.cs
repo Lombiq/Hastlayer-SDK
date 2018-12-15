@@ -1,8 +1,11 @@
 ﻿using AdvancedDLSupport;
 using Hast.Communication.Exceptions;
 using IcIWare.NamedIndexers;
+using Orchard;
+using Orchard.Logging;
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -14,7 +17,7 @@ namespace Hast.Catapult.Abstractions
     /// <summary>
     /// Job and configuration manager for the Catapult FPGA driver.
     /// </summary>
-    public class CatapultLibrary : IDisposable
+    public class CatapultLibrary : ICatapultLibrary
     {
         private bool _isDisposed = false;
         private IntPtr _handle;
@@ -152,6 +155,38 @@ namespace Hast.Catapult.Abstractions
             _slotDispatch = new ConcurrentQueue<Task>[BufferCount];
             for (int i = 0; i < BufferCount; i++)
                 _slotDispatch[i] = new ConcurrentQueue<Task>();
+        }
+
+        public static ICatapultLibrary Create(IDictionary<string, object> config, ILogger logger)
+        {
+            var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
+                config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :
+                Constants.DefaultLibraryPath;
+            var versionDefinitionsFile = config.ContainsKey(Constants.ConfigKeys.VersionDefinitionsFile) ?
+                config[Constants.ConfigKeys.VersionDefinitionsFile] : null;
+            var versionManifestFile = config.ContainsKey(Constants.ConfigKeys.VersionManifestFile) ?
+                config[Constants.ConfigKeys.VersionManifestFile] : null;
+
+            return new CatapultLibrary(
+                (string)libraryPath,
+                (string)versionDefinitionsFile,
+                (string)versionManifestFile,
+                logFunction: (flagValue, text) =>
+                {
+                    var flag = (Constants.Log)flagValue;
+                    if (flag == Constants.Log.None) return;
+
+                    if (flag.HasFlag(Constants.Log.Debug) || flag.HasFlag(Constants.Log.Verbose))
+                        logger.Debug(text);
+                    else if (flag.HasFlag(Constants.Log.Info))
+                        logger.Information(text);
+                    else if (flag.HasFlag(Constants.Log.Error))
+                        logger.Error(text);
+                    else if (flag.HasFlag(Constants.Log.Fatal))
+                        logger.Fatal(text);
+                    else if (flag.HasFlag(Constants.Log.Warn))
+                        logger.Warning(text);
+                });
         }
 
         /// <summary>

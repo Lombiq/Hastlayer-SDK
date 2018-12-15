@@ -39,34 +39,7 @@ namespace Hast.Catapult.Abstractions
                     try
                     {
                         var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
-                        var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
-                            config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :
-                            Constants.DefaultLibraryPath;
-                        var versionDefinitionsFile = config.ContainsKey(Constants.ConfigKeys.VersionDefinitionsFile) ?
-                            config[Constants.ConfigKeys.VersionDefinitionsFile] : null;
-                        var versionManifestFile = config.ContainsKey(Constants.ConfigKeys.VersionManifestFile) ?
-                            config[Constants.ConfigKeys.VersionManifestFile] : null;
-
-                        return new CatapultLibrary(
-                            (string)libraryPath,
-                            (string)versionDefinitionsFile,
-                            (string)versionManifestFile,
-                            logFunction: (flagValue, text) =>
-                            {
-                                var flag = (Constants.Log)flagValue;
-                                if (flag == Constants.Log.None) return;
-                                
-                                if (flag.HasFlag(Constants.Log.Debug) || flag.HasFlag(Constants.Log.Verbose))
-                                    Logger.Debug(text);
-                                else if (flag.HasFlag(Constants.Log.Info))
-                                    Logger.Information(text);
-                                else if (flag.HasFlag(Constants.Log.Error))
-                                    Logger.Error(text);
-                                else if (flag.HasFlag(Constants.Log.Fatal))
-                                    Logger.Fatal(text);
-                                else if (flag.HasFlag(Constants.Log.Warn))
-                                    Logger.Warning(text);
-                            });
+                        return CatapultLibrary.Create(config, Logger);
                     }
                     catch (CatapultFunctionResultException ex)
                     {
