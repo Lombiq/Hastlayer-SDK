@@ -12,6 +12,8 @@ namespace Hast.Communication.Services
         private readonly object _lock = new object();
         private readonly Queue<Action<IReservedDevice>> _waitQueue = new Queue<Action<IReservedDevice>>();
 
+        private bool _isDisposed = false;
+
         private Dictionary<string, PooledDevice> _devicePool = new Dictionary<string, PooledDevice>();
 
 
@@ -97,6 +99,16 @@ namespace Hast.Communication.Services
             }
         }
 
+        public void Dispose()
+        {
+            if (_isDisposed) return;
+
+            foreach (var device in GetDevicesInPool())
+                if (device.Metadata is IDisposable disposable)
+                    disposable.Dispose();
+
+            _isDisposed = true;
+        }
 
         private class ReservedDevice : Device, IReservedDevice
         {

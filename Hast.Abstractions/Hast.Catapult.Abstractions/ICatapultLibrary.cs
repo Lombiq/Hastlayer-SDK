@@ -1,10 +1,9 @@
-﻿using Orchard;
-using System;
+﻿using System;
 using System.Threading.Tasks;
 
 namespace Hast.Catapult.Abstractions
 {
-    public interface ICatapultLibrary : IDisposable, ISingletonDependency
+    public interface ICatapultLibrary : IDisposable
     {
         int BufferCount { get; }
         int BufferSize { get; }
