@@ -80,6 +80,7 @@
     <Compile Include="CatapultCommunicationService.cs" />
     <Compile Include="CatapultLibrary.cs" />
     <Compile Include="CatapultManifestProvider.cs" />
+    <Compile Include="ICatapultLibrary.cs" />
     <Compile Include="ICatapultNativeLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
