@@ -10,7 +10,6 @@ using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
-using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Communication.Services
 {

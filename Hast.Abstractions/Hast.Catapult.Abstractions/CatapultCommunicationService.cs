@@ -60,7 +60,7 @@ namespace Hast.Catapult.Abstractions
                 CatapultLibrary lib = device.Metadata;
 
                 var dma = new DirectSimpleMemoryAccess(simpleMemory);
-                // Get input data, add member id as prefix. schema: (int memberId, byte[] data) where data[0..4] is (int bufferIndex)
+                // Get input data, add member id as prefix. schema: (int memberId, byte[] data)
                 var memory = dma.Get(InputMemoryPrefixCellCount);
                 MemoryMarshal.Write(memory.Span, ref memberId);
 
@@ -74,7 +74,7 @@ namespace Hast.Catapult.Abstractions
                         memoryLength, 16 - (memoryLength % 16));
 
                 // Sending the data.
-                var outputBuffer = await lib.ExecuteJob(simpleMemory.ReadInt32(0), memory);
+                var outputBuffer = await lib.ExecuteJob(memory);
 
                 // Processing the response. schema: (ulong time, uint length, byte[] data)
 

@@ -14,7 +14,7 @@ namespace Hast.Catapult.Abstractions
     /// <summary>
     /// Job and configuration manager for the Catapult FPGA driver.
     /// </summary>
-    public class CatapultLibrary : ICatapultLibrary
+    public class CatapultLibrary : IDisposable
     {
         private bool _isDisposed = false;
         private IntPtr _handle;
@@ -22,7 +22,12 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
         /// </summary>
-        private readonly ConcurrentQueue<Task>[] _slotDispatch;
+        private readonly Task[] _slotDispatch;
+
+        /// <summary>
+        /// The slot to be used for the next run.
+        /// </summary>
+        private int _currentSlot = 0;
 
         /// <summary>
         /// Gets the interface containing the functions exposed by the native FPGA library.
@@ -148,13 +153,12 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetBufferSize(_handle, out count));
             BufferSize = (int)count;
 
-            // Set up the task-based per-slot queuing mechanism
-            _slotDispatch = new ConcurrentQueue<Task>[BufferCount];
-            for (int i = 0; i < BufferCount; i++)
-                _slotDispatch[i] = new ConcurrentQueue<Task>();
+            // Set up the task tracker
+            _slotDispatch = new Task[BufferCount];
+            for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
         }
 
-        public static ICatapultLibrary Create(IDictionary<string, object> config, ILogger logger)
+        public static CatapultLibrary Create(IDictionary<string, object> config, ILogger logger)
         {
             var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
                 config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :
@@ -231,21 +235,29 @@ namespace Hast.Catapult.Abstractions
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// But first it checks if there are any other jobs in queue and awaits them if there are any.
         /// </summary>
-        /// <param name="bufferIndex">The numeric ID of the buffer (called "slot" in the documentation) that the hardware uses for interaction. (ranges from 0 up to BufferCount)</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public async Task<Memory<byte>> ExecuteJob(int bufferIndex, Memory<byte> inputData)
+        public async Task<Memory<byte>> ExecuteJob(Memory<byte> inputData)
         {
             // This job will contain the current call
             Task<Memory<byte>> job = null;
 
-            lock (_slotDispatch[bufferIndex])
+            lock (_slotDispatch)
             {
-                // Check if there was a previous job we have to await
-                if (!_slotDispatch[bufferIndex].TryDequeue(out Task previousJob))
-                    previousJob = Task.CompletedTask;
-                job = previousJob.ContinueWith(_ => { return RunJob(bufferIndex, inputData).Result; });
-                _slotDispatch[bufferIndex].Enqueue(job);
+                // go round-robin
+                _currentSlot = (_currentSlot + 1) % BufferCount;
+
+                // but try to find the first free slot
+                if (!_slotDispatch[_currentSlot].IsCompleted)
+                    for (int i = 0; i < BufferCount; i++)
+                    {
+                        int slot = (_currentSlot + i) % BufferCount;
+                        if (_slotDispatch[slot].IsCompleted)
+                            _currentSlot = slot;
+                    }
+
+                _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
+                    .ContinueWith(_ => { return RunJob(_currentSlot, inputData).Result; });
             }
 
             return await job;
