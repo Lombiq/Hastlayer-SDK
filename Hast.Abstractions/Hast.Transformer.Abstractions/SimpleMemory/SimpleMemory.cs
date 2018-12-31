@@ -155,6 +155,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         }
     }
 
+
     /// <summary>
     /// Memory extensions for framework versions that do not support the new Memory overloads on various framework methods.
     /// </summary>

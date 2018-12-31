@@ -93,6 +93,7 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public readonly NamedIndexer<uint, uint> ShellRegister;
 
+
         /// <summary>
         /// Initializes a new instance of the CatapultLibrary class.
         /// </summary>
@@ -158,6 +159,7 @@ namespace Hast.Catapult.Abstractions
             for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
         }
 
+
         public static CatapultLibrary Create(IDictionary<string, object> config, ILogger logger)
         {
             var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
@@ -190,6 +192,7 @@ namespace Hast.Catapult.Abstractions
                 });
         }
 
+
         /// <summary>
         /// Finalizer to ensure the instance is disposed at some point after the end of its lifecycle.
         /// </summary>
@@ -212,7 +215,6 @@ namespace Hast.Catapult.Abstractions
             _isDisposed = true;
         }
 
-
         /// <summary>
         /// Verifies the result of an ICatapultLibrary function call. If the result is SUCCESS or WAIT_TIMEOUT then
         /// nothing happens. Otherwise CatapultFunctionResultException is thrown with the error message form the library.
@@ -229,7 +231,6 @@ namespace Hast.Catapult.Abstractions
 
             throw new CatapultFunctionResultException(status, errorMessage.ToString());
         }
-
 
         /// <summary>
         /// Uploads the data to the selected slot's input buffer and awaits the output.

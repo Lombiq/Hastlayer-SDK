@@ -9,10 +9,12 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     {
         private SimpleMemory _simpleMemory;
 
+
         public DirectSimpleMemoryAccess(SimpleMemory simpleMemory)
         {
             _simpleMemory = simpleMemory;
         }
+
 
         public Memory<byte> Get() => _simpleMemory.Memory;
 
@@ -28,7 +30,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// Sets the internal value of the SimpleMemory with the first prefixCells amount of cells hidden.
         /// </summary>
         /// <param name="data">The new data.</param>
-        /// <param name="prefixCells">The amound of cells to be shifted out.</param>
+        /// <param name="prefixCells">The amount of cells to be shifted out.</param>
         /// <remarks>
         /// Using prefixCells allows you to set the communication headers during Get without an extra copy,  but you must
         /// use at least as many prefixCells for Set as for Get in continuous usage, otherwise ArgumentOutOfRangeException
