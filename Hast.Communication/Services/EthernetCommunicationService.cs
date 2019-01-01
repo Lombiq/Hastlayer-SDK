@@ -99,7 +99,7 @@ namespace Hast.Communication.Services
 
                             // Here we put together the data stream.
                             var dma = new SimpleMemoryAccessor(simpleMemory);
-                            var memory = dma.Get(MemoryPrefixLength); // this way memory doesn't have to be copied
+                            var memory = dma.Get(MemoryPrefixLength); // This way memory doesn't have to be copied.
                             var memoryDataLength = memory.Length - MemoryPrefixLength;
 
                             // Copying the input length, represented as bytes, to the output buffer.
@@ -108,7 +108,7 @@ namespace Hast.Communication.Services
                             MemoryMarshal.Write(memory.Span.Slice(sizeof(int)), ref memberId);
 
                             // Sending data to the FPGA board.
-                            stream.Write(memory.GetUnderlyingArray().Array, 0, memory.Length); //
+                            stream.Write(memory.GetUnderlyingArray().Array, 0, memory.Length);
 
 
                             // Read the first batch of the TcpServer response bytes that will represent the execution time.

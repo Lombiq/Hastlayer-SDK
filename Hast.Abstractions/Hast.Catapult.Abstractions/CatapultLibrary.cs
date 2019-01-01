@@ -267,7 +267,10 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// </summary>
-        /// <param name="bufferIndex">The numeric ID of the buffer (called "slot" in the documentation) that the hardware uses for interaction. (ranges from 0 up to BufferCount)</param>
+        /// <param name="bufferIndex">
+        /// The numeric ID of the buffer that the hardware uses for interaction. It is called "slot" in the
+        /// Mt Granite Shell Architectural Specification and its value can range from 0 to BufferCount.
+        /// </param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
         private async Task<Memory<byte>> RunJob(int bufferIndex, Memory<byte> inputData)
