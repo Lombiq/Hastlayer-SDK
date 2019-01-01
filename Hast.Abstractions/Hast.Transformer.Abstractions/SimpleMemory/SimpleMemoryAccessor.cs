@@ -5,12 +5,12 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// <summary>
     /// Facilitates read and overwrite of the <see cref="SimpleMemory.Memory"/> for outside users. (like DMA)
     /// </summary>
-    public class DirectSimpleMemoryAccess
+    public class SimpleMemoryAccessor
     {
         private SimpleMemory _simpleMemory;
 
 
-        public DirectSimpleMemoryAccess(SimpleMemory simpleMemory)
+        public SimpleMemoryAccessor(SimpleMemory simpleMemory)
         {
             _simpleMemory = simpleMemory;
         }

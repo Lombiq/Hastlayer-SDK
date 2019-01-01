@@ -93,7 +93,7 @@ namespace Hast.Communication.Services
                     // Here we put together the data stream.
 
                     // Prepare memory.
-                    var dma = new DirectSimpleMemoryAccess(simpleMemory);
+                    var dma = new SimpleMemoryAccessor(simpleMemory);
                     var memory = dma.Get();
                     var memoryLength = memory.Length;
 

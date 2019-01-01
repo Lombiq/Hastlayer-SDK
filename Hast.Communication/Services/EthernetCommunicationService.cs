@@ -98,7 +98,7 @@ namespace Hast.Communication.Services
                             }
 
                             // Here we put together the data stream.
-                            var dma = new DirectSimpleMemoryAccess(simpleMemory);
+                            var dma = new SimpleMemoryAccessor(simpleMemory);
                             var memory = dma.Get(MemoryPrefixLength); // this way memory doesn't have to be copied
                             var memoryDataLength = memory.Length - MemoryPrefixLength;
 

@@ -59,7 +59,7 @@ namespace Hast.Catapult.Abstractions
                 var context = BeginExecution();
                 CatapultLibrary lib = device.Metadata;
 
-                var dma = new DirectSimpleMemoryAccess(simpleMemory);
+                var dma = new SimpleMemoryAccessor(simpleMemory);
                 // Get input data, add member id as prefix. schema: (int memberId, byte[] data)
                 var memory = dma.Get(InputMemoryPrefixCellCount);
                 MemoryMarshal.Write(memory.Span, ref memberId);
