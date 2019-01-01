@@ -165,11 +165,21 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
 
     /// <summary>
-    /// Memory extensions for framework versions that do not support the new Memory overloads on various framework methods.
+    /// Extensions for older Framework features which don't support Memory or Span yet.
     /// </summary>
     public static class MemoryExtensions
     {
+        /// <summary>
+        /// Gets the internal array to be used for <see cref="System.IO.Stream.Write(byte[], int, int)"/>.
+        /// </summary>
+        /// <param name="bytes">The source.</param>
+        /// <returns>The underlying array.</returns>
+        /// <remarks>
+        /// Once Stream.Read(Span) based overload is available, use that instead!
+        /// https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.read?view=netcore-2.2#System_IO_Stream_Read_System_Span_System_Byte__
+        /// </remarks>
         public static ArraySegment<byte> GetUnderlyingArray(this Memory<byte> bytes) => GetUnderlyingArray((ReadOnlyMemory<byte>)bytes);
+
         public static ArraySegment<byte> GetUnderlyingArray(this ReadOnlyMemory<byte> bytes)
         {
             if (!MemoryMarshal.TryGetArray(bytes, out var arraySegment)) throw new NotSupportedException("This Memory does not support exposing the underlying array.");
