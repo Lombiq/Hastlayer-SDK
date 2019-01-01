@@ -18,6 +18,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public Memory<byte> Get() => _simpleMemory.Memory;
 
+        /// <summary>
+        /// Gets the memory contents with additional prefix.
+        /// </summary>
+        /// <param name="prefixCells">The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.</param>
+        /// <returns></returns>
         public Memory<byte> Get(int prefixCells)
         {
             if (prefixCells > _simpleMemory.PrefixCellCount || prefixCells < 0)

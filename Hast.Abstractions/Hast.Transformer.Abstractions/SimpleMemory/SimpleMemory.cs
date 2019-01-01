@@ -18,8 +18,16 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     {
         public const int MemoryCellSizeBytes = sizeof(int);
 
+        /// <summary>
+        /// The number of extra cells used for header information like memberId or data length.
+        /// </summary>
         public int PrefixCellCount { get; internal set; } = 3;
 
+        /// <summary>
+        /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be used
+        /// for passing in extra input parameters (like memberId) without having to copy the operative memory contents
+        /// into an auxiliary arrray.
+        /// </summary>
         internal Memory<byte> PrefixedMemory { get; set; }
 
         /// <summary>
