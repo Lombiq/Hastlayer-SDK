@@ -103,9 +103,7 @@ namespace Hast.Communication.Services
         {
             if (_isDisposed) return;
 
-            foreach (var device in GetDevicesInPool())
-                if (device.Metadata is IDisposable disposable)
-                    disposable.Dispose();
+            foreach (var device in GetDevicesInPool()) device.Dispose();
 
             _isDisposed = true;
         }

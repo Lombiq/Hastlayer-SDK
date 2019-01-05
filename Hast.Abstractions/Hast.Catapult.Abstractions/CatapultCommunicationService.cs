@@ -37,7 +37,7 @@ namespace Hast.Catapult.Abstractions
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
             {
-                var deviceLibrary = await Task.Run(() =>
+                var library = await Task.Run(() =>
                 {
                     try
                     {
@@ -50,8 +50,11 @@ namespace Hast.Catapult.Abstractions
                         return null;
                     }
                 });
-                return deviceLibrary is null ? new Device[0] :
-                    new[] { new Device { Identifier = Constants.ChannelName, Metadata = deviceLibrary } };
+
+                if (library is null) return new Device[0];
+                var device = new Device { Identifier = Constants.ChannelName, Metadata = library };
+                device.Disposing += (sender, arguments) => library.Dispose();
+                return new[] { device };
             });
 
             using (var device = await _devicePoolManager.ReserveDevice())
