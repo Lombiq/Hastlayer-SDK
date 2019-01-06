@@ -13,7 +13,7 @@ namespace Hast.Catapult.Abstractions
 {
     public class CatapultCommunicationService : CommunicationServiceBase
     {
-        private const int InputMemoryPrefixCellCount = 1;
+        private const int InputMemoryPrefixCellCount = 2;
 
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
@@ -70,13 +70,14 @@ namespace Hast.Catapult.Abstractions
                 var context = BeginExecution();
                 CatapultLibrary lib = device.Metadata;
 
+                int memoryLength = simpleMemory.CellCount * SimpleMemory.MemoryCellSizeBytes;
                 var dma = new SimpleMemoryAccessor(simpleMemory);
                 // Get input data, add member id as prefix. schema: (int memberId, byte[] data)
                 var memory = dma.Get(InputMemoryPrefixCellCount);
                 MemoryMarshal.Write(memory.Span, ref memberId);
+                MemoryMarshal.Write(memory.Slice(sizeof(int)).Span, ref memoryLength);
 
                 // This actually happens inside lib.ExecuteJob.
-                int memoryLength = simpleMemory.CellCount * SimpleMemory.MemoryCellSizeBytes;
                 if (memoryLength < Constants.BufferMessageSizeMinByte)
                     Logger.Warning("Incoming data is {0}B! Padding with zeros to reach the minimum of {1}B...",
                         memoryLength, Constants.BufferMessageSizeMinByte);
