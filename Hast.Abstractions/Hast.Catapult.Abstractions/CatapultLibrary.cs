@@ -259,8 +259,21 @@ namespace Hast.Catapult.Abstractions
                             _currentSlot = slot;
                     }
 
-                _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
-                    .ContinueWith(_ => { return RunJob(_currentSlot, inputData).Result; });
+                if (inputData.Length <= BufferSize)
+                    _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
+                        .ContinueWith(_ => RunJob(_currentSlot, inputData).Result);
+                else
+                {
+                    // If the data exceeds buffer size limit, then cut it into maximal slices which are all handled in
+                    // sequence by the same slot. The result is expected to be in the final packet.
+                    int count = (int)Math.Ceiling(((double)inputData.Length) / BufferSize);
+                    job = _slotDispatch[_currentSlot]
+                        .ContinueWith(_ => RunJob(_currentSlot, inputData.Slice(0, BufferSize)).Result);
+                    for (int i = 1; i < count - 1; i++)
+                        job = job.ContinueWith(_ => RunJob(_currentSlot, inputData.Slice(i * BufferSize, BufferSize)).Result);
+                    _slotDispatch[_currentSlot] = job = job
+                        .ContinueWith(_ => RunJob(_currentSlot, inputData.Slice((count - 1) * BufferSize)).Result);
+                }
             }
 
             return await job;
