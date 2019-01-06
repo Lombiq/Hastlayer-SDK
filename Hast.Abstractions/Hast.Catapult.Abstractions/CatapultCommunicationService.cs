@@ -41,6 +41,10 @@ namespace Hast.Catapult.Abstractions
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
             {
+                // Because the FPGA_GetNumberEndpoints function is not implemented in the current driver (and it's not
+                // included in the CatapultNativeLibrary interface because of that) it's not possible to know the number
+                // of endpoints. Instead this algorithm probes the first 8 indices. The single device is expected to be in
+                // endpoint 0 according to spec so this will get at least one result always.
                 var bag = new ConcurrentBag<CatapultLibrary>();
                 await Task.WhenAll(Enumerable.Range(0, 7).Select(i => Task.Run(() =>
                     {
