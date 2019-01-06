@@ -15,6 +15,13 @@ namespace Hast.Communication.Models
         {
         }
 
+        public Device(string identifier, dynamic metadata, EventHandler disposingEventHandler)
+        {
+            Identifier = identifier;
+            Metadata = metadata;
+            Disposing += disposingEventHandler;
+        }
+
 
         public Device(IDevice previousDevice)
         {

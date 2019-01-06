@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Hast.Communication.Models;
@@ -29,6 +31,8 @@ namespace Hast.Catapult.Abstractions
             _devicePoolManager = devicePoolManager;
         }
 
+        private void Device_Disposing(object sender, EventArgs e) => 
+            ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
         public override async Task<IHardwareExecutionInformation> Execute(
             SimpleMemory simpleMemory,
@@ -37,24 +41,24 @@ namespace Hast.Catapult.Abstractions
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
             {
-                var library = await Task.Run(() =>
-                {
-                    try
+                var bag = new ConcurrentBag<CatapultLibrary>();
+                await Task.WhenAll(Enumerable.Range(0, 7).Select(i => Task.Run(() =>
                     {
-                        var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
-                        return CatapultLibrary.Create(config, Logger);
-                    }
-                    catch (CatapultFunctionResultException ex)
-                    {
-                        Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary.");
-                        return null;
-                    }
-                });
+                        try
+                        {
+                            var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
+                            bag.Add(CatapultLibrary.Create(config, Logger, i));
+                        }
+                        catch (CatapultFunctionResultException ex)
+                        {
+                            Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}.");
+                        }
+                    })));
 
-                if (library is null) return new Device[0];
-                var device = new Device { Identifier = Constants.ChannelName, Metadata = library };
-                device.Disposing += (sender, arguments) => library.Dispose();
-                return new[] { device };
+                var libraries = bag.ToArray();
+                return libraries
+                    .Select(x => new Device(Constants.ChannelName, x, Device_Disposing))
+                    .ToArray();
             });
 
             using (var device = await _devicePoolManager.ReserveDevice())

@@ -114,6 +114,7 @@ namespace Hast.Catapult.Abstractions
             string libraryPath = Constants.DefaultLibraryPath,
             string versionDefinitionsFile = null,
             string versionManifestFile = null,
+            int endpointNumber = Constants.PcieHipNumber,
             CatapultLogFunction logFunction = null)
         {
             LogFunction = logFunction;
@@ -135,7 +136,7 @@ namespace Hast.Catapult.Abstractions
             // Check if device is available and connect
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
             var createStatus = NativeLibrary.CreateHandle(out _handle,
-                endpointNumber: Constants.PcieHipNumber,
+                endpointNumber: (uint)endpointNumber,
                 flags: 0,
                 pchVerDefnsFile: string.IsNullOrEmpty(versionDefinitionsFile) ? null : new StringBuilder(versionDefinitionsFile),
                 pchVersionManifestFile: string.IsNullOrEmpty(versionManifestFile) ? null : new StringBuilder(versionManifestFile),
@@ -160,7 +161,7 @@ namespace Hast.Catapult.Abstractions
         }
 
 
-        public static CatapultLibrary Create(IDictionary<string, object> config, ILogger logger)
+        public static CatapultLibrary Create(IDictionary<string, object> config, ILogger logger, int endpointNumber = Constants.PcieHipNumber)
         {
             var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
                 config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :
@@ -174,6 +175,7 @@ namespace Hast.Catapult.Abstractions
                 (string)libraryPath,
                 (string)versionDefinitionsFile,
                 (string)versionManifestFile,
+                endpointNumber: endpointNumber,
                 logFunction: (flagValue, text) =>
                 {
                     var flag = (Constants.Log)flagValue;
@@ -203,7 +205,7 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public void Dispose()
         {
-            if (_isDisposed) return;
+            if (_isDisposed || Handle == IntPtr.Zero) return;
 
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA...\n");
             PcieEnabled = false;
