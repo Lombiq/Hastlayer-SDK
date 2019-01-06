@@ -280,13 +280,15 @@ namespace Hast.Catapult.Abstractions
             Debug.Assert(inputData.Length <= BufferSize);
             var slot = (uint)bufferIndex;
 
-            // Make sure the buffer is ready to be written
+            // Makes sure the buffer is ready to be written.
             bool isInputBufferFull;
             do
             {
                 VerifyResult(NativeLibrary.GetInputBufferFull(
                     _handle, slot, out isInputBufferFull));
-                if (isInputBufferFull) await Task.Delay(1);
+                // While unlikely, it's possible that the device has provided a result (so the previous Task is completed),
+                // but the input buffer hasn't cleared yet. In this case we should wait for it.
+                while (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
             // If the input message is too short, pad it with zeros
