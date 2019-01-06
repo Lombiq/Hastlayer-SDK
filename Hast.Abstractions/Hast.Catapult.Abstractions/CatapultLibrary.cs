@@ -240,7 +240,7 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public async Task<Memory<byte>> ExecuteJob(Memory<byte> inputData)
+        public async Task<Memory<byte>> AssignJob(Memory<byte> inputData)
         {
             // This job will contain the current call
             Task<Memory<byte>> job = null;

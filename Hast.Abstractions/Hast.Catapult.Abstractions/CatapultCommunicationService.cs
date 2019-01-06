@@ -85,7 +85,7 @@ namespace Hast.Catapult.Abstractions
                         memoryLength, 16 - (memoryLength % 16));
 
                 // Sending the data.
-                var outputBuffer = await lib.ExecuteJob(memory);
+                var outputBuffer = await lib.AssignJob(memory);
 
                 // Processing the response. schema: (ulong time, uint length, byte[] data)
 
