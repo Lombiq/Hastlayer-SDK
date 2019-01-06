@@ -155,10 +155,10 @@ namespace Hast.Communication
                                     var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
                                     for (int i = 0; i < memory.CellCount; i++)
                                     {
-                                        if (!memory[i].SequenceEqual(softMemory[i]))
+                                        if (!memory.Read4Bytes(i).SequenceEqual(softMemory.Read4Bytes(i)))
                                         {
                                             mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
-                                                i, memory[i].ToArray(), softMemory[i].ToArray()));
+                                                i, memory.Read4Bytes(i), softMemory.Read4Bytes(i)));
                                         }
                                     }
 
