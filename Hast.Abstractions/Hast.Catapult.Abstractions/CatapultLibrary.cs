@@ -306,9 +306,12 @@ namespace Hast.Catapult.Abstractions
                 while (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
+
             // If the input message is too short, pad it with zeros
             if (inputData.Length < Constants.BufferMessageSizeMinByte)
             {
+                LogFunction((uint)Constants.Log.Warn,
+                    $"Incoming data is {inputData.Length}B! Padding with zeros to reach the minimum of {Constants.BufferMessageSizeMinByte}B...");
                 var padded = new byte[Constants.BufferMessageSizeMinByte];
                 inputData.CopyTo(padded);
                 inputData = padded;
@@ -316,6 +319,8 @@ namespace Hast.Catapult.Abstractions
             // If the input message isn't 16B aligned, pad it with zeros
             else if(inputData.Length % 16 != 0)
             {
+                LogFunction((uint)Constants.Log.Warn,
+                    $"Incoming data ({inputData.Length}B) must be aligned to 16B! Padding for {16 - (inputData.Length % 16)}B...");
                 int paddedLength = (int)Math.Ceiling(inputData.Length / 16.0) * 16;
                 var padded = new byte[paddedLength];
                 inputData.CopyTo(padded);

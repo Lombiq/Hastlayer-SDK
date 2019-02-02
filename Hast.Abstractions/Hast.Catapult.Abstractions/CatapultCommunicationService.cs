@@ -13,9 +13,6 @@ namespace Hast.Catapult.Abstractions
 {
     public class CatapultCommunicationService : CommunicationServiceBase
     {
-        private const int InputMemoryPrefixCellCount = 2;
-
-
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
 
@@ -73,20 +70,13 @@ namespace Hast.Catapult.Abstractions
                 int memoryLength = simpleMemory.CellCount * SimpleMemory.MemoryCellSizeBytes;
                 var dma = new SimpleMemoryAccessor(simpleMemory);
                 // Get input data, add member id as prefix. schema: (int memberId, byte[] data)
-                var memory = dma.Get(InputMemoryPrefixCellCount);
+                var memory = dma.Get();
                 MemoryMarshal.Write(memory.Span, ref memberId);
                 MemoryMarshal.Write(memory.Slice(sizeof(int)).Span, ref memoryLength);
 
-                // This actually happens inside lib.ExecuteJob.
-                if (memoryLength < Constants.BufferMessageSizeMinByte)
-                    Logger.Warning("Incoming data is {0}B! Padding with zeros to reach the minimum of {1}B...",
-                        memoryLength, Constants.BufferMessageSizeMinByte);
-                else if (memoryLength % 16 != 0)
-                    Logger.Warning("Incoming data ({0}B) must be aligned to 16B! Padding for {1}B...",
-                        memoryLength, 16 - (memoryLength % 16));
-
                 // Sending the data.
-                var outputBuffer = await lib.AssignJob(memory);
+                var task = lib.AssignJob(memory);
+                var outputBuffer = await task;
 
                 // Processing the response. schema: (ulong time, uint length, byte[] data)
 
