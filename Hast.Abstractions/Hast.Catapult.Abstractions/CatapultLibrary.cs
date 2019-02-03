@@ -19,6 +19,18 @@ namespace Hast.Catapult.Abstractions
         private bool _isDisposed = false;
         private IntPtr _handle;
 
+
+        /// <summary>
+        /// The length of the input (request) header in bytes.
+        /// int memberId, int inputDataLength, int sliceIndex, int sliceCount
+        /// </summary>
+        public const int InputHeaderSize = 4 * sizeof(int);
+
+        /// <summary>
+        /// The length of the output (response) header in bytes. ulong hardwareExecutionTime, int dataSize
+        /// </summary>
+        public const int OutputHeaderSize = sizeof(ulong) + sizeof(int);
+
         /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
         /// </summary>
@@ -60,6 +72,11 @@ namespace Hast.Catapult.Abstractions
         /// Gets the maximum length of the message sent to the input buffer. (64kB)
         /// </summary>
         public int BufferSize { get; private set; }
+
+        /// <summary>
+        /// Gets the amount of space available in for useful data in the input bugger.
+        /// </summary>
+        private int BufferPayloadSize => BufferSize - InputHeaderSize;
 
         /// <summary>
         /// Gets whether the PCIe access is enabled on the device.
@@ -238,10 +255,47 @@ namespace Hast.Catapult.Abstractions
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// But first it checks if there are any other jobs in queue and awaits them if there are any.
         /// </summary>
+        /// <param name="memberId">Identifies the program on the hardware.</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public async Task<Memory<byte>> AssignJob(Memory<byte> inputData)
+        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) => AssignJob(memberId, inputData, 0);
+
+        private async Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData, int sliceIndex)
         {
+            int sliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
+
+            if (sliceCount >= 2)
+            {
+                // If the data exceeds buffer size limit, then cut it into maximal slices.
+                var tasks = new Task<Memory<byte>>[sliceCount];
+                for (int i = 0; i < sliceCount - 1; i++)
+                    tasks[i] = AssignJob(memberId, inputData.Slice(i * BufferPayloadSize, BufferPayloadSize), i);
+                tasks[sliceCount - 1] = AssignJob(memberId, inputData.Slice((sliceCount - 1) * BufferPayloadSize), sliceCount - 1);
+                var responses = await Task.WhenAll(tasks);
+
+                var responseSize = OutputHeaderSize;
+                var payloadSizes = new int[sliceCount];
+                for (int i = 0; i < responses.Length; i++)
+                    responseSize += payloadSizes[i] = MemoryMarshal.Read<int>(responses[i].Slice(sizeof(ulong)).Span);
+                Memory<byte> result = new byte[responseSize];
+                responses[0].Slice(OutputHeaderSize, payloadSizes[0]).CopyTo(result);
+                for (int i = 0, aggregateIndex = OutputHeaderSize; i < responses.Length; i++)
+                {
+                    responses[i].Slice(OutputHeaderSize, payloadSizes[i]).CopyTo(result.Slice(aggregateIndex));
+                    aggregateIndex += payloadSizes[i];
+                }
+
+                return result;
+            }
+
+            int inputDataLength = inputData.Length;
+            Memory<byte> data = new byte[InputHeaderSize + inputData.Length];
+            MemoryMarshal.Write(data.Span, ref memberId);
+            MemoryMarshal.Write(data.Span.Slice(1 * sizeof(int)), ref inputDataLength);
+            MemoryMarshal.Write(data.Span.Slice(2 * sizeof(int)), ref sliceIndex);
+            MemoryMarshal.Write(data.Span.Slice(3 * sizeof(int)), ref sliceCount);
+            inputData.CopyTo(data.Slice(InputHeaderSize));
+
             // This job will contain the current call
             Task<Memory<byte>> job = null;
 
@@ -259,24 +313,12 @@ namespace Hast.Catapult.Abstractions
                             _currentSlot = slot;
                     }
 
-                if (inputData.Length <= BufferSize)
-                    _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
-                        .ContinueWith(_ => RunJob(_currentSlot, inputData).Result);
-                else
-                {
-                    // If the data exceeds buffer size limit, then cut it into maximal slices which are all handled in
-                    // sequence by the same slot. The result is expected to be in the final packet.
-                    int count = (int)Math.Ceiling(((double)inputData.Length) / BufferSize);
-                    job = _slotDispatch[_currentSlot]
-                        .ContinueWith(_ => RunJob(_currentSlot, inputData.Slice(0, BufferSize)).Result);
-                    for (int i = 1; i < count - 1; i++)
-                        job = job.ContinueWith(_ => RunJob(_currentSlot, inputData.Slice(i * BufferSize, BufferSize)).Result);
-                    _slotDispatch[_currentSlot] = job = job
-                        .ContinueWith(_ => RunJob(_currentSlot, inputData.Slice((count - 1) * BufferSize)).Result);
-                }
+                _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
+                    .ContinueWith(_ => RunJob(_currentSlot, data).Result);
             }
 
             return await job;
+
         }
 
         /// <summary>
@@ -317,7 +359,7 @@ namespace Hast.Catapult.Abstractions
                 inputData = padded;
             }
             // If the input message isn't 16B aligned, pad it with zeros
-            else if(inputData.Length % 16 != 0)
+            else if (inputData.Length % 16 != 0)
             {
                 LogFunction((uint)Constants.Log.Warn,
                     $"Incoming data ({inputData.Length}B) must be aligned to 16B! Padding for {16 - (inputData.Length % 16)}B...");
