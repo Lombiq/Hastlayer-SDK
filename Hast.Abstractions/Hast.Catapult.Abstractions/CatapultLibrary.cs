@@ -27,9 +27,10 @@ namespace Hast.Catapult.Abstractions
         public const int InputHeaderSize = 4 * sizeof(int);
 
         /// <summary>
-        /// The length of the output (response) header in bytes. ulong hardwareExecutionTime, int dataSize
+        /// The length of the output (response) header in bytes.
+        /// ulong hardwareExecutionTime, int dataSize, int sliceIndex, int sliceCount
         /// </summary>
-        public const int OutputHeaderSize = sizeof(ulong) + sizeof(int);
+        public const int OutputHeaderSize = sizeof(ulong) + 3 * sizeof(int);
 
         /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
@@ -267,22 +268,34 @@ namespace Hast.Catapult.Abstractions
             if (sliceCount >= 2)
             {
                 // If the data exceeds buffer size limit, then cut it into maximal slices.
-                var tasks = new Task<Memory<byte>>[sliceCount];
+                var tasks = new List<Task<Memory<byte>>>(sliceCount);
                 for (int i = 0; i < sliceCount - 1; i++)
-                    tasks[i] = AssignJob(memberId, inputData.Slice(i * BufferPayloadSize, BufferPayloadSize), i);
-                tasks[sliceCount - 1] = AssignJob(memberId, inputData.Slice((sliceCount - 1) * BufferPayloadSize), sliceCount - 1);
+                    tasks.Add(AssignJob(memberId, inputData.Slice(i * BufferPayloadSize, BufferPayloadSize), i));
+                tasks.Add(AssignJob(memberId, inputData.Slice(tasks.Count * BufferPayloadSize), tasks.Count));
+                
+                // Check the response count and if necessary open further empty slots
+                var sliceCountIndex = sizeof(uint) + 2 * sizeof(int);
+                sliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountIndex));
+                while (tasks.Count < sliceCount)
+                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count));
+
+                // Make sure that all slots are done.
                 var responses = await Task.WhenAll(tasks);
 
+                // Create output array and fill it with the responses that have a positive slice index.
                 var responseSize = OutputHeaderSize;
-                var payloadSizes = new int[sliceCount];
+                var payloadSizes = new int[responses.Length];
                 for (int i = 0; i < responses.Length; i++)
                     responseSize += payloadSizes[i] = MemoryMarshal.Read<int>(responses[i].Slice(sizeof(ulong)).Span);
                 Memory<byte> result = new byte[responseSize];
                 responses[0].Slice(OutputHeaderSize, payloadSizes[0]).CopyTo(result);
-                for (int i = 0, aggregateIndex = OutputHeaderSize; i < responses.Length; i++)
+                for (int i = 0; i < responses.Length; i++)
                 {
-                    responses[i].Slice(OutputHeaderSize, payloadSizes[i]).CopyTo(result.Slice(aggregateIndex));
-                    aggregateIndex += payloadSizes[i];
+                    var index = BufferSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sizeof(uint) + sizeof(int)));
+                    if (index < 0 || index >= result.Length) continue;
+
+                    var targetSlice = result.Slice(OutputHeaderSize + index);
+                    responses[i].Slice(OutputHeaderSize, payloadSizes[i]).CopyTo(targetSlice);
                 }
 
                 return result;

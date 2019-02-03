@@ -43,9 +43,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </remarks>
         public void Set(Memory<byte> data, int prefixCells = 0)
         {
-            if (prefixCells > _simpleMemory.PrefixCellCount || prefixCells < 0)
-                throw new ArgumentOutOfRangeException($"You can use 0-{_simpleMemory.PrefixCellCount} cells for prefix!");
-
             _simpleMemory.PrefixedMemory = data;
             if (prefixCells < _simpleMemory.PrefixCellCount) _simpleMemory.PrefixCellCount = prefixCells;
         }
