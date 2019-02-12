@@ -137,7 +137,7 @@ namespace Hast.Catapult.Abstractions
         {
             LogFunction = logFunction;
 
-            // Indexer register access
+            // Indexer register access.
             SoftRegister = new NamedIndexer<uint, ulong>(
                 (address) => { VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value)); return value; },
                 (address, value) => { VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value)); }
@@ -147,8 +147,8 @@ namespace Hast.Catapult.Abstractions
                 (register, value) => { VerifyResult(NativeLibrary.WriteShellRegister(_handle, register, value)); }
             );
 
-            // Initialize FPGA library and device
-            // We don't use dllmap so create ALD without it
+            // Initialize FPGA library and device.
+            // We don't use dllmap so create ALD without it.
             var builderWithoutDllMap = new NativeLibraryBuilder(NativeLibraryBuilder.Default.Options & ~ImplementationOptions.EnableDllMapSupport);
             NativeLibrary = builderWithoutDllMap.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
             // Check if device is available and connect
@@ -161,11 +161,11 @@ namespace Hast.Catapult.Abstractions
                 logFunc: logFunction);
             VerifyResult(createStatus);
 
-            // Configure hardware settings & enable hardware
+            // Configure hardware settings & enable hardware.
             SoftRegister[Constants.ConfigDram.Channel0] = 0;
             PcieEnabled = true;
 
-            // Query device info
+            // Query device info.
             VerifyResult(NativeLibrary.GetNumberShellRegisters(_handle, out uint count));
             ShellRegisterCount = (int)count;
             VerifyResult(NativeLibrary.GetNumberBuffers(_handle, out count));
@@ -173,7 +173,7 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetBufferSize(_handle, out count));
             BufferSize = (int)count;
 
-            // Set up the task tracker
+            // Set up the task tracker.
             _slotDispatch = new Task[BufferCount];
             for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
         }
@@ -273,7 +273,7 @@ namespace Hast.Catapult.Abstractions
                     tasks.Add(AssignJob(memberId, inputData.Slice(i * BufferPayloadSize, BufferPayloadSize), i));
                 tasks.Add(AssignJob(memberId, inputData.Slice(tasks.Count * BufferPayloadSize), tasks.Count));
                 
-                // Check the response count and if necessary open further empty slots
+                // Check the response count and if necessary open further empty slots.
                 var sliceCountIndex = sizeof(uint) + 2 * sizeof(int);
                 sliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountIndex));
                 while (tasks.Count < sliceCount)
@@ -309,15 +309,15 @@ namespace Hast.Catapult.Abstractions
             MemoryMarshal.Write(data.Span.Slice(3 * sizeof(int)), ref sliceCount);
             inputData.CopyTo(data.Slice(InputHeaderSize));
 
-            // This job will contain the current call
+            // This job will contain the current call.
             Task<Memory<byte>> job = null;
 
             lock (_slotDispatch)
             {
-                // go round-robin
+                // Go round-robin,
                 _currentSlot = (_currentSlot + 1) % BufferCount;
 
-                // but try to find the first free slot
+                // but try to find the first free slot.
                 if (!_slotDispatch[_currentSlot].IsCompleted)
                     for (int i = 0; i < BufferCount; i++)
                     {
@@ -338,8 +338,8 @@ namespace Hast.Catapult.Abstractions
         /// Uploads the data to the selected slot's input buffer and awaits the output.
         /// </summary>
         /// <param name="bufferIndex">
-        /// The numeric ID of the buffer that the hardware uses for interaction. It is called "slot" in the
-        /// Mt Granite Shell Architectural Specification and its value can range from 0 to BufferCount.
+        /// The numeric ID of the buffer that the hardware uses for interaction. It is called "slot" in the Mt Granite
+        /// Shell Architectural Specification and its value can range from 0 to BufferCount.
         /// </param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
@@ -356,13 +356,13 @@ namespace Hast.Catapult.Abstractions
             {
                 VerifyResult(NativeLibrary.GetInputBufferFull(
                     _handle, slot, out isInputBufferFull));
-                // While unlikely, it's possible that the device has provided a result (so the previous Task is completed),
-                // but the input buffer hasn't cleared yet. In this case we should wait for it.
+                // While unlikely, it's possible that the device has provided a result (so the previous Task is
+                // completed), but the input buffer hasn't cleared yet. In this case we should wait for it.
                 while (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
 
-            // If the input message is too short, pad it with zeros
+            // If the input message is too short, pad it with zeros.
             if (inputData.Length < Constants.BufferMessageSizeMinByte)
             {
                 LogFunction((uint)Constants.Log.Warn,
@@ -371,7 +371,7 @@ namespace Hast.Catapult.Abstractions
                 inputData.CopyTo(padded);
                 inputData = padded;
             }
-            // If the input message isn't 16B aligned, pad it with zeros
+            // If the input message isn't 16B aligned, pad it with zeros.
             else if (inputData.Length % 16 != 0)
             {
                 LogFunction((uint)Constants.Log.Warn,
@@ -382,21 +382,21 @@ namespace Hast.Catapult.Abstractions
                 inputData = padded;
             }
 
-            // Acquire I/O buffer addresses
+            // Acquire I/O buffer addresses.
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
 
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
 
-            // Upload data into input buffer
+            // Upload data into input buffer.
             unsafe
             {
                 inputData.Span.CopyTo(new Span<byte>(inputBuffer.ToPointer(), inputData.Length));
             }
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
-            // Wait for the interrupt and download results from output buffer
+            // Wait for the interrupt and download results from output buffer.
             var resultSize = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
@@ -412,7 +412,7 @@ namespace Hast.Catapult.Abstractions
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}\n");
 
-            // Signal that we are done
+            // Signal that we are done.
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} finished!\n");

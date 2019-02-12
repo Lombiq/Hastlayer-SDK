@@ -26,7 +26,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <summary>
         /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be used
         /// for passing in extra input parameters (like memberId) without having to copy the operative memory contents
-        /// into an auxiliary arrray.
+        /// into an auxiliary array.
         /// </summary>
         internal Memory<byte> PrefixedMemory { get; set; }
 
@@ -133,7 +133,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span);
 
         /// <summary>
-        /// Takes count integers at cellIndex. This version makes a copy of the data as array so only use it when Span isn't applicable!
+        /// Takes count integers at cellIndex. This version makes a copy of the data as array so only use it when Span
+        /// isn't applicable!
         /// </summary>
         /// <param name="startCellIndex">The cell of the first integer</param>
         /// <param name="count">The amount of integers</param>
@@ -143,7 +144,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public void WriteBoolean(int cellIndex, bool boolean) =>
             // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
             // so on the FPGA-side we can depend on it.
-            WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue); // would call MemoryMarshal.Write directly if not for the "ref"
+            // Would call MemoryMarshal.Write directly if not for the "ref".
+            WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
         public void WriteBoolean(int startCellIndex, params bool[] booleans)
         {
