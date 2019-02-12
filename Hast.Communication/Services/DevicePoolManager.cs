@@ -42,7 +42,7 @@ namespace Hast.Communication.Services
             {
                 if (!_devicePool.Any())
                 {
-                    throw new InvalidOperationException("There are no devices in the device pool.");
+                    throw new InvalidOperationException("There are no devices in the device pool (i.e. no connected devices could be detected).");
                 }
 
                 // If there is an available device, return a handle to it. If not, then we put the request into a queue.
