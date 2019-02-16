@@ -39,9 +39,14 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         internal Memory<byte> Memory { get; set; }
 
         /// <summary>
+        /// Gets the number of bytes of this memory allocation.
+        /// </summary>
+        public int ByteCount => Memory.Length;
+
+        /// <summary>
         /// Gets the number of cells of this memory allocation, indicating memory cells of size <see cref="MemoryCellSizeBytes"/>.
         /// </summary>
-        public int CellCount { get => Memory.Length / MemoryCellSizeBytes; }
+        public int CellCount => Memory.Length / MemoryCellSizeBytes;
 
         /// <summary>
         /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.

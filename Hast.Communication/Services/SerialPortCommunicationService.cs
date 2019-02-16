@@ -24,6 +24,9 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IEnumerable<ISerialPortConfigurator> _serialPortConfigurators;
 
+        private const int PrefixCellCount = 3;
+        private const int FirstCellPadding = sizeof(int) - 1;
+
         public override string ChannelName
         {
             get
@@ -94,18 +97,18 @@ namespace Hast.Communication.Services
 
                     // Prepare memory.
                     var dma = new SimpleMemoryAccessor(simpleMemory);
-                    var memory = dma.Get();
-                    var memoryLength = memory.Length;
+                    // The first parameter is actually just a byte but we only fetch whole cells so 3/4 of the cell is padding.
+                    var memory = dma.Get(PrefixCellCount).Slice(FirstCellPadding);
+                    var memoryLength = simpleMemory.ByteCount;
 
                     // Execute Order 66.
-                    var outputBuffer = new byte[sizeof(byte) + sizeof(int) + sizeof(int) + memoryLength];
-                    outputBuffer[0] = (byte)CommandTypes.Execution;
+                    // Set command type
+                    var commandType = (byte)CommandTypes.Execution;
+                    MemoryMarshal.Write(memory.Span, ref commandType);
                     // Copying the input length, represented as bytes, to the output buffer.
-                    MemoryMarshal.Write(outputBuffer.AsSpan().Slice(1, sizeof(int)), ref memoryLength);
+                    MemoryMarshal.Write(memory.Span.Slice(1, sizeof(int)), ref memoryLength);
                     // Copying the member ID, represented as bytes, to the output buffer.
-                    MemoryMarshal.Write(outputBuffer.AsSpan().Slice(1 + sizeof(int), sizeof(int)), ref memberId);
-                    // Copying the simple memory.
-                    memory.Span.CopyTo(outputBuffer.AsSpan().Slice(1 + sizeof(int) + sizeof(int)));
+                    MemoryMarshal.Write(memory.Span.Slice(1 + sizeof(int), sizeof(int)), ref memberId);
 
                     // Sending the data.
                     // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
@@ -113,11 +116,11 @@ namespace Hast.Communication.Services
                     // of 4 bytes. This seems to have no negative impact on performance compared to using
                     // serialPort.Write() once.
                     var maxBytesToSendAtOnce = 4;
-                    for (int i = 0; i < (int)Math.Ceiling(outputBuffer.Length / (decimal)maxBytesToSendAtOnce); i++)
+                    for (int i = 0; i < (int)Math.Ceiling(memory.Length / (decimal)maxBytesToSendAtOnce); i++)
                     {
-                        var remainingBytes = outputBuffer.Length - i * maxBytesToSendAtOnce;
+                        var remainingBytes = memory.Length - i * maxBytesToSendAtOnce;
                         var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
-                        serialPort.Write(outputBuffer, i * maxBytesToSendAtOnce, bytesToSend);
+                        serialPort.Write(memory.GetUnderlyingArray().Array, i * maxBytesToSendAtOnce, bytesToSend);
                     }
 
 
@@ -172,7 +175,7 @@ namespace Hast.Communication.Services
 
                                     // Since the output's size can differ from the input size for optimization reasons,
                                     // we take the explicit size into account.
-                                    outputBytes = new byte[outputByteCount];
+                                    outputBytes = new byte[outputByteCount + PrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
 
                                     Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
@@ -181,12 +184,14 @@ namespace Hast.Communication.Services
                                 }
                                 break;
                             case Serial.CommunicationState.ReceivingOuput:
-                                outputBytes[outputBytesReceivedCount] = receivedByte;
+                                // There is a padding of PrefixCellCount cells for the unlikely case that the user would directly
+                                // feed back the output as the next call's input. This way Prefix space is maintained.
+                                outputBytes[outputBytesReceivedCount + PrefixCellCount * SimpleMemory.MemoryCellSizeBytes] = receivedByte;
                                 outputBytesReceivedCount++;
 
                                 if (outputByteCount == outputBytesReceivedCount)
                                 {
-                                    dma.Set(outputBytes);
+                                    dma.Set(outputBytes, PrefixCellCount);
 
                                     // Serial communication can give more data than we actually await, so need to 
                                     // set this.
