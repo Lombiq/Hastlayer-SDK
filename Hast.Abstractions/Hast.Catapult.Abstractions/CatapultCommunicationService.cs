@@ -42,24 +42,23 @@ namespace Hast.Catapult.Abstractions
                 // included in the CatapultNativeLibrary interface because of that) it's not possible to know the
                 // number of endpoints. Instead this algorithm probes the first 8 indices. The single device is
                 // expected to be in endpoint 0 according to spec so this will get at least one result always.
-                var bag = new ConcurrentBag<CatapultLibrary>();
-                await Task.WhenAll(Enumerable.Range(0, 7).Select(i => Task.Run(() =>
+                var libraries = await Task.WhenAll(Enumerable.Range(0, 7).Select(i => Task.Run(() =>
                     {
                         try
                         {
                             var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
-                            bag.Add(CatapultLibrary.Create(config, Logger, i));
+                            return CatapultLibrary.Create(config, Logger, i);
                         }
                         catch (CatapultFunctionResultException ex)
                         {
                             Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}.");
+                            return null;
                         }
                     })));
-
-                var libraries = bag.ToArray();
+                
                 return libraries
-                    .Select(x => new Device(Constants.ChannelName, x, Device_Disposing))
-                    .ToArray();
+                    .Where(x => x != null)
+                    .Select(x => new Device(x.ToString(), x, Device_Disposing));
             });
 
             using (var device = await _devicePoolManager.ReserveDevice())

@@ -48,7 +48,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="cellIndex">The cell index where the memory span starts.</param>
         /// <returns>A span starting at cellIndex * MemoryCellSizeBytes.</returns>
-        internal Span<byte> this[int cellIndex]
+        private Span<byte> this[int cellIndex]
         {
             get => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
         }
