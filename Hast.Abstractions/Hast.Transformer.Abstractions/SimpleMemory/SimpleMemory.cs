@@ -73,6 +73,19 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             Memory = PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
         }
 
+        /// <summary>
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// the FPGA for transformed algorithms from an existing byte array.
+        /// </summary>
+        /// <param name="memory">The source data.</param>
+        /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
+        public SimpleMemory(Memory<byte> memory, int prefixCellCount = 0)
+        {
+            PrefixedMemory = memory;
+            PrefixCellCount = prefixCellCount;
+            Memory = PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
+        }
+
         public void Write4Bytes(int cellIndex, byte[] bytes)
         {
             var target = this[cellIndex];
