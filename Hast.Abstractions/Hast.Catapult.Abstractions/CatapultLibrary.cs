@@ -57,6 +57,10 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public CatapultLogFunction LogFunction { get; private set; }
 
+        /// <summary>
+        /// Gets the numeric ID of the PCIe endpoint. (phisical slot)
+        /// </summary>
+        public int PcieEndpointNumber { get; private set; }
 
         /// <summary>
         /// Gets the total number of shell registers.
@@ -136,6 +140,7 @@ namespace Hast.Catapult.Abstractions
             CatapultLogFunction logFunction = null)
         {
             LogFunction = logFunction;
+            PcieEndpointNumber = endpointNumber;
 
             // Indexer register access.
             SoftRegister = new NamedIndexer<uint, ulong>(
@@ -418,5 +423,11 @@ namespace Hast.Catapult.Abstractions
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} finished!\n");
             return resultMemory;
         }
+
+        /// <summary>
+        /// Returns the name of the instance. (Catapult:N where N is the PCIe endpoint number)
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => $"{Constants.ChannelName}:{PcieEndpointNumber}";
     }
 }
