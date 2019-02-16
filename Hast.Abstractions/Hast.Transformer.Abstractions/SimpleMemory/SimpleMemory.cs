@@ -139,7 +139,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
             // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
-            // so on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because it's second parameter
+            // so on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because its second parameter
             // must be passed using "ref" and you can't pass in constants or expressions by reference.
             WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
