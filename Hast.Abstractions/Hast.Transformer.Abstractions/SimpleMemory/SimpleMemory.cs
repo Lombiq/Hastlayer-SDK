@@ -14,7 +14,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// mustn't be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL
     /// library too.
     /// </remarks>
-    public class SimpleMemory : ISimpleMemory
+    public class SimpleMemory
     {
         public const int MemoryCellSizeBytes = sizeof(int);
 
@@ -128,23 +128,14 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="startCellIndex">The cell of the first integer</param>
         /// <param name="count">The amount of integers</param>
-        /// <returns>The memory pointer as Span.</returns>
-        public Span<int> ReadInt32Span(int startCellIndex, int count) =>
-            MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span);
-
-        /// <summary>
-        /// Takes count integers at cellIndex. This version makes a copy of the data as array so only use it when Span
-        /// isn't applicable!
-        /// </summary>
-        /// <param name="startCellIndex">The cell of the first integer</param>
-        /// <param name="count">The amount of integers</param>
         /// <returns>The numbers in an array.</returns>
-        public int[] ReadInt32(int startCellIndex, int count) => ReadInt32Span(startCellIndex, count).ToArray();
+        public int[] ReadInt32(int startCellIndex, int count) =>
+            MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span).ToArray();
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
             // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
-            // so on the FPGA-side we can depend on it.
-            // Would call MemoryMarshal.Write directly if not for the "ref".
+            // so on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because it's second parameter
+            // must be passed using "ref" and you can't pass in constants or expressions by reference.
             WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
         public void WriteBoolean(int startCellIndex, params bool[] booleans)
