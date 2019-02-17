@@ -264,25 +264,31 @@ namespace Hast.Catapult.Abstractions
         /// <param name="memberId">Identifies the program on the hardware.</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) => AssignJob(memberId, inputData, 0);
+        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) => AssignJob(memberId, inputData, 0, 1);
 
-        private async Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData, int sliceIndex)
+        private async Task<Memory<byte>> AssignJob(
+            int memberId,
+            Memory<byte> inputData,
+            int sliceIndex,
+            int sliceCountValue,
+            int totalDataSize = -1)
         {
             int sliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
+            if (totalDataSize == -1) totalDataSize = inputData.Length;
 
             if (sliceCount >= 2)
             {
                 // If the data exceeds buffer size limit, then cut it into maximal slices.
                 var tasks = new List<Task<Memory<byte>>>(sliceCount);
                 for (int i = 0; i < sliceCount - 1; i++)
-                    tasks.Add(AssignJob(memberId, inputData.Slice(i * BufferPayloadSize, BufferPayloadSize), i));
-                tasks.Add(AssignJob(memberId, inputData.Slice(tasks.Count * BufferPayloadSize), tasks.Count));
+                    tasks.Add(AssignJob(memberId, inputData.Slice(i * BufferPayloadSize, BufferPayloadSize), i, sliceCount, totalDataSize));
+                tasks.Add(AssignJob(memberId, inputData.Slice(tasks.Count * BufferPayloadSize), sliceCount - 1, sliceCount, totalDataSize));
                 
                 // Check the response count and if necessary open further empty slots.
                 var sliceCountIndex = sizeof(uint) + 2 * sizeof(int);
                 sliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountIndex));
                 while (tasks.Count < sliceCount)
-                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count));
+                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, sliceCount, totalDataSize));
 
                 // Make sure that all slots are done.
                 var responses = await Task.WhenAll(tasks);
@@ -306,12 +312,11 @@ namespace Hast.Catapult.Abstractions
                 return result;
             }
 
-            int inputDataLength = inputData.Length;
             Memory<byte> data = new byte[InputHeaderSize + inputData.Length];
             MemoryMarshal.Write(data.Span, ref memberId);
-            MemoryMarshal.Write(data.Span.Slice(1 * sizeof(int)), ref inputDataLength);
+            MemoryMarshal.Write(data.Span.Slice(1 * sizeof(int)), ref totalDataSize);
             MemoryMarshal.Write(data.Span.Slice(2 * sizeof(int)), ref sliceIndex);
-            MemoryMarshal.Write(data.Span.Slice(3 * sizeof(int)), ref sliceCount);
+            MemoryMarshal.Write(data.Span.Slice(3 * sizeof(int)), ref sliceCountValue);
             inputData.CopyTo(data.Slice(InputHeaderSize));
 
             // This job will contain the current call.
