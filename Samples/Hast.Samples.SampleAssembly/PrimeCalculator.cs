@@ -91,30 +91,39 @@ namespace Hast.Samples.SampleAssembly
             int i = 0;
             while (i < numberCount)
             {
+                // NOTE: multi-cell read/write operations are commented out at the moment. These will be put back once
+                // that's completely supported.
+
                 // Note that you can read/write multiple values from/to SimpleMemory at once. On capable platforms this 
                 // will correspond to batched read/writes, which are much faster than doing them one by one.
-                var numbers = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, MaxDegreeOfParallelism);
+                //var numbers = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, MaxDegreeOfParallelism);
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
+                    var currentNumber = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
+
                     // Note that you can just call (thread-safe) methods from inside Tasks as usual. In hardware those
                     // invoked methods will be copied together with the Tasks' bodies too.
                     tasks[m] = Task.Factory.StartNew(
                         numberObject => IsPrimeNumberInternal((uint)numberObject),
-                        numbers[m]);
+                        currentNumber);
+                    //tasks[m] = Task.Factory.StartNew(
+                    //    numberObject => IsPrimeNumberInternal((uint)numberObject),
+                    //    numbers[m]);
                 }
 
                 // Hastlayer doesn't support async code at the moment since ILSpy doesn't handle the new Roslyn-compiled
                 // code. See: https://github.com/icsharpcode/ILSpy/issues/502
                 Task.WhenAll(tasks).Wait();
 
-                var results = new bool[MaxDegreeOfParallelism];
+                //var results = new bool[MaxDegreeOfParallelism];
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    results[m] = tasks[m].Result;
+                    memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i + m, tasks[m].Result);
+                    //results[m] = tasks[m].Result;
                 }
 
-                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, results);
+                //memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, results);
 
                 i += MaxDegreeOfParallelism;
             }
