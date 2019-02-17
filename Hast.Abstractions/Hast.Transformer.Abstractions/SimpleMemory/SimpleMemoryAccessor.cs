@@ -46,5 +46,29 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             _simpleMemory.PrefixedMemory = data;
             if (prefixCells < _simpleMemory.PrefixCellCount) _simpleMemory.PrefixCellCount = prefixCells;
         }
+
+        /// <summary>
+        /// Creates a new <see cref="SimpleMemory"/> instance from the specified data.
+        /// </summary>
+        /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
+        /// <param name="prefixCells">The amount of cells used for prefix/header.</param>
+        /// <returns>The <see cref="SimpleMemory"/> containing the data.</returns>
+        /// <remarks>If data is a byte[] you can use the <see cref="SimpleMemory"/> constructor instead.</remarks>
+        public static SimpleMemory Create(Memory<byte> data, int prefixCells = 0) => new SimpleMemory(data, prefixCells);
+
+        /// <summary>
+        /// Creates a new <see cref="SimpleMemory"/> instance from the specified data and its
+        /// <see cref="SimpleMemoryAccessor"/> at the same time.
+        /// </summary>
+        /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
+        /// <param name="prefixCells">The amount of cells used for prefix/header.</param>
+        /// <param name="accessor">The accessor of the return value.</param>
+        /// <returns>The <see cref="SimpleMemory"/> containing the data.</returns>
+        public static SimpleMemory Create(Memory<byte> data, int prefixCells, out SimpleMemoryAccessor accessor)
+        {
+            var memory = new SimpleMemory(data, prefixCells);
+            accessor = new SimpleMemoryAccessor(memory);
+            return memory;
+        }
     }
 }

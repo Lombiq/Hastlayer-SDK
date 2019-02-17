@@ -71,7 +71,7 @@ namespace Hast.Catapult.Abstractions
                 var task = lib.AssignJob(memberId, dma.Get());
                 var outputBuffer = await task;
 
-                // Processing the response. schema: (ulong time, uint length, byte[] data)
+                // Processing the response.
                 var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
                 SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
