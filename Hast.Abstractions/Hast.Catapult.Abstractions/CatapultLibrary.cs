@@ -27,7 +27,8 @@ namespace Hast.Catapult.Abstractions
         /// inputDataLength: The total length of the data in bytes. This is the total length of the sent data without the headers.
         /// sliceIndex: Zero-based number of the current data slice. (at least zero and below sliceCount)
         /// sliceCount: The number of slices the data is transmitted in. If the data has less bytes than BufferPayloadSize,
-        ///             then it's always 1. Otherwise it's inputDataLength / BufferPayloadSize rounded up.
+        ///             then it's always 1. Otherwise it's inputDataLength / BufferPayloadSize rounded up. If there are more
+        ///             input slices than slots on the hardware, the response will behave as if the input sliceCount was only 1.
         /// </summary>
         public const int InputHeaderSize = 4 * sizeof(int);
 
@@ -273,31 +274,39 @@ namespace Hast.Catapult.Abstractions
         /// <param name="memberId">Identifies the program on the hardware.</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) => AssignJob(memberId, inputData, 0, 1);
+        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) => AssignJob(memberId, inputData, 0, 1, -1, false);
 
         private async Task<Memory<byte>> AssignJob(
             int memberId,
             Memory<byte> inputData,
             int sliceIndex,
             int sliceCountValue,
-            int totalDataSize = -1)
+            int totalDataSize,
+            bool ignoreResponse)
         {
-            int sliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
-            if (totalDataSize == -1) totalDataSize = inputData.Length;
+            int currentSliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
+            if (totalDataSize < 0) totalDataSize = inputData.Length;
 
-            if (sliceCount >= 2)
+            if (currentSliceCount >= 2)
             {
+                ignoreResponse = currentSliceCount > BufferCount;
+
                 // If the data exceeds buffer size limit, then cut it into maximal slices.
-                var tasks = new List<Task<Memory<byte>>>(sliceCount);
-                for (int i = 0; i < sliceCount - 1; i++)
-                    tasks.Add(AssignJob(memberId, inputData.Slice(i * BufferPayloadSize, BufferPayloadSize), i, sliceCount, totalDataSize));
-                tasks.Add(AssignJob(memberId, inputData.Slice(tasks.Count * BufferPayloadSize), sliceCount - 1, sliceCount, totalDataSize));
+                var tasks = new List<Task<Memory<byte>>>(currentSliceCount);
+                for (int i = 0; i < currentSliceCount; i++)
+                {
+                    var slice = i < currentSliceCount - 1 ? inputData.Slice(i * BufferPayloadSize, BufferPayloadSize) :
+                        inputData.Slice(tasks.Count * BufferPayloadSize);
+                    tasks.Add(AssignJob(memberId, slice, i, currentSliceCount, totalDataSize, i > 0 && ignoreResponse));
+                }
+
+                if (ignoreResponse) tasks.RemoveRange(1, tasks.Count - 1);
                 
                 // Check the response count and if necessary open further empty slots.
                 var sliceCountIndex = sizeof(uint) + 2 * sizeof(int);
-                sliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountIndex));
-                while (tasks.Count < sliceCount)
-                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, sliceCount, totalDataSize));
+                currentSliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountIndex));
+                while (tasks.Count < currentSliceCount)
+                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false));
 
                 // Make sure that all slots are done.
                 var responses = await Task.WhenAll(tasks);
@@ -346,7 +355,7 @@ namespace Hast.Catapult.Abstractions
                     }
 
                 _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
-                    .ContinueWith(_ => RunJob(_currentSlot, data).Result);
+                    .ContinueWith(_ => RunJob(_currentSlot, data, ignoreResponse).Result);
             }
 
             return await job;
@@ -361,8 +370,9 @@ namespace Hast.Catapult.Abstractions
         /// Shell Architectural Specification and its value can range from 0 to BufferCount.
         /// </param>
         /// <param name="inputData">The hardware program's input.</param>
+        /// <param name="ignoreResponse">If true, the scheduler won't wait for the output to appear.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        private async Task<Memory<byte>> RunJob(int bufferIndex, Memory<byte> inputData)
+        private async Task<Memory<byte>> RunJob(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
         {
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} starting...\n");
             Debug.Assert(bufferIndex < BufferCount);
@@ -414,6 +424,8 @@ namespace Hast.Catapult.Abstractions
                 inputData.Span.CopyTo(new Span<byte>(inputBuffer.ToPointer(), inputData.Length));
             }
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
+
+            if (ignoreResponse) return null;
 
             // Wait for the interrupt and download results from output buffer.
             var resultSize = await Task.Run(() =>
