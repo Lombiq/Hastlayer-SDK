@@ -24,7 +24,7 @@ namespace Hast.Catapult.Abstractions
         /// The length of the input (request) header in bytes.
         /// (int memberId, int inputDataLength, int sliceIndex, int sliceCount)
         /// memberId: The member ID in Hast_IP.
-        /// inputDataLength: The total length of the data in bytes. This is the total length of the sent data without the headers.
+        /// dataLengthBytes: This is the total length in bytes of the sent data without the headers.
         /// sliceIndex: Zero-based number of the current data slice. (at least zero and below sliceCount)
         /// sliceCount: The number of slices the data is transmitted in. If the data has less bytes than BufferPayloadSize,
         ///             then it's always 1. Otherwise it's inputDataLength / BufferPayloadSize rounded up. If there are more
@@ -36,7 +36,7 @@ namespace Hast.Catapult.Abstractions
         /// The length of the output (response) header in bytes.
         /// (ulong hardwareExecutionTime, int outputDataLength, int sliceIndex, int sliceCount)
         /// hardwareExecutionTime: The number of clock cycles between Hast_IP's Start and Finished signals.
-        /// outputDataLength: The total length of the output data.
+        /// dataLengthBytes: This is the total length in bytes of the data received without the headers.
         /// sliceIndex: See above.
         /// sliceCount: See above. If higher than the input counterpart, additional empty input requests are sent.
         /// </summary>
