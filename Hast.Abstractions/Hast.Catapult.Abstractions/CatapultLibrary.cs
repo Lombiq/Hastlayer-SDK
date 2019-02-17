@@ -22,13 +22,22 @@ namespace Hast.Catapult.Abstractions
 
         /// <summary>
         /// The length of the input (request) header in bytes.
-        /// int memberId, int inputDataLength, int sliceIndex, int sliceCount
+        /// (int memberId, int inputDataLength, int sliceIndex, int sliceCount)
+        /// memberId: The member ID in Hast_IP.
+        /// inputDataLength: The total length of the data in bytes. This is the total length of the sent data without the headers.
+        /// sliceIndex: Zero-based number of the current data slice. (at least zero and below sliceCount)
+        /// sliceCount: The number of slices the data is transmitted in. If the data has less bytes than BufferPayloadSize,
+        ///             then it's always 1. Otherwise it's inputDataLength / BufferPayloadSize rounded up.
         /// </summary>
         public const int InputHeaderSize = 4 * sizeof(int);
 
         /// <summary>
         /// The length of the output (response) header in bytes.
-        /// ulong hardwareExecutionTime, int dataSize, int sliceIndex, int sliceCount
+        /// (ulong hardwareExecutionTime, int outputDataLength, int sliceIndex, int sliceCount)
+        /// hardwareExecutionTime: The number of clock cycles between Hast_IP's Start and Finished signals.
+        /// outputDataLength: The total length of the output data.
+        /// sliceIndex: See above.
+        /// sliceCount: See above. If higher than the input counterpart, additional empty input requests are sent.
         /// </summary>
         public const int OutputHeaderSize = sizeof(ulong) + 3 * sizeof(int);
 
