@@ -87,6 +87,12 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="memory">The source data.</param>
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
+        /// <remarks>
+        /// This constructor is internal only to avoid dependency issues where we have to include System.Memory package
+        /// everywhere where SimpleMemory is used even if it's created with the other constructors. Instead, you can use
+        /// <see cref="SimpleMemoryAccessor.Create(Memory{byte}, int)"/> to construct a <see cref="SimpleMemory"/> from
+        /// <see cref="Memory{byte}"/>.
+        /// </remarks>
         internal SimpleMemory(Memory<byte> memory, int prefixCellCount)
         {
             PrefixedMemory = memory;
