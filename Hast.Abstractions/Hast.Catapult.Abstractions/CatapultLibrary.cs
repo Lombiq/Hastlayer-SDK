@@ -25,10 +25,11 @@ namespace Hast.Catapult.Abstractions
         /// (int memberId, int inputDataLength, int sliceIndex, int sliceCount)
         /// memberId: The member ID in Hast_IP.
         /// dataLengthBytes: This is the total length in bytes of the sent data without the headers.
-        /// sliceIndex: Zero-based number of the current data slice. (at least zero and below sliceCount)
-        /// sliceCount: The number of slices the data is transmitted in. If the data has less bytes than BufferPayloadSize,
-        ///             then it's always 1. Otherwise it's inputDataLength / BufferPayloadSize rounded up. If there are more
-        ///             input slices than slots on the hardware, the response will behave as if the input sliceCount was only 1.
+        /// sliceIndex: Zero-based index of the current data slice (at least zero and less than sliceCount).
+        /// sliceCount: The number of slices the data is transmitted in. If the data has fewer bytes than
+        ///             BufferPayloadSize then it's always 1. Otherwise it's inputDataLength / BufferPayloadSize rounded 
+        ///             up. If there are more input slices than slots on the hardware, then the response will behave as 
+        ///             if the input sliceCount was only 1.
         /// </summary>
         public const int InputHeaderSize = 4 * sizeof(int);
 
@@ -68,7 +69,7 @@ namespace Hast.Catapult.Abstractions
         public CatapultLogFunction LogFunction { get; private set; }
 
         /// <summary>
-        /// Gets the numeric ID of the PCIe endpoint. (phisical slot)
+        /// Gets the numeric ID of the PCIe endpoint (physical slot).
         /// </summary>
         public int PcieEndpointNumber { get; private set; }
 
@@ -89,7 +90,7 @@ namespace Hast.Catapult.Abstractions
         public int BufferSize { get; private set; }
 
         /// <summary>
-        /// Gets the amount of space available in for useful data in the input bugger.
+        /// Gets the amount of space available for useful data in the input buffer.
         /// </summary>
         private int BufferPayloadSize => BufferSize - InputHeaderSize;
 
@@ -451,7 +452,7 @@ namespace Hast.Catapult.Abstractions
         }
 
         /// <summary>
-        /// Returns the name of the instance. (Catapult:N where N is the PCIe endpoint number)
+        /// Returns the name of the instance (Catapult:N where N is the PCIe endpoint number).
         /// </summary>
         /// <returns></returns>
         public override string ToString() => $"{Constants.ChannelName}:{PcieEndpointNumber}";
