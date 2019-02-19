@@ -58,6 +58,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             get => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
         }
 
+
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
         /// the FPGA for transformed algorithms.
@@ -79,14 +80,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="memory">The source data.</param>
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
-        private SimpleMemory(byte[] memory, int prefixCellCount = 0) : this(memory.AsMemory(), prefixCellCount) { }
-
-        /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
-        /// the FPGA for transformed algorithms from an existing byte array.
-        /// </summary>
-        /// <param name="memory">The source data.</param>
-        /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
         /// <remarks>
         /// This constructor is internal only to avoid dependency issues where we have to include System.Memory package
         /// everywhere where SimpleMemory is used even if it's created with the other constructors. Instead, you can use
@@ -99,6 +92,15 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             PrefixCellCount = prefixCellCount;
             Memory = PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
         }
+
+        /// <summary>
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// the FPGA for transformed algorithms from an existing byte array.
+        /// </summary>
+        /// <param name="memory">The source data.</param>
+        /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
+        private SimpleMemory(byte[] memory, int prefixCellCount = 0) : this(memory.AsMemory(), prefixCellCount) { }
+
 
         public void Write4Bytes(int cellIndex, byte[] bytes)
         {
@@ -165,9 +167,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span).ToArray();
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
-            // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
-            // so on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because its second parameter
-            // must be passed using "ref" and you can't pass in constants or expressions by reference.
+            // Since the implementation of a boolean can depend on the system rather hard-coding the expected values
+            // here so on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because its second
+            // parameter must be passed using "ref" and you can't pass in constants or expressions by reference.
             WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
         public void WriteBoolean(int startCellIndex, params bool[] booleans)

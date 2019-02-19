@@ -47,7 +47,7 @@ namespace Hast.Catapult.Abstractions
         public CatapultLogFunction LogFunction { get; private set; }
 
         /// <summary>
-        /// Gets the numeric ID of the PCIe endpoint. (phisical slot)
+        /// Gets the numeric ID of the PCIe endpoint (physical slot).
         /// </summary>
         public int PcieEndpointNumber { get; private set; }
 
@@ -68,7 +68,7 @@ namespace Hast.Catapult.Abstractions
         public int BufferSize { get; private set; }
 
         /// <summary>
-        /// Gets the amount of space available in for useful data in the input bugger.
+        /// Gets the amount of space available for useful data in the input buffer.
         /// </summary>
         private int BufferPayloadSize => BufferSize - InputHeaderSizes.Total;
 
@@ -433,7 +433,7 @@ namespace Hast.Catapult.Abstractions
         }
 
         /// <summary>
-        /// Returns the name of the instance. (Catapult:N where N is the PCIe endpoint number)
+        /// Returns the name of the instance (Catapult:N where N is the PCIe endpoint number).
         /// </summary>
         /// <returns></returns>
         public override string ToString() => $"{Constants.ChannelName}:{PcieEndpointNumber}";

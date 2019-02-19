@@ -48,7 +48,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         }
 
         /// <summary>
-        /// Creates a new <see cref="SimpleMemory"/> instance from the specified data.
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// the FPGA for transformed algorithms from an existing byte array. Keep in mind that each 32b segment in the
+        /// given <see cref="Memory{T}"/> object will correspond to a cell in <see cref="SimpleMemory"/>, indexed from
+        /// 0.
         /// </summary>
         /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
         /// <param name="prefixCells">The amount of cells used for prefix/header.</param>

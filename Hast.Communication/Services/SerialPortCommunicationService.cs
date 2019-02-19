@@ -184,8 +184,9 @@ namespace Hast.Communication.Services
                                 }
                                 break;
                             case Serial.CommunicationState.ReceivingOuput:
-                                // There is a padding of PrefixCellCount cells for the unlikely case that the user would directly
-                                // feed back the output as the next call's input. This way Prefix space is maintained.
+                                // There is a padding of PrefixCellCount cells for the unlikely case that the user
+                                // would directly feed back the output as the next call's input. This way Prefix space
+                                // is maintained.
                                 outputBytes[outputBytesReceivedCount + PrefixCellCount * SimpleMemory.MemoryCellSizeBytes] = receivedByte;
                                 outputBytesReceivedCount++;
 

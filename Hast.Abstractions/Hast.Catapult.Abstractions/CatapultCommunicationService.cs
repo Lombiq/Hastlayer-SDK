@@ -51,7 +51,7 @@ namespace Hast.Catapult.Abstractions
                         }
                         catch (CatapultFunctionResultException ex)
                         {
-                            Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}.");
+                            Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;
                         }
                     })));
