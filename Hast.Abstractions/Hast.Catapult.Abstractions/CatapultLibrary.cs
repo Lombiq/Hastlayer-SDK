@@ -313,9 +313,9 @@ namespace Hast.Catapult.Abstractions
 
             Memory<byte> data = new byte[InputHeaderSizes.Total + inputData.Length];
             MemoryMarshal.Write(data.Span, ref memberId);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberID), ref totalDataSize);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberID + InputHeaderSizes.PayloadLengthBytes), ref sliceIndex);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberID + InputHeaderSizes.PayloadLengthBytes
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId), ref totalDataSize);
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthBytes), ref sliceIndex);
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthBytes
                 + InputHeaderSizes.SliceIndex), ref sliceCountValue);
             inputData.CopyTo(data.Slice(InputHeaderSizes.Total));
 

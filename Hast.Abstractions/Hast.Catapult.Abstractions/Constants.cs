@@ -188,10 +188,10 @@ namespace Hast.Catapult.Abstractions
             /// <summary>
             /// The member ID in Hast_IP.
             /// </summary>
-            public const int MemberID = sizeof(int);
+            public const int MemberId = sizeof(int);
 
             /// <summary>
-            /// This is the total length in bytes of the sent data without the headers.
+            /// Total length of the sent data in bytes without the headers.
             /// </summary>
             public const int PayloadLengthBytes = sizeof(int);
 
@@ -202,16 +202,16 @@ namespace Hast.Catapult.Abstractions
 
             /// <summary>
             /// The number of slices the data is transmitted in. If the data has fewer bytes than BufferPayloadSize
-            /// then it's always 1. Otherwise it's PayloadLengthBytes  / BufferPayloadSize rounded  up. If there
-            /// are more input slices than slots on the hardware, then the response will behave as  if the input
-            /// sliceCount was only 1.
+            /// then it's always 1. Otherwise it's PayloadLengthBytes  / BufferPayloadSize rounded  up. If there are
+            /// more input slices than slots on the hardware, then the response will behave as if the input sliceCount
+            /// was only 1.
             /// </summary>
             public const int SliceCount = sizeof(int);
 
             /// <summary>
             /// The length of the input (request) header in bytes.
             /// </summary>
-            public const int Total = MemberID + PayloadLengthBytes + SliceIndex + SliceCount;
+            public const int Total = MemberId + PayloadLengthBytes + SliceIndex + SliceCount;
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Hast.Catapult.Abstractions
             public const int HardwareExecutionTime = sizeof(long);
 
             /// <summary>
-            /// This is the total length in bytes of the data received without the headers.
+            /// Total length of the received data in bytes without the headers.
             /// </summary>
             public const int PayloadLengthBytes = sizeof(int);
 
@@ -235,11 +235,10 @@ namespace Hast.Catapult.Abstractions
             public const int SliceIndex = sizeof(int);
 
             /// <summary>
-            /// The number of slices the data is transmitted in. If the data has fewer bytes than
-            /// BufferPayloadSize then it's always 1. Otherwise it's PayloadLengthBytes  / BufferPayloadSize
-            /// rounded  up. If there are more input slices than slots on the hardware, then the response will
-            /// behave as  if the input sliceCount was only 1. If higher than the input counterpart, additional
-            /// empty input requests are sent.
+            /// The number of slices the data is transmitted in. If the data has fewer bytes than BufferPayloadSize
+            /// then it's always 1. Otherwise it's PayloadLengthBytes  / BufferPayloadSize rounded  up. If there are
+            /// more input slices than slots on the hardware, then the response will behave as if the input sliceCount
+            /// was only 1. If higher than the input counterpart, additional empty input requests are sent.
             /// </summary>
             public const int SliceCount = sizeof(int);
 
