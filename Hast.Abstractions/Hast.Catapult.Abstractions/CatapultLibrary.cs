@@ -2,12 +2,13 @@
 using IcIWare.NamedIndexers;
 using Orchard.Logging;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using InputHeaderSizes = Hast.Catapult.Abstractions.Constants.InputHeaderSizes;
+using OutputHeaderSizes = Hast.Catapult.Abstractions.Constants.OutputHeaderSizes;
 
 namespace Hast.Catapult.Abstractions
 {
@@ -19,28 +20,6 @@ namespace Hast.Catapult.Abstractions
         private bool _isDisposed = false;
         private IntPtr _handle;
 
-
-        /// <summary>
-        /// The length of the input (request) header in bytes.
-        /// (int memberId, int inputDataLength, int sliceIndex, int sliceCount)
-        /// memberId: The member ID in Hast_IP.
-        /// dataLengthBytes: This is the total length in bytes of the sent data without the headers.
-        /// sliceIndex: Zero-based number of the current data slice. (at least zero and below sliceCount)
-        /// sliceCount: The number of slices the data is transmitted in. If the data has less bytes than BufferPayloadSize,
-        ///             then it's always 1. Otherwise it's inputDataLength / BufferPayloadSize rounded up. If there are more
-        ///             input slices than slots on the hardware, the response will behave as if the input sliceCount was only 1.
-        /// </summary>
-        public const int InputHeaderSize = 4 * sizeof(int);
-
-        /// <summary>
-        /// The length of the output (response) header in bytes.
-        /// (ulong hardwareExecutionTime, int outputDataLength, int sliceIndex, int sliceCount)
-        /// hardwareExecutionTime: The number of clock cycles between Hast_IP's Start and Finished signals.
-        /// dataLengthBytes: This is the total length in bytes of the data received without the headers.
-        /// sliceIndex: See above.
-        /// sliceCount: See above. If higher than the input counterpart, additional empty input requests are sent.
-        /// </summary>
-        public const int OutputHeaderSize = sizeof(ulong) + 3 * sizeof(int);
 
         /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
@@ -91,7 +70,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Gets the amount of space available in for useful data in the input bugger.
         /// </summary>
-        private int BufferPayloadSize => BufferSize - InputHeaderSize;
+        private int BufferPayloadSize => BufferSize - InputHeaderSizes.Total;
 
         /// <summary>
         /// Gets whether the PCIe access is enabled on the device.
@@ -301,10 +280,11 @@ namespace Hast.Catapult.Abstractions
                 }
 
                 if (ignoreResponse) tasks.RemoveRange(1, tasks.Count - 1);
-                
+
                 // Check the response count and if necessary open further empty slots.
-                var sliceCountIndex = sizeof(uint) + 2 * sizeof(int);
-                currentSliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountIndex));
+                var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthBytes;
+                var sliceCountPosition = sliceIndexPosition + OutputHeaderSizes.SliceIndex;
+                currentSliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountPosition));
                 while (tasks.Count < currentSliceCount)
                     tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false));
 
@@ -312,30 +292,32 @@ namespace Hast.Catapult.Abstractions
                 var responses = await Task.WhenAll(tasks);
 
                 // Create output array and fill it with the responses that have a positive slice index.
-                var responseSize = OutputHeaderSize;
+                var responseSize = OutputHeaderSizes.Total;
                 var payloadSizes = new int[responses.Length];
                 for (int i = 0; i < responses.Length; i++)
-                    responseSize += payloadSizes[i] = MemoryMarshal.Read<int>(responses[i].Slice(sizeof(ulong)).Span);
+                    responseSize += payloadSizes[i] = MemoryMarshal.Read<int>(
+                        responses[i].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
                 Memory<byte> result = new byte[responseSize];
-                responses[0].Slice(OutputHeaderSize, payloadSizes[0]).CopyTo(result);
+                responses[0].Slice(OutputHeaderSizes.Total, payloadSizes[0]).CopyTo(result);
                 for (int i = 0; i < responses.Length; i++)
                 {
-                    var index = BufferSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sizeof(uint) + sizeof(int)));
-                    if (index < 0 || index >= result.Length) continue;
+                    var offset = BufferSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
+                    if (offset < 0 || offset >= result.Length) continue;
 
-                    var targetSlice = result.Slice(OutputHeaderSize + index);
-                    responses[i].Slice(OutputHeaderSize, payloadSizes[i]).CopyTo(targetSlice);
+                    var targetSlice = result.Slice(OutputHeaderSizes.Total + offset);
+                    responses[i].Slice(OutputHeaderSizes.Total, payloadSizes[i]).CopyTo(targetSlice);
                 }
 
                 return result;
             }
 
-            Memory<byte> data = new byte[InputHeaderSize + inputData.Length];
+            Memory<byte> data = new byte[InputHeaderSizes.Total + inputData.Length];
             MemoryMarshal.Write(data.Span, ref memberId);
-            MemoryMarshal.Write(data.Span.Slice(1 * sizeof(int)), ref totalDataSize);
-            MemoryMarshal.Write(data.Span.Slice(2 * sizeof(int)), ref sliceIndex);
-            MemoryMarshal.Write(data.Span.Slice(3 * sizeof(int)), ref sliceCountValue);
-            inputData.CopyTo(data.Slice(InputHeaderSize));
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberID), ref totalDataSize);
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberID + InputHeaderSizes.PayloadLengthBytes), ref sliceIndex);
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberID + InputHeaderSizes.PayloadLengthBytes
+                + InputHeaderSizes.SliceIndex), ref sliceCountValue);
+            inputData.CopyTo(data.Slice(InputHeaderSizes.Total));
 
             // This job will contain the current call.
             Task<Memory<byte>> job = null;

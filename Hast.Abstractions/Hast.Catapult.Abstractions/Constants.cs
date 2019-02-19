@@ -178,5 +178,76 @@ namespace Hast.Catapult.Abstractions
             public const uint Interleaved = 800;
         }
         #endregion
+
+        #region Header sizes
+        /// <summary>
+        /// Sizes of the input headers in bytes.
+        /// </summary>
+        public static class InputHeaderSizes
+        {
+            /// <summary>
+            /// The member ID in Hast_IP.
+            /// </summary>
+            public const int MemberID = sizeof(int);
+
+            /// <summary>
+            /// This is the total length in bytes of the sent data without the headers.
+            /// </summary>
+            public const int PayloadLengthBytes = sizeof(int);
+
+            /// <summary>
+            /// Zero-based index of the current data slice (at least zero and less than sliceCount).
+            /// </summary>
+            public const int SliceIndex = sizeof(int);
+
+            /// <summary>
+            /// The number of slices the data is transmitted in. If the data has fewer bytes than BufferPayloadSize
+            /// then it's always 1. Otherwise it's PayloadLengthBytes  / BufferPayloadSize rounded  up. If there
+            /// are more input slices than slots on the hardware, then the response will behave as  if the input
+            /// sliceCount was only 1.
+            /// </summary>
+            public const int SliceCount = sizeof(int);
+
+            /// <summary>
+            /// The length of the input (request) header in bytes.
+            /// </summary>
+            public const int Total = MemberID + PayloadLengthBytes + SliceIndex + SliceCount;
+        }
+
+        /// <summary>
+        /// Sizes of the output headers in bytes.
+        /// </summary>
+        public static class OutputHeaderSizes
+        {
+            /// <summary>
+            /// The number of clock cycles between Hast_IP's Start and Finished signals.
+            /// </summary>
+            public const int HardwareExecutionTime = sizeof(long);
+
+            /// <summary>
+            /// This is the total length in bytes of the data received without the headers.
+            /// </summary>
+            public const int PayloadLengthBytes = sizeof(int);
+
+            /// <summary>
+            /// Zero-based index of the current data slice (at least zero and less than sliceCount).
+            /// </summary>
+            public const int SliceIndex = sizeof(int);
+
+            /// <summary>
+            /// The number of slices the data is transmitted in. If the data has fewer bytes than
+            /// BufferPayloadSize then it's always 1. Otherwise it's PayloadLengthBytes  / BufferPayloadSize
+            /// rounded  up. If there are more input slices than slots on the hardware, then the response will
+            /// behave as  if the input sliceCount was only 1. If higher than the input counterpart, additional
+            /// empty input requests are sent.
+            /// </summary>
+            public const int SliceCount = sizeof(int);
+
+            /// <summary>
+            /// The length of the output (response) header in bytes.
+            /// </summary>
+            public const int Total = HardwareExecutionTime + PayloadLengthBytes + SliceIndex + SliceCount;
+        }
+        #endregion
     }
 }

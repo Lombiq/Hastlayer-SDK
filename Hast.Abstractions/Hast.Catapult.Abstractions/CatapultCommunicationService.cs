@@ -79,7 +79,7 @@ namespace Hast.Catapult.Abstractions
                 var outputByteCount = outputBuffer.Length; //MemoryMarshal.Read<uint>(outputBuffer.Slice(sizeof(ulong)).Span);
                 //outputBuffer = outputBuffer.Slice(0, sizeof(ulong) + sizeof(uint) + (int)outputByteCount);
 
-                dma.Set(outputBuffer, CatapultLibrary.OutputHeaderSize / SimpleMemory.MemoryCellSizeBytes);
+                dma.Set(outputBuffer, Constants.OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
                 Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
                 EndExecution(context);
