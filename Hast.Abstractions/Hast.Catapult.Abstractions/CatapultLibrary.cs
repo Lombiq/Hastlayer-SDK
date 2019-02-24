@@ -259,7 +259,8 @@ namespace Hast.Catapult.Abstractions
         /// <param name="memberId">Identifies the program on the hardware.</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) => AssignJob(memberId, inputData, 0, 1, -1, false);
+        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) =>
+            AssignJob(memberId, inputData, 0, 1, -1, false);
 
         private async Task<Memory<byte>> AssignJob(
             int memberId,
@@ -267,7 +268,8 @@ namespace Hast.Catapult.Abstractions
             int sliceIndex,
             int sliceCountValue,
             int totalDataSize,
-            bool ignoreResponse)
+            bool ignoreResponse,
+            int skipSlot = -1)
         {
             int currentSliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
             if (totalDataSize < 0) totalDataSize = inputData.Length;
@@ -282,7 +284,14 @@ namespace Hast.Catapult.Abstractions
                 {
                     var slice = i < currentSliceCount - 1 ? inputData.Slice(i * BufferPayloadSize, BufferPayloadSize) :
                         inputData.Slice(tasks.Count * BufferPayloadSize);
-                    tasks.Add(AssignJob(memberId, slice, i, currentSliceCount, totalDataSize, i > 0 && ignoreResponse));
+                    tasks.Add(AssignJob(
+                        memberId,
+                        slice,
+                        i,
+                        currentSliceCount,
+                        totalDataSize,
+                        i > 0 && ignoreResponse,
+                        ignoreResponse ? 0 : -1));
                 }
 
                 if (ignoreResponse) tasks.RemoveRange(1, tasks.Count - 1);
@@ -332,6 +341,8 @@ namespace Hast.Catapult.Abstractions
             {
                 // Go round-robin,
                 _currentSlot = (_currentSlot + 1) % BufferCount;
+                // Prevent hitting the skip slot (ie slot 1) which is expected to be busy for a long time.
+                if (_currentSlot == skipSlot) _currentSlot = (_currentSlot + 2) % BufferCount;
 
                 // but try to find the first free slot.
                 if (!_slotDispatch[_currentSlot].IsCompleted)
