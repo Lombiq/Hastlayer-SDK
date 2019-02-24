@@ -25,8 +25,17 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <returns></returns>
         public Memory<byte> Get(int prefixCells)
         {
-            if (prefixCells > _simpleMemory.PrefixCellCount || prefixCells < 0)
-                throw new ArgumentOutOfRangeException($"You can use 0-{_simpleMemory.PrefixCellCount} cells for prefix!");
+            if (prefixCells < 0)
+                throw new ArgumentOutOfRangeException($"{nameof(prefixCells)} must be positive!");
+            if (prefixCells > _simpleMemory.PrefixCellCount)
+            {
+                int missingBytes = prefixCells - _simpleMemory.PrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
+                Memory<byte> newMemory = new byte[_simpleMemory.PrefixedMemory.Length + missingBytes];
+                _simpleMemory.PrefixedMemory.CopyTo(newMemory.Slice(missingBytes));
+
+                _simpleMemory.PrefixCellCount = prefixCells;
+                return _simpleMemory.PrefixedMemory = newMemory;
+            }
 
             return _simpleMemory.PrefixedMemory.Slice((_simpleMemory.PrefixCellCount - prefixCells) * SimpleMemory.MemoryCellSizeBytes);
         }
@@ -54,22 +63,20 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// 0.
         /// </summary>
         /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
-        /// <param name="prefixCells">The amount of cells used for prefix/header.</param>
         /// <returns>The <see cref="SimpleMemory"/> containing the data.</returns>
         /// <remarks>If data is a byte[] you can use the <see cref="SimpleMemory"/> constructor instead.</remarks>
-        public static SimpleMemory Create(Memory<byte> data, int prefixCells = 0) => new SimpleMemory(data, prefixCells);
+        public static SimpleMemory Create(Memory<byte> data) => new SimpleMemory(data, 0);
 
         /// <summary>
         /// Creates a new <see cref="SimpleMemory"/> instance from the specified data and its
         /// <see cref="SimpleMemoryAccessor"/> at the same time.
         /// </summary>
         /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
-        /// <param name="prefixCells">The amount of cells used for prefix/header.</param>
         /// <param name="accessor">The accessor of the return value.</param>
         /// <returns>The <see cref="SimpleMemory"/> containing the data.</returns>
-        public static SimpleMemory Create(Memory<byte> data, int prefixCells, out SimpleMemoryAccessor accessor)
+        public static SimpleMemory Create(Memory<byte> data, out SimpleMemoryAccessor accessor)
         {
-            var memory = new SimpleMemory(data, prefixCells);
+            var memory = new SimpleMemory(data, 0);
             accessor = new SimpleMemoryAccessor(memory);
             return memory;
         }
