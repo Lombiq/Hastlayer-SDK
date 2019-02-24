@@ -121,6 +121,7 @@ namespace Hast.Communication.Services
             public override void Dispose()
             {
                 _disposer(this);
+                base.Dispose();
             }
         }
     }
