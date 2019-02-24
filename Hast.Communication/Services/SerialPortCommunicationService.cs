@@ -116,11 +116,12 @@ namespace Hast.Communication.Services
                     // of 4 bytes. This seems to have no negative impact on performance compared to using
                     // serialPort.Write() once.
                     var maxBytesToSendAtOnce = 4;
+                    var memoryAsArraySegment = memory.GetUnderlyingArray();
                     for (int i = 0; i < (int)Math.Ceiling(memory.Length / (decimal)maxBytesToSendAtOnce); i++)
                     {
                         var remainingBytes = memory.Length - i * maxBytesToSendAtOnce;
                         var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
-                        serialPort.Write(memory.GetUnderlyingArray().Array, i * maxBytesToSendAtOnce, bytesToSend);
+                        serialPort.Write(memoryAsArraySegment.Array, i * maxBytesToSendAtOnce, bytesToSend);
                     }
 
 
