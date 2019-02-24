@@ -58,7 +58,7 @@ namespace Hast.Catapult.Abstractions
                 
                 return libraries
                     .Where(x => x != null)
-                    .Select(x => new Device(x.ToString(), x, Device_Disposing));
+                    .Select(x => new Device(x.InstanceName, x, Device_Disposing));
             });
 
             using (var device = await _devicePoolManager.ReserveDevice())

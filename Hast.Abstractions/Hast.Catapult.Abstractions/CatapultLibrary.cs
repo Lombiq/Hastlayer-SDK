@@ -22,6 +22,12 @@ namespace Hast.Catapult.Abstractions
 
 
         /// <summary>
+        /// Returns the name of the instance (Catapult:N where N is the PCIe endpoint number).
+        /// </summary>
+        public string InstanceName => $"{Constants.ChannelName}:{PcieEndpointNumber}";
+
+
+        /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
         /// </summary>
         private readonly Task[] _slotDispatch;
@@ -432,10 +438,6 @@ namespace Hast.Catapult.Abstractions
             return resultMemory;
         }
 
-        /// <summary>
-        /// Returns the name of the instance (Catapult:N where N is the PCIe endpoint number).
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString() => $"{Constants.ChannelName}:{PcieEndpointNumber}";
+        public override string ToString() => InstanceName;
     }
 }
