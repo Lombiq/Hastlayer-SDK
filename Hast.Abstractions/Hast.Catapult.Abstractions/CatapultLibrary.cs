@@ -386,7 +386,7 @@ namespace Hast.Catapult.Abstractions
                     _handle, slot, out isInputBufferFull));
                 // While unlikely, it's possible that the device has provided a result (so the previous Task is
                 // completed), but the input buffer hasn't cleared yet. In this case we should wait for it.
-                while (isInputBufferFull) await Task.Delay(1);
+                if (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
 
