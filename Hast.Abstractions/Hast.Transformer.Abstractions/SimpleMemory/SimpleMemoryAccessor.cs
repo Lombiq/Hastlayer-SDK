@@ -21,39 +21,39 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <summary>
         /// Gets the memory contents with additional prefix.
         /// </summary>
-        /// <param name="prefixCells">The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.</param>
+        /// <param name="prefixCellCount">The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.</param>
         /// <returns></returns>
-        public Memory<byte> Get(int prefixCells)
+        public Memory<byte> Get(int prefixCellCount)
         {
-            if (prefixCells < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(prefixCells)} must be positive!");
-            if (prefixCells > _simpleMemory.PrefixCellCount)
+            if (prefixCellCount < 0)
+                throw new ArgumentOutOfRangeException($"{nameof(prefixCellCount)} must be positive!");
+            if (prefixCellCount > _simpleMemory.PrefixCellCount)
             {
-                int missingBytes = prefixCells - _simpleMemory.PrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
+                int missingBytes = prefixCellCount - _simpleMemory.PrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
                 Memory<byte> newMemory = new byte[_simpleMemory.PrefixedMemory.Length + missingBytes];
                 _simpleMemory.PrefixedMemory.CopyTo(newMemory.Slice(missingBytes));
 
-                _simpleMemory.PrefixCellCount = prefixCells;
+                _simpleMemory.PrefixCellCount = prefixCellCount;
                 return _simpleMemory.PrefixedMemory = newMemory;
             }
 
-            return _simpleMemory.PrefixedMemory.Slice((_simpleMemory.PrefixCellCount - prefixCells) * SimpleMemory.MemoryCellSizeBytes);
+            return _simpleMemory.PrefixedMemory.Slice((_simpleMemory.PrefixCellCount - prefixCellCount) * SimpleMemory.MemoryCellSizeBytes);
         }
 
         /// <summary>
-        /// Sets the internal value of the SimpleMemory with the first prefixCells amount of cells hidden.
+        /// Sets the internal value of the SimpleMemory with the first prefixCellCount amount of cells hidden.
         /// </summary>
         /// <param name="data">The new data.</param>
-        /// <param name="prefixCells">The amount of cells to be shifted out.</param>
+        /// <param name="prefixCellCount">The amount of cells to be shifted out.</param>
         /// <remarks>
-        /// Using prefixCells allows you to set the communication headers during Get without an extra copy,  but you must
-        /// use at least as many prefixCells for Set as for Get in continuous usage, otherwise ArgumentOutOfRangeException
-        /// will be thrown eventually.
+        /// Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you
+        /// must use at least as many prefixCellCount for Set as for Get if the <see cref="SimpleMemory"/> is reused,
+        /// otherwise the memory has to be copied and that incurs a performance hit.
         /// </remarks>
-        public void Set(Memory<byte> data, int prefixCells = 0)
+        public void Set(Memory<byte> data, int prefixCellCount = 0)
         {
             _simpleMemory.PrefixedMemory = data;
-            if (prefixCells < _simpleMemory.PrefixCellCount) _simpleMemory.PrefixCellCount = prefixCells;
+            if (prefixCellCount < _simpleMemory.PrefixCellCount) _simpleMemory.PrefixCellCount = prefixCellCount;
         }
 
         /// <summary>
