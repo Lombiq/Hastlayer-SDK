@@ -118,8 +118,7 @@ namespace Hast.Communication.Services
                 _disposer = disposer;
             }
 
-
-            public void Dispose()
+            public override void Dispose()
             {
                 _disposer(this);
             }

@@ -30,7 +30,7 @@ namespace Hast.Communication.Models
             Disposing += (sender, arguments) => previousDevice.Dispose();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             if (!_isDisposed) Disposing?.Invoke(this, new EventArgs());
             _isDisposed = true;
