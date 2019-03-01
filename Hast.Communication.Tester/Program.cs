@@ -10,6 +10,42 @@ namespace Hast.Communication.Tester
 {
     class Program
     {
+        public enum PayloadType
+        {
+            /// <summary>
+            /// Each cell contains an int value of 1 (00000001h)
+            /// </summary>
+            ConstantIntOne,
+
+            /// <summary>
+            /// Each cell had 1 larger value than the previous one, overflow is permitted.
+            /// </summary>
+            Counter,
+
+            /// <summary>
+            /// Each cell gets a random value.
+            /// </summary>
+            Random
+        }
+
+        public enum OutputFileType
+        {
+            /// <summary>
+            /// No output file is to be generated.
+            /// </summary>
+            None,
+
+            /// <summary>
+            /// The output is saved as a text file containing a sequence of hexadecimal numbers in 8 digit groups.
+            /// </summary>
+            Hexdump,
+
+            /// <summary>
+            /// The output is saved as raw binary file.
+            /// </summary>
+            Binary
+        }
+
         public class Options
         {
             [Option('v', "verbose", HelpText = "Set output to verbose messages.")]
@@ -32,6 +68,15 @@ namespace Hast.Communication.Tester
 
             [Option('i', "member-id", HelpText = "The simlated MemberId.")]
             public int MemberId { get; set; } = 1;
+
+            [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random)")]
+            public PayloadType PayloadType { get; set; } = PayloadType.ConstantIntOne;
+
+            [Option('f', "file-type", HelpText = "Output file type (None, Hexdump, Binary)")]
+            public OutputFileType OutputFileType { get; set; } = OutputFileType.None;
+
+            [Option('o', "output", HelpText = "Output file name. (overrides -f to Hexdump if it's None)")]
+            public string OutputFileName { get; set; }
         }
 
         private static async Task MainTask(Options configuration)
