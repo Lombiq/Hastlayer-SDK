@@ -92,6 +92,10 @@ namespace Hast.Communication.Tester
                     return;
                 }
 
+                if (string.IsNullOrEmpty(configuration.DeviceName)) configuration.DeviceName = devices.First().Name;
+                var selectedDevice = devices.FirstOrDefault(device => device.Name == configuration.DeviceName);
+                if (selectedDevice == null) throw new Exception($"Target device '{configuration.DeviceName}' not found!");
+
                 hastlayer.ExecutedOnHardware += (sender, e) =>
                 {
                     Console.WriteLine(
@@ -104,6 +108,8 @@ namespace Hast.Communication.Tester
                         " milliseconds (all together)");
                 };
 
+
+                Console.WriteLine("Starting hardware execution.");
 
             }
         }
