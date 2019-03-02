@@ -118,11 +118,12 @@ namespace Hast.Communication.Tester
                 };
 
                 Console.WriteLine("Generating blank hardware.");
-                hastlayer.GenerateHardware(new Assembly[0], new HardwareGenerationConfiguration(selectedDevice.Name))
+                var hardware = await hastlayer.GenerateHardware(new Assembly[0],
+                    new HardwareGenerationConfiguration(selectedDevice.Name));
 
                 Console.WriteLine("Generating memory.");
 
-                var memory = new SimpleMemory((int)configuration.PayloadLengthCells);
+                var memory = new SimpleMemory(configuration.PayloadLengthCells);
                 switch(configuration.PayloadType)
                 {
                     case PayloadType.ConstantIntOne:
