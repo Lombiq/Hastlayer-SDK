@@ -58,6 +58,10 @@
       <Project>{1059805b-3221-4788-bdf3-11120fa4bf1a}</Project>
       <Name>Hast.Catapult.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
+      <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
+      <Name>Hast.Transformer.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Algorithms\Hast.Algorithms.csproj">
       <Project>{0dc6fd30-4c53-4805-996b-e34a98efebaa}</Project>
       <Name>Hast.Algorithms</Name>

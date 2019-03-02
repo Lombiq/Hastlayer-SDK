@@ -1,8 +1,10 @@
 ﻿using CommandLine;
 using Hast.Layer;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,8 +50,8 @@ namespace Hast.Communication.Tester
 
         public class Options
         {
-            [Option('v', "verbose", HelpText = "Set output to verbose messages.")]
-            public bool Verbose { get; set; }
+            //[Option('v', "verbose", HelpText = "Set output to verbose messages.")]
+            //public bool Verbose { get; set; }
 
             [Option('l', "list", HelpText = "List available devices and exit.")]
             public bool ListDevices { get; set; }
@@ -61,10 +63,17 @@ namespace Hast.Communication.Tester
             public long PayloadBytes { get; set; } = 10;
 
             [Option('k', "kilo-bytes", HelpText = "The total size of the payload in kilobytes.")]
-            public long PayloadKiloBytes { get => PayloadBytes / 1024; set => PayloadBytes = value * 1024; }
+            public int PayloadKiloBytes { get => (int)(PayloadBytes / 1024); set => PayloadBytes = (long)value * 1024; }
 
             [Option('m', "mega-bytes", HelpText = "The total size of the payload in megabytes.")]
-            public long PayloadMegaBytes { get => PayloadBytes / 1024 / 1024; set => PayloadBytes = value * 1024 * 1024; }
+            public int PayloadLengthMegaBytes { get => (int)(PayloadBytes / 1024 / 1024); set => PayloadBytes = (long)value * 1024 * 1024; }
+
+            [Option('c', "cells", HelpText = "The total size of the payload in number of cells.")]
+            public int PayloadLengthCells
+            {
+                get => (int)(PayloadBytes / SimpleMemory.MemoryCellSizeBytes);
+                set => PayloadBytes = (long)value * SimpleMemory.MemoryCellSizeBytes;
+            }
 
             [Option('i', "member-id", HelpText = "The simlated MemberId.")]
             public int MemberId { get; set; } = 1;
@@ -108,9 +117,28 @@ namespace Hast.Communication.Tester
                         " milliseconds (all together)");
                 };
 
+                Console.WriteLine("Generating blank hardware.");
+                hastlayer.GenerateHardware(new Assembly[0], new HardwareGenerationConfiguration(selectedDevice.Name))
+
+                Console.WriteLine("Generating memory.");
+
+                var memory = new SimpleMemory((int)configuration.PayloadLengthCells);
+                switch(configuration.PayloadType)
+                {
+                    case PayloadType.ConstantIntOne:
+                        for (int i = 0; i < memory.CellCount; i++) memory.WriteInt32(i, 1);
+                        break;
+                    case PayloadType.Counter:
+                        for (int i = 0; i < memory.CellCount; i++) memory.WriteInt32(i, i);
+                        break;
+                    case PayloadType.Random:
+                        var random = new Random();
+                        for (int i = 0; i < memory.CellCount; i++)
+                            memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
+                        break;
+                }
 
                 Console.WriteLine("Starting hardware execution.");
-
             }
         }
 
