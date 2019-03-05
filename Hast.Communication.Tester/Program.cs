@@ -104,22 +104,7 @@ namespace Hast.Communication.Tester
                 if (string.IsNullOrEmpty(configuration.DeviceName)) configuration.DeviceName = devices.First().Name;
                 var selectedDevice = devices.FirstOrDefault(device => device.Name == configuration.DeviceName);
                 if (selectedDevice == null) throw new Exception($"Target device '{configuration.DeviceName}' not found!");
-
-                hastlayer.ExecutedOnHardware += (sender, e) =>
-                {
-                    Console.WriteLine(
-                        "Executing " +
-                        e.MemberFullName +
-                        " on hardware took " +
-                        e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                        " milliseconds (net) " +
-                        e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                        " milliseconds (all together)");
-                };
-
-                Console.WriteLine("Generating blank hardware.");
-                var hardware = await hastlayer.GenerateHardware(new Assembly[0],
-                    new HardwareGenerationConfiguration(selectedDevice.Name));
+                var channelName = selectedDevice.DefaultCommunicationChannelName;
 
                 Console.WriteLine("Generating memory.");
 
@@ -140,6 +125,14 @@ namespace Hast.Communication.Tester
                 }
 
                 Console.WriteLine("Starting hardware execution.");
+
+                var communicationService = await hastlayer.GetCommunicationService(channelName);
+                var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
+                    selectedDevice.DefaultCommunicationChannelName);
+                var info = await communicationService.Execute(memory, configuration.MemberId, executionContext);
+
+                Console.WriteLine("Executing test on hardware took {0}ms (net) {1}ms (all together)",
+                    info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
             }
         }
 
