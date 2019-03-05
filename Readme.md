@@ -19,7 +19,7 @@ Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard
 
 ## Notes on Hastlayer's documentation
 
-These text files should only serve as a starting point. On how to use Hastlayer the samples are the best source. The public API of Hastlayer is also documented inline as code comments, so make sure to check those out too if something's not clear. The projects also have further Readme files.
+These text files serve as a starting point. The examples are the best source of how to use Hastlayer. Hastlayer's public API is also documented inline as code comments, so if there's anything unclear, check it out. There are further readme documents for these items.
 
 
 ## Table of contents
