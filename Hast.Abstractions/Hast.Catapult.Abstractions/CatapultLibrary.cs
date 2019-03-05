@@ -1,4 +1,5 @@
 ﻿using AdvancedDLSupport;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using IcIWare.NamedIndexers;
 using Orchard.Logging;
 using System;
@@ -297,9 +298,10 @@ namespace Hast.Catapult.Abstractions
                 if (ignoreResponse) tasks.RemoveRange(1, tasks.Count - 1);
 
                 // Check the response count and if necessary open further empty slots.
-                var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthBytes;
-                var sliceCountPosition = sliceIndexPosition + OutputHeaderSizes.SliceIndex;
-                currentSliceCount = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(sliceCountPosition));
+                var payloadLengthCellsPosition = OutputHeaderSizes.HardwareExecutionTime;
+                var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
+                var payloadLength = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(payloadLengthCellsPosition));
+                currentSliceCount = (int)Math.Ceiling((double)payloadLength / BufferPayloadSize);
                 while (tasks.Count < currentSliceCount)
                     tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false));
 
@@ -307,20 +309,20 @@ namespace Hast.Catapult.Abstractions
                 var responses = await Task.WhenAll(tasks);
 
                 // Create output array and fill it with the responses that have a positive slice index.
-                var responseSize = OutputHeaderSizes.Total;
-                var payloadSizes = new int[responses.Length];
+                var responseSizeCell = OutputHeaderSizes.Total;
+                var payloadSizesCell = new int[responses.Length];
                 for (int i = 0; i < responses.Length; i++)
-                    responseSize += payloadSizes[i] = MemoryMarshal.Read<int>(
+                    responseSizeCell += payloadSizesCell[i] = MemoryMarshal.Read<int>(
                         responses[i].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
-                Memory<byte> result = new byte[responseSize];
-                responses[0].Slice(OutputHeaderSizes.Total, payloadSizes[0]).CopyTo(result);
+                Memory<byte> result = new byte[responseSizeCell * SimpleMemory.MemoryCellSizeBytes];
+                responses[0].Slice(OutputHeaderSizes.Total, payloadSizesCell[0]).CopyTo(result);
                 for (int i = 0; i < responses.Length; i++)
                 {
                     var offset = BufferSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
                     if (offset < 0 || offset >= result.Length) continue;
 
                     var targetSlice = result.Slice(OutputHeaderSizes.Total + offset);
-                    responses[i].Slice(OutputHeaderSizes.Total, payloadSizes[i]).CopyTo(targetSlice);
+                    responses[i].Slice(OutputHeaderSizes.Total, payloadSizesCell[i]).CopyTo(targetSlice);
                 }
 
                 return result;
@@ -329,8 +331,8 @@ namespace Hast.Catapult.Abstractions
             Memory<byte> data = new byte[InputHeaderSizes.Total + inputData.Length];
             MemoryMarshal.Write(data.Span, ref memberId);
             MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId), ref totalDataSize);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthBytes), ref sliceIndex);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthBytes
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells), ref sliceIndex);
+            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
                 + InputHeaderSizes.SliceIndex), ref sliceCountValue);
             inputData.CopyTo(data.Slice(InputHeaderSizes.Total));
 
