@@ -3,6 +3,7 @@ using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -84,9 +85,17 @@ namespace Hast.Communication.Tester
             [Option('f', "file-type", HelpText = "Output file type (None, Hexdump, Binary)")]
             public OutputFileType OutputFileType { get; set; } = OutputFileType.None;
 
-            [Option('o', "output", HelpText = "Output file name. (overrides -f to Hexdump if it's None)")]
+            [Option('o', "output", HelpText = "Output file name. (overrides -f to Hexdump if it's None; use value '-' to write Hexdump to the console)")]
             public string OutputFileName { get; set; }
+
+            [Option('j', "json", HelpText = "Create a summary as JSON file.")]
+            public string JsonOutputFileName { get; set; }
         }
+
+        public const string DefaultHexdumpFileName = "dump.txt";
+        public const string DefaultBinaryFileName = "dump.bin";
+
+        public const int HexDumpDigits = SimpleMemory.MemoryCellSizeBytes * 2;
 
         private static async Task MainTask(Options configuration)
         {
@@ -109,7 +118,7 @@ namespace Hast.Communication.Tester
                 Console.WriteLine("Generating memory.");
 
                 var memory = new SimpleMemory(configuration.PayloadLengthCells);
-                switch(configuration.PayloadType)
+                switch (configuration.PayloadType)
                 {
                     case PayloadType.ConstantIntOne:
                         for (int i = 0; i < memory.CellCount; i++) memory.WriteInt32(i, 1);
@@ -133,7 +142,44 @@ namespace Hast.Communication.Tester
 
                 Console.WriteLine("Executing test on hardware took {0}ms (net) {1}ms (all together)",
                     info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
+
+
+                var memoryData = new SimpleMemoryAccessor(memory).Get();
+
+
+                if (configuration.OutputFileType == OutputFileType.None && !string.IsNullOrEmpty(configuration.OutputFileName))
+                    configuration.OutputFileType = OutputFileType.Hexdump;
+                switch (configuration.OutputFileType)
+                {
+                    case OutputFileType.None: break;
+                    case OutputFileType.Hexdump:
+                        if (string.IsNullOrEmpty(configuration.OutputFileName))
+                            configuration.OutputFileName = DefaultHexdumpFileName;
+                        Console.WriteLine("Saving hexdump to '{0}'", configuration.OutputFileName);
+                        if (configuration.OutputFileName == "-")
+                            WriteHexdump(Console.Out, memory);
+                        else
+                            using (var streamWriter = new StreamWriter(configuration.OutputFileName, false, Encoding.UTF8))
+                                WriteHexdump(streamWriter, memory);
+                        Console.WriteLine("File saved.");
+                        break;
+                    case OutputFileType.Binary:
+                        if (string.IsNullOrEmpty(configuration.OutputFileName))
+                            configuration.OutputFileName = DefaultBinaryFileName;
+                        Console.WriteLine("Saving binary file to '{0}'", configuration.OutputFileName);
+                        using (var fileStream = File.OpenWrite(configuration.OutputFileName))
+                            fileStream.Write(memoryData.GetUnderlyingArray().Array, 0, memory.ByteCount);
+                        Console.WriteLine("File saved.");
+                        break;
+                }
             }
+        }
+
+        public static void WriteHexdump(TextWriter writer, SimpleMemory memory)
+        {
+            for (int i = 0; i < memory.CellCount; i += HexDumpDigits)
+                writer.WriteLine(string.Join(" ", memory.ReadUInt32(i, HexDumpDigits)
+                    .Select(x => x.ToString("X").PadLeft(HexDumpDigits, '0'))));
         }
 
         private static void Main(string[] args)
