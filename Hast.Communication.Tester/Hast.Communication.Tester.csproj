@@ -46,6 +46,9 @@
     <Reference Include="Mono.DllMap, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Orchard\src\packages\Mono.DllMap.1.0.1\lib\netstandard2.0\Mono.DllMap.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\Orchard\src\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="StrictEmit, Version=2.4.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\Orchard\src\packages\StrictEmit.2.4.2\lib\net45\StrictEmit.dll</HintPath>
     </Reference>

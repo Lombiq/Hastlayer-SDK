@@ -2,6 +2,7 @@
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -52,9 +53,6 @@ namespace Hast.Communication.Tester
 
         public class Options
         {
-            //[Option('v', "verbose", HelpText = "Set output to verbose messages.")]
-            //public bool Verbose { get; set; }
-
             [Option('l', "list", HelpText = "List available devices and exit.")]
             public bool ListDevices { get; set; }
 
@@ -73,7 +71,7 @@ namespace Hast.Communication.Tester
             [Option('c', "cells", HelpText = "The total size of the payload in number of cells.")]
             public int PayloadLengthCells
             {
-                get => (int)(PayloadBytes / SimpleMemory.MemoryCellSizeBytes);
+                get => (int)Math.Ceiling((double)PayloadBytes / SimpleMemory.MemoryCellSizeBytes);
                 set => PayloadBytes = (long)value * SimpleMemory.MemoryCellSizeBytes;
             }
 
@@ -136,7 +134,6 @@ namespace Hast.Communication.Tester
                             memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
                         break;
                 }
-                var input = accessor.Get();
 
                 // Create reference copy of input to compare against output.
                 var referenceMemory = new SimpleMemory(memory.CellCount);
@@ -160,9 +157,10 @@ namespace Hast.Communication.Tester
                             i, memory.Read4Bytes(i), referenceMemory.Read4Bytes(i)));
                 if (mismatches.Any()) throw new HardwareExecutionResultMismatchException(mismatches);
 
+                // TODO output verification result and print out each of the output headers for Catapult
+
                 var output = accessor.Get();
-
-
+                // TODO save input to file as well
                 if (configuration.OutputFileType == OutputFileType.None && !string.IsNullOrEmpty(configuration.OutputFileName))
                     configuration.OutputFileType = OutputFileType.Hexdump;
                 switch (configuration.OutputFileType)
@@ -188,6 +186,7 @@ namespace Hast.Communication.Tester
                         Console.WriteLine("File saved.");
                         break;
                 }
+
             }
         }
 
@@ -200,15 +199,18 @@ namespace Hast.Communication.Tester
 
         private static void Main(string[] args)
         {
+            Options configuration = null;
             try
             {
-                Options configuration = null;
                 Parser.Default.ParseArguments<Options>(args).WithParsed(o => { configuration = o; });
                 if (configuration != null) MainTask(configuration).Wait();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
+                if (!string.IsNullOrWhiteSpace(configuration?.JsonOutputFileName))
+                    File.WriteAllText(configuration.JsonOutputFileName, JsonConvert.SerializeObject(
+                        new { Success = false, Exception = ex, }));
             }
 
             Console.ReadKey();
