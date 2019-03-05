@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
@@ -115,9 +116,12 @@ namespace Hast.Communication.Tester
                 if (selectedDevice == null) throw new Exception($"Target device '{configuration.DeviceName}' not found!");
                 var channelName = selectedDevice.DefaultCommunicationChannelName;
 
+
+
                 Console.WriteLine("Generating memory.");
 
                 var memory = new SimpleMemory(configuration.PayloadLengthCells);
+                var accessor = new SimpleMemoryAccessor(memory);
                 switch (configuration.PayloadType)
                 {
                     case PayloadType.ConstantIntOne:
@@ -132,9 +136,14 @@ namespace Hast.Communication.Tester
                             memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
                         break;
                 }
+                var input = accessor.Get();
+
+                // Create reference copy of input to compare against output.
+                var referenceMemory = new SimpleMemory(memory.CellCount);
+                var memoryBytes = new SimpleMemoryAccessor(memory).Get();
+                memoryBytes.CopyTo(new SimpleMemoryAccessor(referenceMemory).Get());
 
                 Console.WriteLine("Starting hardware execution.");
-
                 var communicationService = await hastlayer.GetCommunicationService(channelName);
                 var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
                     selectedDevice.DefaultCommunicationChannelName);
@@ -143,8 +152,15 @@ namespace Hast.Communication.Tester
                 Console.WriteLine("Executing test on hardware took {0}ms (net) {1}ms (all together)",
                     info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
+                // Verify results!
+                var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
+                for (int i = 0; i < memory.CellCount; i++)
+                    if (!memory.Read4Bytes(i).SequenceEqual(referenceMemory.Read4Bytes(i)))
+                        mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                            i, memory.Read4Bytes(i), referenceMemory.Read4Bytes(i)));
+                if (mismatches.Any()) throw new HardwareExecutionResultMismatchException(mismatches);
 
-                var memoryData = new SimpleMemoryAccessor(memory).Get();
+                var output = accessor.Get();
 
 
                 if (configuration.OutputFileType == OutputFileType.None && !string.IsNullOrEmpty(configuration.OutputFileName))
@@ -168,7 +184,7 @@ namespace Hast.Communication.Tester
                             configuration.OutputFileName = DefaultBinaryFileName;
                         Console.WriteLine("Saving binary file to '{0}'", configuration.OutputFileName);
                         using (var fileStream = File.OpenWrite(configuration.OutputFileName))
-                            fileStream.Write(memoryData.GetUnderlyingArray().Array, 0, memory.ByteCount);
+                            fileStream.Write(output.GetUnderlyingArray().Array, 0, memory.ByteCount);
                         Console.WriteLine("File saved.");
                         break;
                 }
