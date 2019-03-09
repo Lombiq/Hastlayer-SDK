@@ -82,6 +82,9 @@
   <ItemGroup>
     <Compile Include="BasicExecutionContext.cs" />
     <Compile Include="FakeEntryPoint.cs" />
+    <Compile Include="Options.cs" />
+    <Compile Include="OutputFileType.cs" />
+    <Compile Include="PayloadType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
