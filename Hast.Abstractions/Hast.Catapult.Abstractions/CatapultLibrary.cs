@@ -101,6 +101,8 @@ namespace Hast.Catapult.Abstractions
             }
         }
 
+        public System.IO.TextWriter TesterOutput { get; set; }
+
         /// <summary>
         /// Gets or sets the value of the Soft Register. Indexed by memory address.
         /// </summary>
@@ -339,6 +341,7 @@ namespace Hast.Catapult.Abstractions
             // This job will contain the current call.
             Task<Memory<byte>> job = null;
 
+            int currentSlot;
             lock (_slotDispatch)
             {
                 // Go round-robin,
@@ -355,12 +358,18 @@ namespace Hast.Catapult.Abstractions
                             _currentSlot = slot;
                     }
 
+                currentSlot = _currentSlot;
                 _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
                     .ContinueWith(_ => RunJob(_currentSlot, data, ignoreResponse).Result);
             }
 
-            return await job;
-
+            var jobResult = await job;
+            TesterOutput?.WriteLine("Job Finished\n************\nSlot: {0}\nTime: {1}\nPayload: {2} cells\nSlice: {3}\n",
+                currentSlot,
+                MemoryMarshal.Read<long>(jobResult.Span),
+                MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime).Span),
+                MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells).Span));
+            return jobResult;
         }
 
         /// <summary>

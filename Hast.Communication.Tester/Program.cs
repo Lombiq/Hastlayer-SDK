@@ -142,6 +142,7 @@ namespace Hast.Communication.Tester
 
                 Console.WriteLine("Starting hardware execution.");
                 var communicationService = await hastlayer.GetCommunicationService(channelName);
+                communicationService.TesterOutput = Console.Out;
                 var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
                     selectedDevice.DefaultCommunicationChannelName);
                 var info = await communicationService.Execute(memory, configuration.MemberId, executionContext);
@@ -156,8 +157,12 @@ namespace Hast.Communication.Tester
                         mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
                             i, memory.Read4Bytes(i), referenceMemory.Read4Bytes(i)));
                 if (mismatches.Any()) throw new HardwareExecutionResultMismatchException(mismatches);
+                Console.WriteLine("Verification passed!");
 
-                // TODO output verification result and print out each of the output headers for Catapult
+                
+                if (!string.IsNullOrWhiteSpace(configuration?.JsonOutputFileName))
+                    File.WriteAllText(configuration.JsonOutputFileName, JsonConvert.SerializeObject(
+                        new { Success = true, Result = info }));
 
                 var output = accessor.Get();
                 // TODO save input to file as well
@@ -186,7 +191,6 @@ namespace Hast.Communication.Tester
                         Console.WriteLine("File saved.");
                         break;
                 }
-
             }
         }
 

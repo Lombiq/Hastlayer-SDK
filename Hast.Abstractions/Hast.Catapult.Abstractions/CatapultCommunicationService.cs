@@ -65,6 +65,7 @@ namespace Hast.Catapult.Abstractions
             {
                 var context = BeginExecution();
                 CatapultLibrary lib = device.Metadata;
+                lib.TesterOutput = TesterOutput;
                 var dma = new SimpleMemoryAccessor(simpleMemory);
 
                 // Sending the data.
