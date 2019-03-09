@@ -30,7 +30,12 @@ namespace Hast.Communication.Tester
             /// <summary>
             /// Each cell gets a random value.
             /// </summary>
-            Random
+            Random,
+
+            /// <summary>
+            /// File gets read as binary.
+            /// </summary>
+            BinaryFile
         }
 
         public enum OutputFileType
@@ -65,9 +70,6 @@ namespace Hast.Communication.Tester
             [Option('k', "kilo-bytes", HelpText = "The total size of the payload in kilobytes.")]
             public int PayloadKiloBytes { get => (int)(PayloadBytes / 1024); set => PayloadBytes = (long)value * 1024; }
 
-            [Option('m', "mega-bytes", HelpText = "The total size of the payload in megabytes.")]
-            public int PayloadLengthMegaBytes { get => (int)(PayloadBytes / 1024 / 1024); set => PayloadBytes = (long)value * 1024 * 1024; }
-
             [Option('c', "cells", HelpText = "The total size of the payload in number of cells.")]
             public int PayloadLengthCells
             {
@@ -75,14 +77,17 @@ namespace Hast.Communication.Tester
                 set => PayloadBytes = (long)value * SimpleMemory.MemoryCellSizeBytes;
             }
 
-            [Option('i', "member-id", HelpText = "The simlated MemberId.")]
+            [Option('m', "member-id", HelpText = "The simulated MemberId.")]
             public int MemberId { get; set; } = 1;
 
-            [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random)")]
+            [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile)")]
             public PayloadType PayloadType { get; set; } = PayloadType.ConstantIntOne;
 
-            [Option('f', "file-type", HelpText = "Output file type (None, Hexdump, Binary)")]
+            [Option('f', "file-type", HelpText = "Type of the files where input and output are dumped to(None, Hexdump, Binary)")]
             public OutputFileType OutputFileType { get; set; } = OutputFileType.None;
+
+            [Option('i', "input", HelpText = "Generated data is saved to or payload is read from here when using BinaryFile as file-type.")]
+            public string InputFileName { get; set; }
 
             [Option('o', "output", HelpText = "Output file name. (overrides -f to Hexdump if it's None; use value '-' to write Hexdump to the console)")]
             public string OutputFileName { get; set; }
@@ -109,15 +114,31 @@ namespace Hast.Communication.Tester
                     return;
                 }
 
+
+                switch (configuration.OutputFileType)
+                {
+                    case OutputFileType.None:
+                        if (!string.IsNullOrEmpty(configuration.OutputFileName))
+                            configuration.OutputFileType = OutputFileType.Hexdump;
+                        break;
+                    case OutputFileType.Hexdump:
+                        if (string.IsNullOrEmpty(configuration.OutputFileName))
+                            configuration.OutputFileName = DefaultHexdumpFileName;
+                        break;
+                    case OutputFileType.Binary:
+                        if (string.IsNullOrEmpty(configuration.OutputFileName))
+                            configuration.OutputFileName = DefaultBinaryFileName;
+                        break;
+                }
+
+
                 if (string.IsNullOrEmpty(configuration.DeviceName)) configuration.DeviceName = devices.First().Name;
                 var selectedDevice = devices.FirstOrDefault(device => device.Name == configuration.DeviceName);
                 if (selectedDevice == null) throw new Exception($"Target device '{configuration.DeviceName}' not found!");
                 var channelName = selectedDevice.DefaultCommunicationChannelName;
 
 
-
                 Console.WriteLine("Generating memory.");
-
                 var memory = new SimpleMemory(configuration.PayloadLengthCells);
                 var accessor = new SimpleMemoryAccessor(memory);
                 switch (configuration.PayloadType)
@@ -132,6 +153,37 @@ namespace Hast.Communication.Tester
                         var random = new Random();
                         for (int i = 0; i < memory.CellCount; i++)
                             memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
+                        break;
+                    case PayloadType.BinaryFile:
+                        using (var fileStream = File.OpenRead(configuration.InputFileName))
+                        {
+                            var data = new byte[fileStream.Length];
+                            fileStream.Read(data, 3 * SimpleMemory.MemoryCellSizeBytes, data.Length);
+                            accessor.Set(data, 3);
+                        }
+                        break;
+                }
+                // Save input to file.
+                switch (configuration.OutputFileType)
+                {
+                    case OutputFileType.None: break;
+                    case OutputFileType.Hexdump:
+                        Console.WriteLine("Saving input hexdump to '{0}'", configuration.InputFileName);
+                        if (configuration.InputFileName == "-")
+                            WriteHexdump(Console.Out, memory);
+                        else
+                            using (var streamWriter = new StreamWriter(configuration.InputFileName, false, Encoding.UTF8))
+                                WriteHexdump(streamWriter, memory);
+                        Console.WriteLine("File saved.");
+                        break;
+                    case OutputFileType.Binary:
+                        if (configuration.PayloadType != PayloadType.BinaryFile)
+                        {
+                            Console.WriteLine("Saving input binary file to '{0}'", configuration.InputFileName);
+                            using (var fileStream = File.OpenWrite(configuration.InputFileName))
+                                fileStream.Write(accessor.Get().GetUnderlyingArray().Array, 0, memory.ByteCount);
+                            Console.WriteLine("File saved.");
+                        }
                         break;
                 }
 
@@ -164,17 +216,11 @@ namespace Hast.Communication.Tester
                     File.WriteAllText(configuration.JsonOutputFileName, JsonConvert.SerializeObject(
                         new { Success = true, Result = info }));
 
-                var output = accessor.Get();
-                // TODO save input to file as well
-                if (configuration.OutputFileType == OutputFileType.None && !string.IsNullOrEmpty(configuration.OutputFileName))
-                    configuration.OutputFileType = OutputFileType.Hexdump;
                 switch (configuration.OutputFileType)
                 {
                     case OutputFileType.None: break;
                     case OutputFileType.Hexdump:
-                        if (string.IsNullOrEmpty(configuration.OutputFileName))
-                            configuration.OutputFileName = DefaultHexdumpFileName;
-                        Console.WriteLine("Saving hexdump to '{0}'", configuration.OutputFileName);
+                        Console.WriteLine("Saving input hexdump to '{0}'", configuration.OutputFileName);
                         if (configuration.OutputFileName == "-")
                             WriteHexdump(Console.Out, memory);
                         else
@@ -183,11 +229,9 @@ namespace Hast.Communication.Tester
                         Console.WriteLine("File saved.");
                         break;
                     case OutputFileType.Binary:
-                        if (string.IsNullOrEmpty(configuration.OutputFileName))
-                            configuration.OutputFileName = DefaultBinaryFileName;
-                        Console.WriteLine("Saving binary file to '{0}'", configuration.OutputFileName);
+                        Console.WriteLine("Saving input binary file to '{0}'", configuration.OutputFileName);
                         using (var fileStream = File.OpenWrite(configuration.OutputFileName))
-                            fileStream.Write(output.GetUnderlyingArray().Array, 0, memory.ByteCount);
+                            fileStream.Write(accessor.Get().GetUnderlyingArray().Array, 0, memory.ByteCount);
                         Console.WriteLine("File saved.");
                         break;
                 }
