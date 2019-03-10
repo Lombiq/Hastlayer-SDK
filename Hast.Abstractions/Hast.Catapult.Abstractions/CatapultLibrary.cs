@@ -311,16 +311,16 @@ namespace Hast.Catapult.Abstractions
                 var responses = await Task.WhenAll(tasks);
 
                 // Create output array and fill it with the responses that have a positive slice index.
-                var responseSizeCell = OutputHeaderSizes.Total;
+                var payloadTotalCells = 0;
                 var payloadSizesCell = new int[responses.Length];
                 for (int i = 0; i < responses.Length; i++)
-                    responseSizeCell += payloadSizesCell[i] = MemoryMarshal.Read<int>(
+                    payloadTotalCells += payloadSizesCell[i] = MemoryMarshal.Read<int>(
                         responses[i].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
-                Memory<byte> result = new byte[responseSizeCell * SimpleMemory.MemoryCellSizeBytes];
-                responses[0].Slice(OutputHeaderSizes.Total, payloadSizesCell[0]).CopyTo(result);
+                Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
+                responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
                 for (int i = 0; i < responses.Length; i++)
                 {
-                    var offset = BufferSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
+                    var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
                     if (offset < 0 || offset >= result.Length) continue;
 
                     var targetSlice = result.Slice(OutputHeaderSizes.Total + offset);

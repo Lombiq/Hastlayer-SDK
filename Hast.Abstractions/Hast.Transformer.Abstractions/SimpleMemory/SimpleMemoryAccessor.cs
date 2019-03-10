@@ -27,7 +27,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         {
             if (prefixCellCount < 0)
                 throw new ArgumentOutOfRangeException($"{nameof(prefixCellCount)} must be positive!");
-            if (prefixCellCount > _simpleMemory.PrefixCellCount)
+            if (prefixCellCount < _simpleMemory.PrefixCellCount)
             {
                 int missingBytes = prefixCellCount - _simpleMemory.PrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
                 Memory<byte> newMemory = new byte[_simpleMemory.PrefixedMemory.Length + missingBytes];
@@ -53,7 +53,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public void Set(Memory<byte> data, int prefixCellCount = 0)
         {
             _simpleMemory.PrefixedMemory = data;
-            if (prefixCellCount < _simpleMemory.PrefixCellCount) _simpleMemory.PrefixCellCount = prefixCellCount;
+            _simpleMemory.PrefixCellCount = prefixCellCount;
         }
 
         /// <summary>
