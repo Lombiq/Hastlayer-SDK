@@ -21,7 +21,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <summary>
         /// The number of extra cells used for header information like memberId or data length.
         /// </summary>
-        public int PrefixCellCount { get; internal set; } = 3;
+        public int PrefixCellCount { get; internal set; } = 4;
 
         /// <summary>
         /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be used
@@ -36,7 +36,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <remarks>
         /// This is internal so the property can be read when handling communication with the FPGA but not by user code.
         /// </remarks>
-        internal Memory<byte> Memory { get; set; }
+        internal Memory<byte> Memory => PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
 
         /// <summary>
         /// Gets the number of bytes of this memory allocation.
@@ -71,7 +71,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public SimpleMemory(int cellCount)
         {
             PrefixedMemory = new byte[(cellCount + PrefixCellCount) * MemoryCellSizeBytes];
-            Memory = PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
         }
 
         /// <summary>
@@ -90,7 +89,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         {
             PrefixedMemory = memory;
             PrefixCellCount = prefixCellCount;
-            Memory = PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
         }
 
         /// <summary>
