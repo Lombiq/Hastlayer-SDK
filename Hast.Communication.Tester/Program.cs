@@ -77,10 +77,10 @@ namespace Hast.Communication.Tester
                     case PayloadType.BinaryFile:
                         using (var fileStream = File.OpenRead(configuration.InputFileName))
                         {
-                            int prefixBytes = 3 * SimpleMemory.MemoryCellSizeBytes;
+                            int prefixBytes = 4 * SimpleMemory.MemoryCellSizeBytes;
                             var data = new byte[fileStream.Length + prefixBytes];
                             fileStream.Read(data, prefixBytes, (int)fileStream.Length);
-                            accessor.Set(data, 3);
+                            accessor.Set(data, 4);
                         }
                         break;
                 }
