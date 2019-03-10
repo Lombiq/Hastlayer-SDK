@@ -102,7 +102,10 @@ namespace Hast.Communication.Tester
                         {
                             Console.WriteLine("Saving input binary file to '{0}'", configuration.InputFileName);
                             using (var fileStream = File.OpenWrite(configuration.InputFileName))
-                                fileStream.Write(accessor.Get().GetUnderlyingArray().Array, 0, memory.ByteCount);
+                            {
+                                var segment = accessor.Get().GetUnderlyingArray();
+                                fileStream.Write(segment.Array, segment.Offset, memory.ByteCount);
+                            }
                             Console.WriteLine("File saved.");
                         }
                         break;
@@ -150,7 +153,10 @@ namespace Hast.Communication.Tester
                     case OutputFileType.Binary:
                         Console.WriteLine("Saving input binary file to '{0}'", configuration.OutputFileName);
                         using (var fileStream = File.OpenWrite(configuration.OutputFileName))
-                            fileStream.Write(accessor.Get().GetUnderlyingArray().Array, 0, memory.ByteCount);
+                        {
+                            var segment = accessor.Get().GetUnderlyingArray();
+                            fileStream.Write(segment.Array, segment.Offset, memory.ByteCount);
+                        }
                         Console.WriteLine("File saved.");
                         break;
                 }
