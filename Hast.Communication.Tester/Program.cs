@@ -109,9 +109,7 @@ namespace Hast.Communication.Tester
                 }
 
                 // Create reference copy of input to compare against output.
-                var referenceMemory = new SimpleMemory(memory.CellCount);
-                var memoryBytes = new SimpleMemoryAccessor(memory).Get();
-                memoryBytes.CopyTo(new SimpleMemoryAccessor(referenceMemory).Get());
+                var referenceMemory = SimpleMemoryAccessor.Create(accessor.Get());
 
                 Console.WriteLine("Starting hardware execution.");
                 var communicationService = await hastlayer.GetCommunicationService(channelName);
