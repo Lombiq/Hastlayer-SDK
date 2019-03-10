@@ -121,7 +121,7 @@ namespace Hast.Communication.Services
                     {
                         var remainingBytes = memory.Length - i * maxBytesToSendAtOnce;
                         var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
-                        serialPort.Write(memoryAsArraySegment.Array, i * maxBytesToSendAtOnce, bytesToSend);
+                        serialPort.Write(memoryAsArraySegment.Array, i * maxBytesToSendAtOnce + memoryAsArraySegment.Offset, bytesToSend);
                     }
 
 
