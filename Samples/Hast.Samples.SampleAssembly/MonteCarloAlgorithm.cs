@@ -68,12 +68,12 @@ namespace Hast.Samples.SampleAssembly
                 short minusThree = -3;
                 y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / 100));
                 short thirteen = 13;
-                s = checked((int)(thirteen + ss * (short)randomZ * Multiplier / 100));
+                s = checked(thirteen + ss * (short)randomZ * Multiplier / 100);
                 short two = 2;
-                z = checked((int)(two * Multiplier * LogN(5 * s / Multiplier) / 10));
+                z = checked(two * Multiplier * LogN(5 * s / Multiplier) / 10);
 
-                int b = checked((int)(Sqrt((x * x) + (y * y)) - 3 * Multiplier));
-                int a = checked((int)(((z * z) + (b * b)) / Multiplier));
+                int b = checked(Sqrt((x * x) + (y * y)) - 3 * Multiplier);
+                int a = checked(((z * z) + (b * b)) / Multiplier);
 
                 // Check if the selected points are inside the torus. 
                 // If they are inside, add to the various cumulants.
@@ -114,13 +114,13 @@ namespace Hast.Samples.SampleAssembly
 
             // Values of the error estimates.
             memory.WriteUInt32(MonteCarloAlgorithm_DWIndex, 
-                checked((uint)(volume * Sqrt((int)((sumvarw / iterationsCount - Pow((sumsw / iterationsCount), 2)) / iterationsCount)))));
+                checked((uint)(volume * Sqrt((sumvarw / iterationsCount - Pow(sumsw / iterationsCount, 2)) / iterationsCount))));
             memory.WriteUInt32(MonteCarloAlgorithm_DXIndex, 
-                checked((uint)(volume * Sqrt((int)((sumvarwx / iterationsCount - Pow((sumswx / iterationsCount), 2)) / iterationsCount)))));
+                checked((uint)(volume * Sqrt((sumvarwx / iterationsCount - Pow((sumswx / iterationsCount), 2)) / iterationsCount))));
             memory.WriteUInt32(MonteCarloAlgorithm_DYIndex, 
-                checked((uint)(volume * Sqrt((int)((sumvarwy / iterationsCount - Pow((sumswy / iterationsCount), 2)) / iterationsCount)))));
+                checked((uint)(volume * Sqrt((sumvarwy / iterationsCount - Pow((sumswy / iterationsCount), 2)) / iterationsCount))));
             memory.WriteUInt32(MonteCarloAlgorithm_DZIndex, 
-                checked((uint)(volume * Sqrt((int)((sumvarwz / iterationsCount - Pow((sumswz / iterationsCount), 2)) / iterationsCount)))));
+                checked((uint)(volume * Sqrt((sumvarwz / iterationsCount - Pow((sumswz / iterationsCount), 2)) / iterationsCount))));
         }
 
 
