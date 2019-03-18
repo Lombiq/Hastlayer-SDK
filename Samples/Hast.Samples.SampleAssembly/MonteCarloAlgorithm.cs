@@ -1,4 +1,5 @@
 ﻿using System;
+using Hast.Algorithms;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -25,7 +26,7 @@ namespace Hast.Samples.SampleAssembly
         public const int MonteCarloAlgorithm_DXIndex = 6;
         public const int MonteCarloAlgorithm_DYIndex = 7;
         public const int MonteCarloAlgorithm_DZIndex = 8;
-        public const int MonteCarloAlgorithm_RandomNumbersStartIndex = 9;
+        public const int MonteCarloAlgorithm_RandomSeed = 9;
 
 
         public virtual void CalculateTorusSectionValues(SimpleMemory memory)
@@ -39,6 +40,7 @@ namespace Hast.Samples.SampleAssembly
             volume = 3 * 7 * ss; // Volume of the sampled region in x,y,s space.
 
             int iterationsCount = memory.ReadInt32(MonteCarloAlgorithm_IterationsCountIndex);
+            var random = new PrngMWC64X(memory.ReadUInt32(MonteCarloAlgorithm_RandomSeed));
 
             int sumsw = 0;
             int sumswx = 0;
@@ -55,9 +57,9 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 1; i <= iterationsCount; i++)
             {
-                randomX = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i);
-                randomY = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 1);
-                randomZ = memory.ReadUInt32(MonteCarloAlgorithm_RandomNumbersStartIndex + i + 2);
+                randomX = random.NextUInt32() % 100;
+                randomY = random.NextUInt32() % 100;
+                randomZ = random.NextUInt32() % 100;
 
                 // Pick points randomly from the sampled region.
                 x = checked((int)(Multiplier + randomX * 3 * Multiplier / 100));
@@ -203,31 +205,14 @@ namespace Hast.Samples.SampleAssembly
         /// </returns>
         public static MonteCarloResult CalculateTorusSectionValues(this MonteCarloAlgorithm monteCarloAlgorithm, int iterationsCount)
         {
-            var simpleMemory = CreateSimpleMemory(iterationsCount);
+            var simpleMemory = new SimpleMemory(10);
+
+            simpleMemory.WriteInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_IterationsCountIndex, iterationsCount);
+            simpleMemory.WriteInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_RandomSeed, _random.Next());
 
             monteCarloAlgorithm.CalculateTorusSectionValues(simpleMemory);
 
             return GetResult(simpleMemory);
-        }
-
-
-        /// <summary>
-        /// Creates a <see cref="SimpleMemory"/> object filled with the input values.
-        /// </summary>
-        /// <param name="iterationsCount">The number of iterations the algorithm uses for calculations.</param>
-        /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
-        private static SimpleMemory CreateSimpleMemory(int iterationsCount)
-        {
-            var simpleMemory = new SimpleMemory(10 + iterationsCount * 3);
-
-            simpleMemory.WriteInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_IterationsCountIndex, iterationsCount);
-
-            for (int i = 0; i < iterationsCount * 3; i++)
-            {
-                simpleMemory.WriteUInt32(MonteCarloAlgorithm.MonteCarloAlgorithm_RandomNumbersStartIndex + i, (uint)(_random.Next(101)));
-            }
-
-            return simpleMemory;
         }
 
         /// <summary>
