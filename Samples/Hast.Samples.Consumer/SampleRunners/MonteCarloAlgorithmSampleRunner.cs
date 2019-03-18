@@ -8,13 +8,12 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.HardwareEntryPointMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.MonteCarloAlgorithm");
+            configuration.AddHardwareEntryPointType<MonteCarloAlgorithm>();
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
-            var monteCarloAlgorithm = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm());
+            var monteCarloAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloAlgorithm());
             var monteCarloResult = monteCarloAlgorithm.CalculateTorusSectionValues(5000000);
         }
     }

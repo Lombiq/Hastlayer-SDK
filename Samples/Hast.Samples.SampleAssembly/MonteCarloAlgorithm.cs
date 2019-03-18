@@ -64,13 +64,13 @@ namespace Hast.Samples.SampleAssembly
               
                 // The constant can't be specified properly inline as (since it can't be specified as a short, see:
                 // http://stackoverflow.com/questions/8670511/how-to-specify-a-short-int-constant-without-casting)
-                // it would cause an underflow and be casted to an ulong.
+                // it would cause an underflow and be cast to an ulong.
                 short minusThree = -3;
                 y = checked((int)(minusThree * Multiplier + randomY * 7 * Multiplier / 100));
                 short thirteen = 13;
                 s = checked((int)(thirteen + ss * (short)randomZ * Multiplier / 100));
                 short two = 2;
-                z = checked((int)(two * Multiplier * Log(5 * s / Multiplier) / 10));
+                z = checked((int)(two * Multiplier * LogN(5 * s / Multiplier) / 10));
 
                 int b = checked((int)(Sqrt((x * x) + (y * y)) - 3 * Multiplier));
                 int a = checked((int)(((z * z) + (b * b)) / Multiplier));
@@ -132,8 +132,7 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns the square root of the number.</returns>
         private int Sqrt(int value)
         {
-            if (value == 0)
-                return 0;
+            if (value == 0) return 0;
 
             var current = 100;  // This is an initial value, where the algorithm starts the estimations.
             var previous = 0;
@@ -153,11 +152,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="value">The number we search the natural based logarithm of.</param>
         /// <returns>Returns the natural based logarithm of the number.</returns>
-        private int Log(int value)
-        {
-            var logarithm = Log10(value);
-            return logarithm * 10000 / 4342; // 4342 is the value of Log(e) multiplied by 10000;
-        }
+        private int LogN(int value) => Log10(value) * 10000 / 4342; // 4342 is the value of Log(e) multiplied by 10000;
 
         /// <summary>
         /// Calculates the logarithm of a number.
@@ -166,22 +161,14 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns the logarithm of the number.</returns>
         private int Log10(int value)
         {
-            if (value >= 10000000)
-                return 7;
-            else if (value >= 1000000)
-                return 6;
-            else if (value >= 100000)
-                return 5;
-            else if (value >= 10000)
-                return 4;
-            else if (value >= 1000)
-                return 3;
-            else if (value >= 100)
-                return 2;
-            else if (value >= 10)
-                return 1;
-            else
-                return 0;
+            if (value >= 10000000) return 7;
+            else if (value >= 1000000) return 6;
+            else if (value >= 100000) return 5;
+            else if (value >= 10000) return 4;
+            else if (value >= 1000) return 3;
+            else if (value >= 100) return 2;
+            else if (value >= 10) return 1;
+            else return 0;
         }
 
         /// <summary>
@@ -194,8 +181,7 @@ namespace Hast.Samples.SampleAssembly
         {
             var baseValue = value;
 
-            for (int i = 0; i < power - 1; i++)
-                baseValue *= value;
+            for (int i = 0; i < power - 1; i++) baseValue *= value;
 
             return baseValue;
         }
@@ -208,10 +194,13 @@ namespace Hast.Samples.SampleAssembly
 
 
         /// <summary>
-        /// Algorithm to find the weight and centre of mass of a section of torus with varying density.
+        /// Algorithm to find the weight and center of mass of a section of torus with varying density.
         /// </summary>
         /// <param name="iterationsCount">The number of iterations the algorithm uses for calculations.</param>
-        /// <returns>Returns the weight and centre of mass of a section of torus with varying density in the form of a <see cref="MonteCarloResult"/> object.</returns>
+        /// <returns>
+        /// Returns the weight and center of mass of a section of torus with varying density in the form of a
+        /// <see cref="MonteCarloResult"/> object.
+        /// </returns>
         public static MonteCarloResult CalculateTorusSectionValues(this MonteCarloAlgorithm monteCarloAlgorithm, int iterationsCount)
         {
             var simpleMemory = CreateSimpleMemory(iterationsCount);
@@ -242,10 +231,14 @@ namespace Hast.Samples.SampleAssembly
         }
 
         /// <summary>
-        /// Calculates the weight and centre of mass of a section of torus with varying density from a <see cref="SimpleMemory"/> object.
+        /// Calculates the weight and center of mass of a section of torus with varying density from a <see
+        /// cref="SimpleMemory"/> object.
         /// </summary>
         /// <param name="simpleMemory">The <see cref="SimpleMemory"/> object that contains the result.</param>
-        /// <returns>Returns the weight and centre of mass of a section of torus with varying density in the form of a <see cref="MonteCarloResult"/> object.</returns>
+        /// <returns>
+        /// Returns the weight and center of mass of a section of torus with varying density in the form of a
+        /// <see cref="MonteCarloResult"/> object.
+        /// </returns>
         private static MonteCarloResult GetResult(SimpleMemory simpleMemory)
         {
             return new MonteCarloResult

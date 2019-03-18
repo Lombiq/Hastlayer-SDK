@@ -46,11 +46,7 @@ namespace Hast.Samples.SampleAssembly
         public uint DZ { get; set; }
 
 
-        public override string ToString()
-        {
-            return string.Format(
-                "W: {0}\r\nX: {1}\r\nY: {2}\r\nZ: {3}\r\n\r\ndW: {4}\r\ndX: {5} \r\ndY: {6} \r\ndZ: {7}",
-                W, X, Y, Z, DW, DX, DY, DZ);
-        }
+        public override string ToString() =>
+            $"W: {W}\r\nX: {X}\r\nY: {Y}\r\nZ: {Z}\r\n\r\ndW: {DW}\r\ndX: {DX} \r\ndY: {DY} \r\ndZ: {DZ}";
     }
 }
