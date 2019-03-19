@@ -51,7 +51,7 @@
     <Compile Include="ParallelAlgorithm.cs" />
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />
-    <Compile Include="MonteCarloAlgorithm.cs" />
+    <Compile Include="MonteCarloPiEstimator.cs" />
     <Compile Include="MonteCarloResult.cs" />
     <Compile Include="ObjectOrientedShowcase.cs" />
     <Compile Include="PrimeCalculator.cs" />

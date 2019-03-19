@@ -516,7 +516,9 @@ namespace Hast.Algorithms
 
             if (yl == 0)
             {
-                throw new DivideByZeroException();
+                return default(Fix64);
+                // Hastlayer can't process exceptions at the moment.
+                //throw new DivideByZeroException();
             }
 
             var remainder = (ulong)(xl >= 0 ? xl : -xl);
