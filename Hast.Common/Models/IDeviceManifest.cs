@@ -35,5 +35,11 @@ namespace Hast.Layer
         /// Gets the amount of memory (RAM) available to hardware implementations, in bytes.
         /// </summary>
         uint AvailableMemoryBytes { get; }
+
+        /// <summary>
+        /// The width, in bytes, of the bus available for the generated hardware implementation to exchange data with
+        /// the hardware framework.
+        /// </summary>
+        uint DataBusWidthBytes { get; }
     }
 }

@@ -27,7 +27,7 @@ namespace Hast.Samples.Consumer
         /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not up-to-date
         /// enough and shouldn't be really taken as good examples (check out the other ones).
         /// </summary>
-        public static Sample SampleToRun = Sample.ParallelAlgorithm;
+        public static Sample SampleToRun = Sample.PrimeCalculator;
     }
 
 
@@ -76,7 +76,7 @@ namespace Hast.Samples.Consumer
                         var devices = await hastlayer.GetSupportedDevices();
                         // Let's just use the first one that is available. However you might want to use a specific
                         // device, not just any first one.
-                        var configuration = new HardwareGenerationConfiguration(devices.First().Name);
+                        var configuration = new HardwareGenerationConfiguration(devices.First(device => device.Name == "Catapult").Name);
 
                         // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                         // here:
