@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace Hast.Algorithms
 {
     /// <summary>
@@ -20,7 +22,7 @@ namespace Hast.Algorithms
             // https://github.com/icsharpcode/ILSpy/issues/807
             uint zLow  = 0xFFFE;
             uint zHigh = 0xB81B;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
+            uint z = 0 | (zLow << 16) | zHigh;
             state = (ulong)x * z + c;
             return x ^ c;
         }
