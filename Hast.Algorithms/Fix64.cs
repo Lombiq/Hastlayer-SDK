@@ -521,8 +521,12 @@ namespace Hast.Algorithms
                 //throw new DivideByZeroException();
             }
 
-            var remainder = (ulong)(xl >= 0 ? xl : -xl);
-            var divider = (ulong)(yl >= 0 ? yl : -yl);
+            // Needs the temporary *Signed variables to work around this ILSpy bug:
+            // https://github.com/icsharpcode/ILSpy/issues/807
+            var remainderSigned = xl >= 0 ? xl : -xl;
+            var remainder = (ulong)remainderSigned;
+            var dividerSigned = yl >= 0 ? yl : -yl;
+            var divider = (ulong)dividerSigned;
             var quotient = 0UL;
             var bitPos = BitCount / 2 + 1;
 
