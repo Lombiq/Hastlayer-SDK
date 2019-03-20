@@ -8,21 +8,14 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
 {
     public class VhdlGenerationConfiguration
     {
-        private static readonly VhdlGenerationConfiguration _debug = new VhdlGenerationConfiguration
-        {
-            AddComments = true,
-            ShortenNames = true
-        };
-
         /// <summary>
         /// The generated VHDL code will be more readable and will contain debug-level information, though it will be 
         /// significantly slower to create. Also, since the identifiers in code are shortened for readability there can
         /// be naming clashes. The hardware will however run with the same performance as with any other configuration.
         /// </summary>
-        public static VhdlGenerationConfiguration Debug => _debug;
-
-        private static readonly VhdlGenerationConfiguration _compact = new VhdlGenerationConfiguration
+        public static VhdlGenerationConfiguration Debug { get; } = new VhdlGenerationConfiguration
         {
+            AddComments = true,
             ShortenNames = true
         };
 
@@ -31,16 +24,17 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
         /// identifiers, though it will be significantly slower to create. Also, there can be naming clashes. The 
         /// hardware will however run with the same performance as with any other configuration.
         /// </summary>
-        public static VhdlGenerationConfiguration Compact = _compact;
-
-        private static readonly VhdlGenerationConfiguration _release = new VhdlGenerationConfiguration();
+        public static VhdlGenerationConfiguration Compact { get; } = new VhdlGenerationConfiguration
+        {
+            ShortenNames = true
+        };
 
         /// <summary>
         /// The generated VHDL code will be significantly faster to create than in <see cref="Debug"/> or 
         /// <see cref="Compact"/> mode, but will be less readable and won't contain debugging information. The hardware
         /// will however run with the same performance as with any other configuration.
         /// </summary>
-        public static VhdlGenerationConfiguration Release = _release;
+        public static VhdlGenerationConfiguration Release { get; } = new VhdlGenerationConfiguration();
 
 
         /// <summary>

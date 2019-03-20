@@ -1,6 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Hast.Transformer.Abstractions.Configuration
 {
@@ -45,6 +47,13 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// even if enabled, doesn't happen automatically, check the documentation.
         /// </summary>
         public bool EnableMethodInlining { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the list of methods that should be inlined in addition to methods already marked with a
+        /// suitable <c>MethodImpl</c> attribute. Will only work if <see cref="EnableMethodInlining"/> is <c>true</c>.
+        /// Fore more information check the documentation.
+        /// </summary>
+        public IList<string> AdditionalInlinableMethodsFullNames { get; set; } = new List<string>();
 
         /// <summary>
         /// The lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer 
@@ -94,5 +103,15 @@ namespace Hast.Transformer.Abstractions.Configuration
                 ArrayLengths.Add(arrayNames[i], length);
             }
         }
-    }
+
+        /// <summary>
+        /// Adds a method to the list of methods that should be inlined in addition to methods already marked with a
+        /// suitable <c>MethodImpl</c> attribute. See <see cref="AdditionalInlinableMethodsFullNames"/> for more 
+        /// information.
+        /// </summary>
+        /// <typeparam name="T">The type of the object that will be later fed to the hardware transformer.</typeparam>
+        /// <param name="expression">An expression with a call to the method.</param>
+        public void AddAdditionalInlinableMethod<T>(Expression<Action<T>> expression) =>
+            AdditionalInlinableMethodsFullNames.Add(expression.GetMethodFullName());
+        }
 }

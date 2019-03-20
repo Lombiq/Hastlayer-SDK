@@ -149,6 +149,9 @@ namespace Hast.Samples.SampleAssembly
         /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that 
         ///   limits further use).
         ///   
+        /// Methods can also be inlined with the help of the 
+        /// <c>TransformerConfiguration().AddAdditionalInlinableMethod<T>()</c> configuration.
+        ///   
         /// WARNING: be sure not to overdo inlining, because just inlining everything (especially if inlined methods
         /// also call inlined methods...) can quickly create giant hardware implementations that won't be just most
         /// possibly too big for the FPGA but also very slow to transform.

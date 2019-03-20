@@ -8,16 +8,18 @@ Note that the hardware framework projects have their own release cycle and relea
 ## vNext
 
 - Adding transformation warning for too large arrays and displaying such arrays in the Consumer sample.
+- Adding the ability to configure methods to be inlined without an attribute.
+- Various smaller bugfixes and improvements.
 
 
-## 1.0.10, 08.06.2017
+## 1.0.10, 08.06.2018
 
 - Updating and fixing hardware timing values, making hardware execution more reliable, but in certain cases slightly slower, however also causing lower FPGA resource usage.
 - Fixing that hardware description caching didn't work with certain programs.
 - Improved documentation.
 
 
-## 1.0.9, 18.03.2017
+## 1.0.9, 18.03.2018
 
 - New Loopback sample to test FPGA connectivity and Hastlayer Hardware Framework resource usage.
 - Fixing that binary operator expressions (like  `1 + 2`) calculated with wrongly sized number types and could cause different results on the hardware than in software.
@@ -29,7 +31,7 @@ Note that the hardware framework projects have their own release cycle and relea
 Note that running Hastlayer now requires Visual Studio 2017 or greater (any edition will work).
 
 
-## 1.0.8, 13.01.2017
+## 1.0.8, 13.01.2018
 
 - Adding ability to inline methods to vastly improve performance if the method is small but called a lot of times.
 - Adding support for `ref` and `out` parameters, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/15).
