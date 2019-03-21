@@ -53,7 +53,7 @@ namespace Hast.Samples.Kpz
             var numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                memory.WriteUInt32(i, kernels.Prng1.NextUInt32());
+                memory.WriteUInt32(i, kernels.Random1.NextUInt32());
             }
         }
     }
@@ -83,7 +83,7 @@ namespace Hast.Samples.Kpz
 
         private uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
-        public PrngMWC64X Prng1, Prng2;
+        public RandomMwc64X Random1, Random2;
         public bool TestMode = false;
         public uint NumberOfIterations = 1;
 
@@ -96,9 +96,9 @@ namespace Hast.Samples.Kpz
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
 
-            Prng1 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
+            Random1 = new RandomMwc64X((((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
                 memory.ReadUInt32(MemIndexRandomStates + 1));
-            Prng2 = new PrngMWC64X((((ulong)memory.ReadUInt32(MemIndexRandomStates + 2)) << 32) |
+            Random2 = new RandomMwc64X((((ulong)memory.ReadUInt32(MemIndexRandomStates + 2)) << 32) |
                 memory.ReadUInt32(MemIndexRandomStates + 3));
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);
@@ -139,11 +139,11 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void RandomlySwitchFourCells(bool forceSwitch)
         {
-            uint randomNumber1 = Prng1.NextUInt32();
+            uint randomNumber1 = Random1.NextUInt32();
             var centerX = (int)(randomNumber1 & (GridWidth - 1));
             var centerY = (int)((randomNumber1 >> 16) & (GridHeight - 1));
             int centerIndex = GetIndexFromXY(centerX, centerY);
-            uint randomNumber2 = Prng2.NextUInt32();
+            uint randomNumber2 = Random2.NextUInt32();
             uint randomVariable1 = randomNumber2 & ((1 << 16) - 1);
             uint randomVariable2 = (randomNumber2 >> 16) & ((1 << 16) - 1);
             int rightNeighbourIndex;

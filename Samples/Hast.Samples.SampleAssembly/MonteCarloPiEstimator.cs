@@ -37,7 +37,7 @@ namespace Hast.Samples.SampleAssembly
                     indexObject =>
                     {
                         var index = (uint)indexObject;
-                        var random = new PrngMWC64X(randomSeed + index);
+                        var random = new RandomMwc64X(randomSeed + index);
 
                         uint inCircleCount = 0;
 

@@ -11,10 +11,10 @@ namespace Hast.Samples.Kpz
     /// </summary>
     public class KpzKernelsTaskState
     {
-        public bool[] bramDx;
-        public bool[] bramDy;
-        public PrngMWC64X prng1;
-        public PrngMWC64X prng2;
+        public bool[] BramDx;
+        public bool[] BramDy;
+        public RandomMwc64X Random1;
+        public RandomMwc64X Random2;
     }
 
 
@@ -81,29 +81,29 @@ namespace Hast.Samples.Kpz
             //  ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
             int parallelTaskRandomIndex = 0;
             uint randomSeedTemp;
-            var prng0 = new PrngMWC64X();
+            var random0 = new RandomMwc64X();
 
             var taskLocals = new KpzKernelsTaskState[ParallelTasks];
             for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
             {
                 taskLocals[TaskLocalsIndex] = new KpzKernelsTaskState
                 {
-                    bramDx = new bool[LocalGridSize * LocalGridSize],
-                    bramDy = new bool[LocalGridSize * LocalGridSize],
-                    prng1 = new PrngMWC64X
+                    BramDx = new bool[LocalGridSize * LocalGridSize],
+                    BramDy = new bool[LocalGridSize * LocalGridSize],
+                    Random1 = new RandomMwc64X
                     {
-                        state = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
+                        State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
                     }
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].prng1.state |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[TaskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
 
-                taskLocals[TaskLocalsIndex].prng2 = new PrngMWC64X
+                taskLocals[TaskLocalsIndex].Random2 = new RandomMwc64X
                 {
-                    state = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
+                    State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].prng2.state |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[TaskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
             }
 
             // What is iterationGroupIndex good for?
@@ -111,13 +111,13 @@ namespace Hast.Samples.Kpz
             // If we want 10 iterations, and starting a full series of tasks makes half iteration on the full table,
             // then we need to start it 20 times (thus IterationGroupSize will be 20).
 
-            prng0.state = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
+            random0.State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
             randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-            prng0.state |= ((ulong)randomSeedTemp) << 32;
+            random0.State |= ((ulong)randomSeedTemp) << 32;
 
             for (int iterationGroupIndex = 0; iterationGroupIndex < iterationGroupSize; iterationGroupIndex++)
             {
-                uint randomValue0 = prng0.NextUInt32();
+                uint randomValue0 = random0.NextUInt32();
                 // This assumes that LocalGridSize is 2^N:
                 int randomXOffset = (int)((LocalGridSize - 1) & randomValue0);
                 int randomYOffset = (int)((LocalGridSize - 1) & (randomValue0 >> 16));
@@ -145,9 +145,9 @@ namespace Hast.Samples.Kpz
                                 int copySrcX = (baseX + copyDstX) % GridSize;
                                 int copySrcY = (baseY + CopyDstY) % GridSize;
                                 uint value = memory.ReadUInt32(MemIndexGrid + copySrcX + copySrcY * GridSize);
-                                taskLocals[parallelTaskIndex].bramDx[copyDstX + CopyDstY * LocalGridSize] =
+                                taskLocals[parallelTaskIndex].BramDx[copyDstX + CopyDstY * LocalGridSize] =
                                     (value & 1) == 1;
-                                taskLocals[parallelTaskIndex].bramDy[copyDstX + CopyDstY * LocalGridSize] =
+                                taskLocals[parallelTaskIndex].BramDy[copyDstX + CopyDstY * LocalGridSize] =
                                     (value & 2) == 2;
                             }
                         }
@@ -162,8 +162,8 @@ namespace Hast.Samples.Kpz
                                 // ==== <Now randomly switch four cells> ====
 
                                 // Generating two random numbers:
-                                uint taskRandomNumber1 = taskLocal.prng1.NextUInt32();
-                                uint taskRandomNumber2 = taskLocal.prng2.NextUInt32();
+                                uint taskRandomNumber1 = taskLocal.Random1.NextUInt32();
+                                uint taskRandomNumber2 = taskLocal.Random2.NextUInt32();
 
                                 // The existence of var-1 in code is a good indicator of that it is assumed to be 2^N:
                                 int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1));
@@ -188,20 +188,20 @@ namespace Hast.Samples.Kpz
 
                                 if (
                                     // If we get the pattern {01, 01} we have a pyramid:
-                                    ((taskLocal.bramDx[pokeCenterIndex] && !taskLocal.bramDx[rightNeighbourIndex]) &&
-                                    (taskLocal.bramDy[pokeCenterIndex] && !taskLocal.bramDy[bottomNeighbourIndex]) &&
+                                    ((taskLocal.BramDx[pokeCenterIndex] && !taskLocal.BramDx[rightNeighbourIndex]) &&
+                                    (taskLocal.BramDy[pokeCenterIndex] && !taskLocal.BramDy[bottomNeighbourIndex]) &&
                                     (false || randomVariable1 < IntegerProbabilityP)) ||
                                     // If we get the pattern {10, 10} we have a hole:
-                                    ((!taskLocal.bramDx[pokeCenterIndex] && taskLocal.bramDx[rightNeighbourIndex]) &&
-                                    (!taskLocal.bramDy[pokeCenterIndex] && taskLocal.bramDy[bottomNeighbourIndex]) &&
+                                    ((!taskLocal.BramDx[pokeCenterIndex] && taskLocal.BramDx[rightNeighbourIndex]) &&
+                                    (!taskLocal.BramDy[pokeCenterIndex] && taskLocal.BramDy[bottomNeighbourIndex]) &&
                                     (false || randomVariable2 < IntegerProbabilityQ))
                                 )
                                 {
                                     // We make a hole into a pyramid, and a pyramid into a hole.
-                                    taskLocal.bramDx[pokeCenterIndex] = !taskLocal.bramDx[pokeCenterIndex];
-                                    taskLocal.bramDy[pokeCenterIndex] = !taskLocal.bramDy[pokeCenterIndex];
-                                    taskLocal.bramDx[rightNeighbourIndex] = !taskLocal.bramDx[rightNeighbourIndex];
-                                    taskLocal.bramDy[bottomNeighbourIndex] = !taskLocal.bramDy[bottomNeighbourIndex];
+                                    taskLocal.BramDx[pokeCenterIndex] = !taskLocal.BramDx[pokeCenterIndex];
+                                    taskLocal.BramDy[pokeCenterIndex] = !taskLocal.BramDy[pokeCenterIndex];
+                                    taskLocal.BramDx[rightNeighbourIndex] = !taskLocal.BramDx[rightNeighbourIndex];
+                                    taskLocal.BramDy[bottomNeighbourIndex] = !taskLocal.BramDy[bottomNeighbourIndex];
                                 }
 
                                 // ==== </Now randomly switch four cells> ====
@@ -232,8 +232,8 @@ namespace Hast.Samples.Kpz
                                 int copyDstX = (baseX + copySrcX) % GridSize;
                                 int copyDstY = (baseY + copySrcY) % GridSize;
                                 uint value =
-                                    (tasks[parallelTaskIndex].Result.bramDx[copySrcX + copySrcY * LocalGridSize] ? 1U : 0U) |
-                                    (tasks[parallelTaskIndex].Result.bramDy[copySrcX + copySrcY * LocalGridSize] ? 2U : 0U);
+                                    (tasks[parallelTaskIndex].Result.BramDx[copySrcX + copySrcY * LocalGridSize] ? 1U : 0U) |
+                                    (tasks[parallelTaskIndex].Result.BramDy[copySrcX + copySrcY * LocalGridSize] ? 2U : 0U);
                                 //Note: use (tasks[parallelTaskIndex].Result), because 
                                 //    (TaskLocals[ParallelTaskIndex]) won't work.
                                 memory.WriteUInt32(MemIndexGrid + copyDstX + copyDstY * GridSize, value);
@@ -241,8 +241,8 @@ namespace Hast.Samples.Kpz
                         }
 
                         // Take PRNG current state from Result to feed it to input next time
-                        taskLocals[parallelTaskIndex].prng1.state = tasks[parallelTaskIndex].Result.prng1.state;
-                        taskLocals[parallelTaskIndex].prng2.state = tasks[parallelTaskIndex].Result.prng2.state;
+                        taskLocals[parallelTaskIndex].Random1.State = tasks[parallelTaskIndex].Result.Random1.State;
+                        taskLocals[parallelTaskIndex].Random2.State = tasks[parallelTaskIndex].Result.Random2.State;
                     }
                 }
             }
