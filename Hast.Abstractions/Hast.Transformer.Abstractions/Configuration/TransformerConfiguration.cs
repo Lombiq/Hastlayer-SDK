@@ -73,6 +73,14 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         public bool ProcessImplementedInterfaces { get; set; } = false;
 
+        /// <summary>
+        /// Gets or sets whether constant values are propagated through the processed code and variables that actually
+        /// hold only these values are substituted with the values themselves. This can significantly cut down on the
+        /// code complexity and improve performance, but in certain cases may yield incorrect results. If the hardware
+        /// implementation's results are incorrect then try setting this to <c>false</c>. Defaults to <c>true</c>.
+        /// </summary>
+        public bool EnableConstantSubstitution { get; set; } = true;
+
 
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)
         {

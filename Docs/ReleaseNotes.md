@@ -9,6 +9,7 @@ Note that the hardware framework projects have their own release cycle and relea
 
 - Adding transformation warning for too large arrays and displaying such arrays in the Consumer sample.
 - Adding the ability to configure methods to be inlined without an attribute.
+- Adding option to enable or disable constant substitution.
 - Various smaller bugfixes and improvements.
 
 
