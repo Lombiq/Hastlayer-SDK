@@ -316,14 +316,14 @@ namespace Hast.Catapult.Abstractions
                         responses[i].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
                 Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
                 responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
-                for (int i = 0; i < responses.Length; i++)
+                Parallel.For(0, responses.Length, (i)=>
                 {
                     var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
-                    if (offset < 0 || offset >= result.Length) continue;
+                    if (offset < 0 || offset >= result.Length) return;
 
                     var targetSlice = result.Slice(OutputHeaderSizes.Total + offset);
                     responses[i].Slice(OutputHeaderSizes.Total, payloadSizesCell[i]).CopyTo(targetSlice);
-                }
+                });
 
                 return result;
             }
