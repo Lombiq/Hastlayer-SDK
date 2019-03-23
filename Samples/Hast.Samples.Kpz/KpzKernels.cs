@@ -18,7 +18,7 @@ namespace Hast.Samples.Kpz
             var kernels = new KpzKernels();
             kernels.CopyFromSimpleMemoryToRawGrid(memory);
             kernels.InitializeParametersFromMemory(memory);
-            //assume that GridWidth and GridHeight are 2^N
+            // Assume that GridWidth and GridHeight are 2^N.
             var numberOfStepsInIteration = kernels.TestMode ? 1 : KpzKernels.GridWidth * KpzKernels.GridHeight;
 
             for (int j = 0; j < kernels.NumberOfIterations; j++)
@@ -96,10 +96,16 @@ namespace Hast.Samples.Kpz
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
 
-            Random1 = new RandomMwc64X((((ulong)memory.ReadUInt32(MemIndexRandomStates)) << 32) |
-                memory.ReadUInt32(MemIndexRandomStates + 1));
-            Random2 = new RandomMwc64X((((ulong)memory.ReadUInt32(MemIndexRandomStates + 2)) << 32) |
-                memory.ReadUInt32(MemIndexRandomStates + 3));
+            Random1 = new RandomMwc64X
+            {
+                State =
+                    (ulong)memory.ReadUInt32(MemIndexRandomStates) << 32 | memory.ReadUInt32(MemIndexRandomStates + 1)
+            };
+            Random2 = new RandomMwc64X
+            {
+                State = 
+                    (ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32 | memory.ReadUInt32(MemIndexRandomStates + 3)
+            };
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);
         }
@@ -135,7 +141,7 @@ namespace Hast.Samples.Kpz
         }
         /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="grid" />, and randomly switches
         /// between pyramid and hole, based on <see cref="probabilityP" /> and <see cref="probabilityQ" /> parameters
-        /// (or swithes anyway, if forceSwitch is on).
+        /// (or switches anyway, if forceSwitch is on).
         /// </summary>
         public void RandomlySwitchFourCells(bool forceSwitch)
         {
@@ -148,14 +154,14 @@ namespace Hast.Samples.Kpz
             uint randomVariable2 = (randomNumber2 >> 16) & ((1 << 16) - 1);
             int rightNeighbourIndex;
             int bottomNeighbourIndex;
-            //get neighbour indexes:
+            // Get neighbor indexes:
             int rightNeighbourX = (centerX < GridWidth - 1) ? centerX + 1 : 0;
             int rightNeighbourY = centerY;
             int bottomNeighbourX = centerX;
             int bottomNeighbourY = (centerY < GridHeight - 1) ? centerY + 1 : 0;
             rightNeighbourIndex = rightNeighbourY * GridWidth + rightNeighbourX;
             bottomNeighbourIndex = bottomNeighbourY * GridWidth + bottomNeighbourX;
-            // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
+            // We check our own {dx,dy} values, and the right neighbor's dx, and bottom neighbor's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
                 ((GetGridDx(centerIndex) && !GetGridDx(rightNeighbourIndex)) &&

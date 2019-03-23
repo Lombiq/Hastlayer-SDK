@@ -4,15 +4,19 @@ namespace Hast.Algorithms
 {
     /// <summary>
     /// Implementation of the MWC64X random number generator algorithm.
-    /// <see href="http://cas.ee.ic.ac.uk/people/dt10/research/rngs-gpu-mwc64x.html"/>
+    /// <see href="http://cas.ee.ic.ac.uk/people/dt10/research/rngs-gpu-mwc64x.html"/> For a PRNG that has lower
+    /// resource usage but also lower quality see <see cref="RandomLfsr"/>.
     /// </summary>
     public class RandomMwc64X
     {
-        public ulong State; // Random seed.
-
-
-        public RandomMwc64X(ulong seed) { State = seed; }
-        public RandomMwc64X() { State = 0xCAFEUL; }
+        /// <summary>
+        /// The current inner state of the random number generator. If you set it when instantiating the object then 
+        /// it'll serve as a seed.
+        /// </summary>
+        /// <remarks>
+        /// By not using a constructor the whole class can be inlined for maximal performance.
+        /// </remarks>
+        public ulong State = 0xCAFEUL; // Just some starting number.
 
 
         public uint NextUInt32()

@@ -50,6 +50,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Fix64.cs" />
+    <Compile Include="RandomLfsr.cs" />
     <Compile Include="RandomMwc64X.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="Readme.md" />

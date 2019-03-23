@@ -1,7 +1,6 @@
 ﻿using Hast.Algorithms;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
@@ -16,10 +15,10 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MonteCarloPiEstimator
     {
-        public const int MaxDegreeOfParallelism = 13;
+        public const int MaxDegreeOfParallelism = 36;
         public const int EstimatePi_IteractionsCountUInt32Index = 0;
         public const int EstimatePi_RandomSeedUInt32Index = 1;
-        public const int EstimatePi_PiEstimateFix64StartIndex = 0;
+        public const int EstimatePi_InCircleCountSumUInt32Index = 0;
 
 
         public virtual void EstimatePi(SimpleMemory memory)
@@ -28,7 +27,10 @@ namespace Hast.Samples.SampleAssembly
             var randomSeed = memory.ReadUInt32(EstimatePi_RandomSeedUInt32Index);
 
             var iterationsPerTask = iterationsCount / MaxDegreeOfParallelism;
-            var range = 0xFFFFFFu;
+            // We need a cap on the RNG range so we don't have to count with uint.MaxValue. 
+            // Marking the variable as const will help to evaluate everything possible at compile time, making the
+            // hardware implementation more efficient.
+            const uint range = 1000000000;
             var tasks = new Task<uint>[MaxDegreeOfParallelism];
 
             for (uint i = 0; i < MaxDegreeOfParallelism; i++)
@@ -37,7 +39,7 @@ namespace Hast.Samples.SampleAssembly
                     indexObject =>
                     {
                         var index = (uint)indexObject;
-                        var random = new RandomMwc64X(randomSeed + index);
+                        var random = new RandomLfsr { State = randomSeed + index };
 
                         uint inCircleCount = 0;
 
@@ -68,7 +70,7 @@ namespace Hast.Samples.SampleAssembly
             }
 
 
-            memory.WriteUInt32(EstimatePi_PiEstimateFix64StartIndex, inCircleCountSum);
+            memory.WriteUInt32(EstimatePi_InCircleCountSumUInt32Index, inCircleCountSum);
         }
     }
 
@@ -93,7 +95,7 @@ namespace Hast.Samples.SampleAssembly
 
             // This single calculation takes up too much space on the FPGA, since it needs fix point arithmetic, but
             // it doesn't take much time. So doing it on the host instead.
-            return (double)memory.ReadInt32(MonteCarloPiEstimator.EstimatePi_PiEstimateFix64StartIndex) / iterationsCount * 4;
+            return (double)memory.ReadInt32(MonteCarloPiEstimator.EstimatePi_InCircleCountSumUInt32Index) / iterationsCount * 4;
         }
     }
 }
