@@ -52,7 +52,6 @@
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />
     <Compile Include="MonteCarloPiEstimator.cs" />
-    <Compile Include="MonteCarloResult.cs" />
     <Compile Include="ObjectOrientedShowcase.cs" />
     <Compile Include="PrimeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
