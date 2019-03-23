@@ -18,9 +18,8 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 5000000;
 
-            // On a Nexys A7 this takes about 1,7s with a 36 degree of parallelism of and method inlining. Although all
-            // the DSPs are utilized on the FPGA since there are plenty of the other resources it's possible to use
-            // more parallel executors. It takes about 1,1s on an i7 processor with 4 physical (8 logical) cores.
+            // On a Nexys A7 this takes about 1,7s with a 36 degree of parallelism of and method inlining. It takes
+            // about 1,1s on an i7 processor with 4 physical (8 logical) cores.
 
             var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator());
             var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount);
