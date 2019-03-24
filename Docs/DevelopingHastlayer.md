@@ -31,3 +31,8 @@ When merging from the `dev` to the `client` branch make sure to not merge entrie
 ## When creating a new project
 
 If you add a new project to the solution make sure link the *SharedAssemblyInfo.cs* file from the root to its Properties node. See the comments in the file on what that is.
+
+
+## Notes on Orchard
+
+Be aware that Hastlayer is a desktop [Orchard](https://orchardproject.net) application using [Orchard ApplicationHost](https://github.com/Lombiq/Orchard-Application-Host). Thus for example the Core projects are loaded dynamically as modules. Because of this if you change something in those (i.e. in projects that are not directly or indirectly statically referenced from the currently executing assembly) then you need to do an explicit rebuild (F6) instead of just starting debugging (F5).

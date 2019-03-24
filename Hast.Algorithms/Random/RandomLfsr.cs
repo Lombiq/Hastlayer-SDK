@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hast.Algorithms
+﻿namespace Hast.Algorithms.Random
 {
     /// <summary>
-    /// A very simple random number generator implemented with a 
+    /// A very simple pseudo random number generator implemented with a 
     /// <see href="https://en.wikipedia.org/wiki/Linear_feedback_shift_register">linear-feedback shift register</see>.
     /// Use this if you want simple but fast PRNG with the least resources. For a PRNG that has better quality but
     /// higher resource usage see <see cref="RandomMwc64X"/>.

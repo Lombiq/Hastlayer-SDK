@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using Hast.Algorithms;
+using Hast.Algorithms.Random;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.Kpz
