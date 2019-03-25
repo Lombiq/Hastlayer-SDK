@@ -21,13 +21,7 @@ namespace Hast.Algorithms.Random
         {
             uint c = (uint)(State >> 32);
             uint x = (uint)State;
-            // Creating the value 0xFFFEB81BUL. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0xFFFE;
-            uint zHigh = 0xB81B;
-            uint z = 0 | (zLow << 16) | zHigh;
-            State = (ulong)x * z + c;
+            State = x * 0xFFFEB81BUL + c;
             return x ^ c;
         }
     }

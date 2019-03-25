@@ -165,19 +165,7 @@ namespace Hast.Algorithms
         public static Fix64 Floor(Fix64 value)
         {
             // Just zero out the fractional part
-
-            // Creating the value 0xFFFFFFFF00000000. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0x0000;
-            uint zHigh = 0x0000;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            ulong mask = 0xFFFFFFFF;
-            mask <<= 32;
-            mask |= z;
-
-            return new Fix64((long)((ulong)value._rawValue & mask));
+            return new Fix64((long)((ulong)value._rawValue & 0xFFFFFFFF00000000));
         }
 
         /// <summary>
@@ -185,18 +173,7 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 Ceiling(Fix64 value)
         {
-            // Creating the value 0x00000000FFFFFFFF. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0xFFFF;
-            uint zHigh = 0xFFFF;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            long mask = 0x00000000;
-            mask <<= 32;
-            mask |= z;
-
-            var hasFractionalPart = (value._rawValue & mask) != 0;
+            var hasFractionalPart = (value._rawValue & 0x00000000FFFFFFFF) != 0;
             return hasFractionalPart ? Floor(value) + One() : value;
         }
 
@@ -206,30 +183,14 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 Round(Fix64 value)
         {
-            // Creating the value 0x00000000FFFFFFFF. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0xFFFF;
-            uint zHigh = 0xFFFF;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            long mask = 0x00000000;
-            mask <<= 32;
-            mask |= z;
-
-            var fractionalPart = value._rawValue & mask;
+            var fractionalPart = value._rawValue & 0x00000000FFFFFFFF;
             var integralPart = Floor(value);
 
-            // Creating the value 0x80000000.
-            uint fractionalPartMask = 0x8000;
-            fractionalPartMask <<= 16;
-            fractionalPartMask |= 0x0000;
-
-            if (fractionalPart < fractionalPartMask)
+            if (fractionalPart < 0x80000000)
             {
                 return integralPart;
             }
-            if (fractionalPart > fractionalPartMask)
+            if (fractionalPart > 0x80000000)
             {
                 return integralPart + One();
             }
@@ -266,17 +227,6 @@ namespace Hast.Algorithms
             {
                 bit >>= 2;
             }
-
-            // Creating the value 0x0000000080000000. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0x0000;
-            uint zHigh = 0x8000;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            long mask = 0x00000000;
-            mask <<= 32;
-            mask |= z;
 
             // The main part is executed twice, in order to avoid
             // using 128 bit values in computations.
@@ -386,20 +336,9 @@ namespace Hast.Algorithms
             var xl = x._rawValue;
             var yl = y._rawValue;
 
-            // Creating the value 0x00000000FFFFFFFF. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0xFFFF;
-            uint zHigh = 0xFFFF;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            long mask = 0x00000000;
-            mask <<= 32;
-            mask |= z;
-
-            var xlo = (ulong)(xl & mask);
+            var xlo = (ulong)(xl & 0x00000000FFFFFFFF);
             var xhi = xl >> FractionalPlaces;
-            var ylo = (ulong)(yl & mask);
+            var ylo = (ulong)(yl & 0x00000000FFFFFFFF);
             var yhi = yl >> FractionalPlaces;
 
             var lolo = xlo * ylo;
@@ -480,19 +419,9 @@ namespace Hast.Algorithms
             var xl = x._rawValue;
             var yl = y._rawValue;
 
-            // Creating the value 0x00000000FFFFFFFF. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0xFFFF;
-            uint zHigh = 0xFFFF;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            long mask = 0x00000000;
-            mask <<= 32;
-            mask |= z;
-            var xlo = (ulong)(xl & mask);
+            var xlo = (ulong)(xl & 0x00000000FFFFFFFF);
             var xhi = xl >> FractionalPlaces;
-            var ylo = (ulong)(yl & mask);
+            var ylo = (ulong)(yl & 0x00000000FFFFFFFF);
             var yhi = yl >> FractionalPlaces;
 
             var lolo = xlo * ylo;
@@ -538,17 +467,6 @@ namespace Hast.Algorithms
                 bitPos -= 4;
             }
 
-            // Creating the value 0xFFFFFFFFFFFFFFFF. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0xFFFF;
-            uint zHigh = 0xFFFF;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            ulong mask = 0xFFFFFFFF;
-            mask <<= 32;
-            mask |= z;
-
             while (remainder != 0 && bitPos >= 0)
             {
                 int shift = CountLeadingZeroes(remainder);
@@ -564,7 +482,7 @@ namespace Hast.Algorithms
                 quotient += div << bitPos;
 
                 // Detect overflow
-                if ((div & ~(mask >> bitPos)) != 0)
+                if ((div & ~(0xFFFFFFFFFFFFFFFF >> bitPos)) != 0)
                 {
                     return ((xl ^ yl) & MinRawValue) == 0 ? MaxValue() : MinValue();
                 }
@@ -675,27 +593,8 @@ namespace Hast.Algorithms
         {
             int result = 0;
 
-            // Creating the value 0xF000000000000000. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint zLow = 0x0000;
-            uint zHigh = 0x0000;
-            uint z = (0 << 32) | (zLow << 16) | zHigh;
-
-            ulong mask1 = 0xF0000000;
-            mask1 <<= 32;
-            mask1 |= z;
-
-            while ((x & mask1) == 0) { result += 4; x <<= 4; }
-
-            // Creating the value 0x8000000000000000. 
-            // This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            ulong mask2 = 0x80000000;
-            mask2 <<= 32;
-            mask2 |= z;
-
-            while ((x & mask2) == 0) { result += 1; x <<= 1; }
+            while ((x & 0xF000000000000000) == 0) { result += 4; x <<= 4; }
+            while ((x & 0x8000000000000000) == 0) { result += 1; x <<= 1; }
 
 
             return result;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Hast.Algorithms;
+using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 
@@ -11,15 +12,15 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
-            configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomLfsr>(p => p.NextUInt32());
+            configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
             uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 5000000;
 
-            // On a Nexys A7 this takes about 1,7s with a 36 degree of parallelism of and method inlining. It takes
-            // about 1,1s on an i7 processor with 4 physical (8 logical) cores.
+            // On a Nexys 4 DDR this takes about 340ms with a 76 degree of parallelism and method inlining. It takes
+            // about 1,5s on an i7 processor with 4 physical (8 logical) cores.
 
             var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator());
             var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount);
