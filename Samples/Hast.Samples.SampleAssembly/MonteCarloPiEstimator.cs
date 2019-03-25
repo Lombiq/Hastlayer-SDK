@@ -15,6 +15,7 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MonteCarloPiEstimator
     {
+        // With 78 about 61% of resources are usd, but with 79 101%, so this is the limit of efficiency.
         public const int MaxDegreeOfParallelism = 78;
         public const int EstimatePi_IteractionsCountUInt32Index = 0;
         public const int EstimatePi_RandomSeedUInt32Index = 1;
