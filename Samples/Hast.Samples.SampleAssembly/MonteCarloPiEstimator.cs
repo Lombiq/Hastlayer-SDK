@@ -15,7 +15,7 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MonteCarloPiEstimator
     {
-        // With 78 about 61% of resources are usd, but with 79 101%, so this is the limit of efficiency.
+        // With 78 about 61% of resources are used, but with 79 101%, so this is the limit of efficiency.
         public const int MaxDegreeOfParallelism = 78;
         public const int EstimatePi_IteractionsCountUInt32Index = 0;
         public const int EstimatePi_RandomSeedUInt32Index = 1;
@@ -45,9 +45,11 @@ namespace Hast.Samples.SampleAssembly
                             uint a = random.NextUInt16();
                             uint b = random.NextUInt16();
 
-                            // A bit of further parallelization can be exploited with SIMD to shave off a few dozen ms.
+                            // A bit of further parallelization can be exploited with SIMD to shave off some execution
+                            // time. However, this needs so much resources on the hardware that the degree of
+                            // parallelism needs to be lowered substantially (below 60).
                             //var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
-                            //var products = SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
+                            //var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
 
                             if ((ulong)(a * a) + b * b <= ((uint)ushort.MaxValue * ushort.MaxValue))
                             //if ((ulong)products[0] + products[1] <= ((uint)ushort.MaxValue * ushort.MaxValue))
