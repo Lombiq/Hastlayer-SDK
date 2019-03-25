@@ -28,9 +28,11 @@ namespace Hast.Samples.SampleAssembly
         public const int VectorElementsStartInt32Index = 1;
         public const int ResultVectorElementsStartInt32Index = 1;
 
-        // This needs to be this low to fit all operations on the Nexys 4 DDR board's FPGA. On the same board just
-        // transforming AddVectors or SubtractVectors could fit with a degree of parallelism of more than 500.
-        public const int MaxDegreeOfParallelism = 30;
+        // This needs to be this low to fit all operations on the Nexys 4 DDR board's FPGA and for the design to remain
+        // stable. While only 69% of the FPGA's resources are used unfortunately we can't go above that.
+        // On the same board just transforming AddVectors or SubtractVectors could fit with a degree of parallelism of
+        // more than 500.
+        public const int MaxDegreeOfParallelism = 20;
 
 
         public virtual void AddVectors(SimpleMemory memory)

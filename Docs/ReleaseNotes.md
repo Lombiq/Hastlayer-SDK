@@ -13,6 +13,7 @@ Note that the hardware framework projects have their own release cycle and relea
 - New sample, see `MonteCarloPiEstimator`: A Monte Carlo simulation computing the value of Pi in a highly parallelized manner.
 - New linear-feedback shift register pseudo random number generator: `RandomLfsr` (check out the `MonteCarloPiEstimator` sample on how it can be useful). This is a simpler PRNG than the `RandomMwc64X` implementation we had before solely, and has lower resource usage, but produces lower quality random numbers. Also included the 16b `RandomLfsr16` and a xorshift version, `RandomXorshiftLfsr16`.
 - Implement workaround for an [ILSpy bug](https://github.com/icsharpcode/ILSpy/issues/807).
+- Fixing SimdCalculator hardware execution, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/11).
 - Various smaller bugfixes and improvements.
 
 
