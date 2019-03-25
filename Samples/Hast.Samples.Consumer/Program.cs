@@ -24,9 +24,8 @@ namespace Hast.Samples.Consumer
         public static string VhdlOutputFilePath = @"Hast_IP.vhd";
 
         /// <summary>
-        /// Which sample algorithm to transform and run? Choose one. Currently the following samples are not up-to-date
-        /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher,
-        /// MonteCarloAlgorithm.
+        /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not up-to-date
+        /// enough and shouldn't be really taken as good examples (check out the other ones).
         /// </summary>
         public static Sample SampleToRun = Sample.PrimeCalculator;
     }
@@ -81,7 +80,7 @@ namespace Hast.Samples.Consumer
 
                         // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                         // here:
-                        var remoteClientConfiguration  = configuration.RemoteClientConfiguration();
+                        var remoteClientConfiguration = configuration.RemoteClientConfiguration();
                         remoteClientConfiguration.AppName = "TestApp";
                         remoteClientConfiguration.AppSecret = "appsecret";
                         if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
@@ -110,8 +109,8 @@ namespace Hast.Samples.Consumer
                             case Sample.Loopback:
                                 LoopbackSampleRunner.Configure(configuration);
                                 break;
-                            case Sample.MonteCarloAlgorithm:
-                                MonteCarloAlgorithmSampleRunner.Configure(configuration);
+                            case Sample.MonteCarloPiEstimator:
+                                MonteCarloPiEstimatorSampleRunner.Configure(configuration);
                                 break;
                             case Sample.ObjectOrientedShowcase:
                                 ObjectOrientedShowcaseSampleRunner.Configure(configuration);
@@ -189,8 +188,8 @@ namespace Hast.Samples.Consumer
                             case Sample.Loopback:
                                 await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
-                            case Sample.MonteCarloAlgorithm:
-                                await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            case Sample.MonteCarloPiEstimator:
+                                await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                                 break;
                             case Sample.ObjectOrientedShowcase:
                                 await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);

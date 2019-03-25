@@ -54,7 +54,7 @@
     <Compile Include="SampleRunners\LoopbackSampleRunner.cs" />
     <Compile Include="SampleRunners\ParallelAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
-    <Compile Include="SampleRunners\MonteCarloAlgorithmSampleRunner.cs" />
+    <Compile Include="SampleRunners\MonteCarloPiEstimatorSampleRunner.cs" />
     <Compile Include="SampleRunners\ObjectOrientedShowcaseSampleRunner.cs" />
     <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
