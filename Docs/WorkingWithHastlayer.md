@@ -84,14 +84,14 @@ The `ParallelAlgorithm` sample does exactly this.
 
 Note that FPGAs have a finite amount of resources that you can utilize, and the more complex your algorithm, the more resources it will take. With simpler algorithms you can achieve a higher degree of parallelism on a given FPGA, since more copies of it will fit. So you can either have more complex pieces of logic parallelized to a lower degree, or simpler logic parallelized to a higher degree.
 
-Very broadly speaking if you performance-optimize your .NET code and it executes faster as software then most possibly it will also execute faster as hardware. But do measure if your optimizations have the desired effect.
+Very broadly speaking if you performance-optimize your .NET code and it executes faster afterwards as software then most possibly it will improve as hardware. But do measure if your optimizations have the desired effect.
 
 
 ## Troubleshooting
 
 If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
 
-If during transformation there's a warning (i.e. some issue that doesn't necessarily make the result wrong but you should know about it) then that will be added to the result of the *IHastlayer.GenerateHardware()* call (inside `HardwareDescription`) as well as to the logs and to Visual's Studio's Debug window when run in Debug mode.
+If during transformation there's a warning (i.e. some issue that doesn't necessarily make the result wrong but you should know about it) then that will be added to the result of the `IHastlayer.GenerateHardware()` call (inside `HardwareDescription`) as well as to the logs and to Visual's Studio's Debug window when run in Debug mode.
 
 You can configure Hastlayer to check whether the hardware execution's results are correct by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects. This will also run everything as software, compare the software output with the hardware output and throw exceptions if they're off.
 
