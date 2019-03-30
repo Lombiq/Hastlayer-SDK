@@ -25,9 +25,8 @@ namespace Hast.Samples.Consumer
         public static string VhdlOutputFilePath = @"Hast_IP.vhd";
 
         /// <summary>
-        /// Which sample algorithm to transform and run? Choose one. Currently the following samples are not up-to-date
-        /// enough and shouldn't be really taken as good examples (check out the other ones): GenomeMatcher,
-        /// MonteCarloAlgorithm.
+        /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not up-to-date
+        /// enough and shouldn't be really taken as good examples (check out the other ones).
         /// </summary>
         public static Sample SampleToRun = Sample.PrimeCalculator;
     }

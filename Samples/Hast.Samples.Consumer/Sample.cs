@@ -7,7 +7,7 @@
         ParallelAlgorithm,
         ImageProcessingAlgorithms,
         Loopback,
-        MonteCarloAlgorithm,
+        MonteCarloPiEstimator,
         ObjectOrientedShowcase,
         PrimeCalculator,
         RecursiveAlgorithms,

@@ -1,10 +1,9 @@
-﻿using System;
+﻿using Hast.Algorithms.Random;
+using Hast.Layer;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Transformer.Abstractions.Configuration;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Kpz
 {
@@ -60,7 +59,7 @@ namespace Hast.Samples.Kpz
 
             var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
                     typeof(KpzKernelsParallelizedInterface).Assembly,
-                    typeof(Algorithms.PrngMWC64X).Assembly
+                    typeof(RandomMwc64X).Assembly
                 }, configuration);
 
             await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);
