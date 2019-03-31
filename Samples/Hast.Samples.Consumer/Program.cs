@@ -112,8 +112,8 @@ namespace Hast.Samples.Consumer
                     case Sample.Loopback:
                         LoopbackSampleRunner.Configure(configuration);
                         break;
-                    case Sample.MonteCarloAlgorithm:
-                        MonteCarloAlgorithmSampleRunner.Configure(configuration);
+                    case Sample.MonteCarloPiEstimator:
+                        MonteCarloPiEstimatorSampleRunner.Configure(configuration);
                         break;
                     case Sample.ObjectOrientedShowcase:
                         ObjectOrientedShowcaseSampleRunner.Configure(configuration);
@@ -190,8 +190,8 @@ namespace Hast.Samples.Consumer
                     case Sample.Loopback:
                         await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
                         break;
-                    case Sample.MonteCarloAlgorithm:
-                        await MonteCarloAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                    case Sample.MonteCarloPiEstimator:
+                        await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                         break;
                     case Sample.ObjectOrientedShowcase:
                         await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
