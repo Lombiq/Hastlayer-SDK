@@ -19,7 +19,7 @@ namespace Hast.Communication.Services
         // This has to be maximum the number set for the TCP MSS in the Hastlayer hardware project.
         private const int ReceiveBufferSize = 1460;
 
-        private const int MemoryPrefixLength = 2;
+        private const int MemoryPrefixCells = 2;
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
@@ -99,8 +99,8 @@ namespace Hast.Communication.Services
 
                             // Here we put together the data stream.
                             var dma = new SimpleMemoryAccessor(simpleMemory);
-                            var memory = dma.Get(MemoryPrefixLength); // This way memory doesn't have to be copied.
-                            var memoryDataLength = memory.Length - MemoryPrefixLength * SimpleMemory.MemoryCellSizeBytes;
+                            var memory = dma.Get(MemoryPrefixCells); // This way memory doesn't have to be copied.
+                            var memoryDataLength = memory.Length - MemoryPrefixCells * SimpleMemory.MemoryCellSizeBytes;
 
                             // Copying the input length, represented as bytes, to the output buffer.
                             MemoryMarshal.Write(memory.Span, ref memoryDataLength);
@@ -123,9 +123,9 @@ namespace Hast.Communication.Services
                             Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
                             // Finally read the memory itself.
-                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixLength * SimpleMemory.MemoryCellSizeBytes);
+                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixCells * SimpleMemory.MemoryCellSizeBytes);
 
-                            dma.Set(outputBytes, MemoryPrefixLength);
+                            dma.Set(outputBytes, MemoryPrefixCells);
                         }
                     }
                 }
