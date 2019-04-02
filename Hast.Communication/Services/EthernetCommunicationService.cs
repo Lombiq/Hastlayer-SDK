@@ -143,7 +143,8 @@ namespace Hast.Communication.Services
 
         public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length, int offset = 0)
         {
-            var outputBytes = new byte[length + offset];
+            length += offset;
+            var outputBytes = new byte[length];
 
             var readPosition = offset;
             var remaining = outputBytes.Length;
