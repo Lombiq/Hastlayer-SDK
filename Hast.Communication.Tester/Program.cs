@@ -21,12 +21,14 @@ namespace Hast.Communication.Tester
 
         public const int HexDumpDigits = SimpleMemory.MemoryCellSizeBytes * 2;
 
+
+        // todo too fat, move out some to own class/method
         private static async Task MainTask(Options configuration)
         {
             using (var hastlayer = await Hastlayer.Create(new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer }))
             {
                 var devices = await hastlayer.GetSupportedDevices();
-                if (devices == null || devices.Count() == 0) throw new Exception("No devices are available!");
+                if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
 
                 if (configuration.ListDevices)
                 {
@@ -84,17 +86,23 @@ namespace Hast.Communication.Tester
                         }
                         break;
                 }
-                // Save input to file.
+                // Save input to file using the format of the output file type.
                 switch (configuration.OutputFileType)
                 {
                     case OutputFileType.None: break;
                     case OutputFileType.Hexdump:
                         Console.WriteLine("Saving input hexdump to '{0}'", configuration.InputFileName);
                         if (configuration.InputFileName == "-")
+                        {
                             WriteHexdump(Console.Out, memory);
+                        }
                         else
+                        {
                             using (var streamWriter = new StreamWriter(configuration.InputFileName, false, Encoding.UTF8))
+                            {
                                 WriteHexdump(streamWriter, memory);
+                            }
+                        }
                         Console.WriteLine("File saved.");
                         break;
                     case OutputFileType.Binary:
@@ -125,12 +133,13 @@ namespace Hast.Communication.Tester
                     info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
                 // Verify results!
+                // TODO: add more brackets
                 var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
                 for (int i = 0; i < memory.CellCount; i++)
                     if (!memory.Read4Bytes(i).SequenceEqual(referenceMemory.Read4Bytes(i)))
                         mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
                             i, memory.Read4Bytes(i), referenceMemory.Read4Bytes(i)));
-                if (mismatches.Any()) throw new HardwareExecutionResultMismatchException(mismatches);
+                if (mismatches.Any()) throw new HardwareExecutionResultMismatchException(mismatches); // TODO don't exception, only log text
                 Console.WriteLine("Verification passed!");
 
                 

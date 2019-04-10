@@ -13,20 +13,20 @@ namespace Hast.Communication.Tester
         public string DeviceName { get; set; }
 
         [Option('b', "bytes", HelpText = "The total size of the payload in bytes.")]
-        public long PayloadBytes { get; set; } = 10;
+        public long PayloadLengthBytes { get; set; } = 10;
 
         [Option('k', "kilo-bytes", HelpText = "The total size of the payload in kilobytes.")]
-        public int PayloadKiloBytes { get => (int)(PayloadBytes / 1024); set => PayloadBytes = (long)value * 1024; }
+        public int PayloadKiloBytes { get => (int)(PayloadLengthBytes / 1024); set => PayloadLengthBytes = (long)value * 1024; }
 
         [Option('c', "cells", HelpText = "The total size of the payload in number of cells.")]
         public int PayloadLengthCells
         {
-            get => (int)Math.Ceiling((double)PayloadBytes / SimpleMemory.MemoryCellSizeBytes);
-            set => PayloadBytes = (long)value * SimpleMemory.MemoryCellSizeBytes;
+            get => (int)Math.Ceiling((double)PayloadLengthBytes / SimpleMemory.MemoryCellSizeBytes);
+            set => PayloadLengthBytes = (long)value * SimpleMemory.MemoryCellSizeBytes;
         }
 
         [Option('m', "member-id", HelpText = "The simulated MemberId.")]
-        public int MemberId { get; set; } = 1;
+        public int MemberId { get; set; } = 0;
 
         [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile)")]
         public PayloadType PayloadType { get; set; } = PayloadType.ConstantIntOne;
