@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,8 +31,39 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdvancedDLSupport, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\AdvancedDLSupport.2.3.0\lib\netstandard2.0\AdvancedDLSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Humanizer, Version=2.5.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\Humanizer.Core.2.5.1\lib\netstandard2.0\Humanizer.dll</HintPath>
+    </Reference>
+    <Reference Include="IcIWare.NamedIndexers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\IcIWare.NamedIndexers.1.0.0\lib\net45\IcIWare.NamedIndexers.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.DllMap, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\Mono.DllMap.1.0.1\lib\netstandard2.0\Mono.DllMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StrictEmit, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\StrictEmit.2.5.0\lib\net45\StrictEmit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,8 +75,12 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CatapultFunctionResultException.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="CatapultCommunicationService.cs" />
+    <Compile Include="CatapultLibrary.cs" />
     <Compile Include="CatapultManifestProvider.cs" />
+    <Compile Include="ICatapultNativeLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +104,19 @@
       <Project>{9DEE53C2-83AC-4048-ADAB-2993FAFFE4EA}</Project>
       <Name>Hast.Transformer.Abstractions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <Content Include="FpgaCoreLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FPGADefaultVersionManifest.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FPGAVersionDefinitions.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

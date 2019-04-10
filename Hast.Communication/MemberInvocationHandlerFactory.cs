@@ -119,7 +119,8 @@ namespace Hast.Communication
                                 if (configuration.VerifyHardwareResults)
                                 {
                                     softMemory = new SimpleMemory(memory.CellCount);
-                                    memory.Memory.CopyTo(softMemory.Memory, 0);
+                                    var memoryBytes = new SimpleMemoryAccessor(memory).Get();
+                                    memoryBytes.CopyTo(new SimpleMemoryAccessor(softMemory).Get());
 
                                     var memoryArgumentIndex = invocation.Arguments
                                         .Select((argument, index) => new { Argument = argument, Index = index })
@@ -154,12 +155,10 @@ namespace Hast.Communication
                                     var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
                                     for (int i = 0; i < memory.CellCount; i++)
                                     {
-                                        var hardwareBytes = memory.Read4Bytes(i);
-                                        var softwareBytes = softMemory.Read4Bytes(i);
-                                        if (!hardwareBytes.SequenceEqual(softwareBytes))
+                                        if (!memory.Read4Bytes(i).SequenceEqual(softMemory.Read4Bytes(i)))
                                         {
                                             mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
-                                                i, hardwareBytes, softwareBytes));
+                                                i, memory.Read4Bytes(i), softMemory.Read4Bytes(i)));
                                         }
                                     }
 

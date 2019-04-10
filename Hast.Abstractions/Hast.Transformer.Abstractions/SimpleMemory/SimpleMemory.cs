@@ -1,8 +1,5 @@
 ﻿using System;
-
-// This is so the Memory property can be read when handling communication with the FPGA but not by user code.
-// This could be supposedly also in AssemblyInfo.cs but there it doesn't work.
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Hast.Communication")]
+using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
@@ -19,8 +16,19 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// </remarks>
     public class SimpleMemory
     {
-        public const uint MemoryCellSizeBytes = 4;
+        public const int MemoryCellSizeBytes = sizeof(int);
 
+        /// <summary>
+        /// The number of extra cells used for header information like memberId or data length.
+        /// </summary>
+        public int PrefixCellCount { get; internal set; } = 4;
+
+        /// <summary>
+        /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be used
+        /// for passing in extra input parameters (like memberId) without having to copy the operative memory contents
+        /// into an auxiliary array.
+        /// </summary>
+        internal Memory<byte> PrefixedMemory { get; set; }
 
         /// <summary>
         /// Gets or sets the contents of the memory representation.
@@ -28,12 +36,27 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <remarks>
         /// This is internal so the property can be read when handling communication with the FPGA but not by user code.
         /// </remarks>
-        internal byte[] Memory { get; set; }
+        internal Memory<byte> Memory => PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
+
+        /// <summary>
+        /// Gets the number of bytes of this memory allocation.
+        /// </summary>
+        public int ByteCount => Memory.Length;
 
         /// <summary>
         /// Gets the number of cells of this memory allocation, indicating memory cells of size <see cref="MemoryCellSizeBytes"/>.
         /// </summary>
-        public int CellCount { get; private set; }
+        public int CellCount => Memory.Length / MemoryCellSizeBytes;
+
+        /// <summary>
+        /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.
+        /// </summary>
+        /// <param name="cellIndex">The cell index where the memory span starts.</param>
+        /// <returns>A span starting at cellIndex * MemoryCellSizeBytes.</returns>
+        private Span<byte> this[int cellIndex]
+        {
+            get => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
+        }
 
 
         /// <summary>
@@ -47,45 +70,55 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </param>
         public SimpleMemory(int cellCount)
         {
-            Memory = new byte[cellCount * MemoryCellSizeBytes];
-            CellCount = cellCount;
+            PrefixedMemory = new byte[(cellCount + PrefixCellCount) * MemoryCellSizeBytes];
         }
+
+        /// <summary>
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// the FPGA for transformed algorithms from an existing byte array.
+        /// </summary>
+        /// <param name="memory">The source data.</param>
+        /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
+        /// <remarks>
+        /// This constructor is internal only to avoid dependency issues where we have to include System.Memory package
+        /// everywhere where SimpleMemory is used even if it's created with the other constructors. Instead, you can use
+        /// <see cref="SimpleMemoryAccessor.Create(Memory{byte}, int)"/> to construct a <see cref="SimpleMemory"/> from
+        /// <see cref="Memory{byte}"/>.
+        /// </remarks>
+        internal SimpleMemory(Memory<byte> memory, int prefixCellCount)
+        {
+            PrefixedMemory = memory;
+            PrefixCellCount = prefixCellCount;
+        }
+
+        /// <summary>
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// the FPGA for transformed algorithms from an existing byte array.
+        /// </summary>
+        /// <param name="memory">The source data.</param>
+        /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
+        private SimpleMemory(byte[] memory, int prefixCellCount = 0) : this(memory.AsMemory(), prefixCellCount) { }
 
 
         public void Write4Bytes(int cellIndex, byte[] bytes)
         {
-            if (bytes.Length > MemoryCellSizeBytes)
-            {
-                throw new ArgumentException("The byte array to be written to memory should be shorter than " + MemoryCellSizeBytes + ".");
-            }
+            var target = this[cellIndex];
 
-            for (uint i = 0; i < bytes.Length; i++)
-            {
-                Memory[i + cellIndex * MemoryCellSizeBytes] = bytes[i];
-            }
-
-            for (uint i = (uint)bytes.Length; i < MemoryCellSizeBytes; i++)
-            {
-                Memory[i + cellIndex * MemoryCellSizeBytes] = 0;
-            }
+            for (int i = 0; i < bytes.Length; i++) target[i] = bytes[i];
+            for (int i = bytes.Length; i < MemoryCellSizeBytes; i++) target[i] = 0;
         }
 
-        public void Write4Bytes(int startCellIndex, params byte[][] bytesMatrix)
+        public void Write4Bytes(int startCellIndex, byte[][] bytesMatrix)
         {
             for (int i = 0; i < bytesMatrix.Length; i++)
-            {
                 Write4Bytes(startCellIndex + i, bytesMatrix[i]);
-            }
         }
 
         public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
 
-            for (uint i = 0; i < MemoryCellSizeBytes; i++)
-            {
-                output[i] = Memory[i + cellIndex * MemoryCellSizeBytes];
-            }
+            this[cellIndex].CopyTo(output);
 
             return output;
         }
@@ -102,83 +135,82 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             return bytesMatrix;
         }
 
-        public void WriteUInt32(int cellIndex, uint number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
+        public void WriteUInt32(int cellIndex, uint number) => MemoryMarshal.Write(this[cellIndex], ref number);
 
-        public void WriteUInt32(int startCellIndex, params uint[] numbers)
-        {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                WriteUInt32(startCellIndex + i, numbers[i]);
-            }
-        }
+        public void WriteUInt32(int startCellIndex, params uint[] numbers) =>
+            MemoryMarshal.Cast<uint, byte>(numbers)
+                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(uint)).Span);
 
-        public uint ReadUInt32(int cellIndex) => BitConverter.ToUInt32(Read4Bytes(cellIndex), 0);
+        public uint ReadUInt32(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]);
 
-        public uint[] ReadUInt32(int startCellIndex, int count)
-        {
-            var numbers = new uint[count];
+        public uint[] ReadUInt32(int startCellIndex, int count) => 
+            MemoryMarshal.Cast<byte, uint>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(uint)).Span).ToArray();
 
-            for (int i = 0; i < count; i++)
-            {
-                numbers[i] = ReadUInt32(startCellIndex + i);
-            }
-
-            return numbers;
-        }
 
         public void WriteInt32(int cellIndex, int number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
-        public void WriteInt32(int startCellIndex, params int[] numbers)
-        {
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                WriteInt32(startCellIndex + i, numbers[i]);
-            }
-        }
+        public void WriteInt32(int startCellIndex, params int[] numbers) =>
+            MemoryMarshal.Cast<int, byte>(numbers)
+                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(int)).Span);
 
-        public int ReadInt32(int cellIndex) => BitConverter.ToInt32(Read4Bytes(cellIndex), 0);
+        public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
 
-        public int[] ReadInt32(int startCellIndex, int count)
-        {
-            var numbers = new int[count];
-
-            for (int i = 0; i < count; i++)
-            {
-                numbers[i] = ReadInt32(startCellIndex + i);
-            }
-
-            return numbers;
-        }
+        /// <summary>
+        /// Takes count integers at cellIndex.
+        /// </summary>
+        /// <param name="startCellIndex">The cell of the first integer</param>
+        /// <param name="count">The amount of integers</param>
+        /// <returns>The numbers in an array.</returns>
+        public int[] ReadInt32(int startCellIndex, int count) =>
+            MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span).ToArray();
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
-            // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here
-            // so on the FPGA-side we can depend on it.
-            Write4Bytes(cellIndex, boolean ? new byte[] { 255, 255, 255, 255 } : new byte[] { 0, 0, 0, 0 });
+            // Since the implementation of a boolean can depend on the system rather hard-coding the expected values
+            // here so on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because its second
+            // parameter must be passed using "ref" and you can't pass in constants or expressions by reference.
+            WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
         public void WriteBoolean(int startCellIndex, params bool[] booleans)
         {
             for (int i = 0; i < booleans.Length; i++)
-            {
                 WriteBoolean(startCellIndex + i, booleans[i]);
-            }
         }
 
-        public bool ReadBoolean(int cellIndex)
-        {
-            var bytes = Read4Bytes(cellIndex);
-            return bytes[0] != 0 || bytes[1] != 0 || bytes[2] != 0 || bytes[3] != 0;
-        }
+        public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
 
         public bool[] ReadBoolean(int startCellIndex, int count)
         {
+            var source = ReadUInt32(startCellIndex, count);
             var booleans = new bool[count];
 
             for (int i = 0; i < count; i++)
-            {
-                booleans[i] = ReadBoolean(startCellIndex + i);
-            }
+                booleans[i] = source[i] == uint.MaxValue;
 
             return booleans;
+        }
+    }
+
+
+    /// <summary>
+    /// Extensions for older Framework features which don't support Memory or Span yet.
+    /// </summary>
+    public static class MemoryExtensions
+    {
+        /// <summary>
+        /// Gets the internal array to be used for <see cref="System.IO.Stream.Write(byte[], int, int)"/>.
+        /// </summary>
+        /// <param name="bytes">The source.</param>
+        /// <returns>The underlying array.</returns>
+        /// <remarks>
+        /// Once Stream.Read(Span) based overload is available, use that instead!
+        /// https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.read?view=netcore-2.2#System_IO_Stream_Read_System_Span_System_Byte__
+        /// </remarks>
+        public static ArraySegment<byte> GetUnderlyingArray(this Memory<byte> bytes) => GetUnderlyingArray((ReadOnlyMemory<byte>)bytes);
+
+        public static ArraySegment<byte> GetUnderlyingArray(this ReadOnlyMemory<byte> bytes)
+        {
+            if (!MemoryMarshal.TryGetArray(bytes, out var arraySegment)) throw new NotSupportedException("This Memory does not support exposing the underlying array.");
+            return arraySegment;
         }
     }
 }
