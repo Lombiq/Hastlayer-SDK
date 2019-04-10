@@ -24,7 +24,7 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IEnumerable<ISerialPortConfigurator> _serialPortConfigurators;
 
-        private const int PrefixCellCount = 3;
+        private const int MemoryPrefixCellCount = 3;
         private const int FirstCellPadding = sizeof(int) - 1;
 
         public override string ChannelName
@@ -98,7 +98,7 @@ namespace Hast.Communication.Services
                     // Prepare memory.
                     var dma = new SimpleMemoryAccessor(simpleMemory);
                     // The first parameter is actually just a byte but we only fetch whole cells so 3/4 of the cell is padding.
-                    var memory = dma.Get(PrefixCellCount).Slice(FirstCellPadding);
+                    var memory = dma.Get(MemoryPrefixCellCount).Slice(FirstCellPadding);
                     var memoryLength = simpleMemory.ByteCount;
 
                     // Execute Order 66.
@@ -176,7 +176,7 @@ namespace Hast.Communication.Services
 
                                     // Since the output's size can differ from the input size for optimization reasons,
                                     // we take the explicit size into account.
-                                    outputBytes = new byte[outputByteCount + PrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
+                                    outputBytes = new byte[outputByteCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
 
                                     Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
@@ -188,12 +188,12 @@ namespace Hast.Communication.Services
                                 // There is a padding of PrefixCellCount cells for the unlikely case that the user
                                 // would directly feed back the output as the next call's input. This way Prefix space
                                 // is maintained.
-                                outputBytes[outputBytesReceivedCount + PrefixCellCount * SimpleMemory.MemoryCellSizeBytes] = receivedByte;
+                                outputBytes[outputBytesReceivedCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes] = receivedByte;
                                 outputBytesReceivedCount++;
 
                                 if (outputByteCount == outputBytesReceivedCount)
                                 {
-                                    dma.Set(outputBytes, PrefixCellCount);
+                                    dma.Set(outputBytes, MemoryPrefixCellCount);
 
                                     // Serial communication can give more data than we actually await, so need to 
                                     // set this.

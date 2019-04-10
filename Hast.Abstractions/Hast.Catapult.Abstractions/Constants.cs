@@ -196,13 +196,15 @@ namespace Hast.Catapult.Abstractions
             public const int PayloadLengthCells = sizeof(int);
 
             /// <summary>
-            /// Zero-based index of the current data slice (at least zero and less than sliceCount).
+            /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is
+            /// more than what would fit into a single slot then the header for the second slot will contain the
+            /// SliceIndex 1, for the third 2, and for the last one <see cref="SliceCount"/> - 1.
             /// </summary>
             public const int SliceIndex = sizeof(int);
 
             /// <summary>
             /// The number of slices the data is transmitted in. If the data has fewer bytes than BufferPayloadSize
-            /// then it's always 1. Otherwise it's PayloadLengthCells  / BufferPayloadSize rounded  up. If there are
+            /// then it's always 1. Otherwise it's PayloadLengthCells / BufferPayloadSize rounded up. If there are
             /// more input slices than slots on the hardware, then the response will behave as if the input sliceCount
             /// was only 1.
             /// </summary>
@@ -230,7 +232,9 @@ namespace Hast.Catapult.Abstractions
             public const int PayloadLengthCells = sizeof(int);
 
             /// <summary>
-            /// Zero-based index of the current data slice (at least zero and less than sliceCount).
+            /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is
+            /// more than what would fit into a single slot then the header for the second slot will contain the
+            /// SliceIndex 1, for the third 2, and for the last one <see cref="SliceCount"/> - 1.
             /// </summary>
             public const int SliceIndex = sizeof(int);
 

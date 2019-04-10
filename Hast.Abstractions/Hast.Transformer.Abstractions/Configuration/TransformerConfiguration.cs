@@ -1,6 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Hast.Transformer.Abstractions.Configuration
 {
@@ -47,6 +49,13 @@ namespace Hast.Transformer.Abstractions.Configuration
         public bool EnableMethodInlining { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets the list of methods that should be inlined in addition to methods already marked with a
+        /// suitable <c>MethodImpl</c> attribute. Will only work if <see cref="EnableMethodInlining"/> is <c>true</c>.
+        /// Fore more information check the documentation.
+        /// </summary>
+        public IList<string> AdditionalInlinableMethodsFullNames { get; set; } = new List<string>();
+
+        /// <summary>
         /// The lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer 
         /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use 
         /// this to specify array lengths.
@@ -63,6 +72,14 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// interfaces need to be loaded. If set to <c>false</c> such loading is not necessary. Defaults to <c>false</c>.
         /// </summary>
         public bool ProcessImplementedInterfaces { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets whether constant values are propagated through the processed code and variables that actually
+        /// hold only these values are substituted with the values themselves. This can significantly cut down on the
+        /// code complexity and improve performance, but in certain cases may yield incorrect results. If the hardware
+        /// implementation's results are incorrect then try setting this to <c>false</c>. Defaults to <c>true</c>.
+        /// </summary>
+        public bool EnableConstantSubstitution { get; set; } = true;
 
 
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)
@@ -94,5 +111,15 @@ namespace Hast.Transformer.Abstractions.Configuration
                 ArrayLengths.Add(arrayNames[i], length);
             }
         }
-    }
+
+        /// <summary>
+        /// Adds a method to the list of methods that should be inlined in addition to methods already marked with a
+        /// suitable <c>MethodImpl</c> attribute. See <see cref="AdditionalInlinableMethodsFullNames"/> for more 
+        /// information.
+        /// </summary>
+        /// <typeparam name="T">The type of the object that will be later fed to the hardware transformer.</typeparam>
+        /// <param name="expression">An expression with a call to the method.</param>
+        public void AddAdditionalInlinableMethod<T>(Expression<Action<T>> expression) =>
+            AdditionalInlinableMethodsFullNames.Add(expression.GetMethodFullName());
+        }
 }

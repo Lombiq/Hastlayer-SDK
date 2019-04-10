@@ -23,7 +23,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var sum = fixed64Calculator.CalculateIntegerSumUpToNumber(10000000);
 
             // This takes about 274ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with 
-            // a MaxDegreeOfParallelism of 13 while the device is about 76% utilized).
+            // a MaxDegreeOfParallelism of 12 while the device is about half utilized; above that the design will get
+            // unstable).
             // Since this basically does what the single-threaded sample but in multiple copies on multiple threads
             // the single-threaded sample takes the same amount of time on the FPGA.
 

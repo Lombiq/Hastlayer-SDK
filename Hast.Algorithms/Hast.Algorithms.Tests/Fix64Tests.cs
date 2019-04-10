@@ -213,7 +213,9 @@ namespace Hast.Algorithms.Tests
 
                     if (_testCases[j] == 0)
                     {
-                        Assert.Throws<DivideByZeroException>(() => Ignore(x / y));
+                        // Hastlayer doesn't handle exceptions.
+                        Assert.That(x / y == default(Fix64));
+                        //Assert.Throws<DivideByZeroException>(() => Ignore(x / y));
                     }
                     else
                     {
@@ -362,7 +364,9 @@ namespace Hast.Algorithms.Tests
 
                     if (operand2 == 0)
                     {
-                        Assert.Throws<DivideByZeroException>(() => Ignore(f1 / f2));
+                        // Hastlayer doesn't handle exceptions.
+                        Assert.That(f1 / f2 == default(Fix64));
+                        //Assert.Throws<DivideByZeroException>(() => Ignore(f1 / f2));
                     }
                     else
                     {
