@@ -147,7 +147,7 @@ namespace Hast.Communication.Services
             var outputBytes = new byte[length];
 
             var readPosition = offset;
-            var remaining = outputBytes.Length;
+            var remaining = outputBytes.Length - offset;
             while (readPosition < length)
             {
                 readPosition += await stream.ReadAsync(outputBytes, readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining);
