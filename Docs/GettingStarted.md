@@ -9,7 +9,7 @@ To begin working with Hastlayer you'll need the following:
 - The SDK and Hardware Framework repositories cloned.
 - Access to Hastlayer Remote Services, which does the actual .NET to hardware transformation. Evaluation access is currently free and you can sign up on [hastlayer.com](https://hastlayer.com).
 - A compatible FPGA board. Currently only the [Nexys A7 (formerly known as Nexys 4 DDR)](https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/) board (which is **NOT** the same as the non-DDR Nexys 4, be sure to purchase the linked board!) is supported, so you'll need to purchase one (in Hastlayer's code and all resources the board is referenced as "Nexys 4 DDR" still). The **Nexys A7-100T** version is required. Note that this is a relatively low-end development board that can't fit huge algorithms and it only supports slow communication channels. So with this board Hastlayer is only suitable for simpler algorithms that only need to exchange small amount of data.
-- [Visual Studio 2017 or later](https://www.visualstudio.com/downloads/) installed (and edition will work).
+- [Visual Studio 2017 or later](https://www.visualstudio.com/downloads/) installed (any edition will work).
 
 If you have a compatible FPGA board you can run the default sample even without having access to Hastlayer Remote Services.
 
