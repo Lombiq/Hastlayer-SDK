@@ -58,6 +58,7 @@
     <Compile Include="Sample.cs" />
     <Compile Include="SampleRunners\Fix64CalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\GenomeMatcherSampleRunner.cs" />
+    <Compile Include="SampleRunners\MemoryTestSampleRunner.cs" />
     <Compile Include="SampleRunners\LoopbackSampleRunner.cs" />
     <Compile Include="SampleRunners\ParallelAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />

@@ -112,6 +112,9 @@ namespace Hast.Samples.Consumer
                     case Sample.Loopback:
                         LoopbackSampleRunner.Configure(configuration);
                         break;
+                    case Sample.MemoryTest:
+                        MemoryTestSampleRunner.Configure(configuration);
+                        break;
                     case Sample.MonteCarloPiEstimator:
                         MonteCarloPiEstimatorSampleRunner.Configure(configuration);
                         break;
@@ -189,6 +192,9 @@ namespace Hast.Samples.Consumer
                         break;
                     case Sample.Loopback:
                         await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.MemoryTest:
+                        await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation);
                         break;
                     case Sample.MonteCarloPiEstimator:
                         await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
