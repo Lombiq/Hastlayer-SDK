@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Hast.Algorithms;
+﻿using Hast.Algorithms;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer
 {
@@ -76,7 +76,7 @@ namespace Hast.Samples.Consumer
                 // Let's just use the first one that is available, unless the user specified the -d command line flag.
                 var targetDeviceName = args.Contains("-d") ? args[(args as IList<string>).IndexOf("-d") + 1] : devices.First().Name;
                 var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
-                if (selectedDevice == null)  throw new Exception($"Target device '{targetDeviceName}' not found!");
+                if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
 
                 var configuration = new HardwareGenerationConfiguration(selectedDevice.Name);
 
@@ -216,7 +216,7 @@ namespace Hast.Samples.Consumer
                 }
             }
         }
-        
+
         static void Main(string[] args)
         {
             // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
@@ -225,7 +225,7 @@ namespace Hast.Samples.Consumer
             {
                 MainTask(args).Wait();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.Error.WriteLine(e);
             }
