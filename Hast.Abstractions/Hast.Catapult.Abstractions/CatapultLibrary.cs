@@ -36,7 +36,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// The slot to be used for the next run.
         /// </summary>
-        private int _currentSlot = 0;
+        private int _currentSlot = -1;
 
         /// <summary>
         /// Gets the interface containing the functions exposed by the native FPGA library.
@@ -113,6 +113,9 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public readonly NamedIndexer<uint, uint> ShellRegister;
 
+        private readonly int AllowedSlots = 64;
+        private readonly int AllowedBytesPerSlot = 64;
+
 
         /// <summary>
         /// Initializes a new instance of the CatapultLibrary class.
@@ -179,6 +182,10 @@ namespace Hast.Catapult.Abstractions
             // Set up the task tracker.
             _slotDispatch = new Task[BufferCount];
             for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
+
+            // Load in configuration from the soft registers
+            AllowedSlots = (int)SoftRegister[Constants.SoftRegisters.AllowedSlots];
+            AllowedBytesPerSlot = (int)SoftRegister[Constants.SoftRegisters.AllowedBytesPerSlot];
         }
 
 
@@ -402,7 +409,7 @@ namespace Hast.Catapult.Abstractions
 
 
             // If the input message is too short, pad it with zeros.
-            if (inputData.Length < Constants.BufferMessageSizeMinByte)
+            if (Constants.BufferMessageSizeMinByte < AllowedBytesPerSlot && inputData.Length < Constants.BufferMessageSizeMinByte)
             {
                 LogFunction((uint)Constants.Log.Warn,
                     $"Incoming data is {inputData.Length}B! Padding with zeros to reach the minimum of {Constants.BufferMessageSizeMinByte}B...");
@@ -410,12 +417,12 @@ namespace Hast.Catapult.Abstractions
                 inputData.CopyTo(padded);
                 inputData = padded;
             }
-            // If the input message isn't 16B aligned, pad it with zeros.
-            else if (inputData.Length % 16 != 0)
+            // If the input message isn't 64B aligned, pad it with zeros.
+            else if (inputData.Length % AllowedBytesPerSlot != 0)
             {
-                LogFunction((uint)Constants.Log.Warn,
-                    $"Incoming data ({inputData.Length}B) must be aligned to 16B! Padding for {16 - (inputData.Length % 16)}B...");
-                int paddedLength = (int)Math.Ceiling(inputData.Length / 16.0) * 16;
+                LogFunction((uint)Constants.Log.Warn, $"Incoming data ({inputData.Length}B) must be aligned to {AllowedBytesPerSlot}B! " + 
+                    "Padding for {AllowedBytesPerSlot - (inputData.Length % AllowedBytesPerSlot)}B...");
+                int paddedLength = (int)Math.Ceiling((double)inputData.Length / AllowedBytesPerSlot) * AllowedBytesPerSlot;
                 var padded = new byte[paddedLength];
                 inputData.CopyTo(padded);
                 inputData = padded;
