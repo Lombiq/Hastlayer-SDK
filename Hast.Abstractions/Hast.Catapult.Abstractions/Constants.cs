@@ -22,7 +22,7 @@ namespace Hast.Catapult.Abstractions
         public static class SoftRegisters
         {
             public const int AllowedSlots = 2;
-            public const int AllowedBytesPerSlot = 3;
+            public const int AllowedBytesPerSlotPayload = 3;
         }
 
         public static class ConfigKeys

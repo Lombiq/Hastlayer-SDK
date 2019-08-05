@@ -114,7 +114,7 @@ namespace Hast.Catapult.Abstractions
         public readonly NamedIndexer<uint, uint> ShellRegister;
 
         private readonly int AllowedSlots = 64;
-        private readonly int AllowedBytesPerSlot = 64;
+        private readonly int AllowedBytesPerSlotPayload = 64;
 
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Hast.Catapult.Abstractions
 
             // Load in configuration from the soft registers
             AllowedSlots = (int)SoftRegister[Constants.SoftRegisters.AllowedSlots];
-            AllowedBytesPerSlot = (int)SoftRegister[Constants.SoftRegisters.AllowedBytesPerSlot];
+            AllowedBytesPerSlotPayload = (int)SoftRegister[Constants.SoftRegisters.AllowedBytesPerSlotPayload];
         }
 
 
@@ -253,7 +253,8 @@ namespace Hast.Catapult.Abstractions
         /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
         public void VerifyResult(Constants.Status status)
         {
-            if (status == Constants.Status.Success || status == Constants.Status.WaitTimeout) return;
+            //if (status == Constants.Status.Success || status == Constants.Status.WaitTimeout) return;
+            if (status == Constants.Status.Success) return;
 
             var errorMessage = new StringBuilder(512);
             NativeLibrary.GetLastError();
@@ -407,9 +408,10 @@ namespace Hast.Catapult.Abstractions
                 if (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
+            var allowedBytesPerSlot = AllowedBytesPerSlotPayload + InputHeaderSizes.Total;
 
             // If the input message is too short, pad it with zeros.
-            if (Constants.BufferMessageSizeMinByte < AllowedBytesPerSlot && inputData.Length < Constants.BufferMessageSizeMinByte)
+            if (Constants.BufferMessageSizeMinByte < allowedBytesPerSlot && inputData.Length < Constants.BufferMessageSizeMinByte)
             {
                 LogFunction((uint)Constants.Log.Warn,
                     $"Incoming data is {inputData.Length}B! Padding with zeros to reach the minimum of {Constants.BufferMessageSizeMinByte}B...");
@@ -418,19 +420,17 @@ namespace Hast.Catapult.Abstractions
                 inputData = padded;
             }
             // If the input message isn't 64B aligned, pad it with zeros.
-            else if (inputData.Length % AllowedBytesPerSlot != 0)
+            else if (inputData.Length % allowedBytesPerSlot != 0)
             {
-                LogFunction((uint)Constants.Log.Warn, $"Incoming data ({inputData.Length}B) must be aligned to {AllowedBytesPerSlot}B! " + 
+                LogFunction((uint)Constants.Log.Warn, $"Incoming data ({inputData.Length}B) must be aligned to {allowedBytesPerSlot}B! " + 
                     "Padding for {AllowedBytesPerSlot - (inputData.Length % AllowedBytesPerSlot)}B...");
-                int paddedLength = (int)Math.Ceiling((double)inputData.Length / AllowedBytesPerSlot) * AllowedBytesPerSlot;
+                int paddedLength = (int)Math.Ceiling((double)inputData.Length / allowedBytesPerSlot) * allowedBytesPerSlot;
                 var padded = new byte[paddedLength];
                 inputData.CopyTo(padded);
                 inputData = padded;
             }
 
-            // Acquire I/O buffer addresses.
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
-            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
 
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
@@ -444,7 +444,15 @@ namespace Hast.Catapult.Abstractions
 
             if (ignoreResponse) return null;
 
+            var resultSizeAcknowledge = await Task.Run(() =>
+            {
+                VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
+                NativeLibrary.DiscardOutputBuffer(_handle, slot);
+                return (int)bytesReceived;
+            });
+
             // Wait for the interrupt and download results from output buffer.
+            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
             var resultSize = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
