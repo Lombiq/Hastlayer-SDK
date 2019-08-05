@@ -8,6 +8,7 @@ using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
+using static Hast.Catapult.Abstractions.Constants;
 
 namespace Hast.Catapult.Abstractions
 {
@@ -76,12 +77,13 @@ namespace Hast.Catapult.Abstractions
                 var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
                 SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                // TODO uncomment this when the FPGA side implements the above response format
-                var outputByteCount = outputBuffer.Length; //MemoryMarshal.Read<uint>(outputBuffer.Slice(sizeof(ulong)).Span);
-                //outputBuffer = outputBuffer.Slice(0, sizeof(ulong) + sizeof(uint) + (int)outputByteCount);
+                var outputPayloadByteCount = SimpleMemory.MemoryCellSizeBytes * (int)MemoryMarshal.Read<uint>(
+                    outputBuffer.Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
+                if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
+                    outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
 
                 dma.Set(outputBuffer, Constants.OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
-                Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
+                Logger.Information("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
                 EndExecution(context);
 
