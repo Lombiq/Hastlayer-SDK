@@ -37,7 +37,10 @@ namespace Hast.Communication.Tester
         [Option('i', "input", HelpText = "Generated data is saved to or payload is read from here when using BinaryFile as file-type.")]
         public string InputFileName { get; set; }
 
-        [Option('o', "output", HelpText = "Output file name. (overrides -f to Hexdump if it's None; use value '-' to write Hexdump to the console)")]
+        public const string OutputFileNameConsole = "CONSOLE";
+
+        [Option('o', "output", HelpText = "Output file name. (overrides -f to Hexdump if it's None; use value '" +
+            OutputFileNameConsole + "' to write Hexdump to the console)")]
         public string OutputFileName { get; set; }
 
         [Option('j', "json", HelpText = "Create a summary as JSON file.")]

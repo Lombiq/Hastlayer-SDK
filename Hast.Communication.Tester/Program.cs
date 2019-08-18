@@ -91,14 +91,16 @@ namespace Hast.Communication.Tester
                 {
                     case OutputFileType.None: break;
                     case OutputFileType.Hexdump:
-                        Console.WriteLine("Saving input hexdump to '{0}'", configuration.InputFileName);
-                        if (configuration.InputFileName == "-")
+                        var fileName = configuration.InputFileName;
+                        if (string.IsNullOrEmpty(fileName)) fileName = "in-" + DefaultHexdumpFileName;
+                        Console.WriteLine("Saving input hexdump to '{0}'", fileName);
+                        if (fileName == Options.OutputFileNameConsole)
                         {
                             WriteHexdump(Console.Out, memory);
                         }
                         else
                         {
-                            using (var streamWriter = new StreamWriter(configuration.InputFileName, false, Encoding.UTF8))
+                            using (var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8))
                             {
                                 WriteHexdump(streamWriter, memory);
                             }
@@ -139,8 +141,6 @@ namespace Hast.Communication.Tester
                     if (!memory.Read4Bytes(i).SequenceEqual(referenceMemory.Read4Bytes(i)))
                         mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
                             i, memory.Read4Bytes(i), referenceMemory.Read4Bytes(i)));
-                if (mismatches.Any()) throw new HardwareExecutionResultMismatchException(mismatches); // TODO don't exception, only log text
-                Console.WriteLine("Verification passed!");
 
                 
                 if (!string.IsNullOrWhiteSpace(configuration?.JsonOutputFileName))
@@ -151,11 +151,13 @@ namespace Hast.Communication.Tester
                 {
                     case OutputFileType.None: break;
                     case OutputFileType.Hexdump:
-                        Console.WriteLine("Saving input hexdump to '{0}'", configuration.OutputFileName);
-                        if (configuration.OutputFileName == "-")
+                        var fileName = configuration.OutputFileName;
+                        if (string.IsNullOrEmpty(fileName)) fileName = "out-" + DefaultHexdumpFileName;
+                        Console.WriteLine("Saving output hexdump to '{0}'", fileName);
+                        if (fileName == Options.OutputFileNameConsole)
                             WriteHexdump(Console.Out, memory);
                         else
-                            using (var streamWriter = new StreamWriter(configuration.OutputFileName, false, Encoding.UTF8))
+                            using (var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8))
                                 WriteHexdump(streamWriter, memory);
                         Console.WriteLine("File saved.");
                         break;
@@ -169,6 +171,11 @@ namespace Hast.Communication.Tester
                         Console.WriteLine("File saved.");
                         break;
                 }
+
+                if (mismatches.Any())
+                    Console.WriteLine("MISMATCH:\n{0}", new HardwareExecutionResultMismatchException(mismatches));
+                else
+                    Console.WriteLine("Verification passed!");
             }
         }
 
