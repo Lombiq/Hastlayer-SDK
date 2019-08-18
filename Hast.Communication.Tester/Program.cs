@@ -129,7 +129,7 @@ namespace Hast.Communication.Tester
                     selectedDevice.DefaultCommunicationChannelName);
                 var info = await communicationService.Execute(memory, configuration.MemberId, executionContext);
 
-                Console.WriteLine("Executing test on hardware took {0}ms (net) {1}ms (all together)",
+                Console.WriteLine("Executing test on hardware took {0:0.##}ms (net) {1:0.##}ms (all together)",
                     info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
                 // Verify results!

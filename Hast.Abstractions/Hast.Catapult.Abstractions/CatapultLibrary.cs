@@ -72,12 +72,16 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Gets the maximum length of the message sent to the input buffer. (64kB)
         /// </summary>
-        public int BufferSize { get; private set; }
+        public int BufferSize
+        {
+            get => BufferPayloadSize + InputHeaderSizes.Total;
+            private set => BufferPayloadSize = value - InputHeaderSizes.Total;
+        }
 
         /// <summary>
         /// Gets the amount of space available for useful data in the input buffer.
         /// </summary>
-        private int BufferPayloadSize => BufferSize - InputHeaderSizes.Total;
+        public int BufferPayloadSize { get; private set; }
 
         /// <summary>
         /// Gets whether the PCIe access is enabled on the device.
@@ -114,7 +118,6 @@ namespace Hast.Catapult.Abstractions
         public readonly NamedIndexer<uint, uint> ShellRegister;
 
         private readonly int AllowedSlots = 64;
-        private readonly int AllowedBytesPerSlotPayload = 64;
 
 
         /// <summary>
@@ -185,7 +188,8 @@ namespace Hast.Catapult.Abstractions
 
             // Load in configuration from the soft registers
             AllowedSlots = (int)SoftRegister[Constants.SoftRegisters.AllowedSlots];
-            AllowedBytesPerSlotPayload = (int)SoftRegister[Constants.SoftRegisters.AllowedBytesPerSlotPayload];
+            var bufferPayloadSize = (int)SoftRegister[Constants.SoftRegisters.BufferPayloadSize];
+            if (0 < bufferPayloadSize && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
         }
 
 
@@ -408,7 +412,7 @@ namespace Hast.Catapult.Abstractions
                 if (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
-            var allowedBytesPerSlot = AllowedBytesPerSlotPayload + InputHeaderSizes.Total;
+            var allowedBytesPerSlot = BufferPayloadSize + InputHeaderSizes.Total;
 
             // If the input message is too short, pad it with zeros.
             if (Constants.BufferMessageSizeMinByte < allowedBytesPerSlot && inputData.Length < Constants.BufferMessageSizeMinByte)
