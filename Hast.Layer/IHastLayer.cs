@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 
 namespace Hast.Layer
@@ -46,5 +47,12 @@ namespace Hast.Layer
             IHardwareRepresentation hardwareRepresentation, 
             T hardwareObject, 
             IProxyGenerationConfiguration configuration) where T : class;
+
+        /// <summary>
+        /// Gets the <see cref="ICommunicationService"/> based on the channel name.
+        /// </summary>
+        /// <param name="communicationChannelName">The <see cref="ICommunicationService.ChannelName"/> value.</param>
+        /// <returns>The matching communication service.</returns>
+        Task<ICommunicationService> GetCommunicationService(string communicationChannelName);
     }
 }

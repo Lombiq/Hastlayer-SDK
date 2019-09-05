@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Layer;
@@ -13,6 +14,15 @@ namespace Hast.Communication.Services
 
         abstract public string ChannelName { get; }
 
+        private TextWriter _testerOutput;
+        public TextWriter TesterOutput
+        {
+            #if DEBUG
+            get => _testerOutput; set => _testerOutput = value;
+            #else
+            get => null; set { }
+            #endif
+        }
 
         public CommunicationServiceBase()
         {

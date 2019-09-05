@@ -17,6 +17,11 @@ namespace Hast.Communication.Services
         string ChannelName { get; }
 
         /// <summary>
+        /// The TextWriter which the communication service may use communicate diagnostic information.
+        /// </summary>
+        System.IO.TextWriter TesterOutput { get; set; }
+
+        /// <summary>
         /// Executes the given member on hardware.
         /// </summary>
         /// <param name="simpleMemory">

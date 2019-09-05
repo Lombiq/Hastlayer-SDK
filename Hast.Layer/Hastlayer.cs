@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Autofac;
 using Hast.Catapult.Abstractions;
 using Hast.Communication;
+using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
@@ -158,6 +159,10 @@ namespace Hast.Layer
                 throw new HastlayerException(message, ex);
             }
         }
+
+        public async Task<ICommunicationService> GetCommunicationService(string communicationChannelName) =>
+            await _host.RunGet(scope => Task.FromResult(scope.Resolve<ICommunicationServiceSelector>()
+                .GetCommunicationService(communicationChannelName)));
 
         public void Dispose()
         {

@@ -19,6 +19,12 @@ namespace Hast.Catapult.Abstractions
         public const int BufferMessageSizeMinByte = 32;
 
 
+        public static class SoftRegisters
+        {
+            public const int AllowedSlots = 2;
+            public const int BufferPayloadSize = 3;
+        }
+
         public static class ConfigKeys
         {
             public const string LibraryPath = nameof(LibraryPath);

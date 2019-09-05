@@ -36,7 +36,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// The slot to be used for the next run.
         /// </summary>
-        private int _currentSlot = 0;
+        private int _currentSlot = -1;
 
         /// <summary>
         /// Gets the interface containing the functions exposed by the native FPGA library.
@@ -72,12 +72,16 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Gets the maximum length of the message sent to the input buffer. (64kB)
         /// </summary>
-        public int BufferSize { get; private set; }
+        public int BufferSize
+        {
+            get => BufferPayloadSize + InputHeaderSizes.Total;
+            private set => BufferPayloadSize = value - InputHeaderSizes.Total;
+        }
 
         /// <summary>
         /// Gets the amount of space available for useful data in the input buffer.
         /// </summary>
-        private int BufferPayloadSize => BufferSize - InputHeaderSizes.Total;
+        public int BufferPayloadSize { get; private set; }
 
         /// <summary>
         /// Gets whether the PCIe access is enabled on the device.
@@ -101,6 +105,8 @@ namespace Hast.Catapult.Abstractions
             }
         }
 
+        public System.IO.TextWriter TesterOutput { get; set; }
+
         /// <summary>
         /// Gets or sets the value of the Soft Register. Indexed by memory address.
         /// </summary>
@@ -110,6 +116,8 @@ namespace Hast.Catapult.Abstractions
         /// Gets or sets the value of the Shell Register. Indexed by register number.
         /// </summary>
         public readonly NamedIndexer<uint, uint> ShellRegister;
+
+        private readonly int AllowedSlots = 64;
 
 
         /// <summary>
@@ -177,6 +185,11 @@ namespace Hast.Catapult.Abstractions
             // Set up the task tracker.
             _slotDispatch = new Task[BufferCount];
             for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
+
+            // Load in configuration from the soft registers
+            AllowedSlots = (int)SoftRegister[Constants.SoftRegisters.AllowedSlots];
+            var bufferPayloadSize = (int)SoftRegister[Constants.SoftRegisters.BufferPayloadSize];
+            if (0 < bufferPayloadSize && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
         }
 
 
@@ -244,7 +257,8 @@ namespace Hast.Catapult.Abstractions
         /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
         public void VerifyResult(Constants.Status status)
         {
-            if (status == Constants.Status.Success || status == Constants.Status.WaitTimeout) return;
+            //if (status == Constants.Status.Success || status == Constants.Status.WaitTimeout) return;
+            if (status == Constants.Status.Success) return;
 
             var errorMessage = new StringBuilder(512);
             NativeLibrary.GetLastError();
@@ -339,6 +353,7 @@ namespace Hast.Catapult.Abstractions
             // This job will contain the current call.
             Task<Memory<byte>> job = null;
 
+            int currentSlot;
             lock (_slotDispatch)
             {
                 // Go round-robin,
@@ -355,12 +370,18 @@ namespace Hast.Catapult.Abstractions
                             _currentSlot = slot;
                     }
 
+                currentSlot = _currentSlot;
                 _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
                     .ContinueWith(_ => RunJob(_currentSlot, data, ignoreResponse).Result);
             }
 
-            return await job;
-
+            var jobResult = await job;
+            TesterOutput?.WriteLine("Job Finished\n************\nSlot: {0}\nTime: {1}\nPayload: {2} cells\nSlice: {3}\n",
+                currentSlot,
+                MemoryMarshal.Read<long>(jobResult.Span),
+                MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime).Span),
+                MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells).Span));
+            return jobResult;
         }
 
         /// <summary>
@@ -391,9 +412,10 @@ namespace Hast.Catapult.Abstractions
                 if (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
+            var allowedBytesPerSlot = BufferPayloadSize + InputHeaderSizes.Total;
 
             // If the input message is too short, pad it with zeros.
-            if (inputData.Length < Constants.BufferMessageSizeMinByte)
+            if (Constants.BufferMessageSizeMinByte < allowedBytesPerSlot && inputData.Length < Constants.BufferMessageSizeMinByte)
             {
                 LogFunction((uint)Constants.Log.Warn,
                     $"Incoming data is {inputData.Length}B! Padding with zeros to reach the minimum of {Constants.BufferMessageSizeMinByte}B...");
@@ -401,20 +423,18 @@ namespace Hast.Catapult.Abstractions
                 inputData.CopyTo(padded);
                 inputData = padded;
             }
-            // If the input message isn't 16B aligned, pad it with zeros.
-            else if (inputData.Length % 16 != 0)
+            // If the input message isn't 64B aligned, pad it with zeros.
+            else if (inputData.Length % allowedBytesPerSlot != 0)
             {
-                LogFunction((uint)Constants.Log.Warn,
-                    $"Incoming data ({inputData.Length}B) must be aligned to 16B! Padding for {16 - (inputData.Length % 16)}B...");
-                int paddedLength = (int)Math.Ceiling(inputData.Length / 16.0) * 16;
+                LogFunction((uint)Constants.Log.Warn, $"Incoming data ({inputData.Length}B) must be aligned to {allowedBytesPerSlot}B! " + 
+                    "Padding for {AllowedBytesPerSlot - (inputData.Length % AllowedBytesPerSlot)}B...");
+                int paddedLength = (int)Math.Ceiling((double)inputData.Length / allowedBytesPerSlot) * allowedBytesPerSlot;
                 var padded = new byte[paddedLength];
                 inputData.CopyTo(padded);
                 inputData = padded;
             }
 
-            // Acquire I/O buffer addresses.
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
-            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
 
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
@@ -428,7 +448,15 @@ namespace Hast.Catapult.Abstractions
 
             if (ignoreResponse) return null;
 
+            var resultSizeAcknowledge = await Task.Run(() =>
+            {
+                VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
+                NativeLibrary.DiscardOutputBuffer(_handle, slot);
+                return (int)bytesReceived;
+            });
+
             // Wait for the interrupt and download results from output buffer.
+            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
             var resultSize = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
