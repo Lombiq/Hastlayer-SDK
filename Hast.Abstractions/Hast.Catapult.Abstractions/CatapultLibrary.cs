@@ -117,8 +117,6 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public readonly NamedIndexer<uint, uint> ShellRegister;
 
-        private readonly int AllowedSlots = 64;
-
 
         /// <summary>
         /// Initializes a new instance of the CatapultLibrary class.
@@ -182,14 +180,15 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetBufferSize(_handle, out count));
             BufferSize = (int)count;
 
+            // Load in configuration from the soft registers
+            var allowedSlots = (int)SoftRegister[Constants.SoftRegisters.AllowedSlots];
+            if (0 < allowedSlots && allowedSlots < BufferCount) BufferCount = allowedSlots;
+            var bufferPayloadSize = (int)SoftRegister[Constants.SoftRegisters.BufferPayloadSize];
+            if (0 < bufferPayloadSize && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
+
             // Set up the task tracker.
             _slotDispatch = new Task[BufferCount];
             for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
-
-            // Load in configuration from the soft registers
-            AllowedSlots = (int)SoftRegister[Constants.SoftRegisters.AllowedSlots];
-            var bufferPayloadSize = (int)SoftRegister[Constants.SoftRegisters.BufferPayloadSize];
-            if (0 < bufferPayloadSize && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
         }
 
 
