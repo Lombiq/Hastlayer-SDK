@@ -458,7 +458,8 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
             var resultSize = await Task.Run(() =>
             {
-                VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
+                VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived,
+                    useInterrupt: true, timeoutInSeconds: 1000));
                 return (int)bytesReceived;
             });
 
