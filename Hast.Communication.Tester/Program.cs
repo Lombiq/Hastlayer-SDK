@@ -19,7 +19,7 @@ namespace Hast.Communication.Tester
         public const string DefaultHexdumpFileName = "dump.txt";
         public const string DefaultBinaryFileName = "dump.bin";
 
-        public const int HexDumpDigits = SimpleMemory.MemoryCellSizeBytes * 2;
+        public const int HexDumpBlocksPerLine = 8;
 
 
         // todo too fat, move out some to own class/method
@@ -134,19 +134,6 @@ namespace Hast.Communication.Tester
                 Console.WriteLine("Executing test on hardware took {0:0.##}ms (net) {1:0.##}ms (all together)",
                     info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
-                // Verify results!
-                // TODO: add more brackets
-                var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
-                for (int i = 0; i < memory.CellCount; i++)
-                    if (!memory.Read4Bytes(i).SequenceEqual(referenceMemory.Read4Bytes(i)))
-                        mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
-                            i, memory.Read4Bytes(i), referenceMemory.Read4Bytes(i)));
-
-                
-                if (!string.IsNullOrWhiteSpace(configuration?.JsonOutputFileName))
-                    File.WriteAllText(configuration.JsonOutputFileName, JsonConvert.SerializeObject(
-                        new { Success = true, Result = info }));
-
                 switch (configuration.OutputFileType)
                 {
                     case OutputFileType.None: break;
@@ -172,18 +159,45 @@ namespace Hast.Communication.Tester
                         break;
                 }
 
-                if (mismatches.Any())
-                    Console.WriteLine("MISMATCH:\n{0}", new HardwareExecutionResultMismatchException(mismatches));
-                else
-                    Console.WriteLine("Verification passed!");
+
+                // Verify results!
+                if (configuration.NoCheck == false)
+                {
+                    var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
+                    for (int i = 0; i < memory.CellCount; i++)
+                    {
+                        if (!memory.Read4Bytes(i).SequenceEqual(referenceMemory.Read4Bytes(i)))
+                        {
+                            mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                                i, memory.Read4Bytes(i), referenceMemory.Read4Bytes(i)));
+                        }
+                    }
+
+
+                    if (!string.IsNullOrWhiteSpace(configuration?.JsonOutputFileName))
+                        File.WriteAllText(configuration.JsonOutputFileName, JsonConvert.SerializeObject(
+                            new { Success = true, Result = info }));
+
+                    if (mismatches.Any())
+                    {
+                        Console.WriteLine("MISMATCH:\n{0}", new HardwareExecutionResultMismatchException(mismatches));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Verification passed!");
+                    }
+                }
             }
         }
 
         public static void WriteHexdump(TextWriter writer, SimpleMemory memory)
         {
-            for (int i = 0; i < memory.CellCount; i += HexDumpDigits)
-                writer.WriteLine(string.Join(" ", memory.ReadUInt32(i, HexDumpDigits)
-                    .Select(x => x.ToString("X").PadLeft(HexDumpDigits, '0'))));
+            for (int i = 0; i < memory.CellCount; i += HexDumpBlocksPerLine)
+            {
+                for (int j = 0; j < HexDumpBlocksPerLine && i + j < memory.CellCount; j++)
+                    writer.Write("{0}{1:X8}", j == 0 ? "" : " ", memory.ReadUInt32(i + j));
+                writer.WriteLine();
+            }
         }
 
         private static void Main(string[] args)
