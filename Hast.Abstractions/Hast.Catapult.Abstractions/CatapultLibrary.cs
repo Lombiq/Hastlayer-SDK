@@ -358,7 +358,7 @@ namespace Hast.Catapult.Abstractions
                 // Go round-robin,
                 _currentSlot = (_currentSlot + 1) % BufferCount;
                 // Prevent hitting the skip slot (ie slot 1) which is expected to be busy for a long time.
-                if (_currentSlot == skipSlot) _currentSlot = (_currentSlot + 2) % BufferCount;
+                if (_currentSlot == skipSlot) _currentSlot = (_currentSlot + 1) % BufferCount;
 
                 // but try to find the first free slot.
                 if (!_slotDispatch[_currentSlot].IsCompleted)
@@ -370,8 +370,8 @@ namespace Hast.Catapult.Abstractions
                     }
 
                 currentSlot = _currentSlot;
-                _slotDispatch[_currentSlot] = job = _slotDispatch[_currentSlot]
-                    .ContinueWith(_ => RunJob(_currentSlot, data, ignoreResponse).Result);
+                _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
+                    .ContinueWith(_ => RunJob(currentSlot, data, ignoreResponse).Result);
             }
 
             var jobResult = await job;
@@ -447,19 +447,21 @@ namespace Hast.Catapult.Abstractions
 
             if (ignoreResponse) return null;
 
+            Console.WriteLine("Slot: {0}, input length: {1} cell", slot, inputData.Length);
             var resultSizeAcknowledge = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
                 NativeLibrary.DiscardOutputBuffer(_handle, slot);
                 return (int)bytesReceived;
             });
+            Console.WriteLine("Slot: {0}, input length: {1} cell, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
 
             // Wait for the interrupt and download results from output buffer.
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
             var resultSize = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived,
-                    useInterrupt: true, timeoutInSeconds: 1000));
+                    useInterrupt: true));
                 return (int)bytesReceived;
             });
 
@@ -475,7 +477,7 @@ namespace Hast.Catapult.Abstractions
             // Signal that we are done.
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} finished!\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slot} finished!\n");
             return resultMemory;
         }
 
