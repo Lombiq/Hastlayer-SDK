@@ -45,5 +45,8 @@ namespace Hast.Communication.Tester
 
         [Option('j', "json", HelpText = "Create a summary as JSON file.")]
         public string JsonOutputFileName { get; set; }
+
+        [Option('n', "no-check", HelpText = "Skips result check at the end.")]
+        public bool NoCheck { get; set; }
     }
 }
