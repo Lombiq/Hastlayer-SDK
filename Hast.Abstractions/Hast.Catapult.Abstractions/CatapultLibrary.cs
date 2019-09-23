@@ -447,14 +447,14 @@ namespace Hast.Catapult.Abstractions
             }
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
-            Console.WriteLine("Slot: {0}, input length: {1} cell", slot, inputData.Length);
+            Console.WriteLine("Slot: {0}, input length: {1} bytes", slot, inputData.Length);
             var resultSizeAcknowledge = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
                 NativeLibrary.DiscardOutputBuffer(_handle, slot);
                 return (int)bytesReceived;
             });
-            Console.WriteLine("Slot: {0}, input length: {1} cell, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
+            Console.WriteLine("Slot: {0}, input length: {1} bytes, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
 
             return ignoreResponse ? null : await ReceiveJobResults(slot);
         }
