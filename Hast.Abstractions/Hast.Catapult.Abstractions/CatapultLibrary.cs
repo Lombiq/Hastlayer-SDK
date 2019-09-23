@@ -274,7 +274,7 @@ namespace Hast.Catapult.Abstractions
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
         public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) =>
-            AssignJob(memberId, inputData, 0, 1, -1, false, -1);
+            AssignJob(memberId, inputData, 0, 1, -1, false);
 
         private async Task<Memory<byte>> AssignJob(
             int memberId,
@@ -282,15 +282,14 @@ namespace Hast.Catapult.Abstractions
             int sliceIndex,
             int sliceCountValue,
             int totalDataSize,
-            bool ignoreResponse,
-            int skipSlot)
+            bool ignoreResponse)
         {
             int currentSliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
             if (totalDataSize < 0) totalDataSize = inputData.Length;
 
             if (currentSliceCount >= 2)
             {
-                ignoreResponse = currentSliceCount > BufferCount;
+                bool slotOverflow = currentSliceCount > BufferCount;
 
                 // If the data exceeds buffer size limit, then cut it into maximal slices.
                 var tasks = new List<Task<Memory<byte>>>(currentSliceCount);
@@ -304,38 +303,40 @@ namespace Hast.Catapult.Abstractions
                         i,
                         currentSliceCount,
                         totalDataSize,
-                        ignoreResponse,
-                        ignoreResponse ? 0 : -1));
+                        slotOverflow));
                 }
 
-                if (ignoreResponse) tasks.RemoveRange(1, tasks.Count - 1);
+                if (slotOverflow)
+                {
+                    await Task.WhenAll(tasks);
+                    tasks.Clear();
+                    for (int i = 0; i < currentSliceCount; i++) tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
+                }
 
                 // Check the response count and if necessary open further empty slots.
-                var payloadLengthCellsPosition = OutputHeaderSizes.HardwareExecutionTime;
+                //var payloadLengthCellsPosition = OutputHeaderSizes.HardwareExecutionTime;
                 var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
-                var payloadLength = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(payloadLengthCellsPosition));
-                currentSliceCount = (int)Math.Ceiling((double)payloadLength / BufferPayloadSize);
-                while (tasks.Count < currentSliceCount)
-                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false, -1));
+                //var payloadLength = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(payloadLengthCellsPosition));
+                //currentSliceCount = (int)Math.Ceiling((double)payloadLength / BufferPayloadSize);
+                //while (tasks.Count < currentSliceCount)
+                //    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false));
 
                 // Make sure that all slots are done.
                 var responses = await Task.WhenAll(tasks);
 
                 // Create output array and fill it with the responses that have a positive slice index.
-                var payloadTotalCells = 0;
-                var payloadSizesCell = new int[responses.Length];
-                for (int i = 0; i < responses.Length; i++)
-                    payloadTotalCells += payloadSizesCell[i] = MemoryMarshal.Read<int>(
-                        responses[i].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
+                var payloadTotalCells = MemoryMarshal.Read<int>(responses[0].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
                 Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
                 responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
                 Parallel.For(0, responses.Length, (i)=>
                 {
+                    int size = i < responses.Length - 1 ? BufferPayloadSize :
+                        (payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) - (i * BufferPayloadSize);
                     var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
                     if (offset < 0 || offset >= result.Length) return;
 
                     var targetSlice = result.Slice(OutputHeaderSizes.Total + offset);
-                    responses[i].Slice(OutputHeaderSizes.Total, payloadSizesCell[i]).CopyTo(targetSlice);
+                    responses[i].Slice(OutputHeaderSizes.Total, size).CopyTo(targetSlice);
                 });
 
                 return result;
@@ -357,17 +358,15 @@ namespace Hast.Catapult.Abstractions
             {
                 // Go round-robin,
                 _currentSlot = (_currentSlot + 1) % BufferCount;
-                // Prevent hitting the skip slot (ie slot 1) which is expected to be busy for a long time.
-                if (_currentSlot == skipSlot) _currentSlot = (_currentSlot + 1) % BufferCount;
 
                 // but try to find the first free slot.
-                if (!_slotDispatch[_currentSlot].IsCompleted)
-                    for (int i = 0; i < BufferCount; i++)
-                    {
-                        int slot = (_currentSlot + i) % BufferCount;
-                        if (_slotDispatch[slot].IsCompleted)
-                            _currentSlot = slot;
-                    }
+                //if (!_slotDispatch[_currentSlot].IsCompleted)
+                //    for (int i = 0; i < BufferCount; i++)
+                //    {
+                //        int slot = (_currentSlot + i) % BufferCount;
+                //        if (_slotDispatch[slot].IsCompleted)
+                //            _currentSlot = slot;
+                //    }
 
                 currentSlot = _currentSlot;
                 _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
@@ -375,11 +374,14 @@ namespace Hast.Catapult.Abstractions
             }
 
             var jobResult = await job;
-            TesterOutput?.WriteLine("Job Finished\n************\nSlot: {0}\nTime: {1}\nPayload: {2} cells\nSlice: {3}\n",
-                currentSlot,
-                MemoryMarshal.Read<long>(jobResult.Span),
-                MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime).Span),
-                MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells).Span));
+            if (ignoreResponse)
+                TesterOutput?.WriteLine("Job Finished\n************\nSlot: {0}\n", currentSlot);
+            else
+                TesterOutput?.WriteLine("Job Finished\n************\nSlot: {0}\nTime: {1}\nPayload: {2} cells\nSlice: {3}\n",
+                    currentSlot,
+                    MemoryMarshal.Read<long>(jobResult.Span),
+                    MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime).Span),
+                    MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells).Span));
             return jobResult;
         }
 
