@@ -274,7 +274,7 @@ namespace Hast.Catapult.Abstractions
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
         public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) =>
-            AssignJob(memberId, inputData, 0, 1, -1, false);
+            AssignJob(memberId, inputData, 0, 1, -1, false, -1);
 
         private async Task<Memory<byte>> AssignJob(
             int memberId,
@@ -283,7 +283,7 @@ namespace Hast.Catapult.Abstractions
             int sliceCountValue,
             int totalDataSize,
             bool ignoreResponse,
-            int skipSlot = -1)
+            int skipSlot)
         {
             int currentSliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
             if (totalDataSize < 0) totalDataSize = inputData.Length;
@@ -304,7 +304,7 @@ namespace Hast.Catapult.Abstractions
                         i,
                         currentSliceCount,
                         totalDataSize,
-                        i > 0 && ignoreResponse,
+                        ignoreResponse,
                         ignoreResponse ? 0 : -1));
                 }
 
@@ -316,7 +316,7 @@ namespace Hast.Catapult.Abstractions
                 var payloadLength = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(payloadLengthCellsPosition));
                 currentSliceCount = (int)Math.Ceiling((double)payloadLength / BufferPayloadSize);
                 while (tasks.Count < currentSliceCount)
-                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false));
+                    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false, -1));
 
                 // Make sure that all slots are done.
                 var responses = await Task.WhenAll(tasks);
@@ -445,8 +445,6 @@ namespace Hast.Catapult.Abstractions
             }
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
-            if (ignoreResponse) return null;
-
             Console.WriteLine("Slot: {0}, input length: {1} cell", slot, inputData.Length);
             var resultSizeAcknowledge = await Task.Run(() =>
             {
@@ -455,6 +453,12 @@ namespace Hast.Catapult.Abstractions
                 return (int)bytesReceived;
             });
             Console.WriteLine("Slot: {0}, input length: {1} cell, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
+
+            return ignoreResponse ? null : await ReceiveJobResults(slot);
+        }
+
+        private async Task<Memory<byte>> ReceiveJobResults(uint slot)
+        {
 
             // Wait for the interrupt and download results from output buffer.
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
