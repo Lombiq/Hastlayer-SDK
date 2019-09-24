@@ -14,9 +14,14 @@ namespace Hast.Catapult.Abstractions
         public const uint RegisterMaskPcieEnabled = 1 << 6;
 
         /// <summary>
-        /// The minimum length of a message sent to the input buffer. (32B)
+        /// The minimum length of a message sent to the input buffer in bytes.
         /// </summary>
-        public const int BufferMessageSizeMinByte = 32;
+        public const int BufferMessageSizeMinByte = 64;
+
+        /// <summary>
+        /// The buffer must be multiples of this size.
+        /// </summary>
+        public const int BufferChunkBytes = 64;
 
 
         public static class SoftRegisters
