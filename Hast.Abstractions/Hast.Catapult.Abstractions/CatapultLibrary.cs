@@ -413,26 +413,19 @@ namespace Hast.Catapult.Abstractions
                 if (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
-            var allowedBytesPerSlot = BufferPayloadSize + InputHeaderSizes.Total;
-
-            // If the input message is too short, pad it with zeros.
-            if (Constants.BufferMessageSizeMinByte < allowedBytesPerSlot && inputData.Length < Constants.BufferMessageSizeMinByte)
-            {
-                LogFunction((uint)Constants.Log.Warn,
-                    $"Incoming data is {inputData.Length}B! Padding with zeros to reach the minimum of {Constants.BufferMessageSizeMinByte}B...");
-                var padded = new byte[Constants.BufferMessageSizeMinByte];
-                inputData.CopyTo(padded);
-                inputData = padded;
-            }
             // If the input message isn't 64B aligned, pad it with zeros.
-            else if (inputData.Length % allowedBytesPerSlot != 0)
+            var payloadBytes = inputData.Length - InputHeaderSizes.Total;
+            if (payloadBytes % Constants.BufferChunkBytes != 0)
             {
-                LogFunction((uint)Constants.Log.Warn, $"Incoming data ({inputData.Length}B) must be aligned to {allowedBytesPerSlot}B! " + 
-                    "Padding for {AllowedBytesPerSlot - (inputData.Length % AllowedBytesPerSlot)}B...");
-                int paddedLength = (int)Math.Ceiling((double)inputData.Length / allowedBytesPerSlot) * allowedBytesPerSlot;
-                var padded = new byte[paddedLength];
-                inputData.CopyTo(padded);
-                inputData = padded;
+                int paddedPayloadSize = Constants.BufferChunkBytes * (payloadBytes / Constants.BufferChunkBytes + 1);
+                if (paddedPayloadSize <= BufferPayloadSize)
+                {
+                    LogFunction((uint)Constants.Log.Warn, $"Incoming payload ({payloadBytes}B) must be aligned to " +
+                        $"{Constants.BufferChunkBytes}B! Padding for {Constants.BufferChunkBytes - paddedPayloadSize}B...");
+                    var padded = new byte[paddedPayloadSize + InputHeaderSizes.Total];
+                    inputData.CopyTo(padded);
+                    inputData = padded;
+                }
             }
 
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
