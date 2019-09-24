@@ -289,6 +289,7 @@ namespace Hast.Catapult.Abstractions
 
             if (currentSliceCount >= 2)
             {
+                TesterOutput?.WriteLine("Slices: {0}", currentSliceCount);
                 bool slotOverflow = currentSliceCount > BufferCount;
 
                 // If the data exceeds buffer size limit, then cut it into maximal slices.
@@ -440,14 +441,14 @@ namespace Hast.Catapult.Abstractions
             }
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
-            Console.WriteLine("Slot: {0}, input length: {1} bytes", slot, inputData.Length);
+            TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes", slot, inputData.Length);
             var resultSizeAcknowledge = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
                 NativeLibrary.DiscardOutputBuffer(_handle, slot);
                 return (int)bytesReceived;
             });
-            Console.WriteLine("Slot: {0}, input length: {1} bytes, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
+            TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
 
             return ignoreResponse ? null : await ReceiveJobResults(slot);
         }
