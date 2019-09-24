@@ -52,7 +52,10 @@ namespace Hast.Catapult.Abstractions
                         }
                         catch (CatapultFunctionResultException ex)
                         {
-                            Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
+                            // The illegal endpoint number messages are normal for higher endpoints if they aren't
+                            // populated, so it's ok to suppress them.
+                            if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
+                                Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;
                         }
                     })));
