@@ -238,6 +238,8 @@ namespace Hast.Catapult.Abstractions
         {
             if (_isDisposed || Handle == IntPtr.Zero) return;
 
+            try { Task.WaitAll(_slotDispatch); } catch { }
+
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA...\n");
             PcieEnabled = false;
             NativeLibrary.CloseHandle(Handle);
