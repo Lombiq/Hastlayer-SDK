@@ -36,7 +36,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// The slot to be used for the next run.
         /// </summary>
-        private int _currentSlot = -1;
+        private int _currentSlot;
 
         /// <summary>
         /// Gets the interface containing the functions exposed by the native FPGA library.
@@ -238,7 +238,7 @@ namespace Hast.Catapult.Abstractions
         {
             if (_isDisposed || Handle == IntPtr.Zero) return;
 
-            try { Task.WaitAll(_slotDispatch); } catch { }
+            try { WaitClean(); } catch { }
 
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA...\n");
             PcieEnabled = false;
@@ -248,6 +248,15 @@ namespace Hast.Catapult.Abstractions
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closed down the FPGA...\n");
 
             _isDisposed = true;
+        }
+
+        /// <summary>
+        /// Waits until all jobs are concluded and then resets the slot counter so AssignJob can start with a clean slate.
+        /// </summary>
+        public void WaitClean()
+        {
+            Task.WaitAll(_slotDispatch);
+            _currentSlot = -1;
         }
 
         /// <summary>
