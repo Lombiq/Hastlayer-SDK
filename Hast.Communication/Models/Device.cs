@@ -27,7 +27,7 @@ namespace Hast.Communication.Models
         {
             Identifier = previousDevice.Identifier;
             Metadata = previousDevice.Metadata;
-            Disposing += (sender, arguments) => previousDevice.Dispose();
+            if (!(this is IReservedDevice)) Disposing += (sender, arguments) => previousDevice.Dispose();
         }
 
         public virtual void Dispose()

@@ -164,7 +164,7 @@ namespace Hast.Communication.Tester
                 if (configuration.NoCheck == false)
                 {
                     var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
-                    for (int i = 0; i < memory.CellCount; i++)
+                    for (int i = 0; i < memory.CellCount && i < referenceMemory.CellCount; i++)
                     {
                         if (!memory.Read4Bytes(i).SequenceEqual(referenceMemory.Read4Bytes(i)))
                         {
@@ -178,16 +178,26 @@ namespace Hast.Communication.Tester
                         File.WriteAllText(configuration.JsonOutputFileName, JsonConvert.SerializeObject(
                             new { Success = true, Result = info }));
 
-                    if (mismatches.Any())
+                    if (mismatches.Count > 0)
                     {
                         Console.WriteLine("MISMATCH:\n{0}", new HardwareExecutionResultMismatchException(mismatches));
                     }
-                    else
+                    if (memory.CellCount != referenceMemory.CellCount)
+                    {
+                        Console.WriteLine("MISMATCH IN LENGTH:\nHardware: {0}\nSoftware: {1}",
+                            memory.CellCount, referenceMemory.CellCount);
+                    }
+                    if (mismatches.Count == 0 && memory.CellCount != referenceMemory.CellCount)
                     {
                         Console.WriteLine("Verification passed!");
                     }
                 }
             }
+        }
+
+        private static void VerifyResults()
+        {
+
         }
 
         public static void WriteHexdump(TextWriter writer, SimpleMemory memory)
@@ -216,7 +226,7 @@ namespace Hast.Communication.Tester
                         new { Success = false, Exception = ex, }));
             }
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

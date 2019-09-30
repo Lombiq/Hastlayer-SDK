@@ -36,7 +36,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// The slot to be used for the next run.
         /// </summary>
-        private int _currentSlot = -1;
+        private int _currentSlot;
 
         /// <summary>
         /// Gets the interface containing the functions exposed by the native FPGA library.
@@ -238,6 +238,8 @@ namespace Hast.Catapult.Abstractions
         {
             if (_isDisposed || Handle == IntPtr.Zero) return;
 
+            try { WaitClean(); } catch { }
+
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA...\n");
             PcieEnabled = false;
             NativeLibrary.CloseHandle(Handle);
@@ -246,6 +248,15 @@ namespace Hast.Catapult.Abstractions
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closed down the FPGA...\n");
 
             _isDisposed = true;
+        }
+
+        /// <summary>
+        /// Waits until all jobs are concluded and then resets the slot counter so AssignJob can start with a clean slate.
+        /// </summary>
+        public void WaitClean()
+        {
+            Task.WaitAll(_slotDispatch);
+            _currentSlot = -1;
         }
 
         /// <summary>
@@ -289,6 +300,7 @@ namespace Hast.Catapult.Abstractions
 
             if (currentSliceCount >= 2)
             {
+                TesterOutput?.WriteLine("Slices: {0}", currentSliceCount);
                 bool slotOverflow = currentSliceCount > BufferCount;
 
                 // If the data exceeds buffer size limit, then cut it into maximal slices.
@@ -310,7 +322,11 @@ namespace Hast.Catapult.Abstractions
                 {
                     await Task.WhenAll(tasks);
                     tasks.Clear();
-                    for (int i = 0; i < currentSliceCount; i++) tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
+                    for (int i = 0; i < currentSliceCount; i++)
+                    {
+                        tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
+                        if ((i + 1) % BufferCount == 0) await Task.WhenAll(tasks);
+                    };
                 }
 
                 // Check the response count and if necessary open further empty slots.
@@ -413,26 +429,19 @@ namespace Hast.Catapult.Abstractions
                 if (isInputBufferFull) await Task.Delay(1);
             } while (isInputBufferFull);
 
-            var allowedBytesPerSlot = BufferPayloadSize + InputHeaderSizes.Total;
-
-            // If the input message is too short, pad it with zeros.
-            if (Constants.BufferMessageSizeMinByte < allowedBytesPerSlot && inputData.Length < Constants.BufferMessageSizeMinByte)
-            {
-                LogFunction((uint)Constants.Log.Warn,
-                    $"Incoming data is {inputData.Length}B! Padding with zeros to reach the minimum of {Constants.BufferMessageSizeMinByte}B...");
-                var padded = new byte[Constants.BufferMessageSizeMinByte];
-                inputData.CopyTo(padded);
-                inputData = padded;
-            }
             // If the input message isn't 64B aligned, pad it with zeros.
-            else if (inputData.Length % allowedBytesPerSlot != 0)
+            var payloadBytes = inputData.Length - InputHeaderSizes.Total;
+            if (payloadBytes % Constants.BufferChunkBytes != 0)
             {
-                LogFunction((uint)Constants.Log.Warn, $"Incoming data ({inputData.Length}B) must be aligned to {allowedBytesPerSlot}B! " + 
-                    "Padding for {AllowedBytesPerSlot - (inputData.Length % AllowedBytesPerSlot)}B...");
-                int paddedLength = (int)Math.Ceiling((double)inputData.Length / allowedBytesPerSlot) * allowedBytesPerSlot;
-                var padded = new byte[paddedLength];
-                inputData.CopyTo(padded);
-                inputData = padded;
+                int paddedPayloadSize = Constants.BufferChunkBytes * (payloadBytes / Constants.BufferChunkBytes + 1);
+                if (paddedPayloadSize <= BufferPayloadSize)
+                {
+                    LogFunction((uint)Constants.Log.Warn, $"Incoming payload ({payloadBytes}B) must be aligned to " +
+                        $"{Constants.BufferChunkBytes}B! Padding for {Constants.BufferChunkBytes - paddedPayloadSize}B...");
+                    var padded = new byte[paddedPayloadSize + InputHeaderSizes.Total];
+                    inputData.CopyTo(padded);
+                    inputData = padded;
+                }
             }
 
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
@@ -447,14 +456,14 @@ namespace Hast.Catapult.Abstractions
             }
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
-            Console.WriteLine("Slot: {0}, input length: {1} cell", slot, inputData.Length);
+            TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes", slot, inputData.Length);
             var resultSizeAcknowledge = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
                 NativeLibrary.DiscardOutputBuffer(_handle, slot);
                 return (int)bytesReceived;
             });
-            Console.WriteLine("Slot: {0}, input length: {1} cell, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
+            TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
 
             return ignoreResponse ? null : await ReceiveJobResults(slot);
         }
