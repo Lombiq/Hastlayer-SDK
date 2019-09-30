@@ -322,7 +322,11 @@ namespace Hast.Catapult.Abstractions
                 {
                     await Task.WhenAll(tasks);
                     tasks.Clear();
-                    for (int i = 0; i < currentSliceCount; i++) tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
+                    for (int i = 0; i < currentSliceCount; i++)
+                    {
+                        tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
+                        if ((i + 1) % BufferCount == 0) await Task.WhenAll(tasks);
+                    };
                 }
 
                 // Check the response count and if necessary open further empty slots.
