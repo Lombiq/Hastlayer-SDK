@@ -296,7 +296,7 @@ namespace Hast.Catapult.Abstractions
             bool ignoreResponse)
         {
             int currentSliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
-            if (totalDataSize < 0) totalDataSize = inputData.Length;
+            if (totalDataSize < 0) totalDataSize = inputData.Length / SimpleMemory.MemoryCellSizeBytes;
 
             if (currentSliceCount >= 2)
             {
