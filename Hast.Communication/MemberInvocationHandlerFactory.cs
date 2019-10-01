@@ -153,13 +153,19 @@ namespace Hast.Communication
                                 if (configuration.VerifyHardwareResults)
                                 {
                                     var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
-                                    for (int i = 0; i < memory.CellCount; i++)
+                                    for (int i = 0; i < memory.CellCount && i < softMemory.CellCount; i++)
                                     {
                                         if (!memory.Read4Bytes(i).SequenceEqual(softMemory.Read4Bytes(i)))
                                         {
                                             mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
                                                 i, memory.Read4Bytes(i), softMemory.Read4Bytes(i)));
                                         }
+                                    }
+                                    if (memory.CellCount != softMemory.CellCount)
+                                    {
+                                        int lastCommon = Math.Min(memory.CellCount, softMemory.CellCount) - 1;
+                                        mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                                            lastCommon, memory.Read4Bytes(lastCommon), softMemory.Read4Bytes(lastCommon)));
                                     }
 
                                     if (mismatches.Any())
