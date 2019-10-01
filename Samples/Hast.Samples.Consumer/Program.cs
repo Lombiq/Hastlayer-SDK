@@ -1,4 +1,5 @@
 ﻿using Hast.Algorithms;
+using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.SampleAssembly;
@@ -176,43 +177,55 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine("Starting hardware execution.");
 
                 // Running samples.
-                switch (Configuration.SampleToRun)
+                try
                 {
-                    case Sample.Fix64Calculator:
-                        await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.GenomeMatcher:
-                        await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.ParallelAlgorithm:
-                        await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.ImageProcessingAlgorithms:
-                        await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.Loopback:
-                        await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.MemoryTest:
-                        await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.MonteCarloPiEstimator:
-                        await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.ObjectOrientedShowcase:
-                        await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.PrimeCalculator:
-                        await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.RecursiveAlgorithms:
-                        await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    case Sample.SimdCalculator:
-                        await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                        break;
-                    default:
-                        break;
+                    switch (Configuration.SampleToRun)
+                    {
+                        case Sample.Fix64Calculator:
+                            await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.GenomeMatcher:
+                            await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.ParallelAlgorithm:
+                            await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.ImageProcessingAlgorithms:
+                            await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Loopback:
+                            await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.MemoryTest:
+                            await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.MonteCarloPiEstimator:
+                            await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.ObjectOrientedShowcase:
+                            await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.PrimeCalculator:
+                            await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.RecursiveAlgorithms:
+                            await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.SimdCalculator:
+                            await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException)
+                {
+                    // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
+                    // GenerateProxy()) then everything will be computed in software as well to check the hardware.
+                    // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
+                    // not impossible in corner cases.
+                    var mismatchCount = ((HardwareExecutionResultMismatchException)ex.InnerException).Mismatches.Count();
+                    Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Check with the debugger.");
                 }
             }
         }
