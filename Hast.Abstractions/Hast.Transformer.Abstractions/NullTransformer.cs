@@ -1,7 +1,6 @@
 ﻿using Hast.Layer;
 using Orchard.Logging;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,10 +21,6 @@ namespace Hast.Transformer.Abstractions
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             Logger.Warning("No Transformer is available. This most possibly means an issue.");
-
-            // If you hit this during debugging then it's a problem, there should be a proper ITransformer 
-            // implementation.
-            Debugger.Break();
 
             var mockHardwareEntryPointMappings = new Dictionary<string, int>();
 
