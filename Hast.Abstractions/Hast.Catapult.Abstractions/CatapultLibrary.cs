@@ -476,7 +476,7 @@ namespace Hast.Catapult.Abstractions
             var resultSize = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived,
-                    useInterrupt: true));
+                    useInterrupt: true, timeoutInSeconds: int.MaxValue));
                 return (int)bytesReceived;
             });
 
