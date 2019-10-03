@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Castle.DynamicProxy;
+﻿using Castle.DynamicProxy;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
 using Hast.Communication.Exceptions;
@@ -14,6 +9,11 @@ using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Communication
 {
@@ -156,9 +156,13 @@ namespace Hast.Communication
 
                                     if (memory.CellCount != softMemory.CellCount)
                                     {
-                                        int lastCommon = Math.Min(memory.CellCount, softMemory.CellCount) - 1;
-                                        mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
-                                            lastCommon, memory.Read4Bytes(lastCommon), softMemory.Read4Bytes(lastCommon)));
+                                        int overflowIndex = Math.Min(memory.CellCount, softMemory.CellCount);
+                                        mismatches.Add(new HardwareExecutionResultMismatchException.LengthMismatch(
+                                            memory.CellCount,
+                                            softMemory.CellCount,
+                                            overflowIndex,
+                                            memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : new byte[0],
+                                            softMemory.CellCount > memory.CellCount ? softMemory.Read4Bytes(overflowIndex) : new byte[0]));
                                     }
                                     else
                                     {
