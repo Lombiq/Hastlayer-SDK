@@ -34,7 +34,7 @@ namespace Hast.Samples.SampleAssembly
     {
         public static int Run(this MemoryTest memoryTest, int startIndex, int length)
         {
-            var memory = new SimpleMemory(startIndex + length);
+            var memory = new SimpleMemory(startIndex + length < 2 ? 2 : startIndex + length);
             memory.WriteInt32(MemoryTest.Run_StartIndexInt32Index, startIndex);
             memory.WriteInt32(MemoryTest.Run_LengthInt32Index, length);
             memoryTest.Run(memory);
