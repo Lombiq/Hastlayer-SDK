@@ -224,8 +224,14 @@ namespace Hast.Samples.Consumer
                     // GenerateProxy()) then everything will be computed in software as well to check the hardware.
                     // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
                     // not impossible in corner cases.
-                    var mismatchCount = ((HardwareExecutionResultMismatchException)ex.InnerException).Mismatches.Count();
-                    Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Check with the debugger.");
+                    var mismatches = ((HardwareExecutionResultMismatchException)ex.InnerException).Mismatches;
+                    var mismatchCount = mismatches.Count();
+                    Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : $"es")}:");
+
+                    foreach (var mismatch in mismatches)
+                    {
+                        Console.WriteLine("* " + mismatch.ToString());
+                    }
                 }
             }
         }
