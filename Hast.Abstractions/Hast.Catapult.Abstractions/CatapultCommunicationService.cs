@@ -32,6 +32,33 @@ namespace Hast.Catapult.Abstractions
         private void Device_Disposing(object sender, EventArgs e) => 
             ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
+        #region Temporary solution while the rolée uses the 16x size hardware cells instead of SimpleMemory cells.
+        private const int HardwareCellMultiplier = 16;
+
+        private Memory<byte> HotfixInput(Memory<byte> memory)
+        {
+            if (memory.Length <= SimpleMemory.MemoryCellSizeBytes) return memory;
+            Memory<byte> hardwareCells = new byte[memory.Length * HardwareCellMultiplier];
+
+            for (int i = 0; i < memory.Length; i += SimpleMemory.MemoryCellSizeBytes)
+                memory.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(hardwareCells.Slice(i * HardwareCellMultiplier));
+
+            return hardwareCells;
+        }
+
+        private Memory<byte> HotfixOutput(Memory<byte> memory)
+        {
+            var memoryBody = memory.Slice(OutputHeaderSizes.Total);
+            var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + memoryBody.Length / HardwareCellMultiplier);
+            var softwareCellsBody = softwareCells.Slice(OutputHeaderSizes.Total);
+
+            for (int i = 0; i < memoryBody.Length; i += SimpleMemory.MemoryCellSizeBytes * HardwareCellMultiplier)
+                memoryBody.Slice(0, SimpleMemory.MemoryCellSizeBytes).CopyTo(softwareCellsBody.Slice(i / HardwareCellMultiplier));
+
+            return softwareCells;
+        }
+        #endregion
+
         public override async Task<IHardwareExecutionInformation> Execute(
             SimpleMemory simpleMemory,
             int memberId,
@@ -74,7 +101,8 @@ namespace Hast.Catapult.Abstractions
                 var dma = new SimpleMemoryAccessor(simpleMemory);
 
                 // Sending the data.
-                var task = lib.AssignJob(memberId, dma.Get());
+                //var task = lib.AssignJob(memberId, dma.Get());
+                var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
                 var outputBuffer = await task;
 
                 // Processing the response.
@@ -86,6 +114,7 @@ namespace Hast.Catapult.Abstractions
                 if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
                     outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
 
+                if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
                 dma.Set(outputBuffer, Constants.OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
                 Logger.Information("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
