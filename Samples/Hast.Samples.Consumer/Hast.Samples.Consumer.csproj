@@ -58,6 +58,7 @@
     <Compile Include="Sample.cs" />
     <Compile Include="SampleRunners\Fix64CalculatorSampleRunner.cs" />
     <Compile Include="SampleRunners\GenomeMatcherSampleRunner.cs" />
+    <Compile Include="SampleRunners\MemoryTestSampleRunner.cs" />
     <Compile Include="SampleRunners\LoopbackSampleRunner.cs" />
     <Compile Include="SampleRunners\ParallelAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
@@ -88,6 +89,10 @@
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
       <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
       <Name>Hast.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj">
+      <Project>{71B55241-A31C-43F5-9B46-40B53099DF56}</Project>
+      <Name>Hast.Communication</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>

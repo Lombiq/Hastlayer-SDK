@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using Hast.Catapult.Abstractions;
 using Hast.Communication;
 using Hast.Communication.Services;
@@ -19,6 +13,12 @@ using Orchard.Environment.Configuration;
 using Orchard.Exceptions;
 using Orchard.Logging;
 using Orchard.Validation;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Layer
 {

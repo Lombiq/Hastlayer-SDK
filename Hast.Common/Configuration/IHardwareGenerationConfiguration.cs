@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Linq;
 
 namespace Hast.Layer
 {
@@ -82,9 +83,17 @@ namespace Hast.Layer
         /// <typeparam name="T">The type of the object that will be later fed to the proxy generator.</typeparam>
         public static void AddHardwareEntryPointType<T>(this IHardwareGenerationConfiguration configuration)
         {
+            // Object base methods are not needed.
+            var excludedMethodNames = new[]
+            {
+                "Boolean Equals(System.Object)",
+                "Int32 GetHashCode()", "System.Type GetType()",
+                "System.String ToString()"
+            };
+
             // If we'd just add the type's name to HardwareEntryPointMemberNamePrefixes then types with just a different
             // suffix in their names would still be included.
-            foreach (var method in typeof(T).GetMethods())
+            foreach (var method in typeof(T).GetMethods().Where(method => !excludedMethodNames.Contains(method.ToString() )))
             {
                 configuration.HardwareEntryPointMemberFullNames.Add(method.GetFullName());
             }

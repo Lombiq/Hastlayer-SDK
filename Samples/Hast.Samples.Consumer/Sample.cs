@@ -7,6 +7,7 @@
         ParallelAlgorithm,
         ImageProcessingAlgorithms,
         Loopback,
+        MemoryTest,
         MonteCarloPiEstimator,
         ObjectOrientedShowcase,
         PrimeCalculator,
