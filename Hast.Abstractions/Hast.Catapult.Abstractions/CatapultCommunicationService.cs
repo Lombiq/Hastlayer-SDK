@@ -34,6 +34,7 @@ namespace Hast.Catapult.Abstractions
 
         #region Temporary solution while the rolée uses the 16x size hardware cells instead of SimpleMemory cells.
         private const int HardwareCellMultiplier = 16;
+        private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
 
         private Memory<byte> HotfixInput(Memory<byte> memory)
         {
