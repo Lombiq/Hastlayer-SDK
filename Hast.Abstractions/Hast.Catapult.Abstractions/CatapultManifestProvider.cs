@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 
 namespace Hast.Catapult.Abstractions
@@ -19,7 +14,8 @@ namespace Hast.Catapult.Abstractions
                 ClockFrequencyHz = 150000000, // 150 Mhz
                 // Since it's completely Catapult-specific, not using e.g. "PCIe" here.
                 SupportedCommunicationChannelNames = new[] { DeviceName },
-                AvailableMemoryBytes = 4 * 1024 * 1024,
+                // Right now the whole memory is not available due to one physical cell being equal to one logical one.
+                AvailableMemoryBytes = 4 * 1024 * 1024 / 16,
                 DataBusWidthBytes = 64
             };
     }
