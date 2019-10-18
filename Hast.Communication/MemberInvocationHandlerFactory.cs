@@ -105,7 +105,7 @@ namespace Hast.Communication
                             var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                             if (memory != null)
                             {
-                                var memoryByteCount = memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
+                                var memoryByteCount = (ulong)memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
                                 if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
                                 {
                                     throw new InvalidOperationException(
