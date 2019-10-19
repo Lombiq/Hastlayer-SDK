@@ -267,7 +267,6 @@ namespace Hast.Catapult.Abstractions
         /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
         public void VerifyResult(Constants.Status status)
         {
-            //if (status == Constants.Status.Success || status == Constants.Status.WaitTimeout) return;
             if (status == Constants.Status.Success) return;
 
             var errorMessage = new StringBuilder(512);
@@ -330,12 +329,7 @@ namespace Hast.Catapult.Abstractions
                 }
 
                 // Check the response count and if necessary open further empty slots.
-                //var payloadLengthCellsPosition = OutputHeaderSizes.HardwareExecutionTime;
                 var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
-                //var payloadLength = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(payloadLengthCellsPosition));
-                //currentSliceCount = (int)Math.Ceiling((double)payloadLength / BufferPayloadSize);
-                //while (tasks.Count < currentSliceCount)
-                //    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false));
 
                 // Make sure that all slots are done.
                 var responses = await Task.WhenAll(tasks);
@@ -374,15 +368,6 @@ namespace Hast.Catapult.Abstractions
             {
                 // Go round-robin,
                 _currentSlot = (_currentSlot + 1) % BufferCount;
-
-                // but try to find the first free slot.
-                //if (!_slotDispatch[_currentSlot].IsCompleted)
-                //    for (int i = 0; i < BufferCount; i++)
-                //    {
-                //        int slot = (_currentSlot + i) % BufferCount;
-                //        if (_slotDispatch[slot].IsCompleted)
-                //            _currentSlot = slot;
-                //    }
 
                 currentSlot = _currentSlot;
                 _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
