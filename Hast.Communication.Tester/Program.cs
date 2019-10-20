@@ -20,6 +20,7 @@ namespace Hast.Communication.Tester
 
         public const int HexDumpBlocksPerLine = 8;
 
+
         private static async Task MainTask(Options configuration)
         {
             using (var hastlayer = await Hastlayer.Create(new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer }))
@@ -111,7 +112,7 @@ namespace Hast.Communication.Tester
                     }
                     break;
                 default:
-                    throw new ArgumentException($"Unknown payload type: {type}");
+                    throw new ArgumentException($"Unknown payload type: {type}.");
             }
 
             return (memory, accessor);

@@ -28,13 +28,13 @@ namespace Hast.Communication.Tester
         [Option('m', "member-id", HelpText = "The simulated MemberId.")]
         public int MemberId { get; set; } = 0;
 
-        [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile)")]
+        [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile).")]
         public PayloadType PayloadType { get; set; } = PayloadType.ConstantIntOne;
 
-        [Option('f', "file-type", HelpText = "Type of the files where input and output are dumped to(None, Hexdump, Binary)")]
+        [Option('f', "file-type", HelpText = "Type of the files where input and output are dumped to (None, Hexdump, Binary).")]
         public OutputFileType OutputFileType { get; set; } = OutputFileType.None;
 
-        [Option('i', "input", HelpText = "Generated data is saved to or payload is read from here when using BinaryFile as file-type.")]
+        [Option('i', "input", HelpText = "Generated data is saved to or payload is read from this file when using BinaryFile as file-type.")]
         public string InputFileName { get; set; }
 
         public const string OutputFileNameConsole = "CONSOLE";
