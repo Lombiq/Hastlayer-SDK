@@ -1,7 +1,6 @@
 ﻿using Hast.Layer;
 using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz
@@ -46,7 +45,7 @@ namespace Hast.Samples.Kpz
             _backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
                 backgroundWorker_RunWorkerCompleted
             );
-            comboTarget.SelectedIndex = 3;
+            comboTarget.SelectedIndex = 4;
         }
 
         /// <summary>It adds a line to the log.</summary>
