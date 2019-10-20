@@ -179,12 +179,13 @@ namespace Hast.Communication.Tester
 
             if (mismatches.Count > 0)
             {
-                Console.WriteLine("MISMATCH:\n{0}", new HardwareExecutionResultMismatchException(mismatches));
+                Console.WriteLine("MISMATCH:");
+                Console.WriteLine(new HardwareExecutionResultMismatchException(mismatches));
             }
             if (memory.CellCount != referenceMemory.CellCount)
             {
-                Console.WriteLine("MISMATCH IN LENGTH:\nHardware: {0}\nSoftware: {1}",
-                    memory.CellCount, referenceMemory.CellCount);
+                Console.WriteLine("MISMATCH IN LENGTH:{0}Hardware: {1}{0}Software: {2}",
+                    Environment.NewLine, memory.CellCount, referenceMemory.CellCount);
             }
             else if (mismatches.Count == 0)
             {
