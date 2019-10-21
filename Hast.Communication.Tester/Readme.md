@@ -4,6 +4,7 @@
 
 Command line application for testing the communication layer.
 
+
 ## About
 
 This application sends test data to any device that has a matching `ICommunicationService` registered. It does not program
@@ -26,6 +27,7 @@ If you need to iterate the output you can do so by using
 
 `Hast.Communication.Tester.exe --device Catapult --bytes 1024 --member-id 0 -i CONSOLE -o CONSOLE -n`
 
+
 ## Switches
 
 - `-l`, `--list`
@@ -41,13 +43,13 @@ The total size of the payload in number of cells.
 - `-m`, `--member-id`
 The simulated MemberId.
 - `-t`, `--payload-type`
-What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile).
+What kind of data to send (`ConstantIntOne`, `Counter`, `Random`, `BinaryFile`).
 - `-f`, `--file-type`
-Type of the files where input and output are dumped to (None, Hexdump, Binary).
+Type of the files where input and output are dumped to (`None`, `Hexdump`, `Binary`).
 - `-i`, `--input`
 Generated data is saved to or payload is read from this file when using BinaryFile as file-type.
 - `-o`, `--output`
-Output file name. (overrides -f to Hexdump if it's None; use value 'CONSOLE' to write Hexdump to the console)
+Output file name. (overrides `-f` to `Hexdump` if it's `None`; use value 'CONSOLE' to write hexdump to the console)
 - `-j`, `--json`
 Create a summary as JSON file.
 - `-n`, `--no-check`
@@ -57,27 +59,29 @@ Display this help screen.
 - `--version`
 Display version information.
 
+
 ## Payload Types
 
-The first 3 options consider each 4 byte sell in the SimpleMemory as an Int32.
+The first 3 options consider each 4 byte cell in the `SimpleMemory` as an `Int32`.
 
-- ConstantIntOne: Sets each cell's value to 1.
-- Counter: The value counts up from 0 by 1, so it is the same as the cell index.
-- Random: Each cell is set to a random int. Uniqueness is not guaranteed.
-- BinaryFile: Loads the input from an external file byte-by-byte.
+- `ConstantIntOne`: Sets each cell's value to 1.
+- `Counter`: The value counts up from 0 by 1, so it is the same as the cell index.
+- `Random`: Each cell is set to a random `int`. Uniqueness is not guaranteed.
+- `BinaryFile`: Loads the input from an external file byte-by-byte.
 
 If it's set to BinaryFile then the input is read from `--input` instead of written to.
 
 Random is non-repeatable so if that becomes an issue you can first export a generated input using the
 `-t Random -f Binary -i random.bin` options and then use `-t BinaryFile -i random.bin` in consecutive runs.
 
+
 ## File Types
 
 This switch controls both the input and the output file types.
 
-- None: They aren't saved. If either input or output file paths are set then it's changed to Hexdump.
-- Hexdump: The data is formatted as hexadecimal in a similar style as seen in a hexdump.
-- Binary: The data is saved/loaded raw as a binary file. 
+- `None`: They aren't saved. If either input or output file paths are set then it's changed to `Hexdump`.
+- `Hexdump`: The data is formatted as hexadecimal in a similar style as seen in a hexdump.
+- `Binary`: The data is saved/loaded raw as a binary file. 
 
 If instead of saving you want to display on the command line you can type the value CONSOLE in all capitals as
 `-i CONSOLE` or `-o CONSOLE`.
