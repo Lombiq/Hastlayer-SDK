@@ -117,9 +117,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
-
-            if (cellIndex < CellCount) this[cellIndex].CopyTo(output);
-
+            this[cellIndex].CopyTo(output);
             return output;
         }
 

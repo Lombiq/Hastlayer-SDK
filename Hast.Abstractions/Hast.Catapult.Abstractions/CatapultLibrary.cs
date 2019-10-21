@@ -240,12 +240,12 @@ namespace Hast.Catapult.Abstractions
 
             try { WaitClean(); } catch { }
 
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA...\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA..." + Environment.NewLine);
             PcieEnabled = false;
             NativeLibrary.CloseHandle(Handle);
 
             NativeLibrary.Dispose();
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closed down the FPGA...\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closed down the FPGA..." + Environment.NewLine);
 
             _isDisposed = true;
         }
@@ -267,7 +267,6 @@ namespace Hast.Catapult.Abstractions
         /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
         public void VerifyResult(Constants.Status status)
         {
-            //if (status == Constants.Status.Success || status == Constants.Status.WaitTimeout) return;
             if (status == Constants.Status.Success) return;
 
             var errorMessage = new StringBuilder(512);
@@ -329,14 +328,6 @@ namespace Hast.Catapult.Abstractions
                     };
                 }
 
-                // Check the response count and if necessary open further empty slots.
-                //var payloadLengthCellsPosition = OutputHeaderSizes.HardwareExecutionTime;
-                var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
-                //var payloadLength = MemoryMarshal.Read<int>((await Task.WhenAny(tasks)).Result.Span.Slice(payloadLengthCellsPosition));
-                //currentSliceCount = (int)Math.Ceiling((double)payloadLength / BufferPayloadSize);
-                //while (tasks.Count < currentSliceCount)
-                //    tasks.Add(AssignJob(memberId, Memory<byte>.Empty, tasks.Count, currentSliceCount, totalDataSize, false));
-
                 // Make sure that all slots are done.
                 var responses = await Task.WhenAll(tasks);
 
@@ -344,6 +335,7 @@ namespace Hast.Catapult.Abstractions
                 var payloadTotalCells = MemoryMarshal.Read<int>(responses[0].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
                 Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
                 responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
+                var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
                 Parallel.For(0, responses.Length, (i)=>
                 {
                     int size = i < responses.Length - 1 ? BufferPayloadSize :
@@ -375,15 +367,6 @@ namespace Hast.Catapult.Abstractions
                 // Go round-robin,
                 _currentSlot = (_currentSlot + 1) % BufferCount;
 
-                // but try to find the first free slot.
-                //if (!_slotDispatch[_currentSlot].IsCompleted)
-                //    for (int i = 0; i < BufferCount; i++)
-                //    {
-                //        int slot = (_currentSlot + i) % BufferCount;
-                //        if (_slotDispatch[slot].IsCompleted)
-                //            _currentSlot = slot;
-                //    }
-
                 currentSlot = _currentSlot;
                 _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
                     .ContinueWith(_ => RunJob(currentSlot, data, ignoreResponse).Result);
@@ -391,9 +374,10 @@ namespace Hast.Catapult.Abstractions
 
             var jobResult = await job;
             if (ignoreResponse)
-                TesterOutput?.WriteLine("Job Finished\n************\nSlot: {0}\n", currentSlot);
+                TesterOutput?.WriteLine("Job Finished{0}************{0}Slot: {1}{0}", Environment.NewLine, currentSlot);
             else
-                TesterOutput?.WriteLine("Job Finished\n************\nSlot: {0}\nTime: {1}\nPayload: {2} cells\nSlice: {3}\n",
+                TesterOutput?.WriteLine("Job Finished{0}************{0}Slot: {1}{0}Time: {2}{0}Payload: {3} cells{0}Slice: {4}{0}",
+                    Environment.NewLine,
                     currentSlot,
                     MemoryMarshal.Read<long>(jobResult.Span),
                     MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime).Span),
@@ -413,7 +397,7 @@ namespace Hast.Catapult.Abstractions
         /// <returns>The resulting output from the FPGA.</returns>
         private async Task<Memory<byte>> RunJob(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
         {
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} starting...\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} starting...{Environment.NewLine}");
             Debug.Assert(bufferIndex < BufferCount);
             Debug.Assert(inputData.Length <= BufferSize);
             var slot = (uint)bufferIndex;
@@ -447,7 +431,7 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
 
             LogFunction?.Invoke((uint)Constants.Log.Debug,
-                $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}\n");
+                $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}{Environment.NewLine}");
 
             // Upload data into input buffer.
             unsafe
@@ -487,12 +471,12 @@ namespace Hast.Catapult.Abstractions
             }
 
             LogFunction?.Invoke((uint)Constants.Log.Debug,
-                $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}\n");
+                $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}{Environment.NewLine}");
 
             // Signal that we are done.
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slot} finished!\n");
+            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slot} finished!{Environment.NewLine}");
             return resultMemory;
         }
 

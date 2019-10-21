@@ -3,7 +3,7 @@
     public enum PayloadType
     {
         /// <summary>
-        /// Each cell contains an int value of 1 (00000001h)
+        /// Each cell contains an int value of 1 (00000001h).
         /// </summary>
         ConstantIntOne,
 

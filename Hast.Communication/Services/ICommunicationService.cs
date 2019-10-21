@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Hast.Communication.Models;
+﻿using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
@@ -17,7 +17,7 @@ namespace Hast.Communication.Services
         string ChannelName { get; }
 
         /// <summary>
-        /// The TextWriter which the communication service may use communicate diagnostic information.
+        /// The TextWriter which the communication service may use to communicate diagnostics information.
         /// </summary>
         System.IO.TextWriter TesterOutput { get; set; }
 

@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using Hast.Communication.Models;
+﻿using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
+using System;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using static Hast.Catapult.Abstractions.Constants;
 
 namespace Hast.Catapult.Abstractions
@@ -32,7 +31,7 @@ namespace Hast.Catapult.Abstractions
         private void Device_Disposing(object sender, EventArgs e) => 
             ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
-        #region Temporary solution while the rolée uses the 16x size hardware cells instead of SimpleMemory cells.
+        #region Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
         private const int HardwareCellMultiplier = 16;
         private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
 
@@ -82,7 +81,7 @@ namespace Hast.Catapult.Abstractions
                         catch (CatapultFunctionResultException ex)
                         {
                             // The illegal endpoint number messages are normal for higher endpoints if they aren't
-                            // populated, so it's ok to suppress them.
+                            // populated, so it's OK to suppress them.
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
                                 Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;

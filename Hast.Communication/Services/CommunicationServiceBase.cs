@@ -17,11 +17,8 @@ namespace Hast.Communication.Services
         private TextWriter _testerOutput;
         public TextWriter TesterOutput
         {
-            #if DEBUG
-            get => _testerOutput; set => _testerOutput = value;
-            #else
-            get => null; set { }
-            #endif
+            get => _testerOutput;
+            set => _testerOutput = value;
         }
 
         public CommunicationServiceBase()
