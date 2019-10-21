@@ -91,6 +91,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Readme.md" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj">
