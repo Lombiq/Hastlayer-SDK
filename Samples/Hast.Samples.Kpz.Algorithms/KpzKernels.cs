@@ -1,8 +1,7 @@
-using Hast.Algorithms;
 using Hast.Algorithms.Random;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
-namespace Hast.Samples.Kpz
+namespace Hast.Samples.Kpz.Algorithms
 {
     /// <summary>
     /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM

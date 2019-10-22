@@ -70,8 +70,6 @@
     </Compile>
     <Compile Include="Kpz.cs" />
     <Compile Include="KpzHast.cs" />
-    <Compile Include="KpzKernels.cs" />
-    <Compile Include="KpzKernelsParallelized.cs" />
     <Compile Include="KpzStateLogger.cs" />
     <Compile Include="PrngTestInterface.cs" />
     <Compile Include="Program.cs" />
@@ -139,6 +137,10 @@
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
       <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
       <Name>Hast.Layer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj">
+      <Project>{ee140765-5088-40aa-9621-d4b0a971ee2c}</Project>
+      <Name>Hast.Samples.Kpz.Algorithms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

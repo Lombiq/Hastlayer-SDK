@@ -1,5 +1,7 @@
+using Hast.Samples.Kpz.Algorithms;
 using System.Collections.Generic;
 using System.Drawing;
+
 namespace Hast.Samples.Kpz
 {
     /// <summary>

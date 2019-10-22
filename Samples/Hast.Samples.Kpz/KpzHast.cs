@@ -1,8 +1,8 @@
 ﻿using Hast.Algorithms.Random;
 using Hast.Layer;
+using Hast.Samples.Kpz.Algorithms;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz

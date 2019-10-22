@@ -1,11 +1,10 @@
 ﻿
-using System;
-using System.Threading.Tasks;
-using Hast.Algorithms;
 using Hast.Algorithms.Random;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System;
+using System.Threading.Tasks;
 
-namespace Hast.Samples.Kpz
+namespace Hast.Samples.Kpz.Algorithms
 {
     /// <summary>
     /// It contains the state of each Task instantiated within KpzKernelsG.ScheduleIterations.
