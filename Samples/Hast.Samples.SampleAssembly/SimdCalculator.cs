@@ -1,6 +1,6 @@
-﻿using System;
-using Hast.Common.Numerics;
+﻿using Hast.Common.Numerics;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -32,6 +32,7 @@ namespace Hast.Samples.SampleAssembly
         // stable. While only 69% of the FPGA's resources are used unfortunately we can't go above that.
         // On the same board just transforming AddVectors or SubtractVectors could fit with a degree of parallelism of
         // more than 500.
+        // On Catapult 170 will fit.
         public const int MaxDegreeOfParallelism = 20;
 
 
