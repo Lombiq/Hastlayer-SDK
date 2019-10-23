@@ -1,9 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Hast.Algorithms;
-using Hast.Algorithms.Random;
+﻿using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using System;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -17,10 +16,12 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
-            uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 5000000;
+            uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 500000;
 
-            // On a Nexys 4 DDR this takes about 340ms with a 76 degree of parallelism and method inlining. It takes
-            // about 1,5s on an i7 processor with 4 physical (8 logical) cores.
+            // On a Nexys 4 DDR this takes about 34ms with a 76 degree of parallelism and method inlining. It takes
+            // about 120ms on an i7 processor with 4 physical (8 logical) cores.
+            // On Catapult with a 350 degree of parallelism it takes 26ms on hardware and 160ms on the (2*32 logical 
+            // core) CPU.
 
             var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator());
             var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount);
