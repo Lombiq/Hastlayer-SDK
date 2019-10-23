@@ -46,6 +46,7 @@ namespace Hast.Samples.Kpz
             if (_kpzTarget.HastlayerParallelizedAlgorithm())
             {
                 configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
+                configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
             }
             else if (_kpzTarget.HastlayerPlainAlgorithm())
             {
