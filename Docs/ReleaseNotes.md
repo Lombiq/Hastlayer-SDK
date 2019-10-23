@@ -7,15 +7,17 @@ Note that the hardware framework projects have their own release cycle and relea
 
 ## vNext
 
-- Adding transformation warning for too large arrays and displaying such arrays in the Consumer sample.
-- Adding the ability to configure methods to be inlined without an attribute.
-- Adding option to enable or disable constant substitution.
+- Support for Microsoft's FPGA platform, [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/). These FPGAs are vastly more resourceful than the Nexys with fast PCIe communication. Thus Hastlayer is now suitable in selected HPC use-cases.
 - New samples:
   - `MonteCarloPiEstimator`: A Monte Carlo simulation computing the value of Pi in a highly parallelized manner.
   - `MemoryTest`: A test algorithm similar to the `Loopback` sample to test basic operations of a hardware device.
 - New linear-feedback shift register pseudo random number generator: `RandomLfsr` (check out the `MonteCarloPiEstimator` sample on how it can be useful). This is a simpler PRNG than the `RandomMwc64X` implementation we had before solely, and has lower resource usage, but produces lower quality random numbers. Also included the 16b `RandomLfsr16` and a xorshift version, `RandomXorshiftLfsr16`.
+- [Optimizing InternalInvocationProxy ](https://github.com/Lombiq/Hastlayer-SDK/issues/30), thus dramatically lowering the resource usage of certain parallel algorithms as well as recursive algorithms while making their execution faster too.
+- Adding transformation warning for too large arrays and displaying such arrays in the Consumer sample.
+- Adding the ability to configure methods to be inlined without an attribute.
+- Adding option to enable or disable constant substitution.
 - Implement workaround for an [ILSpy bug](https://github.com/icsharpcode/ILSpy/issues/807).
-- Fixing SimdCalculator hardware execution, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/11).
+- Fixing [SimdCalculator hardware execution](https://github.com/Lombiq/Hastlayer-SDK/issues/11).
 - Various smaller bugfixes and improvements.
 
 
