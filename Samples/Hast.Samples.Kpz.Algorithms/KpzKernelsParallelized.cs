@@ -71,7 +71,7 @@ namespace Hast.Samples.Kpz.Algorithms
 
         public virtual void ScheduleIterations(SimpleMemory memory)
         {
-            int numberOfIterations = memory.ReadInt32(KpzKernelsParallelizedInterface.MemIndexNumberOfIterations);
+            int numberOfIterations = memory.ReadInt32(MemIndexNumberOfIterations);
             const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
             int iterationGroupSize = numberOfIterations * ReschedulesPerTaskIteration;
