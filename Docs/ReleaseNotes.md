@@ -11,6 +11,7 @@ Note that the hardware framework projects have their own release cycle and relea
 - New samples:
   - `MonteCarloPiEstimator`: A Monte Carlo simulation computing the value of Pi in a highly parallelized manner.
   - `MemoryTest`: A test algorithm similar to the `Loopback` sample to test basic operations of a hardware device.
+  - `FSharpParallelAlgorithm`: Not a C# but an F# sample, showcasing the same basic parallelization features as seen in `ParallelAlgorithm`.
 - New linear-feedback shift register pseudo random number generator: `RandomLfsr` (check out the `MonteCarloPiEstimator` sample on how it can be useful). This is a simpler PRNG than the `RandomMwc64X` implementation we had before solely, and has lower resource usage, but produces lower quality random numbers. Also included the 16b `RandomLfsr16` and a xorshift version, `RandomXorshiftLfsr16`.
 - [Optimizing InternalInvocationProxy ](https://github.com/Lombiq/Hastlayer-SDK/issues/30), thus dramatically lowering the resource usage of certain parallel algorithms as well as recursive algorithms while making their execution faster too.
 - Adding transformation warning for too large arrays and displaying such arrays in the Consumer sample.

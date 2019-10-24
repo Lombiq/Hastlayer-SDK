@@ -3,6 +3,7 @@
     internal enum Sample
     {
         Fix64Calculator,
+        FSharpParallelAlgorithm,
         GenomeMatcher,
         ParallelAlgorithm,
         ImageProcessingAlgorithms,

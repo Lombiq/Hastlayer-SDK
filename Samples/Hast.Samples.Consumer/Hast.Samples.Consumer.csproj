@@ -60,6 +60,7 @@
     <Compile Include="SampleRunners\GenomeMatcherSampleRunner.cs" />
     <Compile Include="SampleRunners\MemoryTestSampleRunner.cs" />
     <Compile Include="SampleRunners\LoopbackSampleRunner.cs" />
+    <Compile Include="SampleRunners\FSharpParallelAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ParallelAlgorithmSampleRunner.cs" />
     <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
     <Compile Include="SampleRunners\MonteCarloPiEstimatorSampleRunner.cs" />
@@ -105,6 +106,10 @@
     <ProjectReference Include="..\..\Hast.Remote.Client\Hast.Remote.Client.csproj">
       <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
       <Name>Hast.Remote.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj">
+      <Project>{a2d4c4bd-4c4a-4ed7-b74f-b2c79f31f2d0}</Project>
+      <Name>Hast.Samples.FSharpSampleAssembly</Name>
     </ProjectReference>
     <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
       <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>

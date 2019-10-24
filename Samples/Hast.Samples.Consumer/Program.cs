@@ -106,7 +106,7 @@ namespace Hast.Samples.Consumer
 
                 // Let's just use the first one that is available unless it's specified.
                 if (string.IsNullOrEmpty(Configuration.DeviceName)) Configuration.DeviceName = devices.First().Name;
-                var targetDeviceName =  GetArgument("device") ?? Configuration.DeviceName;
+                var targetDeviceName = GetArgument("device") ?? Configuration.DeviceName;
                 var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
                 if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
 
@@ -131,6 +131,9 @@ namespace Hast.Samples.Consumer
                 {
                     case Sample.Fix64Calculator:
                         Fix64CalculatorSampleRunner.Configure(configuration);
+                        break;
+                    case Sample.FSharpParallelAlgorithm:
+                        FSharpParallelAlgorithmSampleRunner.Configure(configuration);
                         break;
                     case Sample.GenomeMatcher:
                         GenomeMatcherSampleRunner.Configure(configuration);
@@ -175,9 +178,10 @@ namespace Hast.Samples.Consumer
                 var hardwareRepresentation = await hastlayer.GenerateHardware(
                     new[]
                     {
-                                // Selecting any type from the sample assembly here just to get its Assembly object.
-                                typeof(PrimeCalculator).Assembly,
-                                typeof(Fix64).Assembly
+                        // Selecting any type from the sample assembly here just to get its Assembly object.
+                        typeof(PrimeCalculator).Assembly,
+                        typeof(Fix64).Assembly,
+                        typeof(FSharpSampleAssembly.FSharpParallelAlgorithmContainer).Assembly
                     },
                     configuration);
 
@@ -214,6 +218,9 @@ namespace Hast.Samples.Consumer
                     {
                         case Sample.Fix64Calculator:
                             await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.FSharpParallelAlgorithm:
+                            await FSharpParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
                             break;
                         case Sample.GenomeMatcher:
                             await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);

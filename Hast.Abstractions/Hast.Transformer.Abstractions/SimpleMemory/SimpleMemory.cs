@@ -135,9 +135,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public void WriteUInt32(int cellIndex, uint number) => MemoryMarshal.Write(this[cellIndex], ref number);
 
-        public void WriteUInt32(int startCellIndex, params uint[] numbers) =>
-            MemoryMarshal.Cast<uint, byte>(numbers)
-                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(uint)).Span);
+        // The commented out methods mess up the F# sample but are not actually needed. They'll be removed soon any way.
+        //public void WriteUInt32(int startCellIndex, params uint[] numbers) =>
+        //    MemoryMarshal.Cast<uint, byte>(numbers)
+        //        .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(uint)).Span);
 
         public uint ReadUInt32(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]);
 
@@ -147,9 +148,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public void WriteInt32(int cellIndex, int number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
-        public void WriteInt32(int startCellIndex, params int[] numbers) =>
-            MemoryMarshal.Cast<int, byte>(numbers)
-                .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(int)).Span);
+        //public void WriteInt32(int startCellIndex, params int[] numbers) =>
+        //    MemoryMarshal.Cast<int, byte>(numbers)
+        //        .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(int)).Span);
 
         public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
 
