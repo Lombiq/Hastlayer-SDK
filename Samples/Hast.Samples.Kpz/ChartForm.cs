@@ -1,4 +1,5 @@
 ﻿using Hast.Layer;
+using Hast.Samples.Kpz.Algorithms;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
