@@ -10,8 +10,8 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MemoryTest
     {
-        public const int Run_StartIndexInt32Index = 0;
-        public const int Run_LengthInt32Index = 1;
+        private const int Run_StartIndexInt32Index = 0;
+        private const int Run_LengthInt32Index = 1;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -27,18 +27,15 @@ namespace Hast.Samples.SampleAssembly
                 memory.WriteInt32(i, memory.ReadInt32(i) + 1);
             }
         }
-    }
 
 
-    public static class MemoryTestExtensions
-    {
-        public static int Run(this MemoryTest memoryTest, int startIndex, int length)
+        public int Run(int startIndex, int length)
         {
             var memory = new SimpleMemory(startIndex + length < 2 ? 2 : startIndex + length);
-            memory.WriteInt32(MemoryTest.Run_StartIndexInt32Index, startIndex);
-            memory.WriteInt32(MemoryTest.Run_LengthInt32Index, length);
-            memoryTest.Run(memory);
-            return memory.ReadInt32(MemoryTest.Run_StartIndexInt32Index);
+            memory.WriteInt32(Run_StartIndexInt32Index, startIndex);
+            memory.WriteInt32(Run_LengthInt32Index, length);
+            Run(memory);
+            return memory.ReadInt32(Run_StartIndexInt32Index);
         }
     }
 }

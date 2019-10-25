@@ -15,13 +15,14 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MonteCarloPiEstimator
     {
+        private const int EstimatePi_IteractionsCountUInt32Index = 0;
+        private const int EstimatePi_RandomSeedUInt32Index = 1;
+        private const int EstimatePi_InCircleCountSumUInt32Index = 0;
+
         // With 78 about 61% of resources are used on a Nexys 4 DDR, but with 79 101%, so this is the limit of 
         // efficiency. On Catapult, however, 350 will fit (which uses 56% of the logic cells but almost all of the
         // DSPs, so more won't fit).
         public const int MaxDegreeOfParallelism = 78;
-        public const int EstimatePi_IteractionsCountUInt32Index = 0;
-        public const int EstimatePi_RandomSeedUInt32Index = 1;
-        public const int EstimatePi_InCircleCountSumUInt32Index = 0;
 
 
         public virtual void EstimatePi(SimpleMemory memory)
@@ -75,30 +76,26 @@ namespace Hast.Samples.SampleAssembly
 
             memory.WriteUInt32(EstimatePi_InCircleCountSumUInt32Index, inCircleCountSum);
         }
-    }
 
 
-    public static class MonteCarloPiEstimatorExtensions
-    {
-        private static readonly Random _random = new Random();
+        private readonly Random _random = new Random();
 
-
-        public static double EstimatePi(this MonteCarloPiEstimator piEstimator, uint iterationsCount)
+        public double EstimatePi(uint iterationsCount)
         {
-            if (iterationsCount % MonteCarloPiEstimator.MaxDegreeOfParallelism != 0)
+            if (iterationsCount % MaxDegreeOfParallelism != 0)
             {
-                throw new Exception($"The number of iterations must be divisible by {MonteCarloPiEstimator.MaxDegreeOfParallelism}.");
+                throw new Exception($"The number of iterations must be divisible by {MaxDegreeOfParallelism}.");
             }
 
             var memory = new SimpleMemory(2);
-            memory.WriteUInt32(MonteCarloPiEstimator.EstimatePi_IteractionsCountUInt32Index, iterationsCount);
-            memory.WriteUInt32(MonteCarloPiEstimator.EstimatePi_RandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
+            memory.WriteUInt32(EstimatePi_IteractionsCountUInt32Index, iterationsCount);
+            memory.WriteUInt32(EstimatePi_RandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
 
-            piEstimator.EstimatePi(memory);
+            EstimatePi(memory);
 
             // This single calculation takes up too much space on the FPGA, since it needs fix point arithmetic, but
             // it doesn't take much time. So doing it on the host instead.
-            return (double)memory.ReadInt32(MonteCarloPiEstimator.EstimatePi_InCircleCountSumUInt32Index) / iterationsCount * 4;
+            return (double)memory.ReadInt32(EstimatePi_InCircleCountSumUInt32Index) / iterationsCount * 4;
         }
     }
 }

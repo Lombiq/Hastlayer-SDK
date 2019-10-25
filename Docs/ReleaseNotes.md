@@ -19,6 +19,8 @@ Note that the hardware framework projects have their own release cycle and relea
 - Adding option to enable or disable constant substitution.
 - Implement workaround for an [ILSpy bug](https://github.com/icsharpcode/ILSpy/issues/807).
 - Fixing [SimdCalculator hardware execution](https://github.com/Lombiq/Hastlayer-SDK/issues/11).
+- Improving documentation.
+- Simplifying samples: no more extension methods for wrappers to be called by external consumers (all methods can be in the same classes).
 - Various smaller bugfixes and improvements.
 
 
