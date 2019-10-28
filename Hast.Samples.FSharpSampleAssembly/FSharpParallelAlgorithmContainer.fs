@@ -8,7 +8,7 @@ module FSharpParallelAlgorithmContainer =
     // A simple parallelized sample showcasing what you can also see in ParallelAlgorithm, but in F#.
     type public FSharpParallelAlgorithm() =
         [<Literal>]
-        let MaxDegreeOfParallelism = 2
+        let MaxDegreeOfParallelism = 280
 
         [<Literal>]
         let Run_InputUInt32Index = 0
