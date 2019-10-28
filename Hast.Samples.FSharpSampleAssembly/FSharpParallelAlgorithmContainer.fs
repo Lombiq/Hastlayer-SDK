@@ -6,6 +6,10 @@ module FSharpParallelAlgorithmContainer =
     open System
 
     // A simple parallelized sample showcasing what you can also see in ParallelAlgorithm, but in F#.
+    // Due to how Hastlayer processes the .NET assemblies unfortunately this has to be very similar to the C# sample,
+    // so it's more like a curiosity than something useful.
+
+    // The hardware entry point needs to be a class here too.
     type public FSharpParallelAlgorithm() =
         [<Literal>]
         let MaxDegreeOfParallelism = 280
@@ -17,6 +21,8 @@ module FSharpParallelAlgorithmContainer =
         let Run_OutputUInt32Index = 0
 
 
+        // Since there's no virtual in F# the hardware entry point methods need to be abstracts with the default
+        // implementation following them.
         abstract member Run: SimpleMemory -> unit
         default this.Run memory = 
             let input = memory.ReadInt32(Run_InputUInt32Index)
@@ -24,7 +30,7 @@ module FSharpParallelAlgorithmContainer =
             let tasks : Task<int> array = Array.zeroCreate MaxDegreeOfParallelism
 
             // Since the for loop uses an inclusive upper bound we use a while loop here for clarity with the C# 
-            // ParallelAlgorithm sample
+            // ParallelAlgorithm sample.
             let mutable i = 0
             while i < MaxDegreeOfParallelism do
                 tasks.[i] <- Task.Factory.StartNew((fun (indexObject : Object) -> 
