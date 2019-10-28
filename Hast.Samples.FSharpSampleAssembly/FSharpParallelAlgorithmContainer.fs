@@ -7,8 +7,6 @@ module FSharpParallelAlgorithmContainer =
 
     // A simple parallelized sample showcasing what you can also see in ParallelAlgorithm, but in F#.
     type public FSharpParallelAlgorithm() =
-        // Since literals can't be exposed as public consts we can't put a class with extension methods into the 
-        // Consumer app. Maybe eventually: https://github.com/fsharp/fslang-suggestions/issues/746.
         [<Literal>]
         let MaxDegreeOfParallelism = 2
 
@@ -52,7 +50,6 @@ module FSharpParallelAlgorithmContainer =
 
             memory.WriteInt32(Run_InputUInt32Index, output)
 
-        // Instead of extension methods like in C# we use a standard method to do the SimpleMemory initialization.
         member this.Run input : int =
             let memory = new SimpleMemory(1)
             memory.WriteInt32(Run_InputUInt32Index, input)
