@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FSharp.Core, Version=4.7.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\Orchard\src\packages\FSharp.Core.4.7.0\lib\net45\FSharp.Core.dll</HintPath>
+    </Reference>
     <Reference Include="StrictEmit, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\Orchard\src\packages\StrictEmit.2.5.0\lib\net45\StrictEmit.dll</HintPath>
     </Reference>
