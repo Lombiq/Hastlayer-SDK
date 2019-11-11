@@ -15,8 +15,7 @@ namespace Hast.Catapult.Abstractions
                 // Since it's completely Catapult-specific, not using e.g. "PCIe" here.
                 SupportedCommunicationChannelNames = new[] { DeviceName },
                 // Right now the whole memory is not available due to one physical cell being equal to one logical one.
-                AvailableMemoryBytes = 8_000_000_000UL / 16,
-                DataBusWidthBytes = 64
+                AvailableMemoryBytes = 8_000_000_000UL / 16
             };
     }
 }

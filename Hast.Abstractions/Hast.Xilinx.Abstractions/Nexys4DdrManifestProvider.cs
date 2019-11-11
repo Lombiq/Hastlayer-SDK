@@ -7,14 +7,13 @@ namespace Hast.Xilinx.Abstractions
     {
         public const string DeviceName = "Nexys4 DDR";
 
-        public IDeviceManifest DeviceManifest { get; } = 
+        public IDeviceManifest DeviceManifest { get; } =
             new DeviceManifest
             {
                 Name = DeviceName,
                 ClockFrequencyHz = 100000000, // 100 Mhz
                 SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
-                AvailableMemoryBytes = 115343360, // 110MB
-                DataBusWidthBytes = 4
+                AvailableMemoryBytes = 115343360 // 110MB
             };
     }
 }

@@ -108,12 +108,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             for (int i = bytes.Length; i < MemoryCellSizeBytes; i++) target[i] = 0;
         }
 
-        public void Write4Bytes(int startCellIndex, byte[][] bytesMatrix)
-        {
-            for (int i = 0; i < bytesMatrix.Length; i++)
-                Write4Bytes(startCellIndex + i, bytesMatrix[i]);
-        }
-
         public byte[] Read4Bytes(int cellIndex)
         {
             var output = new byte[MemoryCellSizeBytes];
@@ -121,47 +115,13 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             return output;
         }
 
-        public byte[][] Read4Bytes(int startCellIndex, int count)
-        {
-            var bytesMatrix = new byte[count][];
-
-            for (int i = 0; i < count; i++)
-            {
-                bytesMatrix[i] = Read4Bytes(startCellIndex + i);
-            }
-
-            return bytesMatrix;
-        }
-
         public void WriteUInt32(int cellIndex, uint number) => MemoryMarshal.Write(this[cellIndex], ref number);
-
-        // The commented out methods mess up the F# sample but are not actually needed. They'll be removed soon any way.
-        //public void WriteUInt32(int startCellIndex, params uint[] numbers) =>
-        //    MemoryMarshal.Cast<uint, byte>(numbers)
-        //        .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(uint)).Span);
 
         public uint ReadUInt32(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]);
 
-        public uint[] ReadUInt32(int startCellIndex, int count) => 
-            MemoryMarshal.Cast<byte, uint>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(uint)).Span).ToArray();
-
-
         public void WriteInt32(int cellIndex, int number) => Write4Bytes(cellIndex, BitConverter.GetBytes(number));
 
-        //public void WriteInt32(int startCellIndex, params int[] numbers) =>
-        //    MemoryMarshal.Cast<int, byte>(numbers)
-        //        .CopyTo(Memory.Slice(startCellIndex * MemoryCellSizeBytes, numbers.Length * sizeof(int)).Span);
-
         public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
-
-        /// <summary>
-        /// Takes count integers at cellIndex.
-        /// </summary>
-        /// <param name="startCellIndex">The cell of the first integer</param>
-        /// <param name="count">The amount of integers</param>
-        /// <returns>The numbers in an array.</returns>
-        public int[] ReadInt32(int startCellIndex, int count) =>
-            MemoryMarshal.Cast<byte, int>(Memory.Slice(startCellIndex * MemoryCellSizeBytes, count * sizeof(int)).Span).ToArray();
 
         public void WriteBoolean(int cellIndex, bool boolean) =>
             // Since the implementation of a boolean can depend on the system rather hard-coding the expected values
@@ -169,24 +129,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             // parameter must be passed using "ref" and you can't pass in constants or expressions by reference.
             WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
-        public void WriteBoolean(int startCellIndex, params bool[] booleans)
-        {
-            for (int i = 0; i < booleans.Length; i++)
-                WriteBoolean(startCellIndex + i, booleans[i]);
-        }
-
         public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
-
-        public bool[] ReadBoolean(int startCellIndex, int count)
-        {
-            var source = ReadUInt32(startCellIndex, count);
-            var booleans = new bool[count];
-
-            for (int i = 0; i < count; i++)
-                booleans[i] = source[i] == uint.MaxValue;
-
-            return booleans;
-        }
     }
 
 
