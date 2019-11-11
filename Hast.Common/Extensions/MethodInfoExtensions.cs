@@ -10,7 +10,8 @@ namespace System.Reflection
         /// </summary>
         public static string GetFullName(this MethodInfo method) =>
             method.ReturnType.FullName + " " +
-            method.ReflectedType.FullName + "::" +
+            // The + character connects parent to nested class names here but the for the same a / is used later.
+            method.ReflectedType.FullName.Replace('+', '/') + "::" +
             method.Name + 
             "(" + string.Join(",", method.GetParameters().Select(parameter => parameter.ParameterType.FullName)) + ")";
     }

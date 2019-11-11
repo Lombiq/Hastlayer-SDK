@@ -25,8 +25,8 @@ namespace Hast.Communication.Services
             {
                 if (_poolIsPopulated) return;
 
-                // We can't use await here due to locking. To minimize the danger of a deadlock the awaiter
-                // is configured not to continue on the captured context.
+                // We can't use await here due to locking. To minimize the danger of a deadlock the awaiter is
+                // configured not to continue on the captured context.
                 // See: http://blog.stephencleary.com/2012/07/dont-block-on-async-code.html
                 _devicePoolManager.SetDevicePool(devicesFactory().ConfigureAwait(false).GetAwaiter().GetResult());
                 _poolIsPopulated = true;

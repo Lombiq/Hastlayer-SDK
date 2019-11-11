@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Hast.Algorithms.Random;
+using Hast.Layer;
+using Hast.Samples.Kpz.Algorithms;
+using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Transformer.Abstractions.Configuration;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
 
 namespace Hast.Samples.Kpz
 {
@@ -47,6 +47,7 @@ namespace Hast.Samples.Kpz
             if (_kpzTarget.HastlayerParallelizedAlgorithm())
             {
                 configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
+                configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
             }
             else if (_kpzTarget.HastlayerPlainAlgorithm())
             {
@@ -60,7 +61,7 @@ namespace Hast.Samples.Kpz
 
             var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
                     typeof(KpzKernelsParallelizedInterface).Assembly,
-                    typeof(Algorithms.PrngMWC64X).Assembly
+                    typeof(RandomMwc64X).Assembly
                 }, configuration);
 
             await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);

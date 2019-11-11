@@ -16,14 +16,14 @@ You can set up a peer to peer connection as following:
 1. Set up at least one network adapter (network interface card, NIC) that has DHCP disabled, i.e. has statically configured IP and subnet mask (you can set an IP and subnet mask for the adapter manually: you can e.g. use 192.168.10.1/255.255.255.0 as the IP/subnet mask, leaving everything else empty).
 2. Connect the powered up FPGA board (it doesn't need to be programmed yet at this stage but it can be) to the NIC.
 3. Set up a DHCP Server.
-	- You can use [Open DHCP Server](http://dhcpserver.sourceforge.net/):
+	- You can use [DHCP Server for Windows](http://www.dhcpserver.de/) (since the latest version, 5.2.3 doesn't seem to be on the website, use the one bundled with this project):
+		1. Use the wizard to set up the server for the statically configured NIC(s). You can leave everything on default in the wizard but don't forget to write out the INI file. Also make sure to configure the firewall exception.
+		2. Run the server app and start the server by clicking "Continue as tray app". You don't need to install it as a service.
+	- You can also use [Open DHCP Server](http://dhcpserver.sourceforge.net/):
 		1. Install Open DHCP Server; don't install as service (you won't need that).
 		2. Locate the `DHCPRange=192.168.0.1-192.168.0.254` line in the OpenDHCPServer.ini file in the installation directory. This is a default config for the range of IPs available to be handed out. Unless you set 192.168.0.0 as the NICs IP this won't work.
 		3. Change the line to reflect an IP range suitable for your NIC's subnet. To follow the example you could use `DHCPRange=192.168.10.2-192.168.10.254`.
 		4. Run RunStandAlone.bat to start the DCHP server.
-	- You can also use [DHCP Server for Windows](http://www.dhcpserver.de/) (since the latest version, 5.2.3 doesn't seem to be on the website, use the one bundled with this project):
-		1. Use the wizard to set up the server for the statically configured NIC(s). You can leave everything on default in the wizard but don't forget to write out the INI file. Also make sure to configure the firewall exception.
-		2. Run the server app and start the server by clicking "Continue as tray app". You don't need to install it as a service.
 4. Start up the software on the FPGA board (make sure to configure the software to use Ethernet communication: change the `COMMUNICATION_CHANNEL` symbol's value to `ETHERNET` under the _HastlayerOperatingSystem_ project's properties, C/C++ Build, Settings, MicroBlaze g++ compiler, Symbols) and wait for it to receive an IP address.
 
 Also tried but don't recommend [Tftpd32](http://tftpd32.jounin.net/) (needs manual configuration for the given NICs), [Tiny DHCP Server](http://softcab.com/dhcp-server/index.php) (also needs manual configuration) and [haneWIN DHCP Server](http://www.hanewin.net/dhcp-e.htm) (30 days shareware).

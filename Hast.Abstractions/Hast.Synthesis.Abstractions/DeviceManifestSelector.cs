@@ -15,7 +15,10 @@ namespace Hast.Synthesis.Abstractions
         }
 
 
-        public IEnumerable<IDeviceManifest> GetSupporteDevices() => 
-            _deviceManifestProviders.Select(provider => provider.DeviceManifest);
+        public IEnumerable<IDeviceManifest> GetSupportedDevices() => 
+            _deviceManifestProviders
+                .Select(provider => provider.DeviceManifest)
+                .GroupBy(manifest => manifest.Name)
+                .Select(group => group.First());
     }
 }

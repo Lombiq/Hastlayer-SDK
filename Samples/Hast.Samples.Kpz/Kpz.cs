@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hast.Samples.Kpz.Algorithms;
+using System;
 
 
 namespace Hast.Samples.Kpz
@@ -22,54 +23,6 @@ namespace Hast.Samples.Kpz
 
         public static bool HastlayerPlainAlgorithm(this KpzTarget target) =>
             target == KpzTarget.Fpga || target == KpzTarget.FpgaSimulation;
-    }
-
-
-    /// <summary>
-    /// This struct is used to built the grid that the KPZ algorithm works on.
-    /// Every node on the grid stores the derivatives of a 2D function in X and Y direction.
-    /// </summary>
-    public class KpzNode
-    {
-        public bool dx; // Right
-        public bool dy; // Bottom
-
-
-        public uint SerializeToUInt32() 
-        {
-            return ((dx) ? 1U : 0) | ((dy) ? 2U : 0);
-        }
-
-        public static KpzNode DeserializeFromUInt32(uint value)
-        {
-            KpzNode node = new KpzNode();
-            node.dx = (value & 1) != 0;
-            node.dy = (value & 2) != 0;
-            return node;
-        }
-
-    }
-
-
-    /// <summary>
-    /// This struct stores the right and bottom neighbours of a particular node on the grid.
-    /// It stores both their values and coordinates.
-    /// </summary>
-    public struct KpzNeighbours
-    {
-        public KpzNode nx; // Right neighbour value
-        public KpzNode ny; // Left neighbour value
-        public KpzCoords nxCoords; // Right neighbour coordinates
-        public KpzCoords nyCoords; // Left neighbour coordinates
-    }
-
-    /// <summary>
-    /// This struct stores the coordinates of a <see cref="KpzNode" /> on the grid.
-    /// </summary>
-    public struct KpzCoords
-    {
-        public int x;
-        public int y;
     }
 
 
