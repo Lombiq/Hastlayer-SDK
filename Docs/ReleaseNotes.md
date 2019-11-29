@@ -2,7 +2,7 @@
 
 
 
-Note that the hardware framework projects have their own release cycle and release notes.
+Note that the Hardware Framework projects have their own release cycle and release notes.
 
 
 ## vNext

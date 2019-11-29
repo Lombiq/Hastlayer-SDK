@@ -2,6 +2,9 @@
 
 
 
+How to work on Hastlayer itself?
+
+
 ## Design principles
 
 - From a user's (i.e. using developer's) perspective Hastlayer should be as simple as possible. To achieve this e.g. use generally good default configurations so in the majority of cases there is no configuration needed.

@@ -2,7 +2,7 @@
 
 
 
-Everything is about allowing software engineers to make their programs faster easily by leveraging the power of FPGAs. You can get an up-to-date glimpse of what's in focus from the [issues](https://github.com/Lombiq/Hastlayer-SDK/issues) and the [project cards](https://github.com/Lombiq/Hastlayer-SDK/projects/1). Feel free to open issues yourself for bugreports and feature requests!
+Everything is about allowing software engineers to make their programs faster easily by leveraging the power of FPGAs. You can get an up-to-date glimpse of what's in focus from the [issues](https://github.com/Lombiq/Hastlayer-SDK/issues) and the [project cards](https://github.com/Lombiq/Hastlayer-SDK/projects/1). Feel free to open issues yourself for bug reports and feature requests!
 
 On a high level this is what we have outlined for the future:
 

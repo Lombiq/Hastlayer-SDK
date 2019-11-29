@@ -6,14 +6,14 @@
 
 The Hastlayer developer story is not ideal yet - we're working on improving it. For now the below one is the easiest approach to add Hastlayer to your application:
 
-1. Clone the Hastlayer repository into a subfolder of your application (if you aren't using Mercurial for you app's source control then you can also add the whole directory to your own repository; however be careful to exclude compiled binaries like how the *.hgignore* file does in the Hastlayer repo).
+1. Clone the Hastlayer repository into a subfolder of your application.
 2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.SDK.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
 3. Instruct NuGet to use the *Orchard\src\packages* folder under the Hastlayer folder. You can do this by adding a *NuGet.config* file to the same folder where your solution file is ([this example](Attachments/NuGet.config) again uses the *Hastlayer* subfolder).
 4. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
 
 When Hastlayer is updated you can just pull in changes from the official Hastlayer repository, but you'll need to keep your solution file up to date by hand.
 
-We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications.
+We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications. You can check out all the samples in the *Samples* solution folder.
 
 Since it's possible that due to bugs with some corner cases the hardware code will produce incorrect results it's good to configure Hastlayer to verify the hardware output while testing (and do tell Lombiq if you've found issues): You can do this by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects.
 
@@ -22,7 +22,9 @@ Since it's possible that due to bugs with some corner cases the hardware code wi
 
 While Hastlayer supports a lot of features of .NET, it can't support everything (also due to the fundamental differences between executing a program on a CPU and creating hardware logic). Thus limitations apply.
 
-Take a look at the sample projects in the Sample solution folder. Those are there to give you a general idea how Hastlayer-compatible code looks like, and they're thoroughly documented. If some language construct is not present in the samples then it is probably not supported. The `PrimeCalculator` class is a good starting point with a basic sample algorithm, `ParallelAlgorithm` is a good example of a highly parallelized algorithm, and `Hast.Samples.Consumer` demonstrates how to add Hastlayer to your app (`Hast.Samples.Demo` does the same in a stripped-down manner). You can also run the `Loopback` sample to test FPGA connectivity and Hastlayer Hardware Framework resource usage.
+Take a look at the sample projects in the *Samples* solution folder. Those are there to give you a general idea how Hastlayer-compatible code looks like, and they're thoroughly documented. If some language construct is not present in the samples then it is probably not supported.
+
+The `PrimeCalculator` class in the `Hast.Samples.SampleAssembly` project is a good starting point with a basic sample algorithm, `ParallelAlgorithm` is a good example of a highly parallelized algorithm, and the `Hast.Samples.Consumer` project demonstrates how to add Hastlayer to your app (`Hast.Samples.Demo` does the same in a stripped-down manner). You can also run the `Loopback` sample to test FPGA connectivity and Hastlayer Hardware Framework resource usage.
 
 Some general constraints you have to keep in mind:
 
