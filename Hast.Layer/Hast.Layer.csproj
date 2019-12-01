@@ -87,6 +87,10 @@
       <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
       <Name>Hast.Remote.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hast.TransformerTest\Hast.TransformerTest.csproj">
+      <Project>{219ab5e7-a12f-4629-acef-7a8116b02c76}</Project>
+      <Name>Hast.TransformerTest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj">
       <Project>{3e852853-2d19-49bb-b6c9-39b01d6e9785}</Project>
       <Name>Lombiq.OrchardAppHost</Name>
