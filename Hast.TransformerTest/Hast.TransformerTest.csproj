@@ -59,6 +59,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NoForPatternStatementTransform.cs" />
+    <Compile Include="ListExtension.cs" />
     <Compile Include="DefaultTransformerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
