@@ -97,17 +97,22 @@ namespace Hast.TransformerTest
             // Must revisit after an ILSpy update.
 
             decompiler.ILTransforms
+                // Might need to be removed:
+                // - InlineReturnTransform creates returns with ternary operators and introduces multiple return 
+                //   statements.
+                // - TransformDisplayClassUsage creates local variables instead of assigning them to DisplayClasses.
+
                 // Converts simple while loops into for loops. However, all resulting loops are while (true) ones with
                 // a break statement inside.
                 .Remove<HighLevelLoopTransform>()
                 ;
 
             decompiler.AstTransforms
-                // Re-creates e.g. for statements from while statements. Instead we use NoForPatternStatementTransform.
-                .ReplaceWith<PatternStatementTransform>(new NoForPatternStatementTransform())
+                // Replaces op_* methods with operators but these methods are simpler to transform.
+                .Remove<ReplaceMethodCallsWithOperators>()
 
                 // Converts e.g. num6 = num6 + 1; to num6 += 1.
-                .Remove<ReplaceMethodCallsWithOperators>()
+                .Remove("PrettifyAssignments")
 
                 // Deals with the unsafe modifier but we don't support PInvoke any way.
                 .Remove<IntroduceUnsafeModifier>()
@@ -115,33 +120,6 @@ namespace Hast.TransformerTest
                 // Re-adds checked() blocks that are used for compile-time overflow checking in C#, see:
                 // https://msdn.microsoft.com/en-us/library/74b4xzyw.aspx. We don't need this for transformation.
                 .Remove<AddCheckedBlocks>()
-
-                // Merges separate variable declarations with variable initializations what would make transformation
-                // more complicated.
-                //.Remove<DeclareVariables>()
-
-                // Removes empty ctors or ctors that can be substituted with field initializers. Also breaks the ctors
-                // of compiler-generated classes created from F# lambdas from by converting from this:
-                //     public int input;
-                //     public Run@32 (int input)
-                //     {
-                //         this.input = input;
-                //         base..ctor();
-                //     }
-                //
-                // To this:
-                //     public int input = input;
-                //     public Run@32 (int input)
-                //     {
-                //     }
-                //.Remove<ConvertConstructorCallIntoInitializer>()
-
-                // Converts decimal const fields to more readable variants, e.g. this:
-                // [DecimalConstant (0, 0, 0u, 0u, 234u)]
-                // private static readonly decimal a = 234m;
-                // To this (which is closer to the original):
-                // private const decimal a = 234m;
-                //.Remove<DecimalConstantTransform>()
 
                 // Adds using declarations that aren't needed for transformation.
                 .Remove<IntroduceUsingDeclarations>()
@@ -154,9 +132,6 @@ namespace Hast.TransformerTest
                 // These two deal with LINQ elements that we don't support yet any way.
                 .Remove<IntroduceQueryExpressions>()
                 .Remove<CombineQueryExpressions>()
-
-                // Removes an unnecessary BlockStatement level from switch statements.
-                //.Remove<FlattenSwitchBlocks>()
                 ;
 
             var syntaxTree = decompiler.DecompileWholeModuleAsSingleFile();
