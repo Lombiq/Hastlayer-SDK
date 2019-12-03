@@ -3,6 +3,7 @@ using Hast.Layer;
 using Hast.Transformer.Abstractions;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.CSharp.Transforms;
 using ICSharpCode.Decompiler.IL.Transforms;
 using ICSharpCode.Decompiler.Metadata;
@@ -13,7 +14,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection.PortableExecutable;
 using System.Threading.Tasks;
-using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.TransformerTest
 {
