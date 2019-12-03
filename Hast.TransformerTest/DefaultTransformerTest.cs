@@ -43,7 +43,11 @@ namespace Hast.TransformerTest
 
             var decompilerSettings = new DecompilerSettings
             {
-                AnonymousMethods = false
+                AnonymousMethods = false,
+                // Turn off shorthand form of increment assignments. With this true e.g. x = x * 2 would be x *= 2. The
+                // former is easier to transform. Works in conjunction with the disabling of 
+                // ReplaceMethodCallsWithOperators, see below.
+                IntroduceIncrementAndDecrement = false
             };
 
             var typeSystem = new DecompilerTypeSystem(firstModule, resolver, decompilerSettings);
@@ -108,7 +112,8 @@ namespace Hast.TransformerTest
                 ;
 
             decompiler.AstTransforms
-                // Replaces op_* methods with operators but these methods are simpler to transform.
+                // Replaces op_* methods with operators but these methods are simpler to transform. Works in
+                // conjunction with IntroduceIncrementAndDecrement = false, see above.
                 .Remove<ReplaceMethodCallsWithOperators>()
 
                 // Converts e.g. num6 = num6 + 1; to num6 += 1.
