@@ -110,7 +110,7 @@
       <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
       <Name>Hast.Remote.Client</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj">
+    <ProjectReference Include="..\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj">
       <Project>{a2d4c4bd-4c4a-4ed7-b74f-b2c79f31f2d0}</Project>
       <Name>Hast.Samples.FSharpSampleAssembly</Name>
     </ProjectReference>
