@@ -13,6 +13,8 @@ To begin working with Hastlayer you'll need the following:
   - For production-level workloads: Microsoft's FPGA platform, [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) is supported too, which offers high-end hardware. You'll need to apply for a cloud Catapult node via the [Project Catapult Academic Program](https://www.microsoft.com/en-us/research/academic-program/project-catapult-academic-program/). Be sure to [let us know](https://hastlayer.com/contact) if you'd like to use Catapult and we'll help you get going. 
 - [Visual Studio 2017 or later](https://www.visualstudio.com/downloads/) installed (any edition will work).
 
+Catapult acknowledgment: The authors acknowledge the [Texas Advanced Computing Center (TACC)](http://www.tacc.utexas.edu) at The University of Texas at Austin for providing HPC resources that have contributed to the development of this project. This material is based on work supported by access to [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) hardware and technology donated by Microsoft.
+
 If you have a compatible FPGA board you can run the default sample even without having access to Hastlayer Remote Services.
 
 
