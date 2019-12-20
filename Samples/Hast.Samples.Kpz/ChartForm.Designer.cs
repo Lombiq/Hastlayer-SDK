@@ -189,9 +189,9 @@
             this.labelVerifyOutput.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelVerifyOutput.Location = new System.Drawing.Point(311, 86);
             this.labelVerifyOutput.Name = "labelVerifyOutput";
-            this.labelVerifyOutput.Size = new System.Drawing.Size(132, 23);
+            this.labelVerifyOutput.Size = new System.Drawing.Size(116, 23);
             this.labelVerifyOutput.TabIndex = 13;
-            this.labelVerifyOutput.Text = "Validate results:";
+            this.labelVerifyOutput.Text = "Verify results:";
             this.labelVerifyOutput.Click += new System.EventHandler(this.labelVerifyOutput_Click);
             // 
             // labelStepByStep

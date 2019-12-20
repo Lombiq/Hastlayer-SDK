@@ -2,17 +2,38 @@
 
 
 
-Note that the hardware framework projects have their own release cycle and release notes.
+Note that the Hardware Framework projects have their own release cycle and release notes.
 
 
-## 1.0.10, 08.06.2017
+## v1.1, 20.12.2019
+
+After a lot of work we're finally ready with support for much larger FPGAs that can provide acceleration for much more complex applications! Apart from this there are a lot of other news as well so we've bumped up Hastlayer's version number to v1.1. Check the details out below!
+
+- Support for Microsoft's FPGA platform, [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/). These FPGAs are vastly more resourceful than the Nexys with fast PCIe communication. Thus Hastlayer is now suitable in selected HPC use-cases.
+- New samples:
+  - `MonteCarloPiEstimator`: A Monte Carlo simulation computing the value of Pi in a highly parallelized manner.
+  - `MemoryTest`: A test algorithm similar to the `Loopback` sample to test basic operations of a hardware device.
+  - `FSharpParallelAlgorithm`: Not a C# but an F# sample, showcasing the same basic parallelization features as seen in `ParallelAlgorithm`. See [the issue](https://github.com/Lombiq/Hastlayer-SDK/issues/23).
+- New linear-feedback shift register pseudo random number generator: `RandomLfsr` (check out the `MonteCarloPiEstimator` sample on how it can be useful). This is a simpler PRNG than the `RandomMwc64X` implementation we had before solely, and has lower resource usage, but produces lower quality random numbers. Also included the 16b `RandomLfsr16` and a xorshift version, `RandomXorshiftLfsr16`.
+- [Optimizing InternalInvocationProxy ](https://github.com/Lombiq/Hastlayer-SDK/issues/30), thus dramatically lowering the resource usage of certain parallel algorithms as well as recursive algorithms while making their execution faster too.
+- Adding transformation warning for too large arrays and displaying such arrays in the Consumer sample.
+- Adding the ability to configure methods to be inlined without an attribute.
+- Adding option to enable or disable constant substitution.
+- Implement workaround for an [ILSpy bug](https://github.com/icsharpcode/ILSpy/issues/807).
+- Fixing [SimdCalculator hardware execution](https://github.com/Lombiq/Hastlayer-SDK/issues/11).
+- Improving documentation.
+- Simplifying samples: no more extension methods for wrappers to be called by external consumers (all methods can be in the same classes).
+- Various smaller bugfixes and improvements.
+
+
+## 1.0.10, 08.06.2018
 
 - Updating and fixing hardware timing values, making hardware execution more reliable, but in certain cases slightly slower, however also causing lower FPGA resource usage.
 - Fixing that hardware description caching didn't work with certain programs.
 - Improved documentation.
 
 
-## 1.0.9, 18.03.2017
+## 1.0.9, 18.03.2018
 
 - New Loopback sample to test FPGA connectivity and Hastlayer Hardware Framework resource usage.
 - Fixing that binary operator expressions (like  `1 + 2`) calculated with wrongly sized number types and could cause different results on the hardware than in software.
@@ -24,7 +45,7 @@ Note that the hardware framework projects have their own release cycle and relea
 Note that running Hastlayer now requires Visual Studio 2017 or greater (any edition will work).
 
 
-## 1.0.8, 13.01.2017
+## 1.0.8, 13.01.2018
 
 - Adding ability to inline methods to vastly improve performance if the method is small but called a lot of times.
 - Adding support for `ref` and `out` parameters, see the [issue](https://github.com/Lombiq/Hastlayer-SDK/issues/15).

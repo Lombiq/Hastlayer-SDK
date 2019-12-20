@@ -3,11 +3,13 @@
     internal enum Sample
     {
         Fix64Calculator,
+        FSharpParallelAlgorithm,
         GenomeMatcher,
         ParallelAlgorithm,
         ImageProcessingAlgorithms,
         Loopback,
-        MonteCarloAlgorithm,
+        MemoryTest,
+        MonteCarloPiEstimator,
         ObjectOrientedShowcase,
         PrimeCalculator,
         RecursiveAlgorithms,

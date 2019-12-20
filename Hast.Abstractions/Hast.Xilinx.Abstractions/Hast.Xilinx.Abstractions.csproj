@@ -43,7 +43,9 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Nexys4A7ManifestProvider.cs" />
     <Compile Include="Nexys4DdrManifestProvider.cs" />
+    <Compile Include="NexysManifestProviderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPortConfigurator.cs" />
   </ItemGroup>

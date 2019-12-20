@@ -31,14 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
@@ -48,11 +44,11 @@
     <Compile Include="Fix64Calculator.cs" />
     <Compile Include="GenomeMatcher.cs" />
     <Compile Include="Loopback.cs" />
+    <Compile Include="MemoryTest.cs" />
     <Compile Include="ParallelAlgorithm.cs" />
     <Compile Include="ImageContrastModifier.cs" />
     <Compile Include="ImageFilter.cs" />
-    <Compile Include="MonteCarloAlgorithm.cs" />
-    <Compile Include="MonteCarloResult.cs" />
+    <Compile Include="MonteCarloPiEstimator.cs" />
     <Compile Include="ObjectOrientedShowcase.cs" />
     <Compile Include="PrimeCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -21,12 +21,7 @@ namespace Hast.Samples.Kpz
         {
             uint stateHighWord = memory.ReadUInt32(1);
             uint stateLowWord = memory.ReadUInt32(0); ;
-            // Creating the value 0xFFFEB81BUL. This literal can't be directly used due to an ILSpy bug, see:
-            // https://github.com/icsharpcode/ILSpy/issues/807
-            uint constantHighShort = 0xFFFE;
-            uint constantLowShort = 0xB81B;
-            uint constantWord = (0 << 32) | (constantHighShort << 16) | constantLowShort;
-            ulong randomState = (ulong)stateLowWord * (ulong)constantWord + (ulong)stateHighWord;
+            ulong randomState = stateLowWord * 0xFFFEB81BUL + stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
             memory.WriteUInt32(0, (uint)randomState); //LE: 1 is high byte, 0 is low byte

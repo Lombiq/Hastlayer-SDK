@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Hast.Communication.Constants;
+using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Models;
 using Hast.Layer;
@@ -17,17 +19,17 @@ namespace Hast.Communication.Services
         // This has to be maximum the number set for the TCP MSS in the Hastlayer hardware project.
         private const int ReceiveBufferSize = 1460;
 
+        private const int MemoryPrefixCellCount = 2;
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IFpgaIpEndpointFinder _fpgaIpEndpointFinder;
 
-
         public override string ChannelName
         {
             get
             {
-                return CommunicationConstants.Ethernet.ChannelName;
+                return Ethernet.ChannelName;
             }
         }
 
@@ -90,44 +92,40 @@ namespace Hast.Communication.Services
 
                             var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
 
-                            if (executionCommandTypeResponseByte[0] != CommunicationConstants.Ethernet.Signals.Ready)
+                            if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
                             {
                                 throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
                             }
 
                             // Here we put together the data stream.
-                            var lengthBytes = BitConverter.GetBytes(simpleMemory.Memory.Length);
-                            var memberIdBytes = BitConverter.GetBytes(memberId);
+                            var dma = new SimpleMemoryAccessor(simpleMemory);
+                            var memory = dma.Get(MemoryPrefixCellCount); // This way memory doesn't have to be copied.
+                            var memoryDataLength = memory.Length - MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
 
                             // Copying the input length, represented as bytes, to the output buffer.
-                            var outputBuffer = BitConverter.GetBytes(simpleMemory.Memory.Length)
-                                // Copying the member ID, represented as bytes, to the output buffer.
-                                .Append(BitConverter.GetBytes(memberId))
-                                // Copying the simple memory.
-                                .Append(simpleMemory.Memory);
+                            MemoryMarshal.Write(memory.Span, ref memoryDataLength);
+                            // Copying the member ID, represented as bytes, to the output buffer.
+                            MemoryMarshal.Write(memory.Span.Slice(sizeof(int)), ref memberId);
 
                             // Sending data to the FPGA board.
-                            stream.Write(outputBuffer, 0, outputBuffer.Length);
+                            var segment = memory.GetUnderlyingArray();
+                            stream.Write(segment.Array, segment.Offset, memory.Length);
 
 
                             // Read the first batch of the TcpServer response bytes that will represent the execution time.
-                            var executionTimeBytes = await GetBytesFromStream(stream, 8);
-
+                            var executionTimeBytes = await GetBytesFromStream(stream, sizeof(ulong));
                             var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
-
                             SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
                             // Read the bytes representing the length of the simple memory.
-                            var outputByteCountBytes = await GetBytesFromStream(stream, 4);
-
-                            var outputByteCount = BitConverter.ToUInt32(outputByteCountBytes, 0);
+                            var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStream(stream, sizeof(uint)), 0);
 
                             Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
 
                             // Finally read the memory itself.
-                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount);
+                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
 
-                            simpleMemory.Memory = outputBytes;
+                            dma.Set(outputBytes, MemoryPrefixCellCount);
                         }
                     }
                 }
@@ -143,12 +141,13 @@ namespace Hast.Communication.Services
         }
 
 
-        public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length)
+        public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length, int offset = 0)
         {
+            length += offset;
             var outputBytes = new byte[length];
 
-            var readPosition = 0;
-            var remaining = length;
+            var readPosition = offset;
+            var remaining = outputBytes.Length - offset;
             while (readPosition < length)
             {
                 readPosition += await stream.ReadAsync(outputBytes, readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining);

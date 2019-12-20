@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Castle.DynamicProxy;
+﻿using Castle.DynamicProxy;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
 using Hast.Communication.Exceptions;
@@ -14,6 +9,11 @@ using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Communication
 {
@@ -105,7 +105,7 @@ namespace Hast.Communication
                             var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                             if (memory != null)
                             {
-                                var memoryByteCount = memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
+                                var memoryByteCount = (ulong)memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
                                 if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
                                 {
                                     throw new InvalidOperationException(
@@ -119,7 +119,8 @@ namespace Hast.Communication
                                 if (configuration.VerifyHardwareResults)
                                 {
                                     softMemory = new SimpleMemory(memory.CellCount);
-                                    memory.Memory.CopyTo(softMemory.Memory, 0);
+                                    var memoryBytes = new SimpleMemoryAccessor(memory).Get();
+                                    memoryBytes.CopyTo(new SimpleMemoryAccessor(softMemory).Get());
 
                                     var memoryArgumentIndex = invocation.Arguments
                                         .Select((argument, index) => new { Argument = argument, Index = index })
@@ -152,14 +153,26 @@ namespace Hast.Communication
                                 if (configuration.VerifyHardwareResults)
                                 {
                                     var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
-                                    for (int i = 0; i < memory.CellCount; i++)
+
+                                    if (memory.CellCount != softMemory.CellCount)
                                     {
-                                        var hardwareBytes = memory.Read4Bytes(i);
-                                        var softwareBytes = softMemory.Read4Bytes(i);
-                                        if (!hardwareBytes.SequenceEqual(softwareBytes))
+                                        int overflowIndex = Math.Min(memory.CellCount, softMemory.CellCount);
+                                        mismatches.Add(new HardwareExecutionResultMismatchException.LengthMismatch(
+                                            memory.CellCount,
+                                            softMemory.CellCount,
+                                            overflowIndex,
+                                            memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : new byte[0],
+                                            softMemory.CellCount > memory.CellCount ? softMemory.Read4Bytes(overflowIndex) : new byte[0]));
+                                    }
+                                    else
+                                    {
+                                        for (int i = 0; i < memory.CellCount; i++)
                                         {
-                                            mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
-                                                i, hardwareBytes, softwareBytes));
+                                            if (!memory.Read4Bytes(i).SequenceEqual(softMemory.Read4Bytes(i)))
+                                            {
+                                                mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                                                    i, memory.Read4Bytes(i), softMemory.Read4Bytes(i)));
+                                            }
                                         }
                                     }
 
