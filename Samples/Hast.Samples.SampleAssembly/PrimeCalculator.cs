@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -11,23 +11,31 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class PrimeCalculator
     {
-        // It's good to have externally interesting cell indices in constants like this, so they can be used from wrappers 
-        // like below. Note the Hungarian notation-like prefixes. It's unfortunate but we need them here for clarity.
-        public const int IsPrimeNumber_InputUInt32Index = 0;
-        public const int IsPrimeNumber_OutputBooleanIndex = 0;
-        public const int ArePrimeNumbers_InputUInt32CountIndex = 0;
-        public const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
-        public const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
+        // It's good to have common cell indices in constants like this, so they can be used from multiple methods 
+        // like below. Note the Hungarian notation-like prefixes. These add some clarity but are not mandatory.
+        private const int IsPrimeNumber_InputUInt32Index = 0;
+        private const int IsPrimeNumber_OutputBooleanIndex = 0;
+        private const int ArePrimeNumbers_InputUInt32CountIndex = 0;
+        private const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
+        private const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
 
-        public const int MaxDegreeOfParallelism = 30;
+        private const int MaxDegreeOfParallelism = 30;
 
+        // Note that below there are method pairs: one method with a SimpleMemory parameter and one with built-in types.
+        // The hardware entry points, i.e. the methods actually called from the host PC on the hardware device will be
+        // the ones with SimpleMemory: do every accelerated processing in there. The other methods are wrappers so you
+        // can execute the inner methods more easily but they won't be converted to hardware.
 
         /// <summary>
         /// Calculates whether a number is prime.
         /// </summary>
         /// <remarks>
         /// This demonstrates a simple hardware entry point. Note that the entry point of SimpleMemory-using algorithms 
-        /// should be void methods having a single <see cref="SimpleMemory"/> argument. 
+        /// should be void methods having a single <see cref="SimpleMemory"/> argument. You can find the corresponding 
+        /// wrapper method below as IsPrimeNumber(uint number).
+        /// 
+        /// Note that hardware entry points need to be public and virtual, and they mustn't have any other parameters
+        /// than a single SimpleMemory one.
         /// </remarks>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void IsPrimeNumber(SimpleMemory memory)
@@ -135,6 +143,9 @@ namespace Hast.Samples.SampleAssembly
         /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that 
         ///   limits further use).
         ///   
+        /// Methods can also be inlined with the help of the 
+        /// <c>TransformerConfiguration().AddAdditionalInlinableMethod<T>()</c> configuration.
+        ///   
         /// WARNING: be sure not to overdo inlining, because just inlining everything (especially if inlined methods
         /// also call inlined methods...) can quickly create giant hardware implementations that won't be just most
         /// possibly too big for the FPGA but also very slow to transform.
@@ -155,59 +166,58 @@ namespace Hast.Samples.SampleAssembly
 
             return i == factor + 1;
         }
-    }
 
 
-    /// <summary>
-    /// Extension methods so the SimpleMemory-using PrimeCalculator is easier to consume.
-    /// </summary>
-    public static class PrimeCalculatorExtensions
-    {
-        public static bool IsPrimeNumber(this PrimeCalculator primeCalculator, uint number)
+        // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These 
+        // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
+        // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
+        // in them that is not Hastlayer-compatible.
+
+        public bool IsPrimeNumber(uint number)
         {
-            return RunIsPrimeNumber(number, memory => Task.Run(() => primeCalculator.IsPrimeNumber(memory))).Result;
+            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory))).Result;
         }
 
-        public static Task<bool> IsPrimeNumberAsync(this PrimeCalculator primeCalculator, uint number)
+        public Task<bool> IsPrimeNumberAsync(uint number)
         {
-            return RunIsPrimeNumber(number, memory => primeCalculator.IsPrimeNumberAsync(memory));
+            return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory));
         }
 
-        public static bool[] ArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
+        public bool[] ArePrimeNumbers(uint[] numbers)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => primeCalculator.ArePrimeNumbers(memory));
+            return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory));
         }
 
-        public static bool[] ParallelizedArePrimeNumbers(this PrimeCalculator primeCalculator, uint[] numbers)
+        public bool[] ParallelizedArePrimeNumbers(uint[] numbers)
         {
             var results = RunArePrimeNumbersMethod(
-                numbers.PadToMultipleOf(PrimeCalculator.MaxDegreeOfParallelism),
-                memory => primeCalculator.ParallelizedArePrimeNumbers(memory));
+                numbers.PadToMultipleOf(MaxDegreeOfParallelism),
+                memory => ParallelizedArePrimeNumbers(memory));
 
             // The result might be longer than the input due to padding.
             return results.CutToLength(numbers.Length);
         }
 
-        private static async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
+        private async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
         {
             // One memory cell is enough for data exchange.
             var memory = new SimpleMemory(1);
-            memory.WriteUInt32(PrimeCalculator.IsPrimeNumber_InputUInt32Index, number);
+            memory.WriteUInt32(IsPrimeNumber_InputUInt32Index, number);
 
             await methodRunner(memory);
 
-            return memory.ReadBoolean(PrimeCalculator.IsPrimeNumber_OutputBooleanIndex);
+            return memory.ReadBoolean(IsPrimeNumber_OutputBooleanIndex);
         }
 
-        private static bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner)
+        private bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
             var memory = new SimpleMemory(numbers.Length + 1);
 
-            memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputUInt32CountIndex, (uint)numbers.Length);
+            memory.WriteUInt32(ArePrimeNumbers_InputUInt32CountIndex, (uint)numbers.Length);
             for (int i = 0; i < numbers.Length; i++)
             {
-                memory.WriteUInt32(PrimeCalculator.ArePrimeNumbers_InputUInt32sStartIndex + i, numbers[i]);
+                memory.WriteUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, numbers[i]);
             }
 
 
@@ -217,7 +227,7 @@ namespace Hast.Samples.SampleAssembly
             var output = new bool[numbers.Length];
             for (int i = 0; i < numbers.Length; i++)
             {
-                output[i] = memory.ReadBoolean(PrimeCalculator.ArePrimeNumbers_OutputBooleansStartIndex + i);
+                output[i] = memory.ReadBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i);
             }
             return output;
         }

@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Hast.Communication.Models;
+﻿using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
@@ -17,6 +17,11 @@ namespace Hast.Communication.Services
         string ChannelName { get; }
 
         /// <summary>
+        /// The TextWriter which the communication service may use to communicate diagnostics information.
+        /// </summary>
+        System.IO.TextWriter TesterOutput { get; set; }
+
+        /// <summary>
         /// Executes the given member on hardware.
         /// </summary>
         /// <param name="simpleMemory">
@@ -28,7 +33,8 @@ namespace Hast.Communication.Services
         /// An <see cref="IHardwareExecutionInformation"/> object containing debug and runtime information about the 
         /// hardware execution.
         /// </returns>
-        Task<IHardwareExecutionInformation> Execute(SimpleMemory simpleMemory,
+        Task<IHardwareExecutionInformation> Execute(
+            SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext);
     }

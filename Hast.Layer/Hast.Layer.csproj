@@ -33,7 +33,6 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\Orchard\src\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,6 +59,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj">
+      <Project>{1059805B-3221-4788-BDF3-11120FA4BF1A}</Project>
+      <Name>Hast.Catapult.Abstractions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
       <Project>{9DEE53C2-83AC-4048-ADAB-2993FAFFE4EA}</Project>
       <Name>Hast.Transformer.Abstractions</Name>

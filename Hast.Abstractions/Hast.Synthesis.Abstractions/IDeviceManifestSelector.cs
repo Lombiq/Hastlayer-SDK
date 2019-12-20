@@ -6,6 +6,6 @@ namespace Hast.Synthesis.Abstractions
 {
     public interface IDeviceManifestSelector : IDependency
     {
-        IEnumerable<IDeviceManifest> GetSupporteDevices();
+        IEnumerable<IDeviceManifest> GetSupportedDevices();
     }
 }

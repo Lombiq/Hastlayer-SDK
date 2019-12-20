@@ -12,6 +12,8 @@ namespace Hast.Communication.Services
         private readonly object _lock = new object();
         private readonly Queue<Action<IReservedDevice>> _waitQueue = new Queue<Action<IReservedDevice>>();
 
+        private bool _isDisposed = false;
+
         private Dictionary<string, PooledDevice> _devicePool = new Dictionary<string, PooledDevice>();
 
 
@@ -42,7 +44,7 @@ namespace Hast.Communication.Services
             {
                 if (!_devicePool.Any())
                 {
-                    throw new InvalidOperationException("There are no devices in the device pool.");
+                    throw new InvalidOperationException("There are no devices in the device pool (i.e. no connected devices could be detected).");
                 }
 
                 // If there is an available device, return a handle to it. If not, then we put the request into a queue.
@@ -97,6 +99,14 @@ namespace Hast.Communication.Services
             }
         }
 
+        public void Dispose()
+        {
+            if (_isDisposed) return;
+
+            foreach (var device in GetDevicesInPool()) device.Dispose();
+
+            _isDisposed = true;
+        }
 
         private class ReservedDevice : Device, IReservedDevice
         {
@@ -108,10 +118,10 @@ namespace Hast.Communication.Services
                 _disposer = disposer;
             }
 
-
-            public void Dispose()
+            public override void Dispose()
             {
                 _disposer(this);
+                base.Dispose();
             }
         }
     }

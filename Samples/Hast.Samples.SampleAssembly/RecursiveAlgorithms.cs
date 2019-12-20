@@ -19,12 +19,12 @@ namespace Hast.Samples.SampleAssembly
     /// </remarks>
     public class RecursiveAlgorithms
     {
-        public const int CalculateFibonacchiSeries_InputShortIndex = 0;
-        public const int CalculateFibonacchiSeries_OutputUInt32Index = 0;
-        public const int CalculateFibonacchiSeries_InvocationCounterUInt32Index = 1;
-        public const int CalculateFactorial_InputShortIndex = 0;
-        public const int CalculateFactorial_OutputUInt32Index = 0;
-        public const int CalculateFactorial_InvocationCounterUInt32Index = 1;
+        private const int CalculateFibonacchiSeries_InputShortIndex = 0;
+        private const int CalculateFibonacchiSeries_OutputUInt32Index = 0;
+        private const int CalculateFibonacchiSeries_InvocationCounterUInt32Index = 1;
+        private const int CalculateFactorial_InputShortIndex = 0;
+        private const int CalculateFactorial_OutputUInt32Index = 0;
+        private const int CalculateFactorial_InvocationCounterUInt32Index = 1;
 
 
         public virtual void CalculateFibonacchiSeries(SimpleMemory memory)
@@ -65,25 +65,22 @@ namespace Hast.Samples.SampleAssembly
             if (number == 0) return 1;
             return (uint)(number * RecursivelyCalculateFactorial(memory, (short)(number - 1)));
         }
-    }
 
 
-    public static class RecursiveAlgorithmsExtensions
-    {
-        public static uint CalculateFibonacchiSeries(this RecursiveAlgorithms recursiveAlgorithms, short number)
+        public uint CalculateFibonacchiSeries(short number)
         {
             var memory = new SimpleMemory(2);
-            memory.WriteInt32(RecursiveAlgorithms.CalculateFibonacchiSeries_InputShortIndex, number);
-            recursiveAlgorithms.CalculateFibonacchiSeries(memory);
-            return memory.ReadUInt32(RecursiveAlgorithms.CalculateFibonacchiSeries_OutputUInt32Index);
+            memory.WriteInt32(CalculateFibonacchiSeries_InputShortIndex, number);
+            CalculateFibonacchiSeries(memory);
+            return memory.ReadUInt32(CalculateFibonacchiSeries_OutputUInt32Index);
         }
 
-        public static uint CalculateFactorial(this RecursiveAlgorithms recursiveAlgorithms, short number)
+        public uint CalculateFactorial(short number)
         {
             var memory = new SimpleMemory(2);
-            memory.WriteInt32(RecursiveAlgorithms.CalculateFactorial_InputShortIndex, number);
-            recursiveAlgorithms.CalculateFactorial(memory);
-            return memory.ReadUInt32(RecursiveAlgorithms.CalculateFactorial_OutputUInt32Index);
+            memory.WriteInt32(CalculateFactorial_InputShortIndex, number);
+            CalculateFactorial(memory);
+            return memory.ReadUInt32(CalculateFactorial_OutputUInt32Index);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Hast.Samples.SampleAssembly
     public class ObjectOrientedShowcase
     {
         public const int Run_InputUInt32Index = 0;
-        public const int Run_OutputUInt32Index = 0;
+        private const int Run_OutputUInt32Index = 0;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -73,6 +73,15 @@ namespace Hast.Samples.SampleAssembly
             }
 
             return sum;
+        }
+
+
+        public uint Run(uint input)
+        {
+            var memory = new SimpleMemory(10);
+            memory.WriteUInt32(Run_InputUInt32Index, input);
+            Run(memory);
+            return memory.ReadUInt32(Run_OutputUInt32Index);
         }
     }
 
@@ -140,18 +149,5 @@ namespace Hast.Samples.SampleAssembly
 
 
         public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.Run_InputUInt32Index);
-    }
-
-
-
-    public static class ObjectOrientedShowcaseExtensions
-    {
-        public static uint Run(this ObjectOrientedShowcase algorithm, uint input)
-        {
-            var memory = new SimpleMemory(10);
-            memory.WriteUInt32(ObjectOrientedShowcase.Run_InputUInt32Index, input);
-            algorithm.Run(memory);
-            return memory.ReadUInt32(ObjectOrientedShowcase.Run_OutputUInt32Index);
-        }
     }
 }

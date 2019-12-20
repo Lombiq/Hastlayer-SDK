@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using Hast.Communication.Constants;
+using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Helpers;
 using Hast.Communication.Models;
 using Orchard.Logging;
@@ -36,7 +37,7 @@ namespace Hast.Communication.Services
 
         public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints()
         {
-            var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, CommunicationConstants.Ethernet.Ports.WhoIsAvailableRequest);
+            var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, Ethernet.Ports.WhoIsAvailableRequest);
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
             // We need retries because somehow the FPGA doesn't always catch our request.
@@ -58,7 +59,7 @@ namespace Hast.Communication.Services
                         .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork);
 
                     endpoints.AddRange(ipv4AddressInformations.Select(addressInformation => 
-                        new IPEndPoint(addressInformation.Address, CommunicationConstants.Ethernet.Ports.WhoIsAvailableResponse)));
+                        new IPEndPoint(addressInformation.Address, Ethernet.Ports.WhoIsAvailableResponse)));
                 }
 
                 // Sending requests to all the found IP endpoints at the same time.

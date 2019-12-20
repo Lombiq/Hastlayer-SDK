@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
+using Hast.Catapult.Abstractions;
 using Hast.Communication;
+using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
@@ -17,6 +13,12 @@ using Orchard.Environment.Configuration;
 using Orchard.Exceptions;
 using Orchard.Logging;
 using Orchard.Validation;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace Hast.Layer
 {
@@ -62,7 +64,7 @@ namespace Hast.Layer
 
 
         public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
-            _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupporteDevices()));
+            _host.RunGet(scope => Task.FromResult(scope.Resolve<IDeviceManifestSelector>().GetSupportedDevices()));
 
         public async Task<IHardwareRepresentation> GenerateHardware(
             IEnumerable<string> assembliesPaths,
@@ -101,7 +103,7 @@ namespace Hast.Layer
                             var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
 
                             var deviceManifest = deviceManifestSelector
-                                .GetSupporteDevices()
+                                .GetSupportedDevices()
                                 .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
 
                             if (deviceManifest == null)
@@ -157,6 +159,10 @@ namespace Hast.Layer
                 throw new HastlayerException(message, ex);
             }
         }
+
+        public async Task<ICommunicationService> GetCommunicationService(string communicationChannelName) =>
+            await _host.RunGet(scope => Task.FromResult(scope.Resolve<ICommunicationServiceSelector>()
+                .GetCommunicationService(communicationChannelName)));
 
         public void Dispose()
         {
@@ -225,7 +231,8 @@ namespace Hast.Layer
                 typeof(IProxyGenerator).Assembly,
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
-                typeof(Nexys4DdrManifestProvider).Assembly
+                typeof(NexysA7ManifestProvider).Assembly,
+                typeof(CatapultManifestProvider).Assembly
             }
             .ToList();
 

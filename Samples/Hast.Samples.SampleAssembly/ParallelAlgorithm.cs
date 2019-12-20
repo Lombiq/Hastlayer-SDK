@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -11,8 +11,8 @@ namespace Hast.Samples.SampleAssembly
     {
         private const int MaxDegreeOfParallelism = 280;
 
-        public const int Run_InputUInt32Index = 0;
-        public const int Run_OutputUInt32Index = 0;
+        private const int Run_InputUInt32Index = 0;
+        private const int Run_OutputUInt32Index = 0;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -62,17 +62,13 @@ namespace Hast.Samples.SampleAssembly
 
             memory.WriteUInt32(Run_OutputUInt32Index, output);
         }
-    }
 
-
-    public static class ParallelAlgorithmExtensions
-    {
-        public static uint Run(this ParallelAlgorithm algorithm, uint input)
+        public uint Run(uint input)
         {
             var memory = new SimpleMemory(1);
-            memory.WriteUInt32(ParallelAlgorithm.Run_InputUInt32Index, input);
-            algorithm.Run(memory);
-            return memory.ReadUInt32(ParallelAlgorithm.Run_OutputUInt32Index);
+            memory.WriteUInt32(Run_InputUInt32Index, input);
+            Run(memory);
+            return memory.ReadUInt32(Run_OutputUInt32Index);
         }
     }
 }
