@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer
         /// name of your app.
         /// You can also provide this in the -appname command line argument.
         /// </summary>
-        public static string AppName = "TestApp";
+        public static string AppName = "appname";
 
         /// <summary>
         /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
