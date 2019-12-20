@@ -25,7 +25,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             // This takes about 1900ms on an i7 processor with 4 physical (8 logical) cores and 300ms on an FPGA (with 
             // a MaxDegreeOfParallelism of 280 while the device is about 80% utilized). With a higher degree of 
-            // parallelism it won't fit on the Nexys 4 DDR board's FPGA.
+            // parallelism it won't fit on the Nexys A7 board's FPGA.
             // On Catapult a MaxDegreeOfParallelism of 700 will fit as well (70% resource utilization) and run in about
             // 200ms (including communication latency) vs about 5s on the previous reference PC. Compiling that
             // hardware design will take about 14.5 hours though (with MaxDegreeOfParallelism of 600 it'll take about

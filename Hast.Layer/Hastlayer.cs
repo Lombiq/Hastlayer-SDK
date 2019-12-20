@@ -232,7 +232,7 @@ namespace Hast.Layer
                 typeof(IProxyGenerator).Assembly,
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
-                typeof(Nexys4DdrManifestProvider).Assembly,
+                typeof(NexysA7ManifestProvider).Assembly,
                 typeof(CatapultManifestProvider).Assembly,
                 typeof(DefaultTransformerTest).Assembly
             }

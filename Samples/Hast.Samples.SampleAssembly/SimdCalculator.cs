@@ -28,7 +28,7 @@ namespace Hast.Samples.SampleAssembly
         private const int VectorElementsStartInt32Index = 1;
         private const int ResultVectorElementsStartInt32Index = 1;
 
-        // This needs to be this low to fit all operations on the Nexys 4 DDR board's FPGA and for the design to remain
+        // This needs to be this low to fit all operations on the Nexys A7 board's FPGA and for the design to remain
         // stable. While only 69% of the FPGA's resources are used unfortunately we can't go above that.
         // On the same board just transforming AddVectors or SubtractVectors could fit with a degree of parallelism of
         // more than 500.

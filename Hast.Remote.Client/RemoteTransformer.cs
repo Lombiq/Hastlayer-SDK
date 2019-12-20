@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Hast.Layer;
+using Hast.Remote.Bridge.Models;
+using Hast.Transformer.Abstractions;
+using Newtonsoft.Json;
+using RestEase;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Common.Helpers;
-using Hast.Layer;
-using Hast.Remote.Bridge.Models;
-using Hast.Transformer.Abstractions;
 
 namespace Hast.Remote.Client
 {
@@ -31,60 +32,85 @@ namespace Hast.Remote.Client
                 HardwareEntryPointMemberNamePrefixes = configuration.HardwareEntryPointMemberNamePrefixes
             };
 
-            var transformationTicket = await apiClient
-                .RequestTransformation(new TransformationRequest
-                {
-                    Assemblies = assemblyContainers,
-                    Configuration = apiConfiguration
-                });
-
-
-            TransformationResult transformationResult = null;
-            const int maxResultAttemptCount = 100;
-            var waitAttemptIndex = 0;
-            var waitMilliseconds = 333;
-            while (transformationResult == null && waitAttemptIndex < maxResultAttemptCount)
+            try
             {
-                await Task.Delay(waitMilliseconds);
-                var transformationResultResponse = await apiClient.GetTransformationResult(transformationTicket.Token);
+                var transformationTicket = await apiClient
+                    .RequestTransformation(new TransformationRequest
+                    {
+                        Assemblies = assemblyContainers,
+                        Configuration = apiConfiguration
+                    });
 
-                if (transformationResultResponse.ResponseMessage.IsSuccessStatusCode)
+
+                TransformationResult transformationResult = null;
+                const int maxResultAttemptCount = 100;
+                var waitAttemptIndex = 0;
+                var waitMilliseconds = 333;
+                while (transformationResult == null && waitAttemptIndex < maxResultAttemptCount)
                 {
-                    transformationResult = transformationResultResponse.GetContent();
+                    await Task.Delay(waitMilliseconds);
+                    var transformationResultResponse = await apiClient.GetTransformationResult(transformationTicket.Token);
+
+                    if (transformationResultResponse.ResponseMessage.IsSuccessStatusCode)
+                    {
+                        transformationResult = transformationResultResponse.GetContent();
+                    }
+                    else if (transformationResultResponse.ResponseMessage.StatusCode != System.Net.HttpStatusCode.NotFound)
+                    {
+                        transformationResultResponse.ResponseMessage.EnsureSuccessStatusCode();
+                    }
+
+                    if (++waitAttemptIndex % 10 == 0) waitMilliseconds *= 2;
                 }
-                else if (transformationResultResponse.ResponseMessage.StatusCode != System.Net.HttpStatusCode.NotFound)
+
+                var exceptionMessageBase =
+                    "Transforming the following assemblies failed: " + string.Join(", ", assemblyPaths) + ". ";
+                if (transformationResult == null)
                 {
-                    transformationResultResponse.ResponseMessage.EnsureSuccessStatusCode();
+                    throw new Exception(
+                        exceptionMessageBase + "The remote Hastlayer service didn't produce a result in a timely manner. " +
+                        "This could indicate a problem with the service or that the assemblies contained exceptionally complex code.");
                 }
 
-                if (++waitAttemptIndex % 10 == 0) waitMilliseconds *= 2;
-            }
+                if (transformationResult.Errors?.Any() == true)
+                {
+                    throw new Exception(
+                         exceptionMessageBase + "The following error(s) happened: " + Environment.NewLine +
+                         string.Join(Environment.NewLine, transformationResult.Errors));
+                }
 
-            var exceptionMessageBase =
-                "Transforming the following assemblies failed: " + string.Join(", ", assemblyPaths) + ". ";
-            if (transformationResult == null)
-            {
-                throw new Exception(
-                    exceptionMessageBase + "The remote Hastlayer service didn't produce a result in a timely manner. " +
-                    "This could indicate a problem with the service or that the assemblies contained exceptionally complex code.");
+                var hardwareDescription = transformationResult.HardwareDescription;
+                return new RemoteHardwareDescription
+                {
+                    HardwareEntryPointNamesToMemberIdMappings = hardwareDescription.HardwareEntryPointNamesToMemberIdMappings,
+                    Language = hardwareDescription.Language,
+                    Source = hardwareDescription.Source,
+                    Warnings = hardwareDescription.Warnings.Select(warning =>
+                        new Common.Models.TransformationWarning { Code = warning.Code, Message = warning.Message })
+                };
             }
-
-            if (transformationResult.Errors?.Any() == true)
+            catch (ApiException ex)
             {
-                throw new Exception(
-                     exceptionMessageBase + "The following error(s) happened: " + Environment.NewLine +
-                     string.Join(Environment.NewLine, transformationResult.Errors));
+                var message = "Remote transformation failed: ";
+
+                if (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    message += "Authorizing with Hastlayer Remote Services failed. Maybe you mistyped your credentials?";
+                }
+                else
+                {
+                    message += $"The response code was {ex.StatusCode}. Most possibly there is some issue with Hastlayer Remote Services. If this error persists please get in touch with us under https://hastlayer.com/contact.";
+                }
+
+                throw new RemoteTransformationException(message, ex);
             }
-
-            var hardwareDescription = transformationResult.HardwareDescription;
-            return new RemoteHardwareDescription
+            catch (JsonReaderException ex)
             {
-                HardwareEntryPointNamesToMemberIdMappings = hardwareDescription.HardwareEntryPointNamesToMemberIdMappings,
-                Language = hardwareDescription.Language,
-                Source = hardwareDescription.Source,
-                Warnings = hardwareDescription.Warnings.Select(warning =>
-                    new Common.Models.TransformationWarning { Code = warning.Code, Message = warning.Message })
-            };
+                // This will happen also when authorization fails and Azure AD authentication takes over from the API,
+                // and redirects the client to the Microsoft login screen (there doesn't seem to be a way to prevent
+                // this).
+                throw new RemoteTransformationException("Remote transformation failed because Hastlayer Remote Services returned an unexpected response. This might be because authorization failed (check if you mistyped your credentials) or because there is some issue with the service. If this error persists please get in touch with us under https://hastlayer.com/contact.", ex);
+            }
         }
 
 

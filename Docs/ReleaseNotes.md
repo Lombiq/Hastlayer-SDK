@@ -5,7 +5,9 @@
 Note that the Hardware Framework projects have their own release cycle and release notes.
 
 
-## vNext
+## v1.1, 20.12.2019
+
+After a lot of work we're finally ready with support for much larger FPGAs that can provide acceleration for much more complex applications! Apart from this there are a lot of other news as well so we've bumped up Hastlayer's version number to v1.1. Check the details out below!
 
 - Support for Microsoft's FPGA platform, [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/). These FPGAs are vastly more resourceful than the Nexys with fast PCIe communication. Thus Hastlayer is now suitable in selected HPC use-cases.
 - New samples:

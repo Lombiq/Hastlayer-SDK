@@ -114,7 +114,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Communication.Tester",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Samples.Kpz.Algorithms", "Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj", "{EE140765-5088-40AA-9621-D4B0A971EE2C}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Hast.Samples.FSharpSampleAssembly", "Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj", "{A2D4C4BD-4C4A-4ED7-B74F-B2C79F31F2D0}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Hast.Samples.FSharpSampleAssembly", "Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj", "{A2D4C4BD-4C4A-4ED7-B74F-B2C79F31F2D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TransformerTest", "Hast.TransformerTest\Hast.TransformerTest.csproj", "{219AB5E7-A12F-4629-ACEF-7A8116B02C76}"
 EndProject

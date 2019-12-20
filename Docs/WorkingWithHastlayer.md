@@ -4,7 +4,7 @@
 
 ## Creating a Hastlayer-using application
 
-The Hastlayer developer story is not ideal yet - we're working on improving it. For now the below one is the easiest approach to add Hastlayer to your application:
+The Hastlayer developer story is not ideal yet - we're working on improving it by [making the SDK available from NuGet](https://github.com/Lombiq/Hastlayer-SDK/issues/35). For now the below one is the easiest approach to add Hastlayer to your application:
 
 1. Clone the Hastlayer repository into a subfolder of your application.
 2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.SDK.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
@@ -97,7 +97,7 @@ If during transformation there's a warning (i.e. some issue that doesn't necessa
 
 You can configure Hastlayer to check whether the hardware execution's results are correct by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects. This will also run everything as software, compare the software output with the hardware output and throw exceptions if they're off.
 
-If the result of the hardware execution is wrong then you can use `SimpleMemory` to write out intermediate values and check where the execution goes wrong. Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys 4 DDR you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
+If the result of the hardware execution is wrong then you can use `SimpleMemory` to write out intermediate values and check where the execution goes wrong. Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys A7 you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
 
 When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `saveSyntaxTree`.
 

@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
+﻿using Hast.Layer;
+using Hast.Samples.SampleAssembly;
 using System.Drawing;
 using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -24,7 +22,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 var imageContrastModifier = await hastlayer
                     .GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
-                // This takes about 160ms on an i7 CPU and net 150ms on an FPGA.
+                // This takes about 160ms on an i7 CPU and net 150ms on a Nexys A7.
                 var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
                 modifiedImage.Save("contrast.bmp");
 

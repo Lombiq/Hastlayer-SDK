@@ -57,7 +57,7 @@ namespace Hast.Samples.Kpz.Algorithms
         // The probability of turning a pyramid into a hole (IntegerProbabilityP),
         // or a hole into a pyramid (IntegerProbabilityQ).
         public const uint IntegerProbabilityP = 32767, IntegerProbabilityQ = 32767;
-        // Number of parallel execution engines. (Should be a power of two.) Only 8 will fully fit on the Nexys 4 DDR.
+        // Number of parallel execution engines. (Should be a power of two.) Only 8 will fully fit on the Nexys A7.
         public const int ParallelTasks = 8;
         // The number of reschedules (thus global grid offset changing) within one iteration.
         public const int ReschedulesPerTaskIteration = 2;
@@ -309,7 +309,7 @@ namespace Hast.Samples.Kpz.Algorithms
                 844790112, -1844342060, 1945398439, 309808498, -239141205, -758285938, -59513544, -1870383944,
                 -54120626, 499261195, -1761618908, 966279259, 217571661, 1813251139, 1124806771, 323365414, 595569067,
                 93473713, -937734760, -279968717, -1457028170, -389060750, -1888789492, -1109047524, 171427933
-            }; 
+            };
 
             int numRandomUints = 2 + KpzKernelsParallelizedInterface.ParallelTasks * 4;
             var sm = new SimpleMemory(
