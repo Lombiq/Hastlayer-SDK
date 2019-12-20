@@ -55,6 +55,7 @@
     <Compile Include="ApiClientFactory.cs" />
     <Compile Include="Configuration\RemoteClientConfigurationTransformerExtensions.cs" />
     <Compile Include="Configuration\RemoteClientConfiguration.cs" />
+    <Compile Include="RemoteTransformationException.cs" />
     <Compile Include="RemoteTransformer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
