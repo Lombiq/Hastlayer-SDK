@@ -97,7 +97,7 @@ If during transformation there's a warning (i.e. some issue that doesn't necessa
 
 You can configure Hastlayer to check whether the hardware execution's results are correct by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects. This will also run everything as software, compare the software output with the hardware output and throw exceptions if they're off.
 
-If the result of the hardware execution is wrong then you can use `SimpleMemory` to write out intermediate values and check where the execution goes wrong. Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys 4 DDR you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
+If the result of the hardware execution is wrong then you can use `SimpleMemory` to write out intermediate values and check where the execution goes wrong. Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys A7 you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
 
 When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `saveSyntaxTree`.
 

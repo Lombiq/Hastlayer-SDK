@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using System;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
 {
@@ -15,7 +15,7 @@ namespace Hast.Samples.Demo
                 using (var hastlayer = await Hastlayer.Create())
                 {
                     #region Configuration
-                    var configuration = new HardwareGenerationConfiguration("Nexys4 DDR");
+                    var configuration = new HardwareGenerationConfiguration("Nexys A7");
 
                     configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 

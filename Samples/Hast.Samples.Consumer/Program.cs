@@ -20,10 +20,11 @@ namespace Hast.Samples.Consumer
     {
         /// <summary>
         /// Which supported hardware device to use? If you leave this empty the first one will be used. If you're 
-        /// testing Hastlayer locally then you'll need to use the "Nexys4 DDR" device.
+        /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for 
+        /// high-performance cloud FPGAs use "Catapult" (see the docs).
         /// You can also provide this in the -device command line argument.
         /// </summary>
-        public static string DeviceName = "Nexys4 DDR";
+        public static string DeviceName = "Nexys A7";
 
         /// <summary>
         /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
