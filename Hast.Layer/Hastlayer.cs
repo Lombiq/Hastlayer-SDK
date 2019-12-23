@@ -6,7 +6,6 @@ using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
-using Hast.TransformerTest;
 using Hast.Xilinx.Abstractions;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
@@ -233,8 +232,7 @@ namespace Hast.Layer
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
                 typeof(NexysA7ManifestProvider).Assembly,
-                typeof(CatapultManifestProvider).Assembly,
-                typeof(DefaultTransformerTest).Assembly
+                typeof(CatapultManifestProvider).Assembly
             }
             .ToList();
 
@@ -279,14 +277,14 @@ namespace Hast.Layer
 
             // Enable all loaded features. This is needed so extensions just added to the solution, but not referenced
             // anywhere in the current app can contribute dependencies.
-            //await _host
-            //    .Run<Orchard.Environment.Features.IFeatureManager>(
-            //        (featureManager) =>
-            //        {
-            //            featureManager.EnableFeatures(featureManager.GetAvailableFeatures().Select(feature => feature.Id), true);
+            await _host
+                .Run<Orchard.Environment.Features.IFeatureManager>(
+                    (featureManager) =>
+                    {
+                        featureManager.EnableFeatures(featureManager.GetAvailableFeatures().Select(feature => feature.Id), true);
 
-            //            return Task.CompletedTask;
-            //        }, ShellName, false);
+                        return Task.CompletedTask;
+                    }, ShellName, false);
         }
     }
 }
