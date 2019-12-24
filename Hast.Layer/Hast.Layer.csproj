@@ -83,6 +83,10 @@
       <Project>{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}</Project>
       <Name>Hast.Synthesis.Abstractions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hast.Core\Hast.Transformer\Hast.Transformer.csproj">
+      <Project>{55FFEC87-B87B-4BB6-B50D-26560C8F815A}</Project>
+      <Name>Hast.Transformer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj">
       <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
       <Name>Hast.Remote.Client</Name>
