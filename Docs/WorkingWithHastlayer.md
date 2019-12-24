@@ -80,16 +80,7 @@ In the ideal case your algorithm will do the following (can happen repeatedly of
 
 1. Produces all the data necessary for parallel execution.
 2. Feeds this data to multiple parallel `Task`s as their inputs and starts these `Task`s.
-3. Waits for the `Task`s to finish and takes their results.
-
-The `ParallelAlgorithm` sample does exactly this.
-
-Note that FPGAs have a finite amount of resources that you can utilize, and the more complex your algorithm, the more resources it will take. With simpler algorithms you can achieve a higher degree of parallelism on a given FPGA, since more copies of it will fit. So you can either have more complex pieces of logic parallelized to a lower degree, or simpler logic parallelized to a higher degree.
-
 Very broadly speaking if you performance-optimize your .NET code and it executes faster afterwards as software then most possibly it will improve as hardware. But do measure if your optimizations have the desired effect.
-
-
-## Troubleshooting
 
 If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
 
@@ -105,6 +96,16 @@ When you're working with the Developer flavor of Hastlayer it can also help to s
 ## Extensibility
 
 Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability to override implementations of services through the DI container) provides three kind of extension points:
+3. Waits for the `Task`s to finish and takes their results.
+
+The `ParallelAlgorithm` sample does exactly this.
+
+Note that FPGAs have a finite amount of resources that you can utilize, and the more complex your algorithm, the more resources it will take. With simpler algorithms you can achieve a higher degree of parallelism on a given FPGA, since more copies of it will fit. So you can either have more complex pieces of logic parallelized to a lower degree, or simpler logic parallelized to a higher degree.
+
+Very broadly speaking if you performance-optimize your .NET code and it executes faster as software then most possibly it will also execute faster as hardware. But do measure if your optimizations have the desired effect.
+
+
+## Troubleshooting
 
 - .NET-style events: standard .NET events.
 - Orchard-style events: event handlers that can be hooked into by implementing the event handler interface.

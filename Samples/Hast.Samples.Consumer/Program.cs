@@ -6,6 +6,8 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
 using System.Collections.Generic;
+using Lombiq.Arithmetics;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,11 +57,16 @@ namespace Hast.Samples.Consumer
         public static string VhdlOutputFilePath = @"Hast_IP.vhd";
     }
 
-
     class Program
     {
         static async Task MainTask(string[] args)
         {
+            // Just temporarily here during active posit development.
+            if (Configuration.SampleToRun == Sample.Posit32FusedCalculator)
+            {
+                Posit32FusedCalculatorSampleRunner.RunSoftwareBenchmarks();
+            }
+
             /*
             * On a high level these are the steps to use Hastlayer:
             * 1. Create the Hastlayer shell.
@@ -157,6 +164,18 @@ namespace Hast.Samples.Consumer
                     case Sample.ObjectOrientedShowcase:
                         ObjectOrientedShowcaseSampleRunner.Configure(configuration);
                         break;
+                            case Sample.PositCalculator:
+                                PositCalculatorSampleRunner.Configure(configuration);
+                                break;
+                            case Sample.Posit32AdvancedCalculator:
+                                Posit32AdvancedCalculatorSampleRunner.Configure(configuration);
+                                break;
+                            case Sample.Posit32Calculator:
+                                Posit32CalculatorSampleRunner.Configure(configuration);
+                                break;
+                            case Sample.Posit32FusedCalculator:
+                                Posit32FusedCalculatorSampleRunner.Configure(configuration);
+                                break;
                     case Sample.PrimeCalculator:
                         PrimeCalculatorSampleRunner.Configure(configuration);
                         break;
@@ -166,6 +185,9 @@ namespace Hast.Samples.Consumer
                     case Sample.SimdCalculator:
                         SimdCalculatorSampleRunner.Configure(configuration);
                         break;
+                            case Sample.UnumCalculator:
+                                UnumCalculatorSampleRunner.Configure(configuration);
+                                break;
                     default:
                         break;
                 }
@@ -183,6 +205,11 @@ namespace Hast.Samples.Consumer
                         typeof(PrimeCalculator).Assembly,
                         typeof(Fix64).Assembly,
                         typeof(FSharpSampleAssembly.FSharpParallelAlgorithmContainer).Assembly
+                        // Note that the assemblies used by code to be transformed also need to be added    
+                        // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
+                        // ImmutableArray.
+                        typeof(Posit).Assembly,
+                        typeof(ImmutableArray).Assembly
                     },
                     configuration);
 
@@ -244,6 +271,18 @@ namespace Hast.Samples.Consumer
                         case Sample.ObjectOrientedShowcase:
                             await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
                             break;
+                            case Sample.PositCalculator:
+                                await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.Posit32AdvancedCalculator:
+                                await Posit32AdvancedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.Posit32Calculator:
+                                await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.Posit32FusedCalculator:
+                                await Posit32FusedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
                         case Sample.PrimeCalculator:
                             await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                             break;
@@ -252,6 +291,9 @@ namespace Hast.Samples.Consumer
                             break;
                         case Sample.SimdCalculator:
                             await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                                break;
+                            case Sample.UnumCalculator:
+                                await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
                             break;
                         default:
                             break;
