@@ -11,8 +11,13 @@
         MemoryTest,
         MonteCarloPiEstimator,
         ObjectOrientedShowcase,
+        PositCalculator,
+        Posit32AdvancedCalculator,
+        Posit32Calculator,
+        Posit32FusedCalculator,
         PrimeCalculator,
         RecursiveAlgorithms,
-        SimdCalculator
+        SimdCalculator,
+        UnumCalculator
     }
 }
