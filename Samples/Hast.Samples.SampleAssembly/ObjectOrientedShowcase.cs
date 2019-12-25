@@ -59,11 +59,11 @@ namespace Hast.Samples.SampleAssembly
             }
 
             // You can also pass arrays and other objects around to other methods.
-            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberCointainers(numberContainers1));
+            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberContainers(numberContainers1));
         }
 
 
-        private uint SumNumberCointainers(NumberContainer[] numberContainers)
+        private uint SumNumberContainers(NumberContainer[] numberContainers)
         {
             uint sum = 0;
 
@@ -115,7 +115,7 @@ namespace Hast.Samples.SampleAssembly
             Number = number;
         }
 
-        
+
         // Instance methods can be added as usual.
         public uint IncreaseNumber(uint increaseBy)
         {
