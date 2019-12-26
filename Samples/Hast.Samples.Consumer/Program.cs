@@ -61,12 +61,6 @@ namespace Hast.Samples.Consumer
     {
         static async Task MainTask(string[] args)
         {
-            // Just temporarily here during active posit development.
-            if (Configuration.SampleToRun == Sample.Posit32FusedCalculator)
-            {
-                Posit32FusedCalculatorSampleRunner.RunSoftwareBenchmarks();
-            }
-
             /*
             * On a high level these are the steps to use Hastlayer:
             * 1. Create the Hastlayer shell.
