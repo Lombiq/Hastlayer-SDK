@@ -26,7 +26,7 @@ namespace Hast.Layer
     {
         private const string ShellName = ShellSettings.DefaultName;
 
-        private IHastlayerConfiguration _configuration;
+        private readonly IHastlayerConfiguration _configuration;
         private IOrchardAppHost _host;
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
