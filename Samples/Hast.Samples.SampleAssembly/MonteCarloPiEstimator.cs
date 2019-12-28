@@ -10,7 +10,7 @@ namespace Hast.Samples.SampleAssembly
     /// Carlo method</see> in a parallelized manner. For an overview  of the idea see <see
     /// href="https://www.coursera.org/lecture/parprog1/monte-carlo-method-to-estimate-pi-Zgm76">this video</see>;
     /// <see href="http://www.software-architects.com/devblog/2014/09/22/C-Parallel-and-Async-Programming"/>this
-    /// blogpost's implementation</see> was used as an inspiration too. Also see <see
+    /// blog post's implementation</see> was used as an inspiration too. Also see <see
     /// cref="MonteCarloAlgorithmSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class MonteCarloPiEstimator

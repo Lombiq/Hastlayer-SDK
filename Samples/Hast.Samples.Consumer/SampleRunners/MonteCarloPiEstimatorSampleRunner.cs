@@ -18,7 +18,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 500000;
 
-            // On a Nexys A7 this takes about 34ms with a 76 degree of parallelism and method inlining. It takes
+            // On a Nexys A7 this takes about 34ms with a 78 degree of parallelism and method inlining. It takes
             // about 120ms on an i7 processor with 4 physical (8 logical) cores.
             // On Catapult with a 350 degree of parallelism it takes 26ms on hardware and 160ms on the (2*32 logical 
             // core) CPU.
