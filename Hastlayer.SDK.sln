@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Console", "Hast.Console\Hast.Console.csproj", "{2A58C055-84A1-4B42-9549-1B3EDA597F3D}"
 EndProject
@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.VhdlBuilder", "Hast.Co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8043A55-810D-4760-8390-D0C936EFBD5A}"
 	ProjectSection(SolutionItems) = preProject
+		Docs\Benchmarks.md = Docs\Benchmarks.md
 		Docs\DevelopingHastlayer.md = Docs\DevelopingHastlayer.md
 		Docs\GettingStarted.md = Docs\GettingStarted.md
 		Readme.md = Readme.md
@@ -118,7 +119,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Communication.Tester",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Samples.Kpz.Algorithms", "Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj", "{EE140765-5088-40AA-9621-D4B0A971EE2C}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Hast.Samples.FSharpSampleAssembly", "Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj", "{A2D4C4BD-4C4A-4ED7-B74F-B2C79F31F2D0}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Hast.Samples.FSharpSampleAssembly", "Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj", "{A2D4C4BD-4C4A-4ED7-B74F-B2C79F31F2D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -326,8 +327,8 @@ Global
 		{9AB5BFDC-72D9-4DC3-BDFE-493CC536E011} = {B61218C3-CA60-4263-B6E3-C37AF87DA820}
 		{0DD555F3-B472-422B-8CFB-63CB494CBB5A} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
 		{CBAC105A-E50F-4202-A647-CFD674E6C0F8} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
-		{2C30740A-0E66-476C-89B2-C89D86BFA70C} = {51A02816-8D25-480F-9D28-EC7D05DC3F63}
 		{E77C13E5-DA6A-4A9D-9601-B17BDBFE50BD} = {701D5B71-9A6F-47A4-A3C2-3714AF8B4115}
+		{2C30740A-0E66-476C-89B2-C89D86BFA70C} = {51A02816-8D25-480F-9D28-EC7D05DC3F63}
 		{1059805B-3221-4788-BDF3-11120FA4BF1A} = {B88EC5D8-5D8A-4C87-81B3-F4F8C7FB2BF8}
 		{EE140765-5088-40AA-9621-D4B0A971EE2C} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
 		{A2D4C4BD-4C4A-4ED7-B74F-B2C79F31F2D0} = {765A6EB0-438E-422C-ACDD-13544EFE6467}

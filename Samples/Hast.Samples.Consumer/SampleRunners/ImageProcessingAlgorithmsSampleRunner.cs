@@ -22,10 +22,6 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 var imageContrastModifier = await hastlayer
                     .GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
-                // This takes about 160 ms on an i7 CPU and net 150 ms on a Nexys A7 with a MaxDegreeOfParallelism of
-                // 25 while the FPGA is about 66% utilized.
-                // On Catapult with a MaxDegreeOfParallelism of 50 it uses 59% of the FPGA resources (more would fit
-                // actually, needs more testing) and runs in net 65 ms (1150 ms with the communication round trip).
                 var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
                 modifiedImage.Save("contrast.bmp");
 

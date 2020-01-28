@@ -5,6 +5,11 @@
 Note that the Hardware Framework projects have their own release cycle and release notes.
 
 
+## vNext
+
+- Added a documentation page with benchmarks.
+
+
 ## v1.1, 20.12.2019
 
 After a lot of work we're finally ready with support for much larger FPGAs that can provide acceleration for much more complex applications! Apart from this there are a lot of other news as well so we've bumped up Hastlayer's version number to v1.1. Check the details out below!
