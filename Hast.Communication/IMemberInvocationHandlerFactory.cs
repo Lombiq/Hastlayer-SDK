@@ -1,6 +1,6 @@
 ﻿using Castle.DynamicProxy;
+using Hast.Common.Interfaces;
 using Hast.Layer;
-using Orchard;
 
 namespace Hast.Communication
 {

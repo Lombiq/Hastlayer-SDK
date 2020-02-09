@@ -1,6 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
+using Hast.Common.Interfaces;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
@@ -8,7 +9,6 @@ using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard;
 using System;
 using System.Collections.Generic;
 using System.Linq;

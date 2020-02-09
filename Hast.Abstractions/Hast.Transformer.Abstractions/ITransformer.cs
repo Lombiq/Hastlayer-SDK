@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.Extensions;
-using Orchard;
 
 namespace Hast.Transformer.Abstractions
 {

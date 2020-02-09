@@ -1,4 +1,4 @@
-﻿using Orchard.Events;
+﻿using Hast.Common.Interfaces;
 
 namespace Hast.Communication.Extensibility.Events
 {

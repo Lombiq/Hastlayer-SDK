@@ -9,8 +9,7 @@ using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Helpers;
 using Hast.Communication.Models;
-using Orchard.Logging;
-using Orchard.Services;
+using Hast.Logging;
 
 namespace Hast.Communication.Services
 {
