@@ -1,6 +1,7 @@
 ﻿using Hast.Common.Interfaces;
 using Hast.Layer;
-using Hast.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace Hast.Transformer.Abstractions
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
-            Logger.Warning("No Transformer is available. This most possibly means an issue.");
+            Logger.LogWarning("No Transformer is available. This most possibly means an issue.");
 
             var mockHardwareEntryPointMappings = new Dictionary<string, int>();
 

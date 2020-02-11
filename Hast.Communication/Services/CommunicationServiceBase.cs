@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hast.Communication.Services
 {
@@ -47,7 +49,7 @@ namespace Hast.Communication.Services
 
             context.HardwareExecutionInformation.FullExecutionTimeMilliseconds = context.Stopwatch.ElapsedMilliseconds;
 
-            Logger.Information("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
+            Logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
         }
 
         protected void SetHardwareExecutionTime(
@@ -58,7 +60,7 @@ namespace Hast.Communication.Services
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = 
                 1M / executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
 
-            Logger.Information("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+            Logger.LogInformation("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
         }
 
 

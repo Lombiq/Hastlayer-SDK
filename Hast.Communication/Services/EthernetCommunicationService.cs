@@ -9,6 +9,7 @@ using Hast.Communication.Exceptions;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Microsoft.Extensions.Logging;
 
 namespace Hast.Communication.Services
 {
@@ -71,7 +72,7 @@ namespace Hast.Communication.Services
                 IFpgaEndpoint fpgaEndpoint = device.Metadata;
                 var fpgaIpEndpoint = fpgaEndpoint.Endpoint;
 
-                Logger.Information("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
+                Logger.LogInformation("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
 
                 try
                 {
@@ -119,7 +120,7 @@ namespace Hast.Communication.Services
                             // Read the bytes representing the length of the simple memory.
                             var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStream(stream, sizeof(uint)), 0);
 
-                            Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
+                            Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
                             // Finally read the memory itself.
                             var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);

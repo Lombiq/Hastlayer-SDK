@@ -9,7 +9,9 @@ using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Helpers;
 using Hast.Communication.Models;
-using Hast.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using OrchardCore.Modules;
 
 namespace Hast.Communication.Services
 {
@@ -40,7 +42,7 @@ namespace Hast.Communication.Services
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
             // We need retries because somehow the FPGA doesn't always catch our request.
-            Logger.Information("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
+            Logger.LogInformation("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
 
             var currentRetries = 0;
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();
