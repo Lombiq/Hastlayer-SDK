@@ -10,7 +10,7 @@ namespace Hast.Algorithms.Tests
 {
     public class Fix64Tests
     {
-        private long[] _testCases = new[]
+        private readonly long[] _testCases = new[]
         {
             // Small numbers
             0L, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -214,7 +214,7 @@ namespace Hast.Algorithms.Tests
                     if (_testCases[j] == 0)
                     {
                         // Hastlayer doesn't handle exceptions.
-                        Assert.That(x / y == default(Fix64));
+                        Assert.That(x / y == default);
                         //Assert.Throws<DivideByZeroException>(() => Ignore(x / y));
                     }
                     else
@@ -365,7 +365,7 @@ namespace Hast.Algorithms.Tests
                     if (operand2 == 0)
                     {
                         // Hastlayer doesn't handle exceptions.
-                        Assert.That(f1 / f2 == default(Fix64));
+                        Assert.That(f1 / f2 == default);
                         //Assert.Throws<DivideByZeroException>(() => Ignore(f1 / f2));
                     }
                     else
@@ -435,8 +435,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        // On ignore because temporarily removed the interface implementations from Fix64
-        [Test, Ignore]
+        [Test, Ignore("On ignore because temporarily removed the interface implementations from Fix64")]
         public void CompareTo()
         {
             var nums = _testCases.Select(Fix64.FromRaw).ToArray();
@@ -455,8 +454,6 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-
-        static void Ignore<T>(T value) { }
 
         static void AreEqualWithinPrecision(decimal value1, decimal value2)
         {
