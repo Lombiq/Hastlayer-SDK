@@ -1,7 +1,7 @@
 ﻿using AdvancedDLSupport;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using IcIWare.NamedIndexers;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -213,15 +213,15 @@ namespace Hast.Catapult.Abstractions
                     if (flag == Constants.Log.None) return;
 
                     if (flag.HasFlag(Constants.Log.Debug) || flag.HasFlag(Constants.Log.Verbose))
-                        logger.Debug(text);
+                        logger.LogDebug(text);
                     else if (flag.HasFlag(Constants.Log.Info))
-                        logger.Information(text);
+                        logger.LogInformation(text);
                     else if (flag.HasFlag(Constants.Log.Error))
-                        logger.Error(text);
+                        logger.LogError(text);
                     else if (flag.HasFlag(Constants.Log.Fatal))
-                        logger.Fatal(text);
+                        logger.LogCritical(text);
                     else if (flag.HasFlag(Constants.Log.Warn))
-                        logger.Warning(text);
+                        logger.LogWarning(text);
                 });
         }
 

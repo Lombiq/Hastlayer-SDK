@@ -12,7 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj" />
-    <ProjectReference Include="..\..\Orchard\src\Orchard\Orchard.Framework.csproj" />
     <ProjectReference Include="..\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
   </ItemGroup>
   <ItemGroup>

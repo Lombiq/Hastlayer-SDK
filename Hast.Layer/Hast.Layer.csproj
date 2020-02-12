@@ -18,7 +18,6 @@
     <ProjectReference Include="..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj" />
     <ProjectReference Include="..\Lombiq.OrchardAppHost\Lombiq.OrchardAppHost.csproj" />
-    <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Autofac">
