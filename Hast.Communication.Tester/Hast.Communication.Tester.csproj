@@ -15,7 +15,6 @@
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
     <ProjectReference Include="..\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj" />
-    <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AdvancedDLSupport">
