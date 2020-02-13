@@ -11,25 +11,25 @@ namespace Hast.Samples.SampleAssembly
     {
         private const int MaxDegreeOfParallelism = 280;
 
-        private const int Run_InputUInt32Index = 0;
-        private const int Run_OutputUInt32Index = 0;
+        private const int Run_InputInt32Index = 0;
+        private const int Run_OutputInt32Index = 0;
 
 
         public virtual void Run(SimpleMemory memory)
         {
-            var input = memory.ReadUInt32(Run_InputUInt32Index);
-            var tasks = new Task<uint>[MaxDegreeOfParallelism];
+            var input = memory.ReadInt32(Run_InputInt32Index);
+            var tasks = new Task<int>[MaxDegreeOfParallelism];
 
             // Hastlayer will figure out how many Tasks you want to start if you kick them off in a loop like this.
             // If this is more involved then you'll need to tell Hastlayer the level of parallelism, see the comment in
             // ParallelAlgorithmSampleRunner.
-            for (uint i = 0; i < MaxDegreeOfParallelism; i++)
+            for (int i = 0; i < MaxDegreeOfParallelism; i++)
             {
                 tasks[i] = Task.Factory.StartNew(
                     indexObject =>
                     {
-                        var index = (uint)indexObject;
-                        uint result = input + index * 2;
+                        var index = (int)indexObject;
+                        int result = input + index * 2;
 
                         var even = true;
                         for (int j = 2; j < 9999999; j++)
@@ -54,21 +54,21 @@ namespace Hast.Samples.SampleAssembly
             // Task.WhenAny() can be used too.
             Task.WhenAll(tasks).Wait();
 
-            uint output = 0;
+            int output = 0;
             for (int i = 0; i < MaxDegreeOfParallelism; i++)
             {
                 output += tasks[i].Result;
             }
 
-            memory.WriteUInt32(Run_OutputUInt32Index, output);
+            memory.WriteInt32(Run_OutputInt32Index, output);
         }
 
-        public uint Run(uint input)
+        public int Run(int input)
         {
             var memory = new SimpleMemory(1);
-            memory.WriteUInt32(Run_InputUInt32Index, input);
+            memory.WriteInt32(Run_InputInt32Index, input);
             Run(memory);
-            return memory.ReadUInt32(Run_OutputUInt32Index);
+            return memory.ReadInt32(Run_OutputInt32Index);
         }
     }
 }
