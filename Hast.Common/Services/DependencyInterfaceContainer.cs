@@ -27,15 +27,17 @@ namespace Hast.Common.Services
             }
         }
 
-        public static void RegisterIDependencies(IServiceCollection services)
+        public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
             var iDependencyType = typeof(IDependency);
 
-            var types = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .SelectMany(a => a.GetLoadedModules())
-                .SelectMany(m => { try { return m.GetTypes(); } catch { return Array.Empty<Type>(); } })
-                .Where(t => !t.IsInterface && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
+            var assemblyList = assemblies is IList<Assembly> list ? list : assemblies?.ToList();
+            if (assemblyList?.Any() != true) assemblyList = AppDomain.CurrentDomain.GetAssemblies();
+
+            var types = assemblyList
+                .Where(a => !a.IsDynamic)
+                .SelectMany(a => a.GetExportedTypes())
+                .Where(t => t.IsClass && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
                 .Distinct()
                 .ToList();
 
@@ -45,7 +47,7 @@ namespace Hast.Common.Services
                 var lifetime = ServiceLifetime.Scoped;
                 foreach (var iface in implementationType.GetInterfaces())
                 {
-                    if (iface.Name == nameof(IDependency))
+                    if (!iface.IsPublic || iface.Name == nameof(IDependency))
                     {
                         continue;
                     }
@@ -70,12 +72,12 @@ namespace Hast.Common.Services
             }
         }
 
-        public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<string> paths)
+        public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<string> paths, IEnumerable<Assembly> assemblies = null)
         {
             if (services == null) services = new ServiceCollection();
             if (paths != null) LoadAssemblies(paths);
 
-            RegisterIDependencies(services);
+            RegisterIDependencies(services, assemblies);
             services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));
             services.AddLogging();
             services.AddMemoryCache();
