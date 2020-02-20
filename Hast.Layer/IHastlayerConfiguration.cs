@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Hast.Common.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Hast.Layer
@@ -20,7 +22,7 @@ namespace Hast.Layer
     }
 
 
-    public interface IHastlayerConfiguration
+    public interface IHastlayerConfiguration : ISingletonDependency
     {
         /// <summary>
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
@@ -32,5 +34,21 @@ namespace Hast.Layer
         /// The usage flavor of Hastlayer for different scenarios.
         /// </summary>
         HastlayerFlavor Flavor { get; }
+
+        /// <summary>
+        /// The collection of assemblies to be dynamically loaded. If the item is a directory, then the DLL files in
+        /// that directory are loaded instead.
+        /// </summary>
+        IEnumerable<string> DynamicAssemblies { get; }
+
+        /// <summary>
+        /// The service collection to be used as a basis of the <see cref="ServiceProvider"/> creation.
+        /// </summary>
+        IServiceCollection BaseServiceCollection { get; }
+
+        /// <summary>
+        /// The location of the App_Data folder
+        /// </summary>
+        string AppDataFolderPath { get; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Hast.Common.Interfaces;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
 
@@ -7,7 +8,7 @@ namespace Hast.Layer.Extensibility.Events
     // This needs to be an app-level singleton so it's not recreated with shell restarts (otherwise enabling/disabling
     // features for example would cause the registered event handler to be lost. It can't have the same implementation
     // as IMemberInvocationEventHandler because than the letter's lifetime scope-level lifetime would take precedence.
-    public interface IHardwareExecutionEventHandlerHolder
+    public interface IHardwareExecutionEventHandlerHolder : ISingletonDependency
     {
         void RegisterExecutedOnHardwareEventHandler(Action<ExecutedOnHardwareEventArgs> eventHandler);
         Action<ExecutedOnHardwareEventArgs> GetRegisteredEventHandler();
