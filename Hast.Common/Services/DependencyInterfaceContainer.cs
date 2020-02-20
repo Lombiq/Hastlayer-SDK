@@ -39,11 +39,8 @@ namespace Hast.Common.Services
                 .Distinct()
                 .ToList();
 
-            var typesNames = new Dictionary<string, List<string>>();
-            var xxx = types.Select(x => x.Name).OrderBy(x => x).ToList();
             foreach (var implementationType in types)
             {
-                var className = implementationType.Name;
                 var serviceTypes = new List<Type>();
                 var lifetime = ServiceLifetime.Scoped;
                 foreach (var iface in implementationType.GetInterfaces())
@@ -69,8 +66,6 @@ namespace Hast.Common.Services
                 foreach (var serviceType in serviceTypes)
                 {
                     services.Add(new ServiceDescriptor(serviceType, implementationType, lifetime));
-                    if (!typesNames.ContainsKey(serviceType.Name)) typesNames[serviceType.Name] = new List<string>();
-                    typesNames[serviceType.Name].Add(implementationType.Name);
                 }
             }
         }

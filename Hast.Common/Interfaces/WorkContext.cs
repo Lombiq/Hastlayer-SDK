@@ -13,7 +13,7 @@ namespace Hast.Common.Interfaces
         /// </summary>
         /// <typeparam name="T">The type of the dependency.</typeparam>
         /// <returns>An instance of the dependency if it could be resolved.</returns>
-        public abstract T Resolve<T>();
+        public virtual T Resolve<T>() => (T)Resolve(typeof(T));
 
         /// <summary>
         /// Resolves a registered dependency type.
@@ -28,7 +28,12 @@ namespace Hast.Common.Interfaces
         /// <typeparam name="T">The type of the dependency.</typeparam>
         /// <param name="service">An instance of the dependency if it could be resolved.</param>
         /// <returns>True if the dependency could be resolved, false otherwise.</returns>
-        public abstract bool TryResolve<T>(out T service);
+        public virtual bool TryResolve<T>(out T service)
+        {
+            var success = TryResolve(typeof(T), out object serviceObject);
+            service = success ? (T)serviceObject : default;
+            return success;
+        }
 
         /// <summary>
         /// Tries to resolve a registered dependency type.
@@ -36,7 +41,19 @@ namespace Hast.Common.Interfaces
         /// <param name="serviceType">The type of the dependency.</param>
         /// <param name="service">An instance of the dependency if it could be resolved.</param>
         /// <returns>True if the dependency could be resolved, false otherwise.</returns>
-        public abstract bool TryResolve(Type serviceType, out object service);
+        public virtual bool TryResolve(Type serviceType, out object service)
+        {
+            try
+            {
+                service = Resolve(serviceType);
+                return true;
+            }
+            catch
+            {
+                service = default;
+                return false;
+            }
+        }
 
         public abstract T GetState<T>(string name);
         public abstract void SetState<T>(string name, T value);
