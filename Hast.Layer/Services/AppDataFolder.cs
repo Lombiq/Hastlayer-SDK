@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
-namespace Hast.Common.Services
+namespace Hast.Layer.Services
 {
     public class AppDataFolder : IAppDataFolder
     {
+        private readonly IHastlayerConfiguration _hastlayerConfiguration;
         private readonly DirectoryInfo _appDataFolder;
 
-        public AppDataFolder()
+        public AppDataFolder(IHastlayerConfiguration hastlayerConfiguration)
         {
-            _appDataFolder = new DirectoryInfo("App_Data");
+            _hastlayerConfiguration = hastlayerConfiguration;
+
+            _appDataFolder = new DirectoryInfo(hastlayerConfiguration.AppDataFolderPath);
         }
 
         public string MapPath(string relativePath) => Path.Combine(_appDataFolder.FullName, relativePath);

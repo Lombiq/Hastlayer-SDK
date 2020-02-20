@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Hast.Common.Services
+namespace Hast.Layer.Services
 {
     public interface IAppDataFolder : IDependency
     {

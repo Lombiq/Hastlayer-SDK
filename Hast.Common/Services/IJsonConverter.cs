@@ -8,5 +8,6 @@ namespace Hast.Common.Services
     public interface IJsonConverter : IDependency
     {
         string Serialize(object source);
+        T Deserialize<T>(string json);
     }
 }
