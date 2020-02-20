@@ -13,5 +13,13 @@ namespace Hast.Communication
                 throw new NullReferenceException(name);
             }
         }
+
+        public static void ThrowIfNull(object value, string name)
+        {
+            if (value == null)
+            {
+                throw new NullReferenceException(name);
+            }
+        }
     }
 }
