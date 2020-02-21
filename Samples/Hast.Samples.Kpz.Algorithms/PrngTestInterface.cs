@@ -1,6 +1,6 @@
 ﻿using Hast.Transformer.Abstractions.SimpleMemory;
 
-namespace Hast.Samples.Kpz
+namespace Hast.Samples.Kpz.Algorithms
 {
     //SimpleMemory map:
     // * 0 .. 1  :  
@@ -16,7 +16,6 @@ namespace Hast.Samples.Kpz
     /// </summary>
     public class PrngTestInterface
     {
-
         public virtual void MWC64X(SimpleMemory memory)
         {
             uint stateHighWord = memory.ReadUInt32(1);
