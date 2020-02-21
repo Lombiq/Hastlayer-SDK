@@ -1,5 +1,4 @@
 ﻿using Hast.Common.Interfaces;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -13,10 +12,7 @@ namespace Hast.Common.Services
     {
         internal class Lazier<T> : Lazy<T> where T : class
         {
-            public Lazier(IServiceProvider provider)
-                : base(() => provider.GetRequiredService<T>())
-            {
-            }
+            public Lazier(IServiceProvider provider) : base(() => provider.GetRequiredService<T>()) { }
         }
 
         public static void LoadAssemblies(IEnumerable<string> paths)

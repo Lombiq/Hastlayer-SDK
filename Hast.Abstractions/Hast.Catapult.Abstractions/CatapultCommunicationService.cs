@@ -3,6 +3,7 @@ using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -20,12 +21,10 @@ namespace Hast.Catapult.Abstractions
         public override string ChannelName => Constants.ChannelName;
 
 
-        public CatapultCommunicationService(
-            IDevicePoolPopulator devicePoolPopulator,
-            IDevicePoolManager devicePoolManager)
+        public CatapultCommunicationService(IServiceProvider serviceProvider)
         {
-            _devicePoolPopulator = devicePoolPopulator;
-            _devicePoolManager = devicePoolManager;
+            _devicePoolPopulator = serviceProvider.GetService<IDevicePoolPopulator>();
+            _devicePoolManager = serviceProvider.GetService<IDevicePoolManager>();
         }
 
         private void Device_Disposing(object sender, EventArgs e) => 
