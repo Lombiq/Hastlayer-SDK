@@ -19,9 +19,6 @@ namespace Hast.Samples.SampleAssembly
         private const int EstimatePi_RandomSeedUInt32Index = 1;
         private const int EstimatePi_InCircleCountSumUInt32Index = 0;
 
-        // With 78 about 61% of resources are used on a Nexys A7, but with 79 101%, so this is the limit of efficiency.
-        // On Catapult, however, 350 will fit (which uses 58% of the logic cells but almost all of the DSPs, so more
-        // won't fit).
         public const int MaxDegreeOfParallelism = 78;
 
 

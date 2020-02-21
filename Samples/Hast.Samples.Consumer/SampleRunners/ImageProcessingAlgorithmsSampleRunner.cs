@@ -22,9 +22,13 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 var imageContrastModifier = await hastlayer
                     .GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
-                // This takes about 160ms on an i7 CPU and net 150ms on a Nexys A7.
                 var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
                 modifiedImage.Save("contrast.bmp");
+
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50);
+                sw.Stop();
+                System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
 
                 // ImageFilter disabled until it's improved.
                 //var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());

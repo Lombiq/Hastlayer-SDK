@@ -24,9 +24,7 @@ namespace Hast.Samples.Demo
                     hastlayer.ExecutedOnHardware += (sender, e) =>
                     {
                         Console.WriteLine(
-                            "Executing " +
-                            e.MemberFullName +
-                            " on hardware took " +
+                            "Executing on hardware took " +
                             e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
                             " milliseconds (net) " +
                             e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
@@ -47,17 +45,20 @@ namespace Hast.Samples.Demo
                     #endregion
 
                     #region Execution
-                    Console.WriteLine("Starting hardware execution.");
+                    Console.WriteLine("Hardware generated, starting software execution.");
                     var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
 
-                    var output1 = parallelAlgorithm.Run(234234);
-                    var output2 = parallelAlgorithm.Run(123);
-                    var output3 = parallelAlgorithm.Run(9999);
-
+                    Console.WriteLine();
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     var cpuOutput = new ParallelAlgorithm().Run(234234);
                     sw.Stop();
-                    Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + "ms.");
+                    Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
+
+                    Console.WriteLine();
+                    Console.WriteLine("Starting hardware execution.");
+                    var output1 = parallelAlgorithm.Run(234234);
+                    var output2 = parallelAlgorithm.Run(123);
+                    var output3 = parallelAlgorithm.Run(9999);
                     #endregion
                 }
             }).Wait();
