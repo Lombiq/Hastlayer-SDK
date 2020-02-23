@@ -9,6 +9,7 @@ using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,12 @@ namespace Hast.Communication
 {
     public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
     {
-        private readonly IWorkContextAccessor _wca;
+        private readonly IServiceProvider _serviceProvider;
 
 
-        public MemberInvocationHandlerFactory(IWorkContextAccessor wca)
+        public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)
         {
-            _wca = wca;
+            _serviceProvider = serviceProvider;
         }
 
 
@@ -45,7 +46,7 @@ namespace Hast.Communication
 
                     async Task invocationHandler()
                     {
-                        using (var workContext = _wca.CreateWorkContextScope())
+                        using (var scope = _serviceProvider.CreateScope())
                         {
                             // Although it says Method it can also be a property.
                             var memberFullName = invocation.Method.GetFullName();
@@ -57,10 +58,10 @@ namespace Hast.Communication
                                 HardwareRepresentation = hardwareRepresentation
                             };
 
-                            var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
+                            var eventHandler = scope.ServiceProvider.GetService<IMemberInvocationEventHandler>();
                             eventHandler.MemberInvoking(invocationContext);
 
-                            workContext.Resolve<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
+                            scope.ServiceProvider.GetService<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                                 {
                                     invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
                                 });
@@ -142,8 +143,9 @@ namespace Hast.Communication
                                 var memberId = hardwareRepresentation
                                     .HardwareDescription
                                     .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
-                                invocationContext.ExecutionInformation = await workContext
-                                    .Resolve<ICommunicationServiceSelector>()
+                                invocationContext.ExecutionInformation = await scope
+                                    .ServiceProvider
+                                    .GetService<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)
                                     .Execute(
                                         memory,
