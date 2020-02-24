@@ -14,5 +14,6 @@ namespace Hast.Layer.Services
         bool FileExists(string fileName);
         FileStream CreateFile(string fileName);
         FileStream OpenFile(string fileName);
+        void DeleteFile(string fileName);
     }
 }

@@ -20,5 +20,6 @@ namespace Hast.Layer.Services
         public bool FileExists(string fileName) => File.Exists(MapPath(fileName));
         public FileStream CreateFile(string fileName) => File.Create(MapPath(fileName));
         public FileStream OpenFile(string fileName) => File.OpenRead(MapPath(fileName));
+        public void DeleteFile(string fileName) => File.Delete(MapPath(fileName));
     }
 }
