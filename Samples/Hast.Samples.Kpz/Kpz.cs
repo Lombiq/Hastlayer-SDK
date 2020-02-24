@@ -32,18 +32,18 @@ namespace Hast.Samples.Kpz
     public partial class Kpz
     {
         /// <summary>The probability of pyramid to hole change.</summary>
-        private double _probabilityP = 0.5d;
+        private readonly double _probabilityP = 0.5d;
 
         /// <summary>The probability of hole to pyramid change.</summary>
-        private double _probabilityQ = 0.5d;
+        private readonly double _probabilityQ = 0.5d;
 
         /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
 
         /// <summary>See <see cref="StateLogger" /></summary>
-        private bool _enableStateLogger = false;
+        private readonly bool _enableStateLogger = false;
 
-        private KpzTarget _kpzTarget = KpzTarget.Cpu;
+        private readonly KpzTarget _kpzTarget = KpzTarget.Cpu;
 
         /// <summary>It returns the width of the grid.</summary>
         public int GridWidth { get { return Grid.GetLength(0); } }
@@ -97,9 +97,11 @@ namespace Hast.Samples.Kpz
             {
                 for (int y = 0; y < GridHeight; y++)
                 {
-                    Grid[x, y] = new KpzNode();
-                    Grid[x, y].dx = _random.Next(0, 2) == 0;
-                    Grid[x, y].dy = _random.Next(0, 2) == 0;
+                    Grid[x, y] = new KpzNode
+                    {
+                        dx = _random.Next(0, 2) == 0,
+                        dy = _random.Next(0, 2) == 0
+                    };
                 }
             }
 
@@ -115,9 +117,11 @@ namespace Hast.Samples.Kpz
             {
                 for (int y = 0; y < GridHeight; y++)
                 {
-                    Grid[x, y] = new KpzNode();
-                    Grid[x, y].dx = (bool)((x & 1) != 0);
-                    Grid[x, y].dy = (bool)((y & 1) != 0);
+                    Grid[x, y] = new KpzNode
+                    {
+                        dx = (bool)((x & 1) != 0),
+                        dy = (bool)((y & 1) != 0)
+                    };
                 }
             }
             if (_enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", Grid);
@@ -256,7 +260,7 @@ namespace Hast.Samples.Kpz
             if (_enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
         }
 
-        bool HastlayerGridAlreadyPushed = false;
+        readonly bool HastlayerGridAlreadyPushed = false;
 
 
         /// <summary>
@@ -264,7 +268,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void DoHastIterations(uint numberOfIterations)
         {
-            var numberOfStepsInIteration = GridWidth * GridHeight;
+            //var numberOfStepsInIteration = GridWidth * GridHeight;
             KpzNode[,] gridBefore = (KpzNode[,])Grid.Clone();
 
             if (_enableStateLogger) StateLogger.NewKpzIteration();

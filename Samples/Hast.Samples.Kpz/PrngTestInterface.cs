@@ -38,6 +38,7 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// This copies random seed from the host to the FPGA.
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         public static SimpleMemory PushRandomSeed(this PrngTestInterface kernels, ulong seed)
         {
             SimpleMemory sm = new SimpleMemory(3);
