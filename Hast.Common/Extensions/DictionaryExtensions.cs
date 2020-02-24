@@ -9,9 +9,8 @@ namespace System.Collections.Generic
         public static T GetOrAddCustomConfiguration<T>(this IDictionary<string, object> customConfiguration, string key)
             where T : new()
         {
-            object config;
 
-            if (customConfiguration.TryGetValue(key, out config))
+            if (customConfiguration.TryGetValue(key, out object config))
             {
                 // If this is a remote transformation then custom configs won't necessarily be properly deserialized at
                 // this point, so need to handle them specifically.
