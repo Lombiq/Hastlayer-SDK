@@ -1,5 +1,6 @@
 ﻿using Hast.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -28,27 +29,24 @@ namespace Hast.Layer
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
         /// pipeline. These should be Orchard extensions.
         /// </summary>
-        IEnumerable<Assembly> Extensions { get; }
+        IEnumerable<Assembly> Extensions { get; set; }
 
         /// <summary>
         /// The usage flavor of Hastlayer for different scenarios.
         /// </summary>
-        HastlayerFlavor Flavor { get; }
+        HastlayerFlavor Flavor { get; set; }
 
         /// <summary>
         /// The collection of assemblies to be dynamically loaded. If the item is a directory, then the DLL files in
         /// that directory are loaded instead.
         /// </summary>
-        IEnumerable<string> DynamicAssemblies { get; }
-
-        /// <summary>
-        /// The service collection to be used as a basis of the <see cref="ServiceProvider"/> creation.
-        /// </summary>
-        IServiceCollection BaseServiceCollection { get; }
+        IEnumerable<string> DynamicAssemblies { get; set; }
 
         /// <summary>
         /// The location of the App_Data folder
         /// </summary>
-        string AppDataFolderPath { get; }
+        string AppDataFolderPath { get; set; }
+
+        event EventHandler<IServiceCollection> OnServiceRegistration;
     }
 }

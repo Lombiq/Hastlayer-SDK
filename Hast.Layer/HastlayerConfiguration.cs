@@ -27,14 +27,11 @@ namespace Hast.Layer
         public IEnumerable<string> DynamicAssemblies { get; set; } = Array.Empty<string>();
 
         /// <summary>
-        /// The service collection to be used as a basis of the <see cref="ServiceProvider"/> creation.
-        /// </summary>
-        public IServiceCollection BaseServiceCollection { get; set; } = null;
-
-        /// <summary>
         /// The location of the App_Data folder
         /// </summary>
         public string AppDataFolderPath { get; set; } = "Hastlayer/App_Data";
+
+        public event EventHandler<IServiceCollection> OnServiceRegistration;
 
         public static HastlayerConfiguration Clone(IHastlayerConfiguration previousConfiguration) =>
             new HastlayerConfiguration()
@@ -42,7 +39,7 @@ namespace Hast.Layer
                 Extensions = previousConfiguration.Extensions,
                 Flavor = previousConfiguration.Flavor,
                 DynamicAssemblies = previousConfiguration.DynamicAssemblies,
-                BaseServiceCollection = previousConfiguration.BaseServiceCollection,
+                AppDataFolderPath = previousConfiguration.AppDataFolderPath,
             };
 
         public HastlayerConfiguration() { }
