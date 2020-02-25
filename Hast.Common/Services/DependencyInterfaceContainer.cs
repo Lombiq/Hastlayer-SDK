@@ -17,9 +17,16 @@ namespace Hast.Common.Services
 
         public static void LoadAssemblies(IEnumerable<string> paths)
         {
+            var loadedPaths = AppDomain.CurrentDomain
+                .GetAssemblies()
+                .Where(a => !a.IsDynamic)
+                .Select(a => a.Location)
+                .ToList();
+
             foreach (var path in paths)
             {
-                Assembly.LoadFile(Path.IsPathRooted(path) ? path : Path.Combine(Environment.CurrentDirectory, path));
+                var fileInfo = new FileInfo(path);
+                if (!loadedPaths.Contains(fileInfo.FullName)) Assembly.LoadFrom(fileInfo.FullName);
             }
         }
 
@@ -71,7 +78,7 @@ namespace Hast.Common.Services
         public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<string> paths, IEnumerable<Assembly> assemblies = null)
         {
             if (services == null) services = new ServiceCollection();
-            if (paths != null) LoadAssemblies(paths);
+            if (paths?.Any() == true) LoadAssemblies(paths);
 
             RegisterIDependencies(services, assemblies);
             services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));
