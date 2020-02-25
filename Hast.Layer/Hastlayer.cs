@@ -31,10 +31,10 @@ namespace Hast.Layer
         {
             _configuration = configuration;
 
-            var serviceCollection = configuration.BaseServiceCollection ?? new ServiceCollection();
-            serviceCollection.AddIDependencyContainer(configuration.DynamicAssemblies);
-            serviceCollection.AddSingleton(configuration);
-            _serviceProvider = serviceCollection.BuildServiceProvider();
+            var services = new ServiceCollection();
+            services.AddIDependencyContainer(configuration.DynamicAssemblies);
+            services.AddSingleton(configuration);
+            _serviceProvider = services.BuildServiceProvider();
         }
 
 
@@ -275,6 +275,19 @@ namespace Hast.Layer
             // */
             var proxy = _serviceProvider.GetService<IHardwareExecutionEventHandlerHolder>();
             await Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs)));
+        }
+
+
+        public async Task Run<T>(Func<T, Task> process)
+        {
+            using var scope = _serviceProvider.CreateScope();
+            await process(scope.ServiceProvider.GetService<T>());
+        }
+
+        public async Task<Tout> RunGet<Tout>(Func<IServiceProvider, Task<Tout>> process)
+        {
+            using var scope = _serviceProvider.CreateScope();
+            return await process(scope.ServiceProvider);
         }
     }
 }
