@@ -55,7 +55,10 @@ namespace Hast.Layer
         /// <returns>The matching communication service.</returns>
         Task<ICommunicationService> GetCommunicationService(string communicationChannelName);
         
-        Task Run<T>(Func<T, Task> process);
-        Task<Tout> RunGet<Tout>(Func<IServiceProvider, Task<Tout>> process);
+        Task RunAsync<T>(Func<T, Task> process);
+        Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process);
+        void Run<T>(Action<T> process);
+        Tout RunGet<Tout>(Func<IServiceProvider, Tout> process);
+        Tout Get<Tout>();
     }
 }
