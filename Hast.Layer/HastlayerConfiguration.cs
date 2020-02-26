@@ -9,6 +9,8 @@ namespace Hast.Layer
     {
         public static HastlayerConfiguration Default { get; } = new HastlayerConfiguration();
 
+        public event EventHandler<IServiceCollection> OnServiceRegistration;
+
         /// <summary>
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
         /// pipeline. These should be Orchard extensions.
@@ -31,8 +33,6 @@ namespace Hast.Layer
         /// </summary>
         public string AppDataFolderPath { get; set; } = "Hastlayer/App_Data";
 
-        public event EventHandler<IServiceCollection> OnServiceRegistration;
-
         public static HastlayerConfiguration Clone(IHastlayerConfiguration previousConfiguration) =>
             new HastlayerConfiguration()
             {
@@ -42,15 +42,11 @@ namespace Hast.Layer
                 AppDataFolderPath = previousConfiguration.AppDataFolderPath,
             };
 
-        public HastlayerConfiguration() { }
-
-        /*
-        public HastlayerConfiguration(IHastlayerConfiguration previousConfiguration)
+        public void InvokeOnServiceRegistration(IServiceCollection services)
         {
-            Extensions = previousConfiguration.Extensions;
-            Flavor = previousConfiguration.Flavor;
-            DynamicAssemblies = previousConfiguration.DynamicAssemblies;
-            BaseServiceCollection = previousConfiguration.BaseServiceCollection;
-        } // */
+            OnServiceRegistration?.Invoke(this, services);
+        }
+
+        public HastlayerConfiguration() { }
     }
 }

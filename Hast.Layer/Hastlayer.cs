@@ -34,7 +34,7 @@ namespace Hast.Layer
             var services = new ServiceCollection();
             services.AddIDependencyContainer(configuration.DynamicAssemblies);
             services.AddSingleton(configuration);
-            _serviceProvider = services.BuildServiceProvider();
+            configuration.InvokeOnServiceRegistration(services);
         }
 
 

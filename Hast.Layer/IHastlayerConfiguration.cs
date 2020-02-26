@@ -26,6 +26,11 @@ namespace Hast.Layer
     public interface IHastlayerConfiguration : ISingletonDependency
     {
         /// <summary>
+        /// Invoked before the <see cref="IServiceProvider"/> is built.
+        /// </summary>
+        event EventHandler<IServiceCollection> OnServiceRegistration;
+
+        /// <summary>
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
         /// pipeline. These should be Orchard extensions.
         /// </summary>
@@ -47,6 +52,7 @@ namespace Hast.Layer
         /// </summary>
         string AppDataFolderPath { get; set; }
 
-        event EventHandler<IServiceCollection> OnServiceRegistration;
+
+        void InvokeOnServiceRegistration(IServiceCollection services);
     }
 }
