@@ -35,6 +35,13 @@ namespace Hast.Layer
             services.AddIDependencyContainer(configuration.DynamicAssemblies);
             services.AddSingleton(configuration);
             configuration.InvokeOnServiceRegistration(services);
+            
+            if (services.Any(x => x.ServiceType == typeof(ITransformer) && x.ImplementationType != typeof(NullTransformer)) &&
+                services.SingleOrDefault(x => x.ImplementationType == typeof(NullTransformer)) is ServiceDescriptor nullTransformer)
+            {
+                services.Remove(nullTransformer);
+            }
+            _serviceProvider = services.BuildServiceProvider();
         }
 
 
