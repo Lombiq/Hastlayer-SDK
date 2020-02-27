@@ -1,5 +1,6 @@
 ﻿using Hast.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -83,6 +84,7 @@ namespace Hast.Common.Services
             RegisterIDependencies(services, assemblies);
             services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));
             services.AddLogging();
+            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("Hastlayer"));
             services.AddMemoryCache();
 
             return services;
