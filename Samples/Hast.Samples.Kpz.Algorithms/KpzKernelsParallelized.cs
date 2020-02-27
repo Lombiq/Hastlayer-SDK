@@ -172,7 +172,7 @@ namespace Hast.Samples.Kpz.Algorithms
                                 uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
                                 uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
 
-                                // get neighbour indexes:
+                                // Get neighbour indexes:
                                 int rightNeighbourIndex;
                                 int bottomNeighbourIndex;
                                 // We skip if neighbours would fall out of the local grid:
@@ -223,7 +223,6 @@ namespace Hast.Samples.Kpz.Algorithms
                         // The X and Y coordinate within the big table (grid):
                         int baseX = partitionX * LocalGridSize + randomXOffset;
                         int baseY = partitionY * LocalGridSize + randomYOffset;
-                        //Console.WriteLine("CopyBack | Task={0}, To: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
 
                         for (int copySrcX = 0; copySrcX < LocalGridSize; copySrcX++)
                         {
@@ -234,8 +233,8 @@ namespace Hast.Samples.Kpz.Algorithms
                                 uint value =
                                     (tasks[parallelTaskIndex].Result.BramDx[copySrcX + copySrcY * LocalGridSize] ? 1U : 0U) |
                                     (tasks[parallelTaskIndex].Result.BramDy[copySrcX + copySrcY * LocalGridSize] ? 2U : 0U);
-                                //Note: use (tasks[parallelTaskIndex].Result), because 
-                                //    (TaskLocals[ParallelTaskIndex]) won't work.
+                                // Note: use (tasks[parallelTaskIndex].Result), because 
+                                //(TaskLocals[ParallelTaskIndex]) won't work.
                                 memory.WriteUInt32(MemIndexGrid + copyDstX + copyDstY * GridSize, value);
                             }
                         }

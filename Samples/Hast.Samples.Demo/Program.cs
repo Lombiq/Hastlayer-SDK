@@ -28,7 +28,7 @@ namespace Hast.Samples.Demo
                             e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
                             " milliseconds (net) " +
                             e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                            " milliseconds (all together)");
+                            " milliseconds (all together).");
                     };
                     #endregion
 

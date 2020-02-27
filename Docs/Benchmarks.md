@@ -20,16 +20,16 @@ Here you can find some measurements of execution times of various algorithms on 
 
 - Measurements were made with binaries built in Release mode.
 - Figures are rounded to the nearest integer.
-- Speed and power advantage means the execution time and power consumption advantage of the Hastlayer-accelerated FPGA implementation.
+- Speed and power advantage means the execution time and power consumption advantage of the Hastlayer-accelerated FPGA implementation. E.g. a 100% speed advantage means that the Hastlayer-accelerated implementation took half the time to finish than the original CPU one.
 - Degree of parallelism indicates the level of parallelization in the algorithm (typically the number of concurrent `Task`s). For details on these check out the source of the respective algorithm (these are all classes in the Hastlayer SDK's solution). Note that the degree of parallelism, as indicated, differs between platforms. On every platform the highest possible parallelism was used (so CPUs were under full load and thus peak power consumption can be reasonably assumed).
 - For CPU execution always the lowest achieved number is used.
 - Power consumption is an approximation based on hardware details above. For PCs it only contains the power consumption of the CPU(s). For FPGA measurements the "total" time is used (though presumably when just communication is running the power consumption is much lower than when computations are being executed).
-- FPGA resource utilization figures are based on the "main" resource's utilization with all other resource types assumed to below 100%. For Xilinx FPGAs the main resource type is LUT, for Intel (Altera) ones ALM.
+- FPGA resource utilization figures are based on the "main" resource's utilization with all other resource types assumed to be below 100%. For Xilinx FPGAs the main resource type is LUT, for Intel (Altera) ones ALM.
 - For FPGA measurements "total" means the total execution time, including the communication latency of the FPGA; since this varies because of the host PC's load the lowest achieved number is used. "Net" means just the execution of the algorithm itself on the FPGA, not including the time it took to send data to and receive from the device; FPGA execution time is deterministic and doesn't vary significantly. With faster communication channels "total" can be closer to "net". If the input and output data is small then the two measurements will practically be the same.
 
 ### Catapult
 
-Comparing the performance of the Catapult FPGA (i.e. the Mt Granite card) to the Catapult node's host PC's performance. Only a single CPU is assumed to be running under 100% load.
+Comparing the performance of the Catapult FPGA (i.e. the Mt Granite card) to the Catapult node's host PC's performance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
 
 
 | Algorithm             | Speed advantage | Power advantage |   Parallelism  |   CPU  | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power |

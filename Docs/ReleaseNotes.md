@@ -8,6 +8,7 @@ Note that the Hardware Framework projects have their own release cycle and relea
 ## vNext
 
 - Migrated the code generating Transformer to the latest version of [ILSpy](https://github.com/icsharpcode/ILSpy). Hastlayer uses the .NET decompilation tool ILSpy in the background to process .NET assemblies. Previously Hastlayer depended on an old version of ILSpy, 2.3.1, which came out in 2015. Now ILSpy is at version 6 so you can imagine all the changes such a jump brings! This Hastlayer release is updated to the most recent ILSpy binaries, bringing better support for .NET language features. Shoutout to the ILSpy developers for their awesome work!
+- Added a documentation page with benchmarks.
 
 
 ## v1.1, 20.12.2019
