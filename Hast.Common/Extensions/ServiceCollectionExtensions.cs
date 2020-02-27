@@ -19,5 +19,18 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         public static IServiceCollection RemoveImplementations<T>(this IServiceCollection services) => RemoveImplementations(services, typeof(T).Name);
+        public static IServiceCollection RemoveImplementationsExcept<Tservice, Timplementation>(this IServiceCollection services)
+        {
+            var servicesToRemove = services
+                .Where(service => service.ServiceType == typeof(Tservice) && service.ImplementationType != typeof(Timplementation))
+                .ToList();
+
+            foreach (var service in servicesToRemove)
+            {
+                services.Remove(service);
+            }
+
+            return services;
+        }
     }
 }

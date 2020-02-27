@@ -4,7 +4,9 @@ using Hast.Communication;
 using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
+using Hast.Remote.Client;
 using Hast.Synthesis.Abstractions;
+using Hast.Transformer;
 using Hast.Transformer.Abstractions;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,12 +40,20 @@ namespace Hast.Layer
             var services = new ServiceCollection();
             services.AddIDependencyContainer(dynamicAssemblies);
             services.AddSingleton(configuration);
+            services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
             configuration.InvokeOnServiceRegistration(services);
-            
-            if (services.Any(x => x.ServiceType == typeof(ITransformer) && x.ImplementationType != typeof(NullTransformer)) &&
-                services.SingleOrDefault(x => x.ImplementationType == typeof(NullTransformer)) is ServiceDescriptor nullTransformer)
+
+            var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
+            if (transformerServices.Count > 1)
             {
-                services.Remove(nullTransformer);
+                if (configuration.Flavor == HastlayerFlavor.Client)
+                {
+                    services.RemoveImplementationsExcept<ITransformer, RemoteTransformer>();
+                }
+                else
+                {
+                    services.RemoveImplementationsExcept<ITransformer, DefaultTransformer>();
+                }
             }
 
 #if DEBUG
@@ -251,11 +261,6 @@ namespace Hast.Layer
                 typeof(NexysA7ManifestProvider).Assembly,
                 typeof(CatapultManifestProvider).Assembly
             };
-
-            if (_configuration.Flavor == HastlayerFlavor.Client)
-            {
-                importedExtensions.Add(typeof(Remote.Client.RemoteTransformer).Assembly);
-            }
 
             // Adding imported extensions last so they can override anything.
             importedExtensions.AddRange(_configuration.Extensions);
