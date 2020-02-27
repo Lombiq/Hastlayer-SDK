@@ -299,26 +299,26 @@ namespace Hast.Layer
 
         public async Task RunAsync<T>(Func<T, Task> process)
         {
-            using var scope = _serviceProvider.CreateScope();
-            await process(scope.ServiceProvider.GetService<T>());
+            using (var scope = _serviceProvider.CreateScope())
+                await process(scope.ServiceProvider.GetService<T>());
         }
 
         public async Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process)
         {
-            using var scope = _serviceProvider.CreateScope();
-            return await process(scope.ServiceProvider);
+            using (var scope = _serviceProvider.CreateScope())
+                return await process(scope.ServiceProvider);
         }
 
         public void Run<T>(Action<T> process)
         {
-            using var scope = _serviceProvider.CreateScope();
-            process(scope.ServiceProvider.GetService<T>());
+            using (var scope = _serviceProvider.CreateScope())
+                process(scope.ServiceProvider.GetService<T>());
         }
 
         public Tout RunGet<Tout>(Func<IServiceProvider, Tout> process)
         {
-            using var scope = _serviceProvider.CreateScope();
-            return process(scope.ServiceProvider);
+            using (var scope = _serviceProvider.CreateScope())
+                return process(scope.ServiceProvider);
         }
 
         public Tout Get<Tout>() => RunGet<Tout>(provider => provider.GetService<Tout>());
