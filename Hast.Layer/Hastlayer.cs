@@ -31,8 +31,12 @@ namespace Hast.Layer
         {
             _configuration = configuration;
 
+            var dynamicAssemblies = configuration.DynamicAssemblies.Any() ?
+                configuration.DynamicAssemblies :
+                 Directory.GetFiles(".", "Hast.*.dll");
+
             var services = new ServiceCollection();
-            services.AddIDependencyContainer(configuration.DynamicAssemblies);
+            services.AddIDependencyContainer(dynamicAssemblies);
             services.AddSingleton(configuration);
             configuration.InvokeOnServiceRegistration(services);
             
@@ -41,6 +45,14 @@ namespace Hast.Layer
             {
                 services.Remove(nullTransformer);
             }
+
+#if DEBUG
+            var serviceNames = services
+                .Select(x => (x.ServiceType?.Name, x.ImplementationType?.Name))
+                .OrderBy(x => x.Item1)
+                .ThenBy(x => x.Item2)
+                .ToList();
+#endif
             _serviceProvider = services.BuildServiceProvider();
         }
 
