@@ -1,12 +1,8 @@
-﻿using Hast.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.IO;
 
-namespace Hast.Layer.Services
+namespace Hast.Common.Services
 {
-    public interface IAppDataFolder : IDependency
+    public interface IAppDataFolder
     {
         string MapPath(string relativePath);
         string Combine(params string[] parts);

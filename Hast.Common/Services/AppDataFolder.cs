@@ -1,17 +1,15 @@
 ﻿using System.IO;
 
-namespace Hast.Layer.Services
+namespace Hast.Common.Services
 {
     public class AppDataFolder : IAppDataFolder
     {
-        private readonly IHastlayerConfiguration _hastlayerConfiguration;
         private readonly DirectoryInfo _appDataFolder;
 
-        public AppDataFolder(IHastlayerConfiguration hastlayerConfiguration)
+        public AppDataFolder(string appDataFolderPath)
         {
-            _hastlayerConfiguration = hastlayerConfiguration;
-
-            _appDataFolder = new DirectoryInfo(hastlayerConfiguration.AppDataFolderPath);
+            _appDataFolder = new DirectoryInfo(appDataFolderPath);
+            if (!_appDataFolder.Exists) _appDataFolder.Create();
         }
 
         public string MapPath(string relativePath) => Path.Combine(_appDataFolder.FullName, relativePath);
