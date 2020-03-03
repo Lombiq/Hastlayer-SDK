@@ -41,6 +41,7 @@ namespace Hast.Layer
             services.AddIDependencyContainer(dynamicAssemblies);
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
+            services.AddSingleton<IHardwareExecutionEventHandlerHolder, HardwareExecutionEventHandlerHolder>();
             configuration.InvokeOnServiceRegistration(services);
 
             var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
@@ -63,7 +64,7 @@ namespace Hast.Layer
                 .ThenBy(x => x.Item2)
                 .ToList();
 #endif
-            _serviceProvider = services.BuildServiceProvider();
+            _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
 
@@ -263,40 +264,8 @@ namespace Hast.Layer
             };
 
             // Adding imported extensions last so they can override anything.
-            importedExtensions.AddRange(_configuration.Extensions);
+            importedExtensions.AddRange(_configuration.Extensions);            
 
-            /*
-            var settings = new AppHostSettings
-            {
-                // Setting a custom path so if the parent app is also an AppHost app then with the default settings
-                // those won't clash.
-                AppDataFolderPath = "~/Hastlayer/App_Data",
-                ImportedExtensions = importedExtensions,
-                DefaultShellFeatureStates = new[]
-                {
-                    new DefaultShellFeatureState
-                    {
-                        ShellName = ShellName,
-                        EnabledFeatures = importedExtensions.Select(extension => extension.ShortName())
-                    }
-                },
-                ModuleFolderPaths = moduleFolderPaths
-            };
-
-
-            var registrations = new AppHostRegistrations
-            {
-                HostRegistrations = builder => builder
-                    .RegisterType<HardwareExecutionEventHandlerHolder>()
-                    .As<IHardwareExecutionEventHandlerHolder>()
-                    .SingleInstance()
-            };
-
-            _host = await OrchardAppHostFactory.StartTransientHost(settings, registrations, null);
-
-            await _host.Run<IHardwareExecutionEventHandlerHolder>(proxy => Task.Run(() =>
-                proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs))));
-            // */
             var proxy = _serviceProvider.GetService<IHardwareExecutionEventHandlerHolder>();
             await Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs)));
         }
@@ -326,6 +295,6 @@ namespace Hast.Layer
                 return process(scope.ServiceProvider);
         }
 
-        public Tout Get<Tout>() => RunGet<Tout>(provider => provider.GetService<Tout>());
+        public Tout Get<Tout>() => RunGet(provider => provider.GetService<Tout>());
     }
 }

@@ -49,23 +49,23 @@ namespace Hast.Common.Services
             {
                 var serviceTypes = new List<Type>();
                 var lifetime = ServiceLifetime.Scoped;
-                foreach (var iface in implementationType.GetInterfaces())
+                foreach (var implementedInterfaces in implementationType.GetInterfaces())
                 {
-                    if (!iface.IsPublic || iface.Name == nameof(IDependency))
+                    if (!implementedInterfaces.IsPublic || implementedInterfaces.Name == nameof(IDependency))
                     {
                         continue;
                     }
-                    if (iface.Name == nameof(ISingletonDependency))
+                    if (implementedInterfaces.Name == nameof(ISingletonDependency))
                     {
                         lifetime = ServiceLifetime.Singleton;
                     }
-                    else if (iface.Name == nameof(ITransientDependency))
+                    else if (implementedInterfaces.Name == nameof(ITransientDependency))
                     {
                         lifetime = ServiceLifetime.Transient;
                     }
                     else
                     {
-                        serviceTypes.Add(iface);
+                        serviceTypes.Add(implementedInterfaces);
                     }
                 }
 
