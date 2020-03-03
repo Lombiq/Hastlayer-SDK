@@ -76,18 +76,22 @@ namespace Hast.Common.Services
             }
         }
 
-        public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<string> paths, IEnumerable<Assembly> assemblies = null)
+        public static IServiceCollection AddExternalHastlayerDependencies(this IServiceCollection services)
         {
-            if (services == null) services = new ServiceCollection();
-            if (paths?.Any() == true) LoadAssemblies(paths);
-
-            RegisterIDependencies(services, assemblies);
             services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));
             services.AddLogging();
             services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("Hastlayer"));
             services.AddMemoryCache();
 
             return services;
+        }
+
+        public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<string> paths, IEnumerable<Assembly> assemblies = null)
+        {
+            if (paths?.Any() == true) LoadAssemblies(paths);
+            RegisterIDependencies(services, assemblies);
+
+            return AddExternalHastlayerDependencies(services);
         }
     }
 }
