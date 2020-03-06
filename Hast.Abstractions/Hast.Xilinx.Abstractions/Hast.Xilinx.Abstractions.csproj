@@ -43,6 +43,7 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AlveoU280ManifestProvider.cs" />
     <Compile Include="NexysA7ManifestProvider.cs" />
     <Compile Include="Nexys4DdrManifestProvider.cs" />
     <Compile Include="NexysManifestProviderBase.cs" />
