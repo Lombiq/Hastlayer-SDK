@@ -9,7 +9,7 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ParallelAlgorithm
     {
-        private const int MaxDegreeOfParallelism = 280;
+        private const int MaxDegreeOfParallelism = 270;
 
         private const int Run_InputInt32Index = 0;
         private const int Run_OutputInt32Index = 0;
