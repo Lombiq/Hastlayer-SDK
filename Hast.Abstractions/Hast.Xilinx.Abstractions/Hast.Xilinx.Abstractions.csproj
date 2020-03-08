@@ -43,6 +43,9 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AlveoU250ManifestProvider.cs" />
+    <Compile Include="AwsF1ManifestProvider.cs" />
+    <Compile Include="AlveoU200ManifestProvider.cs" />
     <Compile Include="AlveoU280ManifestProvider.cs" />
     <Compile Include="NexysA7ManifestProvider.cs" />
     <Compile Include="Nexys4DdrManifestProvider.cs" />
