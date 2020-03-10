@@ -31,6 +31,7 @@ namespace Hast.Samples.SampleAssembly
             numberContainers1[0].NumberPlusFive = inputNumber + 10;
             numberContainers1[1].IncreaseNumber(5);
             numberContainers1[2].IncreaseNumberBy10();
+            numberContainers1[2].IncreaseNumberBy20();
 
             // Using ref and out.
             uint increaseBy = 10;
@@ -133,6 +134,13 @@ namespace Hast.Samples.SampleAssembly
             increaseBy *= 10;
             IncreaseNumber(increaseBy);
         }
+    }
+
+
+    public static class NumberContainerExtensions
+    {
+        // You can also write extension methods.
+        public static uint IncreaseNumberBy20(this NumberContainer numberContainer) => numberContainer.IncreaseNumber(20);
     }
 
 

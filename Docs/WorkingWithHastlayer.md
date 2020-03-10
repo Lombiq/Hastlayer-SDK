@@ -28,7 +28,7 @@ The `PrimeCalculator` class in the `Hast.Samples.SampleAssembly` project is a go
 
 Some general constraints you have to keep in mind:
 
-- Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside, i.e. can be hardware entry points. Elsewhere any other kind of methods can be used.
+- Only public virtual methods, or methods that implement a method defined in an interface will be accessible from the outside, i.e. can be hardware entry points. Elsewhere any other kind of methods can be used, including extension methods.
 - Always use the smallest data type necessary, e.g. `short` instead of `int` if 16b is enough (or even `byte`), and unsigned types like `uint` if you don't need negative numbers.
 - Supported primitive types: `byte`, `sbyte`, `short`, `ushort`, `int`, `uint`, `long`, `ulong`, `char`, `bool`.  Floating-point numbers like `float` and `double` and numbers bigger than 64b are not yet supported, however you can use fixed-point math: multiply up your floats before handing them over to Hastlayer-executed code, then divide them back when receiving the results. If this is not enough you can use the `Fix64` 64b fixed-point number type included in the `Hast.Algorithms` library, see the `Fix64Calculator` sample.
 - The most important language constructs like `if` and `else` statements, `while` and `for` loops, type casting, binary operations (e.g. arithmetic, in/equality operators...), conditional expressions (ternary operator) on allowed types are supported. Also, `ref` and `out` parameters in method invocations are supported.

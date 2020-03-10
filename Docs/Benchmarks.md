@@ -9,8 +9,8 @@ Here are some basic performance benchmarks on how Hastlayer-accelerated code com
 
 - "Catapult": [Microsoft Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) servers used via the [Project Catapult Academic Program](https://www.microsoft.com/en-us/research/academic-program/project-catapult-academic-program/). These contain the following hardware:
     - FPGA: Mt Granite card with an Altera Stratix V 5SGSMD5H2F35 FPGA and two channels of 4GB DDR3 RAM, connected to the host via PCIe Gen3 x8. Main clock is 150Mhz, power consumption is at most 29W (source: "[A Cloud-Scale Acceleration Architecture](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/Cloud-Scale-Acceleration-Architecture.pdf)").
-    - Host PC: 2xIntel Xeon E5-2450 CPUs with 16 physical, 32 logial cores each, with a base clock of 2.1GHz. Power consumption is around 95W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html); this is just a rough number and power draw is likely larger when the CPU increases its clock speed under load)
-- "i7": Intel Core i7-960 CPU with 4 physical, 8 logial cores and a base clock of 3.2Ghz. Power consumption is around 130W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/37151/intel-core-i7-960-processor-8m-cache-3-20-ghz-4-80-gt-s-intel-qpi.html)).
+    - Host PC: 2xIntel Xeon E5-2450 CPUs with 16 physical, 32 logical cores each, with a base clock of 2.1GHz. Power consumption is around 95W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html); this is just a rough number and power draw is likely larger when the CPU increases its clock speed under load)
+- "i7": Intel Core i7-960 CPU with 4 physical, 8 logical cores and a base clock of 3.2Ghz. Power consumption is around 130W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/37151/intel-core-i7-960-processor-8m-cache-3-20-ghz-4-80-gt-s-intel-qpi.html)).
 - "Nexys": [Nexys A7-100T FPGA board](https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/) with a Xilinx XC7A100T-1CSG324C FPGA of the Artix-7 family, with 110Mb of user-accessible DDR2 RAM. Main clock is 100Mhz, power consumption is at most about 2.5W (corresponding to the maximal power draw via a USB 2.0 port). The communication channel used was the serial one: Virtual serial port via USB 2.0 with a baud rate of 230400 b/s.
 
 
@@ -51,11 +51,13 @@ Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an I
 |-----------------------------------|:---------------:|:---------------:|:--------------:|:-------:|:---------:|:----------------:|:--------:|:----------:|:----------:|
 | ImageContrastModifier<sup>1</sup> |     -398550%    |      -679%      |       25       |  148 ms |   19 Ws   |        66%       |  147 ms  |  59000 ms  |   148 Ws   |
 | MonteCarloPiEstimator             |       15%       |      5233%      | 78<sup>2</sup> |  120 ms |   16 Ws   |        61%       |   34 ms  |   104 ms   |   0.3 Ws   |
-| ParallelAlgorithm                 |       397%      |      23900%     |       280      | 1839 ms |   239 Ws  |        80%       |  300 ms  |   370 ms   |    1 Ws    |
+| ParallelAlgorithm                 |       391%      |      23600%     |270<sup>3</sup> | 1818 ms |   236 Ws  |        77%       |  300 ms  |   370 ms   |    1 Ws    |
 
 <sup>1</sup>The low degree of parallelism available due to the resource constraints of the FPGA coupled with the slow serial connection makes this sample worse than on the CPU. Due to data transfer using only a fraction of the resources compared to doing the actual computations the power advantage of the FPGA implementation is most possibly closer to +4700%.
 
 <sup>2</sup> With a degree of parallelism of 79 the FPGA resource utilization would jump to 101% so this is the limit of efficiency.
+
+<sup>3</sup> With a degree of parallelism of 270 the resource utilization goes above 90% (94% post-synthesis) and the implementation step of bitstream generation fails.
 
 ### Further data
 
