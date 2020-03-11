@@ -7,6 +7,9 @@ namespace Hast.Xilinx.Abstractions
     {
         public const string DeviceName = "Nexys4 DDR";
 
-        static Nexys4DdrManifestProvider() => DeviceNameInternals[nameof(Nexys4DdrManifestProvider)] = DeviceName;
+        public Nexys4DdrManifestProvider()
+        {
+            _deviceName = DeviceName;
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Hast.Xilinx.Abstractions
 {
     public abstract class NexysManifestProviderBase : IDeviceManifestProvider
     {
-        protected static Dictionary<string, string> DeviceNameInternals = new Dictionary<string, string>();
+        protected string _deviceName;
 
         private IDeviceManifest deviceManifest = null;
         public IDeviceManifest DeviceManifest
@@ -17,7 +17,7 @@ namespace Hast.Xilinx.Abstractions
                 {
                     deviceManifest = new DeviceManifest
                     {
-                        Name = DeviceNameInternals[GetType().Name],
+                        Name = _deviceName,
                         ClockFrequencyHz = 100000000, // 100 Mhz
                         SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
                         AvailableMemoryBytes = 115343360 // 110MB
