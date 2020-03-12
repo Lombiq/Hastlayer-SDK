@@ -84,9 +84,9 @@ namespace Hast.Samples.Kpz.Algorithms
             var random0 = new RandomMwc64X();
 
             var taskLocals = new KpzKernelsTaskState[ParallelTasks];
-            for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
+            for (int taskLocalsIndex = 0; taskLocalsIndex < ParallelTasks; taskLocalsIndex++)
             {
-                taskLocals[TaskLocalsIndex] = new KpzKernelsTaskState
+                taskLocals[taskLocalsIndex] = new KpzKernelsTaskState
                 {
                     BramDx = new bool[LocalGridSize * LocalGridSize],
                     BramDy = new bool[LocalGridSize * LocalGridSize],
@@ -96,14 +96,14 @@ namespace Hast.Samples.Kpz.Algorithms
                     }
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
 
-                taskLocals[TaskLocalsIndex].Random2 = new RandomMwc64X
+                taskLocals[taskLocalsIndex].Random2 = new RandomMwc64X
                 {
                     State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
             }
 
             // What is iterationGroupIndex good for?

@@ -22,6 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8043A55-8
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{765A6EB0-438E-422C-ACDD-13544EFE6467}"
+	ProjectSection(SolutionItems) = preProject
+		Samples\Readme.md = Samples\Readme.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Samples.SampleAssembly", "Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj", "{CB4A8CF6-7DD4-4493-B5CD-E5E51EE5C73B}"
 EndProject
@@ -123,7 +126,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.DynamicTests", "Hast.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Static", "Hast.Core\Hast.TestInputs.Static\Hast.TestInputs.Static.csproj", "{7D8AE520-75D5-4BFC-B617-7FEEA7B1983C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Dynamic", "Hast.Core\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj", "{E9AEADF8-3688-4637-85A4-C61B3F1F8AE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Dynamic", "Hast.Core\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj", "{E9AEADF8-3688-4637-85A4-C61B3F1F8AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
