@@ -1,7 +1,5 @@
-﻿using System;
-using Hast.Common.Interfaces;
-using Hast.Communication.Extensibility;
-using Hast.Communication.Extensibility.Events;
+﻿using Hast.Common.Interfaces;
+using System;
 
 namespace Hast.Layer.Extensibility.Events
 {
@@ -25,29 +23,5 @@ namespace Hast.Layer.Extensibility.Events
             _eventHandler = eventHandler;
 
         public Action<ExecutedOnHardwareEventArgs> GetRegisteredEventHandler() => _eventHandler;
-    }
-
-
-    public class HardwareExecutionEventProxy : IMemberInvocationEventHandler
-    {
-        private readonly IHardwareExecutionEventHandlerHolder _eventHandlerHolder;
-
-
-        public HardwareExecutionEventProxy(IHardwareExecutionEventHandlerHolder eventHandlerHolder)
-        {
-            _eventHandlerHolder = eventHandlerHolder;
-        }
-
-
-        public void MemberInvoking(IMemberInvocationContext invocationContext) { }
-
-        public void MemberExecutedOnHardware(IMemberHardwareExecutionContext hardwareExecutionContext)
-        {
-            _eventHandlerHolder.GetRegisteredEventHandler()(
-                new ExecutedOnHardwareEventArgs(
-                    hardwareExecutionContext.HardwareRepresentation,
-                    hardwareExecutionContext.MemberFullName,
-                    hardwareExecutionContext.ExecutionInformation));
-        }
     }
 }

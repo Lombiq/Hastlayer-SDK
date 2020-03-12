@@ -3,6 +3,7 @@ using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
 using Hast.Common.Interfaces;
 using Hast.Communication.Exceptions;
+using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
@@ -28,6 +29,11 @@ namespace Hast.Communication
             _serviceProvider = serviceProvider;
         }
 
+        private void InvokeEventHandlers<T>(IServiceProvider provider, T context) where T : IMemberInvocationContext
+        {
+            var eventHandlers = provider.GetService<IEnumerable<EventHandler<T>>>();
+            foreach (var eventHandler in eventHandlers) eventHandler?.Invoke(this, context);
+        }
 
         public MemberInvocationHandler CreateMemberInvocationHandler(
             IHardwareRepresentation hardwareRepresentation,
@@ -58,8 +64,7 @@ namespace Hast.Communication
                                 HardwareRepresentation = hardwareRepresentation
                             };
 
-                            var eventHandler = scope.ServiceProvider.GetService<IMemberInvocationEventHandler>();
-                            eventHandler.MemberInvoking(invocationContext);
+                            InvokeEventHandlers<IMemberInvocationPipelineStepContext>(scope.ServiceProvider, invocationContext);
 
                             scope.ServiceProvider.GetService<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                                 {
@@ -190,7 +195,7 @@ namespace Hast.Communication
                                     "Only SimpleMemory-using implementations are supported for hardware execution. The invocation didn't include a SimpleMemory argument.");
                             }
 
-                            eventHandler.MemberExecutedOnHardware(invocationContext);
+                            InvokeEventHandlers<IMemberHardwareExecutionContext>(scope.ServiceProvider, invocationContext);
                         }
                     }
 
