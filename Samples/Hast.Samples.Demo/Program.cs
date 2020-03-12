@@ -28,7 +28,7 @@ namespace Hast.Samples.Demo
                             e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
                             " milliseconds (net) " +
                             e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                            " milliseconds (all together)");
+                            " milliseconds (all together).");
                     };
                     #endregion
 
@@ -46,16 +46,19 @@ namespace Hast.Samples.Demo
 
                     #region Execution
                     Console.WriteLine("Hardware generated, starting software execution.");
-                    var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
-
                     Console.WriteLine();
+
                     var sw = System.Diagnostics.Stopwatch.StartNew();
                     var cpuOutput = new ParallelAlgorithm().Run(234234);
                     sw.Stop();
+
                     Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
 
                     Console.WriteLine();
                     Console.WriteLine("Starting hardware execution.");
+
+                    var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
+
                     var output1 = parallelAlgorithm.Run(234234);
                     var output2 = parallelAlgorithm.Run(123);
                     var output3 = parallelAlgorithm.Run(9999);

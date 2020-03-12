@@ -12,7 +12,7 @@ Hastlayer was also featured on [.NET Conf 2017](https://channel9.msdn.com/events
  
 This is the PC-side component of Hastlayer, the one that transforms .NET assemblies, programs attached FPGAs, and communicates with said FPGAs.
 
-Created by [Lombiq Technologies](https://lombiq.com/), an open source .NET web development company working mostly with [Orchard CMS](https://orchardproject.net).
+Created by [Lombiq Technologies](https://lombiq.com/), an open source .NET web development company working mostly with [Orchard CMS, i.e. Orchard 1.x and Orchard Core](https://www.orchardcore.net/).
 
 Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies and [Orchard Application Host](https://github.com/Lombiq/Orchard-Application-Host) to utilize [Orchard](http://orchardproject.net/) as the application framework.
 

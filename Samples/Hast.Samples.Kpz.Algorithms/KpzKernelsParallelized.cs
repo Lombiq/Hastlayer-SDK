@@ -84,9 +84,9 @@ namespace Hast.Samples.Kpz.Algorithms
             var random0 = new RandomMwc64X();
 
             var taskLocals = new KpzKernelsTaskState[ParallelTasks];
-            for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
+            for (int taskLocalsIndex = 0; taskLocalsIndex < ParallelTasks; taskLocalsIndex++)
             {
-                taskLocals[TaskLocalsIndex] = new KpzKernelsTaskState
+                taskLocals[taskLocalsIndex] = new KpzKernelsTaskState
                 {
                     BramDx = new bool[LocalGridSize * LocalGridSize],
                     BramDy = new bool[LocalGridSize * LocalGridSize],
@@ -96,14 +96,14 @@ namespace Hast.Samples.Kpz.Algorithms
                     }
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
 
-                taskLocals[TaskLocalsIndex].Random2 = new RandomMwc64X
+                taskLocals[taskLocalsIndex].Random2 = new RandomMwc64X
                 {
                     State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
             }
 
             // What is iterationGroupIndex good for?
@@ -172,7 +172,7 @@ namespace Hast.Samples.Kpz.Algorithms
                                 uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
                                 uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
 
-                                // get neighbour indexes:
+                                // Get neighbour indexes:
                                 int rightNeighbourIndex;
                                 int bottomNeighbourIndex;
                                 // We skip if neighbours would fall out of the local grid:
@@ -223,7 +223,6 @@ namespace Hast.Samples.Kpz.Algorithms
                         // The X and Y coordinate within the big table (grid):
                         int baseX = partitionX * LocalGridSize + randomXOffset;
                         int baseY = partitionY * LocalGridSize + randomYOffset;
-                        //Console.WriteLine("CopyBack | Task={0}, To: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
 
                         for (int copySrcX = 0; copySrcX < LocalGridSize; copySrcX++)
                         {
@@ -234,8 +233,8 @@ namespace Hast.Samples.Kpz.Algorithms
                                 uint value =
                                     (tasks[parallelTaskIndex].Result.BramDx[copySrcX + copySrcY * LocalGridSize] ? 1U : 0U) |
                                     (tasks[parallelTaskIndex].Result.BramDy[copySrcX + copySrcY * LocalGridSize] ? 2U : 0U);
-                                //Note: use (tasks[parallelTaskIndex].Result), because 
-                                //    (TaskLocals[ParallelTaskIndex]) won't work.
+                                // Note: use (tasks[parallelTaskIndex].Result), because 
+                                //(TaskLocals[ParallelTaskIndex]) won't work.
                                 memory.WriteUInt32(MemIndexGrid + copyDstX + copyDstY * GridSize, value);
                             }
                         }

@@ -36,7 +36,7 @@
       <HintPath>..\..\Orchard\src\packages\AdvancedDLSupport.2.3.0\lib\netstandard2.0\AdvancedDLSupport.dll</HintPath>
     </Reference>
     <Reference Include="Humanizer, Version=2.5.0.0, Culture=neutral, PublicKeyToken=979442b78dfc278e, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\Humanizer.Core.2.5.1\lib\netstandard2.0\Humanizer.dll</HintPath>
+      <HintPath>..\..\Orchard\src\packages\Humanizer.Core.2.5.16\lib\netstandard2.0\Humanizer.dll</HintPath>
     </Reference>
     <Reference Include="IcIWare.NamedIndexers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\Orchard\src\packages\IcIWare.NamedIndexers.1.0.0\lib\net45\IcIWare.NamedIndexers.dll</HintPath>
