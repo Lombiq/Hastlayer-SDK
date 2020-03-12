@@ -25,9 +25,8 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculatePowerOfReal_InputPosit32Index = 1;
         public const int CalculatePowerOfReal_OutputPosit32Index = 0;
 
-        // This takes about 75% of a Nexys 4 DDR's FPGA. 6 fits with 91%, and appears to be working as well, but above
-        // 80% designs can be unstable.
-        public const int MaxDegreeOfParallelism = 5;
+        // This takes about 84% of a Nexys 4 DDR's FPGA. 3 would be 106%.
+        public const int MaxDegreeOfParallelism = 2;
 
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
