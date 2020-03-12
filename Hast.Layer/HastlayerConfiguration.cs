@@ -7,9 +7,9 @@ namespace Hast.Layer
 {
     public class HastlayerConfiguration : IHastlayerConfiguration
     {
-        public static HastlayerConfiguration Default { get; } = new HastlayerConfiguration();
+        public static IHastlayerConfiguration Default { get; } = new HastlayerConfiguration();
 
-        public event EventHandler<IServiceCollection> OnServiceRegistration;
+        public Action<IHastlayerConfiguration, IServiceCollection> OnServiceRegistration { get; set; }
 
         /// <summary>
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
