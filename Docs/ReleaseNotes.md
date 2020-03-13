@@ -7,10 +7,9 @@ Note that the Hardware Framework projects have their own release cycle and relea
 
 ## vNext
 
-- Added support for the high-end [Xilinx Alveo U200, U250 or U280 Data Center Accelerator Cards](https://www.xilinx.com/products/boards-and-kits/alveo.html). These are suitable hardware for any kind of demanding production-level workload. Apart from using such devices on-premise they're also available in the cloud.
-- Added support for the high-end [AWS EC2 F1 FPGA cloud instances](https://aws.amazon.com/ec2/instance-types/f1/).
 - Migrated the code generating Transformer to the latest version of [ILSpy](https://github.com/icsharpcode/ILSpy). Hastlayer uses the .NET decompilation tool ILSpy in the background to process .NET assemblies. Previously Hastlayer depended on an old version of ILSpy, 2.3.1, which came out in 2015. Now ILSpy is at version 6 so you can imagine all the changes such a jump brings! This Hastlayer release is updated to the most recent ILSpy binaries, bringing better support for .NET language features. Shoutout to the ILSpy developers for their awesome work!
 - Added support for extension methods.
+- Added support for inlining methods with multiple return statements.
 - Added a documentation page with benchmarks.
 
 
