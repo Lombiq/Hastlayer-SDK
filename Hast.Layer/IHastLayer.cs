@@ -54,11 +54,5 @@ namespace Hast.Layer
         /// <param name="communicationChannelName">The <see cref="ICommunicationService.ChannelName"/> value.</param>
         /// <returns>The matching communication service.</returns>
         Task<ICommunicationService> GetCommunicationService(string communicationChannelName);
-        
-        Task RunAsync<T>(Func<T, Task> process);
-        Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process);
-        void Run<T>(Action<T> process);
-        Tout RunGet<Tout>(Func<IServiceProvider, Tout> process);
-        Tout Get<Tout>();
     }
 }
