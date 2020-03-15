@@ -50,11 +50,11 @@ namespace Hast.Samples.Consumer
         public static Sample SampleToRun = Sample.Loopback;
 
         /// <summary>
-        /// Specify a path here where the VHDL file describing the hardware to be generated will be saved. If the path
-        /// is relative (like the default) then the file will be saved along this project's executable in the bin output
-        /// directory. If an empty string or null is specified then no file will be generated.
+        /// Specify a path here where the hardware framework is located. The file describing the hardware to be
+        /// generated will be saved there as well as anything else necessary. If the path is relative (like the
+        /// default) then the file will be saved along this project's executable in the bin output directory.
         /// </summary>
-        public static string VhdlOutputFilePath = @"Hast_IP.vhd";
+        public static string HardwareFrameworkPath = "HardwareFramework";
     }
 
     class Program
@@ -112,7 +112,7 @@ namespace Hast.Samples.Consumer
                 var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
                 if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
 
-                var configuration = new HardwareGenerationConfiguration(selectedDevice.Name);
+                var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, Configuration.HardwareFrameworkPath);
 
                 // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
                 var remoteClientConfiguration = configuration.RemoteClientConfiguration();
@@ -218,16 +218,6 @@ namespace Hast.Samples.Consumer
                         "There were the following transformation warnings, which may hint on issues that can cause the hardware implementation to produce incorrect results:" +
                         Environment.NewLine +
                         string.Join(Environment.NewLine, hardwareRepresentation.HardwareDescription.Warnings.Select(warning => "* " + warning.ToString())));
-                    Console.WriteLine();
-                }
-
-                if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
-                {
-                    Console.WriteLine("Writing VHDL source to file.");
-
-                    await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
-
-                    Console.WriteLine("VHDL source written to file.");
                     Console.WriteLine();
                 }
 

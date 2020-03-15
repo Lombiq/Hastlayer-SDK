@@ -6,7 +6,7 @@ using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using Lombiq.OrchardAppHost;
 using Lombiq.OrchardAppHost.Configuration;
 using Orchard.Environment.Configuration;
@@ -100,8 +100,6 @@ namespace Hast.Layer
                                     warning.Message);
                             }
 
-                            var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
-
                             var deviceManifest = deviceManifestSelector
                                 .GetSupportedDevices()
                                 .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
@@ -111,6 +109,9 @@ namespace Hast.Layer
                                 throw new HastlayerException(
                                     "There is no supported device with the name " + configuration.DeviceName + ".");
                             }
+
+                            var hardwareImplementation = await hardwareImplementationComposer
+                                .Compose(configuration, hardwareDescription, deviceManifest);
 
                             hardwareRepresentation = new HardwareRepresentation
                             {

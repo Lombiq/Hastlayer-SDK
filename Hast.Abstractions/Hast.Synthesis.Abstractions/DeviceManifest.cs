@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Hast.Layer;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Hast.Layer;
 
 namespace Hast.Synthesis.Abstractions
 {
@@ -14,5 +14,6 @@ namespace Hast.Synthesis.Abstractions
         public virtual string DefaultCommunicationChannelName { get { return SupportedCommunicationChannelNames.First(); } }
         public ulong AvailableMemoryBytes { get; set; }
         public uint DataBusWidthBytes { get; set; }
+        public string ToolChainName { get; set; }
     }
 }

@@ -43,15 +43,16 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AlveoU250ManifestProvider.cs" />
-    <Compile Include="AwsF1ManifestProvider.cs" />
-    <Compile Include="AlveoU200ManifestProvider.cs" />
-    <Compile Include="AlveoU280ManifestProvider.cs" />
-    <Compile Include="NexysA7ManifestProvider.cs" />
-    <Compile Include="Nexys4DdrManifestProvider.cs" />
-    <Compile Include="NexysManifestProviderBase.cs" />
+    <Compile Include="ManifestProviders\AlveoU250ManifestProvider.cs" />
+    <Compile Include="ManifestProviders\AwsF1ManifestProvider.cs" />
+    <Compile Include="ManifestProviders\AlveoU200ManifestProvider.cs" />
+    <Compile Include="ManifestProviders\AlveoU280ManifestProvider.cs" />
+    <Compile Include="ManifestProviders\NexysA7ManifestProvider.cs" />
+    <Compile Include="ManifestProviders\Nexys4DdrManifestProvider.cs" />
+    <Compile Include="ManifestProviders\NexysManifestProviderBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerialPortConfigurator.cs" />
+    <Compile Include="VivadoHardwareImplementationComposer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">

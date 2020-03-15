@@ -43,6 +43,7 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="CommonToolChainNames.cs" />
     <Compile Include="DeviceManifest.cs" />
     <Compile Include="DeviceManifestSelector.cs" />
     <Compile Include="NullHardwareImplementationComposer.cs" />

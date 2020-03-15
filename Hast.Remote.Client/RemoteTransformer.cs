@@ -1,4 +1,5 @@
-﻿using Hast.Layer;
+﻿using Hast.Common.Models;
+using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Transformer.Abstractions;
 using Newtonsoft.Json;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Hast.Remote.Client
@@ -80,14 +82,16 @@ namespace Hast.Remote.Client
                 }
 
                 var hardwareDescription = transformationResult.HardwareDescription;
-                return new RemoteHardwareDescription
+
+                if (hardwareDescription.Language != VhdlHardwareDescription.LanguageName)
                 {
-                    HardwareEntryPointNamesToMemberIdMappings = hardwareDescription.HardwareEntryPointNamesToMemberIdMappings,
-                    Language = hardwareDescription.Language,
-                    Source = hardwareDescription.Source,
-                    Warnings = hardwareDescription.Warnings.Select(warning =>
-                        new Common.Models.TransformationWarning { Code = warning.Code, Message = warning.Message })
-                };
+                    throw new NotSupportedException("Only hardware descriptions in the VHDL language are supported.");
+                }
+
+                using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(hardwareDescription.SerializedHardwareDescription)))
+                {
+                    return await VhdlHardwareDescription.Deserialize(memoryStream);
+                }
             }
             catch (ApiException ex)
             {
@@ -121,6 +125,10 @@ namespace Hast.Remote.Client
             public string Source { get; set; }
             public IEnumerable<ITransformationWarning> Warnings { get; set; }
 
+            public Task Serialize(Stream stream)
+            {
+                throw new NotImplementedException();
+            }
 
             public Task WriteSource(Stream stream)
             {
