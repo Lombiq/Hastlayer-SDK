@@ -3,7 +3,8 @@
 namespace Hast.Layer
 {
     /// <summary>
-    /// Represents the hardware that was generated from .NET assemblies.
+    /// Represents the implemented hardware that was created from the hardware description generated based on the
+    /// original .NET assemblies.
     /// </summary>
     public interface IHardwareRepresentation
     {

@@ -50,7 +50,10 @@ namespace Hast.Transformer.Abstractions
             }
 
 
-            public Task WriteSource(Stream stream) => Task.CompletedTask;
+            public Task Serialize(Stream stream)
+            {
+                throw new System.NotImplementedException();
+            }
         }
     }
 }

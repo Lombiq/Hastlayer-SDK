@@ -15,7 +15,7 @@ namespace Hast.Samples.Demo
                 using (var hastlayer = await Hastlayer.Create())
                 {
                     #region Configuration
-                    var configuration = new HardwareGenerationConfiguration("Nexys A7");
+                    var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
 
                     configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
@@ -40,8 +40,6 @@ namespace Hast.Samples.Demo
                             typeof(ParallelAlgorithm).Assembly
                         },
                         configuration);
-
-                    await hardwareRepresentation.HardwareDescription.WriteSource("Hast_IP.vhd");
                     #endregion
 
                     #region Execution

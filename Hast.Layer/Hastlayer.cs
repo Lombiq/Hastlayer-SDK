@@ -8,7 +8,7 @@ using Hast.Remote.Client;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer;
 using Hast.Transformer.Abstractions;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -134,8 +134,6 @@ namespace Hast.Layer
                         warning.Message);
                 }
 
-                var hardwareImplementation = await hardwareImplementationComposer.Compose(hardwareDescription);
-
                 var deviceManifest = deviceManifestSelector
                     .GetSupportedDevices()
                     .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
@@ -145,6 +143,9 @@ namespace Hast.Layer
                     throw new HastlayerException(
                         "There is no supported device with the name " + configuration.DeviceName + ".");
                 }
+
+                            var hardwareImplementation = await hardwareImplementationComposer
+                                .Compose(configuration, hardwareDescription, deviceManifest);
 
                 hardwareRepresentation = new HardwareRepresentation
                 {

@@ -43,11 +43,11 @@ namespace Hast.Layer
         /// </summary>
         public bool EnableCaching { get; set; }
 
-        /// <summary>
-        /// Gets or sets the name of the FPGA device (board) to transform for. Device-specific configurations are 
-        /// determined by device drivers.
-        /// </summary>
-        public string DeviceName { get; set; }
+        /// <inheritdoc/>
+        public string DeviceName { get; }
+
+        /// <inheritdoc/>
+        public string HardwareFrameworkPath { get; }
 
 
         /// <summary>
@@ -57,9 +57,15 @@ namespace Hast.Layer
         /// The name of the FPGA device (board) to transform for. Device-specific configurations are determined by 
         /// device drivers. You can fetch the list of supported devices via <see cref="IHastlayer.GetSupportedDevices()"/>.
         /// </param>
-        public HardwareGenerationConfiguration(string deviceName)
+        /// <param name="hardwareFrameworkPath">
+        /// The file system path here where the hardware framework is located. The file describing the hardware to be
+        /// generated will be saved there as well as anything else necessary, and that framework will be used to
+        /// implement the hardware and configure the device.
+        /// </param>
+        public HardwareGenerationConfiguration(string deviceName, string hardwareFrameworkPath)
         {
             DeviceName = deviceName;
+            HardwareFrameworkPath = hardwareFrameworkPath;
         }
     }
 }

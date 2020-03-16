@@ -1,7 +1,4 @@
-﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-
-namespace Hast.Xilinx.Abstractions
+﻿namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
     public class Nexys4DdrManifestProvider : NexysManifestProviderBase
     {

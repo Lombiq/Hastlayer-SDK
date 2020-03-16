@@ -2,7 +2,7 @@
 using Hast.Synthesis.Abstractions;
 using System.Collections.Generic;
 
-namespace Hast.Xilinx.Abstractions
+namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
     public abstract class NexysManifestProviderBase : IDeviceManifestProvider
     {
@@ -20,7 +20,8 @@ namespace Hast.Xilinx.Abstractions
                         Name = _deviceName,
                         ClockFrequencyHz = 100000000, // 100 Mhz
                         SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
-                        AvailableMemoryBytes = 115343360 // 110MB
+                AvailableMemoryBytes = 115343360, // 110MB
+                ToolChainName = CommonToolChainNames.Vivado
                     };
                 }
                 return deviceManifest;

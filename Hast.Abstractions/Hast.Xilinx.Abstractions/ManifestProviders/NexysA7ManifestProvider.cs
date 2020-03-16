@@ -1,4 +1,4 @@
-﻿namespace Hast.Xilinx.Abstractions
+﻿namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
     public class NexysA7ManifestProvider : NexysManifestProviderBase
     {

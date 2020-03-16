@@ -24,7 +24,7 @@ namespace Hast.Layer
 
     /// <summary>
     /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented 
-    /// logic.
+    /// logic and any corresponding config files.
     /// </summary>
     public interface IHardwareDescription
     {
@@ -41,31 +41,17 @@ namespace Hast.Layer
         IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
 
         /// <summary>
-        /// Writes out the hardware description's source code to the given <see cref="Stream"/>.
-        /// </summary>
-        /// <param name="stream">A <see cref="Stream"/> to write the source code to.</param>
-        Task WriteSource(Stream stream);
-
-        /// <summary>
         /// Gets warnings noted during transformation (i.e. issues that don't necessarily make the result wrong but you 
         /// should know about them). 
         /// </summary>
         IEnumerable<ITransformationWarning> Warnings { get; }
-    }
 
-
-    public static class HardwareDescriptionExtensions
-    {
         /// <summary>
-        /// Writes out the hardware description's source code to a file under the given path.
+        /// Serializes the hardware description instance into a storage format. ó
         /// </summary>
-        /// <param name="filePath">The full path where the file should be written to.</param>
-        public static Task WriteSource(this IHardwareDescription hardwareDescription, string filePath)
-        {
-            using (var fileStream = File.Create(filePath))
-            {
-                return hardwareDescription.WriteSource(fileStream);
-            }
-        }
+        /// <remarks>To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.</remarks>
+        /// <param name="stream"></param>
+        /// <returns></returns>
+        Task Serialize(Stream stream);
     }
 }

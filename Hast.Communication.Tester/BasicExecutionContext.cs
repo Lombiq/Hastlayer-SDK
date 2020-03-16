@@ -1,10 +1,6 @@
-﻿using System;
+﻿using Hast.Layer;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
 
 namespace Hast.Communication.Tester
 {
@@ -20,7 +16,7 @@ namespace Hast.Communication.Tester
             Dictionary<string, object> customConfiguration = null)
         {
             HardwareRepresentation = hastlayer.GenerateHardware(new Assembly[] { Assembly.GetExecutingAssembly() },
-                new HardwareGenerationConfiguration(deviceName)).Result;
+                new HardwareGenerationConfiguration(deviceName, null)).Result;
             ProxyGenerationConfiguration = new ProxyGenerationConfiguration()
             {
                 CommunicationChannelName = communicationChannelName,
