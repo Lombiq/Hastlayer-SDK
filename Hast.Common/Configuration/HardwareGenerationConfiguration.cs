@@ -44,10 +44,10 @@ namespace Hast.Layer
         public bool EnableCaching { get; set; }
 
         /// <inheritdoc/>
-        public string DeviceName { get; }
+        public string DeviceName { get; set; }
 
         /// <inheritdoc/>
-        public string HardwareFrameworkPath { get; }
+        public string HardwareFrameworkPath { get; set; }
 
 
         /// <summary>
