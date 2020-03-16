@@ -78,7 +78,7 @@ namespace Hast.Common.Services
 
         public static IServiceCollection AddExternalHastlayerDependencies(this IServiceCollection services)
         {
-            services.AddTransient(typeof(Lazy<>), typeof(Lazier<>));
+            services.AddScoped(typeof(Lazy<>), typeof(Lazier<>));
             services.AddLogging();
             services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("Hastlayer"));
             services.AddMemoryCache();
