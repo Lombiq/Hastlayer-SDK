@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Ports;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using Hast.Common.Extensibility.Pipeline;
+﻿using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
@@ -15,6 +7,14 @@ using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard.Logging;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Ports;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
@@ -78,7 +78,7 @@ namespace Hast.Communication.Services
                     catch (IOException ex)
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.", 
+                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.",
                             ex);
                     }
 
@@ -89,7 +89,7 @@ namespace Hast.Communication.Services
                     else
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. The " + 
+                            "Communication with the FPGA board through the serial port failed. The " +
                             serialPort.PortName + " exists but it's used by another process.");
                     }
 
@@ -132,7 +132,7 @@ namespace Hast.Communication.Services
                     var outputByteCountByteCounter = 0;
                     var outputByteCount = 0; // The incoming byte buffer size.
                     var outputBytesReceivedCount = 0; // Just used to know when the data is ready.
-                    var outputBytes = new byte[0]; // The incoming buffer.
+                    var outputBytes = Array.Empty<byte>(); // The incoming buffer.
                     var executionTimeBytes = new byte[8];
                     var executionTimeByteCounter = 0;
 
