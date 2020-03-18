@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hast.Common.Validation
 {
@@ -42,7 +40,7 @@ namespace Hast.Common.Validation
         {
             if (string.IsNullOrEmpty(value))
             {
-                throw new ArgumentException("Argument must be a non empty string", name);
+                throw new ArgumentException("Argument must be a non-empty string.", name);
             }
         }
 

@@ -9,12 +9,10 @@ namespace Hast.Layer
     {
         public static IHastlayerConfiguration Default { get; } = new HastlayerConfiguration();
 
+        /// <inheritdoc/>
         public Action<IHastlayerConfiguration, IServiceCollection> OnServiceRegistration { get; set; }
 
-        /// <summary>
-        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
-        /// pipeline. These should be Orchard extensions.
-        /// </summary>
+        /// <inheritdoc/>
         public IEnumerable<Assembly> Extensions { get; set; } = new List<Assembly>();
 
         /// <summary>
@@ -22,15 +20,10 @@ namespace Hast.Layer
         /// </summary>
         public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Developer;
 
-        /// <summary>
-        /// The collection of assemblies to be dynamically loaded. If the item is a directory, then the DLL files in
-        /// that directory are loaded instead.
-        /// </summary>
+        /// <inheritdoc/>
         public IEnumerable<string> DynamicAssemblies { get; set; } = Array.Empty<string>();
 
-        /// <summary>
-        /// The location of the App_Data folder
-        /// </summary>
+        /// <inheritdoc/>
         public string AppDataFolderPath { get; set; } = "Hastlayer/App_Data";
 
         public static HastlayerConfiguration Clone(IHastlayerConfiguration previousConfiguration) =>
