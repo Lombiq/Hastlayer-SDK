@@ -107,10 +107,10 @@ namespace Hast.Layer
             {
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    var transformer = _serviceProvider.GetService<ITransformer>();
-                    var hardwareImplementationComposer = _serviceProvider.GetService<IHardwareImplementationComposer>();
-                    var deviceManifestSelector = _serviceProvider.GetService<IDeviceManifestSelector>();
-                    var loggerService = _serviceProvider.GetService<ILogger>();
+                    var transformer = scope.ServiceProvider.GetService<ITransformer>();
+                    var hardwareImplementationComposer = scope.ServiceProvider.GetService<IHardwareImplementationComposer>();
+                    var deviceManifestSelector = scope.ServiceProvider.GetService<IDeviceManifestSelector>();
+                    var loggerService = scope.ServiceProvider.GetService<ILogger>();
 
                     var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
 
