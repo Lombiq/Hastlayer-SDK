@@ -42,8 +42,7 @@ namespace Hast.Common.Services
                 .Where(a => !a.IsDynamic)
                 .SelectMany(a => a.GetExportedTypes())
                 .Where(t => t.IsClass && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
-                .Distinct()
-                .ToList();
+                .Distinct();
 
             foreach (var implementationType in types)
             {

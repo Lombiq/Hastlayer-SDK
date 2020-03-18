@@ -179,30 +179,16 @@ namespace Hast.Layer
             }
         }
 
-        public Tout Get<Tout>() => RunGet(provider => provider.GetService<Tout>());
-
         public async Task<ICommunicationService> GetCommunicationService(string communicationChannelName) =>
             await Task.Run(() => _serviceProvider.GetService<ICommunicationServiceSelector>().GetCommunicationService(communicationChannelName));
 
         public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
             Task.Run(() => _serviceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices());
 
-        public void Run<T>(Action<T> process)
-        {
-            using (var scope = _serviceProvider.CreateScope())
-                process(scope.ServiceProvider.GetService<T>());
-        }
-
         public async Task RunAsync<T>(Func<T, Task> process)
         {
             using (var scope = _serviceProvider.CreateScope())
                 await process(scope.ServiceProvider.GetService<T>());
-        }
-
-        public Tout RunGet<Tout>(Func<IServiceProvider, Tout> process)
-        {
-            using (var scope = _serviceProvider.CreateScope())
-                return process(scope.ServiceProvider);
         }
 
         public async Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process)
@@ -281,6 +267,6 @@ namespace Hast.Layer
         }
 
         private void LogException(Exception exception, string message) =>
-                                                                                                    _serviceProvider.GetService<ILogger>().LogError(exception, message);
+            _serviceProvider.GetService<ILogger>().LogError(exception, message);
     }
 }
