@@ -117,8 +117,6 @@ namespace Hast.Layer
 
             try
             {
-                HardwareRepresentation hardwareRepresentation = null;
-
                 var transformer = _serviceProvider.GetService<ITransformer>();
                 var hardwareImplementationComposer = _serviceProvider.GetService<IHardwareImplementationComposer>();
                 var deviceManifestSelector = _serviceProvider.GetService<IDeviceManifestSelector>();
@@ -144,18 +142,16 @@ namespace Hast.Layer
                         "There is no supported device with the name " + configuration.DeviceName + ".");
                 }
 
-                            var hardwareImplementation = await hardwareImplementationComposer
-                                .Compose(configuration, hardwareDescription, deviceManifest);
+                var hardwareImplementation = await hardwareImplementationComposer
+                    .Compose(configuration, hardwareDescription, deviceManifest);
 
-                hardwareRepresentation = new HardwareRepresentation
+                return new HardwareRepresentation
                 {
                     SoftAssemblyPaths = assembliesPaths,
                     HardwareDescription = hardwareDescription,
                     HardwareImplementation = hardwareImplementation,
                     DeviceManifest = deviceManifest
                 };
-
-                return hardwareRepresentation;
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
@@ -265,7 +261,7 @@ namespace Hast.Layer
             };
 
             // Adding imported extensions last so they can override anything.
-            importedExtensions.AddRange(_configuration.Extensions);            
+            importedExtensions.AddRange(_configuration.Extensions);
 
             var proxy = _serviceProvider.GetService<IHardwareExecutionEventHandlerHolder>();
             await Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs)));
