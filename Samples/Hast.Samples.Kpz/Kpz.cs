@@ -18,7 +18,7 @@ namespace Hast.Samples.Kpz
         public static bool HastlayerOnFpga(this KpzTarget target) =>
             target == KpzTarget.Fpga || target == KpzTarget.FpgaParallelized || target == KpzTarget.PrngTest;
 
-        public static bool HastlayerParallelizedAlgorithm(this KpzTarget target) => 
+        public static bool HastlayerParallelizedAlgorithm(this KpzTarget target) =>
             target == KpzTarget.FpgaParallelized || target == KpzTarget.FpgaSimulationParallelized;
 
         public static bool HastlayerPlainAlgorithm(this KpzTarget target) =>
@@ -268,7 +268,6 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void DoHastIterations(uint numberOfIterations)
         {
-            //var numberOfStepsInIteration = GridWidth * GridHeight;
             KpzNode[,] gridBefore = (KpzNode[,])Grid.Clone();
 
             if (_enableStateLogger) StateLogger.NewKpzIteration();
