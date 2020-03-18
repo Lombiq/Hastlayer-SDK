@@ -29,12 +29,6 @@ namespace Hast.Communication
             _serviceProvider = serviceProvider;
         }
 
-        private void InvokeEventHandlers<T>(IServiceProvider provider, T context) where T : IMemberInvocationContext
-        {
-            var eventHandlers = provider.GetService<IEnumerable<EventHandler<T>>>();
-            foreach (var eventHandler in eventHandlers) eventHandler?.Invoke(this, context);
-        }
-
         public MemberInvocationHandler CreateMemberInvocationHandler(
             IHardwareRepresentation hardwareRepresentation,
             object target,
@@ -211,6 +205,11 @@ namespace Hast.Communication
                 };
         }
 
+        private void InvokeEventHandlers<T>(IServiceProvider provider, T context) where T : IMemberInvocationContext
+        {
+            var eventHandlers = provider.GetService<IEnumerable<EventHandler<T>>>();
+            foreach (var eventHandler in eventHandlers) eventHandler?.Invoke(this, context);
+        }
 
         // Code taken from http://stackoverflow.com/a/28374134/220230
         private static MethodAsynchronicity GetMethodAsynchronicity(IInvocation invocation)

@@ -25,21 +25,5 @@ namespace Hast.Layer
 
         /// <inheritdoc/>
         public string AppDataFolderPath { get; set; } = "Hastlayer/App_Data";
-
-        public static HastlayerConfiguration Clone(IHastlayerConfiguration previousConfiguration) =>
-            new HastlayerConfiguration()
-            {
-                Extensions = previousConfiguration.Extensions,
-                Flavor = previousConfiguration.Flavor,
-                DynamicAssemblies = previousConfiguration.DynamicAssemblies,
-                AppDataFolderPath = previousConfiguration.AppDataFolderPath,
-            };
-
-        public void InvokeOnServiceRegistration(IServiceCollection services)
-        {
-            OnServiceRegistration?.Invoke(this, services);
-        }
-
-        public HastlayerConfiguration() { }
     }
 }

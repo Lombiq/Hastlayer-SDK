@@ -1,5 +1,6 @@
 ﻿using Hast.Catapult.Abstractions;
 using Hast.Common.Services;
+using Hast.Common.Validation;
 using Hast.Communication;
 using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
@@ -42,7 +43,7 @@ namespace Hast.Layer
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
             services.AddSingleton<IHardwareExecutionEventHandlerHolder, HardwareExecutionEventHandlerHolder>();
-            configuration.InvokeOnServiceRegistration(services);
+            configuration.OnServiceRegistration?.Invoke(configuration, services);
 
             var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
             if (transformerServices.Count > 1)
@@ -76,9 +77,7 @@ namespace Hast.Layer
             Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
             var hastlayer = new Hastlayer(configuration);
-            // It's easier to eagerly load the host than to lazily create it, because the latter would also need 
-            // synchronization to allow concurrent access to this type's instance methods.
-            await hastlayer.LoadHost();
+            hastlayer.LoadHost();
             return hastlayer;
         }
 
@@ -197,7 +196,7 @@ namespace Hast.Layer
                 return await process(scope.ServiceProvider);
         }
 
-        private async Task LoadHost()
+        private void LoadHost()
         {
             var moduleFolderPaths = new List<string>();
 
@@ -262,8 +261,8 @@ namespace Hast.Layer
             // Adding imported extensions last so they can override anything.
             importedExtensions.AddRange(_configuration.Extensions);
 
-            var proxy = _serviceProvider.GetService<IHardwareExecutionEventHandlerHolder>();
-            await Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs)));
+            _serviceProvider.GetService<IHardwareExecutionEventHandlerHolder>()
+                .RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs));
         }
 
         private void LogException(Exception exception, string message) =>

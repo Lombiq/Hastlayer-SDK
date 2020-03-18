@@ -51,8 +51,5 @@ namespace Hast.Layer
         /// The location of the App_Data folder
         /// </summary>
         string AppDataFolderPath { get; }
-
-
-        void InvokeOnServiceRegistration(IServiceCollection services);
     }
 }
