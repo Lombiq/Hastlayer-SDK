@@ -11,6 +11,8 @@ namespace Hast.Common.Services
 {
     public static class DependencyInterfaceContainer
     {
+        // This is necessary because .Net Core Dependency Injection does not resolve Lazy<T> out of the box.
+        // https://stackoverflow.com/questions/44934511/does-net-core-dependency-injection-support-lazyt
         internal class Lazier<T> : Lazy<T> where T : class
         {
             public Lazier(IServiceProvider provider) : base(() => provider.GetRequiredService<T>()) { }
