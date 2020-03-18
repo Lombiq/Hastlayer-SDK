@@ -23,7 +23,7 @@ namespace Hast.Layer
     public class Hastlayer : IHastlayer
     {
         private readonly IHastlayerConfiguration _configuration;
-        private readonly IServiceProvider _serviceProvider;
+        private readonly ServiceProvider _serviceProvider;
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
@@ -57,17 +57,8 @@ namespace Hast.Layer
                 }
             }
 
-#if DEBUG
-            var serviceNames = services
-                .Select(x => (x.ServiceType?.Name, x.ImplementationType?.Name))
-                .OrderBy(x => x.Item1)
-                .ThenBy(x => x.Item2)
-                .ToList();
-#endif
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
-
-
         public static Task<IHastlayer> Create() => Create(HastlayerConfiguration.Default);
 
         /// <summary>
@@ -92,12 +83,10 @@ namespace Hast.Layer
         }
 
 
-        private void LogException(Exception exception, string message) =>
-            _serviceProvider.GetService<ILogger>().LogError(exception, message);
-
-
-        public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
-            Task.Run(() => _serviceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices());
+        public void Dispose()
+        {
+            _serviceProvider.Dispose();
+        }
 
         public async Task<IHardwareRepresentation> GenerateHardware(
             IEnumerable<string> assembliesPaths,
@@ -190,13 +179,37 @@ namespace Hast.Layer
             }
         }
 
+        public Tout Get<Tout>() => RunGet(provider => provider.GetService<Tout>());
+
         public async Task<ICommunicationService> GetCommunicationService(string communicationChannelName) =>
             await Task.Run(() => _serviceProvider.GetService<ICommunicationServiceSelector>().GetCommunicationService(communicationChannelName));
 
-        public void Dispose()
+        public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
+            Task.Run(() => _serviceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices());
+
+        public void Run<T>(Action<T> process)
         {
+            using (var scope = _serviceProvider.CreateScope())
+                process(scope.ServiceProvider.GetService<T>());
         }
 
+        public async Task RunAsync<T>(Func<T, Task> process)
+        {
+            using (var scope = _serviceProvider.CreateScope())
+                await process(scope.ServiceProvider.GetService<T>());
+        }
+
+        public Tout RunGet<Tout>(Func<IServiceProvider, Tout> process)
+        {
+            using (var scope = _serviceProvider.CreateScope())
+                return process(scope.ServiceProvider);
+        }
+
+        public async Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process)
+        {
+            using (var scope = _serviceProvider.CreateScope())
+                return await process(scope.ServiceProvider);
+        }
 
         private async Task LoadHost()
         {
@@ -267,31 +280,7 @@ namespace Hast.Layer
             await Task.Run(() => proxy.RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs)));
         }
 
-
-        public async Task RunAsync<T>(Func<T, Task> process)
-        {
-            using (var scope = _serviceProvider.CreateScope())
-                await process(scope.ServiceProvider.GetService<T>());
-        }
-
-        public async Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process)
-        {
-            using (var scope = _serviceProvider.CreateScope())
-                return await process(scope.ServiceProvider);
-        }
-
-        public void Run<T>(Action<T> process)
-        {
-            using (var scope = _serviceProvider.CreateScope())
-                process(scope.ServiceProvider.GetService<T>());
-        }
-
-        public Tout RunGet<Tout>(Func<IServiceProvider, Tout> process)
-        {
-            using (var scope = _serviceProvider.CreateScope())
-                return process(scope.ServiceProvider);
-        }
-
-        public Tout Get<Tout>() => RunGet(provider => provider.GetService<Tout>());
+        private void LogException(Exception exception, string message) =>
+                                                                                                    _serviceProvider.GetService<ILogger>().LogError(exception, message);
     }
 }
