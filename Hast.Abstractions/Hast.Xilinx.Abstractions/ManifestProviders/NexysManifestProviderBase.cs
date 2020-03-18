@@ -1,6 +1,5 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
-using System.Collections.Generic;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
@@ -20,13 +19,13 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                         Name = _deviceName,
                         ClockFrequencyHz = 100000000, // 100 Mhz
                         SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
-                AvailableMemoryBytes = 115343360, // 110MB
-                ToolChainName = CommonToolChainNames.Vivado
+                        AvailableMemoryBytes = 115343360, // 110MB
+                        ToolChainName = CommonToolChainNames.Vivado
                     };
                 }
                 return deviceManifest;
             }
         }
-            
+
     }
 }
