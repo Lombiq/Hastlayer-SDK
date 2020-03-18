@@ -105,41 +105,44 @@ namespace Hast.Layer
 
             try
             {
-                var transformer = _serviceProvider.GetService<ITransformer>();
-                var hardwareImplementationComposer = _serviceProvider.GetService<IHardwareImplementationComposer>();
-                var deviceManifestSelector = _serviceProvider.GetService<IDeviceManifestSelector>();
-                var loggerService = _serviceProvider.GetService<ILogger>();
-
-                var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
-
-                foreach (var warning in hardwareDescription.Warnings)
+                using (var scope = _serviceProvider.CreateScope())
                 {
-                    loggerService.LogWarning(
-                        "Hastlayer transformation warning (code: {0}): {1}",
-                        warning.Code,
-                        warning.Message);
+                    var transformer = _serviceProvider.GetService<ITransformer>();
+                    var hardwareImplementationComposer = _serviceProvider.GetService<IHardwareImplementationComposer>();
+                    var deviceManifestSelector = _serviceProvider.GetService<IDeviceManifestSelector>();
+                    var loggerService = _serviceProvider.GetService<ILogger>();
+
+                    var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
+
+                    foreach (var warning in hardwareDescription.Warnings)
+                    {
+                        loggerService.LogWarning(
+                            "Hastlayer transformation warning (code: {0}): {1}",
+                            warning.Code,
+                            warning.Message);
+                    }
+
+                    var deviceManifest = deviceManifestSelector
+                        .GetSupportedDevices()
+                        .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
+
+                    if (deviceManifest == null)
+                    {
+                        throw new HastlayerException(
+                            "There is no supported device with the name " + configuration.DeviceName + ".");
+                    }
+
+                    var hardwareImplementation = await hardwareImplementationComposer
+                        .Compose(configuration, hardwareDescription, deviceManifest);
+
+                    return new HardwareRepresentation
+                    {
+                        SoftAssemblyPaths = assembliesPaths,
+                        HardwareDescription = hardwareDescription,
+                        HardwareImplementation = hardwareImplementation,
+                        DeviceManifest = deviceManifest
+                    };
                 }
-
-                var deviceManifest = deviceManifestSelector
-                    .GetSupportedDevices()
-                    .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
-
-                if (deviceManifest == null)
-                {
-                    throw new HastlayerException(
-                        "There is no supported device with the name " + configuration.DeviceName + ".");
-                }
-
-                var hardwareImplementation = await hardwareImplementationComposer
-                    .Compose(configuration, hardwareDescription, deviceManifest);
-
-                return new HardwareRepresentation
-                {
-                    SoftAssemblyPaths = assembliesPaths,
-                    HardwareDescription = hardwareDescription,
-                    HardwareImplementation = hardwareImplementation,
-                    DeviceManifest = deviceManifest
-                };
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
