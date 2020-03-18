@@ -1,0 +1,7 @@
+﻿[*.cs]
+
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
+
+# IDE0066: Convert switch statement to expression
+csharp_style_prefer_switch_expression = true:suggestion

@@ -181,11 +181,21 @@ namespace Hast.Layer
             }
         }
 
-        public async Task<ICommunicationService> GetCommunicationService(string communicationChannelName) =>
-            await Task.Run(() => _serviceProvider.GetService<ICommunicationServiceSelector>().GetCommunicationService(communicationChannelName));
+        public async Task<ICommunicationService> GetCommunicationService(string communicationChannelName) => await Task.Run(() =>
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                return scope.ServiceProvider.GetService<ICommunicationServiceSelector>().GetCommunicationService(communicationChannelName);
+            }
+        });
 
-        public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() =>
-            Task.Run(() => _serviceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices());
+        public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() => Task.Run(() =>
+        {
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
+            }
+        });
 
         public async Task RunAsync<T>(Func<T, Task> process)
         {
