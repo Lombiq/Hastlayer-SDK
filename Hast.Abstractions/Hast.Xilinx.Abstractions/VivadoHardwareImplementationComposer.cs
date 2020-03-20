@@ -44,7 +44,7 @@ namespace Hast.Xilinx.Abstractions
                 CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "IPRepo"));
                 vhdlFileSubPath = Path.Combine(hardwareFrameworkPath, "IPRepo", "Hast_IP.vhd");
             }
-            else vhdlFileSubPath = "Hast_IP.vhd";
+            else vhdlFileSubPath = Path.Combine(hardwareFrameworkPath, "Hast_IP.vhd");
 
             File.WriteAllText(vhdlFileSubPath, vhdlHardwareDescription.VhdlSource);
 
