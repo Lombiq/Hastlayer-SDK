@@ -116,31 +116,5 @@ namespace Hast.Remote.Client
                 throw new RemoteTransformationException("Remote transformation failed because Hastlayer Remote Services returned an unexpected response. This might be because authorization failed (check if you mistyped your credentials) or because there is some issue with the service. If this error persists please get in touch with us under https://hastlayer.com/contact.", ex);
             }
         }
-
-
-        private class RemoteHardwareDescription : IHardwareDescription
-        {
-            public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; set; }
-            public string Language { get; set; }
-            public string Source { get; set; }
-            public IEnumerable<ITransformationWarning> Warnings { get; set; }
-
-            public Task Serialize(Stream stream)
-            {
-                throw new NotImplementedException();
-            }
-
-            public Task WriteSource(Stream stream)
-            {
-                using (var streamWriter = new StreamWriter(stream))
-                {
-                    // WriteAsync would throw a "The stream is currently in use by a previous operation on the stream." for
-                    // FileStreams, even though supposedly there's no operation on the stream.
-                    streamWriter.Write(Source);
-                }
-
-                return Task.CompletedTask;
-            }
-        }
     }
 }
