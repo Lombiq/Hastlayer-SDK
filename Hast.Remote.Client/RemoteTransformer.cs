@@ -74,6 +74,15 @@ namespace Hast.Remote.Client
                         "This could indicate a problem with the service or that the assemblies contained exceptionally complex code.");
                 }
 
+                var localVersion = GetType().Assembly.GetName().Version.ToString();
+                if (transformationResult.RemoteHastlayerVersion != localVersion)
+                {
+                    throw new Exception(
+                        "The local version of Hastlayer is out of date compared to the remote one " +
+                        $"(remote version: {transformationResult.RemoteHastlayerVersion}, local version: {localVersion}). " +
+                        "Please update Hastlayer otherwise incompatibilities may occur.");
+                }
+
                 if (transformationResult.Errors?.Any() == true)
                 {
                     throw new Exception(
