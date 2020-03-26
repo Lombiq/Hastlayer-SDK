@@ -71,14 +71,14 @@ namespace Hast.Layer
         /// </remarks>
         /// <param name="configuration">Configuration for Hastlayer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
-        public static async Task<IHastlayer> Create(IHastlayerConfiguration configuration)
+        public static Task<IHastlayer> Create(IHastlayerConfiguration configuration)
         {
             Argument.ThrowIfNull(configuration, nameof(configuration));
             Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
             var hastlayer = new Hastlayer(configuration);
             hastlayer.LoadHost();
-            return hastlayer;
+            return Task.FromResult((IHastlayer)hastlayer);
         }
 
 
