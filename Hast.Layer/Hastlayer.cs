@@ -50,11 +50,11 @@ namespace Hast.Layer
             {
                 if (configuration.Flavor == HastlayerFlavor.Client)
                 {
-                    services.RemoveImplementationsExcept<ITransformer, RemoteTransformer>();
+                    services.RemoveImplementationsExcept<ITransformer>("RemoteTransformer");
                 }
                 else
                 {
-                    services.RemoveImplementationsExcept<ITransformer, DefaultTransformer>();
+                    services.RemoveImplementationsExcept<ITransformer>("DefaultTransformer");
                 }
             }
 
