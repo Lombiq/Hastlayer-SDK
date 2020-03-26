@@ -33,10 +33,13 @@ namespace Hast.Xilinx.Abstractions
                 throw new InvalidOperationException("Only the Vivado toolchain is supported by this hardware implementation composer.");
             }
 
+
             var isNexys = deviceManifest.Name == Nexys4DdrManifestProvider.DeviceName ||
                 deviceManifest.Name == NexysA7ManifestProvider.DeviceName;
 
+
             CreateDirectoryIfDoesntExist(hardwareFrameworkPath);
+
 
             string vhdlFileSubPath;
             if (isNexys)
@@ -44,33 +47,40 @@ namespace Hast.Xilinx.Abstractions
                 CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "IPRepo"));
                 vhdlFileSubPath = Path.Combine(hardwareFrameworkPath, "IPRepo", "Hast_IP.vhd");
             }
-            else vhdlFileSubPath = "Hast_IP.vhd";
+            else vhdlFileSubPath = Path.Combine(hardwareFrameworkPath, "Hast_IP.vhd");
 
             File.WriteAllText(vhdlFileSubPath, vhdlHardwareDescription.VhdlSource);
 
-            if (!string.IsNullOrEmpty(vhdlHardwareDescription.XdcSource))
+
+            string xdcFileSubPath;
+
+            if (isNexys) xdcFileSubPath = "Nexys4DDR_Master.xdc";
+            else xdcFileSubPath = "Hast_IP.xdc";
+
+            var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
+            var xdcFileTemplatePath = xdcFilePath + "_template";
+
+            if (File.Exists(xdcFilePath))
             {
-                string xdcFileSubPath;
-
-                if (isNexys) xdcFileSubPath = "Nexys4DDR_Master.xdc";
-                else xdcFileSubPath = "Hast_IP.xdc";
-
-                var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
-
-                if (File.Exists(xdcFilePath))
+                // Using the original XDC file as a template and then adding constraints to it.
+                if (!File.Exists(xdcFileTemplatePath))
                 {
-                    // Using the original XDC file as a template and then adding constraints to it.
-                    var xdcFileTemplatePath = xdcFilePath + "_template";
-                    if (!File.Exists(xdcFileTemplatePath))
-                    {
-                        File.Copy(xdcFilePath, xdcFileTemplatePath);
-                    }
-
-                    File.Copy(xdcFileTemplatePath, xdcFilePath, true);
+                    File.Copy(xdcFilePath, xdcFileTemplatePath);
                 }
 
+                File.Copy(xdcFileTemplatePath, xdcFilePath, true);
+            }
+
+            if (!string.IsNullOrEmpty(vhdlHardwareDescription.XdcSource))
+            {
                 File.AppendAllText(xdcFilePath, vhdlHardwareDescription.XdcSource);
             }
+            else if (File.Exists(xdcFileTemplatePath))
+            {
+                // The XDC file can contain constraints of previous hardware designs so clearing those out.
+                File.Copy(xdcFileTemplatePath, xdcFilePath, true);
+            }
+
 
             return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
         }
