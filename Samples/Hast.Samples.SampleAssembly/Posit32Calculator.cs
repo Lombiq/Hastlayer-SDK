@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -25,7 +23,9 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculatePowerOfReal_InputPosit32Index = 1;
         public const int CalculatePowerOfReal_OutputPosit32Index = 0;
 
-        // This takes about 84% of a Nexys 4 DDR's FPGA. 3 would be 106%.
+        // This takes about 75% of a Nexys 4 DDR's FPGA. If only ParallelizedCalculateIntegerSumUpToNumbers is 
+        // selected as the hardware entry point (i.e. only it will be transformed into hardware, see the config in
+        // Posit32CalculatorSampleRunner) then with a MaxDegreeOfParallelism of 5 it'll take 75% as well.
         public const int MaxDegreeOfParallelism = 2;
 
 
