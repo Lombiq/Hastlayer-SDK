@@ -15,13 +15,8 @@ namespace Hast.Layer
         /// <inheritdoc/>
         public IEnumerable<Assembly> Extensions { get; set; } = new List<Assembly>();
 
-        /// <summary>
-        /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Developer"/>.
-        /// </summary>
-        public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Developer;
-
         /// <inheritdoc/>
-        public IEnumerable<string> DynamicAssemblies { get; set; } = Array.Empty<string>();
+        public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Developer;
 
         /// <inheritdoc/>
         public string AppDataFolderPath { get; set; } = "Hastlayer/App_Data";

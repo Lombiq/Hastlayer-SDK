@@ -18,29 +18,15 @@ namespace Hast.Common.Services
             public Lazier(IServiceProvider provider) : base(() => provider.GetRequiredService<T>()) { }
         }
 
-        public static void LoadAssemblies(IEnumerable<string> paths)
-        {
-            var loadedPaths = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .Where(a => !a.IsDynamic)
-                .Select(a => a.Location)
-                .ToList();
+        public static IEnumerable<Assembly> LoadAssemblies(IEnumerable<string> paths) =>
+            paths.Select(x => Assembly.LoadFrom(Path.GetFullPath(x)));
 
-            foreach (var path in paths)
-            {
-                var fileInfo = new FileInfo(path);
-                if (!loadedPaths.Contains(fileInfo.FullName)) Assembly.LoadFrom(fileInfo.FullName);
-            }
-        }
-
-        public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies)
+        public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies = null)
         {
             var iDependencyType = typeof(IDependency);
 
-            var assemblyList = assemblies is IList<Assembly> list ? list : assemblies?.ToList();
-            if (assemblyList?.Any() != true) assemblyList = AppDomain.CurrentDomain.GetAssemblies();
-
-            var types = assemblyList
+            if (assemblies is null) assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var types = assemblies
                 .Where(a => !a.IsDynamic)
                 .SelectMany(a => a.GetExportedTypes())
                 .Where(t => t.IsClass && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
@@ -87,11 +73,9 @@ namespace Hast.Common.Services
             return services;
         }
 
-        public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<string> paths, IEnumerable<Assembly> assemblies = null)
+        public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<Assembly> assemblies)
         {
-            if (paths?.Any() == true) LoadAssemblies(paths);
             RegisterIDependencies(services, assemblies);
-
             return AddExternalHastlayerDependencies(services);
         }
     }

@@ -34,12 +34,22 @@ namespace Hast.Layer
         {
             _configuration = configuration;
 
-            var dynamicAssemblies = configuration.DynamicAssemblies.Any() ?
-                configuration.DynamicAssemblies :
-                 Directory.GetFiles(".", "Hast.*.dll");
+            // Since the DI prefers services in order of registration, we take the user assemblies first, then the
+            // imported assemblies below, followed by dynamic lookup of Hast.*.dll files.
+            var assemblies = new List<Assembly>(configuration.Extensions);
+            assemblies.AddRange(new[]
+            {
+                typeof(Hastlayer).Assembly,
+                typeof(IProxyGenerator).Assembly,
+                typeof(IHardwareImplementationComposer).Assembly,
+                typeof(ITransformer).Assembly,
+                typeof(NexysA7ManifestProvider).Assembly,
+                typeof(CatapultManifestProvider).Assembly
+            });
+            assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
 
             var services = new ServiceCollection();
-            services.AddIDependencyContainer(dynamicAssemblies);
+            services.AddIDependencyContainer(assemblies);
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
             services.AddSingleton<IHardwareExecutionEventHandlerHolder, HardwareExecutionEventHandlerHolder>();
@@ -260,19 +270,6 @@ namespace Hast.Layer
 
                 if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
             }
-
-            var importedExtensions = new List<Assembly>
-            {
-                typeof(Hastlayer).Assembly,
-                typeof(IProxyGenerator).Assembly,
-                typeof(IHardwareImplementationComposer).Assembly,
-                typeof(ITransformer).Assembly,
-                typeof(NexysA7ManifestProvider).Assembly,
-                typeof(CatapultManifestProvider).Assembly
-            };
-
-            // Adding imported extensions last so they can override anything.
-            importedExtensions.AddRange(_configuration.Extensions);
 
             _serviceProvider.GetService<IHardwareExecutionEventHandlerHolder>()
                 .RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs));

@@ -37,15 +37,9 @@ namespace Hast.Layer
         IEnumerable<Assembly> Extensions { get; }
 
         /// <summary>
-        /// The usage flavor of Hastlayer for different scenarios.
+        /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Developer"/>.
         /// </summary>
         HastlayerFlavor Flavor { get; }
-
-        /// <summary>
-        /// The collection of assemblies to be dynamically loaded. If the item is a directory, then the DLL files in
-        /// that directory are loaded instead.
-        /// </summary>
-        IEnumerable<string> DynamicAssemblies { get; }
 
         /// <summary>
         /// The location of the App_Data folder
