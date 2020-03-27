@@ -27,7 +27,7 @@ namespace Hast.Samples.Kpz
 
             LogItFunction("Creating Hastlayer Factory...");
 
-            var hastlayer = await Hastlayer.Create();
+            var hastlayer = Hastlayer.Create();
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {

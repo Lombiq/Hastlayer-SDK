@@ -8,60 +8,59 @@ namespace Hast.Samples.Demo
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             Task.Run(async () =>
             {
-                using (var hastlayer = await Hastlayer.Create())
+                using var hastlayer = Hastlayer.Create();
+                
+                #region Configuration
+                var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+
+                configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
+
+                configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+
+                hastlayer.ExecutedOnHardware += (sender, e) =>
                 {
-                    #region Configuration
-                    var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+                    Console.WriteLine(
+                        "Executing on hardware took " +
+                        e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                        " milliseconds (net) " +
+                        e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                        " milliseconds (all together).");
+                };
+                #endregion
 
-                    configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
-
-                    configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
-
-                    hastlayer.ExecutedOnHardware += (sender, e) =>
+                #region HardwareGeneration
+                Console.WriteLine("Hardware generation starts.");
+                var hardwareRepresentation = await hastlayer.GenerateHardware(
+                    new[]
                     {
-                        Console.WriteLine(
-                            "Executing on hardware took " +
-                            e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                            " milliseconds (net) " +
-                            e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                            " milliseconds (all together).");
-                    };
-                    #endregion
+                        typeof(ParallelAlgorithm).Assembly
+                    },
+                    configuration);
+                #endregion
 
-                    #region HardwareGeneration
-                    Console.WriteLine("Hardware generation starts.");
-                    var hardwareRepresentation = await hastlayer.GenerateHardware(
-                        new[]
-                        {
-                            typeof(ParallelAlgorithm).Assembly
-                        },
-                        configuration);
-                    #endregion
+                #region Execution
+                Console.WriteLine("Hardware generated, starting software execution.");
+                Console.WriteLine();
 
-                    #region Execution
-                    Console.WriteLine("Hardware generated, starting software execution.");
-                    Console.WriteLine();
+                var sw = System.Diagnostics.Stopwatch.StartNew();
+                var cpuOutput = new ParallelAlgorithm().Run(234234);
+                sw.Stop();
 
-                    var sw = System.Diagnostics.Stopwatch.StartNew();
-                    var cpuOutput = new ParallelAlgorithm().Run(234234);
-                    sw.Stop();
+                Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
 
-                    Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
+                Console.WriteLine();
+                Console.WriteLine("Starting hardware execution.");
 
-                    Console.WriteLine();
-                    Console.WriteLine("Starting hardware execution.");
+                var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
 
-                    var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
-
-                    var output1 = parallelAlgorithm.Run(234234);
-                    var output2 = parallelAlgorithm.Run(123);
-                    var output3 = parallelAlgorithm.Run(9999);
-                    #endregion
-                }
+                var output1 = parallelAlgorithm.Run(234234);
+                var output2 = parallelAlgorithm.Run(123);
+                var output3 = parallelAlgorithm.Run(9999);
+                #endregion
             }).Wait();
 
             Console.ReadKey();

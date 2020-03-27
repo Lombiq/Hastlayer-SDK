@@ -5,9 +5,7 @@ using Hast.Communication;
 using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
-using Hast.Remote.Client;
 using Hast.Synthesis.Abstractions;
-using Hast.Transformer;
 using Hast.Transformer.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.DependencyInjection;
@@ -70,7 +68,7 @@ namespace Hast.Layer
 
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
-        public static Task<IHastlayer> Create() => Create(HastlayerConfiguration.Default);
+        public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
 
         /// <summary>
         /// Instantiates a new <see cref="IHastlayer"/> implementation.
@@ -81,14 +79,14 @@ namespace Hast.Layer
         /// </remarks>
         /// <param name="configuration">Configuration for Hastlayer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
-        public static Task<IHastlayer> Create(IHastlayerConfiguration configuration)
+        public static IHastlayer Create(IHastlayerConfiguration configuration)
         {
             Argument.ThrowIfNull(configuration, nameof(configuration));
             Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
             var hastlayer = new Hastlayer(configuration);
             hastlayer.LoadHost();
-            return Task.FromResult((IHastlayer)hastlayer);
+            return hastlayer;
         }
 
 

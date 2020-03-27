@@ -18,7 +18,7 @@ namespace Hast.Catapult.Abstractions
     public class CatapultLibrary : IDisposable
     {
         private bool _isDisposed = false;
-        private IntPtr _handle;
+        private readonly IntPtr _handle;
 
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Gets the device handle utilized by the functions in NativeLibrary.
         /// </summary>
-        public IntPtr Handle { get => _handle; }
+        public IntPtr Handle => _handle;
 
         /// <summary>
         /// Gets the function used for logging. If null, no logging is done.

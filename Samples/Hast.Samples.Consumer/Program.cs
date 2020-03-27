@@ -77,124 +77,123 @@ namespace Hast.Samples.Consumer
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object 
             // while the program runs and re-use it continuously. No need to always wrap it into a using() like 
             // here, just make sure to Dispose() it before the program terminates.
-            using (var hastlayer = await Hastlayer.Create(hastlayerConfiguration))
+            using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
+            // Hooking into an event of Hastlayer so some execution information can be made visible on the
+            // console.
+            hastlayer.ExecutedOnHardware += (sender, e) =>
             {
-                // Hooking into an event of Hastlayer so some execution information can be made visible on the
-                // console.
-                hastlayer.ExecutedOnHardware += (sender, e) =>
+                Console.WriteLine(
+                    "Executing " +
+                    e.MemberFullName +
+                    " on hardware took " +
+                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                    " milliseconds (net) " +
+                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                    " milliseconds (all together).");
+            };
+
+
+            // A little helper for later.
+            var argsList = (IList<string>)args;
+            string GetArgument(string name)
+            {
+                name = "-" + name;
+                return args.Contains(name) ? args[argsList.IndexOf(name) + 1] : null;
+            }
+
+            // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
+            var devices = await hastlayer.GetSupportedDevices();
+            if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
+
+            // Let's just use the first one that is available unless it's specified.
+            if (string.IsNullOrEmpty(Configuration.DeviceName)) Configuration.DeviceName = devices.First().Name;
+            var targetDeviceName = GetArgument("device") ?? Configuration.DeviceName;
+            var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
+            if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
+
+            var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, Configuration.HardwareFrameworkPath);
+
+            // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
+            var remoteClientConfiguration = configuration.RemoteClientConfiguration();
+            remoteClientConfiguration.AppName = GetArgument("appname") ?? Configuration.AppName;
+            remoteClientConfiguration.AppSecret = GetArgument("appsecret") ?? Configuration.AppSecret;
+            if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
+                remoteClientConfiguration.AppSecret == "appsecret")
+            {
+                throw new InvalidOperationException(
+                    "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
+            }
+
+            // If the sample was selected in the command line use that, or otherwise the default.
+            Configuration.SampleToRun = (Sample)Enum.Parse(typeof(Sample), GetArgument("sample") ?? Configuration.SampleToRun.ToString(), true);
+
+            // Letting the configuration of samples run. Check out those methods too!
+            switch (Configuration.SampleToRun)
+            {
+                case Sample.Fix64Calculator:
+                    Fix64CalculatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.FSharpParallelAlgorithm:
+                    FSharpParallelAlgorithmSampleRunner.Configure(configuration);
+                    break;
+                case Sample.GenomeMatcher:
+                    GenomeMatcherSampleRunner.Configure(configuration);
+                    break;
+                case Sample.ParallelAlgorithm:
+                    ParallelAlgorithmSampleRunner.Configure(configuration);
+                    break;
+                case Sample.ImageProcessingAlgorithms:
+                    ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
+                    break;
+                case Sample.Loopback:
+                    LoopbackSampleRunner.Configure(configuration);
+                    break;
+                case Sample.MemoryTest:
+                    MemoryTestSampleRunner.Configure(configuration);
+                    break;
+                case Sample.MonteCarloPiEstimator:
+                    MonteCarloPiEstimatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.ObjectOrientedShowcase:
+                    ObjectOrientedShowcaseSampleRunner.Configure(configuration);
+                    break;
+                case Sample.PositCalculator:
+                    PositCalculatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.Posit32AdvancedCalculator:
+                    Posit32AdvancedCalculatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.Posit32Calculator:
+                    Posit32CalculatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.Posit32FusedCalculator:
+                    Posit32FusedCalculatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.PrimeCalculator:
+                    PrimeCalculatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.RecursiveAlgorithms:
+                    RecursiveAlgorithmsSampleRunner.Configure(configuration);
+                    break;
+                case Sample.SimdCalculator:
+                    SimdCalculatorSampleRunner.Configure(configuration);
+                    break;
+                case Sample.UnumCalculator:
+                    UnumCalculatorSampleRunner.Configure(configuration);
+                    break;
+                default:
+                    break;
+            }
+
+            // The generated VHDL code will contain debug-level information, though it will be slower to create.
+            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+
+            Console.WriteLine("Hardware generation starts.");
+
+            // Generating hardware from the sample assembly with the given configuration.
+            var hardwareRepresentation = await hastlayer.GenerateHardware(
+                new[]
                 {
-                    Console.WriteLine(
-                        "Executing " +
-                        e.MemberFullName +
-                        " on hardware took " +
-                        e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                        " milliseconds (net) " +
-                        e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                        " milliseconds (all together).");
-                };
-
-
-                // A little helper for later.
-                var argsList = (IList<string>)args;
-                string GetArgument(string name)
-                {
-                    name = "-" + name;
-                    return args.Contains(name) ? args[argsList.IndexOf(name) + 1] : null;
-                }
-
-                // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
-                var devices = await hastlayer.GetSupportedDevices();
-                if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
-
-                // Let's just use the first one that is available unless it's specified.
-                if (string.IsNullOrEmpty(Configuration.DeviceName)) Configuration.DeviceName = devices.First().Name;
-                var targetDeviceName = GetArgument("device") ?? Configuration.DeviceName;
-                var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
-                if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
-
-                var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, Configuration.HardwareFrameworkPath);
-
-                // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
-                var remoteClientConfiguration = configuration.RemoteClientConfiguration();
-                remoteClientConfiguration.AppName = GetArgument("appname") ?? Configuration.AppName;
-                remoteClientConfiguration.AppSecret = GetArgument("appsecret") ?? Configuration.AppSecret;
-                if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
-                    remoteClientConfiguration.AppSecret == "appsecret")
-                {
-                    throw new InvalidOperationException(
-                        "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
-                }
-
-                // If the sample was selected in the command line use that, or otherwise the default.
-                Configuration.SampleToRun = (Sample)Enum.Parse(typeof(Sample), GetArgument("sample") ?? Configuration.SampleToRun.ToString(), true);
-
-                // Letting the configuration of samples run. Check out those methods too!
-                switch (Configuration.SampleToRun)
-                {
-                    case Sample.Fix64Calculator:
-                        Fix64CalculatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.FSharpParallelAlgorithm:
-                        FSharpParallelAlgorithmSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.GenomeMatcher:
-                        GenomeMatcherSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.ParallelAlgorithm:
-                        ParallelAlgorithmSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.ImageProcessingAlgorithms:
-                        ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.Loopback:
-                        LoopbackSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.MemoryTest:
-                        MemoryTestSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.MonteCarloPiEstimator:
-                        MonteCarloPiEstimatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.ObjectOrientedShowcase:
-                        ObjectOrientedShowcaseSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.PositCalculator:
-                        PositCalculatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.Posit32AdvancedCalculator:
-                        Posit32AdvancedCalculatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.Posit32Calculator:
-                        Posit32CalculatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.Posit32FusedCalculator:
-                        Posit32FusedCalculatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.PrimeCalculator:
-                        PrimeCalculatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.RecursiveAlgorithms:
-                        RecursiveAlgorithmsSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.SimdCalculator:
-                        SimdCalculatorSampleRunner.Configure(configuration);
-                        break;
-                    case Sample.UnumCalculator:
-                        UnumCalculatorSampleRunner.Configure(configuration);
-                        break;
-                    default:
-                        break;
-                }
-
-                // The generated VHDL code will contain debug-level information, though it will be slower to create.
-                configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
-
-                Console.WriteLine("Hardware generation starts.");
-
-                // Generating hardware from the sample assembly with the given configuration.
-                var hardwareRepresentation = await hastlayer.GenerateHardware(
-                    new[]
-                    {
                         // Selecting any type from the sample assembly here just to get its Assembly object.
                         typeof(PrimeCalculator).Assembly,
                         typeof(Fix64).Assembly,
@@ -204,99 +203,98 @@ namespace Hast.Samples.Consumer
                         // ImmutableArray.
                         typeof(Posit).Assembly,
                         typeof(ImmutableArray).Assembly
-                    },
-                    configuration);
+                },
+                configuration);
 
-                Console.WriteLine("Hardware generation finished.");
+            Console.WriteLine("Hardware generation finished.");
+            Console.WriteLine();
+
+            // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause 
+            // any problems, but sometimes they can.
+            if (hardwareRepresentation.HardwareDescription.Warnings.Any())
+            {
+                Console.WriteLine(
+                    "There were the following transformation warnings, which may hint on issues that can cause the hardware implementation to produce incorrect results:" +
+                    Environment.NewLine +
+                    string.Join(Environment.NewLine, hardwareRepresentation.HardwareDescription.Warnings.Select(warning => "* " + warning.ToString())));
                 Console.WriteLine();
+            }
 
-                // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause 
-                // any problems, but sometimes they can.
-                if (hardwareRepresentation.HardwareDescription.Warnings.Any())
+            Console.WriteLine("Starting hardware execution.");
+
+            // Running samples.
+            try
+            {
+                switch (Configuration.SampleToRun)
                 {
-                    Console.WriteLine(
-                        "There were the following transformation warnings, which may hint on issues that can cause the hardware implementation to produce incorrect results:" +
-                        Environment.NewLine +
-                        string.Join(Environment.NewLine, hardwareRepresentation.HardwareDescription.Warnings.Select(warning => "* " + warning.ToString())));
-                    Console.WriteLine();
+                    case Sample.Fix64Calculator:
+                        await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.FSharpParallelAlgorithm:
+                        await FSharpParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.GenomeMatcher:
+                        await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.ParallelAlgorithm:
+                        await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.ImageProcessingAlgorithms:
+                        await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.Loopback:
+                        await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.MemoryTest:
+                        await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.MonteCarloPiEstimator:
+                        await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.ObjectOrientedShowcase:
+                        await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.PositCalculator:
+                        await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.Posit32AdvancedCalculator:
+                        await Posit32AdvancedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.Posit32Calculator:
+                        await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.Posit32FusedCalculator:
+                        await Posit32FusedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.PrimeCalculator:
+                        await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.RecursiveAlgorithms:
+                        await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.SimdCalculator:
+                        await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    case Sample.UnumCalculator:
+                        await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        break;
+                    default:
+                        break;
                 }
+            }
+            catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException)
+            {
+                // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
+                // GenerateProxy()) then everything will be computed in software as well to check the hardware.
+                // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
+                // not impossible in corner cases.
+                var mismatches = ((HardwareExecutionResultMismatchException)ex.InnerException).Mismatches;
+                var mismatchCount = mismatches.Count();
+                Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : $"es")}:");
 
-                Console.WriteLine("Starting hardware execution.");
-
-                // Running samples.
-                try
+                foreach (var mismatch in mismatches)
                 {
-                    switch (Configuration.SampleToRun)
-                    {
-                        case Sample.Fix64Calculator:
-                            await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.FSharpParallelAlgorithm:
-                            await FSharpParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.GenomeMatcher:
-                            await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.ParallelAlgorithm:
-                            await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.ImageProcessingAlgorithms:
-                            await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.Loopback:
-                            await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.MemoryTest:
-                            await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.MonteCarloPiEstimator:
-                            await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.ObjectOrientedShowcase:
-                            await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.PositCalculator:
-                            await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.Posit32AdvancedCalculator:
-                            await Posit32AdvancedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.Posit32Calculator:
-                            await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.Posit32FusedCalculator:
-                            await Posit32FusedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.PrimeCalculator:
-                            await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.RecursiveAlgorithms:
-                            await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.SimdCalculator:
-                            await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        case Sample.UnumCalculator:
-                            await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException)
-                {
-                    // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
-                    // GenerateProxy()) then everything will be computed in software as well to check the hardware.
-                    // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
-                    // not impossible in corner cases.
-                    var mismatches = ((HardwareExecutionResultMismatchException)ex.InnerException).Mismatches;
-                    var mismatchCount = mismatches.Count();
-                    Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : $"es")}:");
-
-                    foreach (var mismatch in mismatches)
-                    {
-                        Console.WriteLine("* " + mismatch.ToString());
-                    }
+                    Console.WriteLine("* " + mismatch.ToString());
                 }
             }
         }
