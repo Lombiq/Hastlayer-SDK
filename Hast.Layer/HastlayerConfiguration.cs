@@ -19,6 +19,6 @@ namespace Hast.Layer
         public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Developer;
 
         /// <inheritdoc/>
-        public string AppDataFolderPath { get; set; } = "Hastlayer/App_Data";
+        public string AppDataFolderPath { get; set; } = null;
     }
 }

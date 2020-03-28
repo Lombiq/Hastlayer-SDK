@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Hast.Common.Services
 {
@@ -8,6 +9,13 @@ namespace Hast.Common.Services
 
         public AppDataFolder(string appDataFolderPath)
         {
+            // Sets folder to %APPDATA%\Hastlayer on Windows and ~/.config/Hastlayer on Linux.
+            if (string.IsNullOrEmpty(appDataFolderPath))
+            {
+                appDataFolderPath = Path.Combine(Environment.GetFolderPath(
+                    Environment.SpecialFolder.ApplicationData), "Hastlayer");
+            }
+
             _appDataFolder = new DirectoryInfo(appDataFolderPath);
             if (!_appDataFolder.Exists) _appDataFolder.Create();
         }

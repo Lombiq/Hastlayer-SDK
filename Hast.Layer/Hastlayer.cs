@@ -31,6 +31,7 @@ namespace Hast.Layer
         private Hastlayer(IHastlayerConfiguration configuration)
         {
             _configuration = configuration;
+            var appDataFolder = new AppDataFolder(configuration.AppDataFolderPath);
 
             // Since the DI prefers services in order of registration, we take the user assemblies first, then the
             // imported assemblies below, followed by dynamic lookup of Hast.*.dll files.
@@ -44,12 +45,13 @@ namespace Hast.Layer
                 typeof(NexysA7ManifestProvider).Assembly,
                 typeof(CatapultManifestProvider).Assembly
             });
-            assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
+            assemblies.AddRange(GetHastLibraries());
+            assemblies.AddRange(GetHastLibraries(appDataFolder.MapPath("Core")));
 
             var services = new ServiceCollection();
             services.AddIDependencyContainer(assemblies);
             services.AddSingleton(configuration);
-            services.AddSingleton<IAppDataFolder>(new AppDataFolder(configuration.AppDataFolderPath));
+            services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton<IHardwareExecutionEventHandlerHolder, HardwareExecutionEventHandlerHolder>();
             configuration.OnServiceRegistration?.Invoke(configuration, services);
 
@@ -275,5 +277,8 @@ namespace Hast.Layer
 
         private void LogException(Exception exception, string message) =>
             _serviceProvider.GetService<ILogger>().LogError(exception, message);
+
+        private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
+            DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));
     }
 }
