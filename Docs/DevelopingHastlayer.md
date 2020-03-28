@@ -18,10 +18,10 @@ Generally the *client* branch should be only merged to, but never from, the *dev
 
 There are separate solution files for the two flavors that only differ in whether they include *Hast.Core*. Should the solution change then make the changes in the dev solution file, copy it over the client one and remove the *Hast.Core* solution folder. If you switch between the two solutions while on the *dev* branch then temporarily configure the Hastlayer shell to use the Client flavor (see `IHastlayerConfiguration`).
 
-To allow the same code in the samples and elsewhere to support both scenarios Orchard's dynamic module loading needs to be utilized. For this to work *Hast.Core* projects should adhere to the following:
+To allow the same code in the samples and elsewhere to support both scenarios dynamic library loading is utilized. For this to work *Hast.Core* projects should adhere to the following:
 
+- The built DLL name to start with "Hast."
 - Their projects need to be located in a subfolder of *Hast.Core*.
-- They should include a *Module.txt* file (can be empty or can contain the usual Orchard configuration like `Dependencies`).
 - Both the Debug and Release build output directories should be set just to *bin\\*.
 
 If a *Hast.Core* projects needs to have types accessible in the Client flavor then create a corresponding `Abstractions` project. Such projects should follow the same rules listed above as *Hast.Core* projects with the only difference being that they should be located in a subfolder of *Hast.Abstractions*. Exceptions are projects that are directly added as imported extensions in `Hast.Layer`: Those can be just normal projects (like `Hast.Transformer.Abstractions`).
@@ -36,6 +36,6 @@ When merging from the `dev` to the `client` branch make sure to not merge entrie
 If you add a new project to the solution make sure link the *SharedAssemblyInfo.cs* file from the root to its Properties node. See the comments in the file on what that is.
 
 
-## Notes on Orchard
+## Notes on dynamically linked projects
 
-Be aware that Hastlayer is a desktop [Orchard](https://orchardproject.net) application using [Orchard ApplicationHost](https://github.com/Lombiq/Orchard-Application-Host). Thus for example the Core projects are loaded dynamically as modules. Because of this if you change something in those (i.e. in projects that are not directly or indirectly statically referenced from the currently executing assembly) then you need to do an explicit rebuild (F6) instead of just starting debugging (F5).
+Be aware that Hastlayer is a modular application using dynamic linking to scan for and attach non-essential components; for example the Core projects. Because of this if you change something in those (i.e. in projects that are not directly or indirectly statically referenced from the currently executing assembly), then you need to explicitly build the projects in question so msbuild can deploy them to the dependencies folder.

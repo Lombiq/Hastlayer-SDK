@@ -8,8 +8,7 @@ The Hastlayer developer story is not ideal yet - we're working on improving it b
 
 1. Clone the Hastlayer repository into a subfolder of your application.
 2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.SDK.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
-3. Instruct NuGet to use the *Orchard\src\packages* folder under the Hastlayer folder. You can do this by adding a *NuGet.config* file to the same folder where your solution file is ([this example](Attachments/NuGet.config) again uses the *Hastlayer* subfolder).
-4. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
+3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
 
 When Hastlayer is updated you can just pull in changes from the official Hastlayer repository, but you'll need to keep your solution file up to date by hand.
 
@@ -95,7 +94,7 @@ When you're working with the Developer flavor of Hastlayer it can also help to s
 
 ## Extensibility
 
-Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability to override implementations of services through the DI container) provides three kind of extension points:
+Hastlayer offers similar extensibility found in standard Orchard 1.x. (Although with the caveat that service implementations don't overrider each other so the user needs to manage it in the HastlayerConfiguration.) Additionally, it provides these extension points:
 3. Waits for the `Task`s to finish and takes their results.
 
 The `ParallelAlgorithm` sample does exactly this.
@@ -108,5 +107,4 @@ Very broadly speaking if you performance-optimize your .NET code and it executes
 ## Troubleshooting
 
 - .NET-style events: standard .NET events.
-- Orchard-style events: event handlers that can be hooked into by implementing the event handler interface.
 - Pipeline steps: unlike event handlers, pipeline steps are executed in deterministic order and usually have a return value that is fed to the next pipeline step.

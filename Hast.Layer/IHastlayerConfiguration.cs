@@ -32,7 +32,7 @@ namespace Hast.Layer
 
         /// <summary>
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
-        /// pipeline. These should be Orchard extensions.
+        /// pipeline. These should include services that implement <see cref="IDependency"/> directly or indirectly.
         /// </summary>
         IEnumerable<Assembly> Extensions { get; }
 
