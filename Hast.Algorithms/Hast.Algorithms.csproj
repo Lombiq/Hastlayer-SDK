@@ -8,6 +8,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Hast.Algorithms.Tests\**" />
+    <EmbeddedResource Remove="Hast.Algorithms.Tests\**" />
+    <None Remove="Hast.Algorithms.Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
@@ -15,9 +20,5 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Hast.Algorithms.Tests\Fix64Tests.cs" />
-    <Compile Remove="Hast.Algorithms.Tests\Properties\AssemblyInfo.cs" />
   </ItemGroup>
 </Project>

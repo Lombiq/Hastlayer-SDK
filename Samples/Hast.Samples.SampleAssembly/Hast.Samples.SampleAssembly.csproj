@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
+    <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
