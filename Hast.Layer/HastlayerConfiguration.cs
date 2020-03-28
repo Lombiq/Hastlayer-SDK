@@ -16,7 +16,12 @@ namespace Hast.Layer
         public IEnumerable<Assembly> Extensions { get; set; } = new List<Assembly>();
 
         /// <inheritdoc/>
-        public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Developer;
+        public HastlayerFlavor Flavor { get; set; } =
+#if WITH_HAST_CORE
+            HastlayerFlavor.Developer;
+#else
+            HastlayerFlavor.Client;
+#endif
 
         /// <inheritdoc/>
         public string AppDataFolderPath { get; set; } = null;

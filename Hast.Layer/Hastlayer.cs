@@ -26,7 +26,6 @@ namespace Hast.Layer
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
-
         // Private so the static factory should be used.
         private Hastlayer(IHastlayerConfiguration configuration)
         {
@@ -62,7 +61,7 @@ namespace Hast.Layer
                 {
                     services.RemoveImplementationsExcept<ITransformer>("RemoteTransformer");
                 }
-                else
+                else if (configuration.Flavor == HastlayerFlavor.Developer)
                 {
                     services.RemoveImplementationsExcept<ITransformer>("DefaultTransformer");
                 }
