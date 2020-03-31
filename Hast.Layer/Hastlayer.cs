@@ -57,13 +57,19 @@ namespace Hast.Layer
             var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
             if (transformerServices.Count > 1)
             {
-                if (configuration.Flavor == HastlayerFlavor.Client)
+                switch (configuration.Flavor)
                 {
-                    services.RemoveImplementationsExcept<ITransformer>("RemoteTransformer");
-                }
-                else if (configuration.Flavor == HastlayerFlavor.Developer)
-                {
-                    services.RemoveImplementationsExcept<ITransformer>("DefaultTransformer");
+                    case HastlayerFlavor.Client:
+                        services.RemoveImplementationsExcept<ITransformer>("RemoteTransformer");
+                        break;
+                    case HastlayerFlavor.Developer:
+                        services.RemoveImplementationsExcept<ITransformer>("DefaultTransformer");
+                        break;
+                    case HastlayerFlavor.Inert:
+                        services.RemoveImplementationsExcept<ITransformer>("NullTransformer");
+                        break;
+                    default:
+                        throw new ArgumentException($"Unknown flavor in configuration: '{configuration.Flavor}'");
                 }
             }
 
@@ -97,16 +103,19 @@ namespace Hast.Layer
         }
 
         public async Task<IHardwareRepresentation> GenerateHardware(
-            IEnumerable<string> assembliesPaths,
+            IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration)
         {
+            // Avoid repeated multiple enumerations.
+            var assembliesPaths = assemblyPaths.ToList();
+            
             Argument.ThrowIfNull(assembliesPaths, nameof(assembliesPaths));
             if (!assembliesPaths.Any())
             {
                 throw new ArgumentException("No assemblies were specified.");
             }
 
-            if (assembliesPaths.Count() != assembliesPaths.Distinct().Count())
+            if (assembliesPaths.Count != assembliesPaths.Distinct().Count())
             {
                 throw new ArgumentException(
                     "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
