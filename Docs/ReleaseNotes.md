@@ -15,6 +15,8 @@ Note that the Hardware Framework projects have their own release cycle and relea
 - Added support for inlining methods with multiple return statements.
 - Added a documentation page with benchmarks.
 
+Note that running Hastlayer now requires Visual Studio 2019 or greater (any edition will work).
+
 
 ## v1.1, 20.12.2019
 
