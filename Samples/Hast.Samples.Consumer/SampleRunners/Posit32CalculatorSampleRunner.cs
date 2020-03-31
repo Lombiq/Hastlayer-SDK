@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Lombiq.Arithmetics;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -15,6 +12,9 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Posit32Calculator>();
+            // Use the below config if you just want to transform only ParallelizedCalculateIntegerSumUpToNumbers to
+            // hardware.
+            //configuration.AddHardwareEntryPointMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers((SimpleMemory)null));
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)

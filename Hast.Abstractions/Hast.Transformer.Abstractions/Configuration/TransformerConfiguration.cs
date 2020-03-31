@@ -121,5 +121,5 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// <param name="expression">An expression with a call to the method.</param>
         public void AddAdditionalInlinableMethod<T>(Expression<Action<T>> expression) =>
             AdditionalInlinableMethodsFullNames.Add(expression.GetMethodFullName());
-        }
+    }
 }

@@ -41,21 +41,26 @@ namespace Hast.Xilinx.Abstractions
             CreateDirectoryIfDoesntExist(hardwareFrameworkPath);
 
 
-            string vhdlFileSubPath;
+            string vhdlFilePath;
             if (isNexys)
             {
                 CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "IPRepo"));
-                vhdlFileSubPath = Path.Combine(hardwareFrameworkPath, "IPRepo", "Hast_IP.vhd");
+                vhdlFilePath = Path.Combine(hardwareFrameworkPath, "IPRepo", "Hast_IP.vhd");
             }
-            else vhdlFileSubPath = Path.Combine(hardwareFrameworkPath, "Hast_IP.vhd");
+            else
+            {
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "src"));
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "src", "IP"));
+                vhdlFilePath = Path.Combine(hardwareFrameworkPath, "src", "IP", "Hast_IP.vhd");
+            }
 
-            File.WriteAllText(vhdlFileSubPath, vhdlHardwareDescription.VhdlSource);
+            File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
 
             string xdcFileSubPath;
 
             if (isNexys) xdcFileSubPath = "Nexys4DDR_Master.xdc";
-            else xdcFileSubPath = "Hast_IP.xdc";
+            else xdcFileSubPath = Path.Combine("src", "IP", "Hast_IP.xdc");
 
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";

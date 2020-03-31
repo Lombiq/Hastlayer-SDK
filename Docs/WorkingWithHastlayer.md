@@ -79,22 +79,6 @@ In the ideal case your algorithm will do the following (can happen repeatedly of
 
 1. Produces all the data necessary for parallel execution.
 2. Feeds this data to multiple parallel `Task`s as their inputs and starts these `Task`s.
-Very broadly speaking if you performance-optimize your .NET code and it executes faster afterwards as software then most possibly it will improve as hardware. But do measure if your optimizations have the desired effect.
-
-If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
-
-If during transformation there's a warning (i.e. some issue that doesn't necessarily make the result wrong but you should know about it) then that will be added to the result of the `IHastlayer.GenerateHardware()` call (inside `HardwareDescription`) as well as to the logs and to Visual's Studio's Debug window when run in Debug mode.
-
-You can configure Hastlayer to check whether the hardware execution's results are correct by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects. This will also run everything as software, compare the software output with the hardware output and throw exceptions if they're off.
-
-If the result of the hardware execution is wrong then you can use `SimpleMemory` to write out intermediate values and check where the execution goes wrong. Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys A7 you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
-
-When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `saveSyntaxTree`.
-
-
-## Extensibility
-
-Hastlayer offers similar extensibility found in standard Orchard 1.x. (Although with the caveat that service implementations don't overrider each other so the user needs to manage it in the HastlayerConfiguration.) Additionally, it provides these extension points:
 3. Waits for the `Task`s to finish and takes their results.
 
 The `ParallelAlgorithm` sample does exactly this.
@@ -105,6 +89,31 @@ Very broadly speaking if you performance-optimize your .NET code and it executes
 
 
 ## Troubleshooting
+
+If any error happens during runtime Hastlayer will throw an exception (mostly but not exclusively a `HastlayerException`) and the error will be also logged. Log files are located in the `App_Data\Logs` folder under your app's execution folder.
+
+If during transformation there's a warning (i.e. some issue that doesn't necessarily make the result wrong but you should know about it) then that will be added to the result of the `IHastlayer.GenerateHardware()` call (inside `HardwareDescription`) as well as to the logs and to Visual's Studio's Debug window when run in Debug mode.
+
+You can configure Hastlayer to check whether the hardware execution's results are correct by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects. This will also run everything as software, compare the software output with the hardware output and throw exceptions if they're off.
+
+If the result of the hardware execution is wrong then you can use `SimpleMemory` to write out intermediate values and check where the execution goes wrongs, something like this:
+
+    var i = 0;
+    // Do some stuff.
+    memory.WriteInt32(i++, value1);
+    // Do some stuff.
+    memory.WriteInt32(i++, value2);
+
+Think of these as breakpoints where you read out variable values with the debugger. The point is to get to shave down the code to a state where it's still incorrect, and removing a single thing will make it correct. The difference will show what's faulty and then that can be debugged further.
+
+Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys A7 you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
+
+When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `saveSyntaxTree`.
+
+
+## Extensibility
+
+Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability to override implementations of services through the DI container) provides three kind of extension points:Hastlayer offers similar extensibility found in standard Orchard 1.x. (Although with the caveat that service implementations don't overrider each other so the user needs to manage it in the HastlayerConfiguration.) Additionally, it provides these extension points:Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability to override implementations of services through the DI container) provides three kind of extension points:
 
 - .NET-style events: standard .NET events.
 - Pipeline steps: unlike event handlers, pipeline steps are executed in deterministic order and usually have a return value that is fed to the next pipeline step.
