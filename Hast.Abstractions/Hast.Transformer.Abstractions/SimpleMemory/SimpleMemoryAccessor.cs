@@ -3,7 +3,7 @@
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
     /// <summary>
-    /// Facilitates read and overwrite of the <see cref="SimpleMemory.Memory"/> for outside users. (like DMA)
+    /// Facilitates read and overwrite of the <see cref="SimpleMemory.Memory"/> for outside users (like DMA).
     /// </summary>
     public class SimpleMemoryAccessor
     {
