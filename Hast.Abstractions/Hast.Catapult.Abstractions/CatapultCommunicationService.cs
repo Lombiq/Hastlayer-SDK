@@ -28,7 +28,7 @@ namespace Hast.Catapult.Abstractions
             _devicePoolManager = devicePoolManager;
         }
 
-        private void Device_Disposing(object sender, EventArgs e) => 
+        private void Device_Disposing(object sender, EventArgs e) =>
             ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
         #region Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
@@ -87,7 +87,7 @@ namespace Hast.Catapult.Abstractions
                             return null;
                         }
                     })));
-                
+
                 return libraries
                     .Where(x => x != null)
                     .Select(x => new Device(x.InstanceName, x, Device_Disposing));
@@ -102,7 +102,6 @@ namespace Hast.Catapult.Abstractions
                 var dma = new SimpleMemoryAccessor(simpleMemory);
 
                 // Sending the data.
-                //var task = lib.AssignJob(memberId, dma.Get());
                 var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
                 var outputBuffer = await task;
 
@@ -116,7 +115,7 @@ namespace Hast.Catapult.Abstractions
                     outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
 
                 if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
-                dma.Set(outputBuffer, Constants.OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
+                dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
                 Logger.Information("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
                 EndExecution(context);
