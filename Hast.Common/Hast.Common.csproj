@@ -60,6 +60,7 @@
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\MemberNameExtensions.cs" />
     <Compile Include="Helpers\Sha2456Helper.cs" />
+    <Compile Include="Models\ISoftwareExecutionInformation.cs" />
     <Compile Include="Models\VhdlHardwareDescription.cs" />
     <Compile Include="Models\IDeviceManifest.cs" />
     <Compile Include="Models\IHardwareExecutionInformation.cs" />

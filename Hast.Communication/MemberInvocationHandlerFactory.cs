@@ -11,6 +11,7 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 using Orchard;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -77,7 +78,13 @@ namespace Hast.Communication
 
                             if (invocationContext.HardwareExecutionIsCancelled)
                             {
+                                var softwareExecutionStopwatch = Stopwatch.StartNew();
                                 invocation.Proceed();
+                                softwareExecutionStopwatch.Stop();
+                                invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
+                                {
+                                    SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
+                                };
 
                                 if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
                                 {
@@ -128,9 +135,15 @@ namespace Hast.Communication
                                         .Index;
                                     invocation.SetArgumentValue(memoryArgumentIndex, softMemory);
 
+                                    var softwareExecutionStopwatch = Stopwatch.StartNew();
                                     // This needs to happen before the awaited Execute() call below, otherwise the Task
                                     // in ReturnValue wouldn't be the original one any more.
                                     invocation.Proceed();
+                                    softwareExecutionStopwatch.Stop();
+                                    invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
+                                    {
+                                        SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
+                                    };
 
                                     if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
                                     {
@@ -142,7 +155,7 @@ namespace Hast.Communication
                                 var memberId = hardwareRepresentation
                                     .HardwareDescription
                                     .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
-                                invocationContext.ExecutionInformation = await workContext
+                                invocationContext.HardwareExecutionInformation = await workContext
                                     .Resolve<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)
                                     .Execute(
@@ -232,13 +245,19 @@ namespace Hast.Communication
             public IInvocation Invocation { get; set; }
             public string MemberFullName { get; set; }
             public IHardwareRepresentation HardwareRepresentation { get; set; }
-            public IHardwareExecutionInformation ExecutionInformation { get; set; }
+            public IHardwareExecutionInformation HardwareExecutionInformation { get; set; }
+            public ISoftwareExecutionInformation SoftwareExecutionInformation { get; set; }
         }
 
         private class HardwareExecutionContext : IHardwareExecutionContext
         {
             public IProxyGenerationConfiguration ProxyGenerationConfiguration { get; set; }
             public IHardwareRepresentation HardwareRepresentation { get; set; }
+        }
+
+        private class SoftwareExecutionInformation : ISoftwareExecutionInformation
+        {
+            public decimal SoftwareExecutionTimeMilliseconds { get; set; }
         }
     }
 }

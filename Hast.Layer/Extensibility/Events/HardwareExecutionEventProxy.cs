@@ -1,6 +1,6 @@
-﻿using System;
-using Hast.Communication.Extensibility;
+﻿using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
+using System;
 
 namespace Hast.Layer.Extensibility.Events
 {
@@ -46,7 +46,8 @@ namespace Hast.Layer.Extensibility.Events
                 new ExecutedOnHardwareEventArgs(
                     hardwareExecutionContext.HardwareRepresentation,
                     hardwareExecutionContext.MemberFullName,
-                    hardwareExecutionContext.ExecutionInformation));
+                    hardwareExecutionContext.HardwareExecutionInformation,
+                    hardwareExecutionContext.SoftwareExecutionInformation));
         }
     }
 }

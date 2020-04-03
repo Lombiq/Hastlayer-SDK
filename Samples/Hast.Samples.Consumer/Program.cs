@@ -91,6 +91,13 @@ namespace Hast.Samples.Consumer
                         " milliseconds (net) " +
                         e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                         " milliseconds (all together).");
+
+                    if (e.SoftwareExecutionInformation != null)
+                    {
+                        // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults
+                        // to true, see the notes below, or if the hardware execution was canceled.
+                        Console.WriteLine($"The software execution took {e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds} milliseconds.");
+                    }
                 };
 
 
