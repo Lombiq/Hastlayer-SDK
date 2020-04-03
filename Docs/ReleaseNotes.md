@@ -14,6 +14,7 @@ Note that the Hardware Framework projects have their own release cycle and relea
 - Added support for extension methods.
 - Added support for inlining methods with multiple return statements.
 - Added a documentation page with benchmarks.
+- Various smaller bugfixes and improvements.
 
 
 ## v1.1, 20.12.2019
