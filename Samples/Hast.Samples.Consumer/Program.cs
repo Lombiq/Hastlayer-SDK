@@ -191,7 +191,8 @@ namespace Hast.Samples.Consumer
 
                 Console.WriteLine("Hardware generation starts.");
 
-                // Generating hardware from the sample assembly with the given configuration.
+                // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug
+                // assemblies!
                 var hardwareRepresentation = await hastlayer.GenerateHardware(
                     new[]
                     {

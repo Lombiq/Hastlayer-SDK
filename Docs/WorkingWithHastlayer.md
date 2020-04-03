@@ -52,7 +52,7 @@ Some general constraints you have to keep in mind:
 
 ## Running your code on hardware
 
-Once you've written some Hastlayer-compatible algorithm and successfully generated hardware from it you'll be able to execute it on an FPGA as hardware. At the moment this needs to be configured manually, so check out the docs of the Hastlayer Hardware repo on how to get started with that.
+Once you've written some Hastlayer-compatible algorithm you can then generate hardware from it. Be sure to use assemblies built in the Debug configuration. Once you've successfully generated hardware from your algorithm then you'll be able to execute it on an FPGA as hardware. At the moment this needs to be configured manually, so check out the docs of the Hastlayer Hardware repo on how to get started with that.
 
 
 ## Performance-optimizing your code
