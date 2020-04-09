@@ -54,6 +54,14 @@ namespace Hast.Common.Services
                     {
                         serviceTypes.Add(implementedInterfaces);
                     }
+
+                    var initializerName = implementationType.GetCustomAttribute<IDependencyInitializerAttribute>()?.MemberName;
+                    if (!string.IsNullOrEmpty(initializerName))
+                    {
+                        var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static);
+                        if (method is null) throw new ArgumentException($"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
+                        method.Invoke(null, new object[] { services });
+                    }
                 }
 
                 foreach (var serviceType in serviceTypes)
