@@ -48,8 +48,8 @@ namespace Hast.Communication.Tester
             var channelName = selectedDevice.DefaultCommunicationChannelName;
 
 
-            var (memory, accessor) = GenerateMemory(configuration.PayloadType,
-                configuration.PayloadLengthCells, configuration.InputFileName);
+                var (memory, accessor) = GenerateMemory(
+                    configuration.PayloadType, configuration.PayloadLengthCells, configuration.InputFileName);
 
 
             // Save input to file using the format of the output file type.
@@ -102,13 +102,7 @@ namespace Hast.Communication.Tester
                         memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
                     break;
                 case PayloadType.BinaryFile:
-                    using (var fileStream = File.OpenRead(inputFileName))
-                    {
-                        int prefixBytes = 4 * SimpleMemory.MemoryCellSizeBytes;
-                        var data = new byte[fileStream.Length + prefixBytes];
-                        fileStream.Read(data, prefixBytes, (int)fileStream.Length);
-                        accessor.Set(data, 4);
-                    }
+                    accessor.Load(inputFileName, memory.PrefixCellCount);
                     break;
                 default:
                     throw new ArgumentException($"Unknown payload type: {type}.");
@@ -147,11 +141,7 @@ namespace Hast.Communication.Tester
                     {
                         if (string.IsNullOrEmpty(fileName)) fileName = fileNamePrefix + DefaultBinaryFileName;
                         Console.WriteLine("Saving {0} binary file to '{1}'...", direction, fileName);
-
-                        using var fileStream = File.OpenWrite(fileName);
-                        var accessor = new SimpleMemoryAccessor(memory);
-                        var segment = accessor.Get().GetUnderlyingArray();
-                        fileStream.Write(segment.Array, segment.Offset, memory.ByteCount);
+                        new SimpleMemoryAccessor(memory).Store(fileName);
                     }
                     break;
                 default:
