@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 
 namespace Hast.Common.Services
 {
@@ -7,13 +8,24 @@ namespace Hast.Common.Services
     {
         private readonly DirectoryInfo _appDataFolder;
 
+        private static string _currentDirectory = null;
+        public static string CurrentDirectory
+        {
+            get
+            {
+                if (_currentDirectory == null)
+                {
+                    _currentDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.FullName;
+                }
+                return _currentDirectory;
+            }
+        }
+
         public AppDataFolder(string appDataFolderPath)
         {
-            // Sets folder to %APPDATA%\Hastlayer on Windows and ~/.config/Hastlayer on Linux.
             if (string.IsNullOrEmpty(appDataFolderPath))
             {
-                appDataFolderPath = Path.Combine(Environment.GetFolderPath(
-                    Environment.SpecialFolder.ApplicationData), "Hastlayer");
+                appDataFolderPath = Path.Combine(CurrentDirectory, "App_Data");
             }
 
             _appDataFolder = new DirectoryInfo(appDataFolderPath);
