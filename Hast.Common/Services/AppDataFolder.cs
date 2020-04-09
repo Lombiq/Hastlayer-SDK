@@ -8,16 +8,19 @@ namespace Hast.Common.Services
     {
         private readonly DirectoryInfo _appDataFolder;
 
-        private static string _currentDirectory = null;
-        public static string CurrentDirectory
+        private static string _assemblyDirectory = null;
+        public static string AssemblyDirectory
         {
             get
             {
-                if (_currentDirectory == null)
+                if (_assemblyDirectory == null)
                 {
-                    _currentDirectory = new FileInfo(Assembly.GetEntryAssembly().Location).Directory.FullName;
+                    string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                    UriBuilder uri = new UriBuilder(codeBase);
+                    string path = Uri.UnescapeDataString(uri.Path);
+                    _assemblyDirectory = Path.GetDirectoryName(path);
                 }
-                return _currentDirectory;
+                return _assemblyDirectory;
             }
         }
 
@@ -25,7 +28,7 @@ namespace Hast.Common.Services
         {
             if (string.IsNullOrEmpty(appDataFolderPath))
             {
-                appDataFolderPath = Path.Combine(CurrentDirectory, "App_Data");
+                appDataFolderPath = Path.Combine(AssemblyDirectory, "App_Data");
             }
 
             _appDataFolder = new DirectoryInfo(appDataFolderPath);

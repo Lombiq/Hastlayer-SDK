@@ -45,7 +45,6 @@ namespace Hast.Layer
                 typeof(CatapultManifestProvider).Assembly
             });
             assemblies.AddRange(GetHastLibraries());
-            assemblies.AddRange(GetHastLibraries(appDataFolder.MapPath("Core")));
 
             var services = new ServiceCollection();
             services.AddIDependencyContainer(assemblies);
