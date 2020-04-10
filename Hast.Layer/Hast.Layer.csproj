@@ -13,15 +13,18 @@
     <DefineConstants>WITH_HAST_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK'">
+    <ProjectReference Include="..\Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.Transformer\Hast.Transformer.csproj" />
+    <ProjectReference Include="..\Hast.Core\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
+    <ProjectReference Include="..\Hast.Core\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj" />
+    <ProjectReference Include="..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
-    <ProjectReference Include="..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
