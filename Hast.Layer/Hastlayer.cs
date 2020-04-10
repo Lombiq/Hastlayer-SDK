@@ -8,6 +8,7 @@ using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -51,6 +52,7 @@ namespace Hast.Layer
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton<IHardwareExecutionEventHandlerHolder, HardwareExecutionEventHandlerHolder>();
+            services.AddSingleton(BuildConfiguration());
             configuration.OnServiceRegistration?.Invoke(configuration, services);
 
             var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
@@ -96,6 +98,12 @@ namespace Hast.Layer
         }
 
 
+        public static IConfiguration BuildConfiguration() =>
+            new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", true, true)
+                .Build();
+
+
         public void Dispose()
         {
             _serviceProvider.Dispose();
@@ -107,7 +115,7 @@ namespace Hast.Layer
         {
             // Avoid repeated multiple enumerations.
             var assembliesPaths = assemblyPaths.ToList();
-            
+
             Argument.ThrowIfNull(assembliesPaths, nameof(assembliesPaths));
             if (!assembliesPaths.Any())
             {
