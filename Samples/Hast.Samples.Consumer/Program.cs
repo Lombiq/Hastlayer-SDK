@@ -71,8 +71,9 @@ namespace Hast.Samples.Consumer
 
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need
             // the Client flavor: This will let you connect to a remote Hastlayer service to run the software
-            // to hardware transformation.
-            var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer };
+            // to hardware transformation. In most cases the flavor defaults to the one you need.
+            // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
+            var hastlayerConfiguration = new HastlayerConfiguration();
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object 
             // while the program runs and re-use it continuously. No need to always wrap it into a using() like 
@@ -315,13 +316,10 @@ namespace Hast.Samples.Consumer
             {
                 MainTask(args).Wait();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.Error.WriteLine(e);
+                Console.Error.WriteLine(ex);
             }
-
-            Console.WriteLine("Press any key to exit.");
-            Console.ReadKey();
         }
     }
 }
