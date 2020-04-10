@@ -23,7 +23,6 @@
     <ProjectReference Include="..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
-    <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
     <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj" />
   </ItemGroup>

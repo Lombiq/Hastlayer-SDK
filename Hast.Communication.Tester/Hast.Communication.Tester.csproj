@@ -8,13 +8,8 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj" />
-    <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
-    <ProjectReference Include="..\Hast.Algorithms\Hast.Algorithms.csproj" />
-    <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
     <ProjectReference Include="..\Hast.Layer\Hast.Layer.csproj" />
-    <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser">

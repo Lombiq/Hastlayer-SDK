@@ -10,7 +10,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj" />
     <ProjectReference Include="..\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
   </ItemGroup>
