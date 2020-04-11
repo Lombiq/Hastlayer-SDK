@@ -76,6 +76,7 @@ namespace Hast.Layer
 
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
+
         public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
 
         /// <summary>
