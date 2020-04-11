@@ -74,6 +74,15 @@ namespace Hast.Remote.Client
                         "This could indicate a problem with the service or that the assemblies contained exceptionally complex code.");
                 }
 
+                var localVersion = GetType().Assembly.GetName().Version.ToString();
+                if (transformationResult.RemoteHastlayerVersion != localVersion)
+                {
+                    throw new Exception(
+                        "The local version of Hastlayer is out of date compared to the remote one " +
+                        $"(remote version: {transformationResult.RemoteHastlayerVersion}, local version: {localVersion}). " +
+                        "Please update Hastlayer otherwise incompatibilities may occur.");
+                }
+
                 if (transformationResult.Errors?.Any() == true)
                 {
                     throw new Exception(
@@ -114,32 +123,6 @@ namespace Hast.Remote.Client
                 // and redirects the client to the Microsoft login screen (there doesn't seem to be a way to prevent
                 // this).
                 throw new RemoteTransformationException("Remote transformation failed because Hastlayer Remote Services returned an unexpected response. This might be because authorization failed (check if you mistyped your credentials) or because there is some issue with the service. If this error persists please get in touch with us under https://hastlayer.com/contact.", ex);
-            }
-        }
-
-
-        private class RemoteHardwareDescription : IHardwareDescription
-        {
-            public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; set; }
-            public string Language { get; set; }
-            public string Source { get; set; }
-            public IEnumerable<ITransformationWarning> Warnings { get; set; }
-
-            public Task Serialize(Stream stream)
-            {
-                throw new NotImplementedException();
-            }
-
-            public Task WriteSource(Stream stream)
-            {
-                using (var streamWriter = new StreamWriter(stream))
-                {
-                    // WriteAsync would throw a "The stream is currently in use by a previous operation on the stream." for
-                    // FileStreams, even though supposedly there's no operation on the stream.
-                    streamWriter.Write(Source);
-                }
-
-                return Task.CompletedTask;
             }
         }
     }

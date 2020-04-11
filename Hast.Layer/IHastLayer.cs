@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Hast.Communication.Services;
+using Hast.Layer.Extensibility.Events;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hast.Communication.Services;
-using Hast.Layer.Extensibility.Events;
 
 namespace Hast.Layer
 {
@@ -20,7 +20,8 @@ namespace Hast.Layer
         Task<IEnumerable<IDeviceManifest>> GetSupportedDevices();
 
         /// <summary>
-        /// Generates and implements a hardware representation of the given assemblies.
+        /// Generates and implements a hardware representation of the given assemblies. Be sure to use assemblies built
+        /// with the Debug configuration.
         /// </summary>
         /// <param name="assemblyPaths">The assemblies' paths that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
@@ -29,7 +30,7 @@ namespace Hast.Layer
         /// Thrown if any lower-level exception or other error happens during hardware generation.
         /// </exception>
         Task<IHardwareRepresentation> GenerateHardware(
-            IEnumerable<string> assemblyPaths, 
+            IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration);
 
         /// <summary>
@@ -44,8 +45,8 @@ namespace Hast.Layer
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
         Task<T> GenerateProxy<T>(
-            IHardwareRepresentation hardwareRepresentation, 
-            T hardwareObject, 
+            IHardwareRepresentation hardwareRepresentation,
+            T hardwareObject,
             IProxyGenerationConfiguration configuration) where T : class;
 
         /// <summary>

@@ -91,6 +91,13 @@ namespace Hast.Samples.Consumer
                         " milliseconds (net) " +
                         e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                         " milliseconds (all together).");
+
+                    if (e.SoftwareExecutionInformation != null)
+                    {
+                        // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults
+                        // to true, see the notes below, or if the hardware execution was canceled.
+                        Console.WriteLine($"The software execution took {e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds} milliseconds.");
+                    }
                 };
 
 
@@ -122,7 +129,7 @@ namespace Hast.Samples.Consumer
                     remoteClientConfiguration.AppSecret == "appsecret")
                 {
                     throw new InvalidOperationException(
-                        "You haven't changed the default remote credentials! Write to crew@hastlayer.com to receive access if you don't have yet.");
+                        "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
                 }
 
                 // If the sample was selected in the command line use that, or otherwise the default.
@@ -191,7 +198,8 @@ namespace Hast.Samples.Consumer
 
                 Console.WriteLine("Hardware generation starts.");
 
-                // Generating hardware from the sample assembly with the given configuration.
+                // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug
+                // assemblies!
                 var hardwareRepresentation = await hastlayer.GenerateHardware(
                     new[]
                     {

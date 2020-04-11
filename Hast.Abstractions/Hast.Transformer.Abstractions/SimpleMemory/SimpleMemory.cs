@@ -24,9 +24,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public int PrefixCellCount { get; internal set; } = 4;
 
         /// <summary>
-        /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be used
-        /// for passing in extra input parameters (like memberId) without having to copy the operative memory contents
-        /// into an auxiliary array.
+        /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be
+        /// used for passing in extra input parameters (like memberId) without having to copy the operative memory
+        /// contents into an auxiliary array.
         /// </summary>
         internal Memory<byte> PrefixedMemory { get; set; }
 
