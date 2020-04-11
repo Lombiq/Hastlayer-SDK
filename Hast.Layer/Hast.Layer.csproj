@@ -13,10 +13,12 @@
     <DefineConstants>WITH_HAST_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK'">
+    <ProjectReference Include="..\Hast.Core\Hast.Catapult\Hast.Catapult.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.Transformer\Hast.Transformer.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
+    <ProjectReference Include="..\Hast.Core\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj" />
