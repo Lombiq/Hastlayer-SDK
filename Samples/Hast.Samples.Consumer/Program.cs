@@ -110,7 +110,7 @@ namespace Hast.Samples.Consumer
             }
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
-            var devices = await hastlayer.GetSupportedDevices();
+            var devices = hastlayer.GetSupportedDevices();
             if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
 
             // Let's just use the first one that is available unless it's specified.

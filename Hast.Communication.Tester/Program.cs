@@ -26,7 +26,7 @@ namespace Hast.Communication.Tester
             using var hastlayer = Hastlayer.Create(new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer });
 
             // Get devices and if asked exit with the device list.
-            var devices = await hastlayer.GetSupportedDevices();
+            var devices = hastlayer.GetSupportedDevices();
             if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
 
             if (configuration.ListDevices)
@@ -59,7 +59,8 @@ namespace Hast.Communication.Tester
             var referenceMemory = configuration.NoCheck ? null : SimpleMemoryAccessor.Create(accessor.Get());
 
             Console.WriteLine("Starting hardware execution.");
-            var communicationService = await hastlayer.GetCommunicationService(channelName);
+            using var communicationServiceContainer = hastlayer.GetCommunicationService(channelName);
+            var communicationService = communicationServiceContainer.Value;
             communicationService.TesterOutput = Console.Out;
             var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
                 selectedDevice.DefaultCommunicationChannelName);

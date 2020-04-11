@@ -207,21 +207,32 @@ namespace Hast.Layer
             }
         }
 
-        public async Task<ICommunicationService> GetCommunicationService(string communicationChannelName) => await Task.Run(() =>
+        public DisposableContainer<ICommunicationService> GetCommunicationService(string communicationChannelName)
         {
-            using (var scope = _serviceProvider.CreateScope())
+            IServiceScope scope = null;
+            try
             {
-                return scope.ServiceProvider.GetService<ICommunicationServiceSelector>().GetCommunicationService(communicationChannelName);
+                scope = _serviceProvider.CreateScope();
+                var communicationService = scope.ServiceProvider
+                    .GetService<ICommunicationServiceSelector>()
+                    .GetCommunicationService(communicationChannelName);
+                return new DisposableContainer<ICommunicationService>(scope, communicationService);
             }
-        });
+            catch
+            {
+                scope?.Dispose();
+                throw;
+            }
+        }
 
-        public Task<IEnumerable<IDeviceManifest>> GetSupportedDevices() => Task.Run(() =>
+        public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {
+            // This is fine because IDeviceManifest doesn't contain anything disposable.
             using (var scope = _serviceProvider.CreateScope())
             {
                 return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
             }
-        });
+        }
 
         public async Task RunAsync<T>(Func<T, Task> process)
         {
@@ -231,6 +242,11 @@ namespace Hast.Layer
 
         public async Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process)
         {
+            if (typeof(IDisposable).IsAssignableFrom(typeof(Tout)))
+            {
+                throw new InvalidOperationException($"The type return type (used: {typeof(Tout).FullName}) must not be disposable.");
+            }
+
             using (var scope = _serviceProvider.CreateScope())
                 return await process(scope.ServiceProvider);
         }

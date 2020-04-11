@@ -38,7 +38,7 @@ namespace Hast.Samples.Kpz
             };
 
             var configuration = new HardwareGenerationConfiguration(
-                (await hastlayer.GetSupportedDevices()).First().Name,
+                hastlayer.GetSupportedDevices().First().Name,
                 "HardwareFramework");
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;

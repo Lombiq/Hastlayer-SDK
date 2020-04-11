@@ -1,4 +1,5 @@
-﻿using Hast.Communication.Services;
+﻿using Hast.Common.Services;
+using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Hast.Layer
         /// Gets those devices which have their support drivers loaded.
         /// </summary>
         /// <returns>Those devices which have their support drivers loaded.</returns>
-        Task<IEnumerable<IDeviceManifest>> GetSupportedDevices();
+        IEnumerable<IDeviceManifest> GetSupportedDevices();
 
         /// <summary>
         /// Generates and implements a hardware representation of the given assemblies. Be sure to use assemblies built
@@ -54,6 +55,6 @@ namespace Hast.Layer
         /// </summary>
         /// <param name="communicationChannelName">The <see cref="ICommunicationService.ChannelName"/> value.</param>
         /// <returns>The matching communication service.</returns>
-        Task<ICommunicationService> GetCommunicationService(string communicationChannelName);
+        DisposableContainer<ICommunicationService> GetCommunicationService(string communicationChannelName);
     }
 }
