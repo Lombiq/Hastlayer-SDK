@@ -20,23 +20,6 @@ namespace Hast.Common.Services
             Value = value;
         }
 
-        /// <summary>
-        /// Creates a new instance with the specified value and removes the context from this instance.
-        /// </summary>
-        /// <typeparam name="T2">The value type of the result.</typeparam>
-        /// <param name="value">The value exposed value of the result.</param>
-        /// <returns>The result which will own this instance's context.</returns>
-        /// <remarks>
-        /// This instance is still responsible for the lifecylce of the <see cref="Value"/> and disposes of it, if
-        /// <see cref="IDisposable"/>
-        /// </remarks>
-        public DisposableContainer<T2> TransferContext<T2>(T2 value)
-        {
-            var newContainer = new DisposableContainer<T2>(_context, value);
-            _context = null;
-            return newContainer;
-        }
-
         public void Dispose()
         {
             if (_disposed) return;
