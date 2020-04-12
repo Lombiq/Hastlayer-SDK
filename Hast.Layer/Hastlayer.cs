@@ -241,16 +241,17 @@ namespace Hast.Layer
                 await process(scope.ServiceProvider.GetService<T>());
         }
 
-        public async Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process)
+        public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
-            if (typeof(IDisposable).IsAssignableFrom(typeof(Tout)))
+            if (typeof(IDisposable).IsAssignableFrom(typeof(TOut)))
             {
-                throw new InvalidOperationException($"The type return type (used: {typeof(Tout).FullName}) must not be disposable.");
+                throw new InvalidOperationException($"The type return type (used: {typeof(TOut).FullName}) must not be disposable.");
             }
 
             using (var scope = _serviceProvider.CreateScope())
                 return await process(scope.ServiceProvider);
         }
+
 
         private void LoadHost()
         {
