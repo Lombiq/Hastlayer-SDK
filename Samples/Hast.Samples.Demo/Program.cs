@@ -62,8 +62,6 @@ namespace Hast.Samples.Demo
                 var output3 = parallelAlgorithm.Run(9999);
                 #endregion
             }).Wait();
-
-            Console.ReadKey();
         }
     }
 }
