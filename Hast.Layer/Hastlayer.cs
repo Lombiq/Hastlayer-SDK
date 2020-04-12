@@ -1,5 +1,4 @@
 ﻿using Hast.Catapult.Abstractions;
-using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -76,7 +75,7 @@ namespace Hast.Layer
                 }
             }
 
-            _serviceNames = services.Select(x => x.ServiceType.Name).ToList();
+            _serviceNames = services.Select(serviceDescriptor => serviceDescriptor.ServiceType.Name).ToList();
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
