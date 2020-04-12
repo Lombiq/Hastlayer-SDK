@@ -25,7 +25,7 @@ namespace Hast.Communication
         private readonly IServiceProvider _serviceProvider;
 
         public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
-        public event EventHandler<IMemberInvocationPipelineStepContext> MemberInvoking;
+        public event EventHandler<IMemberInvocationContext> MemberInvoking;
 
 
         public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)

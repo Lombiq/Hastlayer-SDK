@@ -1,7 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Hast.Common.Interfaces;
+using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
-using Hast.Communication.Extensibility.Pipeline;
 using Hast.Layer;
 using System;
 
@@ -25,7 +25,7 @@ namespace Hast.Communication
     public interface IMemberInvocationHandlerFactory : ISingletonDependency
     {
         event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
-        event EventHandler<IMemberInvocationPipelineStepContext> MemberInvoking;
+        event EventHandler<IMemberInvocationContext> MemberInvoking;
 
         MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration);
     }
