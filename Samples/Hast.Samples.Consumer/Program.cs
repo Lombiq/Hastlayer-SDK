@@ -92,12 +92,12 @@ namespace Hast.Samples.Consumer
                     e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                     " milliseconds (all together).");
 
-                    if (e.SoftwareExecutionInformation != null)
-                    {
-                        // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults
-                        // to true, see the notes below, or if the hardware execution was canceled.
-                        Console.WriteLine($"The software execution took {e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds} milliseconds.");
-                    }
+                if (e.SoftwareExecutionInformation != null)
+                {
+                    // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults
+                    // to true, see the notes below, or if the hardware execution was canceled.
+                    Console.WriteLine($"The software execution took {e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds} milliseconds.");
+                }
             };
 
 
@@ -198,8 +198,8 @@ namespace Hast.Samples.Consumer
 
             Console.WriteLine("Hardware generation starts.");
 
-                // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug
-                // assemblies!
+            // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug
+            // assemblies!
             var hardwareRepresentation = await hastlayer.GenerateHardware(
                 new[]
                 {
@@ -310,8 +310,7 @@ namespace Hast.Samples.Consumer
 
         static async Task Main(string[] args)
         {
-            // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
-            // inside a console app.
+            // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
             try
             {
                 await MainTask(args);
