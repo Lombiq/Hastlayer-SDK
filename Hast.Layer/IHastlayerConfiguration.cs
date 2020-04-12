@@ -42,7 +42,8 @@ namespace Hast.Layer
         IEnumerable<Assembly> Extensions { get; }
 
         /// <summary>
-        /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Developer"/>.
+        /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Client"/> in
+        /// the client SDK and <see cref="HastlayerFlavor.Developer"/> otherwise.
         /// </summary>
         HastlayerFlavor Flavor { get; }
 

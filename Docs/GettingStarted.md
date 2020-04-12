@@ -15,7 +15,7 @@ To begin working with Hastlayer you'll need the following:
     - Using [Xilinx Alveo U200, U250 or U280 Data Center Accelerator Cards](https://www.xilinx.com/products/boards-and-kits/alveo.html) on-premise or in the cloud. In the cloud these cards are currently available at [Nimbix](https://www.nimbix.net/).
     - Using [AWS EC2 F1 instances](https://aws.amazon.com/ec2/instance-types/f1/).
 - [Visual Studio 2019 or later](https://www.visualstudio.com/downloads/) installed (any edition will work).
-- On Linux you need to install the [Mono project's](https://www.mono-project.com/) implementation of [libgdiplus](https://github.com/mono/libgdiplus). On CentOS you need the "libgdiplus" package, while on Debian systems such as Ubuntu you need "libgdiplus" and "libc6-dev" too.
+- On Linux  if you are going to use System.Drawing (eg. the ImageProcessingAlgorithms sample) you need to install the [Mono project's](https://www.mono-project.com/) implementation of [libgdiplus](https://github.com/mono/libgdiplus). On CentOS you need the "libgdiplus" package, while on Debian systems such as Ubuntu you need "libgdiplus" and "libc6-dev" too.
 
 Catapult acknowledgment: The authors acknowledge the [Texas Advanced Computing Center (TACC)](http://www.tacc.utexas.edu) at The University of Texas at Austin for providing HPC resources that have contributed to the development of this project. This material is based on work supported by access to [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) hardware and technology donated by Microsoft.
 

@@ -131,6 +131,7 @@ namespace Hast.Layer
 
             try
             {
+                // This is fine because IHardwareRepresentation doesn't contain anything disposable.
                 using (var scope = _serviceProvider.CreateScope())
                 {
                     var transformer = scope.ServiceProvider.GetService<ITransformer>();
