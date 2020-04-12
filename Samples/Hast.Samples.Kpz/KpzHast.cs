@@ -27,7 +27,8 @@ namespace Hast.Samples.Kpz
 
             LogItFunction("Creating Hastlayer Factory...");
 
-            using var hastlayer = Hastlayer.Create();
+            // No "using" here since we are returning this object.
+            var hastlayer = Hastlayer.Create();
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
