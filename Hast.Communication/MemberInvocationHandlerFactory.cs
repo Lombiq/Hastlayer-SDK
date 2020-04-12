@@ -24,6 +24,9 @@ namespace Hast.Communication
     {
         private readonly IServiceProvider _serviceProvider;
 
+        public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
+        public event EventHandler<IMemberInvocationPipelineStepContext> MemberInvoking;
+
 
         public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)
         {
@@ -59,7 +62,7 @@ namespace Hast.Communication
                                 HardwareRepresentation = hardwareRepresentation
                             };
 
-                            InvokeEventHandlers<IMemberInvocationPipelineStepContext>(scope.ServiceProvider, invocationContext);
+                            MemberInvoking?.Invoke(this, invocationContext);
 
                             scope.ServiceProvider.GetService<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                                 {
@@ -202,7 +205,7 @@ namespace Hast.Communication
                                     "Only SimpleMemory-using implementations are supported for hardware execution. The invocation didn't include a SimpleMemory argument.");
                             }
 
-                            InvokeEventHandlers<IMemberHardwareExecutionContext>(scope.ServiceProvider, invocationContext);
+                            MemberExecutedOnHardware?.Invoke(this, invocationContext);
                         }
                     }
 
@@ -216,12 +219,6 @@ namespace Hast.Communication
                         invocationHandler().Wait();
                     }
                 };
-        }
-
-        private void InvokeEventHandlers<T>(IServiceProvider provider, T context) where T : IMemberInvocationContext
-        {
-            var eventHandlers = provider.GetService<IEnumerable<EventHandler<T>>>();
-            foreach (var eventHandler in eventHandlers) eventHandler?.Invoke(this, context);
         }
 
         // Code taken from http://stackoverflow.com/a/28374134/220230

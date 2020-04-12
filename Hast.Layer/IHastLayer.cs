@@ -13,6 +13,7 @@ namespace Hast.Layer
         /// Occurs when the member invocation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
         event ExecutedOnHardwareEventHandler ExecutedOnHardware;
+        event InvokingEventHandler Invoking;
 
         /// <summary>
         /// Gets those devices which have their support drivers loaded.

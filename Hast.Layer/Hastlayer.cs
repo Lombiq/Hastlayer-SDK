@@ -3,6 +3,7 @@ using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
+using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
@@ -28,6 +29,7 @@ namespace Hast.Layer
         private readonly List<string> _serviceNames;
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
+        public event InvokingEventHandler Invoking;
 
         // Private so the static factory should be used.
         private Hastlayer(IHastlayerConfiguration configuration)
@@ -53,7 +55,6 @@ namespace Hast.Layer
             services.AddIDependencyContainer(assemblies);
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
-            services.AddSingleton<IHardwareExecutionEventHandlerHolder, HardwareExecutionEventHandlerHolder>();
             services.AddSingleton(BuildConfiguration());
             configuration.OnServiceRegistration?.Invoke(configuration, services);
 
@@ -308,8 +309,9 @@ namespace Hast.Layer
                 if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
             }
 
-            _serviceProvider.GetService<IHardwareExecutionEventHandlerHolder>()
-                .RegisterExecutedOnHardwareEventHandler(eventArgs => ExecutedOnHardware?.Invoke(this, eventArgs));
+            var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
+            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, context);
+            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, context);
         }
 
         private void LogException(Exception exception, string message) =>
