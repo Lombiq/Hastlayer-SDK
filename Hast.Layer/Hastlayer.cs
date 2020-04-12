@@ -25,7 +25,7 @@ namespace Hast.Layer
     {
         private readonly IHastlayerConfiguration _configuration;
         private readonly ServiceProvider _serviceProvider;
-        private readonly List<string> _serviceNames;
+        private readonly HashSet<string> _serviceNames;
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
         public event InvokingEventHandler Invoking;
@@ -76,7 +76,7 @@ namespace Hast.Layer
                 }
             }
 
-            _serviceNames = services.Select(serviceDescriptor => serviceDescriptor.ServiceType.Name).ToList();
+            _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.Name));
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
