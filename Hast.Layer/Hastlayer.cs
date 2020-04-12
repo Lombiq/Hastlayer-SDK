@@ -1,4 +1,5 @@
 ﻿using Hast.Catapult.Abstractions;
+using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -24,6 +25,7 @@ namespace Hast.Layer
     {
         private readonly IHastlayerConfiguration _configuration;
         private readonly ServiceProvider _serviceProvider;
+        private readonly List<string> _serviceNames;
 
         public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
 
@@ -74,6 +76,7 @@ namespace Hast.Layer
                 }
             }
 
+            _serviceNames = services.Select(x => x.ServiceType.Name).ToList();
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
@@ -131,7 +134,7 @@ namespace Hast.Layer
 
             try
             {
-                // This is fine because IHardwareRepresentation doesn't contain anything disposable.
+                // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
                     var transformer = scope.ServiceProvider.GetService<ITransformer>();
@@ -228,7 +231,7 @@ namespace Hast.Layer
 
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {
-            // This is fine because IDeviceManifest doesn't contain anything disposable.
+            // This is fine because IDeviceManifest doesn't contain anything that relies on the scope.
             using (var scope = _serviceProvider.CreateScope())
             {
                 return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
@@ -243,9 +246,9 @@ namespace Hast.Layer
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
-            if (typeof(IDisposable).IsAssignableFrom(typeof(TOut)))
+            if (_serviceNames.Contains(typeof(TOut).Name))
             {
-                throw new InvalidOperationException($"The type return type (used: {typeof(TOut).FullName}) must not be disposable.");
+                throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
             }
 
             using (var scope = _serviceProvider.CreateScope())
