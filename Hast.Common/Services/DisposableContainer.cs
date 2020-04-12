@@ -1,27 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hast.Common.Services
 {
-    public class DisposableContainer<T> : IDisposable
+    public sealed class DisposableContainer<T> : IDisposable
     {
-        private IDisposable context;
+        private IDisposable _context;
 
         public T Value { get; }
 
+
         public DisposableContainer(IDisposable context, T value)
         {
-            this.context = context;
+            _context = context;
             Value = value;
         }
 
         public void Dispose()
         {
-            if (context is null) return;
-            
-            context.Dispose();
-            context = null;
+            if (_context is null) return;
+
+            _context.Dispose();
+            _context = null;
             if (Value is IDisposable disposableValue) disposableValue?.Dispose();
         }
     }
