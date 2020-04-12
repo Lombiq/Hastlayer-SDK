@@ -2,7 +2,6 @@
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
-using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
@@ -105,6 +104,7 @@ namespace Hast.Layer
         public static IConfiguration BuildConfiguration() =>
             new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true, true)
+                .AddEnvironmentVariables()
                 .Build();
 
 
