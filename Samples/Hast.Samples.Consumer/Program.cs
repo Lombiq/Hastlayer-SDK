@@ -310,8 +310,7 @@ namespace Hast.Samples.Consumer
 
         static async Task Main(string[] args)
         {
-            // Wrapping the whole program into Task.Run() is a workaround for async just to be able to run all this from 
-            // inside a console app.
+            // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
             try
             {
                 await MainTask(args);
