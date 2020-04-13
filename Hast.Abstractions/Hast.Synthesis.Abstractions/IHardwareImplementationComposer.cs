@@ -1,5 +1,5 @@
-﻿using Hast.Layer;
-using Orchard;
+﻿using Hast.Common.Interfaces;
+using Hast.Layer;
 using System.Threading.Tasks;
 
 namespace Hast.Synthesis.Abstractions

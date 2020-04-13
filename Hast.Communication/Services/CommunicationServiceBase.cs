@@ -1,10 +1,11 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
-using Hast.Communication.Models;
+﻿using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
@@ -13,13 +14,7 @@ namespace Hast.Communication.Services
         public ILogger Logger { get; set; }
 
         abstract public string ChannelName { get; }
-
-        private TextWriter _testerOutput;
-        public TextWriter TesterOutput
-        {
-            get => _testerOutput;
-            set => _testerOutput = value;
-        }
+        public TextWriter TesterOutput { get; set; }
 
         public CommunicationServiceBase()
         {
@@ -28,8 +23,8 @@ namespace Hast.Communication.Services
 
 
         abstract public Task<IHardwareExecutionInformation> Execute(
-            SimpleMemory simpleMemory, 
-            int memberId, 
+            SimpleMemory simpleMemory,
+            int memberId,
             IHardwareExecutionContext executionContext);
 
 
@@ -48,18 +43,18 @@ namespace Hast.Communication.Services
 
             context.HardwareExecutionInformation.FullExecutionTimeMilliseconds = context.Stopwatch.ElapsedMilliseconds;
 
-            Logger.Information("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
+            Logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
         }
 
         protected void SetHardwareExecutionTime(
             CommunicationStateContext context,
-            IHardwareExecutionContext executionContext, 
+            IHardwareExecutionContext executionContext,
             ulong executionTimeClockCycles)
         {
-            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = 
+            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds =
                 1M / executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
 
-            Logger.Information("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+            Logger.LogInformation("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
         }
 
 

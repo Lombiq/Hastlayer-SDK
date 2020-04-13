@@ -4,6 +4,9 @@
     {
         public const string DeviceName = "Nexys4 DDR";
 
-        static Nexys4DdrManifestProvider() => DeviceNameInternal = DeviceName;
+        public Nexys4DdrManifestProvider()
+        {
+            _deviceName = DeviceName;
+        }
     }
 }

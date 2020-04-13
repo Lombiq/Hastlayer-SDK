@@ -1,93 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Common</RootNamespace>
-    <AssemblyName>Hast.Common</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\Orchard\src\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Configuration\ProxyGenerationConfiguration.cs" />
-    <Compile Include="Configuration\HardwareGenerationConfiguration.cs" />
-    <Compile Include="Configuration\IHardwareGenerationConfiguration.cs" />
-    <Compile Include="Configuration\IProxyGenerationConfiguration.cs" />
-    <Compile Include="ContractResolvers\PrivateSetterContractResolver.cs" />
-    <Compile Include="Extensibility\Pipeline\IPipelineStep.cs" />
-    <Compile Include="Extensibility\Pipeline\PipelineStepBase.cs" />
-    <Compile Include="Extensibility\Pipeline\PipelineStepEnumerationExtensions.cs" />
-    <Compile Include="Extensions\DictionaryExtensions.cs" />
-    <Compile Include="Extensions\ExpressionExtensions.cs" />
-    <Compile Include="Extensions\MethodInfoExtensions.cs" />
-    <Compile Include="Extensions\MemberNameExtensions.cs" />
-    <Compile Include="Helpers\Sha2456Helper.cs" />
-    <Compile Include="Models\ISoftwareExecutionInformation.cs" />
-    <Compile Include="Models\VhdlHardwareDescription.cs" />
-    <Compile Include="Models\IDeviceManifest.cs" />
-    <Compile Include="Models\IHardwareExecutionInformation.cs" />
-    <Compile Include="Models\IHardwareDescription.cs" />
-    <Compile Include="Models\IHardwareImplementation.cs" />
-    <Compile Include="Models\IHardwareRepresentation.cs" />
-    <Compile Include="Models\TransformationWarning.cs" />
-    <Compile Include="Numerics\SimdOperations.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Readme.md" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.2" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Orchard\src\Orchard\Orchard.Framework.csproj">
-      <Project>{2d1d92bb-4555-4cbe-8d0e-63563d6ce4c6}</Project>
-      <Name>Orchard.Framework</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

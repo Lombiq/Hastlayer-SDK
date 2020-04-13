@@ -6,7 +6,7 @@ using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -84,7 +84,7 @@ namespace Hast.Communication.Services
 
                     if (serialPort.IsOpen)
                     {
-                        Logger.Information("The port {0} is ours.", serialPort.PortName);
+                        Logger.LogInformation("The port {0} is ours.", serialPort.PortName);
                     }
                     else
                     {
@@ -178,7 +178,7 @@ namespace Hast.Communication.Services
                                     // we take the explicit size into account.
                                     outputBytes = new byte[outputByteCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
 
-                                    Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
+                                    Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
                                     communicationState = Serial.CommunicationState.ReceivingOuput;
                                     serialPort.Write(Serial.Signals.Ready);

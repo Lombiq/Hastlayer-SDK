@@ -5,6 +5,9 @@
         public const string DeviceName = "Nexys A7";
 
 
-        static NexysA7ManifestProvider() => DeviceNameInternal = DeviceName;
+        public NexysA7ManifestProvider()
+        {
+            _deviceName = DeviceName;
+        }
     }
 }

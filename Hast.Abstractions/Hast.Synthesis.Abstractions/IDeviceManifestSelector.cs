@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Hast.Common.Interfaces;
 using Hast.Layer;
-using Orchard;
 
 namespace Hast.Synthesis.Abstractions
 {

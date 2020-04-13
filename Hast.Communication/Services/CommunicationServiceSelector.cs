@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Hast.Common.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Orchard.Validation;
 
 namespace Hast.Communication.Services
 {

@@ -1,14 +1,16 @@
 ﻿using Castle.DynamicProxy;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
+using Hast.Common.Interfaces;
 using Hast.Communication.Exceptions;
+using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,14 +22,16 @@ namespace Hast.Communication
 {
     public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
     {
-        private readonly IWorkContextAccessor _wca;
+        private readonly IServiceProvider _serviceProvider;
+
+        public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
+        public event EventHandler<IMemberInvocationContext> MemberInvoking;
 
 
-        public MemberInvocationHandlerFactory(IWorkContextAccessor wca)
+        public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)
         {
-            _wca = wca;
+            _serviceProvider = serviceProvider;
         }
-
 
         public MemberInvocationHandler CreateMemberInvocationHandler(
             IHardwareRepresentation hardwareRepresentation,
@@ -46,7 +50,7 @@ namespace Hast.Communication
 
                     async Task invocationHandler()
                     {
-                        using (var workContext = _wca.CreateWorkContextScope())
+                        using (var scope = _serviceProvider.CreateScope())
                         {
                             // Although it says Method it can also be a property.
                             var memberFullName = invocation.Method.GetFullName();
@@ -58,10 +62,9 @@ namespace Hast.Communication
                                 HardwareRepresentation = hardwareRepresentation
                             };
 
-                            var eventHandler = workContext.Resolve<IMemberInvocationEventHandler>();
-                            eventHandler.MemberInvoking(invocationContext);
+                            MemberInvoking?.Invoke(this, invocationContext);
 
-                            workContext.Resolve<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
+                            scope.ServiceProvider.GetService<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
                                 {
                                     invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
                                 });
@@ -155,8 +158,9 @@ namespace Hast.Communication
                                 var memberId = hardwareRepresentation
                                     .HardwareDescription
                                     .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
-                                invocationContext.HardwareExecutionInformation = await workContext
-                                    .Resolve<ICommunicationServiceSelector>()
+                                invocationContext.HardwareExecutionInformation = await scope
+                                    .ServiceProvider
+                                    .GetService<ICommunicationServiceSelector>()
                                     .GetCommunicationService(communicationChannelName)
                                     .Execute(
                                         memory,
@@ -201,7 +205,7 @@ namespace Hast.Communication
                                     "Only SimpleMemory-using implementations are supported for hardware execution. The invocation didn't include a SimpleMemory argument.");
                             }
 
-                            eventHandler.MemberExecutedOnHardware(invocationContext);
+                            MemberExecutedOnHardware?.Invoke(this, invocationContext);
                         }
                     }
 
@@ -216,7 +220,6 @@ namespace Hast.Communication
                     }
                 };
         }
-
 
         // Code taken from http://stackoverflow.com/a/28374134/220230
         private static MethodAsynchronicity GetMethodAsynchronicity(IInvocation invocation)

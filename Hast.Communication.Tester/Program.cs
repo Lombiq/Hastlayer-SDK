@@ -23,64 +23,64 @@ namespace Hast.Communication.Tester
 
         private static async Task MainTask(Options configuration)
         {
-            using (var hastlayer = await Hastlayer.Create(new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer }))
+            using var hastlayer = Hastlayer.Create(new HastlayerConfiguration { Flavor = HastlayerFlavor.Developer });
+
+            // Get devices and if asked exit with the device list.
+            var devices = hastlayer.GetSupportedDevices();
+            if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
+
+            if (configuration.ListDevices)
             {
-                // Get devices and if asked exit with the device list.
-                var devices = await hastlayer.GetSupportedDevices();
-                if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
-
-                if (configuration.ListDevices)
-                {
-                    foreach (var d in devices) Console.WriteLine(d.Name);
-                    return;
-                }
+                foreach (var d in devices) Console.WriteLine(d.Name);
+                return;
+            }
 
 
-                // If there is an output file name, then the file type can not be None.
-                if (configuration.OutputFileType == OutputFileType.None && !string.IsNullOrEmpty(configuration.OutputFileName))
-                    configuration.OutputFileType = OutputFileType.Hexdump;
+            // If there is an output file name, then the file type can not be None.
+            if (configuration.OutputFileType == OutputFileType.None && !string.IsNullOrEmpty(configuration.OutputFileName))
+                configuration.OutputFileType = OutputFileType.Hexdump;
 
 
-                // Try to load selected device or pick the first available if none were selected.
-                if (string.IsNullOrEmpty(configuration.DeviceName)) configuration.DeviceName = devices.First().Name;
-                var selectedDevice = devices.FirstOrDefault(device => device.Name == configuration.DeviceName);
-                if (selectedDevice == null) throw new Exception($"Target device '{configuration.DeviceName}' not found!");
-                var channelName = selectedDevice.DefaultCommunicationChannelName;
+            // Try to load selected device or pick the first available if none were selected.
+            if (string.IsNullOrEmpty(configuration.DeviceName)) configuration.DeviceName = devices.First().Name;
+            var selectedDevice = devices.FirstOrDefault(device => device.Name == configuration.DeviceName);
+            if (selectedDevice == null) throw new Exception($"Target device '{configuration.DeviceName}' not found!");
+            var channelName = selectedDevice.DefaultCommunicationChannelName;
 
 
                 var (memory, accessor) = GenerateMemory(
                     configuration.PayloadType, configuration.PayloadLengthCells, configuration.InputFileName);
 
 
-                // Save input to file using the format of the output file type.
-                SaveFile(configuration.OutputFileType, configuration.PayloadType, configuration.InputFileName, true, memory);
+            // Save input to file using the format of the output file type.
+            SaveFile(configuration.OutputFileType, configuration.PayloadType, configuration.InputFileName, true, memory);
 
-                // Create reference copy of input to compare against output.
-                var referenceMemory = configuration.NoCheck ? null : SimpleMemoryAccessor.Create(accessor.Get());
+            // Create reference copy of input to compare against output.
+            var referenceMemory = configuration.NoCheck ? null : SimpleMemoryAccessor.Create(accessor.Get());
 
-                Console.WriteLine("Starting hardware execution.");
-                var communicationService = await hastlayer.GetCommunicationService(channelName);
-                communicationService.TesterOutput = Console.Out;
-                var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
-                    selectedDevice.DefaultCommunicationChannelName);
-                var info = await communicationService.Execute(memory, configuration.MemberId, executionContext);
+            Console.WriteLine("Starting hardware execution.");
+            using var communicationServiceContainer = hastlayer.GetCommunicationService(channelName);
+            var communicationService = communicationServiceContainer.Value;
+            communicationService.TesterOutput = Console.Out;
+            var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
+                selectedDevice.DefaultCommunicationChannelName);
+            var info = await communicationService.Execute(memory, configuration.MemberId, executionContext);
 
-                Console.WriteLine("Executing test on hardware took {0:0.##}ms (net) {1:0.##}ms (all together)",
-                    info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
+            Console.WriteLine("Executing test on hardware took {0:0.##}ms (net) {1:0.##}ms (all together)",
+                info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
-                // Save output to file.
-                SaveFile(configuration.OutputFileType, configuration.PayloadType, configuration.OutputFileName, false, memory);
+            // Save output to file.
+            SaveFile(configuration.OutputFileType, configuration.PayloadType, configuration.OutputFileName, false, memory);
 
-                if (!string.IsNullOrWhiteSpace(configuration?.JsonOutputFileName))
-                {
-                    var json = JsonConvert.SerializeObject(new { Success = true, Result = info });
-                    File.WriteAllText(configuration.JsonOutputFileName, json);
-                }
-
-
-                // Verify results if wanted.
-                if (!configuration.NoCheck) Verify(memory, referenceMemory);
+            if (!string.IsNullOrWhiteSpace(configuration?.JsonOutputFileName))
+            {
+                var json = JsonConvert.SerializeObject(new { Success = true, Result = info });
+                File.WriteAllText(configuration.JsonOutputFileName, json);
             }
+
+
+            // Verify results if wanted.
+            if (!configuration.NoCheck) Verify(memory, referenceMemory);
         }
 
 
@@ -133,10 +133,8 @@ namespace Hast.Communication.Tester
                     }
                     else
                     {
-                        using (var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8))
-                        {
-                            WriteHexdump(streamWriter, memory);
-                        }
+                        using var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8);
+                        WriteHexdump(streamWriter, memory);
                     }
                     break;
                 case OutputFileType.Binary:

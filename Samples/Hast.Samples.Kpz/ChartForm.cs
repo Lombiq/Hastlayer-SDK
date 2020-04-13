@@ -22,7 +22,7 @@ namespace Hast.Samples.Kpz
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
         /// so that the GUI keeps responding while the algorithm is running.
         /// </summary>
-        BackgroundWorker _backgroundWorker;
+        readonly BackgroundWorker _backgroundWorker;
 
         /// <summary>
         /// The Kpz object is used to perform the KPZ algorithm, to input its parameters and return the result.
@@ -162,12 +162,8 @@ namespace Hast.Samples.Kpz
 
             if (updateChartInThisIteartion)
             {
-                double mean;
-                bool periodicityValid;
-                int periodicityInvalidXCount;
-                int periodicityInvalidYCount;
                 int[,] heightMap = _kpz.GenerateHeightMap(
-                    out mean, out periodicityValid, out periodicityInvalidXCount, out periodicityInvalidYCount);
+                    out double mean, out bool periodicityValid, out int periodicityInvalidXCount, out int periodicityInvalidYCount);
 
                 if (!periodicityValid)
                 {
@@ -204,6 +200,9 @@ namespace Hast.Samples.Kpz
                 _kpz.LogItFunction = AsyncLogIt;
                 var hastlayerInitializationTask = _kpz.InitializeHastlayer(_verifyOutput, _randomSeedEnable);
                 hastlayer = hastlayerInitializationTask.Result;
+                hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
+                hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
+                    $"(took {e.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
             }
 
             try

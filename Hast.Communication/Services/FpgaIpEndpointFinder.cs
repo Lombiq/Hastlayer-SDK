@@ -5,12 +5,13 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Hast.Common.Services;
 using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Helpers;
 using Hast.Communication.Models;
-using Orchard.Logging;
-using Orchard.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hast.Communication.Services
 {
@@ -41,7 +42,7 @@ namespace Hast.Communication.Services
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
             // We need retries because somehow the FPGA doesn't always catch our request.
-            Logger.Information("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
+            Logger.LogInformation("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
 
             var currentRetries = 0;
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();

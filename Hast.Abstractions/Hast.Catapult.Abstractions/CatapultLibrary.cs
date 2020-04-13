@@ -1,7 +1,6 @@
 ﻿using AdvancedDLSupport;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using IcIWare.NamedIndexers;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,7 +18,7 @@ namespace Hast.Catapult.Abstractions
     public class CatapultLibrary : IDisposable
     {
         private bool _isDisposed = false;
-        private IntPtr _handle;
+        private readonly IntPtr _handle;
 
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Gets the device handle utilized by the functions in NativeLibrary.
         /// </summary>
-        public IntPtr Handle { get => _handle; }
+        public IntPtr Handle => _handle;
 
         /// <summary>
         /// Gets the function used for logging. If null, no logging is done.
@@ -106,17 +105,7 @@ namespace Hast.Catapult.Abstractions
         }
 
         public System.IO.TextWriter TesterOutput { get; set; }
-
-        /// <summary>
-        /// Gets or sets the value of the Soft Register. Indexed by memory address.
-        /// </summary>
-        public readonly NamedIndexer<uint, ulong> SoftRegister;
-
-        /// <summary>
-        /// Gets or sets the value of the Shell Register. Indexed by register number.
-        /// </summary>
-        public readonly NamedIndexer<uint, uint> ShellRegister;
-
+        
 
         /// <summary>
         /// Initializes a new instance of the CatapultLibrary class.
@@ -144,16 +133,6 @@ namespace Hast.Catapult.Abstractions
             LogFunction = logFunction;
             PcieEndpointNumber = endpointNumber;
 
-            // Indexer register access.
-            SoftRegister = new NamedIndexer<uint, ulong>(
-                (address) => { VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value)); return value; },
-                (address, value) => { VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value)); }
-            );
-            ShellRegister = new NamedIndexer<uint, uint>(
-                (register) => { VerifyResult(NativeLibrary.ReadShellRegister(_handle, register, out uint value)); return value; },
-                (register, value) => { VerifyResult(NativeLibrary.WriteShellRegister(_handle, register, value)); }
-            );
-
             // Initialize FPGA library and device.
             // We don't use dllmap so create ALD without it.
             var builderWithoutDllMap = new NativeLibraryBuilder(NativeLibraryBuilder.Default.Options & ~ImplementationOptions.EnableDllMapSupport);
@@ -169,7 +148,7 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(createStatus);
 
             // Configure hardware settings & enable hardware.
-            SoftRegister[Constants.ConfigDram.Channel0] = 0;
+            SetSoftRegister(Constants.ConfigDram.Channel0, 0);
             PcieEnabled = true;
 
             // Query device info.
@@ -181,9 +160,9 @@ namespace Hast.Catapult.Abstractions
             BufferSize = (int)count;
 
             // Load in configuration from the soft registers
-            var allowedSlots = (int)SoftRegister[Constants.SoftRegisters.AllowedSlots];
+            var allowedSlots = (int)GetSoftRegister(Constants.SoftRegisters.AllowedSlots);
             if (0 < allowedSlots && allowedSlots < BufferCount) BufferCount = allowedSlots;
-            var bufferPayloadSize = (int)SoftRegister[Constants.SoftRegisters.BufferPayloadSize];
+            var bufferPayloadSize = (int)GetSoftRegister(Constants.SoftRegisters.BufferPayloadSize);
             if (0 < bufferPayloadSize && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
 
             // Set up the task tracker.
@@ -213,15 +192,15 @@ namespace Hast.Catapult.Abstractions
                     if (flag == Constants.Log.None) return;
 
                     if (flag.HasFlag(Constants.Log.Debug) || flag.HasFlag(Constants.Log.Verbose))
-                        logger.Debug(text);
+                        logger.LogDebug(text);
                     else if (flag.HasFlag(Constants.Log.Info))
-                        logger.Information(text);
+                        logger.LogInformation(text);
                     else if (flag.HasFlag(Constants.Log.Error))
-                        logger.Error(text);
+                        logger.LogError(text);
                     else if (flag.HasFlag(Constants.Log.Fatal))
-                        logger.Fatal(text);
+                        logger.LogCritical(text);
                     else if (flag.HasFlag(Constants.Log.Warn))
-                        logger.Warning(text);
+                        logger.LogWarning(text);
                 });
         }
 
@@ -274,6 +253,26 @@ namespace Hast.Catapult.Abstractions
             NativeLibrary.GetLastErrorText(errorMessage, errorMessage.Capacity);
 
             throw new CatapultFunctionResultException(status, errorMessage.ToString());
+        }
+
+        /// <summary>
+        /// Gets the value of the Soft Register. Indexed by memory address.
+        /// </summary>
+        /// <param name="address">The memory address.</param>
+        /// <returns>The value of the soft register.</returns>
+        public ulong GetSoftRegister(uint address) 
+        {
+            VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value)); return value; 
+        }
+
+        /// <summary>
+        /// Sets the value of the Soft Register. Indexed by memory address.
+        /// </summary>
+        /// <param name="address">The memory address.</param>
+        /// <param name="value">The new value</param>
+        public void SetSoftRegister(uint address, ulong value)
+        {
+            VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value));
         }
 
         /// <summary>

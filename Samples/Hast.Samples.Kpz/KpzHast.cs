@@ -27,7 +27,8 @@ namespace Hast.Samples.Kpz
 
             LogItFunction("Creating Hastlayer Factory...");
 
-            var hastlayer = await Hastlayer.Create();
+            // No "using" here since we are returning this object.
+            var hastlayer = Hastlayer.Create();
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
@@ -38,7 +39,7 @@ namespace Hast.Samples.Kpz
             };
 
             var configuration = new HardwareGenerationConfiguration(
-                (await hastlayer.GetSupportedDevices()).First().Name,
+                hastlayer.GetSupportedDevices().First().Name,
                 "HardwareFramework");
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;
