@@ -11,12 +11,14 @@ using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using LogManager = NLog.LogManager;
 
 namespace Hast.Layer
 {
@@ -60,9 +62,8 @@ namespace Hast.Layer
                 if (configuration.ConfigureLogging is null)
                 {
                     builder
-                        .AddFilter("hastlayer", LogLevel.Warning)
-                        .AddConsole()
-                        .AddFile(appDataFolder.Combine("logs", "hastlayer-{Date}.txt"));
+                        .AddFilter("hastlayer", LogLevel.Trace)
+                        .AddNLog("NLog.config");
                 }
                 else
                 {
@@ -258,7 +259,7 @@ namespace Hast.Layer
         public async Task RunAsync<T>(Func<T, Task> process)
         {
             using (var scope = _serviceProvider.CreateScope())
-                await process(scope.ServiceProvider.GetService<T>());
+                await process(scope.ServiceProvider.GetRequiredService<T>());
         }
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
