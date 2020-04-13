@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -25,5 +26,7 @@ namespace Hast.Layer
 
         /// <inheritdoc/>
         public string AppDataFolderPath { get; set; } = null;
+
+        public Action<ILoggingBuilder> ConfigureLogging { get; set; } = null;
     }
 }

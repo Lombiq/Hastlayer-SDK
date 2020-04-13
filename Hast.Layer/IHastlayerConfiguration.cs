@@ -1,5 +1,6 @@
 ﻿using Hast.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -51,5 +52,10 @@ namespace Hast.Layer
         /// The location of the App_Data folder
         /// </summary>
         string AppDataFolderPath { get; }
+
+        /// <summary>
+        /// The method for cusomizing the logger.
+        /// </summary>
+        Action<ILoggingBuilder> ConfigureLogging { get; }
     }
 }

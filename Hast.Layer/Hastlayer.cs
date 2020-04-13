@@ -54,6 +54,23 @@ namespace Hast.Layer
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
+
+            services.AddSingleton(LoggerFactory.Create(builder =>
+            {
+                if (configuration.ConfigureLogging is null)
+                {
+                    builder
+                        .AddFilter("hastlayer", LogLevel.Warning)
+                        .AddConsole()
+                        .AddFile(appDataFolder.Combine("logs", "hastlayer-{Date}.txt"));
+                }
+                else
+                {
+                    configuration.ConfigureLogging(builder);
+                }
+            }));
+            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
+
             configuration.OnServiceRegistration?.Invoke(configuration, services);
 
             var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();

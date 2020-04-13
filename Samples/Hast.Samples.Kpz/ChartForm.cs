@@ -1,7 +1,9 @@
-﻿using Hast.Layer;
+﻿using Castle.Core.Logging;
+using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz
@@ -203,6 +205,7 @@ namespace Hast.Samples.Kpz
                 hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
                 hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
                     $"(took {e.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
+                hastlayer.Invoking += (s, e) => (hastlayer as Hastlayer).RunAsync<ILogger>(x => Task.Run(() => x.Info("Hastlayer: Invoking member..."))).Wait();
             }
 
             try
