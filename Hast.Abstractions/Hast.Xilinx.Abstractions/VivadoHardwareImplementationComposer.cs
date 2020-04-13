@@ -2,6 +2,8 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -10,6 +12,15 @@ namespace Hast.Xilinx.Abstractions
 {
     public class VivadoHardwareImplementationComposer : IHardwareImplementationComposer
     {
+        public ILogger Logger { get; set; }
+
+
+        public VivadoHardwareImplementationComposer()
+        {
+            Logger = NullLogger.Instance;
+        }
+
+
         public Task<IHardwareImplementation> Compose(
             IHardwareGenerationConfiguration configuration,
             IHardwareDescription hardwareDescription,
@@ -19,7 +30,7 @@ namespace Hast.Xilinx.Abstractions
 
             if (string.IsNullOrEmpty(hardwareFrameworkPath))
             {
-                // Log: No hardware framework path was configured. Thus while the hardware description was created it won't be implemented with the FPGA vendor toolchain.
+                Logger.LogWarning("No hardware framework path was configured. Thus while the hardware description was created it won't be implemented with the FPGA vendor toolchain.");
                 return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
             }
 
@@ -97,7 +108,8 @@ namespace Hast.Xilinx.Abstractions
             Directory.CreateDirectory(path);
         }
 
-        public class HardwareImplementation : IHardwareImplementation
+
+        private class HardwareImplementation : IHardwareImplementation
         {
         }
     }

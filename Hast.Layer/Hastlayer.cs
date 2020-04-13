@@ -22,7 +22,7 @@ using LogManager = NLog.LogManager;
 
 namespace Hast.Layer
 {
-    public class Hastlayer : IHastlayer
+    public sealed class Hastlayer : IHastlayer
     {
         private readonly IHastlayerConfiguration _configuration;
         private readonly ServiceProvider _serviceProvider;
@@ -97,6 +97,7 @@ namespace Hast.Layer
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
+
         public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
 
         /// <summary>
@@ -118,7 +119,6 @@ namespace Hast.Layer
             return hastlayer;
         }
 
-
         public static IConfiguration BuildConfiguration() =>
             new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true, true)
@@ -130,6 +130,8 @@ namespace Hast.Layer
         {
             _serviceProvider.Dispose();
         }
+
+        ~Hastlayer() => Dispose();
 
         public async Task<IHardwareRepresentation> GenerateHardware(
             IEnumerable<string> assemblyPaths,
