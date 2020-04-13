@@ -16,7 +16,8 @@ namespace Hast.Communication.Services
         abstract public string ChannelName { get; }
         public TextWriter TesterOutput { get; set; }
 
-        public CommunicationServiceBase()
+
+        protected CommunicationServiceBase()
         {
             Logger = NullLogger.Instance;
         }
