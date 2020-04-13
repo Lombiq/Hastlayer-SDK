@@ -27,6 +27,7 @@ namespace Hast.Layer
         /// <inheritdoc/>
         public string AppDataFolderPath { get; set; } = null;
 
+        /// <inheritdoc/>
         public Action<ILoggingBuilder> ConfigureLogging { get; set; } = null;
     }
 }

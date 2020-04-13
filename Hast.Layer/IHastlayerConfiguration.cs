@@ -32,7 +32,8 @@ namespace Hast.Layer
     public interface IHastlayerConfiguration : ISingletonDependency
     {
         /// <summary>
-        /// Invoked before the <see cref="IServiceProvider"/> is built.
+        /// Invoked before the <see cref="IServiceProvider"/> for Hastlayer's dependency injection is built. Add single
+        /// service registrations or other service collection customizations here.
         /// </summary>
         Action<IHastlayerConfiguration, IServiceCollection> OnServiceRegistration { get; }
 
@@ -54,7 +55,7 @@ namespace Hast.Layer
         string AppDataFolderPath { get; }
 
         /// <summary>
-        /// The method for cusomizing the logger.
+        /// Extension points for customizing the logger.
         /// </summary>
         Action<ILoggingBuilder> ConfigureLogging { get; }
     }
