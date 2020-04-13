@@ -108,7 +108,8 @@ namespace Hast.Xilinx.Abstractions
             Directory.CreateDirectory(path);
         }
 
-        public class HardwareImplementation : IHardwareImplementation
+
+        private class HardwareImplementation : IHardwareImplementation
         {
         }
     }
