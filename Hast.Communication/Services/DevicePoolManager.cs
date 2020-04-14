@@ -1,7 +1,7 @@
 ﻿using Hast.Communication.Models;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,12 +9,19 @@ namespace Hast.Communication.Services
 {
     public sealed class DevicePoolManager : IDevicePoolManager
     {
+        private readonly ILogger<DevicePoolManager> _logger;
         private readonly object _lock = new object();
         private readonly Queue<Action<IReservedDevice>> _waitQueue = new Queue<Action<IReservedDevice>>();
 
         private bool _isDisposed = false;
 
         private Dictionary<string, PooledDevice> _devicePool = new Dictionary<string, PooledDevice>();
+
+
+        public DevicePoolManager(ILogger<DevicePoolManager> logger)
+        {
+            _logger = logger;
+        }
 
 
         public void SetDevicePool(IEnumerable<IDevice> devices)
@@ -55,7 +62,7 @@ namespace Hast.Communication.Services
 
                 if (firstAvailableDevice != null)
                 {
-                    Debug.WriteLine("Found an available device with the identifier {0}.", (object)firstAvailableDevice.Identifier);
+                    _logger.LogDebug("Found an available device with the identifier {0}.", (object)firstAvailableDevice.Identifier);
 
                     firstAvailableDevice.IsBusy = true;
 
@@ -65,7 +72,7 @@ namespace Hast.Communication.Services
                             {
                                 if (_waitQueue.Any())
                                 {
-                                    Debug.WriteLine(
+                                    _logger.LogDebug(
                                         "Dequeuing a device reservation request. Will re-use the device with the ID {0}. {1} items are in the queue.",
                                         thisReservedDevice.Identifier,
                                         _waitQueue.Count);
@@ -75,7 +82,7 @@ namespace Hast.Communication.Services
                                 }
                                 else
                                 {
-                                    Debug.WriteLine(
+                                    _logger.LogDebug(
                                         "No device reservation requests are in the queue so freeing up the device with the ID {0}.",
                                         (object)thisReservedDevice.Identifier);
 
@@ -88,7 +95,7 @@ namespace Hast.Communication.Services
                 }
                 else
                 {
-                    Debug.WriteLine("Enqueuing a device reservation request.");
+                    _logger.LogDebug("Enqueuing a device reservation request.");
 
                     var reservationCompletionSource = new TaskCompletionSource<IReservedDevice>();
 
