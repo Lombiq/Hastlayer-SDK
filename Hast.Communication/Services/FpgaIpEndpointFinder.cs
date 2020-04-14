@@ -1,17 +1,16 @@
-﻿using System;
+﻿using Hast.Common.Services;
+using Hast.Communication.Constants;
+using Hast.Communication.Constants.CommunicationConstants;
+using Hast.Communication.Helpers;
+using Hast.Communication.Models;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using Hast.Common.Services;
-using Hast.Communication.Constants;
-using Hast.Communication.Constants.CommunicationConstants;
-using Hast.Communication.Helpers;
-using Hast.Communication.Models;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hast.Communication.Services
 {
@@ -19,12 +18,9 @@ namespace Hast.Communication.Services
     {
         private const int AvailabilityCheckerTimeout = 1000;
         private const int BroadcastRetryCount = 2;
-        private const string FpgaEndpointsCacheKey = "Hast.Communication.FpgaEndpoints";
-
 
         private readonly IClock _clock;
         private readonly ILogger _logger;
-
 
 
         public FpgaIpEndpointFinder(IClock clock, ILogger logger)
@@ -50,14 +46,14 @@ namespace Hast.Communication.Services
 
                 // Send request to all broadcast addresses on all the supported network interfaces.
                 foreach (var suppertedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
-                    .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up && 
+                    .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up &&
                         networkInterface.SupportsMulticast == true))
                 {
                     // Currently we are supporting only IPv4 addresses.
                     var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
                         .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork);
 
-                    endpoints.AddRange(ipv4AddressInformations.Select(addressInformation => 
+                    endpoints.AddRange(ipv4AddressInformations.Select(addressInformation =>
                         new IPEndPoint(addressInformation.Address, Ethernet.Ports.WhoIsAvailableResponse)));
                 }
 

@@ -15,7 +15,6 @@ namespace Hast.Xilinx.Abstractions
         private readonly ILogger _logger;
 
 
-
         public VivadoHardwareImplementationComposer(ILogger logger)
         {
             _logger = logger;
