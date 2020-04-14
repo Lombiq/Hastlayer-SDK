@@ -74,7 +74,7 @@ namespace Hast.Layer
                 }
             }
 
-            _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.Name));
+            _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.FullName));
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
@@ -271,7 +271,7 @@ namespace Hast.Layer
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
-            if (_serviceNames.Contains(typeof(TOut).Name))
+            if (_serviceNames.Contains(typeof(TOut).FullName))
             {
                 throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
             }
