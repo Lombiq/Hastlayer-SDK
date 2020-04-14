@@ -62,13 +62,15 @@ namespace Hast.Layer
                 switch (configuration.Flavor)
                 {
                     case HastlayerFlavor.Client:
-                        services.RemoveImplementationsExcept<ITransformer>("RemoteTransformer");
+                        services.RemoveImplementationsExcept<ITransformer, Remote.Client.RemoteTransformer>();
                         break;
                     case HastlayerFlavor.Developer:
-                        services.RemoveImplementationsExcept<ITransformer>("DefaultTransformer");
+                        // Can't use the type directly because it won't be available in the Client flavor.
+                        services.RemoveImplementationsExcept<ITransformer>("Hast.Transformer.DefaultTransformer");
                         break;
                     case HastlayerFlavor.Inert:
-                        services.RemoveImplementationsExcept<ITransformer>("NullTransformer");
+                        services.RemoveImplementationsExcept<ITransformer, NullTransformer>();
+                        services.RemoveImplementationsExcept<IHardwareImplementationComposer, NullHardwareImplementationComposer>();
                         break;
                     default:
                         throw new ArgumentException($"Unknown flavor in configuration: '{configuration.Flavor}'");

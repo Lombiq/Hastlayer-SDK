@@ -22,7 +22,7 @@ namespace Hast.Layer
         Client,
 
         /// <summary>
-        /// Flavor for testing without transformation. <see cref="NullTransformer"/> is used.
+        /// Flavor for testing without transformation. <see cref="Hast.Transformer.Abstractions.NullTransformer"/> is used.
         /// </summary>
         Inert
     }

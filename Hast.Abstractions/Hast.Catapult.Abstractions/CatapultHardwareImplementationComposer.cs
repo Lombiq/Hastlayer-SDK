@@ -14,9 +14,5 @@ namespace Hast.Catapult.Abstractions
             // Not yet implemented, just here as a placeholder.
             return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
         }
-
-        private class HardwareImplementation : IHardwareImplementation
-        {
-        }
     }
 }

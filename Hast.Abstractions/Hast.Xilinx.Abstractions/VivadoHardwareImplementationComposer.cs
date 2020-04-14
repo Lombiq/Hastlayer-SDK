@@ -99,10 +99,5 @@ namespace Hast.Xilinx.Abstractions
             if (Directory.Exists(path)) return;
             Directory.CreateDirectory(path);
         }
-
-
-        private class HardwareImplementation : IHardwareImplementation
-        {
-        }
     }
 }
