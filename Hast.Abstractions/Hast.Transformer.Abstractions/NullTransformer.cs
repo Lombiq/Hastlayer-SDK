@@ -11,18 +11,17 @@ namespace Hast.Transformer.Abstractions
 {
     public class NullTransformer : ITransformer
     {
-        public ILogger Logger { get; set; }
+        private readonly ILogger _logger;
 
-
-        public NullTransformer()
+        public NullTransformer(ILogger logger)
         {
-            Logger = NullLogger.Instance;
+            _logger = logger;
         }
 
 
         public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
-            Logger.LogWarning("No Transformer is available. This most possibly means an issue.");
+            _logger.LogWarning("No Transformer is available. This most possibly means an issue.");
 
             var mockHardwareEntryPointMappings = new Dictionary<string, int>();
 

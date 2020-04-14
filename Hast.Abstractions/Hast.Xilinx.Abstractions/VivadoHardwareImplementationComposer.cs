@@ -12,12 +12,13 @@ namespace Hast.Xilinx.Abstractions
 {
     public class VivadoHardwareImplementationComposer : IHardwareImplementationComposer
     {
-        public ILogger Logger { get; set; }
+        private readonly ILogger _logger;
 
 
-        public VivadoHardwareImplementationComposer()
+
+        public VivadoHardwareImplementationComposer(ILogger logger)
         {
-            Logger = NullLogger.Instance;
+            _logger = logger;
         }
 
 
@@ -30,7 +31,7 @@ namespace Hast.Xilinx.Abstractions
 
             if (string.IsNullOrEmpty(hardwareFrameworkPath))
             {
-                Logger.LogWarning("No hardware framework path was configured. Thus while the hardware description was created it won't be implemented with the FPGA vendor toolchain.");
+                _logger.LogWarning("No hardware framework path was configured. Thus while the hardware description was created it won't be implemented with the FPGA vendor toolchain.");
                 return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
             }
 

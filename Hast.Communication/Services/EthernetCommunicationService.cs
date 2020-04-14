@@ -37,7 +37,8 @@ namespace Hast.Communication.Services
         public EthernetCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
-            IFpgaIpEndpointFinder fpgaIpEndpointFinder)
+            IFpgaIpEndpointFinder fpgaIpEndpointFinder,
+            ILogger logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
@@ -72,7 +73,7 @@ namespace Hast.Communication.Services
                 IFpgaEndpoint fpgaEndpoint = device.Metadata;
                 var fpgaIpEndpoint = fpgaEndpoint.Endpoint;
 
-                Logger.LogInformation("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
+                _logger.LogInformation("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
 
                 try
                 {
@@ -120,7 +121,7 @@ namespace Hast.Communication.Services
                             // Read the bytes representing the length of the simple memory.
                             var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStream(stream, sizeof(uint)), 0);
 
-                            Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
+                            _logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
                             // Finally read the memory itself.
                             var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);

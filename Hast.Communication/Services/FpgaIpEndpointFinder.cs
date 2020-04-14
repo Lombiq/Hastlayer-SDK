@@ -23,16 +23,14 @@ namespace Hast.Communication.Services
 
 
         private readonly IClock _clock;
+        private readonly ILogger _logger;
 
 
-        public ILogger Logger { get; set; }
 
-
-        public FpgaIpEndpointFinder(IClock clock)
+        public FpgaIpEndpointFinder(IClock clock, ILogger logger)
         {
             _clock = clock;
-
-            Logger = NullLogger.Instance;
+            _logger = logger;
         }
 
 
@@ -42,7 +40,7 @@ namespace Hast.Communication.Services
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
             // We need retries because somehow the FPGA doesn't always catch our request.
-            Logger.LogInformation("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
+            _logger.LogInformation("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
 
             var currentRetries = 0;
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();
