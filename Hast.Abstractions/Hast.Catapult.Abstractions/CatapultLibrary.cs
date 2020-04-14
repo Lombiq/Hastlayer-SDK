@@ -15,7 +15,7 @@ namespace Hast.Catapult.Abstractions
     /// <summary>
     /// Job and configuration manager for the Catapult FPGA driver.
     /// </summary>
-    public class CatapultLibrary : IDisposable
+    public sealed class CatapultLibrary : IDisposable
     {
         private bool _isDisposed = false;
         private readonly IntPtr _handle;
