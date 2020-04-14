@@ -139,10 +139,10 @@ namespace Hast.Layer
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    var transformer = scope.ServiceProvider.GetService<ITransformer>();
-                    var hardwareImplementationComposer = scope.ServiceProvider.GetService<IHardwareImplementationComposer>();
-                    var deviceManifestSelector = scope.ServiceProvider.GetService<IDeviceManifestSelector>();
-                    var loggerService = scope.ServiceProvider.GetService<ILogger>();
+                    var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
+                    var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
+                    var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
+                    var loggerService = scope.ServiceProvider.GetService<ILogger<Hastlayer>>();
 
                     var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
 
@@ -161,11 +161,29 @@ namespace Hast.Layer
                     if (deviceManifest == null)
                     {
                         throw new HastlayerException(
-                            "There is no supported device with the name " + configuration.DeviceName + ".");
+                            "There is no supported device with the name \"" + configuration.DeviceName + "\".");
+                    }
+
+                    var hardwareImplementationComposerSelector =
+                        scope.ServiceProvider.GetRequiredService<IHardwareImplementationComposerSelector>();
+
+                    var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
+                    {
+                        Configuration = configuration,
+                        HardwareDescription = hardwareDescription,
+                        DeviceManifest = deviceManifest
+                    };
+
+                    var hardwareImplementationComposer = hardwareImplementationComposerSelector
+                        .GetHardwareImplementationComposer(hardwareImplementationCompositionContext);
+
+                    if (hardwareImplementationComposer == null)
+                    {
+                        throw new HastlayerException("No suitable hardware implementation composer was found.");
                     }
 
                     var hardwareImplementation = await hardwareImplementationComposer
-                        .Compose(configuration, hardwareDescription, deviceManifest);
+                        .Compose(hardwareImplementationCompositionContext);
 
                     return new HardwareRepresentation
                     {
