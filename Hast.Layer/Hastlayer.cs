@@ -141,7 +141,6 @@ namespace Hast.Layer
                     var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
                     var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
-                    var loggerService = scope.ServiceProvider.GetService<ILogger<Hastlayer>>();
 
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
                         await transformer.Transform(assembliesPaths, configuration) :
