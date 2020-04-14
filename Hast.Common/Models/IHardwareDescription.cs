@@ -47,7 +47,7 @@ namespace Hast.Layer
         IEnumerable<ITransformationWarning> Warnings { get; }
 
         /// <summary>
-        /// Serializes the hardware description instance into a storage format. ó
+        /// Serializes the hardware description instance into a storage format.
         /// </summary>
         /// <remarks>To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.</remarks>
         /// <param name="stream"></param>
