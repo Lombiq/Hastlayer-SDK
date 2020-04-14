@@ -158,10 +158,19 @@ namespace Hast.Communication
                                 var memberId = hardwareRepresentation
                                     .HardwareDescription
                                     .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
-                                invocationContext.HardwareExecutionInformation = await scope
+
+                                var communicationService = scope
                                     .ServiceProvider
                                     .GetService<ICommunicationServiceSelector>()
-                                    .GetCommunicationService(communicationChannelName)
+                                    .GetCommunicationService(communicationChannelName);
+
+                                if (communicationService == null)
+                                {
+                                    throw new InvalidOperationException(
+                                        $"No communication service was found for the channel \"{communicationChannelName}\".");
+                                }
+
+                                invocationContext.HardwareExecutionInformation = await communicationService
                                     .Execute(
                                         memory,
                                         memberId,

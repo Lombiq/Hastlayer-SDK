@@ -19,14 +19,7 @@ namespace Hast.Communication.Services
         public ICommunicationService GetCommunicationService(string channelName)
         {
             Argument.ThrowIfNullOrEmpty(channelName, "channelName");
-
-            var communicationService = _communicationServices
-                .FirstOrDefault(service => service.ChannelName == channelName);
-
-            if (communicationService == null)
-                throw new InvalidOperationException("No communication service was found with the given channel name.");
-
-            return communicationService;
+            return _communicationServices.FirstOrDefault(service => service.ChannelName == channelName);
         }
     }
 }
