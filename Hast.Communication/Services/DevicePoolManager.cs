@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Hast.Communication.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Communication.Models;
 
 namespace Hast.Communication.Services
 {
-    public class DevicePoolManager : IDevicePoolManager
+    public sealed class DevicePoolManager : IDevicePoolManager
     {
         private readonly object _lock = new object();
         private readonly Queue<Action<IReservedDevice>> _waitQueue = new Queue<Action<IReservedDevice>>();
@@ -66,7 +66,7 @@ namespace Hast.Communication.Services
                                 if (_waitQueue.Any())
                                 {
                                     Debug.WriteLine(
-                                        "Dequeuing a device reservation request. Will re-use the device with the ID {0}. {1} items are in the queue.", 
+                                        "Dequeuing a device reservation request. Will re-use the device with the ID {0}. {1} items are in the queue.",
                                         thisReservedDevice.Identifier,
                                         _waitQueue.Count);
 
