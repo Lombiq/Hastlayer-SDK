@@ -61,9 +61,7 @@ namespace Hast.Layer
             {
                 if (configuration.ConfigureLogging is null)
                 {
-                    builder
-                        .AddFilter("hastlayer", LogLevel.Trace)
-                        .AddNLog("NLog.config");
+                    builder.AddNLog("NLog.config");
                 }
                 else
                 {
