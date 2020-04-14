@@ -1,29 +1,14 @@
-﻿using Hast.Common.Interfaces;
-using Hast.Layer;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Abstractions
+namespace Hast.Layer.EmptyRepresentationFactories
 {
-    public class NullTransformer : ITransformer
+    internal static class EmptyHardwareDescriptionFactory
     {
-        public ILogger Logger { get; set; }
-
-
-        public NullTransformer()
+        public static IHardwareDescription Create(IHardwareGenerationConfiguration configuration)
         {
-            Logger = NullLogger.Instance;
-        }
-
-
-        public Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
-        {
-            Logger.LogWarning("No Transformer is available. This most possibly means an issue.");
-
             var mockHardwareEntryPointMappings = new Dictionary<string, int>();
 
             for (int i = 0; i < configuration.HardwareEntryPointMemberFullNames.Count; i++)
@@ -31,7 +16,7 @@ namespace Hast.Transformer.Abstractions
                 mockHardwareEntryPointMappings[configuration.HardwareEntryPointMemberFullNames[i]] = i;
             }
 
-            return Task.FromResult<IHardwareDescription>(new HardwareDescription(mockHardwareEntryPointMappings));
+            return new HardwareDescription(mockHardwareEntryPointMappings);
         }
 
 

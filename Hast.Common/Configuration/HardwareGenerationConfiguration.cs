@@ -49,6 +49,19 @@ namespace Hast.Layer
         /// <inheritdoc/>
         public string HardwareFrameworkPath { get; set; }
 
+        /// <summary>
+        /// Gets or sets whether hardware transformation takes place. If it doesn't then 
+        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too. Defaults to 
+        /// <c>true</c>.
+        /// </summary>
+        public bool EnableHardwareTransformation { get; set; } = true;
+
+        /// <summary>
+        /// Gets or set whether a hardware implementation composer should be used to synthesize hardware from the
+        /// transformed hardware description. Defaults to <c>true</c>.
+        /// </summary>
+        public bool EnableHardwareImplementationComposition { get; set; } = true;
+
 
         /// <summary>
         /// Constructs a new <see cref="HardwareGenerationConfiguration"/> object.

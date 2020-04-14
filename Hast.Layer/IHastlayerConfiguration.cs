@@ -19,12 +19,7 @@ namespace Hast.Layer
         /// <summary>
         /// Flavor for end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
         /// </summary>
-        Client,
-
-        /// <summary>
-        /// Flavor for testing without transformation. <see cref="Hast.Transformer.Abstractions.NullTransformer"/> is used.
-        /// </summary>
-        Inert
+        Client
     }
 
 

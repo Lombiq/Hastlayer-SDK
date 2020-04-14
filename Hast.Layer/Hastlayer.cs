@@ -3,6 +3,7 @@ using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
 using Hast.Communication.Services;
+using Hast.Layer.EmptyRepresentationFactories;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
@@ -67,10 +68,6 @@ namespace Hast.Layer
                     case HastlayerFlavor.Developer:
                         // Can't use the type directly because it won't be available in the Client flavor.
                         services.RemoveImplementationsExcept<ITransformer>("Hast.Transformer.DefaultTransformer");
-                        break;
-                    case HastlayerFlavor.Inert:
-                        services.RemoveImplementationsExcept<ITransformer, NullTransformer>();
-                        services.RemoveImplementationsExcept<IHardwareImplementationComposer, NullHardwareImplementationComposer>();
                         break;
                     default:
                         throw new ArgumentException($"Unknown flavor in configuration: '{configuration.Flavor}'");
@@ -146,7 +143,9 @@ namespace Hast.Layer
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
                     var loggerService = scope.ServiceProvider.GetService<ILogger<Hastlayer>>();
 
-                    var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
+                    var hardwareDescription = configuration.EnableHardwareTransformation ?
+                        await transformer.Transform(assembliesPaths, configuration) :
+                        EmptyHardwareDescriptionFactory.Create(configuration);
 
                     foreach (var warning in hardwareDescription.Warnings)
                     {
@@ -169,23 +168,28 @@ namespace Hast.Layer
                     var hardwareImplementationComposerSelector =
                         scope.ServiceProvider.GetRequiredService<IHardwareImplementationComposerSelector>();
 
-                    var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
+                    IHardwareImplementation hardwareImplementation;
+                    if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
                     {
-                        Configuration = configuration,
-                        HardwareDescription = hardwareDescription,
-                        DeviceManifest = deviceManifest
-                    };
+                        var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
+                        {
+                            Configuration = configuration,
+                            HardwareDescription = hardwareDescription,
+                            DeviceManifest = deviceManifest
+                        };
 
-                    var hardwareImplementationComposer = hardwareImplementationComposerSelector
-                        .GetHardwareImplementationComposer(hardwareImplementationCompositionContext);
+                        var hardwareImplementationComposer = hardwareImplementationComposerSelector
+                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext);
 
-                    if (hardwareImplementationComposer == null)
-                    {
-                        throw new HastlayerException("No suitable hardware implementation composer was found.");
+                        if (hardwareImplementationComposer == null)
+                        {
+                            throw new HastlayerException("No suitable hardware implementation composer was found.");
+                        }
+
+                        hardwareImplementation = await hardwareImplementationComposer
+                            .Compose(hardwareImplementationCompositionContext);
                     }
-
-                    var hardwareImplementation = await hardwareImplementationComposer
-                        .Compose(hardwareImplementationCompositionContext);
+                    else hardwareImplementation = EmptyHardwareImplementationFactory.Create();
 
                     return new HardwareRepresentation
                     {
