@@ -36,8 +36,8 @@ namespace Hast.Layer
             _configuration = configuration;
             var appDataFolder = new AppDataFolder(configuration.AppDataFolderPath);
 
-            // Since the DI prefers services in order of registration, we take the user assemblies first, then the
-            // imported assemblies below, followed by dynamic lookup of Hast.*.dll files.
+            // Since the DI prefers services in order of registration, we take the user assemblies first followed by
+            // dynamic lookup of Hast.*.dll files.
             var assemblies = new List<Assembly>(configuration.Extensions);
             assemblies.AddRange(new[]
             {
