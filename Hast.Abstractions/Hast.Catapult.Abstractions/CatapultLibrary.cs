@@ -105,7 +105,7 @@ namespace Hast.Catapult.Abstractions
         }
 
         public System.IO.TextWriter TesterOutput { get; set; }
-        
+
 
         /// <summary>
         /// Initializes a new instance of the CatapultLibrary class.
@@ -171,7 +171,7 @@ namespace Hast.Catapult.Abstractions
         }
 
 
-        public static CatapultLibrary Create(IDictionary<string, object> config, ILogger logger, int endpointNumber = Constants.PcieHipNumber)
+        public static CatapultLibrary Create(IDictionary<string, object> config, ILogger<CatapultLibrary> logger, int endpointNumber = Constants.PcieHipNumber)
         {
             var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
                 config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :
@@ -260,9 +260,9 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         /// <param name="address">The memory address.</param>
         /// <returns>The value of the soft register.</returns>
-        public ulong GetSoftRegister(uint address) 
+        public ulong GetSoftRegister(uint address)
         {
-            VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value)); return value; 
+            VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value)); return value;
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace Hast.Catapult.Abstractions
                 Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
                 responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
                 var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
-                Parallel.For(0, responses.Length, (i)=>
+                Parallel.For(0, responses.Length, (i) =>
                 {
                     int size = i < responses.Length - 1 ? BufferPayloadSize :
                         (payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) - (i * BufferPayloadSize);

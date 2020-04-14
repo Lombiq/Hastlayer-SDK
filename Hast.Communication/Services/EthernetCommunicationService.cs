@@ -1,15 +1,15 @@
-﻿using System;
-using System.Linq;
-using System.Net.Sockets;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using Hast.Communication.Constants;
+﻿using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
+using System.Net.Sockets;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
@@ -38,7 +38,7 @@ namespace Hast.Communication.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IFpgaIpEndpointFinder fpgaIpEndpointFinder,
-            ILogger logger) : base(logger)
+            ILogger<EthernetCommunicationService> logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;

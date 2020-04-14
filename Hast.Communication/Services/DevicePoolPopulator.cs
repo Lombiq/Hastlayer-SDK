@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Hast.Communication.Models;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hast.Communication.Models;
-using Microsoft.Extensions.Logging;
 
 namespace Hast.Communication.Services
 {
@@ -14,7 +14,7 @@ namespace Hast.Communication.Services
         private bool _poolIsPopulated = false;
 
 
-        public DevicePoolPopulator(IDevicePoolManager devicePoolManager, ILogger logger)
+        public DevicePoolPopulator(IDevicePoolManager devicePoolManager, ILogger<DevicePoolPopulator> logger)
         {
             _devicePoolManager = devicePoolManager;
             _logger = logger;

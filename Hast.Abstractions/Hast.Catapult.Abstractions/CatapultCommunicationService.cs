@@ -15,6 +15,7 @@ namespace Hast.Catapult.Abstractions
     {
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
+        private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
 
 
         public override string ChannelName => Constants.ChannelName;
@@ -23,10 +24,12 @@ namespace Hast.Catapult.Abstractions
         public CatapultCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
-            ILogger logger) : base(logger)
+            ILogger<CatapultCommunicationService> logger,
+            ILogger<CatapultLibrary> catapultLibraryLogger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
+            _catapultLibraryLogger = catapultLibraryLogger;
         }
 
         private void Device_Disposing(object sender, EventArgs e) =>
@@ -77,7 +80,7 @@ namespace Hast.Catapult.Abstractions
                         try
                         {
                             var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
-                            return CatapultLibrary.Create(config, _logger, i);
+                            return CatapultLibrary.Create(config, _catapultLibraryLogger, i);
                         }
                         catch (CatapultFunctionResultException ex)
                         {

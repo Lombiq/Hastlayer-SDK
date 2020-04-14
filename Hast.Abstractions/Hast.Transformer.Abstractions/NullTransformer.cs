@@ -1,7 +1,5 @@
-﻿using Hast.Common.Interfaces;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +11,7 @@ namespace Hast.Transformer.Abstractions
     {
         private readonly ILogger _logger;
 
-        public NullTransformer(ILogger logger)
+        public NullTransformer(ILogger<NullTransformer> logger)
         {
             _logger = logger;
         }

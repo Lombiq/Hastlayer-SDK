@@ -3,7 +3,6 @@ using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace Hast.Xilinx.Abstractions
         private readonly ILogger _logger;
 
 
-        public VivadoHardwareImplementationComposer(ILogger logger)
+        public VivadoHardwareImplementationComposer(ILogger<VivadoHardwareImplementationComposer> logger)
         {
             _logger = logger;
         }

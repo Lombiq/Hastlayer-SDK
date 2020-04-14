@@ -18,7 +18,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using LogManager = NLog.LogManager;
 
 namespace Hast.Layer
 {
@@ -158,7 +157,7 @@ namespace Hast.Layer
                     var transformer = scope.ServiceProvider.GetService<ITransformer>();
                     var hardwareImplementationComposer = scope.ServiceProvider.GetService<IHardwareImplementationComposer>();
                     var deviceManifestSelector = scope.ServiceProvider.GetService<IDeviceManifestSelector>();
-                    var loggerService = scope.ServiceProvider.GetService<ILogger>();
+                    var loggerService = scope.ServiceProvider.GetService<ILogger<Hastlayer>>();
 
                     var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
 
@@ -177,7 +176,7 @@ namespace Hast.Layer
                     if (deviceManifest == null)
                     {
                         throw new HastlayerException(
-                            "There is no supported device with the name " + configuration.DeviceName + ".");
+                            "There is no supported device with the name \"" + configuration.DeviceName + "\".");
                     }
 
                     var hardwareImplementation = await hardwareImplementationComposer
@@ -332,7 +331,7 @@ namespace Hast.Layer
         }
 
         private void LogException(Exception exception, string message) =>
-            _serviceProvider.GetService<ILogger>().LogError(exception, message);
+            _serviceProvider.GetService<ILogger<Hastlayer>>().LogError(exception, message);
 
         private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
             DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));

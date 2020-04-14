@@ -40,7 +40,7 @@ namespace Hast.Communication.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IEnumerable<ISerialPortConfigurator> serialPortConfigurators,
-            ILogger logger) : base(logger)
+            ILogger<SerialPortCommunicationService> logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;

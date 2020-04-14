@@ -23,7 +23,7 @@ namespace Hast.Communication.Services
         private readonly ILogger _logger;
 
 
-        public FpgaIpEndpointFinder(IClock clock, ILogger logger)
+        public FpgaIpEndpointFinder(IClock clock, ILogger<FpgaIpEndpointFinder> logger)
         {
             _clock = clock;
             _logger = logger;
