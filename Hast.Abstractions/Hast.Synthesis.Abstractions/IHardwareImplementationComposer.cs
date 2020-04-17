@@ -4,18 +4,23 @@ using System.Threading.Tasks;
 
 namespace Hast.Synthesis.Abstractions
 {
+    /// <summary>
+    /// Service for composing the hardware implementation for a given hardware description, e.g. putting all the source
+    /// files where they should be, running hardware synthesis, etc.
+    /// </summary>
     public interface IHardwareImplementationComposer : IDependency
     {
         /// <summary>
+        /// Indicates whether the hardware implementation composes can handle the given context.
+        /// </summary>
+        /// <param name="context">All the data necessary for the hardware implementation composition to happen.</param>
+        bool CanCompose(IHardwareImplementationCompositionContext context);
+
+        /// <summary>
         /// Composes the hardware implementation for the given hardware representation.
         /// </summary>
-        /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
-        /// <param name="hardwareDescription">Represents the hardware that was generated from .NET assemblies.</param>
-        /// <param name="deviceManifest">The hardware device's manifest to compose the hardware implementation for.</param>
+        /// <param name="context">All the data necessary for the hardware implementation composition to happen.</param>
         /// <returns>The handle to the synthesized hardware implementation.</returns>
-        Task<IHardwareImplementation> Compose(
-            IHardwareGenerationConfiguration configuration,
-            IHardwareDescription hardwareDescription,
-            IDeviceManifest deviceManifest);
+        Task<IHardwareImplementation> Compose(IHardwareImplementationCompositionContext context);
     }
 }

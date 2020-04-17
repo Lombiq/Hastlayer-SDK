@@ -3,7 +3,6 @@ using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Logging;
-using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -20,27 +19,20 @@ namespace Hast.Xilinx.Abstractions
         }
 
 
-        public Task<IHardwareImplementation> Compose(
-            IHardwareGenerationConfiguration configuration,
-            IHardwareDescription hardwareDescription,
-            IDeviceManifest deviceManifest)
+        public bool CanCompose(IHardwareImplementationCompositionContext context) =>
+            context.HardwareDescription is VhdlHardwareDescription &&
+            context.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado;
+
+        public Task<IHardwareImplementation> Compose(IHardwareImplementationCompositionContext context)
         {
-            var hardwareFrameworkPath = configuration.HardwareFrameworkPath;
+            var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
+            var deviceManifest = context.DeviceManifest;
+            var vhdlHardwareDescription = (VhdlHardwareDescription)context.HardwareDescription;
 
             if (string.IsNullOrEmpty(hardwareFrameworkPath))
             {
                 _logger.LogWarning("No hardware framework path was configured. Thus while the hardware description was created it won't be implemented with the FPGA vendor toolchain.");
                 return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
-            }
-
-            if (!(hardwareDescription is VhdlHardwareDescription vhdlHardwareDescription))
-            {
-                throw new NotSupportedException("The given hardware description needs to be of type VhdlHardwareDescription.");
-            }
-
-            if (deviceManifest.ToolChainName != CommonToolChainNames.Vivado)
-            {
-                throw new InvalidOperationException("Only the Vivado toolchain is supported by this hardware implementation composer.");
             }
 
 
@@ -105,11 +97,6 @@ namespace Hast.Xilinx.Abstractions
         {
             if (Directory.Exists(path)) return;
             Directory.CreateDirectory(path);
-        }
-
-
-        private class HardwareImplementation : IHardwareImplementation
-        {
         }
     }
 }

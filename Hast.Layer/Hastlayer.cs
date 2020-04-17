@@ -3,6 +3,7 @@ using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
 using Hast.Communication.Services;
+using Hast.Layer.EmptyRepresentationFactories;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
@@ -36,8 +37,8 @@ namespace Hast.Layer
             _configuration = configuration;
             var appDataFolder = new AppDataFolder(configuration.AppDataFolderPath);
 
-            // Since the DI prefers services in order of registration, we take the user assemblies first, then the
-            // imported assemblies below, followed by dynamic lookup of Hast.*.dll files.
+            // Since the DI prefers services in order of registration, we take the user assemblies first followed by
+            // dynamic lookup of Hast.*.dll files.
             var assemblies = new List<Assembly>(configuration.Extensions);
             assemblies.AddRange(new[]
             {
@@ -77,20 +78,18 @@ namespace Hast.Layer
                 switch (configuration.Flavor)
                 {
                     case HastlayerFlavor.Client:
-                        services.RemoveImplementationsExcept<ITransformer>("RemoteTransformer");
+                        services.RemoveImplementationsExcept<ITransformer, Remote.Client.RemoteTransformer>();
                         break;
                     case HastlayerFlavor.Developer:
-                        services.RemoveImplementationsExcept<ITransformer>("DefaultTransformer");
-                        break;
-                    case HastlayerFlavor.Inert:
-                        services.RemoveImplementationsExcept<ITransformer>("NullTransformer");
+                        // Can't use the type directly because it won't be available in the Client flavor.
+                        services.RemoveImplementationsExcept<ITransformer>("Hast.Transformer.DefaultTransformer");
                         break;
                     default:
                         throw new ArgumentException($"Unknown flavor in configuration: '{configuration.Flavor}'");
                 }
             }
 
-            _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.Name));
+            _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.FullName));
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
         }
 
@@ -154,12 +153,13 @@ namespace Hast.Layer
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    var transformer = scope.ServiceProvider.GetService<ITransformer>();
-                    var hardwareImplementationComposer = scope.ServiceProvider.GetService<IHardwareImplementationComposer>();
-                    var deviceManifestSelector = scope.ServiceProvider.GetService<IDeviceManifestSelector>();
-                    var loggerService = scope.ServiceProvider.GetService<ILogger<Hastlayer>>();
+                    var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
+                    var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
+                    var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
 
-                    var hardwareDescription = await transformer.Transform(assembliesPaths, configuration);
+                    var hardwareDescription = configuration.EnableHardwareTransformation ?
+                        await transformer.Transform(assembliesPaths, configuration) :
+                        EmptyHardwareDescriptionFactory.Create(configuration);
 
                     foreach (var warning in hardwareDescription.Warnings)
                     {
@@ -179,8 +179,31 @@ namespace Hast.Layer
                             "There is no supported device with the name \"" + configuration.DeviceName + "\".");
                     }
 
-                    var hardwareImplementation = await hardwareImplementationComposer
-                        .Compose(configuration, hardwareDescription, deviceManifest);
+                    var hardwareImplementationComposerSelector =
+                        scope.ServiceProvider.GetRequiredService<IHardwareImplementationComposerSelector>();
+
+                    IHardwareImplementation hardwareImplementation;
+                    if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
+                    {
+                        var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
+                        {
+                            Configuration = configuration,
+                            HardwareDescription = hardwareDescription,
+                            DeviceManifest = deviceManifest
+                        };
+
+                        var hardwareImplementationComposer = hardwareImplementationComposerSelector
+                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext);
+
+                        if (hardwareImplementationComposer == null)
+                        {
+                            throw new HastlayerException("No suitable hardware implementation composer was found.");
+                        }
+
+                        hardwareImplementation = await hardwareImplementationComposer
+                            .Compose(hardwareImplementationCompositionContext);
+                    }
+                    else hardwareImplementation = EmptyHardwareImplementationFactory.Create();
 
                     return new HardwareRepresentation
                     {
@@ -263,7 +286,7 @@ namespace Hast.Layer
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
-            if (_serviceNames.Contains(typeof(TOut).Name))
+            if (_serviceNames.Contains(typeof(TOut).FullName))
             {
                 throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
             }

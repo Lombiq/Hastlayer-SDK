@@ -57,6 +57,18 @@ namespace Hast.Layer
         /// implement the hardware and configure the device.
         /// </summary>
         string HardwareFrameworkPath { get; }
+
+        /// <summary>
+        /// Gets whether hardware transformation takes place. If it doesn't then 
+        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too.
+        /// </summary>
+        bool EnableHardwareTransformation { get; }
+
+        /// <summary>
+        /// Gets whether a hardware implementation composer should be used to synthesize hardware from the transformed
+        /// hardware description. 
+        /// </summary>
+        bool EnableHardwareImplementationComposition { get; }
     }
 
 
