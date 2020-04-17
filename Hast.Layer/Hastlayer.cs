@@ -52,6 +52,7 @@ namespace Hast.Layer
             assemblies.AddRange(GetHastLibraries());
 
             var services = new ServiceCollection();
+            services.AddSingleton<IHastlayer>(this);
             services.AddIDependencyContainer(assemblies);
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
@@ -294,6 +295,8 @@ namespace Hast.Layer
             using (var scope = _serviceProvider.CreateScope())
                 return await process(scope.ServiceProvider);
         }
+
+        public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();
 
 
         private void LoadHost()

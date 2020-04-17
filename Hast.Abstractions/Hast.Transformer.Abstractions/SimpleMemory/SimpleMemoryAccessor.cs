@@ -8,7 +8,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// </summary>
     public class SimpleMemoryAccessor
     {
-        private SimpleMemory _simpleMemory;
+        private readonly SimpleMemory _simpleMemory;
 
 
         public SimpleMemoryAccessor(SimpleMemory simpleMemory)
