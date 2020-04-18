@@ -1,4 +1,4 @@
-﻿using Hast.Catapult.Abstractions;
+using Hast.Catapult.Abstractions;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -123,10 +123,7 @@ namespace Hast.Layer
                 .Build();
 
 
-        public void Dispose()
-        {
-            _serviceProvider.Dispose();
-        }
+        public void Dispose() => _serviceProvider.Dispose();
 
         ~Hastlayer() => Dispose();
 
