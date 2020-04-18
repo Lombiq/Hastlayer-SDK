@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -40,7 +40,7 @@ namespace Hast.Samples.Kpz.Algorithms
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
         public static SimpleMemory PushRandomSeed(this PrngTestInterface kernels, ulong seed)
         {
-            SimpleMemory sm = new SimpleMemory(3);
+            var sm = new SimpleMemory(3);
             sm.WriteUInt32(0, (uint)seed); //LE: 0 is low byte, 1 is high byte
             sm.WriteUInt32(1, (uint)(seed >> 32));
             return sm;

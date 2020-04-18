@@ -1,4 +1,4 @@
-﻿
+
 using Hast.Algorithms.Random;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
@@ -338,7 +338,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 for (int y = 0; y < KpzKernelsParallelizedInterface.GridSize; y++)
                 {
-                    KpzNode node = gridSrc[x, y];
+                    var node = gridSrc[x, y];
                     memoryDst.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + y * KpzKernelsParallelizedInterface.GridSize + x, node.SerializeToUInt32());
                 }
             }

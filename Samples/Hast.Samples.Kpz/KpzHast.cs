@@ -1,8 +1,7 @@
-﻿using Hast.Algorithms.Random;
+using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -131,7 +130,7 @@ namespace Hast.Samples.Kpz
                     uint prngCpuResult = kernelsCpu.GetNextRandom(smCpu);
                     uint prngFpgaResult = KernelsP.GetNextRandom(smFpga);
                     if (prngCpuResult != prngFpgaResult) { success = false; }
-                    LogItFunction(String.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
+                    LogItFunction(string.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
                 }
 
                 if (success) LogItFunction("TestPrng succeeded!");

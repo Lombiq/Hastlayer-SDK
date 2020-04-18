@@ -1,4 +1,4 @@
-﻿using Hast.Algorithms;
+using Hast.Algorithms;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
@@ -8,6 +8,7 @@ using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -57,9 +58,9 @@ namespace Hast.Samples.Consumer
         public static string HardwareFrameworkPath = "HardwareFramework";
     }
 
-    class Program
+    internal class Program
     {
-        static async Task MainTask(string[] args)
+        private static async Task MainTask(string[] args)
         {
             /*
             * On a high level these are the steps to use Hastlayer:
@@ -308,7 +309,8 @@ namespace Hast.Samples.Consumer
             }
         }
 
-        static async Task Main(string[] args)
+        [SuppressMessage("Design", "CA1031:Do not catch general exception types", Justification = "Just displaying errors as an example.")]
+        private static async Task Main(string[] args)
         {
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
             try
