@@ -210,6 +210,9 @@ dotnet_naming_style.begins_with_i.required_suffix =
 dotnet_naming_style.begins_with_i.word_separator = 
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
 
+# Disabling "catch a more specific exception type" suggestion which is overwhelmingly a false positive.
+dotnet_diagnostic.CA1031.severity = silent
+
 # Various config files
 [*.{config,csproj,json,props,targets}]
 
