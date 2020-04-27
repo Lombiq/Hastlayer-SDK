@@ -5,6 +5,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
     <PlatformTarget>x64</PlatformTarget>
+    <StartupObject>Hast.Samples.Kpz.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System.Windows.Forms.DataVisualization" />

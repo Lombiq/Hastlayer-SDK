@@ -15,15 +15,21 @@ namespace Hast.Catapult.Abstractions
     {
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
+        private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
 
 
         public override string ChannelName => Constants.ChannelName;
 
 
-        public CatapultCommunicationService(IDevicePoolPopulator devicePoolPopulator, IDevicePoolManager devicePoolManager)
+        public CatapultCommunicationService(
+            IDevicePoolPopulator devicePoolPopulator,
+            IDevicePoolManager devicePoolManager,
+            ILogger<CatapultCommunicationService> logger,
+            ILogger<CatapultLibrary> catapultLibraryLogger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
+            _catapultLibraryLogger = catapultLibraryLogger;
         }
 
         private void Device_Disposing(object sender, EventArgs e) =>
@@ -74,14 +80,14 @@ namespace Hast.Catapult.Abstractions
                         try
                         {
                             var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
-                            return CatapultLibrary.Create(config, Logger, i);
+                            return CatapultLibrary.Create(config, _catapultLibraryLogger, i);
                         }
                         catch (CatapultFunctionResultException ex)
                         {
                             // The illegal endpoint number messages are normal for higher endpoints if they aren't
                             // populated, so it's OK to suppress them.
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
-                                Logger.LogError(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
+                                _logger.LogError(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;
                         }
                     })));
@@ -114,7 +120,7 @@ namespace Hast.Catapult.Abstractions
 
                 if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
                 dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
-                Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
+                _logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
                 EndExecution(context);
 

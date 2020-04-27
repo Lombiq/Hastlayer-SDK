@@ -1,7 +1,9 @@
 ﻿using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
+using Microsoft.Extensions.Logging;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz
@@ -291,16 +293,16 @@ namespace Hast.Samples.Kpz
         {
             get
             {
-                switch (comboTarget.SelectedIndex)
+                return comboTarget.SelectedIndex switch
                 {
-                    case 0: return KpzTarget.Cpu;
-                    case 1: return KpzTarget.FpgaSimulation;
-                    case 2: return KpzTarget.Fpga;
-                    case 3: return KpzTarget.FpgaSimulationParallelized;
-                    case 4: return KpzTarget.FpgaParallelized;
-                    case 5: return KpzTarget.PrngTest;
-                }
-                return KpzTarget.Cpu;
+                    0 => KpzTarget.Cpu,
+                    1 => KpzTarget.FpgaSimulation,
+                    2 => KpzTarget.Fpga,
+                    3 => KpzTarget.FpgaSimulationParallelized,
+                    4 => KpzTarget.FpgaParallelized,
+                    5 => KpzTarget.PrngTest,
+                    _ => KpzTarget.Cpu,
+                };
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using Hast.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -26,7 +27,8 @@ namespace Hast.Layer
     public interface IHastlayerConfiguration : ISingletonDependency
     {
         /// <summary>
-        /// Invoked before the <see cref="IServiceProvider"/> is built.
+        /// Invoked before the <see cref="IServiceProvider"/> for Hastlayer's dependency injection is built. Add single
+        /// service registrations or other service collection customizations here.
         /// </summary>
         Action<IHastlayerConfiguration, IServiceCollection> OnServiceRegistration { get; }
 
@@ -46,5 +48,10 @@ namespace Hast.Layer
         /// The location of the App_Data folder
         /// </summary>
         string AppDataFolderPath { get; }
+
+        /// <summary>
+        /// Extension points for customizing the logger.
+        /// </summary>
+        Action<ILoggingBuilder> ConfigureLogging { get; }
     }
 }
