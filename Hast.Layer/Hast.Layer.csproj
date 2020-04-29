@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
@@ -12,7 +12,7 @@
   <PropertyGroup Condition="$(SolutionName) == 'Hastlayer.SDK'">
     <DefineConstants>WITH_HAST_CORE</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK'">
+  <ItemGroup Condition="$(DefineConstants.Contains(WITH_HAST_CORE))">
     <ProjectReference Include="..\Hast.Core\Hast.Catapult\Hast.Catapult.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.Transformer\Hast.Transformer.csproj" />
