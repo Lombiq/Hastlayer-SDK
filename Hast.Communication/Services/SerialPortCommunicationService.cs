@@ -1,4 +1,4 @@
-﻿using Hast.Common.Extensibility.Pipeline;
+using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
@@ -27,13 +27,7 @@ namespace Hast.Communication.Services
         private const int MemoryPrefixCellCount = 3;
         private const int FirstCellPadding = sizeof(int) - 1;
 
-        public override string ChannelName
-        {
-            get
-            {
-                return Serial.ChannelName;
-            }
-        }
+        public override string ChannelName => Serial.ChannelName;
 
 
         public SerialPortCommunicationService(

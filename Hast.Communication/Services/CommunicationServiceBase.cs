@@ -1,8 +1,7 @@
-﻿using Hast.Communication.Models;
+using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,10 +16,7 @@ namespace Hast.Communication.Services
         public TextWriter TesterOutput { get; set; }
 
 
-        protected CommunicationServiceBase(ILogger logger)
-        {
-            _logger = logger;
-        }
+        protected CommunicationServiceBase(ILogger logger) => _logger = logger;
 
 
         abstract public Task<IHardwareExecutionInformation> Execute(
