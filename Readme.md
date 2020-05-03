@@ -1,8 +1,8 @@
-# Hastlayer SDK Readme
+# Hastlayer SDK
 
 
 
-## Overview
+## About
 
 [Hastlayer](https://hastlayer.com/) - be the hardware. Hastlayer automatically transforms [.NET](https://www.microsoft.com/net/) assemblies into computer chips, improving performance and lowering power consumption for massively parallel applications. For some figures check out [the benchmarks](Docs/Benchmarks.md).
 
@@ -11,6 +11,8 @@ Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_arr
 Hastlayer was also featured on [.NET Conf 2017](https://channel9.msdn.com/events/dotnetConf/2017/T212) and [many other conferences and meetups](https://hastlayer.com/hastlayer-world-tour). The [recorded session](https://channel9.msdn.com/events/dotnetConf/2017/T212) covers interesting features of Hastlayer (it's also on [YouTube](https://www.youtube.com/watch?v=03Sq5m3eUSs)). Check out the [FAQ](https://hastlayer.com/faq) for more information.
  
 This is the PC-side component of Hastlayer, the one that transforms .NET assemblies, programs attached FPGAs, and communicates with said FPGAs.
+
+Note that due to a repository purge the repo history doesn't contain anything from before July 2017 though development has been ongoing more or less actively from 2015.
 
 Created by [Lombiq Technologies](https://lombiq.com/), an open source .NET web development company working mostly with [Orchard CMS, i.e. Orchard 1.x and Orchard Core](https://www.orchardcore.net/).
 
@@ -33,10 +35,8 @@ These text files should only serve as a starting point. The samples are the best
 - [Support](Docs/Support.md)
 
 
-## Repository and contributing
+## Contributing and support
 
-The project's source is available in a [git repository on GitHub](https://github.com/Lombiq/Hastlayer-SDK). Note that due to a repository purge the repo history doesn't contain anything from before July 2017 though development has been ongoing more or less actively from 2015.
+Bug reports, feature requests, comments, questions, code contributions, and love letters are warmly welcome, please do so via GitHub issues and pull requests. Please adhere to our [open-source guidelines](https://lombiq.com/open-source-guidelines) while doing so.
 
-Bug reports, feature requests and comments are warmly welcome and feel free to send pull requests too.
-
-This project is developed by [Lombiq Technologies Ltd](https://lombiq.com/). Commercial-grade support is available through Lombiq.
+This project is developed by [Lombiq Technologies](https://lombiq.com/). Commercial-grade support is available through Lombiq.
