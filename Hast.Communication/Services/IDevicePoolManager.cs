@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Common.Interfaces;
 using Hast.Communication.Models;
-using Orchard;
 
 namespace Hast.Communication.Services
 {

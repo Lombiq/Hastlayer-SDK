@@ -18,13 +18,14 @@ namespace Hast.Layer
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
         public static Task<T> GenerateProxy<T>(
-            this IHastlayer hastlayer, 
-            IHardwareRepresentation hardwareRepresentation, 
+            this IHastlayer hastlayer,
+            IHardwareRepresentation hardwareRepresentation,
             T hardwareObject) where T : class =>
             hastlayer.GenerateProxy(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
 
         /// <summary>
-        /// Generates and implements a hardware representation of the given assemblies.
+        /// Generates and implements a hardware representation of the given assemblies. Be sure to use assemblies built
+        /// with the Debug configuration.
         /// </summary>
         /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
@@ -24,9 +25,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public int PrefixCellCount { get; internal set; } = 4;
 
         /// <summary>
-        /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be used
-        /// for passing in extra input parameters (like memberId) without having to copy the operative memory contents
-        /// into an auxiliary array.
+        /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be
+        /// used for passing in extra input parameters (like memberId) without having to copy the operative memory
+        /// contents into an auxiliary array.
         /// </summary>
         internal Memory<byte> PrefixedMemory { get; set; }
 
@@ -91,12 +92,14 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             PrefixCellCount = prefixCellCount;
         }
 
+
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
         /// the FPGA for transformed algorithms from an existing byte array.
         /// </summary>
         /// <param name="memory">The source data.</param>
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
+        [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used by third-party consumer code.")]
         private SimpleMemory(byte[] memory, int prefixCellCount = 0) : this(memory.AsMemory(), prefixCellCount) { }
 
 

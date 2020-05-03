@@ -1,93 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CB4A8CF6-7DD4-4493-B5CD-E5E51EE5C73B}</ProjectGuid>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Samples.SampleAssembly</RootNamespace>
-    <AssemblyName>Hast.Samples.SampleAssembly</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Posit32AdvancedCalculator.cs" />
-    <Compile Include="Posit32FusedCalculator.cs" />
-    <Compile Include="PositCalculator.cs" />
-    <Compile Include="Extensions\ArrayExtensions.cs" />
-    <Compile Include="Fix64Calculator.cs" />
-    <Compile Include="GenomeMatcher.cs" />
-    <Compile Include="Loopback.cs" />
-    <Compile Include="MemoryTest.cs" />
-    <Compile Include="ParallelAlgorithm.cs" />
-    <Compile Include="ImageContrastModifier.cs" />
-    <Compile Include="ImageFilter.cs" />
-    <Compile Include="MonteCarloPiEstimator.cs" />
-    <Compile Include="ObjectOrientedShowcase.cs" />
-    <Compile Include="Posit32Calculator.cs" />
-    <Compile Include="PrimeCalculator.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecursiveAlgorithms.cs" />
-    <Compile Include="SimdCalculator.cs" />
-    <Compile Include="UnumCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
-      <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
-      <Name>Hast.Transformer.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj">
-      <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
-      <Name>Hast.Algorithms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
-      <Project>{6EE5898A-E450-4A1D-80AF-AD27A8BD5E69}</Project>
-      <Name>Hast.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj">
-      <Project>{6cfe69a4-04a3-4427-818c-c0832d197a62}</Project>
-      <Name>Lombiq.Arithmetics</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj" />
+    <ProjectReference Include="..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Readme.md" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

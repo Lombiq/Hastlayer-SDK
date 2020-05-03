@@ -7,7 +7,7 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("Lombiq Technologies Ltd.")]
 [assembly: AssemblyProduct("Hastlayer (hastlayer.com)")]
-[assembly: AssemblyCopyright("Copyright © 2015-2018")]
+[assembly: AssemblyCopyright("Copyright © 2015-2020")]
 [assembly: AssemblyTrademark("")]
 
 #if DEBUG

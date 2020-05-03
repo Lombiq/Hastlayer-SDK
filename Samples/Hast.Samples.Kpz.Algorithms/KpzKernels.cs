@@ -1,5 +1,6 @@
 using Hast.Algorithms.Random;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -37,15 +38,14 @@ namespace Hast.Samples.Kpz.Algorithms
         /// This function is for testing how Hastlayer works by running a simple add operation between memory cells
         /// 0 and 1, and writing the result to cell 2.
         /// </summary>
-        public virtual void TestAdd(SimpleMemory memory)
-        {
-            memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
-        }
+        public virtual void TestAdd(SimpleMemory memory) => memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
+
 
         /// <summary>
         /// This function is for testing how Hastlayer works by running a random generator, writing the results into
         /// SimpleMemory.
         /// </summary>
+        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "It's a hardware entry point.")]
         public void TestPrng(SimpleMemory memory)
         {
             var kernels = new KpzKernels();
@@ -81,7 +81,7 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int MemIndexGrid = 6;
         public const int SizeOfSimpleMemory = GridWidth * GridHeight + 6;
 
-        private uint[] _gridRaw = new uint[GridWidth * GridHeight];
+        private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
         public RandomMwc64X Random1, Random2;
         public bool TestMode = false;
@@ -103,7 +103,7 @@ namespace Hast.Samples.Kpz.Algorithms
             };
             Random2 = new RandomMwc64X
             {
-                State = 
+                State =
                     (ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32 | memory.ReadUInt32(MemIndexRandomStates + 3)
             };
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
@@ -183,49 +183,34 @@ namespace Hast.Samples.Kpz.Algorithms
 
 
         /// <summary>
-        /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for 
-        /// the item's place in the grid.
+        /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for the
+        /// item's place in the grid.
         /// </summary>
-        private int GetIndexFromXY(int x, int y)
-        {
-            return x + y * GridWidth;
-        }
+        private int GetIndexFromXY(int x, int y) => x + y * GridWidth;
 
         /// <summary>
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
         /// This function returns the dx value of the <see cref="KpzNode"/> from its serialized form.
         /// </summary>
-        private bool GetGridDx(int index)
-        {
-            return (_gridRaw[index] & 1) > 0;
-        }
+        private bool GetGridDx(int index) => (_gridRaw[index] & 1) > 0;
 
         /// <summary>
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
         /// This function returns the dy value of the <see cref="KpzNode"/> from its serialized form.
         /// </summary>
-        private bool GetGridDy(int index)
-        {
-            return (_gridRaw[index] & 2) > 0;
-        }
+        private bool GetGridDy(int index) => (_gridRaw[index] & 2) > 0;
 
         /// <summary>
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
         /// This function sets the dx value of the <see cref="KpzNode"/> in its serialized form.
         /// </summary>
-        private void SetGridDx(int index, bool value)
-        {
-            _gridRaw[index] = (_gridRaw[index] & ~1U) | (value ? 1U : 0);
-        }
+        private void SetGridDx(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~1U) | (value ? 1U : 0);
 
         /// <summary>
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
         /// This function sets the dy value of the <see cref="KpzNode"/> in its serialized form.
         /// </summary>
-        private void SetGridDy(int index, bool value)
-        {
-            _gridRaw[index] = (_gridRaw[index] & ~2U) | (value ? 2U : 0);
-        }
+        private void SetGridDy(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~2U) | (value ? 2U : 0);
     }
 
 
@@ -317,7 +302,7 @@ namespace Hast.Samples.Kpz.Algorithms
         public static void DoIterationsWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga,
             bool testMode, ulong randomSeed1, ulong randomSeed2, uint numberOfIterations)
         {
-            SimpleMemory sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
+            var sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
 
             if (pushToFpga)
             {
@@ -337,7 +322,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 for (int y = 0; y < KpzKernels.GridWidth; y++)
                 {
-                    KpzNode node = gridSrc[x, y];
+                    var node = gridSrc[x, y];
                     memoryDst.WriteUInt32(KpzKernels.MemIndexGrid + y * KpzKernels.GridWidth + x, node.SerializeToUInt32());
                 }
             }

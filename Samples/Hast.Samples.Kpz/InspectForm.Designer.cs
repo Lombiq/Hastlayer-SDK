@@ -56,7 +56,7 @@
             this.listIterations.Name = "listIterations";
             this.listIterations.Size = new System.Drawing.Size(122, 441);
             this.listIterations.TabIndex = 1;
-            this.listIterations.SelectedIndexChanged += new System.EventHandler(this.listIterations_SelectedIndexChanged);
+            this.listIterations.SelectedIndexChanged += new System.EventHandler(this.ListIterations_SelectedIndexChanged);
             //
             // label1
             //
@@ -77,7 +77,7 @@
             this.listActions.Name = "listActions";
             this.listActions.Size = new System.Drawing.Size(272, 441);
             this.listActions.TabIndex = 3;
-            this.listActions.SelectedIndexChanged += new System.EventHandler(this.listActions_SelectedIndexChanged);
+            this.listActions.SelectedIndexChanged += new System.EventHandler(this.ListActions_SelectedIndexChanged);
             //
             // label2
             //

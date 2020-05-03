@@ -1,34 +1,33 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Hast.Layer
 {
     public class HastlayerConfiguration : IHastlayerConfiguration
     {
-        private static readonly HastlayerConfiguration _default = new HastlayerConfiguration();
-        public static HastlayerConfiguration Default { get { return _default; } }
+        public static IHastlayerConfiguration Default { get; } = new HastlayerConfiguration();
 
-        /// <summary>
-        /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
-        /// pipeline. These should be Orchard extensions.
-        /// </summary>
-        public IEnumerable<Assembly> Extensions { get; set; }
+        /// <inheritdoc/>
+        public Action<IHastlayerConfiguration, IServiceCollection> OnServiceRegistration { get; set; }
 
-        /// <summary>
-        /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Developer"/>.
-        /// </summary>
-        public HastlayerFlavor Flavor { get; set; } = HastlayerFlavor.Developer;
+        /// <inheritdoc/>
+        public IEnumerable<Assembly> Extensions { get; set; } = new List<Assembly>();
 
+        /// <inheritdoc/>
+        public HastlayerFlavor Flavor { get; set; } =
+#if WITH_HAST_CORE
+            HastlayerFlavor.Developer;
+#else
+            HastlayerFlavor.Client;
+#endif
 
-        public HastlayerConfiguration()
-        {
-            Extensions = new List<Assembly>();
-        }
+        /// <inheritdoc/>
+        public string AppDataFolderPath { get; set; } = null;
 
-        public HastlayerConfiguration(IHastlayerConfiguration previousConfiguration)
-        {
-            Extensions = previousConfiguration.Extensions;
-            Flavor = previousConfiguration.Flavor;
-        }
+        /// <inheritdoc/>
+        public Action<ILoggingBuilder> ConfigureLogging { get; set; } = null;
     }
 }

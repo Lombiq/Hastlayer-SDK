@@ -12,25 +12,30 @@ namespace Hast.Console
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void RunOptions(Options options)
         {
-            var options = new Options();
+            if (options.Help) Environment.Exit(0);
+        }
+        private static void HandleParseError(IEnumerable<Error> errors)
+        {
+            var errorList = errors.ToList();
 
-            var arguments = Parser.Default.ParseArguments<Options>(args);
+            if (errorList.Any(x => x.Tag == ErrorType.HelpRequestedError)) Environment.Exit(0);
 
-            if (arguments.Errors.Any())
+            if (errorList.Any())
             {
                 System.Console.WriteLine("Bad arguments.");
                 System.Console.ReadKey();
-                return;
             }
+        }
 
-            if (arguments.Value.Help)
-            {
-                System.Console.Write(HelpText.AutoBuild(arguments));
-            }
+        private static void Main(string[] args)
+        {
+            var options = new Options();
 
-
+            Parser.Default.ParseArguments<Options>(args)
+                .WithParsed(RunOptions)
+                .WithNotParsed(HandleParseError);
 
             //Console.ReadKey();
         }

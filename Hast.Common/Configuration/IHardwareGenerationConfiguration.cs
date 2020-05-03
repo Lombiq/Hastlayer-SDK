@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Linq;
 
 namespace Hast.Layer
 {
@@ -50,6 +50,25 @@ namespace Hast.Layer
         /// by device drivers.
         /// </summary>
         string DeviceName { get; }
+
+        /// <summary>
+        /// Gets the file system path here where the hardware framework is located. The file describing the hardware to
+        /// be generated will be saved there as well as anything else necessary, and that framework will be used to
+        /// implement the hardware and configure the device.
+        /// </summary>
+        string HardwareFrameworkPath { get; }
+
+        /// <summary>
+        /// Gets whether hardware transformation takes place. If it doesn't then 
+        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too.
+        /// </summary>
+        bool EnableHardwareTransformation { get; }
+
+        /// <summary>
+        /// Gets whether a hardware implementation composer should be used to synthesize hardware from the transformed
+        /// hardware description. 
+        /// </summary>
+        bool EnableHardwareImplementationComposition { get; }
     }
 
 
@@ -72,7 +91,7 @@ namespace Hast.Layer
         /// <typeparam name="T">The type of the object that will be later fed to the proxy generator.</typeparam>
         /// <param name="expression">An expression with a call to the method.</param>
         public static void AddHardwareEntryPointMethod<T>(
-            this IHardwareGenerationConfiguration configuration, 
+            this IHardwareGenerationConfiguration configuration,
             Expression<Action<T>> expression) =>
             configuration.HardwareEntryPointMemberFullNames.Add(expression.GetMethodFullName());
 
@@ -93,7 +112,7 @@ namespace Hast.Layer
 
             // If we'd just add the type's name to HardwareEntryPointMemberNamePrefixes then types with just a different
             // suffix in their names would still be included.
-            foreach (var method in typeof(T).GetMethods().Where(method => !excludedMethodNames.Contains(method.ToString() )))
+            foreach (var method in typeof(T).GetMethods().Where(method => !excludedMethodNames.Contains(method.ToString())))
             {
                 configuration.HardwareEntryPointMemberFullNames.Add(method.GetFullName());
             }

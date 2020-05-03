@@ -9,3 +9,5 @@ bin/
 obj/
 packages/
 .vs/
+.idea/
+publish/

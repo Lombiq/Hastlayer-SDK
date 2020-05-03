@@ -1,8 +1,7 @@
-﻿using Hast.Algorithms.Random;
+using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +12,6 @@ namespace Hast.Samples.Kpz
         private bool _verifyOutput;
         private bool _randomSeedEnable;
 
-        public string VhdlOutputFilePath = @"Hast_IP.vhd";
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
         public KpzKernelsInterface Kernels;
@@ -28,7 +26,8 @@ namespace Hast.Samples.Kpz
 
             LogItFunction("Creating Hastlayer Factory...");
 
-            var hastlayer = await Hastlayer.Create();
+            // No "using" here since we are returning this object.
+            var hastlayer = Hastlayer.Create();
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
@@ -38,7 +37,9 @@ namespace Hast.Samples.Kpz
                 );
             };
 
-            var configuration = new HardwareGenerationConfiguration((await hastlayer.GetSupportedDevices()).First().Name);
+            var configuration = new HardwareGenerationConfiguration(
+                hastlayer.GetSupportedDevices().First().Name,
+                "HardwareFramework");
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;
 
@@ -63,8 +64,6 @@ namespace Hast.Samples.Kpz
                     typeof(KpzKernelsParallelizedInterface).Assembly,
                     typeof(RandomMwc64X).Assembly
                 }, configuration);
-
-            await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);
 
             LogItFunction("Generating proxy...");
 
@@ -131,7 +130,7 @@ namespace Hast.Samples.Kpz
                     uint prngCpuResult = kernelsCpu.GetNextRandom(smCpu);
                     uint prngFpgaResult = KernelsP.GetNextRandom(smFpga);
                     if (prngCpuResult != prngFpgaResult) { success = false; }
-                    LogItFunction(String.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
+                    LogItFunction(string.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
                 }
 
                 if (success) LogItFunction("TestPrng succeeded!");

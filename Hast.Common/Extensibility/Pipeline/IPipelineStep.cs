@@ -1,4 +1,4 @@
-﻿using Orchard;
+﻿using Hast.Common.Interfaces;
 
 namespace Hast.Common.Extensibility.Pipeline
 {

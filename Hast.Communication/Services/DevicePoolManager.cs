@@ -1,20 +1,27 @@
-﻿using System;
+﻿using Hast.Communication.Models;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Communication.Models;
 
 namespace Hast.Communication.Services
 {
-    public class DevicePoolManager : IDevicePoolManager
+    public sealed class DevicePoolManager : IDevicePoolManager
     {
+        private readonly ILogger<DevicePoolManager> _logger;
         private readonly object _lock = new object();
         private readonly Queue<Action<IReservedDevice>> _waitQueue = new Queue<Action<IReservedDevice>>();
 
         private bool _isDisposed = false;
 
         private Dictionary<string, PooledDevice> _devicePool = new Dictionary<string, PooledDevice>();
+
+
+        public DevicePoolManager(ILogger<DevicePoolManager> logger)
+        {
+            _logger = logger;
+        }
 
 
         public void SetDevicePool(IEnumerable<IDevice> devices)
@@ -47,48 +54,48 @@ namespace Hast.Communication.Services
                     throw new InvalidOperationException("There are no devices in the device pool (i.e. no connected devices could be detected).");
                 }
 
-                // If there is an available device, return a handle to it. If not, then we put the request into a queue.
-                // The method then returns a TaskCompletionSource that will complete once the a reserved device is freed
-                // up and this request is the next in the queue.
+                // If there is an available device, return a handle to it. If not, then we put the request into a
+                // queue. The method then returns a TaskCompletionSource that will complete once the a reserved device
+                // is freed up and this request is the next in the queue.
 
                 var firstAvailableDevice = _devicePool.Values.FirstOrDefault(device => !device.IsBusy);
 
                 if (firstAvailableDevice != null)
                 {
-                    Debug.WriteLine("Found an available device with the identifier {0}.", (object)firstAvailableDevice.Identifier);
+                    _logger.LogDebug("Found an available device with the identifier {0}.", (object)firstAvailableDevice.Identifier);
 
                     firstAvailableDevice.IsBusy = true;
 
-                    Action<ReservedDevice> disposer = thisReservedDevice =>
+                    void Disposer(ReservedDevice thisReservedDevice)
+                    {
+                        lock (_lock)
                         {
-                            lock (_lock)
+                            if (_waitQueue.Any())
                             {
-                                if (_waitQueue.Any())
-                                {
-                                    Debug.WriteLine(
-                                        "Dequeuing a device reservation request. Will re-use the device with the ID {0}. {1} items are in the queue.", 
-                                        thisReservedDevice.Identifier,
-                                        _waitQueue.Count);
+                                _logger.LogDebug(
+                                    "Dequeuing a device reservation request. Will re-use the device with the ID {0}. {1} items are in the queue.",
+                                    thisReservedDevice.Identifier,
+                                    _waitQueue.Count);
 
-                                    // In this case we re-use the current ReservedDevice and the device remains IsBusy.
-                                    _waitQueue.Dequeue()(thisReservedDevice);
-                                }
-                                else
-                                {
-                                    Debug.WriteLine(
-                                        "No device reservation requests are in the queue so freeing up the device with the ID {0}.",
-                                        (object)thisReservedDevice.Identifier);
-
-                                    _devicePool[thisReservedDevice.Identifier].IsBusy = false;
-                                }
+                                // In this case we re-use the current ReservedDevice and the device remains IsBusy.
+                                _waitQueue.Dequeue()(thisReservedDevice);
                             }
-                        };
+                            else
+                            {
+                                _logger.LogDebug(
+                                    "No device reservation requests are in the queue so freeing up the device with the ID {0}.",
+                                    (object)thisReservedDevice.Identifier);
 
-                    return Task.FromResult<IReservedDevice>(new ReservedDevice(firstAvailableDevice, disposer));
+                                _devicePool[thisReservedDevice.Identifier].IsBusy = false;
+                            }
+                        }
+                    }
+
+                    return Task.FromResult<IReservedDevice>(new ReservedDevice(firstAvailableDevice, Disposer));
                 }
                 else
                 {
-                    Debug.WriteLine("Enqueuing a device reservation request.");
+                    _logger.LogDebug("Enqueuing a device reservation request.");
 
                     var reservationCompletionSource = new TaskCompletionSource<IReservedDevice>();
 

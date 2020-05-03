@@ -1,6 +1,7 @@
 using Hast.Samples.Kpz.Algorithms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,10 +16,10 @@ namespace Hast.Samples.Kpz
     /// </summary>
     public partial class InspectForm : Form
     {
-        const int MaxGridDisplayWidth = 128;
-        const int MaxGridDisplayHeight = 128;
+        private const int MaxGridDisplayWidth = 128;
+        private const int MaxGridDisplayHeight = 128;
 
-        KpzStateLogger _stateLogger;
+        private readonly KpzStateLogger _stateLogger;
 
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace Hast.Samples.Kpz
                 {
                     dgvRow.Cells.Add(new DataGridViewTextBoxCell()
                     {
-                        Value = String.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0")
+                        Value = string.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0")
                     });
                 }
 
@@ -106,19 +107,23 @@ namespace Hast.Samples.Kpz
             }
         }
 
+
         /// <summary>
         /// This function adds highlight (by applying background color) to a list of table cells in the
         /// <see cref="DataGridView" />.
         /// </summary>
-        private void listIterations_SelectedIndexChanged(object sender, EventArgs e)
+        [SuppressMessage(
+            "Design",
+            "CA1031:Do not catch general exception types",
+            Justification = "If there's an error then nothing to do, just display it to the user.")]
+        private void ListIterations_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
                 listActions.Items.Clear();
                 int i = 0;
                 _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach(
-                (a) => listActions.Items.Add(String.Format("{0} {1}", i++, a.Description))
-                );
+                    (a) => listActions.Items.Add(string.Format("{0} {1}", i++, a.Description)));
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
@@ -126,11 +131,15 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// If an item in <see cref="listActions" /> is clicked, the <see cref="DataGridView" /> is updated.
         /// </summary>
-        private void listActions_SelectedIndexChanged(object sender, EventArgs e)
+        [SuppressMessage(
+            "Design",
+            "CA1031:Do not catch general exception types",
+            Justification = "If there's an error then nothing to do, just display it to the user.")]
+        private void ListActions_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                KpzAction action = _stateLogger
+                var action = _stateLogger
                     .Iterations[listIterations.SelectedIndex]
                     .Actions[listActions.SelectedIndex];
 
