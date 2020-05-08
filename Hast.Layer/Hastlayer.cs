@@ -12,6 +12,7 @@ using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,6 +57,20 @@ namespace Hast.Layer
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
+
+            services.AddSingleton(LoggerFactory.Create(builder =>
+            {
+                if (configuration.ConfigureLogging is null)
+                {
+                    builder.AddNLog("NLog.config");
+                }
+                else
+                {
+                    configuration.ConfigureLogging(builder);
+                }
+            }));
+            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
+
             configuration.OnServiceRegistration?.Invoke(configuration, services);
 
             var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
@@ -108,10 +123,7 @@ namespace Hast.Layer
                 .Build();
 
 
-        public void Dispose()
-        {
-            _serviceProvider.Dispose();
-        }
+        public void Dispose() => _serviceProvider.Dispose();
 
         ~Hastlayer() => Dispose();
 
@@ -139,13 +151,14 @@ namespace Hast.Layer
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
+                    var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
+                    var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
+                    var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
+
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
-                        await scope.ServiceProvider
-                            .GetRequiredService<ITransformer>()
-                            .Transform(assembliesPaths, configuration) :
+                        await transformer.Transform(assembliesPaths, configuration) :
                         EmptyHardwareDescriptionFactory.Create(configuration);
 
-                    var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
                     foreach (var warning in hardwareDescription.Warnings)
                     {
                         loggerService.LogWarning(
@@ -154,8 +167,7 @@ namespace Hast.Layer
                             warning.Message);
                     }
 
-                    var deviceManifest = scope.ServiceProvider
-                        .GetRequiredService<IDeviceManifestSelector>()
+                    var deviceManifest = deviceManifestSelector
                         .GetSupportedDevices()
                         .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
 
@@ -267,7 +279,7 @@ namespace Hast.Layer
         public async Task RunAsync<T>(Func<T, Task> process)
         {
             using (var scope = _serviceProvider.CreateScope())
-                await process(scope.ServiceProvider.GetService<T>());
+                await process(scope.ServiceProvider.GetRequiredService<T>());
         }
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
@@ -280,6 +292,8 @@ namespace Hast.Layer
             using (var scope = _serviceProvider.CreateScope())
                 return await process(scope.ServiceProvider);
         }
+
+        public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();
 
 
         private void LoadHost()
@@ -340,7 +354,7 @@ namespace Hast.Layer
         }
 
         private void LogException(Exception exception, string message) =>
-            _serviceProvider.GetService<ILogger>().LogError(exception, message);
+            _serviceProvider.GetService<ILogger<Hastlayer>>().LogError(exception, message);
 
         private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
             DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));
