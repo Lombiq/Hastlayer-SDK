@@ -1,6 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
@@ -11,7 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
-            // ImageFilter is not parallelized, so not including it not to take away FPGA resources from 
+            // ImageFilter is not parallelized, so not including it not to take away FPGA resources from
             // ImageContrastModifier.
             //configuration.AddHardwareEntryPointType<ImageFilter>();
         }
@@ -23,7 +24,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 var imageContrastModifier = await hastlayer
                     .GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
                 var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
-                modifiedImage.Save("contrast.bmp");
+                modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 
                 var sw = System.Diagnostics.Stopwatch.StartNew();
                 var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50);
