@@ -1,9 +1,8 @@
-﻿using Hast.Common.Services;
-using Hast.Communication.Services;
-using Hast.Layer.Extensibility.Events;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Communication.Services;
+using Hast.Layer.Extensibility.Events;
 
 namespace Hast.Layer
 {
@@ -13,17 +12,15 @@ namespace Hast.Layer
         /// Occurs when the member invocation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
         event ExecutedOnHardwareEventHandler ExecutedOnHardware;
-        event InvokingEventHandler Invoking;
 
         /// <summary>
         /// Gets those devices which have their support drivers loaded.
         /// </summary>
         /// <returns>Those devices which have their support drivers loaded.</returns>
-        IEnumerable<IDeviceManifest> GetSupportedDevices();
+        Task<IEnumerable<IDeviceManifest>> GetSupportedDevices();
 
         /// <summary>
-        /// Generates and implements a hardware representation of the given assemblies. Be sure to use assemblies built
-        /// with the Debug configuration.
+        /// Generates and implements a hardware representation of the given assemblies.
         /// </summary>
         /// <param name="assemblyPaths">The assemblies' paths that should be implemented as hardware.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
@@ -32,7 +29,7 @@ namespace Hast.Layer
         /// Thrown if any lower-level exception or other error happens during hardware generation.
         /// </exception>
         Task<IHardwareRepresentation> GenerateHardware(
-            IEnumerable<string> assemblyPaths,
+            IEnumerable<string> assemblyPaths, 
             IHardwareGenerationConfiguration configuration);
 
         /// <summary>
@@ -47,15 +44,14 @@ namespace Hast.Layer
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
         Task<T> GenerateProxy<T>(
-            IHardwareRepresentation hardwareRepresentation,
-            T hardwareObject,
+            IHardwareRepresentation hardwareRepresentation, 
+            T hardwareObject, 
             IProxyGenerationConfiguration configuration) where T : class;
-
-        /// <summary>
-        /// Gets the <see cref="ICommunicationService"/> based on the channel name.
-        /// </summary>
-        /// <param name="communicationChannelName">The <see cref="ICommunicationService.ChannelName"/> value.</param>
-        /// <returns>The matching communication service.</returns>
-        DisposableContainer<ICommunicationService> GetCommunicationService(string communicationChannelName);
+        
+        Task RunAsync<T>(Func<T, Task> process);
+        Task<Tout> RunGetAsync<Tout>(Func<IServiceProvider, Task<Tout>> process);
+        void Run<T>(Action<T> process);
+        Tout RunGet<Tout>(Func<IServiceProvider, Tout> process);
+        Tout Get<Tout>();
     }
 }

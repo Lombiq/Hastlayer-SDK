@@ -2,7 +2,7 @@
 {
     public static class Ethernet
     {
-        public const string ChannelName = "Ethernet";
+        public const string ChannelName = nameof(Ethernet);
 
 
         public static class Ports

@@ -1,14 +1,13 @@
 ﻿using System;
-using System.IO;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
     /// <summary>
-    /// Facilitates read and overwrite of the <see cref="SimpleMemory.Memory"/> for outside users (like DMA).
+    /// Facilitates read and overwrite of the <see cref="SimpleMemory.Memory"/> for outside users. (like DMA)
     /// </summary>
     public class SimpleMemoryAccessor
     {
-        private readonly SimpleMemory _simpleMemory;
+        private SimpleMemory _simpleMemory;
 
 
         public SimpleMemoryAccessor(SimpleMemory simpleMemory)
@@ -17,12 +16,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         }
 
 
-        /// <summary>
-        /// Gets the memory contents without an additional prefix.
-        /// </summary>
-        /// <remarks>
-        /// Here besides <see cref="Get(int)"/> so for simpler cases there's no branching necessary.
-        /// </remarks>
         public Memory<byte> Get() => _simpleMemory.Memory;
 
         /// <summary>
@@ -30,14 +23,12 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="prefixCellCount">
         /// The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.
-        /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>
         /// </param>
+        /// <returns></returns>
         public Memory<byte> Get(int prefixCellCount)
         {
             if (prefixCellCount < 0)
                 throw new ArgumentOutOfRangeException($"{nameof(prefixCellCount)} must be positive!");
-
-            if (prefixCellCount == 0) return Get();
 
             // If we need more prefix than what is available.
             if (prefixCellCount > _simpleMemory.PrefixCellCount)
@@ -54,13 +45,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         }
 
         /// <summary>
-        /// Sets the internal value of the SimpleMemory with the first prefixCellCount cells hidden.
+        /// Sets the internal value of the SimpleMemory with the first prefixCellCount amount of cells hidden.
         /// </summary>
         /// <param name="data">The new data.</param>
-        /// <param name="prefixCellCount">
-        /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying
-        /// <see cref="SimpleMemory"/>.
-        /// </param>
+        /// <param name="prefixCellCount">The amount of cells to be shifted out.</param>
         /// <remarks>
         /// Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you
         /// must use at least as many prefixCellCount for Set as for Get if the <see cref="SimpleMemory"/> is reused,
@@ -70,59 +58,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         {
             _simpleMemory.PrefixedMemory = data;
             _simpleMemory.PrefixCellCount = prefixCellCount;
-        }
-
-        /// <summary>
-        /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format.
-        /// </summary>
-        /// <param name="stream">The stream to write the storage data to.</param>
-        public void Store(Stream stream)
-        {
-            var segment = Get().GetUnderlyingArray();
-            stream.Write(segment.Array, segment.Offset, _simpleMemory.ByteCount);
-        }
-
-        /// <summary>
-        /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format to a file. Overwrites the file
-        /// if it exists, creates it otherwise.
-        /// </summary>
-        /// <param name="filePath">The path under to write the storage data file to.</param>
-        public void Store(string filePath)
-        {
-            using (var fileStream = File.Create(filePath))
-                Store(fileStream);
-        }
-
-        /// <summary>
-        /// Loads a binary storage format into the underlying <see cref="SimpleMemory"/> with the first prefixCellCount
-        /// cells hidden..
-        /// </summary>
-        /// <param name="stream">The stream to read the storage data from.</param>
-        /// <param name="prefixCellCount">
-        /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying
-        /// <see cref="SimpleMemory"/>.
-        /// </param>
-        public void Load(Stream stream, int prefixCellCount = 0)
-        {
-            int prefixBytesCount = prefixCellCount * SimpleMemory.MemoryCellSizeBytes;
-            var data = new byte[stream.Length + prefixBytesCount];
-            stream.Read(data, prefixBytesCount, (int)stream.Length);
-            Set(data, prefixCellCount);
-        }
-
-        /// <summary>
-        /// Loads a binary storage format into the underlying <see cref="SimpleMemory"/> with the first prefixCellCount
-        /// cells hidden.
-        /// </summary>
-        /// <param name="filePath">The path of the file to read the storage data from.</param>
-        /// <param name="prefixCellCount">
-        /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying
-        /// <see cref="SimpleMemory"/>.
-        /// </param>
-        public void Load(string filePath, int prefixCellCount = 0)
-        {
-            using (var fileStream = File.OpenRead(filePath))
-                Load(fileStream, prefixCellCount);
         }
 
         /// <summary>
@@ -136,18 +71,18 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <remarks>If data is a byte[] you can use the <see cref="SimpleMemory"/> constructor instead.</remarks>
         public static SimpleMemory Create(Memory<byte> data) => new SimpleMemory(data, 0);
 
+        
         /// <summary>
         /// Creates a new <see cref="SimpleMemory"/> instance from the specified data and its
         /// <see cref="SimpleMemoryAccessor"/> at the same time.
         /// </summary>
         /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
-        /// <param name="accessor">The accessor of the return value.</param>
-        /// <returns>The <see cref="SimpleMemory"/> containing the data.</returns>
-        public static SimpleMemory Create(Memory<byte> data, out SimpleMemoryAccessor accessor)
+        /// <param name="prefixCellCount"></param>
+        /// <returns></returns>
+        public static (SimpleMemory Memory, SimpleMemoryAccessor Accessor) Create(Memory<byte> data, int prefixCellCount)
         {
-            var memory = new SimpleMemory(data, 0);
-            accessor = new SimpleMemoryAccessor(memory);
-            return memory;
+            var memory = new SimpleMemory(data, prefixCellCount);
+            return (memory, new SimpleMemoryAccessor(memory));
         }
     }
 }
