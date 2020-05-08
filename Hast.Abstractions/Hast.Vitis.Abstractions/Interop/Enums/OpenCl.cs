@@ -12,7 +12,7 @@
 // CommandQueueProperty at https://www.khronos.org/registry/OpenCL/sdk/1.0/docs/man/xhtml/clCreateCommandQueue.html
 
 
-namespace Hast.SDAccel.Abstractions.Interop.Enums.OpenCl
+namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
 {
     /// <summary>
     /// Represents an enumeration for the different types of information that can be queried from an OpenCl platform.

@@ -1,9 +1,9 @@
 ﻿using System;
 using AdvancedDLSupport;
-using Hast.SDAccel.Abstractions.Interop.Delegates.OpenCl;
-using Hast.SDAccel.Abstractions.Interop.Enums.OpenCl;
+using Hast.Vitis.Abstractions.Interop.Delegates.OpenCl;
+using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 
-namespace Hast.SDAccel.Abstractions.Interop
+namespace Hast.Vitis.Abstractions.Interop
 {
     [NativeSymbols(Prefix = "cl")]
     public interface IOpenCl : IDisposable

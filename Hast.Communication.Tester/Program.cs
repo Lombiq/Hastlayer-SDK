@@ -1,23 +1,22 @@
 ﻿using CommandLine;
 using Hast.Communication.Exceptions;
-using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Communication.Services;
+using Hast.Communication.Tester.Helpers;
+using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Tester
 {
@@ -32,20 +31,11 @@ namespace Hast.Communication.Tester
 
         public static Options CommandLineOptions { get; set; }
 
-        private static IHastlayer _hastlayer { get; set; } = null;
+        private static Hastlayer _hastlayer { get; set; } = null;
 
         private static void OnServiceGeneration(object sender, IServiceCollection services)
         {
             services.RemoveImplementations<ITransformer>();
-            services.AddScoped<ITransformer, NullTransformer>();
-
-            services.AddSingleton(LoggerFactory.Create(builder =>
-            {
-                builder
-                    .AddFilter("hastlayer", CommandLineOptions.LogLevel)
-                    .AddConsole();
-            }));
-            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
         }
 
         private static async Task MainTask(IServiceProvider provider)
@@ -81,8 +71,8 @@ namespace Hast.Communication.Tester
                     .ToArray();
             }
             
-            var (memory, accessor) = GenerateMemory(CommandLineOptions.PayloadType,
-                CommandLineOptions.PayloadLengthCells, prepend, CommandLineOptions.InputFileName);
+            var (memory, accessor) = GenerateMemory(
+                CommandLineOptions.PayloadType, CommandLineOptions.PayloadLengthCells, prepend, CommandLineOptions.InputFileName);
 
 
             // Save input to file using the format of the output file type.
@@ -162,16 +152,13 @@ namespace Hast.Communication.Tester
                         memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
                     break;
                 case PayloadType.BinaryFile:
-                    using (var fileStream = File.OpenRead(inputFileName))
+                    accessor.Load(inputFileName, memory.PrefixCellCount);
+                    break;
+                case PayloadType.Bitmap:
+                    using (var bitmap = (Bitmap)Bitmap.FromFile(inputFileName))
                     {
-                        var extraBytes = (prependCells.Length + prefixCellCount) * SimpleMemory.MemoryCellSizeBytes;
-                        var data = new byte[extraBytes + fileStream.Length];
-                        fileStream.Read(data, extraBytes, (int)fileStream.Length);
-                        Memory<byte> dataAsMemory = data;
-                        MemoryMarshal.Cast<int, byte>(new Span<int>(prependCells))
-                            .CopyTo(dataAsMemory.Span.Slice(prefixCellCount * SimpleMemory.MemoryCellSizeBytes));
-                        
-                        accessor.Set(dataAsMemory, prefixCellCount);
+                        memory = BitmapHelper.ToSimpleMemory(bitmap, prependCells);
+                        accessor = new SimpleMemoryAccessor(memory);
                     }
                     break;
                 default:
@@ -211,12 +198,14 @@ namespace Hast.Communication.Tester
                     {
                         if (string.IsNullOrEmpty(fileName)) fileName = fileNamePrefix + DefaultBinaryFileName;
                         Console.WriteLine("Saving {0} binary file to '{1}'...", direction, fileName);
-                        
-                        using var fileStream = File.OpenWrite(fileName);
-                        
-                        var accessor = new SimpleMemoryAccessor(memory);
-                        var segment = accessor.Get().GetUnderlyingArray();
-                        fileStream.Write(segment.Array ?? Array.Empty<byte>(), segment.Offset, memory.ByteCount);
+                        new SimpleMemoryAccessor(memory).Store(fileName);
+                    }
+                    break;
+                case OutputFileType.BitmapJpeg:
+                    using (var input = (Bitmap) Image.FromFile(CommandLineOptions.InputFileName))
+                    using (var output = BitmapHelper.FromSimpleMemory(memory, input, CommandLineOptions.Prepend?.Length ?? 0))
+                    {
+                        output.Save(fileName, ImageFormat.Jpeg);
                     }
                     break;
                 default:
@@ -274,9 +263,9 @@ namespace Hast.Communication.Tester
                 Parser.Default.ParseArguments<Options>(args).WithParsed(o => { CommandLineOptions = o; });
                 if (CommandLineOptions == null) return;
                 
-                var hastlayerConfiguration = new HastlayerConfiguration {Flavor = HastlayerFlavor.Inert};
+                var hastlayerConfiguration = new HastlayerConfiguration();
                 hastlayerConfiguration.OnServiceRegistration += OnServiceGeneration; 
-                _hastlayer = Hastlayer.Create(hastlayerConfiguration).Result;
+                _hastlayer = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
 
                 _hastlayer.RunAsync<IServiceProvider>(MainTask).Wait();
             }

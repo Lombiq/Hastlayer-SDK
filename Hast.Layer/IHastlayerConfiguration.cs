@@ -20,12 +20,7 @@ namespace Hast.Layer
         /// <summary>
         /// Flavor for end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
         /// </summary>
-        Client,
-        
-        /// <summary>
-        /// Flavor for testing without transformation. <see cref="NullTransformer"/> is used.
-        /// </summary>
-        Inert
+        Client
     }
 
 
@@ -38,27 +33,19 @@ namespace Hast.Layer
 
         /// <summary>
         /// Extensions that can provide implementations for Hastlayer services or hook into the hardware generation 
-        /// pipeline. These should be Orchard extensions.
+        /// pipeline. These should include services that implement <see cref="IDependency"/> directly or indirectly.
         /// </summary>
         IEnumerable<Assembly> Extensions { get; }
 
         /// <summary>
-        /// The usage flavor of Hastlayer for different scenarios.
+        /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Client"/> in
+        /// the client SDK and <see cref="HastlayerFlavor.Developer"/> otherwise.
         /// </summary>
         HastlayerFlavor Flavor { get; }
-
-        /// <summary>
-        /// The collection of assemblies to be dynamically loaded. If the item is a directory, then the DLL files in
-        /// that directory are loaded instead.
-        /// </summary>
-        IEnumerable<string> DynamicAssemblies { get; }
 
         /// <summary>
         /// The location of the App_Data folder
         /// </summary>
         string AppDataFolderPath { get; }
-
-
-        void InvokeOnServiceRegistration(IServiceCollection services);
     }
 }

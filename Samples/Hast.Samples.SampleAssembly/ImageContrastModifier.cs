@@ -86,6 +86,12 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
+        /// <summary>
+        /// Changes the contrast of an image. Same as <see cref="ChangeContrast"/>. Used for Hast.Communication.Tester
+        /// to access this sample by common method name without altering the VHDL.
+        /// </summary>
+        /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
+        internal virtual void Run(SimpleMemory memory) => ChangeContrast(memory);
 
         /// <summary>
         /// Makes the required changes on the selected pixel.

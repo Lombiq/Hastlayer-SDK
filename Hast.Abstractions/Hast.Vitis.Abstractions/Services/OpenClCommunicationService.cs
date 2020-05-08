@@ -1,7 +1,7 @@
 ﻿using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
-using Hast.SDAccel.Abstractions.Models;
+using Hast.Vitis.Abstractions.Models;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
 
-namespace Hast.SDAccel.Abstractions.Services
+namespace Hast.Vitis.Abstractions.Services
 {
     public abstract class OpenClCommunicationService : CommunicationServiceBase
     {

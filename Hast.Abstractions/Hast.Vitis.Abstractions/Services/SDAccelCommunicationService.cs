@@ -1,12 +1,12 @@
 using Hast.Common.Interfaces;
 using Hast.Communication.Services;
-using Hast.SDAccel.Abstractions.Models;
+using Hast.Vitis.Abstractions.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
 
-namespace Hast.SDAccel.Abstractions.Services
+namespace Hast.Vitis.Abstractions.Services
 {
     [IDependencyInitializer(nameof(InitializeService))]
     public class SDAccelCommunicationService : OpenClCommunicationService

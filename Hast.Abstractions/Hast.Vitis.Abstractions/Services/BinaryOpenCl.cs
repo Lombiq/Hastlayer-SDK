@@ -1,18 +1,18 @@
-﻿using Hast.SDAccel.Abstractions.Interop;
-using Hast.SDAccel.Abstractions.Interop.Enums.OpenCl;
-using Hast.SDAccel.Abstractions.Models;
+﻿using AdvancedDLSupport;
+using Hast.Common.Interfaces;
+using Hast.Vitis.Abstractions.Interop;
+using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
+using Hast.Vitis.Abstractions.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using AdvancedDLSupport;
-using Hast.Common.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace Hast.SDAccel.Abstractions.Services
+namespace Hast.Vitis.Abstractions.Services
 {
     [IDependencyInitializer(nameof(InitializeService))]
     public class BinaryOpenCl : IBinaryOpenCl
@@ -21,13 +21,14 @@ namespace Hast.SDAccel.Abstractions.Services
 
         private readonly IOpenCl _cl;
         private readonly IntPtr[] _devices;
+        private readonly ILogger _logger;
         private readonly IntPtr _context = IntPtr.Zero;
         private readonly UIntPtr IntPtrSize = new UIntPtr((uint)Marshal.SizeOf(IntPtr.Zero));
 
         public int DeviceCount => _devices.Length;
 
-        Dictionary<int, IntPtr> Queues { get; } = new Dictionary<int, IntPtr>();
-        Dictionary<string, IntPtr> Kernels { get; } = new Dictionary<string, IntPtr>();
+        private Dictionary<int, IntPtr> Queues { get; } = new Dictionary<int, IntPtr>();
+        private Dictionary<string, IntPtr> Kernels { get; } = new Dictionary<string, IntPtr>();
         private Dictionary<string, List<IntPtr>> KernelBuffers { get; set; } = new Dictionary<string, List<IntPtr>>();
 
         #endregion
@@ -35,11 +36,12 @@ namespace Hast.SDAccel.Abstractions.Services
 
         #region Constructors
 
-        public BinaryOpenCl(IOpenCl cl, IOpenClConfiguration configuration)
+        public BinaryOpenCl(IOpenCl cl, IOpenClConfiguration configuration, ILogger logger)
         {
             _cl = cl;
+            _devices = GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray();
+            _logger = logger;
 
-            _devices = GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType);
             if (_devices.Any())
             {
                 _context = _cl.CreateContext(IntPtr.Zero, (uint)_devices.Length, _devices.ToArray(), IntPtr.Zero, IntPtr.Zero, out Result result);
@@ -52,9 +54,9 @@ namespace Hast.SDAccel.Abstractions.Services
 
         #region Methods
 
-        static void VerifyResult(Result err) { if (err != Result.Success) throw new Exception($"ERROR STATUS: {err}"); }
+        private static void VerifyResult(Result err) { if (err != Result.Success) throw new Exception($"ERROR STATUS: {err}"); }
 
-        static AggregateException VerifyResults(IEnumerable<Result> results, Func<Result, int, Exception> mapper)
+        private static AggregateException VerifyResults(IEnumerable<Result> results, Func<Result, int, Exception> mapper)
         {
             var errors = results
                 .Select((Result, Index) => (Result, Index))
@@ -64,7 +66,7 @@ namespace Hast.SDAccel.Abstractions.Services
             return errors.Count > 0 ? new AggregateException(errors) : null;
         }
 
-        IEnumerable<IntPtr> GetPlatformHandles(string vendorName = null)
+        private IEnumerable<IntPtr> GetPlatformHandles(string vendorName = null)
         {
             VerifyResult(_cl.GetPlatformIDs(0, null, out uint count));
 
@@ -83,7 +85,7 @@ namespace Hast.SDAccel.Abstractions.Services
             });
         }
 
-        IntPtr[] GetDeviceHandles(IntPtr platform, DeviceType deviceType)
+        private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceType deviceType)
         {
             VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, null, out uint numberOfAvailableDevices));
 
@@ -93,15 +95,20 @@ namespace Hast.SDAccel.Abstractions.Services
             return devicePointers;
         }
 
-        IntPtr[] GetDeviceHandlesOfVendor(string vendorName, DeviceType deviceType)
+        private IEnumerable<IntPtr> GetDeviceHandlesOfVendor(string vendorName, DeviceType deviceType)
         {
+            var foundDevice = false;
+
             foreach (var platform in GetPlatformHandles(vendorName))
             {
-                var devices = GetDeviceHandles(platform, deviceType);
-                if (devices.Length > 0) return devices;
+                foreach (var device in GetDeviceHandles(platform, deviceType))
+                {
+                    foundDevice = true;
+                    yield return device;
+                }
             }
 
-            throw new Exception($"Failed to find '{vendorName}' platform that has '{deviceType}' type devices.");
+            if (!foundDevice) _logger?.LogWarning($"Failed to find '{vendorName}' platform that has '{deviceType}' type devices.");
         }
 
         public void CreateCommandQueue(int deviceIndex, CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
@@ -111,7 +118,7 @@ namespace Hast.SDAccel.Abstractions.Services
             Queues[deviceIndex] = queue;
         }
 
-        IntPtr CreateProgramWithBinary(IntPtr binary, int binaryLength)
+        private IntPtr CreateProgramWithBinary(IntPtr binary, int binaryLength)
         {
             var resultsPerDevice = new Result[_devices.Length];
             var program = _cl.CreateProgramWithBinary(
@@ -155,7 +162,7 @@ namespace Hast.SDAccel.Abstractions.Services
             }
         }
 
-        IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes)
+        private IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes)
         {
             var memoryFlags = MemoryFlag.UseHostPointer | MemoryFlag.ReadWrite;
             var buffer = _cl.CreateBuffer(_context, memoryFlags, hostBytes, hostPointer, out Result result);
@@ -163,7 +170,7 @@ namespace Hast.SDAccel.Abstractions.Services
             return buffer;
         }
 
-        void SetKernelArgument(IntPtr kernel, int index, IntPtr buffer)
+        private void SetKernelArgument(IntPtr kernel, int index, IntPtr buffer)
         {
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
@@ -190,7 +197,7 @@ namespace Hast.SDAccel.Abstractions.Services
             }
         }
 
-        IntPtr EnqueueMemoryMigration(IntPtr queue, IntPtr[] memoryObjects, bool toHost, IntPtr waitEvent)
+        private IntPtr EnqueueMemoryMigration(IntPtr queue, IntPtr[] memoryObjects, bool toHost, IntPtr waitEvent)
         {
             var flags = toHost ? MemoryMigrationFlag.Host : MemoryMigrationFlag.Device;
             VerifyResult(_cl.EnqueueMigrateMemObjects(
@@ -204,7 +211,7 @@ namespace Hast.SDAccel.Abstractions.Services
             return waitEvent;
         }
 
-        IntPtr EnqueueTask(IntPtr queue, IntPtr kernel, IntPtr waitEvent)
+        private IntPtr EnqueueTask(IntPtr queue, IntPtr kernel, IntPtr waitEvent)
         {
             VerifyResult(_cl.EnqueueTask(
                 queue,
@@ -265,7 +272,14 @@ namespace Hast.SDAccel.Abstractions.Services
                 (result, index) => new Exception($"Error releasing queue for device #{queues[index].Key}: {result}"));
             if (queueReleaseExceptions != null) exceptions.AddRange(queueReleaseExceptions.InnerExceptions);
 
-            try { VerifyResult(_cl.ReleaseContext(_context)); } catch (Exception ex) { exceptions.Add(ex); }
+            try 
+            {
+                if (_context != IntPtr.Zero) VerifyResult(_cl.ReleaseContext(_context)); 
+            } 
+            catch (Exception ex) 
+            {
+                exceptions.Add(ex); 
+            }
 
             if (exceptions.Count > 0)
             {

@@ -32,10 +32,10 @@ namespace Hast.Communication.Tester
         [Option('m', "member-id", HelpText = "The simulated MemberId.")]
         public int MemberId { get; set; } = 0;
 
-        [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile).")]
+        [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile, Bitmap).")]
         public PayloadType PayloadType { get; set; } = PayloadType.ConstantIntOne;
 
-        [Option('f', "file-type", HelpText = "Type of the files where input and output are dumped to (None, Hexdump, Binary).")]
+        [Option('f', "file-type", HelpText = "Type of the files where input and output are dumped to (None, Hexdump, Binary, BitmapJpeg).")]
         public OutputFileType OutputFileType { get; set; } = OutputFileType.None;
 
         [Option('i', "input", HelpText = "Generated data is saved to or payload is read from this file when using BinaryFile as file-type.")]
@@ -53,7 +53,7 @@ namespace Hast.Communication.Tester
         [Option('n', "no-check", HelpText = "Skips result check at the end.")]
         public bool NoCheck { get; set; }
 
-        [Option('L', "log-level", HelpText = "Sets the logging level for 'hastlayer', 0 is least verbose. (Trace, Debug, Info, Warning, Error, Critical, None)")]
+        [Option('L', "log-level", HelpText = "Sets the logging level for 'hastlayer', 0 for most verbose, 6 for nothing. (Trace, Debug, Info, Warning, Error, Critical, None)")]
         public int LogLevelInt { get => (int)LogLevel; set => LogLevel = (LogLevel)value; }
         public LogLevel LogLevel { get; set; } = LogLevel.Information;
 

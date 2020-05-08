@@ -1,9 +1,9 @@
 ﻿using Hast.Common.Interfaces;
-using Hast.SDAccel.Abstractions.Interop.Enums.OpenCl;
+using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using System;
 using System.Threading.Tasks;
 
-namespace Hast.SDAccel.Abstractions.Services
+namespace Hast.Vitis.Abstractions.Services
 {
     public interface IBinaryOpenCl : IDependency, IDisposable
     {

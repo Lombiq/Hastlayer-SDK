@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
 
-namespace Hast.SDAccel.Abstractions.Models
+namespace Hast.Vitis.Abstractions.Models
 {
     public class OpenClResultMetadata
     {

@@ -15,6 +15,11 @@
         /// <summary>
         /// The output is saved as raw binary file.
         /// </summary>
-        Binary
+        Binary,
+
+        /// <summary>
+        /// The output is saved as a JPEG file.
+        /// </summary>
+        BitmapJpeg
     }
 }
