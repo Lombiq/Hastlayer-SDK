@@ -27,11 +27,11 @@ namespace Hast.Communication.Tester
 
         public const int HexDumpBlocksPerLine = 8;
 
-        private static readonly Type[] SimpleMemoryArgument = new[] {typeof(SimpleMemory)};  
+        private static readonly Type[] SimpleMemoryArgument = new[] {typeof(SimpleMemory)};
 
         public static Options CommandLineOptions { get; set; }
 
-        private static Hastlayer _hastlayer { get; set; } = null;
+        private static Hastlayer _hastlayer = null;
 
         private static void OnServiceGeneration(object sender, IServiceCollection services)
         {
@@ -40,7 +40,7 @@ namespace Hast.Communication.Tester
 
         private static async Task MainTask(IServiceProvider provider)
         {
-            
+
             // Get devices and if asked exit with the device list.
             var devices = provider.GetService<IDeviceManifestSelector>().GetSupportedDevices()?.ToList();
             if (devices?.Any() != true) throw new Exception("No devices are available!");
@@ -70,7 +70,7 @@ namespace Hast.Communication.Tester
                     .Select(int.Parse)
                     .ToArray();
             }
-            
+
             var (memory, accessor) = GenerateMemory(
                 CommandLineOptions.PayloadType, CommandLineOptions.PayloadLengthCells, prepend, CommandLineOptions.InputFileName);
 
@@ -82,7 +82,7 @@ namespace Hast.Communication.Tester
             SimpleMemory referenceMemory = null;
             if (!CommandLineOptions.NoCheck)
             {
-                    
+
                 Memory<byte> newMemory = new byte[memory.ByteCount];
                 accessor.Get().CopyTo(newMemory);
                 referenceMemory = SimpleMemoryAccessor.Create(newMemory);
@@ -137,7 +137,7 @@ namespace Hast.Communication.Tester
                 new byte[(prefixCellCount + prependCells.Length + cellCount) * SimpleMemory.MemoryCellSizeBytes], prefixCellCount);
 
             for (var i = 0; i < prependCells.Length; i++) memory.WriteInt32(i, prependCells[i]);
-            
+
             switch (type)
             {
                 case PayloadType.ConstantIntOne:
@@ -262,9 +262,9 @@ namespace Hast.Communication.Tester
             {
                 Parser.Default.ParseArguments<Options>(args).WithParsed(o => { CommandLineOptions = o; });
                 if (CommandLineOptions == null) return;
-                
+
                 var hastlayerConfiguration = new HastlayerConfiguration();
-                hastlayerConfiguration.OnServiceRegistration += OnServiceGeneration; 
+                hastlayerConfiguration.OnServiceRegistration += OnServiceGeneration;
                 _hastlayer = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
 
                 _hastlayer.RunAsync<IServiceProvider>(MainTask).Wait();

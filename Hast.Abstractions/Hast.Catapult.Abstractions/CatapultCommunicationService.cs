@@ -87,7 +87,7 @@ namespace Hast.Catapult.Abstractions
                             // The illegal endpoint number messages are normal for higher endpoints if they aren't
                             // populated, so it's OK to suppress them.
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
-                                _logger.LogError(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
+                                Logger.LogError(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;
                         }
                     })));
@@ -120,7 +120,7 @@ namespace Hast.Catapult.Abstractions
 
                 if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
                 dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
-                _logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
+                Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
                 EndExecution(context);
 

@@ -23,7 +23,6 @@ namespace Hast.Vitis.Abstractions.Services
 
         private readonly IBinaryOpenCl _binaryOpenCl;
         private readonly IOpenClConfiguration _configuration;
-        private readonly ILogger _logger;
 
 
         protected OpenClCommunicationService(
@@ -31,13 +30,12 @@ namespace Hast.Vitis.Abstractions.Services
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
             IOpenClConfiguration configuration,
-            ILogger logger)
+            ILogger logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _binaryOpenCl = binaryOpenCl;
             _configuration = configuration;
-            _logger = logger;
         }
 
 
@@ -95,13 +93,13 @@ namespace Hast.Vitis.Abstractions.Services
         {
             var bufferSpan = buffer.Get(_configuration.HeaderCellCount).Span;
 
-            _logger.LogInformation("_configuration.HeaderCellCount: {0}", _configuration.HeaderCellCount);
-            _logger.LogInformation("bufferSpan size: {0}b", bufferSpan.Length);
+            Logger.LogInformation("_configuration.HeaderCellCount: {0}", _configuration.HeaderCellCount);
+            Logger.LogInformation("bufferSpan size: {0}b", bufferSpan.Length);
             var header = bufferSpan.Slice(0, _configuration.HeaderCellCount * MemoryCellSizeBytes);
             var result = new OpenClResultMetadata(header, _configuration.DeviceIsBigEndian);
 
-            bool canLogInfo = _logger.IsEnabled(LogLevel.Information);
-            bool canLogDebug = _logger.IsEnabled(LogLevel.Debug);
+            bool canLogInfo = Logger.IsEnabled(LogLevel.Information);
+            bool canLogDebug = Logger.IsEnabled(LogLevel.Debug);
             if (canLogInfo || canLogDebug)
             {
                 bufferSpan = bufferSpan.Slice(_configuration.HeaderCellCount * MemoryCellSizeBytes);
@@ -112,11 +110,11 @@ namespace Hast.Vitis.Abstractions.Services
                     for (int i = 0; i < logAmount; i++)
                     {
                         var value = MemoryMarshal.Read<int>(bufferSpan.Slice(i * MemoryCellSizeBytes));
-                        _logger.LogDebug("HOST: buffer[{0}] = 0x{1:X8}", i, value);
+                        Logger.LogDebug("HOST: buffer[{0}] = 0x{1:X8}", i, value);
                     }
                 }
 
-                if (canLogInfo) _logger.LogInformation("Execution time: {0}ms", result.ExecutionTime);
+                if (canLogInfo) Logger.LogInformation("Execution time: {0}ms", result.ExecutionTime);
             }
 
             return result;
@@ -127,7 +125,7 @@ namespace Hast.Vitis.Abstractions.Services
         private void LaunchWithBuffer(int deviceIndex, string kernelName, Span<byte> buffer)
         {
             var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(kernelName, 0, buffer);
-            _logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
+            Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
 
             _binaryOpenCl.LaunchKernel(deviceIndex, kernelName, new[] { fpgaBuffer });
         }

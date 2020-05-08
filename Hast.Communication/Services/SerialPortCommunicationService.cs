@@ -79,7 +79,7 @@ namespace Hast.Communication.Services
 
                     if (serialPort.IsOpen)
                     {
-                        _logger.LogInformation("The port {0} is ours.", serialPort.PortName);
+                        Logger.LogInformation("The port {0} is ours.", serialPort.PortName);
                     }
                     else
                     {
@@ -173,7 +173,7 @@ namespace Hast.Communication.Services
                                     // we take the explicit size into account.
                                     outputBytes = new byte[outputByteCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
 
-                                    _logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
+                                    Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
                                     communicationState = Serial.CommunicationState.ReceivingOuput;
                                     serialPort.Write(Serial.Signals.Ready);
