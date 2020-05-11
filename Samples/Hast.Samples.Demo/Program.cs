@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
 {
-    class Program
+    internal class Program
     {
-        static async Task Main()
+        private static async Task Main()
         {
             using var hastlayer = Hastlayer.Create();
 
