@@ -6,6 +6,7 @@ using Hast.Vitis.Abstractions.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -44,7 +45,8 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (_devices.Any())
             {
-                _context = _cl.CreateContext(IntPtr.Zero, (uint)_devices.Length, _devices.ToArray(), IntPtr.Zero, IntPtr.Zero, out Result result);
+                _context = _cl.CreateContext(IntPtr.Zero, (uint)_devices.Length, _devices.ToArray(), IntPtr.Zero,
+                    IntPtr.Zero, out Result result);
                 VerifyResult(result);
             }
         }
@@ -54,9 +56,13 @@ namespace Hast.Vitis.Abstractions.Services
 
         #region Methods
 
-        private static void VerifyResult(Result err) { if (err != Result.Success) throw new Exception($"ERROR STATUS: {err}"); }
+        private static void VerifyResult(Result err)
+        {
+            if (err != Result.Success) throw new Exception($"ERROR STATUS: {err}");
+        }
 
-        private static AggregateException VerifyResults(IEnumerable<Result> results, Func<Result, int, Exception> mapper)
+        private static AggregateException VerifyResults(IEnumerable<Result> results,
+            Func<Result, int, Exception> mapper)
         {
             var errors = results
                 .Select((Result, Index) => (Result, Index))
@@ -77,7 +83,8 @@ namespace Hast.Vitis.Abstractions.Services
 
             return platforms.Where(platform =>
             {
-                VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, UIntPtr.Zero, null, out UIntPtr size));
+                VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, UIntPtr.Zero, null,
+                    out UIntPtr size));
                 var output = new byte[size.ToUInt32()];
                 VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));
 
@@ -108,10 +115,12 @@ namespace Hast.Vitis.Abstractions.Services
                 }
             }
 
-            if (!foundDevice) _logger?.LogWarning($"Failed to find '{vendorName}' platform that has '{deviceType}' type devices.");
+            if (!foundDevice)
+                _logger?.LogWarning($"Failed to find '{vendorName}' platform that has '{deviceType}' type devices.");
         }
 
-        public void CreateCommandQueue(int deviceIndex, CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
+        public void CreateCommandQueue(int deviceIndex,
+            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
         {
             var queue = _cl.CreateCommandQueue(_context, _devices[deviceIndex], properties, out Result result);
             VerifyResult(result);
@@ -124,9 +133,9 @@ namespace Hast.Vitis.Abstractions.Services
             var program = _cl.CreateProgramWithBinary(
                 _context,
                 _devices.Length,
-                _devices, 
-                new[] { binaryLength },
-                new[] { binary },
+                _devices,
+                new[] {binaryLength},
+                new[] {binary},
                 resultsPerDevice,
                 out Result result);
             VerifyResult(result);
@@ -147,18 +156,18 @@ namespace Hast.Vitis.Abstractions.Services
         public void CreateBinaryKernel(byte[] binary, string kernelName)
         {
             if (Kernels.ContainsKey(kernelName)) return;
-            
+
             unsafe
             {
                 fixed (byte* pointer = binary)
                 {
-                    var program = CreateProgramWithBinary((IntPtr) pointer, binary.Length);
-                    
+                    var program = CreateProgramWithBinary((IntPtr)pointer, binary.Length);
+
                     var kernel = _cl.CreateKernel(program, kernelName, out Result result);
                     VerifyResult(result);
                     Kernels[kernelName] = kernel;
                     KernelBuffers[kernelName] = new List<IntPtr>();
-                }   
+                }
             }
         }
 
@@ -183,30 +192,24 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        public IntPtr SetKernelArgumentWithNewBuffer(string kernelName, int index, Span<byte> data)
+        public unsafe IntPtr SetKernelArgumentWithNewBuffer(string kernelName, int index, MemoryHandle data, int length)
         {
-            unsafe
-            {
-                fixed (byte* handle = data)
-                {
-                    var buffer = CreateBuffer((IntPtr)handle, data.Length);
-                    SetKernelArgument(Kernels[kernelName], index, buffer);
-                    KernelBuffers[kernelName].Add(buffer);
-                    return buffer;
-                }
-            }
+            var buffer = CreateBuffer((IntPtr)data.Pointer, length);
+            SetKernelArgument(Kernels[kernelName], index, buffer);
+            KernelBuffers[kernelName].Add(buffer);
+            return buffer;
         }
 
         private IntPtr EnqueueMemoryMigration(IntPtr queue, IntPtr[] memoryObjects, bool toHost, IntPtr waitEvent)
         {
             var flags = toHost ? MemoryMigrationFlag.Host : MemoryMigrationFlag.Device;
             VerifyResult(_cl.EnqueueMigrateMemObjects(
-                queue, 
+                queue,
                 (uint)memoryObjects.Length,
-                memoryObjects, 
+                memoryObjects,
                 flags,
                 waitEvent == IntPtr.Zero ? 0u : 1,
-                waitEvent == IntPtr.Zero ? null : new[] { waitEvent }, 
+                waitEvent == IntPtr.Zero ? null : new[] {waitEvent},
                 out waitEvent));
             return waitEvent;
         }
@@ -217,7 +220,7 @@ namespace Hast.Vitis.Abstractions.Services
                 queue,
                 kernel,
                 waitEvent == IntPtr.Zero ? 0u : 1,
-                waitEvent == IntPtr.Zero ? null : new[] { waitEvent }, 
+                waitEvent == IntPtr.Zero ? null : new[] {waitEvent},
                 out waitEvent));
             return waitEvent;
         }
@@ -251,14 +254,14 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var queue in Queues.Values) _cl.Finish(queue);
 
             var exceptions = new List<Exception>();
-            
+
             foreach (var (name, handle) in Kernels)
             {
                 var arguments = VerifyResults(
-                    KernelBuffers[name].Select(_cl.ReleaseMemObject), 
+                    KernelBuffers[name].Select(_cl.ReleaseMemObject),
                     (result, _) => new Exception($"Error releasing buffer for kernel '{name}': {result}"));
                 if (arguments != null) exceptions.AddRange(arguments.InnerExceptions);
-                
+
                 var kernelReleaseResult = _cl.ReleaseKernel(handle);
                 if (kernelReleaseResult != Result.Success)
                 {
@@ -272,18 +275,18 @@ namespace Hast.Vitis.Abstractions.Services
                 (result, index) => new Exception($"Error releasing queue for device #{queues[index].Key}: {result}"));
             if (queueReleaseExceptions != null) exceptions.AddRange(queueReleaseExceptions.InnerExceptions);
 
-            try 
+            try
             {
-                if (_context != IntPtr.Zero) VerifyResult(_cl.ReleaseContext(_context)); 
-            } 
-            catch (Exception ex) 
+                if (_context != IntPtr.Zero) VerifyResult(_cl.ReleaseContext(_context));
+            }
+            catch (Exception ex)
             {
-                exceptions.Add(ex); 
+                exceptions.Add(ex);
             }
 
             if (exceptions.Count > 0)
             {
-                throw  new AggregateException($"Error while disposing {nameof(BinaryOpenCl)}.", exceptions);
+                throw new AggregateException($"Error while disposing {nameof(BinaryOpenCl)}.", exceptions);
             }
         }
     }
