@@ -5,7 +5,6 @@ using Hast.Vitis.Abstractions.Models;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -79,13 +78,16 @@ namespace Hast.Vitis.Abstractions.Services
                     using (var hostMemoryHandle = hostMemory.Pin())
                     {
                         // Send data and execute.
-                        LaunchWithBuffer(deviceIndex, kernelName, hostMemoryHandle, hostMemory.Length);
+                        var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(kernelName, 0, hostMemoryHandle, hostMemory.Length);
+                        Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
+                        _binaryOpenCl.LaunchKernel(deviceIndex, kernelName, new[] {fpgaBuffer});
                         await _binaryOpenCl.AwaitDevice(deviceIndex);
                         var resultMetadata = GetResultMetadata(memoryAccessor);
 
                         // Read out metadata.
                         SetHardwareExecutionTime(context, executionContext, resultMetadata.ExecutionTime);
-                        Logger.LogInformation("Incoming data size in bytes: {0}", GetPayloadCellCount(hostMemory.Span));
+                        Logger.LogInformation("Incoming data size: {0}b",
+                            GetPayloadCellCount(hostMemory.Span) * MemoryCellSizeBytes);
                     }
                 }
                 EndExecution(context);
@@ -128,13 +130,5 @@ namespace Hast.Vitis.Abstractions.Services
 
         private int GetPayloadCellCount(Span<byte> buffer) =>
             buffer.Length / MemoryCellSizeBytes - _configuration.HeaderCellCount;
-
-        private void LaunchWithBuffer(int deviceIndex, string kernelName, MemoryHandle handle, int length)
-        {
-            var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(kernelName, 0, handle, length);
-            Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
-
-            _binaryOpenCl.LaunchKernel(deviceIndex, kernelName, new[] {fpgaBuffer});
-        }
     }
 }
