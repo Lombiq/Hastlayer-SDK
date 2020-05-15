@@ -37,14 +37,14 @@ namespace Hast.Samples.SampleAssembly
 
             var tasks = new Task<PixelProcessingTaskOutput>[MaxDegreeOfParallelism];
 
-            // Since we only need to compute the loop condition's right side once, not on each loop execution, it's an 
+            // Since we only need to compute the loop condition's right side once, not on each loop execution, it's an
             // optimization to put it in a separate variable. This way it's indeed computed only once.
             var pixelCount = imageHeight * imageWidth;
             var stepCount = pixelCount / MaxDegreeOfParallelism;
 
             if (pixelCount % MaxDegreeOfParallelism != 0)
             {
-                // This will take care of the rest of the pixels. This is wasteful as on the last step not all Tasks 
+                // This will take care of the rest of the pixels. This is wasteful as on the last step not all Tasks
                 // will work on something but it's a way to keep the number of Tasks constant.
                 stepCount += 1;
             }
@@ -91,7 +91,7 @@ namespace Hast.Samples.SampleAssembly
         /// to access this sample by common method name without altering the VHDL.
         /// </summary>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
-        internal virtual void Run(SimpleMemory memory) => ChangeContrast(memory);
+        public virtual void Run(SimpleMemory memory) => ChangeContrast(memory);
 
         /// <summary>
         /// Makes the required changes on the selected pixel.
