@@ -8,7 +8,7 @@ namespace System
         {
             for (int i = 0, index = startIndex; i < values.Length; i++, index += sizeof(int))
             {
-                var slide = buffer.Slice(index * sizeof(int), sizeof(int));
+                var slide = buffer.Slice(index, sizeof(int));
                 MemoryMarshal.Write(slide, ref values[i]);
             }
         }

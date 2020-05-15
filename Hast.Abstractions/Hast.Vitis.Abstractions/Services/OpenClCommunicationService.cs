@@ -86,8 +86,6 @@ namespace Hast.Vitis.Abstractions.Services
 
                         // Read out metadata.
                         SetHardwareExecutionTime(context, executionContext, resultMetadata.ExecutionTime);
-                        Logger.LogInformation("Incoming data size: {0}b",
-                            GetPayloadCellCount(hostMemory.Span) * MemoryCellSizeBytes);
                     }
                 }
                 EndExecution(context);
@@ -127,8 +125,5 @@ namespace Hast.Vitis.Abstractions.Services
 
             return result;
         }
-
-        private int GetPayloadCellCount(Span<byte> buffer) =>
-            buffer.Length / MemoryCellSizeBytes - _configuration.HeaderCellCount;
     }
 }
