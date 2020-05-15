@@ -4,7 +4,7 @@ namespace Hast.Vitis.Abstractions.Models
 {
     public class OpenClConfiguration : IOpenClConfiguration
     {
-        public string BinaryFilePath { get; set; } = "xclbin/hastip.hw_emu.xclbin";
+        public string BinaryFilePath { get; set; } = "xclbin/hastip.hw.xclbin";
         public bool DeviceIsBigEndian { get; set; } = true;
         public DeviceType DeviceType { get; set; } = DeviceType.Accelerator;
         public int HeaderCellCount { get; set; } = 4;

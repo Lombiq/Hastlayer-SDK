@@ -16,4 +16,4 @@ This project contains the communication service used to connect with [Vitis Unif
 ## Preparation
 
 Even after everything is installed, you have to make sure that the executing user's environment variables are correctly set by sourcing the setup scripts [as described in the documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/rbk1547656041291.html).
-You can add these commands into the `~/.bashrc` file to avoid having to type them every time.
+You can add these commands into the `~/.bashrc` file to avoid having to type them every time. If running from the cloud, like Nimbix, this is probably handled automatically.
