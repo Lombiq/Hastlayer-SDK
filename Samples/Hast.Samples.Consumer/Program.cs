@@ -21,8 +21,8 @@ namespace Hast.Samples.Consumer
     internal static class Configuration
     {
         /// <summary>
-        /// Which supported hardware device to use? If you leave this empty the first one will be used. If you're 
-        /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for 
+        /// Which supported hardware device to use? If you leave this empty the first one will be used. If you're
+        /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for
         /// high-performance local or cloud FPGAs see the docs.
         /// You can also provide this in the -device command line argument.
         /// </summary>
@@ -75,8 +75,8 @@ namespace Hast.Samples.Consumer
             // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
             var hastlayerConfiguration = new HastlayerConfiguration();
 
-            // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object 
-            // while the program runs and re-use it continuously. No need to always wrap it into a using() like 
+            // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object
+            // while the program runs and re-use it continuously. No need to always wrap it into a using() like
             // here, just make sure to Dispose() it before the program terminates.
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
@@ -207,7 +207,7 @@ namespace Hast.Samples.Consumer
                         typeof(PrimeCalculator).Assembly,
                         typeof(Fix64).Assembly,
                         typeof(FSharpSampleAssembly.FSharpParallelAlgorithmContainer).Assembly,
-                        // Note that the assemblies used by code to be transformed also need to be added    
+                        // Note that the assemblies used by code to be transformed also need to be added
                         // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
                         // ImmutableArray.
                         typeof(Posit).Assembly,
@@ -218,15 +218,12 @@ namespace Hast.Samples.Consumer
             Console.WriteLine("Hardware generation finished.");
             Console.WriteLine();
 
-            // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause 
+            // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause
             // any problems, but sometimes they can.
             if (hardwareRepresentation.HardwareDescription.Warnings.Any())
             {
-                Console.WriteLine(
-                    "There were the following transformation warnings, which may hint on issues that can cause the hardware implementation to produce incorrect results:" +
-                    Environment.NewLine +
-                    string.Join(Environment.NewLine, hardwareRepresentation.HardwareDescription.Warnings.Select(warning => "* " + warning.ToString())));
-                Console.WriteLine();
+                Console.WriteLine("There were transformation warnings in the logs, which may hint on issues that can " +
+                                  "cause the hardware implementation to produce incorrect results.\n");
             }
 
             Console.WriteLine("Starting hardware execution.");
