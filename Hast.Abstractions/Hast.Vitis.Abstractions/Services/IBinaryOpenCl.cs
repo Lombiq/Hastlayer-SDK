@@ -11,9 +11,16 @@ namespace Hast.Vitis.Abstractions.Services
         int DeviceCount { get; }
 
         void CreateBinaryKernel(byte[] binary, string kernelName);
-        void CreateCommandQueue(int deviceIndex, CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable);
+
+        void CreateCommandQueue(int deviceIndex,
+            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable);
+
         void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true);
         Task AwaitDevice(int deviceIndex);
-        IntPtr SetKernelArgumentWithNewBuffer(string kernelName, int index, MemoryHandle data, int length);
+
+        IntPtr SetKernelArgumentWithNewBuffer(
+            string kernelName, int index, MemoryHandle data, int length, IntPtr buffer = default);
+
+        IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags);
     }
 }

@@ -20,6 +20,8 @@ namespace Hast.Vitis.Abstractions.Services
     {
         #region Fields and properties
 
+        public const MemoryFlag DefaultMemoryFlags = MemoryFlag.UseHostPointer | MemoryFlag.ReadWrite;
+
         private readonly IOpenCl _cl;
         private readonly IntPtr[] _devices;
         private readonly ILogger _logger;
@@ -171,9 +173,8 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes)
+        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags)
         {
-            var memoryFlags = MemoryFlag.UseHostPointer | MemoryFlag.ReadWrite;
             var buffer = _cl.CreateBuffer(_context, memoryFlags, hostBytes, hostPointer, out Result result);
             VerifyResult(result);
             return buffer;
@@ -192,9 +193,15 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        public unsafe IntPtr SetKernelArgumentWithNewBuffer(string kernelName, int index, MemoryHandle data, int length)
+        public unsafe IntPtr SetKernelArgumentWithNewBuffer(
+            string kernelName,
+            int index,
+            MemoryHandle data,
+            int length,
+            IntPtr buffer = default)
         {
-            var buffer = CreateBuffer((IntPtr)data.Pointer, length);
+            if (buffer == IntPtr.Zero) buffer = CreateBuffer((IntPtr)data.Pointer, length, DefaultMemoryFlags);
+
             SetKernelArgument(Kernels[kernelName], index, buffer);
             KernelBuffers[kernelName].Add(buffer);
             return buffer;

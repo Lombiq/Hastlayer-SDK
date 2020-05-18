@@ -1,14 +1,15 @@
-﻿using Hast.Communication.Models;
-using Hast.Communication.Services;
-using Hast.Layer;
-using Hast.Vitis.Abstractions.Models;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
+using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Hast.Communication.Models;
+using Hast.Communication.Services;
+using Hast.Layer;
+using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Vitis.Abstractions.Models;
+using Microsoft.Extensions.Logging;
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -21,8 +22,9 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
 
-        private readonly IBinaryOpenCl _binaryOpenCl;
-        private readonly IOpenClConfiguration _configuration;
+        protected readonly IBinaryOpenCl _binaryOpenCl;
+        protected readonly IOpenClConfiguration _configuration;
+        protected readonly ILogger<OpenClCommunicationService> _logger;
 
 
         protected OpenClCommunicationService(
@@ -30,12 +32,13 @@ namespace Hast.Vitis.Abstractions.Services
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
             IOpenClConfiguration configuration,
-            ILogger logger) : base(logger)
+            ILogger<OpenClCommunicationService> logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _binaryOpenCl = binaryOpenCl;
             _configuration = configuration;
+            _logger = logger;
         }
 
 
@@ -55,8 +58,7 @@ namespace Hast.Vitis.Abstractions.Services
                 {
                     devices.Add(new Device
                     {
-                        Identifier = $"{ChannelName}:{_configuration.VendorName ?? "any"}:{i}",
-                        Metadata = i
+                        Identifier = $"{ChannelName}:{_configuration.VendorName ?? "any"}:{i}", Metadata = i
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
                 }
@@ -78,7 +80,8 @@ namespace Hast.Vitis.Abstractions.Services
                     using (var hostMemoryHandle = hostMemory.Pin())
                     {
                         // Send data and execute.
-                        var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(kernelName, 0, hostMemoryHandle, hostMemory.Length);
+                        var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
+                            kernelName, 0, hostMemoryHandle, hostMemory.Length, GetBuffer(hostMemory, hostMemoryHandle));
                         Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
                         _binaryOpenCl.LaunchKernel(deviceIndex, kernelName, new[] {fpgaBuffer});
                         await _binaryOpenCl.AwaitDevice(deviceIndex);
@@ -93,6 +96,9 @@ namespace Hast.Vitis.Abstractions.Services
                 return context.HardwareExecutionInformation;
             }
         }
+
+
+        protected virtual IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle) => IntPtr.Zero;
 
 
         private OpenClResultMetadata GetResultMetadata(SimpleMemoryAccessor buffer)

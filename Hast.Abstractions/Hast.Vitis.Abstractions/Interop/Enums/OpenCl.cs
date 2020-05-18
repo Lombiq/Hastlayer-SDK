@@ -160,13 +160,13 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
 
     /// <summary>
     /// A bit-field that is used to specify allocation and usage information such as the memory arena that should be
-    /// used to allocate the buffer object and how it will be used. 
+    /// used to allocate the buffer object and how it will be used.
     /// </summary>
     [Flags]
     public enum MemoryFlag : ulong
     {
         /// <summary>
-        /// This flag specifies that the memory object will be read and written by a kernel. This is the default. 
+        /// This flag specifies that the memory object will be read and written by a kernel. This is the default.
         /// </summary>
         ReadWrite = 1 << 0,
 
@@ -205,14 +205,21 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// host_ptr.
         /// <see cref="CopyHostPointer"/> and <see cref="UseHostPointer"/> are mutually exclusive.
         /// <see cref="CopyHostPointer"/> can be used with <see cref="AllocateHostPointer"/> to initialize the contents
-        /// of the cl_mem object allocated using host-accessible (e.g. PCIe) memory. 
+        /// of the cl_mem object allocated using host-accessible (e.g. PCIe) memory.
         /// </summary>
         CopyHostPointer = 1 << 5,
 
+        /// <summary>
+        /// Make clCreateBuffer to interpret host_ptr argument as cl_mem_ext_ptr_t.
+        /// </summary>
+        /// <remarks>https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h</remarks>
+        ExtensionXilinxPointer = 1ul << 31,
+
+        ExtensionXilinxTopology = 1ul << 31,
     }
 
     /// <summary>
-    /// A bit-field that is used to specify migration options. 
+    /// A bit-field that is used to specify migration options.
     /// </summary>
     [Flags]
     public enum MemoryMigrationFlag : ulong
