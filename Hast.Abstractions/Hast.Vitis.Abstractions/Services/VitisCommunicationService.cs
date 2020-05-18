@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -36,6 +37,8 @@ namespace Hast.Vitis.Abstractions.Services
                 var json = JsonConvert.SerializeObject(config);
                 File.WriteAllText(ConfigFileName, json);
             }
+
+            SimpleMemory.Alignment = config.MemoryAlignment;
 
             services.AddSingleton<IOpenClConfiguration>(config);
         }

@@ -9,5 +9,6 @@ namespace Hast.Vitis.Abstractions.Models
         DeviceType DeviceType { get; set; }
         int HeaderCellCount { get; set; }
         string VendorName { get; set; }
+        int MemoryAlignment { get; set; }
     }
 }

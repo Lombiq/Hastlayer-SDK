@@ -10,19 +10,25 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// </summary>
     /// <remarks>
     /// All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
-    /// 
-    /// WARNING: changes here should be in sync with the VHDL library. The signatures of the methods of this class 
+    ///
+    /// WARNING: changes here should be in sync with the VHDL library. The signatures of the methods of this class
     /// mustn't be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL
     /// library too.
     /// </remarks>
     public class SimpleMemory
     {
         public const int MemoryCellSizeBytes = sizeof(int);
+        public const int DefaultPrefixCellCount = 4;
+
+        /// <summary>
+        /// The alignment value, which must be an integer power of 2.
+        /// </summary>
+        public static int Alignment { get; set; }
 
         /// <summary>
         /// The number of extra cells used for header information like memberId or data length.
         /// </summary>
-        public int PrefixCellCount { get; internal set; } = 4;
+        public int PrefixCellCount { get; internal set; } = DefaultPrefixCellCount;
 
         /// <summary>
         /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be
@@ -61,21 +67,19 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
 
         /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
         /// the FPGA for transformed algorithms.
         /// </summary>
         /// <param name="cellCount">
         /// The number of memory "cells". The memory is divided into independently accessible "cells"; the size of the
-        /// allocated memory space is calculated from the cell count and the cell size indicated in 
+        /// allocated memory space is calculated from the cell count and the cell size indicated in
         /// <see cref="MemoryCellSizeBytes"/>.
         /// </param>
-        public SimpleMemory(int cellCount)
-        {
-            PrefixedMemory = new byte[(cellCount + PrefixCellCount) * MemoryCellSizeBytes];
-        }
+        public SimpleMemory(int cellCount) : this(new byte[(cellCount + DefaultPrefixCellCount + Alignment) *
+                                                           MemoryCellSizeBytes], DefaultPrefixCellCount) { }
 
         /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
         /// the FPGA for transformed algorithms from an existing byte array.
         /// </summary>
         /// <param name="memory">The source data.</param>
@@ -88,13 +92,28 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </remarks>
         internal SimpleMemory(Memory<byte> memory, int prefixCellCount)
         {
+            if (Alignment > 0)
+            {
+                IntPtr address;
+                unsafe
+                {
+                    fixed (byte* pointer = memory.Span)
+                    {
+                        address = new IntPtr(pointer);
+                    }
+                }
+
+                var alignmentOffset = Alignment - (int)(address.ToInt64() % Alignment);
+                memory = memory.Slice(alignmentOffset);
+            }
+
             PrefixedMemory = memory;
             PrefixCellCount = prefixCellCount;
         }
 
 
         /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
         /// the FPGA for transformed algorithms from an existing byte array.
         /// </summary>
         /// <param name="memory">The source data.</param>
