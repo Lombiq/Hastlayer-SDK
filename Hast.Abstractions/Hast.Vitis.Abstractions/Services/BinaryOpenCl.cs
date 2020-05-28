@@ -91,17 +91,17 @@ namespace Hast.Vitis.Abstractions.Services
             var platforms = new IntPtr[count];
             VerifyResult(_cl.GetPlatformIDs(count, platforms, out _));
 
-            return string.IsNullOrEmpty(vendorName)
-                ? platforms
-                : platforms.Where(platform =>
-            {
-                VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, UIntPtr.Zero, null,
-                    out var size));
-                var output = new byte[size.ToUInt32()];
-                VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));
+            return string.IsNullOrEmpty(vendorName) ?
+                platforms :
+                platforms.Where(platform =>
+                {
+                    VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, UIntPtr.Zero, null,
+                        out var size));
+                    var output = new byte[size.ToUInt32()];
+                    VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));
 
-                return vendorName == Encoding.UTF8.GetString(output, 0, output.Length).TrimEnd('\0');
-            });
+                    return vendorName == Encoding.UTF8.GetString(output, 0, output.Length).TrimEnd('\0');
+                });
         }
 
         private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceType deviceType)
@@ -146,8 +146,8 @@ namespace Hast.Vitis.Abstractions.Services
                 _context.Value,
                 Devices.Length,
                 Devices,
-                new[] {binaryLength},
-                new[] {binary},
+                new[] { binaryLength },
+                new[] { binary },
                 resultsPerDevice,
                 out var result);
             VerifyResult(result);
@@ -226,7 +226,7 @@ namespace Hast.Vitis.Abstractions.Services
                 memoryObjects,
                 flags,
                 waitEvent == IntPtr.Zero ? 0u : 1,
-                waitEvent == IntPtr.Zero ? null : new[] {waitEvent},
+                waitEvent == IntPtr.Zero ? null : new[] { waitEvent },
                 out waitEvent));
             return waitEvent;
         }
@@ -237,7 +237,7 @@ namespace Hast.Vitis.Abstractions.Services
                 queue,
                 kernel,
                 waitEvent == IntPtr.Zero ? 0u : 1,
-                waitEvent == IntPtr.Zero ? null : new[] {waitEvent},
+                waitEvent == IntPtr.Zero ? null : new[] { waitEvent },
                 out waitEvent));
             return waitEvent;
         }
