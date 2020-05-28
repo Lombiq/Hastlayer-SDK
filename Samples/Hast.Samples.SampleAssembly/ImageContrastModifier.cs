@@ -91,7 +91,7 @@ namespace Hast.Samples.SampleAssembly
         /// to access this sample by common method name without altering the VHDL.
         /// </summary>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
-        public virtual void Run(SimpleMemory memory) => ChangeContrast(memory);
+        internal virtual void Run(SimpleMemory memory) => ChangeContrast(memory);
 
         /// <summary>
         /// Makes the required changes on the selected pixel.

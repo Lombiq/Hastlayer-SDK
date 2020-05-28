@@ -15,8 +15,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using BindingFlags = System.Reflection.BindingFlags;
 
 namespace Hast.Communication.Tester
 {
@@ -27,11 +29,9 @@ namespace Hast.Communication.Tester
 
         public const int HexDumpBlocksPerLine = 8;
 
-        private static readonly Type[] SimpleMemoryArgument = new[] {typeof(SimpleMemory)};
-
         public static Options CommandLineOptions { get; set; }
 
-        private static Hastlayer _hastlayer = null;
+        private static Hastlayer _hastlayer;
 
         private static void OnServiceGeneration(object sender, IServiceCollection services)
         {
@@ -93,10 +93,10 @@ namespace Hast.Communication.Tester
                         .Assembly
                         .GetTypes()
                         .Single(x => x.Name.ToLower() == name &&
-                                     x.GetMethod(nameof(MemoryTest.Run), SimpleMemoryArgument) != null &&
-                                     x.GetConstructor(Array.Empty<Type>()) != null);
+                                     x.GetConstructor(Array.Empty<Type>()) != null &&
+                                     GetReferenceAction(x) != null);
                     var sample = type.GetConstructor(Array.Empty<Type>())?.Invoke(Array.Empty<object>());
-                    type.GetMethod(nameof(MemoryTest.Run), SimpleMemoryArgument)?.Invoke(sample, new object[] { referenceMemory });
+                    GetReferenceAction(type)?.Invoke(sample, new object[] { referenceMemory });
                 }
             }
 
@@ -124,6 +124,12 @@ namespace Hast.Communication.Tester
             if (!CommandLineOptions.NoCheck) Verify(memory, referenceMemory);
         }
 
+        private static MethodInfo GetReferenceAction(Type type) =>
+            type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                .SingleOrDefault(x => x.Name == nameof(MemoryTest.Run) &&
+                                      x.GetParameters().Length == 1 &&
+                                      x.GetParameters()[0].ParameterType == typeof(SimpleMemory));
+
 
         private static (SimpleMemory, SimpleMemoryAccessor) GenerateMemory(
             PayloadType type,
@@ -133,8 +139,9 @@ namespace Hast.Communication.Tester
         {
             Console.WriteLine("Generating memory.");
             var prefixCellCount = 4;
-            var (memory, accessor) = SimpleMemoryAccessor.Create(
-                new byte[(prefixCellCount + prependCells.Length + cellCount) * SimpleMemory.MemoryCellSizeBytes], prefixCellCount);
+            var byteCount = (prefixCellCount + prependCells.Length + cellCount) * SimpleMemory.MemoryCellSizeBytes +
+                            SimpleMemory.Alignment;
+            var (memory, accessor) = SimpleMemoryAccessor.Create(new byte[byteCount], prefixCellCount);
 
             for (var i = 0; i < prependCells.Length; i++) memory.WriteInt32(i, prependCells[i]);
 
@@ -155,7 +162,7 @@ namespace Hast.Communication.Tester
                     accessor.Load(inputFileName, memory.PrefixCellCount);
                     break;
                 case PayloadType.Bitmap:
-                    using (var bitmap = (Bitmap)Bitmap.FromFile(inputFileName))
+                    using (var bitmap = (Bitmap)Image.FromFile(inputFileName))
                     {
                         memory = BitmapHelper.ToSimpleMemory(bitmap, prependCells);
                         accessor = new SimpleMemoryAccessor(memory);
