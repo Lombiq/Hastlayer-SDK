@@ -19,11 +19,27 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public const int MemoryCellSizeBytes = sizeof(int);
         public const int DefaultPrefixCellCount = 4;
 
+        private static bool _initialized = false;
+        private static int _alignment = 0;
+
         /// <summary>
         /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a
-        /// multiple of that number. Must be an integer power of 2.
+        /// multiple of that number. It must be an integer power of 2. It can only be set before any instances are
+        /// created.
         /// </summary>
-        public static int Alignment { get; set; }
+        public static int Alignment
+        {
+            get => _alignment;
+            set
+            {
+                if (_initialized) throw new InvalidOperationException(
+                    $"This property can only be set before the first {nameof(SimpleMemory)} is constructed.");
+                if (value < 0 || (value & (value - 1)) != 0) throw new ArgumentOutOfRangeException(
+                    "The alignment value must be a power of 2.");
+
+                _alignment = value;
+            }
+        }
 
         /// <summary>
         /// The number of extra cells used for header information like memberId or data length.
@@ -92,6 +108,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </remarks>
         internal SimpleMemory(Memory<byte> memory, int prefixCellCount)
         {
+            _initialized = true;
+
             if (Alignment > 0)
             {
                 IntPtr address;
