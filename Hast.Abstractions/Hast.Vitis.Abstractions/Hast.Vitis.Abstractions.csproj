@@ -21,4 +21,13 @@
     <ProjectReference Include="..\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="nimbix-compile.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="nimbix-install.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
