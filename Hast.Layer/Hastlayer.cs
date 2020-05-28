@@ -1,4 +1,4 @@
-﻿using Hast.Catapult.Abstractions;
+using Hast.Catapult.Abstractions;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -53,10 +53,10 @@ namespace Hast.Layer
 
             var services = new ServiceCollection();
             services.AddSingleton<IHastlayer>(this);
-            services.AddIDependencyContainer(assemblies);
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
+            services.AddIDependencyContainer(assemblies);
 
             services.AddSingleton(LoggerFactory.Create(builder =>
             {

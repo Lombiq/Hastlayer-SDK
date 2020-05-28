@@ -4,6 +4,7 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Vitis.Abstractions.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -33,21 +34,15 @@ namespace Hast.Vitis.Abstractions.Services
 
         public static void InitializeService(IServiceCollection services)
         {
-            var config = new OpenClConfiguration();
-            if (File.Exists(ConfigFileName))
+            using (var provider = services.BuildServiceProvider())
             {
-                var json = File.ReadAllText(ConfigFileName);
-                config = JsonConvert.DeserializeObject<OpenClConfiguration>(json);
-            }
-            else
-            {
-                var json = JsonConvert.SerializeObject(config);
-                File.WriteAllText(ConfigFileName, json);
-            }
+                var section = provider.GetService<IConfiguration>().GetSection(nameof(OpenClConfiguration));
+                var config = section == null ? new OpenClConfiguration() : section.Get<OpenClConfiguration>();
 
-            SimpleMemory.Alignment = config.MemoryAlignment;
+                SimpleMemory.Alignment = config.MemoryAlignment;
 
-            services.AddSingleton<IOpenClConfiguration>(config);
+                services.AddSingleton<IOpenClConfiguration>(config);
+            }
         }
 
 
