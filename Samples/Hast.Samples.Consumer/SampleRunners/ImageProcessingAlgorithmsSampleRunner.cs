@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -19,6 +19,8 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
+            // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
+            // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
             using (var bitmap = new Bitmap("fpga.jpg"))
             {
                 var imageContrastModifier = await hastlayer
