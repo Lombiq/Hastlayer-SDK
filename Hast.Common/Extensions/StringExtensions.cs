@@ -10,7 +10,7 @@ namespace System
         /// <param name="str">The input in camelCase or PascalCase.</param>
         /// <returns>
         /// The input converted to snake_Case. It doesn't alter case so you can call either ToUpper or ToLower without
-        /// any additional penalities.
+        /// any additional penalties.
         /// </returns>
         public static string ToSnakeCase(this string input) =>
             string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString()));
