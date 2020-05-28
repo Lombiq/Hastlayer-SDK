@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
@@ -8,13 +8,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// </summary>
     public class SimpleMemoryAccessor
     {
-        private SimpleMemory _simpleMemory;
+        private readonly SimpleMemory _simpleMemory;
 
 
-        public SimpleMemoryAccessor(SimpleMemory simpleMemory)
-        {
-            _simpleMemory = simpleMemory;
-        }
+        public SimpleMemoryAccessor(SimpleMemory simpleMemory) => _simpleMemory = simpleMemory;
 
 
         /// <summary>
@@ -133,7 +130,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
         /// <returns>The <see cref="SimpleMemory"/> containing the data.</returns>
-        /// <remarks>If data is a byte[] you can use the <see cref="SimpleMemory"/> constructor instead.</remarks>
+        /// <remarks>If data is a byte[] you can also use the <see cref="SimpleMemory"/> constructor instead.</remarks>
         public static SimpleMemory Create(Memory<byte> data) => new SimpleMemory(data, 0);
 
 
