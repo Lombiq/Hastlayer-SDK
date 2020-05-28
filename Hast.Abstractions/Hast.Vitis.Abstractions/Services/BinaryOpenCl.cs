@@ -21,36 +21,42 @@ namespace Hast.Vitis.Abstractions.Services
         #region Fields and properties
 
         public const MemoryFlag DefaultMemoryFlags = MemoryFlag.UseHostPointer | MemoryFlag.ReadWrite;
+        private static readonly UIntPtr _intPtrSize = new UIntPtr((uint)Marshal.SizeOf(IntPtr.Zero));
 
         private readonly IOpenCl _cl;
-        private readonly IntPtr[] _devices;
         private readonly ILogger _logger;
-        private readonly IntPtr _context = IntPtr.Zero;
-        private readonly UIntPtr IntPtrSize = new UIntPtr((uint)Marshal.SizeOf(IntPtr.Zero));
 
+        private readonly Lazy<IntPtr[]> _devicesLazy;
+        private readonly Lazy<IntPtr> _context;
+
+        private readonly Dictionary<int, IntPtr> _queues = new Dictionary<int, IntPtr>();
+        private readonly Dictionary<string, IntPtr> _kernels = new Dictionary<string, IntPtr>();
+        private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = new Dictionary<string, List<IntPtr>>();
+
+        private IntPtr[] _devices => _devicesLazy.Value;
         public int DeviceCount => _devices.Length;
-
-        private Dictionary<int, IntPtr> Queues { get; } = new Dictionary<int, IntPtr>();
-        private Dictionary<string, IntPtr> Kernels { get; } = new Dictionary<string, IntPtr>();
-        private Dictionary<string, List<IntPtr>> KernelBuffers { get; set; } = new Dictionary<string, List<IntPtr>>();
 
         #endregion
 
 
         #region Constructors
 
-        public BinaryOpenCl(IOpenCl cl, IOpenClConfiguration configuration, ILogger logger)
+        public BinaryOpenCl(IOpenCl cl, ILogger<BinaryOpenCl> logger, IOpenClConfiguration configuration)
         {
             _cl = cl;
-            _devices = GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray();
             _logger = logger;
 
-            if (_devices.Any())
+            _devicesLazy = new Lazy<IntPtr[]>(() =>
+                GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
+
+            _context = new Lazy<IntPtr>(() =>
             {
-                _context = _cl.CreateContext(IntPtr.Zero, (uint)_devices.Length, _devices.ToArray(), IntPtr.Zero,
-                    IntPtr.Zero, out Result result);
+                if (!_devices.Any()) return IntPtr.Zero;
+                var context = _cl.CreateContext(IntPtr.Zero, (uint)_devices.Length, _devices.ToArray(), IntPtr.Zero,
+                    IntPtr.Zero, out var result);
                 VerifyResult(result);
-            }
+                return context;
+            });
         }
 
         #endregion
@@ -67,7 +73,7 @@ namespace Hast.Vitis.Abstractions.Services
             Func<Result, int, Exception> mapper)
         {
             var errors = results
-                .Select((Result, Index) => (Result, Index))
+                .Select((x, i) => (Result: x, Index: i))
                 .Where(x => x.Result != Result.Success)
                 .Select(x => mapper(x.Result, x.Index))
                 .ToList();
@@ -78,7 +84,7 @@ namespace Hast.Vitis.Abstractions.Services
         {
             VerifyResult(_cl.GetPlatformIDs(0, null, out uint count));
 
-            IntPtr[] platforms = new IntPtr[count];
+            var platforms = new IntPtr[count];
             VerifyResult(_cl.GetPlatformIDs(count, platforms, out _));
 
             if (string.IsNullOrEmpty(vendorName)) return platforms;
@@ -86,7 +92,7 @@ namespace Hast.Vitis.Abstractions.Services
             return platforms.Where(platform =>
             {
                 VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, UIntPtr.Zero, null,
-                    out UIntPtr size));
+                    out var size));
                 var output = new byte[size.ToUInt32()];
                 VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));
 
@@ -98,7 +104,7 @@ namespace Hast.Vitis.Abstractions.Services
         {
             VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, null, out uint numberOfAvailableDevices));
 
-            IntPtr[] devicePointers = new IntPtr[numberOfAvailableDevices];
+            var devicePointers = new IntPtr[numberOfAvailableDevices];
             VerifyResult(_cl.GetDeviceIDs(platform, deviceType, numberOfAvailableDevices, devicePointers, out _));
 
             return devicePointers;
@@ -124,22 +130,22 @@ namespace Hast.Vitis.Abstractions.Services
         public void CreateCommandQueue(int deviceIndex,
             CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
         {
-            var queue = _cl.CreateCommandQueue(_context, _devices[deviceIndex], properties, out Result result);
+            var queue = _cl.CreateCommandQueue(_context.Value, _devices[deviceIndex], properties, out var result);
             VerifyResult(result);
-            Queues[deviceIndex] = queue;
+            _queues[deviceIndex] = queue;
         }
 
         private IntPtr CreateProgramWithBinary(IntPtr binary, int binaryLength)
         {
             var resultsPerDevice = new Result[_devices.Length];
             var program = _cl.CreateProgramWithBinary(
-                _context,
+                _context.Value,
                 _devices.Length,
                 _devices,
                 new[] {binaryLength},
                 new[] {binary},
                 resultsPerDevice,
-                out Result result);
+                out var result);
             VerifyResult(result);
             VerifyResults(resultsPerDevice,
                 (deviceResult, i) => new Exception($"Error while creating program on device #{i}: {deviceResult}"));
@@ -157,7 +163,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public void CreateBinaryKernel(byte[] binary, string kernelName)
         {
-            if (Kernels.ContainsKey(kernelName)) return;
+            if (_kernels.ContainsKey(kernelName)) return;
 
             unsafe
             {
@@ -165,17 +171,17 @@ namespace Hast.Vitis.Abstractions.Services
                 {
                     var program = CreateProgramWithBinary((IntPtr)pointer, binary.Length);
 
-                    var kernel = _cl.CreateKernel(program, kernelName, out Result result);
+                    var kernel = _cl.CreateKernel(program, kernelName, out var result);
                     VerifyResult(result);
-                    Kernels[kernelName] = kernel;
-                    KernelBuffers[kernelName] = new List<IntPtr>();
+                    _kernels[kernelName] = kernel;
+                    _kernelBuffers[kernelName] = new List<IntPtr>();
                 }
             }
         }
 
         public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags)
         {
-            var buffer = _cl.CreateBuffer(_context, memoryFlags, hostBytes, hostPointer, out Result result);
+            var buffer = _cl.CreateBuffer(_context.Value, memoryFlags, hostBytes, hostPointer, out var result);
             VerifyResult(result);
             return buffer;
         }
@@ -185,7 +191,7 @@ namespace Hast.Vitis.Abstractions.Services
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             try
             {
-                VerifyResult(_cl.SetKernelArg(kernel, (uint)index, IntPtrSize, handle.AddrOfPinnedObject()));
+                VerifyResult(_cl.SetKernelArg(kernel, (uint)index, _intPtrSize, handle.AddrOfPinnedObject()));
             }
             finally
             {
@@ -202,8 +208,8 @@ namespace Hast.Vitis.Abstractions.Services
         {
             if (buffer == IntPtr.Zero) buffer = CreateBuffer((IntPtr)data.Pointer, length, DefaultMemoryFlags);
 
-            SetKernelArgument(Kernels[kernelName], index, buffer);
-            KernelBuffers[kernelName].Add(buffer);
+            SetKernelArgument(_kernels[kernelName], index, buffer);
+            _kernelBuffers[kernelName].Add(buffer);
             return buffer;
         }
 
@@ -234,8 +240,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         public void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true)
         {
-            var queue = Queues[deviceIndex];
-            var kernel = Kernels[kernelName];
+            var queue = _queues[deviceIndex];
+            var kernel = _kernels[kernelName];
             var waitEvent = IntPtr.Zero;
 
             waitEvent = EnqueueMemoryMigration(queue, buffers, false, waitEvent);
@@ -245,27 +251,25 @@ namespace Hast.Vitis.Abstractions.Services
 
         public async Task AwaitDevice(int deviceIndex)
         {
-            var queue = Queues[deviceIndex];
+            var queue = _queues[deviceIndex];
             VerifyResult(await Task.Run(() => _cl.Finish(queue)));
         }
 
         #endregion
 
-        public static void InitializeService(IServiceCollection services)
-        {
+        public static void InitializeService(IServiceCollection services) =>
             services.AddSingleton(_ => NativeLibraryBuilder.Default.ActivateInterface<IOpenCl>("OpenCL"));
-        }
 
         public void Dispose()
         {
-            foreach (var queue in Queues.Values) _cl.Finish(queue);
+            foreach (var queue in _queues.Values) _cl.Finish(queue);
 
             var exceptions = new List<Exception>();
 
-            foreach (var (name, handle) in Kernels)
+            foreach (var (name, handle) in _kernels)
             {
                 var arguments = VerifyResults(
-                    KernelBuffers[name].Select(_cl.ReleaseMemObject),
+                    _kernelBuffers[name].Select(_cl.ReleaseMemObject),
                     (result, _) => new Exception($"Error releasing buffer for kernel '{name}': {result}"));
                 if (arguments != null) exceptions.AddRange(arguments.InnerExceptions);
 
@@ -276,15 +280,18 @@ namespace Hast.Vitis.Abstractions.Services
                 }
             }
 
-            var queues = Queues.ToList();
+            var queues = _queues.ToList();
             var queueReleaseExceptions = VerifyResults(
-                Queues.Values.Select(_cl.ReleaseCommandQueue),
+                _queues.Values.Select(_cl.ReleaseCommandQueue),
                 (result, index) => new Exception($"Error releasing queue for device #{queues[index].Key}: {result}"));
             if (queueReleaseExceptions != null) exceptions.AddRange(queueReleaseExceptions.InnerExceptions);
 
             try
             {
-                if (_context != IntPtr.Zero) VerifyResult(_cl.ReleaseContext(_context));
+                if (_context.IsValueCreated && _context.Value != IntPtr.Zero)
+                {
+                    VerifyResult(_cl.ReleaseContext(_context.Value));
+                }
             }
             catch (Exception ex)
             {

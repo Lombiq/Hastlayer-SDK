@@ -24,7 +24,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         protected readonly IBinaryOpenCl _binaryOpenCl;
         protected readonly IOpenClConfiguration _configuration;
-        protected readonly ILogger<OpenClCommunicationService> _logger;
+        protected readonly ILogger _logger;
 
 
         protected OpenClCommunicationService(

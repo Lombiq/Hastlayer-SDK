@@ -21,7 +21,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public const int DefaultPrefixCellCount = 4;
 
         /// <summary>
-        /// The alignment value, which must be an integer power of 2.
+        /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a
+        /// multiple of that number. Must be an integer power of 2.
         /// </summary>
         public static int Alignment { get; set; }
 
@@ -75,8 +76,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// allocated memory space is calculated from the cell count and the cell size indicated in
         /// <see cref="MemoryCellSizeBytes"/>.
         /// </param>
-        public SimpleMemory(int cellCount) : this(new byte[(cellCount + DefaultPrefixCellCount + Alignment) *
-                                                           MemoryCellSizeBytes], DefaultPrefixCellCount) { }
+        public SimpleMemory(int cellCount) :
+            this(new byte[(cellCount + DefaultPrefixCellCount) * MemoryCellSizeBytes + Alignment], DefaultPrefixCellCount)
+        {
+        }
 
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on

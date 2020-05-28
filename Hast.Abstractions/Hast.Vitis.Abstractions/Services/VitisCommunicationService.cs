@@ -7,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
@@ -21,6 +19,7 @@ namespace Hast.Vitis.Abstractions.Services
         public const string ConfigFileName = nameof(VitisCommunicationService) + ".json";
 
         public override string ChannelName { get; } = Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
+
 
         public VitisCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
@@ -50,6 +49,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             services.AddSingleton<IOpenClConfiguration>(config);
         }
+
 
         protected override IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle)
         {
