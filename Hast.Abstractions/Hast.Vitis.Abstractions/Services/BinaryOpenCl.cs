@@ -66,7 +66,11 @@ namespace Hast.Vitis.Abstractions.Services
 
         private static void VerifyResult(Result err)
         {
-            if (err != Result.Success) throw new Exception($"ERROR STATUS: {err}");
+            if (err != Result.Success)
+            {
+                throw new Exception($"OpenCL error with status '{err}'. You may find more information by searching " +
+                    $"for 'opencl {err} OR CL_{err.ToString().ToSnakeCase().ToUpper()}' on the web.");
+            }
         }
 
         private static AggregateException VerifyResults(IEnumerable<Result> results,
