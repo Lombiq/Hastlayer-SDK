@@ -37,7 +37,7 @@ namespace Hast.Vitis.Abstractions.Services
             using (var provider = services.BuildServiceProvider())
             {
                 var section = provider.GetService<IConfiguration>().GetSection(nameof(OpenClConfiguration));
-                var config = section == null ? new OpenClConfiguration() : section.Get<OpenClConfiguration>();
+                var config = section.Value == null ? new OpenClConfiguration() : section.Get<OpenClConfiguration>();
 
                 SimpleMemory.Alignment = config.MemoryAlignment;
 
