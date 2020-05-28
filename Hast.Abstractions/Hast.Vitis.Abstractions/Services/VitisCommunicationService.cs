@@ -1,15 +1,15 @@
-using System;
-using System.Buffers;
 using Hast.Common.Interfaces;
 using Hast.Communication.Services;
+using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Vitis.Abstractions.Interop;
+using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Vitis.Abstractions.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.Buffers;
 using System.IO;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Vitis.Abstractions.Interop;
-using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -53,7 +53,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         protected override IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle)
         {
-            _logger.LogInformation($"Using HBM: {data.Length <= 256_000_000}");
+            _logger.LogInformation($"Using HBM: {data.Length <= 256_000_000}.");
+
             if (data.Length > 256_000_000) return IntPtr.Zero;
 
             var flags = BinaryOpenCl.DefaultMemoryFlags | MemoryFlag.ExtensionXilinxPointer;
