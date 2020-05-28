@@ -7,7 +7,7 @@ namespace Hast.Communication.Tester
 {
     public class Options
     {
-        // Be sure to update the Readme when changing these!
+        // Be sure to update the when changing these!
 
         [Option('l', "list", HelpText = "List available devices and exit.")]
         public bool ListDevices { get; set; }

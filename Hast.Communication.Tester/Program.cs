@@ -33,10 +33,8 @@ namespace Hast.Communication.Tester
 
         private static Hastlayer _hastlayer;
 
-        private static void OnServiceGeneration(object sender, IServiceCollection services)
-        {
+        private static void OnServiceGeneration(object sender, IServiceCollection services) =>
             services.RemoveImplementations<ITransformer>();
-        }
 
         private static async Task MainTask(IServiceProvider provider)
         {
@@ -267,7 +265,7 @@ namespace Hast.Communication.Tester
         {
             try
             {
-                Parser.Default.ParseArguments<Options>(args).WithParsed(o => { CommandLineOptions = o; });
+                Parser.Default.ParseArguments<Options>(args).WithParsed(o => CommandLineOptions = o);
                 if (CommandLineOptions == null) return;
 
                 var hastlayerConfiguration = new HastlayerConfiguration();
