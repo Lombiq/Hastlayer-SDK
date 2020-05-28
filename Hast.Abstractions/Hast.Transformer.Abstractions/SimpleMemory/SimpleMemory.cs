@@ -33,9 +33,12 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             set
             {
                 if (_initialized) throw new InvalidOperationException(
-                    $"This property can only be set before the first {nameof(SimpleMemory)} is constructed.");
-                if (value < 0 || (value & (value - 1)) != 0) throw new ArgumentOutOfRangeException(
-                    "The alignment value must be a power of 2.");
+                    $"This property can only be set before the first {nameof(SimpleMemory)} is constructed. Don't create SimpleMemory objects before initializing the Hastlayer shell.");
+
+                if (value < 0 || (value & (value - 1)) != 0)
+                {
+                    throw new ArgumentOutOfRangeException("The alignment value must be a power of 2.");
+                }
 
                 _alignment = value;
             }
