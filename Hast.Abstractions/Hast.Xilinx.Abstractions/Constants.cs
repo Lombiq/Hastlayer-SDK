@@ -2,6 +2,6 @@ namespace Hast.Xilinx.Abstractions
 {
     public static class Constants
     {
-        public const string SDAccelCommunicationChannelName = "SDAccel";
+        public const string VitisCommunicationChannelName = "Vitis";
     }
 }

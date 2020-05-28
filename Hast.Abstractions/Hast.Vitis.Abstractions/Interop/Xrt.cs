@@ -4,7 +4,7 @@ using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 namespace Hast.Vitis.Abstractions.Interop
 {
     /// <summary>
-    /// Xilinx specific memory extensions. Control bank allocation of buffer object.
+    /// Xilinx-specific memory extensions. Control bank allocation of buffer object.
     /// </summary>
     /// <remarks>
     /// Source: https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h

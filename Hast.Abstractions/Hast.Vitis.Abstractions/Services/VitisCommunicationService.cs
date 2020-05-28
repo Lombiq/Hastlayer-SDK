@@ -20,7 +20,7 @@ namespace Hast.Vitis.Abstractions.Services
     {
         public const string ConfigFileName = nameof(VitisCommunicationService) + ".json";
 
-        public override string ChannelName { get; } = Xilinx.Abstractions.Constants.SDAccelCommunicationChannelName;
+        public override string ChannelName { get; } = Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
 
         public VitisCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
