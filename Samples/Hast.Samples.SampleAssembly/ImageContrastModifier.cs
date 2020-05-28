@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Drawing;
 using System.Threading.Tasks;
 
@@ -88,7 +88,7 @@ namespace Hast.Samples.SampleAssembly
 
         /// <summary>
         /// Changes the contrast of an image. Same as <see cref="ChangeContrast"/>. Used for Hast.Communication.Tester
-        /// to access this sample by common method name without altering the VHDL.
+        /// to access this sample by a common method name just for testing. Internal so it doesn't bother otherwise.
         /// </summary>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         internal virtual void Run(SimpleMemory memory) => ChangeContrast(memory);

@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Services;
 using Hast.Communication.Tester.Helpers;
@@ -107,7 +107,7 @@ namespace Hast.Communication.Tester
                 selectedDevice.DefaultCommunicationChannelName);
             var info = await communicationService.Execute(memory, CommandLineOptions.MemberId, executionContext);
 
-            Console.WriteLine("Executing test on hardware took {0:0.##}ms (net) {1:0.##}ms (all together)",
+            Console.WriteLine("Executing test on hardware took {0:0.##} ms (net) {1:0.##} ms (all together)",
                 info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
             // Save output to file.
@@ -209,7 +209,7 @@ namespace Hast.Communication.Tester
                     }
                     break;
                 case OutputFileType.BitmapJpeg:
-                    using (var input = (Bitmap) Image.FromFile(CommandLineOptions.InputFileName))
+                    using (var input = (Bitmap)Image.FromFile(CommandLineOptions.InputFileName))
                     using (var output = BitmapHelper.FromSimpleMemory(memory, input, CommandLineOptions.Prepend?.Length ?? 0))
                     {
                         output.Save(fileName, ImageFormat.Jpeg);
