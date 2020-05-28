@@ -1,4 +1,4 @@
-﻿# Hastlayer Vitis Driver Readme
+# Hastlayer Vitis Driver Readme
 
 
 
@@ -9,9 +9,9 @@ This project contains the communication service used to connect with [Vitis Unif
 
 ## Requirements
 
-* The system running the FPGA card must be 64-bit Linux (eg 18.04.2 LTS and CentOS 7.6) The installation instructions can be found here [in the platform documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/vhc1571429852245.html).
-* The device specific software requirements can be found in the card's Getting Started page, eg. [Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted).
-* Hastlayer has its own software requirements which can be found in the repository's GettingStarted.md file.
+* The system running the FPGA card must be 64-bit Linux (e.g. Ubuntu 18.04.2 LTS or CentOS 7.6) The installation instructions can be found here [in the platform documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/vhc1571429852245.html).
+* The device specific software requirements can be found in the card's Getting Started page, e.g. [Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted).
+* Hastlayer has its own software requirements which can be found in the repository's *GettingStarted.md* file.
 
 ## Preparation
 

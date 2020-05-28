@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+using System;
 using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
@@ -61,10 +60,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="cellIndex">The cell index where the memory span starts.</param>
         /// <returns>A span starting at cellIndex * MemoryCellSizeBytes.</returns>
-        private Span<byte> this[int cellIndex]
-        {
-            get => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
-        }
+        private Span<byte> this[int cellIndex] => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
 
 
         /// <summary>
@@ -88,8 +84,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="memory">The source data.</param>
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
         /// <remarks>
-        /// This constructor is internal only to avoid dependency issues where we have to include System.Memory package
-        /// everywhere where SimpleMemory is used even if it's created with the other constructors. Instead, you can use
+        /// This constructor is internal only to avoid dependency issues where we have to include the System.Memory
+        /// package everywhere where SimpleMemory is used even if it's created with the other constructors. Instead,
+        /// you can use
         /// <see cref="SimpleMemoryAccessor.Create(Memory{byte}, int)"/> to construct a <see cref="SimpleMemory"/> from
         /// <see cref="Memory{byte}"/>.
         /// </remarks>
@@ -121,7 +118,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="memory">The source data.</param>
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
-        [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Used by third-party consumer code.")]
         private SimpleMemory(byte[] memory, int prefixCellCount = 0) : this(memory.AsMemory(), prefixCellCount) { }
 
 
