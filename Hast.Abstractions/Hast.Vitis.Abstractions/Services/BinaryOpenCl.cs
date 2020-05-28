@@ -1,4 +1,4 @@
-﻿using AdvancedDLSupport;
+using AdvancedDLSupport;
 using Hast.Common.Interfaces;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Hast.Vitis.Abstractions.Services
 {
     [IDependencyInitializer(nameof(InitializeService))]
-    public class BinaryOpenCl : IBinaryOpenCl
+    public sealed class BinaryOpenCl : IBinaryOpenCl
     {
         #region Fields and properties
 
@@ -33,8 +33,8 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly Dictionary<string, IntPtr> _kernels = new Dictionary<string, IntPtr>();
         private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = new Dictionary<string, List<IntPtr>>();
 
-        private IntPtr[] _devices => _devicesLazy.Value;
-        public int DeviceCount => _devices.Length;
+        private IntPtr[] Devices => _devicesLazy.Value;
+        public int DeviceCount => Devices.Length;
 
         #endregion
 
@@ -51,8 +51,8 @@ namespace Hast.Vitis.Abstractions.Services
 
             _context = new Lazy<IntPtr>(() =>
             {
-                if (!_devices.Any()) return IntPtr.Zero;
-                var context = _cl.CreateContext(IntPtr.Zero, (uint)_devices.Length, _devices.ToArray(), IntPtr.Zero,
+                if (!Devices.Any()) return IntPtr.Zero;
+                var context = _cl.CreateContext(IntPtr.Zero, (uint)Devices.Length, Devices.ToArray(), IntPtr.Zero,
                     IntPtr.Zero, out var result);
                 VerifyResult(result);
                 return context;
@@ -87,9 +87,9 @@ namespace Hast.Vitis.Abstractions.Services
             var platforms = new IntPtr[count];
             VerifyResult(_cl.GetPlatformIDs(count, platforms, out _));
 
-            if (string.IsNullOrEmpty(vendorName)) return platforms;
-
-            return platforms.Where(platform =>
+            return string.IsNullOrEmpty(vendorName)
+                ? platforms
+                : platforms.Where(platform =>
             {
                 VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, UIntPtr.Zero, null,
                     out var size));
@@ -130,18 +130,18 @@ namespace Hast.Vitis.Abstractions.Services
         public void CreateCommandQueue(int deviceIndex,
             CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
         {
-            var queue = _cl.CreateCommandQueue(_context.Value, _devices[deviceIndex], properties, out var result);
+            var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], properties, out var result);
             VerifyResult(result);
             _queues[deviceIndex] = queue;
         }
 
         private IntPtr CreateProgramWithBinary(IntPtr binary, int binaryLength)
         {
-            var resultsPerDevice = new Result[_devices.Length];
+            var resultsPerDevice = new Result[Devices.Length];
             var program = _cl.CreateProgramWithBinary(
                 _context.Value,
-                _devices.Length,
-                _devices,
+                Devices.Length,
+                Devices,
                 new[] {binaryLength},
                 new[] {binary},
                 resultsPerDevice,
@@ -152,8 +152,8 @@ namespace Hast.Vitis.Abstractions.Services
 
             VerifyResult(_cl.BuildProgram(
                 program,
-                _devices.Length,
-                _devices,
+                Devices.Length,
+                Devices,
                 null,
                 null,
                 IntPtr.Zero));
