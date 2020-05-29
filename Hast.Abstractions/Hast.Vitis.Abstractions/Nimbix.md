@@ -41,3 +41,9 @@ source nimbix-install.sh
 This is assuming that you are going to run `Hast.Samples.Consumer` but other apps will behave similarly.
 1. `dotnet Hast.Samples.Consumer.dll -device "Alveo U280" -sample ImageProcessingAlgorithms`
 3. If it ran successfully, verify the output by typing `thunar contrast.bmp`.
+
+
+## Restaring
+
+To save on compute costs, turn off the instance when not needed. At that point everything outside the /data folder is lost, including all personal settings.
+You can get back by launching a new instance (Administrative steps 2 - 5) and then running the install script (Setup step 9).
