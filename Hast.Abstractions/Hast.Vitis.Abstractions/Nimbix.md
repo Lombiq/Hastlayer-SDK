@@ -33,13 +33,11 @@ source nimbix-install.sh
     1. `cd` to the RTL source folder.
     2. Find the correct platform name by typing `ls /opt/xilinx/platforms/` .
     3. `make all TARGET=hw DEVICE=platform_name` where platform_name is from the previous step.
-13. Wait for a long time.
-15. `cp -R xclbin /data/host_programs_directory/` and then `cd` to the same location.
+11. Wait for a long time. The baseline time requirements (when compiling `MemoryTest`) is around 2h 15m.
 
 
 ## Prepare and Execute Host
 
-This is assuming that you are going to run Hast.Samples.Consumer but other apps will behave similarly.
+This is assuming that you are going to run `Hast.Samples.Consumer` but other apps will behave similarly.
 1. `dotnet Hast.Samples.Consumer.dll -device "Alveo U280" -sample ImageProcessingAlgorithms`
-2. If it fails with a FileNotFoundException, you need to edit the freshly generated VitisCommunicationService.json file. You can edit the file with either of the pre-installed text editors: `vim` or `emacs`.
 3. If it ran successfully, verify the output by typing `thunar contrast.bmp`.
