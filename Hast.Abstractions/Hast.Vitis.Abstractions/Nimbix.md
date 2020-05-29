@@ -8,7 +8,7 @@ To run a Hastlayer applications on the [Nimbix HPC cloud](https://www.nimbix.net
 ## Administrative steps
 
 1. Sign up for the [Nimbix Alveo Trial](https://www.nimbix.net/alveotrial).
-2. [Log into the Nimbix platform](https://platform.jarvice.com/) after the registration is complete. [Here](https://support.nimbix.net/hc/en-us/articles/360035258971-Getting-Started-With-Alveo-Trial) is also some more getting started information.
+2. [Log into the Nimbix platform](https://platform.jarvice.com/) after the registration is complete. [Here](https://support.nimbix.net/hc/en-us/articles/360035258971-Getting-Started-With-Alveo-Trial) is also some more getting started information (note that the costs indicator only updates when you shut down your job).
 3. On the right sidebar click "Compute" and find "Xilinx Vitis Unified Software Platform 2019.2" in the search bar. (At the time of writing this that option lets you pick U200, U250 and U280 while there is a separate one for U50.)
 4. Activate "Desktop Mode with FPGA" and select the machine type with the appropriate board (tested on U280).
 5. You should be sent to the Dashboard section with a thumbnail for the running instance.
