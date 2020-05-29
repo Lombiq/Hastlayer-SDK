@@ -47,6 +47,13 @@ namespace Hast.Vitis.Abstractions.Services
             int memberId,
             IHardwareExecutionContext executionContext)
         {
+            if (!File.Exists(_configuration.BinaryFilePath))
+            {
+                throw new FileNotFoundException("The OpenCL binary (xclbin) is required to start the kernel. The host" +
+                    $"can't launch without it. Please make sure the file at '{_configuration.BinaryFilePath}' exists " +
+                    "and is accessible.");
+            }
+
             var kernelBinary = File.ReadAllBytes(_configuration.BinaryFilePath);
             var kernelName = KernelName;
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, kernelName);

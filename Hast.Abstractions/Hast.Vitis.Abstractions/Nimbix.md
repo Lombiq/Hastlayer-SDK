@@ -47,3 +47,9 @@ This is assuming that you are going to run `Hast.Samples.Consumer` but other app
 To save on compute costs, shut down the job (i.e. turn off the instance) when not needed. At that point everything outside the */data* folder is lost, including all personal settings.
 
 You can get back by launching a new instance (Administrative steps 2 - 5) and then running the install script (Setup step 9).
+
+
+## Tips & Notes
+
+- While your instance is running, you can see the SSH credentials by clicking on the ⓘ. Connect to it using SSH/PUTTY to for a better shell with clipboard access.
+
