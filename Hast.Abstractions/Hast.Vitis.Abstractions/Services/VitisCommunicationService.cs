@@ -39,7 +39,9 @@ namespace Hast.Vitis.Abstractions.Services
                 var section = provider.GetService<IConfiguration>().GetSection(nameof(OpenClConfiguration));
                 var config = section?.Get<OpenClConfiguration>() ?? new OpenClConfiguration();
 
-                SimpleMemory.Alignment = config.MemoryAlignment;
+                #pragma warning disable 618
+                SimpleMemoryConfigurator.UpdateAlignment(config.MemoryAlignment);
+                #pragma warning restore 618
 
                 services.AddSingleton<IOpenClConfiguration>(config);
             }

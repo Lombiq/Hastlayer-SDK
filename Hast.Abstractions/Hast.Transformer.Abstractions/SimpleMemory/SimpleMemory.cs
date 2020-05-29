@@ -27,7 +27,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// multiple of that number. It must be an integer power of 2. It can only be set before any instances are
         /// created.
         /// </summary>
-        public static int Alignment
+        internal static int Alignment
         {
             get => _alignment;
             set

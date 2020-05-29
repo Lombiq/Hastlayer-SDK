@@ -136,10 +136,9 @@ namespace Hast.Communication.Tester
             string inputFileName)
         {
             Console.WriteLine("Generating memory.");
-            var prefixCellCount = 4;
-            var byteCount = (prefixCellCount + prependCells.Length + cellCount) * SimpleMemory.MemoryCellSizeBytes +
-                            SimpleMemory.Alignment;
-            var (memory, accessor) = SimpleMemoryAccessor.Create(new byte[byteCount], prefixCellCount);
+            const int prefixCellCount = 4;
+            var memory = new SimpleMemory(prefixCellCount + prependCells.Length + cellCount);
+            var accessor = new SimpleMemoryAccessor(memory);
 
             for (var i = 0; i < prependCells.Length; i++) memory.WriteInt32(i, prependCells[i]);
 
