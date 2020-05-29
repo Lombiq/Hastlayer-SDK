@@ -51,5 +51,5 @@ You can get back by launching a new instance (Administrative steps 2 - 5) and th
 
 ## Tips & Notes
 
-- While your instance is running, you can see the SSH credentials by clicking on the ⓘ. Connect to it using SSH/PUTTY to for a better shell with clipboard access.
+- While your instance is running, you can see the SSH credentials by clicking on the ⓘ. Connect to it using SSH/PuTTY to for a better shell with clipboard access.
 
