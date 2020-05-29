@@ -44,5 +44,6 @@ This is assuming that you are going to run `Hast.Samples.Consumer` but other app
 
 ## Restaring
 
-To save on compute costs, turn off the instance when not needed. At that point everything outside the /data folder is lost, including all personal settings.
+To save on compute costs, shut down the job (i.e. turn off the instance) when not needed. At that point everything outside the */data* folder is lost, including all personal settings.
+
 You can get back by launching a new instance (Administrative steps 2 - 5) and then running the install script (Setup step 9).
