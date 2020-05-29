@@ -33,13 +33,25 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             set
             {
                 if (_initialized) throw new InvalidOperationException(
-                    $"This property can only be set before the first {nameof(SimpleMemory)} is constructed.");
-                if (value < 0 || (value & (value - 1)) != 0) throw new ArgumentOutOfRangeException(
-                    "The alignment value must be a power of 2.");
+                    $"This property can only be set before the first {nameof(SimpleMemory)} is constructed. Don't create SimpleMemory objects before initializing the Hastlayer shell.");
+
+                if (value < 0 || (value & (value - 1)) != 0)
+                {
+                    throw new ArgumentOutOfRangeException("The alignment value must be a power of 2.");
+                }
 
                 _alignment = value;
             }
         }
+
+
+        /// <summary>
+        /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.
+        /// </summary>
+        /// <param name="cellIndex">The cell index where the memory span starts.</param>
+        /// <returns>A span starting at cellIndex * MemoryCellSizeBytes.</returns>
+        private Span<byte> this[int cellIndex] => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
+
 
         /// <summary>
         /// The number of extra cells used for header information like memberId or data length.
@@ -71,13 +83,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         public int CellCount => Memory.Length / MemoryCellSizeBytes;
 
-        /// <summary>
-        /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.
-        /// </summary>
-        /// <param name="cellIndex">The cell index where the memory span starts.</param>
-        /// <returns>A span starting at cellIndex * MemoryCellSizeBytes.</returns>
-        private Span<byte> this[int cellIndex] => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
-
 
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
@@ -88,6 +93,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// allocated memory space is calculated from the cell count and the cell size indicated in
         /// <see cref="MemoryCellSizeBytes"/>.
         /// </param>
+        /// <remarks>
+        /// If you have existing data in memory that you want to directly pass to hardware execution you can use it as
+        /// <see cref="SimpleMemory"/> too. Check out <see cref="SimpleMemoryAccessor"/> to construct a
+        /// <see cref="SimpleMemory"/> from <see cref="Memory{byte}"/>.
+        /// </remarks>
         public SimpleMemory(int cellCount) :
             this(new byte[(cellCount + DefaultPrefixCellCount) * MemoryCellSizeBytes + Alignment], DefaultPrefixCellCount)
         {

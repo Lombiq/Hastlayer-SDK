@@ -1,4 +1,4 @@
-# Hastlayer consumer sample readme
+# Hastlayer consumer sample
 
 
 A simple console application that showcases how an app can utilize Hastlayer. First head to the *Program.cs* file.

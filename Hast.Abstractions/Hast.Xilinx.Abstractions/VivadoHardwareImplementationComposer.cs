@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
@@ -51,9 +51,10 @@ namespace Hast.Xilinx.Abstractions
             }
             else
             {
-                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "src"));
-                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "src", "IP"));
-                vhdlFilePath = Path.Combine(hardwareFrameworkPath, "src", "IP", "Hast_IP.vhd");
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl"));
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl", "src"));
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"));
+                vhdlFilePath = Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP", "Hast_IP.vhd");
             }
 
             File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
