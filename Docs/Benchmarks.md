@@ -7,6 +7,7 @@ Here are some basic performance benchmarks on how Hastlayer-accelerated code com
 
 ## Notes on the hardware used
 
+- "Vitis": [Xilinx Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) cards were used (eg. []Alveo U280 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u280.html))
 - "Catapult": [Microsoft Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) servers used via the [Project Catapult Academic Program](https://www.microsoft.com/en-us/research/academic-program/project-catapult-academic-program/). These contain the following hardware:
     - FPGA: Mt Granite card with an Altera Stratix V 5SGSMD5H2F35 FPGA and two channels of 4 GB DDR3 RAM, connected to the host via PCIe Gen3 x8. Main clock is 150 Mhz, power consumption is at most 29 W (source: "[A Cloud-Scale Acceleration Architecture](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/Cloud-Scale-Acceleration-Architecture.pdf)").
     - Host PC: 2 x Intel Xeon E5-2450 CPUs with 16 physical, 32 logical cores each, with a base clock of 2.1 GHz. Power consumption is around 95 W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html); this is just a rough number and power draw is likely larger when the CPU increases its clock speed under load)
@@ -26,6 +27,18 @@ Here you can find some measurements of execution times of various algorithms on 
 - Power consumption is an approximation based on hardware details above. For PCs it only contains the power consumption of the CPU(s). For FPGA measurements the "total" time is used (though presumably when just communication is running the power consumption is much lower than when computations are being executed).
 - FPGA resource utilization figures are based on the "main" resource's utilization with all other resource types assumed to be below 100%. For Xilinx FPGAs the main resource type is LUT, for Intel (Altera) ones ALM.
 - For FPGA measurements "total" means the total execution time, including the communication latency of the FPGA; since this varies because of the host PC's load the lowest achieved number is used. "Net" means just the execution of the algorithm itself on the FPGA, not including the time it took to send data to and receive from the device; FPGA execution time is deterministic and doesn't vary significantly. With faster communication channels "total" can be closer to "net". If the input and output data is small then the two measurements will practically be the same.
+
+### Vitis
+
+Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2019.2" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
+
+
+| Algorithm             | Speed advantage | Power advantage |   Parallelism  |   CPU  | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power |
+|:----------------------|:---------------:|:---------------:|:--------------:|:------:|:---------:|:----------------:|:--------:|:----------:|:----------:|
+| ImageContrastModifier |       568%      |       ???%      |        25      | 568 ms |   ?? Ws   |        ??%       |   28 ms  |    85 ms   |   ?? Ws    |
+| ImageContrastModifier |       620%      |       ???%      | 150<sup>1</sup>| 568 ms |   ?? Ws   |        ??%       |   24 ms  |    79 ms   |   ?? Ws    |
+
+<sup>1</sup>More could fit actually, needs more testing.
 
 ### Catapult
 
