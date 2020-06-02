@@ -51,7 +51,7 @@ namespace Hast.Communication.Services
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds =
                 1M / executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
 
-            Logger.LogInformation("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+            Logger.LogInformation($"Hardware execution took {context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds:0.0000}ms.");
         }
 
 
