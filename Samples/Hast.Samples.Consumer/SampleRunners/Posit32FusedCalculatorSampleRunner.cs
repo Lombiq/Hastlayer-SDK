@@ -21,11 +21,11 @@ namespace Hast.Samples.Consumer.SampleRunners
                Posit32FusedCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
 
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator());
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
             var result = positCalculator.CalculateFusedSum(CreateTestPosit32BitsArray());
         }
 

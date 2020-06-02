@@ -16,9 +16,9 @@ namespace Hast.Samples.Consumer.SampleRunners
             // Note that the bottom version can also be used to add multiple types from under a namespace.
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
+            var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var isPrime = primeCalculator.IsPrimeNumber(15);
             var isPrime2 = primeCalculator.IsPrimeNumber(13);
@@ -41,8 +41,8 @@ namespace Hast.Samples.Consumer.SampleRunners
 
 
             // In-algorithm parallelization:
-            // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism 
-            // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see 
+            // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism
+            // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see
             // comments in the method). Thus the communication round-trip will be slower for ParallelizedArePrimeNumbers.
             // Because of this since PrimeCalculator.MaxDegreeOfParallelism is 30 we use 30 numbers here.
             // All of these numbers except for 9999 are primes.

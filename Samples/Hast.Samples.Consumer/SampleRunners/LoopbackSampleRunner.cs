@@ -15,9 +15,9 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.AddHardwareEntryPointType<Loopback>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback());
+            var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var output1 = loopback.Run(123);
             var output2 = loopback.Run(1234);

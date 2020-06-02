@@ -13,12 +13,12 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.AddHardwareEntryPointType<SimdCalculator>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             // Starting with 1 not to have a divide by zero.
             var vector = Enumerable.Range(1, SimdCalculator.MaxDegreeOfParallelism * 4).ToArray();
 
-            var simdCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new SimdCalculator());
+            var simdCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new SimdCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var sumVector = ThrowIfNotCorrect(simdCalculator, calculator => calculator.AddVectors(vector, vector));
             var differenceVector = ThrowIfNotCorrect(simdCalculator, calculator => calculator.SubtractVectors(vector, vector));
@@ -28,7 +28,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
 
         // Checking if the hardware result is correct by running it against the software implementation. Note that this
-        // can be also done by Hastlayer automatically on the SimpleMemory level by setting 
+        // can be also done by Hastlayer automatically on the SimpleMemory level by setting
         // ProxyGenerationConfiguration.VerifyHardwareResults to true when calling GenerateProxy().
         private static int[] ThrowIfNotCorrect(SimdCalculator proxied, Func<SimdCalculator, int[]> operation)
         {
@@ -48,7 +48,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                     {
                         // Uncomment this to list errors in a file.
                         //System.IO.File.AppendAllText(
-                        //    "Errors.txt", 
+                        //    "Errors.txt",
                         //    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
 
                         throw new InvalidOperationException(

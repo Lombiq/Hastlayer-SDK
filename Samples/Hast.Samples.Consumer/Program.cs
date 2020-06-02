@@ -57,9 +57,9 @@ namespace Hast.Samples.Consumer
         public static string HardwareFrameworkPath = "HardwareFramework";
     }
 
-    class Program
+    internal class Program
     {
-        static async Task MainTask(string[] args)
+        private static async Task MainTask(string[] args)
         {
             /*
             * On a high level these are the steps to use Hastlayer:
@@ -87,9 +87,9 @@ namespace Hast.Samples.Consumer
                     "Executing " +
                     e.MemberFullName +
                     " on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds.ToString("0.####") +
                     " milliseconds (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds.ToString("0.####") +
                     " milliseconds (all together).");
 
                 if (e.SoftwareExecutionInformation != null)
@@ -120,6 +120,8 @@ namespace Hast.Samples.Consumer
             if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
 
             var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, Configuration.HardwareFrameworkPath);
+            var proxyConfiguration = new ProxyGenerationConfiguration();
+            if (argsList.Contains("-verify")) proxyConfiguration.VerifyHardwareResults = true;
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
             var remoteClientConfiguration = configuration.RemoteClientConfiguration();
@@ -190,7 +192,7 @@ namespace Hast.Samples.Consumer
                     UnumCalculatorSampleRunner.Configure(configuration);
                     break;
                 default:
-                    break;
+                    throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.");
             }
 
             // The generated VHDL code will contain debug-level information, though it will be slower to create.
@@ -234,58 +236,58 @@ namespace Hast.Samples.Consumer
                 switch (Configuration.SampleToRun)
                 {
                     case Sample.Fix64Calculator:
-                        await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.FSharpParallelAlgorithm:
-                        await FSharpParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await FSharpParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.GenomeMatcher:
-                        await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.ParallelAlgorithm:
-                        await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.ImageProcessingAlgorithms:
-                        await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.Loopback:
-                        await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.MemoryTest:
-                        await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.MonteCarloPiEstimator:
-                        await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.ObjectOrientedShowcase:
-                        await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.PositCalculator:
-                        await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.Posit32AdvancedCalculator:
-                        await Posit32AdvancedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await Posit32AdvancedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.Posit32Calculator:
-                        await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.Posit32FusedCalculator:
-                        await Posit32FusedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await Posit32FusedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.PrimeCalculator:
-                        await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.RecursiveAlgorithms:
-                        await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.SimdCalculator:
-                        await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     case Sample.UnumCalculator:
-                        await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                        await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                         break;
                     default:
-                        break;
+                        throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.");
                 }
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException)
@@ -300,12 +302,12 @@ namespace Hast.Samples.Consumer
 
                 foreach (var mismatch in mismatches)
                 {
-                    Console.WriteLine("* " + mismatch.ToString());
+                    Console.WriteLine("* " + mismatch);
                 }
             }
         }
 
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
             try

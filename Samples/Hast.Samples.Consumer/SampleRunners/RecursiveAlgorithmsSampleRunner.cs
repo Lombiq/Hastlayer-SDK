@@ -20,11 +20,11 @@ namespace Hast.Samples.Consumer.SampleRunners
                 });
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms());
+            var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms(), configuration ?? ProxyGenerationConfiguration.Default);
 
-            var factorial = recursiveAlgorithms.CalculateFactorial(6); // 720 
+            var factorial = recursiveAlgorithms.CalculateFactorial(6); // 720
             var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(13); // 233
         }
     }

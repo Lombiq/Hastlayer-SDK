@@ -20,9 +20,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                 UnumCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var unumCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new UnumCalculator());
+            var unumCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new UnumCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var result = unumCalculator.CalculateSumOfPowersofTwo(9);
         }

@@ -11,10 +11,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var ooShowcase = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new ObjectOrientedShowcase());
+                .GenerateProxy(hardwareRepresentation, new ObjectOrientedShowcase(), configuration ?? ProxyGenerationConfiguration.Default);
             var sum = ooShowcase.Run(93); // 293
         }
     }

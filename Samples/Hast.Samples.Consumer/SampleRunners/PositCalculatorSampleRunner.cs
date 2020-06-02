@@ -23,9 +23,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                 PositCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator());
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var result = positCalculator.CalculateIntegerSumUpToNumber(100000);
         }

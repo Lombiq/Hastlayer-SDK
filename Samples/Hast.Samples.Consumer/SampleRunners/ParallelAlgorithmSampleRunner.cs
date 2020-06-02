@@ -10,7 +10,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
-            // Note that Hastlayer can figure out how many Tasks will be there to an extent (see comment in 
+            // Note that Hastlayer can figure out how many Tasks will be there to an extent (see comment in
             // ParallelAlgorithm) but if it can't, use a configuration like below:
             //configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
             //    new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
@@ -19,9 +19,9 @@ namespace Hast.Samples.Consumer.SampleRunners
             //    });
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
+            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var output1 = parallelAlgorithm.Run(234234);
             var output2 = parallelAlgorithm.Run(123);

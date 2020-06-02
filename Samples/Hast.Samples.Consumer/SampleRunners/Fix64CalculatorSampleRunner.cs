@@ -16,13 +16,13 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.AddHardwareEntryPointType<Fix64Calculator>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator());
+            var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var sum = fixed64Calculator.CalculateIntegerSumUpToNumber(10000000);
 
-            // This takes about 274ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with 
+            // This takes about 274ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with
             // a MaxDegreeOfParallelism of 12 while the device is about half utilized; above that the design will get
             // unstable).
             // Since this basically does what the single-threaded sample but in multiple copies on multiple threads
@@ -33,7 +33,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var numbers = new int[Fix64Calculator.MaxDegreeOfParallelism];
             for (int i = 0; i < Fix64Calculator.MaxDegreeOfParallelism; i++)
             {
-                numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1); 
+                numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1);
             }
             var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
         }

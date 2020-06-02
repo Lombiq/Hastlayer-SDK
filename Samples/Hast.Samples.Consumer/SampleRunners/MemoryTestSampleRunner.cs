@@ -11,9 +11,9 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.AddHardwareEntryPointType<MemoryTest>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var memoryTest = await hastlayer.GenerateProxy(hardwareRepresentation, new MemoryTest());
+            var memoryTest = await hastlayer.GenerateProxy(hardwareRepresentation, new MemoryTest(), configuration ?? ProxyGenerationConfiguration.Default);
 
             var output1 = memoryTest.Run(0, 1);
             var output2 = memoryTest.Run(0, 3);

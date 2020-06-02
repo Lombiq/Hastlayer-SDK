@@ -17,14 +17,14 @@ namespace Hast.Samples.Consumer.SampleRunners
             //configuration.AddHardwareEntryPointType<ImageFilter>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
             // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
             using (var bitmap = new Bitmap("fpga.jpg"))
             {
                 var imageContrastModifier = await hastlayer
-                    .GenerateProxy(hardwareRepresentation, new ImageContrastModifier());
+                    .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration ?? ProxyGenerationConfiguration.Default);
                 var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
                 modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 

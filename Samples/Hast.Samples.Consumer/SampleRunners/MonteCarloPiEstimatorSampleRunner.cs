@@ -14,11 +14,11 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 500000;
 
-            var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator());
+            var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator(), configuration ?? ProxyGenerationConfiguration.Default);
             var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount);
             Console.WriteLine("Estimate for Pi on hardware: " + piEstimateHardware);
 
