@@ -132,7 +132,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                 }
 
                 var alignmentOffset = Alignment - (int)(address.ToInt64() % Alignment);
-                memory = memory.Slice(alignmentOffset);
+                memory = memory.Slice(alignmentOffset, memory.Length - Alignment);
             }
 
             PrefixedMemory = memory;
