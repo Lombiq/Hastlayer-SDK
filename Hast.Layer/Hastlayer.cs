@@ -19,6 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Layer
 {
@@ -266,6 +267,14 @@ namespace Hast.Layer
                 throw;
             }
         }
+
+        public SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, int cellCount) =>
+            RunGetAsync(provider => Task.FromResult(SimpleMemory.Create(
+                MemoryConfiguration.Create(manifestProvider, provider.GetService<IConfiguration>()),
+                provider.GetService<IConfiguration>(),
+                cellCount))).Result;
+
+        public SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, Memory<byte> data, int withPrefixCells = 0) => throw new NotImplementedException();
 
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {

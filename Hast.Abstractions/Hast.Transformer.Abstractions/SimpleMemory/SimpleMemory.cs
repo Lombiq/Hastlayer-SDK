@@ -1,5 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
+using Microsoft.Extensions.Configuration;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
@@ -17,33 +20,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     public class SimpleMemory
     {
         public const int MemoryCellSizeBytes = sizeof(int);
-        public const int DefaultPrefixCellCount = 4;
-
-        private static bool _initialized = false;
-        private static int _alignment = 0;
-
-        /// <summary>
-        /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a
-        /// multiple of that number. It must be an integer power of 2. It can only be set before any instances are
-        /// created.
-        /// </summary>
-        internal static int Alignment
-        {
-            get => _alignment;
-            set
-            {
-                if (_initialized) throw new InvalidOperationException(
-                    $"This property can only be set before the first {nameof(SimpleMemory)} is constructed. Don't create SimpleMemory objects before initializing the Hastlayer shell.");
-
-                if (value < 0 || (value & (value - 1)) != 0)
-                {
-                    throw new ArgumentOutOfRangeException("The alignment value must be a power of 2.");
-                }
-
-                _alignment = value;
-            }
-        }
-
 
         /// <summary>
         /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.
@@ -56,7 +32,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <summary>
         /// The number of extra cells used for header information like memberId or data length.
         /// </summary>
-        public int PrefixCellCount { get; internal set; } = DefaultPrefixCellCount;
+        public int PrefixCellCount { get; internal set; }
 
         /// <summary>
         /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be
@@ -83,26 +59,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         public int CellCount => Memory.Length / MemoryCellSizeBytes;
 
-
-        /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
-        /// the FPGA for transformed algorithms.
-        /// </summary>
-        /// <param name="cellCount">
-        /// The number of memory "cells". The memory is divided into independently accessible "cells"; the size of the
-        /// allocated memory space is calculated from the cell count and the cell size indicated in
-        /// <see cref="MemoryCellSizeBytes"/>.
-        /// </param>
-        /// <remarks>
-        /// If you have existing data in memory that you want to directly pass to hardware execution you can use it as
-        /// <see cref="SimpleMemory"/> too. Check out <see cref="SimpleMemoryAccessor"/> to construct a
-        /// <see cref="SimpleMemory"/> from <see cref="Memory{byte}"/>.
-        /// </remarks>
-        public SimpleMemory(int cellCount) :
-            this(new byte[(cellCount + DefaultPrefixCellCount) * MemoryCellSizeBytes + Alignment], DefaultPrefixCellCount)
-        {
-        }
-
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
         /// the FPGA for transformed algorithms from an existing byte array.
@@ -116,11 +72,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <see cref="SimpleMemoryAccessor.Create(Memory{byte}, int)"/> to construct a <see cref="SimpleMemory"/> from
         /// <see cref="Memory{byte}"/>.
         /// </remarks>
-        internal SimpleMemory(Memory<byte> memory, int prefixCellCount)
+        internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment)
         {
-            _initialized = true;
-
-            if (Alignment > 0)
+            if (alignment > 0)
             {
                 IntPtr address;
                 unsafe
@@ -131,22 +85,13 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                     }
                 }
 
-                var alignmentOffset = Alignment - (int)(address.ToInt64() % Alignment);
-                memory = memory.Slice(alignmentOffset, memory.Length - Alignment);
+                var alignmentOffset = alignment - (int)(address.ToInt64() % alignment);
+                memory = memory.Slice(alignmentOffset, memory.Length - alignment);
             }
 
             PrefixedMemory = memory;
             PrefixCellCount = prefixCellCount;
         }
-
-
-        /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
-        /// the FPGA for transformed algorithms from an existing byte array.
-        /// </summary>
-        /// <param name="memory">The source data.</param>
-        /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
-        private SimpleMemory(byte[] memory, int prefixCellCount = 0) : this(memory.AsMemory(), prefixCellCount) { }
 
 
         public void Write4Bytes(int cellIndex, byte[] bytes)
@@ -179,6 +124,23 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
         public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
+
+        public static SimpleMemory Create(
+            IMemoryConfiguration memoryConfiguration,
+            IConfiguration configuration,
+            int cellCount) =>
+            Create(memoryConfiguration, configuration,
+                new byte[(cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes + memoryConfiguration.Alignment],
+                );
+
+        public static SimpleMemory Create(
+            IDeviceManifestProvider manifestProvider,
+            IConfiguration configuration,
+            int cellCount,
+            int availablePrefix)
+        {
+            return new SimpleMemory();
+        }
     }
 
 

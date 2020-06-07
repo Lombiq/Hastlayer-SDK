@@ -1,5 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Microsoft.Extensions.Configuration;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
@@ -18,5 +19,15 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 AvailableMemoryBytes = 2_000_000_000UL,
                 ToolChainName = CommonToolChainNames.Vivado
             };
+
+        public void ConfigureMemory(MemoryConfiguration memoryConfiguration, IConfiguration configuration) =>
+            ConfigureMemoryForVitis(memoryConfiguration, configuration);
+
+        public static void ConfigureMemoryForVitis(MemoryConfiguration memoryConfiguration, IConfiguration configuration)
+        {
+            var openClConfiguration = OpenClConfiguration.From
+            memoryConfiguration.Alignment = configuration
+            memoryConfiguration.MinimumPrefix =
+        }
     }
 }

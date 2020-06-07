@@ -4,6 +4,8 @@ using Hast.Layer.Extensibility.Events;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Layer
 {
@@ -50,7 +52,7 @@ namespace Hast.Layer
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
             IProxyGenerationConfiguration configuration) where T : class;
-        
+
 
         /// <summary>
         /// Gets the <see cref="ICommunicationService"/> based on the channel name.
@@ -58,5 +60,31 @@ namespace Hast.Layer
         /// <param name="communicationChannelName">The <see cref="ICommunicationService.ChannelName"/> value.</param>
         /// <returns>The matching communication service.</returns>
         DisposableContainer<ICommunicationService> GetCommunicationService(string communicationChannelName);
+
+        /// <summary>
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
+        /// the FPGA for transformed algorithms.
+        /// </summary>
+        /// <param name="manifestProvider">The manifest provider or driver for the device to be used.</param>
+        /// <param name="cellCount">
+        /// The number of memory "cells". The memory is divided into independently accessible "cells"; the size of the
+        /// allocated memory space is calculated from the cell count and the cell size indicated in
+        /// <see cref="SimpleMemory.MemoryCellSizeBytes"/>.
+        /// </param>
+        /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
+        SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, int cellCount);
+
+        /// <summary>
+        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
+        /// the FPGA for transformed algorithms.
+        /// </summary>
+        /// <param name="manifestProvider">The manifest provider or driver for the device to be used.</param>
+        /// <param name="data">
+        /// The input data which is referenced by or copied into the <see cref="SimpleMemory"/> depending on the
+        /// selected device's characteristics, particularly its <see cref="MemoryConfiguration{T}.MinimumPrefix"/>.
+        /// </param>
+        /// <param name="withPrefixCells">The amount of empty header space reserved in the <see cref="data"/>.</param>
+        /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
+        SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, Memory<byte> data, int withPrefixCells = 0);
     }
 }
