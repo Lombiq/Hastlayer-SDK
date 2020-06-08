@@ -1,8 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Hast.Synthesis.Abstractions;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
@@ -65,6 +64,10 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="memory">The source data.</param>
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
+        /// <param name="alignment">
+        /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a
+        /// multiple of that number. It must be an integer power of 2.
+        /// </param>
         /// <remarks>
         /// This constructor is internal only to avoid dependency issues where we have to include the System.Memory
         /// package everywhere where SimpleMemory is used even if it's created with the other constructors. Instead,
@@ -125,21 +128,53 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
 
+        /// <summary>
+        /// Creates a new instance of <see cref="SimpleMemory"/> with a specific size of payload in cells using a
+        /// device's <see cref="MemoryConfiguration"/>.
+        /// </summary>
+        /// <param name="memoryConfiguration">Creation parameters associated with the selected device.</param>
+        /// <param name="cellCount">The size of the usable memory.</param>
+        /// <returns>The instance with a byte[] of capacity for the require payload size.</returns>
         public static SimpleMemory Create(
             IMemoryConfiguration memoryConfiguration,
-            IConfiguration configuration,
-            int cellCount) =>
-            Create(memoryConfiguration, configuration,
-                new byte[(cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes + memoryConfiguration.Alignment],
-                );
-
-        public static SimpleMemory Create(
-            IDeviceManifestProvider manifestProvider,
-            IConfiguration configuration,
-            int cellCount,
-            int availablePrefix)
+            int cellCount)
         {
-            return new SimpleMemory();
+            var memory = new byte[(cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes +
+                                  memoryConfiguration.Alignment];
+            return new SimpleMemory(memory, memoryConfiguration.MinimumPrefix, memoryConfiguration.Alignment);
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="SimpleMemory"/> which wraps the given memory as content.
+        /// </summary>
+        /// <param name="memoryConfiguration">Creation parameters associated with the selected device.</param>
+        /// <param name="memory">The data to be assigned.</param>
+        /// <param name="logger">Optional logger for reporting issues.</param>
+        /// <param name="withPrefixCells">The number of cells already provisioned in the <see cref="memory"/>.</param>
+        /// <returns>A new instance that wraps the given memory.</returns>
+        /// <remarks>
+        /// If the <see cref="IMemoryConfiguration"/> indicates that more prefix space is required than what is already
+        /// provisioned in the <see cref="memory"/> according to the <see cref="withPrefixCells"/>, then an additional
+        /// copy will occur. This is logged as a warning if a logger is given.
+        /// </remarks>
+        public static SimpleMemory Create(
+            IMemoryConfiguration memoryConfiguration,
+            Memory<byte> memory,
+            ILogger logger = null,
+            int withPrefixCells = 0)
+        {
+            if (withPrefixCells < memoryConfiguration.MinimumPrefix)
+            {
+                logger?.LogWarning("Not enough prefix cells available. An extra copy occurs.");
+                var additionalBytes = (memoryConfiguration.MinimumPrefix - withPrefixCells) * MemoryCellSizeBytes;
+                Memory<byte> newMemory = new byte[memory.Length + additionalBytes];
+                memory.CopyTo(newMemory.Slice(additionalBytes));
+
+                memory = newMemory;
+                withPrefixCells = memoryConfiguration.MinimumPrefix;
+            }
+
+            return new SimpleMemory(memory, withPrefixCells, 0);
         }
     }
 
