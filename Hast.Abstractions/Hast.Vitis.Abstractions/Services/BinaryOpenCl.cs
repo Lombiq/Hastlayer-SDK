@@ -12,6 +12,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Common.Services;
+using Hast.Layer;
+using Hast.Vitis.Abstractions.Extensions;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -41,13 +44,19 @@ namespace Hast.Vitis.Abstractions.Services
 
         #region Constructors
 
-        public BinaryOpenCl(IOpenCl cl, ILogger<BinaryOpenCl> logger, IOpenClConfiguration configuration)
+        public BinaryOpenCl(
+            IOpenCl cl,
+            ILogger<BinaryOpenCl> logger,
+            IHardwareGenerationConfigurationHolder configurationholder)
         {
             _cl = cl;
             _logger = logger;
 
             _devicesLazy = new Lazy<IntPtr[]>(() =>
-                GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
+            {
+                var configuration = configurationholder.GetOrAddOpenClConfiguration();
+                return GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray();
+            });
 
             _context = new Lazy<IntPtr>(() =>
             {

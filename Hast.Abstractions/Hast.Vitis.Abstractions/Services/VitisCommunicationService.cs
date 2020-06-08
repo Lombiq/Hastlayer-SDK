@@ -1,50 +1,26 @@
-using Hast.Common.Interfaces;
-using Hast.Communication.Services;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Vitis.Abstractions.Interop;
-using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
-using Hast.Vitis.Abstractions.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
 using System.Buffers;
-using System.IO;
+using Hast.Common.Services;
+using Hast.Communication.Services;
+using Hast.Vitis.Abstractions.Interop;
+using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
+using Hast.Xilinx.Abstractions;
+using Microsoft.Extensions.Logging;
 
 namespace Hast.Vitis.Abstractions.Services
 {
-    [IDependencyInitializer(nameof(InitializeService))]
     public class VitisCommunicationService : OpenClCommunicationService
     {
-        public const string ConfigFileName = nameof(VitisCommunicationService) + ".json";
-
-        public override string ChannelName { get; } = Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
+        public override string ChannelName { get; } = Constants.VitisCommunicationChannelName;
 
 
         public VitisCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
-            IOpenClConfiguration configuration,
+            IHardwareGenerationConfigurationHolder configurationHolder,
             ILogger<VitisCommunicationService> logger)
-            : base(devicePoolPopulator, devicePoolManager, binaryOpenCl, configuration, logger) { }
-
-
-
-        public static void InitializeService(IServiceCollection services)
-        {
-            using (var provider = services.BuildServiceProvider())
-            {
-                var config = OpenClConfiguration.FromConfiguration(provider.GetService<IConfiguration>());
-
-                #pragma warning disable 618
-                SimpleMemoryConfigurator.UpdateAlignment(config.MemoryAlignment);
-                #pragma warning restore 618
-
-                services.AddSingleton<IOpenClConfiguration>(config);
-            }
-        }
+            : base(devicePoolPopulator, devicePoolManager, binaryOpenCl, configurationHolder, logger) { }
 
 
         protected override IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle)

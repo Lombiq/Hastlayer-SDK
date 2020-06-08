@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Hast.Common.Services;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Microsoft.Extensions.Logging;
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
@@ -23,7 +25,7 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IDevicePoolManager _devicePoolManager;
 
         protected readonly IBinaryOpenCl _binaryOpenCl;
-        protected readonly IOpenClConfiguration _configuration;
+        private readonly IHardwareGenerationConfigurationHolder _configurationHolder;
         protected readonly ILogger _logger;
 
 
@@ -31,13 +33,13 @@ namespace Hast.Vitis.Abstractions.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
-            IOpenClConfiguration configuration,
+            IHardwareGenerationConfigurationHolder configurationHolder,
             ILogger<OpenClCommunicationService> logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _binaryOpenCl = binaryOpenCl;
-            _configuration = configuration;
+            _configurationHolder = configurationHolder;
             _logger = logger;
         }
 
@@ -47,16 +49,17 @@ namespace Hast.Vitis.Abstractions.Services
             int memberId,
             IHardwareExecutionContext executionContext)
         {
-            if (!File.Exists(_configuration.BinaryFilePath))
+            var configuration = _configurationHolder.GetOrAddOpenClConfiguration();
+
+            if (!File.Exists(configuration.BinaryFilePath))
             {
                 throw new FileNotFoundException("The OpenCL binary (xclbin) is required to start the kernel. The " +
-                    $"host can't launch without it. Please make sure the file at '{_configuration.BinaryFilePath}' " +
+                    $"host can't launch without it. Please make sure the file at '{configuration.BinaryFilePath}' " +
                     "exists and is accessible.");
             }
 
-            var kernelBinary = File.ReadAllBytes(_configuration.BinaryFilePath);
-            var kernelName = KernelName;
-            _binaryOpenCl.CreateBinaryKernel(kernelBinary, kernelName);
+            var kernelBinary = File.ReadAllBytes(configuration.BinaryFilePath);
+            _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
 
             _devicePoolPopulator.PopulateDevicePoolIfNew(() =>
             {
@@ -65,7 +68,7 @@ namespace Hast.Vitis.Abstractions.Services
                 {
                     devices.Add(new Device
                     {
-                        Identifier = $"{ChannelName}:{_configuration.VendorName ?? "any"}:{i}", Metadata = i
+                        Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}", Metadata = i
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
                 }
@@ -81,16 +84,16 @@ namespace Hast.Vitis.Abstractions.Services
                     var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
 
                     // Prepare host buffer.
-                    var hostMemory = memoryAccessor.Get(_configuration.HeaderCellCount);
-                    hostMemory.Span.SetIntegers(0, _configuration.HeaderCellCount, memberId);
+                    var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
+                    hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
 
                     using (var hostMemoryHandle = hostMemory.Pin())
                     {
                         // Send data and execute.
                         var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
-                            kernelName, 0, hostMemoryHandle, hostMemory.Length, GetBuffer(hostMemory, hostMemoryHandle));
+                            KernelName, 0, hostMemoryHandle, hostMemory.Length, GetBuffer(hostMemory, hostMemoryHandle));
                         Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
-                        _binaryOpenCl.LaunchKernel(deviceIndex, kernelName, new[] {fpgaBuffer});
+                        _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] {fpgaBuffer});
                         await _binaryOpenCl.AwaitDevice(deviceIndex);
                         var resultMetadata = GetResultMetadata(memoryAccessor);
 
@@ -110,18 +113,19 @@ namespace Hast.Vitis.Abstractions.Services
 
         private OpenClResultMetadata GetResultMetadata(SimpleMemoryAccessor buffer)
         {
-            var bufferSpan = buffer.Get(_configuration.HeaderCellCount).Span;
+            var configuration = _configurationHolder.GetOrAddOpenClConfiguration();
+            var bufferSpan = buffer.Get(configuration.HeaderCellCount).Span;
 
-            Logger.LogInformation("_configuration.HeaderCellCount: {0}", _configuration.HeaderCellCount);
+            Logger.LogInformation("_configuration.HeaderCellCount: {0}", configuration.HeaderCellCount);
             Logger.LogInformation("bufferSpan size: {0}b", bufferSpan.Length);
-            var header = bufferSpan.Slice(0, _configuration.HeaderCellCount * MemoryCellSizeBytes);
-            var result = new OpenClResultMetadata(header, _configuration.DeviceIsBigEndian);
+            var header = bufferSpan.Slice(0, configuration.HeaderCellCount * MemoryCellSizeBytes);
+            var result = new OpenClResultMetadata(header, configuration.DeviceIsBigEndian);
 
             bool canLogInfo = Logger.IsEnabled(LogLevel.Information);
             bool canLogDebug = Logger.IsEnabled(LogLevel.Debug);
             if (canLogInfo || canLogDebug)
             {
-                bufferSpan = bufferSpan.Slice(_configuration.HeaderCellCount * MemoryCellSizeBytes);
+                bufferSpan = bufferSpan.Slice(configuration.HeaderCellCount * MemoryCellSizeBytes);
 
                 if (canLogDebug)
                 {
