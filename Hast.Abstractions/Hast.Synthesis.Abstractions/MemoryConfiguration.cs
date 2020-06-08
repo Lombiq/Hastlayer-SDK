@@ -1,5 +1,7 @@
 ﻿using System;
-using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using System.Linq;
+using Hast.Layer;
 
 namespace Hast.Synthesis.Abstractions
 {
@@ -28,11 +30,13 @@ namespace Hast.Synthesis.Abstractions
 
 
         public static IMemoryConfiguration Create(
-            IDeviceManifestProvider deviceManifestProvider,
-            IConfiguration configuration)
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration,
+            IEnumerable<IDeviceManifestProvider> deviceManifestProviders)
         {
             var memoryConfiguration = new MemoryConfiguration();
-            deviceManifestProvider.ConfigureMemory(memoryConfiguration, configuration);
+            var deviceManifestProvider = deviceManifestProviders
+                .First(x => x.DeviceManifest.Name == hardwareGenerationConfiguration.DeviceName);
+            deviceManifestProvider.ConfigureMemory(memoryConfiguration, hardwareGenerationConfiguration);
             return memoryConfiguration;
         }
 

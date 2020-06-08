@@ -28,5 +28,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
             }
         }
 
+        public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
+            memory.MinimumPrefix = 3;
     }
 }

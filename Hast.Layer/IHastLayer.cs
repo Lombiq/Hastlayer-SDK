@@ -4,7 +4,6 @@ using Hast.Layer.Extensibility.Events;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Layer
@@ -65,26 +64,26 @@ namespace Hast.Layer
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
         /// the FPGA for transformed algorithms.
         /// </summary>
-        /// <param name="manifestProvider">The manifest provider or driver for the device to be used.</param>
+        /// <param name="configuration">The configuration with the device information.</param>
         /// <param name="cellCount">
         /// The number of memory "cells". The memory is divided into independently accessible "cells"; the size of the
         /// allocated memory space is calculated from the cell count and the cell size indicated in
         /// <see cref="SimpleMemory.MemoryCellSizeBytes"/>.
         /// </param>
         /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
-        SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, int cellCount);
+        SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, int cellCount);
 
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
         /// the FPGA for transformed algorithms.
         /// </summary>
-        /// <param name="manifestProvider">The manifest provider or driver for the device to be used.</param>
+        /// <param name="configuration">The configuration with the device information.</param>
         /// <param name="data">
         /// The input data which is referenced by or copied into the <see cref="SimpleMemory"/> depending on the
         /// selected device's characteristics, particularly its <see cref="MemoryConfiguration{T}.MinimumPrefix"/>.
         /// </param>
         /// <param name="withPrefixCells">The amount of empty header space reserved in the <see cref="data"/>.</param>
         /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
-        SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, Memory<byte> data, int withPrefixCells = 0);
+        SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0);
     }
 }

@@ -286,14 +286,14 @@ namespace Hast.Layer
             }
         }
 
-        public SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, int cellCount) =>
+        public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, int cellCount) =>
             RunGetAsync(provider => Task.FromResult(SimpleMemory.Create(
-                MemoryConfiguration.Create(manifestProvider, provider.GetService<IConfiguration>()),
+                MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
                 cellCount))).Result;
 
-        public SimpleMemory CreateMemory(IDeviceManifestProvider manifestProvider, Memory<byte> data, int withPrefixCells = 0) =>
+        public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0) =>
             RunGetAsync(provider => Task.FromResult(SimpleMemory.Create(
-                MemoryConfiguration.Create(manifestProvider, provider.GetService<IConfiguration>()),
+                MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
                 data,
                 provider.GetService<ILogger>(),
                 withPrefixCells))).Result;

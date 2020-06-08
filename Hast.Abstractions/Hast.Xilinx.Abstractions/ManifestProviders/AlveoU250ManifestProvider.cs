@@ -18,5 +18,8 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 AvailableMemoryBytes = 2_000_000_000UL,
                 ToolChainName = CommonToolChainNames.Vivado
             };
+
+        public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
+            AlveoU200ManifestProvider.ConfigureMemoryForVitis(memory, hardwareGeneration);
     }
 }

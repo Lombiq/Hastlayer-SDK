@@ -121,30 +121,5 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             using (var fileStream = File.OpenRead(filePath))
                 Load(fileStream, prefixCellCount);
         }
-
-        /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on 
-        /// the FPGA for transformed algorithms from an existing byte array. Keep in mind that each 32b segment in the
-        /// given <see cref="Memory{T}"/> object will correspond to a cell in <see cref="SimpleMemory"/>, indexed from
-        /// 0.
-        /// </summary>
-        /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
-        /// <returns>The <see cref="SimpleMemory"/> containing the data.</returns>
-        /// <remarks>If data is a byte[] you can also use the <see cref="SimpleMemory"/> constructor instead.</remarks>
-        public static SimpleMemory Create(Memory<byte> data) => new SimpleMemory(data, 0);
-
-
-        /// <summary>
-        /// Creates a new <see cref="SimpleMemory"/> instance from the specified data and its
-        /// <see cref="SimpleMemoryAccessor"/> at the same time.
-        /// </summary>
-        /// <param name="data">The data to be put into the <see cref="SimpleMemory"/>.</param>
-        /// <param name="prefixCellCount">The number of cells to be created in front of the indexable range.</param>
-        /// <returns>The <see cref="SimpleMemory"/> with the data and its associated <see cref="SimpleMemoryAccessor"/>.</returns>
-        public static (SimpleMemory Memory, SimpleMemoryAccessor Accessor) Create(Memory<byte> data, int prefixCellCount)
-        {
-            var memory = new SimpleMemory(data, prefixCellCount);
-            return (memory, new SimpleMemoryAccessor(memory));
-        }
     }
 }

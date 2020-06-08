@@ -18,5 +18,7 @@ namespace Hast.Catapult.Abstractions
                 AvailableMemoryBytes = 8_000_000_000UL / 16,
                 ToolChainName = CommonToolChainNames.QuartusPrime
             };
+
+        public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) { }
     }
 }

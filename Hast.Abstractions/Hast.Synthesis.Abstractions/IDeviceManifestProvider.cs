@@ -8,6 +8,6 @@ namespace Hast.Synthesis.Abstractions
     {
         IDeviceManifest DeviceManifest { get; }
 
-        void ConfigureMemory(MemoryConfiguration memoryConfiguration, IConfiguration configuration);
+        void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration);
     }
 }

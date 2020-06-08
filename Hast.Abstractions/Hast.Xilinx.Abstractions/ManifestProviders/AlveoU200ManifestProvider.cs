@@ -1,6 +1,7 @@
-﻿using Hast.Layer;
+﻿using System.Linq;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
-using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
@@ -20,14 +21,20 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 ToolChainName = CommonToolChainNames.Vivado
             };
 
-        public void ConfigureMemory(MemoryConfiguration memoryConfiguration, IConfiguration configuration) =>
-            ConfigureMemoryForVitis(memoryConfiguration, configuration);
+        public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
+            ConfigureMemoryForVitis(memory, hardwareGeneration);
 
-        public static void ConfigureMemoryForVitis(MemoryConfiguration memoryConfiguration, IConfiguration configuration)
+        public static void ConfigureMemoryForVitis(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration)
         {
-            var openClConfiguration = OpenClConfiguration.From
-            memoryConfiguration.Alignment = configuration
-            memoryConfiguration.MinimumPrefix =
+            memory.Alignment = 4096;
+            memory.MinimumPrefix = 4;
+
+            if (!hardwareGeneration.CustomConfiguration.TryGetValue("OpenClConfiguration", out var value)) return;
+            var custom = (value is JObject jObject ? jObject : JObject.FromObject(value))
+                .Properties()
+                .ToDictionary(x => x.Name, x => x.Value);
+            if (custom.TryGetValue(nameof(memory.Alignment), out var alignment)) memory.Alignment = alignment.Value<int>();
+            if (custom.TryGetValue(nameof(memory.MinimumPrefix), out var prefix)) memory.MinimumPrefix = prefix.Value<int>();
         }
     }
 }
