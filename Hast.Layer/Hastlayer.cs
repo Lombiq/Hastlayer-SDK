@@ -20,6 +20,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Newtonsoft.Json.Linq;
 
 namespace Hast.Layer
 {
@@ -155,6 +156,23 @@ namespace Hast.Layer
                     var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
                     var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
+                    var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+
+                    // Make the provided configuration available within this scope.
+                    scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationHolder>()
+                        .Configuration = configuration;
+
+                    // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
+                    // CustomConfiguration into the current hardware generation configuration.
+                    var newCustomConfigurations = appConfiguration
+                        .GetSection(nameof(HardwareGenerationConfiguration))
+                        .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
+                        .GetChildren()
+                        .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
+                    foreach (var item in newCustomConfigurations)
+                    {
+                        configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize());
+                    }
 
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
                         await transformer.Transform(assembliesPaths, configuration) :
@@ -277,6 +295,7 @@ namespace Hast.Layer
             RunGetAsync(provider => Task.FromResult(SimpleMemory.Create(
                 MemoryConfiguration.Create(manifestProvider, provider.GetService<IConfiguration>()),
                 data,
+                provider.GetService<ILogger>(),
                 withPrefixCells))).Result;
 
 
