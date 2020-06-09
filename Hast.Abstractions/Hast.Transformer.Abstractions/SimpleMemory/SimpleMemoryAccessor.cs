@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
@@ -95,7 +95,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         /// <summary>
         /// Loads a binary storage format into the underlying <see cref="SimpleMemory"/> with the first prefixCellCount
-        /// cells hidden..
+        /// cells hidden.
         /// </summary>
         /// <param name="stream">The stream to read the storage data from.</param>
         /// <param name="prefixCellCount">
