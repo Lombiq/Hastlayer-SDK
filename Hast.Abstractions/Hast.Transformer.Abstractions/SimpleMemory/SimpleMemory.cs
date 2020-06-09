@@ -176,6 +176,15 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
             return new SimpleMemory(memory, withPrefixCells, 0);
         }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="SimpleMemory"/> for use in software runs. It handles the content
+        /// identically to an instance created for a specific device but has no specific optimizations.
+        /// </summary>
+        /// <param name="cellCount">The size of the usable memory.</param>
+        /// <returns>The instance with a byte[] of capacity for the require payload size.</returns>
+        public static SimpleMemory CreateSoftwareMemory(int cellCount) =>
+            new SimpleMemory(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
     }
 
 

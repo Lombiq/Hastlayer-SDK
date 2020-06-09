@@ -227,7 +227,8 @@ namespace Hast.Layer
                         SoftAssemblyPaths = assembliesPaths,
                         HardwareDescription = hardwareDescription,
                         HardwareImplementation = hardwareImplementation,
-                        DeviceManifest = deviceManifest
+                        DeviceManifest = deviceManifest,
+                        HardwareGenerationConfiguration = configuration
                     };
                 }
             }
@@ -297,6 +298,13 @@ namespace Hast.Layer
                 data,
                 provider.GetService<ILogger>(),
                 withPrefixCells))).Result;
+
+        public IMemoryConfiguration CreateMemoryConfiguration(IHardwareRepresentation hardwareRepresentation) =>
+            RunGetAsync(provider => Task.FromResult(
+                MemoryConfiguration.Create(
+                    hardwareRepresentation.HardwareGenerationConfiguration,
+                    provider.GetService<IEnumerable<IDeviceManifestProvider>>())
+            )).Result;
 
 
         public IEnumerable<IDeviceManifest> GetSupportedDevices()

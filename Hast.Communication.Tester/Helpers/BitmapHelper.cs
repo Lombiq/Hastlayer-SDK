@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Communication.Tester.Helpers
@@ -7,7 +8,7 @@ namespace Hast.Communication.Tester.Helpers
     public static class BitmapHelper
     {
         private const int MaxDegreeOfParallelism = 25;
-        
+
         public static Bitmap FromSimpleMemory(SimpleMemory memory, Bitmap image, int prependCellCount = 0)
         {
             var newImage = new Bitmap(image);
@@ -23,17 +24,21 @@ namespace Hast.Communication.Tester.Helpers
 
             return newImage;
         }
-        
-        public static SimpleMemory ToSimpleMemory(Bitmap image, int[] prependCells = null)
+
+        public static SimpleMemory ToSimpleMemory(
+            IHardwareGenerationConfiguration configuration,
+            IHastlayer hastlayer,
+            Bitmap image,
+            int[] prependCells = null)
         {
             prependCells ??= Array.Empty<int>();
-            
+
             var pixelCount = image.Width * image.Height;
             var cellCount =
                 pixelCount +
                 (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0) +
                 prependCells.Length;
-            var memory = new SimpleMemory(cellCount);
+            var memory = hastlayer.CreateMemory(configuration, cellCount);
 
             for (int i = 0; i < prependCells.Length; i++)
             {

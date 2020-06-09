@@ -128,7 +128,7 @@ namespace Hast.Communication
 
                                 if (configuration.VerifyHardwareResults)
                                 {
-                                    softMemory = new SimpleMemory(memory.CellCount);
+                                    softMemory = SimpleMemory.CreateSoftwareMemory(memory.CellCount);
                                     var memoryBytes = new SimpleMemoryAccessor(memory).Get();
                                     memoryBytes.CopyTo(new SimpleMemoryAccessor(softMemory).Get());
 

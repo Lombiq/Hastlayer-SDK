@@ -38,6 +38,7 @@ namespace Hast.Communication.Tester
 
         private static async Task MainTask(IServiceProvider provider)
         {
+            var hastlayer = provider.GetService<IHastlayer>();
 
             // Get devices and if asked exit with the device list.
             var devices = provider.GetService<IDeviceManifestSelector>().GetSupportedDevices()?.ToList();
@@ -69,8 +70,14 @@ namespace Hast.Communication.Tester
                     .ToArray();
             }
 
+            var hardwareGenerationConfiguration = new HardwareGenerationConfiguration(selectedDevice.Name, null);
             var (memory, accessor) = GenerateMemory(
-                CommandLineOptions.PayloadType, CommandLineOptions.PayloadLengthCells, prepend, CommandLineOptions.InputFileName);
+                hastlayer,
+                hardwareGenerationConfiguration,
+                CommandLineOptions.PayloadType,
+                CommandLineOptions.PayloadLengthCells,
+                prepend,
+                CommandLineOptions.InputFileName);
 
 
             // Save input to file using the format of the output file type.
@@ -83,7 +90,7 @@ namespace Hast.Communication.Tester
 
                 Memory<byte> newMemory = new byte[memory.ByteCount];
                 accessor.Get().CopyTo(newMemory);
-                referenceMemory = SimpleMemoryAccessor.Create(newMemory);
+                referenceMemory = SimpleMemory.CreateSoftwareMemory(memory.CellCount);
                 if (!string.IsNullOrEmpty(CommandLineOptions.ReferenceAction))
                 {
                     string name = CommandLineOptions.ReferenceAction.ToLower();
@@ -101,7 +108,7 @@ namespace Hast.Communication.Tester
             Console.WriteLine("Starting hardware execution.");
             var communicationService = provider.GetService<ICommunicationServiceSelector>().GetCommunicationService(channelName);
             communicationService.TesterOutput = Console.Out;
-            var executionContext = new BasicExecutionContext(provider.GetService<IHastlayer>(), selectedDevice.Name,
+            var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
                 selectedDevice.DefaultCommunicationChannelName);
             var info = await communicationService.Execute(memory, CommandLineOptions.MemberId, executionContext);
 
@@ -130,6 +137,8 @@ namespace Hast.Communication.Tester
 
 
         private static (SimpleMemory, SimpleMemoryAccessor) GenerateMemory(
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
             PayloadType type,
             int cellCount,
             int[] prependCells,
@@ -137,7 +146,7 @@ namespace Hast.Communication.Tester
         {
             Console.WriteLine("Generating memory.");
             const int prefixCellCount = 4;
-            var memory = new SimpleMemory(prefixCellCount + prependCells.Length + cellCount);
+            var memory = hastlayer.CreateMemory(configuration, prependCells.Length + cellCount);
             var accessor = new SimpleMemoryAccessor(memory);
 
             for (var i = 0; i < prependCells.Length; i++) memory.WriteInt32(i, prependCells[i]);
@@ -161,7 +170,7 @@ namespace Hast.Communication.Tester
                 case PayloadType.Bitmap:
                     using (var bitmap = (Bitmap)Image.FromFile(inputFileName))
                     {
-                        memory = BitmapHelper.ToSimpleMemory(bitmap, prependCells);
+                        memory = BitmapHelper.ToSimpleMemory(configuration, hastlayer, bitmap, prependCells);
                         accessor = new SimpleMemoryAccessor(memory);
                     }
                     break;
