@@ -19,18 +19,19 @@ namespace Hast.Samples.Consumer.SampleRunners
             var inputOne = "GCCCTAGCG";
             var inputTwo = "GCGCAATG";
 
-            var result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+            var result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo, memoryConfig);
 
             // Sample from Wikipedia.
             inputOne = "ACACACTA";
             inputTwo = "AGCACACA";
 
-            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo, memoryConfig);
 
             inputOne = "lombiqtech";
             inputTwo = "coulombtech";
 
-            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo, memoryConfig);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -40,7 +41,7 @@ namespace Hast.Samples.SampleAssembly
 
 
             // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
-            // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a 
+            // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a
             // variable then its value should be computable from all other values at compile-time).
             var numberContainers2 = new NumberContainer[1];
             var numberContainer = new NumberContainer
@@ -77,9 +78,9 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        public uint Run(uint input)
+        public uint Run(uint input, IMemoryConfiguration memoryConfiguration)
         {
-            var memory = new SimpleMemory(10);
+            var memory = SimpleMemory.Create(memoryConfiguration, 10);
             memory.WriteUInt32(Run_InputUInt32Index, input);
             Run(memory);
             return memory.ReadUInt32(Run_OutputUInt32Index);

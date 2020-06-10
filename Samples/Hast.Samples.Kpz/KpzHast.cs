@@ -88,7 +88,7 @@ namespace Hast.Samples.Kpz
                         new KpzKernelsParallelizedInterface(),
                         proxyConf);
                 }
-                else //if(kpzTarget == KpzTarget.PrngTest) 
+                else //if(kpzTarget == KpzTarget.PrngTest)
                 {
                     KernelsP = await hastlayer.GenerateProxy(
                         hardwareRepresentation,
@@ -120,8 +120,8 @@ namespace Hast.Samples.Kpz
 
                 var kernelsCpu = new PrngTestInterface();
                 ulong randomSeed = 0x37a92d76a96ef210UL;
-                var smCpu = kernelsCpu.PushRandomSeed(randomSeed);
-                var smFpga = KernelsP.PushRandomSeed(randomSeed);
+                var smCpu = kernelsCpu.PushRandomSeed(randomSeed, null);
+                var smFpga = KernelsP.PushRandomSeed(randomSeed, (hastlayer as Hastlayer).CreateMemoryConfiguration());
                 LogItFunction("PRNG results:");
                 bool success = true;
 

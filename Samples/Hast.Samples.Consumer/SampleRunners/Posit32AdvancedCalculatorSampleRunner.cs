@@ -22,7 +22,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, memoryConfig);
 
             var sqrtInputArray = new uint[10];
             for (int i = 0; i < 10; i++)
@@ -30,16 +31,16 @@ namespace Hast.Samples.Consumer.SampleRunners
                 sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
             }
 
-            positCalculator.SqrtOfPositsInArray(sqrtInputArray);
+            positCalculator.SqrtOfPositsInArray(sqrtInputArray, memoryConfig);
         }
 
         public static void RunSoftwareBenchmarks()
         {
             var positCalculator = new Posit32AdvancedCalculator();
 
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, null);
             var sw = Stopwatch.StartNew();
-            var resultOfDivision = positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            var resultOfDivision = positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, null);
             sw.Stop();
 
             Console.WriteLine("Result of repeated division: " + resultOfDivision);
@@ -51,7 +52,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
             }
             sw = Stopwatch.StartNew();
-            var resultOfSqrt = positCalculator.SqrtOfPositsInArray(sqrtInputArray);
+            var resultOfSqrt = positCalculator.SqrtOfPositsInArray(sqrtInputArray, null);
             sw.Stop();
 
             Console.WriteLine("Result of sqrt: ");

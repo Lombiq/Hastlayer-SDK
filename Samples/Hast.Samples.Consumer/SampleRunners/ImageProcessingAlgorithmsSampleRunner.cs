@@ -25,11 +25,12 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 var imageContrastModifier = await hastlayer
                     .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration ?? ProxyGenerationConfiguration.Default);
-                var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50);
+                var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+                var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, memoryConfig);
                 modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 
                 var sw = System.Diagnostics.Stopwatch.StartNew();
-                var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50);
+                var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50, memoryConfig);
                 sw.Stop();
                 System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
 

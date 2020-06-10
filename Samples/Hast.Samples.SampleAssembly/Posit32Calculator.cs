@@ -3,11 +3,12 @@ using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample showing how floating point numbers of type posit (<see href="https://posithub.org" />) can be used 
+    /// A sample showing how floating point numbers of type posit (<see href="https://posithub.org" />) can be used
     /// with Hastlayer. Using the statically-typed <see cref="Posit32"/> variant here.
     /// </summary>
     public class Posit32Calculator
@@ -23,7 +24,7 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculatePowerOfReal_InputPosit32Index = 1;
         public const int CalculatePowerOfReal_OutputPosit32Index = 0;
 
-        // This takes about 75% of a Nexys 4 DDR's FPGA. If only ParallelizedCalculateIntegerSumUpToNumbers is 
+        // This takes about 75% of a Nexys 4 DDR's FPGA. If only ParallelizedCalculateIntegerSumUpToNumbers is
         // selected as the hardware entry point (i.e. only it will be transformed into hardware, see the config in
         // Posit32CalculatorSampleRunner) then with a MaxDegreeOfParallelism of 5 it'll take 75% as well.
         public const int MaxDegreeOfParallelism = 2;
@@ -113,9 +114,9 @@ namespace Hast.Samples.SampleAssembly
 
     public static class Posit32CalculatorExtensions
     {
-        public static int CalculateIntegerSumUpToNumber(this Posit32Calculator positCalculator, int number)
+        public static int CalculateIntegerSumUpToNumber(this Posit32Calculator positCalculator, int number, IMemoryConfiguration memoryConfiguration)
         {
-            var memory = new SimpleMemory(1);
+            var memory = SimpleMemory.Create(memoryConfiguration, 1);
 
             memory.WriteInt32(Posit32Calculator.CalculateLargeIntegerSum_InputInt32Index, number);
             positCalculator.CalculateIntegerSumUpToNumber(memory);
@@ -123,9 +124,9 @@ namespace Hast.Samples.SampleAssembly
             return memory.ReadInt32(Posit32Calculator.CalculateLargeIntegerSum_OutputInt32Index);
         }
 
-        public static float CalculatePowerOfReal(this Posit32Calculator positCalculator, int number, float real)
+        public static float CalculatePowerOfReal(this Posit32Calculator positCalculator, int number, float real, IMemoryConfiguration memoryConfiguration)
         {
-            var memory = new SimpleMemory(2);
+            var memory = SimpleMemory.Create(memoryConfiguration, 2);
 
             memory.WriteInt32(Posit32Calculator.CalculatePowerOfReal_InputInt32Index, number);
             memory.WriteUInt32(Posit32Calculator.CalculatePowerOfReal_InputPosit32Index, new Posit32(real).PositBits);
@@ -135,7 +136,7 @@ namespace Hast.Samples.SampleAssembly
             return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.CalculatePowerOfReal_OutputPosit32Index), true);
         }
 
-        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this Posit32Calculator positCalculator, int[] numbers)
+        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this Posit32Calculator positCalculator, int[] numbers, IMemoryConfiguration memoryConfiguration)
         {
             if (numbers.Length != Posit32Calculator.MaxDegreeOfParallelism)
             {
@@ -144,7 +145,7 @@ namespace Hast.Samples.SampleAssembly
                     Posit32Calculator.MaxDegreeOfParallelism + ")");
             }
 
-            var memory = new SimpleMemory(Posit32Calculator.MaxDegreeOfParallelism);
+            var memory = SimpleMemory.Create(memoryConfiguration, Posit32Calculator.MaxDegreeOfParallelism);
 
             for (int i = 0; i < numbers.Length; i++)
             {
@@ -163,9 +164,11 @@ namespace Hast.Samples.SampleAssembly
             return results;
         }
 
-        public static float AddPositsInArray(this Posit32Calculator posit32Calculator, uint[] posit32Array)
+        public static float AddPositsInArray(this Posit32Calculator posit32Calculator, uint[] posit32Array, IMemoryConfiguration memoryConfiguration)
         {
-            var memory = new SimpleMemory(posit32Array.Length + 1);
+            var memory = memoryConfiguration is null ?
+                SimpleMemory.CreateSoftwareMemory(posit32Array.Length + 1) :
+                SimpleMemory.Create(memoryConfiguration, posit32Array.Length + 1);
 
             memory.WriteUInt32(Posit32Calculator.AddPositsInArray_InputPosit32CountIndex, (uint)posit32Array.Length);
 

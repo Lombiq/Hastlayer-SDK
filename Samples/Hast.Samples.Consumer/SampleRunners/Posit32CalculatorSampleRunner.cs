@@ -23,11 +23,11 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, memoryConfig);
 
-            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
 
-
-            positCalculator.CalculatePowerOfReal(100000, (float)1.0001);
+            positCalculator.CalculatePowerOfReal(100000, (float)1.0001, memoryConfig);
 
 
             var numbers = new int[Posit32Calculator.MaxDegreeOfParallelism];
@@ -36,7 +36,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
             }
 
-            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, memoryConfig);
 
 
             var posit32Array = new uint[100000];
@@ -47,7 +47,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
             }
 
-            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array);
+            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array, memoryConfig);
         }
 
         public static void RunSoftwareBenchmarks()
@@ -56,9 +56,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
-            positCalculator.CalculateIntegerSumUpToNumber(100000);
+            positCalculator.CalculateIntegerSumUpToNumber(100000, null);
             var sw = Stopwatch.StartNew();
-            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, null);
             sw.Stop();
 
             Console.WriteLine("Result of counting up to 100000: " + integerSumUpToNumber);
@@ -66,9 +66,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             Console.WriteLine();
 
-            positCalculator.CalculatePowerOfReal(100000, (float)1.0001);
+            positCalculator.CalculatePowerOfReal(100000, (float)1.0001, null);
             sw = Stopwatch.StartNew();
-            var powerOfReal = positCalculator.CalculatePowerOfReal(100000, (float)1.0001);
+            var powerOfReal = positCalculator.CalculatePowerOfReal(100000, (float)1.0001, null);
             sw.Stop();
 
             Console.WriteLine("Result of power of real number: " + powerOfReal);
@@ -82,9 +82,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                 numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
             }
 
-            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
+            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, null);
             sw = Stopwatch.StartNew();
-            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, null);
             sw.Stop();
 
             Console.WriteLine("Result of counting up to ~100000 parallelized: " + string.Join(", ", integerSumsUpToNumbers));
@@ -100,9 +100,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
             }
 
-            positCalculator.AddPositsInArray(posit32Array);
+            positCalculator.AddPositsInArray(posit32Array, null);
             sw = Stopwatch.StartNew();
-            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array);
+            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array, null);
             sw.Stop();
 
             Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);

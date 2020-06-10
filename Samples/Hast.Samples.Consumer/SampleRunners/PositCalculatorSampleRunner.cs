@@ -27,7 +27,8 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
-            var result = positCalculator.CalculateIntegerSumUpToNumber(100000);
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+            var result = positCalculator.CalculateIntegerSumUpToNumber(100000, memoryConfig);
         }
     }
 }

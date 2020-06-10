@@ -2,16 +2,17 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Example for a SimpleMemory-using algorithm. Also see <see cref="PrimeCalculatorSampleRunner"/> on what to 
+    /// Example for a SimpleMemory-using algorithm. Also see <see cref="PrimeCalculatorSampleRunner"/> on what to
     /// configure to make this work.
     /// </summary>
     public class PrimeCalculator
     {
-        // It's good to have common cell indices in constants like this, so they can be used from multiple methods 
+        // It's good to have common cell indices in constants like this, so they can be used from multiple methods
         // like below. Note the Hungarian notation-like prefixes. These add some clarity but are not mandatory.
         private const int IsPrimeNumber_InputUInt32Index = 0;
         private const int IsPrimeNumber_OutputBooleanIndex = 0;
@@ -30,10 +31,10 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates whether a number is prime.
         /// </summary>
         /// <remarks>
-        /// This demonstrates a simple hardware entry point. Note that the entry point of SimpleMemory-using algorithms 
-        /// should be void methods having a single <see cref="SimpleMemory"/> argument. You can find the corresponding 
+        /// This demonstrates a simple hardware entry point. Note that the entry point of SimpleMemory-using algorithms
+        /// should be void methods having a single <see cref="SimpleMemory"/> argument. You can find the corresponding
         /// wrapper method below as IsPrimeNumber(uint number).
-        /// 
+        ///
         /// Note that hardware entry points need to be public and virtual, and they mustn't have any other parameters
         /// than a single SimpleMemory one.
         /// </remarks>
@@ -50,7 +51,7 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates whether the number is prime, in an async way.
         /// </summary>
         /// <remarks>
-        /// For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized hardware 
+        /// For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized hardware
         /// entry point method async like this.
         /// </remarks>
         public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
@@ -84,7 +85,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <remarks>
         /// This demonstrates how you can write parallelized code that Hastlayer will process and turn into hardware-level
-        /// parallelization: the Tasks' bodies will be copied in hardware as many times as many Tasks you start; thus, 
+        /// parallelization: the Tasks' bodies will be copied in hardware as many times as many Tasks you start; thus,
         /// the actual level of parallelism you get on the hardware corresponds to the number of Tasks, not the number
         /// of CPU cores.
         /// </remarks>
@@ -126,26 +127,26 @@ namespace Hast.Samples.SampleAssembly
 
         /// <summary>
         /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods.
-        /// Because when you want to pass data between methods you can freely use supported types as arguments, you 
+        /// Because when you want to pass data between methods you can freely use supported types as arguments, you
         /// don't need to pass data through SimpleMemory.
         /// </summary>
         /// <remarks>
         /// Note the usage of the AggressiveInlining option, which tells Hastlayer that the method can be inlined, i.e.
         /// basically its implementation can be copied over to where it is called. This is a performance optimization:
-        /// this way the overhead of method calls is eliminated and thus execution will be faster (very useful if you 
-        /// have small methods called frequently, like this one from ParallelizedArePrimeNumbers()) but the hardware 
-        /// implementation will most possibly use more resources from the FPGA (though not always; since the method 
+        /// this way the overhead of method calls is eliminated and thus execution will be faster (very useful if you
+        /// have small methods called frequently, like this one from ParallelizedArePrimeNumbers()) but the hardware
+        /// implementation will most possibly use more resources from the FPGA (though not always; since the method
         /// invocation was cut out it can even utilize less resources, check for your program).
-        /// 
+        ///
         /// In the case of the PrimeCalculator sample inlining this method had the following effects:
-        /// - Execution time went down: ArePrimeNumbers() took 1151ms without and 1069ms with inlining (-7%), 
+        /// - Execution time went down: ArePrimeNumbers() took 1151ms without and 1069ms with inlining (-7%),
         ///   ParallelizedArePrimeNumbers() took 64ms without and 60ms with inlining (-6%).
-        /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that 
+        /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that
         ///   limits further use).
-        ///   
-        /// Methods can also be inlined with the help of the 
+        ///
+        /// Methods can also be inlined with the help of the
         /// <c>TransformerConfiguration().AddAdditionalInlinableMethod<T>()</c> configuration.
-        ///   
+        ///
         /// WARNING: be sure not to overdo inlining, because just inlining everything (especially if inlined methods
         /// also call inlined methods...) can quickly create giant hardware implementations that won't be just most
         /// possibly too big for the FPGA but also very slow to transform.
@@ -168,40 +169,41 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These 
+        // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
         // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
         // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
         // in them that is not Hastlayer-compatible.
 
-        public bool IsPrimeNumber(uint number)
+        public bool IsPrimeNumber(uint number, IMemoryConfiguration memoryConfiguration)
         {
-            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory))).Result;
+            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory)), memoryConfiguration).Result;
         }
 
-        public Task<bool> IsPrimeNumberAsync(uint number)
+        public Task<bool> IsPrimeNumberAsync(uint number, IMemoryConfiguration memoryConfiguration)
         {
-            return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory));
+            return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), memoryConfiguration);
         }
 
-        public bool[] ArePrimeNumbers(uint[] numbers)
+        public bool[] ArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory));
+            return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), memoryConfiguration);
         }
 
-        public bool[] ParallelizedArePrimeNumbers(uint[] numbers)
+        public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration)
         {
             var results = RunArePrimeNumbersMethod(
                 numbers.PadToMultipleOf(MaxDegreeOfParallelism),
-                memory => ParallelizedArePrimeNumbers(memory));
+                ParallelizedArePrimeNumbers,
+                memoryConfiguration);
 
             // The result might be longer than the input due to padding.
             return results.CutToLength(numbers.Length);
         }
 
-        private async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner)
+        private async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner, IMemoryConfiguration memoryConfiguration)
         {
             // One memory cell is enough for data exchange.
-            var memory = new SimpleMemory(1);
+            var memory = SimpleMemory.Create(memoryConfiguration, 1);
             memory.WriteUInt32(IsPrimeNumber_InputUInt32Index, number);
 
             await methodRunner(memory);
@@ -209,10 +211,10 @@ namespace Hast.Samples.SampleAssembly
             return memory.ReadBoolean(IsPrimeNumber_OutputBooleanIndex);
         }
 
-        private bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner)
+        private bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner, IMemoryConfiguration memoryConfiguration)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
-            var memory = new SimpleMemory(numbers.Length + 1);
+            var memory = SimpleMemory.Create(memoryConfiguration, numbers.Length + 1);
 
             memory.WriteUInt32(ArePrimeNumbers_InputUInt32CountIndex, (uint)numbers.Length);
             for (int i = 0; i < numbers.Length; i++)

@@ -24,8 +24,9 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms(), configuration ?? ProxyGenerationConfiguration.Default);
 
-            var factorial = recursiveAlgorithms.CalculateFactorial(6); // 720
-            var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(13); // 233
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+            var factorial = recursiveAlgorithms.CalculateFactorial(6, memoryConfig); // 720
+            var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(13, memoryConfig); // 233
         }
     }
 }

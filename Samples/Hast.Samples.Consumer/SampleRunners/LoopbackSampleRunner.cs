@@ -19,12 +19,13 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration ?? ProxyGenerationConfiguration.Default);
 
-            var output1 = loopback.Run(123);
-            var output2 = loopback.Run(1234);
-            var output3 = loopback.Run(-9);
-            var output4 = loopback.Run(0);
-            var output5 = loopback.Run(-19);
-            var output6 = loopback.Run(1);
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+            var output1 = loopback.Run(123, memoryConfig);
+            var output2 = loopback.Run(1234, memoryConfig);
+            var output3 = loopback.Run(-9, memoryConfig);
+            var output4 = loopback.Run(0, memoryConfig);
+            var output5 = loopback.Run(-19, memoryConfig);
+            var output6 = loopback.Run(1, memoryConfig);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -77,14 +78,14 @@ namespace Hast.Samples.SampleAssembly
 
         private readonly Random _random = new Random();
 
-        public double EstimatePi(uint iterationsCount)
+        public double EstimatePi(uint iterationsCount, IMemoryConfiguration memoryConfiguration)
         {
             if (iterationsCount % MaxDegreeOfParallelism != 0)
             {
                 throw new Exception($"The number of iterations must be divisible by {MaxDegreeOfParallelism}.");
             }
 
-            var memory = new SimpleMemory(2);
+            var memory = SimpleMemory.Create(memoryConfiguration, 2);
             memory.WriteUInt32(EstimatePi_IteractionsCountUInt32Index, iterationsCount);
             memory.WriteUInt32(EstimatePi_RandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
 

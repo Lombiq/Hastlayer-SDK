@@ -24,7 +24,8 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var unumCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new UnumCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
 
-            var result = unumCalculator.CalculateSumOfPowersofTwo(9);
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+            var result = unumCalculator.CalculateSumOfPowersofTwo(9, memoryConfig);
         }
     }
 }

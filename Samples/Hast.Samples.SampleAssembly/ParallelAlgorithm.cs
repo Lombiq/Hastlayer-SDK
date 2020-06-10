@@ -1,10 +1,11 @@
 ﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer. Also see 
+    /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer. Also see
     /// <see cref="ParallelAlgorithmSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class ParallelAlgorithm
@@ -63,9 +64,11 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteInt32(Run_OutputInt32Index, output);
         }
 
-        public int Run(int input)
+        public int Run(int input, IMemoryConfiguration memoryConfiguration)
         {
-            var memory = new SimpleMemory(1);
+            var memory = memoryConfiguration is null ?
+                SimpleMemory.CreateSoftwareMemory(1) :
+                SimpleMemory.Create(memoryConfiguration, 1);
             memory.WriteInt32(Run_InputInt32Index, input);
             Run(memory);
             return memory.ReadInt32(Run_OutputInt32Index);

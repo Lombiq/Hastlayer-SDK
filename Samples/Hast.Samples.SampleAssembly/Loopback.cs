@@ -1,9 +1,10 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample that simply sends back the input plus one. This can be used to test connectivity to the FPGA as well 
+    /// A sample that simply sends back the input plus one. This can be used to test connectivity to the FPGA as well
     /// as to see the baseline resource usage of the Hastlayer Hardware Framework. It can also serve as a generic
     /// testbed that you can quickly modify to try out small pieces of code.
     /// </summary>
@@ -19,9 +20,9 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteInt32(Run_InputOutputInt32Index, memory.ReadInt32(Run_InputOutputInt32Index) + 1);
         }
 
-        public int Run(int input)
+        public int Run(int input, IMemoryConfiguration memoryConfiguration)
         {
-            var memory = new SimpleMemory(1);
+            var memory = SimpleMemory.Create(memoryConfiguration, 1);
             memory.WriteInt32(Run_InputOutputInt32Index, input);
             Run(memory);
             return memory.ReadInt32(Run_InputOutputInt32Index);

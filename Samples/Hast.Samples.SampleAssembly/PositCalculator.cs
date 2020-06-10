@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample showing how custom-sized floating point numbers of type Posit (<see href="https://posithub.org" />) 
+    /// A sample showing how custom-sized floating point numbers of type Posit (<see href="https://posithub.org" />)
     /// can be used with Hastlayer.
     /// </summary>
     /// <remarks>
@@ -65,9 +66,9 @@ namespace Hast.Samples.SampleAssembly
         };
 
 
-        public static int CalculateIntegerSumUpToNumber(this PositCalculator positCalculator, int number)
+        public static int CalculateIntegerSumUpToNumber(this PositCalculator positCalculator, int number, IMemoryConfiguration memoryConfiguration)
         {
-            var memory = new SimpleMemory(1);
+            var memory = SimpleMemory.Create(memoryConfiguration, 1);
 
             memory.WriteInt32(PositCalculator.CalculateLargeIntegerSum_InputInt32Index, number);
             positCalculator.CalculateIntegerSumUpToNumber(memory);

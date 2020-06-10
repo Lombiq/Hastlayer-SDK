@@ -1,6 +1,7 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Drawing;
 using System.Threading.Tasks;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -139,11 +140,12 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="image">The image that we modify.</param>
         /// <param name="contrast">The value of the intensity to calculate the new pixel values.</param>
         /// <returns>Returns an image with changed contrast values.</returns>
-        public Bitmap ChangeImageContrast(Bitmap image, int contrast)
+        public Bitmap ChangeImageContrast(Bitmap image, int contrast, IMemoryConfiguration memoryConfiguration)
         {
             var memory = CreateSimpleMemory(
                 image,
-                contrast);
+                contrast,
+                memoryConfiguration);
             ChangeContrast(memory);
             return CreateImage(memory, image);
         }
@@ -155,14 +157,14 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="image">The image to process.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
-        private SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue)
+        private SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue, IMemoryConfiguration memoryConfiguration)
         {
             var pixelCount = image.Width * image.Height;
             var cellCount =
                 pixelCount +
                 (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0) +
                 3;
-            var memory = new SimpleMemory(cellCount);
+            var memory = SimpleMemory.Create(memoryConfiguration, cellCount);
 
             memory.WriteUInt32(ChangeContrast_ImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(ChangeContrast_ImageHeightIndex, (uint)image.Height);

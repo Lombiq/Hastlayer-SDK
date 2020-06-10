@@ -18,12 +18,13 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 500000;
 
+            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator(), configuration ?? ProxyGenerationConfiguration.Default);
-            var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount);
+            var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount, memoryConfig);
             Console.WriteLine("Estimate for Pi on hardware: " + piEstimateHardware);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var piEstimateSoftware = new MonteCarloPiEstimator().EstimatePi(iterationsCount);
+            var piEstimateSoftware = new MonteCarloPiEstimator().EstimatePi(iterationsCount, memoryConfig);
             sw.Stop();
             Console.WriteLine("Estimate for Pi on software: " + piEstimateSoftware);
             Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + "ms.");
