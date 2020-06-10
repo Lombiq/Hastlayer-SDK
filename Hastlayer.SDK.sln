@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{765A6EB0-438E-422C-ACDD-13544EFE6467}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Samples.Consumer", "Samples\Hast.Samples.Consumer\Hast.Samples.Consumer.csproj", "{7249D1E5-ABEC-40BB-9238-5E54AB0E1E94}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Console", "Hast.Console\Hast.Console.csproj", "{2A58C055-84A1-4B42-9549-1B3EDA597F3D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Transformer", "Hast.Core\Hast.Transformer\Hast.Transformer.csproj", "{55FFEC87-B87B-4BB6-B50D-26560C8F815A}"
@@ -21,11 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8043A55-8
 		Docs\WorkingWithHastlayer.md = Docs\WorkingWithHastlayer.md
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{765A6EB0-438E-422C-ACDD-13544EFE6467}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Samples.SampleAssembly", "Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj", "{CB4A8CF6-7DD4-4493-B5CD-E5E51EE5C73B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Samples.Consumer", "Samples\Hast.Samples.Consumer\Hast.Samples.Consumer.csproj", "{7249D1E5-ABEC-40BB-9238-5E54AB0E1E94}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Layer", "Hast.Layer\Hast.Layer.csproj", "{0D77AFBA-1B4D-4083-B35C-3309251039B7}"
 EndProject

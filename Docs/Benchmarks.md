@@ -75,4 +75,4 @@ Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an I
 ### Further data
 
 - In the ["High-level .NET Software Implementations of Unum Type I and Posit with Simultaneous FPGA Implementation Using Hastlayer" whitepaper](https://dl.acm.org/authorize?N659104) presented at the CoNGA 2018 conference the performance and clock cycle efficiency (which can be roughly equated to power efficiency) of operations of the posit floating point number format are compared. While the FPGA implementation is about 10x slower it's about 2-3x more power efficient.
-- While details can't be disclosed an Italian company observed a 10x speed increase of various high-frequency trading algorithms.
+- While details can't be disclosed an Italian company observed a 10x speed increase of various high-frequency trading algorithms, compared to the original C++ implementation.
