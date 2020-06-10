@@ -145,7 +145,6 @@ namespace Hast.Communication.Tester
             string inputFileName)
         {
             Console.WriteLine("Generating memory.");
-            const int prefixCellCount = 4;
             var memory = hastlayer.CreateMemory(configuration, prependCells.Length + cellCount);
             var accessor = new SimpleMemoryAccessor(memory);
 

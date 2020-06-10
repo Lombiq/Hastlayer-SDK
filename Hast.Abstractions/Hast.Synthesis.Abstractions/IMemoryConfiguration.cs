@@ -2,7 +2,7 @@
 
 namespace Hast.Synthesis.Abstractions
 {
-    public interface IMemoryConfiguration: IDependency
+    public interface IMemoryConfiguration
     {
         /// <summary>
         /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a
