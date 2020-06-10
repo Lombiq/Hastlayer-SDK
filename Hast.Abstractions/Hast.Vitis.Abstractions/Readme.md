@@ -20,3 +20,7 @@ Note that the SH scripts in this project should use LF line endings!
 Even after everything is installed, you have to make sure that the executing user's environment variables are correctly set by sourcing the setup scripts [as described in the documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/rbk1547656041291.html). You can add these commands into the `~/.bashrc` file to avoid having to type them every time. If running from the cloud, like Nimbix, this is probably handled automatically.
 
 For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions](Nimbix.md).
+
+## Remarks
+
+The kernel binary (XCLBIN) is presently not portable, running on a different machine than the one it was compiled on will cause various exceptions. Running on multiple instances of the same kind of compute node works however.
