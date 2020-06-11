@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
@@ -9,7 +9,9 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ParallelAlgorithm
     {
-        private const int MaxDegreeOfParallelism = 270;
+        // While 270 will also fit with ~77% of the resources being used that's very slow to compile in the Xilinx
+        // toolchain for the Nexys A7.
+        private const int MaxDegreeOfParallelism = 260;
 
         private const int Run_InputInt32Index = 0;
         private const int Run_OutputInt32Index = 0;
