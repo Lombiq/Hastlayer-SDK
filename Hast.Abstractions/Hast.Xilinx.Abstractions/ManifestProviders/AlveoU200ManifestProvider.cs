@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Xilinx.Abstractions.Helpers;
 using Newtonsoft.Json.Linq;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
@@ -22,19 +23,6 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
-            ConfigureMemoryForVitis(memory, hardwareGeneration);
-
-        public static void ConfigureMemoryForVitis(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration)
-        {
-            memory.Alignment = 4096;
-            memory.MinimumPrefix = 4;
-
-            if (!hardwareGeneration.CustomConfiguration.TryGetValue("OpenClConfiguration", out var value)) return;
-            var custom = (value is JObject jObject ? jObject : JObject.FromObject(value))
-                .Properties()
-                .ToDictionary(x => x.Name, x => x.Value);
-            if (custom.TryGetValue(nameof(memory.Alignment), out var alignment)) memory.Alignment = alignment.Value<int>();
-            if (custom.TryGetValue(nameof(memory.MinimumPrefix), out var prefix)) memory.MinimumPrefix = prefix.Value<int>();
-        }
+            MemoryConfigurationHelper.ConfigureMemoryForVitis(memory, hardwareGeneration);
     }
 }

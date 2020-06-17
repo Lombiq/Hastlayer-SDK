@@ -1,5 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Xilinx.Abstractions.Helpers;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
@@ -20,6 +21,6 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
-            AlveoU200ManifestProvider.ConfigureMemoryForVitis(memory, hardwareGeneration);
+            MemoryConfigurationHelper.ConfigureMemoryForVitis(memory, hardwareGeneration);
     }
 }

@@ -34,8 +34,8 @@ namespace Hast.Synthesis.Abstractions
             IEnumerable<IDeviceManifestProvider> deviceManifestProviders)
         {
             var memoryConfiguration = new MemoryConfiguration();
-            var deviceManifestProvider = deviceManifestProviders
-                .First(x => x.DeviceManifest.Name == hardwareGenerationConfiguration.DeviceName);
+            var deviceManifestProvider = deviceManifestProviders.First(manifestProvider =>
+                manifestProvider.DeviceManifest.Name == hardwareGenerationConfiguration.DeviceName);
             deviceManifestProvider.ConfigureMemory(memoryConfiguration, hardwareGenerationConfiguration);
             return memoryConfiguration;
         }
