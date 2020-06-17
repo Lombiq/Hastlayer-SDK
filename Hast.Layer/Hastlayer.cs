@@ -291,23 +291,22 @@ namespace Hast.Layer
         }
 
         public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, int cellCount) =>
-            RunGetAsync(provider => Task.FromResult(SimpleMemory.Create(
+            RunGet(provider => SimpleMemory.Create(
                 MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
-                cellCount))).Result;
+                cellCount));
 
         public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0) =>
-            RunGetAsync(provider => Task.FromResult(SimpleMemory.Create(
+            RunGet(provider => SimpleMemory.Create(
                 MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
                 data,
                 provider.GetService<ILogger>(),
-                withPrefixCells))).Result;
+                withPrefixCells));
 
         public IMemoryConfiguration CreateMemoryConfiguration(IHardwareRepresentation hardwareRepresentation) =>
-            RunGetAsync(provider => Task.FromResult(
-                MemoryConfiguration.Create(
+            RunGet(provider => MemoryConfiguration.Create(
                     hardwareRepresentation.HardwareGenerationConfiguration,
                     provider.GetService<IEnumerable<IDeviceManifestProvider>>())
-            )).Result;
+            );
 
 
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
@@ -327,13 +326,16 @@ namespace Hast.Layer
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
-            if (_serviceNames.Contains(typeof(TOut).FullName))
-            {
-                throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
-            }
-
+            ThrowIfService<TOut>();
             using (var scope = _serviceProvider.CreateScope())
                 return await process(scope.ServiceProvider);
+        }
+
+        public TOut RunGet<TOut>(Func<IServiceProvider, TOut> process)
+        {
+            ThrowIfService<TOut>();
+            using (var scope = _serviceProvider.CreateScope())
+                return process(scope.ServiceProvider);
         }
 
         public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();
@@ -398,6 +400,14 @@ namespace Hast.Layer
 
         private void LogException(Exception exception, string message) =>
             _serviceProvider.GetService<ILogger<Hastlayer>>().LogError(exception, message);
+
+        private void ThrowIfService<TOut>()
+        {
+            if (_serviceNames.Contains(typeof(TOut).FullName))
+            {
+                throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
+            }
+        }
 
         private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
             DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));
