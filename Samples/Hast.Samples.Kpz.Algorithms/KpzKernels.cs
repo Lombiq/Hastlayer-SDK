@@ -85,7 +85,7 @@ namespace Hast.Samples.Kpz.Algorithms
         private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
         public RandomMwc64X Random1, Random2;
-        public bool TestMode;
+        public bool TestMode = false;
         public uint NumberOfIterations = 1;
 
 
