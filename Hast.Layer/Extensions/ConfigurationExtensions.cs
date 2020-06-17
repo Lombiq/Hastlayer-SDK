@@ -1,18 +1,18 @@
-﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
-using Newtonsoft.Json;
 // ReSharper disable CheckNamespace
 
 namespace Microsoft.Extensions.Configuration
 {
+    // Source: https://stackoverflow.com/a/55050425
     public static class ConfigurationExtensions
     {
 
         /// <summary>
         /// Serializes the configuration into JSON.
         /// </summary>
-        /// <remarks>source: https://stackoverflow.com/a/55050425</remarks>
         public static string Serialize(this IConfiguration config) =>
             JsonConvert.SerializeObject(BindToExpandoObject(config));
 
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Configuration
             var configs = config.AsEnumerable();
             foreach (var kvp in configs)
             {
-                var parent = (IDictionary<string, object>) result;
+                var parent = (IDictionary<string, object>)result;
                 var path = kvp.Key.Split(':');
 
                 // create or retrieve the hierarchy (keep last path item for later)

@@ -23,4 +23,4 @@ For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions
 
 ## Remarks
 
-The kernel binary (XCLBIN) is presently not portable, running on a different machine than the one it was compiled on will cause various exceptions. Running on multiple instances of the same kind of compute node works however.
+The kernel binary (XCLBIN) is presently not portable, running on a different machine than the one it was compiled on will cause various exceptions. Running on multiple instances of the same kind of compute node works, however.

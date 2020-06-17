@@ -1,7 +1,7 @@
-using System;
-using System.Runtime.InteropServices;
 using Hast.Synthesis.Abstractions;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
 {
@@ -66,7 +66,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
         /// <param name="alignment">
         /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a
-        /// multiple of that number. It must be an integer power of 2.
+        /// multiple of that number. It must be an integer and power of 2.
         /// </param>
         /// <remarks>
         /// This constructor is internal only to avoid dependency issues where we have to include the System.Memory
@@ -128,6 +128,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
 
+
         /// <summary>
         /// Creates a new instance of <see cref="SimpleMemory"/> with a specific size of payload in cells using a
         /// device's <see cref="MemoryConfiguration"/>.
@@ -135,9 +136,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="memoryConfiguration">Creation parameters associated with the selected device.</param>
         /// <param name="cellCount">The size of the usable memory.</param>
         /// <returns>The instance with a byte[] of capacity for the require payload size.</returns>
-        public static SimpleMemory Create(
-            IMemoryConfiguration memoryConfiguration,
-            int cellCount)
+        public static SimpleMemory Create(IMemoryConfiguration memoryConfiguration, int cellCount)
         {
             var memory = new byte[(cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes +
                                   memoryConfiguration.Alignment];
@@ -182,7 +181,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// identically to an instance created for a specific device but has no specific optimizations.
         /// </summary>
         /// <param name="cellCount">The size of the usable memory.</param>
-        /// <returns>The instance with a byte[] of capacity for the require payload size.</returns>
+        /// <returns>The instance with a <c>byte[]</c> of capacity for the require payload size.</returns>
         public static SimpleMemory CreateSoftwareMemory(int cellCount) =>
             new SimpleMemory(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
     }

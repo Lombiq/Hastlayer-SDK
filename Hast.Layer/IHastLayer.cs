@@ -1,10 +1,10 @@
-﻿using Hast.Common.Services;
+using Hast.Common.Services;
 using Hast.Communication.Services;
 using Hast.Layer.Extensibility.Events;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Layer
 {
@@ -51,7 +51,6 @@ namespace Hast.Layer
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
             IProxyGenerationConfiguration configuration) where T : class;
-
 
         /// <summary>
         /// Gets the <see cref="ICommunicationService"/> based on the channel name.
