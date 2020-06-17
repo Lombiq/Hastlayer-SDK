@@ -84,7 +84,7 @@ namespace Hast.Samples.Kpz.Algorithms
         private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
         public RandomMwc64X Random1, Random2;
-        public bool TestMode = false;
+        public bool TestMode;
         public uint NumberOfIterations = 1;
 
 
@@ -139,9 +139,10 @@ namespace Hast.Samples.Kpz.Algorithms
                 }
             }
         }
-        /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="grid" />, and randomly switches
-        /// between pyramid and hole, based on <see cref="probabilityP" /> and <see cref="probabilityQ" /> parameters
-        /// (or switches anyway, if forceSwitch is on).
+
+        /// <summary>
+        /// Detects pyramid or hole (if any) at the given coordinates in the grid, and randomly switches between pyramid
+        /// and hole, based on probabilityP and probabilityQ parameters (or switches anyway, if forceSwitch is on).
         /// </summary>
         public void RandomlySwitchFourCells(bool forceSwitch)
         {
@@ -233,7 +234,7 @@ namespace Hast.Samples.Kpz.Algorithms
         }
 
         /// <summary>
-        /// This function generates random numbers on the FPGA using 
+        /// This function generates random numbers on the FPGA using
         /// <see cref="KpzKernelsInterface.TestPrng(SimpleMemory)"/>.
         /// </summary>
         public static uint[] TestPrngWrapper(this KpzKernelsInterface kernels)
