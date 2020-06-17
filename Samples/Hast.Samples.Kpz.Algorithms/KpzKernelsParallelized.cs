@@ -1,8 +1,8 @@
-
 using Hast.Algorithms.Random;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Threading.Tasks;
+using Hast.Layer;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -264,8 +264,14 @@ namespace Hast.Samples.Kpz.Algorithms
         /// consistent across runs.
         /// </param>
         /// <param name="numberOfIterations">The number of iterations to perform.</param>
-        public static void DoIterationsWrapper(this KpzKernelsParallelizedInterface kernels, KpzNode[,] hostGrid, bool pushToFpga,
-            bool randomSeedEnable, uint numberOfIterations)
+        public static void DoIterationsWrapper(
+            this KpzKernelsParallelizedInterface kernels,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
+            KpzNode[,] hostGrid,
+            bool pushToFpga,
+            bool randomSeedEnable,
+            uint numberOfIterations)
         {
             // The following numbers will be used when random seed is disabled in GUI.
             // This makes the result more predictable while debugging.
@@ -311,8 +317,8 @@ namespace Hast.Samples.Kpz.Algorithms
             };
 
             int numRandomUints = 2 + KpzKernelsParallelizedInterface.ParallelTasks * 4;
-            var sm = new SimpleMemory(
-                KpzKernelsParallelizedInterface.GridSize * KpzKernelsParallelizedInterface.GridSize + numRandomUints + 1);
+            var sm = hastlayer.CreateMemory(configuration, KpzKernelsParallelizedInterface.GridSize *
+                KpzKernelsParallelizedInterface.GridSize + numRandomUints + 1);
 
             if (pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
 
