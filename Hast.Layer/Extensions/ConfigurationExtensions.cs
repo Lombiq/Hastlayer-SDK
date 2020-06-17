@@ -29,14 +29,14 @@ namespace Microsoft.Extensions.Configuration
 
                 // create or retrieve the hierarchy (keep last path item for later)
                 int lastIndex = 0;
-                for (var i = 0; i < path.Length - 1; lastIndex = i++)
+                for (var i = 0; i < path.Length - 1; lastIndex = ++i)
                 {
                     if (!parent.ContainsKey(path[i]))
                     {
                         parent.Add(path[i], new ExpandoObject());
                     }
 
-                    parent = parent[path[i]] as IDictionary<string, object> ?? parent;
+                    parent = parent[path[i]] as IDictionary<string, object>;
                 }
 
                 if (kvp.Value == null)

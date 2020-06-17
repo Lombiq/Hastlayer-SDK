@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hast.Common.Services;
 
 namespace Hast.Communication
 {
@@ -54,6 +55,10 @@ namespace Hast.Communication
                         {
                             // Although it says Method it can also be a property.
                             var memberFullName = invocation.Method.GetFullName();
+
+                            // Make the provided configuration available within this scope.
+                            scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationHolder>()
+                                .Configuration = hardwareRepresentation.HardwareGenerationConfiguration;
 
                             var invocationContext = new MemberInvocationContext
                             {

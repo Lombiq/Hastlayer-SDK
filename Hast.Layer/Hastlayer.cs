@@ -171,7 +171,10 @@ namespace Hast.Layer
                         .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
                     foreach (var item in newCustomConfigurations)
                     {
-                        configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize());
+                        configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize())
+                            [nameof(HardwareGenerationConfiguration)]?
+                            [nameof(HardwareGenerationConfiguration.CustomConfiguration)]?
+                            [item.Key];
                     }
 
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
