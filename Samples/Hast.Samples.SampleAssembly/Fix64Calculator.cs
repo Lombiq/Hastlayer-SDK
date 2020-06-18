@@ -104,7 +104,7 @@ namespace Hast.Samples.SampleAssembly
             });
         }
 
-        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers, IMemoryConfiguration memoryConfiguration)
+        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers, IMemoryConfiguration memoryConfiguration = null)
         {
             if (numbers.Length != MaxDegreeOfParallelism)
             {

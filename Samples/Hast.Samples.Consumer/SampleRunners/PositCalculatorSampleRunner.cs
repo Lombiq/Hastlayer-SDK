@@ -25,7 +25,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator(), configuration);
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var result = positCalculator.CalculateIntegerSumUpToNumber(100000, memoryConfig);

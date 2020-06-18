@@ -6,7 +6,7 @@ namespace Hast.Vitis.Abstractions.Extensions
 {
     public static class ConfigurationExtensions
     {
-        public static IOpenClConfiguration GetOrAddOpenClConfiguration(this IHardwareGenerationConfigurationHolder holder) =>
-            holder.Configuration.GetOrAddCustomConfiguration<OpenClConfiguration>(nameof(OpenClConfiguration));
+        public static IOpenClConfiguration GetOrAddOpenClConfiguration(this IHardwareGenerationConfiguration configuration) =>
+            configuration.GetOrAddCustomConfiguration<OpenClConfiguration>(nameof(OpenClConfiguration));
     }
 }

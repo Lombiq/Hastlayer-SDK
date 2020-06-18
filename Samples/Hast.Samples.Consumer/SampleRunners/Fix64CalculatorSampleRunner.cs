@@ -21,7 +21,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator(), configuration ?? ProxyGenerationConfiguration.Default);
+            var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator(), configuration);
 
             var memoryConfiguration = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var sum = fixed64Calculator.CalculateIntegerSumUpToNumber(10000000, memoryConfiguration);
@@ -53,10 +53,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1);
             }
-            var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, null);
+            var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, null);
+            sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
             sw.Stop();
             Console.WriteLine("Elapsed ms: " + sw.ElapsedMilliseconds);
         }

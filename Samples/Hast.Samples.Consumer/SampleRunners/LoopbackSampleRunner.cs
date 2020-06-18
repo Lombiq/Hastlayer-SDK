@@ -17,7 +17,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration ?? ProxyGenerationConfiguration.Default);
+            var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration);
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var output1 = loopback.Run(123, memoryConfig);

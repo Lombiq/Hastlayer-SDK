@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Hast.Common.Services;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
@@ -25,7 +24,6 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IDevicePoolManager _devicePoolManager;
 
         protected readonly IBinaryOpenCl _binaryOpenCl;
-        private readonly IHardwareGenerationConfigurationHolder _configurationHolder;
         protected readonly ILogger _logger;
 
 
@@ -33,13 +31,11 @@ namespace Hast.Vitis.Abstractions.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
-            IHardwareGenerationConfigurationHolder configurationHolder,
             ILogger<OpenClCommunicationService> logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _binaryOpenCl = binaryOpenCl;
-            _configurationHolder = configurationHolder;
             _logger = logger;
         }
 
@@ -49,7 +45,11 @@ namespace Hast.Vitis.Abstractions.Services
             int memberId,
             IHardwareExecutionContext executionContext)
         {
-            var configuration = _configurationHolder.GetOrAddOpenClConfiguration();
+            var configuration = executionContext
+                .HardwareRepresentation
+                .HardwareGenerationConfiguration
+                .GetOrAddOpenClConfiguration();
+            _binaryOpenCl.PrepareDevices(configuration);
 
             if (!File.Exists(configuration.BinaryFilePath))
             {
@@ -95,7 +95,7 @@ namespace Hast.Vitis.Abstractions.Services
                         Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
                         _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] {fpgaBuffer});
                         await _binaryOpenCl.AwaitDevice(deviceIndex);
-                        var resultMetadata = GetResultMetadata(memoryAccessor);
+                        var resultMetadata = GetResultMetadata(memoryAccessor, configuration);
 
                         // Read out metadata.
                         SetHardwareExecutionTime(context, executionContext, resultMetadata.ExecutionTime);
@@ -111,9 +111,8 @@ namespace Hast.Vitis.Abstractions.Services
         protected virtual IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle) => IntPtr.Zero;
 
 
-        private OpenClResultMetadata GetResultMetadata(SimpleMemoryAccessor buffer)
+        private OpenClResultMetadata GetResultMetadata(SimpleMemoryAccessor buffer, IOpenClConfiguration configuration)
         {
-            var configuration = _configurationHolder.GetOrAddOpenClConfiguration();
             var bufferSpan = buffer.Get(configuration.HeaderCellCount).Span;
 
             Logger.LogInformation("_configuration.HeaderCellCount: {0}", configuration.HeaderCellCount);

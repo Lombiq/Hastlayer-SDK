@@ -158,10 +158,6 @@ namespace Hast.Layer
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
                     var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
 
-                    // Make the provided configuration available within this scope.
-                    scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationHolder>()
-                        .Configuration = configuration;
-
                     // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
                     // CustomConfiguration into the current hardware generation configuration.
                     var newCustomConfigurations = appConfiguration
@@ -250,6 +246,7 @@ namespace Hast.Layer
             T hardwareObject,
             IProxyGenerationConfiguration configuration) where T : class
         {
+            if (configuration is null) configuration = ProxyGenerationConfiguration.Default;
             if (!hardwareRepresentation.SoftAssemblyPaths.Contains(hardwareObject.GetType().Assembly.Location))
             {
                 throw new InvalidOperationException(

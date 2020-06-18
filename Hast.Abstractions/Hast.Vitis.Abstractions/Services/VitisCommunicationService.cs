@@ -1,6 +1,5 @@
 using System;
 using System.Buffers;
-using Hast.Common.Services;
 using Hast.Communication.Services;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
@@ -18,9 +17,8 @@ namespace Hast.Vitis.Abstractions.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
-            IHardwareGenerationConfigurationHolder configurationHolder,
             ILogger<VitisCommunicationService> logger)
-            : base(devicePoolPopulator, devicePoolManager, binaryOpenCl, configurationHolder, logger) { }
+            : base(devicePoolPopulator, devicePoolManager, binaryOpenCl, logger) { }
 
 
         protected override IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle)

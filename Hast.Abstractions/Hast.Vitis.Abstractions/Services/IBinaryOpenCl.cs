@@ -3,6 +3,7 @@ using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using System;
 using System.Buffers;
 using System.Threading.Tasks;
+using Hast.Vitis.Abstractions.Models;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -22,5 +23,6 @@ namespace Hast.Vitis.Abstractions.Services
             string kernelName, int index, MemoryHandle data, int length, IntPtr buffer = default);
 
         IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags);
+        void PrepareDevices(IOpenClConfiguration configuration);
     }
 }

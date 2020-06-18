@@ -29,7 +29,7 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IOpenCl _cl;
         private readonly ILogger _logger;
 
-        private readonly Lazy<IntPtr[]> _devicesLazy;
+        private Lazy<IntPtr[]> _devicesLazy = null;
         private readonly Lazy<IntPtr> _context;
 
         private readonly Dictionary<int, IntPtr> _queues = new Dictionary<int, IntPtr>();
@@ -46,17 +46,10 @@ namespace Hast.Vitis.Abstractions.Services
 
         public BinaryOpenCl(
             IOpenCl cl,
-            ILogger<BinaryOpenCl> logger,
-            IHardwareGenerationConfigurationHolder configurationholder)
+            ILogger<BinaryOpenCl> logger)
         {
             _cl = cl;
             _logger = logger;
-
-            _devicesLazy = new Lazy<IntPtr[]>(() =>
-            {
-                var configuration = configurationholder.GetOrAddOpenClConfiguration();
-                return GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray();
-            });
 
             _context = new Lazy<IntPtr>(() =>
             {
@@ -72,6 +65,80 @@ namespace Hast.Vitis.Abstractions.Services
 
 
         #region Methods
+
+        public void PrepareDevices(IOpenClConfiguration configuration)
+        {
+            if (_devicesLazy is null)
+            {
+                _devicesLazy = new Lazy<IntPtr[]>(() =>
+                    GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
+            }
+        }
+
+        public void CreateCommandQueue(int deviceIndex,
+            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
+        {
+            var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], properties, out var result);
+            VerifyResult(result);
+            _queues[deviceIndex] = queue;
+        }
+
+        public void CreateBinaryKernel(byte[] binary, string kernelName)
+        {
+            if (_kernels.ContainsKey(kernelName)) return;
+
+            unsafe
+            {
+                fixed (byte* pointer = binary)
+                {
+                    var program = CreateProgramWithBinary((IntPtr)pointer, binary.Length);
+
+                    var kernel = _cl.CreateKernel(program, kernelName, out var result);
+                    VerifyResult(result);
+                    _kernels[kernelName] = kernel;
+                    _kernelBuffers[kernelName] = new List<IntPtr>();
+                }
+            }
+        }
+
+        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags)
+        {
+            var buffer = _cl.CreateBuffer(_context.Value, memoryFlags, hostBytes, hostPointer, out var result);
+            VerifyResult(result);
+            return buffer;
+        }
+
+        public void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true)
+        {
+            var queue = _queues[deviceIndex];
+            var kernel = _kernels[kernelName];
+            var waitEvent = IntPtr.Zero;
+
+            waitEvent = EnqueueMemoryMigration(queue, buffers, false, waitEvent);
+            waitEvent = EnqueueTask(queue, kernel, waitEvent);
+            if (copyBack) EnqueueMemoryMigration(queue, buffers, true, waitEvent);
+        }
+
+        public async Task AwaitDevice(int deviceIndex)
+        {
+            var queue = _queues[deviceIndex];
+            VerifyResult(await Task.Run(() => _cl.Finish(queue)));
+        }
+
+        public unsafe IntPtr SetKernelArgumentWithNewBuffer(
+            string kernelName,
+            int index,
+            MemoryHandle data,
+            int length,
+            IntPtr buffer = default)
+        {
+            if (buffer == IntPtr.Zero) buffer = CreateBuffer((IntPtr)data.Pointer, length, DefaultMemoryFlags);
+
+            SetKernelArgument(_kernels[kernelName], index, buffer);
+            _kernelBuffers[kernelName].Add(buffer);
+            return buffer;
+        }
+
 
         private static void VerifyResult(Result err)
         {
@@ -140,14 +207,6 @@ namespace Hast.Vitis.Abstractions.Services
                 _logger?.LogWarning($"Failed to find '{vendorName}' platform that has '{deviceType}' type devices.");
         }
 
-        public void CreateCommandQueue(int deviceIndex,
-            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
-        {
-            var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], properties, out var result);
-            VerifyResult(result);
-            _queues[deviceIndex] = queue;
-        }
-
         private IntPtr CreateProgramWithBinary(IntPtr binary, int binaryLength)
         {
             var resultsPerDevice = new Result[Devices.Length];
@@ -174,31 +233,6 @@ namespace Hast.Vitis.Abstractions.Services
             return program;
         }
 
-        public void CreateBinaryKernel(byte[] binary, string kernelName)
-        {
-            if (_kernels.ContainsKey(kernelName)) return;
-
-            unsafe
-            {
-                fixed (byte* pointer = binary)
-                {
-                    var program = CreateProgramWithBinary((IntPtr)pointer, binary.Length);
-
-                    var kernel = _cl.CreateKernel(program, kernelName, out var result);
-                    VerifyResult(result);
-                    _kernels[kernelName] = kernel;
-                    _kernelBuffers[kernelName] = new List<IntPtr>();
-                }
-            }
-        }
-
-        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags)
-        {
-            var buffer = _cl.CreateBuffer(_context.Value, memoryFlags, hostBytes, hostPointer, out var result);
-            VerifyResult(result);
-            return buffer;
-        }
-
         private void SetKernelArgument(IntPtr kernel, int index, IntPtr buffer)
         {
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
@@ -210,20 +244,6 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 handle.Free();
             }
-        }
-
-        public unsafe IntPtr SetKernelArgumentWithNewBuffer(
-            string kernelName,
-            int index,
-            MemoryHandle data,
-            int length,
-            IntPtr buffer = default)
-        {
-            if (buffer == IntPtr.Zero) buffer = CreateBuffer((IntPtr)data.Pointer, length, DefaultMemoryFlags);
-
-            SetKernelArgument(_kernels[kernelName], index, buffer);
-            _kernelBuffers[kernelName].Add(buffer);
-            return buffer;
         }
 
         private IntPtr EnqueueMemoryMigration(IntPtr queue, IntPtr[] memoryObjects, bool toHost, IntPtr waitEvent)
@@ -249,23 +269,6 @@ namespace Hast.Vitis.Abstractions.Services
                 waitEvent == IntPtr.Zero ? null : new[] { waitEvent },
                 out waitEvent));
             return waitEvent;
-        }
-
-        public void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true)
-        {
-            var queue = _queues[deviceIndex];
-            var kernel = _kernels[kernelName];
-            var waitEvent = IntPtr.Zero;
-
-            waitEvent = EnqueueMemoryMigration(queue, buffers, false, waitEvent);
-            waitEvent = EnqueueTask(queue, kernel, waitEvent);
-            if (copyBack) EnqueueMemoryMigration(queue, buffers, true, waitEvent);
-        }
-
-        public async Task AwaitDevice(int deviceIndex)
-        {
-            var queue = _queues[deviceIndex];
-            VerifyResult(await Task.Run(() => _cl.Finish(queue)));
         }
 
         #endregion

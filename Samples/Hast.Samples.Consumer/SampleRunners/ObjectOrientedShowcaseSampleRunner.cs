@@ -14,7 +14,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var ooShowcase = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new ObjectOrientedShowcase(), configuration ?? ProxyGenerationConfiguration.Default);
+                .GenerateProxy(hardwareRepresentation, new ObjectOrientedShowcase(), configuration);
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var sum = ooShowcase.Run(93, memoryConfig); // 293
         }
