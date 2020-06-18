@@ -58,7 +58,7 @@ namespace Hast.Samples.SampleAssembly
 
     public static class Posit32FusedCalculatorExtensions
     {
-        public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array, IMemoryConfiguration memoryConfiguration)
+        public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array, IMemoryConfiguration memoryConfiguration = null)
         {
             var memory = memoryConfiguration is null ?
                 SimpleMemory.CreateSoftwareMemory(posit32Array.Length + 1) :

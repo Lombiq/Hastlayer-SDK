@@ -55,7 +55,7 @@ namespace Hast.Samples.SampleAssembly
 
     public static class Posit32AdvancedCalculatorExtensions
     {
-        public static float RepeatedDivision(this Posit32AdvancedCalculator positCalculator, int number, float dividend, float divisor, IMemoryConfiguration memoryConfiguration)
+        public static float RepeatedDivision(this Posit32AdvancedCalculator positCalculator, int number, float dividend, float divisor, IMemoryConfiguration memoryConfiguration = null)
         {
             var memory = memoryConfiguration is null ?
                 SimpleMemory.CreateSoftwareMemory(3) :
@@ -70,7 +70,7 @@ namespace Hast.Samples.SampleAssembly
             return (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.RepeatedDivision_OutputPosit32Index), true);
         }
 
-        public static float[] SqrtOfPositsInArray(this Posit32AdvancedCalculator posit32Calculator, uint[] posit32Array, IMemoryConfiguration memoryConfiguration)
+        public static float[] SqrtOfPositsInArray(this Posit32AdvancedCalculator posit32Calculator, uint[] posit32Array, IMemoryConfiguration memoryConfiguration = null)
         {
             var memory = SimpleMemory.Create(memoryConfiguration, posit32Array.Length + 1);
 

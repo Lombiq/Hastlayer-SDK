@@ -26,7 +26,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator(), configuration);
             var result = positCalculator.CalculateFusedSum(CreateTestPosit32BitsArray(), memoryConfig);
         }
 
@@ -37,10 +37,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             var posit32BitsArray = CreateTestPosit32BitsArray();
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
-            var result = positCalculator.CalculateFusedSum(posit32BitsArray, null);
+            var result = positCalculator.CalculateFusedSum(posit32BitsArray);
 
             var sw = Stopwatch.StartNew();
-            result = positCalculator.CalculateFusedSum(posit32BitsArray, null);
+            result = positCalculator.CalculateFusedSum(posit32BitsArray);
             sw.Stop();
 
             Console.WriteLine("Result of Fused addition of posits in array: " + result);

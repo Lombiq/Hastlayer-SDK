@@ -21,7 +21,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             RunSoftwareBenchmarks();
 
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator(), configuration ?? ProxyGenerationConfiguration.Default);
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator(), configuration);
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, memoryConfig);
@@ -56,9 +56,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
-            positCalculator.CalculateIntegerSumUpToNumber(100000, null);
+            positCalculator.CalculateIntegerSumUpToNumber(100000);
             var sw = Stopwatch.StartNew();
-            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, null);
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
             sw.Stop();
 
             Console.WriteLine("Result of counting up to 100000: " + integerSumUpToNumber);
@@ -66,9 +66,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             Console.WriteLine();
 
-            positCalculator.CalculatePowerOfReal(100000, (float)1.0001, null);
+            positCalculator.CalculatePowerOfReal(100000, (float)1.0001);
             sw = Stopwatch.StartNew();
-            var powerOfReal = positCalculator.CalculatePowerOfReal(100000, (float)1.0001, null);
+            var powerOfReal = positCalculator.CalculatePowerOfReal(100000, (float)1.0001);
             sw.Stop();
 
             Console.WriteLine("Result of power of real number: " + powerOfReal);
@@ -82,9 +82,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                 numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
             }
 
-            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, null);
+            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
             sw = Stopwatch.StartNew();
-            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, null);
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
             sw.Stop();
 
             Console.WriteLine("Result of counting up to ~100000 parallelized: " + string.Join(", ", integerSumsUpToNumbers));
@@ -100,9 +100,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
             }
 
-            positCalculator.AddPositsInArray(posit32Array, null);
+            positCalculator.AddPositsInArray(posit32Array);
             sw = Stopwatch.StartNew();
-            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array, null);
+            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array);
             sw.Stop();
 
             Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);

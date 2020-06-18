@@ -18,7 +18,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), configuration ?? ProxyGenerationConfiguration.Default);
+            var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), configuration);
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var isPrime = primeCalculator.IsPrimeNumber(15, memoryConfig);
@@ -57,8 +57,8 @@ namespace Hast.Samples.Consumer.SampleRunners
                 9749, 9973, 902119, 907469, 915851
             };
 
-            var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers, null);
-            var arePrimes4 = primeCalculator.ParallelizedArePrimeNumbers(numbers, null);
+            var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
+            var arePrimes4 = primeCalculator.ParallelizedArePrimeNumbers(numbers);
         }
     }
 }

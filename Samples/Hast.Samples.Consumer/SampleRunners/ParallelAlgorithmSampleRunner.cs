@@ -21,7 +21,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm(), configuration ?? ProxyGenerationConfiguration.Default);
+            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm(), configuration);
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var output1 = parallelAlgorithm.Run(234234, memoryConfig);

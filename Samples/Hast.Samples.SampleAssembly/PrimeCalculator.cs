@@ -184,12 +184,12 @@ namespace Hast.Samples.SampleAssembly
             return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), memoryConfiguration);
         }
 
-        public bool[] ArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration)
+        public bool[] ArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration = null)
         {
             return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), memoryConfiguration);
         }
 
-        public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration)
+        public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration = null)
         {
             var results = RunArePrimeNumbersMethod(
                 numbers.PadToMultipleOf(MaxDegreeOfParallelism),
