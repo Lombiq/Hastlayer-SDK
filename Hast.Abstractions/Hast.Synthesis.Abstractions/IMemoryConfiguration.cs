@@ -11,8 +11,7 @@ namespace Hast.Synthesis.Abstractions
 
 
         /// <summary>
-        /// The minimum cell count to be reserved in front of the message payload. It's required for device-specific
-        /// headers in the message.
+        /// The minimum cell count to be reserved in front of the payload. It's required for device-specific headers.
         /// </summary>
         int MinimumPrefix { get; }
     }

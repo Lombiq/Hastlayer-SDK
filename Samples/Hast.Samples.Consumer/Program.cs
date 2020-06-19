@@ -218,13 +218,6 @@ namespace Hast.Samples.Consumer
                         typeof(ImmutableArray).Assembly
                 },
                 configuration);
-            if (hardwareRepresentation.HardwareDescription is VhdlHardwareDescription description)
-            {
-                var ipPath = Path.Combine(configuration.HardwareFrameworkPath, "rtl", "src", "IP");
-                if (!Directory.Exists(ipPath)) Directory.CreateDirectory(ipPath);
-                await File.WriteAllTextAsync(Path.Combine(ipPath, "Hast_IP.vhd"), description.VhdlSource);
-                await File.WriteAllTextAsync(Path.Combine(ipPath, "Hast_IP.xdc"), description.XdcSource);
-            }
 
             Console.WriteLine("Hardware generation finished.");
             Console.WriteLine();

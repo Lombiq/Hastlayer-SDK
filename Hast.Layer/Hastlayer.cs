@@ -244,7 +244,7 @@ namespace Hast.Layer
         public async Task<T> GenerateProxy<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
-            IProxyGenerationConfiguration configuration) where T : class
+            IProxyGenerationConfiguration configuration = null) where T : class
         {
             if (configuration is null) configuration = ProxyGenerationConfiguration.Default;
             if (!hardwareRepresentation.SoftAssemblyPaths.Contains(hardwareObject.GetType().Assembly.Location))
