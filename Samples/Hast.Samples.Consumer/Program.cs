@@ -1,4 +1,4 @@
-using Hast.Algorithms;
+﻿using Hast.Algorithms;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
@@ -138,62 +138,28 @@ namespace Hast.Samples.Consumer
             Configuration.SampleToRun = (Sample)Enum.Parse(typeof(Sample), GetArgument("sample") ?? Configuration.SampleToRun.ToString(), true);
 
             // Letting the configuration of samples run. Check out those methods too!
-            switch (Configuration.SampleToRun)
+            ISampleRunner sampleRunner = Configuration.SampleToRun switch
             {
-                case Sample.Fix64Calculator:
-                    Fix64CalculatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.FSharpParallelAlgorithm:
-                    FSharpParallelAlgorithmSampleRunner.Configure(configuration);
-                    break;
-                case Sample.GenomeMatcher:
-                    GenomeMatcherSampleRunner.Configure(configuration);
-                    break;
-                case Sample.ParallelAlgorithm:
-                    ParallelAlgorithmSampleRunner.Configure(configuration);
-                    break;
-                case Sample.ImageProcessingAlgorithms:
-                    ImageProcessingAlgorithmsSampleRunner.Configure(configuration);
-                    break;
-                case Sample.Loopback:
-                    LoopbackSampleRunner.Configure(configuration);
-                    break;
-                case Sample.MemoryTest:
-                    MemoryTestSampleRunner.Configure(configuration);
-                    break;
-                case Sample.MonteCarloPiEstimator:
-                    MonteCarloPiEstimatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.ObjectOrientedShowcase:
-                    ObjectOrientedShowcaseSampleRunner.Configure(configuration);
-                    break;
-                case Sample.PositCalculator:
-                    PositCalculatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.Posit32AdvancedCalculator:
-                    Posit32AdvancedCalculatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.Posit32Calculator:
-                    Posit32CalculatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.Posit32FusedCalculator:
-                    Posit32FusedCalculatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.PrimeCalculator:
-                    PrimeCalculatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.RecursiveAlgorithms:
-                    RecursiveAlgorithmsSampleRunner.Configure(configuration);
-                    break;
-                case Sample.SimdCalculator:
-                    SimdCalculatorSampleRunner.Configure(configuration);
-                    break;
-                case Sample.UnumCalculator:
-                    UnumCalculatorSampleRunner.Configure(configuration);
-                    break;
-                default:
-                    throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.");
-            }
+                Sample.Fix64Calculator => new Fix64CalculatorSampleRunner(),
+                Sample.FSharpParallelAlgorithm => new FSharpParallelAlgorithmSampleRunner(),
+                Sample.GenomeMatcher => new GenomeMatcherSampleRunner(),
+                Sample.ParallelAlgorithm => new ParallelAlgorithmSampleRunner(),
+                Sample.ImageProcessingAlgorithms => new ImageProcessingAlgorithmsSampleRunner(),
+                Sample.Loopback => new LoopbackSampleRunner(),
+                Sample.MemoryTest => new MemoryTestSampleRunner(),
+                Sample.MonteCarloPiEstimator => new MonteCarloPiEstimatorSampleRunner(),
+                Sample.ObjectOrientedShowcase => new ObjectOrientedShowcaseSampleRunner(),
+                Sample.PositCalculator => new PositCalculatorSampleRunner(),
+                Sample.Posit32AdvancedCalculator => new Posit32AdvancedCalculatorSampleRunner(),
+                Sample.Posit32Calculator => new Posit32CalculatorSampleRunner(),
+                Sample.Posit32FusedCalculator => new Posit32FusedCalculatorSampleRunner(),
+                Sample.PrimeCalculator => new PrimeCalculatorSampleRunner(),
+                Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
+                Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
+                Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
+                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
+            };
+            sampleRunner.Configure(configuration);
 
             // The generated VHDL code will contain debug-level information, though it will be slower to create.
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
@@ -233,62 +199,7 @@ namespace Hast.Samples.Consumer
             // Running samples.
             try
             {
-                switch (Configuration.SampleToRun)
-                {
-                    case Sample.Fix64Calculator:
-                        await Fix64CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.FSharpParallelAlgorithm:
-                        await FSharpParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.GenomeMatcher:
-                        await GenomeMatcherSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.ParallelAlgorithm:
-                        await ParallelAlgorithmSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.ImageProcessingAlgorithms:
-                        await ImageProcessingAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.Loopback:
-                        await LoopbackSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.MemoryTest:
-                        await MemoryTestSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.MonteCarloPiEstimator:
-                        await MonteCarloPiEstimatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.ObjectOrientedShowcase:
-                        await ObjectOrientedShowcaseSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.PositCalculator:
-                        await PositCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.Posit32AdvancedCalculator:
-                        await Posit32AdvancedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.Posit32Calculator:
-                        await Posit32CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.Posit32FusedCalculator:
-                        await Posit32FusedCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.PrimeCalculator:
-                        await PrimeCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.RecursiveAlgorithms:
-                        await RecursiveAlgorithmsSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.SimdCalculator:
-                        await SimdCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    case Sample.UnumCalculator:
-                        await UnumCalculatorSampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                        break;
-                    default:
-                        throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.");
-                }
+                await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {
