@@ -6,14 +6,14 @@ using Hast.Samples.SampleAssembly;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class SimdCalculatorSampleRunner
+    internal class SimdCalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<SimdCalculator>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             // Starting with 1 not to have a divide by zero.
             var vector = Enumerable.Range(1, SimdCalculator.MaxDegreeOfParallelism * 4).ToArray();

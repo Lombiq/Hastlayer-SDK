@@ -5,9 +5,9 @@ using Hast.Transformer.Abstractions.Configuration;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class PrimeCalculatorSampleRunner
+    internal class PrimeCalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             // You can add complete types whose methods you'd like to invoke on the hardware from the outside like this.
             configuration.AddHardwareEntryPointType<PrimeCalculator>();
@@ -16,7 +16,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // Note that the bottom version can also be used to add multiple types from under a namespace.
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), configuration);
 

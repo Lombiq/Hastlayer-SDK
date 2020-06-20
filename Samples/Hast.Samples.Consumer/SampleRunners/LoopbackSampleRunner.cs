@@ -8,14 +8,14 @@ using Hast.Samples.SampleAssembly;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class LoopbackSampleRunner
+    internal class LoopbackSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Loopback>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration);
 

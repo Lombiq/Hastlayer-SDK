@@ -12,14 +12,14 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class Fix64CalculatorSampleRunner
+    internal class Fix64CalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Fix64Calculator>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator(), configuration);
 

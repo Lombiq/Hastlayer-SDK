@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class MonteCarloPiEstimatorSampleRunner
+    internal class MonteCarloPiEstimatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<MonteCarloPiEstimator>();
             configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomXorshiftLfsr16>(p => p.NextUInt16());
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 500000;
 

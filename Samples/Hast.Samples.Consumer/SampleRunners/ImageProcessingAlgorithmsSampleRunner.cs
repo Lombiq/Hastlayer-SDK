@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class ImageProcessingAlgorithmsSampleRunner
+    internal class ImageProcessingAlgorithmsSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
@@ -17,7 +17,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             //configuration.AddHardwareEntryPointType<ImageFilter>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
             // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/

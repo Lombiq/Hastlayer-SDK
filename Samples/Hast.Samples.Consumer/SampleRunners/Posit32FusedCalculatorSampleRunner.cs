@@ -10,9 +10,9 @@ using Lombiq.Arithmetics;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal class Posit32FusedCalculatorSampleRunner
+    internal class Posit32FusedCalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Posit32FusedCalculator>();
 
@@ -21,7 +21,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                Posit32FusedCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
 
