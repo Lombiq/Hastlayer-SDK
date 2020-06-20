@@ -1,4 +1,4 @@
-﻿using Hast.Algorithms;
+using Hast.Algorithms;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
@@ -8,10 +8,8 @@ using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Common.Models;
 
 namespace Hast.Samples.Consumer
 {
@@ -59,7 +57,7 @@ namespace Hast.Samples.Consumer
         public static string HardwareFrameworkPath = "HardwareFramework";
     }
 
-    internal class Program
+    internal static class Program
     {
         private static async Task MainTask(string[] args)
         {
@@ -112,7 +110,7 @@ namespace Hast.Samples.Consumer
             }
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
-            var devices = hastlayer.GetSupportedDevices();
+            var devices = hastlayer.GetSupportedDevices()?.ToList();
             if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
 
             // Let's just use the first one that is available unless it's specified.
@@ -292,15 +290,17 @@ namespace Hast.Samples.Consumer
                         throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.");
                 }
             }
-            catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException)
+            catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {
                 // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
                 // GenerateProxy()) then everything will be computed in software as well to check the hardware.
                 // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
                 // not impossible in corner cases.
-                var mismatches = ((HardwareExecutionResultMismatchException)ex.InnerException).Mismatches;
-                var mismatchCount = mismatches.Count();
-                Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : $"es")}:");
+                var mismatches = exception
+                    .Mismatches?
+                    .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
+                var mismatchCount = mismatches.Count;
+                Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : "es")}:");
 
                 foreach (var mismatch in mismatches)
                 {
