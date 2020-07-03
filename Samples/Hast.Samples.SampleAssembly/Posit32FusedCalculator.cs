@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
@@ -58,7 +59,7 @@ namespace Hast.Samples.SampleAssembly
 
     public static class Posit32FusedCalculatorExtensions
     {
-        public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array, IMemoryConfiguration memoryConfiguration = null)
+        public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = memoryConfiguration is null ?
                 SimpleMemory.CreateSoftwareMemory(posit32Array.Length + 1) :

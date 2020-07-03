@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
@@ -74,7 +75,7 @@ namespace Hast.Samples.SampleAssembly
         };
 
 
-        public static uint[] CalculateSumOfPowersofTwo(this UnumCalculator unumCalculator, uint number, IMemoryConfiguration memoryConfiguration)
+        public static uint[] CalculateSumOfPowersofTwo(this UnumCalculator unumCalculator, uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = SimpleMemory.Create(memoryConfiguration, 9);
             memory.WriteUInt32(UnumCalculator.CalculateSumOfPowersofTwo_InputUInt32Index, number);

@@ -22,8 +22,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);
 
-            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, memoryConfig);
+            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             var sqrtInputArray = new uint[10];
             for (int i = 0; i < 10; i++)
@@ -31,7 +30,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
             }
 
-            positCalculator.SqrtOfPositsInArray(sqrtInputArray, memoryConfig);
+            positCalculator.SqrtOfPositsInArray(sqrtInputArray, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
         public static void RunSoftwareBenchmarks()

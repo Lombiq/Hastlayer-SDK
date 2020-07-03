@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hast.Algorithms;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
@@ -89,9 +90,9 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        public Fix64 CalculateIntegerSumUpToNumber(int input, IMemoryConfiguration configuration)
+        public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {
-            var memory = SimpleMemory.Create(configuration, 2);
+            var memory = hastlayer.CreateMemory(configuration, 2);
 
             memory.WriteInt32(CalculateLargeIntegerSum_InputInt32Index, input);
 
@@ -104,7 +105,7 @@ namespace Hast.Samples.SampleAssembly
             });
         }
 
-        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers, IMemoryConfiguration memoryConfiguration = null)
+        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             if (numbers.Length != MaxDegreeOfParallelism)
             {

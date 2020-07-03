@@ -2,6 +2,7 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
@@ -78,7 +79,7 @@ namespace Hast.Samples.SampleAssembly
 
         private readonly Random _random = new Random();
 
-        public double EstimatePi(uint iterationsCount, IMemoryConfiguration memoryConfiguration)
+        public double EstimatePi(uint iterationsCount, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             if (iterationsCount % MaxDegreeOfParallelism != 0)
             {

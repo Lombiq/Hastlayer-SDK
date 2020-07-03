@@ -174,22 +174,22 @@ namespace Hast.Samples.SampleAssembly
         // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
         // in them that is not Hastlayer-compatible.
 
-        public bool IsPrimeNumber(uint number, IMemoryConfiguration memoryConfiguration)
+        public bool IsPrimeNumber(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory)), memoryConfiguration).Result;
         }
 
-        public Task<bool> IsPrimeNumberAsync(uint number, IMemoryConfiguration memoryConfiguration)
+        public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), memoryConfiguration);
         }
 
-        public bool[] ArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration = null)
+        public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), memoryConfiguration);
         }
 
-        public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IMemoryConfiguration memoryConfiguration = null)
+        public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var results = RunArePrimeNumbersMethod(
                 numbers.PadToMultipleOf(MaxDegreeOfParallelism),
@@ -200,7 +200,7 @@ namespace Hast.Samples.SampleAssembly
             return results.CutToLength(numbers.Length);
         }
 
-        private async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner, IMemoryConfiguration memoryConfiguration)
+        private async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             // One memory cell is enough for data exchange.
             var memory = SimpleMemory.Create(memoryConfiguration, 1);
@@ -211,7 +211,7 @@ namespace Hast.Samples.SampleAssembly
             return memory.ReadBoolean(IsPrimeNumber_OutputBooleanIndex);
         }
 
-        private bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner, IMemoryConfiguration memoryConfiguration)
+        private bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
             var memory = SimpleMemory.Create(memoryConfiguration, numbers.Length + 1);

@@ -1,4 +1,5 @@
-﻿using Hast.Synthesis.Abstractions;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -30,7 +31,7 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        public int Run(int startIndex, int length, IMemoryConfiguration memoryConfiguration)
+        public int Run(int startIndex, int length, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = SimpleMemory.Create(memoryConfiguration, startIndex + length < 2 ? 2 : startIndex + length);
             memory.WriteInt32(Run_StartIndexInt32Index, startIndex);

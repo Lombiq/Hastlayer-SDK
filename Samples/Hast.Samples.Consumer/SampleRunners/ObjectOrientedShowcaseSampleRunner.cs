@@ -15,8 +15,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var ooShowcase = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ObjectOrientedShowcase(), configuration);
-            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
-            var sum = ooShowcase.Run(93, memoryConfig); // 293
+var sum = ooShowcase.Run(93, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 293
         }
     }
 }

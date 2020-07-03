@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
@@ -183,7 +184,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns the longest common subsequence of the two strings.</returns>
-        public string CalculateLongestCommonSubsequence(string inputOne, string inputTwo, IMemoryConfiguration memoryConfiguration)
+        public string CalculateLongestCommonSubsequence(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var simpleMemory = CreateSimpleMemory(inputOne, inputTwo, memoryConfiguration);
 
@@ -199,7 +200,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
-        private SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo, IMemoryConfiguration memoryConfiguration)
+        private SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var cellCount = 2 + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2 + Math.Max(inputOne.Length, inputTwo.Length);
 

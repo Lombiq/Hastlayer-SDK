@@ -108,20 +108,20 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        public int[] AddVectors(int[] vector1, int[] vector2, IMemoryConfiguration memoryConfiguration) =>
+        public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => AddVectors(memory), memoryConfiguration);
 
-        public int[] SubtractVectors(int[] vector1, int[] vector2, IMemoryConfiguration memoryConfiguration) =>
+        public int[] SubtractVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), memoryConfiguration);
 
-        public int[] MultiplyVectors(int[] vector1, int[] vector2, IMemoryConfiguration memoryConfiguration) =>
+        public int[] MultiplyVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), memoryConfiguration);
 
-        public int[] DivideVectors(int[] vector1, int[] vector2, IMemoryConfiguration memoryConfiguration) =>
+        public int[] DivideVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), memoryConfiguration);
 
 
-        private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IMemoryConfiguration memoryConfiguration)
+        private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             SimdOperations.ThrowIfVectorsNotEquallyLong(vector1, vector2);
 

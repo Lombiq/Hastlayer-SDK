@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
@@ -66,7 +67,7 @@ namespace Hast.Samples.SampleAssembly
         };
 
 
-        public static int CalculateIntegerSumUpToNumber(this PositCalculator positCalculator, int number, IMemoryConfiguration memoryConfiguration)
+        public static int CalculateIntegerSumUpToNumber(this PositCalculator positCalculator, int number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = SimpleMemory.Create(memoryConfiguration, 1);
 

@@ -20,13 +20,12 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), configuration);
 
-            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
-            var isPrime = primeCalculator.IsPrimeNumber(15, memoryConfig);
-            var isPrime2 = primeCalculator.IsPrimeNumber(13, memoryConfig);
-            var isPrime3 = await primeCalculator.IsPrimeNumberAsync(21, memoryConfig);
+            var isPrime = primeCalculator.IsPrimeNumber(15, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var isPrime2 = primeCalculator.IsPrimeNumber(13, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var isPrime3 = await primeCalculator.IsPrimeNumberAsync(21, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             // Only 2341 is prime.
-            var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }, memoryConfig);
-            var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 }, memoryConfig);
+            var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 }, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 }, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             // You can also launch hardware-executed method calls in parallel. If there are multiple boards
             // connected then all of them will be utilized. If the whole device pool is utilized calls will

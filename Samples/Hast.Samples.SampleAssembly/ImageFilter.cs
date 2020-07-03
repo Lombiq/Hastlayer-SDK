@@ -148,7 +148,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the smoothed image.</returns>
-        public Bitmap ApplyGaussFilter(Bitmap image, IMemoryConfiguration memoryConfiguration)
+        public Bitmap ApplyGaussFilter(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -166,7 +166,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image.</returns>
-        public Bitmap ApplySobelFilter(Bitmap image, IMemoryConfiguration memoryConfiguration)
+        public Bitmap ApplySobelFilter(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -183,7 +183,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image containing only horizontal edges.</returns>
-        public Bitmap DetectHorizontalEdges(Bitmap image, IMemoryConfiguration memoryConfiguration)
+        public Bitmap DetectHorizontalEdges(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -200,7 +200,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image containing only vertical edges.</returns>
-        public Bitmap DetectVerticalEdges(Bitmap image, IMemoryConfiguration memoryConfiguration)
+        public Bitmap DetectVerticalEdges(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
