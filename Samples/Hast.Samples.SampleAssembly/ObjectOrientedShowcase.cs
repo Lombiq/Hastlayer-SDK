@@ -81,7 +81,9 @@ namespace Hast.Samples.SampleAssembly
 
         public uint Run(uint input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, 10);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(10)
+                : hastlayer.CreateMemory(configuration, 10);
             memory.WriteUInt32(Run_InputUInt32Index, input);
             Run(memory);
             return memory.ReadUInt32(Run_OutputUInt32Index);

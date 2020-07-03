@@ -146,7 +146,8 @@ namespace Hast.Samples.SampleAssembly
             var memory = CreateSimpleMemory(
                 image,
                 contrast,
-                memoryConfiguration);
+                hastlayer,
+                configuration);
             ChangeContrast(memory);
             return CreateImage(memory, image);
         }
@@ -165,7 +166,9 @@ namespace Hast.Samples.SampleAssembly
                 pixelCount +
                 (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0) +
                 3;
-            var memory = SimpleMemory.Create(memoryConfiguration, cellCount);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             memory.WriteUInt32(ChangeContrast_ImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(ChangeContrast_ImageHeightIndex, (uint)image.Height);

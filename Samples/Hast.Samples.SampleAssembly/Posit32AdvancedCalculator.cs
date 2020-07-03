@@ -53,9 +53,9 @@ namespace Hast.Samples.SampleAssembly
     {
         public static float RepeatedDivision(this Posit32AdvancedCalculator positCalculator, int number, float dividend, float divisor, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = memoryConfiguration is null ?
-                SimpleMemory.CreateSoftwareMemory(3) :
-                SimpleMemory.Create(memoryConfiguration, 3);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(3)
+                : hastlayer.CreateMemory(configuration, 3);
 
             memory.WriteInt32(Posit32AdvancedCalculator.RepeatedDivision_InputInt32Index, number);
             memory.WriteUInt32(Posit32AdvancedCalculator.RepeatedDivision_FirstInputPosit32Index, new Posit32(dividend).PositBits);
@@ -68,7 +68,10 @@ namespace Hast.Samples.SampleAssembly
 
         public static float[] SqrtOfPositsInArray(this Posit32AdvancedCalculator posit32Calculator, uint[] posit32Array, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, posit32Array.Length + 1);
+            var cellCount = posit32Array.Length + 1;
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             memory.WriteUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArray_InputPosit32CountIndex, (uint)posit32Array.Length);
 

@@ -33,7 +33,10 @@ namespace Hast.Samples.SampleAssembly
 
         public int Run(int startIndex, int length, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, startIndex + length < 2 ? 2 : startIndex + length);
+            var cellCount = startIndex + length < 2 ? 2 : startIndex + length;
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
             memory.WriteInt32(Run_StartIndexInt32Index, startIndex);
             memory.WriteInt32(Run_LengthInt32Index, length);
             Run(memory);

@@ -69,7 +69,9 @@ namespace Hast.Samples.SampleAssembly
 
         public static int CalculateIntegerSumUpToNumber(this PositCalculator positCalculator, int number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, 1);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(1)
+                : hastlayer.CreateMemory(configuration, 1);
 
             memory.WriteInt32(PositCalculator.CalculateLargeIntegerSum_InputInt32Index, number);
             positCalculator.CalculateIntegerSumUpToNumber(memory);

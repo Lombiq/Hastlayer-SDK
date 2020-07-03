@@ -186,7 +186,7 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns the longest common subsequence of the two strings.</returns>
         public string CalculateLongestCommonSubsequence(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo, memoryConfiguration);
+            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo, hastlayer, configuration);
 
             CalculateLongestCommonSubsequence(simpleMemory);
 
@@ -204,7 +204,9 @@ namespace Hast.Samples.SampleAssembly
         {
             var cellCount = 2 + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2 + Math.Max(inputOne.Length, inputTwo.Length);
 
-            var simpleMemory = SimpleMemory.Create(memoryConfiguration, cellCount);
+            var simpleMemory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             simpleMemory.WriteUInt32(GetLCS_InputOneLengthIndex, (uint)inputOne.Length);
             simpleMemory.WriteUInt32(GetLCS_InputTwoLengthIndex, (uint)inputTwo.Length);

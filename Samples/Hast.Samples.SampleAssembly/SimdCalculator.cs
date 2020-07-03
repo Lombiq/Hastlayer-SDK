@@ -1,6 +1,7 @@
 ﻿using Hast.Common.Numerics;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
@@ -109,16 +110,16 @@ namespace Hast.Samples.SampleAssembly
 
 
         public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => AddVectors(memory), memoryConfiguration);
+            RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
 
         public int[] SubtractVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), memoryConfiguration);
+            RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), hastlayer, configuration);
 
         public int[] MultiplyVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), memoryConfiguration);
+            RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), hastlayer, configuration);
 
         public int[] DivideVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), memoryConfiguration);
+            RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
 
 
         private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
@@ -131,7 +132,10 @@ namespace Hast.Samples.SampleAssembly
             vector2 = vector2.PadToMultipleOf(MaxDegreeOfParallelism);
 
             var elementCount = vector1.Length;
-            var memory = SimpleMemory.Create(memoryConfiguration, 1 + elementCount * 2);
+            var cellCount = 1 + elementCount * 2;
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             memory.WriteInt32(VectorsElementCountInt32Index, elementCount);
 

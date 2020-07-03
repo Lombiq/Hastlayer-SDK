@@ -114,9 +114,9 @@ namespace Hast.Samples.SampleAssembly
                     MaxDegreeOfParallelism + ")");
             }
 
-            var memory = memoryConfiguration is null ?
+            var memory = hastlayer is null ?
                 SimpleMemory.CreateSoftwareMemory(2 * MaxDegreeOfParallelism) :
-                SimpleMemory.Create(memoryConfiguration, 2 * MaxDegreeOfParallelism);
+                hastlayer.CreateMemory(configuration, 2 * MaxDegreeOfParallelism);
 
             for (int i = 0; i < numbers.Length; i++)
             {

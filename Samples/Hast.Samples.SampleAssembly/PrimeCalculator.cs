@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
@@ -176,17 +177,17 @@ namespace Hast.Samples.SampleAssembly
 
         public bool IsPrimeNumber(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory)), memoryConfiguration).Result;
+            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory)), hastlayer, configuration).Result;
         }
 
         public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), memoryConfiguration);
+            return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
         }
 
         public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), memoryConfiguration);
+            return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), hastlayer, configuration);
         }
 
         public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
@@ -194,7 +195,8 @@ namespace Hast.Samples.SampleAssembly
             var results = RunArePrimeNumbersMethod(
                 numbers.PadToMultipleOf(MaxDegreeOfParallelism),
                 ParallelizedArePrimeNumbers,
-                memoryConfiguration);
+                hastlayer,
+                configuration);
 
             // The result might be longer than the input due to padding.
             return results.CutToLength(numbers.Length);
@@ -203,7 +205,9 @@ namespace Hast.Samples.SampleAssembly
         private async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             // One memory cell is enough for data exchange.
-            var memory = SimpleMemory.Create(memoryConfiguration, 1);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(1)
+                : hastlayer.CreateMemory(configuration, 1);
             memory.WriteUInt32(IsPrimeNumber_InputUInt32Index, number);
 
             await methodRunner(memory);
@@ -214,7 +218,9 @@ namespace Hast.Samples.SampleAssembly
         private bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
-            var memory = SimpleMemory.Create(memoryConfiguration, numbers.Length + 1);
+            var memory =hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(numbers.Length + 1)
+                : hastlayer.CreateMemory(configuration, numbers.Length + 1);
 
             memory.WriteUInt32(ArePrimeNumbers_InputUInt32CountIndex, (uint)numbers.Length);
             for (int i = 0; i < numbers.Length; i++)

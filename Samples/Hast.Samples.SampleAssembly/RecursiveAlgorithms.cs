@@ -1,4 +1,5 @@
-﻿using Hast.Synthesis.Abstractions;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -70,7 +71,9 @@ namespace Hast.Samples.SampleAssembly
 
         public uint CalculateFibonacchiSeries(short number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, 2);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(2)
+                : hastlayer.CreateMemory(configuration, 2);
             memory.WriteInt32(CalculateFibonacchiSeries_InputShortIndex, number);
             CalculateFibonacchiSeries(memory);
             return memory.ReadUInt32(CalculateFibonacchiSeries_OutputUInt32Index);
@@ -78,7 +81,9 @@ namespace Hast.Samples.SampleAssembly
 
         public uint CalculateFactorial(short number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, 2);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(2)
+                : hastlayer.CreateMemory(configuration, 2);
             memory.WriteInt32(CalculateFactorial_InputShortIndex, number);
             CalculateFactorial(memory);
             return memory.ReadUInt32(CalculateFactorial_OutputUInt32Index);

@@ -1,5 +1,6 @@
 ﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Drawing;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
@@ -152,7 +153,8 @@ namespace Hast.Samples.SampleAssembly
         {
             var memory = CreateSimpleMemory(
                 image,
-                memoryConfiguration,
+                hastlayer,
+                configuration,
                 1, 2, 1,
                 2, 4, 2,
                 1, 2, 1,
@@ -170,7 +172,8 @@ namespace Hast.Samples.SampleAssembly
         {
             var memory = CreateSimpleMemory(
                 image,
-                memoryConfiguration,
+                hastlayer,
+                configuration,
                 1, 2, 1,
                 0, 0, 0,
                 -1, -2, -1);
@@ -187,7 +190,8 @@ namespace Hast.Samples.SampleAssembly
         {
             var memory = CreateSimpleMemory(
                 image,
-                memoryConfiguration,
+                hastlayer,
+                configuration,
                 1, 1, 1,
                 0, 0, 0,
                 -1, -1, -1);
@@ -204,7 +208,8 @@ namespace Hast.Samples.SampleAssembly
         {
             var memory = CreateSimpleMemory(
                 image,
-                memoryConfiguration,
+                hastlayer,
+                configuration,
                 1, 0, -1,
                 1, 0, -1,
                 1, 0, -1);
@@ -231,13 +236,16 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private SimpleMemory CreateSimpleMemory(
             Bitmap image,
-            IMemoryConfiguration memoryConfiguration,
+            IHastlayer hastlayer, IHardwareGenerationConfiguration configuration,
             int topLeft, int topMiddle, int topRight,
             int middleLeft, int pixel, int middleRight,
             int bottomLeft, int bottomMiddle, int bottomRight,
             int factor = 1, int offset = 0)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, image.Width * image.Height * 6 + 13);
+            var cellCount = image.Width * image.Height * 6 + 13;
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             memory.WriteUInt32(FilterImage_ImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(FilterImage_ImageHeightIndex, (uint)image.Height);

@@ -86,7 +86,9 @@ namespace Hast.Samples.SampleAssembly
                 throw new Exception($"The number of iterations must be divisible by {MaxDegreeOfParallelism}.");
             }
 
-            var memory = SimpleMemory.Create(memoryConfiguration, 2);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(2)
+                : hastlayer.CreateMemory(configuration, 2);
             memory.WriteUInt32(EstimatePi_IteractionsCountUInt32Index, iterationsCount);
             memory.WriteUInt32(EstimatePi_RandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
 

@@ -77,7 +77,9 @@ namespace Hast.Samples.SampleAssembly
 
         public static uint[] CalculateSumOfPowersofTwo(this UnumCalculator unumCalculator, uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = SimpleMemory.Create(memoryConfiguration, 9);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(9)
+                : hastlayer.CreateMemory(configuration, 9);
             memory.WriteUInt32(UnumCalculator.CalculateSumOfPowersofTwo_InputUInt32Index, number);
             unumCalculator.CalculateSumOfPowersofTwo(memory);
             var resultArray = new uint[9];

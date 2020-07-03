@@ -56,9 +56,9 @@ namespace Hast.Samples.Demo
             var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
-            var output1 = parallelAlgorithm.Run(234234, memoryConfig);
-            var output2 = parallelAlgorithm.Run(123, memoryConfig);
-            var output3 = parallelAlgorithm.Run(9999, memoryConfig);
+            var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output2 = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output3 = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             #endregion
         }
     }
