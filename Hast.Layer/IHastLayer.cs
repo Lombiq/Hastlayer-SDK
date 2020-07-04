@@ -77,10 +77,10 @@ namespace Hast.Layer
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
         /// the FPGA for transformed algorithms. Use this method only if you have no control over the source of the
-        /// input data or if the generation process can't be done through Memory&lt;byte&gt; access alone. (eg if using
-        /// an API that only supports classic array manipulation) Otherwise prefer to use the other overload and produce
-        /// the content using Memory&lt;byte&gt; operations. Use <see cref="SimpleMemoryAccessor"/> to gain access to
-        /// the internal <see cref="Memory{byte}" />.
+        /// input data or if the generation process can't be done through Memory&lt;byte&gt; access alone. (E.g. if
+        /// using an API that only supports classic array manipulation) Otherwise prefer to use the other overload and
+        /// produce the content using Memory&lt;byte&gt; operations. Use <see cref="SimpleMemoryAccessor"/> to gain
+        /// access to the internal Memory&lt;byte&gt;.
         /// </summary>
         /// <param name="configuration">The configuration with the device information.</param>
         /// <param name="data">
