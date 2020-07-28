@@ -13,10 +13,7 @@ namespace Hast.Xilinx.Abstractions
         private readonly ILogger _logger;
 
 
-        public VivadoHardwareImplementationComposer(ILogger<VivadoHardwareImplementationComposer> logger)
-        {
-            _logger = logger;
-        }
+        public VivadoHardwareImplementationComposer(ILogger<VivadoHardwareImplementationComposer> logger) => _logger = logger;
 
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
@@ -60,11 +57,7 @@ namespace Hast.Xilinx.Abstractions
             File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
 
-            string xdcFileSubPath;
-
-            if (isNexys) xdcFileSubPath = "Nexys4DDR_Master.xdc";
-            else xdcFileSubPath = Path.Combine("src", "IP", "Hast_IP.xdc");
-
+            var xdcFileSubPath = isNexys ? "Nexys4DDR_Master.xdc" : Path.Combine("src", "IP", "Hast_IP.xdc");
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";
 
