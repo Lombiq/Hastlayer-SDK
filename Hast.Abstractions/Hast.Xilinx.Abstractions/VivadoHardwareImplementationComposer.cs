@@ -57,7 +57,7 @@ namespace Hast.Xilinx.Abstractions
             File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
 
-            var xdcFileSubPath = isNexys ? "Nexys4DDR_Master.xdc" : Path.Combine("src", "IP", "Hast_IP.xdc");
+            var xdcFileSubPath = isNexys ? "Nexys4DDR_Master.xdc" : Path.Combine("rtl", "src", "IP", "Hast_IP.xdc");
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";
 
