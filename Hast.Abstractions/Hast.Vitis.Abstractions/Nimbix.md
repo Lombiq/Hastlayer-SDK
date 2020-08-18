@@ -16,7 +16,7 @@ To run a Hastlayer applications on the [Nimbix HPC cloud](https://www.nimbix.net
 
 ## Setup
 
-1. Set up an SFTP connection to your Nimbix storage as explained [here](https://support.nimbix.net/hc/en-us/articles/115000157983-How-to-Upload-Data-to-JARVICE-using-SFTP). This will serve as persistent storage and will be accessible even if you have no jobs running. A suitable SFTP client is e.g. FileZilla (for Total Commander you need the [SFTP plugin](https://www.ghisler.com/plugins.htm) that you can use like xplained [here](https://webhosting.platon.org/article.php?support::totalcommander)). (Note that SFTP is FTP via SSH, not to be confused with FTPS, i.e. FTP via SSL.)
+1. Set up an SFTP connection to your Nimbix storage as explained [here](https://support.nimbix.net/hc/en-us/articles/115000157983-How-to-Upload-Data-to-JARVICE-using-SFTP). This will serve as persistent storage and will be accessible even if you have no jobs running. A suitable SFTP client is e.g. FileZilla (for Total Commander you need the [SFTP plugin](https://www.ghisler.com/plugins.htm) that you can use like explained [here](https://webhosting.platon.org/article.php?support::totalcommander)). (Note that SFTP is FTP via SSH, not to be confused with FTPS, i.e. FTP via SSL.)
 2. Navigate to the `/data` directory. Note that only files put here will remain between job shutdowns.
 3. Create a *HardwareFramework* directory in the output directory of the host executable (e.g. the `Hast.Samples.Consumer` project) and copy the whole folder of the Hastlayer Hardware Framework - Xilinx Vitis project into it.
 4. Run the host executable locally so the RTL source is generated.
