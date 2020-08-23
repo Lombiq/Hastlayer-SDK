@@ -1,8 +1,8 @@
 using Hast.Algorithms.Random;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Threading.Tasks;
-using Hast.Layer;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -256,6 +256,9 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// Wrapper for calling <see cref="KpzKernelsParallelizedInterface.ScheduleIterations"/>.
         /// </summary>
+        /// <param name="kernels"></param>
+        /// <param name="hastlayer">Required to properly create <see cref="SimpleMemory"/>.</param>
+        /// <param name="configuration">Required to properly create <see cref="SimpleMemory"/>.</param>
         /// <param name="hostGrid">The grid that we work on.</param>
         /// <param name="pushToFpga">Force pushing the grid into the FPGA (or work on the grid already there).</param>
         /// <param name="randomSeedEnable">

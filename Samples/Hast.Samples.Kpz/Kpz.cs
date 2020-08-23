@@ -1,3 +1,4 @@
+using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using System;
 
@@ -266,17 +267,34 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// </summary>
-        public void DoHastIterations(uint numberOfIterations)
+        public void DoHastIterations(IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
+            uint numberOfIterations)
         {
             var gridBefore = (KpzNode[,])Grid.Clone();
 
             if (_enableStateLogger) StateLogger.NewKpzIteration();
 
             if (_kpzTarget == KpzTarget.FpgaParallelized || _kpzTarget == KpzTarget.FpgaSimulationParallelized)
-                KernelsParallelized.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, _randomSeedEnable, numberOfIterations);
+            {
+                KernelsParallelized.DoIterationsWrapper(
+                    hastlayer,
+                    configuration,
+                    Grid,
+                    !HastlayerGridAlreadyPushed,
+                    _randomSeedEnable,
+                    numberOfIterations);
+            }
             else
-                Kernels.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, false,
-                    _random.NextUInt64(), _random.NextUInt64(), numberOfIterations);
+                Kernels.DoIterationsWrapper(
+                    hastlayer,
+                    configuration,
+                    Grid,
+                    !HastlayerGridAlreadyPushed,
+                    false,
+                    _random.NextUInt64(),
+                    _random.NextUInt64(),
+                    numberOfIterations);
 
             if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
             //HastlayerGridAlreadyPushed = true; // If not commented out, push always
@@ -286,7 +304,7 @@ namespace Hast.Samples.Kpz
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// It allows us to debug the steps of the algorithms one by one.
         /// </summary>
-        public void DoHastIterationDebug()
+        public void DoHastIterationDebug(IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {
             var numberOfStepsInIteration = GridWidth * GridHeight;
             var gridBefore = (KpzNode[,])Grid.Clone();
@@ -295,7 +313,15 @@ namespace Hast.Samples.Kpz
 
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                Kernels.DoIterationsWrapper(Grid, true, true, _random.NextUInt64(), _random.NextUInt64(), 1);
+                Kernels.DoIterationsWrapper(
+                    hastlayer,
+                    configuration,
+                    Grid,
+                    true,
+                    true,
+                    _random.NextUInt64(),
+                    _random.NextUInt64(),
+                    1);
                 if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", Grid, gridBefore);
             }
         }

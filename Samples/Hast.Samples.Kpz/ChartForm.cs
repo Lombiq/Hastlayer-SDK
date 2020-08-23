@@ -1,9 +1,10 @@
 ﻿using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
-using Microsoft.Extensions.Logging;
 using System;
 using System.ComponentModel;
-using System.Threading.Tasks;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz
@@ -109,10 +110,10 @@ namespace Hast.Samples.Kpz
                 if (_writeToFile)
                 {
                     LogIt("Writing KpzStateLogger to file...");
-                    var kpzStateLoggerPath = System.IO.Path.GetDirectoryName(
-                        System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\kpzStateLogger\";
-                    if (!System.IO.Directory.Exists(kpzStateLoggerPath))
-                        System.IO.Directory.CreateDirectory(kpzStateLoggerPath);
+                    var kpzStateLoggerPath = Path.GetDirectoryName(
+                        Assembly.GetExecutingAssembly().Location) + @"\kpzStateLogger\";
+                    if (!Directory.Exists(kpzStateLoggerPath))
+                        Directory.CreateDirectory(kpzStateLoggerPath);
                     _kpz.StateLogger.WriteToFiles(kpzStateLoggerPath);
                 }
 
@@ -195,13 +196,14 @@ namespace Hast.Samples.Kpz
             _kpz.InitializeGrid();
 
             IHastlayer hastlayer = null;
+            IHardwareGenerationConfiguration configuration = null;
 
             if (ComputationTarget != KpzTarget.Cpu)
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
                 var hastlayerInitializationTask = _kpz.InitializeHastlayer(_verifyOutput, _randomSeedEnable);
-                hastlayer = hastlayerInitializationTask.Result;
+                (hastlayer, configuration) = hastlayerInitializationTask.Result;
                 hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
                 hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
                     $"(took {e.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
@@ -211,7 +213,7 @@ namespace Hast.Samples.Kpz
             {
                 if (ComputationTarget == KpzTarget.PrngTest) return; // Already done test inside InitializeHastlayer
 
-                var sw = System.Diagnostics.Stopwatch.StartNew();
+                var sw = Stopwatch.StartNew();
                 AsyncLogIt("Starting KPZ iterations...");
 
                 if (!ComputationTarget.HastlayerParallelizedAlgorithm())
@@ -224,8 +226,8 @@ namespace Hast.Samples.Kpz
                         }
                         else
                         {
-                            if (_stepByStep) _kpz.DoHastIterationDebug();
-                            else { _kpz.DoHastIterations((uint)_numKpzIterations); break; }
+                            if (_stepByStep) _kpz.DoHastIterationDebug(hastlayer, configuration);
+                            else { _kpz.DoHastIterations(hastlayer, configuration, (uint)_numKpzIterations); break; }
                         }
                         AsyncUpdateProgressBar(currentIteration);
                         AsyncUpdateChart(currentIteration);
@@ -240,7 +242,7 @@ namespace Hast.Samples.Kpz
                     {
                         int iterationsToDo = currentIteration - lastIteration;
                         AsyncLogIt(String.Format("Doing {0} iterations at once...", iterationsToDo));
-                        _kpz.DoHastIterations((uint)iterationsToDo);
+                        _kpz.DoHastIterations(hastlayer, configuration, (uint)iterationsToDo);
                         AsyncUpdateProgressBar(currentIteration);
                         // Force update if current iteration is the last:
                         AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations);
@@ -287,7 +289,7 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        /// <summary>This property of the <see cref="ChartForm"/> maps the selected item in <see cref="comboTarget"/> to 
+        /// <summary>This property of the <see cref="ChartForm"/> maps the selected item in <see cref="comboTarget"/> to
         /// <see cref="KpzTarget"/> values.</summary>
         private KpzTarget CurrentComputationTarget
         {

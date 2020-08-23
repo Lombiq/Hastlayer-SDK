@@ -1,5 +1,6 @@
-using Hast.Synthesis.Abstractions;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -38,12 +39,16 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// This copies random seed from the host to the FPGA.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
-        public static SimpleMemory PushRandomSeed(this PrngTestInterface kernels, ulong seed, IMemoryConfiguration memoryConfiguration)
+        [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
+        public static SimpleMemory PushRandomSeed(
+            this PrngTestInterface kernels,
+            ulong seed,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration)
         {
-            var sm = memoryConfiguration is null ?
+            var sm = configuration is null ?
                 SimpleMemory.CreateSoftwareMemory(3) :
-                SimpleMemory.Create(memoryConfiguration, 3);
+                hastlayer.CreateMemory(configuration, 3);
             sm.WriteUInt32(0, (uint)seed); //LE: 0 is low byte, 1 is high byte
             sm.WriteUInt32(1, (uint)(seed >> 32));
             return sm;
