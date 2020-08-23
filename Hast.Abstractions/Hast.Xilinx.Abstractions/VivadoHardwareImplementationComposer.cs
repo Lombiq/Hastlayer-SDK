@@ -61,14 +61,13 @@ namespace Hast.Xilinx.Abstractions
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";
 
-            if (File.Exists(xdcFilePath))
+            // Using the original XDC file as a template and then adding constraints to it.
+            if (File.Exists(xdcFilePath) && !File.Exists(xdcFileTemplatePath))
             {
-                // Using the original XDC file as a template and then adding constraints to it.
-                if (!File.Exists(xdcFileTemplatePath))
-                {
-                    File.Copy(xdcFilePath, xdcFileTemplatePath);
-                }
-
+                File.Copy(xdcFilePath, xdcFileTemplatePath);
+            }
+            else
+            {
                 File.Copy(xdcFileTemplatePath, xdcFilePath, true);
             }
 
