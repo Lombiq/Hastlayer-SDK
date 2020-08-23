@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hast.Vitis.Abstractions.Constants;
+using System;
 using System.Runtime.InteropServices;
 
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
@@ -11,8 +12,8 @@ namespace Hast.Vitis.Abstractions.Models
 
         public OpenClResultMetadata(Span<byte> hostBufferSpan, bool isBigEndian)
         {
-            var executionTimeSpan = hostBufferSpan.Slice(1 * MemoryCellSizeBytes, 2 * MemoryCellSizeBytes);
-            
+            var executionTimeSpan = hostBufferSpan.Slice(HeaderOffsets.ExecutionTime, 2 * MemoryCellSizeBytes);
+
             // Swap the two cells if host and device endianness don't match.
             if (isBigEndian == BitConverter.IsLittleEndian)
             {
@@ -21,7 +22,7 @@ namespace Hast.Vitis.Abstractions.Models
                 executionTimeSpan.Slice(MemoryCellSizeBytes).CopyTo(executionTimeSpan);
                 temp.CopyTo(executionTimeSpan.Slice(MemoryCellSizeBytes));
             }
-            
+
             ExecutionTime =  MemoryMarshal.Read<uint>(executionTimeSpan);
         }
     }
