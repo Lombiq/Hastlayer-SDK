@@ -91,7 +91,11 @@ namespace Hast.Vitis.Abstractions.Services
                     {
                         // Send data and execute.
                         var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
-                            KernelName, 0, hostMemoryHandle, hostMemory.Length, GetBuffer(hostMemory, hostMemoryHandle));
+                            KernelName,
+                            index: 0,
+                            hostMemoryHandle,
+                            hostMemory.Length,
+                            GetBuffer(hostMemory, hostMemoryHandle, executionContext));
                         Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
                         _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] {fpgaBuffer});
                         await _binaryOpenCl.AwaitDevice(deviceIndex);
@@ -108,7 +112,11 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
-        protected virtual IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle) => IntPtr.Zero;
+        protected virtual IntPtr GetBuffer(
+            Memory<byte> data,
+            MemoryHandle hostMemoryHandle,
+            IHardwareExecutionContext executionContext) =>
+            IntPtr.Zero;
 
 
         private OpenClResultMetadata GetResultMetadata(SimpleMemoryAccessor buffer, IOpenClConfiguration configuration)
@@ -117,7 +125,14 @@ namespace Hast.Vitis.Abstractions.Services
 
             Logger.LogInformation("_configuration.HeaderCellCount: {0}", configuration.HeaderCellCount);
             Logger.LogInformation("bufferSpan size: {0}b", bufferSpan.Length);
-            var header = bufferSpan.Slice(0, configuration.HeaderCellCount * MemoryCellSizeBytes);
+
+            var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
+            if (bufferSpan.Length < headerSize)
+            {
+                throw new IndexOutOfRangeException($"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b.");
+            }
+
+            var header = bufferSpan.Slice(0, headerSize);
             var result = new OpenClResultMetadata(header, configuration.DeviceIsBigEndian);
 
             bool canLogInfo = Logger.IsEnabled(LogLevel.Information);

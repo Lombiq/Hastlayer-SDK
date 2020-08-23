@@ -1,3 +1,4 @@
+using Hast.Communication.Models;
 using System;
 using System.Buffers;
 using Hast.Communication.Services;
@@ -21,11 +22,19 @@ namespace Hast.Vitis.Abstractions.Services
             : base(devicePoolPopulator, devicePoolManager, binaryOpenCl, logger) { }
 
 
-        protected override IntPtr GetBuffer(Memory<byte> data, MemoryHandle hostMemoryHandle)
+        protected override IntPtr GetBuffer(
+            Memory<byte> data,
+            MemoryHandle hostMemoryHandle,
+            IHardwareExecutionContext executionContext)
         {
-            _logger.LogInformation($"Using HBM: {data.Length <= 256_000_000}.");
+            var isHbm = data.Length <= 256_000_000;
+            _logger.LogInformation($"Using HBM: {isHbm}.");
 
-            if (data.Length > 256_000_000) return IntPtr.Zero;
+            if (!isHbm ||
+                (executionContext.HardwareRepresentation.DeviceManifest as XilinxDeviceManifest)?.SupportsHbm == false)
+            {
+                return IntPtr.Zero;
+            }
 
             var flags = BinaryOpenCl.DefaultMemoryFlags | MemoryFlag.ExtensionXilinxPointer;
             XilinxMemoryExtension bank;
