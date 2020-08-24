@@ -1,5 +1,7 @@
 ﻿namespace Hast.Samples.FSharpSampleAssembly
 
+open Hast.Layer
+
 module FSharpParallelAlgorithmContainer =
     open Hast.Transformer.Abstractions.SimpleMemory
     open System.Threading.Tasks
@@ -55,9 +57,11 @@ module FSharpParallelAlgorithmContainer =
 
             memory.WriteInt32(Run_InputUInt32Index, output)
 
-        member this.Run input =
-            // TODO make this use SimpleMemory.Create instead
-            let memory = SimpleMemory.CreateSoftwareMemory(1)
+        member this.Run (input, hastlayer: IHastlayer, config) =
+            let memory =
+                match hastlayer with
+                | null -> SimpleMemory.CreateSoftwareMemory(1)
+                | _ -> hastlayer.CreateMemory(config, 1)
             memory.WriteInt32(Run_InputUInt32Index, input)
             this.Run memory
             memory.ReadInt32(Run_OutputUInt32Index)

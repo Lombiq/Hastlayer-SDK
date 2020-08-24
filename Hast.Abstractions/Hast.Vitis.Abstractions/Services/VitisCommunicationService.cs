@@ -11,7 +11,7 @@ namespace Hast.Vitis.Abstractions.Services
 {
     public class VitisCommunicationService : OpenClCommunicationService
     {
-        public override string ChannelName { get; } = Constants.VitisCommunicationChannelName;
+        public override string ChannelName { get; } = Hast.Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
 
 
         public VitisCommunicationService(
