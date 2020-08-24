@@ -27,14 +27,11 @@ namespace Hast.Vitis.Abstractions.Services
             MemoryHandle hostMemoryHandle,
             IHardwareExecutionContext executionContext)
         {
-            var isHbm = data.Length <= 256_000_000;
+            var isHbm = data.Length <= 256_000_000 &&
+                (executionContext.HardwareRepresentation.DeviceManifest as XilinxDeviceManifest)?.SupportsHbm != false;
             _logger.LogInformation($"Using HBM: {isHbm}.");
 
-            if (!isHbm ||
-                (executionContext.HardwareRepresentation.DeviceManifest as XilinxDeviceManifest)?.SupportsHbm == false)
-            {
-                return IntPtr.Zero;
-            }
+            if (!isHbm) return IntPtr.Zero;
 
             var flags = BinaryOpenCl.DefaultMemoryFlags | MemoryFlag.ExtensionXilinxPointer;
             XilinxMemoryExtension bank;
