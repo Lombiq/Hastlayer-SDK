@@ -87,6 +87,14 @@ namespace Hast.Vitis.Abstractions.Services
                     var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
                     hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
 
+                    Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
+                    var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
+                    if (hostMemory.Length <= headerSize)
+                    {
+                        throw new IndexOutOfRangeException($"The result size is only {hostMemory.Length}b but it " +
+                                                           $"must be more than the header size of {headerSize}b.");
+                    }
+
                     using (var hostMemoryHandle = hostMemory.Pin())
                     {
                         // Send data and execute.
@@ -124,12 +132,13 @@ namespace Hast.Vitis.Abstractions.Services
             var bufferSpan = buffer.Get(configuration.HeaderCellCount).Span;
 
             Logger.LogInformation("_configuration.HeaderCellCount: {0}", configuration.HeaderCellCount);
-            Logger.LogInformation("bufferSpan size: {0}b", bufferSpan.Length);
+            Logger.LogInformation("Output buffer size: {0}b", bufferSpan.Length);
 
             var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
-            if (bufferSpan.Length < headerSize)
+            if (bufferSpan.Length <= headerSize)
             {
-                throw new IndexOutOfRangeException($"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b.");
+                throw new IndexOutOfRangeException($"The result size is only {bufferSpan.Length}b but it " +
+                                                   $"must be more than the header size of {headerSize}b.");
             }
 
             var header = bufferSpan.Slice(0, headerSize);
@@ -139,7 +148,7 @@ namespace Hast.Vitis.Abstractions.Services
             bool canLogDebug = Logger.IsEnabled(LogLevel.Debug);
             if (canLogInfo || canLogDebug)
             {
-                bufferSpan = bufferSpan.Slice(configuration.HeaderCellCount * MemoryCellSizeBytes);
+                bufferSpan = bufferSpan.Slice(headerSize);
 
                 if (canLogDebug)
                 {
@@ -151,7 +160,7 @@ namespace Hast.Vitis.Abstractions.Services
                     }
                 }
 
-                if (canLogInfo) Logger.LogInformation("Execution time: {0}ms", result.ExecutionTime);
+                if (canLogInfo) Logger.LogInformation("Execution time: {0} cycles", result.ExecutionTime);
             }
 
             return result;
