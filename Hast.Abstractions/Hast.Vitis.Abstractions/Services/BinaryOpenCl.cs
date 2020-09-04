@@ -12,9 +12,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using Hast.Common.Services;
-using Hast.Layer;
-using Hast.Vitis.Abstractions.Extensions;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -29,7 +26,7 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IOpenCl _cl;
         private readonly ILogger _logger;
 
-        private Lazy<IntPtr[]> _devicesLazy = null;
+        private Lazy<IntPtr[]> _devicesLazy;
         private readonly Lazy<IntPtr> _context;
 
         private readonly Dictionary<int, IntPtr> _queues = new Dictionary<int, IntPtr>();
@@ -110,10 +107,10 @@ namespace Hast.Vitis.Abstractions.Services
 
         public void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true)
         {
-            var queue = _queues[deviceIndex];
-            var kernel = _kernels[kernelName];
-            var waitEvent = IntPtr.Zero;
+            var queue = GetQueue(deviceIndex);
+            var kernel = GetKernel(kernelName);
 
+            var waitEvent = IntPtr.Zero;
             waitEvent = EnqueueMemoryMigration(queue, buffers, false, waitEvent);
             waitEvent = EnqueueTask(queue, kernel, waitEvent);
             if (copyBack) EnqueueMemoryMigration(queue, buffers, true, waitEvent);
@@ -121,7 +118,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public async Task AwaitDevice(int deviceIndex)
         {
-            var queue = _queues[deviceIndex];
+            var queue = GetQueue(deviceIndex);
             VerifyResult(await Task.Run(() => _cl.Finish(queue)));
         }
 
@@ -134,8 +131,8 @@ namespace Hast.Vitis.Abstractions.Services
         {
             if (buffer == IntPtr.Zero) buffer = CreateBuffer((IntPtr)data.Pointer, length, DefaultMemoryFlags);
 
-            SetKernelArgument(_kernels[kernelName], index, buffer);
-            _kernelBuffers[kernelName].Add(buffer);
+            SetKernelArgument(GetKernel(kernelName), index, buffer);
+            GetKernelBuffers(kernelName).Add(buffer);
             return buffer;
         }
 
@@ -285,7 +282,7 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var (name, handle) in _kernels)
             {
                 var arguments = VerifyResults(
-                    _kernelBuffers[name].Select(_cl.ReleaseMemObject),
+                    GetKernelBuffers(name).Select(_cl.ReleaseMemObject),
                     (result, _) => new Exception($"Error releasing buffer for kernel '{name}': {result}"));
                 if (arguments != null) exceptions.AddRange(arguments.InnerExceptions);
 
@@ -318,6 +315,27 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 throw new AggregateException($"Error while disposing {nameof(BinaryOpenCl)}.", exceptions);
             }
+        }
+
+        private IntPtr GetQueue(int queueIndex)
+        {
+            if (_queues.TryGetValue(queueIndex, out var queue)) return queue;
+            throw new InvalidOperationException($"There is no command queue for device #{queueIndex}. " +
+                                                $"Please use {nameof(CreateCommandQueue)} to create one!");
+        }
+
+        private IntPtr GetKernel(string kernelName)
+        {
+            if (_kernels.TryGetValue(kernelName, out var kernel)) return kernel;
+            throw new InvalidOperationException($"The kernel '{kernelName}' does not exit. " +
+                                                $"You can create a kernel with {nameof(CreateBinaryKernel)}.");
+        }
+
+        private List<IntPtr> GetKernelBuffers(string kernelName)
+        {
+            if (_kernelBuffers.TryGetValue(kernelName, out var kernel)) return kernel;
+            throw new InvalidOperationException($"The kernel '{kernelName}' does not exit. " +
+                                                $"You can create a kernel with {nameof(CreateBinaryKernel)}.");
         }
     }
 }
