@@ -12,7 +12,8 @@ namespace Hast.Vitis.Abstractions.Models
 
         public OpenClResultMetadata(Span<byte> hostBufferSpan, bool isBigEndian)
         {
-            var executionTimeSpan = hostBufferSpan.Slice(HeaderOffsets.ExecutionTime, 2 * MemoryCellSizeBytes);
+            // TODO: Why is this 4? (instead of HeaderOffsets.ExecutionTime which is 8)
+            var executionTimeSpan = hostBufferSpan.Slice(4, 2 * MemoryCellSizeBytes);
 
             // Swap the two cells if host and device endianness don't match.
             if (isBigEndian == BitConverter.IsLittleEndian)
