@@ -85,21 +85,16 @@ namespace Hast.Samples.Consumer
             // console.
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
-                Console.WriteLine(
-                    "Executing " +
-                    e.MemberFullName +
-                    " on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds.ToString("0.####") +
-                    " milliseconds (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds.ToString("0.####") +
-                    " milliseconds (all together).");
+                var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
+                var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
+                Console.WriteLine($"Executing {e.MemberFullName} on hardware took {netTime:0.####} milliseconds " +
+                            $"(net), {grossTime:0.####} milliseconds (all together).");
 
-                if (e.SoftwareExecutionInformation != null)
-                {
-                    // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults
-                    // to true, see the notes below, or if the hardware execution was canceled.
-                    Console.WriteLine($"The software execution took {e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds} milliseconds.");
-                }
+                if (e.SoftwareExecutionInformation == null) return;
+                // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults
+                // to true, see the notes below, or if the hardware execution was canceled.
+                var softwareTime = e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
+                Console.WriteLine($"The software execution took {softwareTime:0.####} milliseconds.");
             };
 
 
@@ -194,8 +189,7 @@ namespace Hast.Samples.Consumer
                 await File.WriteAllTextAsync(Path.Combine(ipPath, "Hast_IP.xdc"), description.XdcSource);
             }
 
-            Console.WriteLine("Hardware generation finished.");
-            Console.WriteLine();
+            Console.WriteLine("Hardware generation finished.\n");
 
             // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause
             // any problems, but sometimes they can.

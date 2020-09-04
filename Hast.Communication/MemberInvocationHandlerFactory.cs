@@ -35,52 +35,110 @@ namespace Hast.Communication
         public MemberInvocationHandler CreateMemberInvocationHandler(
             IHardwareRepresentation hardwareRepresentation,
             object target,
-            IProxyGenerationConfiguration configuration)
-        {
-            return invocation =>
+            IProxyGenerationConfiguration configuration) =>
+            invocation =>
+            {
+                var methodAsynchronicity = GetMethodAsynchronicity(invocation);
+
+                if (methodAsynchronicity == MethodAsynchronicity.AsyncFunction)
                 {
-                    var methodAsynchronicity = GetMethodAsynchronicity(invocation);
+                    throw new NotSupportedException("Only async methods that return a Task, not Task<T>, are supported.");
+                }
 
-                    if (methodAsynchronicity == MethodAsynchronicity.AsyncFunction)
+
+                async Task InvocationHandler()
+                {
+                    using (var scope = _serviceProvider.CreateScope())
                     {
-                        throw new NotSupportedException("Only async methods that return a Task, not Task<T>, are supported.");
-                    }
+                        // Although it says Method it can also be a property.
+                        var memberFullName = invocation.Method.GetFullName();
 
-
-                    async Task invocationHandler()
-                    {
-                        using (var scope = _serviceProvider.CreateScope())
+                        var invocationContext = new MemberInvocationContext
                         {
-                            // Although it says Method it can also be a property.
-                            var memberFullName = invocation.Method.GetFullName();
+                            Invocation = invocation,
+                            MemberFullName = memberFullName,
+                            HardwareRepresentation = hardwareRepresentation
+                        };
 
-                            var invocationContext = new MemberInvocationContext
+                        MemberInvoking?.Invoke(this, invocationContext);
+
+                        scope.ServiceProvider.GetService<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
+                        {
+                            invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
+                        });
+
+                        if (!invocationContext.HardwareExecutionIsCancelled)
+                        {
+                            var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareEntryPointNamesToMemberIdMappings;
+                            var memberNameAlternates = new HashSet<string>(hardwareMembers.Keys.SelectMany(member => member.GetMemberNameAlternates()));
+                            if (!hardwareMembers.ContainsKey(memberFullName) && !memberNameAlternates.Contains(memberFullName))
                             {
-                                Invocation = invocation,
-                                MemberFullName = memberFullName,
-                                HardwareRepresentation = hardwareRepresentation
+                                invocationContext.HardwareExecutionIsCancelled = true;
+                            }
+                        }
+
+                        if (invocationContext.HardwareExecutionIsCancelled)
+                        {
+                            var softwareExecutionStopwatch = Stopwatch.StartNew();
+                            invocation.Proceed();
+                            softwareExecutionStopwatch.Stop();
+                            invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
+                            {
+                                SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
                             };
 
-                            MemberInvoking?.Invoke(this, invocationContext);
-
-                            scope.ServiceProvider.GetService<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
-                                {
-                                    invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
-                                });
-
-                            if (!invocationContext.HardwareExecutionIsCancelled)
+                            if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
                             {
-                                var hardwareMembers = hardwareRepresentation.HardwareDescription.HardwareEntryPointNamesToMemberIdMappings;
-                                var memberNameAlternates = new HashSet<string>(hardwareMembers.Keys.SelectMany(member => member.GetMemberNameAlternates()));
-                                if (!hardwareMembers.ContainsKey(memberFullName) && !memberNameAlternates.Contains(memberFullName))
-                                {
-                                    invocationContext.HardwareExecutionIsCancelled = true;
-                                }
+                                await (Task)invocation.ReturnValue;
                             }
 
-                            if (invocationContext.HardwareExecutionIsCancelled)
+                            return;
+                        }
+
+                        var communicationChannelName = configuration.CommunicationChannelName;
+                        var deviceManifest = hardwareRepresentation.DeviceManifest;
+
+                        if (string.IsNullOrEmpty(communicationChannelName))
+                        {
+                            communicationChannelName = deviceManifest.DefaultCommunicationChannelName;
+                        }
+
+                        if (!deviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
+                        {
+                            throw new NotSupportedException(
+                                "The configured communication channel \"" + communicationChannelName +
+                                "\" is not supported by the current device.");
+                        }
+
+                        var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
+                        if (memory != null)
+                        {
+                            var memoryByteCount = (ulong)memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
+                            if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
                             {
+                                throw new InvalidOperationException(
+                                    "The input is too large to fit into the device's memory: the input is " +
+                                    memoryByteCount + " bytes, the available memory is " +
+                                    deviceManifest.AvailableMemoryBytes + " bytes.");
+                            }
+
+                            SimpleMemory softMemory = null;
+
+                            if (configuration.VerifyHardwareResults)
+                            {
+                                softMemory = SimpleMemory.CreateSoftwareMemory(memory.CellCount);
+                                var memoryBytes = new SimpleMemoryAccessor(memory).Get();
+                                memoryBytes.CopyTo(new SimpleMemoryAccessor(softMemory).Get());
+
+                                var memoryArgumentIndex = invocation.Arguments
+                                    .Select((argument, index) => new { Argument = argument, Index = index })
+                                    .Single(argument => argument.Argument is SimpleMemory)
+                                    .Index;
+                                invocation.SetArgumentValue(memoryArgumentIndex, softMemory);
+
                                 var softwareExecutionStopwatch = Stopwatch.StartNew();
+                                // This needs to happen before the awaited Execute() call below, otherwise the Task
+                                // in ReturnValue wouldn't be the original one any more.
                                 invocation.Proceed();
                                 softwareExecutionStopwatch.Stop();
                                 invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
@@ -92,142 +150,87 @@ namespace Hast.Communication
                                 {
                                     await (Task)invocation.ReturnValue;
                                 }
-
-                                return;
                             }
 
-                            var communicationChannelName = configuration.CommunicationChannelName;
-                            var deviceManifest = hardwareRepresentation.DeviceManifest;
+                            // At this point we checked that the hardware entry point does have a mapping.
+                            var memberId = hardwareRepresentation
+                                .HardwareDescription
+                                .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
 
-                            if (string.IsNullOrEmpty(communicationChannelName))
+                            var communicationService = scope
+                                .ServiceProvider
+                                .GetService<ICommunicationServiceSelector>()
+                                .GetCommunicationService(communicationChannelName);
+
+                            if (communicationService == null)
                             {
-                                communicationChannelName = deviceManifest.DefaultCommunicationChannelName;
+                                throw new InvalidOperationException(
+                                    $"No communication service was found for the channel \"{communicationChannelName}\".");
                             }
 
-                            if (!deviceManifest.SupportedCommunicationChannelNames.Contains(communicationChannelName))
+                            invocationContext.HardwareExecutionInformation = await communicationService
+                                .Execute(
+                                    memory,
+                                    memberId,
+                                    new HardwareExecutionContext { ProxyGenerationConfiguration = configuration, HardwareRepresentation = hardwareRepresentation });
+
+                            if (configuration.VerifyHardwareResults)
                             {
-                                throw new NotSupportedException(
-                                    "The configured communication channel \"" + communicationChannelName +
-                                    "\" is not supported by the current device.");
-                            }
-
-                            var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
-                            if (memory != null)
-                            {
-                                var memoryByteCount = (ulong)memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
-                                if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
+                                if (softMemory == null)
                                 {
-                                    throw new InvalidOperationException(
-                                        "The input is too large to fit into the device's memory: the input is " +
-                                        memoryByteCount + " bytes, the available memory is " +
-                                        deviceManifest.AvailableMemoryBytes + " bytes.");
+                                    throw new NullReferenceException(nameof(softMemory) + " was not initialized.");
                                 }
 
-                                SimpleMemory softMemory = null;
+                                var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
 
-                                if (configuration.VerifyHardwareResults)
+                                if (memory.CellCount != softMemory.CellCount)
                                 {
-                                    softMemory = SimpleMemory.CreateSoftwareMemory(memory.CellCount);
-                                    var memoryBytes = new SimpleMemoryAccessor(memory).Get();
-                                    memoryBytes.CopyTo(new SimpleMemoryAccessor(softMemory).Get());
-
-                                    var memoryArgumentIndex = invocation.Arguments
-                                        .Select((argument, index) => new { Argument = argument, Index = index })
-                                        .Single(argument => argument.Argument is SimpleMemory)
-                                        .Index;
-                                    invocation.SetArgumentValue(memoryArgumentIndex, softMemory);
-
-                                    var softwareExecutionStopwatch = Stopwatch.StartNew();
-                                    // This needs to happen before the awaited Execute() call below, otherwise the Task
-                                    // in ReturnValue wouldn't be the original one any more.
-                                    invocation.Proceed();
-                                    softwareExecutionStopwatch.Stop();
-                                    invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
-                                    {
-                                        SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
-                                    };
-
-                                    if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
-                                    {
-                                        await (Task)invocation.ReturnValue;
-                                    }
+                                    int overflowIndex = Math.Min(memory.CellCount, softMemory.CellCount);
+                                    mismatches.Add(new HardwareExecutionResultMismatchException.LengthMismatch(
+                                        memory.CellCount,
+                                        softMemory.CellCount,
+                                        overflowIndex,
+                                        memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : new byte[0],
+                                        softMemory.CellCount > memory.CellCount ? softMemory.Read4Bytes(overflowIndex) : new byte[0]));
                                 }
-
-                                // At this point we checked that the hardware entry point does have a mapping.
-                                var memberId = hardwareRepresentation
-                                    .HardwareDescription
-                                    .HardwareEntryPointNamesToMemberIdMappings[memberFullName];
-
-                                var communicationService = scope
-                                    .ServiceProvider
-                                    .GetService<ICommunicationServiceSelector>()
-                                    .GetCommunicationService(communicationChannelName);
-
-                                if (communicationService == null)
+                                else
                                 {
-                                    throw new InvalidOperationException(
-                                        $"No communication service was found for the channel \"{communicationChannelName}\".");
-                                }
-
-                                invocationContext.HardwareExecutionInformation = await communicationService
-                                    .Execute(
-                                        memory,
-                                        memberId,
-                                        new HardwareExecutionContext { ProxyGenerationConfiguration = configuration, HardwareRepresentation = hardwareRepresentation });
-
-                                if (configuration.VerifyHardwareResults)
-                                {
-                                    var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
-
-                                    if (memory.CellCount != softMemory.CellCount)
+                                    for (int i = 0; i < memory.CellCount; i++)
                                     {
-                                        int overflowIndex = Math.Min(memory.CellCount, softMemory.CellCount);
-                                        mismatches.Add(new HardwareExecutionResultMismatchException.LengthMismatch(
-                                            memory.CellCount,
-                                            softMemory.CellCount,
-                                            overflowIndex,
-                                            memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : new byte[0],
-                                            softMemory.CellCount > memory.CellCount ? softMemory.Read4Bytes(overflowIndex) : new byte[0]));
-                                    }
-                                    else
-                                    {
-                                        for (int i = 0; i < memory.CellCount; i++)
+                                        if (!memory.Read4Bytes(i).SequenceEqual(softMemory.Read4Bytes(i)))
                                         {
-                                            if (!memory.Read4Bytes(i).SequenceEqual(softMemory.Read4Bytes(i)))
-                                            {
-                                                mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
-                                                    i, memory.Read4Bytes(i), softMemory.Read4Bytes(i)));
-                                            }
+                                            mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                                                i, memory.Read4Bytes(i), softMemory.Read4Bytes(i)));
                                         }
                                     }
+                                }
 
-                                    if (mismatches.Any())
-                                    {
-                                        throw new HardwareExecutionResultMismatchException(mismatches);
-                                    }
+                                if (mismatches.Any())
+                                {
+                                    throw new HardwareExecutionResultMismatchException(mismatches);
                                 }
                             }
-                            else
-                            {
-                                throw new NotSupportedException(
-                                    "Only SimpleMemory-using implementations are supported for hardware execution. The invocation didn't include a SimpleMemory argument.");
-                            }
-
-                            MemberExecutedOnHardware?.Invoke(this, invocationContext);
                         }
+                        else
+                        {
+                            throw new NotSupportedException(
+                                "Only SimpleMemory-using implementations are supported for hardware execution. The invocation didn't include a SimpleMemory argument.");
+                        }
+
+                        MemberExecutedOnHardware?.Invoke(this, invocationContext);
                     }
+                }
 
 
-                    if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
-                    {
-                        invocation.ReturnValue = invocationHandler();
-                    }
-                    else
-                    {
-                        invocationHandler().Wait();
-                    }
-                };
-        }
+                if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
+                {
+                    invocation.ReturnValue = InvocationHandler();
+                }
+                else
+                {
+                    InvocationHandler().Wait();
+                }
+            };
 
         // Code taken from http://stackoverflow.com/a/28374134/220230
         private static MethodAsynchronicity GetMethodAsynchronicity(IInvocation invocation)
