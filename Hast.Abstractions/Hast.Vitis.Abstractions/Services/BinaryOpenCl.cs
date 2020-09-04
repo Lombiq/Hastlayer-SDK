@@ -75,6 +75,8 @@ namespace Hast.Vitis.Abstractions.Services
         public void CreateCommandQueue(int deviceIndex,
             CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
         {
+            if (_queues.ContainsKey(deviceIndex)) return;
+
             var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], properties, out var result);
             VerifyResult(result);
             _queues[deviceIndex] = queue;

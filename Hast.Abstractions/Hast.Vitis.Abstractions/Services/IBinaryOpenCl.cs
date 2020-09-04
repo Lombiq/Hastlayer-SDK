@@ -7,7 +7,15 @@ using Hast.Vitis.Abstractions.Models;
 
 namespace Hast.Vitis.Abstractions.Services
 {
-    public interface IBinaryOpenCl : IDependency, IDisposable
+    /// <summary>
+    /// A managed wrapper around OpenCL for using precompiled binary kernels. It abstracts resource management and hides
+    /// most pointer usage, within practicality.
+    /// </summary>
+    /// <remarks>
+    /// It is of singleton lifecycle because it handles hardware and binary resources which are not expected to change
+    /// while the application is running. This way subsequent runs don't have to suffer the same initialization costs.
+    /// </remarks>
+    public interface IBinaryOpenCl : ISingletonDependency, IDisposable
     {
         int DeviceCount { get; }
 
