@@ -1,4 +1,5 @@
-﻿using Hast.Algorithms;
+using Hast.Algorithms;
+using Hast.Common.Models;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
@@ -11,7 +12,6 @@ using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Hast.Common.Models;
 
 namespace Hast.Samples.Consumer
 {
@@ -45,8 +45,8 @@ namespace Hast.Samples.Consumer
         public static string AppSecret = "appsecret";
 
         /// <summary>
-        /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not up-to-date
-        /// enough and shouldn't be really taken as good examples (check out the other ones).
+        /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not
+        /// up-to-date enough and shouldn't be really taken as good examples (check out the other ones).
         /// You can also provide this in the -sample command line argument.
         /// </summary>
         public static Sample SampleToRun = Sample.Loopback;
@@ -71,15 +71,15 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
-            // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need
-            // the Client flavor: This will let you connect to a remote Hastlayer service to run the software
-            // to hardware transformation. In most cases the flavor defaults to the one you need.
+            // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
+            // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
+            // transformation. In most cases the flavor defaults to the one you need.
             // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
             var hastlayerConfiguration = new HastlayerConfiguration();
 
-            // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object
-            // while the program runs and re-use it continuously. No need to always wrap it into a using() like
-            // here, just make sure to Dispose() it before the program terminates.
+            // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
+            // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
+            // make sure to Dispose() it before the program terminates.
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
@@ -87,12 +87,15 @@ namespace Hast.Samples.Consumer
             {
                 var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
                 var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
-                Console.WriteLine($"Executing {e.MemberFullName} on hardware took {netTime:0.####} milliseconds " +
-                            $"(net), {grossTime:0.####} milliseconds (all together).");
+
+                Console.WriteLine(
+                    $"Executing {e.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
+                    $"{grossTime:0.####} milliseconds (all together).");
 
                 if (e.SoftwareExecutionInformation == null) return;
-                // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults
-                // to true, see the notes below, or if the hardware execution was canceled.
+
+                // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
+                // see the notes below, or if the hardware execution was canceled.
                 var softwareTime = e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
                 Console.WriteLine($"The software execution took {softwareTime:0.####} milliseconds.");
             };

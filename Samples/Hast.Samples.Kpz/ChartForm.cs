@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using System;
 using System.ComponentModel;
@@ -100,7 +100,7 @@ namespace Hast.Samples.Kpz
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled) LogIt("Operation was canceled.");
-            else if (e.Error != null) LogIt(String.Format("An error occurred: {0}", e.Error.Message));
+            else if (e.Error != null) LogIt($"An error occurred: {e.Error.Message}");
             else LogIt("Operation finished.");
             buttonStart.Enabled = false;
             progressBar.Visible = false;
@@ -112,8 +112,7 @@ namespace Hast.Samples.Kpz
                     LogIt("Writing KpzStateLogger to file...");
                     var kpzStateLoggerPath = Path.GetDirectoryName(
                         Assembly.GetExecutingAssembly().Location) + @"\kpzStateLogger\";
-                    if (!Directory.Exists(kpzStateLoggerPath))
-                        Directory.CreateDirectory(kpzStateLoggerPath);
+                    if (!Directory.Exists(kpzStateLoggerPath)) Directory.CreateDirectory(kpzStateLoggerPath);
                     _kpz.StateLogger.WriteToFiles(kpzStateLoggerPath);
                 }
 

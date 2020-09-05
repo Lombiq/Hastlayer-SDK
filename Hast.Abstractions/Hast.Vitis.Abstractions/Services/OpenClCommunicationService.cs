@@ -1,9 +1,3 @@
-﻿using System;
-using System.Buffers;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
@@ -11,6 +5,12 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Buffers;
+using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -53,9 +53,9 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (!File.Exists(configuration.BinaryFilePath))
             {
-                throw new FileNotFoundException("The OpenCL binary (xclbin) is required to start the kernel. The " +
-                    $"host can't launch without it. Please make sure the file at '{configuration.BinaryFilePath}' " +
-                    "exists and is accessible.");
+                throw new FileNotFoundException(
+                    "The OpenCL binary (xclbin) is required to start the kernel. The host can't launch without it. " +
+                    $"Please make sure the file at '{configuration.BinaryFilePath}' exists and is accessible.");
             }
 
             var kernelBinary = File.ReadAllBytes(configuration.BinaryFilePath);
@@ -68,7 +68,8 @@ namespace Hast.Vitis.Abstractions.Services
                 {
                     devices.Add(new Device
                     {
-                        Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}", Metadata = i
+                        Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}",
+                        Metadata = i
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
                 }
@@ -105,7 +106,7 @@ namespace Hast.Vitis.Abstractions.Services
                             hostMemory.Length,
                             GetBuffer(hostMemory, hostMemoryHandle, executionContext));
                         Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
-                        _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] {fpgaBuffer});
+                        _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
                         await _binaryOpenCl.AwaitDevice(deviceIndex);
                         var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
 
@@ -136,8 +137,8 @@ namespace Hast.Vitis.Abstractions.Services
             var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
             if (bufferSpan.Length <= headerSize)
             {
-                throw new IndexOutOfRangeException($"The result size is only {bufferSpan.Length}b but it " +
-                                                   $"must be more than the header size of {headerSize}b.");
+                throw new IndexOutOfRangeException(
+                    $"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b.");
             }
 
             var header = bufferSpan.Slice(0, headerSize);

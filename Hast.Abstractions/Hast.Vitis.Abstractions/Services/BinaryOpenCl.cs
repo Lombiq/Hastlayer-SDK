@@ -322,22 +322,22 @@ namespace Hast.Vitis.Abstractions.Services
         private IntPtr GetQueue(int queueIndex)
         {
             if (_queues.TryGetValue(queueIndex, out var queue)) return queue;
-            throw new InvalidOperationException($"There is no command queue for device #{queueIndex}. " +
-                                                $"Please use {nameof(CreateCommandQueue)} to create one!");
+            throw new InvalidOperationException(
+                $"There is no command queue for device #{queueIndex}. Please use {nameof(CreateCommandQueue)} to create one!");
         }
 
         private IntPtr GetKernel(string kernelName)
         {
             if (_kernels.TryGetValue(kernelName, out var kernel)) return kernel;
-            throw new InvalidOperationException($"The kernel '{kernelName}' does not exit. " +
-                                                $"You can create a kernel with {nameof(CreateBinaryKernel)}.");
+            throw new InvalidOperationException(
+                $"The kernel '{kernelName}' does not exit. You can create a kernel with {nameof(CreateBinaryKernel)}.");
         }
 
         private List<IntPtr> GetKernelBuffers(string kernelName)
         {
             if (_kernelBuffers.TryGetValue(kernelName, out var kernel)) return kernel;
-            throw new InvalidOperationException($"The kernel '{kernelName}' does not exit. " +
-                                                $"You can create a kernel with {nameof(CreateBinaryKernel)}.");
+            throw new InvalidOperationException(
+                $"The kernel '{kernelName}' does not exit. You can create a kernel with {nameof(CreateBinaryKernel)}.");
         }
     }
 }
