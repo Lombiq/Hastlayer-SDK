@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Vitis.Abstractions.Services;
 
@@ -12,6 +12,7 @@ namespace Hast.Vitis.Abstractions.Models
     /// An example for the appsettings file can be seen below or in the Hast.Samples.Consumer project. Everything
     /// omitted will remain as default.
     ///
+    /// <c>
     /// {
     ///   "HardwareGenerationConfiguration": {
     ///     "CustomConfiguration": {
@@ -22,6 +23,7 @@ namespace Hast.Vitis.Abstractions.Models
     ///     }
     ///   }
     /// }
+    /// </c>
     /// </remarks>
     public interface IOpenClConfiguration
     {

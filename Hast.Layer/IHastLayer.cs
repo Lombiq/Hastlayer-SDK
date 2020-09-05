@@ -90,7 +90,7 @@ namespace Hast.Layer
         /// <param name="withPrefixCells">The amount of empty header space reserved in the <see cref="data"/>.</param>
         /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
         // Here we use Memory&lt;byte&gt; because xmldoc doesn't support generics with a definite type in <see> and in
-        // the generated documentation they get replaced with <T>. See https://stackoverflow.com/a/41208166
+        // the generated documentation they get replaced with <T>. See https://stackoverflow.com/a/41208166.
         SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0);
     }
 }
