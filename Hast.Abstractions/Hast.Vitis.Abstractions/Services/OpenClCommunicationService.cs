@@ -107,7 +107,7 @@ namespace Hast.Vitis.Abstractions.Services
                         Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
                         _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] {fpgaBuffer});
                         await _binaryOpenCl.AwaitDevice(deviceIndex);
-                        var resultMetadata = GetResultMetadata(memoryAccessor, configuration);
+                        var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
 
                         // Read out metadata.
                         SetHardwareExecutionTime(context, executionContext, resultMetadata.ExecutionTime);
@@ -127,11 +127,10 @@ namespace Hast.Vitis.Abstractions.Services
             IntPtr.Zero;
 
 
-        private OpenClResultMetadata GetResultMetadata(SimpleMemoryAccessor buffer, IOpenClConfiguration configuration)
+        private OpenClResultMetadata GetResultMetadata(Span<byte> bufferSpan, IOpenClConfiguration configuration)
         {
-            var bufferSpan = buffer.Get(configuration.HeaderCellCount).Span;
-
             Logger.LogInformation("_configuration.HeaderCellCount: {0}", configuration.HeaderCellCount);
+            Logger.LogInformation("HeaderCellCount reported by output: {0}", MemoryMarshal.Read<uint>(bufferSpan));
             Logger.LogInformation("Output buffer size: {0}b", bufferSpan.Length);
 
             var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
