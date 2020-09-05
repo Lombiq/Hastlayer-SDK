@@ -8,5 +8,8 @@ namespace Hast.Xilinx.Abstractions
         /// Gets or sets if High Bandwidth Memory is available on this device.
         /// </summary>
         public bool SupportsHbm { get; set; } = true;
+
+
+        public XilinxDeviceManifest() => ToolChainName = CommonToolChainNames.Vivado;
     }
 }
