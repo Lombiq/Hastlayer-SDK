@@ -97,7 +97,7 @@ namespace Hast.Samples.Consumer
                 // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
                 // see the notes below, or if the hardware execution was canceled.
                 var softwareTime = e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
-                Console.WriteLine($"The software execution took {softwareTime:0.####} milliseconds.");
+                Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
             };
 
 
