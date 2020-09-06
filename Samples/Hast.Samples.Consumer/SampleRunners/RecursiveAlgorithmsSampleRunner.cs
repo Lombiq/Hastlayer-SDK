@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Abstractions.Configuration;
 using System.Threading.Tasks;
@@ -24,7 +24,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms(), configuration);
 
-var factorial = recursiveAlgorithms.CalculateFactorial(6, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 720
+            var factorial = recursiveAlgorithms.CalculateFactorial(6, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 720
             var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(13, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 233
         }
     }

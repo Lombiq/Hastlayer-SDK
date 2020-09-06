@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -15,7 +11,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.AddHardwareEntryPointType<Loopback>();
         }
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation,
+        public async Task Run(
+            IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation,
             IProxyGenerationConfiguration configuration)
         {
             var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration);
