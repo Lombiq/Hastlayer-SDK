@@ -143,8 +143,9 @@ namespace Hast.Vitis.Abstractions.Services
         {
             if (err != Result.Success)
             {
-                throw new Exception($"OpenCL error with status '{err}'. You may find more information by searching " +
-                    $"for 'opencl {err} OR CL_{err.ToString().ToSnakeCase().ToUpper()}' on the web.");
+                throw new Exception(
+                    $"OpenCL error with status '{err}'. You may find more information by searching for 'opencl {err} " +
+                    $"OR CL_{err.ToString().ToSnakeCase().ToUpper()}' on the web.");
             }
         }
 
