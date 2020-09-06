@@ -8,17 +8,17 @@ wget https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.
 sudo dpkg -i packages-microsoft-prod.deb
 
 sudo apt-get update
-sudo apt-get --yes --force-yes install apt-transport-https
+yes | sudo apt-get --yes --force-yes install apt-transport-https
 sudo apt-get update
 # This installs the full SDK allowing you to build from source. If you only want to run the compiled application, you
 # can install just the runtime by swapping the comment on the two lines below.
-sudo apt-get --yes --force-yes install dotnet-sdk-3.1
-# sudo apt-get --yes --force-yes install dotnet-runtime-3.1
+yes | sudo apt-get --yes --force-yes install dotnet-sdk-3.1
+# yes | sudo apt-get --yes --force-yes install dotnet-runtime-3.1
 
 
 
 # GDI plus (for image processing)
-sudo apt --yes --force-yes install libgdiplus
+yes | sudo apt --yes --force-yes install libgdiplus
 
 
 
