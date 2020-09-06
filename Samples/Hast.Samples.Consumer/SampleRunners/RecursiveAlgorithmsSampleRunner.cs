@@ -14,8 +14,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
                 new MemberInvocationInstanceCountConfigurationForMethod<RecursiveAlgorithms>("Recursively")
                 {
-                    // If we give these algorithms inputs causing a larger recursion depth then that will
-                    // cause runtime problems.
+                    // If we give these algorithms inputs causing a larger recursion depth then that will cause runtime
+                    // problems.
                     MaxRecursionDepth = 20
                 });
         }
