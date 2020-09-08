@@ -66,7 +66,7 @@ namespace Hast.Xilinx.Abstractions
             {
                 File.Copy(xdcFilePath, xdcFileTemplatePath);
             }
-            else
+            else if (File.Exists(xdcFileTemplatePath))
             {
                 File.Copy(xdcFileTemplatePath, xdcFilePath, true);
             }
