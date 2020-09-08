@@ -1,9 +1,8 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Layer;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -218,7 +217,7 @@ namespace Hast.Samples.SampleAssembly
         private bool[] RunArePrimeNumbersMethod(uint[] numbers, Action<SimpleMemory> methodRunner, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             // We need to allocate more memory cells, enough for all the inputs and outputs.
-            var memory =hastlayer is null
+            var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(numbers.Length + 1)
                 : hastlayer.CreateMemory(configuration, numbers.Length + 1);
 
