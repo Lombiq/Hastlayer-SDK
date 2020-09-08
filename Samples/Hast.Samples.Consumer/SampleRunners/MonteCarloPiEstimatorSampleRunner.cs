@@ -1,4 +1,4 @@
-﻿using Hast.Algorithms.Random;
+using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using System;
@@ -18,7 +18,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 500000;
 
-var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator(), configuration);
+            var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator(), configuration);
             var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             Console.WriteLine("Estimate for Pi on hardware: " + piEstimateHardware);
 

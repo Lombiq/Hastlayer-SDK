@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using System;
 using System.Linq;

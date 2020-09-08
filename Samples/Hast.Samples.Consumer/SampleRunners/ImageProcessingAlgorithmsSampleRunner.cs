@@ -21,22 +21,21 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
             // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
-            using (var bitmap = new Bitmap("fpga.jpg"))
-            {
-                var imageContrastModifier = await hastlayer
-                    .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
-                var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-                modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
+            using var bitmap = new Bitmap("fpga.jpg");
 
-                var sw = System.Diagnostics.Stopwatch.StartNew();
-                var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-                sw.Stop();
-                System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
+            var imageContrastModifier = await hastlayer
+                .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
+            var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 
-                // ImageFilter disabled until it's improved.
-                //var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
-                //var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
-            }
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            sw.Stop();
+            System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
+
+            // ImageFilter disabled until it's improved.
+            //var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
+            //var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
         }
     }
 }

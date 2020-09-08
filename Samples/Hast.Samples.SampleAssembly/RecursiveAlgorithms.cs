@@ -1,5 +1,4 @@
-﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -10,11 +9,11 @@ namespace Hast.Samples.SampleAssembly
     ///
     /// Also see <see cref="RecursiveAlgorithmsSampleRunner"/> on what to configure to make this work.
     ///
-    /// There is also an invocation counter for each of the methods, i.e. we'll be able to see how many times the methods
-    /// were invoked. This is only interesting when debugging the hardware side: writing debug data to the memory like
-    /// this can give you insights into how your code works on the hardware (this is even more useful if you also debug
-    /// with the FPGA SDK and check the memory of the FPGA there). Note that naturally adding such memory operations
-    /// makes the algorithm much slower.
+    /// There is also an invocation counter for each of the methods, i.e. we'll be able to see how many times the
+    /// methods were invoked. This is only interesting when debugging the hardware side: writing debug data to the
+    /// memory like this can give you insights into how your code works on the hardware (this is even more useful if
+    /// you also debug with the FPGA SDK and check the memory of the FPGA there). Note that naturally adding such
+    /// memory operations makes the algorithm much slower.
     /// </summary>
     /// <remarks>
     /// The private methods' names are prefixed so they can targeted for recursion configuration.

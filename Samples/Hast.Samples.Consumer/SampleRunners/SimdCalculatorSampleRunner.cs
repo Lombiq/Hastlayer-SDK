@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -20,7 +20,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var simdCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new SimdCalculator(), configuration);
 
-var sumVector = ThrowIfNotCorrect(simdCalculator, calculator => calculator.AddVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
+            var sumVector = ThrowIfNotCorrect(simdCalculator, calculator => calculator.AddVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
             var differenceVector = ThrowIfNotCorrect(simdCalculator, calculator => calculator.SubtractVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
             var productVector = ThrowIfNotCorrect(simdCalculator, calculator => calculator.MultiplyVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
             var quotientVector = ThrowIfNotCorrect(simdCalculator, calculator => calculator.DivideVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));

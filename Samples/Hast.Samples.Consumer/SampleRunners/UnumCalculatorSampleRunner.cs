@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Abstractions.Configuration;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -24,7 +19,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var unumCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new UnumCalculator(), configuration);
 
-var result = unumCalculator.CalculateSumOfPowersofTwo(9, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var result = unumCalculator.CalculateSumOfPowersofTwo(9, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
     }
 }

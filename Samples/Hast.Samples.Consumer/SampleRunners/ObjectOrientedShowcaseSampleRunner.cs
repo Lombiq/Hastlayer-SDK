@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -15,7 +15,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var ooShowcase = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ObjectOrientedShowcase(), configuration);
-var sum = ooShowcase.Run(93, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 293
+            var sum = ooShowcase.Run(93, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 293
         }
     }
 }
