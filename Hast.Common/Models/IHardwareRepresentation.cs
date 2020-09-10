@@ -27,5 +27,10 @@ namespace Hast.Layer
         /// Describes the capabilities, like available memory, of the hardware device the representation was created for.
         /// </summary>
         IDeviceManifest DeviceManifest { get; }
+
+        /// <summary>
+        /// The configuration used to create this representation.
+        /// </summary>
+        IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; }
     }
 }

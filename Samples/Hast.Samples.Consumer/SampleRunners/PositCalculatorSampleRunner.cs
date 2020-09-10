@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Lombiq.Arithmetics;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
     /// <summary>
     /// See <see cref="Posit32CalculatorSampleRunner"/> for a more usable example.
     /// </summary>
-    internal class PositCalculatorSampleRunner
+    internal class PositCalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<PositCalculator>();
 
@@ -23,11 +18,11 @@ namespace Hast.Samples.Consumer.SampleRunners
                 PositCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator());
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PositCalculator(), configuration);
 
-            var result = positCalculator.CalculateIntegerSumUpToNumber(100000);
+            var result = positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
     }
 }

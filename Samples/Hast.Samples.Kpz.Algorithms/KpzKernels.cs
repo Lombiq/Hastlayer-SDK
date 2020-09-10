@@ -1,6 +1,7 @@
 using Hast.Algorithms.Random;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Diagnostics.CodeAnalysis;
+using Hast.Layer;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -139,9 +140,10 @@ namespace Hast.Samples.Kpz.Algorithms
                 }
             }
         }
-        /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="grid" />, and randomly switches
-        /// between pyramid and hole, based on <see cref="probabilityP" /> and <see cref="probabilityQ" /> parameters
-        /// (or switches anyway, if forceSwitch is on).
+
+        /// <summary>
+        /// Detects pyramid or hole (if any) at the given coordinates in the grid, and randomly switches between pyramid
+        /// and hole, based on probabilityP and probabilityQ parameters (or switches anyway, if forceSwitch is on).
         /// </summary>
         public void RandomlySwitchFourCells(bool forceSwitch)
         {
@@ -223,9 +225,14 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// This function adds two numbers on the FPGA using <see cref="KpzKernelsInterface.TestAdd(SimpleMemory)"/>.
         /// </summary>
-        public static uint TestAddWrapper(this KpzKernelsInterface kernels, uint a, uint b)
+        public static uint TestAddWrapper(
+            this KpzKernelsInterface kernels,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
+            uint a,
+            uint b)
         {
-            var sm = new SimpleMemory(3);
+            var sm = hastlayer.CreateMemory(configuration, 3);
             sm.WriteUInt32(0, a);
             sm.WriteUInt32(1, b);
             kernels.TestAdd(sm);
@@ -233,13 +240,16 @@ namespace Hast.Samples.Kpz.Algorithms
         }
 
         /// <summary>
-        /// This function generates random numbers on the FPGA using 
+        /// This function generates random numbers on the FPGA using
         /// <see cref="KpzKernelsInterface.TestPrng(SimpleMemory)"/>.
         /// </summary>
-        public static uint[] TestPrngWrapper(this KpzKernelsInterface kernels)
+        public static uint[] TestPrngWrapper(
+            this KpzKernelsInterface kernels,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration)
         {
             var numbers = new uint[KpzKernels.GridWidth * KpzKernels.GridHeight];
-            var sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
+            var sm = hastlayer.CreateMemory(configuration, KpzKernels.SizeOfSimpleMemory);
 
             CopyParametersToMemory(sm, false, 0x5289a3b89ac5f211, 0x5289a3b89ac5f211, 0);
 
@@ -276,33 +286,43 @@ namespace Hast.Samples.Kpz.Algorithms
         /// This is a wrapper for running the KPZ algorithm on the FPGA.
         /// </summary>
         /// <param name="kernels"></param>
+        /// <param name="configuration"></param>
         /// <param name="hostGrid">
         ///     This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.
         /// </param>
         /// <param name="pushToFpga">
-        ///     If this parameter is false, the FPGA will work on the grid currently available in it, 
+        ///     If this parameter is false, the FPGA will work on the grid currently available in it,
         ///     instead of the grid in the <see cref="hostGrid"/> parameter.
         /// </param>
-        /// <param name="testMode"> 
-        ///     does several things: 
+        /// <param name="testMode">
+        ///     does several things:
         ///     <list type="bullet">
         ///         <item>
         ///             if it is true, <see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the cells
         ///             if it finds an adequate place,
         ///         </item>
         ///         <item>
-        ///             it also does only a single poke, then sends the grid back to the host so that the algorithm 
-        ///             can be analyzed in the step-by-step window. 
+        ///             it also does only a single poke, then sends the grid back to the host so that the algorithm
+        ///             can be analyzed in the step-by-step window.
         ///         </item>
         ///     </list>
         /// </param>
         /// <param name="randomSeed1">is a random seed for the algorithm.</param>
         /// <param name="randomSeed2">is a random seed for the algorithm.</param>
         /// <param name="numberOfIterations">is the number of iterations to perform.</param>
-        public static void DoIterationsWrapper(this KpzKernelsInterface kernels, KpzNode[,] hostGrid, bool pushToFpga,
-            bool testMode, ulong randomSeed1, ulong randomSeed2, uint numberOfIterations)
+        /// <param name="hastlayer"></param>
+        public static void DoIterationsWrapper(
+            this KpzKernelsInterface kernels,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
+            KpzNode[,] hostGrid,
+            bool pushToFpga,
+            bool testMode,
+            ulong randomSeed1,
+            ulong randomSeed2,
+            uint numberOfIterations)
         {
-            var sm = new SimpleMemory(KpzKernels.SizeOfSimpleMemory);
+            var sm = hastlayer.CreateMemory(configuration, KpzKernels.SizeOfSimpleMemory);
 
             if (pushToFpga)
             {

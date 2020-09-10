@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
@@ -13,10 +13,7 @@ namespace Hast.Xilinx.Abstractions
         private readonly ILogger _logger;
 
 
-        public VivadoHardwareImplementationComposer(ILogger<VivadoHardwareImplementationComposer> logger)
-        {
-            _logger = logger;
-        }
+        public VivadoHardwareImplementationComposer(ILogger<VivadoHardwareImplementationComposer> logger) => _logger = logger;
 
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
@@ -51,30 +48,26 @@ namespace Hast.Xilinx.Abstractions
             }
             else
             {
-                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "src"));
-                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "src", "IP"));
-                vhdlFilePath = Path.Combine(hardwareFrameworkPath, "src", "IP", "Hast_IP.vhd");
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl"));
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl", "src"));
+                CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"));
+                vhdlFilePath = Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP", "Hast_IP.vhd");
             }
 
             File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
 
-            string xdcFileSubPath;
-
-            if (isNexys) xdcFileSubPath = "Nexys4DDR_Master.xdc";
-            else xdcFileSubPath = Path.Combine("src", "IP", "Hast_IP.xdc");
-
+            var xdcFileSubPath = isNexys ? "Nexys4DDR_Master.xdc" : Path.Combine("rtl", "src", "IP", "Hast_IP.xdc");
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";
 
-            if (File.Exists(xdcFilePath))
+            // Using the original XDC file as a template and then adding constraints to it.
+            if (File.Exists(xdcFilePath) && !File.Exists(xdcFileTemplatePath))
             {
-                // Using the original XDC file as a template and then adding constraints to it.
-                if (!File.Exists(xdcFileTemplatePath))
-                {
-                    File.Copy(xdcFilePath, xdcFileTemplatePath);
-                }
-
+                File.Copy(xdcFilePath, xdcFileTemplatePath);
+            }
+            else if (File.Exists(xdcFileTemplatePath))
+            {
                 File.Copy(xdcFileTemplatePath, xdcFilePath, true);
             }
 

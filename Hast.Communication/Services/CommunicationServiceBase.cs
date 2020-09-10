@@ -10,13 +10,13 @@ namespace Hast.Communication.Services
 {
     public abstract class CommunicationServiceBase : ICommunicationService
     {
-        protected readonly ILogger _logger;
+        protected  ILogger Logger { get; }
 
         abstract public string ChannelName { get; }
         public TextWriter TesterOutput { get; set; }
 
 
-        protected CommunicationServiceBase(ILogger logger) => _logger = logger;
+        protected CommunicationServiceBase(ILogger logger) => Logger = logger;
 
 
         abstract public Task<IHardwareExecutionInformation> Execute(
@@ -40,7 +40,7 @@ namespace Hast.Communication.Services
 
             context.HardwareExecutionInformation.FullExecutionTimeMilliseconds = context.Stopwatch.ElapsedMilliseconds;
 
-            _logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
+            Logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
         }
 
         protected void SetHardwareExecutionTime(
@@ -51,7 +51,7 @@ namespace Hast.Communication.Services
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds =
                 1M / executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
 
-            _logger.LogInformation("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+            Logger.LogInformation($"Hardware execution took {context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds:0.0000}ms.");
         }
 
 

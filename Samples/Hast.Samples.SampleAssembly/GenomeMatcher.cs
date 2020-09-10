@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Text;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <see cref="GenomeMatcherSampleRunner"/> on what 
+    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <see cref="GenomeMatcherSampleRunner"/> on what
     /// to configure to make this work.
-    /// 
+    ///
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
     public class GenomeMatcher
@@ -182,9 +184,9 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns the longest common subsequence of the two strings.</returns>
-        public string CalculateLongestCommonSubsequence(string inputOne, string inputTwo)
+        public string CalculateLongestCommonSubsequence(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo);
+            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo, hastlayer, configuration);
 
             CalculateLongestCommonSubsequence(simpleMemory);
 
@@ -198,11 +200,13 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
-        private SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo)
+        private SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var cellCount = 2 + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2 + Math.Max(inputOne.Length, inputTwo.Length);
 
-            var simpleMemory = new SimpleMemory(cellCount);
+            var simpleMemory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             simpleMemory.WriteUInt32(GetLCS_InputOneLengthIndex, (uint)inputOne.Length);
             simpleMemory.WriteUInt32(GetLCS_InputTwoLengthIndex, (uint)inputTwo.Length);

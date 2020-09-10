@@ -15,8 +15,13 @@ namespace Hast.Communication.Tester
             string communicationChannelName,
             Dictionary<string, object> customConfiguration = null)
         {
-            HardwareRepresentation = hastlayer.GenerateHardware(new Assembly[] { Assembly.GetExecutingAssembly() },
-                new HardwareGenerationConfiguration(deviceName, null)).Result;
+            var assemblies = new[] { Assembly.GetExecutingAssembly() };
+            var configuration = new HardwareGenerationConfiguration(deviceName, null)
+            {
+                EnableHardwareTransformation = false,
+            };
+            HardwareRepresentation = hastlayer.GenerateHardware(assemblies, configuration).Result;
+
             ProxyGenerationConfiguration = new ProxyGenerationConfiguration()
             {
                 CommunicationChannelName = communicationChannelName,

@@ -1,5 +1,7 @@
 ﻿namespace Hast.Samples.FSharpSampleAssembly
 
+open Hast.Layer
+
 module FSharpParallelAlgorithmContainer =
     open Hast.Transformer.Abstractions.SimpleMemory
     open System.Threading.Tasks
@@ -23,16 +25,16 @@ module FSharpParallelAlgorithmContainer =
         // Since there's no virtual in F# the hardware entry point methods need to be abstracts with the default
         // implementation following them.
         abstract member Run: SimpleMemory -> unit
-        default __.Run memory = 
+        default __.Run memory =
             let input = memory.ReadInt32(Run_InputUInt32Index)
             // You need to use Array.zeroCreate when creating an empty array for Hastlayer to understand it.
             let tasks = Array.zeroCreate MaxDegreeOfParallelism
 
-            // Since the for loop uses an inclusive upper bound we use a while loop here for clarity with the C# 
+            // Since the for loop uses an inclusive upper bound we use a while loop here for clarity with the C#
             // ParallelAlgorithm sample.
             let mutable i = 0
             while i < MaxDegreeOfParallelism do
-                tasks.[i] <- Task.Factory.StartNew((fun (indexObject : obj) -> 
+                tasks.[i] <- Task.Factory.StartNew((fun (indexObject : obj) ->
                     let index = indexObject :?> int
                     let mutable result = input + index * 2
 
@@ -55,8 +57,11 @@ module FSharpParallelAlgorithmContainer =
 
             memory.WriteInt32(Run_InputUInt32Index, output)
 
-        member this.Run input =
-            let memory = new SimpleMemory(1)
+        member this.Run (input, hastlayer: IHastlayer, config) =
+            let memory =
+                match hastlayer with
+                | null -> SimpleMemory.CreateSoftwareMemory(1)
+                | _ -> hastlayer.CreateMemory(config, 1)
             memory.WriteInt32(Run_InputUInt32Index, input)
             this.Run memory
             memory.ReadInt32(Run_OutputUInt32Index)

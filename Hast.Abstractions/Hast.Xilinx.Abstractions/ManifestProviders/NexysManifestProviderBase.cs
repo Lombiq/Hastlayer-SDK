@@ -1,5 +1,6 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Communication.Constants.CommunicationConstants;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
@@ -18,7 +19,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                     {
                         Name = _deviceName,
                         ClockFrequencyHz = 100000000, // 100 Mhz
-                        SupportedCommunicationChannelNames = new[] { "Serial", "Ethernet" },
+                        SupportedCommunicationChannelNames = new[] { Serial.ChannelName, Ethernet.ChannelName },
                         AvailableMemoryBytes = 115343360, // 110MB
                         ToolChainName = CommonToolChainNames.Vivado
                     };
@@ -27,5 +28,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
             }
         }
 
+        public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
+            memory.MinimumPrefix = 3;
     }
 }

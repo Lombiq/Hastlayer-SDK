@@ -19,7 +19,9 @@ namespace Hast.Samples.Kpz
         public PrngTestInterface KernelsP;
 
 
-        public async Task<IHastlayer> InitializeHastlayer(bool verifyOutput, bool randomSeedEnable)
+        public async Task<(IHastlayer, IHardwareGenerationConfiguration)> InitializeHastlayer(
+            bool verifyOutput,
+            bool randomSeedEnable)
         {
             _verifyOutput = verifyOutput;
             _randomSeedEnable = randomSeedEnable;
@@ -88,7 +90,7 @@ namespace Hast.Samples.Kpz
                         new KpzKernelsParallelizedInterface(),
                         proxyConf);
                 }
-                else //if(kpzTarget == KpzTarget.PrngTest) 
+                else //if(kpzTarget == KpzTarget.PrngTest)
                 {
                     KernelsP = await hastlayer.GenerateProxy(
                         hardwareRepresentation,
@@ -108,7 +110,7 @@ namespace Hast.Samples.Kpz
             if (_kpzTarget.HastlayerPlainAlgorithm())
             {
                 LogItFunction("Running TestAdd...");
-                uint resultFpga = Kernels.TestAddWrapper(4313, 123);
+                uint resultFpga = Kernels.TestAddWrapper(hastlayer, configuration, 4313, 123);
                 uint resultCpu = 4313 + 123;
                 if (resultCpu == resultFpga) LogItFunction(string.Format("Success: {0} == {1}", resultFpga, resultCpu));
                 else LogItFunction(string.Format("Fail: {0} != {1}", resultFpga, resultCpu));
@@ -120,8 +122,8 @@ namespace Hast.Samples.Kpz
 
                 var kernelsCpu = new PrngTestInterface();
                 ulong randomSeed = 0x37a92d76a96ef210UL;
-                var smCpu = kernelsCpu.PushRandomSeed(randomSeed);
-                var smFpga = KernelsP.PushRandomSeed(randomSeed);
+                var smCpu = kernelsCpu.PushRandomSeed(randomSeed, null, null);
+                var smFpga = KernelsP.PushRandomSeed(randomSeed, hastlayer, configuration);
                 LogItFunction("PRNG results:");
                 bool success = true;
 
@@ -136,7 +138,7 @@ namespace Hast.Samples.Kpz
                 if (success) LogItFunction("TestPrng succeeded!");
                 else LogItFunction("TestPrng failed!");
             }
-            return hastlayer;
+            return (hastlayer, configuration);
         }
     }
 }

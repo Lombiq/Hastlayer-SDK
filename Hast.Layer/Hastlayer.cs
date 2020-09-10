@@ -19,6 +19,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Hast.Transformer.Abstractions.SimpleMemory;
+using Newtonsoft.Json.Linq;
 
 namespace Hast.Layer
 {
@@ -53,10 +55,10 @@ namespace Hast.Layer
 
             var services = new ServiceCollection();
             services.AddSingleton<IHastlayer>(this);
-            services.AddIDependencyContainer(assemblies);
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
+            services.AddIDependencyContainer(assemblies);
 
             services.AddSingleton(LoggerFactory.Create(builder =>
             {
@@ -154,6 +156,22 @@ namespace Hast.Layer
                     var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
                     var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
+                    var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+
+                    // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
+                    // CustomConfiguration into the current hardware generation configuration.
+                    var newCustomConfigurations = appConfiguration
+                        .GetSection(nameof(HardwareGenerationConfiguration))
+                        .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
+                        .GetChildren()
+                        .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
+                    foreach (var item in newCustomConfigurations)
+                    {
+                        configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize())
+                            [nameof(HardwareGenerationConfiguration)]?
+                            [nameof(HardwareGenerationConfiguration.CustomConfiguration)]?
+                            [item.Key];
+                    }
 
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
                         await transformer.Transform(assembliesPaths, configuration) :
@@ -208,7 +226,8 @@ namespace Hast.Layer
                         SoftAssemblyPaths = assembliesPaths,
                         HardwareDescription = hardwareDescription,
                         HardwareImplementation = hardwareImplementation,
-                        DeviceManifest = deviceManifest
+                        DeviceManifest = deviceManifest,
+                        HardwareGenerationConfiguration = configuration
                     };
                 }
             }
@@ -225,8 +244,9 @@ namespace Hast.Layer
         public async Task<T> GenerateProxy<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
-            IProxyGenerationConfiguration configuration) where T : class
+            IProxyGenerationConfiguration configuration = null) where T : class
         {
+            if (configuration is null) configuration = ProxyGenerationConfiguration.Default;
             if (!hardwareRepresentation.SoftAssemblyPaths.Contains(hardwareObject.GetType().Assembly.Location))
             {
                 throw new InvalidOperationException(
@@ -267,6 +287,25 @@ namespace Hast.Layer
             }
         }
 
+        public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, int cellCount) =>
+            RunGet(provider => SimpleMemory.Create(
+                MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
+                cellCount));
+
+        public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0) =>
+            RunGet(provider => SimpleMemory.Create(
+                MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
+                data,
+                provider.GetService<ILogger>(),
+                withPrefixCells));
+
+        public IMemoryConfiguration CreateMemoryConfiguration(IHardwareRepresentation hardwareRepresentation) =>
+            RunGet(provider => MemoryConfiguration.Create(
+                    hardwareRepresentation.HardwareGenerationConfiguration,
+                    provider.GetService<IEnumerable<IDeviceManifestProvider>>())
+            );
+
+
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {
             // This is fine because IDeviceManifest doesn't contain anything that relies on the scope.
@@ -284,13 +323,16 @@ namespace Hast.Layer
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
-            if (_serviceNames.Contains(typeof(TOut).FullName))
-            {
-                throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
-            }
-
+            ThrowIfService<TOut>();
             using (var scope = _serviceProvider.CreateScope())
                 return await process(scope.ServiceProvider);
+        }
+
+        public TOut RunGet<TOut>(Func<IServiceProvider, TOut> process)
+        {
+            ThrowIfService<TOut>();
+            using (var scope = _serviceProvider.CreateScope())
+                return process(scope.ServiceProvider);
         }
 
         public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();
@@ -355,6 +397,14 @@ namespace Hast.Layer
 
         private void LogException(Exception exception, string message) =>
             _serviceProvider.GetService<ILogger<Hastlayer>>().LogError(exception, message);
+
+        private void ThrowIfService<TOut>()
+        {
+            if (_serviceNames.Contains(typeof(TOut).FullName))
+            {
+                throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
+            }
+        }
 
         private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
             DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));

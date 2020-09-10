@@ -1,4 +1,4 @@
-# Hastlayer KPZ algorithm sample readme
+# Hastlayer KPZ algorithm sample
 
 
 
