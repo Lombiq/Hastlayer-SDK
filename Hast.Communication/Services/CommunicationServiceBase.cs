@@ -10,7 +10,7 @@ namespace Hast.Communication.Services
 {
     public abstract class CommunicationServiceBase : ICommunicationService
     {
-        protected  ILogger Logger { get; }
+        protected ILogger Logger { get; }
 
         abstract public string ChannelName { get; }
         public TextWriter TesterOutput { get; set; }
@@ -59,6 +59,7 @@ namespace Hast.Communication.Services
                 clockFrequency == null ? "standard" : "specified",
                 (clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz) /
                 1_000_000.0);
+
             Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
 

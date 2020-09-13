@@ -1,4 +1,4 @@
-﻿using Hast.Vitis.Abstractions.Interop.Enums;
+using Hast.Vitis.Abstractions.Interop.Enums;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,11 +18,11 @@ namespace Hast.Vitis.Abstractions.Models
             var results = new List<XclbinClockInfo>();
             using var reader = new StreamReader(stream, encoding);
 
-            while (reader.ReadLine() is {} line)
+            while (reader.ReadLine() is { } line)
             {
                 if (line == "Clocks")
                 {
-                    // skip the "------" line.
+                    // Skip the "------" line.
                     reader.ReadLine();
                     break;
                 }
