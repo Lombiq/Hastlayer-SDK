@@ -67,14 +67,14 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 Logger.LogWarning(
                     "The info file is required to learn the kernel clock frequency and report the execution time " +
-                    "accurately. Please copy it to '{1}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
+                    "accurately. Please copy it to '{0}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
                     infoFilePath);
             }
             else
             {
                 using var stream = new FileStream(infoFilePath, FileMode.Open);
-                clockFrequency = XclbinInfo.FromStream(stream, Encoding.Default)
-                    .FirstOrDefault(info => info.Type == XclbinInfoType.Data)?
+                clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
+                    .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
                     .Frequency;
             }
 

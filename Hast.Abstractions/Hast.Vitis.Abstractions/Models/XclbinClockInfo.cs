@@ -6,33 +6,46 @@ using System.Text;
 
 namespace Hast.Vitis.Abstractions.Models
 {
-    public class XclbinInfo
+    public class XclbinClockInfo
     {
         public string Name { get; set; }
         public int Index { get; set; }
-        public XclbinInfoType Type { get; set; }
+        public XclbinClockInfoType Type { get; set; }
         public uint Frequency { get; set; }
 
-        public static IList<XclbinInfo> FromStream(Stream stream, Encoding encoding)
+        public static IList<XclbinClockInfo> FromStream(Stream stream, Encoding encoding)
         {
-            var results = new List<XclbinInfo>();
+            var results = new List<XclbinClockInfo>();
             using var reader = new StreamReader(stream, encoding);
 
+            while (reader.ReadLine() is {} line)
+            {
+                if (line == "Clocks")
+                {
+                    // skip the "------" line.
+                    reader.ReadLine();
+                    break;
+                }
+            }
+
             var set = false;
-            var item = new XclbinInfo();
+            var item = new XclbinClockInfo();
             while (true)
             {
                 var line = reader.ReadLine();
-                if (string.IsNullOrWhiteSpace(line))
+
+                // Stop at document end or at next header.
+                var sectionFinished = line?.StartsWith("---") != false;
+                if (sectionFinished || string.IsNullOrWhiteSpace(line))
                 {
                     if (set)
                     {
                         results.Add(item);
-                        item = new XclbinInfo();
+                        item = new XclbinClockInfo();
                         set = false;
                     }
 
-                    if (line == null) return results;
+                    if (sectionFinished) return results;
                     continue;
                 }
 
@@ -51,7 +64,7 @@ namespace Hast.Vitis.Abstractions.Models
                         item.Index = int.Parse(value);
                         break;
                     case nameof(Type):
-                        item.Type = (XclbinInfoType)Enum.Parse(typeof(XclbinInfoType), value, true);
+                        item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, true);
                         break;
                     case nameof(Frequency):
                         parts = value.Split();
