@@ -65,9 +65,10 @@ namespace Hast.Vitis.Abstractions.Services
             var infoFilePath = configuration.BinaryFilePath + ".info";
             if (!File.Exists(infoFilePath))
             {
-                Logger.LogWarning($"The file '{infoFilePath}' is required to set the actual clock frequency and " +
-                                  "report the execution time accurately. Please copy it to the expectged location! " +
-                                  "(Try using the `xclbinutil --info --input XCLBIN_FILE_PATH` command)");
+                Logger.LogWarning(
+                    "The info file is required to learn the kernel clock frequency and report the execution time " +
+                    "accurately. Please copy it to '{1}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
+                    infoFilePath);
             }
             else
             {

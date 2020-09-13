@@ -49,14 +49,17 @@ namespace Hast.Communication.Services
             ulong executionTimeClockCycles,
             uint? clockFrequency = null)
         {
-            if (clockFrequency == null)
-            {
-                clockFrequency = executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz;
-            }
+            var frequency = clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz;
 
-            var milliseconds = 1M / clockFrequency.Value * 1000 * executionTimeClockCycles;
+            var milliseconds = 1M / frequency * 1000 * executionTimeClockCycles;
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = milliseconds;
-            Logger.LogInformation($"Hardware execution took {milliseconds:0.0000}ms.");
+
+            Logger.LogInformation(
+                "The {0} clock frequency is {1:0.###} MHz",
+                clockFrequency == null ? "standard" : "specified",
+                (clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz) /
+                1_000_000.0);
+            Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
 
 
