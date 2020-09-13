@@ -46,12 +46,17 @@ namespace Hast.Communication.Services
         protected void SetHardwareExecutionTime(
             CommunicationStateContext context,
             IHardwareExecutionContext executionContext,
-            ulong executionTimeClockCycles)
+            ulong executionTimeClockCycles,
+            uint? clockFrequency = null)
         {
-            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds =
-                1M / executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
+            if (clockFrequency == null)
+            {
+                clockFrequency = executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz;
+            }
 
-            Logger.LogInformation($"Hardware execution took {context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds:0.0000}ms.");
+            var milliseconds = 1M / clockFrequency.Value * 1000 * executionTimeClockCycles;
+            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = milliseconds;
+            Logger.LogInformation($"Hardware execution took {milliseconds:0.0000}ms.");
         }
 
 

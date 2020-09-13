@@ -3,13 +3,16 @@ using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Vitis.Abstractions.Extensions;
+using Hast.Vitis.Abstractions.Interop.Enums;
 using Hast.Vitis.Abstractions.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading.Tasks;
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
 
@@ -58,6 +61,22 @@ namespace Hast.Vitis.Abstractions.Services
                     $"Please make sure the file at '{configuration.BinaryFilePath}' exists and is accessible.");
             }
 
+            uint? clockFrequency = null;
+            var infoFilePath = configuration.BinaryFilePath + ".info";
+            if (!File.Exists(infoFilePath))
+            {
+                Logger.LogWarning($"The file '{infoFilePath}' is required to set the actual clock frequency and " +
+                                  "report the execution time accurately. Please copy it to the expectged location! " +
+                                  "(Try using the `xclbinutil --info --input XCLBIN_FILE_PATH` command)");
+            }
+            else
+            {
+                using var stream = new FileStream(infoFilePath, FileMode.Open);
+                clockFrequency = XclbinInfo.FromStream(stream, Encoding.Default)
+                    .FirstOrDefault(info => info.Type == XclbinInfoType.Data)?
+                    .Frequency;
+            }
+
             var kernelBinary = File.ReadAllBytes(configuration.BinaryFilePath);
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
 
@@ -77,47 +96,49 @@ namespace Hast.Vitis.Abstractions.Services
                 return Task.FromResult<IEnumerable<IDevice>>(devices);
             });
 
-            using (var device = await _devicePoolManager.ReserveDevice())
+            using var device = await _devicePoolManager.ReserveDevice();
+            var context = BeginExecution();
             {
-                var context = BeginExecution();
+                int deviceIndex = device.Metadata;
+                var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
+
+                // Prepare host buffer.
+                var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
+                hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
+
+                Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
+                var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
+                if (hostMemory.Length <= headerSize)
                 {
-                    int deviceIndex = device.Metadata;
-                    var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
-
-                    // Prepare host buffer.
-                    var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
-                    hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
-
-                    Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
-                    var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
-                    if (hostMemory.Length <= headerSize)
-                    {
-                        throw new IndexOutOfRangeException($"The result size is only {hostMemory.Length}b but it " +
-                                                           $"must be more than the header size of {headerSize}b.");
-                    }
-
-                    using (var hostMemoryHandle = hostMemory.Pin())
-                    {
-                        // Send data and execute.
-                        var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
-                            KernelName,
-                            index: 0,
-                            hostMemoryHandle,
-                            hostMemory.Length,
-                            GetBuffer(hostMemory, hostMemoryHandle, executionContext));
-                        Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
-                        _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
-                        await _binaryOpenCl.AwaitDevice(deviceIndex);
-                        var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
-
-                        // Read out metadata.
-                        SetHardwareExecutionTime(context, executionContext, resultMetadata.ExecutionTime);
-                    }
+                    throw new IndexOutOfRangeException($"The result size is only {hostMemory.Length}b but it " +
+                                                       $"must be more than the header size of {headerSize}b.");
                 }
-                EndExecution(context);
 
-                return context.HardwareExecutionInformation;
+                using (var hostMemoryHandle = hostMemory.Pin())
+                {
+                    // Send data and execute.
+                    var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
+                        KernelName,
+                        index: 0,
+                        hostMemoryHandle,
+                        hostMemory.Length,
+                        GetBuffer(hostMemory, hostMemoryHandle, executionContext));
+                    Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
+                    _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+                    await _binaryOpenCl.AwaitDevice(deviceIndex);
+                    var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
+
+                    // Read out metadata.
+                    SetHardwareExecutionTime(
+                        context,
+                        executionContext,
+                        resultMetadata.ExecutionTime,
+                        clockFrequency);
+                }
             }
+            EndExecution(context);
+
+            return context.HardwareExecutionInformation;
         }
 
 
