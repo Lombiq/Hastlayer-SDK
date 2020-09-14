@@ -10,7 +10,7 @@ namespace Hast.Communication.Services
 {
     public abstract class CommunicationServiceBase : ICommunicationService
     {
-        protected  ILogger Logger { get; }
+        protected ILogger Logger { get; }
 
         abstract public string ChannelName { get; }
         public TextWriter TesterOutput { get; set; }
@@ -46,12 +46,20 @@ namespace Hast.Communication.Services
         protected void SetHardwareExecutionTime(
             CommunicationStateContext context,
             IHardwareExecutionContext executionContext,
-            ulong executionTimeClockCycles)
+            ulong executionTimeClockCycles,
+            uint? clockFrequency = null)
         {
-            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds =
-                1M / executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
+            var frequency = clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz;
 
-            Logger.LogInformation($"Hardware execution took {context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds:0.0000}ms.");
+            var milliseconds = 1M / frequency * 1000 * executionTimeClockCycles;
+            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = milliseconds;
+
+            Logger.LogInformation(
+                "The {0} clock frequency is {1:0.###} MHz",
+                clockFrequency == null ? "standard" : "specified",
+                frequency / 1_000_000.0);
+
+            Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
 
 

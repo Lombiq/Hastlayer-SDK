@@ -43,7 +43,7 @@ You can have multiple such compilations running at the same time, as there are e
 
 This is assuming that you are going to run `Hast.Samples.Consumer` with the image procesing sample but other apps will behave similarly.
 
-1. Run the `dotnet Hast.Samples.Consumer.dll -device "Alveo U280" -sample ImageProcessingAlgorithms` command. Add the `-verify true` switch if you want to verify whether the hardware output is the same as the software one, i.e. the device works properly. Also add the `-appname` and `-appsecret` switches if you don't have these hard-coded in the app.
+1. Run the `dotnet Hast.Samples.Consumer.dll -device "Alveo U280" -sample ImageProcessingAlgorithms` command. Add the `-verify` switch if you want to verify whether the hardware output is the same as the software one, i.e. the device works properly. Also add the `-appname` and `-appsecret` switches if you don't have these hard-coded in the app.
 3. If it ran successfully, check the output picture by typing `thunar contrast.bmp`.
 
 
