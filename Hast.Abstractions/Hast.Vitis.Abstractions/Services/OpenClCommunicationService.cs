@@ -111,8 +111,9 @@ namespace Hast.Vitis.Abstractions.Services
                 var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
                 if (hostMemory.Length <= headerSize)
                 {
-                    throw new IndexOutOfRangeException($"The result size is only {hostMemory.Length}b but it " +
-                                                       $"must be more than the header size of {headerSize}b.");
+                    throw new IndexOutOfRangeException(
+                        $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
+                        $"{headerSize}b.");
                 }
 
                 using (var hostMemoryHandle = hostMemory.Pin())
