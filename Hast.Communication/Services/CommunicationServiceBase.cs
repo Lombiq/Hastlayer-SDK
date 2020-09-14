@@ -57,8 +57,7 @@ namespace Hast.Communication.Services
             Logger.LogInformation(
                 "The {0} clock frequency is {1:0.###} MHz",
                 clockFrequency == null ? "standard" : "specified",
-                (clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz) /
-                1_000_000.0);
+                frequency / 1_000_000.0);
 
             Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
