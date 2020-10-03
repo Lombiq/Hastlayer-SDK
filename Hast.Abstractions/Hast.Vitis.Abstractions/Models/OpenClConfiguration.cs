@@ -10,5 +10,6 @@ namespace Hast.Vitis.Abstractions.Models
         public int HeaderCellCount { get; set; } = 4;
         public string VendorName { get; set; } = "Xilinx";
         public int MemoryAlignment { get; set; } = 4096;
+        public bool UseEmulation { get; set; }
     }
 }

@@ -3,7 +3,9 @@ using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Xilinx.Abstractions
@@ -11,52 +13,81 @@ namespace Hast.Xilinx.Abstractions
     public class VivadoHardwareImplementationComposer : IHardwareImplementationComposer
     {
         private readonly ILogger _logger;
+        private readonly Dictionary<string, IHardwareImplementationComposerBuildProvider> _buildProviders;
 
 
-        public VivadoHardwareImplementationComposer(ILogger<VivadoHardwareImplementationComposer> logger) =>
+        public VivadoHardwareImplementationComposer(
+            ILogger<VivadoHardwareImplementationComposer> logger,
+            IEnumerable<IHardwareImplementationComposerBuildProvider> buildProviders)
+        {
             _logger = logger;
+            _buildProviders = buildProviders.ToDictionary(x => x.Name);
+        }
 
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.HardwareDescription is VhdlHardwareDescription &&
             context.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado;
 
-        public Task<IHardwareImplementation> ComposeAsync(IHardwareImplementationCompositionContext context)
+        public async Task<IHardwareImplementation> ComposeAsync(IHardwareImplementationCompositionContext context)
         {
             if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
                 throw new InvalidCastException($"This composer expects a {nameof(XilinxDeviceManifest)} type " +
                                                "manifest because Vivado works with Xilinx FPGAs.");
             }
-            if (string.IsNullOrEmpty(context.Configuration.HardwareFrameworkPath))
+
+            var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
+            if (string.IsNullOrEmpty(hardwareFrameworkPath))
             {
                 _logger.LogWarning("No hardware framework path was configured. Thus while the hardware description " +
                                    "was created it won't be implemented with the FPGA vendor toolchain.");
-                return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
+                return (IHardwareImplementation)new HardwareImplementation();
             }
 
-            CreateFiles(context, deviceManifest);
+            var (vhdlDirectory, vhdlFileName) = GetFilePath(deviceManifest, hardwareFrameworkPath);
+            var vhdlFilePath = Path.Combine(vhdlDirectory, vhdlFileName);
+            var hashId = context.HardwareDescription.TransformationId;
+            var hashFile = vhdlFilePath + ".hash";
+            if (!File.Exists(hashFile) ||
+                File.ReadAllText(hashFile).Trim() != hashId)
+            {
+                CreateFiles(context, deviceManifest, vhdlFilePath);
+                File.WriteAllText(hashFile, hashId);
+            }
 
-            return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
+            if (deviceManifest.DeviceType == XilinxDeviceType.Vitis)
+            {
+
+                var vhdlBinaryPath = Path.Combine(
+                    CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "xclbin"),
+                    hashId + ".xclbin");
+                if (!File.Exists(vhdlBinaryPath))
+                {
+                    await _buildProviders[nameof(XilinxDeviceType.Vitis)]
+                        .BuildAsync(context, vhdlBinaryPath);
+                }
+            }
+
+            return new HardwareImplementation();
         }
 
 
         private static void CreateFiles(
             IHardwareImplementationCompositionContext context,
-            XilinxDeviceManifest deviceManifest)
+            XilinxDeviceManifest deviceManifest,
+            string vhdlFilePath)
         {
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var vhdlHardwareDescription = (VhdlHardwareDescription)context.HardwareDescription;
 
-            CreateDirectoryIfDoesntExist(hardwareFrameworkPath);
-            File.WriteAllText(GetFilePath(deviceManifest, hardwareFrameworkPath), vhdlHardwareDescription.VhdlSource);
-
+            File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
             var xdcFileSubPath = deviceManifest.DeviceType switch
             {
                 XilinxDeviceType.Vitis => Path.Combine("rtl", "src", "IP", "Hast_IP.xdc"),
                 XilinxDeviceType.Nexys => "Nexys4DDR_Master.xdc",
-                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}")
+                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}"),
             };
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";
@@ -82,26 +113,30 @@ namespace Hast.Xilinx.Abstractions
             }
         }
 
-        private static void CreateDirectoryIfDoesntExist(string path)
+        private static (string Directory, string FileName) GetFilePath(
+            XilinxDeviceManifest deviceManifest,
+            string hardwareFrameworkPath)
         {
-            if (Directory.Exists(path)) return;
-            Directory.CreateDirectory(path);
-        }
-
-        private static string GetFilePath(XilinxDeviceManifest deviceManifest, string hardwareFrameworkPath)
-        {
+            string directory;
             switch (deviceManifest.DeviceType)
             {
                 case XilinxDeviceType.Nexys:
-                    CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "IPRepo"));
-                    return Path.Combine(hardwareFrameworkPath, "IPRepo", "Hast_IP.vhd");
+                    directory = CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "IPRepo");
+                    break;
                 case XilinxDeviceType.Vitis:
-                    CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl"));
-                    CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl", "src"));
-                    CreateDirectoryIfDoesntExist(Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"));
-                    return Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP", "Hast_IP.vhd");
-                default: return string.Empty;
+                    directory = CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "src", "IP");
+                    break;
+                default: throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}");
             }
+
+            return (directory, "Hast_IP.vhd");
+        }
+
+        private static string CreateDirectoryIfDoesntExist(params string[] pathComponents)
+        {
+            var path = Path.Combine(pathComponents);
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            return path;
         }
     }
 }

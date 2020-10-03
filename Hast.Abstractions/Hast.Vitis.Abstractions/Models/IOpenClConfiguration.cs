@@ -58,5 +58,10 @@ namespace Hast.Vitis.Abstractions.Models
         /// aligning is expected.
         /// </summary>
         int MemoryAlignment { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the the binary is for real hardware or emulated.
+        /// </summary>
+        bool UseEmulation { get; set; }
     }
 }

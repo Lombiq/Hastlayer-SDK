@@ -9,15 +9,15 @@ namespace Hast.Layer
     public interface IHardwareGenerationConfiguration
     {
         /// <summary>
-        /// Gets a dictionary that can contain settings for non-default configuration options (like ones required by 
+        /// Gets a dictionary that can contain settings for non-default configuration options (like ones required by
         /// specific transformer implementations).
         /// </summary>
         IDictionary<string, object> CustomConfiguration { get; }
 
         /// <summary>
-        /// Gets the collection of the full name of those public members that will be accessible as hardware 
-        /// implementation from the host computer. By default all members implemented from interfaces and all public 
-        /// virtual members will be included. You can use this to restrict what gets transformed into hardware; if 
+        /// Gets the collection of the full name of those public members that will be accessible as hardware
+        /// implementation from the host computer. By default all members implemented from interfaces and all public
+        /// virtual members will be included. You can use this to restrict what gets transformed into hardware; if
         /// nothing is specified all suitable members will be transformed.
         /// </summary>
         /// <example>
@@ -28,9 +28,9 @@ namespace Hast.Layer
         IList<string> HardwareEntryPointMemberFullNames { get; }
 
         /// <summary>
-        /// Gets the collection of the name prefixes of those public members that will be accessible as hardware 
-        /// implementation from the host computer. By default all members implemented from interfaces and all public 
-        /// virtual members will be included. You can use this to restrict what gets transformed into hardware; if 
+        /// Gets the collection of the name prefixes of those public members that will be accessible as hardware
+        /// implementation from the host computer. By default all members implemented from interfaces and all public
+        /// virtual members will be included. You can use this to restrict what gets transformed into hardware; if
         /// nothing is specified all suitable members will be transformed.
         /// </summary>
         /// <example>
@@ -59,14 +59,14 @@ namespace Hast.Layer
         string HardwareFrameworkPath { get; }
 
         /// <summary>
-        /// Gets whether hardware transformation takes place. If it doesn't then 
+        /// Gets whether hardware transformation takes place. If it doesn't then
         /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too.
         /// </summary>
         bool EnableHardwareTransformation { get; }
 
         /// <summary>
         /// Gets whether a hardware implementation composer should be used to synthesize hardware from the transformed
-        /// hardware description. 
+        /// hardware description.
         /// </summary>
         bool EnableHardwareImplementationComposition { get; }
     }
@@ -78,10 +78,14 @@ namespace Hast.Layer
         /// Gets the custom configuration if it exists or creates and adds it if it doesn't.
         /// </summary>
         /// <typeparam name="T">Type of the configuration object.</typeparam>
-        /// <param name="key">Key where the custom configuration object is stored in the 
-        /// <see cref="IHardwareGenerationConfiguration"/> instance.</param>
+        /// <param name="hardwareConfiguration">The customizable hardware generation configuration object.</param>
+        /// <param name="key">
+        /// Key where the custom configuration object is stored in <paramref name="hardwareConfiguration"/>.
+        /// </param>
         /// <returns>The existing or newly created configuration object.</returns>
-        public static T GetOrAddCustomConfiguration<T>(this IHardwareGenerationConfiguration hardwareConfiguration, string key)
+        public static T GetOrAddCustomConfiguration<T>(
+            this IHardwareGenerationConfiguration hardwareConfiguration,
+            string key)
             where T : new() =>
             hardwareConfiguration.CustomConfiguration.GetOrAddCustomConfiguration<T>(key);
 
@@ -96,7 +100,7 @@ namespace Hast.Layer
             configuration.HardwareEntryPointMemberFullNames.Add(expression.GetMethodFullName());
 
         /// <summary>
-        /// Adds a public type the suitable methods of which will be accessible from the host computer as hardware 
+        /// Adds a public type the suitable methods of which will be accessible from the host computer as hardware
         /// implementation.
         /// </summary>
         /// <typeparam name="T">The type of the object that will be later fed to the proxy generator.</typeparam>
