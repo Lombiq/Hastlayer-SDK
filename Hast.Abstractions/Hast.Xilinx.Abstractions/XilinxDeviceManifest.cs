@@ -5,9 +5,14 @@ namespace Hast.Xilinx.Abstractions
     public class XilinxDeviceManifest : DeviceManifest
     {
         /// <summary>
-        /// Gets or sets if High Bandwidth Memory is available on this device.
+        /// Gets or sets a value indicating whether High Bandwidth Memory is available on this device.
         /// </summary>
         public bool SupportsHbm { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets hardware family.
+        /// </summary>
+        public XilinxDeviceType DeviceType { get; set; } = XilinxDeviceType.Vitis;
 
 
         public XilinxDeviceManifest() => ToolChainName = CommonToolChainNames.Vivado;
