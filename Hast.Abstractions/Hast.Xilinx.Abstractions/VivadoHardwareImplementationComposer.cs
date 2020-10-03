@@ -28,17 +28,25 @@ namespace Hast.Xilinx.Abstractions
                 throw new InvalidCastException($"This composer expects a {nameof(XilinxDeviceManifest)} type " +
                                                "manifest because Vivado works with Xilinx FPGAs.");
             }
-
-            var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
-            var vhdlHardwareDescription = (VhdlHardwareDescription)context.HardwareDescription;
-
-            if (string.IsNullOrEmpty(hardwareFrameworkPath))
+            if (string.IsNullOrEmpty(context.Configuration.HardwareFrameworkPath))
             {
                 _logger.LogWarning("No hardware framework path was configured. Thus while the hardware description " +
                                    "was created it won't be implemented with the FPGA vendor toolchain.");
                 return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
             }
 
+            CreateFiles(context, deviceManifest);
+
+            return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
+        }
+
+
+        private static void CreateFiles(
+            IHardwareImplementationCompositionContext context,
+            XilinxDeviceManifest deviceManifest)
+        {
+            var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
+            var vhdlHardwareDescription = (VhdlHardwareDescription)context.HardwareDescription;
 
             CreateDirectoryIfDoesntExist(hardwareFrameworkPath);
             File.WriteAllText(GetFilePath(deviceManifest, hardwareFrameworkPath), vhdlHardwareDescription.VhdlSource);
@@ -72,11 +80,7 @@ namespace Hast.Xilinx.Abstractions
                 // The XDC file can contain constraints of previous hardware designs so clearing those out.
                 File.Copy(xdcFileTemplatePath, xdcFilePath, true);
             }
-
-
-            return Task.FromResult((IHardwareImplementation)new HardwareImplementation());
         }
-
 
         private static void CreateDirectoryIfDoesntExist(string path)
         {
