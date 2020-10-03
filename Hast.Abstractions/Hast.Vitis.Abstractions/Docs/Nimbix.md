@@ -18,25 +18,21 @@ Be sure to also check out the [general docs](../Readme.md).
 
 ## Setup
 
-1. While still on your local machine create a *HardwareFramework* directory in the output directory of the host executable (e.g. the `Hast.Samples.Consumer` project) and copy the whole folder of the Hastlayer Hardware Framework - Xilinx Vitis project into it.
-2. Run the host executable configured for the selected device so the RTL source is generated (or you can also do this already on the Nimbix machine but it's simpler locally).
-3. Set up an SFTP connection to your Nimbix storage as explained [here](https://support.nimbix.net/hc/en-us/articles/115000157983-How-to-Upload-Data-to-JARVICE-using-SFTP). This will serve as persistent storage and will be accessible even if you have no jobs running. A suitable SFTP client is e.g. FileZilla (for Total Commander you need the [SFTP plugin](https://www.ghisler.com/plugins.htm) that you can use like explained [here](https://webhosting.platon.org/article.php?support::totalcommander)). (Note that SFTP is FTP via SSH, not to be confused with FTPS, i.e. FTP via SSL.)
-4. Navigate to the `/data` directory. Note that only files put here will remain between job shutdowns.
-5. Upload the output directory of the host executable, e.g. the directory containing *Hast.Samples.Consumer.dll*. This will include the scripts for the next steps, as well as the newly generated RTL sources (in the *HardwareFramework* directory).
-6. In the Nimbix Dashboard click on the instance's image to open the web GUI.
-7. Click on the Nimbix ("start") menu at the bottom left and select Terminal Emulator.
-8. Type in the following to set up dependencies:
-```
-cd /data/host_programs_directory
-source nimbix-install.sh
-```
+1. Run the host executable configured for the selected Vitis device. This generates the RTL source as VHDL. It will terminate with an exception saying "The OpenCL binary (xclbin) is required to start the kernel. The host can't launch without it." This is normal. (you can also do this already on the Nimbix machine but it's simpler locally).
+2. Set up an SFTP connection to your Nimbix storage as explained [here](https://support.nimbix.net/hc/en-us/articles/115000157983-How-to-Upload-Data-to-JARVICE-using-SFTP). This serves as persistent storage and can be accessed even if you have no jobs running. A suitable SFTP client is e.g. FileZilla (for Total Commander you need the [SFTP plugin](https://www.ghisler.com/plugins.htm) that you can use like explained [here](https://webhosting.platon.org/article.php?support::totalcommander)). (Note that SFTP is FTP via SSH, not to be confused with FTPS, i.e. FTP via SSL.) The files uploaded here are bound to the `/data` directory in the Nimbix machine. Note that only files put here remain between job shutdowns.
+3. Upload the build directory of the host executable (ie. the directory containing *Hast.Samples.Consumer.dll*). This contains the scripts for the next steps, as well as the newly generated RTL sources in the *HardwareFramework* directory.
+4. In the Nimbix Dashboard click on the instance's image to open the web VNC GUI.
+6. Click on the Nimbix ("start") menu at the bottom left and select Terminal Emulator.
+7. Type in the following to set up dependencies:<br/>
+  `cd /data/host_programs_directory`<br/>
+  `source nimbix-install.sh`
 9. Run `source nimbix-compile.sh` to compile the generated hardware for the current U280 platform available on Nimbix. Alternatively, if you're targeting something else:
     1. `cd` to the RTL source folder.
     2. Find the correct platform name by typing `ls /opt/xilinx/platforms`.
     3. `make all TARGET=hw DEVICE=platform_name` where platform_name is from the previous step. Note that the U50 board is available in two PCIe configurations (x4 and x16) and these are not interchangeable: Use the exact platform for the board attached to the VM.
 10. Wait for a long time. The baseline time requirements (when compiling `MemoryTest` for U280) is around 2h 15m. U50, as the smallest board, is the fastest to compile for.
 
-You can have multiple such compilations running at the same time, as there are enough hardware resources, depending on the complexity of the generated hardware (i.e. the input software) and the targeted board. To see the resources usage of the VM you can install System Monitor wit `sudo apt-get --yes --force-yes install gnome-system-monitor` (you'll then find it under the System category in the start menu).
+You can have multiple such compilations running at the same time, as there are enough hardware resources, depending on the complexity of the generated hardware (i.e. the input software) and the targeted board. To see the resources usage of the VM you can use the console app [top](https://linux.die.net/man/1/top) or install [System Monitor](https://help.gnome.org/users/gnome-system-monitor/) with `sudo apt-get --yes --force-yes install gnome-system-monitor` (located under the System category in the start menu).
 
 
 ## Prepare and execute host
