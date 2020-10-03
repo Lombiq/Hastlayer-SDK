@@ -209,12 +209,8 @@ namespace Hast.Layer
                         };
 
                         var hardwareImplementationComposer = hardwareImplementationComposerSelector
-                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext);
-
-                        if (hardwareImplementationComposer == null)
-                        {
+                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
                             throw new HastlayerException("No suitable hardware implementation composer was found.");
-                        }
 
                         hardwareImplementation = await hardwareImplementationComposer
                             .Compose(hardwareImplementationCompositionContext);
