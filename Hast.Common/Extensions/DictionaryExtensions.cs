@@ -10,13 +10,16 @@ namespace System.Collections.Generic
             where T : new()
         {
 
-            if (customConfiguration.TryGetValue(key, out object config))
+            if (customConfiguration.TryGetValue(key, out var config))
             {
                 // If this is a remote transformation then custom configs won't necessarily be properly deserialized at
                 // this point, so need to handle them specifically.
-                if (config is JObject)
+                if (config is JObject jObject)
                 {
-                    return ((JObject)config).ToObject<T>(new JsonSerializer { ContractResolver = new PrivateSetterContractResolver() });
+                    var deserialized = jObject
+                        .ToObject<T>(new JsonSerializer { ContractResolver = new PrivateSetterContractResolver() });
+                    customConfiguration[key] = deserialized;
+                    return deserialized;
                 }
 
                 return (T)config;
@@ -24,7 +27,7 @@ namespace System.Collections.Generic
 
             return (T)(customConfiguration[key] = new T());
         }
-        
+
         public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> pair, out TKey key, out TValue value)
         {
             key = pair.Key;
