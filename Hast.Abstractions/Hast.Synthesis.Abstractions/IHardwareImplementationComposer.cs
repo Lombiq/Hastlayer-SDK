@@ -21,6 +21,6 @@ namespace Hast.Synthesis.Abstractions
         /// </summary>
         /// <param name="context">All the data necessary for the hardware implementation composition to happen.</param>
         /// <returns>The handle to the synthesized hardware implementation.</returns>
-        Task<IHardwareImplementation> Compose(IHardwareImplementationCompositionContext context);
+        Task<IHardwareImplementation> ComposeAsync(IHardwareImplementationCompositionContext context);
     }
 }

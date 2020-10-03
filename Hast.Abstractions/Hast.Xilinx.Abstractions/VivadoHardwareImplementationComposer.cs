@@ -21,7 +21,7 @@ namespace Hast.Xilinx.Abstractions
             context.HardwareDescription is VhdlHardwareDescription &&
             context.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado;
 
-        public Task<IHardwareImplementation> Compose(IHardwareImplementationCompositionContext context)
+        public Task<IHardwareImplementation> ComposeAsync(IHardwareImplementationCompositionContext context)
         {
             if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
