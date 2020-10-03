@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Hast.Layer
 {
     /// <summary>
-    /// A warning (i.e. an issue that doesn't necessarily make the result wrong but you should know about it) during 
+    /// A warning (i.e. an issue that doesn't necessarily make the result wrong but you should know about it) during
     /// transformation.
     /// </summary>
     public interface ITransformationWarning
@@ -23,26 +23,31 @@ namespace Hast.Layer
 
 
     /// <summary>
-    /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented 
+    /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented
     /// logic and any corresponding config files.
     /// </summary>
     public interface IHardwareDescription
     {
+        /// <summary>
+        /// A hash string suitable to identify the transformation that originated this hardware description.
+        /// </summary>
+        string TransformationId { get; }
+
         /// <summary>
         /// The hardware description language used.
         /// </summary>
         string Language { get; }
 
         /// <summary>
-        /// Gets a collection of the full name (including the full namespace of the parent type(s) as well as their 
-        /// return type and the types of their - type - arguments of hardware entry members (that are accessible as 
+        /// Gets a collection of the full name (including the full namespace of the parent type(s) as well as their
+        /// return type and the types of their - type - arguments of hardware entry members (that are accessible as
         /// hardware implementation from the host) and their corresponding numerical IDs on the hardware.
         /// </summary>
         IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
 
         /// <summary>
-        /// Gets warnings noted during transformation (i.e. issues that don't necessarily make the result wrong but you 
-        /// should know about them). 
+        /// Gets warnings noted during transformation (i.e. issues that don't necessarily make the result wrong but you
+        /// should know about them).
         /// </summary>
         IEnumerable<ITransformationWarning> Warnings { get; }
 
