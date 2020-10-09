@@ -21,6 +21,12 @@ namespace Hast.Vitis.Abstractions.Services
             string buildTarget)
         {
             var deviceManifest = (XilinxDeviceManifest)context.DeviceManifest;
+            if (string.IsNullOrEmpty(deviceManifest?.TechnicalName))
+            {
+                throw new InvalidOperationException($"The device manifest for '{deviceManifest?.Name}' is missing " +
+                                                    $"its technical name which is required to build.");
+            }
+
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
 
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
