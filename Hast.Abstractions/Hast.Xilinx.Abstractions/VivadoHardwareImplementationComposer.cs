@@ -13,7 +13,7 @@ namespace Hast.Xilinx.Abstractions
     public class VivadoHardwareImplementationComposer : IHardwareImplementationComposer
     {
         private readonly ILogger _logger;
-        private readonly Dictionary<string, IHardwareImplementationComposerBuildProvider> _buildProviders;
+        private readonly IList<IHardwareImplementationComposerBuildProvider> _buildProviders;
 
 
         public VivadoHardwareImplementationComposer(
@@ -21,7 +21,9 @@ namespace Hast.Xilinx.Abstractions
             IEnumerable<IHardwareImplementationComposerBuildProvider> buildProviders)
         {
             _logger = logger;
-            _buildProviders = buildProviders.ToDictionary(x => x.Name);
+            _buildProviders = buildProviders
+                .Where(x => x.SupportedComposers.Contains(nameof(VivadoHardwareImplementationComposer)))
+                .ToList();
         }
 
 
@@ -42,7 +44,7 @@ namespace Hast.Xilinx.Abstractions
             {
                 _logger.LogWarning("No hardware framework path was configured. Thus while the hardware description " +
                                    "was created it won't be implemented with the FPGA vendor toolchain.");
-                return (IHardwareImplementation)new HardwareImplementation();
+                return new HardwareImplementation();
             }
 
             var (vhdlDirectory, vhdlFileName) = GetFilePath(deviceManifest, hardwareFrameworkPath);
@@ -62,10 +64,10 @@ namespace Hast.Xilinx.Abstractions
                 var vhdlBinaryPath = Path.Combine(
                     CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "xclbin"),
                     hashId + ".xclbin");
-                if (!File.Exists(vhdlBinaryPath))
+                if (!File.Exists(vhdlBinaryPath) &&
+                    _buildProviders.FirstOrDefault(provider => provider.IsSupported(context)) is {} buildProvider)
                 {
-                    await _buildProviders[nameof(XilinxDeviceType.Vitis)]
-                        .BuildAsync(context, vhdlBinaryPath);
+                    await buildProvider.BuildAsync(context, vhdlBinaryPath);
                 }
             }
 

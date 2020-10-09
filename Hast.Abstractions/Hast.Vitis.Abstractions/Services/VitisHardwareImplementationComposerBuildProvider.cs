@@ -3,14 +3,18 @@ using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Xilinx.Abstractions;
 using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
 {
     public class VitisHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
-        public string Name { get; } = nameof(XilinxDeviceType.Vitis);
+        public IEnumerable<string> SupportedComposers { get; } = new[] { nameof(VivadoHardwareImplementationComposer) };
+
+        public bool IsSupported(IHardwareImplementationCompositionContext context) =>
+            context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
+            xilinxDeviceManifest.DeviceType == XilinxDeviceType.Vitis;
 
         public Task<IHardwareImplementation> BuildAsync(
             IHardwareImplementationCompositionContext context,
