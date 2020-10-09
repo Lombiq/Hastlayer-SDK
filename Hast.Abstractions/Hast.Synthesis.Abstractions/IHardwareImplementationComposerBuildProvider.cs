@@ -11,6 +11,6 @@ namespace Hast.Synthesis.Abstractions
 
         bool IsSupported(IHardwareImplementationCompositionContext context);
 
-        Task<IHardwareImplementation> BuildAsync(IHardwareImplementationCompositionContext context, string buildTarget);
+        Task<IHardwareImplementation> BuildAsync(IHardwareImplementationCompositionContext context, string buildPath);
     }
 }
