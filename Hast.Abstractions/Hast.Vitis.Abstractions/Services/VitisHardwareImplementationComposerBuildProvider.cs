@@ -7,6 +7,7 @@ using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,43 +34,37 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementationCompositionContext context,
             string buildPath)
         {
-            var deviceManifest = (XilinxDeviceManifest)context.DeviceManifest;
-            if (string.IsNullOrEmpty(deviceManifest?.TechnicalName))
+            if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
-                throw new InvalidOperationException($"The device manifest for '{deviceManifest?.Name}' is missing " +
+                throw new InvalidCastException($"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
+                                               $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
+            }
+
+            if (string.IsNullOrEmpty(deviceManifest.TechnicalName))
+            {
+                throw new InvalidOperationException($"The device manifest for '{deviceManifest.Name}' is missing " +
                                                     $"its technical name which is required to build.");
+            }
+
+            if (Environment.GetEnvironmentVariable("XILINX_VITIS") == null)
+            {
+                throw new InvalidOperationException("XILINX_VITIS variable is not set.");
             }
 
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
             openClConfiguration.BinaryFilePath = buildPath;
 
-            // using the names found in the Makefile.
+            // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw" : "hw_emu";
             var device = Directory.GetDirectories("/opt/xilinx/platforms", $"{deviceManifest.TechnicalName}*")
                 .OrderByDescending(directoryName => directoryName)
                 .First();
 
-            // vivado -mode batch -source ./HardwareFramework/src/scripts/gen_xo.tcl -tclargs ./xclbin/hastip.hw_emu.xo hastip hw_emu xilinx_u200_xdma_201830_2
-            var vivadoExecutable = (await CliHelper.WhichAsync("vivado")).FirstOrDefault(fileInfo => fileInfo.Exists);
-            if (vivadoExecutable == null) throw new FileNotFoundException("The executable 'vivado' was not found. Is it in your PATH?");
-
-            var vivadoArguments = new []
-            {
-                "-mode",
-                "batch",
-                "-source",
-                Path.Combine(hardwareFrameworkPath, "src", "scripts", "gen_xo.tcl"),
-                "-tclargs",
-                Path.Combine(hardwareFrameworkPath, "rtl", "xclbin", $"hastip.{target}.xo"),
-                target,
-                device,
-            };
-            await CliHelper.StreamAsync(vivadoExecutable.FullName, vivadoArguments, VivadoOnCommandEvent);
+            await BuildKernel(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
 
             // TODO:
-            // - v++,
-            // - error handling
+            // - error handling (?)
             // - copy and rename built files
             // - interpret performance metrics
             // - cleanup
@@ -77,7 +72,70 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
-        private void VivadoOnCommandEvent(CommandEvent commandEvent)
+        private async Task BuildKernel(string hardwareFrameworkPath, string target, string device, uint frequency)
+        {
+            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
+            if (!Directory.Exists(xclbinDirectoryPath)) Directory.CreateDirectory(xclbinDirectoryPath);
+
+            var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
+
+            // For example:
+            // vivado -mode batch -source ./HardwareFramework/src/scripts/gen_xo.tcl
+            //        -tclargs ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo hastip hw_emu xilinx_u200_xdma_201830_2
+            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
+            var vivadoArguments = new []
+            {
+                "-mode",
+                "batch",
+                "-source",
+                Path.Combine(hardwareFrameworkPath, "src", "scripts", "gen_xo.tcl"),
+                "-tclargs",
+                xoFilePath,
+                target,
+                device,
+            };
+            await CliHelper.StreamAsync(vivadoExecutable, vivadoArguments, OnCommandEvent);
+
+
+            // For example:
+            // v++ -R2 -g -t hw_emu --platform xilinx_u200_xdma_201830_2 --save-temps --kernel_frequency 300 -lo
+            //     ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xclbin ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo
+            var vppExecutable = (await GetExecutablePathAsync("v++"));
+            var vppArguments = new []
+            {
+                "-R2",
+                "-g",
+                "-t",
+                target,
+                "--platform",
+                device,
+                "--save-temps",
+                "--report",
+                "estimate",
+                "--profile_kernel",
+                "data:all:all:all",
+                "--kernel_frequency",
+                frequency.ToString(CultureInfo.InvariantCulture),
+                "-lo",
+                Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"),
+                xoFilePath,
+            };
+            await CliHelper.StreamAsync(vppExecutable, vppArguments, OnCommandEvent);
+
+            // For example:
+            // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
+            var emConfigExecutable = (await GetExecutablePathAsync("emconfigutil"));
+            var emConfigArguments = new []
+            {
+                "--platform",
+                device,
+                "--od",
+                xclbinDirectoryPath,
+            };
+            await CliHelper.StreamAsync(emConfigExecutable, emConfigArguments, OnCommandEvent);
+        }
+
+        private void OnCommandEvent(CommandEvent commandEvent)
         {
             switch (commandEvent)
             {
@@ -90,12 +148,28 @@ namespace Hast.Vitis.Abstractions.Services
                 case StandardErrorCommandEvent error:
                     _logger.LogWarning("Vivado: {0}", error.Text);
                     break;
-                case ExitedCommandEvent exited:
+                case ExitedCommandEvent _:
                     // CliMon should do something like this on its own?
                     // if (exited.ExitCode != 0) throw new InvalidOperationException("vivado exited with code " + exited.ExitCode);
                     _logger.LogInformation("Vivado finished execution.");
                     break;
             }
+        }
+
+        private string GetXclbinDirectoryPath(string hardwareFrameworkPath) =>
+            Path.Combine(hardwareFrameworkPath, "rtl", "xclbin");
+
+        private static async Task<string> GetExecutablePathAsync(string executable)
+        {
+            var executableName = (await CliHelper.WhichAsync(executable))
+                .FirstOrDefault(fileInfo => fileInfo.Exists)?
+                .FullName;
+            if (executableName == null)
+            {
+                throw new FileNotFoundException($"The executable '{executable}' was not found. Is it in your PATH?");
+            }
+
+            return executableName;
         }
     }
 }
