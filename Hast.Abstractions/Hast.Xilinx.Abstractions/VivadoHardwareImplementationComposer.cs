@@ -62,7 +62,7 @@ namespace Hast.Xilinx.Abstractions
             {
 
                 var vhdlBinaryPath = Path.Combine(
-                    CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "xclbin"),
+                    CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "bin"),
                     hashId + ".xclbin");
                 if (!File.Exists(vhdlBinaryPath) &&
                     _buildProviders.FirstOrDefault(provider => provider.IsSupported(context)) is {} buildProvider)

@@ -3,6 +3,7 @@ using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
+using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -53,7 +54,6 @@ namespace Hast.Vitis.Abstractions.Services
 
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
-            openClConfiguration.BinaryFilePath = buildPath;
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw" : "hw_emu";
@@ -61,18 +61,36 @@ namespace Hast.Vitis.Abstractions.Services
                 .OrderByDescending(directoryName => directoryName)
                 .First();
 
-            await BuildKernel(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
+            await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
+            CopyBinaries(hardwareFrameworkPath, target, buildPath, openClConfiguration);
 
             // TODO:
             // - error handling (?)
-            // - copy and rename built files
             // - interpret performance metrics
             // - cleanup
             throw new NotImplementedException();
         }
 
 
-        private async Task BuildKernel(string hardwareFrameworkPath, string target, string device, uint frequency)
+        private void CopyBinaries(
+            string hardwareFrameworkPath,
+            string target,
+            string binaryPath,
+            IOpenClConfiguration openClConfiguration)
+        {
+            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
+
+            var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
+            if (binaryDirectoryPath != null && !Directory.Exists(binaryDirectoryPath))
+            {
+                Directory.CreateDirectory(binaryDirectoryPath);
+            }
+
+            File.Copy(Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"), binaryPath);
+            openClConfiguration.BinaryFilePath = binaryPath;
+        }
+
+        private async Task BuildKernelAsync(string hardwareFrameworkPath, string target, string device, uint frequency)
         {
             var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
             if (!Directory.Exists(xclbinDirectoryPath)) Directory.CreateDirectory(xclbinDirectoryPath);
