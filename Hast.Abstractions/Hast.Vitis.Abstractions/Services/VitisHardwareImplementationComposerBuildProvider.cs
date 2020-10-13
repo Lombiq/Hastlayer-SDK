@@ -98,7 +98,7 @@ namespace Hast.Vitis.Abstractions.Services
             var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
 
             // For example:
-            // vivado -mode batch -source ./HardwareFramework/src/scripts/gen_xo.tcl
+            // vivado -mode batch -source ./HardwareFramework/rtl/src/scripts/gen_xo.tcl
             //        -tclargs ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo hastip hw_emu xilinx_u200_xdma_201830_2
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
             var vivadoArguments = new []
@@ -106,7 +106,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "-mode",
                 "batch",
                 "-source",
-                Path.Combine(hardwareFrameworkPath, "src", "scripts", "gen_xo.tcl"),
+                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "gen_xo.tcl"),
                 "-tclargs",
                 xoFilePath,
                 target,

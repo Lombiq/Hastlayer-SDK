@@ -28,10 +28,10 @@
     <None Update="nimbix-install.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="HardwareFramework\src\scripts\gen_xo.tcl">
+    <None Update="HardwareFramework\rtl\src\scripts\gen_xo.tcl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="HardwareFramework\src\scripts\package_kernel.tcl">
+    <None Update="HardwareFramework\rtl\src\scripts\package_kernel.tcl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

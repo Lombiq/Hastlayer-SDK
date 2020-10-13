@@ -32,30 +32,23 @@
 #
 # *******************************************************************************/
 
-set path_to_hdl "./HardwareFramework/src/IP"
-set path_to_packaged "./HardwareFramework/packaged_kernel_${suffix}"
-set path_to_tmp_project "./HardwareFramework/tmp_kernel_pack_${suffix}"
-
-create_project -force kernel_pack $path_to_tmp_project
-add_files -norecurse [glob $path_to_hdl/*.v $path_to_hdl/*.sv $path_to_hdl/*.vhd  $path_to_hdl/*.xdc]
-update_compile_order -fileset sources_1
-update_compile_order -fileset sim_1
-ipx::package_project -root_dir $path_to_packaged -vendor xilinx.com -library RTLKernel -taxonomy /KernelIP -import_files -set_current false
-ipx::unload_core $path_to_packaged/component.xml
-ipx::edit_ip_in_project -upgrade true -name tmp_edit_project -directory $path_to_packaged $path_to_packaged/component.xml
-set_property core_revision 2 [ipx::current_core]
-foreach up [ipx::get_user_parameters] {
-  ipx::remove_user_parameter [get_property NAME $up] [ipx::current_core]
+if { $::argc != 4 } {
+    puts "ERROR: Program \"$::argv0\" requires 4 arguments!\n"
+    puts "Usage: $::argv0 <xoname> <krnl_name> <target> <device>\n"
+    exit
 }
-set_property sdx_kernel true [ipx::current_core]
-set_property sdx_kernel_type rtl [ipx::current_core]
-ipx::create_xgui_files [ipx::current_core]
-ipx::associate_bus_interfaces -busif m_axi_gmem -clock ap_clk [ipx::current_core]
-ipx::associate_bus_interfaces -busif s_axi_control -clock ap_clk [ipx::current_core]
 
-set_property xpm_libraries {XPM_CDC XPM_MEMORY XPM_FIFO} [ipx::current_core]
-set_property supported_families { } [ipx::current_core]
-set_property auto_family_support_level level_2 [ipx::current_core]
-ipx::update_checksums [ipx::current_core]
-ipx::save_core [ipx::current_core]
-close_project -delete
+set xoname    [lindex $::argv 0]
+set krnl_name [lindex $::argv 1]
+set target    [lindex $::argv 2]
+set device    [lindex $::argv 3]
+
+set suffix "${krnl_name}_${target}_${device}"
+
+source -notrace ./HardwareFramework/rtl/src/scripts/package_kernel.tcl
+
+if {[file exists "${xoname}"]} {
+    file delete -force "${xoname}"
+}
+
+package_xo -xo_path ${xoname} -kernel_name hastip -ip_directory ./HardwareFramework/packaged_kernel_${suffix} -kernel_xml ./HardwareFramework/rtl/src/xml/kernel.xml
