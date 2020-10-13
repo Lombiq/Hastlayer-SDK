@@ -17,6 +17,9 @@ namespace Hast.Vitis.Abstractions.Services
 {
     public class VitisHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
+        public const int StepsTotal = 8;
+        private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
+
         private readonly ILogger _logger;
 
         public IEnumerable<string> SupportedComposers { get; } = new[] { nameof(VivadoHardwareImplementationComposer) };
@@ -62,7 +65,7 @@ namespace Hast.Vitis.Abstractions.Services
                 .First();
 
             await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
-            CopyBinaries(hardwareFrameworkPath, target, buildPath, openClConfiguration);
+            CopyBinariesAndCleanup(hardwareFrameworkPath, target, buildPath, openClConfiguration);
 
             // TODO:
             // - error handling (?)
@@ -71,24 +74,6 @@ namespace Hast.Vitis.Abstractions.Services
             throw new NotImplementedException();
         }
 
-
-        private void CopyBinaries(
-            string hardwareFrameworkPath,
-            string target,
-            string binaryPath,
-            IOpenClConfiguration openClConfiguration)
-        {
-            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
-
-            var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
-            if (binaryDirectoryPath != null && !Directory.Exists(binaryDirectoryPath))
-            {
-                Directory.CreateDirectory(binaryDirectoryPath);
-            }
-
-            File.Copy(Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"), binaryPath);
-            openClConfiguration.BinaryFilePath = binaryPath;
-        }
 
         private async Task BuildKernelAsync(string hardwareFrameworkPath, string target, string device, uint frequency)
         {
@@ -152,6 +137,42 @@ namespace Hast.Vitis.Abstractions.Services
             };
             await CliHelper.StreamAsync(emConfigExecutable, emConfigArguments, OnCommandEvent);
         }
+
+        private void CopyBinariesAndCleanup(
+            string hardwareFrameworkPath,
+            string target,
+            string binaryPath,
+            IOpenClConfiguration openClConfiguration)
+        {
+            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
+
+            var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
+            if (binaryDirectoryPath != null && !Directory.Exists(binaryDirectoryPath))
+            {
+                Directory.CreateDirectory(binaryDirectoryPath);
+            }
+
+            var builtFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin");
+            File.Copy(builtFilePath, binaryPath);
+            File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
+            openClConfiguration.BinaryFilePath = binaryPath;
+            Progress!(this, $"Files copied to binary folder ({builtFilePath}).");
+
+            // In the makefile it is:
+            // rm -rf host ./xclbin/{*sw_emu*,*hw_emu*}
+            // rm -rf TempConfig system_estimate.xtxt *.rpt
+            // rm -rf src/*.ll _v++_* .Xil emconfig.json dltmp* xmltmp* *.log *.jou
+            // rm -rf ./xclbin
+            // rm -rf _x.*
+            // rm -rf ./tmp_kernel_pack* ./packaged_kernel* _x/
+            Directory.Delete(GetXclbinDirectoryPath(hardwareFrameworkPath), recursive: true);
+            // TODO: Where is: TempConfig, src, system_estimate.xtxt, tmp_*, etc
+            Progress!(this, "Build directory cleaned up.");
+        }
+
+
+        private void OnProgress(object sender, string message) =>
+            _logger.LogInformation("Build step {0}/{1} completed: {2}", ++Step, StepsTotal, message);
 
         private void OnCommandEvent(CommandEvent commandEvent)
         {

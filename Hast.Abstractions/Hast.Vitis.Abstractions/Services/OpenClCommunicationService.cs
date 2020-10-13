@@ -21,6 +21,7 @@ namespace Hast.Vitis.Abstractions.Services
     public abstract class OpenClCommunicationService : CommunicationServiceBase
     {
         public const string KernelName = "hastip";
+        public const string InfoFileExtension = ".info";
 
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
@@ -62,7 +63,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             uint? clockFrequency = null;
-            var infoFilePath = configuration.BinaryFilePath + ".info";
+            var infoFilePath = configuration.BinaryFilePath + InfoFileExtension;
             if (!File.Exists(infoFilePath))
             {
                 Logger.LogWarning(
