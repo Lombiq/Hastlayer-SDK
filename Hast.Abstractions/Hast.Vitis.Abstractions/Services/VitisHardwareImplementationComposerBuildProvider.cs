@@ -111,8 +111,8 @@ namespace Hast.Vitis.Abstractions.Services
                 "-source",
                 Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "gen_xo.tcl"),
                 "-tclargs",
-                "hastip",
                 xoFilePath,
+                "hastip",
                 target,
                 device,
             };

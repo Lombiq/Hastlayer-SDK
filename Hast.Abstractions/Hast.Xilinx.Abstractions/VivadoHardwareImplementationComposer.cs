@@ -119,17 +119,12 @@ namespace Hast.Xilinx.Abstractions
             XilinxDeviceManifest deviceManifest,
             string hardwareFrameworkPath)
         {
-            string directory;
-            switch (deviceManifest.DeviceType)
+            string directory = deviceManifest.DeviceType switch
             {
-                case XilinxDeviceType.Nexys:
-                    directory = CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "IPRepo");
-                    break;
-                case XilinxDeviceType.Vitis:
-                    directory = CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "src", "IP");
-                    break;
-                default: throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}");
-            }
+                XilinxDeviceType.Nexys => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "IPRepo"),
+                XilinxDeviceType.Vitis => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "src", "IP"),
+                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}")
+            };
 
             return (directory, "Hast_IP.vhd");
         }

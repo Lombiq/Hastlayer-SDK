@@ -1,15 +1,14 @@
 using Hast.Algorithms;
-using Hast.Common.Models;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
+using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -174,7 +173,7 @@ namespace Hast.Samples.Consumer
                         // Selecting any type from the sample assembly here just to get its Assembly object.
                         typeof(PrimeCalculator).Assembly,
                         typeof(Fix64).Assembly,
-                        typeof(FSharpSampleAssembly.FSharpParallelAlgorithmContainer).Assembly,
+                        typeof(FSharpParallelAlgorithmContainer).Assembly,
                         // Note that the assemblies used by code to be transformed also need to be added
                         // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
                         // ImmutableArray.
