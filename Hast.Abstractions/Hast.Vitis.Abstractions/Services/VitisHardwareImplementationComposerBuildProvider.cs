@@ -22,12 +22,18 @@ namespace Hast.Vitis.Abstractions.Services
 
         private readonly ILogger _logger;
 
+        public event EventHandler<string> Progress;
+
+        public int Step { get; private set; }
         public IEnumerable<string> SupportedComposers { get; } = new[] { nameof(VivadoHardwareImplementationComposer) };
 
 
         public VitisHardwareImplementationComposerBuildProvider(
-            ILogger<VitisHardwareImplementationComposerBuildProvider> logger) =>
+            ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
+        {
             _logger = logger;
+            Progress += OnProgress;
+        }
 
 
         public bool IsSupported(IHardwareImplementationCompositionContext context) =>
@@ -47,13 +53,15 @@ namespace Hast.Vitis.Abstractions.Services
             if (string.IsNullOrEmpty(deviceManifest.TechnicalName))
             {
                 throw new InvalidOperationException($"The device manifest for '{deviceManifest.Name}' is missing " +
-                                                    $"its technical name which is required to build.");
+                                                    "its technical name which is required to build.");
             }
 
             if (Environment.GetEnvironmentVariable("XILINX_VITIS") == null)
             {
                 throw new InvalidOperationException("XILINX_VITIS variable is not set.");
             }
+
+            Progress!(this, "Ready for build.");
 
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
@@ -64,13 +72,13 @@ namespace Hast.Vitis.Abstractions.Services
                 .OrderByDescending(directoryName => directoryName)
                 .First();
 
+            Progress(this, "Staring Build.");
             await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
             CopyBinariesAndCleanup(hardwareFrameworkPath, target, buildPath, openClConfiguration);
 
             // TODO:
             // - error handling (?)
             // - interpret performance metrics
-            // - cleanup
             throw new NotImplementedException();
         }
 
@@ -98,6 +106,7 @@ namespace Hast.Vitis.Abstractions.Services
                 device,
             };
             await CliHelper.StreamAsync(vivadoExecutable, vivadoArguments, OnCommandEvent);
+            Progress!(this, "Vivado build is finished.");
 
 
             // For example:
@@ -124,6 +133,7 @@ namespace Hast.Vitis.Abstractions.Services
                 xoFilePath,
             };
             await CliHelper.StreamAsync(vppExecutable, vppArguments, OnCommandEvent);
+            Progress!(this, "v++ build is finished.");
 
             // For example:
             // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
@@ -136,6 +146,7 @@ namespace Hast.Vitis.Abstractions.Services
                 xclbinDirectoryPath,
             };
             await CliHelper.StreamAsync(emConfigExecutable, emConfigArguments, OnCommandEvent);
+            Progress!(this, "Emulation configuration (emconfig) setup is finished.");
         }
 
         private void CopyBinariesAndCleanup(
