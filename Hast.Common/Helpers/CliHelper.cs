@@ -35,7 +35,9 @@ namespace Hast.Common.Helpers
         public static async Task StreamAsync(string program, IList<string> arguments, Action<CommandEvent> handler)
         {
             var command = Cli.Wrap(program);
-            if (arguments?.Any() == true) command = command.WithArguments(arguments);
+            if (arguments?.Any() == true) command = command
+                .WithArguments(arguments)
+                .WithValidation(CommandResultValidation.None);
 
             await foreach (var commandEvent in command.ListenAsync()) handler(commandEvent);
         }

@@ -1,4 +1,5 @@
 ﻿using CliWrap.EventStream;
+using CliWrap.Exceptions;
 using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
@@ -23,7 +24,8 @@ namespace Hast.Vitis.Abstractions.Services
         private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
 
         private readonly ILogger _logger;
-        private StreamWriter _buildOutput;
+        private readonly string _buildOutputPath;
+        private readonly StreamWriter _buildOutput;
 
         public event EventHandler<string> Progress;
 
@@ -39,7 +41,8 @@ namespace Hast.Vitis.Abstractions.Services
 
             var buildOutputPath = Path.Combine("App_Data", "logs");
             if (!Directory.Exists(buildOutputPath)) Directory.CreateDirectory(buildOutputPath);
-            _buildOutput = new StreamWriter(Path.Combine(buildOutputPath, "build.out"), append: false, Encoding.UTF8);
+            _buildOutputPath = Path.Combine(buildOutputPath, "build.out");
+            _buildOutput = new StreamWriter(_buildOutputPath, append: false, Encoding.UTF8);
         }
 
 
@@ -108,11 +111,12 @@ namespace Hast.Vitis.Abstractions.Services
                 "-source",
                 Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "gen_xo.tcl"),
                 "-tclargs",
+                "hastip",
                 xoFilePath,
                 target,
                 device,
             };
-            await CliHelper.StreamAsync(vivadoExecutable, vivadoArguments, CreateOnCommandEventHandler("Vivado"));
+            await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
             Progress!(this, "Vivado build is finished.");
 
 
@@ -139,7 +143,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,
             };
-            await CliHelper.StreamAsync(vppExecutable, vppArguments, CreateOnCommandEventHandler("v++"));
+            await ExecuteWithLogging(vppExecutable, vppArguments);
             Progress!(this, "v++ build is finished.");
 
             // For example:
@@ -152,7 +156,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--od",
                 xclbinDirectoryPath,
             };
-            await CliHelper.StreamAsync(emConfigExecutable, emConfigArguments, CreateOnCommandEventHandler("emconfig"));
+            await ExecuteWithLogging(emConfigExecutable, emConfigArguments);
             Progress!(this, "Emulation configuration (emconfig) setup is finished.");
         }
 
@@ -192,14 +196,15 @@ namespace Hast.Vitis.Abstractions.Services
         private void OnProgress(object sender, string message) =>
             _logger.LogInformation("Build step {0}/{1} completed: {2}", ++Step, StepsTotal, message);
 
-        private Action<CommandEvent> CreateOnCommandEventHandler(string name)
+        private Task ExecuteWithLogging(string executable, IList<string> arguments)
         {
+            var name = Path.GetFileName(executable);
             void OnCommandEvent(CommandEvent commandEvent)
             {
                 switch (commandEvent)
                 {
                     case StartedCommandEvent started:
-                        _logger.LogInformation("Launching {0}. (process ID: {1})", name, started.ProcessId);
+                        _logger.LogInformation("Started {0}. (process ID: {1})", name, started.ProcessId);
                         break;
                     case StandardOutputCommandEvent output:
                         _logger.LogTrace("{0}: {1}", name, output.Text);
@@ -210,18 +215,22 @@ namespace Hast.Vitis.Abstractions.Services
                         _buildOutput.WriteLine("{0} stderr: {1}", name, error.Text);
                         break;
                     case ExitedCommandEvent exited:
-                        // CliMon should do something like this on its own?
-                        // if (exited.ExitCode != 0)
-                        // {
-                        //     throw new InvalidOperationException(name + " exited with code " + exited.ExitCode);
-                        // }
-                        _logger.LogInformation(name + " finished execution.");
                         _buildOutput.WriteLine("{0} exit code: {1}\n\n\n", name, exited.ExitCode);
+
+                        if (exited.ExitCode != 0)
+                        {
+                            throw new CommandExecutionException(
+                                $"The command {name} exited with code {exited.ExitCode}. " +
+                                $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
+                        }
+
+                        _logger.LogInformation(name + " finished execution.");
                         break;
                 }
             }
 
-            return OnCommandEvent;
+            _logger.LogInformation("Starting program: {0} {1}", executable, string.Join(" ", arguments));
+            return CliHelper.StreamAsync(executable, arguments, OnCommandEvent);
         }
 
         private string GetXclbinDirectoryPath(string hardwareFrameworkPath) =>
