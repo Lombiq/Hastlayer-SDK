@@ -71,21 +71,22 @@ namespace Hast.Vitis.Abstractions.Services
                 throw new InvalidOperationException("XILINX_VITIS variable is not set.");
             }
 
-            Progress!(this, "Ready for build.");
+            Progress!(this, "Environment ready.");
 
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
             Cleanup(hardwareFrameworkPath);
 
             // Using the variable names in the Makefile.
-            var target = openClConfiguration.UseEmulation ? "hw" : "hw_emu";
+            var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
             var device = Directory.GetDirectories("/opt/xilinx/platforms", $"{deviceManifest.TechnicalName}*")
+                .Select(Path.GetFileName)
                 .OrderByDescending(directoryName => directoryName)
                 .First();
 
-            Progress(this, "Staring Build.");
+            Progress!(this, "Staring Build.");
             await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
-            CopyBinariesAndCleanup(hardwareFrameworkPath, target, buildPath, openClConfiguration);
+            CopyBinaries(hardwareFrameworkPath, target, buildPath, openClConfiguration);
 
             // TODO:
             // - error handling (?)
@@ -136,8 +137,8 @@ namespace Hast.Vitis.Abstractions.Services
                 "--save-temps",
                 "--report",
                 "estimate",
-                "--profile_kernel",
-                "data:all:all:all",
+                //"--profile_kernel",
+                //"data:all:all:all",
                 "--kernel_frequency",
                 frequency.ToString(CultureInfo.InvariantCulture),
                 "-lo",
@@ -161,7 +162,7 @@ namespace Hast.Vitis.Abstractions.Services
             Progress!(this, "Emulation configuration (emconfig) setup is finished.");
         }
 
-        private void CopyBinariesAndCleanup(
+        private void CopyBinaries(
             string hardwareFrameworkPath,
             string target,
             string binaryPath,
