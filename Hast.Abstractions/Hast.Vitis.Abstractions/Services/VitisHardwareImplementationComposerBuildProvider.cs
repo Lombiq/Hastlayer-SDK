@@ -20,7 +20,7 @@ namespace Hast.Vitis.Abstractions.Services
     public sealed class VitisHardwareImplementationComposerBuildProvider
         : IHardwareImplementationComposerBuildProvider, IDisposable
     {
-        public const int StepsTotal = 8;
+        public const int StepsTotal = 9;
         private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
 
         private readonly ILogger _logger;
@@ -75,6 +75,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
+            Cleanup(hardwareFrameworkPath);
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw" : "hw_emu";
@@ -179,6 +180,19 @@ namespace Hast.Vitis.Abstractions.Services
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
             openClConfiguration.BinaryFilePath = binaryPath;
             Progress!(this, $"Files copied to binary folder ({builtFilePath}).");
+        }
+
+        private void Cleanup(string hardwareFrameworkPath)
+        {
+            var toDelete = Directory.GetDirectories(hardwareFrameworkPath, "tmp_*")
+                .Union(Directory.GetDirectories(hardwareFrameworkPath, "packaged_kernel_*"))
+                .Union(new[] { "_x", GetXclbinDirectoryPath(hardwareFrameworkPath) })
+                .Where(Directory.Exists);
+
+            foreach (var directory in toDelete)
+            {
+                Directory.Delete(directory, recursive: true);
+            }
 
             // In the makefile it is:
             // rm -rf host ./xclbin/{*sw_emu*,*hw_emu*}
@@ -187,8 +201,7 @@ namespace Hast.Vitis.Abstractions.Services
             // rm -rf ./xclbin
             // rm -rf _x.*
             // rm -rf ./tmp_kernel_pack* ./packaged_kernel* _x/
-            Directory.Delete(GetXclbinDirectoryPath(hardwareFrameworkPath), recursive: true);
-            // TODO: Where is: TempConfig, src, system_estimate.xtxt, tmp_*, etc
+            // TODO: Where is: TempConfig, system_estimate.xtxt, *.rpt, src/*.ll, _v++_*, tmp_*, etc
             Progress!(this, "Build directory cleaned up.");
         }
 
