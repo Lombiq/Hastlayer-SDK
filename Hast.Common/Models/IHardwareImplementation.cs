@@ -5,6 +5,9 @@
     /// </summary>
     public interface IHardwareImplementation
     {
-        // Just a placeholder for now.
+        /// <summary>
+        /// Gets the path of the binary to be executed on hardware, if any.
+        /// </summary>
+        string BinaryPath { get; }
     }
 }

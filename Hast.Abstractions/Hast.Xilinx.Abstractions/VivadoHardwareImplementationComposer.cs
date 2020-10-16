@@ -58,20 +58,26 @@ namespace Hast.Xilinx.Abstractions
                 File.WriteAllText(hashFile, hashId);
             }
 
-            if (deviceManifest.DeviceType == XilinxDeviceType.Vitis)
+            var implementation = new HardwareImplementation
             {
-
-                var vhdlBinaryPath = Path.Combine(
-                    CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "bin"),
-                    hashId + ".xclbin");
-                if (!File.Exists(vhdlBinaryPath) &&
-                    _buildProviders.FirstOrDefault(provider => provider.IsSupported(context)) is {} buildProvider)
+                BinaryPath = deviceManifest.DeviceType switch
                 {
-                    await buildProvider.BuildAsync(context, vhdlBinaryPath);
-                }
+                    XilinxDeviceType.Vitis =>
+                        Path.Combine(
+                            CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "bin"),
+                            hashId + ".xclbin"),
+                    XilinxDeviceType.Nexys => null,
+                    _ => throw deviceManifest.GetUnknownDeviceType(),
+                },
+            };
+
+            foreach (var buildProvider in _buildProviders
+                .Where(provider => provider.IsSupported(context, implementation)))
+            {
+                await buildProvider.BuildAsync(context, implementation);
             }
 
-            return new HardwareImplementation();
+            return implementation;
         }
 
 

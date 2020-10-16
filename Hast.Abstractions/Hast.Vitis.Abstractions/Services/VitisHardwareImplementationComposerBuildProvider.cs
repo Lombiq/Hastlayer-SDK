@@ -46,13 +46,22 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
-        public bool IsSupported(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
-            xilinxDeviceManifest.DeviceType == XilinxDeviceType.Vitis;
-
-        public async Task<IHardwareImplementation> BuildAsync(
+        /// <summary>
+        /// It is supported if the manifest is a <see cref="XilinxDeviceManifest"/> with the type of
+        /// <see cref="XilinxDeviceType.Vitis"/> and the <see cref="IHardwareImplementation.BinaryPath"/> is set but the
+        /// indicated file doesn't yet exist.
+        /// </summary>
+        public bool IsSupported(
             IHardwareImplementationCompositionContext context,
-            string buildPath)
+            IHardwareImplementation implementation) =>
+            context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
+            xilinxDeviceManifest.DeviceType == XilinxDeviceType.Vitis &&
+            !string.IsNullOrEmpty(implementation.BinaryPath) &&
+            !File.Exists(implementation.BinaryPath);
+
+        public async Task BuildAsync(
+            IHardwareImplementationCompositionContext context,
+            IHardwareImplementation implementation)
         {
             if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
@@ -86,7 +95,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             Progress!(this, "Staring Build.");
             await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
-            CopyBinaries(hardwareFrameworkPath, target, buildPath, openClConfiguration);
+            CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, openClConfiguration);
 
             // TODO:
             // - error handling (?)

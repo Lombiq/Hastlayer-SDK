@@ -9,8 +9,8 @@ namespace Hast.Synthesis.Abstractions
     {
         IEnumerable<string> SupportedComposers { get; }
 
-        bool IsSupported(IHardwareImplementationCompositionContext context);
+        bool IsSupported(IHardwareImplementationCompositionContext context, IHardwareImplementation implementation);
 
-        Task<IHardwareImplementation> BuildAsync(IHardwareImplementationCompositionContext context, string buildPath);
+        Task BuildAsync(IHardwareImplementationCompositionContext context, IHardwareImplementation implementation);
     }
 }
