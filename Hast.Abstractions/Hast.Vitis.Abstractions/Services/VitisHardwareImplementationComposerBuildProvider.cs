@@ -95,7 +95,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             Progress!(this, "Staring Build.");
             await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
-            CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, openClConfiguration);
+            CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath);
 
             // TODO:
             // - error handling (?)
@@ -174,8 +174,7 @@ namespace Hast.Vitis.Abstractions.Services
         private void CopyBinaries(
             string hardwareFrameworkPath,
             string target,
-            string binaryPath,
-            IOpenClConfiguration openClConfiguration)
+            string binaryPath)
         {
             var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
 
@@ -188,7 +187,6 @@ namespace Hast.Vitis.Abstractions.Services
             var builtFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin");
             File.Copy(builtFilePath, binaryPath);
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
-            openClConfiguration.BinaryFilePath = binaryPath;
             Progress!(this, $"Files copied to binary folder ({builtFilePath}).");
         }
 

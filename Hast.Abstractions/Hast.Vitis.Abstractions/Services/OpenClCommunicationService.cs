@@ -55,15 +55,16 @@ namespace Hast.Vitis.Abstractions.Services
                 .GetOrAddOpenClConfiguration();
             _binaryOpenCl.PrepareDevices(configuration);
 
-            if (!File.Exists(configuration.BinaryFilePath))
+            var implementation = executionContext.HardwareRepresentation.HardwareImplementation;
+            if (!File.Exists(implementation.BinaryPath))
             {
                 throw new FileNotFoundException(
                     "The OpenCL binary (xclbin) is required to start the kernel. The host can't launch without it. " +
-                    $"Please make sure the file at '{configuration.BinaryFilePath}' exists and is accessible.");
+                    $"Please make sure the file at '{implementation.BinaryPath}' exists and is accessible.");
             }
 
             uint? clockFrequency = null;
-            var infoFilePath = configuration.BinaryFilePath + InfoFileExtension;
+            var infoFilePath = implementation.BinaryPath + InfoFileExtension;
             if (!File.Exists(infoFilePath))
             {
                 Logger.LogWarning(
@@ -79,7 +80,7 @@ namespace Hast.Vitis.Abstractions.Services
                     .Frequency;
             }
 
-            var kernelBinary = File.ReadAllBytes(configuration.BinaryFilePath);
+            var kernelBinary = File.ReadAllBytes(implementation.BinaryPath);
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
 
             _devicePoolPopulator.PopulateDevicePoolIfNew(() =>

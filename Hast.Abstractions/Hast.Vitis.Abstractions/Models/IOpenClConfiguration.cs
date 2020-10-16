@@ -28,11 +28,6 @@ namespace Hast.Vitis.Abstractions.Models
     public interface IOpenClConfiguration
     {
         /// <summary>
-        /// The location and name of the xclbin file.
-        /// </summary>
-        string BinaryFilePath { get; set; }
-
-        /// <summary>
         /// If true, any <see cref="long"/> value in the header is considered big endian, if false then little endian.
         /// </summary>
         bool DeviceIsBigEndian { get; set; }
