@@ -4,7 +4,6 @@ using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
-using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -63,6 +62,7 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
+
             if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
                 throw new InvalidCastException($"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
@@ -98,9 +98,7 @@ namespace Hast.Vitis.Abstractions.Services
             CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath);
 
             // TODO:
-            // - error handling (?)
             // - interpret performance metrics
-            throw new NotImplementedException();
         }
 
 
@@ -144,10 +142,6 @@ namespace Hast.Vitis.Abstractions.Services
                 "--platform",
                 device,
                 "--save-temps",
-                "--report",
-                "estimate",
-                //"--profile_kernel",
-                //"data:all:all:all",
                 "--kernel_frequency",
                 frequency.ToString(CultureInfo.InvariantCulture),
                 "-lo",
@@ -199,6 +193,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             foreach (var directory in toDelete)
             {
+                Console.WriteLine("Deleting: {0}", directory);
                 Directory.Delete(directory, recursive: true);
             }
 
