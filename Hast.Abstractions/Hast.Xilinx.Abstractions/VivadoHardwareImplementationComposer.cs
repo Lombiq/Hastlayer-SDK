@@ -123,7 +123,7 @@ namespace Hast.Xilinx.Abstractions
             {
                 XilinxDeviceType.Nexys => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "IPRepo"),
                 XilinxDeviceType.Vitis => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "src", "IP"),
-                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}")
+                _ => throw deviceManifest.GetUnknownDeviceType(),
             };
 
             return (directory, "Hast_IP.vhd");
