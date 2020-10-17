@@ -145,8 +145,8 @@ namespace Hast.Vitis.Abstractions.Services
                 "--kernel_frequency",
                 frequency.ToString(CultureInfo.InvariantCulture),
                 "-lo",
-                Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"),
-                xoFilePath,
+                Path.GetFullPath(Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin")),
+                    Path.GetFullPath(xoFilePath),
             };
             await ExecuteWithLogging(vppExecutable, vppArguments);
             Progress!(this, "v++ build is finished.");
