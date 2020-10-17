@@ -94,15 +94,17 @@ namespace Hast.Vitis.Abstractions.Services
                 .First();
 
             Progress!(this, "Staring Build.");
-            await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest.ClockFrequencyHz / 1_000_000);
+            await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest);
             CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath);
-
-            // TODO:
-            // - interpret performance metrics
+            await CollectReport(hardwareFrameworkPath, target, device, implementation);
         }
 
 
-        private async Task BuildKernelAsync(string hardwareFrameworkPath, string target, string device, uint frequency)
+        private async Task BuildKernelAsync(
+            string hardwareFrameworkPath,
+            string target,
+            string device,
+            XilinxDeviceManifest deviceManifest)
         {
             var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
             if (!Directory.Exists(xclbinDirectoryPath)) Directory.CreateDirectory(xclbinDirectoryPath);
@@ -133,7 +135,7 @@ namespace Hast.Vitis.Abstractions.Services
             // v++ -R2 -g -t hw_emu --platform xilinx_u200_xdma_201830_2 --save-temps --kernel_frequency 300 -lo
             //     ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xclbin ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo
             var vppExecutable = (await GetExecutablePathAsync("v++"));
-            var vppArguments = new []
+            var vppArguments = new List<string>
             {
                 "-R2",
                 "-g",
@@ -143,11 +145,26 @@ namespace Hast.Vitis.Abstractions.Services
                 device,
                 "--save-temps",
                 "--kernel_frequency",
-                frequency.ToString(CultureInfo.InvariantCulture),
+                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.InvariantCulture),
+            };
+
+            if (deviceManifest.SupportsHbm)
+            {
+                /* TODO
+                vppArguments.AddRange(new[]
+                {
+                    "--sp",
+                    "krnl_vadd_1.m_axi_gmem0:HBM[0:3]",
+                }); // */
+            }
+
+            vppArguments.AddRange(new[]
+            {
                 "-lo",
                 Path.GetFullPath(Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin")),
-                    Path.GetFullPath(xoFilePath),
-            };
+                Path.GetFullPath(xoFilePath),
+            });
+
             await ExecuteWithLogging(vppExecutable, vppArguments);
             Progress!(this, "v++ build is finished.");
 
@@ -182,6 +199,17 @@ namespace Hast.Vitis.Abstractions.Services
             File.Copy(builtFilePath, binaryPath);
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
             Progress!(this, $"Files copied to binary folder ({builtFilePath}).");
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        private async Task CollectReport(
+            string hardwareFrameworkPath,
+            string target,
+            string device,
+            IHardwareImplementation implementation)
+        {
         }
 
         private void Cleanup(string hardwareFrameworkPath)
