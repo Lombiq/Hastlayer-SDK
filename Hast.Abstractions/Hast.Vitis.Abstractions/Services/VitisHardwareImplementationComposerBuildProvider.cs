@@ -62,7 +62,6 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
-
             if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
                 throw new InvalidCastException($"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
