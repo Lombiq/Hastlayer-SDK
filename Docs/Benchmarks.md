@@ -16,7 +16,9 @@ Here are some basic performance benchmarks on how Hastlayer-accelerated code com
 - "i7 CPU": Intel Core i7-960 CPU with 4 physical, 8 logical cores and a base clock of 3.2 Ghz. Power consumption is around 130 W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/37151/intel-core-i7-960-processor-8m-cache-3-20-ghz-4-80-gt-s-intel-qpi.html)).
 - "Nexys": [Nexys A7-100T FPGA board](https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/) with a Xilinx XC7A100T-1CSG324C FPGA of the Artix-7 family, with 110 MB of user-accessible DDR2 RAM. Main clock is 100 Mhz, power consumption is at most about 2.5 W (corresponding to the maximal power draw via a USB 2.0 port). The communication channel used was the serial one: Virtual serial port via USB 2.0 with a baud rate of 230400 b/s.
 
-1. Based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html). This is just a rough number and power draw is likely larger when the CPU increases its clock speed under load.
+1. Based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html).
+2. Based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/83359/intel-xeon-processor-e5-2640-v3-20m-cache-2-60-ghz.html)
+3. Just a rough number and power draw is likely larger when the CPU increases its clock speed under load.
 
 ## Measurements
 
@@ -43,7 +45,7 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the ho
 | MonteCarloPiEstimator |       302%      |     16800%      | 350<sup>1</sup>|   338 ms |   30 Ws   |        16%       |   21 ms  |     84 ms  |    2 Ws    |      19.239 W      |
 
 1. More could fit actually, needs more testing.
-2. Using a 0.2MP image.
+2. Using the default 0.2MP image.
 3. Using a 6.5MP image.
 
 ### Catapult
