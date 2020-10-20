@@ -8,12 +8,15 @@ Here are some basic performance benchmarks on how Hastlayer-accelerated code com
 ## Notes on the hardware used
 
 - "Vitis": [Xilinx Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) cards were used (eg. [Alveo U280 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u280.html)).
+    - FPGA: [Alveo U280 Data Center Accelerator](https://www.avnet.com/opasdata/d120001/medias/docus/196/XLX-A-U280-A32G-DEV-G-Datasheet.pdf): PCI Express® Gen3 x16, 225W
+    - Host: 16 x Intel Xeon E5-2640 v3 CPUs with 8 physical, 16 logical cores each, with a base clock of 2.6 GHz. Power consumption is around 90 W under load<sup>1</sup>.
 - "Catapult": [Microsoft Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) servers used via the [Project Catapult Academic Program](https://www.microsoft.com/en-us/research/academic-program/project-catapult-academic-program/). These contain the following hardware:
     - FPGA: Mt Granite card with an Altera Stratix V 5SGSMD5H2F35 FPGA and two channels of 4 GB DDR3 RAM, connected to the host via PCIe Gen3 x8. Main clock is 150 Mhz, power consumption is at most 29 W (source: "[A Cloud-Scale Acceleration Architecture](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/Cloud-Scale-Acceleration-Architecture.pdf)").
-    - Host PC: 2 x Intel Xeon E5-2450 CPUs with 16 physical, 32 logical cores each, with a base clock of 2.1 GHz. Power consumption is around 95 W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html); this is just a rough number and power draw is likely larger when the CPU increases its clock speed under load)
+    - Host PC: 2 x Intel Xeon E5-2450 CPUs with 16 physical, 32 logical cores each, with a base clock of 2.1 GHz. Power consumption is around 95 W under load<sup>1</sup>.
 - "i7 CPU": Intel Core i7-960 CPU with 4 physical, 8 logical cores and a base clock of 3.2 Ghz. Power consumption is around 130 W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/37151/intel-core-i7-960-processor-8m-cache-3-20-ghz-4-80-gt-s-intel-qpi.html)).
 - "Nexys": [Nexys A7-100T FPGA board](https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/) with a Xilinx XC7A100T-1CSG324C FPGA of the Artix-7 family, with 110 MB of user-accessible DDR2 RAM. Main clock is 100 Mhz, power consumption is at most about 2.5 W (corresponding to the maximal power draw via a USB 2.0 port). The communication channel used was the serial one: Virtual serial port via USB 2.0 with a baud rate of 230400 b/s.
 
+1. Based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html). This is just a rough number and power draw is likely larger when the CPU increases its clock speed under load.
 
 ## Measurements
 
@@ -30,15 +33,18 @@ Here you can find some measurements of execution times of various algorithms on 
 
 ### Vitis
 
-Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2019.2" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
+Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
 
 
-| Algorithm             | Speed advantage | Power advantage |   Parallelism  |   CPU  | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power |
-|:----------------------|:---------------:|:---------------:|:--------------:|:------:|:---------:|:----------------:|:--------:|:----------:|:----------:|
-| ImageContrastModifier |       568%      |       ???%      |        25      | 568 ms |   ?? Ws   |        ??%       |   28 ms  |    85 ms   |   ?? Ws    |
-| ImageContrastModifier |       620%      |       ???%      | 150<sup>1</sup>| 568 ms |   ?? Ws   |        ??%       |   24 ms  |    79 ms   |   ?? Ws    |
+| Algorithm             | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power |
+|:----------------------|:---------------:|:---------------:|:--------------:|:--------:|:---------:|:----------------:|:--------:|:----------:|:----------:|
+| ImageContrastModifier | 261%<sup>2</sup>|        26%      | 150<sup>1</sup>|   578 ms |   52 Ws   |        ??%       |   61 ms  |    160 ms  |   40 Ws    |
+| ImageContrastModifier | 691%<sup>3</sup>|       180%      | 150<sup>1</sup>| 19378 ms | 1744 Ws   |        ??%       | 2330 ms  |   2447 ms  |  623 Ws    |
+| MonteCarloPiEstimator |       302%      |       036%      | 350<sup>1</sup>|   338 ms |   30 Ws   |        ??%       |   21 ms  |     84 ms  |   22 Ws    |
 
-<sup>1</sup>More could fit actually, needs more testing.
+1. More could fit actually, needs more testing.
+2. Using a 0.2MP image.
+3. Using a 6.5MP image.
 
 ### Catapult
 
