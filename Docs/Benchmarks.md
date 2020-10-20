@@ -40,9 +40,9 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the ho
 
 | Algorithm             | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
 |:----------------------|:---------------:|:---------------:|:--------------:|:--------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:------------------:|
-| ImageContrastModifier | 261%<sup>2</sup>|      1200%      | 150<sup>1</sup>|   578 ms |   52 Ws   |        21%       |   61 ms  |    160 ms  |    4 Ws    |      22.334 W      |
-| ImageContrastModifier | 691%<sup>3</sup>|      3129%      | 150<sup>1</sup>| 19378 ms | 1744 Ws   |        21%       | 2330 ms  |   2447 ms  |   54 Ws    |      22.334 W      |
-| MonteCarloPiEstimator |       302%      |     16800%      | 350<sup>1</sup>|   338 ms |   30 Ws   |        16%       |   21 ms  |     84 ms  |    2 Ws    |      19.239 W      |
+| ImageContrastModifier | 483%<sup>2</sup>|      2200%      | 150<sup>1</sup>|   513 ms |   46 Ws   |        21%       |   61 ms  |     88 ms  |    2 Ws    |      22.334 W      |
+| ImageContrastModifier | 650%<sup>3</sup>|      2901%      | 150<sup>1</sup>| 18012 ms | 1621 Ws   |        21%       | 2330 ms  |   2399 ms  |   54 Ws    |      22.334 W      |
+| MonteCarloPiEstimator |       580%      |     27100%      | 350<sup>1</sup>|   272 ms |   24 Ws   |        16%       |   21 ms  |     40 ms  |    1 Ws    |      19.239 W      |
 
 1. More could fit actually, needs more testing.
 2. Using the default 0.2MP image.
