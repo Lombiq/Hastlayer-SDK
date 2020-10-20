@@ -199,9 +199,11 @@ namespace Hast.Vitis.Abstractions.Services
                 Directory.CreateDirectory(binaryDirectoryPath);
             }
 
+            const string hashSource = "HashSource.txt";
             var builtFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin");
             File.Copy(builtFilePath, binaryPath);
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
+            if (File.Exists(hashSource)) File.Copy(hashSource, builtFilePath + ".hash" + InfoFileExtension);
             Progress!(this, $"Files copied to binary folder ({builtFilePath}).");
         }
 
