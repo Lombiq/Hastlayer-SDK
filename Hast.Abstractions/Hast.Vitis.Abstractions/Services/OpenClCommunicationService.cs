@@ -127,8 +127,10 @@ namespace Hast.Vitis.Abstractions.Services
                         hostMemoryHandle,
                         hostMemory.Length,
                         GetBuffer(hostMemory, hostMemoryHandle, executionContext));
-                    Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
+                    Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
+                    Logger.LogInformation("LAUNCHING KERNEL...");
                     _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+                    Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
                     await _binaryOpenCl.AwaitDevice(deviceIndex);
                     var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
 

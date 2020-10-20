@@ -19,7 +19,7 @@ namespace Hast.Vitis.Abstractions.Services
     public sealed class VitisHardwareImplementationComposerBuildProvider
         : IHardwareImplementationComposerBuildProvider, IDisposable
     {
-        public const int StepsTotal = 9;
+        public const int StepsTotal = 8;
         private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
 
         private readonly ILogger _logger;
@@ -92,10 +92,15 @@ namespace Hast.Vitis.Abstractions.Services
                 .OrderByDescending(directoryName => directoryName)
                 .First();
 
-            Progress!(this, "Staring Build.");
+            Progress!(this, "Staring build.");
             await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest);
             CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath);
-            await CollectReport(hardwareFrameworkPath, target, device, implementation);
+
+            Progress!(this, "Collecting reports.");
+            try { await CollectReport(hardwareFrameworkPath, target, device, context, implementation); }
+            catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
+
+            Cleanup(hardwareFrameworkPath);
         }
 
 
@@ -207,8 +212,25 @@ namespace Hast.Vitis.Abstractions.Services
             string hardwareFrameworkPath,
             string target,
             string device,
+            IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
+            var reportPath = Path.Combine("_x", "reports", "link", "imp");
+            if (!Directory.Exists(reportPath))
+            {
+                _logger.LogWarning("Report directory is missing!");
+                return;
+            }
+
+            var hash = context.HardwareDescription.TransformationId;
+            var reportSavePath = Path.Combine(hardwareFrameworkPath, "reports", hash);
+            if (!Directory.Exists(reportSavePath)) Directory.CreateDirectory(reportSavePath);
+
+            var reportFiles = Directory.GetFiles(reportPath, "*.rpt");
+            foreach (var reportFile in reportFiles)
+            {
+                File.Copy(reportFile, Path.Combine(reportSavePath, Path.GetFileName(reportFile)));
+            }
         }
 
         private void Cleanup(string hardwareFrameworkPath)
