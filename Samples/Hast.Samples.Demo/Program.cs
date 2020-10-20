@@ -35,7 +35,7 @@ namespace Hast.Samples.Demo
             var hardwareRepresentation = await hastlayer.GenerateHardware(
                 new[]
                 {
-                        typeof(ParallelAlgorithm).Assembly
+                    typeof(ParallelAlgorithm).Assembly,
                 },
                 configuration);
             #endregion

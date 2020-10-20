@@ -170,15 +170,15 @@ namespace Hast.Samples.Consumer
             var hardwareRepresentation = await hastlayer.GenerateHardware(
                 new[]
                 {
-                        // Selecting any type from the sample assembly here just to get its Assembly object.
-                        typeof(PrimeCalculator).Assembly,
-                        typeof(Fix64).Assembly,
-                        typeof(FSharpParallelAlgorithmContainer).Assembly,
-                        // Note that the assemblies used by code to be transformed also need to be added
-                        // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
-                        // ImmutableArray.
-                        typeof(Posit).Assembly,
-                        typeof(ImmutableArray).Assembly
+                    // Selecting any type from the sample assembly here just to get its Assembly object.
+                    typeof(PrimeCalculator).Assembly,
+                    typeof(Fix64).Assembly,
+                    typeof(FSharpParallelAlgorithmContainer).Assembly,
+                    // Note that the assemblies used by code to be transformed also need to be added
+                    // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
+                    // ImmutableArray.
+                    typeof(Posit).Assembly,
+                    typeof(ImmutableArray).Assembly,
                 },
                 configuration);
 
