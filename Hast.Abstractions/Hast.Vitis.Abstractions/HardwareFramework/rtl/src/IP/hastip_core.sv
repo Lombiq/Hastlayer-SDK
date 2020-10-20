@@ -1,3 +1,5 @@
+// This is a generated file. Use and modify at your own risk.
+//////////////////////////////////////////////////////////////////////////////// 
 // default_nettype of none prevents implicit wire declaration.
 `default_nettype none
 module hastip_core #(
@@ -36,12 +38,16 @@ module hastip_core #(
   input  wire [64-1:0]                     axi00_ptr0     
 );
 
+
 timeunit 1ps;
 timeprecision 1ps;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Local Parameters
 ///////////////////////////////////////////////////////////////////////////////
+// Large enough for interesting traffic.
+// localparam integer  LP_DEFAULT_LENGTH_IN_BYTES = 16384;
+// localparam integer  LP_NUM_EXAMPLES    = 1;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Wires and Variables
@@ -76,13 +82,12 @@ wire [31:0] hastipCellIndex;
 wire hastipReadEnable;
 wire hastipWriteEnable;
 
+reg [HAST_IP_DATA_WIDTH-1:0] hastipDataIn;
+reg hastipReadsDone;
+reg hastipWritesDone;
 reg [31:0] hastipMemberId;
 reg hastipStarted;
-wire hastipFinished;
-
-wire [HAST_IP_DATA_WIDTH-1:0] hastipDataIn;
-wire hastipReadsDone;
-wire hastipWritesDone;
+reg hastipFinished;
 
 Hast_IP_Wrapper hastip
 (
@@ -109,6 +114,62 @@ assign hastipDataOut     = (hastipSwitch == 0) ? hastipDataOutFsm     : hastipDa
 assign hastipCellIndex   = (hastipSwitch == 0) ? hastipCellIndexFsm   : hastipCellIndexIp + hastipBufferOffset;
 assign hastipReadEnable  = (hastipSwitch == 0) ? hastipReadEnableFsm  : hastipReadEnableIp;
 assign hastipWriteEnable = (hastipSwitch == 0) ? hastipWriteEnableFsm : hastipWriteEnableIp;
+
+// initial begin : DONE
+//   ap_done_i[0] = 1'b0;
+//   hastipDataOutFsm = 0;
+//   hastipCellIndexFsm = 0;
+//   hastipReadEnableFsm = 0;
+//   hastipWriteEnableFsm = 0;
+//   hastipSwitch = 0;
+//   
+//   @(posedge ap_start_pulse);
+//   $display("%0d: posedge ap_start_pulse", $time);
+// 
+//   #(1*1000*1000);
+//   for (int i = 0; i < 4; i++) begin
+//     @(negedge ap_clk);
+//     hastipDataOutFsm = 64'hABBA0000ABBAFF80 + i;
+//     hastipCellIndexFsm = i;
+//     hastipWriteEnableFsm = 1;
+//     $display("%0d: hastipWriteEnableFsm = 1, i = %d", $time, i);
+//     @(posedge hastipWritesDone);
+//     $display("%0d: posedge hastipWritesDone", $time);
+//     @(negedge ap_clk);
+//     hastipWriteEnableFsm = 0;
+//     @(negedge ap_clk);
+//   end
+// 
+//   #(1*1000*1000);
+//   for (int i = 0; i < 4; i++) begin
+//     @(negedge ap_clk);
+//     hastipCellIndexFsm = i;
+//     hastipReadEnableFsm = 1;
+//     $display("%0d: hastipReadEnableFsm, i = %d", $time, i);
+//     @(posedge hastipReadsDone);
+//     $display("%0d: posedge hastipReadsDone %x", $time, hastipDataIn);
+//     @(negedge ap_clk);
+//     hastipReadEnableFsm = 0;
+//     @(negedge ap_clk);
+//   end
+// 
+//   #(1*1000*1000);
+//   @(negedge ap_clk);
+//   hastipSwitch = 1;
+//   hastipMemberId = 0;
+//   hastipStarted = 1;
+//   $display("%0d: hastipStarted = 1 *************", $time);
+//   @(negedge ap_clk);
+//   @(posedge hastipFinished);
+//   $display("%0d: @(posedge hastipFinished) *************", $time);
+//   
+//   #(2*1000*1000);
+//   @(negedge ap_clk);
+//   $display("%0d: my DONE *************", $time);
+//   ap_done_i[0] = 1'b1;
+//   @(negedge ap_clk);
+//   ap_done_i[0] = 1'b0;
+// end
 
 typedef enum {
   FSM_IDLE,
@@ -273,42 +334,125 @@ always @(posedge ap_clk) begin
   end
 end
 
-hastip_core_cache #(
-  .C_M00_AXI_ADDR_WIDTH ( C_M00_AXI_ADDR_WIDTH ),
-  .C_M00_AXI_DATA_WIDTH ( C_M00_AXI_DATA_WIDTH ),
-  .HAST_IP_DATA_WIDTH   ( HAST_IP_DATA_WIDTH )
-)
-inst_cache (
-  .ap_clk          ( ap_clk          ),
-  .ap_rst_n        ( ap_rst_n        ),
-  .m00_axi_awvalid ( m00_axi_awvalid ),
-  .m00_axi_awready ( m00_axi_awready ),
-  .m00_axi_awaddr  ( m00_axi_awaddr  ),
-  .m00_axi_awlen   ( m00_axi_awlen   ),
-  .m00_axi_wvalid  ( m00_axi_wvalid  ),
-  .m00_axi_wready  ( m00_axi_wready  ),
-  .m00_axi_wdata   ( m00_axi_wdata   ),
-  .m00_axi_wstrb   ( m00_axi_wstrb   ),
-  .m00_axi_wlast   ( m00_axi_wlast   ),
-  .m00_axi_bvalid  ( m00_axi_bvalid  ),
-  .m00_axi_bready  ( m00_axi_bready  ),
-  .m00_axi_arvalid ( m00_axi_arvalid ),
-  .m00_axi_arready ( m00_axi_arready ),
-  .m00_axi_araddr  ( m00_axi_araddr  ),
-  .m00_axi_arlen   ( m00_axi_arlen   ),
-  .m00_axi_rvalid  ( m00_axi_rvalid  ),
-  .m00_axi_rready  ( m00_axi_rready  ),
-  .m00_axi_rdata   ( m00_axi_rdata   ),
-  .m00_axi_rlast   ( m00_axi_rlast   ),
-  .hastipDataIn (hastipDataIn),
-  .hastipDataOut (hastipDataOut),
-  .hastipCellIndex (hastipCellIndex),
-  .hastipReadEnable (hastipReadEnable),
-  .hastipWriteEnable (hastipWriteEnable),
-  .hastipReadsDone (hastipReadsDone),
-  .hastipWritesDone (hastipWritesDone),
-  .axi00_ptr0 (axi00_ptr0)
-);
+    typedef enum {
+        IDLE,
+        WR_ADDR,
+        WR_DATA,
+        WR_DONE,
+        RD_ADDR,
+        RD_DATA,
+        RD_DONE,
+        LAST
+    } AXI_State_Type;
+    
+    AXI_State_Type axi_state = IDLE;
+
+    always @(posedge ap_clk) begin
+        if (areset) begin
+            axi_state = IDLE;
+        end
+        else begin
+            case (axi_state)
+            
+                IDLE:
+                    begin
+                        hastipDataIn = 32'b0;
+                        hastipReadsDone = 1'b0;
+                        hastipWritesDone = 1'b0;
+
+                        m00_axi_awvalid = 1'b0;
+                        m00_axi_awaddr = 0;
+                        m00_axi_awlen = 0;
+                        m00_axi_wvalid = 1'b0;
+                        m00_axi_wdata  = 0;
+                        m00_axi_wstrb = 8'b11111111;
+                        m00_axi_wlast = 1'b1;
+                        m00_axi_bready = 1'b1;
+
+                        m00_axi_arvalid = 1'b0;
+                        m00_axi_araddr = 0;
+                        m00_axi_arlen = 0;
+                        m00_axi_rready = 1'b0;
+                        
+                        if (hastipWriteEnable) begin
+                            $display("%0d: AXI: hastipWriteEnable, %x, %x", $time, hastipCellIndex, hastipDataOut);
+                            axi_state = WR_ADDR;
+                        end else if (hastipReadEnable) begin
+                            $display("%0d: AXI: hastipReadEnable, %x", $time, hastipCellIndex);
+                            axi_state = RD_ADDR;
+                        end
+                    end
+                
+                WR_ADDR:
+                    begin
+                        m00_axi_awaddr <= axi00_ptr0 + 4 * hastipCellIndex;
+                        m00_axi_awvalid <= 1'b1;
+                        if (m00_axi_awvalid && m00_axi_awready) begin
+                            m00_axi_awvalid <= 1'b0;
+                            axi_state <= WR_DATA;
+                        end
+                    end
+                
+                WR_DATA:
+                    begin
+                        m00_axi_wdata <= hastipDataOut;
+                        m00_axi_wvalid <= 1'b1;
+                        if (m00_axi_wvalid && m00_axi_wready) begin
+                            m00_axi_wvalid <= 1'b0;
+                            hastipWritesDone <= 1'b1;
+                            axi_state <= WR_DONE;
+                        end
+                    end
+
+                WR_DONE:
+                    begin
+                        if (hastipWriteEnable == 0) begin
+                            hastipWritesDone <= 1'b0;
+                            axi_state <= IDLE;
+                        end
+                    end
+
+                RD_ADDR:
+                    begin
+                        m00_axi_araddr <= axi00_ptr0 + 4 * hastipCellIndex;
+                        m00_axi_arvalid <= 1'b1;
+                        if (m00_axi_arvalid && m00_axi_arready) begin
+                            m00_axi_arvalid <= 1'b0;
+                            axi_state <= RD_DATA;
+                        end
+                    end
+
+                RD_DATA:
+                    begin
+                      if (m00_axi_rvalid) begin
+                        m00_axi_rready <= 1'b1;
+                        hastipDataIn = m00_axi_rdata;
+                        hastipReadsDone <= 1'b1;
+                        axi_state = RD_DONE;
+                      end
+                    end
+
+                RD_DONE:
+                    begin
+                      m00_axi_rready <= 1'b0;
+                      if (hastipReadEnable == 0) begin
+                          hastipReadsDone = 1'b0;
+                          axi_state = IDLE;
+                      end
+                    end
+                
+                default:
+                    begin
+                        axi_state = IDLE;
+                    end
+            endcase        
+        end
+    end
+
+    
+initial begin : DEBUG
+  $display("myhello *************");
+end
 
 endmodule : hastip_core
 `default_nettype wire
