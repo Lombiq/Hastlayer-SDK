@@ -40,32 +40,31 @@ namespace Hast.Console.Subcommands
             switch (Enum.Parse<Instruction>(options.Instruction, ignoreCase: true))
             {
                 case Instruction.Build:
-                    var vhdlPath = _mainOptions.InputFilePath;
-                    if (vhdlPath?.EndsWith(".vhdl") != true || !File.Exists(vhdlPath))
+                    var hardwareFrameworkPath = _mainOptions.InputFilePath ?? "HardwareFramework";
+                    if (!Directory.Exists(hardwareFrameworkPath))
                     {
-                        throw new ArgumentException("Please set the -i option to point to the main vhdl file! " +
-                                                    "(eg. ./HardwareFramework/rtl/src/IP/Hast_IP.vhd)");
+                        throw new ArgumentException("Please set the -i option to point to the directory that " +
+                                                    "contains the rtl directory! (eg. ./HardwareFramework)");
                     }
 
                     var outputSet = !string.IsNullOrWhiteSpace(_mainOptions.OutputFilePath);
                     if (outputSet && !_mainOptions.OutputFilePath.EndsWith(".xclbin"))
                     {
-                        throw new ArgumentException("Please set the -o option to point to the desired location of the " +
-                                                    "xclbin file (eg. ./HardwareFramework/bin/Hastlayer.) or omit it!");
+                        throw new ArgumentException("Please set the -o option to point to the location of the xclbin " +
+                                                    "file (eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
                     }
 
                     var manifest = new XilinxDeviceManifest();
-                    var transformationId = "Hastlayer";
                     var context = new HardwareImplementationCompositionContext
                     {
                         DeviceManifest = manifest,
                         Configuration = new HardwareGenerationConfiguration(
                             manifest.Name,
-                            Path.GetFullPath("HardwareFramework")),
+                            Path.GetFullPath(hardwareFrameworkPath)),
                         HardwareDescription = new VhdlHardwareDescription
                         {
                             HardwareEntryPointNamesToMemberIdMappings = new Dictionary<string, int>(),
-                            TransformationId = transformationId,
+                            TransformationId = options.Hash ?? "Hastlayer",
                             Warnings = Array.Empty<ITransformationWarning>(),
                         },
                     };
@@ -73,7 +72,7 @@ namespace Hast.Console.Subcommands
                     {
                         BinaryPath = outputSet
                             ? _mainOptions.OutputFilePath
-                            : Path.Combine("VitisBuildOutput", transformationId + ".xclbin"),
+                            : Path.Combine("VitisOutput", context.HardwareDescription.TransformationId + ".xclbin"),
                     };
 
 

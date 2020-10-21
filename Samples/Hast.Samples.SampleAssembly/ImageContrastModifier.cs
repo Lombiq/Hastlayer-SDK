@@ -19,7 +19,7 @@ namespace Hast.Samples.SampleAssembly
         private const int ChangeContrast_ContrastValueIndex = 2;
         private const int ChangeContrast_ImageStartIndex = 3;
 
-        private const int MaxDegreeOfParallelism = 25;
+        private const int MaxDegreeOfParallelism = 150;
 
 
         /// <summary>
