@@ -122,6 +122,7 @@ namespace Hast.Layer
             new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true, true)
                 .AddEnvironmentVariables()
+                .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
 
