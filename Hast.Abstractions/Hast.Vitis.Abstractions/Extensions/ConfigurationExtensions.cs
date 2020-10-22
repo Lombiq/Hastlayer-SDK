@@ -8,5 +8,8 @@ namespace Hast.Vitis.Abstractions.Extensions
     {
         public static IOpenClConfiguration GetOrAddOpenClConfiguration(this IHardwareGenerationConfiguration configuration) =>
             configuration.GetOrAddCustomConfiguration<OpenClConfiguration>(nameof(OpenClConfiguration));
+
+        public static VitisBuildConfiguration GetOrAddVitisBuildConfiguration(this IHardwareGenerationConfiguration configuration) =>
+            configuration.GetOrAddCustomConfiguration<VitisBuildConfiguration>(nameof(VitisBuildConfiguration));
     }
 }

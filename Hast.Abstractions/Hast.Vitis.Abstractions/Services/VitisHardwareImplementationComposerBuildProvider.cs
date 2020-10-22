@@ -5,6 +5,7 @@ using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
+using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -94,12 +95,18 @@ namespace Hast.Vitis.Abstractions.Services
                 .OrderByDescending(directoryName => directoryName)
                 .First();
 
+            if (context.Configuration.GetOrAddVitisBuildConfiguration().SynthesisOnly)
+            {
+                await SynthKernelAsync(hardwareFrameworkPath, hashId);
+                Environment.Exit(0);
+            }
+
             Progress!(this, "Staring build.");
             await BuildKernelAsync(hardwareFrameworkPath, target, device, hashId, deviceManifest);
             CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, hashId);
 
             Progress!(this, "Collecting reports.");
-            try { CollectReport(hardwareFrameworkPath, context); }
+            try { CollectReport(hardwareFrameworkPath, context, hashId); }
             catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
 
             Cleanup(hardwareFrameworkPath, hashId);
@@ -190,6 +197,25 @@ namespace Hast.Vitis.Abstractions.Services
             Progress!(this, "Emulation configuration (emconfig) setup is finished.");
         }
 
+        private async Task SynthKernelAsync(string hardwareFrameworkPath, string hashId)
+        {
+            // vivado -mode batch -source synth_util.tcl
+            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
+
+            var reportsDirectoryPath = Path.Combine(hardwareFrameworkPath, "reports", hashId);
+            if (!Directory.Exists(reportsDirectoryPath)) Directory.CreateDirectory(reportsDirectoryPath);
+
+            var vivadoArguments = new[]
+            {
+                "-mode", "batch", "-source",
+                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "synth_util.tcl"), "-tclargs",
+                Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP", "Hast_IP.vhd"),
+                Path.Combine(reportsDirectoryPath, "Hast_IP_synth_util.rpt"),
+            };
+            await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
+            Progress!(this, "Vivado synthesis is finished.");
+        }
+
         private void CopyBinaries(
             string hardwareFrameworkPath,
             string target,
@@ -217,9 +243,11 @@ namespace Hast.Vitis.Abstractions.Services
         /// </summary>
         private void CollectReport(
             string hardwareFrameworkPath,
-            IHardwareImplementationCompositionContext context)
+            IHardwareImplementationCompositionContext context,
+            string hashId)
         {
-            var reportPath = Path.Combine("_x", "reports", "link", "imp");
+            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
+            var reportPath = Path.Combine(rtlDirectoryPath, "_x", "reports", "link", "imp");
             if (!Directory.Exists(reportPath))
             {
                 _logger.LogWarning("Report directory is missing!");
@@ -267,7 +295,7 @@ namespace Hast.Vitis.Abstractions.Services
         private void OnProgress(object sender, string message) =>
             _logger.LogInformation("Build step {0}/{1} completed: {2}", ++Step, StepsTotal, message);
 
-        private Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory)
+        private Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory = null)
         {
             var name = Path.GetFileName(executable);
             void OnCommandEvent(CommandEvent commandEvent)
