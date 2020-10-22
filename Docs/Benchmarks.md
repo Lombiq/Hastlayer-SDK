@@ -38,11 +38,11 @@ Here you can find some measurements of execution times of various algorithms on 
 Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
 
 
-| Algorithm             | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
-|:----------------------|:---------------:|:---------------:|:--------------:|:--------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:------------------:|
-| ImageContrastModifier | 483%<sup>2</sup>|      2200%      | 150<sup>1</sup>|   513 ms |   46 Ws   |        21%       |   61 ms  |     88 ms  |    2 Ws    |      22.334 W      |
-| ImageContrastModifier | 650%<sup>3</sup>|      2901%      | 150<sup>1</sup>| 18012 ms | 1621 Ws   |        21%       | 2330 ms  |   2399 ms  |   54 Ws    |      22.334 W      |
-| MonteCarloPiEstimator |       580%      |     27100%      | 350<sup>1</sup>|   272 ms |   24 Ws   |        16%       |   21 ms  |     40 ms  |    1 Ws    |      19.239 W      |
+| Device     | Algorithm                         | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
+|:----------:|:---------------------------------:|:---------------:|:---------------:|:--------------:|:--------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:------------------:|
+| Alveo U280 | ImageContrastModifier<sup>2</sup> |            483% |           2200% | 150<sup>1</sup>|   513 ms |     46 Ws |              21% |    61 ms |      88 ms |       2 Ws |           22.334 W |
+| Alveo U280 | ImageContrastModifier<sup>3</sup> |            650% |           2901% | 150<sup>1</sup>| 18012 ms |   1621 Ws |              21% |  2330 ms |    2399 ms |      54 Ws |           22.334 W |
+| Alveo U280 | MonteCarloPiEstimator             |            580% |          27100% | 350<sup>1</sup>|   272 ms |     24 Ws |              16% |    21 ms |      40 ms |       1 Ws |           19.239 W |
 
 1. More could fit actually, needs more testing.
 2. Using the default 0.2MP image.
