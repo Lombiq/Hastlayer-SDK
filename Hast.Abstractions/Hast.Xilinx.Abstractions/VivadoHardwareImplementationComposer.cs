@@ -1,6 +1,7 @@
 using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -47,14 +48,13 @@ namespace Hast.Xilinx.Abstractions
                 return new HardwareImplementation();
             }
 
-            var (vhdlDirectory, vhdlFileName) = GetFilePath(deviceManifest, hardwareFrameworkPath);
-            var vhdlFilePath = Path.Combine(vhdlDirectory, vhdlFileName);
             var hashId = context.HardwareDescription.TransformationId;
+            var vhdlFilePath = GetFilePath(deviceManifest, hardwareFrameworkPath, hashId);
             var hashFile = vhdlFilePath + ".hash";
             if (!File.Exists(hashFile) ||
                 File.ReadAllText(hashFile).Trim() != hashId)
             {
-                CreateFiles(context, deviceManifest, vhdlFilePath);
+                CreateFiles(context, deviceManifest, vhdlFilePath, hashId);
                 File.WriteAllText(hashFile, hashId);
             }
 
@@ -84,19 +84,29 @@ namespace Hast.Xilinx.Abstractions
         private static void CreateFiles(
             IHardwareImplementationCompositionContext context,
             XilinxDeviceManifest deviceManifest,
-            string vhdlFilePath)
+            string vhdlFilePath,
+            string hashId)
         {
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var vhdlHardwareDescription = (VhdlHardwareDescription)context.HardwareDescription;
 
+            if (deviceManifest.DeviceType == XilinxDeviceType.Vitis)
+            {
+                // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
+                CopyAll(
+                    new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", "src")),
+                    new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src")));
+            }
+
             File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
-            var xdcFileSubPath = deviceManifest.DeviceType switch
+            string xdcFileSubPath = deviceManifest.DeviceType switch
             {
-                XilinxDeviceType.Vitis => Path.Combine("rtl", "src", "IP", "Hast_IP.xdc"),
+                XilinxDeviceType.Vitis => Path.Combine("rtl", "src", hashId, "IP", "Hast_IP.xdc"),
                 XilinxDeviceType.Nexys => "Nexys4DDR_Master.xdc",
-                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}"),
+                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}")
             };
+
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";
 
@@ -121,18 +131,19 @@ namespace Hast.Xilinx.Abstractions
             }
         }
 
-        private static (string Directory, string FileName) GetFilePath(
+        private static string GetFilePath(
             XilinxDeviceManifest deviceManifest,
-            string hardwareFrameworkPath)
+            string hardwareFrameworkPath,
+            string hashId)
         {
             string directory = deviceManifest.DeviceType switch
             {
                 XilinxDeviceType.Nexys => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "IPRepo"),
-                XilinxDeviceType.Vitis => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", "src", "IP"),
+                XilinxDeviceType.Vitis => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", hashId, "src", "IP"),
                 _ => throw deviceManifest.GetUnknownDeviceType(),
             };
 
-            return (directory, "Hast_IP.vhd");
+            return Path.Combine(directory, "Hast_IP.vhd");
         }
 
         private static string CreateDirectoryIfDoesntExist(params string[] pathComponents)
@@ -140,6 +151,26 @@ namespace Hast.Xilinx.Abstractions
             var path = Path.Combine(pathComponents);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             return path;
+        }
+
+        // source: https://stackoverflow.com/a/690980
+        private static void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            Directory.CreateDirectory(target.FullName);
+
+            // Copy each file into the new directory.
+            foreach (var file in source.GetFiles())
+            {
+                Console.WriteLine(@"Copying {0}\{1}", target.FullName, file.Name);
+                file.CopyTo(Path.Combine(target.FullName, file.Name), true);
+            }
+
+            // Copy each subdirectory using recursion.
+            foreach (var subDirectory in source.GetDirectories())
+            {
+                var nextTargetSubDir = target.CreateSubdirectory(subDirectory.Name);
+                CopyAll(subDirectory, nextTargetSubDir);
+            }
         }
     }
 }

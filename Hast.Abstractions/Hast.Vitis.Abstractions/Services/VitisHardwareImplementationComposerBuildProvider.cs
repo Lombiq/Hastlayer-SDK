@@ -1,4 +1,5 @@
-﻿using CliWrap.EventStream;
+﻿using CliWrap;
+using CliWrap.EventStream;
 using CliWrap.Exceptions;
 using Hast.Common.Helpers;
 using Hast.Layer;
@@ -81,9 +82,10 @@ namespace Hast.Vitis.Abstractions.Services
 
             Progress!(this, "Environment ready.");
 
+            var hashId = context.HardwareDescription.TransformationId;
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
-            Cleanup(hardwareFrameworkPath);
+            Cleanup(hardwareFrameworkPath, hashId);
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
@@ -93,14 +95,14 @@ namespace Hast.Vitis.Abstractions.Services
                 .First();
 
             Progress!(this, "Staring build.");
-            await BuildKernelAsync(hardwareFrameworkPath, target, device, deviceManifest);
-            CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath);
+            await BuildKernelAsync(hardwareFrameworkPath, target, device, hashId, deviceManifest);
+            CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, hashId);
 
             Progress!(this, "Collecting reports.");
-            try { await CollectReport(hardwareFrameworkPath, target, device, context, implementation); }
+            try { CollectReport(hardwareFrameworkPath, context); }
             catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
 
-            Cleanup(hardwareFrameworkPath);
+            Cleanup(hardwareFrameworkPath, hashId);
         }
 
 
@@ -108,10 +110,12 @@ namespace Hast.Vitis.Abstractions.Services
             string hardwareFrameworkPath,
             string target,
             string device,
+            string hashId,
             XilinxDeviceManifest deviceManifest)
         {
-            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
+            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath, hashId);
             if (!Directory.Exists(xclbinDirectoryPath)) Directory.CreateDirectory(xclbinDirectoryPath);
+            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
 
             var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
 
@@ -124,14 +128,14 @@ namespace Hast.Vitis.Abstractions.Services
                 "-mode",
                 "batch",
                 "-source",
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "gen_xo.tcl"),
+                Path.Combine(GetXclbinDirectoryPath(hardwareFrameworkPath, hashId), "src", "scripts", "gen_xo.tcl"),
                 "-tclargs",
                 xoFilePath,
                 "hastip",
                 target,
                 device,
             };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
+            await ExecuteWithLogging(vivadoExecutable, vivadoArguments, rtlDirectoryPath);
             Progress!(this, "Vivado build is finished.");
 
 
@@ -165,11 +169,11 @@ namespace Hast.Vitis.Abstractions.Services
             vppArguments.AddRange(new[]
             {
                 "-lo",
-                Path.GetFullPath(Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin")),
-                Path.GetFullPath(xoFilePath),
+                Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"),
+                xoFilePath,
             });
 
-            await ExecuteWithLogging(vppExecutable, vppArguments);
+            await ExecuteWithLogging(vppExecutable, vppArguments, rtlDirectoryPath);
             Progress!(this, "v++ build is finished.");
 
             // For example:
@@ -182,16 +186,17 @@ namespace Hast.Vitis.Abstractions.Services
                 "--od",
                 xclbinDirectoryPath,
             };
-            await ExecuteWithLogging(emConfigExecutable, emConfigArguments);
+            await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
             Progress!(this, "Emulation configuration (emconfig) setup is finished.");
         }
 
         private void CopyBinaries(
             string hardwareFrameworkPath,
             string target,
-            string binaryPath)
+            string binaryPath,
+            string hashId)
         {
-            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath);
+            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath, hashId);
 
             var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
             if (binaryDirectoryPath != null && !Directory.Exists(binaryDirectoryPath))
@@ -210,12 +215,9 @@ namespace Hast.Vitis.Abstractions.Services
         /// <summary>
         /// TODO
         /// </summary>
-        private async Task CollectReport(
+        private void CollectReport(
             string hardwareFrameworkPath,
-            string target,
-            string device,
-            IHardwareImplementationCompositionContext context,
-            IHardwareImplementation implementation)
+            IHardwareImplementationCompositionContext context)
         {
             var reportPath = Path.Combine("_x", "reports", "link", "imp");
             if (!Directory.Exists(reportPath))
@@ -235,11 +237,14 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private void Cleanup(string hardwareFrameworkPath)
+        /// <summary>
+        /// TODO
+        /// </summary>
+        private void Cleanup(string hardwareFrameworkPath, string hashId)
         {
             var toDelete = Directory.GetDirectories(hardwareFrameworkPath, "tmp_*")
                 .Union(Directory.GetDirectories(hardwareFrameworkPath, "packaged_kernel_*"))
-                .Union(new[] { "_x", GetXclbinDirectoryPath(hardwareFrameworkPath) })
+                .Union(new[] { "_x", GetXclbinDirectoryPath(hardwareFrameworkPath, hashId) })
                 .Where(Directory.Exists);
 
             foreach (var directory in toDelete)
@@ -255,7 +260,6 @@ namespace Hast.Vitis.Abstractions.Services
             // rm -rf ./xclbin
             // rm -rf _x.*
             // rm -rf ./tmp_kernel_pack* ./packaged_kernel* _x/
-            // TODO: Where is: TempConfig, system_estimate.xtxt, *.rpt, src/*.ll, _v++_*, tmp_*, etc
             Progress!(this, "Build directory cleaned up.");
         }
 
@@ -263,7 +267,7 @@ namespace Hast.Vitis.Abstractions.Services
         private void OnProgress(object sender, string message) =>
             _logger.LogInformation("Build step {0}/{1} completed: {2}", ++Step, StepsTotal, message);
 
-        private Task ExecuteWithLogging(string executable, IList<string> arguments)
+        private Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory)
         {
             var name = Path.GetFileName(executable);
             void OnCommandEvent(CommandEvent commandEvent)
@@ -296,12 +300,22 @@ namespace Hast.Vitis.Abstractions.Services
                 }
             }
 
+            Command Configure(Command command)
+            {
+                if (!Directory.Exists(workingDirectory)) command = command.WithWorkingDirectory(workingDirectory);
+                return command.WithValidation(CommandResultValidation.None);
+            }
+
+
             _logger.LogInformation("Starting program: {0} {1}", executable, string.Join(" ", arguments));
-            return CliHelper.StreamAsync(executable, arguments, OnCommandEvent);
+            return CliHelper.StreamAsync(executable, arguments, OnCommandEvent, Configure);
         }
 
-        private string GetXclbinDirectoryPath(string hardwareFrameworkPath) =>
-            Path.Combine(hardwareFrameworkPath, "rtl", "xclbin");
+        private string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
+            Path.Combine(hardwareFrameworkPath, "rtl", hashId);
+
+        private string GetXclbinDirectoryPath(string hardwareFrameworkPath, string hashId) =>
+            Path.GetFullPath(Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "xclbin"));
 
         private static async Task<string> GetExecutablePathAsync(string executable)
         {

@@ -32,9 +32,9 @@
 #
 # *******************************************************************************/
 
-set path_to_hdl "./HardwareFramework/rtl/src/IP"
-set path_to_packaged "./HardwareFramework/packaged_kernel_${suffix}"
-set path_to_tmp_project "./HardwareFramework/tmp_kernel_pack_${suffix}"
+set path_to_hdl "./src/IP"
+set path_to_packaged "./packaged_kernel_${suffix}"
+set path_to_tmp_project "./tmp_kernel_pack_${suffix}"
 
 create_project -force kernel_pack $path_to_tmp_project
 add_files -norecurse [glob $path_to_hdl/*.v $path_to_hdl/*.sv $path_to_hdl/*.vhd  $path_to_hdl/*.xdc]

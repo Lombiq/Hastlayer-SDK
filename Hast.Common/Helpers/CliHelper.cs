@@ -32,12 +32,15 @@ namespace Hast.Common.Helpers
                 .Select(x => new FileInfo(x));
         }
 
-        public static async Task StreamAsync(string program, IList<string> arguments, Action<CommandEvent> handler)
+        public static async Task StreamAsync(
+            string program,
+            IList<string> arguments,
+            Action<CommandEvent> handler,
+            Func<Command, Command> configureCommand = null)
         {
             var command = Cli.Wrap(program);
-            if (arguments?.Any() == true) command = command
-                .WithArguments(arguments)
-                .WithValidation(CommandResultValidation.None);
+            if (arguments?.Any() == true) command = command.WithArguments(arguments);
+            if (configureCommand != null) command = configureCommand(command);
 
             await foreach (var commandEvent in command.ListenAsync()) handler(commandEvent);
         }

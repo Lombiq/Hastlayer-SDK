@@ -45,10 +45,10 @@ set device    [lindex $::argv 3]
 
 set suffix "${krnl_name}_${target}_${device}"
 
-source -notrace ./HardwareFramework/rtl/src/scripts/package_kernel.tcl
+source -notrace ./src/scripts/package_kernel.tcl
 
 if {[file exists "${xoname}"]} {
     file delete -force "${xoname}"
 }
 
-package_xo -xo_path ${xoname} -kernel_name hastip -ip_directory ./HardwareFramework/packaged_kernel_${suffix} -kernel_xml ./HardwareFramework/rtl/src/xml/kernel.xml
+package_xo -xo_path ${xoname} -kernel_name hastip -ip_directory ./packaged_kernel_${suffix} -kernel_xml ./src/xml/kernel.xml
