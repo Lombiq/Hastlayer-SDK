@@ -22,7 +22,7 @@ namespace Hast.Samples.SampleAssembly
         private const int EstimatePi_InCircleCountSumUInt32Index = 0;
 
         [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
-        public readonly int MaxDegreeOfParallelism = 78;
+        public static readonly int MaxDegreeOfParallelism = 78;
 
 
         public virtual void EstimatePi(SimpleMemory memory)
