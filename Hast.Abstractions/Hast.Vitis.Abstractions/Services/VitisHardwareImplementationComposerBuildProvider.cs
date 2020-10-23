@@ -76,9 +76,16 @@ namespace Hast.Vitis.Abstractions.Services
                                                     "its technical name which is required to build.");
             }
 
-            if (Environment.GetEnvironmentVariable("XILINX_VITIS") == null)
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
             {
                 throw new InvalidOperationException("XILINX_VITIS variable is not set.");
+            }
+
+            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_PATH_XRT"));
+            if (!Directory.Exists(xilinxDirectoryPath))
+            {
+                throw new InvalidOperationException(
+                    "XILINX_PATH_XRT variable is not set or it is not pointing to an existing directory.");
             }
 
             Progress!(this, "Environment ready.");
@@ -90,7 +97,8 @@ namespace Hast.Vitis.Abstractions.Services
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
-            var device = Directory.GetDirectories("/opt/xilinx/platforms", $"{deviceManifest.TechnicalName}*")
+            var platformsDirectoryPath = Path.Combine(xilinxDirectoryPath, "platforms");
+            var device = Directory.GetDirectories(platformsDirectoryPath, $"{deviceManifest.TechnicalName}*")
                 .Select(Path.GetFileName)
                 .OrderByDescending(directoryName => directoryName)
                 .First();
