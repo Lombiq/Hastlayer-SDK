@@ -5,7 +5,6 @@ using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
-using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -42,8 +41,19 @@ namespace Hast.Vitis.Abstractions.Services
 
             var buildOutputPath = Path.Combine("App_Data", "logs");
             if (!Directory.Exists(buildOutputPath)) Directory.CreateDirectory(buildOutputPath);
-            _buildOutputPath = Path.Combine(buildOutputPath, "build.out");
-            _buildOutput = new StreamWriter(_buildOutputPath, append: false, Encoding.UTF8);
+            for (var i = 0; i < 100 && _buildOutput == null; i++)
+            {
+                var fileName = i == 0 ? "build.out" : $"build~{i}.out";
+                try
+                {
+                    _buildOutputPath = Path.Combine(buildOutputPath, fileName);
+                    _buildOutput = new StreamWriter(_buildOutputPath, append: false, Encoding.UTF8);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to open {0} for writing.", fileName);
+                }
+            }
         }
 
 
@@ -91,16 +101,23 @@ namespace Hast.Vitis.Abstractions.Services
             Progress!(this, "Environment ready.");
 
             var hashId = context.HardwareDescription.TransformationId;
-            var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
+            var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
             Cleanup(hardwareFrameworkPath, hashId);
 
+            var platformsDirectoryPath = Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable
+                ? Path.GetFullPath(platformVariable)
+                : Path.Combine(xilinxDirectoryPath, "platforms");
+
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
-            var platformsDirectoryPath = Path.Combine(xilinxDirectoryPath, "platforms");
-            var device = Directory.GetDirectories(platformsDirectoryPath, $"{deviceManifest.TechnicalName}*")
-                .Select(Path.GetFileName)
-                .OrderByDescending(directoryName => directoryName)
+            // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
+            // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
+            // see: https://github.com/Xilinx/Vitis-Tutorials/issues/3
+            var device = new DirectoryInfo(platformsDirectoryPath)
+                .GetDirectories($"{deviceManifest.TechnicalName}*")
+                .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
+                .OrderByDescending(name => name)
                 .First();
 
             if (context.Configuration.GetOrAddVitisBuildConfiguration().SynthesisOnly)
@@ -138,15 +155,14 @@ namespace Hast.Vitis.Abstractions.Services
             // vivado -mode batch -source ./HardwareFramework/rtl/src/scripts/gen_xo.tcl
             //        -tclargs ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo hastip hw_emu xilinx_u200_xdma_201830_2
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
-            var vivadoArguments = new []
+            var vivadoArguments = new[]
             {
                 "-mode",
                 "batch",
                 "-source",
-                Path.Combine(GetXclbinDirectoryPath(hardwareFrameworkPath, hashId), "src", "scripts", "gen_xo.tcl"),
+                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "gen_xo.tcl"),
                 "-tclargs",
                 xoFilePath,
-                "hastip",
                 target,
                 device,
             };
@@ -334,14 +350,19 @@ namespace Hast.Vitis.Abstractions.Services
                 }
             }
 
+            var hasWorkingDirectory = Directory.Exists(workingDirectory);
             Command Configure(Command command)
             {
-                if (!Directory.Exists(workingDirectory)) command = command.WithWorkingDirectory(workingDirectory);
+                if (hasWorkingDirectory) command = command.WithWorkingDirectory(workingDirectory!);
                 return command.WithValidation(CommandResultValidation.None);
             }
 
 
-            _logger.LogInformation("Starting program: {0} {1}", executable, string.Join(" ", arguments));
+            _logger.LogInformation(
+                "Starting program: {0} {1} (working directory: {2})",
+                executable,
+                string.Join(" ", arguments),
+                hasWorkingDirectory ? workingDirectory : ".");
             return CliHelper.StreamAsync(executable, arguments, OnCommandEvent, Configure);
         }
 
@@ -349,7 +370,7 @@ namespace Hast.Vitis.Abstractions.Services
             Path.Combine(hardwareFrameworkPath, "rtl", hashId);
 
         private string GetXclbinDirectoryPath(string hardwareFrameworkPath, string hashId) =>
-            Path.GetFullPath(Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "xclbin"));
+            Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "xclbin");
 
         private static async Task<string> GetExecutablePathAsync(string executable)
         {

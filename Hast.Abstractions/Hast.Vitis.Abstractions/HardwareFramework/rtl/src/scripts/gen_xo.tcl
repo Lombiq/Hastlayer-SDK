@@ -32,23 +32,16 @@
 #
 # *******************************************************************************/
 
-if { $::argc != 4 } {
-    puts "ERROR: Program \"$::argv0\" requires 4 arguments!\n"
-    puts "Usage: $::argv0 <xoname> <krnl_name> <target> <device>\n"
-    exit
-}
-
 set xoname    [lindex $::argv 0]
-set krnl_name [lindex $::argv 1]
-set target    [lindex $::argv 2]
-set device    [lindex $::argv 3]
+set target    [lindex $::argv 1]
+set device    [lindex $::argv 2]
 
-set suffix "${krnl_name}_${target}_${device}"
+set suffix "hastip_${target}_${device}"
 
-source -notrace ./src/scripts/package_kernel.tcl
+source -notrace ../src/scripts/package_kernel.tcl
 
 if {[file exists "${xoname}"]} {
     file delete -force "${xoname}"
 }
 
-package_xo -xo_path ${xoname} -kernel_name hastip -ip_directory ./packaged_kernel_${suffix} -kernel_xml ./src/xml/kernel.xml
+package_xo -xo_path ${xoname} -kernel_name hastip -ip_directory ./packaged_kernel_${suffix} -kernel_xml ../src/xml/kernel.xml

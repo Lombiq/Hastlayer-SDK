@@ -94,21 +94,23 @@ namespace Hast.Xilinx.Abstractions
             {
                 // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
                 CopyAll(
-                    new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", "src")),
-                    new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src")));
+                    new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP")),
+                    new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP")));
             }
 
+            CreateDirectoryIfDoesntExist(Path.GetDirectoryName(vhdlFilePath));
             File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
             string xdcFileSubPath = deviceManifest.DeviceType switch
             {
-                XilinxDeviceType.Vitis => Path.Combine("rtl", "src", hashId, "IP", "Hast_IP.xdc"),
+                XilinxDeviceType.Vitis => Path.Combine("rtl", hashId, "src", "IP", "Hast_IP.xdc"),
                 XilinxDeviceType.Nexys => "Nexys4DDR_Master.xdc",
                 _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}")
             };
 
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
             var xdcFileTemplatePath = xdcFilePath + "_template";
+            CreateDirectoryIfDoesntExist(Path.GetDirectoryName(xdcFilePath));
 
             // Using the original XDC file as a template and then adding constraints to it.
             if (File.Exists(xdcFilePath) && !File.Exists(xdcFileTemplatePath))
