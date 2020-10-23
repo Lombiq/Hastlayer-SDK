@@ -287,29 +287,9 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        /// <summary>
-        /// TODO
-        /// </summary>
         private void Cleanup(string hardwareFrameworkPath, string hashId)
         {
-            var toDelete = Directory.GetDirectories(hardwareFrameworkPath, "tmp_*")
-                .Union(Directory.GetDirectories(hardwareFrameworkPath, "packaged_kernel_*"))
-                .Union(new[] { "_x", GetXclbinDirectoryPath(hardwareFrameworkPath, hashId) })
-                .Where(Directory.Exists);
-
-            foreach (var directory in toDelete)
-            {
-                Console.WriteLine("Deleting: {0}", directory);
-                Directory.Delete(directory, recursive: true);
-            }
-
-            // In the makefile it is:
-            // rm -rf host ./xclbin/{*sw_emu*,*hw_emu*}
-            // rm -rf TempConfig system_estimate.xtxt *.rpt
-            // rm -rf src/*.ll _v++_* .Xil emconfig.json dltmp* xmltmp* *.log *.jou
-            // rm -rf ./xclbin
-            // rm -rf _x.*
-            // rm -rf ./tmp_kernel_pack* ./packaged_kernel* _x/
+            Directory.Delete(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), recursive: true);
             Progress!(this, "Build directory cleaned up.");
         }
 
@@ -366,10 +346,10 @@ namespace Hast.Vitis.Abstractions.Services
             return CliHelper.StreamAsync(executable, arguments, OnCommandEvent, Configure);
         }
 
-        private string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
+        private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
             Path.Combine(hardwareFrameworkPath, "rtl", hashId);
 
-        private string GetXclbinDirectoryPath(string hardwareFrameworkPath, string hashId) =>
+        private static string GetXclbinDirectoryPath(string hardwareFrameworkPath, string hashId) =>
             Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "xclbin");
 
         private static async Task<string> GetExecutablePathAsync(string executable)
