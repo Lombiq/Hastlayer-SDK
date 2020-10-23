@@ -105,7 +105,10 @@ namespace Hast.Samples.Consumer
             string GetArgument(string name)
             {
                 name = "-" + name;
-                return args.Contains(name) ? args[argsList.IndexOf(name) + 1] : null;
+                int index = argsList.IndexOf(name) + 1;
+                if (index <= 0) return null;
+                if (index == args.Length) index--; // if it's the last element just return the switch.
+                return args[index];
             }
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
@@ -191,6 +194,8 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine("There were transformation warnings in the logs, which may hint on issues that can " +
                                   "cause the hardware implementation to produce incorrect results.\n");
             }
+
+            if (GetArgument("build") != null) Environment.Exit(0);
 
             Console.WriteLine("Starting hardware execution.");
 
