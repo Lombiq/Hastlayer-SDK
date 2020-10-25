@@ -137,7 +137,10 @@ namespace Hast.Samples.Consumer
             }
 
             // If the sample was selected in the command line use that, or otherwise the default.
-            Configuration.SampleToRun = (Sample)Enum.Parse(typeof(Sample), GetArgument("sample") ?? Configuration.SampleToRun.ToString(), true);
+            Configuration.SampleToRun = (Sample)Enum.Parse(
+                typeof(Sample),
+                GetArgument("sample") ?? Configuration.SampleToRun.ToString(),
+                ignoreCase: true);
 
             // Letting the configuration of samples run. Check out those methods too!
             ISampleRunner sampleRunner = Configuration.SampleToRun switch
@@ -162,6 +165,7 @@ namespace Hast.Samples.Consumer
                 _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
             };
             sampleRunner.Configure(configuration);
+            configuration.ConsumerName = GetArgument("name") ?? Configuration.SampleToRun.ToString();
 
             // The generated VHDL code will contain debug-level information, though it will be slower to create.
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;

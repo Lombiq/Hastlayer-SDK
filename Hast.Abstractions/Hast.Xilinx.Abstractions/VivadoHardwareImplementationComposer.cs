@@ -50,6 +50,8 @@ namespace Hast.Xilinx.Abstractions
 
             var hashId = context.HardwareDescription.TransformationId;
             var vhdlFilePath = GetFilePath(deviceManifest, hardwareFrameworkPath, hashId);
+            var name = context.Configuration.ConsumerName;
+            if (!string.IsNullOrWhiteSpace(name)) File.WriteAllText(vhdlFilePath + ".name", name);
             var hashFile = vhdlFilePath + ".hash";
             if (!File.Exists(hashFile) ||
                 File.ReadAllText(hashFile).Trim() != hashId)

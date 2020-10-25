@@ -15,6 +15,12 @@ namespace Hast.Layer
         IDictionary<string, object> CustomConfiguration { get; }
 
         /// <summary>
+        /// Gets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
+        /// logged or saved during hardware generation but otherwise it may not used in any activities.
+        /// </summary>
+        string ConsumerName { get; set; }
+
+        /// <summary>
         /// Gets the collection of the full name of those public members that will be accessible as hardware
         /// implementation from the host computer. By default all members implemented from interfaces and all public
         /// virtual members will be included. You can use this to restrict what gets transformed into hardware; if
