@@ -40,7 +40,7 @@ namespace Hast.Vitis.Abstractions.Models
             ReadUntil(reader, TableBorderLine);
 
             // Read each line into a table and then drop the bottom table border line.
-            var data = ReadWhile(reader, line => !line.StartsWith(TableBorderLine))
+            var data = ReadWhile(reader, line => line.StartsWith("|") && !line.StartsWith(TableBorderLine))
                 .Select(line => line.Trim('|')
                     .Split('|')
                     .Select(cell => cell.Trim())
