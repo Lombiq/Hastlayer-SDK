@@ -103,7 +103,7 @@ namespace Hast.Vitis.Abstractions.Services
             var hashId = context.HardwareDescription.TransformationId;
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
-            Cleanup(hardwareFrameworkPath, hashId);
+            Cleanup(hardwareFrameworkPath, hashId, deleteSource: false);
 
             var platformsDirectoryPath = Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable
                 ? Path.GetFullPath(platformVariable)
@@ -231,8 +231,11 @@ namespace Hast.Vitis.Abstractions.Services
 
             var vivadoArguments = new[]
             {
-                "-mode", "batch", "-source",
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "synth_util.tcl"), "-tclargs",
+                "-mode",
+                "batch",
+                "-source",
+                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "synth_util.tcl"),
+                "-tclargs",
                 Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP", "Hast_IP.vhd"),
                 Path.Combine(reportsDirectoryPath, "Hast_IP_synth_util.rpt"),
             };
@@ -287,9 +290,21 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private void Cleanup(string hardwareFrameworkPath, string hashId)
+        private void Cleanup(string hardwareFrameworkPath, string hashId, bool deleteSource = true)
         {
-            Directory.Delete(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), recursive: true);
+            var path = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
+            if (deleteSource)
+            {
+                Directory.Delete(path, recursive: true);
+            }
+            else
+            {
+                var directories = new DirectoryInfo(path)
+                    .GetDirectories()
+                    .Where(directory => directory.Name != "src");
+                foreach (var directory in directories) directory.Delete();
+            }
+
             Progress!(this, "Build directory cleaned up.");
         }
 

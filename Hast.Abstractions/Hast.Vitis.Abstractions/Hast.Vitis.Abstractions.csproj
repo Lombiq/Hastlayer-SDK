@@ -52,6 +52,9 @@
     <None Update="HardwareFramework\rtl\src\scripts\package_kernel.tcl">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="HardwareFramework\rtl\src\scripts\synth_util.tcl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="HardwareFramework\rtl\src\testbench\control_hastip_vip.sv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
