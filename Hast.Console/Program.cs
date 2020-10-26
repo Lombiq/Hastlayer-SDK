@@ -12,27 +12,20 @@ namespace Hast.Console
 {
     class Program
     {
+        private static Dictionary<string, SubcommandInfo> _subcommands;
+
+
         private static void RunOptions(MainOptions mainOptions, string[] arguments)
         {
-            var subcommands = typeof(SubcommandAttribute)
-                .GetTypesWithAttribute()
-                .Select(result => new
-                {
-                    CommandName = ((SubcommandAttribute)result.Attribute)!.Name,
-                    Instance = (ISubcommand)result.Type!
-                            .GetConstructor(new[] { typeof(MainOptions), typeof(string[]) })!
-                        .Invoke(new object[] { mainOptions, arguments }),
-                });
-
-
             if (mainOptions.ListCommands)
             {
-                WriteLine("Subcommands:\n* {0}", string.Join("\n* ", subcommands.Select(c => c.CommandName)));
+                var allSubcommands = string.Join("\n* ", _subcommands.Keys);
+                WriteLine("Subcommands:\n* {0}", allSubcommands);
             }
             else if (mainOptions.Subcommand?.ToUpperInvariant() is { } name &&
-                     subcommands.SingleOrDefault(c => c.CommandName.ToUpperInvariant() == name) is { } subcommand)
+                     _subcommands.SingleOrDefault(sub => sub.Key.ToUpperInvariant() == name) is { } subcommand)
             {
-                subcommand.Instance.Run();
+                WriteLine("Please put the subcommand name as the first argument!");
             }
             else
             {
@@ -53,9 +46,35 @@ namespace Hast.Console
             }
         }
 
-        private static void Main(string[] args) =>
+        private static void Main(string[] args)
+        {
+            _subcommands = typeof(SubcommandAttribute)
+                .GetTypesWithAttribute()
+                .Select(result => new SubcommandInfo
+                {
+                    CommandName = ((SubcommandAttribute)result.Attribute)!.Name,
+                    Instance = (ISubcommand)result.Type!
+                            .GetConstructor(new[] { typeof(string[]) })!
+                        .Invoke(new object[] { args })
+                })
+                .ToDictionary(info => info.CommandName);
+
+            if (_subcommands.TryGetValue(args[0], out var subcommand))
+            {
+                subcommand.Instance.Run();
+                return;
+            }
+
             Parser.Default.ParseArguments<MainOptions>(args)
                 .WithParsed(options => RunOptions(options, args))
                 .WithNotParsed(HandleParseError);
+        }
+
+
+        private class SubcommandInfo
+        {
+            public string CommandName { get; set; }
+            public ISubcommand Instance { get; set; }
+        }
     }
 }

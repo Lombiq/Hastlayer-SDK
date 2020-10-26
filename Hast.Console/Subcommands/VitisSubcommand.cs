@@ -21,17 +21,12 @@ namespace Hast.Console.Subcommands
     [Subcommand("vitis")]
     public class VitisSubcommand : ISubcommand
     {
-        private readonly MainOptions _mainOptions;
         private readonly string[] _rawArguments;
 
         public ILogger<VitisHardwareImplementationComposerBuildProvider> BuildLogger { get; set; } =
             new NullLogger<VitisHardwareImplementationComposerBuildProvider>();
 
-        public VitisSubcommand(MainOptions mainOptions, string[] rawArguments)
-        {
-            _mainOptions = mainOptions;
-            _rawArguments = rawArguments;
-        }
+        public VitisSubcommand(string[] rawArguments) => _rawArguments = rawArguments;
 
         private void HandleParseError(IEnumerable<Error> obj)
         {
@@ -55,21 +50,21 @@ namespace Hast.Console.Subcommands
                             example => example));
                     break;
                 case Instruction.Build:
-                    var hardwareFrameworkPath = _mainOptions.InputFilePath ?? "HardwareFramework";
+                    var hardwareFrameworkPath = options.InputFilePath ?? "HardwareFramework";
                     if (!Directory.Exists(hardwareFrameworkPath))
                     {
                         throw new ArgumentException("Please set the -i option to point to the directory that " +
                                                     "contains the rtl directory! (eg. ./HardwareFramework)");
                     }
 
-                    var outputSet = !string.IsNullOrWhiteSpace(_mainOptions.OutputFilePath);
-                    if (outputSet && !_mainOptions.OutputFilePath.EndsWith(".xclbin"))
+                    var outputSet = !string.IsNullOrWhiteSpace(options.OutputFilePath);
+                    if (outputSet && !options.OutputFilePath.EndsWith(".xclbin"))
                     {
                         throw new ArgumentException("Please set the -o option to point to the location of the xclbin " +
                                                     "file (eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
                     }
 
-                    var manifest = new XilinxDeviceManifest();
+                    var manifest = new XilinxDeviceManifest { TechnicalName = options.Platform };
                     var context = new HardwareImplementationCompositionContext
                     {
                         DeviceManifest = manifest,
@@ -86,7 +81,7 @@ namespace Hast.Console.Subcommands
                     var implementation = new HardwareImplementation
                     {
                         BinaryPath = outputSet
-                            ? _mainOptions.OutputFilePath
+                            ? options.OutputFilePath
                             : Path.Combine("VitisOutput", context.HardwareDescription.TransformationId + ".xclbin"),
                     };
 
