@@ -1,4 +1,5 @@
 ﻿using CliWrap;
+using CliWrap.Buffered;
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
 using Hast.Common.Helpers;
@@ -20,6 +21,8 @@ namespace Hast.Vitis.Abstractions.Services
     public sealed class VitisHardwareImplementationComposerBuildProvider
         : IHardwareImplementationComposerBuildProvider, IDisposable
     {
+        private static bool _firstRun = true;
+
         public const int StepsTotal = 8;
         private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
 
@@ -98,6 +101,13 @@ namespace Hast.Vitis.Abstractions.Services
                     "XILINX_PATH_XRT variable is not set or it is not pointing to an existing directory.");
             }
 
+            var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
+            if (buildConfiguration.ResetOnFirstRun && _firstRun)
+            {
+                _firstRun = false;
+                await EnsureDeviceReady();
+            }
+
             Progress!(this, "Environment ready.");
 
             var hashId = context.HardwareDescription.TransformationId;
@@ -120,7 +130,7 @@ namespace Hast.Vitis.Abstractions.Services
                 .OrderByDescending(name => name)
                 .First();
 
-            if (context.Configuration.GetOrAddVitisBuildConfiguration().SynthesisOnly)
+            if (buildConfiguration.SynthesisOnly)
             {
                 await SynthKernelAsync(hardwareFrameworkPath, hashId);
                 Environment.Exit(0);
@@ -308,6 +318,20 @@ namespace Hast.Vitis.Abstractions.Services
             Progress!(this, "Build directory cleaned up.");
         }
 
+        private async Task EnsureDeviceReady()
+        {
+            _logger.LogWarning("This is the first build with the current process. " +
+                               "Resetting the devices for a clean state...");
+
+            var yes = PipeSource.FromString("y" + Environment.NewLine);
+            var xbutil = Cli.Wrap((await CliHelper.WhichAsync("xbutil")).First().FullName)
+                .WithArguments(new[] { "reset" })
+                .WithValidation(CommandResultValidation.None);
+            var result = await (yes | xbutil).ExecuteBufferedAsync();
+
+            _logger.LogWarning("xbutil: {0}", result.StandardOutput);
+            _buildOutput.WriteLine("xbutil stdout: {0}", result.StandardOutput);
+        }
 
         private void OnProgress(object sender, string message) =>
             _logger.LogInformation("Build step {0}/{1} completed: {2}", ++Step, StepsTotal, message);
@@ -360,6 +384,7 @@ namespace Hast.Vitis.Abstractions.Services
                 hasWorkingDirectory ? workingDirectory : ".");
             return CliHelper.StreamAsync(executable, arguments, OnCommandEvent, Configure);
         }
+
 
         private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
             Path.Combine(hardwareFrameworkPath, "rtl", hashId);
