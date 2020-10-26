@@ -1,4 +1,5 @@
 ﻿using CommandLine;
+using CommandLine.Text;
 using Hast.Common.Models;
 using Hast.Console.Attributes;
 using Hast.Console.Options;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using static System.Console;
 
@@ -35,10 +37,23 @@ namespace Hast.Console.Subcommands
         {
         }
 
-        private async Task RunOptionsAsync(VitisOptions options)
+        private async Task RunOptionsAsync(VitisOptions options, ParserResult<VitisOptions> parserResult)
         {
-            switch (Enum.Parse<Instruction>(options.Instruction, ignoreCase: true))
+            if (!Enum.TryParse(options.Instruction, ignoreCase: true, out Instruction instruction))
             {
+                instruction = (Instruction)(-1);
+            }
+
+            switch (instruction)
+            {
+                case Instruction.Help:
+                    WriteLine("The vitis specific help:");
+                    WriteLine(
+                        HelpText.AutoBuild(
+                            parserResult,
+                            error => error,
+                            example => example));
+                    break;
                 case Instruction.Build:
                     var hardwareFrameworkPath = _mainOptions.InputFilePath ?? "HardwareFramework";
                     if (!Directory.Exists(hardwareFrameworkPath))
@@ -85,19 +100,23 @@ namespace Hast.Console.Subcommands
                 default:
                     System.Console.Error.WriteLine(
                         "The valid options are: {0}",
-                        string.Join(", ", Enum.GetNames(typeof(Instruction))));
+                        string.Join(", ", Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant())));
                     throw new ArgumentOutOfRangeException(options.Instruction);
             }
         }
 
-        public void Run() =>
-            Parser.Default.ParseArguments<VitisOptions>(_rawArguments)
-                .WithParsed(options => RunOptionsAsync(options).Wait())
+        public void Run()
+        {
+            var result = Parser.Default.ParseArguments<VitisOptions>(_rawArguments);
+                result
+                .WithParsed(options => RunOptionsAsync(options, result).Wait())
                 .WithNotParsed(HandleParseError);
+        }
 
         private enum Instruction
         {
-            Build
+            Help,
+            Build,
         }
     }
 }

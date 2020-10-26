@@ -20,7 +20,7 @@ namespace Hast.Console
                 {
                     CommandName = ((SubcommandAttribute)result.Attribute)!.Name,
                     Instance = (ISubcommand)result.Type!
-                            .GetConstructor(new[] { typeof(ParserResult<MainOptions>), typeof(string[]) })!
+                            .GetConstructor(new[] { typeof(MainOptions), typeof(string[]) })!
                         .Invoke(new object[] { mainOptions, arguments }),
                 });
 
