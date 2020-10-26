@@ -6,6 +6,7 @@ using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
+using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
@@ -21,18 +22,21 @@ namespace Hast.Vitis.Abstractions.Services
     public sealed class VitisHardwareImplementationComposerBuildProvider
         : IHardwareImplementationComposerBuildProvider, IDisposable
     {
-        private static bool _firstRun = true;
+        private const string Vpp = "v++";
 
-        public const int StepsTotal = 8;
+        private static bool _firstRun = true;
+        private static readonly string[] VppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
+
         private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
 
         private readonly ILogger _logger;
         private readonly string _buildOutputPath;
         private readonly StreamWriter _buildOutput;
 
-        public event EventHandler<string> Progress;
+        public event EventHandler<BuildProgressEventArgs> Progress;
 
-        public int Step { get; private set; }
+        public int MajorStepsTotal { get; private set; } = 8;
+        public int MajorStep { get; private set; }
         public IEnumerable<string> SupportedComposers { get; } = new[] { nameof(VivadoHardwareImplementationComposer) };
 
 
@@ -102,13 +106,16 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
+            if (buildConfiguration.SynthesisOnly) MajorStepsTotal = 3;
             if (buildConfiguration.ResetOnFirstRun && _firstRun)
             {
                 _firstRun = false;
                 await EnsureDeviceReady();
             }
 
-            Progress!(this, "Environment ready.");
+            ProgressMajor("Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more " +
+                          "complex ones usually up to 4. Although 15 hours are also possible if the hardware is " +
+                          "completely utilized with extremely complex and/or very highly parallelized algorithms.");
 
             var hashId = context.HardwareDescription.TransformationId;
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
@@ -136,15 +143,21 @@ namespace Hast.Vitis.Abstractions.Services
                 Environment.Exit(0);
             }
 
-            Progress!(this, "Staring build.");
+            ProgressMajor("Staring build.");
             await BuildKernelAsync(hardwareFrameworkPath, target, device, hashId, deviceManifest);
             CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, hashId);
 
-            Progress!(this, "Collecting reports.");
+            ProgressMajor("Collecting reports.");
             try { CollectReport(hardwareFrameworkPath, context, hashId); }
             catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
 
             Cleanup(hardwareFrameworkPath, hashId);
+        }
+
+        private void ProgressMajor(string message)
+        {
+            MajorStep++;
+            Progress?.Invoke(this, new BuildProgressEventArgs(message, isMajorStep: true));
         }
 
 
@@ -177,13 +190,13 @@ namespace Hast.Vitis.Abstractions.Services
                 device,
             };
             await ExecuteWithLogging(vivadoExecutable, vivadoArguments, rtlDirectoryPath);
-            Progress!(this, "Vivado build is finished.");
+            ProgressMajor("Vivado build is finished.");
 
 
             // For example:
             // v++ -R2 -g -t hw_emu --platform xilinx_u200_xdma_201830_2 --save-temps --kernel_frequency 300 -lo
             //     ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xclbin ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo
-            var vppExecutable = (await GetExecutablePathAsync("v++"));
+            var vppExecutable = (await GetExecutablePathAsync(Vpp));
             var vppArguments = new List<string>
             {
                 "-R2",
@@ -215,7 +228,7 @@ namespace Hast.Vitis.Abstractions.Services
             });
 
             await ExecuteWithLogging(vppExecutable, vppArguments, rtlDirectoryPath);
-            Progress!(this, "v++ build is finished.");
+            ProgressMajor("v++ build is finished.");
 
             // For example:
             // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
@@ -228,11 +241,13 @@ namespace Hast.Vitis.Abstractions.Services
                 xclbinDirectoryPath,
             };
             await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
-            Progress!(this, "Emulation configuration (emconfig) setup is finished.");
+            ProgressMajor("Emulation configuration (emconfig) setup is finished.");
         }
 
         private async Task SynthKernelAsync(string hardwareFrameworkPath, string hashId)
         {
+            ProgressMajor("Starting Vivado synthesis.");
+
             // vivado -mode batch -source synth_util.tcl
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
 
@@ -250,7 +265,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(reportsDirectoryPath, "Hast_IP_synth_util.rpt"),
             };
             await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
-            Progress!(this, "Vivado synthesis is finished.");
+            ProgressMajor("Vivado synthesis is finished.");
         }
 
         private void CopyBinaries(
@@ -270,7 +285,7 @@ namespace Hast.Vitis.Abstractions.Services
             var builtFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin");
             File.Copy(builtFilePath, binaryPath);
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
-            Progress!(this, $"Files copied to binary folder ({builtFilePath}).");
+            ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
         }
 
         /// <summary>
@@ -315,7 +330,7 @@ namespace Hast.Vitis.Abstractions.Services
                 foreach (var directory in directories) directory.Delete();
             }
 
-            Progress!(this, "Build directory cleaned up.");
+            ProgressMajor("Build directory cleaned up.");
         }
 
         private async Task EnsureDeviceReady()
@@ -333,8 +348,13 @@ namespace Hast.Vitis.Abstractions.Services
             _buildOutput.WriteLine("xbutil stdout: {0}", result.StandardOutput);
         }
 
-        private void OnProgress(object sender, string message) =>
-            _logger.LogInformation("Build step {0}/{1} completed: {2}", ++Step, StepsTotal, message);
+        private void OnProgress(object sender, BuildProgressEventArgs e) =>
+            _logger.LogInformation(
+                "Message on build step {0}/{1}{3}: {2}",
+                MajorStep,
+                MajorStepsTotal,
+                e.Message,
+                e.IsMajorStep ? " (new)" : string.Empty);
 
         private Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory = null)
         {
@@ -344,18 +364,16 @@ namespace Hast.Vitis.Abstractions.Services
                 switch (commandEvent)
                 {
                     case StartedCommandEvent started:
-                        _logger.LogInformation("Started {0}. (process ID: {1})", name, started.ProcessId);
+                        Log(LogLevel.Information, name, started.ProcessId, "started");
                         break;
                     case StandardOutputCommandEvent output:
-                        _logger.LogTrace("{0}: {1}", name, output.Text);
-                        _buildOutput.WriteLine("{0} stdout: {1}", name, output.Text);
+                        Log(LogLevel.Trace, name, output.Text, "stdout");
                         break;
                     case StandardErrorCommandEvent error:
-                        _logger.LogWarning("{0}: {1}", name, error.Text);
-                        _buildOutput.WriteLine("{0} stderr: {1}", name, error.Text);
+                        Log(LogLevel.Warning, name, error.Text, "stderr");
                         break;
                     case ExitedCommandEvent exited:
-                        _buildOutput.WriteLine("{0} exit code: {1}\n\n\n", name, exited.ExitCode);
+                        Log(LogLevel.Information, name, exited.ExitCode == 0 ? "success" : "failure", "finished");
 
                         if (exited.ExitCode != 0)
                         {
@@ -363,8 +381,6 @@ namespace Hast.Vitis.Abstractions.Services
                                 $"The command {name} exited with code {exited.ExitCode}. " +
                                 $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
                         }
-
-                        _logger.LogInformation(name + " finished execution.");
                         break;
                 }
             }
@@ -383,6 +399,41 @@ namespace Hast.Vitis.Abstractions.Services
                 string.Join(" ", arguments),
                 hasWorkingDirectory ? workingDirectory : ".");
             return CliHelper.StreamAsync(executable, arguments, OnCommandEvent, Configure);
+        }
+
+        private void Log(LogLevel logLevel, string name, object message, string buildLogType)
+        {
+            var text = message as string;
+            if (text?.Contains(':') == true)
+            {
+                // Find informational messages and escalate their log level since most of them will be "trace" by default.
+                logLevel = text.Split(':')[0].Trim().ToUpperInvariant() switch
+                {
+                    "ERROR" => LogLevel.Error,
+                    "CRITICAL WARNING" => LogLevel.Warning,
+                    "WARNING" => LogLevel.Warning,
+                    "INFO" when logLevel < LogLevel.Information => LogLevel.Information,
+                    _ => logLevel,
+                };
+            }
+
+            // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
+            if (name == Vpp && text?.StartsWith("[") == true && VppStatusLogs.Any(fragment => text.Contains(fragment)))
+            {
+                if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
+                Progress?.Invoke(this, new BuildProgressEventArgs(text));
+            }
+
+            if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker") == true)
+            {
+                throw new Exception(
+                    "The linker encountered an error. Typically because the resulting hardware design won't fit on " +
+                    "the FPGA as it's too complex. Try to make your code simpler (make it shorter, use smaller data " +
+                    "types, use a lower degree of parallelism) until this error goes away.");
+            }
+
+            _logger.Log(logLevel, "{0}: {1}", name, message);
+            _buildOutput.WriteLine("{0} {2}: {1}\n\n\n", name, message, buildLogType);
         }
 
 
