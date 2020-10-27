@@ -154,5 +154,17 @@ namespace Hast.Vitis.Abstractions.Tests
                     .ShouldBe(_expectedColumns.Select(column => section[i][column]).ToArray());
             }
         }
+
+        [Fact]
+        public void SummaryShouldWork()
+        {
+            using var reader = File.OpenText("sample2.rpt");
+            var report = XilinxReport.Parse(reader);
+
+            report
+                .Sections["1. Summary"]
+                .ToDictionaryByFirstColumn()["Max Ambient (C)"][XilinxReportSection.Value]
+                .ShouldBe("87.1");
+        }
     }
 }

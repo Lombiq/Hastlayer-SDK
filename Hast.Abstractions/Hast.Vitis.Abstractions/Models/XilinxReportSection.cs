@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using static Hast.Vitis.Abstractions.Models.XilinxReport;
@@ -7,7 +8,10 @@ namespace Hast.Vitis.Abstractions.Models
 {
     public class XilinxReportSection
     {
+        public const string Key = nameof(Key);
+        public const string Value = nameof(Value);
         private const string TableBorderLine = "+---";
+        private static readonly List<string> SimpleColumns = new List<string> { "Key", "Value" };
 
         private readonly string[][] _data;
 
@@ -31,13 +35,25 @@ namespace Hast.Vitis.Abstractions.Models
         }
 
 
-        public static XilinxReportSection Parse(TextReader reader)
+        public IDictionary<string, IDictionary<string, string>> ToDictionaryByFirstColumn() =>
+            Enumerable
+                .Range(0, Rows)
+                .Select(row => this[row])
+                .ToDictionary(row => row[Columns[0]]);
+
+
+        public static XilinxReportSection Parse(TextReader reader, string title)
         {
+            var columnNames = SimpleColumns;
+
             // Scroll to the table start. Each section always seems to have a table even if empty.
             ReadUntil(reader, TableBorderLine);
-            var columnNames = reader.ReadLine()!.Trim('|').Split('|').Select(columnName => columnName.Trim())
-                .ToList();
-            ReadUntil(reader, TableBorderLine);
+            if (!title.EndsWith(". Summary"))
+            {
+                columnNames = reader.ReadLine()!.Trim('|').Split('|').Select(columnName => columnName.Trim())
+                    .ToList();
+                ReadUntil(reader, TableBorderLine);
+            }
 
             // Read each line into a table and then drop the bottom table border line.
             var data = ReadWhile(reader, line => line.StartsWith("|") && !line.StartsWith(TableBorderLine))

@@ -40,7 +40,7 @@ namespace Hast.Vitis.Abstractions.Models
                 if (header == null) break;
                 ReadUntil(reader);
 
-                report.Sections[header] = XilinxReportSection.Parse(reader);
+                report.Sections[header] = XilinxReportSection.Parse(reader, header);
             }
 
             return report;
