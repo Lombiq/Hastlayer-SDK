@@ -124,7 +124,7 @@ namespace Hast.Console.Subcommands
                     using (var reader = File.OpenText(input.FullName))
                     {
                         var report = XilinxReport.Parse(reader);
-                        var json = JsonConvert.SerializeObject(report);
+                        var json = JsonConvert.SerializeObject(report, Formatting.Indented);
                         await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
                     }
                     break;

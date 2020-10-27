@@ -331,7 +331,11 @@ namespace Hast.Vitis.Abstractions.Services
             File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
             _logger.LogInformation("A converted JSON file is saved to {0}.", jsonFilePath);
 
-            foreach (var (resourceType, row) in report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn())
+            var componentsSection = report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn();
+            _logger.LogInformation(
+                "On-Chip Components: {0}",
+                JsonConvert.SerializeObject(componentsSection, Formatting.Indented));
+            foreach (var (resourceType, row) in componentsSection)
             {
                 if (!decimal.TryParse(
                     row[UtilizationPercent],

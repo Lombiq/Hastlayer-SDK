@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace Hast.Vitis.Abstractions.Models
         public int Rows { get; }
         public IReadOnlyList<string> Columns { get; }
         public IReadOnlyList<string> Comments { get; }
+
+        [JsonProperty]
+        public IReadOnlyList<IReadOnlyList<string>> Data => _data;
 
 
         public IDictionary<string, string> this[int rowIndex] =>
