@@ -9,6 +9,7 @@ using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -22,7 +23,11 @@ namespace Hast.Vitis.Abstractions.Services
     public sealed class VitisHardwareImplementationComposerBuildProvider
         : IHardwareImplementationComposerBuildProvider, IDisposable
     {
+        private const string Value = XilinxReportSection.Value;
         private const string Vpp = "v++";
+        private const string UtilizationPercent = "Utilization (%)";
+        private const string TryToMakeItSmaller = "Try to make your code simpler (make it shorter, use smaller data " +
+                                                  "types, use a lower degree of parallelism) until it goes below 80%.";
 
         private static bool _firstRun = true;
         private static readonly string[] VppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
@@ -148,7 +153,7 @@ namespace Hast.Vitis.Abstractions.Services
             CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, hashId);
 
             ProgressMajor("Collecting reports.");
-            try { CollectReport(hardwareFrameworkPath, context, hashId); }
+            try { CollectReports(hardwareFrameworkPath, context, implementation, hashId); }
             catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
 
             Cleanup(hardwareFrameworkPath, hashId);
@@ -288,12 +293,10 @@ namespace Hast.Vitis.Abstractions.Services
             ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
         }
 
-        /// <summary>
-        /// TODO
-        /// </summary>
-        private void CollectReport(
+        private void CollectReports(
             string hardwareFrameworkPath,
             IHardwareImplementationCompositionContext context,
+            IHardwareImplementation implementation,
             string hashId)
         {
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
@@ -312,6 +315,62 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var reportFile in reportFiles)
             {
                 File.Copy(reportFile, Path.Combine(reportSavePath, Path.GetFileName(reportFile)));
+            }
+
+            var reportFilePath = Directory.GetFiles(reportSavePath, "*_bb_locked_power_routed.rpt").FirstOrDefault();
+            if (reportFilePath == null)
+            {
+                _logger.LogWarning("The report file is missing. Utilization related verification is not performed.");
+                return;
+            }
+
+            using var reader = File.OpenText(reportFilePath);
+            var report = XilinxReport.Parse(reader);
+
+            var jsonFilePath = Path.Combine(reportSavePath, "report.json");
+            File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
+            _logger.LogInformation("A converted JSON file is saved to {0}.", jsonFilePath);
+
+            var componentsDictionary = report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn();
+            var lutUtilization = double.Parse(componentsDictionary["LUT as Logic"][UtilizationPercent]);
+            if (lutUtilization > 90.0)
+            {
+                throw new Exception(
+                    "The resulting hardware design is using more than 90% of the FPGA's resources. This will " +
+                    "almost always be unstable and randomly give incorrect results. " + TryToMakeItSmaller);
+            }
+            else if (lutUtilization > 80.0)
+            {
+                _logger.LogWarning(
+                    "The resulting hardware design is using more than 80% of the FPGA's resources. While this " +
+                    "may work fine the result can be potentially unstable and randomly give incorrect results. " +
+                    TryToMakeItSmaller);
+            }
+
+            foreach (var (resourceType, row) in componentsDictionary)
+            {
+                if (!decimal.TryParse(row[UtilizationPercent], NumberStyles.Any, CultureInfo.InvariantCulture, out var utilization)) continue;
+                if (utilization > 99.0m)
+                {
+                    throw new Exception($"The resulting hardware design is completely utilizing '{resourceType}' " +
+                                        "which likely also means that it has used some other resource type to not " +
+                                        "go above 100% (eg. LUT instead of DSP) which results in performance " +
+                                        "degradation and potential loss of accuracy. " + TryToMakeItSmaller);
+                }
+
+                implementation.ResourceUsagePercent[resourceType] = utilization;
+            }
+
+            try
+            {
+                implementation.PowerUsageWatts = decimal.Parse(
+                    report.Sections["1. Summary"].ToDictionaryByFirstColumn()["Total On-Chip Power (W)"][Value],
+                    CultureInfo.InvariantCulture);
+                _logger.LogInformation("Total on-chip power: {0}W", implementation.PowerUsageWatts);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Unable to acquire hardware wattage information.");
             }
         }
 
