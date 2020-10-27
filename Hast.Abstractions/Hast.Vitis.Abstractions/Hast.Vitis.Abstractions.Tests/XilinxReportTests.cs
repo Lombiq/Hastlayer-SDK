@@ -21,20 +21,21 @@ namespace Hast.Vitis.Abstractions.Tests
         };
 
         private static readonly string[] _expectedSections = {
-            "CLB Logic",
-            "BLOCKRAM",
-            "ARITHMETIC",
-            "I/O",
-            "CLOCK",
-            "ADVANCED",
-            "CONFIGURATION",
-            "Primitives",
-            "Black Boxes",
-            "Instantiated Netlists",
-            "SLR Connectivity",
-            "SLR Connectivity Matrix",
-            "SLR CLB Logic and Dedicated Block Utilization",
-            "SLR IO Utilization",
+            "1. CLB Logic",
+            "1.1 Summary of Registers by Type",
+            "2. BLOCKRAM",
+            "3. ARITHMETIC",
+            "4. I/O",
+            "5. CLOCK",
+            "6. ADVANCED",
+            "7. CONFIGURATION",
+            "8. Primitives",
+            "9. Black Boxes",
+            "10. Instantiated Netlists",
+            "11. SLR Connectivity",
+            "12. SLR Connectivity Matrix",
+            "13. SLR CLB Logic and Dedicated Block Utilization",
+            "14. SLR IO Utilization",
         };
 
         private static readonly string[] _expectedColumns = {
@@ -142,7 +143,7 @@ namespace Hast.Vitis.Abstractions.Tests
 
             report.Sections.Keys.OrderBy(x => x).ToArray().ShouldBe(_expectedSections.OrderBy(x => x).ToArray());
 
-            var section = report.Sections["CLB Logic"];
+            var section = report.Sections["1. CLB Logic"];
             section.Columns.ToArray().ShouldBe(_expectedColumns);
             section.Rows.ShouldBe(_expectedTableData.Length);
             for (var i = 0; i < section.Rows; i++)

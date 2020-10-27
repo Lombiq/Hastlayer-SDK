@@ -28,10 +28,15 @@ namespace Hast.Vitis.Abstractions.Models
                 report.MetaData[parts[0].Trim()] = parts[1].Trim();
             }
 
-            for (var n = 1; ; n++)
+            // Get all section headers from the Table of Contents.
+            ReadUntil(reader, "Table of Contents");
+            ReadUntil(reader);
+            var sectionHeaders = ReadWhile(reader, line => !string.IsNullOrWhiteSpace(line)).ToList();
+
+            foreach(var title in sectionHeaders)
             {
                 // Scroll to section start with underlined header that starts with the chapter number.
-                var header = ReadUntil(reader, $"{n}. ")?.Split(new [] {'.'}, 2).Last().Trim();
+                var header = ReadUntil(reader, title);
                 if (header == null) break;
                 ReadUntil(reader);
 
