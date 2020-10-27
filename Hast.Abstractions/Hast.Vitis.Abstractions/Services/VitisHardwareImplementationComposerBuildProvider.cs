@@ -30,7 +30,7 @@ namespace Hast.Vitis.Abstractions.Services
                                                   "types, use a lower degree of parallelism) until it goes below 80%.";
 
         private static bool _firstRun = true;
-        private static readonly string[] VppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
+        private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
 
         private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
 
@@ -111,7 +111,17 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
-            if (buildConfiguration.SynthesisOnly) MajorStepsTotal = 3;
+            var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
+
+            if (buildConfiguration.SynthesisOnly)
+            {
+                MajorStepsTotal = 3;
+            }
+            else if (!openClConfiguration.UseEmulation)
+            {
+                MajorStepsTotal--;
+            }
+
             if (buildConfiguration.ResetOnFirstRun && _firstRun)
             {
                 _firstRun = false;
@@ -124,7 +134,6 @@ namespace Hast.Vitis.Abstractions.Services
 
             var hashId = context.HardwareDescription.TransformationId;
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
-            var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
             Cleanup(hardwareFrameworkPath, hashId, deleteSource: false);
 
             var platformsDirectoryPath = Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable
@@ -179,9 +188,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
 
-            // For example:
-            // vivado -mode batch -source ./HardwareFramework/rtl/src/scripts/gen_xo.tcl
-            //        -tclargs ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo hastip hw_emu xilinx_u200_xdma_201830_2
+            // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
             var vivadoArguments = new[]
             {
@@ -198,35 +205,29 @@ namespace Hast.Vitis.Abstractions.Services
             ProgressMajor("Vivado build is finished.");
 
 
-            // For example:
-            // v++ -R2 -g -t hw_emu --platform xilinx_u200_xdma_201830_2 --save-temps --kernel_frequency 300 -lo
-            //     ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xclbin ./HardwareFramework/rtl/xclbin/hastip.hw_emu.xo
+            // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
+            //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
+            // endif
+            // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
+            // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
             var vppExecutable = (await GetExecutablePathAsync(Vpp));
-            var vppArguments = new List<string>
+            var vppArguments = new List<string>(
+                deviceManifest.SupportsHbm
+                ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
+                : Array.Empty<string>());
+            vppArguments.AddRange(new[]
             {
-                "-R2",
                 "-g",
+                "-R2",
+                "--save-temps",
                 "-t",
                 target,
                 "--platform",
                 device,
-                "--save-temps",
+                "--dk",
+                "chipscope:hastip_1:m_axi_gmem",
                 "--kernel_frequency",
                 (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.InvariantCulture),
-            };
-
-            if (deviceManifest.SupportsHbm)
-            {
-                /* TODO
-                vppArguments.AddRange(new[]
-                {
-                    "--sp",
-                    "krnl_vadd_1.m_axi_gmem0:HBM[0:3]",
-                }); // */
-            }
-
-            vppArguments.AddRange(new[]
-            {
                 "-lo",
                 Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,
@@ -235,18 +236,16 @@ namespace Hast.Vitis.Abstractions.Services
             await ExecuteWithLogging(vppExecutable, vppArguments, rtlDirectoryPath);
             ProgressMajor("v++ build is finished.");
 
-            // For example:
-            // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
-            var emConfigExecutable = (await GetExecutablePathAsync("emconfigutil"));
-            var emConfigArguments = new []
+            if (target.ToUpperInvariant() == "HW_EMU")
             {
-                "--platform",
-                device,
-                "--od",
-                xclbinDirectoryPath,
-            };
-            await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
-            ProgressMajor("Emulation configuration (emconfig) setup is finished.");
+                // For example:
+                // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
+                var emConfigExecutable = (await GetExecutablePathAsync("emconfigutil"));
+                var emConfigArguments = new[] { "--platform", device, "--od", xclbinDirectoryPath, };
+                await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
+                File.Copy(Path.Combine(xclbinDirectoryPath, "emconfig.json"), "emconfig.json");
+                ProgressMajor("Emulation configuration (emconfig) setup is finished.");
+            }
         }
 
         private async Task SynthKernelAsync(string hardwareFrameworkPath, string hashId)
@@ -495,7 +494,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
-            if (name == Vpp && text?.StartsWith("[") == true && VppStatusLogs.Any(fragment => text.Contains(fragment)))
+            if (name == Vpp && text?.StartsWith("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
             {
                 if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
                 Progress?.Invoke(this, new BuildProgressEventArgs(text));
