@@ -10,7 +10,7 @@ namespace Hast.Console.Options
         [Option("hash", HelpText = "The hash, also known as transformation ID.")]
         public string Hash { get; set; }
 
-        [Value(1, HelpText = "Instruction name. (available: help, build)")]
+        [Value(1, HelpText = "Instruction name. (available: help, build, json)")]
         public string Instruction { get; set; }
     }
 }

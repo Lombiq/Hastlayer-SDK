@@ -5,10 +5,12 @@ using Hast.Console.Attributes;
 using Hast.Console.Options;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Vitis.Abstractions.Models;
 using Hast.Vitis.Abstractions.Services;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,11 +30,16 @@ namespace Hast.Console.Subcommands
 
         public VitisSubcommand(string[] rawArguments) => _rawArguments = rawArguments;
 
-        private void HandleParseError(IEnumerable<Error> obj)
+        public void Run()
         {
+            var result = Parser.Default.ParseArguments<VitisOptions>(_rawArguments);
+                result
+                .WithParsed(options => RunOptionsAsync(options, result).Wait())
+                .WithNotParsed(errors => WriteLine(string.Join("\n", errors)));
         }
 
-        private async Task RunOptionsAsync(VitisOptions options, ParserResult<VitisOptions> parserResult)
+
+        private Task RunOptionsAsync(VitisOptions options, ParserResult<VitisOptions> parserResult)
         {
             if (!Enum.TryParse(options.Instruction, ignoreCase: true, out Instruction instruction))
             {
@@ -48,50 +55,9 @@ namespace Hast.Console.Subcommands
                             parserResult,
                             error => error,
                             example => example));
-                    break;
-                case Instruction.Build:
-                    var hardwareFrameworkPath = options.InputFilePath ?? "HardwareFramework";
-                    if (!Directory.Exists(hardwareFrameworkPath))
-                    {
-                        throw new ArgumentException("Please set the -i option to point to the directory that " +
-                                                    "contains the rtl directory! (eg. ./HardwareFramework)");
-                    }
-
-                    var outputSet = !string.IsNullOrWhiteSpace(options.OutputFilePath);
-                    if (outputSet && !options.OutputFilePath.EndsWith(".xclbin"))
-                    {
-                        throw new ArgumentException("Please set the -o option to point to the location of the xclbin " +
-                                                    "file (eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
-                    }
-
-                    var manifest = new XilinxDeviceManifest { TechnicalName = options.Platform };
-                    var context = new HardwareImplementationCompositionContext
-                    {
-                        DeviceManifest = manifest,
-                        Configuration = new HardwareGenerationConfiguration(
-                            manifest.Name,
-                            Path.GetFullPath(hardwareFrameworkPath)),
-                        HardwareDescription = new VhdlHardwareDescription
-                        {
-                            HardwareEntryPointNamesToMemberIdMappings = new Dictionary<string, int>(),
-                            TransformationId = options.Hash ?? "Hastlayer",
-                            Warnings = Array.Empty<ITransformationWarning>(),
-                        },
-                    };
-                    var implementation = new HardwareImplementation
-                    {
-                        BinaryPath = outputSet
-                            ? options.OutputFilePath
-                            : Path.Combine("VitisOutput", context.HardwareDescription.TransformationId + ".xclbin"),
-                    };
-
-
-                    await new VitisHardwareImplementationComposerBuildProvider(BuildLogger)
-                        .BuildAsync(context, implementation);
-
-                    WriteLine("Build Completed. Find files at: {0}", Path.GetFullPath(implementation.BinaryPath));
-
-                    break;
+                    return Task.CompletedTask;
+                case Instruction.Build: return BuildAsync(options);
+                case Instruction.Json: return JsonAsync(options);
                 default:
                     System.Console.Error.WriteLine(
                         "The valid options are: {0}",
@@ -100,18 +66,77 @@ namespace Hast.Console.Subcommands
             }
         }
 
-        public void Run()
+        private async Task BuildAsync(VitisOptions options)
         {
-            var result = Parser.Default.ParseArguments<VitisOptions>(_rawArguments);
-                result
-                .WithParsed(options => RunOptionsAsync(options, result).Wait())
-                .WithNotParsed(HandleParseError);
+            var hardwareFrameworkPath = options.InputFilePath ?? "HardwareFramework";
+            if (!Directory.Exists(hardwareFrameworkPath))
+            {
+                throw new ArgumentException("Please set the -i option to point to the directory that contains the " +
+                                            "rtl directory! (eg. ./HardwareFramework)");
+            }
+
+            var outputSet = !string.IsNullOrWhiteSpace(options.OutputFilePath);
+            if (outputSet && !options.OutputFilePath.EndsWith(".xclbin"))
+            {
+                throw new ArgumentException("Please set the -o option to point to the location of the xclbin file " +
+                                            "(eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
+            }
+
+            var manifest = new XilinxDeviceManifest { TechnicalName = options.Platform };
+            var context = new HardwareImplementationCompositionContext
+            {
+                DeviceManifest = manifest,
+                Configuration = new HardwareGenerationConfiguration(
+                    manifest.Name,
+                    Path.GetFullPath(hardwareFrameworkPath)),
+                HardwareDescription = new VhdlHardwareDescription
+                {
+                    HardwareEntryPointNamesToMemberIdMappings = new Dictionary<string, int>(),
+                    TransformationId = options.Hash ?? "Hastlayer",
+                    Warnings = Array.Empty<ITransformationWarning>(),
+                },
+            };
+            var implementation = new HardwareImplementation
+            {
+                BinaryPath = outputSet
+                    ? options.OutputFilePath
+                    : Path.Combine("VitisOutput", context.HardwareDescription.TransformationId + ".xclbin"),
+            };
+
+
+            await new VitisHardwareImplementationComposerBuildProvider(BuildLogger)
+                .BuildAsync(context, implementation);
+
+            WriteLine("Build Completed. Find files at: {0}", Path.GetFullPath(implementation.BinaryPath));
         }
+
+        private async Task JsonAsync(VitisOptions options)
+        {
+            var input = new FileInfo(options.InputFilePath);
+            if (!input.Exists)
+            {
+                throw new ArgumentException("Please set the -i option to file you wish to convert.");
+            }
+
+            switch (input.Extension)
+            {
+                case ".rpt":
+                    using (var reader = File.OpenText(input.FullName))
+                    {
+                        var report = XilinxReport.Parse(reader);
+                        var json = JsonConvert.SerializeObject(report);
+                        await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
+                    }
+                    break;
+            }
+        }
+
 
         private enum Instruction
         {
             Help,
             Build,
+            Json,
         }
     }
 }
