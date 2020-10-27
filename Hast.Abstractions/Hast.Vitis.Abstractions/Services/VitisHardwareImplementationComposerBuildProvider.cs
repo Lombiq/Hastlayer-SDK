@@ -103,11 +103,11 @@ namespace Hast.Vitis.Abstractions.Services
                 throw new InvalidOperationException("XILINX_VITIS variable is not set.");
             }
 
-            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_PATH_XRT"));
+            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
             if (!Directory.Exists(xilinxDirectoryPath))
             {
                 throw new InvalidOperationException(
-                    "XILINX_PATH_XRT variable is not set or it is not pointing to an existing directory.");
+                    "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
             }
 
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
