@@ -331,26 +331,22 @@ namespace Hast.Vitis.Abstractions.Services
             File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
             _logger.LogInformation("A converted JSON file is saved to {0}.", jsonFilePath);
 
-            var componentsDictionary = report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn();
-            var lutUtilization = double.Parse(componentsDictionary["LUT as Logic"][UtilizationPercent]);
-            if (lutUtilization > 90.0)
+            foreach (var (resourceType, row) in report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn())
             {
-                throw new Exception(
-                    "The resulting hardware design is using more than 90% of the FPGA's resources. This will " +
-                    "almost always be unstable and randomly give incorrect results. " + TryToMakeItSmaller);
-            }
-            else if (lutUtilization > 80.0)
-            {
-                _logger.LogWarning(
-                    "The resulting hardware design is using more than 80% of the FPGA's resources. While this " +
-                    "may work fine the result can be potentially unstable and randomly give incorrect results. " +
-                    TryToMakeItSmaller);
-            }
+                if (!decimal.TryParse(
+                    row[UtilizationPercent],
+                    NumberStyles.Any,
+                    CultureInfo.InvariantCulture,
+                    out var utilization))
+                {
+                    continue;
+                }
 
-            foreach (var (resourceType, row) in componentsDictionary)
-            {
-                if (!decimal.TryParse(row[UtilizationPercent], NumberStyles.Any, CultureInfo.InvariantCulture, out var utilization)) continue;
-                if (utilization > 99.0m)
+                if (resourceType.ToUpperInvariant().Contains("LUT AS LOGIC"))
+                {
+                    CheckLutUtilization(utilization);
+                }
+                else if (utilization > 99.0m)
                 {
                     throw new Exception($"The resulting hardware design is completely utilizing '{resourceType}' " +
                                         "which likely also means that it has used some other resource type to not " +
@@ -371,6 +367,24 @@ namespace Hast.Vitis.Abstractions.Services
             catch (Exception ex)
             {
                 _logger.LogWarning(ex, "Unable to acquire hardware wattage information.");
+            }
+        }
+
+        private void CheckLutUtilization(decimal lutUtilization)
+        {
+            if (lutUtilization > 90.0m)
+            {
+                throw new Exception(
+                    "The resulting hardware design is using more than 90% of the FPGA's resources. This will " +
+                    "almost always be unstable and randomly give incorrect results. " + TryToMakeItSmaller);
+            }
+
+            if (lutUtilization > 80.0m)
+            {
+                _logger.LogWarning(
+                    "The resulting hardware design is using more than 80% of the FPGA's resources. While this " +
+                    "may work fine the result can be potentially unstable and randomly give incorrect results. " +
+                    TryToMakeItSmaller);
             }
         }
 
