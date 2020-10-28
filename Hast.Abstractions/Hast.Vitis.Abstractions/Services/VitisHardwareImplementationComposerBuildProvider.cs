@@ -117,12 +117,8 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 MajorStepsTotal = 3;
             }
-            else if (!openClConfiguration.UseEmulation)
-            {
-                MajorStepsTotal--;
-            }
-
-            if (buildConfiguration.ResetOnFirstRun && _firstRun)
+            // Synthesis doesn't need the device.
+            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
             {
                 _firstRun = false;
                 await EnsureDeviceReady();
