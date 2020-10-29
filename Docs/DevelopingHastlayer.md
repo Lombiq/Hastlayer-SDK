@@ -39,21 +39,3 @@ If you add a new project to the solution make sure link the *SharedAssemblyInfo.
 ## Notes on dynamically linked projects
 
 Be aware that Hastlayer is a modular application using dynamic linking to scan for and attach non-essential components; for example the Core projects. Because of this if you change something in those (i.e. in projects that are not directly or indirectly statically referenced from the currently executing assembly), then you need to explicitly build the projects in question so msbuild can deploy them to the dependencies folder.
-
-
-## Using dynamic constants
-
-If you need to iterate through versions of your code with different FPGA constants, it can be done without recompiling your software. Since .Net automatically substitutes constants with their literal value, your fields have to be `public readonly` instead of `constant` to preserve the variable usage in the compiled code. Annotate this field with the `[Replaceable(key)]` attribute. It takes a parameter representing the key you can add to appdata.json or as a command line switch. For example:
-
-```csharp
-[Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))] // key = "ParallelAlgorithm.MaxDegreeOfParallelism"
-public readonly int MaxDegreeOfParallelism = 260;
-```
-
-The value in code will remain the default, when no replacement is specified. Either way the readonly is substituted with the desired literal as a constant would during compilation. To set the replacement from the command line, add the following switch.
-
-```bash
---HardwareGenerationConfiguration:CustomConfiguration:Replaceable:ParallelAlgorithm.MaxDegreeOfParallelism 123
-``` 
-
-The part up to the last colon is fixed, then comes the key you've passed to the `[Replaceable]` attribute and finally the replacement value as a separate word. The value may be a string, boolean or integer. You can automate trials by looping through candidate values in the shell. You can have multiple replacements too.

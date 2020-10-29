@@ -125,3 +125,33 @@ Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability
 
 - .NET-style events: standard .NET events.
 - Pipeline steps: unlike event handlers, pipeline steps are executed in deterministic order and usually have a return value that is fed to the next pipeline step.
+
+
+## Using dynamic constants
+
+If you need to iterate through versions of your code with different FPGA constants, it can be done without recompiling your software. Since .Net automatically substitutes constants with their literal value, your fields have to be `static readonly` instead of `constant` to preserve the variable usage in the compiled code. Annotate this field with the `[Replaceable(key)]` attribute. It takes a parameter representing the key you can add to appdata.json or as a command line switch. For example:
+
+```csharp
+[Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))] // key = "ParallelAlgorithm.MaxDegreeOfParallelism"
+public static readonly int MaxDegreeOfParallelism = 260;
+```
+
+The value in code will remain the default, when no replacement is specified. Either way the readonly is substituted with the desired literal as a constant would during compilation. To set the replacement from the command line, add the following switch.
+
+```shell script
+--HardwareGenerationConfiguration:CustomConfiguration:Replaceable:ParallelAlgorithm.MaxDegreeOfParallelism 123
+``` 
+
+The part up to the last colon is fixed, then comes the key you've passed to the `[Replaceable]` attribute and finally the replacement value as a separate word. The value may be a string, boolean or integer. You can automate trials by looping through candidate values in the shell. You can have multiple replacements too.
+
+Alternatively, you can set the same value in the appesttings.json file into the object with the same path like this:
+
+```json
+{
+  "HardwareGenerationConfiguration": {
+    "Replaceable": {
+      "ParallelAlgorithm.MaxDegreeOfParallelism": 123
+    }
+  }
+}
+```
