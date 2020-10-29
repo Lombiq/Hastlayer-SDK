@@ -42,7 +42,6 @@ namespace Hast.Vitis.Abstractions.Services
 
         public int MajorStepsTotal { get; private set; } = 8;
         public int MajorStep { get; private set; }
-        public IEnumerable<string> SupportedComposers { get; } = new[] { nameof(VivadoHardwareImplementationComposer) };
 
 
         public VitisHardwareImplementationComposerBuildProvider(
@@ -56,12 +55,13 @@ namespace Hast.Vitis.Abstractions.Services
             for (var i = 0; i < 100 && _buildOutput == null; i++)
             {
                 var fileName = i == 0 ? "build.out" : $"build~{i}.out";
+                _buildOutputPath = Path.Combine(buildOutputPath, fileName);
+
                 try
                 {
-                    _buildOutputPath = Path.Combine(buildOutputPath, fileName);
                     _buildOutput = new StreamWriter(_buildOutputPath, append: false, Encoding.UTF8);
                 }
-                catch (Exception ex)
+                catch (IOException ex)
                 {
                     _logger.LogWarning(ex, "Failed to open {0} for writing.", fileName);
                 }
@@ -100,7 +100,9 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
             {
-                throw new InvalidOperationException("XILINX_VITIS variable is not set.");
+                throw new InvalidOperationException(
+                    "XILINX_VITIS variable is not set. This is required to run Vivado. For further instructions see " +
+                    "https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html");
             }
 
             var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
@@ -150,7 +152,7 @@ namespace Hast.Vitis.Abstractions.Services
             if (buildConfiguration.SynthesisOnly)
             {
                 await SynthKernelAsync(hardwareFrameworkPath, hashId);
-                Environment.Exit(0);
+                return;
             }
 
             ProgressMajor("Staring build.");
@@ -315,8 +317,8 @@ namespace Hast.Vitis.Abstractions.Services
             var reportFilePath = Directory.GetFiles(reportSavePath, "*_bb_locked_power_routed.rpt").FirstOrDefault();
             if (reportFilePath == null)
             {
-                _logger.LogWarning("The report file is missing. Utilization related verification is not performed.");
-                return;
+                throw new FileNotFoundException(
+                    "The report file is missing. Utilization related verification is not performed.");
             }
 
             using var reader = File.OpenText(reportFilePath);

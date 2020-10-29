@@ -14,7 +14,7 @@ namespace Hast.Xilinx.Abstractions
     public class VivadoHardwareImplementationComposer : IHardwareImplementationComposer
     {
         private readonly ILogger _logger;
-        private readonly IList<IHardwareImplementationComposerBuildProvider> _buildProviders;
+        private readonly IEnumerable<IHardwareImplementationComposerBuildProvider> _buildProviders;
 
 
         public VivadoHardwareImplementationComposer(
@@ -22,9 +22,7 @@ namespace Hast.Xilinx.Abstractions
             IEnumerable<IHardwareImplementationComposerBuildProvider> buildProviders)
         {
             _logger = logger;
-            _buildProviders = buildProviders
-                .Where(x => x.SupportedComposers.Contains(nameof(VivadoHardwareImplementationComposer)))
-                .ToList();
+            _buildProviders = buildProviders;
         }
 
 
@@ -36,15 +34,16 @@ namespace Hast.Xilinx.Abstractions
         {
             if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
-                throw new InvalidCastException($"This composer expects a {nameof(XilinxDeviceManifest)} type " +
-                                               "manifest because Vivado works with Xilinx FPGAs.");
+                throw new InvalidCastException(
+                    $"This composer expects a {nameof(XilinxDeviceManifest)} because Vivado works with Xilinx FPGAs.");
             }
 
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             if (string.IsNullOrEmpty(hardwareFrameworkPath))
             {
-                _logger.LogWarning("No hardware framework path was configured. Thus while the hardware description " +
-                                   "was created it won't be implemented with the FPGA vendor toolchain.");
+                _logger.LogWarning(
+                    "No hardware framework path was configured. Thus while the hardware description was created it " +
+                    "won't be implemented with the FPGA vendor toolchain.");
                 return new HardwareImplementation();
             }
 
@@ -157,7 +156,6 @@ namespace Hast.Xilinx.Abstractions
             return path;
         }
 
-        // source: https://stackoverflow.com/a/690980
         private static void CopyAll(DirectoryInfo source, DirectoryInfo target)
         {
             Directory.CreateDirectory(target.FullName);

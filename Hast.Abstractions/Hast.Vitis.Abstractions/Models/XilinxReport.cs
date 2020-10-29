@@ -21,7 +21,7 @@ namespace Hast.Vitis.Abstractions.Models
 
             // Read the meta data. (block starts with a horizontal line)
             ReadUntil(reader);
-            foreach (var metaLine in ReadWhile(reader, line => !line.StartsWith(HorizontalLine)))
+            foreach (var metaLine in ReadWhile(reader, line => !line.StartsWith(HorizontalLine, StringComparison.Ordinal)))
             {
                 if (!metaLine.Contains(':')) continue;
                 var parts = metaLine.TrimStart('|').Split(new[] { ':' }, 2);
@@ -52,7 +52,7 @@ namespace Hast.Vitis.Abstractions.Models
             do
             {
                 var line = reader.ReadLine();
-                if (line?.StartsWith(start) != false) return line;
+                if (line?.StartsWith(start, StringComparison.InvariantCulture) != false) return line;
             } while (true);
         }
 
