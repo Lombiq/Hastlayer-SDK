@@ -155,3 +155,11 @@ Alternatively, you can set the same value in the appesttings.json file into the 
   }
 }
 ```
+
+You can also set the override programmatically.
+
+```csharp
+public void OverrideMaxDegreeOfParallelism(IHardwareGenerationConfiguration configuration, int value = 123) {
+    configuration.GotOrAddReplacements()["ParallelAlgorithm.MaxDegreeOfParallelism"] = value;
+}
+```
