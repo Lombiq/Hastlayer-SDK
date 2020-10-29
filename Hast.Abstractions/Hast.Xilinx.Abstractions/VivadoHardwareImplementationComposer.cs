@@ -1,7 +1,6 @@
 using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -52,8 +51,7 @@ namespace Hast.Xilinx.Abstractions
             var name = context.Configuration.ConsumerName;
             if (!string.IsNullOrWhiteSpace(name)) File.WriteAllText(vhdlFilePath + ".name", name);
             var hashFile = vhdlFilePath + ".hash";
-            if (!File.Exists(hashFile) ||
-                File.ReadAllText(hashFile).Trim() != hashId)
+            if (!File.Exists(hashFile) || File.ReadAllText(hashFile).Trim() != hashId)
             {
                 CreateFiles(context, deviceManifest, vhdlFilePath, hashId);
                 File.WriteAllText(hashFile, hashId);
@@ -106,7 +104,7 @@ namespace Hast.Xilinx.Abstractions
             {
                 XilinxDeviceType.Vitis => Path.Combine("rtl", hashId, "src", "IP", "Hast_IP.xdc"),
                 XilinxDeviceType.Nexys => "Nexys4DDR_Master.xdc",
-                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}")
+                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}.")
             };
 
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
@@ -134,10 +132,7 @@ namespace Hast.Xilinx.Abstractions
             }
         }
 
-        private static string GetFilePath(
-            XilinxDeviceManifest deviceManifest,
-            string hardwareFrameworkPath,
-            string hashId)
+        private static string GetFilePath(XilinxDeviceManifest deviceManifest, string hardwareFrameworkPath, string hashId)
         {
             string directory = deviceManifest.DeviceType switch
             {
@@ -156,6 +151,7 @@ namespace Hast.Xilinx.Abstractions
             return path;
         }
 
+        // Source: https://stackoverflow.com/a/690980
         private static void CopyAll(DirectoryInfo source, DirectoryInfo target)
         {
             Directory.CreateDirectory(target.FullName);

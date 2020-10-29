@@ -1,4 +1,4 @@
-﻿namespace Hast.Vitis.Abstractions.Models
+namespace Hast.Vitis.Abstractions.Models
 {
     public class VitisBuildConfiguration
     {
@@ -8,7 +8,7 @@
         public bool SynthesisOnly { get; set; }
 
         /// <summary>
-        /// If true, the device will be reset via `xbutil reset` before the first build.
+        /// If <see langword="true"/>, the device will be reset via <c>xbutil reset</c> before the first build.
         /// </summary>
         public bool ResetOnFirstRun { get; set; }
     }

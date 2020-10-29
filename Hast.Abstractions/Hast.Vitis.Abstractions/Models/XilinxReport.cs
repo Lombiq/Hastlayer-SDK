@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,6 +11,7 @@ namespace Hast.Vitis.Abstractions.Models
 
         public IDictionary<string, string> MetaData { get; } =
             new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
+
         public IDictionary<string, XilinxReportSection> Sections { get; } =
             new Dictionary<string, XilinxReportSection>(StringComparer.InvariantCultureIgnoreCase);
 
@@ -19,7 +20,7 @@ namespace Hast.Vitis.Abstractions.Models
         {
             var report = new XilinxReport();
 
-            // Read the meta data. (block starts with a horizontal line)
+            // Read the meta data (block starts with a horizontal line).
             ReadUntil(reader);
             foreach (var metaLine in ReadWhile(reader, line => !line.StartsWith(HorizontalLine, StringComparison.Ordinal)))
             {
@@ -33,7 +34,7 @@ namespace Hast.Vitis.Abstractions.Models
             ReadUntil(reader);
             var sectionHeaders = ReadWhile(reader, line => !string.IsNullOrWhiteSpace(line)).ToList();
 
-            foreach(var title in sectionHeaders)
+            foreach (var title in sectionHeaders)
             {
                 // Scroll to section start with underlined header that starts with the chapter number.
                 var header = ReadUntil(reader, title);

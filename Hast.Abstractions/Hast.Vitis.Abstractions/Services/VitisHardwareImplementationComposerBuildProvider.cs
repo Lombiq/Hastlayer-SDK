@@ -1,4 +1,4 @@
-﻿using CliWrap;
+using CliWrap;
 using CliWrap.Buffered;
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
@@ -142,7 +142,7 @@ namespace Hast.Vitis.Abstractions.Services
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
             // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
             // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
-            // see: https://github.com/Xilinx/Vitis-Tutorials/issues/3
+            // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
             var device = new DirectoryInfo(platformsDirectoryPath)
                 .GetDirectories($"{deviceManifest.TechnicalName}*")
                 .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
@@ -501,9 +501,9 @@ namespace Hast.Vitis.Abstractions.Services
             if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker") == true)
             {
                 throw new Exception(
-                    "The linker encountered an error. Typically because the resulting hardware design won't fit on " +
-                    "the FPGA as it's too complex. Try to make your code simpler (make it shorter, use smaller data " +
-                    "types, use a lower degree of parallelism) until this error goes away.");
+                    "The linker encountered an error. This is typically because the resulting hardware design won't " +
+                    "fit on the FPGA as it's too complex. Try to make your code simpler (make it shorter, use smaller " +
+                    "data types and a lower degree of parallelism) until this error goes away.");
             }
 
             _logger.Log(logLevel, "{0}: {1}", name, message);

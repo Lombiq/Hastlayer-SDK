@@ -1,5 +1,4 @@
-﻿using Hast.Common.Helpers;
-using System;
+using Hast.Common.Helpers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
