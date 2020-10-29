@@ -18,7 +18,7 @@ namespace Hast.Layer
         /// Gets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
         /// logged or saved during hardware generation but otherwise it may not used in any activities.
         /// </summary>
-        string ConsumerName { get; set; }
+        string Label { get; set; }
 
         /// <summary>
         /// Gets the collection of the full name of those public members that will be accessible as hardware

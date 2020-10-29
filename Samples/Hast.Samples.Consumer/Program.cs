@@ -165,7 +165,7 @@ namespace Hast.Samples.Consumer
                 _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
             };
             sampleRunner.Configure(configuration);
-            configuration.ConsumerName = GetArgument("name") ?? Configuration.SampleToRun.ToString();
+            configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
 
             // The generated VHDL code will contain debug-level information, though it will be slower to create.
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
