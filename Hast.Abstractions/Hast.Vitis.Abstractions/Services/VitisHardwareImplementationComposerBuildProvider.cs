@@ -152,7 +152,9 @@ namespace Hast.Vitis.Abstractions.Services
             if (buildConfiguration.SynthesisOnly)
             {
                 await SynthKernelAsync(hardwareFrameworkPath, hashId);
-                return;
+                throw new OperationCanceledException(
+                    $"The build is cancelled by {nameof(VitisHardwareImplementationComposerBuildProvider)} because" +
+                    $"{nameof(VitisBuildConfiguration.SynthesisOnly)} mode was enabled.");
             }
 
             ProgressMajor("Staring build.");
