@@ -93,7 +93,7 @@ namespace Hast.Vitis.Abstractions.Services
                     $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
             }
 
-            if (string.IsNullOrEmpty(deviceManifest.TechnicalName))
+            if (string.IsNullOrEmpty(deviceManifest.PlatformName))
             {
                 throw new InvalidOperationException(
                     $"The device manifest for '{deviceManifest.Name}' is missing its technical name which is required to build.");
@@ -146,7 +146,7 @@ namespace Hast.Vitis.Abstractions.Services
             // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
             // see: https://github.com/Xilinx/Vitis-Tutorials/issues/3
             var device = new DirectoryInfo(platformsDirectoryPath)
-                .GetDirectories($"{deviceManifest.TechnicalName}*")
+                .GetDirectories($"{deviceManifest.PlatformName}*")
                 .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
                 .OrderByDescending(name => name)
                 .First();

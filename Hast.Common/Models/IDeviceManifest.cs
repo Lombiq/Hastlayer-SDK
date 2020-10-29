@@ -40,10 +40,5 @@ namespace Hast.Layer
         /// Gets the FPGA vendor toolchain's name to be used with this device.
         /// </summary>
         string ToolChainName { get; }
-
-        /// <summary>
-        /// Gets the device name used by the toolchain, runtime or other applications. Optional.
-        /// </summary>
-        public string TechnicalName { get; set; }
     }
 }

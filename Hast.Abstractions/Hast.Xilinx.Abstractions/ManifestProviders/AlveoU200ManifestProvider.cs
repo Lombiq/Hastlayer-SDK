@@ -20,7 +20,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 // SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
                 AvailableMemoryBytes = 2_000_000_000UL,
                 SupportsHbm = false,
-                TechnicalName = "xilinx_u200",
+                PlatformName = "xilinx_u200",
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

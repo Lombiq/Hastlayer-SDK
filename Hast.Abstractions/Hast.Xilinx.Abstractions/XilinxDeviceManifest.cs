@@ -15,6 +15,11 @@ namespace Hast.Xilinx.Abstractions
         /// </summary>
         public XilinxDeviceType DeviceType { get; set; } = XilinxDeviceType.Vitis;
 
+        /// <summary>
+        /// Gets or sets the partial name of the platform directory that contains the .xpfm file.
+        /// </summary>
+        public string PlatformName { get; set; }
+
 
         public XilinxDeviceManifest() => ToolChainName = CommonToolChainNames.Vivado;
 

@@ -15,6 +15,5 @@ namespace Hast.Synthesis.Abstractions
         public ulong AvailableMemoryBytes { get; set; }
         public uint DataBusWidthBytes { get; set; }
         public string ToolChainName { get; set; }
-        public string TechnicalName { get; set; }
     }
 }

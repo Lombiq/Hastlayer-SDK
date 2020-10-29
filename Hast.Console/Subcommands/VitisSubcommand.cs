@@ -82,7 +82,7 @@ namespace Hast.Console.Subcommands
                                             "(eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
             }
 
-            var manifest = new XilinxDeviceManifest { TechnicalName = options.Platform };
+            var manifest = new XilinxDeviceManifest { PlatformName = options.Platform };
             var context = new HardwareImplementationCompositionContext
             {
                 DeviceManifest = manifest,
