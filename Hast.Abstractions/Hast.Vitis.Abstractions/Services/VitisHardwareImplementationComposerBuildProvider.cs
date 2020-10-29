@@ -88,14 +88,15 @@ namespace Hast.Vitis.Abstractions.Services
         {
             if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
             {
-                throw new InvalidCastException($"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
-                                               $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
+                throw new InvalidOperationException(
+                    $"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
+                    $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
             }
 
             if (string.IsNullOrEmpty(deviceManifest.TechnicalName))
             {
-                throw new InvalidOperationException($"The device manifest for '{deviceManifest.Name}' is missing " +
-                                                    "its technical name which is required to build.");
+                throw new InvalidOperationException(
+                    $"The device manifest for '{deviceManifest.Name}' is missing its technical name which is required to build.");
             }
 
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
@@ -126,9 +127,10 @@ namespace Hast.Vitis.Abstractions.Services
                 await EnsureDeviceReady();
             }
 
-            ProgressMajor("Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more " +
-                          "complex ones usually up to 4. Although 15 hours are also possible if the hardware is " +
-                          "completely utilized with extremely complex and/or very highly parallelized algorithms.");
+            ProgressMajor(
+                "Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more complex " +
+                "ones usually up to 4. Although 15 hours are also possible if the hardware is completely utilized " +
+                "with extremely complex and/or very highly parallelized algorithms.");
 
             var hashId = context.HardwareDescription.TransformationId;
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
@@ -152,9 +154,13 @@ namespace Hast.Vitis.Abstractions.Services
             if (buildConfiguration.SynthesisOnly)
             {
                 await SynthKernelAsync(hardwareFrameworkPath, hashId);
-                throw new OperationCanceledException(
-                    $"The build is cancelled by {nameof(VitisHardwareImplementationComposerBuildProvider)} because" +
-                    $"{nameof(VitisBuildConfiguration.SynthesisOnly)} mode was enabled.");
+
+                if (context.Configuration is HardwareGenerationConfiguration configuration)
+                {
+                    configuration.EnableHardwareImplementationComposition = false;
+                }
+
+                return;
             }
 
             ProgressMajor("Staring build.");
@@ -351,10 +357,11 @@ namespace Hast.Vitis.Abstractions.Services
                 }
                 else if (utilization > 99.0m)
                 {
-                    throw new Exception($"The resulting hardware design is completely utilizing '{resourceType}' " +
-                                        "which likely also means that it has used some other resource type to not " +
-                                        "go above 100% (eg. LUT instead of DSP) which results in performance " +
-                                        "degradation and potential loss of accuracy. " + TryToMakeItSmaller);
+                    throw new InvalidOperationException(
+                        $"The resulting hardware design is completely utilizing '{resourceType}' which likely also " +
+                        $"means that it has used some other resource type to not go above 100% (eg. LUT instead of " +
+                        $"DSP) which results in performance degradation and potential loss of accuracy. " +
+                        TryToMakeItSmaller);
                 }
 
                 implementation.ResourceUsagePercent[resourceType] = utilization;
@@ -369,7 +376,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
             catch (Exception ex)
             {
-                _logger.LogWarning(ex, "Unable to acquire hardware wattage information.");
+                throw new InvalidOperationException("Unable to acquire hardware wattage information.", ex);
             }
         }
 
@@ -377,7 +384,7 @@ namespace Hast.Vitis.Abstractions.Services
         {
             if (lutUtilization > 90.0m)
             {
-                throw new Exception(
+                throw new InvalidOperationException(
                     "The resulting hardware design is using more than 90% of the FPGA's resources. This will " +
                     "almost always be unstable and randomly give incorrect results. " + TryToMakeItSmaller);
             }
@@ -411,8 +418,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         private async Task EnsureDeviceReady()
         {
-            _logger.LogWarning("This is the first build with the current process. " +
-                               "Resetting the devices for a clean state...");
+            _logger.LogWarning(
+                "This is the first build with the current process. Resetting the devices for a clean state...");
 
             var yes = PipeSource.FromString("y" + Environment.NewLine);
             var xbutil = Cli.Wrap((await CliHelper.WhichAsync("xbutil")).First().FullName)
@@ -502,7 +509,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker") == true)
             {
-                throw new Exception(
+                throw new InvalidOperationException(
                     "The linker encountered an error. Typically because the resulting hardware design won't fit on " +
                     "the FPGA as it's too complex. Try to make your code simpler (make it shorter, use smaller data " +
                     "types, use a lower degree of parallelism) until this error goes away.");
