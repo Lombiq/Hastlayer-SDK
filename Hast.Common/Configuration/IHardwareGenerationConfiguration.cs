@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -16,7 +16,7 @@ namespace Hast.Layer
 
         /// <summary>
         /// Gets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
-        /// logged or saved during hardware generation but otherwise it may not used in any activities.
+        /// logged or saved during hardware generation but otherwise it may not be used in any activities.
         /// </summary>
         string Label { get; set; }
 

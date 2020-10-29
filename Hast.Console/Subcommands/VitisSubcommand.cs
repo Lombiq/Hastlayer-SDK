@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using CommandLine.Text;
 using Hast.Common.Models;
 using Hast.Console.Attributes;
@@ -28,12 +28,14 @@ namespace Hast.Console.Subcommands
         public ILogger<VitisHardwareImplementationComposerBuildProvider> BuildLogger { get; set; } =
             new NullLogger<VitisHardwareImplementationComposerBuildProvider>();
 
+
         public VitisSubcommand(string[] rawArguments) => _rawArguments = rawArguments;
+
 
         public void Run()
         {
             var result = Parser.Default.ParseArguments<VitisOptions>(_rawArguments);
-                result
+            result
                 .WithParsed(options => RunOptionsAsync(options, result).Wait())
                 .WithNotParsed(errors => WriteLine(string.Join("\n", errors)));
         }
@@ -49,7 +51,7 @@ namespace Hast.Console.Subcommands
             switch (instruction)
             {
                 case Instruction.Help:
-                    WriteLine("The vitis specific help:");
+                    WriteLine("The Vitis-specific help:");
                     WriteLine(
                         HelpText.AutoBuild(
                             parserResult,
@@ -107,7 +109,7 @@ namespace Hast.Console.Subcommands
             await new VitisHardwareImplementationComposerBuildProvider(BuildLogger)
                 .BuildAsync(context, implementation);
 
-            WriteLine("Build Completed. Find files at: {0}", Path.GetFullPath(implementation.BinaryPath));
+            WriteLine("Build Completed. Find files under: {0}", Path.GetFullPath(implementation.BinaryPath));
         }
 
         private async Task JsonAsync(VitisOptions options)

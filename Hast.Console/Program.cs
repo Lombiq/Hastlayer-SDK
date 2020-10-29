@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using Hast.Console.Attributes;
 using Hast.Console.Extensions;
 using Hast.Console.Options;
@@ -10,7 +10,7 @@ using static System.Console;
 
 namespace Hast.Console
 {
-    class Program
+    internal class Program
     {
         private static Dictionary<string, SubcommandInfo> _subcommands;
 

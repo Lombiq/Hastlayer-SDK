@@ -129,7 +129,7 @@ Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability
 
 ## Using dynamic constants
 
-If you need to iterate through versions of your code with different FPGA constants, it can be done without recompiling your software. Since .Net automatically substitutes constants with their literal value, your fields have to be `static readonly` instead of `constant` to preserve the variable usage in the compiled code. Annotate this field with the `[Replaceable(key)]` attribute. It takes a parameter representing the key you can add to appdata.json or as a command line switch. For example:
+If you need to iterate through versions of your code with different FPGA constants, it can be done without recompiling your software. Since .NET automatically substitutes constants with their literal value, your fields have to be `static readonly` instead of `constant` to preserve the variable usage in the compiled code. Annotate this field with the `[Replaceable(key)]` attribute. It takes a parameter representing the key you can add to appdata.json or as a command line switch. For example:
 
 ```csharp
 [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))] // key = "ParallelAlgorithm.MaxDegreeOfParallelism"

@@ -22,15 +22,15 @@ Be sure to also check out the [general docs](../Readme.md).
 2. Set up access to your JARVICE Storage Vault as explained [in the documentation](https://support.nimbix.net/hc/en-us/articles/208083526-How-do-I-transfer-files-to-and-from-JARVICE-). This will serve as persistent storage and will be accessible even if you have no jobs running. You can e.g. set up an SFTP connection to your Nimbix storage as explained [here](https://support.nimbix.net/hc/en-us/articles/115000157983-How-to-Upload-Data-to-JARVICE-using-SFTP). A suitable SFTP client is e.g. FileZilla (for Total Commander you need the [SFTP plugin](https://www.ghisler.com/plugins.htm) that you can use like explained [here](https://webhosting.platon.org/article.php?support::totalcommander)). (Note that SFTP is FTP via SSH, not to be confused with FTPS, i.e. FTP via SSL.)
 3. Upload the build directory of the host executable (ie. the directory containing *Hast.Samples.Consumer.dll*). This contains the scripts for the next steps, as well as the newly generated RTL sources in the *HardwareFramework* directory.
 4. In the Nimbix Dashboard click on the instance's image to open the web VNC GUI.
-6. Click on the Nimbix ("start") menu at the bottom left and select Terminal Emulator.
-7. Type in the following to set up dependencies:<br/>
-  `cd /data/host_programs_directory`<br/>
+5. Click on the Nimbix ("start") menu at the bottom left and select Terminal Emulator.
+6. Type in the following to set up dependencies:<br>
+  `cd /data/host_programs_directory`<br>
   `source nimbix-install.sh`
-9. Run `source nimbix-compile.sh` to compile the generated hardware for the current U280 platform available on Nimbix. Alternatively, if you're targeting something else:
+7. Run `source nimbix-compile.sh` to compile the generated hardware for the current U280 platform available on Nimbix. Alternatively, if you're targeting something else:
     1. `cd` to the RTL source folder.
     2. Find the correct platform name by typing `ls /opt/xilinx/platforms`.
     3. `make all TARGET=hw DEVICE=platform_name` where platform_name is from the previous step. Note that the U50 board is available in two PCIe configurations (x4 and x16) and these are not interchangeable: Use the exact platform for the board attached to the VM.
-10. Wait for a long time. The baseline time requirements (when compiling `MemoryTest` for U280) is around 2h 15m. U50, as the smallest board, is the fastest to compile for.
+8. Wait for a long time. The baseline time requirements (when compiling `MemoryTest` for U280) is around 2h 15m. U50, as the smallest board, is the fastest to compile for.
 
 You can have multiple such compilations running at the same time, as there are enough hardware resources, depending on the complexity of the generated hardware (i.e. the input software) and the targeted board. To see the resources usage of the VM you can use the console app [top](https://linux.die.net/man/1/top) or install [System Monitor](https://help.gnome.org/users/gnome-system-monitor/) with `sudo apt-get --yes --force-yes install gnome-system-monitor` (located under the System category in the start menu).
 
