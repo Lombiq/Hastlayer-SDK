@@ -14,7 +14,7 @@ namespace Hast.Samples.SampleAssembly
         // While 270 will also fit with ~77% of the resources being used that's very slow to compile in the Xilinx
         // toolchain for the Nexys A7.
         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
-        public readonly int MaxDegreeOfParallelism = 260;
+        private static readonly int MaxDegreeOfParallelism = 260;
 
         private const int Run_InputInt32Index = 0;
         private const int Run_OutputInt32Index = 0;
