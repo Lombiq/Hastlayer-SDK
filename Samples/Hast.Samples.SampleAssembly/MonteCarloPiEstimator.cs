@@ -21,8 +21,7 @@ namespace Hast.Samples.SampleAssembly
         private const int EstimatePi_RandomSeedUInt32Index = 1;
         private const int EstimatePi_InCircleCountSumUInt32Index = 0;
 
-        [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
-        public static readonly int MaxDegreeOfParallelism = 78;
+        public const int MaxDegreeOfParallelism = 78;
 
 
         public virtual void EstimatePi(SimpleMemory memory)
