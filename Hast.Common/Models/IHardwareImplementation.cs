@@ -8,9 +8,9 @@ namespace Hast.Layer
     public interface IHardwareImplementation
     {
         /// <summary>
-        /// Gets the path of the binary to be executed on hardware, if any.
+        /// Gets or sets the path of the binary to be executed on hardware, if any.
         /// </summary>
-        string BinaryPath { get; }
+        string BinaryPath { get; set; }
 
         /// <summary>
         /// Gets the utilization percentage values for hardware resources where that information is available.
