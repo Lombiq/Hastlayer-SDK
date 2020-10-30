@@ -5,6 +5,7 @@ using CliWrap.Exceptions;
 using Hast.Common.Helpers;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Helpers;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
@@ -69,18 +70,8 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
-        /// <summary>
-        /// It is supported if the manifest is a <see cref="XilinxDeviceManifest"/> with the type of
-        /// <see cref="XilinxDeviceType.Vitis"/> and the <see cref="IHardwareImplementation.BinaryPath"/> is set but the
-        /// indicated file doesn't yet exist.
-        /// </summary>
-        public bool IsSupported(
-            IHardwareImplementationCompositionContext context,
-            IHardwareImplementation implementation) =>
-            context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
-            xilinxDeviceManifest.DeviceType == XilinxDeviceType.Vitis &&
-            !string.IsNullOrEmpty(implementation.BinaryPath) &&
-            !File.Exists(implementation.BinaryPath);
+        public bool CanCompose(IHardwareImplementationCompositionContext context) =>
+            context.DeviceManifest.ToolChainName == CommonToolChainNames.Vitis;
 
         public async Task BuildAsync(
             IHardwareImplementationCompositionContext context,
@@ -135,7 +126,16 @@ namespace Hast.Vitis.Abstractions.Services
 
             var hashId = context.HardwareDescription.TransformationId;
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
-            Cleanup(hardwareFrameworkPath, hashId, deleteSource: false);
+            implementation.BinaryPath = Path.Combine(
+                EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
+                hashId + ".xclbin");
+            Cleanup(hardwareFrameworkPath, hashId);
+            CreateSourceFiles(context, hardwareFrameworkPath, hashId);
+
+            // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
+            CopyAll(
+                new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP")),
+                new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP")));
 
             var platformsDirectoryPath = Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable
                 ? new DirectoryInfo(Path.GetFullPath(platformVariable))
@@ -190,7 +190,6 @@ namespace Hast.Vitis.Abstractions.Services
             XilinxDeviceManifest deviceManifest)
         {
             var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath, hashId);
-            if (!Directory.Exists(xclbinDirectoryPath)) Directory.CreateDirectory(xclbinDirectoryPath);
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
 
             var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
@@ -356,8 +355,8 @@ namespace Hast.Vitis.Abstractions.Services
                 {
                     throw new InvalidOperationException(
                         $"The resulting hardware design is completely utilizing '{resourceType}' which likely also " +
-                        $"means that it has used some other resource type to not go above 100% (eg. LUT instead of " +
-                        $"DSP) which results in performance degradation and potential loss of accuracy. " +
+                        "means that it has used some other resource type to not go above 100% (eg. LUT instead of " +
+                        "DSP) which results in performance degradation and potential loss of accuracy. " +
                         TryToMakeItSmaller);
                 }
 
@@ -395,20 +394,10 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private void Cleanup(string hardwareFrameworkPath, string hashId, bool deleteSource = true)
+        private void Cleanup(string hardwareFrameworkPath, string hashId)
         {
             var path = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            if (deleteSource)
-            {
-                Directory.Delete(path, recursive: true);
-            }
-            else
-            {
-                var directories = new DirectoryInfo(path)
-                    .GetDirectories()
-                    .Where(directory => directory.Name != "src");
-                foreach (var directory in directories) directory.Delete();
-            }
+            Directory.Delete(path, recursive: true);
 
             ProgressMajor("Build directory cleaned up.");
         }
