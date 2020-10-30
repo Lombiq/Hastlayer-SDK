@@ -517,6 +517,18 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
+        private static void CreateSourceFiles(
+            IHardwareImplementationCompositionContext context,
+            string hardwareFrameworkPath,
+            string hashId)
+        {
+            var ipDirectoryPath = EnsureDirectoryExists(hardwareFrameworkPath, "rtl", hashId, "src", "IP");
+            var vhdlFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.vhd");
+            var xdcFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.xdc");
+
+            VhdlHelper.CreateVhdlAndXdcFiles(context, xdcFilePath, vhdlFilePath);
+        }
+
         private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
             Path.Combine(hardwareFrameworkPath, "rtl", hashId);
 
