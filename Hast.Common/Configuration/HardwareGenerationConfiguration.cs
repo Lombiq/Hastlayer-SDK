@@ -50,10 +50,10 @@ namespace Hast.Layer
         public bool EnableCaching { get; set; }
 
         /// <inheritdoc/>
-        public string DeviceName { get; set; }
+        public string DeviceName { get; }
 
         /// <inheritdoc/>
-        public string HardwareFrameworkPath { get; set; }
+        public string HardwareFrameworkPath { get; }
 
         /// <summary>
         /// Gets or sets whether hardware transformation takes place. If it doesn't then
@@ -84,7 +84,9 @@ namespace Hast.Layer
         public HardwareGenerationConfiguration(string deviceName, string hardwareFrameworkPath)
         {
             DeviceName = deviceName;
-            HardwareFrameworkPath = hardwareFrameworkPath;
+            HardwareFrameworkPath = string.IsNullOrWhiteSpace(hardwareFrameworkPath)
+                ? "HardwareFramework"
+                : hardwareFrameworkPath;
         }
     }
 }
