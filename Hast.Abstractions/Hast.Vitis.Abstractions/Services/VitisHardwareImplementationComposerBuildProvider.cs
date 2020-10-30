@@ -171,7 +171,7 @@ namespace Hast.Vitis.Abstractions.Services
             CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, hashId);
 
             ProgressMajor("Collecting reports.");
-            try { CollectReports(hardwareFrameworkPath, context, implementation, hashId); }
+            try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
             catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
 
             Cleanup(hardwareFrameworkPath, hashId);
@@ -296,7 +296,7 @@ namespace Hast.Vitis.Abstractions.Services
             ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
         }
 
-        private void CollectReports(
+        private async Task CollectReportsAsync(
             string hardwareFrameworkPath,
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation,
@@ -331,7 +331,7 @@ namespace Hast.Vitis.Abstractions.Services
             var report = XilinxReport.Parse(reader);
 
             var jsonFilePath = Path.Combine(reportSavePath, "report.json");
-            File.WriteAllText(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
+            await File.WriteAllTextAsync(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
             _logger.LogInformation("A converted JSON file is saved to {0}.", jsonFilePath);
 
             var componentsSection = report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn();
