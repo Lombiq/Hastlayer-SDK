@@ -1,5 +1,4 @@
 using Hast.Synthesis.Abstractions;
-using System;
 using System.Collections.Generic;
 
 namespace Hast.Xilinx.Abstractions
@@ -25,9 +24,5 @@ namespace Hast.Xilinx.Abstractions
 
 
         public XilinxDeviceManifest() => ToolChainName = CommonToolChainNames.Vivado;
-
-
-        public Exception GetUnknownDeviceType() =>
-            new InvalidOperationException($"Unknown device type: {DeviceType}");
     }
 }

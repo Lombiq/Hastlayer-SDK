@@ -1,6 +1,5 @@
 using Hast.Common.Models;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hast.Xilinx.Abstractions
+namespace Hast.Synthesis.Abstractions
 {
     public class VhdlHardwareImplementationComposer : IHardwareImplementationComposer
     {
@@ -26,17 +25,11 @@ namespace Hast.Xilinx.Abstractions
 
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.HardwareDescription is VhdlHardwareDescription &&
-            context.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado;
+            context.HardwareDescription is VhdlHardwareDescription;
 
         public async Task<IHardwareImplementation> ComposeAsync(IHardwareImplementationCompositionContext context)
         {
-            if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
-            {
-                throw new InvalidCastException(
-                    $"This composer expects a {nameof(XilinxDeviceManifest)} because Vivado works with Xilinx FPGAs.");
-            }
-
+            var deviceManifest = context.DeviceManifest;
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             if (string.IsNullOrEmpty(hardwareFrameworkPath))
             {
@@ -59,14 +52,14 @@ namespace Hast.Xilinx.Abstractions
 
             var implementation = new HardwareImplementation
             {
-                BinaryPath = deviceManifest.DeviceType switch
+                BinaryPath = deviceManifest.ToolChainName switch
                 {
-                    XilinxDeviceType.Vitis =>
+                    CommonToolChainNames.Vitis =>
                         Path.Combine(
                             CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "bin"),
                             hashId + ".xclbin"),
-                    XilinxDeviceType.Nexys => null,
-                    _ => throw deviceManifest.GetUnknownDeviceType(),
+                    CommonToolChainNames.Vivado => null,
+                    _ => throw deviceManifest.GetUnknownToolChainException(),
                 },
             };
 
@@ -82,14 +75,14 @@ namespace Hast.Xilinx.Abstractions
 
         private static void CreateFiles(
             IHardwareImplementationCompositionContext context,
-            XilinxDeviceManifest deviceManifest,
+            IDeviceManifest deviceManifest,
             string vhdlFilePath,
             string hashId)
         {
             var hardwareFrameworkPath = context.Configuration.HardwareFrameworkPath;
             var vhdlHardwareDescription = (VhdlHardwareDescription)context.HardwareDescription;
 
-            if (deviceManifest.DeviceType == XilinxDeviceType.Vitis)
+            if (deviceManifest.ToolChainName == CommonToolChainNames.Vitis)
             {
                 // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
                 CopyAll(
@@ -100,11 +93,11 @@ namespace Hast.Xilinx.Abstractions
             CreateDirectoryIfDoesntExist(Path.GetDirectoryName(vhdlFilePath));
             File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
-            string xdcFileSubPath = deviceManifest.DeviceType switch
+            string xdcFileSubPath = deviceManifest.ToolChainName switch
             {
-                XilinxDeviceType.Vitis => Path.Combine("rtl", hashId, "src", "IP", "Hast_IP.xdc"),
-                XilinxDeviceType.Nexys => "Nexys4DDR_Master.xdc",
-                _ => throw new InvalidOperationException($"Unknown device type: {deviceManifest.DeviceType}.")
+                CommonToolChainNames.Vitis => Path.Combine("rtl", hashId, "src", "IP", "Hast_IP.xdc"),
+                CommonToolChainNames.Vivado => "Nexys4DDR_Master.xdc",
+                _ => throw deviceManifest.GetUnknownToolChainException(),
             };
 
             var xdcFilePath = Path.Combine(hardwareFrameworkPath, xdcFileSubPath);
@@ -132,13 +125,13 @@ namespace Hast.Xilinx.Abstractions
             }
         }
 
-        private static string GetFilePath(XilinxDeviceManifest deviceManifest, string hardwareFrameworkPath, string hashId)
+        private static string GetFilePath(IDeviceManifest deviceManifest, string hardwareFrameworkPath, string hashId)
         {
-            string directory = deviceManifest.DeviceType switch
+            string directory = deviceManifest.ToolChainName switch
             {
-                XilinxDeviceType.Nexys => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "IPRepo"),
-                XilinxDeviceType.Vitis => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", hashId, "src", "IP"),
-                _ => throw deviceManifest.GetUnknownDeviceType(),
+                CommonToolChainNames.Vivado => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "IPRepo"),
+                CommonToolChainNames.Vitis => CreateDirectoryIfDoesntExist(hardwareFrameworkPath, "rtl", hashId, "src", "IP"),
+                _ => throw deviceManifest.GetUnknownToolChainException(),
             };
 
             return Path.Combine(directory, "Hast_IP.vhd");

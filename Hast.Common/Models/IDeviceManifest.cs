@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Hast.Layer
 {
@@ -40,5 +41,7 @@ namespace Hast.Layer
         /// Gets the FPGA vendor toolchain's name to be used with this device.
         /// </summary>
         string ToolChainName { get; }
+
+        Exception GetUnknownToolChainException();
     }
 }
