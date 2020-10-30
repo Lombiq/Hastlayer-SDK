@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Hast.Common.Helpers.FileSystemHelper;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -50,8 +51,7 @@ namespace Hast.Vitis.Abstractions.Services
             Progress += OnProgress;
             _logger = logger;
 
-            var buildOutputPath = Path.Combine("App_Data", "logs");
-            if (!Directory.Exists(buildOutputPath)) Directory.CreateDirectory(buildOutputPath);
+            var buildOutputPath = EnsureDirectoryExists("App_Data", "logs");
             for (var i = 0; i < 100 && _buildOutput == null; i++)
             {
                 var fileName = i == 0 ? "build.out" : $"build~{i}.out";
@@ -261,10 +261,6 @@ namespace Hast.Vitis.Abstractions.Services
 
             // vivado -mode batch -source synth_util.tcl
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
-
-            var reportsDirectoryPath = Path.Combine(hardwareFrameworkPath, "reports", hashId);
-            if (!Directory.Exists(reportsDirectoryPath)) Directory.CreateDirectory(reportsDirectoryPath);
-
             var vivadoArguments = new[]
             {
                 "-mode",
@@ -273,7 +269,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "synth_util.tcl"),
                 "-tclargs",
                 Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP", "Hast_IP.vhd"),
-                Path.Combine(reportsDirectoryPath, "Hast_IP_synth_util.rpt"),
+                Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
             };
             await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
             ProgressMajor("Vivado synthesis is finished.");
@@ -525,7 +521,7 @@ namespace Hast.Vitis.Abstractions.Services
             Path.Combine(hardwareFrameworkPath, "rtl", hashId);
 
         private static string GetXclbinDirectoryPath(string hardwareFrameworkPath, string hashId) =>
-            Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "xclbin");
+            EnsureDirectoryExists(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "xclbin");
 
         private static async Task<string> GetExecutablePathAsync(string executable)
         {
