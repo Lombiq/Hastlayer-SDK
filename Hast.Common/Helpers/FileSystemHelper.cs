@@ -14,29 +14,5 @@ namespace Hast.Common.Helpers
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             return path;
         }
-
-
-        /// <summary>
-        /// Recursively copies the contents fo <paramref name="source"/> to the path of <paramref name="target"/>.
-        /// </summary>
-        /// <remarks>Source: https://stackoverflow.com/a/690980</remarks>
-        public static void CopyAll(DirectoryInfo source, DirectoryInfo target)
-        {
-            Directory.CreateDirectory(target.FullName);
-
-            // Copy each file into the new directory.
-            foreach (var file in source.GetFiles())
-            {
-                System.Console.WriteLine(@"Copying {0}\{1}", target.FullName, file.Name);
-                file.CopyTo(Path.Combine(target.FullName, file.Name), true);
-            }
-
-            // Copy each subdirectory using recursion.
-            foreach (var subDirectory in source.GetDirectories())
-            {
-                var nextTargetSubDir = target.CreateSubdirectory(subDirectory.Name);
-                CopyAll(subDirectory, nextTargetSubDir);
-            }
-        }
     }
 }

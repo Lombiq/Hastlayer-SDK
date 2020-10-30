@@ -10,6 +10,7 @@ using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -133,9 +134,9 @@ namespace Hast.Vitis.Abstractions.Services
             CreateSourceFiles(context, hardwareFrameworkPath, hashId);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
-            CopyAll(
-                new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP")),
-                new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP")));
+            FileSystem.CopyDirectory(
+                Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"),
+                Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP"));
 
             var platformsDirectoryPath = new DirectoryInfo(
                 Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
