@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.Helpers;
-using Newtonsoft.Json.Linq;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
@@ -20,7 +18,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 // SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
                 AvailableMemoryBytes = 2_000_000_000UL,
                 SupportsHbm = false,
-                PlatformName = "xilinx_u200",
+                SupportedPlatforms = new[] { "xilinx_u200" },
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

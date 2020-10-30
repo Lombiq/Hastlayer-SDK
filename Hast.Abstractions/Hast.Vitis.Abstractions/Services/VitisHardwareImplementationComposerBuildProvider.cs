@@ -93,10 +93,11 @@ namespace Hast.Vitis.Abstractions.Services
                     $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
             }
 
-            if (string.IsNullOrEmpty(deviceManifest.PlatformName))
+            if (deviceManifest.SupportedPlatforms?.Count == 0)
             {
                 throw new InvalidOperationException(
-                    $"The device manifest for '{deviceManifest.Name}' is missing its technical name which is required to build.");
+                    $"The device manifest for '{deviceManifest.Name}' is doesn't have any " +
+                    $"{nameof(XilinxDeviceManifest.SupportedPlatforms)} which is required to build.");
             }
 
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
@@ -137,16 +138,16 @@ namespace Hast.Vitis.Abstractions.Services
             Cleanup(hardwareFrameworkPath, hashId, deleteSource: false);
 
             var platformsDirectoryPath = Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable
-                ? Path.GetFullPath(platformVariable)
-                : Path.Combine(xilinxDirectoryPath, "platforms");
+                ? new DirectoryInfo(Path.GetFullPath(platformVariable))
+                : new DirectoryInfo(Path.Combine(xilinxDirectoryPath, "platforms"));
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
             // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
             // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
             // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
-            var device = new DirectoryInfo(platformsDirectoryPath)
-                .GetDirectories($"{deviceManifest.PlatformName}*")
+            var device = deviceManifest.SupportedPlatforms!
+                .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
                 .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
                 .OrderByDescending(name => name)
                 .First();

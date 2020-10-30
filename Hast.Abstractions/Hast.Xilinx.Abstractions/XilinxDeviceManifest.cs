@@ -1,5 +1,6 @@
 using Hast.Synthesis.Abstractions;
 using System;
+using System.Collections.Generic;
 
 namespace Hast.Xilinx.Abstractions
 {
@@ -16,9 +17,11 @@ namespace Hast.Xilinx.Abstractions
         public XilinxDeviceType DeviceType { get; set; } = XilinxDeviceType.Vitis;
 
         /// <summary>
-        /// Gets or sets the partial name of the platform directory that contains the .xpfm file.
+        /// Gets or sets the collection of supported platform names (can be partial, wildcard is considered at the end).
+        /// The full platform name is the name of the directory in $XILINX_PLATFORM (defaults to "$XILINX_XRT/platforms"
+        /// if not set) where that directory contains an .xpfm file.
         /// </summary>
-        public string PlatformName { get; set; }
+        public IList<string> SupportedPlatforms { get; set; }
 
 
         public XilinxDeviceManifest() => ToolChainName = CommonToolChainNames.Vivado;
