@@ -137,9 +137,11 @@ namespace Hast.Vitis.Abstractions.Services
                 new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP")),
                 new DirectoryInfo(Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP")));
 
-            var platformsDirectoryPath = Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable
-                ? new DirectoryInfo(Path.GetFullPath(platformVariable))
-                : new DirectoryInfo(Path.Combine(xilinxDirectoryPath, "platforms"));
+            var platformsDirectoryPath = new DirectoryInfo(
+                Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
+                Directory.Exists(platformVariable)
+                    ? Path.GetFullPath(platformVariable)
+                    : Path.Combine(xilinxDirectoryPath!, "platforms"));
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
