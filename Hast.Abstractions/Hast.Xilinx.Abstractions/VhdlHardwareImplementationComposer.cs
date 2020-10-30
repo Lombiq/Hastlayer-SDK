@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Hast.Xilinx.Abstractions
 {
-    public class VivadoHardwareImplementationComposer : IHardwareImplementationComposer
+    public class VhdlHardwareImplementationComposer : IHardwareImplementationComposer
     {
         private readonly ILogger _logger;
         private readonly IEnumerable<IHardwareImplementationComposerBuildProvider> _buildProviders;
 
 
-        public VivadoHardwareImplementationComposer(
-            ILogger<VivadoHardwareImplementationComposer> logger,
+        public VhdlHardwareImplementationComposer(
+            ILogger<VhdlHardwareImplementationComposer> logger,
             IEnumerable<IHardwareImplementationComposerBuildProvider> buildProviders)
         {
             _logger = logger;
