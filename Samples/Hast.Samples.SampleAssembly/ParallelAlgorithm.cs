@@ -13,7 +13,10 @@ namespace Hast.Samples.SampleAssembly
     {
         // While 270 will also fit with ~77% of the resources being used that's very slow to compile in the Xilinx
         // toolchain for the Nexys A7.
-        private const int MaxDegreeOfParallelism = 260;
+        // The [Replaceable] enables the substitution of this static readonly field into constant literals wherever it
+        // is used. Check out the xmldoc of ReplaceableAttribute for further instructions.
+        [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
+        private static readonly int MaxDegreeOfParallelism = 260;
 
         private const int Run_InputInt32Index = 0;
         private const int Run_OutputInt32Index = 0;
