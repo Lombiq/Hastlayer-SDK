@@ -17,7 +17,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 SupportedCommunicationChannelNames = new[] { Serial.ChannelName, Ethernet.ChannelName },
                 AvailableMemoryBytes = 115343360, // 110MB
                 SupportsHbm = false,
-                DeviceType = XilinxDeviceType.Nexys,
+                ToolChainName = CommonToolChainNames.Vivado,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

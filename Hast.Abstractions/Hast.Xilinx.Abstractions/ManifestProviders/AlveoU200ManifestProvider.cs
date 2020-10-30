@@ -19,6 +19,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 AvailableMemoryBytes = 2_000_000_000UL,
                 SupportsHbm = false,
                 SupportedPlatforms = new[] { "xilinx_u200" },
+                ToolChainName = CommonToolChainNames.Vitis,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
