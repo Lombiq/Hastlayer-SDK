@@ -10,3 +10,7 @@
 	path = Lombiq.Arithmetics
 	url = https://github.com/Lombiq/Arithmetics.git
 	branch = dev
+[submodule "Hastlayer-Hardware-Framework---Vitis"]
+	path = Hastlayer-Hardware-Framework---Vitis
+	url = https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis
+	branch = dev
