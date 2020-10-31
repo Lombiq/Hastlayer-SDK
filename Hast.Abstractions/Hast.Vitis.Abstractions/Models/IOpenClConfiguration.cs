@@ -58,5 +58,15 @@ namespace Hast.Vitis.Abstractions.Models
         /// Gets or sets a value indicating whether the the binary is for real hardware or emulated.
         /// </summary>
         bool UseEmulation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Advanced eXtensible Interface bus width in bits.
+        /// </summary>
+        int AxiBusWith { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether cache should be used. Default is <see langword="true"/>.
+        /// </summary>
+        bool UseCache { get; set; }
     }
 }

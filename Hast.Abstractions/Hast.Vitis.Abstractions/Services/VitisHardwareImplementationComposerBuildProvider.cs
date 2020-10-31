@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
+using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -237,7 +238,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--dk",
                 "chipscope:hastip_1:m_axi_gmem",
                 "--kernel_frequency",
-                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.InvariantCulture),
+                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
                 "-lo",
                 Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,
@@ -262,7 +263,7 @@ namespace Hast.Vitis.Abstractions.Services
         {
             ProgressMajor("Starting Vivado synthesis.");
 
-            // vivado -mode batch -source synth_util.tcl
+            // vivado -mode batch -source synth_util.tcl $(VhdFileIn) $(RptFileOut)
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
             var vivadoArguments = new[]
             {
@@ -345,7 +346,7 @@ namespace Hast.Vitis.Abstractions.Services
                 if (!decimal.TryParse(
                     row[UtilizationPercent],
                     NumberStyles.Any,
-                    CultureInfo.InvariantCulture,
+                    InvariantCulture,
                     out var utilization))
                 {
                     continue;
@@ -371,7 +372,7 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 implementation.PowerUsageWatts = decimal.Parse(
                     report.Sections["1. Summary"].ToDictionaryByFirstColumn()["Total On-Chip Power (W)"][Value],
-                    CultureInfo.InvariantCulture);
+                    InvariantCulture);
                 _logger.LogInformation("Total on-chip power: {0}W", implementation.PowerUsageWatts);
             }
             catch (Exception ex)
@@ -539,6 +540,32 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             return executableName;
+        }
+
+        private static async Task ApplyTemplatesAsync(
+            string hardwareFrameworkPath,
+            string hashId,
+            IOpenClConfiguration openClConfiguration)
+        {
+            var sourceDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", "src");
+            var targetDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src");
+            var files = new[]
+            {
+                Path.Combine("xml", "kernel.xml"),
+                Path.Combine("IP", "hastip.v"),
+                Path.Combine("testbench", "slv_m00_axi_vip_pkg.sv"),
+                Path.Combine("testbench", "slv_m00_axi_vip.sv"),
+                Path.Combine("testbench", "hastip_tb.sv"),
+            };
+
+            foreach (var file in files)
+            {
+                var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
+                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture))
+                    .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
+                await File.WriteAllTextAsync(Path.Combine(targetDirectoryPath, file), result);
+            }
+
         }
 
         public void Dispose() => _buildOutput?.Dispose();

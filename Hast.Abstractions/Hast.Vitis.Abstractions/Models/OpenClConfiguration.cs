@@ -10,5 +10,7 @@ namespace Hast.Vitis.Abstractions.Models
         public string VendorName { get; set; } = "Xilinx";
         public int MemoryAlignment { get; set; } = 4096;
         public bool UseEmulation { get; set; }
+        public int AxiBusWith { get; set; } = 512;
+        public bool UseCache { get; set; } = true;
     }
 }
