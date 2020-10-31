@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 
 namespace Hast.Synthesis.Abstractions
 {
@@ -10,12 +10,12 @@ namespace Hast.Synthesis.Abstractions
         IHardwareGenerationConfiguration Configuration { get; }
 
         /// <summary>
-        /// Represents the hardware that was generated from .NET assemblies.
+        /// The hardware device's manifest to compose the hardware implementation for.
         /// </summary>
         IDeviceManifest DeviceManifest { get; }
 
         /// <summary>
-        /// The hardware device's manifest to compose the hardware implementation for.
+        /// Represents the hardware that was generated from .NET assemblies.
         /// </summary>
         IHardwareDescription HardwareDescription { get; }
     }

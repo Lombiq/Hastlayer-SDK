@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer
 {
     /// <summary>
-    /// Represents a handle to the hardware implementation synthesized through the FPGA vendor tool-chain.
+    /// Represents a handle to the hardware implementation synthesized through the FPGA vendor toolchain.
     /// </summary>
     public interface IHardwareImplementation
     {

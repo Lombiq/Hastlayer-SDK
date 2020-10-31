@@ -22,6 +22,7 @@ namespace Hast.Synthesis.Abstractions
         public async Task<IHardwareImplementation> ComposeAsync(IHardwareImplementationCompositionContext context)
         {
             var implementation = new HardwareImplementation();
+
             foreach (var buildProvider in _buildProviders.Where(provider => provider.CanCompose(context)))
             {
                 await buildProvider.BuildAsync(context, implementation);

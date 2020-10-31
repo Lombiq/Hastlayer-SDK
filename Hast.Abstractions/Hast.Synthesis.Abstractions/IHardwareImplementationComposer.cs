@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using System.Threading.Tasks;
 
@@ -11,7 +11,7 @@ namespace Hast.Synthesis.Abstractions
     public interface IHardwareImplementationComposer : IDependency
     {
         /// <summary>
-        /// Indicates whether the hardware implementation composes can handle the given context.
+        /// Indicates whether the hardware implementation composer can handle the given context.
         /// </summary>
         /// <param name="context">All the data necessary for the hardware implementation composition to happen.</param>
         bool CanCompose(IHardwareImplementationCompositionContext context);

@@ -89,7 +89,7 @@ namespace Hast.Vitis.Abstractions.Services
             if (deviceManifest.SupportedPlatforms?.Count == 0)
             {
                 throw new InvalidOperationException(
-                    $"The device manifest for '{deviceManifest.Name}' is doesn't have any " +
+                    $"The device manifest for '{deviceManifest.Name}' doesn't have any " +
                     $"{nameof(XilinxDeviceManifest.SupportedPlatforms)} which is required to build.");
             }
 
@@ -180,6 +180,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             Cleanup(hardwareFrameworkPath, hashId);
         }
+
 
         private void ProgressMajor(string message)
         {
