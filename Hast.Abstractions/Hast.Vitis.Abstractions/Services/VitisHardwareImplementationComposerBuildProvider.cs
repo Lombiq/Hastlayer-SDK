@@ -439,7 +439,11 @@ namespace Hast.Vitis.Abstractions.Services
                 switch (commandEvent)
                 {
                     case StartedCommandEvent started:
-                        Log(LogLevel.Information, name, started.ProcessId, "started");
+                        Log(
+                            LogLevel.None,
+                            name,
+                            $"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}",
+                            "started");
                         break;
                     case StandardOutputCommandEvent output:
                         Log(LogLevel.Trace, name, output.Text, "stdout");
