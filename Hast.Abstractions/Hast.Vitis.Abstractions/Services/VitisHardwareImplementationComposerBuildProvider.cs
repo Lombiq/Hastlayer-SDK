@@ -132,13 +132,14 @@ namespace Hast.Vitis.Abstractions.Services
                 EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
                 hashId + ".xclbin");
             Cleanup(hardwareFrameworkPath, hashId);
-            await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
-            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
             FileSystem.CopyDirectory(
                 Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"),
                 Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP"));
+
+            await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
+            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
 
             var platformsDirectoryPath = new DirectoryInfo(
                 Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
@@ -402,7 +403,7 @@ namespace Hast.Vitis.Abstractions.Services
         private void Cleanup(string hardwareFrameworkPath, string hashId)
         {
             var path = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            Directory.Delete(path, recursive: true);
+            if (Directory.Exists(path)) Directory.Delete(path, recursive: true);
 
             ProgressMajor("Build directory cleaned up.");
         }
@@ -447,7 +448,8 @@ namespace Hast.Vitis.Abstractions.Services
                         Log(LogLevel.Warning, name, error.Text, "stderr");
                         break;
                     case ExitedCommandEvent exited:
-                        Log(LogLevel.Information, name, exited.ExitCode == 0 ? "success" : "failure", "finished");
+                        var message = (exited.ExitCode == 0 ? "success" : "failure") + "\n\n\n";
+                        Log(LogLevel.Information, name, message, "finished");
 
                         if (exited.ExitCode != 0)
                         {
@@ -507,7 +509,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             _logger.Log(logLevel, "{0}: {1}", name, message);
-            _buildOutput.WriteLine("{0} {2}: {1}\n\n\n", name, message, buildLogType);
+            _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
         }
 
 
@@ -563,7 +565,9 @@ namespace Hast.Vitis.Abstractions.Services
                 var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
                     .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture))
                     .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
-                await File.WriteAllTextAsync(Path.Combine(targetDirectoryPath, file), result);
+                var targetFilePath = Path.Combine(targetDirectoryPath, file);
+                EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
+                await File.WriteAllTextAsync(targetFilePath, result);
             }
 
         }
