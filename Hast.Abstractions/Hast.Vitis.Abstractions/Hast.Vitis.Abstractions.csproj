@@ -29,52 +29,17 @@
     <None Update="nimbix-install.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="HardwareFramework\rtl\src\IP\Hast_IP.xdc_template">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\IP\Hast_IP_Wrapper.vhd">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\IP\hastip.v">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\IP\hastip_control_s_axi.v">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\IP\hastip_core.sv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\IP\hastip_core_cache.sv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\scripts\gen_xo.tcl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\scripts\package_kernel.tcl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\scripts\synth_util.tcl">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\testbench\control_hastip_vip.sv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\testbench\control_hastip_vip_pkg.sv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\testbench\hastip_tb.sv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\testbench\slv_m00_axi_vip.sv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\testbench\slv_m00_axi_vip_pkg.sv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="HardwareFramework\rtl\src\xml\kernel.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <MySourceFiles Include="$(SolutionDir)Hastlayer-Hardware-Framework---Vitis\rtl\src\**\*.*"/>
+  </ItemGroup>
+
+  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+    <Copy
+      SourceFiles="@(MySourceFiles)"
+      DestinationFiles="@(MySourceFiles->'$(ProjectDir)$(OutDir)\HardwareFramework\rtl\src\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
 
   <ItemGroup>
     <None Remove="Hast.Vitis.Abstractions.Tests\**" />
