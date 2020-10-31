@@ -167,6 +167,12 @@ namespace Hast.Samples.Consumer
             sampleRunner.Configure(configuration);
             configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
 
+            if (GetArgument("replace") is { } replacement)
+            {
+                var parts = replacement.Split('=', 2);
+                configuration.GotOrAddReplacements()[parts[0]] = parts[1];
+            }
+
             // The generated VHDL code will contain debug-level information, though it will be slower to create.
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
