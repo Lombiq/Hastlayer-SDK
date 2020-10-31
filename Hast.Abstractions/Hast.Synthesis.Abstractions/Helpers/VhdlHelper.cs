@@ -1,6 +1,7 @@
 ﻿using Hast.Common.Helpers;
 using Hast.Common.Models;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Hast.Synthesis.Abstractions.Helpers
 {
@@ -11,22 +12,22 @@ namespace Hast.Synthesis.Abstractions.Helpers
         /// <paramref name="context"/>.<see cref="IHardwareImplementationCompositionContext.HardwareDescription"/> that
         /// must be <see cref="VhdlHardwareDescription"/>.
         /// </summary>
-        public static void CreateVhdlAndXdcFiles(
+        public static async Task CreateVhdlAndXdcFilesAsync(
             IHardwareImplementationCompositionContext context,
             string xdcFilePath,
             string vhdlFilePath)
         {
             var hashId = context.HardwareDescription.TransformationId;
             var hashFile = vhdlFilePath + ".hash";
-            if (File.Exists(hashFile) && File.ReadAllText(hashFile).Trim() == hashId) return;
+            if (File.Exists(hashFile) && (await File.ReadAllTextAsync(hashFile)).Trim() == hashId) return;
 
             var name = context.Configuration.Label;
-            if (!string.IsNullOrWhiteSpace(name)) File.WriteAllText(vhdlFilePath + ".name", name);
+            if (!string.IsNullOrWhiteSpace(name)) await File.WriteAllTextAsync(vhdlFilePath + ".name", name);
 
             var vhdlHardwareDescription = (VhdlHardwareDescription)context.HardwareDescription;
 
             FileSystemHelper.EnsureDirectoryExists(Path.GetDirectoryName(vhdlFilePath));
-            File.WriteAllText(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
+            await File.WriteAllTextAsync(vhdlFilePath, vhdlHardwareDescription.VhdlSource);
 
             var xdcFileTemplatePath = xdcFilePath + "_template";
             FileSystemHelper.EnsureDirectoryExists(Path.GetDirectoryName(xdcFilePath));
@@ -43,7 +44,7 @@ namespace Hast.Synthesis.Abstractions.Helpers
 
             if (!string.IsNullOrEmpty(vhdlHardwareDescription.XdcSource))
             {
-                File.AppendAllText(xdcFilePath, vhdlHardwareDescription.XdcSource);
+                await File.AppendAllTextAsync(xdcFilePath, vhdlHardwareDescription.XdcSource);
             }
             else if (File.Exists(xdcFileTemplatePath))
             {
@@ -51,7 +52,7 @@ namespace Hast.Synthesis.Abstractions.Helpers
                 File.Copy(xdcFileTemplatePath, xdcFilePath, true);
             }
 
-            File.WriteAllText(hashFile, hashId);
+            await File.WriteAllTextAsync(hashFile, hashId);
         }
     }
 }

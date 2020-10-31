@@ -131,7 +131,8 @@ namespace Hast.Vitis.Abstractions.Services
                 EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
                 hashId + ".xclbin");
             Cleanup(hardwareFrameworkPath, hashId);
-            CreateSourceFiles(context, hardwareFrameworkPath, hashId);
+            await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
+            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
             FileSystem.CopyDirectory(
@@ -509,7 +510,7 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
-        private static void CreateSourceFiles(
+        private static Task CreateSourceFilesAwait(
             IHardwareImplementationCompositionContext context,
             string hardwareFrameworkPath,
             string hashId)
@@ -518,7 +519,7 @@ namespace Hast.Vitis.Abstractions.Services
             var vhdlFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.vhd");
             var xdcFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.xdc");
 
-            VhdlHelper.CreateVhdlAndXdcFiles(context, xdcFilePath, vhdlFilePath);
+            return VhdlHelper.CreateVhdlAndXdcFilesAsync(context, xdcFilePath, vhdlFilePath);
         }
 
         private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
