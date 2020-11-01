@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using static Hast.Vitis.Abstractions.Models.XilinxReport;
 
 namespace Hast.Vitis.Abstractions.Models
@@ -46,21 +46,21 @@ namespace Hast.Vitis.Abstractions.Models
                 .ToDictionary(row => row[Columns[0]]);
 
 
-        public static XilinxReportSection Parse(TextReader reader, string title)
+        public static async Task<XilinxReportSection> ParseAsync(TextReader reader, string title)
         {
             var columnNames = SimpleColumns;
 
             // Scroll to the table start. Each section always seems to have a table even if empty.
-            ReadUntil(reader, TableBorderLine);
+            await ReadUntilAsync(reader, TableBorderLine);
             if (!title.EndsWith(". Summary"))
             {
-                columnNames = reader.ReadLine()!.Trim('|').Split('|').Select(columnName => columnName.Trim())
+                columnNames = (await reader.ReadLineAsync())!.Trim('|').Split('|').Select(columnName => columnName.Trim())
                     .ToList();
-                ReadUntil(reader, TableBorderLine);
+                await ReadUntilAsync(reader, TableBorderLine);
             }
 
             // Read each line into a table and then drop the bottom table border line.
-            var data = ReadWhile(reader, line => line.StartsWith("|") && !line.StartsWith(TableBorderLine))
+            var data = (await ReadWhileAsync(reader, line => line.StartsWith("|") && !line.StartsWith(TableBorderLine)))
                 .Select(line => line.Trim('|')
                     .Split('|')
                     .Select(cell => cell.Trim())
@@ -69,7 +69,7 @@ namespace Hast.Vitis.Abstractions.Models
 
             // Post-table comments start with an asterisk.
             var comments = new List<string>();
-            while (reader.ReadLine() is { } line && line.StartsWith("*")) comments.Add(line);
+            while (await reader.ReadLineAsync() is { } line && line.StartsWith("*")) comments.Add(line);
 
             return new XilinxReportSection(data, columnNames, comments);
         }

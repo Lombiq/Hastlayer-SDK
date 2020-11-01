@@ -3,6 +3,7 @@ using Shouldly;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Hast.Vitis.Abstractions.Tests
@@ -131,10 +132,10 @@ namespace Hast.Vitis.Abstractions.Tests
         };
 
         [Fact]
-        public void SampleShouldParseAsExpected()
+        public async Task SampleShouldParseAsExpected()
         {
             using var reader = File.OpenText("sample.rpt");
-            var report = XilinxReport.Parse(reader);
+            var report = await XilinxReport.ParseAsync(reader);
 
             report.MetaData.ShouldNotBeEmpty();
             report.Sections.ShouldNotBeEmpty();
@@ -156,10 +157,10 @@ namespace Hast.Vitis.Abstractions.Tests
         }
 
         [Fact]
-        public void SummaryShouldWork()
+        public async Task SummaryShouldWork()
         {
             using var reader = File.OpenText("sample2.rpt");
-            var report = XilinxReport.Parse(reader);
+            var report = await XilinxReport.ParseAsync(reader);
 
             report
                 .Sections["1. Summary"]

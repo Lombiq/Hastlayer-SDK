@@ -125,7 +125,7 @@ namespace Hast.Console.Subcommands
                 case ".rpt":
                     using (var reader = File.OpenText(input.FullName))
                     {
-                        var report = XilinxReport.Parse(reader);
+                        var report = await XilinxReport.ParseAsync(reader);
                         var json = JsonConvert.SerializeObject(report, Formatting.Indented);
                         await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
                     }

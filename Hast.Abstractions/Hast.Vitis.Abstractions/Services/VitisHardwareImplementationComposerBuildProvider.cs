@@ -333,7 +333,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             using var reader = File.OpenText(reportFilePath);
-            var report = XilinxReport.Parse(reader);
+            var report = await XilinxReport.ParseAsync(reader);
 
             var jsonFilePath = Path.Combine(reportSavePath, "report.json");
             await File.WriteAllTextAsync(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
