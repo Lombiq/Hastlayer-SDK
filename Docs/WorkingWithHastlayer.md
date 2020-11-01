@@ -162,6 +162,6 @@ You can also set the override programmatically.
 
 ```csharp
 public void OverrideMaxDegreeOfParallelism(IHardwareGenerationConfiguration configuration, int value = 123) {
-    configuration.GotOrAddReplacements()["ParallelAlgorithm.MaxDegreeOfParallelism"] = value;
+    configuration.GetOrAddReplacements()["ParallelAlgorithm.MaxDegreeOfParallelism"] = value;
 }
 ```
