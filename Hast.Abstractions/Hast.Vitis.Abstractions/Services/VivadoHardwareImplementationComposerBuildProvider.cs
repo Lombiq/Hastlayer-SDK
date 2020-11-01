@@ -19,8 +19,8 @@ namespace Hast.Vitis.Abstractions.Services
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
             return VhdlHelper.CreateVhdlAndXdcFilesAsync(
                 context,
-                Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "IPRepo"), "Hast_IP.vhd"),
-                Path.Combine(hardwareFrameworkPath, "Nexys4DDR_Master.xdc"));
+                Path.Combine(hardwareFrameworkPath, "Nexys4DDR_Master.xdc"),
+                Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "IPRepo"), "Hast_IP.vhd"));
         }
     }
 }
