@@ -65,7 +65,8 @@ namespace Hast.Vitis.Abstractions.Models
         int AxiBusWith { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether cache should be used. Default is <see langword="true"/>.
+        /// Gets or sets a value indicating whether cache (for accelerating access to the on-board DDR or HBM memory on
+        /// the device) should be used. Default is <see langword="true"/>.
         /// </summary>
         bool UseCache { get; set; }
     }
