@@ -54,14 +54,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <HardwareFrameworkSourceFiles Include="$(SolutionDir)Hastlayer-Hardware-Framework---Vitis\rtl\src\**\*.*"/>
-  </ItemGroup>
-
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-    <Copy
-      SourceFiles="@(HardwareFrameworkSourceFiles)"
-      DestinationFiles="@(HardwareFrameworkSourceFiles->'$(ProjectDir)$(OutDir)\HardwareFramework\rtl\src\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
 </Project>

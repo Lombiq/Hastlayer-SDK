@@ -3,13 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DefaultItemExcludes>$(DefaultItemExcludes);Hast.Vitis.Abstractions.Tests\**</DefaultItemExcludes>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -19,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Hastlayer-Hardware-Framework---Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj" />
     <ProjectReference Include="..\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
   </ItemGroup>
 
@@ -30,16 +24,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
-  <ItemGroup>
-    <HardwareFrameworkSourceFiles Include="$(SolutionDir)Hastlayer-Hardware-Framework---Vitis\rtl\src\**\*.*"/>
-  </ItemGroup>
-
-  <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-    <Copy
-      SourceFiles="@(HardwareFrameworkSourceFiles)"
-      DestinationFiles="@(HardwareFrameworkSourceFiles->'$(ProjectDir)$(OutDir)\HardwareFramework\rtl\src\%(RecursiveDir)%(Filename)%(Extension)')" />
-  </Target>
 
   <ItemGroup>
     <None Remove="Hast.Vitis.Abstractions.Tests\**" />
