@@ -141,7 +141,7 @@ public static readonly int MaxDegreeOfParallelism = 260;
 The value in code will remain the default, when no replacement is specified. Either way the readonly is substituted with the desired literal as a constant would during compilation. To set the replacement from the command line, add the following switch.
 
 ```shell script
---HardwareGenerationConfiguration:CustomConfiguration:Replaceable:ParallelAlgorithm.MaxDegreeOfParallelism 123
+--HardwareGenerationConfiguration:CustomConfiguration:ReplaceableDynamicConstants:ParallelAlgorithm.MaxDegreeOfParallelism 123
 ``` 
 
 The part up to the last colon is fixed, then comes the key you've passed to the `[Replaceable]` attribute and finally the replacement value as a separate word. The value may be a string, boolean or integer. You can automate trials by looping through candidate values in the shell. You can have multiple replacements too.
@@ -151,7 +151,7 @@ Alternatively, you can set the same value in the appesttings.json file into the 
 ```json
 {
   "HardwareGenerationConfiguration": {
-    "Replaceable": {
+    "ReplaceableDynamicConstants": {
       "ParallelAlgorithm.MaxDegreeOfParallelism": 123
     }
   }

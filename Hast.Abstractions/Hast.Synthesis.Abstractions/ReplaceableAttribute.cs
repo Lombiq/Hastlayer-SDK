@@ -11,7 +11,7 @@ namespace Hast.Synthesis.Abstractions
     [AttributeUsage(AttributeTargets.Field)]
     public class ReplaceableAttribute : Attribute
     {
-        public static readonly string Name = nameof(ReplaceableAttribute).Replace(nameof(Attribute), string.Empty);
+        public static readonly string Name = "ReplaceableDynamicConstants";
 
         public string Key { get; }
 
