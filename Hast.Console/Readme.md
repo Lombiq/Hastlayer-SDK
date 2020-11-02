@@ -1,4 +1,4 @@
-﻿# Hastlayer - Console
+# Hastlayer - Console
 
 
 
@@ -17,18 +17,20 @@ A subcommand must be the very first argument after `dotnet Hast.Console.dll`, ot
 
 Features related to `Hast.Vitis.Abstractions`.
 
-- `dotnet Hast.Console.dll vitis help`: get help specific to this subcommand.
-- `dotnet Hast.Console.dll vitis build -i HardwareFramework -o kernel_binary.xclbin --platform xilinx_u200_xdma_201830_2 --hash some_text`: build RTL source like the ones generated during Hastlayer usage into xclbin files with the "Xilinx Vitis" toolchain. The `-i` refers to the directory containing the rtl directory. The `--platform` is the directory name in `/opt/xilinx/platforms`. 
-- `dotnet Hast.Console.dll vitis json -i `: convert RPT files that contain synthesis or build reports into JSON files. 
+- `dotnet Hast.Console.dll vitis help`: Get help specific to this subcommand.
+- `dotnet Hast.Console.dll vitis build -i HardwareFramework -o kernel_binary.xclbin --platform xilinx_u200_xdma_201830_2 --hash some_text`: Build RTL source like the ones generated during Hastlayer usage into xclbin files with the "Xilinx Vitis" toolchain. The `-i` refers to the directory containing the rtl directory. The `--platform` is the directory name in `/opt/xilinx/platforms`. 
+- `dotnet Hast.Console.dll vitis json -i `: Convert RPT files that contain synthesis or build reports into JSON files. 
 
 
 ## Developing Hast.Console
 
 Any features that can be reasonably grouped together or need custom arguments should be added as subcommands. Make two new classes: 
+
 - One that implements `ISubcommand` for the logic, for example `SampleSubcommand`.
 - One that inherits from `MainOptions` for the argument definitions, for example `SampleOptions`.
 
 The `SampleSubcommand` must:
+
 - Be annotated with the `[Subcommand("sample")]` attribute where "sample" is the subcommand name.
 - Have a `public SampleSubcommand(string[] rawArguments)` constructor.
 - Use `SampleSubcommand.Run()` to parse the arguments received in the constructor.
