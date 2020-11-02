@@ -26,10 +26,7 @@ Be sure to also check out the [general docs](../Readme.md).
 6. Type in the following to set up dependencies:<br>
   `cd /data/host_programs_directory`<br>
   `source nimbix-install.sh`
-7. Run `source nimbix-compile.sh` to compile the generated hardware for the current U280 platform available on Nimbix. Alternatively, if you're targeting something else:
-    1. `cd` to the RTL source folder.
-    2. Find the correct platform name by typing `ls /opt/xilinx/platforms`.
-    3. `make all TARGET=hw DEVICE=platform_name` where platform_name is from the previous step. Note that the U50 board is available in two PCIe configurations (x4 and x16) and these are not interchangeable: Use the exact platform for the board attached to the VM.
+7. Execute the host program, on first execution it will start to build the new xclbin file. Upon subsequent runs the binary will be detected and the compilation step skipped. 
 8. Wait for a long time. The baseline time requirements (when compiling `MemoryTest` for U280) is around 2h 15m. U50, as the smallest board, is the fastest to compile for.
 
 You can have multiple such compilations running at the same time, as there are enough hardware resources, depending on the complexity of the generated hardware (i.e. the input software) and the targeted board. To see the resources usage of the VM you can use the console app [top](https://linux.die.net/man/1/top) or install [System Monitor](https://help.gnome.org/users/gnome-system-monitor/) with `sudo apt-get --yes --force-yes install gnome-system-monitor` (located under the System category in the start menu).
