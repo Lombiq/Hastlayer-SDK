@@ -1,9 +1,9 @@
-﻿using Hast.Algorithms.Random;
+using Hast.Algorithms.Random;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -21,8 +21,11 @@ namespace Hast.Samples.SampleAssembly
         private const int EstimatePi_RandomSeedUInt32Index = 1;
         private const int EstimatePi_InCircleCountSumUInt32Index = 0;
 
+        // With a degree of parallelism of 78 the resource utilization of the Nexys A7 board would jump to 101% so this
+        // is the limit of efficiency. Note that this is one lower than in the currently measured benchmark because
+        // since then we changed Hastlayer slightly.
         [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
-        public static readonly int MaxDegreeOfParallelism = 78;
+        public static readonly int MaxDegreeOfParallelism = 77;
 
 
         public virtual void EstimatePi(SimpleMemory memory)
