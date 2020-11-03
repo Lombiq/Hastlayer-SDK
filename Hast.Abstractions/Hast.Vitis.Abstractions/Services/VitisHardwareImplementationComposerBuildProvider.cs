@@ -134,12 +134,18 @@ namespace Hast.Vitis.Abstractions.Services
             Cleanup(hardwareFrameworkPath, hashId);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
-            FileSystem.CopyDirectory(
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"),
-                Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP"));
+            var ipDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP");
+            if (!Directory.Exists(ipDirectoryPath))
+            {
+                FileSystem.CopyDirectory(
+                    Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"),
+                    ipDirectoryPath);
+            }
 
             await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
-            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
+
+            // If no source files hat to be created then we are done here.
+            if (!await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId)) return;
 
             var platformsDirectoryPath = new DirectoryInfo(
                 Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
@@ -403,8 +409,23 @@ namespace Hast.Vitis.Abstractions.Services
 
         private void Cleanup(string hardwareFrameworkPath, string hashId)
         {
-            var path = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            if (Directory.Exists(path)) Directory.Delete(path, recursive: true);
+            var rtlDirectory = new DirectoryInfo(GetRtlDirectoryPath(hardwareFrameworkPath, hashId));
+
+            if (rtlDirectory.Exists)
+            {
+                try
+                {
+                    foreach (var file in rtlDirectory.GetFiles()) file.Delete();
+                    foreach (var subDirectory in rtlDirectory.GetDirectories().Where(sub => sub.Name != "src"))
+                    {
+                        subDirectory.Delete(recursive: true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to clean up.");
+                }
+            }
 
             ProgressMajor("Build directory cleaned up.");
         }
@@ -518,7 +539,7 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
-        private static Task CreateSourceFilesAwait(
+        private static Task<bool> CreateSourceFilesAwait(
             IHardwareImplementationCompositionContext context,
             string hardwareFrameworkPath,
             string hashId)

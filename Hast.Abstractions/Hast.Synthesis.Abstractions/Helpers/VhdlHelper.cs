@@ -12,14 +12,18 @@ namespace Hast.Synthesis.Abstractions.Helpers
         /// <paramref name="context"/>.<see cref="IHardwareImplementationCompositionContext.HardwareDescription"/> that
         /// must be <see cref="VhdlHardwareDescription"/>.
         /// </summary>
-        public static async Task CreateVhdlAndXdcFilesAsync(
+        /// <returns>
+        /// The result is <see langword="true"/> if files were created, <see langword="false"/> if the hash matched and
+        /// there was nothing to do.
+        /// </returns>
+        public static async Task<bool> CreateVhdlAndXdcFilesAsync(
             IHardwareImplementationCompositionContext context,
             string xdcFilePath,
             string vhdlFilePath)
         {
             var hashId = context.HardwareDescription.TransformationId;
             var hashFile = vhdlFilePath + ".hash";
-            if (File.Exists(hashFile) && (await File.ReadAllTextAsync(hashFile)).Trim() == hashId) return;
+            if (File.Exists(hashFile) && (await File.ReadAllTextAsync(hashFile)).Trim() == hashId) return false;
 
             var name = context.Configuration.Label;
             if (!string.IsNullOrWhiteSpace(name)) await File.WriteAllTextAsync(vhdlFilePath + ".name", name);
@@ -53,6 +57,7 @@ namespace Hast.Synthesis.Abstractions.Helpers
             }
 
             await File.WriteAllTextAsync(hashFile, hashId);
+            return true;
         }
     }
 }
