@@ -134,7 +134,7 @@ namespace Hast.Vitis.Abstractions.Services
             Cleanup(hardwareFrameworkPath, hashId);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
-            var ipDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP");
+            var ipDirectoryPath = Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "src", "IP");
             if (!Directory.Exists(ipDirectoryPath))
             {
                 FileSystem.CopyDirectory(
@@ -143,9 +143,6 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
-
-            // If no source files hat to be created then we are done here.
-            if (!await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId)) return;
 
             var platformsDirectoryPath = new DirectoryInfo(
                 Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
@@ -164,6 +161,17 @@ namespace Hast.Vitis.Abstractions.Services
                 .OrderByDescending(name => name)
                 .First();
 
+            var xclbinDirectoryPath = EnsureDirectoryExists(
+                GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
+                "xclbin");
+
+            // If no source files had to be created and the xclbin exists then we are done here.
+            if (!await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId) &&
+                File.Exists(Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin")))
+            {
+                return;
+            }
+
             if (buildConfiguration.SynthesisOnly)
             {
                 await SynthKernelAsync(hardwareFrameworkPath, hashId);
@@ -177,8 +185,8 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             ProgressMajor("Staring build.");
-            await BuildKernelAsync(hardwareFrameworkPath, target, device, hashId, deviceManifest);
-            CopyBinaries(hardwareFrameworkPath, target, implementation.BinaryPath, hashId);
+            await BuildKernelAsync(hardwareFrameworkPath, target, device, hashId, deviceManifest, xclbinDirectoryPath);
+            CopyBinaries(target, implementation.BinaryPath, hashId);
 
             ProgressMajor("Collecting reports.");
             try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
@@ -200,14 +208,16 @@ namespace Hast.Vitis.Abstractions.Services
             string target,
             string device,
             string hashId,
-            XilinxDeviceManifest deviceManifest)
+            XilinxDeviceManifest deviceManifest,
+            string xclbinDirectoryPath)
         {
-            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath, hashId);
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
+            var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
 
             var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
 
             // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
+            //        $(PATH_TO_HDL) $(KERNEL_TCL) $(KERNEL_XML)
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
             var vivadoArguments = new[]
             {
@@ -219,8 +229,11 @@ namespace Hast.Vitis.Abstractions.Services
                 xoFilePath,
                 target,
                 device,
+                Path.Combine(rtlDirectoryPath, "src", "IP"),
+                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "package_kernel.tcl"),
+                Path.Combine(rtlDirectoryPath, "src", "xml", "kernel.xml"),
             };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments, rtlDirectoryPath);
+            await ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
 
@@ -248,11 +261,11 @@ namespace Hast.Vitis.Abstractions.Services
                 "--kernel_frequency",
                 (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
                 "-lo",
-                Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin"),
+                Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,
             });
 
-            await ExecuteWithLogging(vppExecutable, vppArguments, rtlDirectoryPath);
+            await ExecuteWithLogging(vppExecutable, vppArguments, tmpDirectoryPath);
             ProgressMajor("v++ build is finished.");
 
             if (target.ToUpperInvariant() == "HW_EMU")
@@ -260,9 +273,9 @@ namespace Hast.Vitis.Abstractions.Services
                 // For example:
                 // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
                 var emConfigExecutable = (await GetExecutablePathAsync("emconfigutil"));
-                var emConfigArguments = new[] { "--platform", device, "--od", xclbinDirectoryPath, };
+                var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
                 await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
-                File.Copy(Path.Combine(xclbinDirectoryPath, "emconfig.json"), "emconfig.json");
+                File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
                 ProgressMajor("Emulation configuration (emconfig) setup is finished.");
             }
         }
@@ -270,6 +283,8 @@ namespace Hast.Vitis.Abstractions.Services
         private async Task SynthKernelAsync(string hardwareFrameworkPath, string hashId)
         {
             ProgressMajor("Starting Vivado synthesis.");
+
+            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
 
             // vivado -mode batch -source synth_util.tcl $(VhdFileIn) $(RptFileOut)
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
@@ -280,7 +295,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "-source",
                 Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "synth_util.tcl"),
                 "-tclargs",
-                Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src", "IP", "Hast_IP.vhd"),
+                Path.Combine(rtlDirectoryPath, "src", "IP", "Hast_IP.vhd"),
                 Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
             };
             await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
@@ -288,20 +303,14 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         private void CopyBinaries(
-            string hardwareFrameworkPath,
             string target,
             string binaryPath,
             string hashId)
         {
-            var xclbinDirectoryPath = GetXclbinDirectoryPath(hardwareFrameworkPath, hashId);
-
             var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
-            if (binaryDirectoryPath != null && !Directory.Exists(binaryDirectoryPath))
-            {
-                Directory.CreateDirectory(binaryDirectoryPath);
-            }
+            if (binaryDirectoryPath != null) EnsureDirectoryExists(binaryDirectoryPath);
 
-            var builtFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin");
+            var builtFilePath = Path.Combine(GetTmpDirectoryPath(hashId), $"hastip.{target}.xclbin");
             File.Copy(builtFilePath, binaryPath);
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
             ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
@@ -410,7 +419,6 @@ namespace Hast.Vitis.Abstractions.Services
         private void Cleanup(string hardwareFrameworkPath, string hashId)
         {
             var rtlDirectory = new DirectoryInfo(GetRtlDirectoryPath(hardwareFrameworkPath, hashId));
-
             if (rtlDirectory.Exists)
             {
                 try
@@ -426,6 +434,9 @@ namespace Hast.Vitis.Abstractions.Services
                     _logger.LogWarning(ex, "Failed to clean up.");
                 }
             }
+
+            var tmpDirectory = new DirectoryInfo(GetTmpDirectoryPath(hashId));
+            if (tmpDirectory.Exists) tmpDirectory.Delete(recursive: true);
 
             ProgressMajor("Build directory cleaned up.");
         }
@@ -506,9 +517,10 @@ namespace Hast.Vitis.Abstractions.Services
         private void Log(LogLevel logLevel, string name, object message, string buildLogType)
         {
             var text = message as string;
+
+            // Find informational messages and escalate their log level since most of them will be "trace" by default.
             if (text?.Contains(':') == true)
             {
-                // Find informational messages and escalate their log level since most of them will be "trace" by default.
                 logLevel = text.Split(':')[0].Trim().ToUpperInvariant() switch
                 {
                     "ERROR" => LogLevel.Error,
@@ -530,8 +542,8 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 throw new InvalidOperationException(
                     "The linker encountered an error. This is typically because the resulting hardware design won't " +
-                    "fit on the FPGA as it's too complex. Try to make your code simpler (make it shorter, use smaller " +
-                    "data types and a lower degree of parallelism) until this error goes away.");
+                    "fit on the FPGA as it's too complex. Try to make your code simpler (make it shorter, use " +
+                    "smaller data types and a lower degree of parallelism) until this error goes away.");
             }
 
             _logger.Log(logLevel, "{0}: {1}", name, message);
@@ -544,7 +556,8 @@ namespace Hast.Vitis.Abstractions.Services
             string hardwareFrameworkPath,
             string hashId)
         {
-            var ipDirectoryPath = EnsureDirectoryExists(hardwareFrameworkPath, "rtl", hashId, "src", "IP");
+            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
+            var ipDirectoryPath = EnsureDirectoryExists(rtlDirectoryPath, "src", "IP");
             var vhdlFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.vhd");
             var xdcFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.xdc");
 
@@ -554,8 +567,8 @@ namespace Hast.Vitis.Abstractions.Services
         private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
             Path.Combine(hardwareFrameworkPath, "rtl", hashId);
 
-        private static string GetXclbinDirectoryPath(string hardwareFrameworkPath, string hashId) =>
-            EnsureDirectoryExists(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "xclbin");
+        private static string GetTmpDirectoryPath(string hashId) =>
+            Path.Combine(Path.DirectorySeparatorChar.ToString(), "tmp", "hastlayer", hashId);
 
         private static async Task<string> GetExecutablePathAsync(string executable)
         {
