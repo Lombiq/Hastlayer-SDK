@@ -2,6 +2,7 @@ using Hast.Algorithms;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
+using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.Arithmetics;
@@ -104,7 +105,10 @@ namespace Hast.Samples.Consumer
             string GetArgument(string name)
             {
                 name = "-" + name;
-                return args.Contains(name) ? args[argsList.IndexOf(name) + 1] : null;
+                int index = argsList.IndexOf(name) + 1;
+                if (index <= 0) return null;
+                if (index == args.Length) index--; // if it's the last element just return the switch.
+                return args[index];
             }
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
@@ -133,7 +137,10 @@ namespace Hast.Samples.Consumer
             }
 
             // If the sample was selected in the command line use that, or otherwise the default.
-            Configuration.SampleToRun = (Sample)Enum.Parse(typeof(Sample), GetArgument("sample") ?? Configuration.SampleToRun.ToString(), true);
+            Configuration.SampleToRun = (Sample)Enum.Parse(
+                typeof(Sample),
+                GetArgument("sample") ?? Configuration.SampleToRun.ToString(),
+                ignoreCase: true);
 
             // Letting the configuration of samples run. Check out those methods too!
             ISampleRunner sampleRunner = Configuration.SampleToRun switch
@@ -158,6 +165,13 @@ namespace Hast.Samples.Consumer
                 _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
             };
             sampleRunner.Configure(configuration);
+            configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
+
+            if (GetArgument("replace") is { } replacement)
+            {
+                var parts = replacement.Split('=', 2);
+                configuration.GetOrAddReplacements()[parts[0]] = parts[1];
+            }
 
             // The generated VHDL code will contain debug-level information, though it will be slower to create.
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
@@ -172,7 +186,7 @@ namespace Hast.Samples.Consumer
                     // Selecting any type from the sample assembly here just to get its Assembly object.
                     typeof(PrimeCalculator).Assembly,
                     typeof(Fix64).Assembly,
-                    typeof(FSharpSampleAssembly.FSharpParallelAlgorithmContainer).Assembly,
+                    typeof(FSharpParallelAlgorithmContainer).Assembly,
                     // Note that the assemblies used by code to be transformed also need to be added
                     // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
                     // ImmutableArray.
@@ -190,6 +204,8 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine("There were transformation warnings in the logs, which may hint on issues that can " +
                                   "cause the hardware implementation to produce incorrect results.\n");
             }
+
+            if (GetArgument("build") != null) Environment.Exit(0);
 
             Console.WriteLine("Starting hardware execution.");
 

@@ -1,15 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <DefaultItemExcludes>$(DefaultItemExcludes);Hast.Vitis.Abstractions.Tests\**</DefaultItemExcludes>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -19,16 +12,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Hastlayer-Hardware-Framework---Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj" />
     <ProjectReference Include="..\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="nimbix-compile.sh">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="nimbix-install.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Hast.Vitis.Abstractions.Tests\**" />
   </ItemGroup>
 
   <ItemGroup>

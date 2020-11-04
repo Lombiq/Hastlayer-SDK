@@ -16,7 +16,8 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            uint iterationsCount = MonteCarloPiEstimator.MaxDegreeOfParallelism * 500000;
+            var maxDegreeOfParallelism = (uint)MonteCarloPiEstimator.MaxDegreeOfParallelism;
+            uint iterationsCount = maxDegreeOfParallelism * 500000;
 
             var monteCarloPiEstimator = await hastlayer.GenerateProxy(hardwareRepresentation, new MonteCarloPiEstimator(), configuration);
             var piEstimateHardware = monteCarloPiEstimator.EstimatePi(iterationsCount, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

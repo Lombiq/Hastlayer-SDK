@@ -28,11 +28,6 @@ namespace Hast.Vitis.Abstractions.Models
     public interface IOpenClConfiguration
     {
         /// <summary>
-        /// The location and name of the xclbin file.
-        /// </summary>
-        string BinaryFilePath { get; set; }
-
-        /// <summary>
         /// If true, any <see cref="long"/> value in the header is considered big endian, if false then little endian.
         /// </summary>
         bool DeviceIsBigEndian { get; set; }
@@ -58,5 +53,21 @@ namespace Hast.Vitis.Abstractions.Models
         /// aligning is expected.
         /// </summary>
         int MemoryAlignment { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the the binary is for real hardware or emulated.
+        /// </summary>
+        bool UseEmulation { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Advanced eXtensible Interface bus width in bits.
+        /// </summary>
+        int AxiBusWith { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether cache (for accelerating access to the on-board DDR or HBM memory on
+        /// the device) should be used. Default is <see langword="true"/>.
+        /// </summary>
+        bool UseCache { get; set; }
     }
 }

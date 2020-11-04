@@ -8,25 +8,17 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
     {
         protected string _deviceName;
 
-        private IDeviceManifest deviceManifest = null;
-        public IDeviceManifest DeviceManifest
-        {
-            get
+        private IDeviceManifest deviceManifest;
+        public IDeviceManifest DeviceManifest =>
+            deviceManifest ??= new XilinxDeviceManifest
             {
-                if (deviceManifest is null)
-                {
-                    deviceManifest = new DeviceManifest
-                    {
-                        Name = _deviceName,
-                        ClockFrequencyHz = 100000000, // 100 Mhz
-                        SupportedCommunicationChannelNames = new[] { Serial.ChannelName, Ethernet.ChannelName },
-                        AvailableMemoryBytes = 115343360, // 110MB
-                        ToolChainName = CommonToolChainNames.Vivado
-                    };
-                }
-                return deviceManifest;
-            }
-        }
+                Name = _deviceName,
+                ClockFrequencyHz = 100000000, // 100 Mhz
+                SupportedCommunicationChannelNames = new[] { Serial.ChannelName, Ethernet.ChannelName },
+                AvailableMemoryBytes = 115343360, // 110MB
+                SupportsHbm = false,
+                ToolChainName = CommonToolChainNames.Vivado,
+            };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
             memory.MinimumPrefix = 3;

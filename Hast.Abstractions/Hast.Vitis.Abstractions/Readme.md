@@ -25,6 +25,6 @@ For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions
 
 ## Remarks
 
-The kernel binary (XCLBIN) is presently not portable, running on a different machine than the one it was compiled on will cause various exceptions. Running on multiple instances of the same kind of compute node works, however.
-
 If you ever get an error *\[XRT\] ERROR: some device is already programmed* due to a crashed or interrupted execution, you can reset the card using `xbutil reset` command. See more info about the Xilinx Board Utility [here](https://www.xilinx.com/html_docs/xilinx2019_1/sdaccel_doc/yrx1536963262111.html).
+
+If you just want to generate a simulation report, you can do that without the full build by configuring the `VitisBuildConfiguration.SynthesisOnly` custom configuration in the appdata or by adding the `--HardwareGenerationConfiguration:CustomConfiguration:VitisBuildConfiguration:SynthesisOnly true` command line argument.

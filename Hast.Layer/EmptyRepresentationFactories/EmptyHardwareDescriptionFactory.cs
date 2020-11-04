@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using Hast.Common.Helpers;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Hast.Layer.EmptyRepresentationFactories
 
         private class HardwareDescription : IHardwareDescription
         {
+            public string TransformationId { get; } = Sha2456Helper.Empty();
             public string Language => "VHDL";
 
             public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }

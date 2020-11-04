@@ -37,7 +37,7 @@ namespace Hast.Layer
         ulong AvailableMemoryBytes { get; }
 
         /// <summary>
-        /// The FPGA vendor toolchain's name to be used with this device.
+        /// Gets the FPGA vendor toolchain's name to be used with this device.
         /// </summary>
         string ToolChainName { get; }
     }

@@ -9,7 +9,7 @@ namespace Hast.Catapult.Abstractions
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest.Name == CatapultManifestProvider.DeviceName;
 
-        public Task<IHardwareImplementation> Compose(IHardwareImplementationCompositionContext context)
+        public Task<IHardwareImplementation> ComposeAsync(IHardwareImplementationCompositionContext context)
         {
             // Not yet implemented, just here as a placeholder.
             return Task.FromResult((IHardwareImplementation)new HardwareImplementation());

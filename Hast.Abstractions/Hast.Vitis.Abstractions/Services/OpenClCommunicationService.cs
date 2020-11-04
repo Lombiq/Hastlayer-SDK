@@ -21,6 +21,7 @@ namespace Hast.Vitis.Abstractions.Services
     public abstract class OpenClCommunicationService : CommunicationServiceBase
     {
         public const string KernelName = "hastip";
+        public const string InfoFileExtension = ".info";
 
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
@@ -54,15 +55,16 @@ namespace Hast.Vitis.Abstractions.Services
                 .GetOrAddOpenClConfiguration();
             _binaryOpenCl.PrepareDevices(configuration);
 
-            if (!File.Exists(configuration.BinaryFilePath))
+            var implementation = executionContext.HardwareRepresentation.HardwareImplementation;
+            if (!File.Exists(implementation.BinaryPath))
             {
                 throw new FileNotFoundException(
                     "The OpenCL binary (xclbin) is required to start the kernel. The host can't launch without it. " +
-                    $"Please make sure the file at '{configuration.BinaryFilePath}' exists and is accessible.");
+                    $"Please make sure the file at '{implementation.BinaryPath}' exists and is accessible.");
             }
 
             uint? clockFrequency = null;
-            var infoFilePath = configuration.BinaryFilePath + ".info";
+            var infoFilePath = implementation.BinaryPath + InfoFileExtension;
             if (!File.Exists(infoFilePath))
             {
                 Logger.LogWarning(
@@ -78,7 +80,7 @@ namespace Hast.Vitis.Abstractions.Services
                     .Frequency;
             }
 
-            var kernelBinary = File.ReadAllBytes(configuration.BinaryFilePath);
+            var kernelBinary = File.ReadAllBytes(implementation.BinaryPath);
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
 
             _devicePoolPopulator.PopulateDevicePoolIfNew(() =>
@@ -125,8 +127,10 @@ namespace Hast.Vitis.Abstractions.Services
                         hostMemoryHandle,
                         hostMemory.Length,
                         GetBuffer(hostMemory, hostMemoryHandle, executionContext));
-                    Logger.LogInformation("KERNEL #{0} ARGUMENT SET", 0);
+                    Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
+                    Logger.LogInformation("LAUNCHING KERNEL...");
                     _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+                    Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
                     await _binaryOpenCl.AwaitDevice(deviceIndex);
                     var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
 

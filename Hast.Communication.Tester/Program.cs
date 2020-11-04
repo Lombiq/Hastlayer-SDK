@@ -121,7 +121,7 @@ namespace Hast.Communication.Tester
             if (!string.IsNullOrWhiteSpace(CommandLineOptions.JsonOutputFileName))
             {
                 var json = JsonConvert.SerializeObject(new { Success = true, Result = info });
-                File.WriteAllText(CommandLineOptions.JsonOutputFileName, json);
+                await File.WriteAllTextAsync(CommandLineOptions.JsonOutputFileName, json);
             }
 
 

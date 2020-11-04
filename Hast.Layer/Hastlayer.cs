@@ -122,6 +122,7 @@ namespace Hast.Layer
             new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", true, true)
                 .AddEnvironmentVariables()
+                .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
 
@@ -209,15 +210,11 @@ namespace Hast.Layer
                         };
 
                         var hardwareImplementationComposer = hardwareImplementationComposerSelector
-                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext);
-
-                        if (hardwareImplementationComposer == null)
-                        {
+                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
                             throw new HastlayerException("No suitable hardware implementation composer was found.");
-                        }
 
                         hardwareImplementation = await hardwareImplementationComposer
-                            .Compose(hardwareImplementationCompositionContext);
+                            .ComposeAsync(hardwareImplementationCompositionContext);
                     }
                     else hardwareImplementation = EmptyHardwareImplementationFactory.Create();
 

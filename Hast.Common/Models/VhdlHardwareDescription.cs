@@ -12,6 +12,8 @@ namespace Hast.Common.Models
     {
         public const string LanguageName = "VHDL";
 
+        [JsonProperty] public string TransformationId { get; set; }
+
         [JsonProperty]
         public string Language => LanguageName;
 

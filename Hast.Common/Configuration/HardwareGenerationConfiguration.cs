@@ -5,14 +5,20 @@ namespace Hast.Layer
     public class HardwareGenerationConfiguration : IHardwareGenerationConfiguration
     {
         /// <summary>
-        /// Gets or sets a dictionary that can contain settings for non-default configuration options (like ones required 
+        /// Gets or sets a dictionary that can contain settings for non-default configuration options (like ones required
         /// by specific transformer implementations).
         /// </summary>
         public IDictionary<string, object> CustomConfiguration { get; set; } = new Dictionary<string, object>();
 
         /// <summary>
-        /// Gets or sets the collection of the full name of those public members that will be accessible as hardware 
-        /// implementation. By default all members implemented from interfaces and all public virtual members will 
+        /// Gets or sets a name associated with the hardware generation operation that's meaningful to the consumer. It
+        /// may be logged or saved during hardware generation but otherwise it may not used in any activities.
+        /// </summary>
+        public string Label { get; set; }
+
+        /// <summary>
+        /// Gets or sets the collection of the full name of those public members that will be accessible as hardware
+        /// implementation. By default all members implemented from interfaces and all public virtual members will
         /// be included. You can use this to restrict what gets transformed into hardware; if nothing is specified
         /// all suitable members will be transformed.
         /// </summary>
@@ -24,8 +30,8 @@ namespace Hast.Layer
         public IList<string> HardwareEntryPointMemberFullNames { get; set; } = new List<string>();
 
         /// <summary>
-        /// Gets or sets the collection of the name prefixes of those public members that will be accessible as hardware 
-        /// implementation. By default all members implemented from interfaces and all public virtual members will 
+        /// Gets or sets the collection of the name prefixes of those public members that will be accessible as hardware
+        /// implementation. By default all members implemented from interfaces and all public virtual members will
         /// be included. You can use this to restrict what gets transformed into hardware; if nothing is specified
         /// all suitable members will be transformed.
         /// </summary>
@@ -44,14 +50,14 @@ namespace Hast.Layer
         public bool EnableCaching { get; set; }
 
         /// <inheritdoc/>
-        public string DeviceName { get; set; }
+        public string DeviceName { get; }
 
         /// <inheritdoc/>
-        public string HardwareFrameworkPath { get; set; }
+        public string HardwareFrameworkPath { get; }
 
         /// <summary>
-        /// Gets or sets whether hardware transformation takes place. If it doesn't then 
-        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too. Defaults to 
+        /// Gets or sets whether hardware transformation takes place. If it doesn't then
+        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too. Defaults to
         /// <c>true</c>.
         /// </summary>
         public bool EnableHardwareTransformation { get; set; } = true;
@@ -67,7 +73,7 @@ namespace Hast.Layer
         /// Constructs a new <see cref="HardwareGenerationConfiguration"/> object.
         /// </summary>
         /// <param name="deviceName">
-        /// The name of the FPGA device (board) to transform for. Device-specific configurations are determined by 
+        /// The name of the FPGA device (board) to transform for. Device-specific configurations are determined by
         /// device drivers. You can fetch the list of supported devices via <see cref="IHastlayer.GetSupportedDevices()"/>.
         /// </param>
         /// <param name="hardwareFrameworkPath">
@@ -78,7 +84,9 @@ namespace Hast.Layer
         public HardwareGenerationConfiguration(string deviceName, string hardwareFrameworkPath)
         {
             DeviceName = deviceName;
-            HardwareFrameworkPath = hardwareFrameworkPath;
+            HardwareFrameworkPath = string.IsNullOrWhiteSpace(hardwareFrameworkPath)
+                ? "HardwareFramework"
+                : hardwareFrameworkPath;
         }
     }
 }

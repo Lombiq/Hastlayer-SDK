@@ -8,14 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using HardwareGenerationConfiguration = Hast.Remote.Bridge.Models.HardwareGenerationConfiguration;
 
 namespace Hast.Remote.Client
 {
     public class RemoteTransformer : ITransformer
     {
-        public async Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
@@ -26,7 +28,7 @@ namespace Hast.Remote.Client
                     FileContent = File.ReadAllBytes(path)
                 });
 
-            var apiConfiguration = new Bridge.Models.HardwareGenerationConfiguration
+            var apiConfiguration = new HardwareGenerationConfiguration
             {
                 CustomConfiguration = configuration.CustomConfiguration,
                 DeviceName = configuration.DeviceName,
@@ -57,7 +59,7 @@ namespace Hast.Remote.Client
                     {
                         transformationResult = transformationResultResponse.GetContent();
                     }
-                    else if (transformationResultResponse.ResponseMessage.StatusCode != System.Net.HttpStatusCode.NotFound)
+                    else if (transformationResultResponse.ResponseMessage.StatusCode != HttpStatusCode.NotFound)
                     {
                         transformationResultResponse.ResponseMessage.EnsureSuccessStatusCode();
                     }
@@ -106,7 +108,7 @@ namespace Hast.Remote.Client
             {
                 var message = "Remote transformation failed: ";
 
-                if (ex.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                if (ex.StatusCode == HttpStatusCode.Unauthorized)
                 {
                     message += "Authorizing with Hastlayer Remote Services failed. Maybe you mistyped your credentials?";
                 }

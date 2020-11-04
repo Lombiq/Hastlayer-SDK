@@ -19,19 +19,19 @@ namespace Hast.Transformer.Abstractions
         /// <param name="assemblyPaths">The file path to the assemblies to transform.</param>
         /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
         /// <returns>The hardware description created from the assemblies.</returns>
-        Task<IHardwareDescription> Transform(IEnumerable<string> assemblyPaths, IHardwareGenerationConfiguration configuration);
+        Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration);
     }
 
 
     public static class TransformerExtensions
     {
         public static Task<IHardwareDescription> Transform(
-            this ITransformer transformer, 
-            IEnumerable<Assembly> assemblies, 
+            this ITransformer transformer,
+            IList<Assembly> assemblies,
             IHardwareGenerationConfiguration configuration)
         {
             assemblies.ThrowArgumentExceptionIfAnyInMemory();
-            return transformer.Transform(assemblies.Select(assembly => assembly.Location), configuration);
+            return transformer.Transform(assemblies.Select(assembly => assembly.Location).ToList(), configuration);
         }
     }
 }
