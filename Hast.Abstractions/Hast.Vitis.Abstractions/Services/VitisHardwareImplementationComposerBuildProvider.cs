@@ -167,7 +167,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             // If no source files had to be created and the xclbin exists then we are done here.
             if (!await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId) &&
-                File.Exists(Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xclbin")))
+                File.Exists(implementation.BinaryPath))
             {
                 return;
             }
