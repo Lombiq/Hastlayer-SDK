@@ -165,9 +165,10 @@ namespace Hast.Vitis.Abstractions.Services
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
 
-            // If no source files had to be created and the xclbin exists then we are done here.
-            if (!await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId) &&
-                File.Exists(implementation.BinaryPath))
+            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
+
+            // If the xclbin exists then we are done here.
+            if (File.Exists(implementation.BinaryPath) && File.Exists(implementation.BinaryPath + ".info"))
             {
                 return;
             }
