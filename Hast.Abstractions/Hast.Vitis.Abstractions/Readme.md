@@ -27,14 +27,17 @@ For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions
 
 ## Cross Compilation
 
-If you want to build for a platform not in your `/opt/xilinx/platforms` directory, you can set the `XILINX_PLATFORM` environment variable to the directory that contains the platform directories. For example `export XILINX_PLATFORM=$HOME/platforms`. If the environment variable is not set of if its value isn't an existing directory then `/opt/xilinx/platforms` is used as fallback.
+If you want to build for a platform not in your `/opt/xilinx/platforms` directory, you can set the `XILINX_PLATFORM` environment variable to the directory that contains the platform directories. For example `export XILINX_PLATFORM=$HOME/platforms`. If the environment variable is not set or if its value isn't an existing directory then `/opt/xilinx/platforms` is used as fallback.
 
-Be sure that all .Net software dependencies are on the same version on both the target and the source computers. Otherwise the source code won't match during decompilation. This will result in a different Transformation ID and the XCLBIN file won't be found prompting a recompilation on the target machine. To mitigate this risk you can try some of the following strategies:
-* Perform a system update on both machines before cross compilation so both are on the most up-to-date frameworks.
-* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained) instead of a regular build.
+Be sure that all .Net software dependencies are on the same version on both the target and the source computers. Otherwise the source code won't match during transformation. This will result in a different Transformation ID and the XCLBIN file won't be found, prompting a recompilation on the target machine. To mitigate this risk you can try some of the following strategies:
+* Perform a system update on both machines before starting, so both are on the most up-to-date frameworks.
+* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true`. (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions))
 
 ## Other Remarks
 
 If you ever get an error *\[XRT\] ERROR: some device is already programmed* due to a crashed or interrupted execution, you can reset the card using `xbutil reset` command. See more info about the Xilinx Board Utility [here](https://www.xilinx.com/html_docs/xilinx2019_1/sdaccel_doc/yrx1536963262111.html).
 
-If you just want to generate a simulation report, you can do that without the full build by configuring the `VitisBuildConfiguration.SynthesisOnly` custom configuration in the appdata or by adding the `--HardwareGenerationConfiguration:CustomConfiguration:VitisBuildConfiguration:SynthesisOnly true` command line argument.
+If you just want to generate a simulation report, you can do that without the full build by configuring the `VitisBuildConfiguration.SynthesisOnly` custom configuration in the appdata or by adding the following command line argument:
+```
+--HardwareGenerationConfiguration:CustomConfiguration:VitisBuildConfiguration:SynthesisOnly true
+```
