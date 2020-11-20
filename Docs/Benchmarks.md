@@ -37,16 +37,55 @@ Here you can find some measurements of execution times of various algorithms on 
 
 Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
 
+| Device     | Algorithm                         | Speed advantage | Power advantage |   Parallelism  |     CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
+|:----------:|:---------------------------------:|:---------------:|:---------------:|:--------------:|:---------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:------------------:|
+| Alveo U200 | ImageContrastModifier<sup>1</sup> |           1155% |               % | 150            |    527 ms |        Ws |                % |    12 ms |      42 ms |         Ws |                  W |
+| Alveo U200 | ImageContrastModifier<sup>2</sup> |           3561% |               % | 150            | 203883 ms |        Ws |                % |  5340 ms |    5569 ms |         Ws |                  W |
+| Alveo U200 | ParallelAlgorithm                 |            175% |               % | 300            |    347 ms |        Ws |                % |   110 ms |     126 ms |         Ws |                  W |
+| Alveo U200 | MonteCarloPiEstimator             |            114% |               % | 230            |     75 ms |        Ws |                % |     5 ms |      35 ms |         Ws |                  W |
+| Alveo U250 | ImageContrastModifier<sup>1</sup> |               % |               % | 150            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U250 | ImageContrastModifier<sup>2</sup> |           3268% |               % | 150            | 193158 ms |        Ws |                % |  5535 ms |    5735 ms |         Ws |                  W |
+| Alveo U250 | ParallelAlgorithm                 |               % |               % | 300            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U250 | MonteCarloPiEstimator             |               % |               % | 230            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U280 | ImageContrastModifier<sup>1</sup> |               % |               % | 150            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U280 | ImageContrastModifier<sup>2</sup> |               % |               % | 150            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U280 | ParallelAlgorithm                 |               % |               % | 300            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U280 | MonteCarloPiEstimator             |               % |               % | 230            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U50  | ImageContrastModifier<sup>1</sup> |           1324% |               % | 150            |    470 ms |        Ws |                % |    12 ms |      33 ms |         Ws |                  W |
+| Alveo U50  | ImageContrastModifier<sup>3</sup> |           3462% |               % | 150            |  17167 ms |        Ws |                % |   450 ms |     482 ms |         Ws |                  W |
+| Alveo U50  | ParallelAlgorithm                 |            258% |               % | 300            |    379 ms |        Ws |                % |   104 ms |     106 ms |         Ws |                  W |
+| Alveo U50  | MonteCarloPiEstimator             |            348% |               % | 230            |    197 ms |        Ws |                % |    18 ms |      44 ms |         Ws |                  W |
 
-| Device     | Algorithm                         | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
-|:----------:|:---------------------------------:|:---------------:|:---------------:|:--------------:|:--------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:------------------:|
-| Alveo U280 | ImageContrastModifier<sup>2</sup> |            483% |           2200% | 150<sup>1</sup>|   513 ms |     46 Ws |              21% |    61 ms |      88 ms |       2 Ws |           22.334 W |
-| Alveo U280 | ImageContrastModifier<sup>3</sup> |            650% |           2901% | 150<sup>1</sup>| 18012 ms |   1621 Ws |              21% |  2330 ms |    2399 ms |      54 Ws |           22.334 W |
-| Alveo U280 | MonteCarloPiEstimator             |            580% |          27100% | 350<sup>1</sup>|   272 ms |     24 Ws |              16% |    21 ms |      40 ms |       1 Ws |           19.239 W |
+1. Using the default 0.2MP image.
+2. Using the larger [73.2MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web.jpg).
+3. Using the scaled down [6.4MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web50pct-square-scaled.jpg) because the larger one didn't fit into memory. We didn't test the maximum size.
 
-1. More could fit actually, needs more testing.
-2. Using the default 0.2MP image.
-3. Using a 6.5MP image.
+We used the following shell function to test: 
+```shell
+function benchmark() {
+	name=$1
+	sample=$2
+	device=$3
+
+	echo -e "\n\n\n\n\n\n\n\n$name"
+	dotnet Hast.Samples.Consumer.dll -sample $sample -device "$device" -name "$name" > /dev/null
+	dotnet Hast.Samples.Consumer.dll -sample $sample -device "$device" -name "$name" > /dev/null
+	dotnet Hast.Samples.Consumer.dll -sample $sample -device "$device" -name "$name"
+}
+```
+
+Inside the Hast.Samples.Consumer binary's directory, while assuming that the larger image is in the home as moon.jpg.
+```shell
+benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.log
+benchmark parallel ParallelAlgorithm ParallelAlgorithm >> run.log
+benchmark monte MonteCarloPiEstimator MonteCarloPiEstimator >> run.log
+
+cp ~/moon.jpg fpga.jpg
+benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.moon.log
+```
+
+The power usage information was inside the HardwareFramework
+
 
 ### Catapult
 
