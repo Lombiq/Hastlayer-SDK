@@ -323,8 +323,7 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementation implementation,
             string hashId)
         {
-            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            var reportPath = Path.Combine(rtlDirectoryPath, "_x", "reports", "link", "imp");
+            var reportPath = Path.Combine(GetTmpDirectoryPath(hashId), "_x", "reports", "link", "imp");
             if (!Directory.Exists(reportPath))
             {
                 _logger.LogWarning("Report directory is missing!");
