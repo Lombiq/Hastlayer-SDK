@@ -22,7 +22,7 @@ For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
 
 Even after everything is installed, you have to make sure that the executing user's environment variables are correctly set by sourcing the setup scripts [as described in the documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/rbk1547656041291.html). You can add these commands into the `~/.bashrc` file to avoid having to type them every time. If running from the cloud, like Nimbix, this is probably handled automatically.
 
-For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions](Nimbix.md).
+For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions](Docs/Nimbix.md).
 
 
 ## Cross Compilation
@@ -41,3 +41,4 @@ If you just want to generate a simulation report, you can do that without the fu
 ```
 --HardwareGenerationConfiguration:CustomConfiguration:VitisBuildConfiguration:SynthesisOnly true
 ```
+Available system memory is an important factor. Unless you have a lot, you won't be able to compile multiple projects at the same time. When V++ runs out of available memory it rather crashes than waits so it's best practice to not do anything involved on the machine during compilation.
