@@ -47,18 +47,18 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the ho
 | Alveo U250 | ImageContrastModifier<sup>2</sup> |           3268% |               % | 150            | 193158 ms |        Ws |                % |  5535 ms |    5735 ms |         Ws |                  W |
 | Alveo U250 | ParallelAlgorithm                 |               % |               % | 300            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
 | Alveo U250 | MonteCarloPiEstimator             |               % |               % | 230            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
-| Alveo U280 | ImageContrastModifier<sup>1</sup> |               % |               % | 150            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
-| Alveo U280 | ImageContrastModifier<sup>2</sup> |               % |               % | 150            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
-| Alveo U280 | ParallelAlgorithm                 |               % |               % | 300            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
-| Alveo U280 | MonteCarloPiEstimator             |               % |               % | 230            |        ms |        Ws |                % |       ms |         ms |         Ws |                  W |
+| Alveo U280 | ImageContrastModifier<sup>1</sup> |           1591% |               % | 150            |    541 ms |        Ws |                % |    12 ms |      32 ms |         Ws |                  W |
+| Alveo U280 | ImageContrastModifier<sup>3</sup> |           3414% |               % | 150            |  17359 ms |        Ws |                % |   459 ms |     494 ms |         Ws |                  W |
+| Alveo U280 | ParallelAlgorithm                 |            226% |               % | 300            |    362 ms |        Ws |                % |   102 ms |     111 ms |         Ws |                  W |
+| Alveo U280 | MonteCarloPiEstimator             |            387% |               % | 230            |    185 ms |        Ws |                % |    16 ms |      38 ms |         Ws |                  W |
 | Alveo U50  | ImageContrastModifier<sup>1</sup> |           1324% |               % | 150            |    470 ms |        Ws |                % |    12 ms |      33 ms |         Ws |                  W |
 | Alveo U50  | ImageContrastModifier<sup>3</sup> |           3462% |               % | 150            |  17167 ms |        Ws |                % |   450 ms |     482 ms |         Ws |                  W |
 | Alveo U50  | ParallelAlgorithm                 |            258% |               % | 300            |    379 ms |        Ws |                % |   104 ms |     106 ms |         Ws |                  W |
 | Alveo U50  | MonteCarloPiEstimator             |            348% |               % | 230            |    197 ms |        Ws |                % |    18 ms |      44 ms |         Ws |                  W |
 
-1. Using the default 0.2MP image.
+1. Using the default 0.2MP image `fpga.jpg`.
 2. Using the larger [73.2MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web.jpg).
-3. Using the scaled down [6.4MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web50pct-square-scaled.jpg) because the larger one didn't fit into memory. We didn't test the maximum size.
+3. Using the scaled down [6.4MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web50pct-square-scaled.jpg) because the it was built with HMB so the larger file can't fit.
 
 We used the following shell function to test: 
 ```shell
@@ -74,7 +74,7 @@ function benchmark() {
 }
 ```
 
-Inside the Hast.Samples.Consumer binary's directory, while assuming that the larger image is in the home as moon.jpg.
+Inside the Hast.Samples.Consumer binary's directory, while assuming that the larger image is in the home as `moon.jpg`.
 ```shell
 benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.log
 benchmark parallel ParallelAlgorithm ParallelAlgorithm >> run.log
