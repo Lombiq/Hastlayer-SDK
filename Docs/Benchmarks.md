@@ -39,10 +39,10 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the ho
 
 | Device     | Algorithm                         | Speed advantage | Power advantage |   Parallelism  |     CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
 |:----------:|:---------------------------------:|:---------------:|:---------------:|:--------------:|:---------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:------------------:|
-| Alveo U200 | ImageContrastModifier<sup>1</sup> |           1155% |               % | 150            |    527 ms |        Ws |                % |    12 ms |      42 ms |         Ws |                  W |
-| Alveo U200 | ImageContrastModifier<sup>2</sup> |           3561% |               % | 150            | 203883 ms |        Ws |                % |  5340 ms |    5569 ms |         Ws |                  W |
-| Alveo U200 | ParallelAlgorithm                 |            175% |               % | 300            |    347 ms |        Ws |                % |   110 ms |     126 ms |         Ws |                  W |
-| Alveo U200 | MonteCarloPiEstimator             |            114% |               % | 230            |     75 ms |        Ws |                % |     5 ms |      35 ms |         Ws |                  W |
+| Alveo U200 | ImageContrastModifier<sup>1</sup> |            735% |               % | 150            |    543 ms |        Ws |                % |    12 ms |      65 ms |         Ws |                  W |
+| Alveo U200 | ImageContrastModifier<sup>2</sup> |           3447% |               % | 150            | 198172 ms |        Ws |                % |  5340 ms |    5586 ms |         Ws |                  W |
+| Alveo U200 | ParallelAlgorithm                 |            171% |               % | 300            |    379 ms |        Ws |                % |   110 ms |     140 ms |         Ws |                  W |
+| Alveo U200 | MonteCarloPiEstimator             |            203% |               % | 230            |    203 ms |        Ws |                % |    17 ms |      67 ms |         Ws |                  W |
 | Alveo U250 | ImageContrastModifier<sup>1</sup> |           1503% |               % | 150            |    529 ms |        Ws |                % |    13 ms |      33 ms |         Ws |                  W |
 | Alveo U250 | ImageContrastModifier<sup>2</sup> |           3268% |               % | 150            | 193158 ms |        Ws |                % |  5535 ms |    5735 ms |         Ws |                  W |
 | Alveo U250 | ParallelAlgorithm                 |            265% |               % | 300            |    498 ms |        Ws |                % |   101 ms |     109 ms |         Ws |                  W |
