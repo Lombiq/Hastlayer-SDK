@@ -42,3 +42,8 @@ If you just want to generate a simulation report, you can do that without the fu
 --HardwareGenerationConfiguration:CustomConfiguration:VitisBuildConfiguration:SynthesisOnly true
 ```
 Available system memory is an important factor. Unless you have a lot, you won't be able to compile multiple projects at the same time. When V++ runs out of available memory it rather crashes than waits so it's best practice to not do anything involved on the machine during compilation.
+
+HBM is used on the cards that support it (Alveo U50 and U250) but only one slot. This means only 256MB memory can be utilized with HBM. To use larger programs on these devices, you must disable HMB during compilation either by editing the `UseHbm` property of `OpenClConfiguration` in appsettings.json, programmatically changing the value of this in `HardwareGenerationConfiguration` or using the following command line switch:
+```
+--HardwareGenerationConfiguration:CustomConfiguration:OpenClConfiguration:UseHbm false
+```

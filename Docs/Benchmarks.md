@@ -58,7 +58,7 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the ho
 
 1. Using the default 0.2MP image `fpga.jpg`.
 2. Using the larger [73.2MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web.jpg).
-3. Using the scaled down [6.4MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web50pct-square-scaled.jpg) because the it was built with HMB so the larger file can't fit.
+3. Using the scaled down [6.4MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web50pct-square-scaled.jpg) because the testing binary was built for the High Bandwidth Memory. Currently only one HBM slot is supported, meaning that the available memory without disabling HBM is 256MB.
 
 We used the following shell function to test: 
 ```shell
