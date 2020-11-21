@@ -69,5 +69,11 @@ namespace Hast.Vitis.Abstractions.Models
         /// the device) should be used. Default is <see langword="true"/>.
         /// </summary>
         bool UseCache { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether High Bandwidth Memory should be used when available in the device.
+        /// Default is <see langword="true"/>.
+        /// </summary>
+        bool UseHbm { get; set; }
     }
 }

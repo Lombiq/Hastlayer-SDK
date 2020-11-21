@@ -12,5 +12,6 @@ namespace Hast.Vitis.Abstractions.Models
         public bool UseEmulation { get; set; }
         public int AxiBusWith { get; set; } = 512;
         public bool UseCache { get; set; } = true;
+        public bool UseHbm { get; set; } = true;
     }
 }

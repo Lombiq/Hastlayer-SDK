@@ -186,7 +186,14 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             ProgressMajor("Staring build.");
-            await BuildKernelAsync(hardwareFrameworkPath, target, device, hashId, deviceManifest, xclbinDirectoryPath);
+            await BuildKernelAsync(
+                hardwareFrameworkPath,
+                target,
+                device,
+                hashId,
+                deviceManifest,
+                xclbinDirectoryPath,
+                openClConfiguration);
             CopyBinaries(target, implementation.BinaryPath, hashId);
 
             ProgressMajor("Collecting reports.");
@@ -210,7 +217,8 @@ namespace Hast.Vitis.Abstractions.Services
             string device,
             string hashId,
             XilinxDeviceManifest deviceManifest,
-            string xclbinDirectoryPath)
+            string xclbinDirectoryPath,
+            IOpenClConfiguration openClConfiguration)
         {
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
             var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
@@ -245,7 +253,7 @@ namespace Hast.Vitis.Abstractions.Services
             // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
             var vppExecutable = (await GetExecutablePathAsync(Vpp));
             var vppArguments = new List<string>(
-                deviceManifest.SupportsHbm
+                deviceManifest.SupportsHbm && openClConfiguration.UseHbm
                 ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
                 : Array.Empty<string>());
             vppArguments.AddRange(new[]
