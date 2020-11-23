@@ -12,7 +12,7 @@ namespace Hast.Synthesis.Abstractions
         public string Name { get; set; }
         public uint ClockFrequencyHz { get; set; }
         public IEnumerable<string> SupportedCommunicationChannelNames { get; set; } = Enumerable.Empty<string>();
-        public virtual string DefaultCommunicationChannelName { get { return SupportedCommunicationChannelNames.First(); } }
+        public virtual string DefaultCommunicationChannelName => SupportedCommunicationChannelNames.First();
         public ulong AvailableMemoryBytes { get; set; }
         public uint DataBusWidthBytes { get; set; }
         public string ToolChainName { get; set; }

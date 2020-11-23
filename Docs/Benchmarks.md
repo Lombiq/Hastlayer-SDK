@@ -35,26 +35,26 @@ Here you can find some measurements of execution times of various algorithms on 
 
 ### Vitis
 
-Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
+Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](BenchmarksVitis.xlsx).
 
-| Device     | Algorithm                         | Speed advantage | Power advantage |   Parallelism  |     CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
-|:----------:|:---------------------------------:|:---------------:|:---------------:|:--------------:|:---------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:------------------:|
-| Alveo U200 | ImageContrastModifier<sup>1</sup> |            735% |               % | 150            |    543 ms |        Ws |                % |    12 ms |      65 ms |         Ws |           23.889 W |
-| Alveo U200 | ImageContrastModifier<sup>2</sup> |           3447% |               % | 150            | 198172 ms |        Ws |                % |  5340 ms |    5586 ms |         Ws |           23.889 W |
-| Alveo U200 | ParallelAlgorithm                 |            171% |               % | 300            |    379 ms |        Ws |                % |   110 ms |     140 ms |         Ws |           15.576 W |
-| Alveo U200 | MonteCarloPiEstimator             |            203% |               % | 230            |    203 ms |        Ws |                % |    17 ms |      67 ms |         Ws |           19.035 W |
-| Alveo U250 | ImageContrastModifier<sup>1</sup> |           1503% |               % | 150            |    529 ms |        Ws |                % |    13 ms |      33 ms |         Ws |           25.216 W |
-| Alveo U250 | ImageContrastModifier<sup>2</sup> |           3268% |               % | 150            | 193158 ms |        Ws |                % |  5535 ms |    5735 ms |         Ws |           25.216 W |
-| Alveo U250 | ParallelAlgorithm                 |            265% |               % | 300            |    498 ms |        Ws |                % |   101 ms |     109 ms |         Ws |           16.207 W |
-| Alveo U250 | MonteCarloPiEstimator             |            369% |               % | 230            |    197 ms |        Ws |                % |    21 ms |      42 ms |         Ws |           19.891 W |
-| Alveo U280 | ImageContrastModifier<sup>1</sup> |           1591% |               % | 150            |    541 ms |        Ws |                % |    12 ms |      32 ms |         Ws |           23.035 W |
-| Alveo U280 | ImageContrastModifier<sup>3</sup> |           3414% |               % | 150            |  17359 ms |        Ws |                % |   459 ms |     494 ms |         Ws |           23.035 W |
-| Alveo U280 | ParallelAlgorithm                 |            226% |               % | 300            |    362 ms |        Ws |                % |   102 ms |     111 ms |         Ws |           14.988 W |
-| Alveo U280 | MonteCarloPiEstimator             |            387% |               % | 230            |    185 ms |        Ws |                % |    16 ms |      38 ms |         Ws |           17.550 W |
-| Alveo U50  | ImageContrastModifier<sup>1</sup> |           1324% |               % | 150            |    470 ms |        Ws |                % |    12 ms |      33 ms |         Ws |           19.846 W |
-| Alveo U50  | ImageContrastModifier<sup>3</sup> |           3462% |               % | 150            |  17167 ms |        Ws |                % |   450 ms |     482 ms |         Ws |           19.846 W |
-| Alveo U50  | ParallelAlgorithm                 |            258% |               % | 300            |    379 ms |        Ws |                % |   104 ms |     106 ms |         Ws |                  W |
-| Alveo U50  | MonteCarloPiEstimator             |            348% |               % | 230            |    197 ms |        Ws |                % |    18 ms |      44 ms |         Ws |           14.429 W |
+| Device     | Algorithm                         | Speed advantage | Power advantage | Parallelism | CPU       | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
+|------------|-----------------------------------|-----------------|-----------------|-------------|-----------|-----------|------------------|----------|------------|------------|--------------------|
+| Alveo U200 | ImageContrastModifier<sup>1</sup> | 735%            | 3047%           | 150         | 543 ms    | 49 Ws     | 27.23%           | 12 ms    | 65 ms      | 2 Ws       | 24 W               |
+| Alveo U200 | ImageContrastModifier<sup>2</sup> | 3448%           | 13266%          | 150         | 198172 ms | 17835 Ws  | 27.23%           | 5340 ms  | 5586 ms    | 133 Ws     | 24 W               |
+| Alveo U200 | ParallelAlgorithm                 | 171%            | 1464%           | 300         | 379 ms    | 34 Ws     | 15.56%           | 110 ms   | 140 ms     | 2 Ws       | 16 W               |
+| Alveo U200 | MonteCarloPiEstimator             | 203%            | 1333%           | 230         | 203 ms    | 18 Ws     | 18.57%           | 17 ms    | 67 ms      | 1 Ws       | 19 W               |
+| Alveo U250 | ImageContrastModifier<sup>1</sup> | 1503%           | 5621%           | 150         | 529 ms    | 48 Ws     | 18.29%           | 13 ms    | 33 ms      | 1 Ws       | 25 W               |
+| Alveo U250 | ImageContrastModifier<sup>2</sup> | 3268%           | 11921%          | 150         | 193158 ms | 17384 Ws  | 18.29%           | 5535 ms  | 5735 ms    | 145 Ws     | 25 W               |
+| Alveo U250 | ParallelAlgorithm                 | 357%            | 2437%           | 300         | 498 ms    | 45 Ws     | 10.30%           | 101 ms   | 109 ms     | 2 Ws       | 16 W               |
+| Alveo U250 | MonteCarloPiEstimator             | 369%            | 2022%           | 230         | 197 ms    | 18 Ws     | 12.39%           | 21 ms    | 42 ms      | 1 Ws       | 20 W               |
+| Alveo U280 | ImageContrastModifier<sup>1</sup> | 1591%           | 6505%           | 150         | 541 ms    | 49 Ws     | 21.44%           | 12 ms    | 32 ms      | 1 Ws       | 23 W               |
+| Alveo U280 | ImageContrastModifier<sup>3</sup> | 3414%           | 13629%          | 150         | 17359 ms  | 1562 Ws   | 21.44%           | 459 ms   | 494 ms     | 11 Ws      | 23 W               |
+| Alveo U280 | ParallelAlgorithm                 | 226%            | 1858%           | 300         | 362 ms    | 33 Ws     | 10.86%           | 102 ms   | 111 ms     | 2 Ws       | 15 W               |
+| Alveo U280 | MonteCarloPiEstimator             | 387%            | 2397%           | 230         | 185 ms    | 17 Ws     | 13.63%           | 16 ms    | 38 ms      | 1 Ws       | 18 W               |
+| Alveo U50  | ImageContrastModifier<sup>1</sup> | 1324%           | 6359%           | 150         | 470 ms    | 42 Ws     | 32.09%           | 12 ms    | 33 ms      | 1 Ws       | 20 W               |
+| Alveo U50  | ImageContrastModifier<sup>3</sup> | 3462%           | 16052%          | 150         | 17167 ms  | 1545 Ws   | 32.09%           | 450 ms   | 482 ms     | 10 Ws      | 20 W               |
+| Alveo U50  | ParallelAlgorithm                 | 258%            |                 | 300         | 379 ms    | 34 Ws     |                  | 104 ms   | 106 ms     | 0 Ws       |                    |
+| Alveo U50  | MonteCarloPiEstimator             | 348%            | 2693%           | 230         | 197 ms    | 18 Ws     | 20.37%           | 18 ms    | 44 ms      | 1 Ws       | 14 W               |
 
 1. Using the default 0.2MP image `fpga.jpg`.
 2. Using the larger [73.2MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web.jpg).
@@ -84,7 +84,7 @@ cp ~/moon.jpg fpga.jpg
 benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.moon.log
 ```
 
-The power usage information was inside the HardwareFramework
+The utilization and power usage information was inside the `HardwareFramework/reports` directory.
 
 
 ### Catapult
