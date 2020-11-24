@@ -10,3 +10,4 @@ packages/
 .vs/
 .idea/
 publish/
+/Docs/~*.xlsx
