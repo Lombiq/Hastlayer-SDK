@@ -35,7 +35,7 @@ Here you can find some measurements of execution times of various algorithms on 
 
 ### Vitis
 
-Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](BenchmarksVitis.xlsx).
+Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](BenchmarksVitis.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
 
 | Device     | Algorithm                         | Speed advantage | Power advantage | Parallelism | CPU       | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
 |------------|-----------------------------------|-----------------|-----------------|-------------|-----------|-----------|------------------|----------|------------|------------|--------------------|
