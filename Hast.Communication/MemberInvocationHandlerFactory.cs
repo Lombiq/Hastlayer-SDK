@@ -51,7 +51,7 @@ namespace Hast.Communication
                     using (var scope = _serviceProvider.CreateScope())
                     {
                         var memoryResourceCheckers = scope.ServiceProvider
-                            .GetService<IEnumerable<MemoryResourceChecker>>();
+                            .GetService<IEnumerable<IMemoryResourceChecker>>();
 
                         // Although it says Method it can also be a property.
                         var memberFullName = invocation.Method.GetFullName();
