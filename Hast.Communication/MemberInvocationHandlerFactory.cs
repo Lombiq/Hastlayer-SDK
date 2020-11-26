@@ -50,6 +50,9 @@ namespace Hast.Communication
                 {
                     using (var scope = _serviceProvider.CreateScope())
                     {
+                        var memoryResourceCheckers = scope.ServiceProvider
+                            .GetService<IEnumerable<MemoryResourceChecker>>();
+
                         // Although it says Method it can also be a property.
                         var memberFullName = invocation.Method.GetFullName();
 
@@ -113,13 +116,9 @@ namespace Hast.Communication
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            var memoryByteCount = (ulong)memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
-                            if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
+                            foreach (var checker in memoryResourceCheckers)
                             {
-                                throw new InvalidOperationException(
-                                    "The input is too large to fit into the device's memory: the input is " +
-                                    memoryByteCount + " bytes, the available memory is " +
-                                    deviceManifest.AvailableMemoryBytes + " bytes.");
+                                checker.EnsureResourceAvailable(memory, hardwareRepresentation);
                             }
 
                             SimpleMemory softMemory = null;
