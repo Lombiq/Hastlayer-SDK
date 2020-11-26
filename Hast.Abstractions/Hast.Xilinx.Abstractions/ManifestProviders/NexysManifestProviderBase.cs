@@ -1,6 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Communication.Constants.CommunicationConstants;
+using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;
 
 namespace Hast.Xilinx.Abstractions.ManifestProviders
@@ -16,7 +17,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 Name = _deviceName,
                 ClockFrequencyHz = 100 * Mhz,
                 SupportedCommunicationChannelNames = new[] { Serial.ChannelName, Ethernet.ChannelName },
-                AvailableMemoryBytes = 115343360, // 110MiB
+                AvailableMemoryBytes = 110 * MebiByte,
                 SupportsHbm = false,
                 ToolChainName = CommonToolChainNames.Vivado,
             };
