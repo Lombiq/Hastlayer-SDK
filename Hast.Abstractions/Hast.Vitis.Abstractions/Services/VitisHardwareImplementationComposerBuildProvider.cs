@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
+using static Hast.Vitis.Abstractions.Constants.Extensions;
 using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -35,9 +36,6 @@ namespace Hast.Vitis.Abstractions.Services
 
         private static bool _firstRun = true;
         private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
-
-        private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
-        private const string NoHbmFlagExtension = OpenClCommunicationService.NoHbmFlagExtension;
 
         private readonly ILogger _logger;
         private readonly string _buildOutputPath;

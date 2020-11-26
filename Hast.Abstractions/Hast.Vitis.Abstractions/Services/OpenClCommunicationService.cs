@@ -15,14 +15,13 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
+using static Hast.Vitis.Abstractions.Constants.Extensions;
 
 namespace Hast.Vitis.Abstractions.Services
 {
     public abstract class OpenClCommunicationService : CommunicationServiceBase
     {
         public const string KernelName = "hastip";
-        public const string InfoFileExtension = ".info";
-        public const string NoHbmFlagExtension = ".no-hbm";
 
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;

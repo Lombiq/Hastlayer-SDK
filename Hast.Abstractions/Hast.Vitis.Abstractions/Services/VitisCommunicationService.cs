@@ -8,6 +8,7 @@ using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System.IO;
+using static Hast.Vitis.Abstractions.Constants.Extensions;
 
 namespace Hast.Vitis.Abstractions.Services
 {
