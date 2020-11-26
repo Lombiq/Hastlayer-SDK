@@ -22,6 +22,7 @@ namespace Hast.Vitis.Abstractions.Services
     {
         public const string KernelName = "hastip";
         public const string InfoFileExtension = ".info";
+        public const string NoHbmFlagExtension = ".no-hbm";
 
 
         private readonly IDevicePoolPopulator _devicePoolPopulator;
