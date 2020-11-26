@@ -1,4 +1,5 @@
-﻿using Hast.Layer;
+﻿using Hast.Common.Interfaces;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 
@@ -7,7 +8,7 @@ namespace Hast.Communication.Services
     /// <summary>
     /// Checks if the memory resources can fit the <see cref="SimpleMemory"/> before sending it to the device.
     /// </summary>
-    public interface IMemoryResourceChecker
+    public interface IMemoryResourceChecker : IDependency
     {
         /// <summary>
         /// Verifies resource availability. If there is an issue, an exception is thrown.

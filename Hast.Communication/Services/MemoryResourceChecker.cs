@@ -10,7 +10,7 @@ namespace Hast.Communication.Services
         {
             var availableBytes = hardwareRepresentation.DeviceManifest.AvailableMemoryBytes;
 
-            var memoryByteCount = (ulong)memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
+            var memoryByteCount = (ulong)memory.ByteCount;
             if (memoryByteCount > availableBytes)
             {
                 throw new InvalidOperationException(
