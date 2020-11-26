@@ -8,7 +8,6 @@ namespace Hast.Vitis.Abstractions.Models
         public DeviceType DeviceType { get; set; } = DeviceType.Accelerator;
         public int HeaderCellCount { get; set; } = 4;
         public string VendorName { get; set; } = "Xilinx";
-        public int MemoryAlignment { get; set; } = 4096;
         public bool UseEmulation { get; set; }
         public int AxiBusWith { get; set; } = 512;
         public bool UseCache { get; set; } = true;
