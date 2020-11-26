@@ -39,7 +39,7 @@ namespace Hast.Vitis.Abstractions.Services
                 (executionContext.HardwareRepresentation.DeviceManifest as XilinxDeviceManifest)?.SupportsHbm != false;
 
             var implementation = executionContext.HardwareRepresentation.HardwareImplementation;
-            if (isHbm && !File.Exists(implementation.BinaryPath + NoHbmFlagExtension))
+            if (isHbm && File.Exists(implementation.BinaryPath + NoHbmFlagExtension))
             {
                 isHbm = false;
                 _logger.LogInformation("HBM was explicitly disabled.");
