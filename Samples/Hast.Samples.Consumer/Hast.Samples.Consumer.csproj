@@ -22,9 +22,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="FSharp.Core">
-      <Version>4.7.2</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
       <Version>1.1.1</Version>
     </PackageReference>
