@@ -22,7 +22,7 @@ namespace Hast.Vitis.Abstractions.Services
             if (memoryByteCount > Limits.HbmSizeBytes &&
                 hardwareRepresentation.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
                 xilinxDeviceManifest.SupportsHbm &&
-                File.Exists(binaryPath + NoHbmFlagExtension))
+                !File.Exists(binaryPath + NoHbmFlagExtension))
             {
                 throw new InvalidOperationException(
                     $"The input is too large to fit into the device's HBM memory: the input is {memoryByteCount} " +
