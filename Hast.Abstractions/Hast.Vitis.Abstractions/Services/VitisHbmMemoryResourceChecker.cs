@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Services;
+using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Vitis.Abstractions.Constants;
@@ -25,9 +25,9 @@ namespace Hast.Vitis.Abstractions.Services
                 !File.Exists(binaryPath + NoHbmFlagExtension))
             {
                 throw new InvalidOperationException(
-                    $"The input is too large to fit into the device's HBM memory: the input is {memoryByteCount} " +
+                    $"The input is too large to fit into the device's HBM memory: The input is {memoryByteCount} " +
                     $"bytes, the available memory is {Limits.HbmSizeBytes} bytes. Try rebuiling the kernel with " +
-                    $"UseHbm option turned off. (see the Readme.md in Hast.Vitis.Abstractions)");
+                    $"UseHbm option turned off (see the Readme in Hast.Vitis.Abstractions).");
             }
 
         }

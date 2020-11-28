@@ -83,7 +83,7 @@ cp ~/moon.jpg fpga.jpg
 benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.moon.log
 ```
 
-The utilization and power usage information was inside the `HardwareFramework/reports` directory.
+The utilization and power usage information was inside the *HardwareFramework/reports* directory.
 
 
 ## Catapult

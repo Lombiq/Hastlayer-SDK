@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 
@@ -14,7 +14,7 @@ namespace Hast.Communication.Services
             if (memoryByteCount > availableBytes)
             {
                 throw new InvalidOperationException(
-                    $"The input is too large to fit into the device's memory: the input is {memoryByteCount} bytes, " +
+                    $"The input is too large to fit into the device's memory: The input is {memoryByteCount} bytes, " +
                     $"the available memory is {availableBytes} bytes.");
             }
         }
