@@ -52,13 +52,14 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the ho
 | Alveo U280 | ParallelAlgorithm                 | 226%            | 1858%           | 300         | 362 ms    | 33 Ws     | 10.86%           | 102 ms   | 111 ms     | 1.66 Ws    | 14.99 W            |
 | Alveo U280 | MonteCarloPiEstimator             | 387%            | 2397%           | 230         | 185 ms    | 17 Ws     | 13.63%           | 16 ms    | 38 ms      | 0.67 Ws    | 17.55 W            |
 | Alveo U50  | ImageContrastModifier<sup>1</sup> | 1324%           | 6359%           | 150         | 470 ms    | 42 Ws     | 32.09%           | 12 ms    | 33 ms      | 0.65 Ws    | 19.85 W            |
-| Alveo U50  | ImageContrastModifier<sup>3</sup> | 3462%           | 16052%          | 150         | 17167 ms  | 1545 Ws   | 32.09%           | 450 ms   | 482 ms     | 9.57 Ws    | 19.85 W            |
+| Alveo U50  | ImageContrastModifier<sup>4</sup> | 3462%           | 16052%          | 150         | 17167 ms  | 1545 Ws   | 32.09%           | 450 ms   | 482 ms     | 9.57 Ws    | 19.85 W            |
 | Alveo U50  | ParallelAlgorithm                 | 258%            | 2653%           | 300         | 379 ms    | 34 Ws     | 16.22%           | 104 ms   | 106 ms     | 1.24 Ws    | 11.69 W            |
 | Alveo U50  | MonteCarloPiEstimator             | 348%            | 2693%           | 230         | 197 ms    | 18 Ws     | 20.37%           | 18 ms    | 44 ms      | 0.63 Ws    | 14.43 W            |
 
 1. Using the default 0.2MP image `fpga.jpg`.
 2. Using the larger [73.2MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web.jpg).
 3. Using the scaled down [6.4MP image](https://photographingspace.com/wp-content/uploads/2019/10/2019JulyLunarEclipse-Moon0655-CorySchmitz-PI2_wm-web50pct-square-scaled.jpg) because the testing binary was built for the High Bandwidth Memory. Currently only one HBM slot is supported, meaning that the available memory without disabling HBM is 256MB.
+4. The same applies from the previous point, with the added limitation that the Alveo U50 card doesn't have any DDR memory, so using HBM is the only option.
 
 We used the following shell function to test: 
 ```shell

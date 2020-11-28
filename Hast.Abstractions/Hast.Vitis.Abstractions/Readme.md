@@ -43,7 +43,8 @@ If you just want to generate a simulation report, you can do that without the fu
 ```
 Available system memory is an important factor. Unless you have a lot, you won't be able to compile multiple projects at the same time. When V++ runs out of available memory it rather crashes than waits so it's best practice to not do anything involved on the machine during compilation.
 
-HBM is used on the cards that support it (Alveo U50 and U250) but only one slot. This means only 256MB memory can be utilized with HBM. To use larger programs on these devices, you must disable HMB during compilation either by editing the `UseHbm` property of `OpenClConfiguration` in appsettings.json, programmatically changing the value of this in `HardwareGenerationConfiguration` or using the following command line switch:
+HBM is used by default on the cards that support it (Alveo U50 and U280) but only one slot. This means only 256MB memory can be utilized with HBM. To use larger programs with devices that have both HBM and DDR memory, you must disable HMB during compilation either by editing the `UseHbm` property of `OpenClConfiguration` in appsettings.json, programmatically changing the value of this in `HardwareGenerationConfiguration` or using the following command line switch:
 ```
 --HardwareGenerationConfiguration:CustomConfiguration:OpenClConfiguration:UseHbm false
 ```
+Like with every other `HardwareGenerationConfiguration` change, adding this setting will alter the hash resulting in a unique xclbin file so both options can be compiled ahead of time in case you want to automate selecting between them based on the input. Also note, that _Alveo U50_ only has HBM memory this option will have no real effect on it.
