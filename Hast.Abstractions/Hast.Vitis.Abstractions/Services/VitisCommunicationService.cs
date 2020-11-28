@@ -14,6 +14,7 @@ namespace Hast.Vitis.Abstractions.Services
 {
     public class VitisCommunicationService : OpenClCommunicationService
     {
+        private const int HbmSizeBytes = (int)Constants.Limits.HbmSizeBytes;
         public override string ChannelName { get; } = Hast.Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
 
 
@@ -36,7 +37,7 @@ namespace Hast.Vitis.Abstractions.Services
                 .GetOrAddOpenClConfiguration();
 
             var isHbm = configuration.UseHbm &&
-                data.Length <= 256_000_000 &&
+                data.Length <= HbmSizeBytes &&
                 (executionContext.HardwareRepresentation.DeviceManifest as XilinxDeviceManifest)?.SupportsHbm != false;
 
             var implementation = executionContext.HardwareRepresentation.HardwareImplementation;
