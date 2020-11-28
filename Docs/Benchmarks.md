@@ -10,6 +10,7 @@ Here are some basic performance benchmarks on how Hastlayer-accelerated code com
 Here you can find some measurements of execution times of various algorithms on different platforms. Note:
 
 - Measurements were made with binaries built in Release mode.
+- Measurements were always taken from the second or third run of the application to disregard initialization time. 
 - Figures are rounded to the nearest integer.
 - Speed and power advantage means the execution time and power consumption advantage of the Hastlayer-accelerated FPGA implementation. E.g. a 100% speed advantage means that the Hastlayer-accelerated implementation took half the time to finish than the original CPU one.
 - Degree of parallelism indicates the level of parallelization in the algorithm (typically the number of concurrent `Task`s). For details on these check out the source of the respective algorithm (these are all classes in the Hastlayer SDK's solution). Note that the degree of parallelism, as indicated, differs between platforms. On every platform the highest possible parallelism was used (so CPUs were under full load and thus peak power consumption can be reasonably assumed).
@@ -141,3 +142,8 @@ Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an I
 
 - In the ["High-level .NET Software Implementations of Unum Type I and Posit with Simultaneous FPGA Implementation Using Hastlayer" whitepaper](https://dl.acm.org/authorize?N659104) presented at the CoNGA 2018 conference the performance and clock cycle efficiency (which can be roughly equated to power efficiency) of operations of the posit floating point number format are compared. While the FPGA implementation is about 10x slower it's about 2-3x more power efficient.
 - While details can't be disclosed an Italian company observed a 10x speed increase of various high-frequency trading algorithms, compared to the original C++ implementation.
+
+
+## Attribution
+
+- The moon image is from [Cory Schmitz](https://photographingspace.com/100-megapixel-moon/). 
