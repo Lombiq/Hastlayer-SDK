@@ -5,22 +5,7 @@
 Here are some basic performance benchmarks on how Hastlayer-accelerated code compares to standard .NET. Since with FPGAs you're not running a program on a processor like a CPU or GPU but rather you create a processor out of your algorithm direct comparisons are hard. Nevertheless, here we tried to compare FPGAs and host PCs (CPUs) with roughly on the same level (e.g. comparing a mid-tier CPU to a mid-tier FPGA). All the algorithms are samples in the Hastlayer solution and available for you to check.
 
 
-## Notes on the hardware used
-
-- "Vitis": [Xilinx Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) cards were used (eg. [Alveo U280 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u280.html)).
-    - FPGA: [Alveo U280 Data Center Accelerator](https://www.avnet.com/opasdata/d120001/medias/docus/196/XLX-A-U280-A32G-DEV-G-Datasheet.pdf): PCI Express® Gen3 x16, 225W
-    - Host: 16 x Intel Xeon E5-2640 v3 CPUs with 8 physical, 16 logical cores each, with a base clock of 2.6 GHz. Power consumption is around 90 W under load<sup>1</sup>.
-- "Catapult": [Microsoft Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) servers used via the [Project Catapult Academic Program](https://www.microsoft.com/en-us/research/academic-program/project-catapult-academic-program/). These contain the following hardware:
-    - FPGA: Mt Granite card with an Altera Stratix V 5SGSMD5H2F35 FPGA and two channels of 4 GB DDR3 RAM, connected to the host via PCIe Gen3 x8. Main clock is 150 Mhz, power consumption is at most 29 W (source: "[A Cloud-Scale Acceleration Architecture](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/Cloud-Scale-Acceleration-Architecture.pdf)").
-    - Host PC: 2 x Intel Xeon E5-2450 CPUs with 16 physical, 32 logical cores each, with a base clock of 2.1 GHz. Power consumption is around 95 W under load<sup>1</sup>.
-- "i7 CPU": Intel Core i7-960 CPU with 4 physical, 8 logical cores and a base clock of 3.2 Ghz. Power consumption is around 130 W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/37151/intel-core-i7-960-processor-8m-cache-3-20-ghz-4-80-gt-s-intel-qpi.html)).
-- "Nexys": [Nexys A7-100T FPGA board](https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/) with a Xilinx XC7A100T-1CSG324C FPGA of the Artix-7 family, with 110 MB of user-accessible DDR2 RAM. Main clock is 100 Mhz, power consumption is at most about 2.5 W (corresponding to the maximal power draw via a USB 2.0 port). The communication channel used was the serial one: Virtual serial port via USB 2.0 with a baud rate of 230400 b/s.
-
-1. Based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html).
-2. Based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/83359/intel-xeon-processor-e5-2640-v3-20m-cache-2-60-ghz.html)
-3. Just a rough number and power draw is likely larger when the CPU increases its clock speed under load.
-
-## Measurements
+## Notes on measurements
 
 Here you can find some measurements of execution times of various algorithms on different platforms. Note:
 
@@ -33,9 +18,22 @@ Here you can find some measurements of execution times of various algorithms on 
 - FPGA resource utilization figures are based on the "main" resource's utilization with all other resource types assumed to be below 100%. For Xilinx FPGAs the main resource type is LUT, for Intel (Altera) ones ALM.
 - For FPGA measurements "total" means the total execution time, including the communication latency of the FPGA; since this varies because of the host PC's load the lowest achieved number is used. "Net" means just the execution of the algorithm itself on the FPGA, not including the time it took to send data to and receive from the device; FPGA execution time is deterministic and doesn't vary significantly. With faster communication channels "total" can be closer to "net". If the input and output data is small then the two measurements will practically be the same.
 
-### Vitis
 
-Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](BenchmarksVitis.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
+## Vitis
+
+Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280/250/200/50) to the host PC's performance on a [Nimbix](https://www.nimbix.net/alveo) instance.
+
+### Details
+
+- FPGA: The following [Xilinx Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) cards were used:
+  - [Alveo U280 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u280.html), PCI Express® Gen3 x16, 225 W Maximum Total Power
+  - [Alveo U250 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html), PCI Express® Gen3 x16, 225 W Maximum Total Power
+  - [Alveo U200 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u200.html), PCI Express® Gen3 x16, 225 W Maximum Total Power
+  - [Alveo U50 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u50.html), PCI Express® Gen3 x16, 75 W Maximum Total Power
+- Host: A [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance with 16 x Intel Xeon E5-2640 v3 CPUs with 8 physical, 16 logical cores each, with a base clock of 2.6 GHz. Power consumption is around 90 W under load (based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/83359/intel-xeon-processor-e5-2640-v3-20m-cache-2-60-ghz.html); the power draw is likely larger when the CPU increases its clock speed under load).
+- Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](BenchmarksVitis.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
+
+### Measurements
 
 | Device     | Algorithm                         | Speed advantage | Power advantage | Parallelism | CPU       | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power | FPGA on-chip power |
 |------------|-----------------------------------|-----------------|-----------------|-------------|-----------|-----------|------------------|----------|------------|------------|--------------------|
@@ -88,10 +86,19 @@ benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.moon.log
 The utilization and power usage information was inside the `HardwareFramework/reports` directory.
 
 
-### Catapult
+## Catapult
 
-Comparing the performance of the Catapult FPGA (i.e. the Mt Granite card) to the Catapult node's host PC's performance. Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
+Comparing the performance of the Catapult FPGA to the Catapult node's host PC's performance.
 
+### Details
+
+[Microsoft Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) servers used via the [Project Catapult Academic Program](https://www.microsoft.com/en-us/research/academic-program/project-catapult-academic-program/). These contain the following hardware:
+
+- FPGA: Mt Granite card with an Altera Stratix V 5SGSMD5H2F35 FPGA and two channels of 4 GB DDR3 RAM, connected to the host via PCIe Gen3 x8. Main clock is 150 Mhz, power consumption is at most 29 W (source: "[A Cloud-Scale Acceleration Architecture](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/10/Cloud-Scale-Acceleration-Architecture.pdf)").
+- Host: 2 x Intel Xeon E5-2450 CPUs with 16 physical, 32 logical cores each, with a base clock of 2.1 GHz. Power consumption is around 95 W under load (based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html); the power draw is likely larger when the CPU increases its clock speed under load).
+- Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity.
+
+### Measurements
 
 | Algorithm             | Speed advantage | Power advantage |   Parallelism  |   CPU  | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power |
 |:----------------------|:---------------:|:---------------:|:--------------:|:------:|:---------:|:----------------:|:--------:|:----------:|:----------:|
@@ -104,9 +111,18 @@ Comparing the performance of the Catapult FPGA (i.e. the Mt Granite card) to the
 
 <sup>2</sup>Uses 88% of the DSPs. With a degree of parallelism of 400 it would be 101% of DSPs.
 
-### Nexys
+
+## Nexys
 
 Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an Intel Core i7-960 CPU.
+
+### Details
+
+- FPGA: [Nexys A7-100T FPGA board](https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/) with a Xilinx XC7A100T-1CSG324C FPGA of the Artix-7 family, with 110 MB of user-accessible DDR2 RAM. Main clock is 100 Mhz, power consumption is at most about 2.5 W (corresponding to the maximal power draw via a USB 2.0 port). The communication channel used was the serial one: Virtual serial port via USB 2.0 with a baud rate of 230400 b/s.
+- Host: Intel Core i7-960 CPU with 4 physical, 8 logical cores and a base clock of 3.2 Ghz. Power consumption is around 130 W under load (based on [the processor's TDP](https://ark.intel.com/content/www/us/en/ark/products/37151/intel-core-i7-960-processor-8m-cache-3-20-ghz-4-80-gt-s-intel-qpi.html)); the power draw is likely larger when the CPU increases its clock speed under load).
+
+
+### Measurements
 
 | Algorithm                         | Speed advantage | Power advantage |   Parallelism  |   CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power |
 |-----------------------------------|:---------------:|:---------------:|:--------------:|:-------:|:---------:|:----------------:|:--------:|:----------:|:----------:|
@@ -120,7 +136,8 @@ Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an I
 
 <sup>3</sup> With a degree of parallelism of 270 the resource utilization goes above 90% (94% post-synthesis) and the implementation step of bitstream generation fails.
 
-### Further data
+
+## Further data
 
 - In the ["High-level .NET Software Implementations of Unum Type I and Posit with Simultaneous FPGA Implementation Using Hastlayer" whitepaper](https://dl.acm.org/authorize?N659104) presented at the CoNGA 2018 conference the performance and clock cycle efficiency (which can be roughly equated to power efficiency) of operations of the posit floating point number format are compared. While the FPGA implementation is about 10x slower it's about 2-3x more power efficient.
 - While details can't be disclosed an Italian company observed a 10x speed increase of various high-frequency trading algorithms, compared to the original C++ implementation.
