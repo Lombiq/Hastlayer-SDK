@@ -1,9 +1,10 @@
+using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Vitis.Abstractions.Constants;
+using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
-using System;
 using System.IO;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
 
@@ -14,7 +15,7 @@ namespace Hast.Vitis.Abstractions.Services
         /// <summary>
         /// Checks if HBM is used and then applies further memory restrictions.
         /// </summary>
-        public void EnsureResourceAvailable(SimpleMemory memory, IHardwareRepresentation hardwareRepresentation)
+        public MemoryResourceProblem EnsureResourceAvailable(SimpleMemory memory, IHardwareRepresentation hardwareRepresentation)
         {
             var memoryByteCount = (ulong)memory.ByteCount;
             var binaryPath = hardwareRepresentation.HardwareImplementation.BinaryPath;
@@ -24,10 +25,15 @@ namespace Hast.Vitis.Abstractions.Services
                 xilinxDeviceManifest.SupportsHbm &&
                 !File.Exists(binaryPath + NoHbmFlagExtension))
             {
-                throw new InvalidOperationException(
-                    $"The input is too large to fit into the device's HBM memory: The input is {memoryByteCount} " +
-                    $"bytes, the available memory is {Limits.HbmSizeBytes} bytes. Try rebuiling the kernel with " +
-                    $"UseHbm option turned off (see the Readme in Hast.Vitis.Abstractions).");
+                return new MemoryResourceProblem
+                {
+                    Sender = this,
+                    Message = $"The device uses HMB memory. If it also has DDR memory, disabling HMB via the " +
+                              $"{nameof(IOpenClConfiguration)}.{nameof(IOpenClConfiguration.UseHbm)} option might " +
+                              $"help, see the readme of Hast.Vitis.Abstractions.",
+                    AvailableByteCount = Limits.HbmSizeBytes,
+                    MemoryByteCount = memoryByteCount,
+                };
             }
 
         }
