@@ -36,6 +36,7 @@ namespace Hast.Vitis.Abstractions.Services
                 };
             }
 
+            return null;
         }
     }
 }

@@ -21,6 +21,8 @@ namespace Hast.Communication.Services
                     MemoryByteCount = memoryByteCount,
                 };
             }
+
+            return null;
         }
     }
 }
