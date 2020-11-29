@@ -121,7 +121,7 @@ namespace Hast.Communication
                                 var exception = new InvalidOperationException(
                                     $"The input is too large to fit into the device's memory. The input is " +
                                     $"{problem.MemoryByteCount} bytes, the available memory is " +
-                                    $"{problem.AvailableByteCount} bytes (reported by {problem.GetType().FullName}). " +
+                                    $"{problem.AvailableByteCount} bytes. (Reported by {problem.GetType().FullName}.) " +
                                     $"{problem.Message}");
                                 foreach (var (key, value) in problem.AdditionalData) exception.Data[key] = value;
                                 throw exception;
