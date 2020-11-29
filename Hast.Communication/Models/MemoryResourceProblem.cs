@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Services;
+using Hast.Communication.Services;
 using System.Collections.Generic;
 
 namespace Hast.Communication.Models
@@ -7,7 +7,7 @@ namespace Hast.Communication.Models
     {
         public IMemoryResourceChecker Sender { get; set; }
 
-        public string Message { get; set; } = "";
+        public string Message { get; set; } = string.Empty;
 
         public ulong MemoryByteCount { get; set; }
 
