@@ -49,12 +49,6 @@ namespace Hast.Vitis.Abstractions.Models
         string VendorName { get; set; }
 
         /// <summary>
-        /// The device may expect input data to be aligned against N byte chunks where N is this value. If zero then no
-        /// aligning is expected.
-        /// </summary>
-        int MemoryAlignment { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether the the binary is for real hardware or emulated.
         /// </summary>
         bool UseEmulation { get; set; }
@@ -69,5 +63,11 @@ namespace Hast.Vitis.Abstractions.Models
         /// the device) should be used. Default is <see langword="true"/>.
         /// </summary>
         bool UseCache { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether High Bandwidth Memory should be used when available in the device.
+        /// Default is <see langword="true"/>.
+        /// </summary>
+        bool UseHbm { get; set; }
     }
 }

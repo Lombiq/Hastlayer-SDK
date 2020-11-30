@@ -1,4 +1,4 @@
-﻿using Castle.DynamicProxy;
+using Castle.DynamicProxy;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
 using Hast.Communication.Exceptions;
@@ -50,6 +50,9 @@ namespace Hast.Communication
                 {
                     using (var scope = _serviceProvider.CreateScope())
                     {
+                        var memoryResourceCheckers = scope.ServiceProvider
+                            .GetService<IEnumerable<IMemoryResourceChecker>>();
+
                         // Although it says Method it can also be a property.
                         var memberFullName = invocation.Method.GetFullName();
 
@@ -113,13 +116,15 @@ namespace Hast.Communication
                         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
                         if (memory != null)
                         {
-                            var memoryByteCount = (ulong)memory.CellCount * SimpleMemory.MemoryCellSizeBytes;
-                            if (memoryByteCount > deviceManifest.AvailableMemoryBytes)
+                            if (memoryResourceCheckers.Check(memory, hardwareRepresentation) is { } problem)
                             {
-                                throw new InvalidOperationException(
-                                    "The input is too large to fit into the device's memory: the input is " +
-                                    memoryByteCount + " bytes, the available memory is " +
-                                    deviceManifest.AvailableMemoryBytes + " bytes.");
+                                var exception = new InvalidOperationException(
+                                    $"The input is too large to fit into the device's memory. The input is " +
+                                    $"{problem.MemoryByteCount} bytes, the available memory is " +
+                                    $"{problem.AvailableByteCount} bytes. (Reported by {problem.GetType().FullName}.) " +
+                                    $"{problem.Message}");
+                                foreach (var (key, value) in problem.AdditionalData) exception.Data[key] = value;
+                                throw exception;
                             }
 
                             SimpleMemory softMemory = null;

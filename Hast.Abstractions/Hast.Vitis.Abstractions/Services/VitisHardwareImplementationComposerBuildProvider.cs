@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
+using static Hast.Vitis.Abstractions.Constants.Extensions;
 using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -35,8 +36,6 @@ namespace Hast.Vitis.Abstractions.Services
 
         private static bool _firstRun = true;
         private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
-
-        private const string InfoFileExtension = OpenClCommunicationService.InfoFileExtension;
 
         private readonly ILogger _logger;
         private readonly string _buildOutputPath;
@@ -165,10 +164,12 @@ namespace Hast.Vitis.Abstractions.Services
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
 
-            // If no source files had to be created and the xclbin exists then we are done here.
-            if (!await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId) &&
-                File.Exists(implementation.BinaryPath))
+            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
+
+            // If the xclbin exists then we are done here.
+            if (File.Exists(implementation.BinaryPath) && File.Exists(implementation.BinaryPath + ".info"))
             {
+                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
                 return;
             }
 
@@ -185,8 +186,17 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             ProgressMajor("Staring build.");
-            await BuildKernelAsync(hardwareFrameworkPath, target, device, hashId, deviceManifest, xclbinDirectoryPath);
-            CopyBinaries(target, implementation.BinaryPath, hashId);
+            await BuildKernelAsync(
+                hardwareFrameworkPath,
+                target,
+                device,
+                hashId,
+                deviceManifest,
+                xclbinDirectoryPath,
+                openClConfiguration);
+
+            var disableHbm = deviceManifest.SupportsHbm && !openClConfiguration.UseHbm;
+            CopyBinaries(target, implementation.BinaryPath, hashId, disableHbm);
 
             ProgressMajor("Collecting reports.");
             try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
@@ -209,7 +219,8 @@ namespace Hast.Vitis.Abstractions.Services
             string device,
             string hashId,
             XilinxDeviceManifest deviceManifest,
-            string xclbinDirectoryPath)
+            string xclbinDirectoryPath,
+            IOpenClConfiguration openClConfiguration)
         {
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
             var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
@@ -244,7 +255,7 @@ namespace Hast.Vitis.Abstractions.Services
             // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
             var vppExecutable = (await GetExecutablePathAsync(Vpp));
             var vppArguments = new List<string>(
-                deviceManifest.SupportsHbm
+                deviceManifest.SupportsHbm && openClConfiguration.UseHbm
                 ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
                 : Array.Empty<string>());
             vppArguments.AddRange(new[]
@@ -305,7 +316,8 @@ namespace Hast.Vitis.Abstractions.Services
         private void CopyBinaries(
             string target,
             string binaryPath,
-            string hashId)
+            string hashId,
+            bool disableHbm)
         {
             var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
             if (binaryDirectoryPath != null) EnsureDirectoryExists(binaryDirectoryPath);
@@ -313,6 +325,7 @@ namespace Hast.Vitis.Abstractions.Services
             var builtFilePath = Path.Combine(GetTmpDirectoryPath(hashId), $"hastip.{target}.xclbin");
             File.Copy(builtFilePath, binaryPath);
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
+            if (disableHbm) File.Create(binaryPath + NoHbmFlagExtension).Dispose();
             ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
         }
 
@@ -322,8 +335,7 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementation implementation,
             string hashId)
         {
-            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            var reportPath = Path.Combine(rtlDirectoryPath, "_x", "reports", "link", "imp");
+            var reportPath = Path.Combine(GetTmpDirectoryPath(hashId), "_x", "reports", "link", "imp");
             if (!Directory.Exists(reportPath))
             {
                 _logger.LogWarning("Report directory is missing!");

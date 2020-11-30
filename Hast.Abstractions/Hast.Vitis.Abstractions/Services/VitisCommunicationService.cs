@@ -2,15 +2,19 @@ using Hast.Communication.Models;
 using System;
 using System.Buffers;
 using Hast.Communication.Services;
+using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
+using System.IO;
+using static Hast.Vitis.Abstractions.Constants.Extensions;
 
 namespace Hast.Vitis.Abstractions.Services
 {
     public class VitisCommunicationService : OpenClCommunicationService
     {
+        private const int HbmSizeBytes = (int)Constants.Limits.HbmSizeBytes;
         public override string ChannelName { get; } = Hast.Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
 
 
@@ -27,9 +31,25 @@ namespace Hast.Vitis.Abstractions.Services
             MemoryHandle hostMemoryHandle,
             IHardwareExecutionContext executionContext)
         {
-            var isHbm = data.Length <= 256_000_000 &&
+            var configuration = executionContext
+                .HardwareRepresentation
+                .HardwareGenerationConfiguration
+                .GetOrAddOpenClConfiguration();
+
+            var isHbm = configuration.UseHbm &&
+                data.Length <= HbmSizeBytes &&
                 (executionContext.HardwareRepresentation.DeviceManifest as XilinxDeviceManifest)?.SupportsHbm != false;
-            _logger.LogInformation($"Using HBM: {isHbm}.");
+
+            var implementation = executionContext.HardwareRepresentation.HardwareImplementation;
+            if (isHbm && File.Exists(implementation.BinaryPath + NoHbmFlagExtension))
+            {
+                isHbm = false;
+                _logger.LogInformation("HBM was explicitly disabled.");
+            }
+            else
+            {
+                _logger.LogInformation($"Using HBM: {isHbm}.");
+            }
 
             if (!isHbm) return IntPtr.Zero;
 
