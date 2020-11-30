@@ -33,6 +33,7 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280/250/200/50
   - [Alveo U50 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u50.html), PCI Express® Gen3 x16, 75 W Maximum Total Power
 - Host: A [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance with 16 x Intel Xeon E5-2640 v3 CPUs with 8 physical, 16 logical cores each, with a base clock of 2.6 GHz. Power consumption is around 90 W under load (based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/83359/intel-xeon-processor-e5-2640-v3-20m-cache-2-60-ghz.html); the power draw is likely larger when the CPU increases its clock speed under load).
 - Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](Attachments/BenchmarksVitis.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
+- The kernels were built on the initial 2019.2 version of the Vitis Unified Software Platform. We have seen in one case 20% improvement in frequency (leading to shorter run times and lower total power consumption) by compiling with the newer 2020.1 version.
 
 ### Measurements
 
