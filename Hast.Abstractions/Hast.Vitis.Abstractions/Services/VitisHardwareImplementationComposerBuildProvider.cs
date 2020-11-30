@@ -169,6 +169,7 @@ namespace Hast.Vitis.Abstractions.Services
             // If the xclbin exists then we are done here.
             if (File.Exists(implementation.BinaryPath) && File.Exists(implementation.BinaryPath + ".info"))
             {
+                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
                 return;
             }
 
