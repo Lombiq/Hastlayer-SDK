@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,7 +18,7 @@ namespace Hast.Synthesis.Abstractions
         public string ToolChainName { get; set; }
 
 
-        public Exception GetUnknownToolChainException() =>
+        public Exception CreateUnknownToolChainException() =>
             new InvalidOperationException($"Unknown tool chain: {ToolChainName}");
     }
 }
