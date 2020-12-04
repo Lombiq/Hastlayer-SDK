@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace Hast.Common.Validation
 {
-    public class Argument
+    public static class Argument
     {
         public static void Validate(bool condition, string name)
         {
