@@ -20,9 +20,9 @@ namespace Hast.Samples.SampleAssembly
     /// this work.
     /// </summary>
     /// <remarks>
-    /// System.Numerics.Vectors (including the NuGet package version of it: http://www.nuget.org/packages/System.Numerics.Vectors)
-    /// could be used for SIMD processing on x64 systems. However Vector<T> can only contain that many elements that can
-    /// fit into the processor's SIMD register and thus is quite inconvenient to use. So using a custom implementation.
+    /// <para>System.Numerics.Vectors (including the NuGet package version of it: http://www.nuget.org/packages/System.Numerics.Vectors)
+    /// could be used for SIMD processing on x64 systems. However <c>Vector&lt;T&gt;</c> can only contain that many elements that can
+    /// fit into the processor's SIMD register and thus is quite inconvenient to use. So using a custom implementation.</para>
     /// </remarks>
     public class SimdCalculator
     {

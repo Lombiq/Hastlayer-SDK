@@ -44,7 +44,7 @@ namespace Hast.Layer
         /// <param name="hardwareObject">The object to generate the proxy for.</param>
         /// <param name="configuration">
         /// Configuration for how the proxy generation should happen. If null, it will be substituted with
-        /// <see cref="ProxyGenerationConfiguration.Default"/></param>
+        /// <see cref="ProxyGenerationConfiguration.Default"/>.</param>
         /// <returns>The generated proxy object.</returns>
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during proxy generation.
@@ -71,7 +71,7 @@ namespace Hast.Layer
         /// allocated memory space is calculated from the cell count and the cell size indicated in
         /// <see cref="SimpleMemory.MemoryCellSizeBytes"/>.
         /// </param>
-        /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
+        /// <returns>A new instance of <see cref="SimpleMemory"/>.</returns>
         SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, int cellCount);
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Hast.Layer
         /// selected device's characteristics, particularly its <see cref="MemoryConfiguration{T}.MinimumPrefix"/>.
         /// </param>
         /// <param name="withPrefixCells">The amount of empty header space reserved in the <see cref="data"/>.</param>
-        /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
+        /// <returns>A new instance of <see cref="SimpleMemory"/>.</returns>
         // Here we use Memory&lt;byte&gt; because xmldoc doesn't support generics with a definite type in <see> and in
         // the generated documentation they get replaced with <T>. See https://stackoverflow.com/a/41208166.
         SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0);

@@ -38,7 +38,7 @@ namespace Hast.Samples.Kpz
         /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
         private readonly Random _random = new Random();
 
-        /// <summary>See <see cref="StateLogger" /></summary>
+        /// <summary>See <see cref="StateLogger" />.</summary>
         private readonly bool _enableStateLogger = false;
 
         private readonly KpzTarget _kpzTarget = KpzTarget.Cpu;

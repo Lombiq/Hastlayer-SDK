@@ -15,8 +15,8 @@ namespace Hast.Samples.SampleAssembly
     /// can be used with Hastlayer.
     /// </summary>
     /// <remarks>
-    /// This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable,
-    /// <see cref="Posit32Calculator"/>;
+    /// <para>This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable,
+    /// <see cref="Posit32Calculator"/>.</para>
     /// </remarks>
     public class PositCalculator
     {

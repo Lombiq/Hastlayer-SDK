@@ -9,15 +9,17 @@ namespace Hast.Common.Extensions
     public static class MemberNameExtensions
     {
         /// <summary>
-        /// Creates an alternate versions of a member name if the full member name contains both a class and an interface 
+        /// Creates an alternate versions of a member name if the full member name contains both a class and an interface
         /// reference (as it is with explicitly implemented members).
         /// </summary>
         /// <remarks>
+        /// <para>
         /// E.g. a member name as stored in the hardware description can be:
-        /// "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.ComplexTypes.IInterface1.Interface1Method1(System.Int32)"
+        /// <c>"System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.ComplexTypes.IInterface1.Interface1Method1(System.Int32)"</c>
         /// We create two alternates from this:
-        /// 1) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Interface1Method1(System.Int32)"
-        /// 2) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)"
+        /// 1) <c>"System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Interface1Method1(System.Int32)"</c>
+        /// 2) <c>"System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)"</c>
+        /// </para>
         /// </remarks>
         /// <returns>Alternate member names, if any.</returns>
         public static IEnumerable<string> GetMemberNameAlternates(this string memberFullName)

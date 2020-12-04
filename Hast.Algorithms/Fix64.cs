@@ -80,7 +80,7 @@ namespace Hast.Algorithms
         //static readonly Fix64 LutInterval = (Fix64)(LUT_SIZE - 1) / PiOver2;
 
         /// <summary>
-        /// Gets the underlying integer representation
+        /// Gets the underlying integer representation.
         /// </summary>
         public long RawValue { get { return _rawValue; } }
 
@@ -415,7 +415,7 @@ namespace Hast.Algorithms
 
         /// <summary>
         /// Performs multiplication without checking for overflow.
-        /// Useful for performance-critical code where the values are guaranteed not to cause overflow
+        /// Useful for performance-critical code where the values are guaranteed not to cause overflow.
         /// </summary>
         public static Fix64 FastMul(Fix64 x, Fix64 y)
         {

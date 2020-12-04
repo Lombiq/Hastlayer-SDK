@@ -11,7 +11,7 @@ using Lombiq.Arithmetics;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample on using unum floating point numbers. For some info on unums see: http://www.johngustafson.net/unums.html
+    /// A sample on using unum floating point numbers. <see href="http://www.johngustafson.net/unums.html">Some info on unums.</see>
     /// </summary>
     public class UnumCalculator
     {

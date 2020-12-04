@@ -67,7 +67,7 @@ namespace Hast.Catapult.Abstractions
         public int BufferCount { get; private set; }
 
         /// <summary>
-        /// Gets the maximum length of the message sent to the input buffer. (64kB)
+        /// Gets the maximum length of the message sent to the input buffer (64kB).
         /// </summary>
         public int BufferSize
         {
@@ -264,7 +264,7 @@ namespace Hast.Catapult.Abstractions
         /// Sets the value of the Soft Register. Indexed by memory address.
         /// </summary>
         /// <param name="address">The memory address.</param>
-        /// <param name="value">The new value</param>
+        /// <param name="value">The new value.</param>
         public void SetSoftRegister(uint address, ulong value)
         {
             VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value));

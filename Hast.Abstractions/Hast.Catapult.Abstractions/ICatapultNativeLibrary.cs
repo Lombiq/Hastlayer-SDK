@@ -45,7 +45,7 @@ namespace Hast.Catapult.Abstractions
         Constants.Status IsGoldenImage(IntPtr fpgaHandle, out bool isGolden, out uint roleID, out uint roleVersion);
 
         /// <summary>
-        /// This function returns the RSU Image ID 
+        /// This function returns the RSU Image ID. 
         /// </summary>
         Constants.Status ReadRsuImageId(IntPtr fpgaHandle, out uint pImageId);
 
@@ -68,7 +68,7 @@ namespace Hast.Catapult.Abstractions
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according
         /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the timeout.
         /// </param>
-        /// <returns>When a timeout is triggered, it returns <see cref="Constants.Status.FlashMutexTimeout"/></returns>
+        /// <returns>When a timeout is triggered, it returns <see cref="Constants.Status.FlashMutexTimeout"/>.</returns>
         Constants.Status WriteFlashImageEx(IntPtr fpgaHandle,
             bool writeToGolden,
             string RpdFilename,
@@ -112,7 +112,7 @@ namespace Hast.Catapult.Abstractions
 
         /// <summary>
         /// Sanity check: FPGA reconfig often fails simply because the FPGA vendor/device ID changed after reconfig
-        /// Will need to use RSU -rootportReload first in order to restore the ability to open an FPGA handle
+        /// Will need to use RSU -rootportReload first in order to restore the ability to open an FPGA handle.
         /// </summary>
         Constants.Status ReadVendorDeviceId(IntPtr fpgaHandle, out uint vendorId, out uint deviceId);
 
@@ -125,7 +125,7 @@ namespace Hast.Catapult.Abstractions
 
         /// <summary>
         /// Disables and re-enables all instances of the root port filter driver.
-        /// Useful if the FPGA device fails to start after reconfig, potentially saves a reboot
+        /// Useful if the FPGA device fails to start after reconfig, potentially saves a reboot.
         /// </summary>
         Constants.Status CycleRootportEnabledNoDriver();
 

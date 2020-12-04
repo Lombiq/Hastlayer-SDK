@@ -23,7 +23,7 @@ namespace Hast.Vitis.Abstractions.Models
     ///     }
     ///   }
     /// }
-    /// </c>
+    /// </c>.
     /// </remarks>
     public interface IOpenClConfiguration
     {

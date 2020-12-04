@@ -85,7 +85,7 @@ namespace Hast.Samples.Kpz
 
         /// <summary>
         /// It runs the KPZ algorithm in the background.
-        /// See also: <see cref="BackgroundWorker"/>
+        /// See also: <see cref="BackgroundWorker"/>.
         /// </summary>
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -144,7 +144,7 @@ namespace Hast.Samples.Kpz
 
         /// <summary>
         /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the
-        /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>
+        /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
         /// </summary>
         private void AsyncUpdateProgressBar(int progress)
         {
@@ -156,7 +156,7 @@ namespace Hast.Samples.Kpz
 
         /// <summary>
         /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the
-        /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>
+        /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
         /// </summary>
         private void AsyncUpdateChart(int iteration, bool forceUpdate = false)
         {

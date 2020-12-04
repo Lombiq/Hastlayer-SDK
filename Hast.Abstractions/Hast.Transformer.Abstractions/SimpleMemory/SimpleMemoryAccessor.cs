@@ -25,7 +25,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="prefixCellCount">
         /// The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.
-        /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>
+        /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>.
         /// </param>
         public Memory<byte> Get(int prefixCellCount)
         {

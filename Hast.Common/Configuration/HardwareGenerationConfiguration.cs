@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Hast.Layer
 {
@@ -23,9 +23,13 @@ namespace Hast.Layer
         /// all suitable members will be transformed.
         /// </summary>
         /// <example>
+        /// <para>
         /// Specify members with their full name, including the full namespace of the parent type(s) as well as their
-        /// return type and the types of their (type) arguments, e.g.:
+        /// return type and the types of their (type) arguments.
+        /// </para>
+        /// <code>
         /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
+        /// </code>
         /// </example>
         public IList<string> HardwareEntryPointMemberFullNames { get; set; } = new List<string>();
 

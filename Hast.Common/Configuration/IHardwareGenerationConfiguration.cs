@@ -29,7 +29,7 @@ namespace Hast.Layer
         /// <example>
         /// Specify members with their full name, including the full namespace of the parent type(s) as well as their
         /// return type and the types of their (type) arguments, e.g.:
-        /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
+        /// <c>"System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])</c>.
         /// </example>
         IList<string> HardwareEntryPointMemberFullNames { get; }
 
