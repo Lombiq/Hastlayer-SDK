@@ -431,7 +431,7 @@ namespace Hast.Catapult.Abstractions
                 }
             }
 
-            VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
+            VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out var inputBuffer));
 
             LogFunction?.Invoke((uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}{Environment.NewLine}");
@@ -459,7 +459,7 @@ namespace Hast.Catapult.Abstractions
         {
 
             // Wait for the interrupt and download results from output buffer.
-            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
+            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out var outputBuffer));
             var resultSize = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived,

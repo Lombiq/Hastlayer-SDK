@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Reflection;
 
@@ -16,7 +16,7 @@ namespace Hast.Common.Services
                 if (_assemblyDirectory == null)
                 {
                     string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                    UriBuilder uri = new UriBuilder(codeBase);
+                    var uri = new UriBuilder(codeBase);
                     string path = Uri.UnescapeDataString(uri.Path);
                     _assemblyDirectory = Path.GetDirectoryName(path);
                 }
