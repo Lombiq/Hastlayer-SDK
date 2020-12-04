@@ -232,6 +232,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 output[i] = memory.ReadBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i);
             }
+
             return output;
         }
     }

@@ -167,6 +167,7 @@ namespace Hast.Communication.Tester
                         memory = BitmapHelper.ToSimpleMemory(configuration, hastlayer, bitmap, prependCells);
                         accessor = new SimpleMemoryAccessor(memory);
                     }
+
                     break;
                 default:
                     throw new ArgumentException($"Unknown payload type: {type}.");
@@ -199,6 +200,7 @@ namespace Hast.Communication.Tester
                         using var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8);
                         WriteHexdump(streamWriter, memory);
                     }
+
                     break;
                 case OutputFileType.Binary:
                     if (payloadType != PayloadType.BinaryFile)
@@ -207,6 +209,7 @@ namespace Hast.Communication.Tester
                         Console.WriteLine("Saving {0} binary file to '{1}'...", direction, fileName);
                         new SimpleMemoryAccessor(memory).Store(fileName);
                     }
+
                     break;
                 case OutputFileType.BitmapJpeg:
                     using (var input = (Bitmap)Image.FromFile(CommandLineOptions.InputFileName))
@@ -214,6 +217,7 @@ namespace Hast.Communication.Tester
                     {
                         output.Save(fileName, ImageFormat.Jpeg);
                     }
+
                     break;
                 default:
                     throw new ArgumentException($"Unknown {direction} file type: {fileType}");
@@ -239,6 +243,7 @@ namespace Hast.Communication.Tester
                 Console.WriteLine("MISMATCH:");
                 Console.WriteLine(new HardwareExecutionResultMismatchException(mismatches));
             }
+
             if (memory.CellCount != referenceMemory.CellCount)
             {
                 Console.WriteLine("MISMATCH IN LENGTH:{0}Hardware: {1}{0}Software: {2}",
@@ -258,6 +263,7 @@ namespace Hast.Communication.Tester
                 {
                     writer.Write("{0}{1:X8}", j == 0 ? "" : " ", memory.ReadUInt32(i + j));
                 }
+
                 writer.WriteLine();
             }
         }

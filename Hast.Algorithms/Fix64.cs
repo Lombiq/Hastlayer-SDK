@@ -188,10 +188,12 @@ namespace Hast.Algorithms
             {
                 return integralPart;
             }
+
             if (fractionalPart > 0x80000000)
             {
                 return integralPart + One();
             }
+
             // if number is halfway between two values, round to the nearest even number
             // this is the method used by System.Math.Round().
             return (integralPart._rawValue & OneRawValue) == 0
@@ -242,6 +244,7 @@ namespace Hast.Algorithms
                     {
                         result = result >> 1;
                     }
+
                     bit >>= 2;
                 }
 
@@ -269,11 +272,13 @@ namespace Hast.Algorithms
                     bit = 1UL << (BitCount / 2 - 2);
                 }
             }
+
             // Finally, if next bit would have been 1, round the result upwards.
             if (num > result)
             {
                 ++result;
             }
+
             return new Fix64((long)result);
         }
 
@@ -471,6 +476,7 @@ namespace Hast.Algorithms
                 {
                     shift = bitPos;
                 }
+
                 remainder <<= shift;
                 bitPos -= shift;
 

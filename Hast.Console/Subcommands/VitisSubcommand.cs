@@ -125,6 +125,7 @@ namespace Hast.Console.Subcommands
                         var json = JsonConvert.SerializeObject(report, Formatting.Indented);
                         await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
                     }
+
                     break;
             }
         }

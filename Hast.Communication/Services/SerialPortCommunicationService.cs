@@ -144,6 +144,7 @@ namespace Hast.Communication.Services
                                         "Awaited a ping signal from the FPGA after it finished but received the following byte instead: " +
                                         receivedByte);
                                 }
+
                                 break;
                             case Serial.CommunicationState.ReceivingExecutionInformation:
                                 executionTimeBytes[executionTimeByteCounter] = receivedByte;
@@ -157,6 +158,7 @@ namespace Hast.Communication.Services
                                     communicationState = Serial.CommunicationState.ReceivingOutputByteCount;
                                     serialPort.Write(Serial.Signals.Ready);
                                 }
+
                                 break;
                             case Serial.CommunicationState.ReceivingOutputByteCount:
                                 outputByteCountBytes[outputByteCountByteCounter] = receivedByte;
@@ -175,6 +177,7 @@ namespace Hast.Communication.Services
                                     communicationState = Serial.CommunicationState.ReceivingOuput;
                                     serialPort.Write(Serial.Signals.Ready);
                                 }
+
                                 break;
                             case Serial.CommunicationState.ReceivingOuput:
                                 // There is a padding of PrefixCellCount cells for the unlikely case that the user
@@ -194,6 +197,7 @@ namespace Hast.Communication.Services
 
                                     taskCompletionSource.SetResult(true);
                                 }
+
                                 break;
                             default:
                                 break;

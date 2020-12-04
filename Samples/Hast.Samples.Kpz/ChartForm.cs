@@ -123,6 +123,7 @@ namespace Hast.Samples.Kpz
                 _inspectForm = new InspectForm(_kpz.StateLogger);
                 _inspectForm.Show();
             }
+
             LogIt("Done.");
         }
 
@@ -231,6 +232,7 @@ namespace Hast.Samples.Kpz
                             if (_stepByStep) _kpz.DoHastIterationDebug(hastlayer, configuration);
                             else { _kpz.DoHastIterations(hastlayer, configuration, (uint)_numKpzIterations); break; }
                         }
+
                         AsyncUpdateProgressBar(currentIteration);
                         AsyncUpdateChart(currentIteration);
                         if (bw.CancellationPending) return;
@@ -254,6 +256,7 @@ namespace Hast.Samples.Kpz
                         if (currentIteration > _numKpzIterations) currentIteration = _numKpzIterations;
                     }
                 }
+
                 sw.Stop();
                 AsyncLogIt("Done. Total time measured: " + sw.ElapsedMilliseconds + " ms");
             }

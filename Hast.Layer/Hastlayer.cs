@@ -343,6 +343,7 @@ namespace Hast.Layer
             {
                 abstractionsPath = Path.GetDirectoryName(abstractionsPath);
             }
+
             currentDirectory = Path.GetFileName(abstractionsPath);
             if (currentDirectory.Equals("bin", StringComparison.OrdinalIgnoreCase))
             {

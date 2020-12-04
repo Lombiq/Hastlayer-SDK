@@ -84,6 +84,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 resultArray[i] = memory.ReadUInt32(UnumCalculator.CalculateSumOfPowersofTwo_OutputUInt32Index + i);
             }
+
             return resultArray;
         }
     }

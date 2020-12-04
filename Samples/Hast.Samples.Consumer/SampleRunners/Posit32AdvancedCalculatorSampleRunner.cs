@@ -50,6 +50,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
             }
+
             sw = Stopwatch.StartNew();
             var resultOfSqrt = positCalculator.SqrtOfPositsInArray(sqrtInputArray);
             sw.Stop();
@@ -59,6 +60,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 Console.Write(resultOfSqrt[i] + ", ");
             }
+
             Console.WriteLine();
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
         }

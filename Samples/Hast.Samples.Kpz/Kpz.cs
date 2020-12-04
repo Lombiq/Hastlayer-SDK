@@ -120,6 +120,7 @@ namespace Hast.Samples.Kpz
                     };
                 }
             }
+
             if (_enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", Grid);
         }
 
@@ -169,6 +170,7 @@ namespace Hast.Samples.Kpz
                     heightMap[x, y] = heightNow;
                     mean += heightNow;
                 }
+
                 if (heightNow + Bool2Delta(Grid[1, y].dx) != heightMap[0, y])
                 {
                     periodicityValid = false;
@@ -176,6 +178,7 @@ namespace Hast.Samples.Kpz
                     if (doVerboseLoggingToConsole)
                         Console.WriteLine(string.Format("periodicityInvalidX at line {0}", y));
                 }
+
                 heightNow += Bool2Delta(Grid[0, (y + 1) % GridHeight].dy);
             }
 

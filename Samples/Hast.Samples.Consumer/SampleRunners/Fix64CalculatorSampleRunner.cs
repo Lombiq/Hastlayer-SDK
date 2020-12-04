@@ -51,6 +51,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1);
             }
+
             var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();

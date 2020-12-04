@@ -194,6 +194,7 @@ namespace Hast.Algorithms.Tests
                     }
                 }
             }
+
             Console.WriteLine("{0} total, {1} per multiplication", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
@@ -244,6 +245,7 @@ namespace Hast.Algorithms.Tests
                     }
                 }
             }
+
             Console.WriteLine("{0} total, {1} per division", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
@@ -328,6 +330,7 @@ namespace Hast.Algorithms.Tests
                 var expected = expecteds[i];
                 Assert.Equal(expected, actual);
             }
+
             Assert.Equal(Fix64.MaxValue(), Fix64.Round(Fix64.MaxValue()));
         }
 
@@ -380,6 +383,7 @@ namespace Hast.Algorithms.Tests
                     }
                 }
             }
+
             Console.WriteLine("Max error: {0} ({1} times precision)", deltas.Max(), deltas.Max() / Fix64.Precision);
             Console.WriteLine("Average precision: {0} ({1} times precision)", deltas.Average(), deltas.Average() / Fix64.Precision);
             Console.WriteLine("failed: {0}%", deltas.Count(d => d > Fix64.Precision) * 100.0 / deltas.Count);

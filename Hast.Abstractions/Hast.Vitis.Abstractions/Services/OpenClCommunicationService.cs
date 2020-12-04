@@ -139,6 +139,7 @@ namespace Hast.Vitis.Abstractions.Services
                         clockFrequency);
                 }
             }
+
             EndExecution(context);
 
             return context.HardwareExecutionInformation;

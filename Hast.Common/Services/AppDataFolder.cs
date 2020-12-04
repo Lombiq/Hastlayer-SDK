@@ -20,6 +20,7 @@ namespace Hast.Common.Services
                     string path = Uri.UnescapeDataString(uri.Path);
                     _assemblyDirectory = Path.GetDirectoryName(path);
                 }
+
                 return _assemblyDirectory;
             }
         }

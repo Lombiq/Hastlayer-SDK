@@ -136,6 +136,7 @@ namespace Hast.Samples.Kpz
                 if (success) LogItFunction("TestPrng succeeded!");
                 else LogItFunction("TestPrng failed!");
             }
+
             return (hastlayer, configuration);
         }
     }
