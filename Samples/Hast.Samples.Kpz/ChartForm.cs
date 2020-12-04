@@ -294,8 +294,9 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        /// <summary>This property of the <see cref="ChartForm"/> maps the selected item in <see cref="comboTarget"/> to
-        /// <see cref="KpzTarget"/> values.</summary>
+        /// <summary>
+        /// Gets the selected item in <see cref="comboTarget"/> to <see cref="KpzTarget"/> values.
+        /// </summary>
         private KpzTarget CurrentComputationTarget
         {
             get

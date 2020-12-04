@@ -80,7 +80,7 @@ namespace Hast.Algorithms
         //static readonly Fix64 LutInterval = (Fix64)(LUT_SIZE - 1) / PiOver2;
 
         /// <summary>
-        /// The underlying integer representation
+        /// Gets the underlying integer representation
         /// </summary>
         public long RawValue { get { return _rawValue; } }
 

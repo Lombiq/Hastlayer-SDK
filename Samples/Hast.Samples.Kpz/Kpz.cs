@@ -43,10 +43,14 @@ namespace Hast.Samples.Kpz
 
         private readonly KpzTarget _kpzTarget = KpzTarget.Cpu;
 
-        /// <summary>It returns the width of the grid.</summary>
+        /// <summary>
+        /// Gets the width of the grid.
+        /// </summary>
         public int GridWidth => Grid.GetLength(0);
 
-        /// <summary>It returns the height of the grid.</summary>
+        /// <summary>
+        /// Gets the height of the grid.
+        /// </summary>
         public int GridHeight => Grid.GetLength(1);
 
         /// <summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer
 {
@@ -9,27 +9,27 @@ namespace Hast.Layer
     public interface IHardwareRepresentation
     {
         /// <summary>
-        /// The original assemblies' paths this hardware assembly was generated from.
+        /// Gets the original assemblies' paths this hardware assembly was generated from.
         /// </summary>
         IEnumerable<string> SoftAssemblyPaths { get; }
 
         /// <summary>
-        /// Describes the hardware created from a transformed assembly.
+        /// Gets the description of the hardware created from a transformed assembly.
         /// </summary>
         IHardwareDescription HardwareDescription { get; }
 
         /// <summary>
-        /// Represents a handle to the hardware implementation synthesized through the FPGA vendor tool-chain.
+        /// Gets the handle to the hardware implementation synthesized through the FPGA vendor tool-chain.
         /// </summary>
         IHardwareImplementation HardwareImplementation { get; }
 
         /// <summary>
-        /// Describes the capabilities, like available memory, of the hardware device the representation was created for.
+        /// Gets the capabilities (eg. available memory) of the hardware device the representation was created for.
         /// </summary>
         IDeviceManifest DeviceManifest { get; }
 
         /// <summary>
-        /// The configuration used to create this representation.
+        /// Gets the configuration used to create this representation.
         /// </summary>
         IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; }
     }

@@ -33,7 +33,7 @@ namespace Hast.Common.Interfaces
     public class IDependencyInitializerAttribute : Attribute
     {
         /// <summary>
-        /// The name of the public static method which will be invoked.
+        /// Gets the name of the public static method which will be invoked.
         /// </summary>
         public string MemberName { get; }
 

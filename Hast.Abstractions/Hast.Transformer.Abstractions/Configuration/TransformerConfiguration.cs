@@ -35,13 +35,13 @@ namespace Hast.Transformer.Abstractions.Configuration
         }
 
         /// <summary>
-        /// Determines whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
+        /// Gets or sets a value indicating whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
         /// array. Defaults to <c>true</c>.
         /// </summary>
         public bool UseSimpleMemory { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets whether inlining methods on the hardware is enabled. Defaults to <c>true</c>. Inlining methods
+        /// Gets or sets a value indicating whether inlining methods on the hardware is enabled. Defaults to <c>true</c>. Inlining methods
         /// eliminates the performance impact of method calls (and is thus advised for small, frequently invoked methods),
         /// but causes the hardware design to be larger (and hardware generation to be slower). Be aware that inlining,
         /// even if enabled, doesn't happen automatically, check the documentation.
@@ -56,7 +56,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         public IList<string> AdditionalInlinableMethodsFullNames { get; set; } = new List<string>();
 
         /// <summary>
-        /// The lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer 
+        /// Gets or sets lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer 
         /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use 
         /// this to specify array lengths.
         /// 
@@ -67,14 +67,14 @@ namespace Hast.Transformer.Abstractions.Configuration
         public IDictionary<string, int> ArrayLengths { get; set; } = new Dictionary<string, int>();
 
         /// <summary>
-        /// Gets or sets whether interfaces that are implemented by transformed types are processed. Currently such 
+        /// Gets or sets a value indicating whether interfaces that are implemented by transformed types are processed. Currently such 
         /// interfaces don't affect the resulting hardware implementation, but the assemblies of all referenced
         /// interfaces need to be loaded. If set to <c>false</c> such loading is not necessary. Defaults to <c>false</c>.
         /// </summary>
         public bool ProcessImplementedInterfaces { get; set; } = false;
 
         /// <summary>
-        /// Gets or sets whether constant values are propagated through the processed code and variables that actually
+        /// Gets or sets a value indicating whether constant values are propagated through the processed code and variables that actually
         /// hold only these values are substituted with the values themselves (also called constant folding or constant
         /// propagation). This can significantly cut down on the code complexity and improve performance, but in
         /// certain cases may yield incorrect results. If the hardware implementation's results are incorrect then try

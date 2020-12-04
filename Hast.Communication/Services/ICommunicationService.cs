@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
@@ -12,12 +12,12 @@ namespace Hast.Communication.Services
     public interface ICommunicationService : IDependency
     {
         /// <summary>
-        /// Name of the channel used for the communication.
+        /// Gets the name of the channel used for the communication.
         /// </summary>
         string ChannelName { get; }
 
         /// <summary>
-        /// The TextWriter which the communication service may use to communicate diagnostics information.
+        /// Gets or sets the TextWriter which the communication service may use to communicate diagnostics information.
         /// </summary>
         System.IO.TextWriter TesterOutput { get; set; }
 

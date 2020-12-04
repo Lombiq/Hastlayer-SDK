@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer
 {
@@ -43,7 +43,7 @@ namespace Hast.Layer
         public IList<string> HardwareEntryPointMemberNamePrefixes { get; set; } = new List<string>();
 
         /// <summary>
-        /// Gets or sets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
+        /// Gets or sets a value indicating whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
         /// will happen. Defaults to <c>false</c>. Note that this will have an affect only on client-side caching when
         /// using the Client flavor.
         /// </summary>
@@ -56,14 +56,14 @@ namespace Hast.Layer
         public string HardwareFrameworkPath { get; }
 
         /// <summary>
-        /// Gets or sets whether hardware transformation takes place. If it doesn't then
+        /// Gets or sets a value indicating whether hardware transformation takes place. If it doesn't then
         /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too. Defaults to
         /// <c>true</c>.
         /// </summary>
         public bool EnableHardwareTransformation { get; set; } = true;
 
         /// <summary>
-        /// Gets or set whether a hardware implementation composer should be used to synthesize hardware from the
+        /// Gets or sets a value indicating whether a hardware implementation composer should be used to synthesize hardware from the
         /// transformed hardware description. Defaults to <c>true</c>.
         /// </summary>
         public bool EnableHardwareImplementationComposition { get; set; } = true;

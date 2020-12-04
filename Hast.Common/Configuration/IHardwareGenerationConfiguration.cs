@@ -15,7 +15,7 @@ namespace Hast.Layer
         IDictionary<string, object> CustomConfiguration { get; }
 
         /// <summary>
-        /// Gets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
+        /// Gets or sets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
         /// logged or saved during hardware generation but otherwise it may not be used in any activities.
         /// </summary>
         string Label { get; set; }
@@ -47,7 +47,7 @@ namespace Hast.Layer
         IList<string> HardwareEntryPointMemberNamePrefixes { get; }
 
         /// <summary>
-        /// Gets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching will happen.
+        /// Gets a value indicating whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching will happen.
         /// </summary>
         bool EnableCaching { get; }
 
@@ -65,13 +65,13 @@ namespace Hast.Layer
         string HardwareFrameworkPath { get; }
 
         /// <summary>
-        /// Gets whether hardware transformation takes place. If it doesn't then
+        /// Gets a value indicating whether hardware transformation takes place. If it doesn't then
         /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too.
         /// </summary>
         bool EnableHardwareTransformation { get; }
 
         /// <summary>
-        /// Gets whether a hardware implementation composer should be used to synthesize hardware from the transformed
+        /// Gets a value indicating whether a hardware implementation composer should be used to synthesize hardware from the transformed
         /// hardware description.
         /// </summary>
         bool EnableHardwareImplementationComposition { get; }
