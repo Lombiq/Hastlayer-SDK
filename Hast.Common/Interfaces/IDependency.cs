@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
+#pragma warning disable CA1040 // Avoid empty interfaces
 namespace Hast.Common.Interfaces
 {
     /// <summary>
@@ -28,6 +29,7 @@ namespace Hast.Common.Interfaces
     /// Indicates that the <see cref="IDependency"/> has its own initializer which should be invoked right before the
     /// service is added to the <see cref="IServiceCollection"/>.
     /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
     public class IDependencyInitializerAttribute : Attribute
     {
         /// <summary>
