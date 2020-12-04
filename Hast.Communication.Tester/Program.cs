@@ -84,7 +84,6 @@ namespace Hast.Communication.Tester
             SimpleMemory referenceMemory = null;
             if (!CommandLineOptions.NoCheck)
             {
-
                 Memory<byte> newMemory = new byte[memory.ByteCount];
                 accessor.Get().CopyTo(newMemory);
                 referenceMemory = SimpleMemory.CreateSoftwareMemory(memory.CellCount);

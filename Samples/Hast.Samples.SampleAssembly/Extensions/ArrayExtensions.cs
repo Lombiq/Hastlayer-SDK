@@ -11,7 +11,6 @@ namespace System
         /// </summary>
         public static T[] PadToMultipleOf<T>(this T[] arrayToPad, int multipleOf)
         {
-
             var originalNumberCount = arrayToPad.Length;
             var remainderToMaxDegreeOfParallelism = arrayToPad.Length % multipleOf;
             if (remainderToMaxDegreeOfParallelism != 0)

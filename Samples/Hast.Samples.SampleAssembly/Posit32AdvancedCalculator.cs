@@ -7,7 +7,6 @@ namespace Hast.Samples.SampleAssembly
 {
     public class Posit32AdvancedCalculator
     {
-
         public const int RepeatedDivision_InputInt32Index = 0;
         public const int RepeatedDivision_FirstInputPosit32Index = 1;
         public const int RepeatedDivision_SecondInputPosit32Index = 2;

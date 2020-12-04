@@ -93,7 +93,6 @@ namespace Hast.Algorithms.Tests
         [Fact]
         public void DecimalToFix64AndBack()
         {
-
             Assert.Equal(Fix64.MaxValue(), (Fix64)(decimal)Fix64.MaxValue());
             Assert.Equal(Fix64.MinValue(), (Fix64)(decimal)Fix64.MinValue());
 

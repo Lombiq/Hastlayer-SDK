@@ -93,7 +93,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <param name="memory"></param>
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
-
             Random1 = new RandomMwc64X
             {
                 State =
@@ -216,7 +215,6 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public static class KpzKernelsExtensions
     {
-
         /// <summary>
         /// This function adds two numbers on the FPGA using <see cref="KpzKernelsInterface.TestAdd(SimpleMemory)"/>.
         /// </summary>
