@@ -276,7 +276,7 @@ namespace Hast.Vitis.Abstractions.Services
         public static void InitializeService(IServiceCollection services) =>
             services.AddSingleton(_ => NativeLibraryBuilder.Default.ActivateInterface<IOpenCl>("OpenCL"));
 
-        public void Dispose()
+        public void FinishAndClose()
         {
             foreach (var queue in _queues.Values) _cl.Finish(queue);
 
@@ -319,6 +319,8 @@ namespace Hast.Vitis.Abstractions.Services
                 throw new AggregateException($"Error while disposing {nameof(BinaryOpenCl)}.", exceptions);
             }
         }
+
+        public void Dispose() => FinishAndClose();
 
         private IntPtr GetQueue(int queueIndex)
         {
