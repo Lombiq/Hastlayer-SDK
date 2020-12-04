@@ -21,10 +21,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             // not necessarily the same on all machines or during all executions. Thus we need sorting so the 
             // transformation ID is deterministic (see DefaultTransformer in Hast.Transformer).
             // Also, ToArray() and the setter are needed for JSON de/serialization when doing remote transformation. 
-            get
-            {
-                return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray();
-            }
+            get => _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray();
 
             private set
             {

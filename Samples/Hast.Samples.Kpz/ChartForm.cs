@@ -22,7 +22,6 @@ namespace Hast.Samples.Kpz
         private bool _stepByStep { get { return checkStep.Checked; } }
         private bool _randomSeedEnable { get { return checkRandomSeed.Checked; } }
 
-
         /// <summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
         /// so that the GUI keeps responding while the algorithm is running.
