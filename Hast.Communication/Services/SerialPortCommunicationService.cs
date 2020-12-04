@@ -91,7 +91,7 @@ namespace Hast.Communication.Services
                     // Prepare memory.
                     var dma = new SimpleMemoryAccessor(simpleMemory);
                     // The first parameter is actually just a byte but we only fetch whole cells so 3/4 of the cell is padding.
-                    var memory = dma.Get(MemoryPrefixCellCount).Slice(FirstCellPadding);
+                    var memory = dma.Get(MemoryPrefixCellCount)[FirstCellPadding..];
                     var memoryLength = simpleMemory.ByteCount;
 
                     // Execute Order 66.

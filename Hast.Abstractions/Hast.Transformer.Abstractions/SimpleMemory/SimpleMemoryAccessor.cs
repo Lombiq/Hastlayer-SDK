@@ -39,13 +39,13 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             {
                 int missingBytes = prefixCellCount - _simpleMemory.PrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
                 Memory<byte> newMemory = new byte[_simpleMemory.PrefixedMemory.Length + missingBytes];
-                _simpleMemory.PrefixedMemory.CopyTo(newMemory.Slice(missingBytes));
+                _simpleMemory.PrefixedMemory.CopyTo(newMemory[missingBytes..]);
 
                 _simpleMemory.PrefixCellCount = prefixCellCount;
                 return _simpleMemory.PrefixedMemory = newMemory;
             }
 
-            return _simpleMemory.PrefixedMemory.Slice((_simpleMemory.PrefixCellCount - prefixCellCount) * SimpleMemory.MemoryCellSizeBytes);
+            return _simpleMemory.PrefixedMemory[((_simpleMemory.PrefixCellCount - prefixCellCount) * SimpleMemory.MemoryCellSizeBytes)..];
         }
 
         /// <summary>

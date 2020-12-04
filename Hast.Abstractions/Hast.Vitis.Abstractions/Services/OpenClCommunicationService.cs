@@ -171,14 +171,14 @@ namespace Hast.Vitis.Abstractions.Services
             bool canLogDebug = Logger.IsEnabled(LogLevel.Debug);
             if (canLogInfo || canLogDebug)
             {
-                bufferSpan = bufferSpan.Slice(headerSize);
+                bufferSpan = bufferSpan[headerSize..];
 
                 if (canLogDebug)
                 {
                     int logAmount = bufferSpan.Length / MemoryCellSizeBytes;
                     for (int i = 0; i < logAmount; i++)
                     {
-                        var value = MemoryMarshal.Read<int>(bufferSpan.Slice(i * MemoryCellSizeBytes));
+                        var value = MemoryMarshal.Read<int>(bufferSpan[(i * MemoryCellSizeBytes)..]);
                         Logger.LogDebug("HOST: buffer[{0}] = 0x{1:X8}", i, value);
                     }
                 }
