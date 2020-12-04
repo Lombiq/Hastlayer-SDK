@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Catapult.Abstractions
 {
@@ -172,6 +173,7 @@ namespace Hast.Catapult.Abstractions
             public const uint WriteGolden = 0x0002000u;
         }
 
+        [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "Not applicable.")]
         public enum Stat
         {
             CyclesLower = 8,

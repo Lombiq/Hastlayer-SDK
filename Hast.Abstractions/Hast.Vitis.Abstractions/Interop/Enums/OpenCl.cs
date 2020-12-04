@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 
 // Some of the enums are taken from OpenCL.NET:
@@ -17,6 +18,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// <summary>
     /// Represents an enumeration for the different types of information that can be queried from an OpenCl platform.
     /// </summary>
+    [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "Not applicable.")]
     public enum PlatformInformation : uint
     {
         /// <summary>
@@ -222,6 +224,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// A bit-field that is used to specify migration options.
     /// </summary>
     [Flags]
+    [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "From external library.")]
     public enum MemoryMigrationFlag : ulong
     {
         /// <summary>
