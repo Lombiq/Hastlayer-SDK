@@ -9,7 +9,7 @@ namespace Hast.Vitis.Abstractions.Models
     /// that should work out of the box, but if configuration is necessary, the appconfig.json file should be edited.
     /// </summary>
     /// <remarks>
-    /// An example for the appsettings file can be seen below or in the Hast.Samples.Consumer project. Everything
+    /// <para>An example for the appsettings file can be seen below or in the Hast.Samples.Consumer project. Everything
     /// omitted will remain as default.
     ///
     /// <c>
@@ -23,7 +23,7 @@ namespace Hast.Vitis.Abstractions.Models
     ///     }
     ///   }
     /// }
-    /// </c>.
+    /// </c>.</para>
     /// </remarks>
     public interface IOpenClConfiguration
     {

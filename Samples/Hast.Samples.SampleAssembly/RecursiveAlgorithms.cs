@@ -16,7 +16,7 @@ namespace Hast.Samples.SampleAssembly
     /// memory operations makes the algorithm much slower.
     /// </summary>
     /// <remarks>
-    /// The private methods' names are prefixed so they can targeted for recursion configuration.
+    /// <para>The private methods' names are prefixed so they can targeted for recursion configuration.</para>
     /// </remarks>
     public class RecursiveAlgorithms
     {

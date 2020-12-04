@@ -39,7 +39,7 @@ namespace Hast.Samples.Kpz
 
     /// <summary>
     /// It logs the state of the KPZ algorithm at particular steps.
-    /// <note type="caution">As it stores the full KPZ grid at every step, it can use up a lot of memory.</note>
+    /// <note type="caution"><para>As it stores the full KPZ grid at every step, it can use up a lot of memory.</para></note>
     /// </summary>
     public class KpzStateLogger
     {

@@ -102,8 +102,8 @@ namespace Hast.Layer
         /// Instantiates a new <see cref="IHastlayer"/> implementation.
         /// </summary>
         /// <remarks>
-        /// Point of this factory is that it returns an interface type instead of the implementation and can throw
-        /// exceptions.
+        /// <para>Point of this factory is that it returns an interface type instead of the implementation and can throw
+        /// exceptions.</para>
         /// </remarks>
         /// <param name="configuration">Configuration for Hastlayer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>

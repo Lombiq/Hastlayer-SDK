@@ -12,7 +12,7 @@ namespace Hast.Algorithms.Random
         /// it'll serve as a seed.
         /// </summary>
         /// <remarks>
-        /// By not using a constructor the whole class can be inlined for maximal performance.
+        /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
         public ulong State = 0xCAFEUL; // Just some starting number.
 

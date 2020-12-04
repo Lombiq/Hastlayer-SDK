@@ -13,7 +13,7 @@
         /// it'll serve as a seed.
         /// </summary>
         /// <remarks>
-        /// By not using a constructor the whole class can be inlined for maximal performance.
+        /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
         public uint State = 498113; // Just some starting number.
 

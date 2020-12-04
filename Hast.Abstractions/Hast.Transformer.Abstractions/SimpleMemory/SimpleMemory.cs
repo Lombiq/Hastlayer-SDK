@@ -11,11 +11,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// NOT thread-safe, there shouldn't be any concurrent access to it.
     /// </summary>
     /// <remarks>
-    /// All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
+    /// <para>All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
     ///
     /// WARNING: changes here should be in sync with the VHDL library. The signatures of the methods of this class
     /// mustn't be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL
-    /// library too.
+    /// library too.</para>
     /// </remarks>
     public class SimpleMemory
     {
@@ -69,11 +69,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// multiple of that number. It must be an integer and power of 2.
         /// </param>
         /// <remarks>
-        /// This constructor is internal only to avoid dependency issues where we have to include the System.Memory
+        /// <para>This constructor is internal only to avoid dependency issues where we have to include the System.Memory
         /// package everywhere where SimpleMemory is used even if it's created with the other constructors. Instead,
         /// you can use
         /// <see cref="SimpleMemoryAccessor.Create(Memory{byte}, int)"/> to construct a <see cref="SimpleMemory"/> from
-        /// <see cref="Memory{byte}"/>.
+        /// <see cref="Memory{byte}"/>.</para>
         /// </remarks>
         internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment)
         {
@@ -150,9 +150,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="withPrefixCells">The number of cells already provisioned in the <see cref="memory"/>.</param>
         /// <returns>A new instance that wraps the given memory.</returns>
         /// <remarks>
-        /// If the <see cref="IMemoryConfiguration"/> indicates that more prefix space is required than what is already
+        /// <para>If the <see cref="IMemoryConfiguration"/> indicates that more prefix space is required than what is already
         /// provisioned in the <see cref="memory"/> according to the <see cref="withPrefixCells"/>, then an additional
-        /// copy will occur. This is logged as a warning if a logger is given.
+        /// copy will occur. This is logged as a warning if a logger is given.</para>
         /// </remarks>
         public static SimpleMemory Create(
             IMemoryConfiguration memoryConfiguration,

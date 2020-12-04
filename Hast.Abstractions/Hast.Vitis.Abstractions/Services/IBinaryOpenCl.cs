@@ -12,8 +12,8 @@ namespace Hast.Vitis.Abstractions.Services
     /// most pointer usage, within practicality.
     /// </summary>
     /// <remarks>
-    /// It is of singleton lifecycle because it handles hardware and binary resources which are not expected to change
-    /// while the application is running. This way subsequent runs don't have to suffer the same initialization costs.
+    /// <para>It is of singleton lifecycle because it handles hardware and binary resources which are not expected to change
+    /// while the application is running. This way subsequent runs don't have to suffer the same initialization costs.</para>
     /// </remarks>
     public interface IBinaryOpenCl : ISingletonDependency, IDisposable
     {

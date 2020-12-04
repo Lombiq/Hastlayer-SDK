@@ -12,7 +12,7 @@
         /// it'll serve as a seed.
         /// </summary>
         /// <remarks>
-        /// By not using a constructor the whole class can be inlined for maximal performance.
+        /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
         public ushort State = 49813; // Just some starting number.
 

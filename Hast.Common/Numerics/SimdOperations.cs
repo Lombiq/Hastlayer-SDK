@@ -7,7 +7,7 @@ namespace Hast.Common.Numerics
     /// an operation on multiple elements at once.
     /// </summary>
     /// <remarks>
-    /// These operations are transformed into SIMD-like operations but currently they are plainly sequential in .NET.
+    /// <para>These operations are transformed into SIMD-like operations but currently they are plainly sequential in .NET.</para>
     /// </remarks>
     public static class SimdOperations
     {

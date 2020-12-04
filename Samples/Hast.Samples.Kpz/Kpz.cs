@@ -61,7 +61,7 @@ namespace Hast.Samples.Kpz
         /// given steps during its execution. This object can be later passed on to <see cref="InspectForm" />
         /// to graphically represent it on a UI.
         /// <note type="caution">
-        /// Use a small grid and a low amount of iterations if enabled. It will use a lot of memory.
+        /// <para>Use a small grid and a low amount of iterations if enabled. It will use a lot of memory.</para>
         /// </note>
         /// </summary>
         public KpzStateLogger StateLogger;

@@ -53,7 +53,7 @@ namespace Hast.Layer
         /// <summary>
         /// Serializes the hardware description instance into a storage format.
         /// </summary>
-        /// <remarks>To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.</remarks>
+        /// <remarks><para>To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.</para></remarks>
         /// <param name="stream"></param>
         /// <returns></returns>
         Task Serialize(Stream stream);
