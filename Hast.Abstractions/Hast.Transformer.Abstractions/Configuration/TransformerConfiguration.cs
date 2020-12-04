@@ -92,7 +92,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             string simpleMemberName)
         {
             var maxRecursionDepthConfig = MemberInvocationInstanceCountConfigurations
-                .Where(config => simpleMemberName.StartsWith(config.MemberNamePrefix))
+                .Where(config => simpleMemberName.StartsWith(config.MemberNamePrefix, StringComparison.InvariantCulture))
                 .OrderByDescending(config => config.MemberNamePrefix.Length)
                 .FirstOrDefault();
 

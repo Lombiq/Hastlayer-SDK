@@ -36,7 +36,7 @@ namespace Hast.Vitis.Abstractions.Models
                 var line = reader.ReadLine();
 
                 // Stop at document end or at next header.
-                var sectionFinished = line?.StartsWith("---") != false;
+                var sectionFinished = line?.StartsWith("---", StringComparison.Ordinal) != false;
                 if (sectionFinished || string.IsNullOrWhiteSpace(line))
                 {
                     if (set)
@@ -50,7 +50,7 @@ namespace Hast.Vitis.Abstractions.Models
                     continue;
                 }
 
-                if (!line.Contains(":")) continue;
+                if (!line.Contains(":", StringComparison.Ordinal)) continue;
 
                 var parts = line.Split(new[] { ':' }, 2);
                 var key = parts[0].Trim();

@@ -75,7 +75,7 @@ namespace Hast.Console.Subcommands
             }
 
             var outputSet = !string.IsNullOrWhiteSpace(options.OutputFilePath);
-            if (outputSet && !options.OutputFilePath.EndsWith(".xclbin"))
+            if (outputSet && !options.OutputFilePath.EndsWith(".xclbin", StringComparison.Ordinal))
             {
                 throw new ArgumentException("Please set the -o option to point to the location of the xclbin file " +
                                             "(eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");

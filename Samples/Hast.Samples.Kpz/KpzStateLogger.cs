@@ -1,4 +1,5 @@
 using Hast.Samples.Kpz.Algorithms;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
@@ -154,7 +155,7 @@ namespace Hast.Samples.Kpz
 
         public void WriteToFiles(string path)
         {
-            if (!path.EndsWith("\\")) path += "\\";
+            if (!path.EndsWith("\\", StringComparison.Ordinal)) path += "\\";
 
             int iterationIndex = 0;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Text;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
@@ -231,7 +231,7 @@ namespace Hast.Samples.SampleAssembly
         {
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
-            var result = "";
+            var result = new StringBuilder();
             var startIndex = GetLCS_InputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2;
 
             for (int i = 0; i < maxInputLength; i++)
@@ -240,10 +240,10 @@ namespace Hast.Samples.SampleAssembly
                 var currentCharBytes = BitConverter.GetBytes(currentChar);
                 var chars = Encoding.UTF8.GetChars(currentCharBytes);
 
-                result += chars[0];
+                result.Append(chars[0]);
             }
 
-            return result.Replace("\0", "");
+            return result.ToString().Replace("\0", string.Empty, StringComparison.Ordinal);
         }
     }
 }

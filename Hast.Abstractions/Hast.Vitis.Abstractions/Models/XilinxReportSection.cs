@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace Hast.Vitis.Abstractions.Models
 
             // Scroll to the table start. Each section always seems to have a table even if empty.
             await ReadUntilAsync(reader, TableBorderLine);
-            if (!title.EndsWith(". Summary"))
+            if (!title.EndsWith(". Summary", StringComparison.InvariantCulture))
             {
                 columnNames = (await reader.ReadLineAsync())!.Trim('|').Split('|').Select(columnName => columnName.Trim())
                     .ToList();
@@ -56,7 +57,7 @@ namespace Hast.Vitis.Abstractions.Models
             }
 
             // Read each line into a table and then drop the bottom table border line.
-            var data = (await ReadWhileAsync(reader, line => line.StartsWith("|") && !line.StartsWith(TableBorderLine)))
+            var data = (await ReadWhileAsync(reader, line => line.StartsWith("|", StringComparison.Ordinal) && !line.StartsWith(TableBorderLine, StringComparison.Ordinal)))
                 .Select(line => line.Trim('|')
                     .Split('|')
                     .Select(cell => cell.Trim())
@@ -65,7 +66,7 @@ namespace Hast.Vitis.Abstractions.Models
 
             // Post-table comments start with an asterisk.
             var comments = new List<string>();
-            while (await reader.ReadLineAsync() is { } line && line.StartsWith("*")) comments.Add(line);
+            while (await reader.ReadLineAsync() is { } line && line.StartsWith("*", StringComparison.Ordinal)) comments.Add(line);
 
             return new XilinxReportSection(data, columnNames, comments);
         }
