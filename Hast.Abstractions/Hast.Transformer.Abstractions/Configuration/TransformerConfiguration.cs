@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             new ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration>();
 
         /// <summary>
-        /// Gets or sets the list of the member invocation instance counts, i.e. how many times a member can be invoked
+        /// Gets the list of the member invocation instance counts, i.e. how many times a member can be invoked
         /// at a given time.
         /// </summary>
         public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations
@@ -21,7 +21,10 @@ namespace Hast.Transformer.Abstractions.Configuration
             // not necessarily the same on all machines or during all executions. Thus we need sorting so the 
             // transformation ID is deterministic (see DefaultTransformer in Hast.Transformer).
             // Also, ToArray() and the setter are needed for JSON de/serialization when doing remote transformation. 
-            get { return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray(); }
+            get
+            {
+                return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray();
+            }
 
             private set
             {

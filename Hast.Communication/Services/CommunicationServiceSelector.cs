@@ -1,4 +1,4 @@
-﻿using Hast.Common.Validation;
+using Hast.Common.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +14,7 @@ namespace Hast.Communication.Services
             _communicationServices = communicationServices;
         }
 
-        public ICommunicationService GetCommunicationService(string channelName)
+        public ICommunicationService GetCommunicationService(string channelName = "")
         {
             Argument.ThrowIfNullOrEmpty(channelName, "channelName");
             return _communicationServices.FirstOrDefault(service => service.ChannelName == channelName);

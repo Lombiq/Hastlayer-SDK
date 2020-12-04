@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -212,7 +212,7 @@ namespace Hast.Algorithms
             {
                 // We cannot represent infinities like Single and Double, and Sqrt is
                 // mathematically undefined for x < 0. So we just throw an exception.
-                throw new ArgumentOutOfRangeException("Negative value passed to Sqrt", "x");
+                throw new ArgumentOutOfRangeException(nameof(x), "Negative value passed to Sqrt");
             }
 
             var num = (ulong)xl;

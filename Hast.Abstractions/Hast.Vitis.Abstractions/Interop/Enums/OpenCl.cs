@@ -211,7 +211,10 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// <remarks>https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h</remarks>
         ExtensionXilinxPointer = 1ul << 31,
 
+        // Blame Xilinx.
+#pragma warning disable CA1069 // Enums values should not be duplicated
         ExtensionXilinxTopology = 1ul << 31,
+#pragma warning restore CA1069 // Enums values should not be duplicated
     }
 
     /// <summary>

@@ -37,7 +37,7 @@ namespace Hast.Vitis.Abstractions.Services
         public int DeviceCount => Devices.Length;
 
         #endregion
-        
+
         #region Constructors
 
         public BinaryOpenCl(

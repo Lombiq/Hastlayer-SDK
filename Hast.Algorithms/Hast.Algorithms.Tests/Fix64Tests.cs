@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,6 +68,7 @@ namespace Hast.Algorithms.Tests
         }
 
         [Fact]
+        [SuppressMessage("Blocker Code Smell", "S2699:Tests should include assertions", Justification = nameof(EqualWithinPrecision) + " is an assertion.")]
         public void DoubleToFix64AndBack()
         {
             var sources = new[] {

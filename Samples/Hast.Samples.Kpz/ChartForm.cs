@@ -3,6 +3,7 @@ using Hast.Samples.Kpz.Algorithms;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -21,10 +22,12 @@ namespace Hast.Samples.Kpz
         private bool _stepByStep { get { return checkStep.Checked; } }
         private bool _randomSeedEnable { get { return checkRandomSeed.Checked; } }
 
+
         /// <summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
         /// so that the GUI keeps responding while the algorithm is running.
         /// </summary>
+        [SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Disposed in Closed event handler.")]
         readonly BackgroundWorker _backgroundWorker;
 
         /// <summary>
@@ -33,6 +36,7 @@ namespace Hast.Samples.Kpz
         Kpz _kpz;
 
         /// <summary>InspectForm allows us to inspect the results of the KPZ algorithm on a GUI interface.</summary>
+        [SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Disposed in Closed event handler.")]
         InspectForm _inspectForm;
 
         /// <summary>
@@ -352,6 +356,13 @@ namespace Hast.Samples.Kpz
         private void labelRandomSeed_Click(object sender, EventArgs e)
         {
             if (checkRandomSeed.Enabled) checkRandomSeed.Checked = !checkRandomSeed.Checked;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            _backgroundWorker?.Dispose();
+            _inspectForm?.Dispose();
+            base.OnClosed(e);
         }
     }
 }
