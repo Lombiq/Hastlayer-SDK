@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Example for a SimpleMemory-using algorithm. Also see <see cref="PrimeCalculatorSampleRunner"/> on what to
+    /// Example for a SimpleMemory-using algorithm. Also see <c>PrimeCalculatorSampleRunner</c> on what to
     /// configure to make this work.
     /// </summary>
     public class PrimeCalculator
@@ -130,25 +130,33 @@ namespace Hast.Samples.SampleAssembly
         /// don't need to pass data through SimpleMemory.
         /// </summary>
         /// <remarks>
+        /// <para>
         /// Note the usage of the AggressiveInlining option, which tells Hastlayer that the method can be inlined, i.e.
         /// basically its implementation can be copied over to where it is called. This is a performance optimization:
         /// this way the overhead of method calls is eliminated and thus execution will be faster (very useful if you
         /// have small methods called frequently, like this one from ParallelizedArePrimeNumbers()) but the hardware
         /// implementation will most possibly use more resources from the FPGA (though not always; since the method
         /// invocation was cut out it can even utilize less resources, check for your program).
+        /// </para>
         ///
+        /// <para>
         /// In the case of the PrimeCalculator sample inlining this method had the following effects:
         /// - Execution time went down: ArePrimeNumbers() took 1151ms without and 1069ms with inlining (-7%),
         ///   ParallelizedArePrimeNumbers() took 64ms without and 60ms with inlining (-6%).
         /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that
         ///   limits further use).
+        /// </para>
         ///
+        /// <para>
         /// Methods can also be inlined with the help of the
-        /// <c>TransformerConfiguration().AddAdditionalInlinableMethod<T>()</c> configuration.
+        /// <c>TransformerConfiguration().AddAdditionalInlinableMethod&lt;T&gt;()</c> configuration.
+        /// </para>
         ///
+        /// <para>
         /// WARNING: be sure not to overdo inlining, because just inlining everything (especially if inlined methods
         /// also call inlined methods...) can quickly create giant hardware implementations that won't be just most
         /// possibly too big for the FPGA but also very slow to transform.
+        /// </para>
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsPrimeNumberInternal(uint number)

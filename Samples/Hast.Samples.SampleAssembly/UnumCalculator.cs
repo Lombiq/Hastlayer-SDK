@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample on using unum floating point numbers. <see href="http://www.johngustafson.net/unums.html">Some info on unums.</see>
+    /// A sample on using unum floating point numbers. <see href="http://www.johngustafson.net/unums.html">Some info on unums</see>.
     /// </summary>
     public class UnumCalculator
     {

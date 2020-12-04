@@ -1,6 +1,7 @@
 using Hast.Synthesis.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.Abstractions.SimpleMemory
@@ -194,11 +195,13 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="bytes">The source.</param>
         /// <returns>The underlying array.</returns>
         /// <remarks>
-        /// Once Stream.Read(Span) based overload is available, use that instead!
-        /// https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.read?view=netcore-2.2#System_IO_Stream_Read_System_Span_System_Byte__
+        /// <para>
+        /// Once <see cref="Stream.Read(Span{byte})"/> based overload is available, use that instead!
+        /// See <see href="https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.read?view=netcore-2.2#System_IO_Stream_Read_System_Span_System_Byte__">here</see>.
+        /// </para>
         /// </remarks>
         public static ArraySegment<byte> GetUnderlyingArray(this Memory<byte> bytes) => GetUnderlyingArray((ReadOnlyMemory<byte>)bytes);
-
+        
         public static ArraySegment<byte> GetUnderlyingArray(this ReadOnlyMemory<byte> bytes)
         {
             if (!MemoryMarshal.TryGetArray(bytes, out var arraySegment)) throw new NotSupportedException("This Memory does not support exposing the underlying array.");

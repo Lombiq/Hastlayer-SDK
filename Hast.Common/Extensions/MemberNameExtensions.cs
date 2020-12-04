@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -18,7 +18,7 @@ namespace Hast.Common.Extensions
         /// <c>"System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.ComplexTypes.IInterface1.Interface1Method1(System.Int32)"</c>
         /// We create two alternates from this:
         /// 1) <c>"System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Interface1Method1(System.Int32)"</c>
-        /// 2) <c>"System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)"</c>
+        /// 2) <c>"System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)"</c>.
         /// </para>
         /// </remarks>
         /// <returns>Alternate member names, if any.</returns>
