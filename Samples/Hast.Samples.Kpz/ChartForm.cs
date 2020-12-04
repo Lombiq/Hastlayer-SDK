@@ -173,15 +173,14 @@ namespace Hast.Samples.Kpz
 
                 if (!periodicityValid)
                 {
-                    AsyncLogIt(String.Format("Warning: Periodicity invalid (x: {0}, y: {1})",
-                        periodicityInvalidXCount, periodicityInvalidYCount));
+                    AsyncLogIt($"Warning: Periodicity invalid (x: {periodicityInvalidXCount}, y: {periodicityInvalidYCount})");
                 }
 
                 double surfaceRoughness = _kpz.HeightMapStandardDeviation(heightMap, mean);
 
                 Invoke(new Action(() =>
                 {
-                    LogIt(String.Format("iteration: {0}, surfaceRoughness: {1}", iteration, surfaceRoughness));
+                    LogIt($"iteration: {iteration}, surfaceRoughness: {surfaceRoughness}");
                     chartKPZ.Series[0].Points.AddXY(iteration + 1, surfaceRoughness);
                     chartKPZ.ChartAreas[0].AxisX.IsLogarithmic = true;
                 }));
@@ -245,7 +244,7 @@ namespace Hast.Samples.Kpz
                     for (; ; )
                     {
                         int iterationsToDo = currentIteration - lastIteration;
-                        AsyncLogIt(String.Format("Doing {0} iterations at once...", iterationsToDo));
+                        AsyncLogIt($"Doing {iterationsToDo} iterations at once...");
                         _kpz.DoHastIterations(hastlayer, configuration, (uint)iterationsToDo);
                         AsyncUpdateProgressBar(currentIteration);
                         // Force update if current iteration is the last:

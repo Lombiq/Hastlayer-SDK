@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hast.Algorithms
 {
@@ -108,7 +105,7 @@ namespace Hast.Algorithms
 
         public int CompareTo(Fix64 other) => _rawValue.CompareTo(other._rawValue);
 
-        public override string ToString() => ((decimal)this).ToString();
+        public override string ToString() => ((decimal)this).ToString(CultureInfo.InvariantCulture);
 
         public int[] ToIntegers()
         {

@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -51,8 +52,8 @@ namespace Hast.Samples.Consumer.SampleRunners
                         //    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
 
                         throw new InvalidOperationException(
-                            "The hardware result and the software result is not the same on index " + i.ToString() + ": " +
-                            hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + ".");
+                            "The hardware result and the software result is not the same on index " + i.ToString(CultureInfo.InvariantCulture) + ": " +
+                            hardwareResult[i].ToString(CultureInfo.InvariantCulture) + " vs " + softwareResult[i].ToString(CultureInfo.InvariantCulture) + ".");
                     }
                 }
                 catch (Exception)

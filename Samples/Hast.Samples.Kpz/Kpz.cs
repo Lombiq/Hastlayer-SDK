@@ -180,7 +180,7 @@ namespace Hast.Samples.Kpz
                     periodicityValid = false;
                     periodicityInvalidXCount++;
                     if (doVerboseLoggingToConsole)
-                        Console.WriteLine(string.Format("periodicityInvalidX at line {0}", y));
+                        Console.WriteLine($"periodicityInvalidX at line {y}");
                 }
 
                 heightNow += Bool2Delta(Grid[0, (y + 1) % GridHeight].dy);
@@ -191,8 +191,13 @@ namespace Hast.Samples.Kpz
                 periodicityValid = false;
                 periodicityInvalidYCount++;
                 if (doVerboseLoggingToConsole)
-                    Console.WriteLine(string.Format("periodicityInvalidY {0} + {1} != {2}", heightMap[0, GridHeight - 1],
-                        Bool2Delta(Grid[0, 0].dy), heightMap[0, 0]));
+                {
+#pragma warning disable S106 // Standard outputs should not be used directly to log anything
+#pragma warning disable S2228 // Console logging should not be used
+                    Console.WriteLine($"periodicityInvalidY {heightMap[0, GridHeight - 1]} + {Bool2Delta(Grid[0, 0].dy)} != {heightMap[0, 0]}");
+#pragma warning restore S2228 // Console logging should not be used
+#pragma warning restore S106 // Standard outputs should not be used directly to log anything
+                }
             }
 
             if (_enableStateLogger) StateLogger.AddKpzAction("GenerateHeightMap", heightMap);
@@ -224,7 +229,7 @@ namespace Hast.Samples.Kpz
             double standardDeviation = Math.Sqrt(variance);
 
             if (_enableStateLogger)
-                StateLogger.AddKpzAction(string.Format("HeightMapStandardDeviation: {0}", standardDeviation));
+                StateLogger.AddKpzAction($"HeightMapStandardDeviation: {standardDeviation}");
 
             return standardDeviation;
         }

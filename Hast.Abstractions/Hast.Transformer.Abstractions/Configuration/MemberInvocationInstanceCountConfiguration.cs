@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq.Expressions;
 
 namespace Hast.Transformer.Abstractions.Configuration
@@ -68,7 +69,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix
         /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
         public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
-            simpleName + ".LambdaExpression." + lambdaExpressionIndex.ToString();
+            simpleName + ".LambdaExpression." + lambdaExpressionIndex.ToString(CultureInfo.InvariantCulture);
     }
 
     public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration

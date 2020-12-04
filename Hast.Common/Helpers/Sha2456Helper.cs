@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,7 +17,7 @@ namespace Hast.Common.Helpers
 
             for (int i = 0; i < hashedIdBytes.Length; i++)
             {
-                stringBuilder.Append(hashedIdBytes[i].ToString("x2"));
+                stringBuilder.Append(hashedIdBytes[i].ToString("x2", CultureInfo.InvariantCulture));
             }
 
             return stringBuilder.ToString();

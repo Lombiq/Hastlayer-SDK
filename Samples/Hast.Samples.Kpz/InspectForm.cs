@@ -81,9 +81,9 @@ namespace Hast.Samples.Kpz
 
                 for (int x = 0; x < gridDisplayWidth; x++)
                 {
-                    dgvRow.Cells.Add(new DataGridViewTextBoxCell()
+                    dgvRow.Cells.Add(new DataGridViewTextBoxCell
                     {
-                        Value = string.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0")
+                        Value = $"{(arr[x, y].dx ? "1" : "0")}{(arr[x, y].dy ? "1" : "0")}",
                     });
                 }
 
@@ -121,7 +121,7 @@ namespace Hast.Samples.Kpz
                 listActions.Items.Clear();
                 int i = 0;
                 _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach(
-                    (a) => listActions.Items.Add(string.Format("{0} {1}", i++, a.Description)));
+                    (a) => listActions.Items.Add($"{i++} {a.Description}"));
             }
             catch (Exception ex) { Console.WriteLine(ex.ToString()); }
         }
