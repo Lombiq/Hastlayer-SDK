@@ -17,7 +17,6 @@
         /// </remarks>
         public uint State = 498113; // Just some starting number.
 
-
         public uint NextUInt32()
         {
             // Using the taps from https://www.xilinx.com/support/documentation/application_notes/xapp052.pdf

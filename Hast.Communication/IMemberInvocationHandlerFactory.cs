@@ -17,7 +17,6 @@ namespace Hast.Communication
     /// </returns>
     public delegate void MemberInvocationHandler(IInvocation invocation);
 
-
     /// <summary>
     /// Creates delegates that will handle member invocations issued to members of objects whose logic is implemented 
     /// as hardware.

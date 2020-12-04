@@ -22,7 +22,6 @@ namespace Hast.Transformer.Abstractions
         Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration);
     }
 
-
     public static class TransformerExtensions
     {
         public static Task<IHardwareDescription> Transform(

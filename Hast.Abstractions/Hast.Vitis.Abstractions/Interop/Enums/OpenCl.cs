@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-
 // Some of the enums are taken from OpenCL.NET:
 // PlatformInformation is sourced from https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Platforms/PlatformInformation.cs
 // Result is sourced from https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Result.cs
@@ -11,7 +10,6 @@ using System.Diagnostics.CodeAnalysis;
 // MemoryFlag is described at https://www.khronos.org/registry/OpenCL/sdk/1.0/docs/man/xhtml/clCreateBuffer.html
 // MemoryMigrationFlag at https://www.khronos.org/registry/OpenCL/sdk/1.2/docs/man/xhtml/clEnqueueMigrateMemObjects.html
 // CommandQueueProperty at https://www.khronos.org/registry/OpenCL/sdk/1.0/docs/man/xhtml/clCreateCommandQueue.html
-
 
 namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
 {
@@ -54,7 +52,6 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// </summary>
         Extensions = 0x0904,
     }
-
 
     /// <summary>
     /// Represents an enumeration for the result codes that are returned by the native OpenCL functions.
@@ -121,7 +118,6 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         InvalidPartitionNameExt = -1059
     }
 
-
     /// <summary>
     /// A bitfield that identifies the type of OpenCL device. The device_type can be used to query specific OpenCL
     /// devices or all OpenCL devices available.
@@ -157,8 +153,6 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// </summary>
         All = 0xFFFFFFFF
     }
-
-
 
     /// <summary>
     /// A bit-field that is used to specify allocation and usage information such as the memory arena that should be

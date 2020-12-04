@@ -15,7 +15,6 @@ namespace Hast.Samples.SampleAssembly
         private const int Run_StartIndexInt32Index = 0;
         private const int Run_LengthInt32Index = 1;
 
-
         public virtual void Run(SimpleMemory memory)
         {
             var startIndex = memory.ReadInt32(Run_StartIndexInt32Index);
@@ -29,7 +28,6 @@ namespace Hast.Samples.SampleAssembly
                 memory.WriteInt32(i, memory.ReadInt32(i) + 1);
             }
         }
-
 
         public int Run(int startIndex, int length, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {

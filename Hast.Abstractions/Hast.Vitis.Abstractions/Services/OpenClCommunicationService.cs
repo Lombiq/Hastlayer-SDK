@@ -23,13 +23,11 @@ namespace Hast.Vitis.Abstractions.Services
     {
         public const string KernelName = "hastip";
 
-
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
 
         protected readonly IBinaryOpenCl _binaryOpenCl;
         protected readonly ILogger _logger;
-
 
         protected OpenClCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
@@ -42,7 +40,6 @@ namespace Hast.Vitis.Abstractions.Services
             _binaryOpenCl = binaryOpenCl;
             _logger = logger;
         }
-
 
         public override async Task<IHardwareExecutionInformation> Execute(
             SimpleMemory simpleMemory,
@@ -147,13 +144,11 @@ namespace Hast.Vitis.Abstractions.Services
             return context.HardwareExecutionInformation;
         }
 
-
         protected virtual IntPtr GetBuffer(
             Memory<byte> data,
             MemoryHandle hostMemoryHandle,
             IHardwareExecutionContext executionContext) =>
             IntPtr.Zero;
-
 
         private OpenClResultMetadata GetResultMetadata(Span<byte> bufferSpan, IOpenClConfiguration configuration)
         {

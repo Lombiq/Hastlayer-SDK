@@ -23,12 +23,10 @@ namespace Hast.Vitis.Abstractions.Models
         [JsonProperty]
         public IReadOnlyList<IReadOnlyList<string>> Data => _data;
 
-
         public IDictionary<string, string> this[int rowIndex] =>
             _data[rowIndex]
                 .Select((item, columnIndex) => new { Cell = item, ColumnIndex = columnIndex })
                 .ToDictionary(item => Columns[item.ColumnIndex], item => item.Cell);
-
 
         public XilinxReportSection(string[][] data, IReadOnlyList<string> columns, IReadOnlyList<string> comments)
         {
@@ -38,13 +36,11 @@ namespace Hast.Vitis.Abstractions.Models
             Comments = comments;
         }
 
-
         public IDictionary<string, IDictionary<string, string>> ToDictionaryByFirstColumn() =>
             Enumerable
                 .Range(0, Rows)
                 .Select(row => this[row])
                 .ToDictionary(row => row[Columns[0]]);
-
 
         public static async Task<XilinxReportSection> ParseAsync(TextReader reader, string title)
         {

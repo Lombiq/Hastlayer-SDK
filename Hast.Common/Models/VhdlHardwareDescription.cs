@@ -29,7 +29,6 @@ namespace Hast.Common.Models
         [JsonProperty]
         public IEnumerable<ITransformationWarning> Warnings { get; set; }
 
-
         public async Task Serialize(Stream stream)
         {
             if (string.IsNullOrEmpty(VhdlSource)) throw new InvalidOperationException("There is no VHDL source set.");
@@ -43,7 +42,6 @@ namespace Hast.Common.Models
             }
         }
 
-
         public static async Task<VhdlHardwareDescription> Deserialize(Stream stream)
         {
             using (var reader = new StreamReader(stream))
@@ -53,7 +51,6 @@ namespace Hast.Common.Models
                         GetJsonSerializerSettings());
             }
         }
-
 
         private static JsonSerializerSettings GetJsonSerializerSettings() =>
             new JsonSerializerSettings

@@ -25,9 +25,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
-
             positCalculator.CalculatePowerOfReal(100000, (float)1.0001, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-
 
             var numbers = new int[Posit32Calculator.MaxDegreeOfParallelism];
             for (int i = 0; i < Posit32Calculator.MaxDegreeOfParallelism; i++)
@@ -36,7 +34,6 @@ namespace Hast.Samples.Consumer.SampleRunners
             }
 
             var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-
 
             var posit32Array = new uint[100000];
 
@@ -52,7 +49,6 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void RunSoftwareBenchmarks()
         {
             var positCalculator = new Posit32Calculator();
-
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
             positCalculator.CalculateIntegerSumUpToNumber(100000);

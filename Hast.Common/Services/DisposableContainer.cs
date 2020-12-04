@@ -13,7 +13,6 @@ namespace Hast.Common.Services
 
         public T Value { get; }
 
-
         public DisposableContainer(IDisposable context, T value)
         {
             _context = context;

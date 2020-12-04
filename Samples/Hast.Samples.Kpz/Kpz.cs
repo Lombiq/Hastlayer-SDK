@@ -2,14 +2,12 @@ using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using System;
 
-
 namespace Hast.Samples.Kpz
 {
     public enum KpzTarget
     {
         Cpu, Fpga, FpgaSimulation, FpgaParallelized, FpgaSimulationParallelized, PrngTest
     }
-
 
     public static class KpzTargetExtensions
     {
@@ -25,7 +23,6 @@ namespace Hast.Samples.Kpz
         public static bool HastlayerPlainAlgorithm(this KpzTarget target) =>
             target == KpzTarget.Fpga || target == KpzTarget.FpgaSimulation;
     }
-
 
     /// <summary>
     /// This class performs the calculations of the KPZ algorithm.
@@ -65,7 +62,6 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public KpzStateLogger StateLogger;
 
-
         /// <summary>
         /// The constructor initializes the parameters of <see cref="Kpz" />, see:
         /// <see cref="GridWidth" />, <see cref="GridHeight" />,
@@ -89,7 +85,6 @@ namespace Hast.Samples.Kpz
             if (_enableStateLogger) StateLogger = new KpzStateLogger();
             _kpzTarget = target;
         }
-
 
         /// <summary>It fills the <see cref="Grid" /> with random data.</summary>
         public void RandomizeGrid()
@@ -263,7 +258,6 @@ namespace Hast.Samples.Kpz
 
         private readonly bool HastlayerGridAlreadyPushed = false;
 
-
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// </summary>
@@ -370,7 +364,6 @@ namespace Hast.Samples.Kpz
             return toReturn;
         }
     }
-
 
     /// <summary>
     /// This class extends the built-in Random class with convenience functions.

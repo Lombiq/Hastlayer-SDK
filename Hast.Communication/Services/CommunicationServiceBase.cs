@@ -15,15 +15,12 @@ namespace Hast.Communication.Services
         abstract public string ChannelName { get; }
         public TextWriter TesterOutput { get; set; }
 
-
         protected CommunicationServiceBase(ILogger logger) => Logger = logger;
-
 
         abstract public Task<IHardwareExecutionInformation> Execute(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext);
-
 
         protected CommunicationStateContext BeginExecution()
         {
@@ -61,7 +58,6 @@ namespace Hast.Communication.Services
 
             Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
-
 
         protected class CommunicationStateContext
         {

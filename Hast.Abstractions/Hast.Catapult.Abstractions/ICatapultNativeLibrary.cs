@@ -3,7 +3,6 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-
 namespace Hast.Catapult.Abstractions
 {
     /// <summary>
@@ -181,7 +180,6 @@ namespace Hast.Catapult.Abstractions
         //   - CloseHandle has the same constraints as CreateHandle.
         // 
         // All functions return an Constants.Status code that should be checked for Constants.Status.Success by the user.
-
 
         /// <summary>
         /// This method can be used to determine if a compatible Catapult device is installed in the system. During

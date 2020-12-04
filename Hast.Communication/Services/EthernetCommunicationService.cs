@@ -33,7 +33,6 @@ namespace Hast.Communication.Services
             }
         }
 
-
         public EthernetCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
@@ -44,7 +43,6 @@ namespace Hast.Communication.Services
             _devicePoolManager = devicePoolManager;
             _fpgaIpEndpointFinder = fpgaIpEndpointFinder;
         }
-
 
         public override async Task<IHardwareExecutionInformation> Execute(
             SimpleMemory simpleMemory,
@@ -64,7 +62,6 @@ namespace Hast.Communication.Services
                     return fpgaEndpoints.Select(endpoint =>
                         new Device { Identifier = endpoint.Endpoint.Address.ToString(), Metadata = endpoint });
                 });
-
 
             using (var device = await _devicePoolManager.ReserveDevice())
             {
@@ -112,7 +109,6 @@ namespace Hast.Communication.Services
                             var segment = memory.GetUnderlyingArray();
                             await stream.WriteAsync(segment.Array, segment.Offset, memory.Length);
 
-
                             // Read the first batch of the TcpServer response bytes that will represent the execution time.
                             var executionTimeBytes = await GetBytesFromStream(stream, sizeof(ulong));
                             var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
@@ -140,7 +136,6 @@ namespace Hast.Communication.Services
                 return context.HardwareExecutionInformation;
             }
         }
-
 
         public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length, int offset = 0)
         {

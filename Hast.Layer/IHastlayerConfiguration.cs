@@ -23,7 +23,6 @@ namespace Hast.Layer
         Client
     }
 
-
     public interface IHastlayerConfiguration : ISingletonDependency
     {
         /// <summary>

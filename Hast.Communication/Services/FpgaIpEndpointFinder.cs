@@ -22,13 +22,11 @@ namespace Hast.Communication.Services
         private readonly IClock _clock;
         private readonly ILogger _logger;
 
-
         public FpgaIpEndpointFinder(IClock clock, ILogger<FpgaIpEndpointFinder> logger)
         {
             _clock = clock;
             _logger = logger;
         }
-
 
         public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints()
         {
@@ -71,7 +69,6 @@ namespace Hast.Communication.Services
             return receiveResults.Select(result => CreateFpgaEndpoint(result.Buffer));
         }
 
-
         private FpgaEndpoint CreateFpgaEndpoint(byte[] answerBytes)
         {
             var isAvailable = Convert.ToBoolean(answerBytes[0]);
@@ -85,7 +82,6 @@ namespace Hast.Communication.Services
                 LastCheckedUtc = _clock.UtcNow
             };
         }
-
 
         private class UdpReceiveResultEqualityComparer : IEqualityComparer<UdpReceiveResult>
         {

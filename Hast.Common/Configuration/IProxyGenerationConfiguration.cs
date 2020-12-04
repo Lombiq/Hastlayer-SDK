@@ -22,7 +22,6 @@ namespace Hast.Layer
         bool VerifyHardwareResults { get; }
     }
 
-
     public static class ProxyGenerationConfigurationExtensions
     {
         /// <summary>

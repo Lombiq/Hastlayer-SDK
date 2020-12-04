@@ -16,7 +16,6 @@ namespace Hast.Vitis.Abstractions.Models
         public IDictionary<string, XilinxReportSection> Sections { get; } =
             new Dictionary<string, XilinxReportSection>(StringComparer.InvariantCultureIgnoreCase);
 
-
         public static async Task<XilinxReport> ParseAsync(TextReader reader)
         {
             var report = new XilinxReport();
@@ -47,7 +46,6 @@ namespace Hast.Vitis.Abstractions.Models
 
             return report;
         }
-
 
         public static async Task<string> ReadUntilAsync(TextReader reader, string start = HorizontalLine)
         {

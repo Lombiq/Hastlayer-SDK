@@ -21,7 +21,6 @@ namespace Hast.Samples.Kpz
 
         private readonly KpzStateLogger _stateLogger;
 
-
         /// <summary>
         /// When the form is loaded, <see cref="listIterations"/> is initialized with the iterations available in
         /// <see cref="_stateLogger"/>.
@@ -106,7 +105,6 @@ namespace Hast.Samples.Kpz
                 dgv.Rows[coord.y].Cells[coord.x].Style.BackColor = HighlightColor;
             }
         }
-
 
         /// <summary>
         /// This function adds highlight (by applying background color) to a list of table cells in the

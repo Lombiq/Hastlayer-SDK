@@ -8,7 +8,6 @@ using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
-
 namespace Hast.Samples.SampleAssembly
 {
     public class Posit32FusedCalculator
@@ -23,7 +22,6 @@ namespace Hast.Samples.SampleAssembly
         public const int MaxArrayChunkSize = 160;
         public const int QuireSizeIn32BitChunks = Posit32.QuireSize >> 5;
         public const int QuireSizeIn64BitChunks = Posit32.QuireSize >> 6;
-
 
         public virtual void CalculateFusedSum(SimpleMemory memory)
         {

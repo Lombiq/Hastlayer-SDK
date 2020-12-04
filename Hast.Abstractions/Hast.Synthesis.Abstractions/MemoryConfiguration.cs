@@ -25,9 +25,7 @@ namespace Hast.Synthesis.Abstractions
 
         public int MinimumPrefix { get; set; }
 
-
         private MemoryConfiguration() { }
-
 
         public static IMemoryConfiguration Create(
             IHardwareGenerationConfiguration hardwareGenerationConfiguration,

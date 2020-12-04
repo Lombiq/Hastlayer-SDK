@@ -40,7 +40,6 @@ namespace Hast.Remote.Client
                         Configuration = apiConfiguration
                     });
 
-
                 TransformationResult transformationResult = null;
                 const int maxResultAttemptCount = 100;
                 var waitAttemptIndex = 0;

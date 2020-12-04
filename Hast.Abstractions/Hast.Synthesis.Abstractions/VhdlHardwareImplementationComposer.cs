@@ -10,11 +10,9 @@ namespace Hast.Synthesis.Abstractions
     {
         private readonly IEnumerable<IHardwareImplementationComposerBuildProvider> _buildProviders;
 
-
         public VhdlHardwareImplementationComposer(
             IEnumerable<IHardwareImplementationComposerBuildProvider> buildProviders) =>
             _buildProviders = buildProviders;
-
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.HardwareDescription is VhdlHardwareDescription;

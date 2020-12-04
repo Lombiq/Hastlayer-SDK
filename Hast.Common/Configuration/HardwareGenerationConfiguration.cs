@@ -68,7 +68,6 @@ namespace Hast.Layer
         /// </summary>
         public bool EnableHardwareImplementationComposition { get; set; } = true;
 
-
         /// <summary>
         /// Constructs a new <see cref="HardwareGenerationConfiguration"/> object.
         /// </summary>

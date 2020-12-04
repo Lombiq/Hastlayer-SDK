@@ -77,7 +77,6 @@ namespace Hast.Layer
         bool EnableHardwareImplementationComposition { get; }
     }
 
-
     public static class HardwareGenerationConfigurationExtensions
     {
         /// <summary>

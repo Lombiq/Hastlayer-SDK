@@ -41,7 +41,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// </summary>
         public virtual void TestAdd(SimpleMemory memory) => memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
 
-
         /// <summary>
         /// This function is for testing how Hastlayer works by running a random generator, writing the results into
         /// SimpleMemory.
@@ -58,7 +57,6 @@ namespace Hast.Samples.Kpz.Algorithms
             }
         }
     }
-
 
     /// <summary>
     /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM
@@ -87,7 +85,6 @@ namespace Hast.Samples.Kpz.Algorithms
         public RandomMwc64X Random1, Random2;
         public bool TestMode = false;
         public uint NumberOfIterations = 1;
-
 
         /// <summary>
         /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at
@@ -183,7 +180,6 @@ namespace Hast.Samples.Kpz.Algorithms
             }
         }
 
-
         /// <summary>
         /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for the
         /// item's place in the grid.
@@ -214,7 +210,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// </summary>
         private void SetGridDy(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~2U) | (value ? 2U : 0);
     }
-
 
     /// <summary>
     /// These are host-side helper functions for <see cref="KpzKernels"/>.
@@ -333,7 +328,6 @@ namespace Hast.Samples.Kpz.Algorithms
             kernels.DoIterations(sm);
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
-
 
         /// <summary>Push table into FPGA.</summary>
         public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)

@@ -21,7 +21,6 @@ namespace Hast.Samples.SampleAssembly
         private const int Run_InputInt32Index = 0;
         private const int Run_OutputInt32Index = 0;
 
-
         public virtual void Run(SimpleMemory memory)
         {
             var input = memory.ReadInt32(Run_InputInt32Index);

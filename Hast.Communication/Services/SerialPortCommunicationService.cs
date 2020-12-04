@@ -29,7 +29,6 @@ namespace Hast.Communication.Services
 
         public override string ChannelName => Serial.ChannelName;
 
-
         public SerialPortCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
@@ -40,7 +39,6 @@ namespace Hast.Communication.Services
             _devicePoolManager = devicePoolManager;
             _serialPortConfigurators = serialPortConfigurators;
         }
-
 
         public override async Task<IHardwareExecutionInformation> Execute(
             SimpleMemory simpleMemory,
@@ -118,7 +116,6 @@ namespace Hast.Communication.Services
                         var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
                         serialPort.Write(memoryAsArraySegment.Array, i * maxBytesToSendAtOnce + memoryAsArraySegment.Offset, bytesToSend);
                     }
-
 
                     // Processing the response.
                     var taskCompletionSource = new TaskCompletionSource<bool>();
@@ -231,7 +228,6 @@ namespace Hast.Communication.Services
                 }
             }
         }
-
 
         /// <summary>
         /// Detects serial-connected compatible FPGA boards.

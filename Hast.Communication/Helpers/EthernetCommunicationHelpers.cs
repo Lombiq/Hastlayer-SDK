@@ -39,7 +39,6 @@ namespace Hast.Communication.Helpers
                 datagram, bindingEndpoint, targetEndpoint, receiveTimeoutMilliseconds);
         }
 
-
         private static async Task<T> UdpSendAndReceiveAnyAsync<T>(Func<UdpClient, Task<T>> receiverTaskFactory, byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
         {
             // We need two UDP clients for sending and receiving datagrams. 

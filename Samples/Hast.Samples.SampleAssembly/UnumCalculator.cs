@@ -18,7 +18,6 @@ namespace Hast.Samples.SampleAssembly
         public const int CalculateSumOfPowersofTwo_InputUInt32Index = 0;
         public const int CalculateSumOfPowersofTwo_OutputUInt32Index = 0;
 
-
         public virtual void CalculateSumOfPowersofTwo(SimpleMemory memory)
         {
             var number = memory.ReadUInt32(CalculateSumOfPowersofTwo_InputUInt32Index);
@@ -47,7 +46,6 @@ namespace Hast.Samples.SampleAssembly
         public static UnumEnvironment EnvironmentFactory() => new UnumEnvironment(2, 4);
     }
 
-
     public static class UnumCalculatorExtensions
     {
         // While Hastlayer can figure out if an array is statically sized most of the time we need to specify the below
@@ -73,7 +71,6 @@ namespace Hast.Samples.SampleAssembly
             "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.Int32).array",
             "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32).array"
         };
-
 
         public static uint[] CalculateSumOfPowersofTwo(this UnumCalculator unumCalculator, uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {

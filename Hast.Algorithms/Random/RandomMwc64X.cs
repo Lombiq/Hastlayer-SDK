@@ -16,7 +16,6 @@ namespace Hast.Algorithms.Random
         /// </remarks>
         public ulong State = 0xCAFEUL; // Just some starting number.
 
-
         public uint NextUInt32()
         {
             uint c = (uint)(State >> 32);

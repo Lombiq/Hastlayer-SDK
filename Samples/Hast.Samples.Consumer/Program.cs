@@ -99,7 +99,6 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
             };
 
-
             // A little helper for later.
             var argsList = (IList<string>)args;
             string GetArgument(string name)

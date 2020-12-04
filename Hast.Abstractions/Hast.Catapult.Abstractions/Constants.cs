@@ -24,7 +24,6 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public const int BufferChunkBytes = 64;
 
-
         public static class SoftRegisters
         {
             public const int AllowedSlots = 2;
@@ -37,7 +36,6 @@ namespace Hast.Catapult.Abstractions
             public const string VersionDefinitionsFile = nameof(VersionDefinitionsFile);
             public const string VersionManifestFile = nameof(VersionManifestFile);
         }
-
 
         #region Unique constants from header files
         public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1000;

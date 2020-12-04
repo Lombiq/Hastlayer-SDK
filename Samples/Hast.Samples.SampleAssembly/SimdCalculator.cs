@@ -37,7 +37,6 @@ namespace Hast.Samples.SampleAssembly
         // On Catapult 170 will fit.
         public const int MaxDegreeOfParallelism = 20;
 
-
         public virtual void AddVectors(SimpleMemory memory)
         {
             RunSimdOperation(memory, SimdOperation.Add);
@@ -57,7 +56,6 @@ namespace Hast.Samples.SampleAssembly
         {
             RunSimdOperation(memory, SimdOperation.Divide);
         }
-
 
         private void RunSimdOperation(SimpleMemory memory, SimdOperation operation)
         {
@@ -108,7 +106,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
 
@@ -120,7 +117,6 @@ namespace Hast.Samples.SampleAssembly
 
         public int[] DivideVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
-
 
         private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {

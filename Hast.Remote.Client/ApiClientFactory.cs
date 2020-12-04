@@ -21,7 +21,6 @@ namespace Hast.Remote.Client
             return api;
         }
 
-
         public interface IHastlayerApi
         {
             [Header("Authorization")]

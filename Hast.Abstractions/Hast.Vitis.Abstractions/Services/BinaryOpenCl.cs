@@ -37,8 +37,7 @@ namespace Hast.Vitis.Abstractions.Services
         public int DeviceCount => Devices.Length;
 
         #endregion
-
-
+        
         #region Constructors
 
         public BinaryOpenCl(
@@ -59,7 +58,6 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         #endregion
-
 
         #region Methods
 
@@ -137,7 +135,6 @@ namespace Hast.Vitis.Abstractions.Services
             GetKernelBuffers(kernelName).Add(buffer);
             return buffer;
         }
-
 
         private static void VerifyResult(Result err)
         {

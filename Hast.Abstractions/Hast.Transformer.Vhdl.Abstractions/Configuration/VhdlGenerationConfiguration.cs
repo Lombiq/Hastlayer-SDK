@@ -36,7 +36,6 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
         /// </summary>
         public static VhdlGenerationConfiguration Release { get; } = new VhdlGenerationConfiguration();
 
-
         /// <summary>
         /// Gets or sets whether inline comments are added to the generated VHDL code. If set to <c>true</c> the
         /// generated code will contain comments on the structure of the code, notes on implementations and hints aiding

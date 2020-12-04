@@ -10,13 +10,11 @@ namespace Hast.Communication.Constants.CommunicationConstants
         public const int DefaultWriteTimeoutMilliseconds = 10000;
         public const string ChannelName = nameof(Serial);
 
-
         public static class Signals
         {
             public const char Ping = 'p';
             public const char Ready = 'r';
         }
-
 
         public enum CommunicationState
         {

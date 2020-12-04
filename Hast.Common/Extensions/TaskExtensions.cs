@@ -14,7 +14,6 @@ namespace System.Threading.Tasks
         public static Task<TOut> ThenAsync<TIn, TOut>(this Task<TIn> originalTask, Func<TIn, TOut> thenFunction, TaskScheduler scheduler = null) =>
             originalTask.ContinueWith(task => thenFunction(task.Result), scheduler ?? TaskScheduler.Default);
 
-
         [SuppressMessage("Usage", "VSTHRD103:Call async methods when in an async method", Justification = "ContinueWith only fires when The task is done.")]
         public static Task<TOut> ThenAsync<TIn, TOut>(this Task<TIn> originalTask, Func<TIn, Task<TOut>> thenFunction, TaskScheduler scheduler = null) =>
             originalTask.ContinueWith(task => thenFunction(task.Result), scheduler ?? TaskScheduler.Default).Unwrap();

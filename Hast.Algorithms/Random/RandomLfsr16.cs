@@ -15,7 +15,6 @@
         /// </remarks>
         public ushort State = 49813; // Just some starting number.
 
-
         public ushort NextUInt16()
         {
             // Using the taps from https://en.wikipedia.org/wiki/Linear-feedback_shift_register
