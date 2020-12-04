@@ -13,14 +13,14 @@ namespace Hast.Samples.Kpz
     ///<summary>The main form showing the log and the output graph of the algorithm.</summary>
     public partial class ChartForm : Form
     {
-        private int _numKpzIterations { get { return (int)nudIterations.Value; } }
-        private int _kpzWidth { get { return (int)nudTableWidth.Value; } }
-        private int _kpzHeight { get { return (int)nudTableHeight.Value; } }
-        private bool _showInspector { get { return checkShowInspector.Checked; } }
-        private bool _writeToFile { get { return checkWriteToFile.Checked; } }
-        private bool _verifyOutput { get { return checkVerifyOutput.Checked; } }
-        private bool _stepByStep { get { return checkStep.Checked; } }
-        private bool _randomSeedEnable { get { return checkRandomSeed.Checked; } }
+        public int NumKpzIterations => (int)nudIterations.Value;
+        public int KpzWidth => (int)nudTableWidth.Value;
+        public int KpzHeight => (int)nudTableHeight.Value;
+        public bool ShowInspector => checkShowInspector.Checked;
+        public bool WriteToFile => checkWriteToFile.Checked;
+        public bool VerifyOutput => checkVerifyOutput.Checked;
+        public bool StepByStep => checkStep.Checked;
+        public bool RandomSeedEnable => checkRandomSeed.Checked;
 
         /// <summary>
         /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
@@ -48,9 +48,9 @@ namespace Hast.Samples.Kpz
             {
                 WorkerSupportsCancellation = true
             };
-            _backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
+            _backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);
             _backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
-                backgroundWorker_RunWorkerCompleted
+                BackgroundWorker_RunWorkerCompleted
             );
             comboTarget.SelectedIndex = 4;
         }
@@ -66,13 +66,13 @@ namespace Hast.Samples.Kpz
         /// Clicking on <see cref="buttonStart" /> starts the KPZ algorithm in the background.
         /// When the algorithm is running, it can also be used to stop it.
         /// </summary>
-        private void buttonStart_Click(object sender, EventArgs e)
+        private void ButtonStart_Click(object sender, EventArgs e)
         {
             panelTop.Enabled = false;
             if (!_backgroundWorker.IsBusy)
             {
                 buttonStart.Text = "Stop";
-                progressBar.Maximum = _numKpzIterations;
+                progressBar.Maximum = NumKpzIterations;
                 ComputationTarget = CurrentComputationTarget; //ComboBox value cannot be accessed from BackgroundWorker
                 _backgroundWorker.RunWorkerAsync(2000);
             }
@@ -87,7 +87,7 @@ namespace Hast.Samples.Kpz
         /// It runs the KPZ algorithm in the background.
         /// See also: <see cref="BackgroundWorker"/>.
         /// </summary>
-        private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Do not access the form's BackgroundWorker reference directly.
             // Instead, use the reference provided by the sender parameter.
@@ -100,7 +100,7 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// It is called when the <see cref="BackgroundWorker"/> is finished with the KPZ algorithm.
         /// </summary>
-        private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (e.Cancelled) LogIt("Operation was canceled.");
             else if (e.Error != null) LogIt($"An error occurred: {e.Error.Message}");
@@ -108,9 +108,9 @@ namespace Hast.Samples.Kpz
             buttonStart.Enabled = false;
             progressBar.Visible = false;
 
-            if (_showInspector)
+            if (ShowInspector)
             {
-                if (_writeToFile)
+                if (WriteToFile)
                 {
                     LogIt("Writing KpzStateLogger to file...");
                     var kpzStateLoggerPath = Path.GetDirectoryName(
@@ -193,7 +193,7 @@ namespace Hast.Samples.Kpz
         private void RunKpz(BackgroundWorker bw)
         {
             AsyncLogIt("Creating KPZ data structure...");
-            _kpz = new Kpz(_kpzWidth, _kpzHeight, 0.5, 0.5, _showInspector, ComputationTarget);
+            _kpz = new Kpz(KpzWidth, KpzHeight, 0.5, 0.5, ShowInspector, ComputationTarget);
             AsyncLogIt("Filling grid with initial data...");
             _kpz.InitializeGrid();
 
@@ -204,7 +204,7 @@ namespace Hast.Samples.Kpz
             {
                 AsyncLogIt("Initializing Hastlayer...");
                 _kpz.LogItFunction = AsyncLogIt;
-                var hastlayerInitializationTask = _kpz.InitializeHastlayer(_verifyOutput, _randomSeedEnable);
+                var hastlayerInitializationTask = _kpz.InitializeHastlayer(VerifyOutput, RandomSeedEnable);
                 (hastlayer, configuration) = hastlayerInitializationTask.Result;
                 hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
                 hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
@@ -220,7 +220,7 @@ namespace Hast.Samples.Kpz
 
                 if (!ComputationTarget.HastlayerParallelizedAlgorithm())
                 {
-                    for (int currentIteration = 0; currentIteration < _numKpzIterations; currentIteration++)
+                    for (int currentIteration = 0; currentIteration < NumKpzIterations; currentIteration++)
                     {
                         if (ComputationTarget == KpzTarget.Cpu)
                         {
@@ -228,8 +228,8 @@ namespace Hast.Samples.Kpz
                         }
                         else
                         {
-                            if (_stepByStep) _kpz.DoHastIterationDebug(hastlayer, configuration);
-                            else { _kpz.DoHastIterations(hastlayer, configuration, (uint)_numKpzIterations); break; }
+                            if (StepByStep) _kpz.DoHastIterationDebug(hastlayer, configuration);
+                            else { _kpz.DoHastIterations(hastlayer, configuration, (uint)NumKpzIterations); break; }
                         }
 
                         AsyncUpdateProgressBar(currentIteration);
@@ -248,11 +248,11 @@ namespace Hast.Samples.Kpz
                         _kpz.DoHastIterations(hastlayer, configuration, (uint)iterationsToDo);
                         AsyncUpdateProgressBar(currentIteration);
                         // Force update if current iteration is the last:
-                        AsyncUpdateChart(currentIteration - 1, currentIteration == _numKpzIterations);
-                        if (currentIteration >= _numKpzIterations) break;
+                        AsyncUpdateChart(currentIteration - 1, currentIteration == NumKpzIterations);
+                        if (currentIteration >= NumKpzIterations) break;
                         lastIteration = currentIteration;
                         currentIteration *= 10;
-                        if (currentIteration > _numKpzIterations) currentIteration = _numKpzIterations;
+                        if (currentIteration > NumKpzIterations) currentIteration = NumKpzIterations;
                     }
                 }
 
@@ -269,12 +269,12 @@ namespace Hast.Samples.Kpz
         /// <see cref="labelShowInspector" /> is next to <see cref="checkShowInspector" />, and clicking on it
         /// can be used to toggle the checkbox.
         /// </summary>
-        private void labelShowInspector_Click(object sender, EventArgs e)
+        private void LabelShowInspector_Click(object sender, EventArgs e)
         {
             checkShowInspector.Checked = !checkShowInspector.Checked;
         }
 
-        private void comboTarget_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboTarget_SelectedIndexChanged(object sender, EventArgs e)
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
@@ -319,7 +319,7 @@ namespace Hast.Samples.Kpz
         /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
         /// that's why we need to use an external label for it.)
         /// </summary>
-        private void labelVerifyOutput_Click(object sender, EventArgs e)
+        private void LabelVerifyOutput_Click(object sender, EventArgs e)
         {
             if (checkVerifyOutput.Enabled) checkVerifyOutput.Checked = !checkVerifyOutput.Checked;
         }
@@ -328,7 +328,7 @@ namespace Hast.Samples.Kpz
         /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
         /// that's why we need to use an external label for it.)
         /// </summary>
-        private void labelStepByStep_Click(object sender, EventArgs e)
+        private void LabelStepByStep_Click(object sender, EventArgs e)
         {
             if (checkStep.Enabled) checkStep.Checked = !checkStep.Checked;
         }
@@ -337,7 +337,7 @@ namespace Hast.Samples.Kpz
         /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
         /// that's why we need to use an external label for it.)
         /// </summary>
-        private void labelShowInspector_Click_1(object sender, EventArgs e)
+        private void LabelShowInspector_Click_1(object sender, EventArgs e)
         {
             if (checkShowInspector.Enabled) checkShowInspector.Checked = !checkShowInspector.Checked;
         }
@@ -346,7 +346,7 @@ namespace Hast.Samples.Kpz
         /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
         /// that's why we need to use an external label for it.)
         /// </summary>
-        private void labelWriteToFile_Click(object sender, EventArgs e)
+        private void LabelWriteToFile_Click(object sender, EventArgs e)
         {
             if (checkWriteToFile.Enabled) checkWriteToFile.Checked = !checkWriteToFile.Checked;
         }
@@ -355,7 +355,7 @@ namespace Hast.Samples.Kpz
         /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
         /// that's why we need to use an external label for it.)
         /// </summary>
-        private void labelRandomSeed_Click(object sender, EventArgs e)
+        private void LabelRandomSeed_Click(object sender, EventArgs e)
         {
             if (checkRandomSeed.Enabled) checkRandomSeed.Checked = !checkRandomSeed.Checked;
         }

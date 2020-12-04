@@ -126,7 +126,7 @@ namespace Hast.Communication.Services
             var executionTimeBytes = new byte[8];
             var executionTimeByteCounter = 0;
 
-            void processReceivedByte(byte receivedByte, bool isLastOfBatch)
+            void ProcessReceivedByte(byte receivedByte, bool isLastOfBatch)
             {
                 switch (communicationState)
                 {
@@ -212,7 +212,7 @@ namespace Hast.Communication.Services
 
                     for (int i = 0; i < inputBuffer.Length; i++)
                     {
-                        processReceivedByte(inputBuffer[i], i == inputBuffer.Length - 1);
+                        ProcessReceivedByte(inputBuffer[i], i == inputBuffer.Length - 1);
 
                         if (communicationState == Serial.CommunicationState.Finished)
                         {
