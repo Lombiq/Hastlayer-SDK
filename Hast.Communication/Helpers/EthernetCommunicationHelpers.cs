@@ -43,19 +43,17 @@ namespace Hast.Communication.Helpers
         {
             // We need two UDP clients for sending and receiving datagrams. 
             // See: http://stackoverflow.com/questions/221783/udpclient-receive-right-after-send-does-not-work/222503#222503
-            using (var receiverClient = CreateUdpClient(bindingEndpoint))
-            using (var senderClient = CreateUdpClient(bindingEndpoint))
-            {
-                // It's handled by the Task.WhenAll below.
+            using var receiverClient = CreateUdpClient(bindingEndpoint);
+            using var senderClient = CreateUdpClient(bindingEndpoint);
+            // It's handled by the Task.WhenAll below.
 #pragma warning disable AsyncFixer04 // Fire & forget async call inside a using block
-                var receiveTask = receiverTaskFactory(receiverClient);
-                var sendTask = senderClient.SendAsync(datagram, datagram.Length, targetEndpoint);
+            var receiveTask = receiverTaskFactory(receiverClient);
+            var sendTask = senderClient.SendAsync(datagram, datagram.Length, targetEndpoint);
 #pragma warning restore AsyncFixer04 // Fire & forget async call inside a using block
 
-                await Task.WhenAll(receiveTask, sendTask);
+            await Task.WhenAll(receiveTask, sendTask);
 
-                return await receiveTask;
-            }
+            return await receiveTask;
         }
 
         private static UdpClient CreateUdpClient(IPEndPoint bindingEndpoint)

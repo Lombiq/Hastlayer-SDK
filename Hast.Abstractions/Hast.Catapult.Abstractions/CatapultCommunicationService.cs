@@ -95,35 +95,33 @@ namespace Hast.Catapult.Abstractions
                     .Select(x => new Device(x.InstanceName, x, Device_Disposing));
             });
 
-            using (var device = await _devicePoolManager.ReserveDevice())
-            {
-                var context = BeginExecution();
-                CatapultLibrary lib = device.Metadata;
-                lib.WaitClean();
-                lib.TesterOutput = TesterOutput;
-                var dma = new SimpleMemoryAccessor(simpleMemory);
+            using var device = await _devicePoolManager.ReserveDevice();
+            var context = BeginExecution();
+            CatapultLibrary lib = device.Metadata;
+            lib.WaitClean();
+            lib.TesterOutput = TesterOutput;
+            var dma = new SimpleMemoryAccessor(simpleMemory);
 
-                // Sending the data.
-                var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
-                var outputBuffer = await task;
+            // Sending the data.
+            var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
+            var outputBuffer = await task;
 
-                // Processing the response.
-                var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
-                SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+            // Processing the response.
+            var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
+            SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                var outputPayloadByteCount = SimpleMemory.MemoryCellSizeBytes * (int)MemoryMarshal.Read<uint>(
-                    outputBuffer[OutputHeaderSizes.HardwareExecutionTime..].Span);
-                if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
-                    outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
+            var outputPayloadByteCount = SimpleMemory.MemoryCellSizeBytes * (int)MemoryMarshal.Read<uint>(
+                outputBuffer[OutputHeaderSizes.HardwareExecutionTime..].Span);
+            if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
+                outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
 
-                if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
-                dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
-                Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
+            if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
+            dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
+            Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
-                EndExecution(context);
+            EndExecution(context);
 
-                return context.HardwareExecutionInformation;
-            }
+            return context.HardwareExecutionInformation;
         }
     }
 }

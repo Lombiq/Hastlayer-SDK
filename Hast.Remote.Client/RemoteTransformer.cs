@@ -93,10 +93,8 @@ namespace Hast.Remote.Client
                     throw new NotSupportedException("Only hardware descriptions in the VHDL language are supported.");
                 }
 
-                using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(hardwareDescription.SerializedHardwareDescription)))
-                {
-                    return await VhdlHardwareDescription.Deserialize(memoryStream);
-                }
+                using var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(hardwareDescription.SerializedHardwareDescription));
+                return await VhdlHardwareDescription.Deserialize(memoryStream);
             }
             catch (ApiException ex)
             {

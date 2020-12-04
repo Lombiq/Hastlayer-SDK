@@ -115,29 +115,27 @@ namespace Hast.Vitis.Abstractions.Services
                         $"{headerSize}b.");
                 }
 
-                using (var hostMemoryHandle = hostMemory.Pin())
-                {
-                    // Send data and execute.
-                    var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
-                        KernelName,
-                        index: 0,
-                        hostMemoryHandle,
-                        hostMemory.Length,
-                        GetBuffer(hostMemory, hostMemoryHandle, executionContext));
-                    Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
-                    Logger.LogInformation("LAUNCHING KERNEL...");
-                    _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
-                    Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
-                    await _binaryOpenCl.AwaitDevice(deviceIndex);
-                    var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
+                using var hostMemoryHandle = hostMemory.Pin();
+                // Send data and execute.
+                var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
+                    KernelName,
+                    index: 0,
+                    hostMemoryHandle,
+                    hostMemory.Length,
+                    GetBuffer(hostMemory, hostMemoryHandle, executionContext));
+                Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
+                Logger.LogInformation("LAUNCHING KERNEL...");
+                _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+                Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
+                await _binaryOpenCl.AwaitDevice(deviceIndex);
+                var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
 
-                    // Read out metadata.
-                    SetHardwareExecutionTime(
-                        context,
-                        executionContext,
-                        resultMetadata.ExecutionTime,
-                        clockFrequency);
-                }
+                // Read out metadata.
+                SetHardwareExecutionTime(
+                    context,
+                    executionContext,
+                    resultMetadata.ExecutionTime,
+                    clockFrequency);
             }
 
             EndExecution(context);

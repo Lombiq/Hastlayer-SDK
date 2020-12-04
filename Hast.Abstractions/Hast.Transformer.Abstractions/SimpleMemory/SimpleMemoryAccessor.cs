@@ -84,8 +84,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="filePath">The path under to write the storage data file to.</param>
         public void Store(string filePath)
         {
-            using (var fileStream = File.Create(filePath))
-                Store(fileStream);
+            using var fileStream = File.Create(filePath);
+            Store(fileStream);
         }
 
         /// <summary>
@@ -116,8 +116,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </param>
         public void Load(string filePath, int prefixCellCount = 0)
         {
-            using (var fileStream = File.OpenRead(filePath))
-                Load(fileStream, prefixCellCount);
+            using var fileStream = File.OpenRead(filePath);
+            Load(fileStream, prefixCellCount);
         }
     }
 }
