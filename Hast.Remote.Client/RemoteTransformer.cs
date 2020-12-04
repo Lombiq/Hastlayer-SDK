@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Transformer.Abstractions;
@@ -21,12 +21,7 @@ namespace Hast.Remote.Client
         {
             var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
-            var assemblyContainers = assemblyPaths
-                .Select(path => new AssemblyContainer
-                {
-                    Name = Path.GetFileNameWithoutExtension(path),
-                    FileContent = File.ReadAllBytes(path)
-                });
+            var assemblyContainers = assemblyPaths.Select(GetAssemblyContainers);
 
             var apiConfiguration = new HardwareGenerationConfiguration
             {
@@ -127,5 +122,13 @@ namespace Hast.Remote.Client
                 throw new RemoteTransformationException("Remote transformation failed because Hastlayer Remote Services returned an unexpected response. This might be because authorization failed (check if you mistyped your credentials) or because there is some issue with the service. If this error persists please get in touch with us under https://hastlayer.com/contact.", ex);
             }
         }
+
+        private AssemblyContainer GetAssemblyContainers(string path) =>
+            new AssemblyContainer
+            {
+                Name = Path.GetFileNameWithoutExtension(path),
+                FileContent = File.ReadAllBytes(path),
+            };
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -33,9 +33,9 @@ namespace Hast.Communication.Helpers
         /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent. Possibly it is a broadcast address.</param>
         /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
         /// <returns>Result objects containing UDP datagram received from the remote host. It is empty if nothing has arrived.</returns>
-        public static async Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
+        public static Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
         {
-            return await UdpSendAndReceiveAnyAsync(client => client.ReceiveAllAsync(receiveTimeoutMilliseconds), 
+            return UdpSendAndReceiveAnyAsync(client => client.ReceiveAllAsync(receiveTimeoutMilliseconds), 
                 datagram, bindingEndpoint, targetEndpoint, receiveTimeoutMilliseconds);
         }
 
@@ -47,12 +47,15 @@ namespace Hast.Communication.Helpers
             using (var receiverClient = CreateUdpClient(bindingEndpoint))
             using (var senderClient = CreateUdpClient(bindingEndpoint))
             {
+                // It's handled by the Task.WhenAll below.
+#pragma warning disable AsyncFixer04 // Fire & forget async call inside a using block
                 var receiveTask = receiverTaskFactory(receiverClient);
                 var sendTask = senderClient.SendAsync(datagram, datagram.Length, targetEndpoint);
+#pragma warning restore AsyncFixer04 // Fire & forget async call inside a using block
 
                 await Task.WhenAll(receiveTask, sendTask);
 
-                return receiveTask.Result;
+                return await receiveTask;
             }
         }
 

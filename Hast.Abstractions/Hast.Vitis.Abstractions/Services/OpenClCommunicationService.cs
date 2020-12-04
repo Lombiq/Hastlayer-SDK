@@ -80,7 +80,7 @@ namespace Hast.Vitis.Abstractions.Services
                     .Frequency;
             }
 
-            var kernelBinary = File.ReadAllBytes(implementation.BinaryPath);
+            var kernelBinary = await File.ReadAllBytesAsync(implementation.BinaryPath);
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
 
             _devicePoolPopulator.PopulateDevicePoolIfNew(() =>

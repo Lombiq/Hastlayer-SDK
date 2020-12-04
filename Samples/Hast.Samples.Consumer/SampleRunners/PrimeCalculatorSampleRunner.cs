@@ -24,7 +24,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             foreach (var number in new uint[] { 15, 13, 20 })
             {
                 Console.WriteLine("primeCalculator.IsPrimeNumber: {0}", number);
-                var result = primeCalculator.IsPrimeNumber(
+                var result = primeCalculator.IsPrimeNumberSync(
                     number,
                     hastlayer,
                     hardwareRepresentation.HardwareGenerationConfiguration);

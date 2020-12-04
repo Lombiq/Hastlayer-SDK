@@ -1,4 +1,4 @@
-﻿using AdvancedDLSupport;
+using AdvancedDLSupport;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
@@ -367,8 +367,12 @@ namespace Hast.Catapult.Abstractions
                 _currentSlot = (_currentSlot + 1) % BufferCount;
 
                 currentSlot = _currentSlot;
+
+                // We are inside a lock.
+#pragma warning disable AsyncFixer02 // Long-running or blocking operations inside an async method
                 _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
-                    .ContinueWith(_ => RunJob(currentSlot, data, ignoreResponse).Result);
+                    .ThenAsync(() => RunJob(currentSlot, data, ignoreResponse).Result);
+#pragma warning restore AsyncFixer02 // Long-running or blocking operations inside an async method
             }
 
             var jobResult = await job;

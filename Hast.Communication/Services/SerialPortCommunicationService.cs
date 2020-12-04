@@ -254,35 +254,12 @@ namespace Hast.Communication.Services
 
             for (int i = 0; i < ports.Length; i++)
             {
-                serialPortPingingTasks[i] = Task.Factory.StartNew(portNameObject =>
-                    {
-                        using (var serialPort = CreateSerialPort(executionContext))
-                        {
-                            var taskCompletionSource = new TaskCompletionSource<bool>();
-
-                            serialPort.DataReceived += (sender, e) =>
-                            {
-                                if (serialPort.ReadByte() == Serial.Signals.Ready)
-                                {
-                                    fpgaPortNames.Add(serialPort.PortName);
-                                    taskCompletionSource.SetResult(true);
-                                }
-                            };
-
-                            serialPort.PortName = (string)portNameObject;
-
-                            try
-                            {
-                                serialPort.Open();
-                                serialPort.Write(CommandTypes.WhoIsAvailable);
-                            }
-                            catch (IOException) { }
-                            catch (UnauthorizedAccessException) { } // This happens if the port is used by another app.
-
-                            // Waiting a maximum of 3s for a response from the port.
-                            taskCompletionSource.Task.Wait(3000);
-                        }
-                    }, ports[i]);
+                serialPortPingingTasks[i] = Task.Factory.StartNew(
+                    portNameObject => RunPort(portNameObject, executionContext, fpgaPortNames),
+                    ports[i],
+                    default,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default);
             }
 
             await Task.WhenAll(serialPortPingingTasks);
@@ -309,6 +286,36 @@ namespace Hast.Communication.Services
             _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort, executionContext));
 
             return serialPort;
+        }
+
+        private void RunPort(object portNameObject, IHardwareExecutionContext executionContext, ConcurrentBag<string> fpgaPortNames)
+        {
+            using (var serialPort = CreateSerialPort(executionContext))
+            {
+                var taskCompletionSource = new TaskCompletionSource<bool>();
+
+                serialPort.DataReceived += (sender, e) =>
+                {
+                    if (serialPort.ReadByte() == Serial.Signals.Ready)
+                    {
+                        fpgaPortNames.Add(serialPort.PortName);
+                        taskCompletionSource.SetResult(true);
+                    }
+                };
+
+                serialPort.PortName = (string)portNameObject;
+
+                try
+                {
+                    serialPort.Open();
+                    serialPort.Write(CommandTypes.WhoIsAvailable);
+                }
+                catch (IOException) { }
+                catch (UnauthorizedAccessException) { } // This happens if the port is used by another app.
+
+                // Waiting a maximum of 3s for a response from the port.
+                taskCompletionSource.Task.Wait(3000);
+            }
         }
     }
 }
