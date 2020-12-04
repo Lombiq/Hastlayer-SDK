@@ -99,7 +99,7 @@ namespace Hast.Samples.Kpz
         }
 
         /// <summary>
-        /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration, and highlights all 
+        /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration, and highlights all
         /// the cells changed between <see cref="Grid" /> and <see cref="GridBefore" /> with yellow color.
         /// </summary>
         public void AddKpzAction(string Description, KpzNode[,] Grid, KpzNode[,] GridBefore)

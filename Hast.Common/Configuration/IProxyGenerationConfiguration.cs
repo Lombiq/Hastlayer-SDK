@@ -28,7 +28,7 @@ namespace Hast.Layer
         /// Gets the custom configuration if it exists or creates and adds it if it doesn't.
         /// </summary>
         /// <typeparam name="T">Type of the configuration object.</typeparam>
-        /// <param name="key">Key where the custom configuration object is stored in the 
+        /// <param name="key">Key where the custom configuration object is stored in the
         /// <see cref="IProxyGenerationConfiguration"/> instance.</param>
         /// <returns>The existing or newly created configuration object.</returns>
         public static T GetOrAddCustomConfiguration<T>(this IProxyGenerationConfiguration proxyGenerationConfiguration, string key)

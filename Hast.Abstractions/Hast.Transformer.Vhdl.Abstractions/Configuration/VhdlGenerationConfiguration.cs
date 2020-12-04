@@ -9,7 +9,7 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
     public class VhdlGenerationConfiguration
     {
         /// <summary>
-        /// Gets the generated VHDL code will be more readable and will contain debug-level information, though it will be 
+        /// Gets the generated VHDL code will be more readable and will contain debug-level information, though it will be
         /// significantly slower to create. Also, since the identifiers in code are shortened for readability there can
         /// be naming clashes. The hardware will however run with the same performance as with any other configuration.
         /// </summary>
@@ -20,8 +20,8 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
         };
 
         /// <summary>
-        /// Gets the generated VHDL code will have the smallest possible size and be more readable due to shortened 
-        /// identifiers, though it will be significantly slower to create. Also, there can be naming clashes. The 
+        /// Gets the generated VHDL code will have the smallest possible size and be more readable due to shortened
+        /// identifiers, though it will be significantly slower to create. Also, there can be naming clashes. The
         /// hardware will however run with the same performance as with any other configuration.
         /// </summary>
         public static VhdlGenerationConfiguration Compact { get; } = new VhdlGenerationConfiguration
@@ -30,7 +30,7 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
         };
 
         /// <summary>
-        /// Gets the generated VHDL code will be significantly faster to create than in <see cref="Debug"/> or 
+        /// Gets the generated VHDL code will be significantly faster to create than in <see cref="Debug"/> or
         /// <see cref="Compact"/> mode, but will be less readable and won't contain debugging information. The hardware
         /// will however run with the same performance as with any other configuration.
         /// </summary>

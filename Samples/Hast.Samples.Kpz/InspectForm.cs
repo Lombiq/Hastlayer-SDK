@@ -11,7 +11,7 @@ namespace Hast.Samples.Kpz
     /// This form allows us to inspect the KPZ algorithm step by step.
     /// It relies heavily on the <see cref="KpzStateLogger"/> class.
     /// For large grids, it does not display the whole grid (due to speed limitations of <see cref="DataGridView"/>)
-    /// only a part of it, which can be configured with <see cref="MaxGridDisplayWidth"/> and 
+    /// only a part of it, which can be configured with <see cref="MaxGridDisplayWidth"/> and
     /// <see cref="MaxGridDisplayHeight"/>.
     /// </summary>
     public partial class InspectForm : Form

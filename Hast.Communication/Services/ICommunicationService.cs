@@ -30,7 +30,7 @@ namespace Hast.Communication.Services
         /// <param name="memberId">The member ID identifies the class member that we want to run on the FPGA board.</param>
         /// <param name="executionContext">The contextual information of the execution.</param>
         /// <returns>
-        /// An <see cref="IHardwareExecutionInformation"/> object containing debug and runtime information about the 
+        /// An <see cref="IHardwareExecutionInformation"/> object containing debug and runtime information about the
         /// hardware execution.
         /// </returns>
         Task<IHardwareExecutionInformation> Execute(

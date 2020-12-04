@@ -22,7 +22,7 @@ namespace Hast.Common.Services
         public void Dispose()
         {
             if (_disposed) return;
-            
+
             _context?.Dispose();
             _context = null;
             if (Value is IDisposable disposableValue) disposableValue.Dispose();

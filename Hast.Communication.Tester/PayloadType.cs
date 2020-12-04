@@ -21,9 +21,9 @@
         /// File gets read as binary.
         /// </summary>
         BinaryFile,
-        
+
         /// <summary>
-        /// File gets read as a bitmap. 
+        /// File gets read as a bitmap.
         /// </summary>
         Bitmap
     }

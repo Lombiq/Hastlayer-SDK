@@ -22,11 +22,11 @@ namespace Hast.Catapult.Abstractions
         {
             Status = status;
         }
-        
+
         public CatapultFunctionResultException(string message) : base(message) { }
-        
+
         public CatapultFunctionResultException(string message, Exception inner) : base(message, inner) { }
-        
+
         protected CatapultFunctionResultException(
           SerializationInfo info,
           StreamingContext context) : base(info, context)

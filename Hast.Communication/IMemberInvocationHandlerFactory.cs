@@ -12,13 +12,13 @@ namespace Hast.Communication
     /// </summary>
     /// <param name="invocation">The context of the member invocation.</param>
     /// <returns>
-    /// <c>True</c> if the member invocation was successfully transferred to the hardware implementation, <c>false</c> 
+    /// <c>True</c> if the member invocation was successfully transferred to the hardware implementation, <c>false</c>
     /// otherwise.
     /// </returns>
     public delegate void MemberInvocationHandler(IInvocation invocation);
 
     /// <summary>
-    /// Creates delegates that will handle member invocations issued to members of objects whose logic is implemented 
+    /// Creates delegates that will handle member invocations issued to members of objects whose logic is implemented
     /// as hardware.
     /// </summary>
     public interface IMemberInvocationHandlerFactory : ISingletonDependency

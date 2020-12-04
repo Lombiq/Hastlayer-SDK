@@ -1,7 +1,7 @@
 ﻿namespace Hast.Algorithms.Random
 {
     /// <summary>
-    /// A very simple pseudo random number generator implemented with a 
+    /// A very simple pseudo random number generator implemented with a
     /// <see href="https://en.wikipedia.org/wiki/Linear_feedback_shift_register">linear-feedback shift register</see>.
     /// Use this if you want simple but fast PRNG with the least resources. For a PRNG that has better quality but
     /// higher resource usage see <see cref="RandomMwc64X"/>.
@@ -9,7 +9,7 @@
     public class RandomLfsr
     {
         /// <summary>
-        /// The current inner state of the random number generator. If you set it when instantiating the object then 
+        /// The current inner state of the random number generator. If you set it when instantiating the object then
         /// it'll serve as a seed.
         /// </summary>
         /// <remarks>

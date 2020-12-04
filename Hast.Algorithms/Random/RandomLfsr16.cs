@@ -7,7 +7,7 @@
     public class RandomLfsr16
     {
         /// <summary>
-        /// The current inner state of the random number generator. If you set it when instantiating the object then 
+        /// The current inner state of the random number generator. If you set it when instantiating the object then
         /// it'll serve as a seed.
         /// </summary>
         /// <remarks>

@@ -188,7 +188,7 @@ namespace Hast.Communication.Services
                         {
                             dma.Set(outputBytes, MemoryPrefixCellCount);
 
-                            // Serial communication can give more data than we actually await, so need to 
+                            // Serial communication can give more data than we actually await, so need to
                             // set this.
                             communicationState = Serial.CommunicationState.Finished;
                             serialPort.Write(Serial.Signals.Ready);
