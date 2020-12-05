@@ -23,7 +23,7 @@ namespace Hast.Vitis.Abstractions.Models
                 temp.CopyTo(executionTimeSpan[MemoryCellSizeBytes..]);
             }
 
-            ExecutionTime =  MemoryMarshal.Read<ulong>(executionTimeSpan);
+            ExecutionTime = MemoryMarshal.Read<ulong>(executionTimeSpan);
         }
     }
 }

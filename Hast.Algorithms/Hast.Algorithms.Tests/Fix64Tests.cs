@@ -437,7 +437,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        [Fact(Skip="On ignore because temporarily removed the interface implementations from Fix64")]
+        [Fact(Skip = "On ignore because temporarily removed the interface implementations from Fix64")]
         public void CompareTo()
         {
             var nums = _testCases.Select(Fix64.FromRaw).ToArray();

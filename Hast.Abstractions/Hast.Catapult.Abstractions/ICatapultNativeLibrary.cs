@@ -192,7 +192,7 @@ namespace Hast.Catapult.Abstractions
         /// </returns>
         Constants.Status IsDevicePresent(
             string pchVerManifestFile,
-            [MarshalAs(UnmanagedType.FunctionPtr)]CatapultLogFunction logFunc);
+            [MarshalAs(UnmanagedType.FunctionPtr)] CatapultLogFunction logFunc);
 
         /// <summary>
         /// This function instantiates and returns a handle to an FPGA device. If the device is disabled  and the caller
@@ -221,9 +221,9 @@ namespace Hast.Catapult.Abstractions
             out IntPtr fpgaHandle,
             uint endpointNumber,
             uint flags,
-            [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVerDefnsFile,
-            [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVersionManifestFile,
-            [MarshalAs(UnmanagedType.FunctionPtr)]CatapultLogFunction logFunc = null);
+            [MarshalAs(UnmanagedType.LPStr)] StringBuilder pchVerDefnsFile,
+            [MarshalAs(UnmanagedType.LPStr)] StringBuilder pchVersionManifestFile,
+            [MarshalAs(UnmanagedType.FunctionPtr)] CatapultLogFunction logFunc = null);
 
         /// <summary>
         /// This function allows the library user to query the version of both software and hardware components. All
@@ -262,7 +262,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Provides error string for the last error occurred.
         /// </summary>
-        Constants.Status GetLastErrorText([MarshalAs(UnmanagedType.LPStr)]StringBuilder pErrorTextBuf, int cbBufSize);
+        Constants.Status GetLastErrorText([MarshalAs(UnmanagedType.LPStr)] StringBuilder pErrorTextBuf, int cbBufSize);
 
         /// <summary>
         /// This function retrieves a user-mapped pointer to a pinned region of kernel memory that is typically written
