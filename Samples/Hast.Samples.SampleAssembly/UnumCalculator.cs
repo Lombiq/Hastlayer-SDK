@@ -63,7 +63,7 @@ namespace Hast.Samples.SampleAssembly
             "System.UInt32[] Lombiq.Arithmetics.Unum::FractionToUintArray().array",
             "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32[],System.Boolean).value",
             "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.Int32).array",
-            "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32).array"
+            "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32).array",
         };
 
         public static uint[] CalculateSumOfPowersofTwo(this UnumCalculator unumCalculator, uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)

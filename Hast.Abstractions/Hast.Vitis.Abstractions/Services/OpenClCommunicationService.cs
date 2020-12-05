@@ -88,7 +88,7 @@ namespace Hast.Vitis.Abstractions.Services
                     devices.Add(new Device
                     {
                         Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}",
-                        Metadata = i
+                        Metadata = i,
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
                 }

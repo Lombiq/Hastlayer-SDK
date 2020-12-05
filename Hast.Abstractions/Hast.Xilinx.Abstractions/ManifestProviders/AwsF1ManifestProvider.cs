@@ -19,7 +19,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 // While there is 8GB of HBM2 and 32GB DDR RAM the max object size in .NET is 2GB. So until we
                 // add paging to SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
                 AvailableMemoryBytes = 2 * GigaByte,
-                ToolChainName = CommonToolChainNames.Vivado
+                ToolChainName = CommonToolChainNames.Vivado,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

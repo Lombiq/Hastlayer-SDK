@@ -28,7 +28,7 @@ namespace Hast.Remote.Client
                 CustomConfiguration = configuration.CustomConfiguration,
                 DeviceName = configuration.DeviceName,
                 HardwareEntryPointMemberFullNames = configuration.HardwareEntryPointMemberFullNames,
-                HardwareEntryPointMemberNamePrefixes = configuration.HardwareEntryPointMemberNamePrefixes
+                HardwareEntryPointMemberNamePrefixes = configuration.HardwareEntryPointMemberNamePrefixes,
             };
 
             try
@@ -37,7 +37,7 @@ namespace Hast.Remote.Client
                     .RequestTransformation(new TransformationRequest
                     {
                         Assemblies = assemblyContainers,
-                        Configuration = apiConfiguration
+                        Configuration = apiConfiguration,
                     });
 
                 TransformationResult transformationResult = null;

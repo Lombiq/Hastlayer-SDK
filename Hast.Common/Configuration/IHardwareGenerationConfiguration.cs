@@ -116,7 +116,7 @@ namespace Hast.Layer
             {
                 "Boolean Equals(System.Object)",
                 "Int32 GetHashCode()", "System.Type GetType()",
-                "System.String ToString()"
+                "System.String ToString()",
             };
 
             // If we'd just add the type's name to HardwareEntryPointMemberNamePrefixes then types with just a different

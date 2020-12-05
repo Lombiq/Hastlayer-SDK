@@ -49,7 +49,7 @@ namespace Hast.Layer
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
                 typeof(NexysA7ManifestProvider).Assembly,
-                typeof(CatapultManifestProvider).Assembly
+                typeof(CatapultManifestProvider).Assembly,
             });
             assemblies.AddRange(GetHastLibraries());
 
@@ -203,7 +203,7 @@ namespace Hast.Layer
                     {
                         Configuration = configuration,
                         HardwareDescription = hardwareDescription,
-                        DeviceManifest = deviceManifest
+                        DeviceManifest = deviceManifest,
                     };
 
                     var hardwareImplementationComposer = hardwareImplementationComposerSelector
@@ -221,7 +221,7 @@ namespace Hast.Layer
                     HardwareDescription = hardwareDescription,
                     HardwareImplementation = hardwareImplementation,
                     DeviceManifest = deviceManifest,
-                    HardwareGenerationConfiguration = configuration
+                    HardwareGenerationConfiguration = configuration,
                 };
             }
             catch (Exception ex) when (!ex.IsFatal())

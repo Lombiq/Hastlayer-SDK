@@ -27,7 +27,7 @@ namespace Hast.Communication.Services
             return new CommunicationStateContext
             {
                 Stopwatch = Stopwatch.StartNew(),
-                HardwareExecutionInformation = new HardwareExecutionInformation()
+                HardwareExecutionInformation = new HardwareExecutionInformation(),
             };
         }
 

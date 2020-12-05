@@ -57,7 +57,7 @@ namespace Hast.Communication
                     {
                         Invocation = invocation,
                         MemberFullName = memberFullName,
-                        HardwareRepresentation = hardwareRepresentation
+                        HardwareRepresentation = hardwareRepresentation,
                     };
 
                     MemberInvoking?.Invoke(this, invocationContext);
@@ -84,7 +84,7 @@ namespace Hast.Communication
                         softwareExecutionStopwatch.Stop();
                         invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
                         {
-                            SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
+                            SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds,
                         };
 
                         if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
@@ -145,7 +145,7 @@ namespace Hast.Communication
                             softwareExecutionStopwatch.Stop();
                             invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
                             {
-                                SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
+                                SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds,
                             };
 
                             if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
@@ -249,7 +249,7 @@ namespace Hast.Communication
         {
             Synchronous,
             AsyncAction,
-            AsyncFunction
+            AsyncFunction,
         }
 
         private class MemberInvocationContext : IMemberInvocationPipelineStepContext, IMemberHardwareExecutionContext

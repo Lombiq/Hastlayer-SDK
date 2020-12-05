@@ -20,7 +20,7 @@ namespace Hast.Layer
         /// <summary>
         /// Flavor for end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
         /// </summary>
-        Client
+        Client,
     }
 
     public interface IHastlayerConfiguration : ISingletonDependency

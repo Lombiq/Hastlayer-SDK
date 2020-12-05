@@ -276,7 +276,7 @@ namespace Hast.Communication.Services
                 BaudRate = Serial.DefaultBaudRate,
                 Parity = Serial.DefaultParity,
                 StopBits = Serial.DefaultStopBits,
-                WriteTimeout = Serial.DefaultWriteTimeoutMilliseconds
+                WriteTimeout = Serial.DefaultWriteTimeoutMilliseconds,
             };
 
             _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort, executionContext));

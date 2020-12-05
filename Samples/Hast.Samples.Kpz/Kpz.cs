@@ -6,7 +6,7 @@ namespace Hast.Samples.Kpz
 {
     public enum KpzTarget
     {
-        Cpu, Fpga, FpgaSimulation, FpgaParallelized, FpgaSimulationParallelized, PrngTest
+        Cpu, Fpga, FpgaSimulation, FpgaParallelized, FpgaSimulationParallelized, PrngTest,
     }
 
     public static class KpzTargetExtensions
@@ -100,7 +100,7 @@ namespace Hast.Samples.Kpz
                     Grid[x, y] = new KpzNode
                     {
                         dx = _random.Next(0, 2) == 0,
-                        dy = _random.Next(0, 2) == 0
+                        dy = _random.Next(0, 2) == 0,
                     };
                 }
             }
@@ -120,7 +120,7 @@ namespace Hast.Samples.Kpz
                     Grid[x, y] = new KpzNode
                     {
                         dx = (bool)((x & 1) != 0),
-                        dy = (bool)((y & 1) != 0)
+                        dy = (bool)((y & 1) != 0),
                     };
                 }
             }
@@ -361,13 +361,13 @@ namespace Hast.Samples.Kpz
             toReturn.nxCoords = new KpzCoords
             {
                 x = (p.x < GridWidth - 1) ? p.x + 1 : 0,
-                y = p.y
+                y = p.y,
             };
 
             toReturn.nyCoords = new KpzCoords
             {
                 x = p.x,
-                y = (p.y < GridHeight - 1) ? p.y + 1 : 0
+                y = (p.y < GridHeight - 1) ? p.y + 1 : 0,
             };
 
             toReturn.nx = grid[toReturn.nxCoords.x, toReturn.nxCoords.y];

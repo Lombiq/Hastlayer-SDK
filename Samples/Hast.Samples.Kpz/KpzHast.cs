@@ -62,7 +62,7 @@ namespace Hast.Samples.Kpz
 
             var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
                     typeof(KpzKernelsParallelizedInterface).Assembly,
-                    typeof(RandomMwc64X).Assembly
+                    typeof(RandomMwc64X).Assembly,
                 }, configuration);
 
             LogItFunction("Generating proxy...");
@@ -71,7 +71,7 @@ namespace Hast.Samples.Kpz
             {
                 var proxyConf = new ProxyGenerationConfiguration
                 {
-                    VerifyHardwareResults = _verifyOutput
+                    VerifyHardwareResults = _verifyOutput,
                 };
 
                 if (_kpzTarget == KpzTarget.Fpga)

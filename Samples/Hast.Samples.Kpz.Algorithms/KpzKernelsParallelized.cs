@@ -90,15 +90,15 @@ namespace Hast.Samples.Kpz.Algorithms
                     BramDy = new bool[LocalGridSize * LocalGridSize],
                     Random1 = new RandomMwc64X
                     {
-                        State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
-                    }
+                        State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++),
+                    },
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
                 taskLocals[taskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
 
                 taskLocals[taskLocalsIndex].Random2 = new RandomMwc64X
                 {
-                    State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
+                    State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++),
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
                 taskLocals[taskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
@@ -315,7 +315,7 @@ namespace Hast.Samples.Kpz.Algorithms
                 -1344050653, 1279472494, -1840938918, 1248877495, 861602743, -570947693, -1118345807, -111877096,
                 844790112, -1844342060, 1945398439, 309808498, -239141205, -758285938, -59513544, -1870383944,
                 -54120626, 499261195, -1761618908, 966279259, 217571661, 1813251139, 1124806771, 323365414, 595569067,
-                93473713, -937734760, -279968717, -1457028170, -389060750, -1888789492, -1109047524, 171427933
+                93473713, -937734760, -279968717, -1457028170, -389060750, -1888789492, -1109047524, 171427933,
             };
 
             int numRandomUints = 2 + KpzKernelsParallelizedInterface.ParallelTasks * 4;

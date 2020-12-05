@@ -1,4 +1,4 @@
-﻿using Hast.Common.ContractResolvers;
+using Hast.Common.ContractResolvers;
 using Hast.Layer;
 using Newtonsoft.Json;
 using System;
@@ -53,7 +53,7 @@ namespace Hast.Common.Models
             {
                 TypeNameHandling = TypeNameHandling.Auto,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new PrivateSetterContractResolver()
+                ContractResolver = new PrivateSetterContractResolver(),
             };
     }
 }

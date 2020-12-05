@@ -16,7 +16,7 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
         public static VhdlGenerationConfiguration Debug { get; } = new VhdlGenerationConfiguration
         {
             AddComments = true,
-            ShortenNames = true
+            ShortenNames = true,
         };
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Hast.Transformer.Vhdl.Abstractions.Configuration
         /// </summary>
         public static VhdlGenerationConfiguration Compact { get; } = new VhdlGenerationConfiguration
         {
-            ShortenNames = true
+            ShortenNames = true,
         };
 
         /// <summary>

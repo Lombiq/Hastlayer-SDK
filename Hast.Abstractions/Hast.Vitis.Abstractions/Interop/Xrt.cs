@@ -22,7 +22,7 @@ namespace Hast.Vitis.Abstractions.Interop
             {
                 Flags = bank | (ulong)MemoryFlag.ExtensionXilinxTopology,
                 Object = data,
-                Parameters = IntPtr.Zero
+                Parameters = IntPtr.Zero,
             };
     }
 }

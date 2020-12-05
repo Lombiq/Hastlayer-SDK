@@ -22,7 +22,7 @@ namespace Hast.Communication.Constants.CommunicationConstants
             ReceivingExecutionInformation,
             ReceivingOutputByteCount,
             ReceivingOuput,
-            Finished
+            Finished,
         }
     }
 }

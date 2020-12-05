@@ -65,7 +65,7 @@ namespace Hast.Samples.SampleAssembly
                         return new TaskResult
                         {
                             Fix64Low = integers[0],
-                            Fix64High = integers[1]
+                            Fix64High = integers[1],
                         };
                     }, upToNumber);
             }
@@ -98,7 +98,7 @@ namespace Hast.Samples.SampleAssembly
             return Fix64.FromRawInts(new[]
             {
                 memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index),
-                memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index + 1)
+                memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index + 1),
             });
         }
 
@@ -131,7 +131,7 @@ namespace Hast.Samples.SampleAssembly
                 results[i] = Fix64.FromRawInts(new[]
                 {
                     memory.ReadInt32(itemOutputStartIndex),
-                    memory.ReadInt32(itemOutputStartIndex + 1)
+                    memory.ReadInt32(itemOutputStartIndex + 1),
                 });
             }
 

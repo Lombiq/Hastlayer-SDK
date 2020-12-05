@@ -46,7 +46,7 @@ namespace Hast.Samples.Kpz
             InitializeComponent();
             _backgroundWorker = new BackgroundWorker
             {
-                WorkerSupportsCancellation = true
+                WorkerSupportsCancellation = true,
             };
             _backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);
             _backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(

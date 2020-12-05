@@ -63,7 +63,7 @@ namespace Hast.Samples.Kpz
                 Grid = CopyOfGrid(Grid),
                 HeightMap = new int[0, 0],
                 HightlightColor = Color.Transparent,
-                HighlightedCoords = new List<KpzCoords>()
+                HighlightedCoords = new List<KpzCoords>(),
             });
         }
 
@@ -78,7 +78,7 @@ namespace Hast.Samples.Kpz
                 Grid = new KpzNode[0, 0],
                 HeightMap = CopyOfHeightMap(HeightMap),
                 HightlightColor = Color.Transparent,
-                HighlightedCoords = new List<KpzCoords>()
+                HighlightedCoords = new List<KpzCoords>(),
             });
         }
 
@@ -94,7 +94,7 @@ namespace Hast.Samples.Kpz
                 Grid = new KpzNode[0, 0],
                 HeightMap = new int[0, 0],
                 HightlightColor = Color.Transparent,
-                HighlightedCoords = new List<KpzCoords>()
+                HighlightedCoords = new List<KpzCoords>(),
             });
         }
 
@@ -123,7 +123,7 @@ namespace Hast.Samples.Kpz
                 Grid = CopyOfGrid(Grid),
                 HeightMap = new int[0, 0],
                 HightlightColor = Color.Orange,
-                HighlightedCoords = highlightedCoords
+                HighlightedCoords = highlightedCoords,
             });
         }
 
@@ -140,7 +140,7 @@ namespace Hast.Samples.Kpz
             {
                 new KpzCoords { x = Center.x, y = Center.y },
                 new KpzCoords { x = Neighbours.nxCoords.x, y = Neighbours.nxCoords.y },
-                new KpzCoords { x = Neighbours.nyCoords.x, y = Neighbours.nyCoords.y }
+                new KpzCoords { x = Neighbours.nyCoords.x, y = Neighbours.nyCoords.y },
             };
 
             Iterations[^1].Actions.Add(new KpzAction
@@ -149,7 +149,7 @@ namespace Hast.Samples.Kpz
                 Grid = CopyOfGrid(Grid),
                 HeightMap = new int[0, 0],
                 HightlightColor = (ChangedGrid) ? Color.LightGreen : Color.Salmon, // green or red
-                HighlightedCoords = highlightedCoords
+                HighlightedCoords = highlightedCoords,
             });
         }
 
@@ -196,7 +196,7 @@ namespace Hast.Samples.Kpz
                     toReturn[x, y] = new KpzNode
                     {
                         dx = Grid[x, y].dx,
-                        dy = Grid[x, y].dy
+                        dy = Grid[x, y].dy,
                     };
                 }
             }

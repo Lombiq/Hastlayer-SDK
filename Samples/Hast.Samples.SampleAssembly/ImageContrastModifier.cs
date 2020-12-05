@@ -70,7 +70,7 @@ namespace Hast.Samples.SampleAssembly
                             {
                                 R = ChangePixelValue(input.PixelBytes[0], input.ContrastValue),
                                 G = ChangePixelValue(input.PixelBytes[1], input.ContrastValue),
-                                B = ChangePixelValue(input.PixelBytes[2], input.ContrastValue)
+                                B = ChangePixelValue(input.PixelBytes[2], input.ContrastValue),
                             };
                         },
                     new PixelProcessingTaskInput { PixelBytes = pixelBytes, ContrastValue = contrastValue });

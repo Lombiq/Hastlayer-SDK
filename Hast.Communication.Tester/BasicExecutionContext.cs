@@ -26,7 +26,7 @@ namespace Hast.Communication.Tester
             {
                 CommunicationChannelName = communicationChannelName,
                 CustomConfiguration = customConfiguration ?? new Dictionary<string, object>(),
-                VerifyHardwareResults = false
+                VerifyHardwareResults = false,
             };
         }
     }

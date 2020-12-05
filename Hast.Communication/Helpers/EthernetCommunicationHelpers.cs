@@ -60,7 +60,7 @@ namespace Hast.Communication.Helpers
         {
             var udpClient = new UdpClient
             {
-                ExclusiveAddressUse = false
+                ExclusiveAddressUse = false,
             };
 
             udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
