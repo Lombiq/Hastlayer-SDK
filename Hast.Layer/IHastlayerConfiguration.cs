@@ -26,7 +26,8 @@ namespace Hast.Layer
     public interface IHastlayerConfiguration : ISingletonDependency
     {
         /// <summary>
-        /// Gets the action to be invoked before the <see cref="IServiceProvider"/> for Hastlayer's dependency injection is built. Add single service registrations or other service collection customizations here.
+        /// Gets the action to be invoked before the <see cref="IServiceProvider"/> for Hastlayer's dependency
+        /// injection is built. Add single service registrations or other service collection customizations here.
         /// </summary>
         Action<IHastlayerConfiguration, IServiceCollection> OnServiceRegistration { get; }
 

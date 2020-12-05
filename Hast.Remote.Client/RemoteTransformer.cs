@@ -106,7 +106,9 @@ namespace Hast.Remote.Client
                 }
                 else
                 {
-                    message += $"The response code was {ex.StatusCode}. Most possibly there is some issue with Hastlayer Remote Services. If this error persists please get in touch with us under https://hastlayer.com/contact.";
+                    message += $"The response code was {ex.StatusCode}. Most possibly there is some issue with " +
+                        $"Hastlayer Remote Services. If this error persists please get in touch with us under " +
+                        $"https://hastlayer.com/contact.";
                 }
 
                 throw new RemoteTransformationException(message, ex);
@@ -116,7 +118,12 @@ namespace Hast.Remote.Client
                 // This will happen also when authorization fails and Azure AD authentication takes over from the API,
                 // and redirects the client to the Microsoft login screen (there doesn't seem to be a way to prevent
                 // this).
-                throw new RemoteTransformationException("Remote transformation failed because Hastlayer Remote Services returned an unexpected response. This might be because authorization failed (check if you mistyped your credentials) or because there is some issue with the service. If this error persists please get in touch with us under https://hastlayer.com/contact.", ex);
+                throw new RemoteTransformationException(
+                    "Remote transformation failed because Hastlayer Remote Services returned an unexpected " +
+                    "response. This might be because authorization failed (check if you mistyped your credentials) " +
+                    "or because there is some issue with the service. If this error persists please get in touch " +
+                    "with us under https://hastlayer.com/contact.",
+                    ex);
             }
         }
 

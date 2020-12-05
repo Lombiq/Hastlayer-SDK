@@ -55,7 +55,8 @@ namespace Hast.Communication.Services
             var context = BeginExecution();
 
             // Initializing some serial port connection settings (may be different with some FPGA boards).
-            // For detailed info on how the SerialPort class works see: https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
+            // For detailed info on how the SerialPort class works see:
+            // https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e/how-does-serialport-handle-datareceived?forum=netfxbcl
             // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
             using var serialPort = CreateSerialPort(executionContext);
@@ -263,7 +264,8 @@ namespace Hast.Communication.Services
             if (!fpgaPortNames.Any())
             {
                 throw new SerialPortCommunicationException(
-                    "No compatible FPGA board connected to any serial port or a connected FPGA is not answering. Is an FPGA board connected and is it powered up? If yes, is the SDK software running on it?");
+                    "No compatible FPGA board connected to any serial port or a connected FPGA is not answering. Is " +
+                    "an FPGA board connected and is it powered up? If yes, is the SDK software running on it?");
             }
 
             return fpgaPortNames;

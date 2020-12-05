@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using AdvancedDLSupport;
 using Hast.Vitis.Abstractions.Interop.Delegates.OpenCl;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
@@ -36,7 +36,13 @@ namespace Hast.Vitis.Abstractions.Interop
 
         Result SetKernelArg(IntPtr kernel, uint argumentIndex, UIntPtr argumentSize, IntPtr argumentValue);
 
-        Result EnqueueMigrateMemObjects(IntPtr commandQueue, uint numberOfMemoryObjects, IntPtr[] memoryObjects, MemoryMigrationFlag memoryMigrationFlags, uint numberOfEventsInWaitList, IntPtr[] eventWaitList, out IntPtr waitEvent);
+        Result EnqueueMigrateMemObjects(IntPtr commandQueue,
+            uint numberOfMemoryObjects,
+            IntPtr[] memoryObjects,
+            MemoryMigrationFlag memoryMigrationFlags,
+            uint numberOfEventsInWaitList,
+            IntPtr[] eventWaitList,
+            out IntPtr waitEvent);
 
         Result EnqueueTask(IntPtr commandQueue, IntPtr kernel, uint numberOfEventsInWaitList, IntPtr[] eventWaitList, out IntPtr waitEvent);
 
