@@ -63,11 +63,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         public void PrepareDevices(IOpenClConfiguration configuration)
         {
-            if (_devicesLazy == null)
-            {
-                _devicesLazy = new Lazy<IntPtr[]>(() =>
-                    GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
-            }
+            _devicesLazy ??= new Lazy<IntPtr[]>(() =>
+                     GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
         }
 
         public void CreateCommandQueue(int deviceIndex,

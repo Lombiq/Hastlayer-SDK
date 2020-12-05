@@ -110,8 +110,7 @@ namespace Hast.Samples.Kpz
                 LogItFunction("Running TestAdd...");
                 uint resultFpga = Kernels.TestAddWrapper(hastlayer, configuration, 4313, 123);
                 uint resultCpu = 4313 + 123;
-                if (resultCpu == resultFpga) LogItFunction($"Success: {resultFpga} == {resultCpu}");
-                else LogItFunction($"Fail: {resultFpga} != {resultCpu}");
+                LogItFunction(resultCpu == resultFpga ? $"Success: {resultFpga} == {resultCpu}" : $"Fail: {resultFpga} != {resultCpu}");
             }
 
             if (_kpzTarget == KpzTarget.PrngTest)
@@ -133,8 +132,7 @@ namespace Hast.Samples.Kpz
                     LogItFunction($"{prngCpuResult}, {prngFpgaResult}");
                 }
 
-                if (success) LogItFunction("TestPrng succeeded!");
-                else LogItFunction("TestPrng failed!");
+                LogItFunction(success ? "TestPrng succeeded!" : "TestPrng failed!");
             }
 
             return (hastlayer, configuration);

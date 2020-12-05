@@ -73,10 +73,7 @@ namespace Hast.Samples.SampleAssembly
                         {
                             currentCell = diagonalCell;
 
-                            if (row == 0 || column == 0)
-                                cellPointer = GetLCS_OutOfBorderDiagonalCellPointerValue;
-                            else
-                                cellPointer = GetLCS_DiagonalCellPointerValue;
+                            cellPointer = row == 0 || column == 0 ? GetLCS_OutOfBorderDiagonalCellPointerValue : GetLCS_DiagonalCellPointerValue;
                         }
                         else
                         {
