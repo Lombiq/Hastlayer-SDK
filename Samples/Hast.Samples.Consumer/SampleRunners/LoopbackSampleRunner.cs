@@ -6,10 +6,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class LoopbackSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
-            configuration.AddHardwareEntryPointType<Loopback>();
-        }
+        public void Configure(HardwareGenerationConfiguration configuration) => configuration.AddHardwareEntryPointType<Loopback>();
 
         public async Task Run(
             IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation,

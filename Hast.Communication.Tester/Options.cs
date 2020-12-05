@@ -56,7 +56,10 @@ namespace Hast.Communication.Tester
         public int LogLevelInt { get => (int)LogLevel; set => LogLevel = (LogLevel)value; }
         public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
-        [Option('a', "action", HelpText = "What sample to run on the reference memory (e.g. MemoryTest). Note that the given sample should have a method with the exact signature \"Run(SimpleMemory memory)\".")]
+        [Option(
+            'a',
+            "action",
+            HelpText = "What sample to run on the reference memory (e.g. MemoryTest). Note that the given sample should have a method with the exact signature \"Run(SimpleMemory memory)\".")]
         public string ReferenceAction { get; set; } = null;
 
         [Option('p', "prepend", HelpText = "Prepend a list of integers to the SimpleMemory.")]

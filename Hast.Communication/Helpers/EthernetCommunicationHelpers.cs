@@ -19,12 +19,10 @@ namespace Hast.Communication.Helpers
         /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent.</param>
         /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
         /// <returns>Result object containing UDP datagram received from the remote host. It is null if nothing has arrived.</returns>
-        public static async Task<UdpReceiveResult> UdpSendAndReceiveAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
-        {
-            return await UdpSendAndReceiveAnyAsync(
+        public static async Task<UdpReceiveResult> UdpSendAndReceiveAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds) =>
+            await UdpSendAndReceiveAnyAsync(
                 client => client.ReceiveAsync(receiveTimeoutMilliseconds),
                 datagram, bindingEndpoint, targetEndpoint);
-        }
 
         /// <summary>
         /// Sends an UDP datagram to an endpoint (possibly to a broadcast address) and receives every datagrams arriving within a period of time.
@@ -34,12 +32,10 @@ namespace Hast.Communication.Helpers
         /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent. Possibly it is a broadcast address.</param>
         /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
         /// <returns>Result objects containing UDP datagram received from the remote host. It is empty if nothing has arrived.</returns>
-        public static Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
-        {
-            return UdpSendAndReceiveAnyAsync(
+        public static Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds) =>
+            UdpSendAndReceiveAnyAsync(
                 client => client.ReceiveAllAsync(receiveTimeoutMilliseconds),
                 datagram, bindingEndpoint, targetEndpoint);
-        }
 
         private static async Task<T> UdpSendAndReceiveAnyAsync<T>(
             Func<UdpClient, Task<T>> receiverTaskFactory,

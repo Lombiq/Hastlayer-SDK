@@ -61,11 +61,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         #region Methods
 
-        public void PrepareDevices(IOpenClConfiguration configuration)
-        {
-            _devicesLazy ??= new Lazy<IntPtr[]>(() =>
-                     GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
-        }
+        public void PrepareDevices(IOpenClConfiguration configuration) => _devicesLazy ??= new Lazy<IntPtr[]>(() =>
+                                                                                 GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
 
         public void CreateCommandQueue(
             int deviceIndex,

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,7 +40,9 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (var j = 0; j < posit32ArrayChunk.Length; j++)
                 {
-                    posit32ArrayChunk[j] = i * MaxArrayChunkSize + j < numberCount ? new Posit32(memory.ReadUInt32(CalculateFusedSum_InputPosit32StartIndex + i * MaxArrayChunkSize + j), true) : new Posit32(0);
+                    posit32ArrayChunk[j] = (i * MaxArrayChunkSize) + j < numberCount
+                        ? new Posit32(memory.ReadUInt32(CalculateFusedSum_InputPosit32StartIndex + (i * MaxArrayChunkSize) + j), true)
+                        : new Posit32(0);
                 }
 
                 quire = Posit32.FusedSum(posit32ArrayChunk, quire);
@@ -53,7 +55,11 @@ namespace Hast.Samples.SampleAssembly
 
     public static class Posit32FusedCalculatorExtensions
     {
-        public static float CalculateFusedSum(this Posit32FusedCalculator posit32FusedCalculator, uint[] posit32Array, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static float CalculateFusedSum(
+            this Posit32FusedCalculator posit32FusedCalculator,
+            uint[] posit32Array,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(posit32Array.Length + 1)

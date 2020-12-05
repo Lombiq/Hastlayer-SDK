@@ -6,18 +6,14 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class ParallelAlgorithmSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
-            configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
-
-            // Note that Hastlayer can figure out how many Tasks will be there to an extent (see comment in
-            // ParallelAlgorithm) but if it can't, use a configuration like below:
-            // configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
-            //    new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
-            //    {
-            //        MaxDegreeOfParallelism = ParallelAlgorithm.MaxDegreeOfParallelism
-            //    });
-        }
+        public void Configure(HardwareGenerationConfiguration configuration) => configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
+        // Note that Hastlayer can figure out how many Tasks will be there to an extent (see comment in
+        // ParallelAlgorithm) but if it can't, use a configuration like below:
+        //// configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+        ////    new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
+        ////    {
+        ////        MaxDegreeOfParallelism = ParallelAlgorithm.MaxDegreeOfParallelism
+        ////    });
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {

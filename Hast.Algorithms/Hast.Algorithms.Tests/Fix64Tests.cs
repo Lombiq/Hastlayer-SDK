@@ -48,10 +48,7 @@ namespace Hast.Algorithms.Tests
         };
 
         [Fact]
-        public void Precision()
-        {
-            Assert.Equal(0.00000000023283064365386962890625m, Fix64.Precision);
-        }
+        public void Precision() => Assert.Equal(0.00000000023283064365386962890625m, Fix64.Precision);
 
         [Fact]
         public void LongToFix64AndBack()
@@ -459,14 +456,8 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        static void EqualWithinPrecision(decimal value1, decimal value2)
-        {
-            Assert.True(Math.Abs(value2 - value1) < Fix64.Precision);
-        }
+        static void EqualWithinPrecision(decimal value1, decimal value2) => Assert.True(Math.Abs(value2 - value1) < Fix64.Precision);
 
-        static void EqualWithinPrecision(double value1, double value2)
-        {
-            Assert.True(Math.Abs(value2 - value1) < (double)Fix64.Precision);
-        }
+        static void EqualWithinPrecision(double value1, double value2) => Assert.True(Math.Abs(value2 - value1) < (double)Fix64.Precision);
     }
 }

@@ -134,25 +134,19 @@ namespace Hast.Samples.Kpz
         /// AsyncLogIt schedules a <see cref="LogIt"/> operation on the GUI thread from within the
         /// <see cref="BackgroundWorker"/>.
         /// </summary>
-        private void AsyncLogIt(string what)
-        {
-            Invoke(new Action(() =>
-            {
-                LogIt(what);
-            }));
-        }
+        private void AsyncLogIt(string what) => Invoke(new Action(() =>
+                                              {
+                                                  LogIt(what);
+                                              }));
 
         /// <summary>
         /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the
         /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
         /// </summary>
-        private void AsyncUpdateProgressBar(int progress)
-        {
-            Invoke(new Action(() =>
-            {
-                progressBar.Value = progress;
-            }));
-        }
+        private void AsyncUpdateProgressBar(int progress) => Invoke(new Action(() =>
+                                                           {
+                                                               progressBar.Value = progress;
+                                                           }));
 
         /// <summary>
         /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the
@@ -269,10 +263,7 @@ namespace Hast.Samples.Kpz
         /// <see cref="labelShowInspector" /> is next to <see cref="checkShowInspector" />, and clicking on it
         /// can be used to toggle the checkbox.
         /// </summary>
-        private void LabelShowInspector_Click(object sender, EventArgs e)
-        {
-            checkShowInspector.Checked = !checkShowInspector.Checked;
-        }
+        private void LabelShowInspector_Click(object sender, EventArgs e) => checkShowInspector.Checked = !checkShowInspector.Checked;
 
         private void ComboTarget_SelectedIndexChanged(object sender, EventArgs e)
         {

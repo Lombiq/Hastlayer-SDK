@@ -8,14 +8,12 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class PrimeCalculatorSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
+        public void Configure(HardwareGenerationConfiguration configuration) =>
             // You can add complete types whose methods you'd like to invoke on the hardware from the outside like this.
             configuration.AddHardwareEntryPointType<PrimeCalculator>();
-            // A not statically typed way of doing the same as above would be:
-            // configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
-            // Note that the bottom version can also be used to add multiple types from under a namespace.
-        }
+        // A not statically typed way of doing the same as above would be:
+        //// configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+        // Note that the bottom version can also be used to add multiple types from under a namespace.
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {

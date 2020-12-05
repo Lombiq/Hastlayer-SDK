@@ -22,14 +22,11 @@ namespace Hast.Communication.Services
             int memberId,
             IHardwareExecutionContext executionContext);
 
-        protected CommunicationStateContext BeginExecution()
+        protected CommunicationStateContext BeginExecution() => new CommunicationStateContext
         {
-            return new CommunicationStateContext
-            {
-                Stopwatch = Stopwatch.StartNew(),
-                HardwareExecutionInformation = new HardwareExecutionInformation(),
-            };
-        }
+            Stopwatch = Stopwatch.StartNew(),
+            HardwareExecutionInformation = new HardwareExecutionInformation(),
+        };
 
         protected void EndExecution(CommunicationStateContext context)
         {

@@ -55,38 +55,31 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration.
         /// </summary>
-        public void AddKpzAction(string Description, KpzNode[,] Grid)
+        public void AddKpzAction(string Description, KpzNode[,] Grid) => Iterations[^1].Actions.Add(new KpzAction
         {
-            Iterations[^1].Actions.Add(new KpzAction
-            {
-                Description = Description,
-                Grid = CopyOfGrid(Grid),
-                HeightMap = new int[0, 0],
-                HightlightColor = Color.Transparent,
-                HighlightedCoords = new List<KpzCoords>(),
-            });
-        }
+            Description = Description,
+            Grid = CopyOfGrid(Grid),
+            HeightMap = new int[0, 0],
+            HightlightColor = Color.Transparent,
+            HighlightedCoords = new List<KpzCoords>(),
+        });
 
         /// <summary>
         /// Adds a deep copy of the heightmap into the current <see cref="KpzStateLogger" /> iteration.
         /// </summary>
-        public void AddKpzAction(string Description, int[,] HeightMap)
+        public void AddKpzAction(string Description, int[,] HeightMap) => Iterations[^1].Actions.Add(new KpzAction
         {
-            Iterations[^1].Actions.Add(new KpzAction
-            {
-                Description = Description,
-                Grid = new KpzNode[0, 0],
-                HeightMap = CopyOfHeightMap(HeightMap),
-                HightlightColor = Color.Transparent,
-                HighlightedCoords = new List<KpzCoords>(),
-            });
-        }
+            Description = Description,
+            Grid = new KpzNode[0, 0],
+            HeightMap = CopyOfHeightMap(HeightMap),
+            HightlightColor = Color.Transparent,
+            HighlightedCoords = new List<KpzCoords>(),
+        });
 
         /// <summary>
         /// Adds an action with only description into the current <see cref="KpzStateLogger" /> iteration.
         /// </summary>
-        public void AddKpzAction(string Description)
-        {
+        public void AddKpzAction(string Description) =>
             // Adds a deep copy of the grid into the current iteration
             Iterations[^1].Actions.Add(new KpzAction
             {
@@ -96,7 +89,6 @@ namespace Hast.Samples.Kpz
                 HightlightColor = Color.Transparent,
                 HighlightedCoords = new List<KpzCoords>(),
             });
-        }
 
         /// <summary>
         /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration, and highlights all

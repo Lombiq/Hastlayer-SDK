@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
@@ -139,7 +139,11 @@ namespace Hast.Samples.SampleAssembly
             return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.CalculatePowerOfReal_OutputPosit32Index), true);
         }
 
-        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this Posit32Calculator positCalculator, int[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(
+            this Posit32Calculator positCalculator,
+            int[] numbers,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             if (numbers.Length != Posit32Calculator.MaxDegreeOfParallelism)
             {

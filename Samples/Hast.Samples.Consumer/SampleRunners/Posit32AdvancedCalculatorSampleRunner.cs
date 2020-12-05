@@ -12,10 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class Posit32AdvancedCalculatorSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
-            configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();
-        }
+        public void Configure(HardwareGenerationConfiguration configuration) => configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {

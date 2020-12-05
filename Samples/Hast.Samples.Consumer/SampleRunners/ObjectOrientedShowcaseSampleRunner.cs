@@ -6,10 +6,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class ObjectOrientedShowcaseSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
-            configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
-        }
+        public void Configure(HardwareGenerationConfiguration configuration) => configuration.AddHardwareEntryPointType<ObjectOrientedShowcase>();
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {

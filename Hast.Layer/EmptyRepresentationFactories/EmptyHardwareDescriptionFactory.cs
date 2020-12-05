@@ -34,10 +34,7 @@ namespace Hast.Layer.EmptyRepresentationFactories
                 HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
             }
 
-            public Task Serialize(Stream stream)
-            {
-                throw new System.NotImplementedException();
-            }
+            public Task Serialize(Stream stream) => throw new System.NotImplementedException();
         }
     }
 }
