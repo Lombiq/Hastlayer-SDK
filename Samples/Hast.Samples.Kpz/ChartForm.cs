@@ -48,10 +48,8 @@ namespace Hast.Samples.Kpz
             {
                 WorkerSupportsCancellation = true,
             };
-            _backgroundWorker.DoWork += new DoWorkEventHandler(BackgroundWorker_DoWork);
-            _backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(
-                BackgroundWorker_RunWorkerCompleted
-            );
+            _backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            _backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             comboTarget.SelectedIndex = 4;
         }
 

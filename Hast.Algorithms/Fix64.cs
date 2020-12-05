@@ -118,7 +118,7 @@ namespace Hast.Algorithms
         {
             var low = (int)(_rawValue & uint.MaxValue);
             int high = (int)(_rawValue >> 32);
-            return new int[] { low, high };
+            return new[] { low, high };
         }
 
         #endregion
@@ -582,14 +582,14 @@ namespace Hast.Algorithms
         {
             var low = (int)(number & uint.MaxValue);
             int high = (int)(number >> 32);
-            return new int[] { low, high };
+            return new[] { low, high };
         }
 
         private static int[] ToIntegers(long number)
         {
             var low = (int)(number & uint.MaxValue);
             int high = (int)(number >> 32);
-            return new int[] { low, high };
+            return new[] { low, high };
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
