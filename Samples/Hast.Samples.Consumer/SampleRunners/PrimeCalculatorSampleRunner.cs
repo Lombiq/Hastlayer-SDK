@@ -13,7 +13,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // You can add complete types whose methods you'd like to invoke on the hardware from the outside like this.
             configuration.AddHardwareEntryPointType<PrimeCalculator>();
             // A not statically typed way of doing the same as above would be:
-            //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+            // configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
             // Note that the bottom version can also be used to add multiple types from under a namespace.
         }
 
@@ -46,13 +46,13 @@ namespace Hast.Samples.Consumer.SampleRunners
             // connected then all of them will be utilized. If the whole device pool is utilized calls will
             // wait for their turn.
             // Uncomment if you have multiple boards connected.
-            //var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
-            //for (uint i = 100; i < 110; i++)
-            //{
+            // var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
+            // for (uint i = 100; i < 110; i++)
+            // {
             //    parallelLaunchedIsPrimeTasks
             //        .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
-            //}
-            //var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+            // }
+            // var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
             // In-algorithm parallelization:
             // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism

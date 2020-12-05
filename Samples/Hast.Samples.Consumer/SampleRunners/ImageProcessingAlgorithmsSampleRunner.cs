@@ -14,7 +14,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             // ImageFilter is not parallelized, so not including it not to take away FPGA resources from
             // ImageContrastModifier.
-            //configuration.AddHardwareEntryPointType<ImageFilter>();
+            // configuration.AddHardwareEntryPointType<ImageFilter>();
         }
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
@@ -34,8 +34,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
 
             // ImageFilter disabled until it's improved.
-            //var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
-            //var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
+            // var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
+            // var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
         }
     }
 }

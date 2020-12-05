@@ -303,7 +303,7 @@ namespace Hast.Samples.Kpz
                     numberOfIterations);
 
             if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
-            //HastlayerGridAlreadyPushed = true; // If not commented out, push always
+            // HastlayerGridAlreadyPushed = true; // If not commented out, push always
         }
 
         /// <summary>

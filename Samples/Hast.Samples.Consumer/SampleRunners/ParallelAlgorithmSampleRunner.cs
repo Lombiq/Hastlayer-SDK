@@ -12,7 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             // Note that Hastlayer can figure out how many Tasks will be there to an extent (see comment in
             // ParallelAlgorithm) but if it can't, use a configuration like below:
-            //configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
+            // configuration.TransformerConfiguration().AddMemberInvocationInstanceCountConfiguration(
             //    new MemberInvocationInstanceCountConfigurationForMethod<ParallelAlgorithm>(p => p.Run(null), 0)
             //    {
             //        MaxDegreeOfParallelism = ParallelAlgorithm.MaxDegreeOfParallelism

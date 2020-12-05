@@ -13,7 +13,7 @@ namespace Hast.Samples.Kpz
         private bool _randomSeedEnable;
 
         public delegate void LogItDelegate(string toLog);
-        public LogItDelegate LogItFunction { get; set; } //Should be AsyncLogIt from ChartForm
+        public LogItDelegate LogItFunction { get; set; } // Should be AsyncLogIt from ChartForm
         public KpzKernelsInterface Kernels { get; set; }
         public KpzKernelsParallelizedInterface KernelsParallelized { get; set; }
         public PrngTestInterface KernelsP { get; set; }
@@ -88,7 +88,7 @@ namespace Hast.Samples.Kpz
                         new KpzKernelsParallelizedInterface(),
                         proxyConf);
                 }
-                else //if(kpzTarget == KpzTarget.PrngTest)
+                else // if(kpzTarget == KpzTarget.PrngTest)
                 {
                     KernelsP = await hastlayer.GenerateProxy(
                         hardwareRepresentation,
@@ -98,7 +98,7 @@ namespace Hast.Samples.Kpz
 
                 LogItFunction("FPGA target detected");
             }
-            else //if (kpzTarget == KpzTarget.HastlayerSimulation())
+            else // if (kpzTarget == KpzTarget.HastlayerSimulation())
             {
                 Kernels = new KpzKernelsInterface();
                 KernelsParallelized = new KpzKernelsParallelizedInterface();

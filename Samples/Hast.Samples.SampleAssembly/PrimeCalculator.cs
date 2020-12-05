@@ -162,7 +162,7 @@ namespace Hast.Samples.SampleAssembly
         private bool IsPrimeNumberInternal(uint number)
         {
             uint factor = number / 2;
-            //uint factor = Math.Sqrt(number); // Math.Sqrt() can't be processed because it's not a managed method.
+            // uint factor = Math.Sqrt(number); // Math.Sqrt() can't be processed because it's not a managed method.
 
             // i mustn't be an int, because due to the mismatch with the uint number and factor all of these would be
             // cast to long by the C# compiler, resulting in much slower hardware.
