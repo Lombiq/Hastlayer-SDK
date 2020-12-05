@@ -25,7 +25,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms(), configuration);
 
             // 720
-            var factorial = recursiveAlgorithms.CalculateFactorial(6, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            _ = recursiveAlgorithms.CalculateFactorial(6, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             // The Fibonacci sample is deactivated because it gives wrong results on hardware.
             // 233

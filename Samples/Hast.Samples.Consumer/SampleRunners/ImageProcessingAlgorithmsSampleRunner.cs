@@ -20,17 +20,13 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var imageContrastModifier = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
-            var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            using var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration).Dispose();
             sw.Stop();
             System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
-
-            // ImageFilter disabled until it's improved.
-            // var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
-            // var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
         }
     }
 }
