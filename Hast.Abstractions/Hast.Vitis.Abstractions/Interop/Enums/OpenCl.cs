@@ -26,31 +26,31 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// supported). EMBEDDED_PROFILE - if the implementation supports the OpenCL embedded profile. The embedded
         /// profile is defined to be a subset for each version of OpenCL.
         /// </summary>
-        Profile = 0x0900,
+        Profile = 0x_0900,
 
         /// <summary>
         /// OpenCL version string. Returns the OpenCL version supported by the implementation. This version string has
         /// the following format: OpenCL{space}{major_version}.{minor_version}{space}{platform-specific information}
         /// The major_version.minor_version value returned will be 1.0.
         /// </summary>
-        Version = 0x0901,
+        Version = 0x_0901,
 
         /// <summary>
         /// Platform name string.
         /// </summary>
-        Name = 0x0902,
+        Name = 0x_0902,
 
         /// <summary>
         /// Platform vendor string.
         /// </summary>
-        Vendor = 0x0903,
+        Vendor = 0x_0903,
 
         /// <summary>
         /// Returns a space-separated list of extension names (the extension names themselves do not contain any
         /// spaces) supported by the platform. Extensions defined here must be supported by all devices associated with
         /// this platform.
         /// </summary>
-        Extensions = 0x0904,
+        Extensions = 0x_0904,
     }
 
     /// <summary>
@@ -112,10 +112,10 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         InvalidDevicePartitionCount = -68,
         InvalidPipeSize = -69,
         InvalidDeviceQueue = -70,
-        PlatformNotFoundKhr = -1001,
-        DevicePartitionFailedExt = -1057,
-        InvalidPartitionCountExt = -1058,
-        InvalidPartitionNameExt = -1059,
+        PlatformNotFoundKhr = -1_001,
+        DevicePartitionFailedExt = -1_057,
+        InvalidPartitionCountExt = -1_058,
+        InvalidPartitionNameExt = -1_059,
     }
 
     /// <summary>
@@ -151,7 +151,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// <summary>
         /// All OpenCL devices available in the system.
         /// </summary>
-        All = 0xFFFFFFFF,
+        All = 0x_FFFF_FFFF,
     }
 
     /// <summary>

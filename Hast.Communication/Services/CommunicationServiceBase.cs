@@ -45,7 +45,7 @@ namespace Hast.Communication.Services
         {
             var frequency = clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz;
 
-            var milliseconds = 1M / frequency * 1000 * executionTimeClockCycles;
+            var milliseconds = 1M / frequency * 1_000 * executionTimeClockCycles;
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = milliseconds;
 
             Logger.LogInformation(

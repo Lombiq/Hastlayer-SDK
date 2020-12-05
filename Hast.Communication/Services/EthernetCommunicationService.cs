@@ -15,9 +15,9 @@ namespace Hast.Communication.Services
 {
     public class EthernetCommunicationService : CommunicationServiceBase
     {
-        private const int TcpConnectionTimeout = 3000;
+        private const int TcpConnectionTimeout = 3_000;
         // This has to be maximum the number set for the TCP MSS in the Hastlayer hardware project.
-        private const int ReceiveBufferSize = 1460;
+        private const int ReceiveBufferSize = 1_460;
 
         private const int MemoryPrefixCellCount = 2;
 

@@ -45,7 +45,7 @@ namespace Hast.Samples.Demo
             Console.WriteLine();
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            _ = new ParallelAlgorithm().Run(234234);
+            _ = new ParallelAlgorithm().Run(234_234);
             sw.Stop();
 
             Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
@@ -56,9 +56,9 @@ namespace Hast.Samples.Demo
             var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
 
             _ = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
-            _ = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            _ = parallelAlgorithm.Run(234_234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            _ = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            _ = parallelAlgorithm.Run(9_999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             #endregion
         }
     }

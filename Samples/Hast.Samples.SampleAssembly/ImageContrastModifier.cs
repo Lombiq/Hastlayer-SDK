@@ -12,7 +12,7 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ImageContrastModifier
     {
-        private const ushort Multiplier = 1000;
+        private const ushort Multiplier = 1_000;
 
         private const int ChangeContrast_ImageWidthIndex = 0;
         private const int ChangeContrast_ImageHeightIndex = 1;

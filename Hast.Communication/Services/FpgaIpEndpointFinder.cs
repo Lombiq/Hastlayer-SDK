@@ -16,7 +16,7 @@ namespace Hast.Communication.Services
 {
     public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
     {
-        private const int AvailabilityCheckerTimeout = 1000;
+        private const int AvailabilityCheckerTimeout = 1_000;
         private const int BroadcastRetryCount = 2;
 
         private readonly IClock _clock;

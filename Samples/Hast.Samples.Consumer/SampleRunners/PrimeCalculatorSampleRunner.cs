@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             }
 
             // Only 2341 is prime.
-            foreach (var numbersToCheck in new[] { new uint[] { 15, 493, 2341, 99237 }, new uint[] { 13, 493 } })
+            foreach (var numbersToCheck in new[] { new uint[] { 15, 493, 2_341, 99_237 }, new uint[] { 13, 493 } })
             {
                 WriteOutPrimes(
                     nameof(primeCalculator.ArePrimeNumbers),
@@ -60,12 +60,12 @@ namespace Hast.Samples.Consumer.SampleRunners
             // All of these numbers except for 9999 are primes.
             var numbers = new uint[]
             {
-                9749, 9999, 902119, 907469, 915851,
-                9749, 9973, 902119, 907469, 915851,
-                9749, 9999, 902119, 907469, 915851,
-                9749, 9973, 902119, 907469, 915851,
-                9749, 9999, 902119, 907469, 915851,
-                9749, 9973, 902119, 907469, 915851,
+                9_749, 9_999, 902_119, 907_469, 915_851,
+                9_749, 9_973, 902_119, 907_469, 915_851,
+                9_749, 9_999, 902_119, 907_469, 915_851,
+                9_749, 9_973, 902_119, 907_469, 915_851,
+                9_749, 9_999, 902_119, 907_469, 915_851,
+                9_749, 9_973, 902_119, 907_469, 915_851,
             };
 
             WriteOutPrimes(

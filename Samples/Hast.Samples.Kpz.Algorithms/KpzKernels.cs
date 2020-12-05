@@ -71,11 +71,11 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int GridHeight = 8;
         // The probability of turning a pyramid into a hole (IntegerProbabilityP),
         // or a hole into a pyramid (IntegerProbabilityQ).
-        public const uint IntegerProbabilityP = 32767;
+        public const uint IntegerProbabilityP = 32_767;
 
         // The probability of turning a pyramid into a hole (IntegerProbabilityP),
         // or a hole into a pyramid (IntegerProbabilityQ).
-        public const uint IntegerProbabilityQ = 32767;
+        public const uint IntegerProbabilityQ = 32_767;
         // ==== </CONFIGURABLE PARAMETERS> ====
 
         public const int MemIndexNumberOfIterations = 0;
@@ -249,7 +249,7 @@ namespace Hast.Samples.Kpz.Algorithms
             var numbers = new uint[KpzKernels.GridWidth * KpzKernels.GridHeight];
             var sm = hastlayer.CreateMemory(configuration, KpzKernels.SizeOfSimpleMemory);
 
-            CopyParametersToMemory(sm, false, 0x5289a3b89ac5f211, 0x5289a3b89ac5f211, 0);
+            CopyParametersToMemory(sm, false, 0x_5289_a3b8_9ac5_f211, 0x_5289_a3b8_9ac5_f211, 0);
 
             kernels.TestPrng(sm);
 
@@ -272,10 +272,10 @@ namespace Hast.Samples.Kpz.Algorithms
         public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1,
             ulong randomSeed2, uint numberOfIterations)
         {
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0xFFFFFFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0xFFFFFFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 2, (uint)(randomSeed2 & 0xFFFFFFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)((randomSeed2 >> 32) & 0xFFFFFFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0x_FFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0x_FFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 2, (uint)(randomSeed2 & 0x_FFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)((randomSeed2 >> 32) & 0x_FFFF_FFFFUL));
             memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, (testMode) ? 1U : 0U);
             memoryDst.WriteUInt32(KpzKernels.MemIndexNumberOfIterations, numberOfIterations);
         }

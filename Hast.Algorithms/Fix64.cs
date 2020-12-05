@@ -51,9 +51,9 @@ namespace Hast.Algorithms
         private const long OneRawValue = 1L << FractionalPlaces;
         private const int BitCount = 64;
         private const int FractionalPlaces = 32;
-        private const long PiTimes2 = 0x6487ED511;
-        private const long Pi = 0x3243F6A88;
-        private const long PiOver2 = 0x1921FB544;
+        private const long PiTimes2 = 0x_6_487E_D511;
+        private const long Pi = 0x_3_243F_6A88;
+        private const long PiOver2 = 0x_1_921F_B544;
         private const int LutSize = (int)(PiOver2 >> 15);
 
         // Original static fields commented out because those are not yet supported by Hastlayer, see:
@@ -166,14 +166,14 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 Floor(Fix64 value) =>
             // Just zero out the fractional part
-            new Fix64((long)((ulong)value._rawValue & 0xFFFFFFFF00000000));
+            new Fix64((long)((ulong)value._rawValue & 0x_FFFF_FFFF_0000_0000));
 
         /// <summary>
         /// Returns the smallest integral value that is greater than or equal to the specified number.
         /// </summary>
         public static Fix64 Ceiling(Fix64 value)
         {
-            var hasFractionalPart = (value._rawValue & 0x00000000FFFFFFFF) != 0;
+            var hasFractionalPart = (value._rawValue & 0x_0000_0000_FFFF_FFFF) != 0;
             return hasFractionalPart ? Floor(value) + One() : value;
         }
 
@@ -183,15 +183,15 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 Round(Fix64 value)
         {
-            var fractionalPart = value._rawValue & 0x00000000FFFFFFFF;
+            var fractionalPart = value._rawValue & 0x_0000_0000_FFFF_FFFF;
             var integralPart = Floor(value);
 
-            if (fractionalPart < 0x80000000)
+            if (fractionalPart < 0x_8000_0000)
             {
                 return integralPart;
             }
 
-            if (fractionalPart > 0x80000000)
+            if (fractionalPart > 0x_8000_0000)
             {
                 return integralPart + One();
             }
@@ -262,8 +262,8 @@ namespace Hast.Algorithms
                         //       = num + result^2 - (result + 0.5)^2
                         //       = num - result - 0.5
                         num -= result;
-                        num = (num << (BitCount / 2)) - 0x80000000UL;
-                        result = (result << (BitCount / 2)) + 0x80000000UL;
+                        num = (num << (BitCount / 2)) - 0x_8000_0000UL;
+                        result = (result << (BitCount / 2)) + 0x_8000_0000UL;
                     }
                     else
                     {
@@ -341,9 +341,9 @@ namespace Hast.Algorithms
             var xl = x._rawValue;
             var yl = y._rawValue;
 
-            var xlo = (ulong)(xl & 0x00000000FFFFFFFF);
+            var xlo = (ulong)(xl & 0x_0000_0000_FFFF_FFFF);
             var xhi = xl >> FractionalPlaces;
-            var ylo = (ulong)(yl & 0x00000000FFFFFFFF);
+            var ylo = (ulong)(yl & 0x_0000_0000_FFFF_FFFF);
             var yhi = yl >> FractionalPlaces;
 
             var lolo = xlo * ylo;
@@ -424,9 +424,9 @@ namespace Hast.Algorithms
             var xl = x._rawValue;
             var yl = y._rawValue;
 
-            var xlo = (ulong)(xl & 0x00000000FFFFFFFF);
+            var xlo = (ulong)(xl & 0x_0000_0000_FFFF_FFFF);
             var xhi = xl >> FractionalPlaces;
-            var ylo = (ulong)(yl & 0x00000000FFFFFFFF);
+            var ylo = (ulong)(yl & 0x_0000_0000_FFFF_FFFF);
             var yhi = yl >> FractionalPlaces;
 
             var lolo = xlo * ylo;
@@ -465,7 +465,7 @@ namespace Hast.Algorithms
             var bitPos = BitCount / 2 + 1;
 
             // If the divider is divisible by 2^n, take advantage of it.
-            while ((divider & 0xF) == 0 && bitPos >= 4)
+            while ((divider & 0x_F) == 0 && bitPos >= 4)
             {
                 divider >>= 4;
                 bitPos -= 4;
@@ -487,7 +487,7 @@ namespace Hast.Algorithms
                 quotient += div << bitPos;
 
                 // Detect overflow
-                if ((div & ~(0xFFFFFFFFFFFFFFFF >> bitPos)) != 0)
+                if ((div & ~(0x_FFFF_FFFF_FFFF_FFFF >> bitPos)) != 0)
                 {
                     return ((xl ^ yl) & MinRawValue) == 0 ? MaxValue() : MinValue();
                 }
@@ -597,8 +597,8 @@ namespace Hast.Algorithms
         {
             int result = 0;
 
-            while ((x & 0xF000000000000000) == 0) { result += 4; x <<= 4; }
-            while ((x & 0x8000000000000000) == 0) { result += 1; x <<= 1; }
+            while ((x & 0x_F000_0000_0000_0000) == 0) { result += 4; x <<= 4; }
+            while ((x & 0x_8000_0000_0000_0000) == 0) { result += 1; x <<= 1; }
 
             return result;
         }

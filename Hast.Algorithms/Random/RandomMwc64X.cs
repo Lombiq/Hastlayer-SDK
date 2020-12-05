@@ -14,13 +14,13 @@ namespace Hast.Algorithms.Random
         /// <remarks>
         /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
-        public ulong State { get; set; } = 0xCAFEUL; // Just some starting number.
+        public ulong State { get; set; } = 0x_CAFEUL; // Just some starting number.
 
         public uint NextUInt32()
         {
             uint c = (uint)(State >> 32);
             uint x = (uint)State;
-            State = x * 0xFFFEB81BUL + c;
+            State = x * 0x_FFFE_B81BUL + c;
             return x ^ c;
         }
     }

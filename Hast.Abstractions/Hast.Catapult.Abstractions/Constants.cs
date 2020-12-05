@@ -38,7 +38,7 @@ namespace Hast.Catapult.Abstractions
         }
 
         #region Unique constants from header files
-        public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1000;
+        public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1_000;
         public const string ErrorLabels = "hr:min:sec:ms,cycles,pid,tid,filename,line,errmsg,";
         public const string DefaultVersionManifestFile = "FPGADefaultVersionManifest.ini";
         public const string VersionDefinitionsFile = "FPGAVersionDefinitions.ini";
@@ -46,7 +46,7 @@ namespace Hast.Catapult.Abstractions
         public const int SoftResetRole = 14;
         public const double WaitOutputBufferTimeoutDefaultSeconds = 10.0;
         public const int PcieHipNumber = 0;
-        public const int MaxBufferSizeBytes = 65536;
+        public const int MaxBufferSizeBytes = 65_536;
         #endregion
 
         #region Grouped constants from header files
@@ -138,7 +138,7 @@ namespace Hast.Catapult.Abstractions
             FlashMutexTimeout = 79,
             EnumerationMoreDevices = 80,
             EnumerationNoList = 81,
-            UnknownError = 10000,
+            UnknownError = 10_000,
         }
 
         /// <summary>
@@ -147,28 +147,28 @@ namespace Hast.Catapult.Abstractions
         [Flags]
         public enum Log
         {
-            None = 0x00,
-            Info = 0x01,
-            Debug = 0x03,
-            Verbose = 0x04,
-            Error = 0x08,
-            Fatal = 0x10,
-            Warn = 0x20,
+            None = 0x_00,
+            Info = 0x_01,
+            Debug = 0x_03,
+            Verbose = 0x_04,
+            Error = 0x_08,
+            Fatal = 0x_10,
+            Warn = 0x_20,
         }
 
         public static class HandleFlag
         {
-            public const uint None = 0x0000000u;
-            public const uint Verbose = 0x0000001u;
-            public const uint Diagnostics = 0x0000002u;
+            public const uint None = 0x_000_0000u;
+            public const uint Verbose = 0x_000_0001u;
+            public const uint Diagnostics = 0x_000_0002u;
             /// <summary>
             /// Must be passed to use functions in FPGAManagementLib.h (e.g., flash write, reconfig).
             /// </summary>
-            public const uint Exclusive = 0x0001000u;
+            public const uint Exclusive = 0x_000_1000u;
             /// <summary>
             /// Must be passed in when updating the golden image.
             /// </summary>
-            public const uint WriteGolden = 0x0002000u;
+            public const uint WriteGolden = 0x_000_2000u;
         }
 
         [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "Not applicable.")]

@@ -74,7 +74,7 @@ namespace Hast.Samples.Kpz
                 buttonStart.Text = "Stop";
                 progressBar.Maximum = NumKpzIterations;
                 ComputationTarget = CurrentComputationTarget; // ComboBox value cannot be accessed from BackgroundWorker
-                _backgroundWorker.RunWorkerAsync(2000);
+                _backgroundWorker.RunWorkerAsync(2_000);
             }
             else
             {

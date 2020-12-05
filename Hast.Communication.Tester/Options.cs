@@ -19,7 +19,7 @@ namespace Hast.Communication.Tester
         public long PayloadLengthBytes { get; set; } = 10;
 
         [Option('k', "kilo-bytes", HelpText = "The total size of the payload in kilobytes.")]
-        public int PayloadKiloBytes { get => (int)(PayloadLengthBytes / 1024); set => PayloadLengthBytes = (long)value * 1024; }
+        public int PayloadKiloBytes { get => (int)(PayloadLengthBytes / 1_024); set => PayloadLengthBytes = (long)value * 1_024; }
 
         [Option('c', "cells", HelpText = "The total size of the payload in number of cells.")]
         public int PayloadLengthCells

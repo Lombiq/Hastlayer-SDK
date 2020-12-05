@@ -9,7 +9,7 @@ namespace Hast.Xilinx.Abstractions.Helpers
     {
         public static void ConfigureMemoryForVitis(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration)
         {
-            memory.Alignment = 4096;
+            memory.Alignment = 4_096;
             memory.MinimumPrefix = 4;
 
             if (!hardwareGeneration.CustomConfiguration.TryGetValue("OpenClConfiguration", out var value)) return;

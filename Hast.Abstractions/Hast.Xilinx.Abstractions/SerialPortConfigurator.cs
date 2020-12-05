@@ -16,7 +16,7 @@ namespace Hast.Xilinx.Abstractions
                 return;
             }
 
-            serialPort.BaudRate = 230400;
+            serialPort.BaudRate = 230_400;
         }
     }
 }

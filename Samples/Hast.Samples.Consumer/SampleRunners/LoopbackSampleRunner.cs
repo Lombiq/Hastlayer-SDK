@@ -16,7 +16,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration);
 
             _ = loopback.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            _ = loopback.Run(1234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            _ = loopback.Run(1_234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = loopback.Run(-9, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = loopback.Run(0, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = loopback.Run(-19, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
