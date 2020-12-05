@@ -36,7 +36,8 @@ namespace Hast.Vitis.Abstractions.Interop
 
         Result SetKernelArg(IntPtr kernel, uint argumentIndex, UIntPtr argumentSize, IntPtr argumentValue);
 
-        Result EnqueueMigrateMemObjects(IntPtr commandQueue,
+        Result EnqueueMigrateMemObjects(
+            IntPtr commandQueue,
             uint numberOfMemoryObjects,
             IntPtr[] memoryObjects,
             MemoryMigrationFlag memoryMigrationFlags,

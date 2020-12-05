@@ -67,7 +67,8 @@ namespace Hast.Vitis.Abstractions.Services
                      GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
         }
 
-        public void CreateCommandQueue(int deviceIndex,
+        public void CreateCommandQueue(
+            int deviceIndex,
             CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
         {
             if (_queues.ContainsKey(deviceIndex)) return;
@@ -143,7 +144,8 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private static AggregateException VerifyResults(IEnumerable<Result> results,
+        private static AggregateException VerifyResults(
+            IEnumerable<Result> results,
             Func<Result, int, Exception> mapper)
         {
             var errors = results
@@ -213,7 +215,8 @@ namespace Hast.Vitis.Abstractions.Services
                 resultsPerDevice,
                 out var result);
             VerifyResult(result);
-            VerifyResults(resultsPerDevice,
+            VerifyResults(
+                resultsPerDevice,
                 (deviceResult, i) => new Exception($"Error while creating program on device #{i}: {deviceResult}"));
 
             VerifyResult(_cl.BuildProgram(

@@ -136,7 +136,8 @@ namespace Hast.Catapult.Abstractions
             NativeLibrary = builderWithoutDllMap.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
             // Check if device is available and connect
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
-            var createStatus = NativeLibrary.CreateHandle(out _handle,
+            var createStatus = NativeLibrary.CreateHandle(
+                out _handle,
                 endpointNumber: (uint)endpointNumber,
                 flags: 0,
                 pchVerDefnsFile: string.IsNullOrEmpty(versionDefinitionsFile) ? null : new StringBuilder(versionDefinitionsFile),
@@ -349,7 +350,8 @@ namespace Hast.Catapult.Abstractions
             MemoryMarshal.Write(data.Span, ref memberId);
             MemoryMarshal.Write(data.Span[InputHeaderSizes.MemberId..], ref totalDataSize);
             MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], ref sliceIndex);
-            MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
+            MemoryMarshal.Write(
+                data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
                 + InputHeaderSizes.SliceIndex)..], ref sliceCountValue);
             inputData.CopyTo(data[InputHeaderSizes.Total..]);
 
@@ -375,7 +377,8 @@ namespace Hast.Catapult.Abstractions
             if (ignoreResponse)
                 TesterOutput?.WriteLine("Job Finished{0}************{0}Slot: {1}{0}", Environment.NewLine, currentSlot);
             else
-                TesterOutput?.WriteLine("Job Finished{0}************{0}Slot: {1}{0}Time: {2}{0}Payload: {3} cells{0}Slice: {4}{0}",
+                TesterOutput?.WriteLine(
+                    "Job Finished{0}************{0}Slot: {1}{0}Time: {2}{0}Payload: {3} cells{0}Slice: {4}{0}",
                     Environment.NewLine,
                     currentSlot,
                     MemoryMarshal.Read<long>(jobResult.Span),
@@ -429,7 +432,8 @@ namespace Hast.Catapult.Abstractions
 
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out var inputBuffer));
 
-            LogFunction?.Invoke((uint)Constants.Log.Debug,
+            LogFunction?.Invoke(
+                (uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}{Environment.NewLine}");
 
             // Upload data into input buffer.
@@ -469,7 +473,8 @@ namespace Hast.Catapult.Abstractions
                 new Span<byte>(outputBuffer.ToPointer(), resultSize).CopyTo(resultMemory.Span);
             }
 
-            LogFunction?.Invoke((uint)Constants.Log.Debug,
+            LogFunction?.Invoke(
+                (uint)Constants.Log.Debug,
                 $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}{Environment.NewLine}");
 
             // Signal that we are done.

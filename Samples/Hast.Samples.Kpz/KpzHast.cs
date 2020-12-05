@@ -60,7 +60,8 @@ namespace Hast.Samples.Kpz
                 configuration.AddHardwareEntryPointType<PrngTestInterface>();
             }
 
-            var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
+            var hardwareRepresentation = await hastlayer.GenerateHardware(
+                new[] {
                     typeof(KpzKernelsParallelizedInterface).Assembly,
                     typeof(RandomMwc64X).Assembly,
                 }, configuration);

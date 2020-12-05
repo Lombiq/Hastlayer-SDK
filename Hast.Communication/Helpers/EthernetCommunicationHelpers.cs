@@ -21,7 +21,8 @@ namespace Hast.Communication.Helpers
         /// <returns>Result object containing UDP datagram received from the remote host. It is null if nothing has arrived.</returns>
         public static async Task<UdpReceiveResult> UdpSendAndReceiveAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
         {
-            return await UdpSendAndReceiveAnyAsync(client => client.ReceiveAsync(receiveTimeoutMilliseconds),
+            return await UdpSendAndReceiveAnyAsync(
+                client => client.ReceiveAsync(receiveTimeoutMilliseconds),
                 datagram, bindingEndpoint, targetEndpoint);
         }
 
@@ -35,7 +36,8 @@ namespace Hast.Communication.Helpers
         /// <returns>Result objects containing UDP datagram received from the remote host. It is empty if nothing has arrived.</returns>
         public static Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds)
         {
-            return UdpSendAndReceiveAnyAsync(client => client.ReceiveAllAsync(receiveTimeoutMilliseconds),
+            return UdpSendAndReceiveAnyAsync(
+                client => client.ReceiveAllAsync(receiveTimeoutMilliseconds),
                 datagram, bindingEndpoint, targetEndpoint);
         }
 

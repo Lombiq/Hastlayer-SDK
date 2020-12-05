@@ -184,7 +184,8 @@ namespace Hast.Algorithms.Tests
                     var maxDelta = (decimal)Fix64.FromRaw(1);
                     if (Math.Abs(actualM - expected) > maxDelta)
                     {
-                        Console.WriteLine("Failed for FromRaw({0}) * FromRaw({1}): expected {2} but got {3}",
+                        Console.WriteLine(
+                            "Failed for FromRaw({0}) * FromRaw({1}): expected {2} but got {3}",
                                           _testCases[i],
                                           _testCases[j],
                                           (Fix64)expected,
@@ -234,7 +235,8 @@ namespace Hast.Algorithms.Tests
                         var maxDelta = (decimal)Fix64.FromRaw(1);
                         if (Math.Abs(actualM - expected) > maxDelta)
                         {
-                            Console.WriteLine("Failed for FromRaw({0}) / FromRaw({1}): expected {2} but got {3}",
+                            Console.WriteLine(
+                                "Failed for FromRaw({0}) / FromRaw({1}): expected {2} but got {3}",
                                               _testCases[i],
                                               _testCases[j],
                                               (Fix64)expected,

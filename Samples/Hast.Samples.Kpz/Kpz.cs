@@ -273,7 +273,8 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// </summary>
-        public void DoHastIterations(IHastlayer hastlayer,
+        public void DoHastIterations(
+            IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration,
             uint numberOfIterations)
         {

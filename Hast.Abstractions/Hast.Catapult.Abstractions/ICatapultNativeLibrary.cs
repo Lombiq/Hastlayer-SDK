@@ -69,7 +69,8 @@ namespace Hast.Catapult.Abstractions
         /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the timeout.
         /// </param>
         /// <returns>When a timeout is triggered, it returns <see cref="Constants.Status.FlashMutexTimeout"/>.</returns>
-        Constants.Status WriteFlashImageEx(IntPtr fpgaHandle,
+        Constants.Status WriteFlashImageEx(
+            IntPtr fpgaHandle,
             bool writeToGolden,
             string RpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
@@ -85,7 +86,8 @@ namespace Hast.Catapult.Abstractions
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according
         /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the timeout.
         /// </param>
-        Constants.Status CaptureFlashImageEx(IntPtr fpgaHandle,
+        Constants.Status CaptureFlashImageEx(
+            IntPtr fpgaHandle,
             bool isGolden,
             string RpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
@@ -188,7 +190,8 @@ namespace Hast.Catapult.Abstractions
         /// <see cref="Constants.Status.Success"/> if the device is present or
         /// <see cref="Constants.Status.HardwareNotPresent"/> if the device is not present.
         /// </returns>
-        Constants.Status IsDevicePresent(string pchVerManifestFile,
+        Constants.Status IsDevicePresent(
+            string pchVerManifestFile,
             [MarshalAs(UnmanagedType.FunctionPtr)]CatapultLogFunction logFunc);
 
         /// <summary>
@@ -214,7 +217,8 @@ namespace Hast.Catapult.Abstractions
         /// <param name="logFunc">
         /// Optional <see cref="CatapultLogFunction"/> logging callback function.
         /// </param>
-        Constants.Status CreateHandle(out IntPtr fpgaHandle,
+        Constants.Status CreateHandle(
+            out IntPtr fpgaHandle,
             uint endpointNumber,
             uint flags,
             [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVerDefnsFile,
@@ -332,7 +336,8 @@ namespace Hast.Catapult.Abstractions
         /// <returns>
         /// <see cref="Constants.Status.WaitTimeout"/> if on timeout, otherwise <see cref="Constants.Status.Success"/>.
         /// </returns>
-        Constants.Status WaitOutputBuffer(IntPtr fpgaHandle,
+        Constants.Status WaitOutputBuffer(
+            IntPtr fpgaHandle,
             uint whichBuffer,
             out uint pBytesReceived,
             bool useInterrupt = true,
