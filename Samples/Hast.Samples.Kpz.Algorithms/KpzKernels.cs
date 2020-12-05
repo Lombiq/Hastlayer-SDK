@@ -86,10 +86,10 @@ namespace Hast.Samples.Kpz.Algorithms
 
         private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
-        public RandomMwc64X Random1;
-        public RandomMwc64X Random2;
-        public bool TestMode = false;
-        public uint NumberOfIterations = 1;
+        public RandomMwc64X Random1 { get; set; }
+        public RandomMwc64X Random2 { get; set; }
+        public bool TestMode { get; set; }
+        public uint NumberOfIterations { get; set; } = 1;
 
         /// <summary>
         /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at

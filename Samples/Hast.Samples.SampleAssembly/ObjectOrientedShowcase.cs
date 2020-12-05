@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
@@ -96,7 +96,11 @@ namespace Hast.Samples.SampleAssembly
         public uint Number { get; set; } = 99;
 
         // Fields can be used too.
+#pragma warning disable S1104 // Fields should not have public accessibility
+#pragma warning disable S2357 // Fields should be private
         public bool WasIncreased;
+#pragma warning restore S2357 // Fields should be private
+#pragma warning restore S1104 // Fields should not have public accessibility
 
         // Fancy custom properties that can do everything a method can.
         public uint NumberPlusFive

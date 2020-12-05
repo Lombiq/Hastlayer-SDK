@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 
 namespace Hast.Vitis.Abstractions.Interop
@@ -13,9 +13,9 @@ namespace Hast.Vitis.Abstractions.Interop
     /// </remarks>
     public struct XilinxMemoryExtension
     {
-        public ulong Flags;
-        public IntPtr Object;
-        public IntPtr Parameters;
+        public ulong Flags { get; set; }
+        public IntPtr Object { get; set; }
+        public IntPtr Parameters { get; set; }
 
         public static XilinxMemoryExtension Create(IntPtr data, ulong bank) =>
             new XilinxMemoryExtension

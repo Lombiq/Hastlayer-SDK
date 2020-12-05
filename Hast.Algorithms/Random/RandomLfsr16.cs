@@ -1,4 +1,4 @@
-﻿namespace Hast.Algorithms.Random
+namespace Hast.Algorithms.Random
 {
     /// <summary>
     /// The same linear-feedback shift register pseudo random number generator as in <see cref="RandomLfsr"/> but with
@@ -13,7 +13,7 @@
         /// <remarks>
         /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
-        public ushort State = 49813; // Just some starting number.
+        public ushort State { get; set; } = 49813; // Just some starting number.
 
         public ushort NextUInt16()
         {

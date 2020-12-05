@@ -1,4 +1,4 @@
-﻿namespace Hast.Algorithms.Random
+namespace Hast.Algorithms.Random
 {
     /// <summary>
     /// A linear-feedback shift register pseudo random number generator with a 16b state. For details check out <see
@@ -14,7 +14,7 @@
         /// <remarks>
         /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
-        public ushort State = 49813; // Just some starting number.
+        public ushort State { get; set; } = 49813; // Just some starting number.
 
         public ushort NextUInt16()
         {

@@ -54,7 +54,7 @@ namespace Hast.Samples.Kpz
         public int GridHeight => Grid.GetLength(1);
 
         /// <summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>
-        public KpzNode[,] Grid;
+        public KpzNode[,] Grid { get; set; }
 
         /// <summary>
         /// The <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
@@ -64,7 +64,7 @@ namespace Hast.Samples.Kpz
         /// <para>Use a small grid and a low amount of iterations if enabled. It will use a lot of memory.</para>
         /// </note>
         /// </summary>
-        public KpzStateLogger StateLogger;
+        public KpzStateLogger StateLogger { get; set; }
 
         /// <summary>
         /// The constructor initializes the parameters of <see cref="Kpz" />, see:
@@ -356,7 +356,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         private KpzNeighbours GetNeighbours(KpzNode[,] grid, KpzCoords p)
         {
-            KpzNeighbours toReturn;
+            KpzNeighbours toReturn = new KpzNeighbours();
 
             toReturn.nxCoords = new KpzCoords
             {

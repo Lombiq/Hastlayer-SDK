@@ -1,4 +1,4 @@
-﻿namespace Hast.Algorithms.Random
+namespace Hast.Algorithms.Random
 {
     /// <summary>
     /// A very simple pseudo random number generator implemented with a
@@ -15,7 +15,7 @@
         /// <remarks>
         /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
-        public uint State = 498113; // Just some starting number.
+        public uint State { get; set; } = 498113; // Just some starting number.
 
         public uint NextUInt32()
         {

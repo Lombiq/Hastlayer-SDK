@@ -8,8 +8,8 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public class KpzNode
     {
-        public bool dx; // Right
-        public bool dy; // Bottom
+        public bool dx { get; set; } // Right
+        public bool dy { get; set; } // Bottom
 
         public uint SerializeToUInt32() => ((dx) ? 1U : 0) | ((dy) ? 2U : 0);
 
@@ -32,10 +32,10 @@ namespace Hast.Samples.Kpz.Algorithms
     [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
     public struct KpzNeighbours
     {
-        public KpzNode nx; // Right neighbour value
-        public KpzNode ny; // Left neighbour value
-        public KpzCoords nxCoords; // Right neighbour coordinates
-        public KpzCoords nyCoords; // Left neighbour coordinates
+        public KpzNode nx { get; set; } // Right neighbour value
+        public KpzNode ny { get; set; } // Left neighbour value
+        public KpzCoords nxCoords { get; set; } // Right neighbour coordinates
+        public KpzCoords nyCoords { get; set; } // Left neighbour coordinates
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ namespace Hast.Samples.Kpz.Algorithms
     [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
     public struct KpzCoords
     {
-        public int x;
-        public int y;
+        public int x { get; set; }
+        public int y { get; set; }
     }
 }

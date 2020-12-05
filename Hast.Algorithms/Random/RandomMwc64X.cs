@@ -14,7 +14,7 @@ namespace Hast.Algorithms.Random
         /// <remarks>
         /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
-        public ulong State = 0xCAFEUL; // Just some starting number.
+        public ulong State { get; set; } = 0xCAFEUL; // Just some starting number.
 
         public uint NextUInt32()
         {

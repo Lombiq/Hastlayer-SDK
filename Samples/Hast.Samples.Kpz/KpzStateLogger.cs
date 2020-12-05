@@ -12,7 +12,7 @@ namespace Hast.Samples.Kpz
     /// </summary>
     public class KpzIteration
     {
-        public List<KpzAction> Actions = new List<KpzAction>();
+        public List<KpzAction> Actions { get; set; } = new List<KpzAction>();
     }
 
     /// <summary>
@@ -30,11 +30,11 @@ namespace Hast.Samples.Kpz
     [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
     public struct KpzAction
     {
-        public string Description;
-        public KpzNode[,] Grid;
-        public int[,] HeightMap;
-        public List<KpzCoords> HighlightedCoords;
-        public Color HightlightColor;
+        public string Description { get; set; }
+        public KpzNode[,] Grid { get; set; }
+        public int[,] HeightMap { get; set; }
+        public List<KpzCoords> HighlightedCoords { get; set; }
+        public Color HightlightColor { get; set; }
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ namespace Hast.Samples.Kpz
     public class KpzStateLogger
     {
         /// <summary>The KPZ iteration list.</summary>
-        public List<KpzIteration> Iterations = new List<KpzIteration>();
+        public List<KpzIteration> Iterations { get; set; } = new List<KpzIteration>();
 
         /// <summary>We add an iteration when the constructor is called, so actions can be added right away.</summary>
         public KpzStateLogger() => NewKpzIteration();

@@ -11,10 +11,10 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public class KpzKernelsTaskState
     {
-        public bool[] BramDx;
-        public bool[] BramDy;
-        public RandomMwc64X Random1;
-        public RandomMwc64X Random2;
+        public bool[] BramDx { get; set; }
+        public bool[] BramDy { get; set; }
+        public RandomMwc64X Random1 { get; set; }
+        public RandomMwc64X Random2 { get; set; }
     }
 
     // SimpleMemory map:

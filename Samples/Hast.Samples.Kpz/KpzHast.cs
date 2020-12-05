@@ -13,10 +13,10 @@ namespace Hast.Samples.Kpz
         private bool _randomSeedEnable;
 
         public delegate void LogItDelegate(string toLog);
-        public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
-        public KpzKernelsInterface Kernels;
-        public KpzKernelsParallelizedInterface KernelsParallelized;
-        public PrngTestInterface KernelsP;
+        public LogItDelegate LogItFunction { get; set; } //Should be AsyncLogIt from ChartForm
+        public KpzKernelsInterface Kernels { get; set; }
+        public KpzKernelsParallelizedInterface KernelsParallelized { get; set; }
+        public PrngTestInterface KernelsP { get; set; }
 
         public async Task<(IHastlayer, IHardwareGenerationConfiguration)> InitializeHastlayer(
             bool verifyOutput,
