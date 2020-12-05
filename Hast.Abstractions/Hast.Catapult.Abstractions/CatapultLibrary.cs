@@ -328,7 +328,7 @@ namespace Hast.Catapult.Abstractions
                 var payloadTotalCells = MemoryMarshal.Read<int>(responses[0][OutputHeaderSizes.HardwareExecutionTime..].Span);
                 Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
                 responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
-                var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
+                const int sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
                 Parallel.For(0, responses.Length, (i) =>
                 {
                     int size = i < responses.Length - 1 ? BufferPayloadSize :

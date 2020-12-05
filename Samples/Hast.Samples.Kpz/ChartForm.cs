@@ -191,19 +191,8 @@ namespace Hast.Samples.Kpz
             AsyncLogIt("Filling grid with initial data...");
             _kpz.InitializeGrid();
 
-            IHastlayer hastlayer = null;
-            IHardwareGenerationConfiguration configuration = null;
-
-            if (ComputationTarget != KpzTarget.Cpu)
-            {
-                AsyncLogIt("Initializing Hastlayer...");
-                _kpz.LogItFunction = AsyncLogIt;
-                var hastlayerInitializationTask = _kpz.InitializeHastlayer(VerifyOutput, RandomSeedEnable);
-                (hastlayer, configuration) = hastlayerInitializationTask.Result;
-                hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
-                hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
-                    $"(took {e.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
-            }
+            var (hastlayer, configuration) = ComputationTarget != KpzTarget.Cpu
+                ? InitializeHastlayer() : (null, null);
 
             try
             {
@@ -257,6 +246,19 @@ namespace Hast.Samples.Kpz
             {
                 hastlayer?.Dispose();
             }
+        }
+
+        private (IHastlayer, IHardwareGenerationConfiguration) InitializeHastlayer()
+        {
+            AsyncLogIt("Initializing Hastlayer...");
+            _kpz.LogItFunction = AsyncLogIt;
+            var result = _kpz.InitializeHastlayer(VerifyOutput, RandomSeedEnable).Result;
+
+            result.Hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
+            result.Hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
+                $"(took {e.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
+
+            return result;
         }
 
         /// <summary>

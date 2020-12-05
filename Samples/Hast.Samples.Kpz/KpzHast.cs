@@ -18,7 +18,7 @@ namespace Hast.Samples.Kpz
         public KpzKernelsParallelizedInterface KernelsParallelized { get; set; }
         public PrngTestInterface KernelsP { get; set; }
 
-        public async Task<(IHastlayer, IHardwareGenerationConfiguration)> InitializeHastlayer(
+        public async Task<(IHastlayer Hastlayer, IHardwareGenerationConfiguration Configuration)> InitializeHastlayer(
             bool verifyOutput,
             bool randomSeedEnable)
         {
@@ -110,7 +110,7 @@ namespace Hast.Samples.Kpz
             {
                 LogItFunction("Running TestAdd...");
                 uint resultFpga = Kernels.TestAddWrapper(hastlayer, configuration, 4_313, 123);
-                uint resultCpu = 4_313 + 123;
+                const uint resultCpu = 4_313 + 123;
                 LogItFunction(resultCpu == resultFpga ? $"Success: {resultFpga} == {resultCpu}" : $"Fail: {resultFpga} != {resultCpu}");
             }
 
@@ -119,7 +119,7 @@ namespace Hast.Samples.Kpz
                 LogItFunction("Running TestPrng...");
 
                 var kernelsCpu = new PrngTestInterface();
-                ulong randomSeed = 0x_37a9_2d76_a96e_f210UL;
+                const ulong randomSeed = 0x_37a9_2d76_a96e_f210UL;
                 var smCpu = kernelsCpu.PushRandomSeed(randomSeed, null, null);
                 var smFpga = KernelsP.PushRandomSeed(randomSeed, hastlayer, configuration);
                 LogItFunction("PRNG results:");

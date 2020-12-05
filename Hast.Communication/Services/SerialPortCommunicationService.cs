@@ -107,7 +107,7 @@ namespace Hast.Communication.Services
             // we need to create batches. Since the FPGA receives data in the multiples of 4 bytes we use a batch
             // of 4 bytes. This seems to have no negative impact on performance compared to using
             // serialPort.Write() once.
-            var maxBytesToSendAtOnce = 4;
+            const int maxBytesToSendAtOnce = 4;
             var memoryAsArraySegment = memory.GetUnderlyingArray();
             for (int i = 0; i < (int)Math.Ceiling(memory.Length / (decimal)maxBytesToSendAtOnce); i++)
             {
