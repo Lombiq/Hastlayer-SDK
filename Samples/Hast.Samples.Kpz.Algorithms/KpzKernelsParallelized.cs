@@ -55,7 +55,16 @@ namespace Hast.Samples.Kpz.Algorithms
         // Also both GridSize and LocalGridSize should be a power of two.
         // The probability of turning a pyramid into a hole (IntegerProbabilityP),
         // or a hole into a pyramid (IntegerProbabilityQ).
-        public const uint IntegerProbabilityP = 32767, IntegerProbabilityQ = 32767;
+        public const uint IntegerProbabilityP = 32767;
+
+        // Furthermore, for LocalGridSize and GridSize the following expressions should have an integer result:
+        //    (GridSize^2)/(LocalGridSize^2)
+        //    GridSize/LocalGridSize
+        // (Here the ^ operator means power.)
+        // Also both GridSize and LocalGridSize should be a power of two.
+        // The probability of turning a pyramid into a hole (IntegerProbabilityP),
+        // or a hole into a pyramid (IntegerProbabilityQ).
+        public const uint IntegerProbabilityQ = 32767;
         // Number of parallel execution engines. (Should be a power of two.) Only 8 will fully fit on the Nexys A7.
         public const int ParallelTasks = 8;
         // The number of reschedules (thus global grid offset changing) within one iteration.

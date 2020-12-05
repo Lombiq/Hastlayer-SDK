@@ -71,7 +71,11 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int GridHeight = 8;
         // The probability of turning a pyramid into a hole (IntegerProbabilityP),
         // or a hole into a pyramid (IntegerProbabilityQ).
-        public const uint IntegerProbabilityP = 32767, IntegerProbabilityQ = 32767;
+        public const uint IntegerProbabilityP = 32767;
+
+        // The probability of turning a pyramid into a hole (IntegerProbabilityP),
+        // or a hole into a pyramid (IntegerProbabilityQ).
+        public const uint IntegerProbabilityQ = 32767;
         // ==== </CONFIGURABLE PARAMETERS> ====
 
         public const int MemIndexNumberOfIterations = 0;
@@ -82,7 +86,8 @@ namespace Hast.Samples.Kpz.Algorithms
 
         private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
-        public RandomMwc64X Random1, Random2;
+        public RandomMwc64X Random1;
+        public RandomMwc64X Random2;
         public bool TestMode = false;
         public uint NumberOfIterations = 1;
 
