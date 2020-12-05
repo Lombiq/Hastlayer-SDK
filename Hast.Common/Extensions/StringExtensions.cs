@@ -14,6 +14,6 @@ namespace System
         /// </returns>
         /// <remarks><para><see href="https://stackoverflow.com/a/18781533">Source</see>.</para></remarks>
         public static string ToSnakeCase(this string input) =>
-            string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x.ToString() : x.ToString()));
+            string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x : x.ToString()));
     }
 }
