@@ -19,7 +19,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);
 
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             var sqrtInputArray = new uint[10];
             for (int i = 0; i < 10; i++)
@@ -34,9 +34,9 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var positCalculator = new Posit32AdvancedCalculator();
 
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F);
             var sw = Stopwatch.StartNew();
-            var resultOfDivision = positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            var resultOfDivision = positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F);
             sw.Stop();
 
             Console.WriteLine("Result of repeated division: " + resultOfDivision);

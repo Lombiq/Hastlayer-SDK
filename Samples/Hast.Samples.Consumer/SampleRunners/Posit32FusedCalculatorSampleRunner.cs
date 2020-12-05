@@ -53,7 +53,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             for (var i = 1; i < posit32Array.Length; i++)
             {
-                posit32Array[i] = new Posit32((float)0.5).PositBits;
+                posit32Array[i] = new Posit32(0.5F).PositBits;
             }
 
             return posit32Array;

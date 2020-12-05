@@ -20,7 +20,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator(), configuration);
             _ = positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
-            positCalculator.CalculatePowerOfReal(100000, (float)1.0001, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            positCalculator.CalculatePowerOfReal(100000, 1.0001F, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             var numbers = new int[Posit32Calculator.MaxDegreeOfParallelism];
             for (int i = 0; i < Posit32Calculator.MaxDegreeOfParallelism; i++)
@@ -34,7 +34,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             for (var i = 0; i < 100000; i++)
             {
-                posit32Array[i] = i % 2 == 0 ? new Posit32((float)0.25 * 2 * i).PositBits : new Posit32((float)0.25 * -2 * i).PositBits;
+                posit32Array[i] = i % 2 == 0 ? new Posit32(0.25F * 2 * i).PositBits : new Posit32(0.25F * -2 * i).PositBits;
             }
 
             _ = positCalculator.AddPositsInArray(posit32Array, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
@@ -55,9 +55,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             Console.WriteLine();
 
-            positCalculator.CalculatePowerOfReal(100000, (float)1.0001);
+            positCalculator.CalculatePowerOfReal(100000, 1.0001F);
             sw = Stopwatch.StartNew();
-            var powerOfReal = positCalculator.CalculatePowerOfReal(100000, (float)1.0001);
+            var powerOfReal = positCalculator.CalculatePowerOfReal(100000, 1.0001F);
             sw.Stop();
 
             Console.WriteLine("Result of power of real number: " + powerOfReal);
@@ -85,7 +85,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             for (var i = 0; i < 100000; i++)
             {
-                posit32Array[i] = i % 2 == 0 ? new Posit32((float)0.25 * 2 * i).PositBits : new Posit32((float)0.25 * -2 * i).PositBits;
+                posit32Array[i] = i % 2 == 0 ? new Posit32(0.25F * 2 * i).PositBits : new Posit32(0.25F * -2 * i).PositBits;
             }
 
             positCalculator.AddPositsInArray(posit32Array);

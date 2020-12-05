@@ -119,8 +119,8 @@ namespace Hast.Samples.Kpz
                 {
                     Grid[x, y] = new KpzNode
                     {
-                        dx = (bool)((x & 1) != 0),
-                        dy = (bool)((y & 1) != 0),
+                        dx = (x & 1) != 0,
+                        dy = (y & 1) != 0,
                     };
                 }
             }

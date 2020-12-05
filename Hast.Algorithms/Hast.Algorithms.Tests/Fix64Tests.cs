@@ -69,16 +69,16 @@ namespace Hast.Algorithms.Tests
         public void DoubleToFix64AndBack()
         {
             var sources = new[] {
-                (double)int.MinValue,
-                -(double)Math.PI,
-                -(double)Math.E,
+                int.MinValue,
+                -Math.PI,
+                -Math.E,
                 -1.0,
                 -0.0,
                 0.0,
                 1.0,
-                (double)Math.PI,
-                (double)Math.E,
-                (double)int.MaxValue,
+                Math.PI,
+                Math.E,
+                int.MaxValue,
             };
 
             foreach (var value in sources)
