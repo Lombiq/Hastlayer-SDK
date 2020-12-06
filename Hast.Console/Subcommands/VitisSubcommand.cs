@@ -108,7 +108,7 @@ namespace Hast.Console.Subcommands
             WriteLine("Build Completed. Find files under: {0}", Path.GetFullPath(implementation.BinaryPath));
         }
 
-        private async Task JsonAsync(VitisOptions options)
+        private static async Task JsonAsync(VitisOptions options)
         {
             var input = new FileInfo(options.InputFilePath);
             if (!input.Exists)

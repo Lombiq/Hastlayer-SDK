@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Models;
+using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
@@ -37,7 +37,7 @@ namespace Hast.Catapult.Abstractions
         private const int HardwareCellMultiplier = 16;
         private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
 
-        private Memory<byte> HotfixInput(Memory<byte> memory)
+        private static Memory<byte> HotfixInput(Memory<byte> memory)
         {
             if (memory.Length <= SimpleMemory.MemoryCellSizeBytes) return memory;
             Memory<byte> hardwareCells = new byte[memory.Length * HardwareCellMultiplier];
@@ -48,7 +48,7 @@ namespace Hast.Catapult.Abstractions
             return hardwareCells;
         }
 
-        private Memory<byte> HotfixOutput(Memory<byte> memory)
+        private static Memory<byte> HotfixOutput(Memory<byte> memory)
         {
             var memoryBody = memory[OutputHeaderSizes.Total..];
             var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + memoryBody.Length / HardwareCellMultiplier);
