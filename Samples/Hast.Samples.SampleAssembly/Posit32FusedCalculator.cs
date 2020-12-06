@@ -46,7 +46,10 @@ namespace Hast.Samples.SampleAssembly
                     {
                         posit32ArrayChunk[j] = new Posit32(memory.ReadUInt32(CalculateFusedSum_InputPosit32StartIndex + i * MaxArrayChunkSize + j), true);
                     }
-                    else posit32ArrayChunk[j] = new Posit32(0);
+                    else
+                    {
+                        posit32ArrayChunk[j] = new Posit32(0);
+                    }
                 }
 
                 quire = Posit32.FusedSum(posit32ArrayChunk, quire);

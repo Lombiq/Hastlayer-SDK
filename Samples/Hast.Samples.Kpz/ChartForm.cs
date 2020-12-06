@@ -209,7 +209,10 @@ namespace Hast.Samples.Kpz
                         }
                         else
                         {
-                            if (StepByStep) _kpz.DoHastIterationDebug(hastlayer, configuration);
+                            if (StepByStep)
+                            {
+                                _kpz.DoHastIterationDebug(hastlayer, configuration);
+                            }
                             else { _kpz.DoHastIterations(hastlayer, configuration, (uint)NumKpzIterations); break; }
                         }
 

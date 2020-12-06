@@ -213,7 +213,10 @@ namespace Hast.Layer
                     hardwareImplementation = await hardwareImplementationComposer
                         .ComposeAsync(hardwareImplementationCompositionContext);
                 }
-                else hardwareImplementation = EmptyHardwareImplementationFactory.Create();
+                else
+                {
+                    hardwareImplementation = EmptyHardwareImplementationFactory.Create();
+                }
 
                 return new HardwareRepresentation
                 {

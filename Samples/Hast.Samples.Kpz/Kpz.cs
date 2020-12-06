@@ -293,6 +293,7 @@ namespace Hast.Samples.Kpz
                     numberOfIterations);
             }
             else
+            {
                 Kernels.DoIterationsWrapper(
                     hastlayer,
                     configuration,
@@ -302,6 +303,7 @@ namespace Hast.Samples.Kpz
                     _random.NextUInt64(),
                     _random.NextUInt64(),
                     numberOfIterations);
+            }
 
             if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
             // HastlayerGridAlreadyPushed = true; // If not commented out, push always

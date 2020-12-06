@@ -300,7 +300,10 @@ namespace Hast.Communication.Tester
                         Console.WriteLine(exception);
                     }
                 }
-                else Console.WriteLine(ex.InnerExceptions[0]);
+                else
+                {
+                    Console.WriteLine(ex.InnerExceptions[0]);
+                }
             }
             catch (Exception ex)
             {
