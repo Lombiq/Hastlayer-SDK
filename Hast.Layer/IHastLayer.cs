@@ -85,9 +85,9 @@ namespace Hast.Layer
         /// <param name="configuration">The configuration with the device information.</param>
         /// <param name="data">
         /// The input data which is referenced by or copied into the <see cref="SimpleMemory"/> depending on the
-        /// selected device's characteristics, particularly its <see cref="MemoryConfiguration{T}.MinimumPrefix"/>.
+        /// selected device's characteristics, particularly its <c>MemoryConfiguration.MinimumPrefix</c>.
         /// </param>
-        /// <param name="withPrefixCells">The amount of empty header space reserved in the <see cref="data"/>.</param>
+        /// <param name="withPrefixCells">The amount of empty header space reserved in the <paramref name="data"/>.</param>
         /// <returns>A new instance of <see cref="SimpleMemory"/>.</returns>
         // Here we use Memory&lt;byte&gt; because xmldoc doesn't support generics with a definite type in <see> and in
         // the generated documentation they get replaced with <T>. See https://stackoverflow.com/a/41208166.

@@ -245,7 +245,7 @@ namespace Hast.Catapult.Abstractions
             /// <summary>
             /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is
             /// more than what would fit into a single slot then the header for the second slot will contain the
-            /// SliceIndex 1, for the third 2, and for the last one <see cref="SliceCount"/> - 1.
+            /// SliceIndex 1, for the third 2, and for the last one <see cref="Total"/> - 1.
             /// </summary>
             public const int SliceIndex = sizeof(int);
 

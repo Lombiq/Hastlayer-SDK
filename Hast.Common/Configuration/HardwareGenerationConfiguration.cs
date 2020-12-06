@@ -77,7 +77,7 @@ namespace Hast.Layer
         /// </summary>
         /// <param name="deviceName">
         /// The name of the FPGA device (board) to transform for. Device-specific configurations are determined by
-        /// device drivers. You can fetch the list of supported devices via <see cref="IHastlayer.GetSupportedDevices()"/>.
+        /// device drivers. You can fetch the list of supported devices via <c>IHastlayer.GetSupportedDevices()</c>.
         /// </param>
         /// <param name="hardwareFrameworkPath">
         /// The file system path here where the hardware framework is located. The file describing the hardware to be

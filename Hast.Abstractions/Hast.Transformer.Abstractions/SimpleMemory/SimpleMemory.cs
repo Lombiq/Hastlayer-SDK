@@ -72,8 +72,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <para>This constructor is internal only to avoid dependency issues where we have to include the System.Memory
         /// package everywhere where SimpleMemory is used even if it's created with the other constructors. Instead,
         /// you can use
-        /// <see cref="SimpleMemoryAccessor.Create(Memory{byte}, int)"/> to construct a <see cref="SimpleMemory"/> from
-        /// <see cref="Memory{byte}"/>.</para>
+        /// <see cref="Create(IMemoryConfiguration, Memory{byte}, ILogger, int)"/> to construct a <see cref="SimpleMemory"/> from
+        /// <see cref="Memory{T}"/> of <see cref="byte"/>.</para>
         /// </remarks>
         internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment)
         {
@@ -147,11 +147,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="memoryConfiguration">Creation parameters associated with the selected device.</param>
         /// <param name="memory">The data to be assigned.</param>
         /// <param name="logger">Optional logger for reporting issues.</param>
-        /// <param name="withPrefixCells">The number of cells already provisioned in the <see cref="memory"/>.</param>
+        /// <param name="withPrefixCells">The number of cells already provisioned in the <paramref name="memory"/>.</param>
         /// <returns>A new instance that wraps the given memory.</returns>
         /// <remarks>
         /// <para>If the <see cref="IMemoryConfiguration"/> indicates that more prefix space is required than what is already
-        /// provisioned in the <see cref="memory"/> according to the <see cref="withPrefixCells"/>, then an additional
+        /// provisioned in the <paramref name="memory"/> according to the <paramref name="withPrefixCells"/>, then an additional
         /// copy will occur. This is logged as a warning if a logger is given.</para>
         /// </remarks>
         public static SimpleMemory Create(

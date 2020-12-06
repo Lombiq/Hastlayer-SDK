@@ -60,7 +60,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use
         /// this to specify array lengths.
         ///
-        /// Key should be the full name of the array (<see cref="IHardwareGenerationConfiguration.HardwareEntryPointMemberFullNames"/>)
+        /// Key should be the full name of the array (<c>IHardwareGenerationConfiguration.HardwareEntryPointMemberFullNames</c>)
         /// and value should be the length. If you get exceptions due to arrays missing their sizes the exception will
         /// indicate the full array name too.
         /// </summary>
