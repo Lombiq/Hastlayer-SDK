@@ -11,7 +11,7 @@ namespace Hast.Communication.Services
         private readonly object _lock = new object();
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly ILogger _logger;
-        private bool _poolIsPopulated = false;
+        private bool _poolIsPopulated;
 
         public DevicePoolPopulator(IDevicePoolManager devicePoolManager, ILogger<DevicePoolPopulator> logger)
         {

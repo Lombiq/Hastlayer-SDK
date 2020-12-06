@@ -39,7 +39,7 @@ namespace Hast.Samples.Kpz
         private readonly Random _random = new Random();
 
         /// <summary>See <see cref="StateLogger" />.</summary>
-        private readonly bool _enableStateLogger = false;
+        private readonly bool _enableStateLogger;
 
         private readonly KpzTarget _kpzTarget = KpzTarget.Cpu;
 
@@ -270,7 +270,7 @@ namespace Hast.Samples.Kpz
             if (_enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
         }
 
-        private readonly bool HastlayerGridAlreadyPushed = false;
+        private readonly bool HastlayerGridAlreadyPushed;
 
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).

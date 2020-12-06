@@ -17,7 +17,7 @@ namespace Hast.Catapult.Abstractions
     /// </summary>
     public sealed class CatapultLibrary : IDisposable
     {
-        private bool _isDisposed = false;
+        private bool _isDisposed;
         private readonly IntPtr _handle;
 
         /// <summary>

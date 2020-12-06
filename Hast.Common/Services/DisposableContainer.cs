@@ -8,7 +8,7 @@ namespace Hast.Common.Services
     /// <typeparam name="T">The type of the value wich is exposed.</typeparam>
     public sealed class DisposableContainer<T> : IDisposable
     {
-        private bool _disposed = false;
+        private bool _disposed;
         private IDisposable _context;
 
         public T Value { get; }

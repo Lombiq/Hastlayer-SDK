@@ -8,7 +8,7 @@ namespace Hast.Common.Services
     {
         private readonly DirectoryInfo _appDataFolder;
 
-        private static string _assemblyDirectory = null;
+        private static string _assemblyDirectory;
         public static string AssemblyDirectory
         {
             get
