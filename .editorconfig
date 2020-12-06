@@ -251,6 +251,9 @@ dotnet_diagnostic.CA1810.severity = none
 # Don't apply "CA1822: Mark members as static" to the public API
 dotnet_code_quality.ca1822.api_surface = private, internal
 
+# S3937: Number patterns should be regular. Doesn't work well with hex literals.
+dotnet_diagnostic.S3937.severity = none
+
 # Various config files
 [*.{config,csproj,json,props,targets}]
 
