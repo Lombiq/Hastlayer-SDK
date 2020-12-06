@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Common.Numerics
 {
@@ -9,6 +10,7 @@ namespace Hast.Common.Numerics
     /// <remarks>
     /// <para>These operations are transformed into SIMD-like operations but currently they are plainly sequential in .NET.</para>
     /// </remarks>
+    [SuppressMessage("Usage", "CA1801:Review unused parameters", Justification = "Required by Hast.Transformer.Vhdl.SubTransformers.SpecialOperationInvocationTransformer.")]
     public static class SimdOperations
     {
         public static int[] AddVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism) => RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
