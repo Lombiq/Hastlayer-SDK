@@ -56,7 +56,7 @@ namespace Hast.Samples.SampleAssembly
                             // var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
                             // var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
 
-                            if ((ulong)(a * a) + b * b <= ((uint)ushort.MaxValue * ushort.MaxValue))
+                            if ((ulong)(a * a) + b * b <= (uint)ushort.MaxValue * ushort.MaxValue)
                             // if ((ulong)products[0] + products[1] <= ((uint)ushort.MaxValue * ushort.MaxValue))
                             {
                                 inCircleCount++;

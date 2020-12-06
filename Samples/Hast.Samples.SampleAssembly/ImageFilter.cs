@@ -124,16 +124,16 @@ namespace Hast.Samples.SampleAssembly
             if (factor == 0)
                 return pixel;
 
-            var newPixel = (((topLeft * topLeftValue) +
-                            (topMiddle * topMiddleValue) +
-                            (topRight * topRightValue) +
-                            (middleLeft * middleLeftValue) +
-                            (pixel * pixelValue) +
-                            (middleRight * middleRightValue) +
-                            (bottomRight * bottomLeftValue) +
-                            (bottomMiddle * bottomMiddleValue) +
-                            (bottomRight * bottomRightValue))
-                            / factor) + offset;
+            var newPixel = (topLeft * topLeftValue +
+                            topMiddle * topMiddleValue +
+                            topRight * topRightValue +
+                            middleLeft * middleLeftValue +
+                            pixel * pixelValue +
+                            middleRight * middleRightValue +
+                            bottomRight * bottomLeftValue +
+                            bottomMiddle * bottomMiddleValue +
+                            bottomRight * bottomRightValue)
+                / factor + offset;
 
             if (newPixel < 0) newPixel = 0;
             if (newPixel > 255) newPixel = 255;
@@ -269,9 +269,9 @@ namespace Hast.Samples.SampleAssembly
                     memory.WriteUInt32((x * image.Width + y) * 3 + 1 + FilterImage_ImageStartIndex, pixelValue.G);
                     memory.WriteUInt32((x * image.Width + y) * 3 + 2 + FilterImage_ImageStartIndex, pixelValue.B);
 
-                    memory.WriteUInt32((x * image.Width + y) * 3 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.R);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.G);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + size * 3 + FilterImage_ImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + size * 3 + FilterImage_ImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + size * 3 + FilterImage_ImageStartIndex, pixelValue.B);
                 }
             }
 

@@ -140,7 +140,7 @@ namespace Hast.Samples.Kpz
                 Description = Description,
                 Grid = CopyOfGrid(Grid),
                 HeightMap = new int[0, 0],
-                HightlightColor = (ChangedGrid) ? Color.LightGreen : Color.Salmon, // green or red
+                HightlightColor = ChangedGrid ? Color.LightGreen : Color.Salmon, // green or red
                 HighlightedCoords = highlightedCoords,
             });
         }
@@ -164,8 +164,8 @@ namespace Hast.Samples.Kpz
 
                         for (int x = 0; x < action.Grid.GetLength(0); x++)
                         {
-                            line += ((action.Grid[x, y].dx) ? "1" : "0") +
-                                ((action.Grid[x, y].dy) ? "1" : "0") + " ";
+                            line += (action.Grid[x, y].dx ? "1" : "0") +
+                                (action.Grid[x, y].dy ? "1" : "0") + " ";
                         }
 
                         file.WriteLine(line);

@@ -135,7 +135,7 @@ namespace Hast.Samples.Kpz
         /// It converts <see cref="KpzNode.dx" /> and <see cref="KpzNode.dy" /> boolean values to +1 and -1 integer
         /// values.
         /// </summary>
-        private static int Bool2Delta(bool what) => (what) ? 1 : -1;
+        private static int Bool2Delta(bool what) => what ? 1 : -1;
 
         /// <summary>
         /// It generates a heightmap from the <see cref="Grid" />.
@@ -252,11 +252,9 @@ namespace Hast.Samples.Kpz
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
-                ((currentPoint.dx && !neighbours.nx.dx) && (currentPoint.dy && !neighbours.ny.dy) &&
-                (_random.NextDouble() < _probabilityP)) ||
+                currentPoint.dx && !neighbours.nx.dx && currentPoint.dy && !neighbours.ny.dy && _random.NextDouble() < _probabilityP ||
                 // If we get the pattern {10, 10} we have a hole:
-                ((!currentPoint.dx && neighbours.nx.dx) && (!currentPoint.dy && neighbours.ny.dy) &&
-                (_random.NextDouble() < _probabilityQ))
+                !currentPoint.dx && neighbours.nx.dx && !currentPoint.dy && neighbours.ny.dy && _random.NextDouble() < _probabilityQ
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
@@ -363,14 +361,14 @@ namespace Hast.Samples.Kpz
 
             toReturn.nxCoords = new KpzCoords
             {
-                x = (p.x < GridWidth - 1) ? p.x + 1 : 0,
+                x = p.x < GridWidth - 1 ? p.x + 1 : 0,
                 y = p.y,
             };
 
             toReturn.nyCoords = new KpzCoords
             {
                 x = p.x,
-                y = (p.y < GridHeight - 1) ? p.y + 1 : 0,
+                y = p.y < GridHeight - 1 ? p.y + 1 : 0,
             };
 
             toReturn.nx = grid[toReturn.nxCoords.x, toReturn.nxCoords.y];
@@ -389,7 +387,7 @@ namespace Hast.Samples.Kpz
         {
             uint val1 = (uint)random.Next();
             uint val2 = (uint)random.Next();
-            ulong toReturn = val1 | ((ulong)val2 << 32);
+            ulong toReturn = val1 | (ulong)val2 << 32;
             return toReturn;
         }
     }

@@ -286,7 +286,7 @@ namespace Hast.Catapult.Abstractions
             int totalDataSize,
             bool ignoreResponse)
         {
-            int currentSliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
+            int currentSliceCount = (int)Math.Ceiling((double)inputData.Length / BufferPayloadSize);
             if (totalDataSize < 0) totalDataSize = inputData.Length / SimpleMemory.MemoryCellSizeBytes;
 
             if (currentSliceCount >= 2)
@@ -332,7 +332,7 @@ namespace Hast.Catapult.Abstractions
                 Parallel.For(0, responses.Length, (i) =>
                 {
                     int size = i < responses.Length - 1 ? BufferPayloadSize :
-                        (payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) - (i * BufferPayloadSize);
+                        payloadTotalCells * SimpleMemory.MemoryCellSizeBytes - i * BufferPayloadSize;
                     var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span[sliceIndexPosition..]);
                     if (offset < 0 || offset >= result.Length) return;
 
@@ -459,8 +459,12 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out var outputBuffer));
             var resultSize = await Task.Run(() =>
             {
-                VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived,
-                    useInterrupt: true, timeoutInSeconds: int.MaxValue));
+                VerifyResult(NativeLibrary.WaitOutputBuffer(
+                    _handle,
+                    slot,
+                    out uint bytesReceived,
+                    useInterrupt: true,
+                    timeoutInSeconds: int.MaxValue));
                 return (int)bytesReceived;
             });
 

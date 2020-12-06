@@ -202,7 +202,7 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
         private SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var cellCount = 2 + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2 + Math.Max(inputOne.Length, inputTwo.Length);
+            var cellCount = 2 + inputOne.Length + inputTwo.Length + inputOne.Length * inputTwo.Length * 2 + Math.Max(inputOne.Length, inputTwo.Length);
 
             var simpleMemory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
@@ -236,7 +236,7 @@ namespace Hast.Samples.SampleAssembly
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
             var result = "";
-            var startIndex = GetLCS_InputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2;
+            var startIndex = GetLCS_InputOneStartIndex + inputOne.Length + inputTwo.Length + inputOne.Length * inputTwo.Length * 2;
 
             for (int i = 0; i < maxInputLength; i++)
             {

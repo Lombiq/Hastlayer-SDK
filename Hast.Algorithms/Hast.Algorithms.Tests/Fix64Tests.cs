@@ -130,7 +130,7 @@ namespace Hast.Algorithms.Tests
         public void Substraction()
         {
             var terms1 = new[] { Fix64.MinValue(), (Fix64)(-1), Fix64.Zero(), Fix64.One(), Fix64.MaxValue() };
-            var terms2 = new[] { Fix64.One(), (Fix64)(-2), (Fix64)(1.5m), (Fix64)(2), (Fix64)(-1) };
+            var terms2 = new[] { Fix64.One(), (Fix64)(-2), (Fix64)1.5m, (Fix64)2, (Fix64)(-1) };
             var expecteds = new[] { Fix64.MinValue(), Fix64.One(), (Fix64)(-1.5m), (Fix64)(-1), Fix64.MaxValue() };
             for (int i = 0; i < terms1.Length; ++i)
             {
@@ -399,8 +399,8 @@ namespace Hast.Algorithms.Tests
                 }
                 else
                 {
-                    var expected = -((decimal)f);
-                    var actual = (decimal)(-f);
+                    var expected = -(decimal)f;
+                    var actual = (decimal)-f;
                     Assert.Equal(expected, actual);
                 }
             }
@@ -430,9 +430,9 @@ namespace Hast.Algorithms.Tests
                 {
                     var d1 = (double)op1;
                     var d2 = (double)op2;
-                    Assert.True((op1 == op2) == (d1 == d2));
-                    Assert.True((op1 != op2) == (d1 != d2));
-                    Assert.False((op1 == op2) && (op1 != op2));
+                    Assert.True(op1 == op2 == (d1 == d2));
+                    Assert.True(op1 != op2 == (d1 != d2));
+                    Assert.False(op1 == op2 && op1 != op2);
                 }
             }
         }

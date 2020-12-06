@@ -50,8 +50,13 @@ namespace Hast.Vitis.Abstractions.Services
             _context = new Lazy<IntPtr>(() =>
             {
                 if (!Devices.Any()) return IntPtr.Zero;
-                var context = _cl.CreateContext(IntPtr.Zero, (uint)Devices.Length, Devices.ToArray(), IntPtr.Zero,
-                    IntPtr.Zero, out var result);
+                var context = _cl.CreateContext(
+                    IntPtr.Zero,
+                    (uint)Devices.Length,
+                    Devices.ToArray(),
+                    IntPtr.Zero,
+                    IntPtr.Zero,
+                    out var result);
                 VerifyResult(result);
                 return context;
             });
@@ -164,7 +169,11 @@ namespace Hast.Vitis.Abstractions.Services
                 platforms :
                 platforms.Where(platform =>
                 {
-                    VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, UIntPtr.Zero, null,
+                    VerifyResult(_cl.GetPlatformInfo(
+                        platform,
+                        PlatformInformation.Name,
+                        UIntPtr.Zero,
+                        null,
                         out var size));
                     var output = new byte[size.ToUInt32()];
                     VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));

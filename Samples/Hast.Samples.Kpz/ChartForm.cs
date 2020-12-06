@@ -156,7 +156,7 @@ namespace Hast.Samples.Kpz
             // in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
             int iterationNext10Pow = (int)Math.Pow(10, Math.Floor(Math.Log10(iteration) + 1));
             bool updateChartInThisIteartion = forceUpdate || iteration < 10 ||
-                ((iteration + 1) % (iterationNext10Pow / 10)) == 0;
+                (iteration + 1) % (iterationNext10Pow / 10) == 0;
 
             if (updateChartInThisIteartion)
             {

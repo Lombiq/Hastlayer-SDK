@@ -226,7 +226,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
             //        $(PATH_TO_HDL) $(KERNEL_TCL) $(KERNEL_XML)
-            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
+            var vivadoExecutable = await GetExecutablePathAsync("vivado");
             var vivadoArguments = new[]
             {
                 "-mode",
@@ -249,7 +249,7 @@ namespace Hast.Vitis.Abstractions.Services
             // endif
             // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
             // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
-            var vppExecutable = (await GetExecutablePathAsync(Vpp));
+            var vppExecutable = await GetExecutablePathAsync(Vpp);
             var vppArguments = new List<string>(
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm
                 ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
@@ -279,7 +279,7 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 // For example:
                 // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
-                var emConfigExecutable = (await GetExecutablePathAsync("emconfigutil"));
+                var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
                 var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
                 await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
                 File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
@@ -294,7 +294,7 @@ namespace Hast.Vitis.Abstractions.Services
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
 
             // vivado -mode batch -source synth_util.tcl $(VhdFileIn) $(RptFileOut)
-            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
+            var vivadoExecutable = await GetExecutablePathAsync("vivado");
             var vivadoArguments = new[]
             {
                 "-mode",

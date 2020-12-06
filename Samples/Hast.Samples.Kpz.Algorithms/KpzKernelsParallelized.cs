@@ -79,7 +79,7 @@ namespace Hast.Samples.Kpz.Algorithms
         public virtual void ScheduleIterations(SimpleMemory memory)
         {
             int numberOfIterations = memory.ReadInt32(MemIndexNumberOfIterations);
-            const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
+            const int TasksPerIteration = GridSize * GridSize / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
             int iterationGroupSize = numberOfIterations * ReschedulesPerTaskIteration;
             const int PokesInsideTask = LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration;
@@ -103,14 +103,14 @@ namespace Hast.Samples.Kpz.Algorithms
                     },
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[taskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random1.State |= (ulong)randomSeedTemp << 32;
 
                 taskLocals[taskLocalsIndex].Random2 = new RandomMwc64X
                 {
                     State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++),
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[taskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random2.State |= (ulong)randomSeedTemp << 32;
             }
 
             // What is iterationGroupIndex good for?
@@ -120,14 +120,14 @@ namespace Hast.Samples.Kpz.Algorithms
 
             random0.State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
             randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-            random0.State |= ((ulong)randomSeedTemp) << 32;
+            random0.State |= (ulong)randomSeedTemp << 32;
 
             for (int iterationGroupIndex = 0; iterationGroupIndex < iterationGroupSize; iterationGroupIndex++)
             {
                 uint randomValue0 = random0.NextUInt32();
                 // This assumes that LocalGridSize is 2^N:
-                int randomXOffset = (int)((LocalGridSize - 1) & randomValue0);
-                int randomYOffset = (int)((LocalGridSize - 1) & (randomValue0 >> 16));
+                int randomXOffset = (int)(LocalGridSize - 1 & randomValue0);
+                int randomYOffset = (int)(LocalGridSize - 1 & randomValue0 >> 16);
                 for (int scheduleIndex = 0; scheduleIndex < SchedulesPerIteration; scheduleIndex++)
                 {
                     var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
@@ -173,11 +173,11 @@ namespace Hast.Samples.Kpz.Algorithms
                                 uint taskRandomNumber2 = taskLocal.Random2.NextUInt32();
 
                                 // The existence of var-1 in code is a good indicator of that it is assumed to be 2^N:
-                                int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1));
-                                int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
+                                int pokeCenterX = (int)(taskRandomNumber1 & LocalGridSize - 1);
+                                int pokeCenterY = (int)(taskRandomNumber1 >> 16 & LocalGridSize - 1);
                                 int pokeCenterIndex = pokeCenterX + pokeCenterY * LocalGridSize;
-                                uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
-                                uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
+                                uint randomVariable1 = taskRandomNumber2 & (1 << 16) - 1;
+                                uint randomVariable2 = taskRandomNumber2 >> 16 & (1 << 16) - 1;
 
                                 // Get neighbour indexes:
                                 int rightNeighbourIndex;
@@ -195,13 +195,9 @@ namespace Hast.Samples.Kpz.Algorithms
 
                                 if (
                                     // If we get the pattern {01, 01} we have a pyramid:
-                                    ((taskLocal.BramDx[pokeCenterIndex] && !taskLocal.BramDx[rightNeighbourIndex]) &&
-                                    (taskLocal.BramDy[pokeCenterIndex] && !taskLocal.BramDy[bottomNeighbourIndex]) &&
-                                    (randomVariable1 < IntegerProbabilityP)) ||
+                                    taskLocal.BramDx[pokeCenterIndex] && !taskLocal.BramDx[rightNeighbourIndex] && taskLocal.BramDy[pokeCenterIndex] && !taskLocal.BramDy[bottomNeighbourIndex] && randomVariable1 < IntegerProbabilityP ||
                                     // If we get the pattern {10, 10} we have a hole:
-                                    ((!taskLocal.BramDx[pokeCenterIndex] && taskLocal.BramDx[rightNeighbourIndex]) &&
-                                    (!taskLocal.BramDy[pokeCenterIndex] && taskLocal.BramDy[bottomNeighbourIndex]) &&
-                                    (randomVariable2 < IntegerProbabilityQ))
+                                    !taskLocal.BramDx[pokeCenterIndex] && taskLocal.BramDx[rightNeighbourIndex] && !taskLocal.BramDy[pokeCenterIndex] && taskLocal.BramDy[bottomNeighbourIndex] && randomVariable2 < IntegerProbabilityQ
                                 )
                                 {
                                     // We make a hole into a pyramid, and a pyramid into a hole.
@@ -340,7 +336,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 sm.WriteUInt32(
                     KpzKernelsParallelizedInterface.MemIndexRandomSeed + randomWriteIndex,
-                    (randomSeedEnable) ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
+                    randomSeedEnable ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
                 // See comment on notRandomSeed if you get an index out of bounds error here.
             }
 

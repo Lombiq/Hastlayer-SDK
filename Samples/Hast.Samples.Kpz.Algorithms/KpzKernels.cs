@@ -149,31 +149,27 @@ namespace Hast.Samples.Kpz.Algorithms
         public void RandomlySwitchFourCells(bool forceSwitch)
         {
             uint randomNumber1 = Random1.NextUInt32();
-            var centerX = (int)(randomNumber1 & (GridWidth - 1));
-            var centerY = (int)((randomNumber1 >> 16) & (GridHeight - 1));
+            var centerX = (int)(randomNumber1 & GridWidth - 1);
+            var centerY = (int)(randomNumber1 >> 16 & GridHeight - 1);
             int centerIndex = GetIndexFromXY(centerX, centerY);
             uint randomNumber2 = Random2.NextUInt32();
-            uint randomVariable1 = randomNumber2 & ((1 << 16) - 1);
-            uint randomVariable2 = (randomNumber2 >> 16) & ((1 << 16) - 1);
+            uint randomVariable1 = randomNumber2 & (1 << 16) - 1;
+            uint randomVariable2 = randomNumber2 >> 16 & (1 << 16) - 1;
             int rightNeighbourIndex;
             int bottomNeighbourIndex;
             // Get neighbor indexes:
-            int rightNeighbourX = (centerX < GridWidth - 1) ? centerX + 1 : 0;
+            int rightNeighbourX = centerX < GridWidth - 1 ? centerX + 1 : 0;
             int rightNeighbourY = centerY;
             int bottomNeighbourX = centerX;
-            int bottomNeighbourY = (centerY < GridHeight - 1) ? centerY + 1 : 0;
+            int bottomNeighbourY = centerY < GridHeight - 1 ? centerY + 1 : 0;
             rightNeighbourIndex = rightNeighbourY * GridWidth + rightNeighbourX;
             bottomNeighbourIndex = bottomNeighbourY * GridWidth + bottomNeighbourX;
             // We check our own {dx,dy} values, and the right neighbor's dx, and bottom neighbor's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
-                ((GetGridDx(centerIndex) && !GetGridDx(rightNeighbourIndex)) &&
-                (GetGridDy(centerIndex) && !GetGridDy(bottomNeighbourIndex)) &&
-                (forceSwitch || randomVariable1 < IntegerProbabilityP)) ||
+                GetGridDx(centerIndex) && !GetGridDx(rightNeighbourIndex) && GetGridDy(centerIndex) && !GetGridDy(bottomNeighbourIndex) && (forceSwitch || randomVariable1 < IntegerProbabilityP) ||
                 // If we get the pattern {10, 10} we have a hole:
-                ((!GetGridDx(centerIndex) && GetGridDx(rightNeighbourIndex)) &&
-                (!GetGridDy(centerIndex) && GetGridDy(bottomNeighbourIndex)) &&
-                (forceSwitch || randomVariable2 < IntegerProbabilityQ))
+                !GetGridDx(centerIndex) && GetGridDx(rightNeighbourIndex) && !GetGridDy(centerIndex) && GetGridDy(bottomNeighbourIndex) && (forceSwitch || randomVariable2 < IntegerProbabilityQ)
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
@@ -206,13 +202,13 @@ namespace Hast.Samples.Kpz.Algorithms
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
         /// This function sets the dx value of the <see cref="KpzNode"/> in its serialized form.
         /// </summary>
-        private void SetGridDx(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~1U) | (value ? 1U : 0);
+        private void SetGridDx(int index, bool value) => _gridRaw[index] = _gridRaw[index] & ~1U | (value ? 1U : 0);
 
         /// <summary>
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
         /// This function sets the dy value of the <see cref="KpzNode"/> in its serialized form.
         /// </summary>
-        private void SetGridDy(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~2U) | (value ? 2U : 0);
+        private void SetGridDy(int index, bool value) => _gridRaw[index] = _gridRaw[index] & ~2U | (value ? 2U : 0);
     }
 
     /// <summary>
@@ -273,10 +269,10 @@ namespace Hast.Samples.Kpz.Algorithms
             ulong randomSeed2, uint numberOfIterations)
         {
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0x_FFFF_FFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0x_FFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)(randomSeed1 >> 32 & 0x_FFFF_FFFFUL));
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 2, (uint)(randomSeed2 & 0x_FFFF_FFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)((randomSeed2 >> 32) & 0x_FFFF_FFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, (testMode) ? 1U : 0U);
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)(randomSeed2 >> 32 & 0x_FFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, testMode ? 1U : 0U);
             memoryDst.WriteUInt32(KpzKernels.MemIndexNumberOfIterations, numberOfIterations);
         }
 
