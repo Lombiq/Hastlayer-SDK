@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Samples.SampleAssembly.Extensions;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.Consumer.SampleRunners

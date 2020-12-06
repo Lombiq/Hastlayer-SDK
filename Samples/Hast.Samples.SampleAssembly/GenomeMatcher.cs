@@ -93,10 +93,9 @@ namespace Hast.Samples.SampleAssembly
                 {
                     currentCell = diagonalCell;
 
-                    if (row == 0 || column == 0)
-                        cellPointer = GetLCSOutOfBorderDiagonalCellPointerValue;
-                    else
-                        cellPointer = GetLCSDiagonalCellPointerValue;
+                    cellPointer = row == 0 || column == 0
+                        ? GetLCSOutOfBorderDiagonalCellPointerValue
+                        : GetLCSDiagonalCellPointerValue;
                 }
                 else
                 {
@@ -176,12 +175,11 @@ namespace Hast.Samples.SampleAssembly
                     previousCell = (ushort)memory.ReadUInt32(previousPosition);
 
                 // Add the current character to the result if the pointer is diagonal and the cell value decreased.
-                if (pointer == GetLCSDiagonalCellPointerValue && (currentCell == previousCell + 1 || previousPosition < resultStartIndex))
-                {
-                    var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
-                    memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);
-                }
-                else if (pointer == GetLCSOutOfBorderDiagonalCellPointerValue)
+                // A separate variable is used because otherwise the transformer breaks. Investigate later why that is.
+                var addToResults = pointer == GetLCSDiagonalCellPointerValue &&
+                    (currentCell == previousCell + 1 || previousPosition < resultStartIndex);
+                addToResults = addToResults || pointer == GetLCSOutOfBorderDiagonalCellPointerValue;
+                if (addToResults)
                 {
                     var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
                     memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);

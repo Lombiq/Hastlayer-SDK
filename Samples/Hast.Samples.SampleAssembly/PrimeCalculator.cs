@@ -184,13 +184,13 @@ namespace Hast.Samples.SampleAssembly
             uint number,
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null) =>
-            RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory)), hastlayer, configuration).Result;
+            RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumber(memory)), hastlayer, configuration).Result;
 
         public Task<bool> IsPrimeNumberAsync(
             uint number,
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null) =>
-            RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
+            RunIsPrimeNumberAsync(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
 
         public bool[] ArePrimeNumbers(
             uint[] numbers,
@@ -210,7 +210,11 @@ namespace Hast.Samples.SampleAssembly
             return results.CutToLength(numbers.Length);
         }
 
-        private async Task<bool> RunIsPrimeNumber(uint number, Func<SimpleMemory, Task> methodRunner, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        private async Task<bool> RunIsPrimeNumberAsync(
+            uint number,
+            Func<SimpleMemory, Task> methodRunner,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             // One memory cell is enough for data exchange.
             var memory = hastlayer is null

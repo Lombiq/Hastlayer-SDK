@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Samples.SampleAssembly.Extensions;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
