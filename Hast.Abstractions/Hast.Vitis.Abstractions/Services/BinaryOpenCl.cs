@@ -135,9 +135,9 @@ namespace Hast.Vitis.Abstractions.Services
         {
             if (err != Result.Success)
             {
-                throw new Exception(
+                throw new InvalidOperationException(
                     $"OpenCL error with status '{err}'. You may find more information by searching for 'opencl {err} " +
-                    $"OR CL_{err.ToString().ToSnakeCase().ToUpper()}' on the web.");
+                    $"OR CL_{err.ToString().ToSnakeCase().ToUpperInvariant()}' on the web.");
             }
         }
 
@@ -214,7 +214,7 @@ namespace Hast.Vitis.Abstractions.Services
             VerifyResult(result);
             VerifyResults(
                 resultsPerDevice,
-                (deviceResult, i) => new Exception($"Error while creating program on device #{i}: {deviceResult}"));
+                (deviceResult, i) => new InvalidOperationException($"Error while creating program on device #{i}: {deviceResult}"));
 
             VerifyResult(_cl.BuildProgram(
                 program,
@@ -280,20 +280,20 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 var arguments = VerifyResults(
                     GetKernelBuffers(name).Select(_cl.ReleaseMemObject),
-                    (result, _) => new Exception($"Error releasing buffer for kernel '{name}': {result}"));
+                    (result, _) => new InvalidOperationException($"Error releasing buffer for kernel '{name}': {result}"));
                 if (arguments != null) exceptions.AddRange(arguments.InnerExceptions);
 
                 var kernelReleaseResult = _cl.ReleaseKernel(handle);
                 if (kernelReleaseResult != Result.Success)
                 {
-                    exceptions.Add(new Exception($"Error releasing kernel '{name}': {kernelReleaseResult}"));
+                    exceptions.Add(new InvalidOperationException($"Error releasing kernel '{name}': {kernelReleaseResult}"));
                 }
             }
 
             var queues = _queues.ToList();
             var queueReleaseExceptions = VerifyResults(
                 _queues.Values.Select(_cl.ReleaseCommandQueue),
-                (result, index) => new Exception($"Error releasing queue for device #{queues[index].Key}: {result}"));
+                (result, index) => new InvalidOperationException($"Error releasing queue for device #{queues[index].Key}: {result}"));
             if (queueReleaseExceptions != null) exceptions.AddRange(queueReleaseExceptions.InnerExceptions);
 
             try

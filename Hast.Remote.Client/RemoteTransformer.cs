@@ -65,7 +65,7 @@ namespace Hast.Remote.Client
                     "Transforming the following assemblies failed: " + string.Join(", ", assemblyPaths) + ". ";
                 if (transformationResult == null)
                 {
-                    throw new Exception(
+                    throw new TimeoutException(
                         exceptionMessageBase + "The remote Hastlayer service didn't produce a result in a timely manner. " +
                         "This could indicate a problem with the service or that the assemblies contained exceptionally complex code.");
                 }
@@ -73,7 +73,7 @@ namespace Hast.Remote.Client
                 var localVersion = GetType().Assembly.GetName().Version.ToString();
                 if (transformationResult.RemoteHastlayerVersion != localVersion)
                 {
-                    throw new Exception(
+                    throw new InvalidOperationException(
                         "The local version of Hastlayer is out of date compared to the remote one " +
                         $"(remote version: {transformationResult.RemoteHastlayerVersion}, local version: {localVersion}). " +
                         "Please update Hastlayer otherwise incompatibilities may occur.");
@@ -81,7 +81,7 @@ namespace Hast.Remote.Client
 
                 if (transformationResult.Errors?.Any() == true)
                 {
-                    throw new Exception(
+                    throw new InvalidOperationException(
                          exceptionMessageBase + "The following error(s) happened: " + Environment.NewLine +
                          string.Join(Environment.NewLine, transformationResult.Errors));
                 }

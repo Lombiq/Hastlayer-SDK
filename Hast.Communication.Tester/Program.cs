@@ -42,7 +42,7 @@ namespace Hast.Communication.Tester
 
             // Get devices and if asked exit with the device list.
             var devices = provider.GetService<IDeviceManifestSelector>().GetSupportedDevices()?.ToList();
-            if (devices?.Any() != true) throw new Exception("No devices are available!");
+            if (devices?.Any() != true) throw new InvalidOperationException("No devices are available!");
 
             if (CommandLineOptions.ListDevices)
             {
@@ -57,7 +57,7 @@ namespace Hast.Communication.Tester
             // Try to load selected device or pick the first available if none were selected.
             if (string.IsNullOrEmpty(CommandLineOptions.DeviceName)) CommandLineOptions.DeviceName = devices.First().Name;
             var selectedDevice = devices.FirstOrDefault(device => device.Name == CommandLineOptions.DeviceName);
-            if (selectedDevice == null) throw new Exception($"Target device '{CommandLineOptions.DeviceName}' not found!");
+            if (selectedDevice == null) throw new InvalidOperationException($"Target device '{CommandLineOptions.DeviceName}' not found!");
             var channelName = selectedDevice.DefaultCommunicationChannelName;
 
             var prepend = Array.Empty<int>();
