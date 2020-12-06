@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.Helpers;
 using static Hast.Common.Constants.DataSize;
@@ -11,7 +11,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
         public const string DeviceName = "Alveo U280";
 
         public IDeviceManifest DeviceManifest { get; } =
-            new XilinxDeviceManifest
+            new XilinxDeviceManifest(supportsHbm: true, "xilinx_u280")
             {
                 Name = DeviceName,
                 ClockFrequencyHz = 300 * Mhz,
@@ -19,7 +19,6 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 // While there is 8GB of HBM2 and 32GB DDR RAM the max object size in .NET is 2GB. So until we
                 // add paging to SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
                 AvailableMemoryBytes = 2 * GigaByte,
-                SupportedPlatforms = new[] { "xilinx_u280" },
                 ToolChainName = CommonToolChainNames.Vitis,
             };
 

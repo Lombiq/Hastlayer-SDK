@@ -23,13 +23,11 @@ namespace Hast.Remote.Client
 
             var assemblyContainers = assemblyPaths.Select(GetAssemblyContainers);
 
-            var apiConfiguration = new HardwareGenerationConfiguration
-            {
-                CustomConfiguration = configuration.CustomConfiguration,
-                DeviceName = configuration.DeviceName,
-                HardwareEntryPointMemberFullNames = configuration.HardwareEntryPointMemberFullNames,
-                HardwareEntryPointMemberNamePrefixes = configuration.HardwareEntryPointMemberNamePrefixes,
-            };
+            var apiConfiguration = new HardwareGenerationConfiguration(
+                configuration.DeviceName,
+                configuration.CustomConfiguration,
+                configuration.HardwareEntryPointMemberFullNames,
+                configuration.HardwareEntryPointMemberNamePrefixes);
 
             try
             {
@@ -81,7 +79,7 @@ namespace Hast.Remote.Client
 
                 if (transformationResult.Errors?.Any() == true)
                 {
-                    throw new InvalidOperationException(
+                    throw new Exception(
                          exceptionMessageBase + "The following error(s) happened: " + Environment.NewLine +
                          string.Join(Environment.NewLine, transformationResult.Errors));
                 }

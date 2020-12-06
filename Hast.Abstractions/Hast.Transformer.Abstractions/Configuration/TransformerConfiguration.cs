@@ -49,14 +49,14 @@ namespace Hast.Transformer.Abstractions.Configuration
         public bool EnableMethodInlining { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets the list of methods that should be inlined in addition to methods already marked with a
+        /// Gets the list of methods that should be inlined in addition to methods already marked with a
         /// suitable <c>MethodImpl</c> attribute. Will only work if <see cref="EnableMethodInlining"/> is <c>true</c>.
         /// Fore more information check the documentation.
         /// </summary>
-        public IList<string> AdditionalInlinableMethodsFullNames { get; set; } = new List<string>();
+        public IList<string> AdditionalInlinableMethodsFullNames { get; } = new List<string>();
 
         /// <summary>
-        /// Gets or sets lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer
+        /// Gets lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer
         /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use
         /// this to specify array lengths.
         ///
@@ -64,14 +64,14 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// and value should be the length. If you get exceptions due to arrays missing their sizes the exception will
         /// indicate the full array name too.
         /// </summary>
-        public IDictionary<string, int> ArrayLengths { get; set; } = new Dictionary<string, int>();
+        public IDictionary<string, int> ArrayLengths { get; } = new Dictionary<string, int>();
 
         /// <summary>
         /// Gets or sets a value indicating whether interfaces that are implemented by transformed types are processed. Currently such
         /// interfaces don't affect the resulting hardware implementation, but the assemblies of all referenced
         /// interfaces need to be loaded. If set to <c>false</c> such loading is not necessary. Defaults to <c>false</c>.
         /// </summary>
-        public bool ProcessImplementedInterfaces { get; set; } = false;
+        public bool ProcessImplementedInterfaces { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether constant values are propagated through the processed code and variables that actually

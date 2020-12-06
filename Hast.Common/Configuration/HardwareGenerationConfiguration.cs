@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer
 {
     public class HardwareGenerationConfiguration : IHardwareGenerationConfiguration
     {
         /// <summary>
-        /// Gets or sets a dictionary that can contain settings for non-default configuration options (like ones required
+        /// Gets a dictionary that can contain settings for non-default configuration options (like ones required
         /// by specific transformer implementations).
         /// </summary>
-        public IDictionary<string, object> CustomConfiguration { get; set; } = new Dictionary<string, object>();
+        public IDictionary<string, object> CustomConfiguration { get; }
 
         /// <summary>
         /// Gets or sets a name associated with the hardware generation operation that's meaningful to the consumer. It
@@ -17,7 +17,7 @@ namespace Hast.Layer
         public string Label { get; set; }
 
         /// <summary>
-        /// Gets or sets the collection of the full name of those public members that will be accessible as hardware
+        /// Gets the collection of the full name of those public members that will be accessible as hardware
         /// implementation. By default all members implemented from interfaces and all public virtual members will
         /// be included. You can use this to restrict what gets transformed into hardware; if nothing is specified
         /// all suitable members will be transformed.
@@ -31,10 +31,10 @@ namespace Hast.Layer
         /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
         /// </code>
         /// </example>
-        public IList<string> HardwareEntryPointMemberFullNames { get; set; } = new List<string>();
+        public IList<string> HardwareEntryPointMemberFullNames { get; }
 
         /// <summary>
-        /// Gets or sets the collection of the name prefixes of those public members that will be accessible as hardware
+        /// Gets the collection of the name prefixes of those public members that will be accessible as hardware
         /// implementation. By default all members implemented from interfaces and all public virtual members will
         /// be included. You can use this to restrict what gets transformed into hardware; if nothing is specified
         /// all suitable members will be transformed.
@@ -44,7 +44,7 @@ namespace Hast.Layer
         /// "Contoso.ImageProcessing" will include all members under this namespace.
         /// "Contoso.ImageProcessing.FaceRecognition.FaceDetectors" will include all members in this class.
         /// </example>
-        public IList<string> HardwareEntryPointMemberNamePrefixes { get; set; } = new List<string>();
+        public IList<string> HardwareEntryPointMemberNamePrefixes { get; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
@@ -84,12 +84,20 @@ namespace Hast.Layer
         /// generated will be saved there as well as anything else necessary, and that framework will be used to
         /// implement the hardware and configure the device.
         /// </param>
-        public HardwareGenerationConfiguration(string deviceName, string hardwareFrameworkPath)
+        public HardwareGenerationConfiguration(
+            string deviceName,
+            string hardwareFrameworkPath,
+            IDictionary<string, object> customConfiguration = null,
+            IList<string> hardwareEntryPointMemberFullNames = null,
+            IList<string> hardwareEntryPointMemberNamePrefixes = null)
         {
             DeviceName = deviceName;
             HardwareFrameworkPath = string.IsNullOrWhiteSpace(hardwareFrameworkPath)
                 ? "HardwareFramework"
                 : hardwareFrameworkPath;
+            CustomConfiguration = customConfiguration ?? new Dictionary<string, object>();
+            HardwareEntryPointMemberFullNames = hardwareEntryPointMemberFullNames ?? new List<string>();
+            HardwareEntryPointMemberNamePrefixes = hardwareEntryPointMemberNamePrefixes ?? new List<string>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -23,12 +23,19 @@ namespace Hast.Communication.Tester
             };
             HardwareRepresentation = hastlayer.GenerateHardware(assemblies, configuration).Result;
 
-            ProxyGenerationConfiguration = new ProxyGenerationConfiguration()
+            ProxyGenerationConfiguration = new ProxyGenerationConfiguration
             {
                 CommunicationChannelName = communicationChannelName,
-                CustomConfiguration = customConfiguration ?? new Dictionary<string, object>(),
                 VerifyHardwareResults = false,
             };
+
+            if (customConfiguration != null)
+            {
+                foreach (var (key, value) in customConfiguration)
+                {
+                    ProxyGenerationConfiguration.CustomConfiguration[key] = value;
+                }
+            }
         }
     }
 }
