@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Text;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
@@ -22,6 +22,7 @@ namespace Hast.Samples.SampleAssembly
         private const ushort GetLCS_DiagonalCellPointerValue = 2;
         private const ushort GetLCS_OutOfBorderDiagonalCellPointerValue = 3;
 
+
         /// <summary>
         /// Calculates the longest common subsequence of two byte arrays with the Smith-Waterman algorithm.
         /// </summary>
@@ -31,6 +32,7 @@ namespace Hast.Samples.SampleAssembly
             FillTable(memory);
             Traceback(memory);
         }
+
 
         private void FillTable(SimpleMemory memory)
         {
@@ -73,7 +75,10 @@ namespace Hast.Samples.SampleAssembly
                         {
                             currentCell = diagonalCell;
 
-                            cellPointer = row == 0 || column == 0 ? GetLCS_OutOfBorderDiagonalCellPointerValue : GetLCS_DiagonalCellPointerValue;
+                            if (row == 0 || column == 0)
+                                cellPointer = GetLCS_OutOfBorderDiagonalCellPointerValue;
+                            else
+                                cellPointer = GetLCS_DiagonalCellPointerValue;
                         }
                         else
                         {
@@ -172,6 +177,7 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
+
         /// <summary>
         /// Calculates the longest common subsequence of two strings.
         /// </summary>
@@ -186,6 +192,7 @@ namespace Hast.Samples.SampleAssembly
 
             return GetResult(simpleMemory, inputOne, inputTwo);
         }
+
 
         /// <summary>
         /// Creates a <see cref="SimpleMemory"/> object filled with the input values.
@@ -228,7 +235,7 @@ namespace Hast.Samples.SampleAssembly
         {
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
-            var result = new StringBuilder();
+            var result = "";
             var startIndex = GetLCS_InputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2;
 
             for (int i = 0; i < maxInputLength; i++)
@@ -237,10 +244,10 @@ namespace Hast.Samples.SampleAssembly
                 var currentCharBytes = BitConverter.GetBytes(currentChar);
                 var chars = Encoding.UTF8.GetChars(currentCharBytes);
 
-                result.Append(chars[0]);
+                result += chars[0];
             }
 
-            return result.ToString().Replace("\0", string.Empty, StringComparison.Ordinal);
+            return result.Replace("\0", "");
         }
     }
 }

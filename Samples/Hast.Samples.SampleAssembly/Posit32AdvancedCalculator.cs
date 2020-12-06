@@ -1,4 +1,4 @@
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
@@ -7,6 +7,7 @@ namespace Hast.Samples.SampleAssembly
 {
     public class Posit32AdvancedCalculator
     {
+
         public const int RepeatedDivision_InputInt32Index = 0;
         public const int RepeatedDivision_FirstInputPosit32Index = 1;
         public const int RepeatedDivision_SecondInputPosit32Index = 2;
@@ -50,13 +51,7 @@ namespace Hast.Samples.SampleAssembly
 
     public static class Posit32AdvancedCalculatorExtensions
     {
-        public static float RepeatedDivision(
-            this Posit32AdvancedCalculator positCalculator,
-            int number,
-            float dividend,
-            float divisor,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
+        public static float RepeatedDivision(this Posit32AdvancedCalculator positCalculator, int number, float dividend, float divisor, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(3)
@@ -71,11 +66,7 @@ namespace Hast.Samples.SampleAssembly
             return (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.RepeatedDivision_OutputPosit32Index), true);
         }
 
-        public static float[] SqrtOfPositsInArray(
-            this Posit32AdvancedCalculator posit32Calculator,
-            uint[] posit32Array,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
+        public static float[] SqrtOfPositsInArray(this Posit32AdvancedCalculator posit32Calculator, uint[] posit32Array, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var cellCount = posit32Array.Length + 1;
             var memory = hastlayer is null
@@ -96,7 +87,6 @@ namespace Hast.Samples.SampleAssembly
             {
                 resultArray[i] = (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArray_OutputPosit32StartIndex + i), true);
             }
-
             return resultArray;
         }
     }

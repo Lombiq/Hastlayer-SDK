@@ -1,4 +1,4 @@
-using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
@@ -29,6 +29,7 @@ namespace Hast.Samples.SampleAssembly
         // selected as the hardware entry point (i.e. only it will be transformed into hardware, see the config in
         // Posit32CalculatorSampleRunner) then with a MaxDegreeOfParallelism of 5 it'll take 75% as well.
         public const int MaxDegreeOfParallelism = 2;
+
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
@@ -65,6 +66,8 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
         {
+            var numbers = new int[MaxDegreeOfParallelism];
+
             var tasks = new Task<int>[MaxDegreeOfParallelism];
 
             for (int i = 0; i < MaxDegreeOfParallelism; i++)
@@ -109,6 +112,7 @@ namespace Hast.Samples.SampleAssembly
         }
     }
 
+
     public static class Posit32CalculatorExtensions
     {
         public static int CalculateIntegerSumUpToNumber(this Posit32Calculator positCalculator, int number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
@@ -137,11 +141,7 @@ namespace Hast.Samples.SampleAssembly
             return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.CalculatePowerOfReal_OutputPosit32Index), true);
         }
 
-        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(
-            this Posit32Calculator positCalculator,
-            int[] numbers,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
+        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this Posit32Calculator positCalculator, int[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             if (numbers.Length != Posit32Calculator.MaxDegreeOfParallelism)
             {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hast.Algorithms;
@@ -22,6 +22,7 @@ namespace Hast.Samples.SampleAssembly
 
         public const int MaxDegreeOfParallelism = 10;
 
+
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
             var number = memory.ReadInt32(CalculateLargeIntegerSum_InputInt32Index);
@@ -41,6 +42,8 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
         {
+            var numbers = new int[MaxDegreeOfParallelism];
+
             var tasks = new Task<TaskResult>[MaxDegreeOfParallelism];
 
             for (int i = 0; i < MaxDegreeOfParallelism; i++)
@@ -63,7 +66,7 @@ namespace Hast.Samples.SampleAssembly
                         return new TaskResult
                         {
                             Fix64Low = integers[0],
-                            Fix64High = integers[1],
+                            Fix64High = integers[1]
                         };
                     }, upToNumber);
             }
@@ -79,11 +82,13 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
+
         private class TaskResult
         {
             public int Fix64Low { get; set; }
             public int Fix64High { get; set; }
         }
+
 
         public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {
@@ -96,7 +101,7 @@ namespace Hast.Samples.SampleAssembly
             return Fix64.FromRawInts(new[]
             {
                 memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index),
-                memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index + 1),
+                memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index + 1)
             });
         }
 
@@ -129,7 +134,7 @@ namespace Hast.Samples.SampleAssembly
                 results[i] = Fix64.FromRawInts(new[]
                 {
                     memory.ReadInt32(itemOutputStartIndex),
-                    memory.ReadInt32(itemOutputStartIndex + 1),
+                    memory.ReadInt32(itemOutputStartIndex + 1)
                 });
             }
 
