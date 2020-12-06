@@ -1,22 +1,20 @@
-﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Object-oriented code can be written with Hastlayer as usual. This will also be directly mapped to hardware.
-    /// Also see <see cref="ObjectOrientedShowcaseSampleRunner"/> on what to configure to make this work.
+    /// Also see <c>ObjectOrientedShowcaseSampleRunner</c> on what to configure to make this work.
     /// </summary>
     public class ObjectOrientedShowcase
     {
-        public const int Run_InputUInt32Index = 0;
-        private const int Run_OutputUInt32Index = 0;
+        public const int RunInputUInt32Index = 0;
+        private const int RunOutputUInt32Index = 0;
 
         public virtual void Run(SimpleMemory memory)
         {
-            var inputNumber = memory.ReadUInt32(Run_InputUInt32Index);
-            // Or:
+            uint inputNumber; //// = memory.ReadUInt32(RunInputUInt32Index);
             inputNumber = new MemoryContainer(memory).GetInput();
 
             // Arrays can be initialized as usual, as well as objects.
@@ -61,7 +59,7 @@ namespace Hast.Samples.SampleAssembly
             }
 
             // You can also pass arrays and other objects around to other methods.
-            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberContainers(numberContainers1));
+            memory.WriteUInt32(RunOutputUInt32Index, SumNumberContainers(numberContainers1));
         }
 
         private uint SumNumberContainers(NumberContainer[] numberContainers)
@@ -81,9 +79,9 @@ namespace Hast.Samples.SampleAssembly
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(10)
                 : hastlayer.CreateMemory(configuration, 10);
-            memory.WriteUInt32(Run_InputUInt32Index, input);
+            memory.WriteUInt32(RunInputUInt32Index, input);
             Run(memory);
-            return memory.ReadUInt32(Run_OutputUInt32Index);
+            return memory.ReadUInt32(RunOutputUInt32Index);
         }
     }
 
@@ -105,8 +103,8 @@ namespace Hast.Samples.SampleAssembly
         // Fancy custom properties that can do everything a method can.
         public uint NumberPlusFive
         {
-            get { return Number + 5; }
-            set { Number = value - 5; }
+            get => Number + 5;
+            set => Number = value - 5;
         }
 
         // Constructors can be used, with or without parameters.
@@ -114,10 +112,7 @@ namespace Hast.Samples.SampleAssembly
         {
         }
 
-        public NumberContainer(uint number)
-        {
-            Number = number;
-        }
+        public NumberContainer(uint number) => Number = number;
 
         // Instance methods can be added as usual.
         public uint IncreaseNumber(uint increaseBy)
@@ -141,7 +136,9 @@ namespace Hast.Samples.SampleAssembly
     public static class NumberContainerExtensions
     {
         // You can also write extension methods.
+#pragma warning disable S4226 // Extensions should be in separate namespaces
         public static uint IncreaseNumberBy20(this NumberContainer numberContainer) => numberContainer.IncreaseNumber(20);
+#pragma warning restore S4226 // Extensions should be in separate namespaces
     }
 
     public class MemoryContainer
@@ -149,11 +146,8 @@ namespace Hast.Samples.SampleAssembly
         // The SimpleMemory object can be passed around as usual.
         private readonly SimpleMemory _memory;
 
-        public MemoryContainer(SimpleMemory memory)
-        {
-            _memory = memory;
-        }
+        public MemoryContainer(SimpleMemory memory) => _memory = memory;
 
-        public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.Run_InputUInt32Index);
+        public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.RunInputUInt32Index);
     }
 }

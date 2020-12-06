@@ -76,7 +76,7 @@ namespace Hast.Vitis.Abstractions.Models
                             "KHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000,
                             "HZ" => uint.Parse(value, CultureInfo.InvariantCulture),
                             "" => uint.Parse(value, CultureInfo.InvariantCulture),
-                            _ => throw new InvalidCastException($"Unknown frequency unit '{parts[1]}'.")
+                            _ => throw new InvalidCastException($"Unknown frequency unit '{parts[1]}'."),
                         };
                         break;
                     default: throw new InvalidDataException($"Unknown entry type: '{key}'.");

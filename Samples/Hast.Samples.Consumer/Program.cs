@@ -161,7 +161,7 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
+                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'."),
             };
             sampleRunner.Configure(configuration);
             configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();

@@ -17,9 +17,9 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MonteCarloPiEstimator
     {
-        private const int EstimatePi_IteractionsCountUInt32Index = 0;
-        private const int EstimatePi_RandomSeedUInt32Index = 1;
-        private const int EstimatePi_InCircleCountSumUInt32Index = 0;
+        private const int EstimatePiIteractionsCountUInt32Index = 0;
+        private const int EstimatePiRandomSeedUInt32Index = 1;
+        private const int EstimatePiInCircleCountSumUInt32Index = 0;
 
         // With a degree of parallelism of 78 the resource utilization of the Nexys A7 board would jump to 101% so this
         // is the limit of efficiency. Note that this is one lower than in the currently measured benchmark because
@@ -29,8 +29,8 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void EstimatePi(SimpleMemory memory)
         {
-            var iterationsCount = memory.ReadUInt32(EstimatePi_IteractionsCountUInt32Index);
-            var randomSeed = (ushort)memory.ReadUInt32(EstimatePi_RandomSeedUInt32Index);
+            var iterationsCount = memory.ReadUInt32(EstimatePiIteractionsCountUInt32Index);
+            var randomSeed = (ushort)memory.ReadUInt32(EstimatePiRandomSeedUInt32Index);
             var iterationsPerTask = iterationsCount / MaxDegreeOfParallelism;
             var tasks = new Task<uint>[MaxDegreeOfParallelism];
 
@@ -53,11 +53,16 @@ namespace Hast.Samples.SampleAssembly
                             // A bit of further parallelization can be exploited with SIMD to shave off some execution
                             // time. However, this needs so much resources on the hardware that the degree of
                             // parallelism needs to be lowered substantially (below 60).
-                            // var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
-                            // var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
+#if USE_SIMD
+                            var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
+                            var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
+#endif
 
-                            if ((ulong)(a * a) + b * b <= (uint)ushort.MaxValue * ushort.MaxValue)
-                            // if ((ulong)products[0] + products[1] <= ((uint)ushort.MaxValue * ushort.MaxValue))
+#if USE_SIMD
+                            if ((ulong)products[0] + products[1] <= ((uint)ushort.MaxValue * ushort.MaxValue))
+#else
+                            if ((ulong)(a * a) + (b * b) <= (uint)ushort.MaxValue * ushort.MaxValue)
+#endif
                             {
                                 inCircleCount++;
                             }
@@ -76,7 +81,7 @@ namespace Hast.Samples.SampleAssembly
                 inCircleCountSum += tasks[i].Result;
             }
 
-            memory.WriteUInt32(EstimatePi_InCircleCountSumUInt32Index, inCircleCountSum);
+            memory.WriteUInt32(EstimatePiInCircleCountSumUInt32Index, inCircleCountSum);
         }
 
         private readonly Random _random = new Random();
@@ -85,20 +90,24 @@ namespace Hast.Samples.SampleAssembly
         {
             if (iterationsCount % MaxDegreeOfParallelism != 0)
             {
-                throw new Exception($"The number of iterations must be divisible by {MaxDegreeOfParallelism}.");
+                throw new ArgumentException($"The number of iterations must be divisible by {MaxDegreeOfParallelism}.");
             }
 
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(2)
                 : hastlayer.CreateMemory(configuration, 2);
-            memory.WriteUInt32(EstimatePi_IteractionsCountUInt32Index, iterationsCount);
-            memory.WriteUInt32(EstimatePi_RandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
+            memory.WriteUInt32(EstimatePiIteractionsCountUInt32Index, iterationsCount);
+
+            // It's not for security.
+#pragma warning disable SCS0005 // Weak random generator
+            memory.WriteUInt32(EstimatePiRandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
+#pragma warning restore SCS0005 // Weak random generator
 
             EstimatePi(memory);
 
             // This single calculation takes up too much space on the FPGA, since it needs fix point arithmetic, but
             // it doesn't take much time. So doing it on the host instead.
-            return (double)memory.ReadInt32(EstimatePi_InCircleCountSumUInt32Index) / iterationsCount * 4;
+            return (double)memory.ReadInt32(EstimatePiInCircleCountSumUInt32Index) / iterationsCount * 4;
         }
     }
 }

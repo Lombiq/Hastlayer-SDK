@@ -280,7 +280,7 @@ namespace Hast.Vitis.Abstractions.Services
                 // For example:
                 // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
                 var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
-                var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
+                var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath };
                 await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
                 File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
                 ProgressMajor("Emulation configuration (emconfig) setup is finished.");

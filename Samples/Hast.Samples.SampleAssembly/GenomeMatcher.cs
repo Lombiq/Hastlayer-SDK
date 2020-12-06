@@ -1,27 +1,25 @@
-﻿using System;
-using System.Text;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System;
+using System.Text;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <see cref="GenomeMatcherSampleRunner"/> on what
+    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <c>GenomeMatcherSampleRunner</c> on what
     /// to configure to make this work.
     ///
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
     public class GenomeMatcher
     {
-        private const int GetLCS_InputOneLengthIndex = 0;
-        private const int GetLCS_InputTwoLengthIndex = 1;
-        private const int GetLCS_InputOneStartIndex = 2;
-        private const ushort GetLCS_TopCellPointerValue = 0;
-        private const ushort GetLCS_LeftCellPointerValue = 1;
-        private const ushort GetLCS_DiagonalCellPointerValue = 2;
-        private const ushort GetLCS_OutOfBorderDiagonalCellPointerValue = 3;
-
+        private const int GetLCSInputOneLengthIndex = 0;
+        private const int GetLCSInputTwoLengthIndex = 1;
+        private const int GetLCSInputOneStartIndex = 2;
+        private const ushort GetLCSTopCellPointerValue = 0;
+        private const ushort GetLCSLeftCellPointerValue = 1;
+        private const ushort GetLCSDiagonalCellPointerValue = 2;
+        private const ushort GetLCSOutOfBorderDiagonalCellPointerValue = 3;
 
         /// <summary>
         /// Calculates the longest common subsequence of two byte arrays with the Smith-Waterman algorithm.
@@ -33,13 +31,12 @@ namespace Hast.Samples.SampleAssembly
             Traceback(memory);
         }
 
-
         private void FillTable(SimpleMemory memory)
         {
-            ushort inputOneLength = (ushort)memory.ReadUInt32(GetLCS_InputOneLengthIndex); // This will be the width of the matrix.
-            ushort inputTwoLength = (ushort)memory.ReadUInt32(GetLCS_InputTwoLengthIndex); // This will be the height of the matrix.
+            ushort inputOneLength = (ushort)memory.ReadUInt32(GetLCSInputOneLengthIndex); // This will be the width of the matrix.
+            ushort inputTwoLength = (ushort)memory.ReadUInt32(GetLCSInputTwoLengthIndex); // This will be the height of the matrix.
 
-            ushort inputTwoStartIndex = (ushort)(GetLCS_InputOneStartIndex + inputOneLength);
+            ushort inputTwoStartIndex = (ushort)(GetLCSInputOneStartIndex + inputOneLength);
             ushort resultStartIndex = (ushort)(inputTwoStartIndex + inputTwoLength);
             ushort resultLength = (ushort)(inputOneLength * inputTwoLength);
 
@@ -47,71 +44,90 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (ushort column = 0; column < inputOneLength; column++)
                 {
-                    ushort position = (ushort)(resultStartIndex + column + row * inputOneLength);
-
-                    ushort topCell = 0;
-                    ushort leftCell = 0;
-                    ushort diagonalCell = 0;
-                    ushort currentCell = 0;
-                    ushort cellPointer = 0;
-
-                    if (row != 0)
-                        topCell = (ushort)memory.ReadUInt32(position - inputOneLength);
-
-                    if (column != 0)
-                        leftCell = (ushort)memory.ReadUInt32(position - 1);
-
-                    if (column != 0 && row != 0)
-                        diagonalCell = (ushort)memory.ReadUInt32(position - inputOneLength - 1);
-
-                    // Increase the value of the diagonal cell if the current elements are the same, and the diagonal cell exists.
-                    if (memory.ReadUInt32(GetLCS_InputOneStartIndex + column) == memory.ReadUInt32(inputTwoStartIndex + row))
-                        diagonalCell++;
-
-                    // Select the maximum of the three cells and set the value of the current cell and pointer.
-                    if (diagonalCell > leftCell)
-                    {
-                        if (diagonalCell > topCell)
-                        {
-                            currentCell = diagonalCell;
-
-                            if (row == 0 || column == 0)
-                                cellPointer = GetLCS_OutOfBorderDiagonalCellPointerValue;
-                            else
-                                cellPointer = GetLCS_DiagonalCellPointerValue;
-                        }
-                        else
-                        {
-                            currentCell = topCell;
-                            cellPointer = GetLCS_TopCellPointerValue;
-                        }
-                    }
-                    else
-                    {
-                        if (leftCell > topCell)
-                        {
-                            currentCell = leftCell;
-                            cellPointer = GetLCS_LeftCellPointerValue;
-                        }
-                        else
-                        {
-                            currentCell = topCell;
-                            cellPointer = GetLCS_TopCellPointerValue;
-                        }
-                    }
-
-                    memory.WriteUInt32(position, currentCell);
-                    memory.WriteUInt32(position + resultLength, cellPointer);
+                    FillCell(
+                        memory,
+                        row,
+                        column,
+                        inputOneLength,
+                        inputTwoStartIndex,
+                        resultStartIndex,
+                        resultLength);
                 }
             }
         }
 
+        private void FillCell(
+            SimpleMemory memory,
+            ushort row,
+            ushort column,
+            ushort inputOneLength,
+            ushort inputTwoStartIndex,
+            ushort resultStartIndex,
+            ushort resultLength)
+        {
+            ushort position = (ushort)(resultStartIndex + column + (row * inputOneLength));
+
+            ushort topCell = 0;
+            ushort leftCell = 0;
+            ushort diagonalCell = 0;
+
+            if (row != 0)
+                topCell = (ushort)memory.ReadUInt32(position - inputOneLength);
+
+            if (column != 0)
+                leftCell = (ushort)memory.ReadUInt32(position - 1);
+
+            if (column != 0 && row != 0)
+                diagonalCell = (ushort)memory.ReadUInt32(position - inputOneLength - 1);
+
+            // Increase the value of the diagonal cell if the current elements are the same, and the diagonal cell exists.
+            if (memory.ReadUInt32(GetLCSInputOneStartIndex + column) == memory.ReadUInt32(inputTwoStartIndex + row))
+                diagonalCell++;
+
+            ushort currentCell;
+            ushort cellPointer;
+            // Select the maximum of the three cells and set the value of the current cell and pointer.
+            if (diagonalCell > leftCell)
+            {
+                if (diagonalCell > topCell)
+                {
+                    currentCell = diagonalCell;
+
+                    if (row == 0 || column == 0)
+                        cellPointer = GetLCSOutOfBorderDiagonalCellPointerValue;
+                    else
+                        cellPointer = GetLCSDiagonalCellPointerValue;
+                }
+                else
+                {
+                    currentCell = topCell;
+                    cellPointer = GetLCSTopCellPointerValue;
+                }
+            }
+            else
+            {
+                if (leftCell > topCell)
+                {
+                    currentCell = leftCell;
+                    cellPointer = GetLCSLeftCellPointerValue;
+                }
+                else
+                {
+                    currentCell = topCell;
+                    cellPointer = GetLCSTopCellPointerValue;
+                }
+            }
+
+            memory.WriteUInt32(position, currentCell);
+            memory.WriteUInt32(position + resultLength, cellPointer);
+        }
+
         private void Traceback(SimpleMemory memory)
         {
-            ushort inputOneLength = (ushort)memory.ReadUInt32(GetLCS_InputOneLengthIndex);
-            ushort inputTwoLength = (ushort)memory.ReadUInt32(GetLCS_InputTwoLengthIndex);
+            ushort inputOneLength = (ushort)memory.ReadUInt32(GetLCSInputOneLengthIndex);
+            ushort inputTwoLength = (ushort)memory.ReadUInt32(GetLCSInputTwoLengthIndex);
 
-            ushort inputTwoStartIndex = (ushort)(GetLCS_InputOneStartIndex + inputOneLength);
+            ushort inputTwoStartIndex = (ushort)(GetLCSInputOneStartIndex + inputOneLength);
             ushort resultStartIndex = (ushort)(inputTwoStartIndex + inputTwoLength);
 
             var resultLength = inputOneLength * inputTwoLength;
@@ -120,7 +136,6 @@ namespace Hast.Samples.SampleAssembly
             ushort currentCell = (ushort)memory.ReadUInt32(currentPosition);
             ushort previousPosition = 0;
             ushort previousCell = 0;
-            ushort pointer = 0;
             short column = (short)inputOneLength;
             short row = (short)inputTwoLength;
 
@@ -133,25 +148,25 @@ namespace Hast.Samples.SampleAssembly
                     row--;
 
                 // Get the pointer and the cell value from the pointers position.
-                pointer = (ushort)memory.ReadUInt32(currentPosition + resultLength);
+                ushort pointer = (ushort)memory.ReadUInt32(currentPosition + resultLength);
 
-                if (pointer == GetLCS_DiagonalCellPointerValue)
+                if (pointer == GetLCSDiagonalCellPointerValue)
                 {
                     previousPosition = (ushort)(currentPosition - inputOneLength - 1);
                     column--;
                     row--;
                 }
-                else if (pointer == GetLCS_LeftCellPointerValue)
+                else if (pointer == GetLCSLeftCellPointerValue)
                 {
                     previousPosition = (ushort)(currentPosition - 1);
                     column--;
                 }
-                else if (pointer == GetLCS_TopCellPointerValue)
+                else if (pointer == GetLCSTopCellPointerValue)
                 {
                     previousPosition = (ushort)(currentPosition - inputOneLength);
                     row--;
                 }
-                else if (pointer == GetLCS_OutOfBorderDiagonalCellPointerValue)
+                else if (pointer == GetLCSOutOfBorderDiagonalCellPointerValue)
                 {
                     column--;
                     row--;
@@ -161,22 +176,21 @@ namespace Hast.Samples.SampleAssembly
                     previousCell = (ushort)memory.ReadUInt32(previousPosition);
 
                 // Add the current character to the result if the pointer is diagonal and the cell value decreased.
-                if (pointer == GetLCS_DiagonalCellPointerValue && (currentCell == previousCell + 1 || previousPosition < resultStartIndex))
+                if (pointer == GetLCSDiagonalCellPointerValue && (currentCell == previousCell + 1 || previousPosition < resultStartIndex))
                 {
-                    var originalValue = memory.ReadUInt32(GetLCS_InputOneStartIndex + column);
-                    memory.WriteUInt32(resultStartIndex + 2 * resultLength + column, originalValue);
+                    var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
+                    memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);
                 }
-                else if (pointer == GetLCS_OutOfBorderDiagonalCellPointerValue)
+                else if (pointer == GetLCSOutOfBorderDiagonalCellPointerValue)
                 {
-                    var originalValue = memory.ReadUInt32(GetLCS_InputOneStartIndex + column);
-                    memory.WriteUInt32(resultStartIndex + 2 * resultLength + column, originalValue);
+                    var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
+                    memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);
                 }
 
                 currentCell = previousCell;
                 currentPosition = previousPosition;
             }
         }
-
 
         /// <summary>
         /// Calculates the longest common subsequence of two strings.
@@ -193,7 +207,6 @@ namespace Hast.Samples.SampleAssembly
             return GetResult(simpleMemory, inputOne, inputTwo);
         }
 
-
         /// <summary>
         /// Creates a <see cref="SimpleMemory"/> object filled with the input values.
         /// </summary>
@@ -202,23 +215,23 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
         private SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var cellCount = 2 + inputOne.Length + inputTwo.Length + inputOne.Length * inputTwo.Length * 2 + Math.Max(inputOne.Length, inputTwo.Length);
+            var cellCount = 2 + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length * 2) + Math.Max(inputOne.Length, inputTwo.Length);
 
             var simpleMemory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
 
-            simpleMemory.WriteUInt32(GetLCS_InputOneLengthIndex, (uint)inputOne.Length);
-            simpleMemory.WriteUInt32(GetLCS_InputTwoLengthIndex, (uint)inputTwo.Length);
+            simpleMemory.WriteUInt32(GetLCSInputOneLengthIndex, (uint)inputOne.Length);
+            simpleMemory.WriteUInt32(GetLCSInputTwoLengthIndex, (uint)inputTwo.Length);
 
             for (int i = 0; i < inputOne.Length; i++)
             {
-                simpleMemory.WriteUInt32(GetLCS_InputOneStartIndex + i, Encoding.UTF8.GetBytes(inputOne[i].ToString())[0]);
+                simpleMemory.WriteUInt32(GetLCSInputOneStartIndex + i, Encoding.UTF8.GetBytes(inputOne[i].ToString())[0]);
             }
 
             for (int i = 0; i < inputTwo.Length; i++)
             {
-                simpleMemory.WriteUInt32(GetLCS_InputOneStartIndex + i + inputOne.Length, Encoding.UTF8.GetBytes(inputTwo[i].ToString())[0]);
+                simpleMemory.WriteUInt32(GetLCSInputOneStartIndex + i + inputOne.Length, Encoding.UTF8.GetBytes(inputTwo[i].ToString())[0]);
             }
 
             return simpleMemory;
@@ -235,8 +248,8 @@ namespace Hast.Samples.SampleAssembly
         {
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
-            var result = "";
-            var startIndex = GetLCS_InputOneStartIndex + inputOne.Length + inputTwo.Length + inputOne.Length * inputTwo.Length * 2;
+            var result = string.Empty;
+            var startIndex = GetLCSInputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length * 2);
 
             for (int i = 0; i < maxInputLength; i++)
             {
@@ -247,7 +260,7 @@ namespace Hast.Samples.SampleAssembly
                 result += chars[0];
             }
 
-            return result.Replace("\0", "");
+            return result.Replace("\0", string.Empty, StringComparison.Ordinal);
         }
     }
 }
