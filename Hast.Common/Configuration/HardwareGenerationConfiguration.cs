@@ -47,8 +47,8 @@ namespace Hast.Layer
         public IList<string> HardwareEntryPointMemberNamePrefixes { get; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching
-        /// will happen. Defaults to <c>false</c>. Note that this will have an affect only on client-side caching when
+        /// Gets or sets a value indicating whether the caching of the generated hardware is allowed. If set to <see langword="false"/> no caching
+        /// will happen. Defaults to <see langword="false"/>. Note that this will have an affect only on client-side caching when
         /// using the Client flavor.
         /// </summary>
         public bool EnableCaching { get; set; }
@@ -61,14 +61,14 @@ namespace Hast.Layer
 
         /// <summary>
         /// Gets or sets a value indicating whether hardware transformation takes place. If it doesn't then
-        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too. Defaults to
-        /// <c>true</c>.
+        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <see langword="false"/> too. Defaults to
+        /// <see langword="true"/>.
         /// </summary>
         public bool EnableHardwareTransformation { get; set; } = true;
 
         /// <summary>
         /// Gets or sets a value indicating whether a hardware implementation composer should be used to synthesize hardware from the
-        /// transformed hardware description. Defaults to <c>true</c>.
+        /// transformed hardware description. Defaults to <see langword="true"/>.
         /// </summary>
         public bool EnableHardwareImplementationComposition { get; set; } = true;
 

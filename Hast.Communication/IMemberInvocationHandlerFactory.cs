@@ -12,7 +12,7 @@ namespace Hast.Communication
     /// </summary>
     /// <param name="invocation">The context of the member invocation.</param>
     /// <returns>
-    /// <c>True</c> if the member invocation was successfully transferred to the hardware implementation, <c>false</c>
+    /// <c>True</c> if the member invocation was successfully transferred to the hardware implementation, <see langword="false"/>
     /// otherwise.
     /// </returns>
     public delegate void MemberInvocationHandler(IInvocation invocation);

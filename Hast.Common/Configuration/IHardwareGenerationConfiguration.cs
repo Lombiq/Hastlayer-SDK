@@ -47,7 +47,7 @@ namespace Hast.Layer
         IList<string> HardwareEntryPointMemberNamePrefixes { get; }
 
         /// <summary>
-        /// Gets a value indicating whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching will happen.
+        /// Gets a value indicating whether the caching of the generated hardware is allowed. If set to <see langword="false"/> no caching will happen.
         /// </summary>
         bool EnableCaching { get; }
 
@@ -66,7 +66,7 @@ namespace Hast.Layer
 
         /// <summary>
         /// Gets a value indicating whether hardware transformation takes place. If it doesn't then
-        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too.
+        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <see langword="false"/> too.
         /// </summary>
         bool EnableHardwareTransformation { get; }
 

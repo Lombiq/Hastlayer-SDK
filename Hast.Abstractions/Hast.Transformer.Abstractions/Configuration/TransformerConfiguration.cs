@@ -36,12 +36,12 @@ namespace Hast.Transformer.Abstractions.Configuration
 
         /// <summary>
         /// Gets or sets a value indicating whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
-        /// array. Defaults to <c>true</c>.
+        /// array. Defaults to <see langword="true"/>.
         /// </summary>
         public bool UseSimpleMemory { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets a value indicating whether inlining methods on the hardware is enabled. Defaults to <c>true</c>. Inlining methods
+        /// Gets or sets a value indicating whether inlining methods on the hardware is enabled. Defaults to <see langword="true"/>. Inlining methods
         /// eliminates the performance impact of method calls (and is thus advised for small, frequently invoked methods),
         /// but causes the hardware design to be larger (and hardware generation to be slower). Be aware that inlining,
         /// even if enabled, doesn't happen automatically, check the documentation.
@@ -50,7 +50,7 @@ namespace Hast.Transformer.Abstractions.Configuration
 
         /// <summary>
         /// Gets the list of methods that should be inlined in addition to methods already marked with a
-        /// suitable <c>MethodImpl</c> attribute. Will only work if <see cref="EnableMethodInlining"/> is <c>true</c>.
+        /// suitable <c>MethodImpl</c> attribute. Will only work if <see cref="EnableMethodInlining"/> is <see langword="true"/>.
         /// Fore more information check the documentation.
         /// </summary>
         public IList<string> AdditionalInlinableMethodsFullNames { get; } = new List<string>();
@@ -69,7 +69,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// <summary>
         /// Gets or sets a value indicating whether interfaces that are implemented by transformed types are processed. Currently such
         /// interfaces don't affect the resulting hardware implementation, but the assemblies of all referenced
-        /// interfaces need to be loaded. If set to <c>false</c> such loading is not necessary. Defaults to <c>false</c>.
+        /// interfaces need to be loaded. If set to <see langword="false"/> such loading is not necessary. Defaults to <see langword="false"/>.
         /// </summary>
         public bool ProcessImplementedInterfaces { get; set; }
 
@@ -78,7 +78,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// hold only these values are substituted with the values themselves (also called constant folding or constant
         /// propagation). This can significantly cut down on the code complexity and improve performance, but in
         /// certain cases may yield incorrect results. If the hardware implementation's results are incorrect then try
-        /// setting this to <c>false</c>. Defaults to <c>true</c>.
+        /// setting this to <see langword="false"/>. Defaults to <see langword="true"/>.
         /// </summary>
         public bool EnableConstantSubstitution { get; set; } = true;
 
