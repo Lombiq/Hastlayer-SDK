@@ -43,7 +43,7 @@ namespace Hast.Samples.Kpz
     /// </summary>
     public class KpzStateLogger
     {
-        /// <summary>The KPZ iteration list.</summary>
+        /// <summary>Gets or sets the KPZ iteration list.</summary>
         public List<KpzIteration> Iterations { get; set; } = new List<KpzIteration>();
 
         /// <summary>We add an iteration when the constructor is called, so actions can be added right away.</summary>

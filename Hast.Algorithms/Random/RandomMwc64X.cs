@@ -8,7 +8,7 @@ namespace Hast.Algorithms.Random
     public class RandomMwc64X
     {
         /// <summary>
-        /// The current inner state of the random number generator. If you set it when instantiating the object then
+        /// Gets or sets the current inner state of the random number generator. If you set it when instantiating the object then
         /// it'll serve as a seed.
         /// </summary>
         /// <remarks>

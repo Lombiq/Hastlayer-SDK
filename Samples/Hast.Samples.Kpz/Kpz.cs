@@ -53,11 +53,13 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public int GridHeight => Grid.GetLength(1);
 
-        /// <summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>
+        /// <summary>
+        /// Gets or sets the 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.
+        /// </summary>
         public KpzNode[,] Grid { get; set; }
 
         /// <summary>
-        /// The <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
+        /// Gets or sets the <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
         /// given steps during its execution. This object can be later passed on to <see cref="InspectForm" />
         /// to graphically represent it on a UI.
         /// <note type="caution">
