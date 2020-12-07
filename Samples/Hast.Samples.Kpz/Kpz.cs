@@ -1,12 +1,18 @@
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz
 {
     public enum KpzTarget
     {
-        Cpu, Fpga, FpgaSimulation, FpgaParallelized, FpgaSimulationParallelized, PrngTest,
+        Cpu,
+        Fpga,
+        FpgaSimulation,
+        FpgaParallelized,
+        FpgaSimulationParallelized,
+        PrngTest,
     }
 
     public static class KpzTargetExtensions
@@ -27,13 +33,15 @@ namespace Hast.Samples.Kpz
     /// <summary>
     /// This class performs the calculations of the KPZ algorithm.
     /// </summary>
+    [SuppressMessage("Major Code Smell", "S106:Standard outputs should not be used directly to log anything", Justification = "Opt-in via setting.")]
+    [SuppressMessage("Minor Vulnerability", "S2228:Console logging should not be used", Justification = "Opt-in via setting.")]
     public partial class Kpz
     {
         /// <summary>The probability of pyramid to hole change.</summary>
-        private readonly double _probabilityP = 0.5d;
+        private readonly double _probabilityP;
 
         /// <summary>The probability of hole to pyramid change.</summary>
-        private readonly double _probabilityQ = 0.5d;
+        private readonly double _probabilityQ;
 
         /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
         private readonly Random _random = new Random();
@@ -41,7 +49,7 @@ namespace Hast.Samples.Kpz
         /// <summary>See <see cref="StateLogger" />.</summary>
         private readonly bool _enableStateLogger;
 
-        private readonly KpzTarget _kpzTarget = KpzTarget.Cpu;
+        private readonly KpzTarget _kpzTarget;
 
         /// <summary>
         /// Gets the width of the grid.
@@ -53,15 +61,17 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public int GridHeight => Grid.GetLength(1);
 
+#pragma warning disable CA1819 // Properties should not return arrays
         /// <summary>
         /// Gets or sets the 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.
         /// </summary>
         public KpzNode[,] Grid { get; set; }
+#pragma warning restore CA1819 // Properties should not return arrays
 
         /// <summary>
-        /// Gets or sets the <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
+        /// <para>Gets or sets the <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
         /// given steps during its execution. This object can be later passed on to <see cref="InspectForm" />
-        /// to graphically represent it on a UI.
+        /// to graphically represent it on a UI.</para>
         /// <note type="caution">
         /// <para>Use a small grid and a low amount of iterations if enabled. It will use a lot of memory.</para>
         /// </note>
@@ -69,13 +79,13 @@ namespace Hast.Samples.Kpz
         public KpzStateLogger StateLogger { get; set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Kpz"/> class.
         /// The constructor initializes the parameters of <see cref="Kpz" />, see:
         /// <see cref="GridWidth" />, <see cref="GridHeight" />,
         /// <see cref="_probabilityP" />, <see cref="_probabilityQ" />,
         /// <see cref="StateLogger" />.
         /// </summary>
-        public Kpz
-        (
+        public Kpz(
             int newGridWidth,
             int newGridHeight,
             double probabilityP,
@@ -101,13 +111,16 @@ namespace Hast.Samples.Kpz
                 {
                     Grid[x, y] = new KpzNode
                     {
+                        // Not crypto.
+#pragma warning disable SCS0005 // Weak random generator
                         dx = _random.Next(0, 2) == 0,
                         dy = _random.Next(0, 2) == 0,
+#pragma warning restore SCS0005 // Weak random generator
                     };
                 }
             }
 
-            if (_enableStateLogger) StateLogger.AddKpzAction("RandomizeGrid", Grid);
+            if (_enableStateLogger) StateLogger.AddKpzAction("RandomizeGrid", this);
         }
 
         /// <summary>
@@ -127,7 +140,7 @@ namespace Hast.Samples.Kpz
                 }
             }
 
-            if (_enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", Grid);
+            if (_enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", this);
         }
 
         /// <summary>
@@ -136,6 +149,24 @@ namespace Hast.Samples.Kpz
         /// values.
         /// </summary>
         private static int Bool2Delta(bool what) => what ? 1 : -1;
+
+        public HeighmapMetaData GenerateAndProcessHeighMap()
+        {
+            var map = GenerateHeightMap(
+                out var mean,
+                out var periodicityValid,
+                out var periodicityInvalidXCount,
+                out var periodicityInvalidYCount);
+
+            return new HeighmapMetaData
+            {
+                Mean = mean,
+                PeriodicityInvalidXCount = periodicityInvalidXCount,
+                PeriodicityInvalidYCount = periodicityInvalidYCount,
+                PeriodicityValid = periodicityValid,
+                StandardDeviation = HeightMapStandardDeviation(map, mean),
+            };
+        }
 
         /// <summary>
         /// It generates a heightmap from the <see cref="Grid" />.
@@ -153,8 +184,7 @@ namespace Hast.Samples.Kpz
         /// (between top and bottom borders).
         /// </param>
         /// <returns>the heightmap.</returns>
-        public int[,] GenerateHeightMap
-        (
+        private int[,] GenerateHeightMap(
             out double mean,
             out bool periodicityValid,
             out int periodicityInvalidXCount,
@@ -194,11 +224,7 @@ namespace Hast.Samples.Kpz
                 periodicityInvalidYCount++;
                 if (doVerboseLoggingToConsole)
                 {
-#pragma warning disable S106 // Standard outputs should not be used directly to log anything
-#pragma warning disable S2228 // Console logging should not be used
                     Console.WriteLine($"periodicityInvalidY {heightMap[0, GridHeight - 1]} + {Bool2Delta(Grid[0, 0].dy)} != {heightMap[0, 0]}");
-#pragma warning restore S2228 // Console logging should not be used
-#pragma warning restore S106 // Standard outputs should not be used directly to log anything
                 }
             }
 
@@ -215,7 +241,7 @@ namespace Hast.Samples.Kpz
         /// <a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Two-pass_algorithm">Wikipedia</a>.
         /// </summary>
         /// <param name="mean">is the mean of the heightmap that was output by <see cref="GenerateHeightMap" />.</param>
-        public double HeightMapStandardDeviation(int[,] inputHeightMap, double mean)
+        private double HeightMapStandardDeviation(int[,] inputHeightMap, double mean)
         {
             double variance = 0;
 
@@ -227,7 +253,7 @@ namespace Hast.Samples.Kpz
                 }
             }
 
-            variance /= GridWidth * GridHeight - 1;
+            variance /= (GridWidth * GridHeight) - 1;
             double standardDeviation = Math.Sqrt(variance);
 
             if (_enableStateLogger)
@@ -251,10 +277,12 @@ namespace Hast.Samples.Kpz
 
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
+#pragma warning disable SCS0005 // Weak random generator
                 // If we get the pattern {01, 01} we have a pyramid:
-                currentPoint.dx && !neighbours.nx.dx && currentPoint.dy && !neighbours.ny.dy && _random.NextDouble() < _probabilityP ||
+                (currentPoint.dx && !neighbours.nx.dx && currentPoint.dy && !neighbours.ny.dy && _random.NextDouble() < _probabilityP) ||
                 // If we get the pattern {10, 10} we have a hole:
-                !currentPoint.dx && neighbours.nx.dx && !currentPoint.dy && neighbours.ny.dy && _random.NextDouble() < _probabilityQ
+                (!currentPoint.dx && neighbours.nx.dx && !currentPoint.dy && neighbours.ny.dy && _random.NextDouble() < _probabilityQ)
+#pragma warning restore SCS0005 // Weak random generator
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
@@ -267,8 +295,6 @@ namespace Hast.Samples.Kpz
 
             if (_enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
         }
-
-        private readonly bool HastlayerGridAlreadyPushed;
 
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
@@ -288,7 +314,7 @@ namespace Hast.Samples.Kpz
                     hastlayer,
                     configuration,
                     Grid,
-                    !HastlayerGridAlreadyPushed,
+                    false,
                     _randomSeedEnable,
                     numberOfIterations);
             }
@@ -298,7 +324,7 @@ namespace Hast.Samples.Kpz
                     hastlayer,
                     configuration,
                     Grid,
-                    !HastlayerGridAlreadyPushed,
+                    false,
                     false,
                     _random.NextUInt64(),
                     _random.NextUInt64(),
@@ -348,29 +374,34 @@ namespace Hast.Samples.Kpz
             {
                 // We randomly choose a point on the grid.
                 // If there is a pyramid or hole, we randomly switch them.
+
+                // Not crypto.
+#pragma warning disable SCS0005 // Weak random generator
                 var randomPoint = new KpzCoords { x = _random.Next(0, GridWidth), y = _random.Next(0, GridHeight) };
+#pragma warning restore SCS0005 // Weak random generator
                 RandomlySwitchFourCells(Grid, randomPoint);
             }
         }
 
         /// <summary>
-        /// Gets the right and bottom neighbours of the point given with the coordinates <see cref="p" />
+        /// Gets the right and bottom neighbours of the point given with the coordinates <paramref name="p"/>
         /// in the <see cref="Grid" />.
         /// </summary>
         private KpzNeighbours GetNeighbours(KpzNode[,] grid, KpzCoords p)
         {
-            KpzNeighbours toReturn = new KpzNeighbours();
-
-            toReturn.nxCoords = new KpzCoords
+            var toReturn = new KpzNeighbours
             {
-                x = p.x < GridWidth - 1 ? p.x + 1 : 0,
-                y = p.y,
-            };
+                nxCoords = new KpzCoords
+                {
+                    x = p.x < GridWidth - 1 ? p.x + 1 : 0,
+                    y = p.y,
+                },
 
-            toReturn.nyCoords = new KpzCoords
-            {
-                x = p.x,
-                y = p.y < GridHeight - 1 ? p.y + 1 : 0,
+                nyCoords = new KpzCoords
+                {
+                    x = p.x,
+                    y = p.y < GridHeight - 1 ? p.y + 1 : 0,
+                },
             };
 
             toReturn.nx = grid[toReturn.nxCoords.x, toReturn.nxCoords.y];
@@ -387,8 +418,11 @@ namespace Hast.Samples.Kpz
     {
         public static ulong NextUInt64(this Random random)
         {
+            // Not crypto.
+#pragma warning disable SCS0005 // Weak random generator
             uint val1 = (uint)random.Next();
             uint val2 = (uint)random.Next();
+#pragma warning restore SCS0005 // Weak random generator
             ulong toReturn = val1 | (ulong)val2 << 32;
             return toReturn;
         }

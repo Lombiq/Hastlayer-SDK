@@ -22,20 +22,19 @@ namespace Hast.Samples.Kpz
         private readonly KpzStateLogger _stateLogger;
 
         /// <summary>
-        /// When the form is loaded, <see cref="listIterations"/> is initialized with the iterations available in
-        /// <see cref="_stateLogger"/>.
+        /// Initializes a new instance of the <see cref="InspectForm"/> class. When the form is loaded,
+        /// <see cref="listIterations"/> is initialized with the iterations available in <see cref="_stateLogger"/>.
         /// </summary>
-        /// <param name="StateLogger">is the data source to be displayed on the form.</param>
-        public InspectForm(KpzStateLogger StateLogger)
+        /// <param name="stateLogger">is the data source to be displayed on the form.</param>
+        public InspectForm(KpzStateLogger stateLogger)
         {
             InitializeComponent();
-            _stateLogger = StateLogger;
+            _stateLogger = stateLogger;
 
             for (int i = 0; i < _stateLogger.Iterations.Count; i++)
             {
                 listIterations.Items.Add(i);
             }
-
         }
 
         /// <summary>
@@ -55,7 +54,7 @@ namespace Hast.Samples.Kpz
 
                 for (int x = 0; x < gridDisplayWidth; x++)
                 {
-                    dgvRow.Cells.Add(new DataGridViewTextBoxCell() { Value = arr[x, y] });
+                    dgvRow.Cells.Add(new DataGridViewTextBoxCell { Value = arr[x, y] });
                 }
 
                 dgv.Rows.Add(dgvRow);
@@ -95,14 +94,14 @@ namespace Hast.Samples.Kpz
         /// This function adds highlight (by applying background color) to a list of table cells in the
         /// <see cref="DataGridView" />.
         /// </summary>
-        /// <param name="HighlightedCoords">is the list of table cell indexes to be highlighted.</param>
-        /// <param name="Color">is the background color to be set on the given table cells.</param>
-        private void DgvAddHighlight(List<KpzCoords> HighlightedCoords, Color HighlightColor)
+        /// <param name="highlightedCoords">is the list of table cell indexes to be highlighted.</param>
+        /// <param name="highlightColor">is the background color to be set on the given table cells.</param>
+        private void DgvAddHighlight(List<KpzCoords> highlightedCoords, Color highlightColor)
         {
-            foreach (var coord in HighlightedCoords)
+            foreach (var coord in highlightedCoords)
             {
                 if (coord.x >= dgv.ColumnCount || coord.y >= dgv.RowCount) continue;
-                dgv.Rows[coord.y].Cells[coord.x].Style.BackColor = HighlightColor;
+                dgv.Rows[coord.y].Cells[coord.x].Style.BackColor = highlightColor;
             }
         }
 
@@ -123,7 +122,7 @@ namespace Hast.Samples.Kpz
                 _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach(
                     (a) => listActions.Items.Add($"{i++} {a.Description}"));
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
         /// <summary>
@@ -159,7 +158,7 @@ namespace Hast.Samples.Kpz
                     DgvAddHighlight(action.HighlightedCoords, action.HightlightColor);
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
     }
 }

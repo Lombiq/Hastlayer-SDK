@@ -5,12 +5,11 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz
 {
-    ///<summary>The main form showing the log and the output graph of the algorithm.</summary>
+    /// <summary>The main form showing the log and the output graph of the algorithm.</summary>
     public partial class ChartForm : Form
     {
         public int NumKpzIterations => (int)nudIterations.Value;
@@ -27,20 +26,17 @@ namespace Hast.Samples.Kpz
         /// so that the GUI keeps responding while the algorithm is running.
         /// </summary>
         [SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Disposed in Closed event handler.")]
-        readonly BackgroundWorker _backgroundWorker;
+        private readonly BackgroundWorker _backgroundWorker;
 
         /// <summary>
         /// The Kpz object is used to perform the KPZ algorithm, to input its parameters and return the result.
         /// </summary>
-        Kpz _kpz;
+        private Kpz _kpz;
 
         /// <summary>InspectForm allows us to inspect the results of the KPZ algorithm on a GUI interface.</summary>
         [SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Disposed in Closed event handler.")]
-        InspectForm _inspectForm;
+        private InspectForm _inspectForm;
 
-        /// <summary>
-        /// The constructor initializes the <see cref="_backgroundWorker" />.
-        /// </summary>
         public ChartForm()
         {
             InitializeComponent();
@@ -112,7 +108,7 @@ namespace Hast.Samples.Kpz
                 {
                     LogIt("Writing KpzStateLogger to file...");
                     var kpzStateLoggerPath = Path.GetDirectoryName(
-                        Assembly.GetExecutingAssembly().Location) + @"\kpzStateLogger\";
+                        typeof(Program).Assembly.Location) + @"\kpzStateLogger\";
                     if (!Directory.Exists(kpzStateLoggerPath)) Directory.CreateDirectory(kpzStateLoggerPath);
                     _kpz.StateLogger.WriteToFiles(kpzStateLoggerPath);
                 }
@@ -127,24 +123,18 @@ namespace Hast.Samples.Kpz
 
         /// <summary>
         /// GUI controls cannot be directly updated from inside the <see cref="BackgroundWorker"/>.
-        /// One solution for this is using <see cref="System.Windows.Threading.Dispatcher.Invoke"/> to
+        /// One solution for this is using <c>Windows.Threading.Dispatcher.Invoke</c> to
         /// schedule an update in the GUI thread.
         /// AsyncLogIt schedules a <see cref="LogIt"/> operation on the GUI thread from within the
         /// <see cref="BackgroundWorker"/>.
         /// </summary>
-        private void AsyncLogIt(string what) => Invoke(new Action(() =>
-                                              {
-                                                  LogIt(what);
-                                              }));
+        private void AsyncLogIt(string what) => Invoke(new Action(() => LogIt(what)));
 
         /// <summary>
         /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the
         /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
         /// </summary>
-        private void AsyncUpdateProgressBar(int progress) => Invoke(new Action(() =>
-                                                           {
-                                                               progressBar.Value = progress;
-                                                           }));
+        private void AsyncUpdateProgressBar(int progress) => Invoke(new Action(() => progressBar.Value = progress));
 
         /// <summary>
         /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the
@@ -160,20 +150,17 @@ namespace Hast.Samples.Kpz
 
             if (updateChartInThisIteartion)
             {
-                int[,] heightMap = _kpz.GenerateHeightMap(
-                    out double mean, out bool periodicityValid, out int periodicityInvalidXCount, out int periodicityInvalidYCount);
+                var meta = _kpz.GenerateAndProcessHeighMap();
 
-                if (!periodicityValid)
+                if (!meta.PeriodicityValid)
                 {
-                    AsyncLogIt($"Warning: Periodicity invalid (x: {periodicityInvalidXCount}, y: {periodicityInvalidYCount})");
+                    AsyncLogIt($"Warning: Periodicity invalid (x: {meta.PeriodicityInvalidXCount}, y: {meta.PeriodicityInvalidYCount})");
                 }
-
-                double surfaceRoughness = _kpz.HeightMapStandardDeviation(heightMap, mean);
 
                 Invoke(new Action(() =>
                 {
-                    LogIt($"iteration: {iteration}, surfaceRoughness: {surfaceRoughness}");
-                    chartKPZ.Series[0].Points.AddXY(iteration + 1, surfaceRoughness);
+                    LogIt($"iteration: {iteration}, surfaceRoughness: {meta.StandardDeviation}");
+                    chartKPZ.Series[0].Points.AddXY(iteration + 1, meta.StandardDeviation);
                     chartKPZ.ChartAreas[0].AxisX.IsLogarithmic = true;
                 }));
             }
@@ -199,45 +186,13 @@ namespace Hast.Samples.Kpz
                 var sw = Stopwatch.StartNew();
                 AsyncLogIt("Starting KPZ iterations...");
 
-                if (!ComputationTarget.HastlayerParallelizedAlgorithm())
+                if (ComputationTarget.HastlayerParallelizedAlgorithm())
                 {
-                    for (int currentIteration = 0; currentIteration < NumKpzIterations; currentIteration++)
-                    {
-                        if (ComputationTarget == KpzTarget.Cpu)
-                        {
-                            _kpz.DoIteration();
-                        }
-                        else
-                        {
-                            if (StepByStep)
-                            {
-                                _kpz.DoHastIterationDebug(hastlayer, configuration);
-                            }
-                            else { _kpz.DoHastIterations(hastlayer, configuration, (uint)NumKpzIterations); break; }
-                        }
-
-                        AsyncUpdateProgressBar(currentIteration);
-                        AsyncUpdateChart(currentIteration);
-                        if (bw.CancellationPending) return;
-                    }
+                    DoParallelIterations(hastlayer, configuration);
                 }
-                else
+                else if (!DoSingleIteration(hastlayer, configuration, bw))
                 {
-                    int currentIteration = 1;
-                    int lastIteration = 0;
-                    for (; ; )
-                    {
-                        int iterationsToDo = currentIteration - lastIteration;
-                        AsyncLogIt($"Doing {iterationsToDo} iterations at once...");
-                        _kpz.DoHastIterations(hastlayer, configuration, (uint)iterationsToDo);
-                        AsyncUpdateProgressBar(currentIteration);
-                        // Force update if current iteration is the last:
-                        AsyncUpdateChart(currentIteration - 1, currentIteration == NumKpzIterations);
-                        if (currentIteration >= NumKpzIterations) break;
-                        lastIteration = currentIteration;
-                        currentIteration *= 10;
-                        if (currentIteration > NumKpzIterations) currentIteration = NumKpzIterations;
-                    }
+                    return;
                 }
 
                 sw.Stop();
@@ -246,6 +201,54 @@ namespace Hast.Samples.Kpz
             finally
             {
                 hastlayer?.Dispose();
+            }
+        }
+
+        private bool DoSingleIteration(IHastlayer hastlayer, IHardwareGenerationConfiguration configuration, BackgroundWorker bw)
+        {
+            for (int currentIteration = 0; currentIteration < NumKpzIterations; currentIteration++)
+            {
+                if (ComputationTarget == KpzTarget.Cpu)
+                {
+                    _kpz.DoIteration();
+                }
+                else
+                {
+                    if (StepByStep)
+                    {
+                        _kpz.DoHastIterationDebug(hastlayer, configuration);
+                    }
+                    else
+                    {
+                        _kpz.DoHastIterations(hastlayer, configuration, (uint)NumKpzIterations);
+                        return true;
+                    }
+                }
+
+                AsyncUpdateProgressBar(currentIteration);
+                AsyncUpdateChart(currentIteration);
+                if (bw.CancellationPending) return false;
+            }
+
+            return true;
+        }
+
+        private void DoParallelIterations(IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
+        {
+            int currentIteration = 1;
+            int lastIteration = 0;
+            while (true)
+            {
+                int iterationsToDo = currentIteration - lastIteration;
+                AsyncLogIt($"Doing {iterationsToDo} iterations at once...");
+                _kpz.DoHastIterations(hastlayer, configuration, (uint)iterationsToDo);
+                AsyncUpdateProgressBar(currentIteration);
+                // Force update if current iteration is the last:
+                AsyncUpdateChart(currentIteration - 1, currentIteration == NumKpzIterations);
+                if (currentIteration >= NumKpzIterations) return;
+                lastIteration = currentIteration;
+                currentIteration *= 10;
+                if (currentIteration > NumKpzIterations) currentIteration = NumKpzIterations;
             }
         }
 
@@ -307,7 +310,7 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        KpzTarget ComputationTarget;
+        private KpzTarget ComputationTarget;
 
         /// <summary>
         /// The label next to the checkbox should also trigger its state. (The checkbox cannot have a label at the left,
