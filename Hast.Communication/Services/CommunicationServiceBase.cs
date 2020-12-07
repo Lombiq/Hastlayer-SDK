@@ -12,12 +12,12 @@ namespace Hast.Communication.Services
     {
         protected ILogger Logger { get; }
 
-        abstract public string ChannelName { get; }
+        public abstract string ChannelName { get; }
         public TextWriter TesterOutput { get; set; }
 
         protected CommunicationServiceBase(ILogger logger) => Logger = logger;
 
-        abstract public Task<IHardwareExecutionInformation> Execute(
+        public abstract Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext);

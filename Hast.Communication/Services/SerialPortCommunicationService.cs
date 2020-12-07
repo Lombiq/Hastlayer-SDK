@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -20,12 +21,13 @@ namespace Hast.Communication.Services
 {
     public class SerialPortCommunicationService : CommunicationServiceBase
     {
+        private const int MemoryPrefixCellCount = 3;
+        private const int FirstCellPadding = sizeof(int) - 1;
+
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IEnumerable<ISerialPortConfigurator> _serialPortConfigurators;
-
-        private const int MemoryPrefixCellCount = 3;
-        private const int FirstCellPadding = sizeof(int) - 1;
+        private readonly ILogger<SerialPortCommunicationService> _logger;
 
         public override string ChannelName => Serial.ChannelName;
 
@@ -33,25 +35,27 @@ namespace Hast.Communication.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IEnumerable<ISerialPortConfigurator> serialPortConfigurators,
-            ILogger<SerialPortCommunicationService> logger) : base(logger)
+            ILogger<SerialPortCommunicationService> logger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _serialPortConfigurators = serialPortConfigurators;
+            _logger = logger;
         }
 
-        public override async Task<IHardwareExecutionInformation> Execute(
+        public override async Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
         {
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
-                    var portNames = await GetFpgaPortNames(executionContext);
+                    var portNames = await GetFpgaPortNamesAsync(executionContext);
                     return portNames.Select(portName => new Device { Identifier = portName });
                 });
 
-            using var device = await _devicePoolManager.ReserveDevice();
+            using var device = await _devicePoolManager.ReserveDeviceAsync();
             var context = BeginExecution();
 
             // Initializing some serial port connection settings (may be different with some FPGA boards).
@@ -111,12 +115,28 @@ namespace Hast.Communication.Services
             var memoryAsArraySegment = memory.GetUnderlyingArray();
             for (int i = 0; i < (int)Math.Ceiling(memory.Length / (decimal)maxBytesToSendAtOnce); i++)
             {
-                var remainingBytes = memory.Length - i * maxBytesToSendAtOnce;
+                var remainingBytes = memory.Length - (i * maxBytesToSendAtOnce);
                 var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
-                serialPort.Write(memoryAsArraySegment.Array, i * maxBytesToSendAtOnce + memoryAsArraySegment.Offset, bytesToSend);
+                serialPort.Write(memoryAsArraySegment.Array, (i * maxBytesToSendAtOnce) + memoryAsArraySegment.Offset, bytesToSend);
             }
 
             // Processing the response.
+            await ProcessResponse(dma, serialPort, context, executionContext).Task;
+
+            EndExecution(context);
+
+            return context.HardwareExecutionInformation;
+        }
+
+        [SuppressMessage("Major Code Smell", "S1172:Unused method parameters should be removed", Justification = "False positive, it's in the event.")]
+        private TaskCompletionSource<bool> ProcessResponse(
+            SimpleMemoryAccessor dma,
+            SerialPort serialPort,
+            CommunicationStateContext context,
+            IHardwareExecutionContext executionContext)
+        {
+            // False positive, probably because the writes are in the event handler.
+#pragma warning disable S1854 // Unused assignments should be removed
             var taskCompletionSource = new TaskCompletionSource<bool>();
             var communicationState = Serial.CommunicationState.WaitForFirstResponse;
             var outputByteCountBytes = new byte[4];
@@ -126,42 +146,34 @@ namespace Hast.Communication.Services
             var outputBytes = Array.Empty<byte>(); // The incoming buffer.
             var executionTimeBytes = new byte[8];
             var executionTimeByteCounter = 0;
+#pragma warning restore S1854 // Unused assignments should be removed
 
             void ProcessReceivedByte(byte receivedByte)
             {
                 switch (communicationState)
                 {
                     case Serial.CommunicationState.WaitForFirstResponse:
-                        if (receivedByte == Serial.Signals.Ping)
-                        {
-                            communicationState = Serial.CommunicationState.ReceivingExecutionInformation;
-                            serialPort.Write(Serial.Signals.Ready);
-                        }
-                        else
+                        if (receivedByte != Serial.Signals.Ping)
                         {
                             throw new SerialPortCommunicationException(
                                 "Awaited a ping signal from the FPGA after it finished but received the following byte instead: " +
                                 receivedByte);
                         }
 
+                        communicationState = Serial.CommunicationState.ReceivingExecutionInformation;
+
                         break;
                     case Serial.CommunicationState.ReceivingExecutionInformation:
-                        executionTimeBytes[executionTimeByteCounter] = receivedByte;
-                        executionTimeByteCounter++;
-                        if (executionTimeByteCounter == 8)
-                        {
-                            var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
-
-                            SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
-
-                            communicationState = Serial.CommunicationState.ReceivingOutputByteCount;
-                            serialPort.Write(Serial.Signals.Ready);
-                        }
+                        executionTimeBytes[executionTimeByteCounter++] = receivedByte;
+                        communicationState = ReceivedExecutionInformation(
+                            executionTimeBytes,
+                            executionTimeByteCounter,
+                            context,
+                            executionContext);
 
                         break;
                     case Serial.CommunicationState.ReceivingOutputByteCount:
-                        outputByteCountBytes[outputByteCountByteCounter] = receivedByte;
-                        outputByteCountByteCounter++;
+                        outputByteCountBytes[outputByteCountByteCounter++] = receivedByte;
 
                         if (outputByteCountByteCounter == 4)
                         {
@@ -169,72 +181,90 @@ namespace Hast.Communication.Services
 
                             // Since the output's size can differ from the input size for optimization reasons,
                             // we take the explicit size into account.
-                            outputBytes = new byte[outputByteCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
+                            outputBytes = new byte[outputByteCount + (MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes)];
 
                             Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
-                            communicationState = Serial.CommunicationState.ReceivingOuput;
-                            serialPort.Write(Serial.Signals.Ready);
+                            communicationState = Serial.CommunicationState.ReceivingOutput;
                         }
 
                         break;
-                    case Serial.CommunicationState.ReceivingOuput:
+                    case Serial.CommunicationState.ReceivingOutput:
                         // There is a padding of PrefixCellCount cells for the unlikely case that the user
                         // would directly feed back the output as the next call's input. This way Prefix space
                         // is maintained.
-                        outputBytes[outputBytesReceivedCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes] = receivedByte;
+                        outputBytes[outputBytesReceivedCount + (MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes)] = receivedByte;
                         outputBytesReceivedCount++;
-
-                        if (outputByteCount == outputBytesReceivedCount)
-                        {
-                            dma.Set(outputBytes, MemoryPrefixCellCount);
-
-                            // Serial communication can give more data than we actually await, so need to
-                            // set this.
-                            communicationState = Serial.CommunicationState.Finished;
-                            serialPort.Write(Serial.Signals.Ready);
-
-                            taskCompletionSource.SetResult(true);
-                        }
+                        communicationState = ReceivedOutput(
+                            outputBytes,
+                            outputByteCount,
+                            outputBytesReceivedCount,
+                            taskCompletionSource,
+                            dma);
 
                         break;
+                    case Serial.CommunicationState.Finished:
                     default:
-                        break;
+                        // Intentionally empty.
+                        return;
                 }
+
+                serialPort.Write(Serial.Signals.Ready);
             }
 
             // In this event we are receiving the useful data coming from the FPGA board.
-            serialPort.DataReceived += (s, e) =>
+            serialPort.DataReceived += (_, e) =>
             {
-                if (e.EventType == SerialData.Chars)
+                if (e.EventType != SerialData.Chars) return;
+
+                var inputBuffer = new byte[serialPort.BytesToRead];
+                serialPort.Read(inputBuffer, 0, inputBuffer.Length);
+
+                for (int i = 0; i < inputBuffer.Length && communicationState != Serial.CommunicationState.Finished; i++)
                 {
-                    var inputBuffer = new byte[serialPort.BytesToRead];
-                    serialPort.Read(inputBuffer, 0, inputBuffer.Length);
-
-                    for (int i = 0; i < inputBuffer.Length; i++)
-                    {
-                        ProcessReceivedByte(inputBuffer[i]);
-
-                        if (communicationState == Serial.CommunicationState.Finished)
-                        {
-                            return;
-                        }
-                    }
+                    ProcessReceivedByte(inputBuffer[i]);
                 }
             };
 
-            await taskCompletionSource.Task;
+            return taskCompletionSource;
+        }
 
-            EndExecution(context);
+        private static Serial.CommunicationState ReceivedOutput(
+            byte[] outputBytes,
+            int outputByteCount,
+            int outputBytesReceivedCount,
+            TaskCompletionSource<bool> taskCompletionSource,
+            SimpleMemoryAccessor dma)
+        {
+            if (outputByteCount != outputBytesReceivedCount) return Serial.CommunicationState.ReceivingOutput;
 
-            return context.HardwareExecutionInformation;
+            dma.Set(outputBytes, MemoryPrefixCellCount);
+            taskCompletionSource.SetResult(true);
+
+            // Serial communication can give more data than we actually await, so need to set this.
+            return Serial.CommunicationState.Finished;
+        }
+
+        private Serial.CommunicationState ReceivedExecutionInformation(
+            byte[] executionTimeBytes,
+            int executionTimeByteCounter,
+            CommunicationStateContext context,
+            IHardwareExecutionContext executionContext)
+        {
+            if (executionTimeByteCounter < 8) return Serial.CommunicationState.ReceivingExecutionInformation;
+
+            var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
+
+            SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+
+            return Serial.CommunicationState.ReceivingOutputByteCount;
         }
 
         /// <summary>
         /// Detects serial-connected compatible FPGA boards.
         /// </summary>
         /// <returns>The serial port name where the FPGA board is connected to.</returns>
-        private async Task<IEnumerable<string>> GetFpgaPortNames(IHardwareExecutionContext executionContext)
+        private async Task<IEnumerable<string>> GetFpgaPortNamesAsync(IHardwareExecutionContext executionContext)
         {
             // Get all available serial ports in the system.
             var ports = SerialPort.GetPortNames();
@@ -291,7 +321,7 @@ namespace Hast.Communication.Services
             using var serialPort = CreateSerialPort(executionContext);
             var taskCompletionSource = new TaskCompletionSource<bool>();
 
-            serialPort.DataReceived += (sender, e) =>
+            serialPort.DataReceived += (_, _) =>
             {
                 if (serialPort.ReadByte() == Serial.Signals.Ready)
                 {
@@ -307,8 +337,15 @@ namespace Hast.Communication.Services
                 serialPort.Open();
                 serialPort.Write(CommandTypes.WhoIsAvailable);
             }
-            catch (IOException) { }
-            catch (UnauthorizedAccessException) { } // This happens if the port is used by another app.
+            catch (IOException ex)
+            {
+                _logger.LogWarning(ex, "Failed to access serial port");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                // This happens if the port is used by another app.
+                _logger.LogWarning(ex, "Failed to access serial port");
+            }
 
             // Waiting a maximum of 3s for a response from the port.
             taskCompletionSource.Task.Wait(3_000);

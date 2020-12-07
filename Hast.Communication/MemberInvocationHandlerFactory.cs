@@ -180,7 +180,7 @@ namespace Hast.Communication
             }
 
             invocationContext.HardwareExecutionInformation = await communicationService
-                .Execute(
+                .ExecuteAsync(
                     memory,
                     memberId,
                     new HardwareExecutionContext

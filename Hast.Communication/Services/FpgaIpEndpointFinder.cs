@@ -1,4 +1,4 @@
-﻿using Hast.Common.Services;
+using Hast.Common.Services;
 using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Helpers;
@@ -28,7 +28,7 @@ namespace Hast.Communication.Services
             _logger = logger;
         }
 
-        public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints()
+        public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpointsAsync()
         {
             var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, Ethernet.Ports.WhoIsAvailableRequest);
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
@@ -45,7 +45,7 @@ namespace Hast.Communication.Services
                 // Send request to all broadcast addresses on all the supported network interfaces.
                 foreach (var suppertedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
                     .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up &&
-                        networkInterface.SupportsMulticast == true))
+                        networkInterface.SupportsMulticast))
                 {
                     // Currently we are supporting only IPv4 addresses.
                     var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
@@ -85,9 +85,9 @@ namespace Hast.Communication.Services
 
         private class UdpReceiveResultEqualityComparer : IEqualityComparer<UdpReceiveResult>
         {
-            public bool Equals(UdpReceiveResult firstResult, UdpReceiveResult secondResult) => firstResult.RemoteEndPoint.Equals(secondResult.RemoteEndPoint);
+            public bool Equals(UdpReceiveResult x, UdpReceiveResult y) => x.RemoteEndPoint.Equals(y.RemoteEndPoint);
 
-            public int GetHashCode(UdpReceiveResult result) => result.RemoteEndPoint.GetHashCode();
+            public int GetHashCode(UdpReceiveResult obj) => obj.RemoteEndPoint.GetHashCode();
         }
     }
 }

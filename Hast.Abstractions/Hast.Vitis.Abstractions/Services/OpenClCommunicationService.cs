@@ -41,7 +41,7 @@ namespace Hast.Vitis.Abstractions.Services
             _logger = logger;
         }
 
-        public override async Task<IHardwareExecutionInformation> Execute(
+        public override async Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
@@ -96,7 +96,7 @@ namespace Hast.Vitis.Abstractions.Services
                 return Task.FromResult<IEnumerable<IDevice>>(devices);
             });
 
-            using var device = await _devicePoolManager.ReserveDevice();
+            using var device = await _devicePoolManager.ReserveDeviceAsync();
             var context = BeginExecution();
             {
                 int deviceIndex = device.Metadata;

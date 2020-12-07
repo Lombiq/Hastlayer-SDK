@@ -1,5 +1,8 @@
 namespace Hast.Communication.Extensibility.Pipeline
 {
+    /// <summary>
+    /// The context of the invocation of a hardware-implemented member in the pipeline.
+    /// </summary>
     public interface IMemberInvocationPipelineStepContext : IMemberInvocationContext
     {
         /// <summary>

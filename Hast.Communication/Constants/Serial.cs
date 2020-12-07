@@ -21,7 +21,7 @@ namespace Hast.Communication.Constants.CommunicationConstants
             WaitForFirstResponse,
             ReceivingExecutionInformation,
             ReceivingOutputByteCount,
-            ReceivingOuput,
+            ReceivingOutput,
             Finished,
         }
     }

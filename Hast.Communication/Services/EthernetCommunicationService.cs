@@ -25,26 +25,21 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IFpgaIpEndpointFinder _fpgaIpEndpointFinder;
 
-        public override string ChannelName
-        {
-            get
-            {
-                return Ethernet.ChannelName;
-            }
-        }
+        public override string ChannelName => Ethernet.ChannelName;
 
         public EthernetCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IFpgaIpEndpointFinder fpgaIpEndpointFinder,
-            ILogger<EthernetCommunicationService> logger) : base(logger)
+            ILogger<EthernetCommunicationService> logger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
             _fpgaIpEndpointFinder = fpgaIpEndpointFinder;
         }
 
-        public override async Task<IHardwareExecutionInformation> Execute(
+        public override async Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
@@ -52,7 +47,7 @@ namespace Hast.Communication.Services
             _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
                 {
                     // Get the IP addresses of the FPGA boards.
-                    var fpgaEndpoints = await _fpgaIpEndpointFinder.FindFpgaEndpoints();
+                    var fpgaEndpoints = await _fpgaIpEndpointFinder.FindFpgaEndpointsAsync();
 
                     if (!fpgaEndpoints.Any())
                     {
@@ -63,7 +58,7 @@ namespace Hast.Communication.Services
                         new Device { Identifier = endpoint.Endpoint.Address.ToString(), Metadata = endpoint });
                 });
 
-            using var device = await _devicePoolManager.ReserveDevice();
+            using var device = await _devicePoolManager.ReserveDeviceAsync();
             var context = BeginExecution();
 
             IFpgaEndpoint fpgaEndpoint = device.Metadata;
@@ -83,9 +78,9 @@ namespace Hast.Communication.Services
                 using var stream = client.GetStream();
                 // We send an execution signal to make the FPGA ready to receive the data stream.
                 var executionCommandTypeByte = new[] { (byte)CommandTypes.Execution };
-                await stream.WriteAsync(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
+                await stream.WriteAsync(executionCommandTypeByte.AsMemory(0, executionCommandTypeByte.Length));
 
-                var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
+                var executionCommandTypeResponseByte = await GetBytesFromStreamAsync(stream, 1);
 
                 if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
                 {
@@ -97,7 +92,7 @@ namespace Hast.Communication.Services
                 // Here we put together the data stream.
                 var dma = new SimpleMemoryAccessor(simpleMemory);
                 var memory = dma.Get(MemoryPrefixCellCount); // This way memory doesn't have to be copied.
-                var memoryDataLength = memory.Length - MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
+                var memoryDataLength = memory.Length - (MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
 
                 // Copying the input length, represented as bytes, to the output buffer.
                 MemoryMarshal.Write(memory.Span, ref memoryDataLength);
@@ -106,20 +101,20 @@ namespace Hast.Communication.Services
 
                 // Sending data to the FPGA board.
                 var segment = memory.GetUnderlyingArray();
-                await stream.WriteAsync(segment.Array, segment.Offset, memory.Length);
+                await stream.WriteAsync(segment.Array.AsMemory(segment.Offset, memory.Length));
 
                 // Read the first batch of the TcpServer response bytes that will represent the execution time.
-                var executionTimeBytes = await GetBytesFromStream(stream, sizeof(ulong));
+                var executionTimeBytes = await GetBytesFromStreamAsync(stream, sizeof(ulong));
                 var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
                 SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
                 // Read the bytes representing the length of the simple memory.
-                var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStream(stream, sizeof(uint)), 0);
+                var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStreamAsync(stream, sizeof(uint)), 0);
 
                 Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
                 // Finally read the memory itself.
-                var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
+                var outputBytes = await GetBytesFromStreamAsync(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
 
                 dma.Set(outputBytes, MemoryPrefixCellCount);
             }
@@ -133,7 +128,7 @@ namespace Hast.Communication.Services
             return context.HardwareExecutionInformation;
         }
 
-        public static async Task<byte[]> GetBytesFromStream(NetworkStream stream, int length, int offset = 0)
+        public static async Task<byte[]> GetBytesFromStreamAsync(NetworkStream stream, int length, int offset = 0)
         {
             length += offset;
             var outputBytes = new byte[length];
@@ -142,7 +137,7 @@ namespace Hast.Communication.Services
             var remaining = outputBytes.Length - offset;
             while (readPosition < length)
             {
-                readPosition += await stream.ReadAsync(outputBytes, readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining);
+                readPosition += await stream.ReadAsync(outputBytes.AsMemory(readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining));
                 remaining = length - readPosition;
             }
 

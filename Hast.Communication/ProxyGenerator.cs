@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hast.Layer;
 
 namespace Hast.Communication
@@ -14,7 +14,8 @@ namespace Hast.Communication
             _proxyGenerator = new Castle.DynamicProxy.ProxyGenerator();
         }
 
-        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target, IProxyGenerationConfiguration configuration) where T : class
+        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target, IProxyGenerationConfiguration configuration)
+            where T : class
         {
             var memberInvocationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(
                 hardwareRepresentation, target, configuration);
@@ -30,10 +31,8 @@ namespace Hast.Communication
         {
             private readonly MemberInvocationHandler _memberInvocationHandler;
 
-            public MemberInvocationInterceptor(MemberInvocationHandler memberInvocationHandler)
-            {
+            public MemberInvocationInterceptor(MemberInvocationHandler memberInvocationHandler) =>
                 _memberInvocationHandler = memberInvocationHandler;
-            }
 
             public void Intercept(Castle.DynamicProxy.IInvocation invocation) => _memberInvocationHandler(invocation);
         }
