@@ -56,7 +56,8 @@ namespace Hast.Remote.Client
                         transformationResultResponse.ResponseMessage.EnsureSuccessStatusCode();
                     }
 
-                    if (++waitAttemptIndex % 10 == 0) waitMilliseconds *= 2;
+                    waitAttemptIndex++;
+                    if (waitAttemptIndex % 10 == 0) waitMilliseconds *= 2;
                 }
 
                 var exceptionMessageBase =
@@ -79,7 +80,7 @@ namespace Hast.Remote.Client
 
                 if (transformationResult.Errors?.Any() == true)
                 {
-                    throw new Exception(
+                    throw new InvalidOperationException(
                          exceptionMessageBase + "The following error(s) happened: " + Environment.NewLine +
                          string.Join(Environment.NewLine, transformationResult.Errors));
                 }
@@ -122,6 +123,5 @@ namespace Hast.Remote.Client
 
         private AssemblyContainer GetAssemblyContainers(string path) =>
             new AssemblyContainer(Path.GetFileNameWithoutExtension(path), File.ReadAllBytes(path));
-
     }
 }

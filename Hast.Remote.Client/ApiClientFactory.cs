@@ -21,14 +21,27 @@ namespace Hast.Remote.Client
             return api;
         }
 
+        /// <summary>
+        /// The API for communicating with the transformation worker server using REST.
+        /// </summary>
         public interface IHastlayerApi
         {
+            /// <summary>
+            /// Gets or sets the authentication information needed to authorize usage.
+            /// </summary>
             [Header("Authorization")]
             AuthenticationHeaderValue Authorization { get; set; }
 
+            /// <summary>
+            /// Sends the configuration and assemblies requesting transformation.
+            /// </summary>
             [Post("TransformationRequests")]
             Task<TransformationTicket> RequestTransformationAsync([Body] TransformationRequest transformationRequest);
 
+            /// <summary>
+            /// Retrieves the result of the transformation when it's finished using the ticket from
+            /// <see cref="RequestTransformationAsync(TransformationRequest)"/>.
+            /// </summary>
             [Get("TransformationResults"), AllowAnyStatusCode]
             Task<Response<TransformationResult>> GetTransformationResultAsync([Query] string transformationToken);
         }
