@@ -10,7 +10,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher(), configuration);
+            var genomeMatcher = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new GenomeMatcher(), configuration);
 
             // Sample from IBM.
             var inputOne = "GCCCTAGCG";

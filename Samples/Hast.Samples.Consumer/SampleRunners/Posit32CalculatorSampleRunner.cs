@@ -18,7 +18,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             RunSoftwareBenchmarks();
 
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32Calculator(), configuration);
+            var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32Calculator(), configuration);
             _ = positCalculator.CalculateIntegerSumUpToNumber(100_000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             positCalculator.CalculatePowerOfReal(100_000, 1.0001F, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

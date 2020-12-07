@@ -60,7 +60,7 @@ namespace Hast.Samples.Kpz
                 configuration.AddHardwareEntryPointType<PrngTestInterface>();
             }
 
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[] {
                     typeof(KpzKernelsParallelizedInterface).Assembly,
                     typeof(RandomMwc64X).Assembly,
@@ -77,21 +77,21 @@ namespace Hast.Samples.Kpz
 
                 if (_kpzTarget == KpzTarget.Fpga)
                 {
-                    Kernels = await hastlayer.GenerateProxy(
+                    Kernels = await hastlayer.GenerateProxyAsync(
                         hardwareRepresentation,
                         new KpzKernelsInterface(),
                         proxyConf);
                 }
                 else if (_kpzTarget == KpzTarget.FpgaParallelized)
                 {
-                    KernelsParallelized = await hastlayer.GenerateProxy(
+                    KernelsParallelized = await hastlayer.GenerateProxyAsync(
                         hardwareRepresentation,
                         new KpzKernelsParallelizedInterface(),
                         proxyConf);
                 }
                 else // if(kpzTarget == KpzTarget.PrngTest)
                 {
-                    KernelsP = await hastlayer.GenerateProxy(
+                    KernelsP = await hastlayer.GenerateProxyAsync(
                         hardwareRepresentation,
                         new PrngTestInterface(),
                         proxyConf);

@@ -16,7 +16,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // Starting with 1 not to have a divide by zero.
             var vector = Enumerable.Range(1, SimdCalculator.MaxDegreeOfParallelism * 4).ToArray();
 
-            var simdCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new SimdCalculator(), configuration);
+            var simdCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new SimdCalculator(), configuration);
 
             _ = ThrowIfNotCorrect(simdCalculator, calculator => calculator.AddVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
             _ = ThrowIfNotCorrect(simdCalculator, calculator => calculator.SubtractVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));

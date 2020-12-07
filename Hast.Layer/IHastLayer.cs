@@ -8,13 +8,25 @@ using System.Threading.Tasks;
 
 namespace Hast.Layer
 {
+    /// <summary>
+    /// The main container that manages Hastlayer features and services.
+    /// </summary>
     public interface IHastlayer : IDisposable
     {
+        // The envent objects are interfaces becuase we reuse a common context object for them.
+#pragma warning disable S3906 // Event Handlers should have the correct signature
+#pragma warning disable S3908 // Generic event handlers should be used
         /// <summary>
         /// Occurs when the member invocation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
         event ExecutedOnHardwareEventHandler ExecutedOnHardware;
+
+        /// <summary>
+        /// Occurs before the proxy is executed.
+        /// </summary>
         event InvokingEventHandler Invoking;
+#pragma warning restore S3908 // Generic event handlers should be used
+#pragma warning restore S3906 // Event Handlers should have the correct signature
 
         /// <summary>
         /// Gets those devices which have their support drivers loaded.
@@ -32,7 +44,7 @@ namespace Hast.Layer
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during hardware generation.
         /// </exception>
-        Task<IHardwareRepresentation> GenerateHardware(
+        Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration);
 
@@ -49,10 +61,11 @@ namespace Hast.Layer
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
-        Task<T> GenerateProxy<T>(
+        Task<T> GenerateProxyAsync<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
-            IProxyGenerationConfiguration configuration = null) where T : class;
+            IProxyGenerationConfiguration configuration = null)
+            where T : class;
 
         /// <summary>
         /// Gets the <see cref="ICommunicationService"/> based on the channel name.

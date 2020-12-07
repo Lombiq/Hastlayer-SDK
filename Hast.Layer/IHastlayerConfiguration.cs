@@ -23,6 +23,9 @@ namespace Hast.Layer
         Client,
     }
 
+    /// <summary>
+    /// Provides settings for <see cref="IHastlayer"/> initialization.
+    /// </summary>
     public interface IHastlayerConfiguration : ISingletonDependency
     {
         /// <summary>

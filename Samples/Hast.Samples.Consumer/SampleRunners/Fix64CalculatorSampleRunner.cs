@@ -18,7 +18,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator(), configuration);
+            var fixed64Calculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Fix64Calculator(), configuration);
             _ = fixed64Calculator.CalculateIntegerSumUpToNumber(10_000_000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             // This takes about 274ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with

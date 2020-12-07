@@ -29,12 +29,10 @@ namespace Hast.Layer.EmptyRepresentationFactories
 
             public IEnumerable<ITransformationWarning> Warnings => Enumerable.Empty<ITransformationWarning>();
 
-            public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings)
-            {
+            public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings) =>
                 HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
-            }
 
-            public Task Serialize(Stream stream) => throw new System.NotImplementedException();
+            public Task Serialize(Stream stream) => throw new System.NotSupportedException();
         }
     }
 }

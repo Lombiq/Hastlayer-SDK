@@ -19,7 +19,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             using var bitmap = new Bitmap("fpga.jpg");
 
             var imageContrastModifier = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
+                .GenerateProxyAsync(hardwareRepresentation, new ImageContrastModifier(), configuration);
             using var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 

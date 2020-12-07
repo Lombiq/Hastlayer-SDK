@@ -179,7 +179,7 @@ namespace Hast.Samples.Consumer
 
             // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug
             // assemblies!
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[]
                 {
                     // Selecting any type from the sample assembly here just to get its Assembly object.

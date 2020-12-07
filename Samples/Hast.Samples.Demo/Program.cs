@@ -32,7 +32,7 @@ namespace Hast.Samples.Demo
 
             #region HardwareGeneration
             Console.WriteLine("Hardware generation starts.");
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[]
                 {
                     typeof(ParallelAlgorithm).Assembly,
@@ -53,7 +53,7 @@ namespace Hast.Samples.Demo
             Console.WriteLine();
             Console.WriteLine("Starting hardware execution.");
 
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
+            var parallelAlgorithm = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ParallelAlgorithm());
 
             _ = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             _ = parallelAlgorithm.Run(234_234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

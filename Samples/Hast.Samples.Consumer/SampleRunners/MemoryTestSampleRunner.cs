@@ -13,7 +13,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             IHardwareRepresentation hardwareRepresentation,
             IProxyGenerationConfiguration configuration)
         {
-            var memoryTest = await hastlayer.GenerateProxy(hardwareRepresentation, new MemoryTest(), configuration);
+            var memoryTest = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new MemoryTest(), configuration);
 
             _ = memoryTest.Run(0, 1, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = memoryTest.Run(0, 3, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

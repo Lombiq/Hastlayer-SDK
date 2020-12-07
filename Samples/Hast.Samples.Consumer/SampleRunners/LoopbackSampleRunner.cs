@@ -13,7 +13,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             IHardwareRepresentation hardwareRepresentation,
             IProxyGenerationConfiguration configuration)
         {
-            var loopback = await hastlayer.GenerateProxy(hardwareRepresentation, new Loopback(), configuration);
+            var loopback = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Loopback(), configuration);
 
             _ = loopback.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = loopback.Run(1_234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

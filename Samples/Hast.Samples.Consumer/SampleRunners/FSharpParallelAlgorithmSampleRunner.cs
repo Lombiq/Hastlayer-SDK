@@ -11,7 +11,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             _ = new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm().Run(234_234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm(), configuration).ConfigureAwait(true);
+            var parallelAlgorithm = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm(), configuration).ConfigureAwait(true);
 
             _ = parallelAlgorithm.Run(234_234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
