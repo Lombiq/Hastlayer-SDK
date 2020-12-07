@@ -6,31 +6,18 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
 {
-    internal class Program
+    public static class Program
     {
         private static async Task Main()
         {
             using var hastlayer = Hastlayer.Create();
 
-            #region Configuration
-            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+            var configuration = Configure(
+                hastlayer,
+                "Nexys A7",
+                "HardwareFramework");
 
-            configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
-
-            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
-
-            hastlayer.ExecutedOnHardware += (sender, e) =>
-            {
-                Console.WriteLine(
-                    "Executing on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                    " milliseconds (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                    " milliseconds (all together).");
-            };
-            #endregion
-
-            #region HardwareGeneration
+            // HardwareGeneration
             Console.WriteLine("Hardware generation starts.");
             var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[]
@@ -38,9 +25,33 @@ namespace Hast.Samples.Demo
                     typeof(ParallelAlgorithm).Assembly,
                 },
                 configuration);
-            #endregion
 
-            #region Execution
+            await ExecuteAsync(hastlayer, hardwareRepresentation);
+        }
+
+        private static HardwareGenerationConfiguration Configure(IHastlayer hastlayer, string deviceName, string hardwareFrameworkPath)
+        {
+            var configuration = new HardwareGenerationConfiguration(deviceName, hardwareFrameworkPath);
+
+            configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
+
+            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+
+            hastlayer.ExecutedOnHardware += (_, e) =>
+                Console.WriteLine(
+                    "Executing on hardware took " +
+                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                    " milliseconds (net) " +
+                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                    " milliseconds (all together).");
+
+            return configuration;
+        }
+
+        private static async Task ExecuteAsync(
+            IHastlayer hastlayer,
+            IHardwareRepresentation hardwareRepresentation)
+        {
             Console.WriteLine("Hardware generated, starting software execution.");
             Console.WriteLine();
 
@@ -55,11 +66,13 @@ namespace Hast.Samples.Demo
 
             var parallelAlgorithm = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ParallelAlgorithm());
 
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
             _ = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
+
             _ = parallelAlgorithm.Run(234_234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             _ = parallelAlgorithm.Run(9_999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            #endregion
         }
     }
 }
