@@ -14,7 +14,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         // Use the below config if you just want to transform only ParallelizedCalculateIntegerSumUpToNumbers to hardware.
         //// configuration.AddHardwareEntryPointMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers((SimpleMemory)null));
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
 

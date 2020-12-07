@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using System;
 using System.Buffers;
@@ -26,7 +26,7 @@ namespace Hast.Vitis.Abstractions.Services
             CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable);
 
         void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true);
-        Task AwaitDevice(int deviceIndex);
+        Task AwaitDeviceAsync(int deviceIndex);
 
         IntPtr SetKernelArgumentWithNewBuffer(
             string kernelName, int index, MemoryHandle data, int length, IntPtr buffer = default);

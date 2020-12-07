@@ -15,7 +15,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         //// configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
         // Note that the bottom version can also be used to add multiple types from under a namespace.
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var primeCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new PrimeCalculator(), configuration);
 

@@ -19,7 +19,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                Posit32FusedCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
 

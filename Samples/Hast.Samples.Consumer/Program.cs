@@ -60,7 +60,7 @@ namespace Hast.Samples.Consumer
 
     internal static class Program
     {
-        private static async Task MainTask(string[] args)
+        private static async Task MainTaskAsync(string[] args)
         {
             /*
             * On a high level these are the steps to use Hastlayer:
@@ -211,7 +211,7 @@ namespace Hast.Samples.Consumer
             // Running samples.
             try
             {
-                await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
+                await sampleRunner.RunAsync(hastlayer, hardwareRepresentation, proxyConfiguration);
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {
@@ -239,7 +239,7 @@ namespace Hast.Samples.Consumer
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
             try
             {
-                await MainTask(args);
+                await MainTaskAsync(args);
             }
             catch (Exception ex)
             {

@@ -8,7 +8,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public void Configure(HardwareGenerationConfiguration configuration) => configuration.AddHardwareEntryPointType<Loopback>();
 
-        public async Task Run(
+        public async Task RunAsync(
             IHastlayer hastlayer,
             IHardwareRepresentation hardwareRepresentation,
             IProxyGenerationConfiguration configuration)

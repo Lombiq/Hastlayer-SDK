@@ -196,7 +196,7 @@ namespace Hast.Layer
                 }
 
                 var hardwareDescription = configuration.EnableHardwareTransformation ?
-                    await transformer.Transform(assemblyPaths, configuration) :
+                    await transformer.TransformAsync(assemblyPaths, configuration) :
                     EmptyHardwareDescriptionFactory.Create(configuration);
 
                 foreach (var warning in hardwareDescription.Warnings)

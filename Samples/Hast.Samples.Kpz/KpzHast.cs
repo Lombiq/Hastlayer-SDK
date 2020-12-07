@@ -18,7 +18,7 @@ namespace Hast.Samples.Kpz
         public KpzKernelsParallelizedInterface KernelsParallelized { get; set; }
         public PrngTestInterface KernelsP { get; set; }
 
-        public async Task<(IHastlayer Hastlayer, IHardwareGenerationConfiguration Configuration)> InitializeHastlayer(
+        public async Task<(IHastlayer Hastlayer, IHardwareGenerationConfiguration Configuration)> InitializeHastlayerAsync(
             bool verifyOutput,
             bool randomSeedEnable)
         {

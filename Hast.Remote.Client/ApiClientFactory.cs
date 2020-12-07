@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +27,10 @@ namespace Hast.Remote.Client
             AuthenticationHeaderValue Authorization { get; set; }
 
             [Post("TransformationRequests")]
-            Task<TransformationTicket> RequestTransformation([Body] TransformationRequest transformationRequest);
+            Task<TransformationTicket> RequestTransformationAsync([Body] TransformationRequest transformationRequest);
 
             [Get("TransformationResults"), AllowAnyStatusCode]
-            Task<Response<TransformationResult>> GetTransformationResult([Query] string transformationToken);
+            Task<Response<TransformationResult>> GetTransformationResultAsync([Query] string transformationToken);
         }
     }
 }

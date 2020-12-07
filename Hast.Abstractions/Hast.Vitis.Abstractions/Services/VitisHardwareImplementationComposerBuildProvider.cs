@@ -116,7 +116,7 @@ namespace Hast.Vitis.Abstractions.Services
             else if (buildConfiguration.ResetOnFirstRun && _firstRun)
             {
                 _firstRun = false;
-                await EnsureDeviceReady();
+                await EnsureDeviceReadyAsync();
             }
 
             ProgressMajor(
@@ -163,7 +163,7 @@ namespace Hast.Vitis.Abstractions.Services
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
 
-            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
+            await CreateSourceFilesAsync(context, hardwareFrameworkPath, hashId);
 
             // If the xclbin exists then we are done here.
             if (File.Exists(implementation.BinaryPath) && File.Exists(implementation.BinaryPath + ".info"))
@@ -241,7 +241,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "package_kernel.tcl"),
                 Path.Combine(rtlDirectoryPath, "src", "xml", "kernel.xml"),
             };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
+            await ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
             // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
@@ -272,7 +272,7 @@ namespace Hast.Vitis.Abstractions.Services
                 xoFilePath,
             });
 
-            await ExecuteWithLogging(vppExecutable, vppArguments, tmpDirectoryPath);
+            await ExecuteWithLoggingAsync(vppExecutable, vppArguments, tmpDirectoryPath);
             ProgressMajor("v++ build is finished.");
 
             if (target.ToUpperInvariant() == "HW_EMU")
@@ -281,7 +281,7 @@ namespace Hast.Vitis.Abstractions.Services
                 // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
                 var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
                 var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath };
-                await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
+                await ExecuteWithLoggingAsync(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
                 File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
                 ProgressMajor("Emulation configuration (emconfig) setup is finished.");
             }
@@ -305,7 +305,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(rtlDirectoryPath, "src", "IP", "Hast_IP.vhd"),
                 Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
             };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
+            await ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments);
             ProgressMajor("Vivado synthesis is finished.");
         }
 
@@ -449,7 +449,7 @@ namespace Hast.Vitis.Abstractions.Services
             ProgressMajor("Build directory cleaned up.");
         }
 
-        private async Task EnsureDeviceReady()
+        private async Task EnsureDeviceReadyAsync()
         {
             _logger.LogWarning(
                 "This is the first build with the current process. Resetting the devices for a clean state...");
@@ -472,7 +472,7 @@ namespace Hast.Vitis.Abstractions.Services
                 e.Message,
                 e.IsMajorStep ? " (new)" : string.Empty);
 
-        private Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory = null)
+        private Task ExecuteWithLoggingAsync(string executable, IList<string> arguments, string workingDirectory = null)
         {
             var name = Path.GetFileName(executable);
             void OnCommandEvent(CommandEvent commandEvent)
@@ -558,7 +558,7 @@ namespace Hast.Vitis.Abstractions.Services
             _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
         }
 
-        private static Task<bool> CreateSourceFilesAwait(
+        private static Task<bool> CreateSourceFilesAsync(
             IHardwareImplementationCompositionContext context,
             string hardwareFrameworkPath,
             string hashId)

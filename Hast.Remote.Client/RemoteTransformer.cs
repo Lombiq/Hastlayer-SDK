@@ -17,7 +17,7 @@ namespace Hast.Remote.Client
 {
     public class RemoteTransformer : ITransformer
     {
-        public async Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareDescription> TransformAsync(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
@@ -32,7 +32,7 @@ namespace Hast.Remote.Client
             try
             {
                 var transformationTicket = await apiClient
-                    .RequestTransformation(new TransformationRequest
+                    .RequestTransformationAsync(new TransformationRequest
                     {
                         Assemblies = assemblyContainers,
                         Configuration = apiConfiguration,
@@ -45,7 +45,7 @@ namespace Hast.Remote.Client
                 while (transformationResult == null && waitAttemptIndex < maxResultAttemptCount)
                 {
                     await Task.Delay(waitMilliseconds);
-                    var transformationResultResponse = await apiClient.GetTransformationResult(transformationTicket.Token);
+                    var transformationResultResponse = await apiClient.GetTransformationResultAsync(transformationTicket.Token);
 
                     if (transformationResultResponse.ResponseMessage.IsSuccessStatusCode)
                     {
