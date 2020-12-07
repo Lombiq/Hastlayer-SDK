@@ -3,7 +3,6 @@ using Hast.Console.Attributes;
 using Hast.Console.Extensions;
 using Hast.Console.Options;
 using Hast.Console.Subcommands;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using static System.Console;
@@ -36,7 +35,7 @@ namespace Hast.Console
         {
             var errorList = errors.ToList();
 
-            if (errorList.Any(x => x.Tag == ErrorType.HelpRequestedError)) Environment.Exit(0);
+            if (errorList.Any(x => x.Tag == ErrorType.HelpRequestedError)) return;
 
             if (errorList.Any())
             {

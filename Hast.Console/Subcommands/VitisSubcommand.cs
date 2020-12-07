@@ -56,16 +56,19 @@ namespace Hast.Console.Subcommands
                             example => example));
                     return Task.CompletedTask;
                 case Instruction.Build: return BuildAsync(options);
-                case Instruction.Json: return JsonAsync(options);
-                default:
-                    System.Console.Error.WriteLine(
-                        "The valid options are: {0}",
-                        string.Join(", ", Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant())));
-                    throw new ArgumentOutOfRangeException(options.Instruction);
+                case Instruction.Json:
+                    var input = new FileInfo(options.InputFilePath);
+                    if (!input.Exists)
+                    {
+                        throw new ArgumentException("Please set the -i option to file you wish to convert.");
+                    }
+
+                    return JsonAsync(options, input);
+                default: return ParseFailedAsync(options);
             }
         }
 
-        private async Task BuildAsync(VitisOptions options)
+        private Task BuildAsync(VitisOptions options)
         {
             var hardwareFrameworkPath = options.InputFilePath ?? "HardwareFramework";
             if (!Directory.Exists(hardwareFrameworkPath))
@@ -102,32 +105,44 @@ namespace Hast.Console.Subcommands
                     : Path.Combine("VitisOutput", context.HardwareDescription.TransformationId + ".xclbin"),
             };
 
-            await new VitisHardwareImplementationComposerBuildProvider(BuildLogger)
-                .BuildAsync(context, implementation);
+#pragma warning disable CA2000 // Dispose objects before losing scope
+            var provider = new VitisHardwareImplementationComposerBuildProvider(BuildLogger);
+#pragma warning restore CA2000 // Dispose objects before losing scope
 
-            WriteLine("Build Completed. Find files under: {0}", Path.GetFullPath(implementation.BinaryPath));
+            return provider
+                .BuildAsync(context, implementation)
+                .ThenAsync(() =>
+                {
+                    provider?.Dispose();
+                    WriteLine(
+                        "Build Completed. Find files under: {0}",
+                        Path.GetFullPath(implementation.BinaryPath));
+                });
         }
 
-        private static async Task JsonAsync(VitisOptions options)
+        private static async Task JsonAsync(VitisOptions options, FileInfo input)
         {
-            var input = new FileInfo(options.InputFilePath);
-            if (!input.Exists)
+            if (input.Extension[1..] == "rpt")
             {
-                throw new ArgumentException("Please set the -i option to file you wish to convert.");
+                using var reader = File.OpenText(input.FullName);
+                var report = await XilinxReport.ParseAsync(reader);
+                var json = JsonConvert.SerializeObject(report, Formatting.Indented);
+                await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
             }
-
-            switch (input.Extension)
+            else
             {
-                case ".rpt":
-                    using (var reader = File.OpenText(input.FullName))
-                    {
-                        var report = await XilinxReport.ParseAsync(reader);
-                        var json = JsonConvert.SerializeObject(report, Formatting.Indented);
-                        await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
-                    }
-
-                    break;
+                await System.Console.Error.WriteAsync($"Unknown extension type '{input.Extension}'. Supported: rpt");
             }
+        }
+
+        private static async Task ParseFailedAsync(VitisOptions options)
+        {
+            // That would be confusing.
+#pragma warning disable CA1308 // Normalize strings to uppercase
+            var validOptions = Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant());
+#pragma warning restore CA1308 // Normalize strings to uppercase
+            await System.Console.Error.WriteLineAsync($"The valid options are: {string.Join(", ", validOptions)}");
+            throw new ArgumentOutOfRangeException(options.Instruction);
         }
 
         private enum Instruction
