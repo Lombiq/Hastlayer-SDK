@@ -223,7 +223,7 @@ namespace Hast.Algorithms
             var result = 0UL;
 
             // second-to-top bit
-            var bit = 1UL << BitCount - 2;
+            var bit = 1UL << (BitCount - 2);
 
             while (bit > num)
             {
@@ -253,7 +253,7 @@ namespace Hast.Algorithms
                 if (i == 0)
                 {
                     // Then process it again to get the lowest 16 bits.
-                    if (num > (1UL << BitCount / 2) - 1)
+                    if (num > (1UL << (BitCount / 2)) - 1)
                     {
                         // The remainder 'num' is too large to be shifted left
                         // by 32, so we have to add 1 to result manually and
@@ -262,8 +262,8 @@ namespace Hast.Algorithms
                         //       = num + result^2 - (result + 0.5)^2
                         //       = num - result - 0.5
                         num -= result;
-                        num = (num << BitCount / 2) - 0x_8000_0000UL;
-                        result = (result << BitCount / 2) + 0x_8000_0000UL;
+                        num = (num << (BitCount / 2)) - 0x_8000_0000UL;
+                        result = (result << (BitCount / 2)) + 0x_8000_0000UL;
                     }
                     else
                     {
@@ -271,7 +271,7 @@ namespace Hast.Algorithms
                         result <<= BitCount / 2;
                     }
 
-                    bit = 1UL << BitCount / 2 - 2;
+                    bit = 1UL << ((BitCount / 2) - 2);
                 }
             }
 
@@ -368,7 +368,7 @@ namespace Hast.Algorithms
             // the reverse is also true
             if (opSignsEqual)
             {
-                if (sum < 0 || overflow && xl > 0)
+                if (sum < 0 || (overflow && xl > 0))
                 {
                     return MaxValue();
                 }
@@ -462,7 +462,7 @@ namespace Hast.Algorithms
             var dividerSigned = yl >= 0 ? yl : -yl;
             var divider = (ulong)dividerSigned;
             var quotient = 0UL;
-            var bitPos = BitCount / 2 + 1;
+            var bitPos = (BitCount / 2) + 1;
 
             // If the divider is divisible by 2^n, take advantage of it.
             while ((divider & 0x_F) == 0 && bitPos >= 4)

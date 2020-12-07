@@ -20,7 +20,7 @@ namespace Hast.Algorithms.Random
         {
             uint c = (uint)(State >> 32);
             uint x = (uint)State;
-            State = x * 0x_FFFE_B81BUL + c;
+            State = (x * 0x_FFFE_B81BUL) + c;
             return x ^ c;
         }
     }
