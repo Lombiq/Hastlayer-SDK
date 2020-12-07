@@ -121,11 +121,7 @@ namespace Hast.Remote.Client
         }
 
         private AssemblyContainer GetAssemblyContainers(string path) =>
-            new AssemblyContainer
-            {
-                Name = Path.GetFileNameWithoutExtension(path),
-                FileContent = File.ReadAllBytes(path),
-            };
+            new AssemblyContainer(Path.GetFileNameWithoutExtension(path), File.ReadAllBytes(path));
 
     }
 }
