@@ -34,10 +34,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             var posit32BitsArray = CreateTestPosit32BitsArray();
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
-            var result = positCalculator.CalculateFusedSum(posit32BitsArray);
+            _ = positCalculator.CalculateFusedSum(posit32BitsArray);
 
             var sw = Stopwatch.StartNew();
-            result = positCalculator.CalculateFusedSum(posit32BitsArray);
+            float result = positCalculator.CalculateFusedSum(posit32BitsArray);
             sw.Stop();
 
             Console.WriteLine("Result of Fused addition of posits in array: " + result);

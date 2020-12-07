@@ -10,6 +10,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class Posit32CalculatorSampleRunner : ISampleRunner
     {
+        private const string Elapsed = "Elapsed: ";
+        private const string Milliseconds = "ms";
+
         public void Configure(HardwareGenerationConfiguration configuration) => configuration.AddHardwareEntryPointType<Posit32Calculator>();
         // Use the below config if you just want to transform only ParallelizedCalculateIntegerSumUpToNumbers to hardware.
         //// configuration.AddHardwareEntryPointMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers((SimpleMemory)null));
@@ -52,7 +55,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             sw.Stop();
 
             Console.WriteLine("Result of counting up to 100000: " + integerSumUpToNumber);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(Elapsed + sw.ElapsedMilliseconds + Milliseconds);
 
             Console.WriteLine();
 
@@ -62,7 +65,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             sw.Stop();
 
             Console.WriteLine("Result of power of real number: " + powerOfReal);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(Elapsed + sw.ElapsedMilliseconds + Milliseconds);
 
             Console.WriteLine();
 
@@ -78,7 +81,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             sw.Stop();
 
             Console.WriteLine("Result of counting up to ~100000 parallelized: " + string.Join(", ", integerSumsUpToNumbers));
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(Elapsed + sw.ElapsedMilliseconds + Milliseconds);
 
             Console.WriteLine();
 
@@ -95,7 +98,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             sw.Stop();
 
             Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(Elapsed + sw.ElapsedMilliseconds + Milliseconds);
 
             Console.WriteLine();
         }

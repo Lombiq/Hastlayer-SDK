@@ -10,7 +10,7 @@ namespace Hast.Samples.Consumer.SampleRunners
     {
         public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<ImageContrastModifier>();
-        // ImageFilter is not parallelized, so not including it not to take away FPGA resources from  ImageContrastModifier.configuration.AddHardwareEntryPointType<ImageFilter>();
+        //// ImageFilter is not parallelized, so not including it not to take away FPGA resources from ImageContrastModifier.configuration.AddHardwareEntryPointType<ImageFilter>();
 
         public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {

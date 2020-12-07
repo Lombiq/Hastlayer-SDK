@@ -1,14 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Hast.Synthesis.Abstractions;
-using Hast.Transformer.Abstractions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -48,10 +41,10 @@ namespace Hast.Samples.Consumer.SampleRunners
                 numbers[i] = 10_000_000 + (i % 2 == 0 ? -1 : 1);
             }
 
-            var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
+            _ = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
+            _ = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
             sw.Stop();
             Console.WriteLine("Elapsed ms: " + sw.ElapsedMilliseconds);
         }

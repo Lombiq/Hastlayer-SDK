@@ -29,7 +29,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             // The Fibonacci sample is deactivated because it gives wrong results on hardware.
             // 233
-            // var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(13, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            //// var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(13, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
     }
 }

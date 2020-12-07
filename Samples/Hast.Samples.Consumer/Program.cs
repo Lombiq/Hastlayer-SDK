@@ -22,40 +22,40 @@ namespace Hast.Samples.Consumer
     internal static class Configuration
     {
         /// <summary>
-        /// Which supported hardware device to use? If you leave this empty the first one will be used. If you're
-        /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for
+        /// Gets or sets which supported hardware device to use? If you leave this empty the first one will be used. If
+        /// you're testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for
         /// high-performance local or cloud FPGAs see the docs.
         /// You can also provide this in the -device command line argument.
         /// </summary>
-        public static string DeviceName = "Nexys A7";
+        public static string DeviceName { get; set; } = "Nexys A7";
 
         /// <summary>
-        /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
-        /// name of your app.
+        /// Gets or sets the name of the app. If you're running Hastlayer in the Client flavor, you need to configure
+        /// your credentials here.
         /// You can also provide this in the -appname command line argument.
         /// </summary>
-        public static string AppName = "appname";
+        public static string AppName { get; set; } = "appname";
 
         /// <summary>
-        /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
-        /// app secret corresponding to of your app.
+        /// Gets or sets the app secret corresponding to of your app. If you're running Hastlayer in the Client flavor,
+        /// you need to configure your credentials here.
         /// You can also provide this in the -appsecret command line argument.
         /// </summary>
-        public static string AppSecret = "appsecret";
+        public static string AppSecret { get; set; } = "appsecret";
 
         /// <summary>
-        /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not
-        /// up-to-date enough and shouldn't be really taken as good examples (check out the other ones).
+        /// Gets or sets which sample algorithm to transform and run. Choose one. Currently the GenomeMatcher sample is
+        /// not up-to-date enough and shouldn't be really taken as good example (check out the other ones).
         /// You can also provide this in the -sample command line argument.
         /// </summary>
-        public static Sample SampleToRun = Sample.Loopback;
+        public static Sample SampleToRun { get; set; } = Sample.Loopback;
 
         /// <summary>
-        /// Specify a path here where the hardware framework is located. The file describing the hardware to be
+        /// Gets or sets the path where the hardware framework is located. The file describing the hardware to be
         /// generated will be saved there as well as anything else necessary. If the path is relative (like the
         /// default) then the file will be saved along this project's executable in the bin output directory.
         /// </summary>
-        public static string HardwareFrameworkPath = "HardwareFramework";
+        public static string HardwareFrameworkPath { get; set; } = "HardwareFramework";
     }
 
     internal static class Program
@@ -73,7 +73,7 @@ namespace Hast.Samples.Consumer
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
             // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
             // transformation. In most cases the flavor defaults to the one you need.
-            // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
+            //// var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
             var hastlayerConfiguration = new HastlayerConfiguration();
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
@@ -82,7 +82,7 @@ namespace Hast.Samples.Consumer
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
                 var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
@@ -99,35 +99,24 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
             };
 
-            // A little helper for later.
-            var argsList = (IList<string>)args;
-            string GetArgument(string name)
-            {
-                name = "-" + name;
-                int index = argsList.IndexOf(name) + 1;
-                if (index <= 0) return null;
-                if (index == args.Length) index--; // if it's the last element just return the switch.
-                return args[index];
-            }
-
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
             var devices = hastlayer.GetSupportedDevices()?.ToList();
-            if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
+            if (devices == null || !devices.Any()) throw new InvalidOperationException("No devices are available!");
 
             // Let's just use the first one that is available unless it's specified.
             if (string.IsNullOrEmpty(Configuration.DeviceName)) Configuration.DeviceName = devices.First().Name;
-            var targetDeviceName = GetArgument("device") ?? Configuration.DeviceName;
+            var targetDeviceName = GetArgument(args, "device") ?? Configuration.DeviceName;
             var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
-            if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
+            if (selectedDevice == null) throw new InvalidOperationException($"Target device '{targetDeviceName}' not found!");
 
             var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, Configuration.HardwareFrameworkPath);
             var proxyConfiguration = new ProxyGenerationConfiguration();
-            if (argsList.Contains("-verify")) proxyConfiguration.VerifyHardwareResults = true;
+            if (args.Contains("-verify")) proxyConfiguration.VerifyHardwareResults = true;
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
             var remoteClientConfiguration = configuration.RemoteClientConfiguration();
-            remoteClientConfiguration.AppName = GetArgument("appname") ?? Configuration.AppName;
-            remoteClientConfiguration.AppSecret = GetArgument("appsecret") ?? Configuration.AppSecret;
+            remoteClientConfiguration.AppName = GetArgument(args, "appname") ?? Configuration.AppName;
+            remoteClientConfiguration.AppSecret = GetArgument(args, "appsecret") ?? Configuration.AppSecret;
             if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
                 remoteClientConfiguration.AppSecret == "appsecret")
             {
@@ -138,42 +127,11 @@ namespace Hast.Samples.Consumer
             // If the sample was selected in the command line use that, or otherwise the default.
             Configuration.SampleToRun = (Sample)Enum.Parse(
                 typeof(Sample),
-                GetArgument("sample") ?? Configuration.SampleToRun.ToString(),
+                GetArgument(args, "sample") ?? Configuration.SampleToRun.ToString(),
                 ignoreCase: true);
 
             // Letting the configuration of samples run. Check out those methods too!
-            ISampleRunner sampleRunner = Configuration.SampleToRun switch
-            {
-                Sample.Fix64Calculator => new Fix64CalculatorSampleRunner(),
-                Sample.FSharpParallelAlgorithm => new FSharpParallelAlgorithmSampleRunner(),
-                Sample.GenomeMatcher => new GenomeMatcherSampleRunner(),
-                Sample.ParallelAlgorithm => new ParallelAlgorithmSampleRunner(),
-                Sample.ImageProcessingAlgorithms => new ImageProcessingAlgorithmsSampleRunner(),
-                Sample.Loopback => new LoopbackSampleRunner(),
-                Sample.MemoryTest => new MemoryTestSampleRunner(),
-                Sample.MonteCarloPiEstimator => new MonteCarloPiEstimatorSampleRunner(),
-                Sample.ObjectOrientedShowcase => new ObjectOrientedShowcaseSampleRunner(),
-                Sample.PositCalculator => new PositCalculatorSampleRunner(),
-                Sample.Posit32AdvancedCalculator => new Posit32AdvancedCalculatorSampleRunner(),
-                Sample.Posit32Calculator => new Posit32CalculatorSampleRunner(),
-                Sample.Posit32FusedCalculator => new Posit32FusedCalculatorSampleRunner(),
-                Sample.PrimeCalculator => new PrimeCalculatorSampleRunner(),
-                Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
-                Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
-                Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'."),
-            };
-            sampleRunner.Configure(configuration);
-            configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
-
-            if (GetArgument("replace") is { } replacement)
-            {
-                var parts = replacement.Split('=', 2);
-                configuration.GetOrAddReplacements()[parts[0]] = parts[1];
-            }
-
-            // The generated VHDL code will contain debug-level information, though it will be slower to create.
-            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+            var sampleRunner = ConfigureSamples(configuration, args);
 
             Console.WriteLine("Hardware generation starts.");
 
@@ -204,11 +162,58 @@ namespace Hast.Samples.Consumer
                                   "cause the hardware implementation to produce incorrect results.\n");
             }
 
-            if (GetArgument("build") != null) Environment.Exit(0);
+            // With the "-build" argument you won't attempt to run the app. Handy if you are just preparing binaries for
+            // a different host.
+            if (GetArgument(args, "build") != null) return;
 
             Console.WriteLine("Starting hardware execution.");
+            await RunSamplesAsync(sampleRunner, hastlayer, hardwareRepresentation, proxyConfiguration);
+        }
 
-            // Running samples.
+        private static ISampleRunner ConfigureSamples(HardwareGenerationConfiguration configuration, IList<string> args)
+        {
+            ISampleRunner sampleRunner = Configuration.SampleToRun switch
+            {
+                Sample.Fix64Calculator => new Fix64CalculatorSampleRunner(),
+                Sample.FSharpParallelAlgorithm => new FSharpParallelAlgorithmSampleRunner(),
+                Sample.GenomeMatcher => new GenomeMatcherSampleRunner(),
+                Sample.ParallelAlgorithm => new ParallelAlgorithmSampleRunner(),
+                Sample.ImageProcessingAlgorithms => new ImageProcessingAlgorithmsSampleRunner(),
+                Sample.Loopback => new LoopbackSampleRunner(),
+                Sample.MemoryTest => new MemoryTestSampleRunner(),
+                Sample.MonteCarloPiEstimator => new MonteCarloPiEstimatorSampleRunner(),
+                Sample.ObjectOrientedShowcase => new ObjectOrientedShowcaseSampleRunner(),
+                Sample.PositCalculator => new PositCalculatorSampleRunner(),
+                Sample.Posit32AdvancedCalculator => new Posit32AdvancedCalculatorSampleRunner(),
+                Sample.Posit32Calculator => new Posit32CalculatorSampleRunner(),
+                Sample.Posit32FusedCalculator => new Posit32FusedCalculatorSampleRunner(),
+                Sample.PrimeCalculator => new PrimeCalculatorSampleRunner(),
+                Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
+                Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
+                Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
+                _ => throw new ArgumentException($"Unknown sample '{Configuration.SampleToRun}'."),
+            };
+            sampleRunner.Configure(configuration);
+            configuration.Label = GetArgument(args, "name") ?? Configuration.SampleToRun.ToString();
+
+            if (GetArgument(args, "replace") is { } replacement)
+            {
+                var parts = replacement.Split('=', 2);
+                configuration.GetOrAddReplacements()[parts[0]] = parts[1];
+            }
+
+            // The generated VHDL code will contain debug-level information, though it will be slower to create.
+            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+
+            return sampleRunner;
+        }
+
+        private static async Task RunSamplesAsync(
+            ISampleRunner sampleRunner,
+            IHastlayer hastlayer,
+            IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration proxyConfiguration)
+        {
             try
             {
                 await sampleRunner.RunAsync(hastlayer, hardwareRepresentation, proxyConfiguration);
@@ -234,6 +239,15 @@ namespace Hast.Samples.Consumer
             }
         }
 
+        private static string GetArgument(IList<string> argsList, string name)
+        {
+            name = "-" + name;
+            int index = argsList.IndexOf(name) + 1;
+            if (index <= 0) return null;
+            if (index == argsList.Count) index--; // if it's the last element just return the switch.
+            return argsList[index];
+        }
+
         private static async Task Main(string[] args)
         {
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
@@ -243,7 +257,7 @@ namespace Hast.Samples.Consumer
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex);
+                await Console.Error.WriteLineAsync(ex.ToString());
             }
         }
     }
