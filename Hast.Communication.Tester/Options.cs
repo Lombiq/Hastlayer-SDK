@@ -29,7 +29,7 @@ namespace Hast.Communication.Tester
         }
 
         [Option('m', "member-id", HelpText = "The simulated MemberId.")]
-        public int MemberId { get; set; } = 0;
+        public int MemberId { get; set; }
 
         [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile, Bitmap).")]
         public PayloadType PayloadType { get; set; } = PayloadType.ConstantIntOne;
@@ -60,7 +60,7 @@ namespace Hast.Communication.Tester
             'a',
             "action",
             HelpText = "What sample to run on the reference memory (e.g. MemoryTest). Note that the given sample should have a method with the exact signature \"Run(SimpleMemory memory)\".")]
-        public string ReferenceAction { get; set; } = null;
+        public string ReferenceAction { get; set; }
 
         [Option('p', "prepend", HelpText = "Prepend a list of integers to the SimpleMemory.")]
         public string Prepend { get; set; }

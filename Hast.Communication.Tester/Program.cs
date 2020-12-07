@@ -36,7 +36,7 @@ namespace Hast.Communication.Tester
         private static void OnServiceGeneration(object sender, IServiceCollection services) =>
             services.RemoveImplementations<ITransformer>();
 
-        private static async Task MainTask(IServiceProvider provider)
+        private static async Task MainTaskAsync(IServiceProvider provider)
         {
             var hastlayer = provider.GetService<IHastlayer>();
 
@@ -89,11 +89,11 @@ namespace Hast.Communication.Tester
                 referenceMemory = SimpleMemory.CreateSoftwareMemory(memory.CellCount);
                 if (!string.IsNullOrEmpty(CommandLineOptions.ReferenceAction))
                 {
-                    string name = CommandLineOptions.ReferenceAction.ToLower();
+                    string name = CommandLineOptions.ReferenceAction.ToUpperInvariant();
                     var type = typeof(MemoryTest)
                         .Assembly
                         .GetTypes()
-                        .Single(x => x.Name.ToLower() == name &&
+                        .Single(x => x.Name.ToUpperInvariant() == name &&
                                      x.GetConstructor(Array.Empty<Type>()) != null &&
                                      GetReferenceAction(x) != null);
                     var sample = type.GetConstructor(Array.Empty<Type>())?.Invoke(Array.Empty<object>());
@@ -159,7 +159,13 @@ namespace Hast.Communication.Tester
                 case PayloadType.Random:
                     var random = new Random();
                     for (int i = prependCells.Length; i < memory.CellCount; i++)
+                    {
+                        // Doesn't matter, it's not for crypto.
+#pragma warning disable SCS0005 // Weak random generator
                         memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
+#pragma warning restore SCS0005 // Weak random generator
+                    }
+
                     break;
                 case PayloadType.BinaryFile:
                     accessor.Load(inputFileName, memory.PrefixCellCount);
@@ -268,7 +274,7 @@ namespace Hast.Communication.Tester
             {
                 for (int j = 0; j < HexDumpBlocksPerLine && i + j < memory.CellCount; j++)
                 {
-                    writer.Write("{0}{1:X8}", j == 0 ? "" : " ", memory.ReadUInt32(i + j));
+                    writer.Write("{0}{1:X8}", j == 0 ? string.Empty : " ", memory.ReadUInt32(i + j));
                 }
 
                 writer.WriteLine();
@@ -284,9 +290,13 @@ namespace Hast.Communication.Tester
 
                 var hastlayerConfiguration = new HastlayerConfiguration();
                 hastlayerConfiguration.OnServiceRegistration += OnServiceGeneration;
-                _hastlayer = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
 
-                _hastlayer.RunAsync<IServiceProvider>(MainTask).Wait();
+                // It's not in the interface because the feature is for internal use only.
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+                _hastlayer = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
+
+                _hastlayer.RunAsync<IServiceProvider>(MainTaskAsync).Wait();
             }
             catch (AggregateException ex)
             {

@@ -16,12 +16,16 @@ namespace Hast.Communication.Tester
             string communicationChannelName,
             Dictionary<string, object> customConfiguration = null)
         {
-            var assemblies = new[] { Assembly.GetExecutingAssembly() };
+            var assemblies = new[] { typeof(Program).Assembly };
             var configuration = new HardwareGenerationConfiguration(deviceName, null)
             {
                 EnableHardwareTransformation = false,
             };
+
+            // This runs synchronously anyway.
+#pragma warning disable VSTHRD104 // Offer async methods
             HardwareRepresentation = hastlayer.GenerateHardwareAsync(assemblies, configuration).Result;
+#pragma warning restore VSTHRD104 // Offer async methods
 
             ProxyGenerationConfiguration = new ProxyGenerationConfiguration
             {
