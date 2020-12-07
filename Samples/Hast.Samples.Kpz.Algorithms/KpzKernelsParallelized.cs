@@ -27,19 +27,19 @@ namespace Hast.Samples.Kpz.Algorithms
     //      The input KPZ nodes as 32 bit numbers, with bit 0 as dx and bit 1 as dy.
 
     /// <summary>
-    /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, with a parallelized architecture
+    /// <para>This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, with a parallelized architecture
     /// similar to GPUs. It makes use of a given number of Tasks as parallel execution engines
     /// (see <see cref="ReschedulesPerTaskIteration" />).
     ///
-    /// For each iteration:
+    /// For each iteration:</para>
     /// <list type="bullet">
-    /// <item>it loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks,</item>
-    /// <item>it runs the algorithm on these local tables,</item>
-    /// <item>it loads back the local tables into the original grid.</item>
+    /// <item><description>it loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks,</description></item>
+    /// <item><description>it runs the algorithm on these local tables,</description></item>
+    /// <item><description>it loads back the local tables into the original grid.</description></item>
     /// </list>
     ///
-    /// It changes the offset of the local grids within the global grid a given number of times for each iteration
-    /// (see <see cref="ReschedulesPerTaskIteration"/>).
+    /// <para>It changes the offset of the local grids within the global grid a given number of times for each iteration
+    /// (see <see cref="ReschedulesPerTaskIteration"/>).</para>
     /// </summary>
     public class KpzKernelsParallelizedInterface
     {

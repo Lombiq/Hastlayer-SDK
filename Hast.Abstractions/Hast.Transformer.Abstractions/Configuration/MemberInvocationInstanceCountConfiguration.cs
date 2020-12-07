@@ -30,6 +30,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         public int MaxRecursionDepth { get; set; }
 
         private int _maxDegreeOfParallelism;
+
         /// <summary>
         /// Gets or sets the maximal degree of parallelism that will be attempted to build into the generated hardware
         /// when constructs suitable for hardware-level parallelisation are found.

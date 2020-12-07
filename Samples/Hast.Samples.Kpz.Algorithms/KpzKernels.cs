@@ -282,28 +282,28 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <param name="kernels"></param>
         /// <param name="configuration"></param>
         /// <param name="hostGrid">
-        ///     This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.
+        ///     <para>This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.</para>
         /// </param>
         /// <param name="pushToFpga">
-        ///     If this parameter is false, the FPGA will work on the grid currently available in it,
-        ///     instead of the grid in the <see cref="hostGrid"/> parameter.
+        ///     <para>If this parameter is false, the FPGA will work on the grid currently available in it,
+        ///     instead of the grid in the <see cref="hostGrid"/> parameter.</para>
         /// </param>
         /// <param name="testMode">
-        ///     does several things:
+        ///     <para>does several things:</para>
         ///     <list type="bullet">
-        ///         <item>
+        ///         <item><description>
         ///             if it is true, <see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the cells
         ///             if it finds an adequate place,
-        ///         </item>
-        ///         <item>
+        ///         </description></item>
+        ///         <item><description>
         ///             it also does only a single poke, then sends the grid back to the host so that the algorithm
         ///             can be analyzed in the step-by-step window.
-        ///         </item>
+        ///         </description></item>
         ///     </list>
         /// </param>
-        /// <param name="randomSeed1">is a random seed for the algorithm.</param>
-        /// <param name="randomSeed2">is a random seed for the algorithm.</param>
-        /// <param name="numberOfIterations">is the number of iterations to perform.</param>
+        /// <param name="randomSeed1"><para>is a random seed for the algorithm.</para></param>
+        /// <param name="randomSeed2"><para>is a random seed for the algorithm.</para></param>
+        /// <param name="numberOfIterations"><para>is the number of iterations to perform.</para></param>
         /// <param name="hastlayer"></param>
         public static void DoIterationsWrapper(
             this KpzKernelsInterface kernels,
