@@ -2,6 +2,10 @@ using Hast.Layer;
 
 namespace Hast.Synthesis.Abstractions
 {
+    /// <summary>
+    /// The required data for <see cref="IHardwareImplementationComposer"/> and
+    /// <see cref="IHardwareImplementationComposerBuildProvider"/>.
+    /// </summary>
     public interface IHardwareImplementationCompositionContext
     {
         /// <summary>
