@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace Hast.Layer
 {
+    /// <summary>
+    /// Configuration for <c>IHastlayer.GenerateProxyAsync</c>.
+    /// </summary>
     public interface IProxyGenerationConfiguration
     {
         /// <summary>

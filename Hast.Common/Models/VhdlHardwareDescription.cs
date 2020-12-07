@@ -12,35 +12,31 @@ namespace Hast.Common.Models
     {
         public const string LanguageName = "VHDL";
 
-        [JsonProperty] public string TransformationId { get; set; }
+        public string TransformationId { get; set; }
 
         [JsonProperty]
         public string Language => LanguageName;
 
-        [JsonProperty]
         public string VhdlSource { get; set; }
 
-        [JsonProperty]
         public string XdcSource { get; set; }
 
-        [JsonProperty]
         public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; set; }
 
-        [JsonProperty]
         public IEnumerable<ITransformationWarning> Warnings { get; set; }
 
-        public async Task Serialize(Stream stream)
+        public Task SerializeAsync(Stream stream)
         {
             if (string.IsNullOrEmpty(VhdlSource)) throw new InvalidOperationException("There is no VHDL source set.");
 
             using var writer = new StreamWriter(stream);
-            await writer.WriteAsync(JsonConvert.SerializeObject(
+            return writer.WriteAsync(JsonConvert.SerializeObject(
                 this,
                 Formatting.None,
                 GetJsonSerializerSettings()));
         }
 
-        public static async Task<VhdlHardwareDescription> Deserialize(Stream stream)
+        public static async Task<VhdlHardwareDescription> DeserializeAsync(Stream stream)
         {
             using var reader = new StreamReader(stream);
             return JsonConvert.DeserializeObject<VhdlHardwareDescription>(
@@ -51,7 +47,7 @@ namespace Hast.Common.Models
         private static JsonSerializerSettings GetJsonSerializerSettings() =>
             new JsonSerializerSettings
             {
-                TypeNameHandling = TypeNameHandling.Auto,
+                TypeNameHandling = TypeNameHandling.None,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new PrivateSetterContractResolver(),
             };

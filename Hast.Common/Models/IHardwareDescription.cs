@@ -1,3 +1,4 @@
+using Hast.Common.Models;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -53,9 +54,7 @@ namespace Hast.Layer
         /// <summary>
         /// Serializes the hardware description instance into a storage format.
         /// </summary>
-        /// <remarks><para>To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.</para></remarks>
-        /// <param name="stream"></param>
-        /// <returns></returns>
-        Task Serialize(Stream stream);
+        /// <remarks><para>To deserialize you'll need a concrete implementation like <see cref="VhdlHardwareDescription"/>.</para></remarks>
+        Task SerializeAsync(Stream stream);
     }
 }

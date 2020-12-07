@@ -32,7 +32,7 @@ namespace Hast.Layer.EmptyRepresentationFactories
             public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings) =>
                 HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
 
-            public Task Serialize(Stream stream) => throw new System.NotSupportedException();
+            public Task SerializeAsync(Stream stream) => throw new System.NotSupportedException();
         }
     }
 }

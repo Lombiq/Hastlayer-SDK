@@ -7,7 +7,7 @@ namespace System
         /// <summary>
         /// Turns a camelCase or PascalCase token into snake_Case.
         /// </summary>
-        /// <param name="str">The input in camelCase or PascalCase.</param>
+        /// <param name="input">The input in camelCase or PascalCase.</param>
         /// <returns>
         /// The input converted to snake_Case. It doesn't alter case so you can call either ToUpper or ToLower without
         /// any additional penalties.

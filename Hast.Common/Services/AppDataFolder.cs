@@ -15,7 +15,10 @@ namespace Hast.Common.Services
             {
                 if (_assemblyDirectory == null)
                 {
+                    // It's not guaranteed which one is the executing assembly.
+#pragma warning disable S3902 // "Assembly.GetExecutingAssembly" should not be called
                     string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+#pragma warning restore S3902 // "Assembly.GetExecutingAssembly" should not be called
                     var uri = new UriBuilder(codeBase);
                     string path = Uri.UnescapeDataString(uri.Path);
                     _assemblyDirectory = Path.GetDirectoryName(path);
@@ -42,6 +45,10 @@ namespace Hast.Common.Services
         public bool FileExists(string fileName) => File.Exists(MapPath(fileName));
         public FileStream CreateFile(string fileName) => File.Create(MapPath(fileName));
         public FileStream OpenFile(string fileName) => File.OpenRead(MapPath(fileName));
-        public void DeleteFile(string fileName) => File.Delete(MapPath(fileName));
+        public void DeleteFile(string fileName)
+        {
+            var path = MapPath(fileName);
+            if (File.Exists(path)) File.Delete(path);
+        }
     }
 }

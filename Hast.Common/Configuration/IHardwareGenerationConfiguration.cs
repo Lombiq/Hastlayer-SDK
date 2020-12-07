@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace Hast.Layer
 {
+    /// <summary>
+    /// Configuration for <c>IHastlayer.GenerateHardwareAsync</c>.
+    /// </summary>
     public interface IHardwareGenerationConfiguration
     {
         /// <summary>

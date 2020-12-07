@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
 {
-    [IDependencyInitializer(nameof(InitializeService))]
+    [DependencyInitializer(nameof(InitializeService))]
     public sealed class BinaryOpenCl : IBinaryOpenCl
     {
         #region Fields and properties

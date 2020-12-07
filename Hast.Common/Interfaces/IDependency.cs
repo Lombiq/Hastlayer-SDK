@@ -30,7 +30,7 @@ namespace Hast.Common.Interfaces
     /// service is added to the <see cref="IServiceCollection"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class IDependencyInitializerAttribute : Attribute
+    public class DependencyInitializerAttribute : Attribute
     {
         /// <summary>
         /// Gets the name of the public static method which will be invoked.
@@ -40,9 +40,6 @@ namespace Hast.Common.Interfaces
         /// <param name="memberName">
         /// The name of a public static method that takes one <see cref="IServiceCollection" /> argument and returns void.
         /// </param>
-        public IDependencyInitializerAttribute(string memberName)
-        {
-            MemberName = memberName;
-        }
+        public DependencyInitializerAttribute(string memberName) => MemberName = memberName;
     }
 }

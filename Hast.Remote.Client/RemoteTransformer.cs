@@ -92,7 +92,7 @@ namespace Hast.Remote.Client
                 }
 
                 using var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(hardwareDescription.SerializedHardwareDescription));
-                return await VhdlHardwareDescription.Deserialize(memoryStream);
+                return await VhdlHardwareDescription.DeserializeAsync(memoryStream);
             }
             catch (ApiException ex)
             {

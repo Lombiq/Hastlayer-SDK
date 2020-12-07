@@ -73,7 +73,7 @@ namespace Hast.Layer
         public bool EnableHardwareImplementationComposition { get; set; } = true;
 
         /// <summary>
-        /// Constructs a new <see cref="HardwareGenerationConfiguration"/> object.
+        /// Initializes a new instance of the <see cref="HardwareGenerationConfiguration"/> class.
         /// </summary>
         /// <param name="deviceName">
         /// The name of the FPGA device (board) to transform for. Device-specific configurations are determined by

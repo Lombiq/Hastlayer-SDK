@@ -7,11 +7,12 @@ namespace Hast.Common.Helpers
 {
     public static class Sha2456Helper
     {
-        private static Lazy<string> EmptyLazy = new Lazy<string>(() => ComputeHash(string.Empty));
+        private static readonly Lazy<string> _emptyLazy = new Lazy<string>(() => ComputeHash(string.Empty));
 
         public static string ComputeHash(string text)
         {
-            var hashedIdBytes = new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(text));
+            using var sha256 = new SHA256Managed();
+            var hashedIdBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(text));
 
             var stringBuilder = new StringBuilder();
 
@@ -23,6 +24,6 @@ namespace Hast.Common.Helpers
             return stringBuilder.ToString();
         }
 
-        public static string Empty() => EmptyLazy.Value;
+        public static string Empty() => _emptyLazy.Value;
     }
 }

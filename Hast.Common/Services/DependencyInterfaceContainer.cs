@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -13,13 +13,18 @@ namespace Hast.Common.Services
     {
         // This is necessary because .Net Core Dependency Injection does not resolve Lazy<T> out of the box.
         // https://stackoverflow.com/questions/44934511/does-net-core-dependency-injection-support-lazyt
-        internal class Lazier<T> : Lazy<T> where T : class
+        internal class Lazier<T> : Lazy<T>
+            where T : class
         {
-            public Lazier(IServiceProvider provider) : base(() => provider.GetRequiredService<T>()) { }
+            public Lazier(IServiceProvider provider)
+                : base(() => provider.GetRequiredService<T>()) { }
         }
 
         public static IEnumerable<Assembly> LoadAssemblies(IEnumerable<string> paths) =>
+            // That would cause duplicate classes.
+#pragma warning disable S3885 // "Assembly.Load" should be used
             paths.Select(x => Assembly.LoadFrom(Path.GetFullPath(x)));
+#pragma warning restore S3885 // "Assembly.Load" should be used
 
         public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies = null)
         {
@@ -32,44 +37,7 @@ namespace Hast.Common.Services
                 .Where(t => t.IsClass && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
                 .Distinct();
 
-            foreach (var implementationType in types)
-            {
-                var serviceTypes = new List<Type>();
-                var lifetime = ServiceLifetime.Scoped;
-                foreach (var implementedInterfaces in implementationType.GetInterfaces())
-                {
-                    if (!implementedInterfaces.IsPublic || implementedInterfaces.Name == nameof(IDependency))
-                    {
-                        continue;
-                    }
-
-                    if (implementedInterfaces.Name == nameof(ISingletonDependency))
-                    {
-                        lifetime = ServiceLifetime.Singleton;
-                    }
-                    else if (implementedInterfaces.Name == nameof(ITransientDependency))
-                    {
-                        lifetime = ServiceLifetime.Transient;
-                    }
-                    else
-                    {
-                        serviceTypes.Add(implementedInterfaces);
-                    }
-
-                    var initializerName = implementationType.GetCustomAttribute<IDependencyInitializerAttribute>()?.MemberName;
-                    if (!string.IsNullOrEmpty(initializerName))
-                    {
-                        var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static);
-                        if (method is null) throw new ArgumentException($"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
-                        method.Invoke(null, new object[] { services });
-                    }
-                }
-
-                foreach (var serviceType in serviceTypes)
-                {
-                    services.Add(new ServiceDescriptor(serviceType, implementationType, lifetime));
-                }
-            }
+            foreach (var implementationType in types) RegisterType(services, implementationType);
         }
 
         public static IServiceCollection AddExternalHastlayerDependencies(this IServiceCollection services)
@@ -86,6 +54,45 @@ namespace Hast.Common.Services
         {
             RegisterIDependencies(services, assemblies);
             return AddExternalHastlayerDependencies(services);
+        }
+
+        private static void RegisterType(IServiceCollection services, Type implementationType)
+        {
+            var serviceTypes = new List<Type>();
+            var lifetime = ServiceLifetime.Scoped;
+            foreach (var implementedInterfaces in implementationType.GetInterfaces())
+            {
+                if (!implementedInterfaces.IsPublic || implementedInterfaces.Name == nameof(IDependency))
+                {
+                    continue;
+                }
+
+                switch (implementedInterfaces.Name)
+                {
+                    case nameof(ISingletonDependency):
+                        lifetime = ServiceLifetime.Singleton;
+                        break;
+                    case nameof(ITransientDependency):
+                        lifetime = ServiceLifetime.Singleton;
+                        break;
+                    default:
+                        serviceTypes.Add(implementedInterfaces);
+                        break;
+                }
+
+                var initializerName = implementationType.GetCustomAttribute<DependencyInitializerAttribute>()?.MemberName;
+                if (!string.IsNullOrEmpty(initializerName))
+                {
+                    var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static) ??
+                        throw new ArgumentException($"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
+                    method.Invoke(null, new object[] { services });
+                }
+            }
+
+            foreach (var serviceType in serviceTypes)
+            {
+                services.Add(new ServiceDescriptor(serviceType, implementationType, lifetime));
+            }
         }
     }
 }

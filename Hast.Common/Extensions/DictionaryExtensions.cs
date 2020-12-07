@@ -24,7 +24,9 @@ namespace System.Collections.Generic
                 return (T)config;
             }
 
-            return (T)(customConfiguration[key] = new T());
+            object instance = new T();
+            customConfiguration[key] = instance;
+            return (T)instance;
         }
 
         public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> pair, out TKey key, out TValue value)
