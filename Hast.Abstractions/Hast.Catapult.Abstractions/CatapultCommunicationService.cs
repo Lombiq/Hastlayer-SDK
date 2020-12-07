@@ -13,6 +13,9 @@ namespace Hast.Catapult.Abstractions
 {
     public class CatapultCommunicationService : CommunicationServiceBase
     {
+        private const int HardwareCellMultiplier = 16;
+        private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
+
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
@@ -23,7 +26,8 @@ namespace Hast.Catapult.Abstractions
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             ILogger<CatapultCommunicationService> logger,
-            ILogger<CatapultLibrary> catapultLibraryLogger) : base(logger)
+            ILogger<CatapultLibrary> catapultLibraryLogger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
@@ -34,9 +38,6 @@ namespace Hast.Catapult.Abstractions
             ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
         #region Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
-        private const int HardwareCellMultiplier = 16;
-        private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
-
         private static Memory<byte> HotfixInput(Memory<byte> memory)
         {
             if (memory.Length <= SimpleMemory.MemoryCellSizeBytes) return memory;
@@ -51,7 +52,7 @@ namespace Hast.Catapult.Abstractions
         private static Memory<byte> HotfixOutput(Memory<byte> memory)
         {
             var memoryBody = memory[OutputHeaderSizes.Total..];
-            var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + memoryBody.Length / HardwareCellMultiplier);
+            var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + (memoryBody.Length / HardwareCellMultiplier));
             var softwareCellsBody = softwareCells[OutputHeaderSizes.Total..];
 
             // first one is already at the right place
@@ -103,7 +104,7 @@ namespace Hast.Catapult.Abstractions
             var dma = new SimpleMemoryAccessor(simpleMemory);
 
             // Sending the data.
-            var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
+            var task = lib.AssignJobAsync(memberId, HotfixInput(dma.Get()));
             var outputBuffer = await task;
 
             // Processing the response.

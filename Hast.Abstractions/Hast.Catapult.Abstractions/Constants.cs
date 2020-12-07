@@ -41,15 +41,16 @@ namespace Hast.Catapult.Abstractions
         public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1_000;
         public const string ErrorLabels = "hr:min:sec:ms,cycles,pid,tid,filename,line,errmsg,";
         public const string DefaultVersionManifestFile = "FPGADefaultVersionManifest.ini";
-        public const string VersionDefinitionsFile = "FPGAVersionDefinitions.ini";
-        public static readonly Version LibraryVersion = new Version(3, 40);
+        public const string VersionDefinitionsFilePath = "FPGAVersionDefinitions.ini";
         public const int SoftResetRole = 14;
         public const double WaitOutputBufferTimeoutDefaultSeconds = 10.0;
         public const int PcieHipNumber = 0;
         public const int MaxBufferSizeBytes = 65_536;
+        public static readonly Version LibraryVersion = new Version(3, 40);
         #endregion
 
         #region Grouped constants from header files
+
         /// <summary>
         /// The return value of the functions in the native Catapult FPGA library.
         /// It indicates the success or error state of the function call.
@@ -144,7 +145,6 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// The type flags used in the logger function.
         /// </summary>
-        [Flags]
         public enum Log
         {
             None = 0x_00,
@@ -161,10 +161,12 @@ namespace Hast.Catapult.Abstractions
             public const uint None = 0x_000_0000u;
             public const uint Verbose = 0x_000_0001u;
             public const uint Diagnostics = 0x_000_0002u;
+
             /// <summary>
             /// Must be passed to use functions in FPGAManagementLib.h (e.g., flash write, reconfig).
             /// </summary>
             public const uint Exclusive = 0x_000_1000u;
+
             /// <summary>
             /// Must be passed in when updating the golden image.
             /// </summary>
@@ -191,6 +193,7 @@ namespace Hast.Catapult.Abstractions
         #endregion
 
         #region Header sizes
+
         /// <summary>
         /// Sizes of the input headers in bytes.
         /// </summary>

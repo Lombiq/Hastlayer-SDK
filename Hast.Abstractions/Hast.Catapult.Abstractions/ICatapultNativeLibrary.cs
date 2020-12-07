@@ -24,6 +24,7 @@ namespace Hast.Catapult.Abstractions
     public interface ICatapultNativeLibrary : IDisposable
     {
         #region FPGAManagementLib
+
         /// <summary>
         /// This function retrieves the total number of shell registers.
         /// </summary>
@@ -72,7 +73,7 @@ namespace Hast.Catapult.Abstractions
         Constants.Status WriteFlashImageEx(
             IntPtr fpgaHandle,
             bool writeToGolden,
-            string RpdFilename,
+            string rpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
 
         /// <summary>
@@ -89,14 +90,14 @@ namespace Hast.Catapult.Abstractions
         Constants.Status CaptureFlashImageEx(
             IntPtr fpgaHandle,
             bool isGolden,
-            string RpdFilename,
+            string rpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
 
         /// <summary>
         /// Disable non-maskable interrupt error reporting.  Needed during FPGA reconfiguration. It is not multithreaded-
         /// or multiprocess-safe.
         /// </summary>
-        Constants.Status DisableNMI(IntPtr fpgaHandle);
+        Constants.Status DisableNmi(IntPtr fpgaHandle);
 
         /// <summary>
         /// Sanity check: FPGA reconfig often fails simply because the FPGA vendor/device ID changed after reconfig
@@ -227,9 +228,9 @@ namespace Hast.Catapult.Abstractions
 
         /// <summary>
         /// This function allows the library user to query the version of both software and hardware components. All
-        /// queryable version keys are defined in the 'pchVerDefnsFile' argument of <see cref="CreateHandle(out IntPtr,
-        /// uint, uint, StringBuilder, StringBuilder, CatapultLogFunction)"/>. By default, the definitions are listed in
-        /// VersionDefinitions.ini.
+        /// queryable version keys are defined in the 'pchVerDefnsFile' argument of
+        /// <see cref="CreateHandle(out IntPtr, uint, uint, StringBuilder, StringBuilder, CatapultLogFunction)"/>.
+        /// By default, the definitions are listed in VersionDefinitions.ini.
         /// </summary>
         Constants.Status GetVersion(IntPtr fpgaHandle, string pchVerKey, out uint pVersion);
 
@@ -237,12 +238,6 @@ namespace Hast.Catapult.Abstractions
         /// This function should be called to release and close an FPGA handle.
         /// </summary>
         Constants.Status CloseHandle(IntPtr fpgaHandle);
-
-        // Not presently supported by the native API.
-        // /// <summary>
-        // /// This function retrieves the total number of available PCIe endpoints on an FPGA.
-        // /// </summary>
-        // Constants.Status GetNumberEndpoints(IntPtr fpgaHandle, out uint numEndpoints);
 
         /// <summary>
         /// This function retrieves the total number of PCIe buffers available for host-to-FPGA communication.
