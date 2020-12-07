@@ -244,11 +244,11 @@ namespace Hast.Vitis.Abstractions.Services
             await ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
-            // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
-            //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
-            // endif
-            // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
-            // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
+            //// ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
+            ////     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
+            //// endif
+            //// CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
+            //// v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
             var vppExecutable = await GetExecutablePathAsync(Vpp);
             var vppArguments = new List<string>(
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm
@@ -539,7 +539,7 @@ namespace Hast.Vitis.Abstractions.Services
                 };
             }
 
-            // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
+            //// Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
             if (name == Vpp && text?.StartsWith("[", StringComparison.Ordinal) == true && _vppStatusLogs.Any(fragment => text.Contains(fragment, StringComparison.InvariantCulture)))
             {
                 if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;

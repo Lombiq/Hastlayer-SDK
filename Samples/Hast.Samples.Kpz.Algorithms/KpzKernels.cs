@@ -279,14 +279,12 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// This is a wrapper for running the KPZ algorithm on the FPGA.
         /// </summary>
-        /// <param name="kernels"></param>
-        /// <param name="configuration"></param>
         /// <param name="hostGrid">
         ///     <para>This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.</para>
         /// </param>
         /// <param name="pushToFpga">
         ///     <para>If this parameter is false, the FPGA will work on the grid currently available in it,
-        ///     instead of the grid in the <see cref="hostGrid"/> parameter.</para>
+        ///     instead of the grid in the <paramref name="hostGrid"/> parameter.</para>
         /// </param>
         /// <param name="testMode">
         ///     <para>does several things:</para>
@@ -301,10 +299,9 @@ namespace Hast.Samples.Kpz.Algorithms
         ///         </description></item>
         ///     </list>
         /// </param>
-        /// <param name="randomSeed1"><para>is a random seed for the algorithm.</para></param>
-        /// <param name="randomSeed2"><para>is a random seed for the algorithm.</para></param>
+        /// <param name="randomSeed1"><para>A random seed for the algorithm.</para></param>
+        /// <param name="randomSeed2"><para>Another random seed for the algorithm.</para></param>
         /// <param name="numberOfIterations"><para>is the number of iterations to perform.</para></param>
-        /// <param name="hastlayer"></param>
         public static void DoIterationsWrapper(
             this KpzKernelsInterface kernels,
             IHastlayer hastlayer,

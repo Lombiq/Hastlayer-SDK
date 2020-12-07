@@ -55,7 +55,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         public int MaxInvocationInstanceCount { get { return (MaxRecursionDepth + 1) * MaxDegreeOfParallelism; } }
 
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfiguration"/> class.
         /// </summary>
         /// <param name="memberNamePrefix">
         /// The prefix of the member's name. Use the same convention as with <see cref="MemberNamePrefix"/>.
@@ -76,23 +76,23 @@ namespace Hast.Transformer.Abstractions.Configuration
     public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration
     {
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a method (or methods)
-        /// with the given name prefix.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.
+        /// It's for a method (or methods) with the given name prefix.
         /// </summary>
         /// <param name="methodNamePrefix">The prefix of the method's name (or methods' names).</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
             string methodNamePrefix) : base(typeof(T).FullName + "." + methodNamePrefix) { }
 
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a method.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.
         /// </summary>
         /// <param name="expression">An expression with a call to the method.</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
             Expression<Action<T>> expression) : base(expression.GetMethodSimpleName()) { }
 
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a lambda expression
-        /// inside a method.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.
+        /// It's for a lambda expression inside a method.
         /// </summary>
         /// <param name="expression">An expression with a call to the method.</param>
         /// <param name="lambdaExpressionIndex">

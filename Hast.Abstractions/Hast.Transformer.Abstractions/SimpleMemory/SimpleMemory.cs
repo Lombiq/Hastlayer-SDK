@@ -59,8 +59,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public int CellCount => Memory.Length / MemoryCellSizeBytes;
 
         /// <summary>
-        /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
-        /// the FPGA for transformed algorithms from an existing byte array.
+        /// Initializes a new instance of the <see cref="SimpleMemory"/> class. It represents a simplified memory model
+        /// available on the FPGA for transformed algorithms from an existing byte array.
         /// </summary>
         /// <param name="memory">The source data.</param>
         /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>

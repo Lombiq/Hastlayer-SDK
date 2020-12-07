@@ -89,7 +89,7 @@ namespace Hast.Algorithms
         public long RawValue { get { return _rawValue; } }
 
         /// <summary>
-        /// This is the constructor from raw value; it can only be used internally.
+        /// Initializes a new instance of the <see cref="Fix64"/> struct. It's from raw value; only use it internally.
         /// </summary>
         /// <param name="rawValue"></param>
         private Fix64(long rawValue)
