@@ -86,21 +86,15 @@ namespace Hast.Algorithms
         /// <summary>
         /// Gets the underlying integer representation.
         /// </summary>
-        public long RawValue { get { return _rawValue; } }
+        public long RawValue => _rawValue;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Fix64"/> struct. It's from raw value; only use it internally.
         /// </summary>
         /// <param name="rawValue"></param>
-        private Fix64(long rawValue)
-        {
-            _rawValue = rawValue;
-        }
+        private Fix64(long rawValue) => _rawValue = rawValue;
 
-        public Fix64(int value)
-        {
-            _rawValue = value * OneRawValue;
-        }
+        public Fix64(int value) => _rawValue = value * OneRawValue;
 
         #region Instance methods
 

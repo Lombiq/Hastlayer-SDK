@@ -15,9 +15,6 @@ namespace Hast.Synthesis.Abstractions
 
         public string Key { get; }
 
-        public ReplaceableAttribute(string key)
-        {
-            Key = key;
-        }
+        public ReplaceableAttribute(string key) => Key = key;
     }
 }

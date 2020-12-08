@@ -40,7 +40,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </example>
         public int MaxDegreeOfParallelism
         {
-            get { return _maxDegreeOfParallelism; }
+            get => _maxDegreeOfParallelism;
             set
             {
                 if (value < 1)
@@ -52,7 +52,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             }
         }
 
-        public int MaxInvocationInstanceCount { get { return (MaxRecursionDepth + 1) * MaxDegreeOfParallelism; } }
+        public int MaxInvocationInstanceCount => (MaxRecursionDepth + 1) * MaxDegreeOfParallelism;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfiguration"/> class.

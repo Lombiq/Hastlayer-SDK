@@ -9,10 +9,7 @@ namespace Hast.Communication.Services
     {
         private readonly IEnumerable<ICommunicationService> _communicationServices;
 
-        public CommunicationServiceSelector(IEnumerable<ICommunicationService> communicationServices)
-        {
-            _communicationServices = communicationServices;
-        }
+        public CommunicationServiceSelector(IEnumerable<ICommunicationService> communicationServices) => _communicationServices = communicationServices;
 
         public ICommunicationService GetCommunicationService(string channelName = "")
         {

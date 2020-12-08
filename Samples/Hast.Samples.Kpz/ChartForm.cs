@@ -293,22 +293,17 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// Gets the selected item in <see cref="comboTarget"/> to <see cref="KpzTarget"/> values.
         /// </summary>
-        private KpzTarget CurrentComputationTarget
-        {
-            get
+        private KpzTarget CurrentComputationTarget =>
+            comboTarget.SelectedIndex switch
             {
-                return comboTarget.SelectedIndex switch
-                {
-                    0 => KpzTarget.Cpu,
-                    1 => KpzTarget.FpgaSimulation,
-                    2 => KpzTarget.Fpga,
-                    3 => KpzTarget.FpgaSimulationParallelized,
-                    4 => KpzTarget.FpgaParallelized,
-                    5 => KpzTarget.PrngTest,
-                    _ => KpzTarget.Cpu,
-                };
-            }
-        }
+                0 => KpzTarget.Cpu,
+                1 => KpzTarget.FpgaSimulation,
+                2 => KpzTarget.Fpga,
+                3 => KpzTarget.FpgaSimulationParallelized,
+                4 => KpzTarget.FpgaParallelized,
+                5 => KpzTarget.PrngTest,
+                _ => KpzTarget.Cpu,
+            };
 
         private KpzTarget ComputationTarget;
 
