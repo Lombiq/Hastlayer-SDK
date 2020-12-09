@@ -95,7 +95,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at
         /// the beginning.
         /// </summary>
-        /// <param name="memory"></param>
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
             Random1 = new RandomMwc64X
@@ -260,13 +259,12 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// This function pushes parameters and PRNG seed to the FPGA.
         /// </summary>
-        /// <param name="memoryDst"></param>
-        /// <param name="testMode"></param>
-        /// <param name="randomSeed1"></param>
-        /// <param name="randomSeed2"></param>
-        /// <param name="numberOfIterations"></param>
-        public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1,
-            ulong randomSeed2, uint numberOfIterations)
+        public static void CopyParametersToMemory(
+            SimpleMemory memoryDst,
+            bool testMode,
+            ulong randomSeed1,
+            ulong randomSeed2,
+            uint numberOfIterations)
         {
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0x_FFFF_FFFFUL));
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)(randomSeed1 >> 32 & 0x_FFFF_FFFFUL));
