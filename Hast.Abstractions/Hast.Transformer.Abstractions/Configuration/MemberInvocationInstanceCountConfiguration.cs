@@ -81,14 +81,16 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         /// <param name="methodNamePrefix">The prefix of the method's name (or methods' names).</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
-            string methodNamePrefix) : base(typeof(T).FullName + "." + methodNamePrefix) { }
+            string methodNamePrefix)
+            : base(typeof(T).FullName + "." + methodNamePrefix) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.
         /// </summary>
         /// <param name="expression">An expression with a call to the method.</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
-            Expression<Action<T>> expression) : base(expression.GetMethodSimpleName()) { }
+            Expression<Action<T>> expression)
+            : base(expression.GetMethodSimpleName()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.

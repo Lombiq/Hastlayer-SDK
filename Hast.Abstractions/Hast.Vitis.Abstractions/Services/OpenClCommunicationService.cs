@@ -33,7 +33,8 @@ namespace Hast.Vitis.Abstractions.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
-            ILogger<OpenClCommunicationService> logger) : base(logger)
+            ILogger<OpenClCommunicationService> logger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
