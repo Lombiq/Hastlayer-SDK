@@ -110,6 +110,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lombiq.Arithmetics", "Lombi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Algorithms.Tests", "Hast.Algorithms\Hast.Algorithms.Tests\Hast.Algorithms.Tests.csproj", "{EB781B61-C535-4A9B-A039-E28B56ACCB64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Samples.Posit", "Hast.Samples.Posit\Hast.Samples.Posit.csproj", "{D60C14F3-05FD-44BF-B109-7A3F4113CC46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -260,6 +262,10 @@ Global
 		{EB781B61-C535-4A9B-A039-E28B56ACCB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB781B61-C535-4A9B-A039-E28B56ACCB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB781B61-C535-4A9B-A039-E28B56ACCB64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D60C14F3-05FD-44BF-B109-7A3F4113CC46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60C14F3-05FD-44BF-B109-7A3F4113CC46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60C14F3-05FD-44BF-B109-7A3F4113CC46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60C14F3-05FD-44BF-B109-7A3F4113CC46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -297,6 +303,7 @@ Global
 		{0DD555F3-B472-422B-8CFB-63CB494CBB5A} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
 		{CBAC105A-E50F-4202-A647-CFD674E6C0F8} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
 		{E77C13E5-DA6A-4A9D-9601-B17BDBFE50BD} = {701D5B71-9A6F-47A4-A3C2-3714AF8B4115}
+		{D60C14F3-05FD-44BF-B109-7A3F4113CC46} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C7FC230-A7A8-4206-A533-E41B96D6E222}

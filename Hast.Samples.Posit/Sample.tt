@@ -1,0 +1,37 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#
+	var positSizes = new byte[] {8,16,32,64};
+	var calculatorTypes = new string[] {"Calculator", "AdvancedCalculator", "FusedCalculator"};
+	List<string> calculatorNames = new List<string>();	
+
+	for (var positSize = 2; positSize >= 0; positSize--){ 
+			for (var type = 2; type>=0; type--){
+				for (var exponentSize = 4; exponentSize>=0; exponentSize--){
+				var positCalculatorName = "Posit" + positSizes[positSize] + "_" + exponentSize + "_" + calculatorTypes[type];
+				calculatorNames.Add(positCalculatorName);
+                }
+            }
+    }
+#> 
+
+namespace Hast.Samples.Posit
+{
+    internal enum Sample
+    {
+    <#
+	var last = calculatorNames.First();
+	calculatorNames.RemoveAt(0);
+	calculatorNames.Reverse();
+	foreach (var name in calculatorNames)
+       {  #>
+			<#=name#>, 		 
+    <#  } #> 
+	<#=last#>
+    }
+}
