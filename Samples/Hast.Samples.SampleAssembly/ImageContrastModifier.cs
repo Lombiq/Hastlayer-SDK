@@ -1,6 +1,8 @@
-﻿using System.Drawing;
-using System.Threading.Tasks;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Drawing;
+using System.Threading.Tasks;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -12,12 +14,13 @@ namespace Hast.Samples.SampleAssembly
     {
         private const ushort Multiplier = 1000;
 
-        public const int ChangeContrast_ImageWidthIndex = 0;
-        public const int ChangeContrast_ImageHeightIndex = 1;
-        public const int ChangeContrast_ContrastValueIndex = 2;
-        public const int ChangeContrast_ImageStartIndex = 3;
+        private const int ChangeContrast_ImageWidthIndex = 0;
+        private const int ChangeContrast_ImageHeightIndex = 1;
+        private const int ChangeContrast_ContrastValueIndex = 2;
+        private const int ChangeContrast_ImageStartIndex = 3;
 
-        public const int MaxDegreeOfParallelism = 25;
+        [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
+        private static readonly int MaxDegreeOfParallelism = 25;
 
 
         /// <summary>
@@ -37,14 +40,14 @@ namespace Hast.Samples.SampleAssembly
 
             var tasks = new Task<PixelProcessingTaskOutput>[MaxDegreeOfParallelism];
 
-            // Since we only need to compute the loop condition's right side once, not on each loop execution, it's an 
+            // Since we only need to compute the loop condition's right side once, not on each loop execution, it's an
             // optimization to put it in a separate variable. This way it's indeed computed only once.
             var pixelCount = imageHeight * imageWidth;
             var stepCount = pixelCount / MaxDegreeOfParallelism;
 
             if (pixelCount % MaxDegreeOfParallelism != 0)
             {
-                // This will take care of the rest of the pixels. This is wasteful as on the last step not all Tasks 
+                // This will take care of the rest of the pixels. This is wasteful as on the last step not all Tasks
                 // will work on something but it's a way to keep the number of Tasks constant.
                 stepCount += 1;
             }
@@ -86,6 +89,12 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
+        /// <summary>
+        /// Changes the contrast of an image. Same as <see cref="ChangeContrast"/>. Used for Hast.Communication.Tester
+        /// to access this sample by a common method name just for testing. Internal so it doesn't bother otherwise.
+        /// </summary>
+        /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
+        internal virtual void Run(SimpleMemory memory) => ChangeContrast(memory);
 
         /// <summary>
         /// Makes the required changes on the selected pixel.
@@ -125,23 +134,22 @@ namespace Hast.Samples.SampleAssembly
             public byte G { get; set; }
             public byte B { get; set; }
         }
-    }
 
 
-    public static class ImageContrastModifierExtensions
-    {
         /// <summary>
         /// Changes the contrast of an image.
         /// </summary>
         /// <param name="image">The image that we modify.</param>
         /// <param name="contrast">The value of the intensity to calculate the new pixel values.</param>
         /// <returns>Returns an image with changed contrast values.</returns>
-        public static Bitmap ChangeImageContrast(this ImageContrastModifier imageContrast, Bitmap image, int contrast)
+        public Bitmap ChangeImageContrast(Bitmap image, int contrast, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
-                contrast);
-            imageContrast.ChangeContrast(memory);
+                contrast,
+                hastlayer,
+                configuration);
+            ChangeContrast(memory);
             return CreateImage(memory, image);
         }
 
@@ -152,18 +160,20 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="image">The image to process.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
-        private static SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue)
+        private SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var pixelCount = image.Width * image.Height;
-            var cellCount = 
-                pixelCount + 
-                (pixelCount % ImageContrastModifier.MaxDegreeOfParallelism != 0 ? ImageContrastModifier.MaxDegreeOfParallelism : 0) + 
+            var cellCount =
+                pixelCount +
+                (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0) +
                 3;
-            var memory = new SimpleMemory(cellCount);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
-            memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ImageWidthIndex, (uint)image.Width);
-            memory.WriteUInt32(ImageContrastModifier.ChangeContrast_ImageHeightIndex, (uint)image.Height);
-            memory.WriteInt32(ImageContrastModifier.ChangeContrast_ContrastValueIndex, contrastValue);
+            memory.WriteUInt32(ChangeContrast_ImageWidthIndex, (uint)image.Width);
+            memory.WriteUInt32(ChangeContrast_ImageHeightIndex, (uint)image.Height);
+            memory.WriteInt32(ChangeContrast_ContrastValueIndex, contrastValue);
 
             for (int x = 0; x < image.Height; x++)
             {
@@ -175,7 +185,7 @@ namespace Hast.Samples.SampleAssembly
                     // complicated, so good enough for a sample; if we'd want to optimize memory usage, that would be
                     // needed.
                     memory.Write4Bytes(
-                        x * image.Width + y + ImageContrastModifier.ChangeContrast_ImageStartIndex,
+                        x * image.Width + y + ChangeContrast_ImageStartIndex,
                         new[] { pixel.R, pixel.G, pixel.B });
                 }
             }
@@ -189,7 +199,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
         /// <param name="image">The original image.</param>
         /// <returns>Returns the processed image.</returns>
-        private static Bitmap CreateImage(SimpleMemory memory, Bitmap image)
+        private Bitmap CreateImage(SimpleMemory memory, Bitmap image)
         {
             var newImage = new Bitmap(image);
 
@@ -197,7 +207,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    var bytes = memory.Read4Bytes(x * newImage.Width + y + ImageContrastModifier.ChangeContrast_ImageStartIndex);
+                    var bytes = memory.Read4Bytes(x * newImage.Width + y + ChangeContrast_ImageStartIndex);
                     newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
                 }
             }

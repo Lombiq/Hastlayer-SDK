@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Hast.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    }
+  }
+}

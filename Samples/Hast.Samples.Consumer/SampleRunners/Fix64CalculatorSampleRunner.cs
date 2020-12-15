@@ -1,29 +1,33 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class Fix64CalculatorSampleRunner
+    internal class Fix64CalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Fix64Calculator>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator());
+            var fixed64Calculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Fix64Calculator(), configuration);
 
-            var sum = fixed64Calculator.CalculateIntegerSumUpToNumber(10000000);
+            var sum = fixed64Calculator.CalculateIntegerSumUpToNumber(10000000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
-            // This takes about 274ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with 
-            // a MaxDegreeOfParallelism of 13 while the device is about 76% utilized).
+            // This takes about 274ms on an i7 processor with 4 physical (8 logical) cores and 1300ms on an FPGA (with
+            // a MaxDegreeOfParallelism of 12 while the device is about half utilized; above that the design will get
+            // unstable).
             // Since this basically does what the single-threaded sample but in multiple copies on multiple threads
             // the single-threaded sample takes the same amount of time on the FPGA.
 
@@ -32,9 +36,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             var numbers = new int[Fix64Calculator.MaxDegreeOfParallelism];
             for (int i = 0; i < Fix64Calculator.MaxDegreeOfParallelism; i++)
             {
-                numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1); 
+                numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1);
             }
-            var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
+
+            var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
         public static void RunSoftwareBenchmark()

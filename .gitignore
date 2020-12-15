@@ -7,3 +7,7 @@ desktop.ini
 bin/
 obj/
 packages/
+.vs/
+.idea/
+publish/
+~*.xlsx

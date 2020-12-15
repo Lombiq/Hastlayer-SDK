@@ -34,6 +34,11 @@ namespace Hast.Layer
         /// <summary>
         /// Gets the amount of memory (RAM) available to hardware implementations, in bytes.
         /// </summary>
-        uint AvailableMemoryBytes { get; }
+        ulong AvailableMemoryBytes { get; }
+
+        /// <summary>
+        /// Gets the FPGA vendor toolchain's name to be used with this device.
+        /// </summary>
+        string ToolChainName { get; }
     }
 }

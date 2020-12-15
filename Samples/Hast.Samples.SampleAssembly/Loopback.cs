@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample that simply sends back the input plus one. This can be used to test connectivity to the FPGA as well 
+    /// A sample that simply sends back the input plus one. This can be used to test connectivity to the FPGA as well
     /// as to see the baseline resource usage of the Hastlayer Hardware Framework. It can also serve as a generic
     /// testbed that you can quickly modify to try out small pieces of code.
     /// </summary>
     public class Loopback
     {
-        public const int Run_InputOutputInt32Index = 0;
+        private const int Run_InputOutputInt32Index = 0;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -23,17 +20,15 @@ namespace Hast.Samples.SampleAssembly
             // sent back.
             memory.WriteInt32(Run_InputOutputInt32Index, memory.ReadInt32(Run_InputOutputInt32Index) + 1);
         }
-    }
 
-
-    public static class LoopbackExtensions
-    {
-        public static int Run(this Loopback loopback, int input)
+        public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = new SimpleMemory(1);
-            memory.WriteInt32(Loopback.Run_InputOutputInt32Index, input);
-            loopback.Run(memory);
-            return memory.ReadInt32(Loopback.Run_InputOutputInt32Index);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(1)
+                : hastlayer.CreateMemory(configuration, 1);
+            memory.WriteInt32(Run_InputOutputInt32Index, input);
+            Run(memory);
+            return memory.ReadInt32(Run_InputOutputInt32Index);
         }
     }
 }

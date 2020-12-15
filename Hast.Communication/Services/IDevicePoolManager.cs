@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Common.Interfaces;
 using Hast.Communication.Models;
-using Orchard;
 
 namespace Hast.Communication.Services
 {
     /// <summary>
     /// Manages the usage of the pool of connected compatible devices to make maximal utilization possible.
     /// </summary>
-    public interface IDevicePoolManager : ISingletonDependency
+    public interface IDevicePoolManager : ISingletonDependency, IDisposable
     {
         /// <summary>
         /// Sets the current device pool to contain the give devices. It overwrites the previous pool completely.

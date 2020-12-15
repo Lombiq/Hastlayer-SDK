@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Hast.Algorithms;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Sample using the <see cref="Fix64"/> 64 fixed-point number type. This is useful if you need more involved
-    /// calculations with fractions where simply scaling the numbers up and down is not enough. Also see 
+    /// calculations with fractions where simply scaling the numbers up and down is not enough. Also see
     /// <see cref="Fix64CalculatorSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class Fix64Calculator
     {
-        public const int CalculateLargeIntegerSum_InputInt32Index = 0;
-        public const int CalculateLargeIntegerSum_OutputInt32Index = 0;
-        public const int ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex = 0;
-        public const int ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex = 0;
+        private const int CalculateLargeIntegerSum_InputInt32Index = 0;
+        private const int CalculateLargeIntegerSum_OutputInt32Index = 0;
+        private const int ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex = 0;
+        private const int ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex = 0;
 
-        public const int MaxDegreeOfParallelism = 13;
+        public const int MaxDegreeOfParallelism = 10;
 
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
@@ -88,49 +88,48 @@ namespace Hast.Samples.SampleAssembly
             public int Fix64Low { get; set; }
             public int Fix64High { get; set; }
         }
-    }
 
 
-    public static class Fix64CalculatorExtensions
-    {
-        public static Fix64 CalculateIntegerSumUpToNumber(this Fix64Calculator fix64Calculator, int input)
+        public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {
-            var memory = new SimpleMemory(2);
+            var memory = hastlayer.CreateMemory(configuration, 2);
 
-            memory.WriteInt32(Fix64Calculator.CalculateLargeIntegerSum_InputInt32Index, input);
+            memory.WriteInt32(CalculateLargeIntegerSum_InputInt32Index, input);
 
-            fix64Calculator.CalculateIntegerSumUpToNumber(memory);
+            CalculateIntegerSumUpToNumber(memory);
 
             return Fix64.FromRawInts(new[]
             {
-                memory.ReadInt32(Fix64Calculator.CalculateLargeIntegerSum_OutputInt32Index),
-                memory.ReadInt32(Fix64Calculator.CalculateLargeIntegerSum_OutputInt32Index + 1)
+                memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index),
+                memory.ReadInt32(CalculateLargeIntegerSum_OutputInt32Index + 1)
             });
         }
 
-        public static IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(this Fix64Calculator fix64Calculator, int[] numbers)
+        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            if (numbers.Length != Fix64Calculator.MaxDegreeOfParallelism)
+            if (numbers.Length != MaxDegreeOfParallelism)
             {
                 throw new ArgumentException(
                     "Provide as many numbers as the degree of parallelism of Fix64Calculator is (" +
-                    Fix64Calculator.MaxDegreeOfParallelism + ")");
+                    MaxDegreeOfParallelism + ")");
             }
 
-            var memory = new SimpleMemory(2 * Fix64Calculator.MaxDegreeOfParallelism);
+            var memory = hastlayer is null ?
+                SimpleMemory.CreateSoftwareMemory(2 * MaxDegreeOfParallelism) :
+                hastlayer.CreateMemory(configuration, 2 * MaxDegreeOfParallelism);
 
             for (int i = 0; i < numbers.Length; i++)
             {
-                memory.WriteInt32(Fix64Calculator.ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex + i, numbers[i]); 
+                memory.WriteInt32(ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex + i, numbers[i]);
             }
 
-            fix64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(memory);
+            ParallelizedCalculateIntegerSumUpToNumbers(memory);
 
-            var results = new Fix64[Fix64Calculator.MaxDegreeOfParallelism];
+            var results = new Fix64[MaxDegreeOfParallelism];
 
-            for (int i = 0; i < Fix64Calculator.MaxDegreeOfParallelism; i++)
+            for (int i = 0; i < MaxDegreeOfParallelism; i++)
             {
-                var itemOutputStartIndex = Fix64Calculator.ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex + i * 2;
+                var itemOutputStartIndex = ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex + i * 2;
 
                 results[i] = Fix64.FromRawInts(new[]
                 {

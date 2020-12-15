@@ -18,13 +18,13 @@ namespace Hast.Communication
 
         public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target, IProxyGenerationConfiguration configuration) where T : class
         {
-            var memberInvocationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(hardwareRepresentation, target, configuration);
-            if (typeof(T).IsInterface)
-            {
-                return _proxyGenerator.CreateInterfaceProxyWithTarget(target, new MemberInvocationInterceptor(memberInvocationHandler));
-            }
+            var memberInvocationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(
+                hardwareRepresentation, target, configuration);
+            var interceptor = new MemberInvocationInterceptor(memberInvocationHandler);
 
-            return _proxyGenerator.CreateClassProxyWithTarget(target, new MemberInvocationInterceptor(memberInvocationHandler));
+            return typeof(T).IsInterface
+                ? _proxyGenerator.CreateInterfaceProxyWithTarget(target, interceptor)
+                : _proxyGenerator.CreateClassProxyWithTarget(target, interceptor);
         }
 
 
@@ -38,8 +38,8 @@ namespace Hast.Communication
             {
                 _memberInvocationHandler = memberInvocationHandler;
             }
-        
-        
+
+
             public void Intercept(Castle.DynamicProxy.IInvocation invocation)
             {
                 _memberInvocationHandler(invocation);

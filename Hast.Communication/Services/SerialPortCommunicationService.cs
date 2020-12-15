@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Ports;
-using System.Linq;
-using System.Threading.Tasks;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Constants;
+using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Ports;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
@@ -22,19 +24,17 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IEnumerable<ISerialPortConfigurator> _serialPortConfigurators;
 
-        public override string ChannelName
-        {
-            get
-            {
-                return CommunicationConstants.Serial.ChannelName;
-            }
-        }
+        private const int MemoryPrefixCellCount = 3;
+        private const int FirstCellPadding = sizeof(int) - 1;
+
+        public override string ChannelName => Serial.ChannelName;
 
 
         public SerialPortCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
-            IEnumerable<ISerialPortConfigurator> serialPortConfigurators)
+            IEnumerable<ISerialPortConfigurator> serialPortConfigurators,
+            ILogger<SerialPortCommunicationService> logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
@@ -73,31 +73,37 @@ namespace Hast.Communication.Services
                     catch (IOException ex)
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.", 
+                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.",
                             ex);
                     }
 
                     if (serialPort.IsOpen)
                     {
-                        Logger.Information("The port {0} is ours.", serialPort.PortName);
+                        Logger.LogInformation("The port {0} is ours.", serialPort.PortName);
                     }
                     else
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. The " + 
+                            "Communication with the FPGA board through the serial port failed. The " +
                             serialPort.PortName + " exists but it's used by another process.");
                     }
 
                     // Here we put together the data stream.
 
+                    // Prepare memory.
+                    var dma = new SimpleMemoryAccessor(simpleMemory);
+                    // The first parameter is actually just a byte but we only fetch whole cells so 3/4 of the cell is padding.
+                    var memory = dma.Get(MemoryPrefixCellCount).Slice(FirstCellPadding);
+                    var memoryLength = simpleMemory.ByteCount;
+
                     // Execute Order 66.
-                    var outputBuffer = new byte[] { (byte)CommandTypes.Execution }
-                        // Copying the input length, represented as bytes, to the output buffer.
-                        .Append(BitConverter.GetBytes(simpleMemory.Memory.Length))
-                        // Copying the member ID, represented as bytes, to the output buffer.
-                        .Append(BitConverter.GetBytes(memberId))
-                        // Copying the simple memory.
-                        .Append(simpleMemory.Memory);
+                    // Set command type
+                    var commandType = (byte)CommandTypes.Execution;
+                    MemoryMarshal.Write(memory.Span, ref commandType);
+                    // Copying the input length, represented as bytes, to the output buffer.
+                    MemoryMarshal.Write(memory.Span.Slice(1, sizeof(int)), ref memoryLength);
+                    // Copying the member ID, represented as bytes, to the output buffer.
+                    MemoryMarshal.Write(memory.Span.Slice(1 + sizeof(int), sizeof(int)), ref memberId);
 
                     // Sending the data.
                     // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
@@ -105,22 +111,23 @@ namespace Hast.Communication.Services
                     // of 4 bytes. This seems to have no negative impact on performance compared to using
                     // serialPort.Write() once.
                     var maxBytesToSendAtOnce = 4;
-                    for (int i = 0; i < (int)Math.Ceiling(outputBuffer.Length / (decimal)maxBytesToSendAtOnce); i++)
+                    var memoryAsArraySegment = memory.GetUnderlyingArray();
+                    for (int i = 0; i < (int)Math.Ceiling(memory.Length / (decimal)maxBytesToSendAtOnce); i++)
                     {
-                        var remainingBytes = outputBuffer.Length - i * maxBytesToSendAtOnce;
+                        var remainingBytes = memory.Length - i * maxBytesToSendAtOnce;
                         var bytesToSend = remainingBytes > maxBytesToSendAtOnce ? maxBytesToSendAtOnce : remainingBytes;
-                        serialPort.Write(outputBuffer, i * maxBytesToSendAtOnce, bytesToSend);
+                        serialPort.Write(memoryAsArraySegment.Array, i * maxBytesToSendAtOnce + memoryAsArraySegment.Offset, bytesToSend);
                     }
 
 
                     // Processing the response.
                     var taskCompletionSource = new TaskCompletionSource<bool>();
-                    var communicationState = CommunicationConstants.Serial.CommunicationState.WaitForFirstResponse;
+                    var communicationState = Serial.CommunicationState.WaitForFirstResponse;
                     var outputByteCountBytes = new byte[4];
                     var outputByteCountByteCounter = 0;
                     var outputByteCount = 0; // The incoming byte buffer size.
                     var outputBytesReceivedCount = 0; // Just used to know when the data is ready.
-                    var outputBytes = new byte[0]; // The incoming buffer.
+                    var outputBytes = Array.Empty<byte>(); // The incoming buffer.
                     var executionTimeBytes = new byte[8];
                     var executionTimeByteCounter = 0;
 
@@ -128,11 +135,11 @@ namespace Hast.Communication.Services
                     {
                         switch (communicationState)
                         {
-                            case CommunicationConstants.Serial.CommunicationState.WaitForFirstResponse:
-                                if (receivedByte == CommunicationConstants.Serial.Signals.Ping)
+                            case Serial.CommunicationState.WaitForFirstResponse:
+                                if (receivedByte == Serial.Signals.Ping)
                                 {
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.ReceivingExecutionInformation;
+                                    serialPort.Write(Serial.Signals.Ready);
                                 }
                                 else
                                 {
@@ -141,7 +148,7 @@ namespace Hast.Communication.Services
                                         receivedByte);
                                 }
                                 break;
-                            case CommunicationConstants.Serial.CommunicationState.ReceivingExecutionInformation:
+                            case Serial.CommunicationState.ReceivingExecutionInformation:
                                 executionTimeBytes[executionTimeByteCounter] = receivedByte;
                                 executionTimeByteCounter++;
                                 if (executionTimeByteCounter == 8)
@@ -150,11 +157,11 @@ namespace Hast.Communication.Services
 
                                     SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.ReceivingOutputByteCount;
+                                    serialPort.Write(Serial.Signals.Ready);
                                 }
                                 break;
-                            case CommunicationConstants.Serial.CommunicationState.ReceivingOutputByteCount:
+                            case Serial.CommunicationState.ReceivingOutputByteCount:
                                 outputByteCountBytes[outputByteCountByteCounter] = receivedByte;
                                 outputByteCountByteCounter++;
 
@@ -164,26 +171,29 @@ namespace Hast.Communication.Services
 
                                     // Since the output's size can differ from the input size for optimization reasons,
                                     // we take the explicit size into account.
-                                    outputBytes = new byte[outputByteCount];
+                                    outputBytes = new byte[outputByteCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
 
-                                    Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
+                                    Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.ReceivingOuput;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.ReceivingOuput;
+                                    serialPort.Write(Serial.Signals.Ready);
                                 }
                                 break;
-                            case CommunicationConstants.Serial.CommunicationState.ReceivingOuput:
-                                outputBytes[outputBytesReceivedCount] = receivedByte;
+                            case Serial.CommunicationState.ReceivingOuput:
+                                // There is a padding of PrefixCellCount cells for the unlikely case that the user
+                                // would directly feed back the output as the next call's input. This way Prefix space
+                                // is maintained.
+                                outputBytes[outputBytesReceivedCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes] = receivedByte;
                                 outputBytesReceivedCount++;
 
                                 if (outputByteCount == outputBytesReceivedCount)
                                 {
-                                    simpleMemory.Memory = outputBytes;
+                                    dma.Set(outputBytes, MemoryPrefixCellCount);
 
                                     // Serial communication can give more data than we actually await, so need to 
                                     // set this.
-                                    communicationState = CommunicationConstants.Serial.CommunicationState.Finished;
-                                    serialPort.Write(CommunicationConstants.Serial.Signals.Ready);
+                                    communicationState = Serial.CommunicationState.Finished;
+                                    serialPort.Write(Serial.Signals.Ready);
 
                                     taskCompletionSource.SetResult(true);
                                 }
@@ -205,7 +215,7 @@ namespace Hast.Communication.Services
                             {
                                 processReceivedByte(inputBuffer[i], i == inputBuffer.Length - 1);
 
-                                if (communicationState == CommunicationConstants.Serial.CommunicationState.Finished)
+                                if (communicationState == Serial.CommunicationState.Finished)
                                 {
                                     return;
                                 }
@@ -252,7 +262,7 @@ namespace Hast.Communication.Services
 
                             serialPort.DataReceived += (sender, e) =>
                             {
-                                if (serialPort.ReadByte() == CommunicationConstants.Serial.Signals.Ready)
+                                if (serialPort.ReadByte() == Serial.Signals.Ready)
                                 {
                                     fpgaPortNames.Add(serialPort.PortName);
                                     taskCompletionSource.SetResult(true);
@@ -290,10 +300,10 @@ namespace Hast.Communication.Services
         {
             var serialPort = new SerialPort
             {
-                BaudRate = CommunicationConstants.Serial.DefaultBaudRate,
-                Parity = CommunicationConstants.Serial.DefaultParity,
-                StopBits = CommunicationConstants.Serial.DefaultStopBits,
-                WriteTimeout = CommunicationConstants.Serial.DefaultWriteTimeoutMilliseconds
+                BaudRate = Serial.DefaultBaudRate,
+                Parity = Serial.DefaultParity,
+                StopBits = Serial.DefaultStopBits,
+                WriteTimeout = Serial.DefaultWriteTimeoutMilliseconds
             };
 
             _serialPortConfigurators.InvokePipelineSteps(step => step.ConfigureSerialPort(serialPort, executionContext));

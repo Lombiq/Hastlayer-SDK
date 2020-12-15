@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Common.Interfaces;
 using Hast.Communication.Models;
-using Orchard;
 
 namespace Hast.Communication.Services
 {
@@ -15,7 +15,7 @@ namespace Hast.Communication.Services
         /// Populates the device pool with the given device handles.
         /// </summary>
         /// <param name="devicesFactory">
-        /// The factory function to produce the device. Will only be run if the device pool was't previously populated.
+        /// The factory function to produce the device. Will only be run if the device pool wasn't previously populated.
         /// </param>
         void PopulateDevicePoolIfNew(Func<Task<IEnumerable<IDevice>>> devicesFactory);
     }

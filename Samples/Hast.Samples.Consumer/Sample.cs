@@ -1,18 +1,20 @@
-﻿namespace Hast.Samples.Consumer
+namespace Hast.Samples.Consumer
 {
     internal enum Sample
     {
         Fix64Calculator,
+        FSharpParallelAlgorithm,
         GenomeMatcher,
-        ParallelAlgorithm,
         ImageProcessingAlgorithms,
         Loopback,
-        MonteCarloAlgorithm,
+        MemoryTest,
+        MonteCarloPiEstimator,
         ObjectOrientedShowcase,
-        PositCalculator,
+        ParallelAlgorithm,
         Posit32AdvancedCalculator,
         Posit32Calculator,
         Posit32FusedCalculator,
+        PositCalculator,
         PrimeCalculator,
         RecursiveAlgorithms,
         SimdCalculator,

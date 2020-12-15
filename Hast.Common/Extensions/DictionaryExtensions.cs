@@ -9,21 +9,29 @@ namespace System.Collections.Generic
         public static T GetOrAddCustomConfiguration<T>(this IDictionary<string, object> customConfiguration, string key)
             where T : new()
         {
-            object config;
 
-            if (customConfiguration.TryGetValue(key, out config))
+            if (customConfiguration.TryGetValue(key, out var config))
             {
                 // If this is a remote transformation then custom configs won't necessarily be properly deserialized at
                 // this point, so need to handle them specifically.
-                if (config is JObject)
+                if (config is JObject jObject)
                 {
-                    return ((JObject)config).ToObject<T>(new JsonSerializer { ContractResolver = new PrivateSetterContractResolver() });
+                    var deserialized = jObject
+                        .ToObject<T>(new JsonSerializer { ContractResolver = new PrivateSetterContractResolver() });
+                    customConfiguration[key] = deserialized;
+                    return deserialized;
                 }
 
                 return (T)config;
             }
 
             return (T)(customConfiguration[key] = new T());
+        }
+
+        public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> pair, out TKey key, out TValue value)
+        {
+            key = pair.Key;
+            value = pair.Value;
         }
     }
 }

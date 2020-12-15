@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Text;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <see cref="GenomeMatcherSampleRunner"/> on what 
+    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <see cref="GenomeMatcherSampleRunner"/> on what
     /// to configure to make this work.
-    /// 
+    ///
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
     public class GenomeMatcher
     {
-        public const int GetLCS_InputOneLengthIndex = 0;
-        public const int GetLCS_InputTwoLengthIndex = 1;
-        public const int GetLCS_InputOneStartIndex = 2;
-        public const ushort GetLCS_TopCellPointerValue = 0;
-        public const ushort GetLCS_LeftCellPointerValue = 1;
-        public const ushort GetLCS_DiagonalCellPointerValue = 2;
-        public const ushort GetLCS_OutOfBorderDiagonalCellPointerValue = 3;
+        private const int GetLCS_InputOneLengthIndex = 0;
+        private const int GetLCS_InputTwoLengthIndex = 1;
+        private const int GetLCS_InputOneStartIndex = 2;
+        private const ushort GetLCS_TopCellPointerValue = 0;
+        private const ushort GetLCS_LeftCellPointerValue = 1;
+        private const ushort GetLCS_DiagonalCellPointerValue = 2;
+        private const ushort GetLCS_OutOfBorderDiagonalCellPointerValue = 3;
 
 
         /// <summary>
@@ -174,22 +176,19 @@ namespace Hast.Samples.SampleAssembly
                 currentPosition = previousPosition;
             }
         }
-    }
 
 
-    public static class GenomeMatcherExtensions
-    {
         /// <summary>
         /// Calculates the longest common subsequence of two strings.
         /// </summary>
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns the longest common subsequence of the two strings.</returns>
-        public static string CalculateLongestCommonSubsequence(this GenomeMatcher genomeMatcher, string inputOne, string inputTwo)
+        public string CalculateLongestCommonSubsequence(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo);
+            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo, hastlayer, configuration);
 
-            genomeMatcher.CalculateLongestCommonSubsequence(simpleMemory);
+            CalculateLongestCommonSubsequence(simpleMemory);
 
             return GetResult(simpleMemory, inputOne, inputTwo);
         }
@@ -201,23 +200,25 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns a <see cref="SimpleMemory"/> object containing the input values.</returns>
-        private static SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo)
+        private SimpleMemory CreateSimpleMemory(string inputOne, string inputTwo, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var cellCount = 2 + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2 + Math.Max(inputOne.Length, inputTwo.Length);
 
-            var simpleMemory = new SimpleMemory(cellCount);
+            var simpleMemory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
-            simpleMemory.WriteUInt32(GenomeMatcher.GetLCS_InputOneLengthIndex, (uint)inputOne.Length);
-            simpleMemory.WriteUInt32(GenomeMatcher.GetLCS_InputTwoLengthIndex, (uint)inputTwo.Length);
+            simpleMemory.WriteUInt32(GetLCS_InputOneLengthIndex, (uint)inputOne.Length);
+            simpleMemory.WriteUInt32(GetLCS_InputTwoLengthIndex, (uint)inputTwo.Length);
 
             for (int i = 0; i < inputOne.Length; i++)
             {
-                simpleMemory.WriteUInt32(GenomeMatcher.GetLCS_InputOneStartIndex + i, Encoding.UTF8.GetBytes(inputOne[i].ToString())[0]);
+                simpleMemory.WriteUInt32(GetLCS_InputOneStartIndex + i, Encoding.UTF8.GetBytes(inputOne[i].ToString())[0]);
             }
 
             for (int i = 0; i < inputTwo.Length; i++)
             {
-                simpleMemory.WriteUInt32(GenomeMatcher.GetLCS_InputOneStartIndex + i + inputOne.Length, Encoding.UTF8.GetBytes(inputTwo[i].ToString())[0]);
+                simpleMemory.WriteUInt32(GetLCS_InputOneStartIndex + i + inputOne.Length, Encoding.UTF8.GetBytes(inputTwo[i].ToString())[0]);
             }
 
             return simpleMemory;
@@ -230,12 +231,12 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="inputOne">The first string to compare.</param>
         /// <param name="inputTwo">The second string to compare.</param>
         /// <returns>Returns the longest common subsequence.</returns>
-        private static string GetResult(SimpleMemory simpleMemory, string inputOne, string inputTwo)
+        private string GetResult(SimpleMemory simpleMemory, string inputOne, string inputTwo)
         {
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
             var result = "";
-            var startIndex = GenomeMatcher.GetLCS_InputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2;
+            var startIndex = GetLCS_InputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2;
 
             for (int i = 0; i < maxInputLength; i++)
             {

@@ -1,4 +1,6 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -9,7 +11,7 @@ namespace Hast.Samples.SampleAssembly
     public class ObjectOrientedShowcase
     {
         public const int Run_InputUInt32Index = 0;
-        public const int Run_OutputUInt32Index = 0;
+        private const int Run_OutputUInt32Index = 0;
 
 
         public virtual void Run(SimpleMemory memory)
@@ -31,6 +33,7 @@ namespace Hast.Samples.SampleAssembly
             numberContainers1[0].NumberPlusFive = inputNumber + 10;
             numberContainers1[1].IncreaseNumber(5);
             numberContainers1[2].IncreaseNumberBy10();
+            numberContainers1[2].IncreaseNumberBy20();
 
             // Using ref and out.
             uint increaseBy = 10;
@@ -39,7 +42,7 @@ namespace Hast.Samples.SampleAssembly
 
 
             // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
-            // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a 
+            // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a
             // variable then its value should be computable from all other values at compile-time).
             var numberContainers2 = new NumberContainer[1];
             var numberContainer = new NumberContainer
@@ -59,11 +62,11 @@ namespace Hast.Samples.SampleAssembly
             }
 
             // You can also pass arrays and other objects around to other methods.
-            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberCointainers(numberContainers1));
+            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberContainers(numberContainers1));
         }
 
 
-        private uint SumNumberCointainers(NumberContainer[] numberContainers)
+        private uint SumNumberContainers(NumberContainer[] numberContainers)
         {
             uint sum = 0;
 
@@ -73,6 +76,17 @@ namespace Hast.Samples.SampleAssembly
             }
 
             return sum;
+        }
+
+
+        public uint Run(uint input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        {
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(10)
+                : hastlayer.CreateMemory(configuration, 10);
+            memory.WriteUInt32(Run_InputUInt32Index, input);
+            Run(memory);
+            return memory.ReadUInt32(Run_OutputUInt32Index);
         }
     }
 
@@ -106,7 +120,7 @@ namespace Hast.Samples.SampleAssembly
             Number = number;
         }
 
-        
+
         // Instance methods can be added as usual.
         public uint IncreaseNumber(uint increaseBy)
         {
@@ -127,6 +141,13 @@ namespace Hast.Samples.SampleAssembly
     }
 
 
+    public static class NumberContainerExtensions
+    {
+        // You can also write extension methods.
+        public static uint IncreaseNumberBy20(this NumberContainer numberContainer) => numberContainer.IncreaseNumber(20);
+    }
+
+
     public class MemoryContainer
     {
         // The SimpleMemory object can be passed around as usual.
@@ -140,18 +161,5 @@ namespace Hast.Samples.SampleAssembly
 
 
         public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.Run_InputUInt32Index);
-    }
-
-
-
-    public static class ObjectOrientedShowcaseExtensions
-    {
-        public static uint Run(this ObjectOrientedShowcase algorithm, uint input)
-        {
-            var memory = new SimpleMemory(10);
-            memory.WriteUInt32(ObjectOrientedShowcase.Run_InputUInt32Index, input);
-            algorithm.Run(memory);
-            return memory.ReadUInt32(ObjectOrientedShowcase.Run_OutputUInt32Index);
-        }
     }
 }

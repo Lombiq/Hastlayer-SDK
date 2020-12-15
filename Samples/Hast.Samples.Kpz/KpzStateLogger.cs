@@ -1,5 +1,8 @@
+using Hast.Samples.Kpz.Algorithms;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+
 namespace Hast.Samples.Kpz
 {
     /// <summary>
@@ -9,6 +12,7 @@ namespace Hast.Samples.Kpz
     {
         public List<KpzAction> Actions = new List<KpzAction>();
     }
+
 
 
     /// <summary>
@@ -23,6 +27,7 @@ namespace Hast.Samples.Kpz
     /// </item></description>
     /// </list>
     /// </summary>
+    [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
     public struct KpzAction
     {
         public string Description;
@@ -44,10 +49,7 @@ namespace Hast.Samples.Kpz
 
 
         /// <summary>We add an iteration when the constructor is called, so actions can be added right away.</summary>
-        public KpzStateLogger()
-        {
-            NewKpzIteration();
-        }
+        public KpzStateLogger() => NewKpzIteration();
 
 
         /// <summary>Add a new <see cref="KpzIteration" />.</summary>
@@ -58,7 +60,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void AddKpzAction(string Description, KpzNode[,] Grid)
         {
-            Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
+            Iterations[^1].Actions.Add(new KpzAction
             {
                 Description = Description,
                 Grid = CopyOfGrid(Grid),
@@ -73,7 +75,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         public void AddKpzAction(string Description, int[,] HeightMap)
         {
-            Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
+            Iterations[^1].Actions.Add(new KpzAction
             {
                 Description = Description,
                 Grid = new KpzNode[0, 0],
@@ -89,7 +91,7 @@ namespace Hast.Samples.Kpz
         public void AddKpzAction(string Description)
         {
             // Adds a deep copy of the grid into the current iteration
-            Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
+            Iterations[^1].Actions.Add(new KpzAction
             {
                 Description = Description,
                 Grid = new KpzNode[0, 0],
@@ -118,7 +120,7 @@ namespace Hast.Samples.Kpz
                 }
             }
 
-            Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
+            Iterations[^1].Actions.Add(new KpzAction
             {
                 Description = Description,
                 Grid = CopyOfGrid(Grid),
@@ -137,12 +139,14 @@ namespace Hast.Samples.Kpz
         public void AddKpzAction(string Description, KpzNode[,] Grid, KpzCoords Center,
             KpzNeighbours Neighbours, bool ChangedGrid)
         {
-            var highlightedCoords = new List<KpzCoords>();
-            highlightedCoords.Add(new KpzCoords { x = Center.x, y = Center.y });
-            highlightedCoords.Add(new KpzCoords { x = Neighbours.nxCoords.x, y = Neighbours.nxCoords.y });
-            highlightedCoords.Add(new KpzCoords { x = Neighbours.nyCoords.x, y = Neighbours.nyCoords.y });
+            var highlightedCoords = new List<KpzCoords>
+            {
+                new KpzCoords { x = Center.x, y = Center.y },
+                new KpzCoords { x = Neighbours.nxCoords.x, y = Neighbours.nxCoords.y },
+                new KpzCoords { x = Neighbours.nyCoords.x, y = Neighbours.nyCoords.y }
+            };
 
-            Iterations[Iterations.Count - 1].Actions.Add(new KpzAction
+            Iterations[^1].Actions.Add(new KpzAction
             {
                 Description = Description,
                 Grid = CopyOfGrid(Grid),
@@ -160,25 +164,22 @@ namespace Hast.Samples.Kpz
 
             foreach (var iteration in Iterations)
             {
-                using (System.IO.StreamWriter file =
-                    new System.IO.StreamWriter(path + (iterationIndex++).ToString() + ".txt"))
+                using var file = new System.IO.StreamWriter(path + (iterationIndex++).ToString() + ".txt");
+                foreach (var action in iteration.Actions)
                 {
-                    foreach (var action in iteration.Actions)
+                    file.WriteLine(action.Description);
+
+                    for (int y = 0; y < action.Grid.GetLength(1); y++)
                     {
-                        file.WriteLine(action.Description);
+                        string line = "";
 
-                        for (int y = 0; y < action.Grid.GetLength(1); y++)
+                        for (int x = 0; x < action.Grid.GetLength(0); x++)
                         {
-                            string line = "";
-
-                            for (int x = 0; x < action.Grid.GetLength(0); x++)
-                            {
-                                line += ((action.Grid[x, y].dx) ? "1" : "0") +
-                                    ((action.Grid[x, y].dy) ? "1" : "0") + " ";
-                            }
-
-                            file.WriteLine(line);
+                            line += ((action.Grid[x, y].dx) ? "1" : "0") +
+                                ((action.Grid[x, y].dy) ? "1" : "0") + " ";
                         }
+
+                        file.WriteLine(line);
                     }
                 }
             }
@@ -191,14 +192,16 @@ namespace Hast.Samples.Kpz
         /// <summary>Make a deep copy of a grid (2D <see cref="KpzNode" /> array).</summary>
         private static KpzNode[,] CopyOfGrid(KpzNode[,] Grid)
         {
-            KpzNode[,] toReturn = new KpzNode[Grid.GetLength(0), Grid.GetLength(1)];
+            var toReturn = new KpzNode[Grid.GetLength(0), Grid.GetLength(1)];
             for (int x = 0; x < Grid.GetLength(0); x++)
             {
                 for (int y = 0; y < Grid.GetLength(1); y++)
                 {
-                    toReturn[x, y] = new KpzNode();
-                    toReturn[x, y].dx = Grid[x, y].dx;
-                    toReturn[x, y].dy = Grid[x, y].dy;
+                    toReturn[x, y] = new KpzNode
+                    {
+                        dx = Grid[x, y].dx,
+                        dy = Grid[x, y].dy
+                    };
                 }
             }
             return toReturn;

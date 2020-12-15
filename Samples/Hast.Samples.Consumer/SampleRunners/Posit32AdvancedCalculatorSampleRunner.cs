@@ -10,19 +10,19 @@ using Lombiq.Arithmetics;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal class Posit32AdvancedCalculatorSampleRunner
+    internal class Posit32AdvancedCalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator());
+            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);
 
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             var sqrtInputArray = new uint[10];
             for (int i = 0; i < 10; i++)
@@ -30,7 +30,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
             }
 
-            positCalculator.SqrtOfPositsInArray(sqrtInputArray);
+            positCalculator.SqrtOfPositsInArray(sqrtInputArray, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
         public static void RunSoftwareBenchmarks()

@@ -23,5 +23,11 @@ namespace Hast.Communication.Extensibility
         /// Gets the materialized hardware behind the hardware-implemented members.
         /// </summary>
         IHardwareRepresentation HardwareRepresentation { get; }
+
+        /// <summary>
+        /// Debug information about the software execution of hardware-executed members in case the hardware execution
+        /// was canceled or verified in software.
+        /// </summary>
+        ISoftwareExecutionInformation SoftwareExecutionInformation { get; }
     }
 }

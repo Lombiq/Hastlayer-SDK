@@ -1,126 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7249D1E5-ABEC-40BB-9238-5E54AB0E1E94}</ProjectGuid>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <OutputType>Exe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hast.Samples.Consumer</RootNamespace>
-    <AssemblyName>Hast.Samples.Consumer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\Orchard\src\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sample.cs" />
-    <Compile Include="SampleRunners\Fix64CalculatorSampleRunner.cs" />
-    <Compile Include="SampleRunners\GenomeMatcherSampleRunner.cs" />
-    <Compile Include="SampleRunners\LoopbackSampleRunner.cs" />
-    <Compile Include="SampleRunners\ParallelAlgorithmSampleRunner.cs" />
-    <Compile Include="SampleRunners\ImageProcessingAlgorithmsSampleRunner.cs" />
-    <Compile Include="SampleRunners\MonteCarloAlgorithmSampleRunner.cs" />
-    <Compile Include="SampleRunners\ObjectOrientedShowcaseSampleRunner.cs" />
-    <Compile Include="SampleRunners\Posit32AdvancedCalculatorSampleRunner.cs" />
-    <Compile Include="SampleRunners\Posit32FusedCalculatorSampleRunner.cs" />
-    <Compile Include="SampleRunners\PositCalculatorSampleRunner.cs" />
-    <Compile Include="SampleRunners\Posit32CalculatorSampleRunner.cs" />
-    <Compile Include="SampleRunners\PrimeCalculatorSampleRunner.cs" />
-    <Compile Include="SampleRunners\RecursiveAlgorithmsSampleRunner.cs" />
-    <Compile Include="SampleRunners\SimdCalculatorSampleRunner.cs" />
-    <Compile Include="SampleRunners\UnumCalculatorSampleRunner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Readme.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj">
-      <Project>{9dee53c2-83ac-4048-adab-2993faffe4ea}</Project>
-      <Name>Hast.Transformer.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj">
-      <Project>{0DC6FD30-4C53-4805-996B-E34A98EFEBAA}</Project>
-      <Name>Hast.Algorithms</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Common\Hast.Common.csproj">
-      <Project>{6ee5898a-e450-4a1d-80af-ad27a8bd5e69}</Project>
-      <Name>Hast.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj">
-      <Project>{0d77afba-1b4d-4083-b35c-3309251039b7}</Project>
-      <Name>Hast.Layer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj">
-      <Project>{0d13986f-fa33-4898-a0de-c173764663f0}</Project>
-      <Name>Hast.Transformer.Vhdl.Abstractions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Hast.Remote.Client\Hast.Remote.Client.csproj">
-      <Project>{86d47be0-994e-48ba-b68c-1f0bcab67f02}</Project>
-      <Name>Hast.Remote.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj">
-      <Project>{6cfe69a4-04a3-4427-818c-c0832d197a62}</Project>
-      <Name>Lombiq.Arithmetics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj">
-      <Project>{cb4a8cf6-7dd4-4493-b5cd-e5e51ee5c73b}</Project>
-      <Name>Hast.Samples.SampleAssembly</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
+    <ProjectReference Include="..\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj" />
+    <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fpga.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces">
+      <Version>1.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="StrictEmit">
+      <Version>2.8.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Buffers">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Collections.Immutable">
+      <Version>1.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="System.Numerics.Vectors">
+      <Version>4.5.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reflection.Emit">
+      <Version>4.7.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
+      <Version>4.7.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

@@ -11,7 +11,7 @@ namespace System.Reflection
         public static string GetFullName(this MethodInfo method) =>
             method.ReturnType.FullName + " " +
             method.ReflectedType.FullName + "::" +
-            method.Name + 
+            method.Name +
             "(" + string.Join(",", method.GetParameters().Select(parameter => parameter.ParameterType.FullName)) + ")";
     }
 }
