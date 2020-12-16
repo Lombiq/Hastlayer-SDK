@@ -22,7 +22,7 @@ namespace Hast.Layer.EmptyRepresentationFactories
 
         private class HardwareDescription : IHardwareDescription
         {
-            public string TransformationId { get; } = Sha2456Helper.Empty();
+            public string TransformationId { get; } = Sha256Helper.Empty();
             public string Language => "VHDL";
 
             public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }

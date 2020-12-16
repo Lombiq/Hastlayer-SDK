@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hast.Common.Helpers
 {
-    public static class Sha2456Helper
+    public static class Sha256Helper
     {
         private static readonly Lazy<string> _emptyLazy = new Lazy<string>(() => ComputeHash(string.Empty));
 
