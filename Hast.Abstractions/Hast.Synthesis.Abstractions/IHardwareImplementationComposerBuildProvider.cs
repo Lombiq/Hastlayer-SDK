@@ -8,7 +8,7 @@ namespace Hast.Synthesis.Abstractions
     /// If <see cref="CanCompose"/> returns <see langword="true"/> it performs any build actions and fills in the
     /// <see cref="IHardwareImplementation"/> given by the <see cref="VhdlHardwareImplementationComposer"/>.
     /// </summary>
-    public interface IHardwareImplementationComposerBuildProvider : IDependency
+    public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IDependency
     {
         /// <summary>
         /// Determines if the instance is applicable to the current composition task based on the

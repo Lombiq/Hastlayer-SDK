@@ -1,3 +1,4 @@
+using Hast.Common.Extensions;
 using Hast.Common.Models;
 using Hast.Layer;
 using System.Collections.Generic;
@@ -23,10 +24,10 @@ namespace Hast.Synthesis.Abstractions
         {
             var implementation = new HardwareImplementation();
 
-            foreach (var buildProvider in _buildProviders.Where(provider => provider.CanCompose(context)))
-            {
-                await buildProvider.BuildAsync(context, implementation);
-            }
+            var buildProviders = _buildProviders
+                .Where(provider => provider.CanCompose(context))
+                .OrderByRequirements<IHardwareImplementationComposerBuildProvider, string>();
+            foreach (var buildProvider in buildProviders) await buildProvider.BuildAsync(context, implementation);
 
             return implementation;
         }
