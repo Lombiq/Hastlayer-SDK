@@ -158,7 +158,13 @@ namespace Hast.Vitis.Abstractions.Services
                 .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
                 .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
                 .OrderByDescending(name => name)
-                .First();
+                .FirstOrDefault();
+
+            if (device == null)
+            {
+                throw new InvalidOperationException("No device platform were found. Did you forget to set the " +
+                                                    "$XILINX_PLATFORM environment variable?");
+            }
 
             var xclbinDirectoryPath = EnsureDirectoryExists(
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
@@ -258,6 +264,13 @@ namespace Hast.Vitis.Abstractions.Services
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm
                 ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
                 : Array.Empty<string>());
+
+            if (deviceManifest.RequiresDcpBinary)
+            {
+                vppArguments.Add("--advanced.param");
+                vppArguments.Add("compiler.acceleratorBinaryContent=dcp");
+            }
+
             vppArguments.AddRange(new[]
             {
                 "-g",

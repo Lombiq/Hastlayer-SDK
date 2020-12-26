@@ -16,5 +16,10 @@ namespace Hast.Xilinx.Abstractions
         /// if not set) where that directory contains an .xpfm file.
         /// </summary>
         public IList<string> SupportedPlatforms { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the binary should be DCP format instead of the default bitstream.
+        /// </summary>
+        public bool RequiresDcpBinary { get; set; }
     }
 }
