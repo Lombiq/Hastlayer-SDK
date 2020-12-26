@@ -155,16 +155,12 @@ namespace Hast.Vitis.Abstractions.Services
             // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
             // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
             var device = deviceManifest.SupportedPlatforms!
-                .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
-                .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
-                .OrderByDescending(name => name)
-                .FirstOrDefault();
-
-            if (device == null)
-            {
-                throw new InvalidOperationException("No device platform were found. Did you forget to set the " +
-                                                    "$XILINX_PLATFORM environment variable?");
-            }
+                             .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
+                             .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
+                             .OrderByDescending(name => name)
+                             .FirstOrDefault() ??
+                         throw new InvalidOperationException(
+                             "No device platform was found. Did you set the $XILINX_PLATFORM environment variable?");
 
             var xclbinDirectoryPath = EnsureDirectoryExists(
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
@@ -173,7 +169,7 @@ namespace Hast.Vitis.Abstractions.Services
             await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
 
             // If the xclbin exists then we are done here.
-            if (File.Exists(implementation.BinaryPath) && File.Exists(implementation.BinaryPath + ".info"))
+            if (AllExist(implementation.BinaryPath, implementation.BinaryPath + ".info"))
             {
                 ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
                 return;
@@ -211,13 +207,11 @@ namespace Hast.Vitis.Abstractions.Services
             Cleanup(hardwareFrameworkPath, hashId);
         }
 
-
         private void ProgressMajor(string message)
         {
             MajorStep++;
             Progress?.Invoke(this, new BuildProgressEventArgs(message, isMajorStep: true));
         }
-
 
         private async Task BuildKernelAsync(
             string hardwareFrameworkPath,
