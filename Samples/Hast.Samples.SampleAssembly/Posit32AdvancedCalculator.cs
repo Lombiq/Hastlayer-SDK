@@ -1,5 +1,4 @@
-﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 

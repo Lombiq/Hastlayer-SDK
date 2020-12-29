@@ -1,5 +1,3 @@
-﻿
-
 using Hast.Layer;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.Arithmetics;
