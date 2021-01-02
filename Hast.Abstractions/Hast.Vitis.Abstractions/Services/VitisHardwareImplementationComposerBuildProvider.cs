@@ -202,7 +202,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (deviceManifest.RequiresDcpBinary)
             {
-                ProgressMajor("There are no reports when then the project is compiles as netlist.");
+                ProgressMajor("There are no reports when then the project is compiled as netlist.");
             }
             else
             {
