@@ -18,7 +18,8 @@ namespace Hast.Xilinx.Abstractions
         public IList<string> SupportedPlatforms { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the binary should be DCP format instead of the default bitstream.
+        /// Gets or sets a value indicating whether the binary should be netlist (DCP) format instead of the default
+        /// bitstream.
         /// </summary>
         public bool RequiresDcpBinary { get; set; }
     }

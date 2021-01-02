@@ -200,9 +200,16 @@ namespace Hast.Vitis.Abstractions.Services
             var disableHbm = deviceManifest.SupportsHbm && !openClConfiguration.UseHbm;
             CopyBinaries(target, implementation.BinaryPath, hashId, disableHbm);
 
-            ProgressMajor("Collecting reports.");
-            try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
-            catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
+            if (deviceManifest.RequiresDcpBinary)
+            {
+                ProgressMajor("There are no reports when then the project is compiles as netlist.");
+            }
+            else
+            {
+                ProgressMajor("Collecting reports.");
+                try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
+                catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
+            }
 
             Cleanup(hardwareFrameworkPath, hashId);
         }
