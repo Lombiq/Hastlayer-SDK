@@ -11,13 +11,9 @@ namespace Hast.Vitis.Abstractions.Models
         [JsonProperty("BlobContainerSAS")]
         public string BlobContainerSignature { get; set; }
 
-        public AzureStartPostData(AzureAttestationConfiguration configuration, string blobContainerSignature)
-            : base(configuration)
-        {
+        public AzureStartPostData(
+            AzureAttestationConfiguration configuration)
+            : base(configuration) =>
             StorageAccountName = configuration?.StorageAccountName;
-            Container = configuration?.Container;
-            NetlistName = configuration?.NetlistName;
-            BlobContainerSignature = blobContainerSignature;
-        }
     }
 }

@@ -76,7 +76,12 @@ namespace Hast.Vitis.Abstractions.Services
         {
             var (orchestrationId, errorMessage) = await GetResponseAsync<AzureStartResponseData>(
                 configuration.StartFunctionUrl,
-                new AzureStartPostData(configuration, await GetSharedAccessSignatureAsync(configuration)));
+                new AzureStartPostData(configuration)
+                {
+                    BlobContainerSignature = await GetSharedAccessSignatureAsync(configuration),
+                    Container = BlobContainerName,
+                    NetlistName = Path.GetFileName(binaryPath),
+                });
             if (!string.IsNullOrWhiteSpace(errorMessage) && errorMessage != "None")
             {
                 throw new InvalidOperationException($"Couldn't start attestation: {errorMessage}");

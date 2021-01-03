@@ -27,22 +27,18 @@ namespace Hast.Vitis.Abstractions.Models
         public string StorageAccountKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the container name for the storage account name.
-        /// </summary>
-        public string Container { get; set; }
-
-        /// <summary>
-        /// Gets or sets the netlist name to be validated.
-        /// </summary>
-        public string NetlistName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ID of the user hosting the storage blob.
+        /// Gets or sets the ID of the user hosting the storage blob. You can retreive it using:
+        /// <code>
+        /// az account show --output tsv --query id
+        /// </code>
         /// </summary>
         public string ClientSubscriptionId { get; set; }
 
         /// <summary>
-        /// Gets or sets the ID of the tenant hosting the storage blob.
+        /// Gets or sets the ID of the tenant hosting the storage blob. You can retreive it using:
+        /// <code>
+        /// az account show --output tsv --query tenantId
+        /// </code>
         /// </summary>
         public string ClientTenantId { get; set; }
 
@@ -65,8 +61,6 @@ namespace Hast.Vitis.Abstractions.Models
             if (StartFunctionUrl == null) ThrowMissing(nameof(StartFunctionUrl));
             if (PollFunctionUrl == null) ThrowMissing(nameof(PollFunctionUrl));
             if (string.IsNullOrEmpty(StorageAccountName)) ThrowMissing(nameof(StorageAccountName));
-            if (string.IsNullOrEmpty(Container)) ThrowMissing(nameof(Container));
-            if (string.IsNullOrEmpty(NetlistName)) ThrowMissing(nameof(NetlistName));
             if (string.IsNullOrEmpty(ClientTenantId)) ThrowMissing(nameof(ClientTenantId));
             if (string.IsNullOrEmpty(ClientSubscriptionId)) ThrowMissing(nameof(ClientSubscriptionId));
         }
