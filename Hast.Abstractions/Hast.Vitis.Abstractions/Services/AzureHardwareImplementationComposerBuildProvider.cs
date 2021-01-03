@@ -1,4 +1,5 @@
-﻿using Hast.Layer;
+﻿using Azure.Storage.Blobs;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
@@ -19,6 +20,7 @@ namespace Hast.Vitis.Abstractions.Services
 {
     public class AzureHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
+        private const string BlobContainerName = "hastlayer-attestation";
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
 
         public ISet<string> Requirements { get; } = new HashSet<string> { nameof(VitisCommunicationService) };
@@ -42,21 +44,37 @@ namespace Hast.Vitis.Abstractions.Services
             var configuration = context.Configuration.GetOrAddAzureAttestationConfiguration();
             configuration.SetupAndVerify();
 
-            await UploadToStorageAsync(configuration);
+            await UploadToStorageAsync(configuration, implementation.BinaryPath);
             await PerformAttestationAsync(configuration);
             await DownloadValidatedFileAsnyc(configuration, implementation.BinaryPath);
         }
 
-        private async Task UploadToStorageAsync(AzureAttestationConfiguration configuration)
+        private async Task UploadToStorageAsync(
+            AzureAttestationConfiguration configuration,
+            string binaryPath)
         {
-            throw new NotImplementedException();
+            _logger.LogInformation("Setting up storage client...");
+            var blobServiceClient = new BlobServiceClient(configuration.GenerateStorageConnectionString());
+            var containerClient = (await blobServiceClient.CreateBlobContainerAsync(BlobContainerName)).Value;
+            var blobClient = containerClient.GetBlobClient(Path.GetFileName(binaryPath));
+
+            if ((await blobClient.ExistsAsync()).Value)
+            {
+                _logger.LogInformation("The xclbin file is already uploaded to the storage container!");
+                return;
+            }
+
+            _logger.LogInformation("Uploading file...");
+            await using var xclbinToUploadStream = File.OpenRead(binaryPath);
+            await blobClient.UploadAsync(xclbinToUploadStream);
+            xclbinToUploadStream.Close();
         }
 
         private async Task PerformAttestationAsync(AzureAttestationConfiguration configuration)
         {
             var (orchestrationId, errorMessage) = await GetResponseAsync<AzureStartResponseData>(
                 configuration.StartFunctionUrl,
-                new AzureStartPostData(configuration));
+                new AzureStartPostData(configuration, await GetSharedAccessSignatureAsync(configuration)));
             if (!string.IsNullOrWhiteSpace(errorMessage) && errorMessage != "None")
             {
                 throw new InvalidOperationException($"Couldn't start attestation: {errorMessage}");
@@ -98,6 +116,11 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         private async Task DownloadValidatedFileAsnyc(AzureAttestationConfiguration configuration, string binaryPath)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static async Task<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
         {
             throw new NotImplementedException();
         }
