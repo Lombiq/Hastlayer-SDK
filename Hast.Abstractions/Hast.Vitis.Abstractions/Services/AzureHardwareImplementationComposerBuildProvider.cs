@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,6 +20,7 @@ namespace Hast.Vitis.Abstractions.Services
     public class AzureHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
+
         public ISet<string> Requirements { get; } = new HashSet<string> { nameof(VitisCommunicationService) };
 
         public AzureHardwareImplementationComposerBuildProvider(
@@ -33,12 +35,12 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
-            // Update XCLBIN file path. Skip if the validated bit file already exists.
+            // Update xclbin file path. Skip if the validated bit file already exists.
             implementation.BinaryPath = Regex.Replace(implementation.BinaryPath, @"\.xclbin$", ".bit.xclbin");
-            if (System.IO.File.Exists(implementation.BinaryPath)) return;
+            if (File.Exists(implementation.BinaryPath)) return;
 
             var configuration = context.Configuration.GetOrAddAzureAttestationConfiguration();
-            VerifyConfiguration(configuration);
+            configuration.SetupAndVerify();
 
             await UploadToStorageAsync(configuration);
             await PerformAttestationAsync(configuration);
@@ -117,24 +119,5 @@ namespace Hast.Vitis.Abstractions.Services
 
             return result;
         }
-
-        private static void VerifyConfiguration(AzureAttestationConfiguration configuration)
-        {
-            if (configuration.StartFunctionUrl == null) ThrowMissing(nameof(configuration.StartFunctionUrl));
-            if (configuration.PollFunctionUrl == null) ThrowMissing(nameof(configuration.PollFunctionUrl));
-            if (string.IsNullOrEmpty(configuration.StorageAccountName)) ThrowMissing(nameof(configuration.StorageAccountName));
-            if (string.IsNullOrEmpty(configuration.Container)) ThrowMissing(nameof(configuration.Container));
-            if (string.IsNullOrEmpty(configuration.NetlistName)) ThrowMissing(nameof(configuration.NetlistName));
-            if (string.IsNullOrEmpty(configuration.BlobContainerSas)) ThrowMissing(nameof(configuration.BlobContainerSas));
-            if (string.IsNullOrEmpty(configuration.ClientTenantId)) ThrowMissing(nameof(configuration.ClientTenantId));
-            if (string.IsNullOrEmpty(configuration.ClientSubscriptionId)) ThrowMissing(nameof(configuration.ClientSubscriptionId));
-        }
-
-        private static void ThrowMissing(string name) =>
-            throw new InvalidOperationException(
-                $"The property '{name}' is missing or empty. It is required to deal with the attestation service. " +
-                $"Please specify it in the appsettings.json or otherwise set the " +
-                $"{nameof(IHardwareGenerationConfiguration)}. See the readme of the Hast.Vitis.Abstractions library " +
-                $"for further details.");
     }
 }

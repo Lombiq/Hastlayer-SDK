@@ -4,7 +4,7 @@
     {
         public string OrchestrationId { get; set; }
 
-        public AzurePollPostData(AzureAttestationConfiguration configuration = null, string orchestrationId = null)
+        public AzurePollPostData(AzureAttestationConfiguration configuration, string orchestrationId)
             : base(configuration) =>
             OrchestrationId = orchestrationId;
     }
