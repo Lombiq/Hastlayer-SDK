@@ -1,4 +1,6 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Specialized;
+using Azure.Storage.Sas;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
@@ -15,6 +17,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static Azure.Storage.Sas.BlobContainerSasPermissions;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -45,8 +48,8 @@ namespace Hast.Vitis.Abstractions.Services
             configuration.SetupAndVerify();
 
             await UploadToStorageAsync(configuration, implementation.BinaryPath);
-            await PerformAttestationAsync(configuration);
-            await DownloadValidatedFileAsnyc(configuration, implementation.BinaryPath);
+            await PerformAttestationAsync(configuration, implementation.BinaryPath);
+            await DownloadValidatedFileAsync(configuration, implementation.BinaryPath);
         }
 
         private async Task UploadToStorageAsync(
@@ -54,8 +57,7 @@ namespace Hast.Vitis.Abstractions.Services
             string binaryPath)
         {
             _logger.LogInformation("Setting up storage client...");
-            var blobServiceClient = new BlobServiceClient(configuration.GenerateStorageConnectionString());
-            var containerClient = (await blobServiceClient.CreateBlobContainerAsync(BlobContainerName)).Value;
+            var containerClient = await GetBlobContainerClientAsync(configuration);
             var blobClient = containerClient.GetBlobClient(Path.GetFileName(binaryPath));
 
             if ((await blobClient.ExistsAsync()).Value)
@@ -70,7 +72,7 @@ namespace Hast.Vitis.Abstractions.Services
             xclbinToUploadStream.Close();
         }
 
-        private async Task PerformAttestationAsync(AzureAttestationConfiguration configuration)
+        private async Task PerformAttestationAsync(AzureAttestationConfiguration configuration, string binaryPath)
         {
             var (orchestrationId, errorMessage) = await GetResponseAsync<AzureStartResponseData>(
                 configuration.StartFunctionUrl,
@@ -107,7 +109,7 @@ namespace Hast.Vitis.Abstractions.Services
                         var runStatus = outputList.FirstOrDefault();
                         if (runStatus == "Attestation process succeeded") return;
 
-                        // TODO download the logs from blob storage before throwing this exception.
+                        await DownloadLogsAsync(configuration, binaryPath);
                         throw new InvalidOperationException($"Attestation failed: {runStatus ?? "Unknown issue"}");
                     default:
                         throw new InvalidOperationException($"Unknown polled status: {statusText}");
@@ -115,14 +117,52 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private async Task DownloadValidatedFileAsnyc(AzureAttestationConfiguration configuration, string binaryPath)
+        private async Task DownloadLogsAsync(AzureAttestationConfiguration configuration, string binaryPath)
         {
-            throw new NotImplementedException();
+            const string extensionRegexp = @"\.bit\.xclbin$";
+            var logFiles = new []
+            {
+                Regex.Replace(binaryPath, extensionRegexp, "-log.txt"),
+                Regex.Replace(binaryPath, extensionRegexp, "-logPhase0.txt"),
+                Regex.Replace(binaryPath, extensionRegexp, "-logPhase1.txt"),
+                Regex.Replace(binaryPath, extensionRegexp, "-logPhase2.txt"),
+                Regex.Replace(binaryPath, extensionRegexp, "-logPhase3.txt"),
+            }; // The logPhase files are either 0-2 or 1-3, the doc doesn't make this clear.
+
+            var containerClient = await GetBlobContainerClientAsync(configuration);
+            foreach (var logFile in logFiles)
+            {
+                var logFileName = Path.GetFileName(logFile);
+                var blobClient = containerClient.GetBlobClient(logFileName);
+                if (!await blobClient.ExistsAsync()) continue;
+
+                try
+                {
+                    if (File.Exists(logFile)) File.Delete(logFile);
+
+                    await DownloadAsync(blobClient, logFile);
+                    _logger.LogInformation("Log file downloaded: {0}", logFile);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to download log file: {0}", logFileName);
+                }
+            }
+        }
+
+        private async Task DownloadValidatedFileAsync(AzureAttestationConfiguration configuration, string binaryPath)
+        {
+            var containerClient = await GetBlobContainerClientAsync(configuration);
+            var blobClient = containerClient.GetBlobClient(Path.GetFileName(binaryPath));
+
+            await DownloadAsync(blobClient, binaryPath);
         }
 
         private static async Task<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
         {
-            throw new NotImplementedException();
+            var client = await GetBlobContainerClientAsync(configuration);
+            var sasUri = await GetUserDelegationSasContainerAsync(client);
+            return sasUri.AbsoluteUri;
         }
 
         private static async Task<T> GetResponseAsync<T>(Uri url, object post)
@@ -141,6 +181,46 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             return result;
+        }
+
+        private static async Task<BlobContainerClient> GetBlobContainerClientAsync(
+            AzureAttestationConfiguration configuration)
+        {
+            var blobServiceClient = new BlobServiceClient(configuration.GenerateStorageConnectionString());
+            var containerClientResponse = await blobServiceClient.CreateBlobContainerAsync(BlobContainerName);
+            return containerClientResponse.Value;
+        }
+
+        private static async Task<Uri> GetUserDelegationSasContainerAsync(BlobContainerClient blobContainerClient)
+        {
+            var blobServiceClient = blobContainerClient.GetParentBlobServiceClient();
+
+            // Values configured as per Running FPGA Attestation for Azure Private Preview document.
+            var startOffset = DateTimeOffset.UtcNow;
+            var expirationOffset = startOffset.AddHours(6);
+            var userDelegationKey = await blobServiceClient.GetUserDelegationKeyAsync(startOffset, expirationOffset);
+
+            var sasBuilder = new BlobSasBuilder
+            {
+                BlobContainerName = blobContainerClient.Name,
+                Resource = "c",
+                ExpiresOn = expirationOffset,
+            };
+            sasBuilder.SetPermissions(Read | Write | Create);
+
+            var uriBuilder = new BlobUriBuilder(blobContainerClient.Uri)
+            {
+                Sas = sasBuilder.ToSasQueryParameters(userDelegationKey, blobServiceClient.AccountName),
+            };
+            return uriBuilder.ToUri();
+        }
+
+        private static async Task DownloadAsync(BlobClient blobClient, string filePath)
+        {
+            var download = await blobClient.DownloadAsync();
+            await using var stream = File.OpenWrite(filePath);
+            await download.Value.Content.CopyToAsync(stream);
+            stream.Close();
         }
     }
 }
