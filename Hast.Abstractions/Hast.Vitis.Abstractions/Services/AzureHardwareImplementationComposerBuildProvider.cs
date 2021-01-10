@@ -16,6 +16,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using static Azure.Storage.Sas.BlobContainerSasPermissions;
 
@@ -25,8 +26,12 @@ namespace Hast.Vitis.Abstractions.Services
     {
         private const string BlobContainerName = "hastlayer-attestation";
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
+        private bool _containerChecked;
 
-        public ISet<string> Requirements { get; } = new HashSet<string> { nameof(VitisCommunicationService) };
+        public ISet<string> Requirements { get; } = new HashSet<string>
+        {
+            nameof(VitisHardwareImplementationComposerBuildProvider)
+        };
 
         public AzureHardwareImplementationComposerBuildProvider(
             ILogger<AzureHardwareImplementationComposerBuildProvider> logger) =>
@@ -41,14 +46,15 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementation implementation)
         {
             // Update xclbin file path. Skip if the validated bit file already exists.
+            var oldBinaryPath = implementation.BinaryPath;
             implementation.BinaryPath = Regex.Replace(implementation.BinaryPath, @"\.xclbin$", ".bit.xclbin");
             if (File.Exists(implementation.BinaryPath)) return;
 
             var configuration = context.Configuration.GetOrAddAzureAttestationConfiguration();
             configuration.SetupAndVerify();
 
-            await UploadToStorageAsync(configuration, implementation.BinaryPath);
-            await PerformAttestationAsync(configuration, implementation.BinaryPath);
+            await UploadToStorageAsync(configuration, oldBinaryPath);
+            await PerformAttestationAsync(configuration, oldBinaryPath);
             await DownloadValidatedFileAsync(configuration, implementation.BinaryPath);
         }
 
@@ -68,12 +74,12 @@ namespace Hast.Vitis.Abstractions.Services
 
             _logger.LogInformation("Uploading file...");
             await using var xclbinToUploadStream = File.OpenRead(binaryPath);
-            await blobClient.UploadAsync(xclbinToUploadStream);
-            xclbinToUploadStream.Close();
+            await blobClient.UploadAsync(xclbinToUploadStream, true, CancellationToken.None);
         }
 
         private async Task PerformAttestationAsync(AzureAttestationConfiguration configuration, string binaryPath)
         {
+            _logger.LogInformation("Sending attestation start request...");
             var (orchestrationId, errorMessage) = await GetResponseAsync<AzureStartResponseData>(
                 configuration.StartFunctionUrl,
                 new AzureStartPostData(configuration)
@@ -89,7 +95,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             _logger.LogInformation(
                 "Attestation request was submitted successfully with Orchestration ID: {0}",
-                errorMessage);
+                orchestrationId);
             _logger.LogInformation("Checking the status of attestation using {0}", configuration.PollFunctionUrl);
 
             while (true)
@@ -124,7 +130,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private async Task DownloadLogsAsync(AzureAttestationConfiguration configuration, string binaryPath)
         {
-            const string extensionRegexp = @"\.bit\.xclbin$";
+            const string extensionRegexp = @"\.xclbin$";
             var logFiles = new []
             {
                 Regex.Replace(binaryPath, extensionRegexp, "-log.txt"),
@@ -163,11 +169,29 @@ namespace Hast.Vitis.Abstractions.Services
             await DownloadAsync(blobClient, binaryPath);
         }
 
-        private static async Task<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
+        private async Task<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
         {
             var client = await GetBlobContainerClientAsync(configuration);
             var sasUri = await GetUserDelegationSasContainerAsync(client);
             return sasUri.AbsoluteUri;
+        }
+
+        private async Task<BlobContainerClient> GetBlobContainerClientAsync(
+            AzureAttestationConfiguration configuration)
+        {
+            var blobServiceClient = new BlobServiceClient(configuration.GenerateStorageConnectionString());
+
+            var client = blobServiceClient.GetBlobContainerClient(BlobContainerName);
+            if (_containerChecked) return client;
+
+            if (!await client.ExistsAsync())
+            {
+                var containerClientResponse = await blobServiceClient.CreateBlobContainerAsync(BlobContainerName);
+                client = containerClientResponse.Value;
+            }
+
+            _containerChecked = true;
+            return client;
         }
 
         private static async Task<T> GetResponseAsync<T>(Uri url, object post)
@@ -186,14 +210,6 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             return result;
-        }
-
-        private static async Task<BlobContainerClient> GetBlobContainerClientAsync(
-            AzureAttestationConfiguration configuration)
-        {
-            var blobServiceClient = new BlobServiceClient(configuration.GenerateStorageConnectionString());
-            var containerClientResponse = await blobServiceClient.CreateBlobContainerAsync(BlobContainerName);
-            return containerClientResponse.Value;
         }
 
         private static async Task<Uri> GetUserDelegationSasContainerAsync(BlobContainerClient blobContainerClient)
