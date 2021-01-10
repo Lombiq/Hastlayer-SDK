@@ -34,6 +34,41 @@ Be sure that all .NET software dependencies are on the same version on both the 
 * [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true` (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions)).
 
 
+## Using Azure Attestation
+
+If you want work with an Alveo card on an Azure VM, you need to use the Azure-specific driver. (Currently only `Azure Alveo U250`.) This alters some of the automatic compilation steps and after compilation submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
+
+This feature is currently in the private preview stage. We can't share some specific setting values as they are confidential and you need to set them using information in the validation scripts. If you don't have access to them, please wait until the project leaves the private phase whereupon we will update the fields' default values so you won't have to set them.
+
+The approval process requires addition configuration. Fill out and add the below `AzureAttestationConfiguration` property to the `CustomConfiguration` in your `appsettings.json` file.
+
+```json
+{
+    "AzureAttestationConfiguration": {
+        "StartFunctionUrl": "Look for $FunctionUrl in Validate-FPGAImage.ps1 inside the validation.zip archive.",
+        "PollFunctionUrl": "Look for $FunctionUrl in Monitor-Validation.ps1 inside the validation.zip archive.",
+        "StorageAccountName": "From portal.",
+        "StorageAccountKey": "From portal.",
+        "ClientSubscriptionId": "From portal.",
+        "ClientTenantId": "From portal."
+    }
+}
+```
+
+To get the rest from your Azure account:
+1. Go to the [Azure Portal](https://portal.azure.com/).
+2. Click Storage Accounts.
+3. Select your account or create a new one with *Blob Storage*.
+4. The Subscription ID in the Overview page becomes `ClientSubscriptionId`.
+5. CLick Settings | Access Keys on the side bar.
+6. Click the Show Keys button.
+7. The "Storage account name" field becomes `StorageAccountName` and the "Key" becomes `StorageAccountKey`.
+8. Go back to the home page and select Active Directory.
+9. The Tenant ID in the Overview page becomes `ClientTenantId`.
+
+Additionally, during compilation only a netlist is generated instead of a bitstream so there won't be any reports based on simulation data.
+
+
 ## Other Remarks
 
 If you ever get an error *\[XRT\] ERROR: some device is already programmed* due to a crashed or interrupted execution, you can reset the card using `xbutil reset` command. See more info about the Xilinx Board Utility [here](https://www.xilinx.com/html_docs/xilinx2019_1/sdaccel_doc/yrx1536963262111.html).
