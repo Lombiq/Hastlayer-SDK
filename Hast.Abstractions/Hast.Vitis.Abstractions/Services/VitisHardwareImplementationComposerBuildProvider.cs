@@ -143,22 +143,44 @@ namespace Hast.Vitis.Abstractions.Services
 
             await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
 
-            var platformsDirectoryPath = new DirectoryInfo(
-                Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
-                Directory.Exists(platformVariable)
-                    ? Path.GetFullPath(platformVariable)
-                    : Path.Combine(xilinxDirectoryPath!, "platforms"));
+            var platformsDirectories = (new[]
+                {
+                    Environment.GetEnvironmentVariable("XILINX_PLATFORM"),
+                    Path.Combine(xilinxDirectoryPath!, "platforms"),
+                    Path.Combine(hardwareFrameworkPath, "platforms"),
+                })
+                .Where(path => path != null && Directory.Exists(path))
+                .Select(path => new DirectoryInfo(path))
+                .ToList();
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
             // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
             // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
             // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
+            // We are looking for platform directories first, then xpfm files. Then by SupportedPlatforms and location:
+            // 1. $XILINX_PLATFORM,
+            // 2. /opt/xilinx/platforms
+            // 3. ./HardwareFramework/platforms
             var device = deviceManifest.SupportedPlatforms!
-                .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
-                .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
-                .OrderByDescending(name => name)
-                .First();
+                .SelectMany(platformName => platformsDirectories
+                    .SelectMany(directoryInfo => directoryInfo
+                        .GetDirectories($"{platformName}*")
+                        .SelectMany(directory => directory.GetFiles("*.xpfm"))
+                        .OrderByDescending(fileInfo => fileInfo.FullName))
+                    .Union(platformsDirectories
+                        .SelectMany(directoryInfo => directoryInfo.GetFiles($"{platformName}*.xpfm"))
+                        .OrderByDescending(fileInfo => fileInfo.FullName))
+                )
+                .FirstOrDefault()?
+                .FullName;
+
+            if (device == null)
+            {
+                throw new FileNotFoundException(
+                    "Unable to find the platform xpfm file. The supported platforms are: " +
+                    string.Join(", ", deviceManifest.SupportedPlatforms));
+            }
 
             var xclbinDirectoryPath = EnsureDirectoryExists(
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
