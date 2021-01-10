@@ -55,7 +55,7 @@ namespace Hast.Common.Extensions
                 {
                     if (!keys.Contains(requirement))
                     {
-                        throw new KeyNotFoundException($"The required servic '{requirement}' was not found!");
+                        throw new KeyNotFoundException($"The required service '{requirement}' was not found!");
                     }
                 }
             }
