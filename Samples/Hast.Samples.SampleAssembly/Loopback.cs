@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
@@ -21,7 +21,10 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteInt32(Run_InputOutputInt32Index, memory.ReadInt32(Run_InputOutputInt32Index) + 1);
         }
 
-        public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public int Run(
+            int input,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(1)
