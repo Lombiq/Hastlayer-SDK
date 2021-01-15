@@ -88,8 +88,31 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                     }
                 }
 
-                var alignmentOffset = alignment - (int)(address.ToInt64() % alignment);
-                memory = memory.Slice(alignmentOffset, memory.Length - alignment);
+                var alignmentOffset = Environment.Is64BitProcess
+                    ? alignment - (int)(address.ToInt64() % alignment)
+                    : alignment - address.ToInt32() % alignment;
+
+                var expectedLength = alignmentOffset + memory.Length - alignment;
+                if (expectedLength > 0 && expectedLength < memory.Length)
+                {
+                    memory = memory.Slice(alignmentOffset, memory.Length - alignment);
+                }
+                else // This should never happen in production.
+                {
+#if DEBUG
+                    Console.Error.WriteLine("Alignment failed!!");
+                    Console.Error.WriteLine("memory length: {0}", memory.Length);
+                    Console.Error.WriteLine("alignment: {0}", alignment);
+                    Console.Error.WriteLine("alignmentOffset: {0}", alignmentOffset);
+                    Console.Error.WriteLine("expectedLength: {0}", expectedLength);
+#else
+                    throw new InvalidOperationException("Alignment failed! (" +
+                                                        $"memory length: {memory.Length}; " +
+                                                        $"alignment: {alignment}; " +
+                                                        $"alignmentOffset: {alignmentOffset}; " +
+                                                        $"expectedLength: {expectedLength})");
+#endif
+                }
             }
 
             PrefixedMemory = memory;

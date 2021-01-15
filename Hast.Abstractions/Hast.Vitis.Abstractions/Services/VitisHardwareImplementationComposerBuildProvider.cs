@@ -132,6 +132,25 @@ namespace Hast.Vitis.Abstractions.Services
                 hashId + ".xclbin");
             Cleanup(hardwareFrameworkPath, hashId);
 
+            // If the xclbin exists then we are done here.
+            if (File.Exists(implementation.BinaryPath))
+            {
+                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
+
+                if (!File.Exists(implementation.BinaryPath + InfoFileExtension))
+                {
+                    _logger.LogInformation(
+                        "The info file (\"{0}\") does not exist. You may generate it using `xclbinutil --info`.",
+                        implementation.BinaryPath + InfoFileExtension);
+                }
+
+                return;
+            }
+
+            _logger.LogInformation(
+                "The xclbin file (\"{0}\") does not exist. Starting build...",
+                implementation.BinaryPath);
+
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
             var ipDirectoryPath = Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "src", "IP");
             if (!Directory.Exists(ipDirectoryPath))
@@ -187,13 +206,6 @@ namespace Hast.Vitis.Abstractions.Services
                 "xclbin");
 
             await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
-
-            // If the xclbin exists then we are done here.
-            if (File.Exists(implementation.BinaryPath) && File.Exists(implementation.BinaryPath + ".info"))
-            {
-                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
-                return;
-            }
 
             if (buildConfiguration.SynthesisOnly)
             {
