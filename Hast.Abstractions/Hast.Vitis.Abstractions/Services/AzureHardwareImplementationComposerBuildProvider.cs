@@ -1,5 +1,5 @@
-﻿using Azure.Storage.Blobs;
-using Azure.Storage.Blobs.Specialized;
+﻿using Azure.Storage;
+using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
@@ -18,7 +18,6 @@ using System.Net.Http.Headers;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using static Azure.Storage.Sas.BlobContainerSasPermissions;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -171,19 +170,29 @@ namespace Hast.Vitis.Abstractions.Services
 
         private async Task<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
         {
-            var client = await GetBlobContainerClientAsync(configuration);
-            var sasUri = await GetUserDelegationSasContainerAsync(client);
+            //directly build BlobContainerClient, then pass it to GetServiceSasUriForContainer() method
+            var blobContainer = await GetBlobContainerClientAsync(configuration);
+
+            var sasUri = GetServiceSasUriForContainer(blobContainer);
             return sasUri.AbsoluteUri;
         }
 
-        private async Task<BlobContainerClient> GetBlobContainerClientAsync(
-            AzureAttestationConfiguration configuration)
+        private ValueTask<BlobContainerClient> GetBlobContainerClientAsync(AzureAttestationConfiguration configuration)
         {
             var blobServiceClient = new BlobServiceClient(configuration.GenerateStorageConnectionString());
 
-            var client = blobServiceClient.GetBlobContainerClient(BlobContainerName);
-            if (_containerChecked) return client;
+            var client = new BlobContainerClient(
+                new Uri($"https://{configuration.StorageAccountName}.blob.core.windows.net/{BlobContainerName}"),
+                new StorageSharedKeyCredential(configuration.StorageAccountName, configuration.StorageAccountKey));
+            return _containerChecked
+                ? new ValueTask<BlobContainerClient>(client)
+                : EnsureBlobContainerExistsAsync(client, blobServiceClient);
+        }
 
+        private async ValueTask<BlobContainerClient> EnsureBlobContainerExistsAsync(
+            BlobContainerClient client,
+            BlobServiceClient blobServiceClient)
+        {
             if (!await client.ExistsAsync())
             {
                 var containerClientResponse = await blobServiceClient.CreateBlobContainerAsync(BlobContainerName);
@@ -192,6 +201,41 @@ namespace Hast.Vitis.Abstractions.Services
 
             _containerChecked = true;
             return client;
+        }
+
+        // Based on: https://docs.microsoft.com/en-us/azure/storage/blobs/sas-service-create?tabs=dotnet
+        private Uri GetServiceSasUriForContainer(
+            BlobContainerClient containerClient,
+            string storedPolicyName = null)
+        {
+            // Check whether this BlobContainerClient object has been authorized with Shared Key.
+            if (!containerClient.CanGenerateSasUri)
+            {
+                throw new InvalidOperationException(
+                    "BlobContainerClient must be authorized with Shared Key credentials to create a service SAS.");
+            }
+
+            // Create a SAS token that's valid for one hour.
+            var sasBuilder = new BlobSasBuilder
+            {
+                BlobContainerName = containerClient.Name,
+                Resource = "c",
+            };
+
+            if (storedPolicyName == null)
+            {
+                sasBuilder.ExpiresOn = DateTimeOffset.UtcNow.AddHours(1);
+                sasBuilder.SetPermissions(BlobContainerSasPermissions.Read);
+            }
+            else
+            {
+                sasBuilder.Identifier = storedPolicyName;
+            }
+
+            var sasUri = containerClient.GenerateSasUri(sasBuilder);
+            _logger.LogInformation("SAS URI for blob container is: {0}", sasUri);
+
+            return sasUri;
         }
 
         private static async Task<T> GetResponseAsync<T>(Uri url, object post)
@@ -210,30 +254,6 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             return result;
-        }
-
-        private static async Task<Uri> GetUserDelegationSasContainerAsync(BlobContainerClient blobContainerClient)
-        {
-            var blobServiceClient = blobContainerClient.GetParentBlobServiceClient();
-
-            // Values configured as per Running FPGA Attestation for Azure Private Preview document.
-            var startOffset = DateTimeOffset.UtcNow;
-            var expirationOffset = startOffset.AddHours(6);
-            var userDelegationKey = await blobServiceClient.GetUserDelegationKeyAsync(startOffset, expirationOffset);
-
-            var sasBuilder = new BlobSasBuilder
-            {
-                BlobContainerName = blobContainerClient.Name,
-                Resource = "c",
-                ExpiresOn = expirationOffset,
-            };
-            sasBuilder.SetPermissions(Read | Write | Create);
-
-            var uriBuilder = new BlobUriBuilder(blobContainerClient.Uri)
-            {
-                Sas = sasBuilder.ToSasQueryParameters(userDelegationKey, blobServiceClient.AccountName),
-            };
-            return uriBuilder.ToUri();
         }
 
         private static async Task DownloadAsync(BlobClient blobClient, string filePath)
