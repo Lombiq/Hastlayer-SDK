@@ -74,7 +74,7 @@ namespace Hast.Vitis.Abstractions.Services
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest.ToolChainName == CommonToolChainNames.Vitis;
 
-        public async Task BuildAsync(
+        public Task BuildAsync(
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
@@ -106,6 +106,15 @@ namespace Hast.Vitis.Abstractions.Services
                     "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
             }
 
+            return BuildInnerAsync(context, implementation, deviceManifest, xilinxDirectoryPath);
+        }
+
+        private async Task BuildInnerAsync(
+            IHardwareImplementationCompositionContext context,
+            IHardwareImplementation implementation,
+            XilinxDeviceManifest deviceManifest,
+            string xilinxDirectoryPath)
+        {
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
