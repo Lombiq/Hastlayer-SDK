@@ -2,7 +2,7 @@
 
 namespace Hast.Vitis.Abstractions.Models
 {
-    internal class AzureStartPostData : AzurePostData
+    public class AzureStartPostData : AzurePostData
     {
         public string StorageAccountName { get; set; }
         public string Container { get; set; }
