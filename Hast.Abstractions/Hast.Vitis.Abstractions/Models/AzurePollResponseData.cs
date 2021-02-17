@@ -13,12 +13,4 @@ namespace Hast.Vitis.Abstractions.Models
             output = OrchestrationOutput;
         }
     }
-
-    public enum OrchestrationStatus
-    {
-        Pending,
-        Running,
-        Failed,
-        Successful,
-    }
 }

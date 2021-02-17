@@ -99,28 +99,26 @@ namespace Hast.Vitis.Abstractions.Services
                 var (statusText, output) = await GetResponseAsync<AzurePollResponseData>(
                     configuration.PollFunctionUrl,
                     new AzurePollPostData(configuration, orchestrationId));
+                var statusUpper = statusText.ToUpperInvariant();
 
-                var status = Enum.TryParse<OrchestrationStatus>(statusText, out var newStatus)
-                    ? newStatus
-                    : (OrchestrationStatus?) null;
-                switch (status)
+                _logger.LogInformation("Polled status: {0}", statusText);
+
+                if (statusUpper == "PENDING" || statusUpper == "RUNNING")
                 {
-                    case OrchestrationStatus.Pending:
-                    case OrchestrationStatus.Running:
-                        _logger.LogInformation("Polled status: {0}", statusText);
-                        await Task.Delay(TimeSpan.FromSeconds(30));
-                        break;
-                    case OrchestrationStatus.Failed:
-                    case OrchestrationStatus.Successful:
-                        var outputList = output?.ToArray() ?? Array.Empty<string>();
-                        var runStatus = outputList.FirstOrDefault();
-                        if (runStatus == "Attestation process succeeded") return;
-
-                        await DownloadLogsAsync(configuration, binaryPath);
-                        throw new InvalidOperationException($"Attestation failed: {runStatus ?? "Unknown issue"}");
-                    default:
-                        throw new InvalidOperationException($"Unknown polled status: {statusText}");
+                    await Task.Delay(TimeSpan.FromSeconds(30));
+                    continue;
                 }
+
+                var outputList = output?.ToArray() ?? Array.Empty<string>();
+                if (outputList.Contains("Attestation process succeeded")) return;
+
+                var outputString = outputList.Any()
+                    ? string.Join("\n", outputList.Select(item => "- " + item))
+                    : "- Unknown issue";
+                _logger.LogError("Attestation failed:\n{0}", outputString);
+
+                await DownloadLogsAsync(configuration, binaryPath);
+                throw new InvalidOperationException("Attestation failed.");
             }
         }
 
