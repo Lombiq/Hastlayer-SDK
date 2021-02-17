@@ -15,6 +15,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -87,10 +88,6 @@ namespace Hast.Vitis.Abstractions.Services
                     Container = BlobContainerName,
                     NetlistName = Path.GetFileName(binaryPath),
                 });
-            if (!string.IsNullOrWhiteSpace(errorMessage) && errorMessage != "None")
-            {
-                throw new InvalidOperationException($"Couldn't start attestation: {errorMessage}");
-            }
 
             _logger.LogInformation(
                 "Attestation request was submitted successfully with Orchestration ID: {0}",
@@ -238,22 +235,37 @@ namespace Hast.Vitis.Abstractions.Services
             return sasUri;
         }
 
-        private static async Task<T> GetResponseAsync<T>(Uri url, object post)
+        private async Task<T> GetResponseAsync<T>(Uri url, object post)
+            where T : AzureResponseData
         {
             const string jsonContentType = "application/json";
 
+            var postJson = JsonConvert.SerializeObject(post);
+            var postContent = new StringContent(postJson, Encoding.UTF8, jsonContentType);
+
             using var client = new HttpClient();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(jsonContentType));
-            var response = await client.PostAsync(url, new StringContent(JsonConvert.SerializeObject(post)));
-            if (!response.IsSuccessStatusCode) throw new WebException(response.StatusCode.ToString());
+            var response = await client.PostAsync(url, postContent);
 
             var content = await response.Content.ReadAsStringAsync();
             if (string.IsNullOrWhiteSpace(content) || JsonConvert.DeserializeObject<T>(content) is not { } result)
             {
-                throw new InvalidOperationException("Response is empty.");
+                throw response.IsSuccessStatusCode
+                    ? new InvalidOperationException("Response is empty.")
+                    : new WebException(response.StatusCode.ToString());
             }
 
-            return result;
+            var hasErrorMessage = !string.IsNullOrWhiteSpace(result.ErrorMessage);
+            if (!hasErrorMessage && response.IsSuccessStatusCode) return result;
+
+            _logger.LogError(
+                "There was an error in the response to the request for {0}. (request: {1}; response: {2})",
+                url,
+                postJson,
+                JsonConvert.SerializeObject(result));
+            throw hasErrorMessage
+                ? new InvalidOperationException(result.ErrorMessage)
+                : new WebException(response.StatusCode.ToString());
         }
 
         private static async Task DownloadAsync(BlobClient blobClient, string filePath)
