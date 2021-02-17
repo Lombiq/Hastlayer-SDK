@@ -2,17 +2,11 @@
 
 namespace Hast.Vitis.Abstractions.Models
 {
-    public class AzureStartResponseData
+    public class AzureStartResponseData : AzureResponseData
     {
-        // The C# name is the same passed into AzurePollPostData.
-        [JsonProperty("instanceId")]
-        public string OrchestrationId { get; set; }
-
-        public string ErrorMessage { get; set; }
-
-        public void Deconstruct(out string orchestrationId, out string errorMessage)
+        public void Deconstruct(out string instanceId, out string errorMessage)
         {
-            orchestrationId = OrchestrationId;
+            instanceId = InstanceId;
             errorMessage = ErrorMessage;
         }
     }

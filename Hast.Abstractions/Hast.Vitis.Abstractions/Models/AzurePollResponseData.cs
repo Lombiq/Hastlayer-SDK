@@ -2,7 +2,7 @@
 
 namespace Hast.Vitis.Abstractions.Models
 {
-    public class AzurePollResponseData
+    public class AzurePollResponseData : AzureResponseData
     {
         public string OrchestrationStatus { get; set; }
         public IEnumerable<string> OrchestrationOutput { get; set; }
