@@ -201,7 +201,8 @@ namespace Hast.Vitis.Abstractions.Services
         // Based on: https://docs.microsoft.com/en-us/azure/storage/blobs/sas-service-create?tabs=dotnet
         private Uri GetServiceSasUriForContainer(
             BlobContainerClient containerClient,
-            string storedPolicyName = null)
+            string storedPolicyName = null,
+            BlobContainerSasPermissions permissions = BlobContainerSasPermissions.All)
         {
             // Check whether this BlobContainerClient object has been authorized with Shared Key.
             if (!containerClient.CanGenerateSasUri)
@@ -220,7 +221,7 @@ namespace Hast.Vitis.Abstractions.Services
             if (storedPolicyName == null)
             {
                 sasBuilder.ExpiresOn = DateTimeOffset.UtcNow.AddHours(1);
-                sasBuilder.SetPermissions(BlobContainerSasPermissions.Read);
+                sasBuilder.SetPermissions(permissions);
             }
             else
             {
