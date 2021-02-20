@@ -113,7 +113,7 @@ namespace Hast.Vitis.Abstractions.Services
                 if (outputList.Contains("Attestation process succeeded")) return;
 
                 var outputString = outputList.Any()
-                    ? string.Join("\n", outputList.Select(item => "- " + item))
+                    ? string.Join("\n", outputList.Select(item => "- " + item.Trim()))
                     : "- Unknown issue";
                 _logger.LogError("Attestation failed:\n{0}", outputString);
 
@@ -163,13 +163,13 @@ namespace Hast.Vitis.Abstractions.Services
             await DownloadAsync(blobClient, binaryPath);
         }
 
-        private async Task<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
+        private async ValueTask<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
         {
             //directly build BlobContainerClient, then pass it to GetServiceSasUriForContainer() method
             var blobContainer = await GetBlobContainerClientAsync(configuration);
 
             var sasUri = GetServiceSasUriForContainer(blobContainer);
-            return sasUri.AbsoluteUri;
+            return sasUri.Query.Substring(1);
         }
 
         private ValueTask<BlobContainerClient> GetBlobContainerClientAsync(AzureAttestationConfiguration configuration)
