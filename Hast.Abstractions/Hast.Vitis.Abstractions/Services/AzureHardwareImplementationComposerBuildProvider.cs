@@ -80,25 +80,25 @@ namespace Hast.Vitis.Abstractions.Services
         private async Task PerformAttestationAsync(AzureAttestationConfiguration configuration, string binaryPath)
         {
             _logger.LogInformation("Sending attestation start request...");
-            var (orchestrationId, errorMessage) = await GetResponseAsync<AzureStartResponseData>(
+            var instanceId = (await GetResponseAsync<AzureResponseData>(
                 configuration.StartFunctionUrl,
                 new AzureStartPostData(configuration)
                 {
                     BlobContainerSignature = await GetSharedAccessSignatureAsync(configuration),
                     Container = BlobContainerName,
                     NetlistName = Path.GetFileName(binaryPath),
-                });
+                })).InstanceId;
 
             _logger.LogInformation(
-                "Attestation request was submitted successfully with Orchestration ID: {0}",
-                orchestrationId);
+                "Attestation request was submitted successfully with orchestration instance ID: {0}",
+                instanceId);
             _logger.LogInformation("Checking the status of attestation using {0}", configuration.PollFunctionUrl);
 
             while (true)
             {
                 var (statusText, output) = await GetResponseAsync<AzurePollResponseData>(
                     configuration.PollFunctionUrl,
-                    new AzurePollPostData(configuration, orchestrationId));
+                    new AzurePollPostData(configuration, instanceId));
                 var statusUpper = statusText.ToUpperInvariant();
 
                 _logger.LogInformation("Polled status: {0}", statusText);
@@ -247,7 +247,7 @@ namespace Hast.Vitis.Abstractions.Services
             var response = await client.PostAsync(url, postContent);
 
             var content = await response.Content.ReadAsStringAsync();
-            if (string.IsNullOrWhiteSpace(content) || JsonConvert.DeserializeObject<T>(content) is not { } result)
+            if (string.IsNullOrWhiteSpace(content) || !(JsonConvert.DeserializeObject<T>(content) is { } result))
             {
                 throw response.IsSuccessStatusCode
                     ? new InvalidOperationException("Response is empty.")

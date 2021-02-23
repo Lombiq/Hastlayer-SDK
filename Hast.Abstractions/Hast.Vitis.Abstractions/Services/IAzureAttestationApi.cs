@@ -13,7 +13,7 @@ namespace Hast.Vitis.Abstractions.Services
         /// Submits the xclbin file (in blob storage) for attestation.
         /// </summary>
         [Post("{path}")]
-        Task<AzureStartResponseData> Start([Path(UrlEncode = false)] string path, [Body] AzureStartPostData data);
+        Task<AzureResponseData> Start([Path(UrlEncode = false)] string path, [Body] AzureStartPostData data);
 
         /// <summary>
         /// Gets the status of the request launched via <see cref="Start"/>.
