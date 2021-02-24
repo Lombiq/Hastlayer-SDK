@@ -16,7 +16,17 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            // ...
+            using var image = new Bitmap("fpga.jpg"); // Change to IS Image later?
+
+            var resizeImage = await hastlayer
+                .GenerateProxy(hardwareRepresentation, new ImageSharpResize(), configuration);
+            // var modifiedImage = resizeImage.HastResize()
+            // modifiedImage.Save('resized.png', ImageFormat.Png);
+
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            // var cpuOutput = new ImageSharpResize().Do Stuff
+            sw.Stop();
+            System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
         }
     }
 }
