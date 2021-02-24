@@ -1,10 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Hast.Layer;
+using Hast.Samples.SampleAssembly;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Threading.Tasks;
+
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    class ImageSharpResizeSampleRunner : ISampleRunner
+    internal class ImageSharpResizeSampleRunner : ISampleRunner
     {
+        public void Configure(HardwareGenerationConfiguration configuration)
+        {
+            configuration.AddHardwareEntryPointType<ImageSharpResize>();
+        }
+
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        {
+            // ...
+        }
     }
 }
