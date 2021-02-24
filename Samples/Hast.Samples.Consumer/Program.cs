@@ -162,6 +162,7 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
+                Sample.ImageSharpResize => new ImageSharpResizeSampleRunner(),
                 _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
             };
             sampleRunner.Configure(configuration);
