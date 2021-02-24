@@ -19,6 +19,6 @@ namespace Hast.Samples.Consumer
         RecursiveAlgorithms,
         SimdCalculator,
         UnumCalculator,
-        ImageSharpResize
+        ImageSharpSample
     }
 }

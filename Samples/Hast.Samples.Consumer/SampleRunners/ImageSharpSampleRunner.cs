@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal class ImageSharpResizeSampleRunner : ISampleRunner
+    internal class ImageSharpSampleRunner : ISampleRunner
     {
         public void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.AddHardwareEntryPointType<ImageSharpResize>();
+            configuration.AddHardwareEntryPointType<ImageSharpSample>();
         }
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
@@ -19,7 +19,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             using var image = new Bitmap("fpga.jpg"); // Change to IS Image later?
 
             var resizeImage = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new ImageSharpResize(), configuration);
+                .GenerateProxy(hardwareRepresentation, new ImageSharpSample(), configuration);
             // var modifiedImage = resizeImage.HastResize()
             // modifiedImage.Save('resized.png', ImageFormat.Png);
 

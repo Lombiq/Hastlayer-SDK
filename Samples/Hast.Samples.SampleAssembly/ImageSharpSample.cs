@@ -9,13 +9,13 @@ namespace Hast.Samples.SampleAssembly
     /// <summary>
     /// Algorithm for resizing image with a modified Image Sharp library
     /// </summary>
-    public class ImageSharpResize
+    public class ImageSharpSample
     {
         private const ushort Divisor = 2;
 
         // some values here probably
 
-        [Replaceable(nameof(ImageSharpResize) + "." + nameof(MaxDegreeOfParallelism))]
+        [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
     }
 }
