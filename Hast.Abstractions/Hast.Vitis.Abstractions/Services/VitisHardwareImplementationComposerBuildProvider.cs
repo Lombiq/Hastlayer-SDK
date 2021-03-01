@@ -135,6 +135,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "with extremely complex and/or very highly parallelized algorithms.");
 
             var hashId = context.HardwareDescription.TransformationId;
+            _logger.LogInformation("HASH ID: {0}", hashId);
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
             implementation.BinaryPath = Path.Combine(
                 EnsureDirectoryExists(hardwareFrameworkPath, "bin"),

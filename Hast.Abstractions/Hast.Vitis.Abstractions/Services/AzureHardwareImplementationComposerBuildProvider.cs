@@ -110,7 +110,11 @@ namespace Hast.Vitis.Abstractions.Services
                 }
 
                 var outputList = output?.ToArray() ?? Array.Empty<string>();
-                if (outputList.Contains("Attestation process succeeded")) return;
+                if (outputList.Contains("Attestation process succeeded"))
+                {
+                    _logger.LogInformation("Attestation process has succeeded.");
+                    return;
+                }
 
                 var outputString = outputList.Any()
                     ? string.Join("\n", outputList.Select(item => "- " + item.Trim()))
@@ -157,6 +161,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private async Task DownloadValidatedFileAsync(AzureAttestationConfiguration configuration, string binaryPath)
         {
+            _logger.LogInformation("Downloading validated files...");
             var containerClient = await GetBlobContainerClientAsync(configuration);
             var blobClient = containerClient.GetBlobClient(Path.GetFileName(binaryPath));
 
