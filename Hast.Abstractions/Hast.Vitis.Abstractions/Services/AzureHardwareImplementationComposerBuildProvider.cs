@@ -28,6 +28,8 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
         private bool _containerChecked;
 
+        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
+
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
             nameof(VitisHardwareImplementationComposerBuildProvider)
@@ -56,6 +58,16 @@ namespace Hast.Vitis.Abstractions.Services
             await UploadToStorageAsync(configuration, oldBinaryPath);
             await PerformAttestationAsync(configuration, oldBinaryPath);
             await DownloadValidatedFileAsync(configuration, implementation.BinaryPath);
+        }
+
+        public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        {
+            var shortcuts = providers
+                .Single(provider => provider.Name == nameof(VitisHardwareImplementationComposerBuildProvider))
+                .Shortcuts;
+            shortcuts.Add(
+                nameof(AzureHardwareImplementationComposerBuildProvider),
+                (_, implementation) => File.Exists(implementation.BinaryPath.Replace(".xclbin", ".bit.xclbin")));
         }
 
         private async Task UploadToStorageAsync(

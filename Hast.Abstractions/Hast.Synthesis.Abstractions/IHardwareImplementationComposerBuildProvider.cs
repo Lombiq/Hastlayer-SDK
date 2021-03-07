@@ -1,5 +1,6 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hast.Synthesis.Abstractions
@@ -11,6 +12,11 @@ namespace Hast.Synthesis.Abstractions
     public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IDependency
     {
         /// <summary>
+        /// Gets the functions installed by other providers. If any of them returns true this provider is skipped.
+        /// </summary>
+        Dictionary<string, BuildProviderShortcut> Shortcuts { get; }
+
+        /// <summary>
         /// Determines if the instance is applicable to the current composition task based on the
         /// <paramref name="context"/>.
         /// </summary>
@@ -20,5 +26,10 @@ namespace Hast.Synthesis.Abstractions
         /// Performs the building and sets up the <paramref name="implementation"/>.
         /// </summary>
         Task BuildAsync(IHardwareImplementationCompositionContext context, IHardwareImplementation implementation);
+
+        /// <summary>
+        /// If implemented, it adds to the <see cref="Shortcuts"/> of other providers.
+        /// </summary>
+        void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers) { }
     }
 }
