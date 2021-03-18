@@ -1,4 +1,4 @@
-﻿<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Core" #>
 <#@ assembly name="System.Data" #>
 <#@ assembly name="System.Data.Entity" #>
 <#@ assembly name="System.Xml" #>
@@ -76,7 +76,7 @@ void WriteToBuildPane (string message){
 typeof( SVsOutputWindow ) ) as IVsOutputWindow;
        Guid generalPaneGuid =
 Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
-		// P.S. There's also the GUID_OutWindowDebugPane available.
+        // P.S. There's also the GUID_OutWindowDebugPane available.
        IVsOutputWindowPane generalPane;
        outWindow.GetPane( ref generalPaneGuid , out generalPane );
        generalPane.OutputString( message  );
@@ -90,12 +90,12 @@ Microsoft.VisualStudio.VSConstants.OutputWindowPaneGuid.BuildOutputPane_guid;
 /// <author>R. Leupold</author>
 public class TemplateFileManager
 {
-	private EnvDTE.ProjectItem templateProjectItem;
+    private EnvDTE.ProjectItem templateProjectItem;
     private Action<string> checkOutAction;
     private Action<IEnumerable<OutputFile>> projectSyncAction;
-	private EnvDTE.DTE dte;
-	private List<string> templatePlaceholderList = new List<string>();
-	
+    private EnvDTE.DTE dte;
+    private List<string> templatePlaceholderList = new List<string>();
+    
     /// <summary>
     /// Creates files with VS sync
     /// </summary>
@@ -127,11 +127,11 @@ public class TemplateFileManager
         {
             throw new ArgumentNullException("textTransformation");
         }
-				
+                
         _textTransformation = DynamicTextTransformation2.Create(textTransformation);
         _generationEnvironment = _textTransformation.GenerationEnvironment;
-		
-		var hostServiceProvider = _textTransformation.Host.AsIServiceProvider();
+        
+        var hostServiceProvider = _textTransformation.Host.AsIServiceProvider();
         if (hostServiceProvider == null)
         {
             throw new ArgumentNullException("Could not obtain hostServiceProvider");
@@ -142,43 +142,43 @@ public class TemplateFileManager
         {
             throw new ArgumentNullException("Could not obtain DTE from host");
         }
-		
-		this.templateProjectItem = dte.Solution.FindProjectItem(_textTransformation.Host.TemplateFile);
-		this.CanOverrideExistingFile = true;
-		this.IsAutoIndentEnabled = false;
-		this.Encoding = System.Text.Encoding.UTF8;
+        
+        this.templateProjectItem = dte.Solution.FindProjectItem(_textTransformation.Host.TemplateFile);
+        this.CanOverrideExistingFile = true;
+        this.IsAutoIndentEnabled = false;
+        this.Encoding = System.Text.Encoding.UTF8;
         checkOutAction = fileName => dte.SourceControl.CheckOutItem(fileName);
         projectSyncAction = keepFileNames => ProjectSync(templateProjectItem, keepFileNames);
     }
 
-	/// <summary>
-	/// If set to false, existing files are not overwritten
-	/// </summary>
-	/// <returns></returns>
-	public bool CanOverrideExistingFile { get; set; }
-	
-	/// <summary>
-	/// If set to true, output files (c#, vb) are formatted based on the vs settings.
-	/// </summary>
-	/// <returns></returns>
-	public bool IsAutoIndentEnabled { get; set; }
-	
-	/// <summary>
-	/// Defines Encoding format for generated output file. (Default UTF8)
-	/// </summary>
-	/// <returns></returns>
-	public System.Text.Encoding Encoding { get; set; }
-	
+    /// <summary>
+    /// If set to false, existing files are not overwritten
+    /// </summary>
+    /// <returns></returns>
+    public bool CanOverrideExistingFile { get; set; }
+    
+    /// <summary>
+    /// If set to true, output files (c#, vb) are formatted based on the vs settings.
+    /// </summary>
+    /// <returns></returns>
+    public bool IsAutoIndentEnabled { get; set; }
+    
+    /// <summary>
+    /// Defines Encoding format for generated output file. (Default UTF8)
+    /// </summary>
+    /// <returns></returns>
+    public System.Text.Encoding Encoding { get; set; }
+    
     /// <summary>
     /// Marks the end of the last file if there was one, and starts a new
     /// and marks this point in generation as a new file.
     /// </summary>
-	/// <param name="name">Filename</param>
-	/// <param name="projectName">Name of the target project for the new file.</param>
-	/// <param name="folderName">Name of the target folder for the new file.</param>
-	/// <param name="fileProperties">File property settings in vs for the new File</param>
+    /// <param name="name">Filename</param>
+    /// <param name="projectName">Name of the target project for the new file.</param>
+    /// <param name="folderName">Name of the target folder for the new file.</param>
+    /// <param name="fileProperties">File property settings in vs for the new File</param>
     public void StartNewFile(string name
-		, string projectName = "", string folderName = "", FileProperties fileProperties = null)
+        , string projectName = "", string folderName = "", FileProperties fileProperties = null)
     {
         if (String.IsNullOrWhiteSpace(name) == true)
         {
@@ -186,12 +186,12 @@ public class TemplateFileManager
         }
 
         CurrentBlock = new Block 
-					  { 
-						Name = name, 
-						ProjectName = projectName, 
-						FolderName = folderName,
-						FileProperties = fileProperties ?? new FileProperties()
-					  };
+                      { 
+                        Name = name, 
+                        ProjectName = projectName, 
+                        FolderName = folderName,
+                        FileProperties = fileProperties ?? new FileProperties()
+                      };
     }
 
     public void StartFooter()
@@ -220,14 +220,14 @@ public class TemplateFileManager
 
         currentBlock = null;
     }
-	
+    
     /// <summary>
     /// Produce the template output files.
     /// </summary>
     public virtual IEnumerable<OutputFile> Process(bool split = true)
     {
-		var list = new List<OutputFile>();
-		
+        var list = new List<OutputFile>();
+        
         if (split)
         {
             EndBlock();
@@ -238,178 +238,178 @@ public class TemplateFileManager
 
             foreach (var block in files)
             {
-				var outputPath = VSHelper.GetOutputPath(dte, block, Path.GetDirectoryName(_textTransformation.Host.TemplateFile));
+                var outputPath = VSHelper.GetOutputPath(dte, block, Path.GetDirectoryName(_textTransformation.Host.TemplateFile));
                 var fileName = Path.Combine(outputPath, block.Name);
                 var content = this.ReplaceParameter(headerText, block) + 
-				_generationEnvironment.ToString(block.Start, block.Length) + 
-				footerText;
+                _generationEnvironment.ToString(block.Start, block.Length) + 
+                footerText;
 
                 var file = new OutputFile 
-				   { 
-						FileName = fileName, 
-						ProjectName = block.ProjectName, 
-						FolderName = block.FolderName,
-						FileProperties = block.FileProperties,
-						Content = content
-					};
-				
+                   { 
+                        FileName = fileName, 
+                        ProjectName = block.ProjectName, 
+                        FolderName = block.FolderName,
+                        FileProperties = block.FileProperties,
+                        Content = content
+                    };
+                
                 CreateFile(file);
                 _generationEnvironment.Remove(block.Start, block.Length);
-								
-				list.Add(file);		
+                                
+                list.Add(file);		
             }
         }
-		
-		projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(list, null, null));
-		this.CleanUpTemplatePlaceholders();
-		var items = VSHelper.GetOutputFilesAsProjectItems(this.dte, list);
-		this.WriteVsProperties(items, list);
-		
-		if (this.IsAutoIndentEnabled == true && split == true)
-		{
-			this.FormatProjectItems(items);
-		}
-			
-		this.WriteLog(list);
-		
-		return list;
+        
+        projectSyncAction.EndInvoke(projectSyncAction.BeginInvoke(list, null, null));
+        this.CleanUpTemplatePlaceholders();
+        var items = VSHelper.GetOutputFilesAsProjectItems(this.dte, list);
+        this.WriteVsProperties(items, list);
+        
+        if (this.IsAutoIndentEnabled == true && split == true)
+        {
+            this.FormatProjectItems(items);
+        }
+            
+        this.WriteLog(list);
+        
+        return list;
     }
-	
-	private void FormatProjectItems(IEnumerable<EnvDTE.ProjectItem> items)
-	{
-		foreach (var item in items)
-		{
-			this._textTransformation.WriteLine(
-			VSHelper.ExecuteVsCommand(this.dte, item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
-			this._textTransformation.WriteLine("//-> " + item.Name);
-		}
-	}
-	
-	private void WriteVsProperties(IEnumerable<EnvDTE.ProjectItem> items, IEnumerable<OutputFile> outputFiles)
-	{
-		foreach (var file in outputFiles)
-		{
-			var item = items.Where(p => p.Name == Path.GetFileName(file.FileName)).FirstOrDefault();
-			if (item == null) continue; 
-			
-			if (String.IsNullOrEmpty(file.FileProperties.CustomTool) == false)
-			{
-				VSHelper.SetPropertyValue(item, "CustomTool", file.FileProperties.CustomTool);
-			}
+    
+    private void FormatProjectItems(IEnumerable<EnvDTE.ProjectItem> items)
+    {
+        foreach (var item in items)
+        {
+            this._textTransformation.WriteLine(
+            VSHelper.ExecuteVsCommand(this.dte, item, "Edit.FormatDocument")); //, "Edit.RemoveAndSort"));
+            this._textTransformation.WriteLine("//-> " + item.Name);
+        }
+    }
+    
+    private void WriteVsProperties(IEnumerable<EnvDTE.ProjectItem> items, IEnumerable<OutputFile> outputFiles)
+    {
+        foreach (var file in outputFiles)
+        {
+            var item = items.Where(p => p.Name == Path.GetFileName(file.FileName)).FirstOrDefault();
+            if (item == null) continue; 
+            
+            if (String.IsNullOrEmpty(file.FileProperties.CustomTool) == false)
+            {
+                VSHelper.SetPropertyValue(item, "CustomTool", file.FileProperties.CustomTool);
+            }
 
-			if (String.IsNullOrEmpty(file.FileProperties.BuildActionString) == false)
-			{
-				VSHelper.SetPropertyValue(item, "ItemType", file.FileProperties.BuildActionString);
-			}
-		}
-	}
-	
-	private string ReplaceParameter(string text, Block block)
-	{
-		if (String.IsNullOrEmpty(text) == false)
-		{
-			text = text.Replace("$filename$", block.Name);
-		}
-		
-		
-		foreach (var item in block.FileProperties.TemplateParameter.AsEnumerable())
-		{
-			text = text.Replace(item.Key, item.Value);
-		}
-		
-		return text;
-	}
-	
-	/// <summary>
-	/// Write log to the default output file.
-	/// </summary>
-	/// <param name="list"></param>
-	private void WriteLog(IEnumerable<OutputFile> list)
-	{
-		this._textTransformation.WriteLine("// Generated helper templates");
-		foreach (var item in templatePlaceholderList)
-		{
-			this._textTransformation.WriteLine("// " + this.GetDirectorySolutionRelative(item));		 
-		}
-		
-		this._textTransformation.WriteLine("// Generated items");
-		foreach (var item in list)
-		{
-			this._textTransformation.WriteLine("// " + this.GetDirectorySolutionRelative(item.FileName)); 
-		}
-	}
-	
-	/// <summary>
-	/// Removes old template placeholders from the solution.
-	/// </summary>
-	private void CleanUpTemplatePlaceholders()		
-	{
-		string[] activeTemplateFullNames = this.templatePlaceholderList.ToArray();
-		string[] allHelperTemplateFullNames = VSHelper.GetAllSolutionItems(this.dte)
-			.Where(p => p.Name == VSHelper.GetTemplatePlaceholderName(this.templateProjectItem))
-			.Select(p => VSHelper.GetProjectItemFullPath(p))
-			.ToArray();
-		
-		var delta = allHelperTemplateFullNames.Except(activeTemplateFullNames).ToArray();
-			
-		var dirtyHelperTemplates = VSHelper.GetAllSolutionItems(this.dte)
-			.Where(p => delta.Contains(VSHelper.GetProjectItemFullPath(p)));
+            if (String.IsNullOrEmpty(file.FileProperties.BuildActionString) == false)
+            {
+                VSHelper.SetPropertyValue(item, "ItemType", file.FileProperties.BuildActionString);
+            }
+        }
+    }
+    
+    private string ReplaceParameter(string text, Block block)
+    {
+        if (String.IsNullOrEmpty(text) == false)
+        {
+            text = text.Replace("$filename$", block.Name);
+        }
+        
+        
+        foreach (var item in block.FileProperties.TemplateParameter.AsEnumerable())
+        {
+            text = text.Replace(item.Key, item.Value);
+        }
+        
+        return text;
+    }
+    
+    /// <summary>
+    /// Write log to the default output file.
+    /// </summary>
+    /// <param name="list"></param>
+    private void WriteLog(IEnumerable<OutputFile> list)
+    {
+        this._textTransformation.WriteLine("// Generated helper templates");
+        foreach (var item in templatePlaceholderList)
+        {
+            this._textTransformation.WriteLine("// " + this.GetDirectorySolutionRelative(item));		 
+        }
+        
+        this._textTransformation.WriteLine("// Generated items");
+        foreach (var item in list)
+        {
+            this._textTransformation.WriteLine("// " + this.GetDirectorySolutionRelative(item.FileName)); 
+        }
+    }
+    
+    /// <summary>
+    /// Removes old template placeholders from the solution.
+    /// </summary>
+    private void CleanUpTemplatePlaceholders()		
+    {
+        string[] activeTemplateFullNames = this.templatePlaceholderList.ToArray();
+        string[] allHelperTemplateFullNames = VSHelper.GetAllSolutionItems(this.dte)
+            .Where(p => p.Name == VSHelper.GetTemplatePlaceholderName(this.templateProjectItem))
+            .Select(p => VSHelper.GetProjectItemFullPath(p))
+            .ToArray();
+        
+        var delta = allHelperTemplateFullNames.Except(activeTemplateFullNames).ToArray();
+            
+        var dirtyHelperTemplates = VSHelper.GetAllSolutionItems(this.dte)
+            .Where(p => delta.Contains(VSHelper.GetProjectItemFullPath(p)));
 
-		foreach (ProjectItem item in dirtyHelperTemplates)
-		{
-			if (item.ProjectItems != null)
-			{
-				foreach (ProjectItem subItem in item.ProjectItems)
-				{
-					subItem.Remove(); 
-				}
-			}
-			
-			item.Remove();
-		}
-	}
-	
-	/// <summary>
-	/// Gets a list of helper templates from the log.
-	/// </summary>
-	/// <returns>List of generated helper templates.</returns>
-	private string[] GetPreviousTemplatePlaceholdersFromLog()
-	{
-		string path = Path.GetDirectoryName(this._textTransformation.Host.ResolvePath(this._textTransformation.Host.TemplateFile));
-		string file1 = Path.GetFileNameWithoutExtension(this._textTransformation.Host.TemplateFile) + ".txt";
-		string contentPrevious = File.ReadAllText(Path.Combine(path, file1));
-		
-		var result = contentPrevious
+        foreach (ProjectItem item in dirtyHelperTemplates)
+        {
+            if (item.ProjectItems != null)
+            {
+                foreach (ProjectItem subItem in item.ProjectItems)
+                {
+                    subItem.Remove(); 
+                }
+            }
+            
+            item.Remove();
+        }
+    }
+    
+    /// <summary>
+    /// Gets a list of helper templates from the log.
+    /// </summary>
+    /// <returns>List of generated helper templates.</returns>
+    private string[] GetPreviousTemplatePlaceholdersFromLog()
+    {
+        string path = Path.GetDirectoryName(this._textTransformation.Host.ResolvePath(this._textTransformation.Host.TemplateFile));
+        string file1 = Path.GetFileNameWithoutExtension(this._textTransformation.Host.TemplateFile) + ".txt";
+        string contentPrevious = File.ReadAllText(Path.Combine(path, file1));
+        
+        var result = contentPrevious
               .Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
               .Select(x => x.Split(new[] { "=>" }, StringSplitOptions.RemoveEmptyEntries).First())
               .Select(x => Regex.Replace(x, "//", String.Empty).Trim())
-			  .Where(x => x.EndsWith(VSHelper.GetTemplatePlaceholderName(this.templateProjectItem)))
-			  .ToArray();
-		
-		return result;
-	}
-	
-	private string GetDirectorySolutionRelative(string fullName)
-	{
-		int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(this.dte.Solution.FileName));
-		if (slnPos < 0)
-		{
-			slnPos = 0;
-		}
-		
-		return fullName.Substring(slnPos);
-	}
-	
+              .Where(x => x.EndsWith(VSHelper.GetTemplatePlaceholderName(this.templateProjectItem)))
+              .ToArray();
+        
+        return result;
+    }
+    
+    private string GetDirectorySolutionRelative(string fullName)
+    {
+        int slnPos = fullName.IndexOf(Path.GetFileNameWithoutExtension(this.dte.Solution.FileName));
+        if (slnPos < 0)
+        {
+            slnPos = 0;
+        }
+        
+        return fullName.Substring(slnPos);
+    }
+    
     protected virtual void CreateFile(OutputFile file)
     {
-		if (this.CanOverrideExistingFile == false && File.Exists(file.FileName) == true)
-		{
-			return;
-		}
-		
+        if (this.CanOverrideExistingFile == false && File.Exists(file.FileName) == true)
+        {
+            return;
+        }
+        
         if (IsFileContentDifferent(file))
         {
-			CheckoutFileIfRequired(file.FileName);
+            CheckoutFileIfRequired(file.FileName);
             File.WriteAllText(file.FileName, file.Content, this.Encoding);
         }
     }
@@ -437,38 +437,38 @@ public class TemplateFileManager
             currentBlock = value;
         }		
     }
-	
-	private void ProjectSync(EnvDTE.ProjectItem templateProjectItem, IEnumerable<OutputFile> keepFileNames)
-	{
-		var groupedFileNames = from f in keepFileNames
-								group f by new { f.ProjectName, f.FolderName }
-								into l
-								select new { 
-									ProjectName = l.Key.ProjectName,
-									FolderName = l.Key.FolderName,
-									FirstItem = l.First(),
-									OutputFiles = l
-								};
-		
-		this.templatePlaceholderList.Clear();
-								
-		foreach (var item in groupedFileNames)
-		{
-			EnvDTE.ProjectItem pi = VSHelper.GetTemplateProjectItem(templateProjectItem.DTE, item.FirstItem, templateProjectItem);
-			ProjectSyncPart(pi, item.OutputFiles);
-			
-			if (pi.Name.EndsWith("txt4"))
-				this.templatePlaceholderList.Add(VSHelper.GetProjectItemFullPath(pi));			
-		}
-	
-		// clean up
-		bool hasDefaultItems = groupedFileNames.Where(f => String.IsNullOrEmpty(f.ProjectName) && String.IsNullOrEmpty(f.FolderName)).Count() > 0;
-		if (hasDefaultItems == false)
-		{
-			ProjectSyncPart(templateProjectItem, new List<OutputFile>());
-		}
-	}
-	
+    
+    private void ProjectSync(EnvDTE.ProjectItem templateProjectItem, IEnumerable<OutputFile> keepFileNames)
+    {
+        var groupedFileNames = from f in keepFileNames
+                                group f by new { f.ProjectName, f.FolderName }
+                                into l
+                                select new { 
+                                    ProjectName = l.Key.ProjectName,
+                                    FolderName = l.Key.FolderName,
+                                    FirstItem = l.First(),
+                                    OutputFiles = l
+                                };
+        
+        this.templatePlaceholderList.Clear();
+                                
+        foreach (var item in groupedFileNames)
+        {
+            EnvDTE.ProjectItem pi = VSHelper.GetTemplateProjectItem(templateProjectItem.DTE, item.FirstItem, templateProjectItem);
+            ProjectSyncPart(pi, item.OutputFiles);
+            
+            if (pi.Name.EndsWith("txt4"))
+                this.templatePlaceholderList.Add(VSHelper.GetProjectItemFullPath(pi));			
+        }
+    
+        // clean up
+        bool hasDefaultItems = groupedFileNames.Where(f => String.IsNullOrEmpty(f.ProjectName) && String.IsNullOrEmpty(f.FolderName)).Count() > 0;
+        if (hasDefaultItems == false)
+        {
+            ProjectSyncPart(templateProjectItem, new List<OutputFile>());
+        }
+    }
+    
     private static void ProjectSyncPart(EnvDTE.ProjectItem templateProjectItem, IEnumerable<OutputFile> keepFileNames)
     {
         var keepFileNameSet = new HashSet<OutputFile>(keepFileNames);
@@ -483,7 +483,7 @@ public class TemplateFileManager
         // Remove unused items from the project
         foreach (var pair in projectFiles)
         {
-			bool isNotFound = keepFileNames.Where(f=>f.FileName == pair.Key).Count() == 0;
+            bool isNotFound = keepFileNames.Where(f=>f.FileName == pair.Key).Count() == 0;
             if (isNotFound == true
                 && !(Path.GetFileNameWithoutExtension(pair.Key) + ".").StartsWith(originalOutput + "."))
             {
@@ -760,330 +760,330 @@ public sealed class Block
 {
     public String Name;
     public int Start, Length;
-	public string ProjectName { get; set; }
-	public string FolderName { get; set; }
-	public FileProperties FileProperties { get; set; }
+    public string ProjectName { get; set; }
+    public string FolderName { get; set; }
+    public FileProperties FileProperties { get; set; }
 }
 
 public class ParamTextTemplate
 {
-	private ITextTemplatingEngineHost Host { get; set; }
-	
-	private ParamTextTemplate(ITextTemplatingEngineHost host)
-	{
-		this.Host = host;
-	}
-	
-	public static ParamTextTemplate Create(ITextTemplatingEngineHost host)
-	{
-		return new ParamTextTemplate(host);
-	}
-	
-	public static TextTemplatingSession GetSessionObject()
-	{
-		return new TextTemplatingSession();
-	}
-	
-	public string TransformText(string templateName, TextTemplatingSession session)
-	{
-		return this.GetTemplateContent(templateName, session);
-	}
-	
-	public string GetTemplateContent(string templateName, TextTemplatingSession session)
-	{
-		string fullName = this.Host.ResolvePath(templateName);
-		string templateContent = File.ReadAllText(fullName);
-		
-		var sessionHost = this.Host as ITextTemplatingSessionHost;
-		sessionHost.Session = session;
+    private ITextTemplatingEngineHost Host { get; set; }
+    
+    private ParamTextTemplate(ITextTemplatingEngineHost host)
+    {
+        this.Host = host;
+    }
+    
+    public static ParamTextTemplate Create(ITextTemplatingEngineHost host)
+    {
+        return new ParamTextTemplate(host);
+    }
+    
+    public static TextTemplatingSession GetSessionObject()
+    {
+        return new TextTemplatingSession();
+    }
+    
+    public string TransformText(string templateName, TextTemplatingSession session)
+    {
+        return this.GetTemplateContent(templateName, session);
+    }
+    
+    public string GetTemplateContent(string templateName, TextTemplatingSession session)
+    {
+        string fullName = this.Host.ResolvePath(templateName);
+        string templateContent = File.ReadAllText(fullName);
+        
+        var sessionHost = this.Host as ITextTemplatingSessionHost;
+        sessionHost.Session = session;
 
-		Engine engine = new Engine();
-		return engine.ProcessTemplate(templateContent, this.Host);
-	}
+        Engine engine = new Engine();
+        return engine.ProcessTemplate(templateContent, this.Host);
+    }
 }
 
 public class VSHelper
 {
-	/// <summary>
-	/// Execute Visual Studio commands against the project item.
-	/// </summary>
-	/// <param name="item">The current project item.</param>
-	/// <param name="command">The vs command as string.</param>
-	/// <returns>An error message if the command fails.</returns>
-	public static string ExecuteVsCommand(EnvDTE.DTE dte, EnvDTE.ProjectItem item, params string[] command)
-	{
-		if (item == null)
-		{
-			throw new ArgumentNullException("item");
-		}
-		
-		string error = String.Empty;
-		
-		try
-		{
-			EnvDTE.Window window = item.Open();
-			window.Activate();
-			
-			foreach (var cmd in command)
-			{
-				if (String.IsNullOrWhiteSpace(cmd) == true)
-				{
-					continue;
-				}
-				
-				EnvDTE80.DTE2 dte2 = dte as EnvDTE80.DTE2;
-				dte2.ExecuteCommand(cmd, String.Empty);		
-			}
-			
-			item.Save();
-			window.Visible = false;
-			// window.Close(); // Ends VS, but not the tab :(
-		}
-		catch (Exception ex)
-		{
-			error = String.Format("Error processing file {0} {1}", item.Name, ex.Message);
-		}
-		
-		return error;
-	}
-	
-	/// <summary>
-	/// Sets a property value for the vs project item.
-	/// </summary>
-	public static void SetPropertyValue(EnvDTE.ProjectItem item, string propertyName, object value)
-	{
-		EnvDTE.Property property = item.Properties.Item(propertyName);
-		if (property == null)
-		{
-			throw new ArgumentException(String.Format("The property {0} was not found.", propertyName));
-		}
-		else
-		{
-			property.Value = value;
-		}
-	}
-	
-	public static IEnumerable<ProjectItem> GetOutputFilesAsProjectItems(EnvDTE.DTE dte, IEnumerable<OutputFile> outputFiles)
-	{
-		var fileNames = (from o in outputFiles
-						select Path.GetFileName(o.FileName)).ToArray();
+    /// <summary>
+    /// Execute Visual Studio commands against the project item.
+    /// </summary>
+    /// <param name="item">The current project item.</param>
+    /// <param name="command">The vs command as string.</param>
+    /// <returns>An error message if the command fails.</returns>
+    public static string ExecuteVsCommand(EnvDTE.DTE dte, EnvDTE.ProjectItem item, params string[] command)
+    {
+        if (item == null)
+        {
+            throw new ArgumentNullException("item");
+        }
+        
+        string error = String.Empty;
+        
+        try
+        {
+            EnvDTE.Window window = item.Open();
+            window.Activate();
+            
+            foreach (var cmd in command)
+            {
+                if (String.IsNullOrWhiteSpace(cmd) == true)
+                {
+                    continue;
+                }
+                
+                EnvDTE80.DTE2 dte2 = dte as EnvDTE80.DTE2;
+                dte2.ExecuteCommand(cmd, String.Empty);		
+            }
+            
+            item.Save();
+            window.Visible = false;
+            // window.Close(); // Ends VS, but not the tab :(
+        }
+        catch (Exception ex)
+        {
+            error = String.Format("Error processing file {0} {1}", item.Name, ex.Message);
+        }
+        
+        return error;
+    }
+    
+    /// <summary>
+    /// Sets a property value for the vs project item.
+    /// </summary>
+    public static void SetPropertyValue(EnvDTE.ProjectItem item, string propertyName, object value)
+    {
+        EnvDTE.Property property = item.Properties.Item(propertyName);
+        if (property == null)
+        {
+            throw new ArgumentException(String.Format("The property {0} was not found.", propertyName));
+        }
+        else
+        {
+            property.Value = value;
+        }
+    }
+    
+    public static IEnumerable<ProjectItem> GetOutputFilesAsProjectItems(EnvDTE.DTE dte, IEnumerable<OutputFile> outputFiles)
+    {
+        var fileNames = (from o in outputFiles
+                        select Path.GetFileName(o.FileName)).ToArray();
 
-		return VSHelper.GetAllSolutionItems(dte).Where(f => fileNames.Contains(f.Name));
-	}
-	
-	public static string GetOutputPath(EnvDTE.DTE dte, Block block, string defaultPath)
-	{
-		if (String.IsNullOrEmpty(block.ProjectName) == true && String.IsNullOrEmpty(block.FolderName) == true)
-		{
-			return defaultPath;
-		}
-		
-		EnvDTE.Project prj = null;
-		EnvDTE.ProjectItem item = null;
-		
-		if (String.IsNullOrEmpty(block.ProjectName) == false)
-		{
-			prj = GetProject(dte, block.ProjectName);			
-		}
-		
-		if (String.IsNullOrEmpty(block.FolderName) == true && prj != null)
-		{
-			return Path.GetDirectoryName(prj.FullName);
-		}
-		else if (prj != null && String.IsNullOrEmpty(block.FolderName) == false)
-		{
-			item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.Name == block.FolderName).First();
-		}
-		else if (String.IsNullOrEmpty(block.FolderName) == false)
-		{
-			item = GetAllProjectItemsRecursive(
-				dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
-				Where(i=>i.Name == block.FolderName).First();
-		}
-		
-		if (item != null)
-		{
-			return GetProjectItemFullPath(item);
-		}
-		
-		return defaultPath;
-	}
-	public static string GetTemplatePlaceholderName(EnvDTE.ProjectItem item)
-	{
-		return String.Format("{0}.txt4", Path.GetFileNameWithoutExtension(item.Name));
-	}
-	
-	public static EnvDTE.ProjectItem GetTemplateProjectItem(EnvDTE.DTE dte, OutputFile file, EnvDTE.ProjectItem defaultItem)
-	{
-		if (String.IsNullOrEmpty(file.ProjectName) == true && String.IsNullOrEmpty(file.FolderName) == true)
-		{
-			return defaultItem;
-		}
-		
-		string templatePlaceholder = GetTemplatePlaceholderName(defaultItem);
-		string itemPath = Path.GetDirectoryName(file.FileName); 
-		string fullName = Path.Combine(itemPath, templatePlaceholder);
-		EnvDTE.Project prj = null;
-		EnvDTE.ProjectItem item = null;
-		
-		if (String.IsNullOrEmpty(file.ProjectName) == false)
-		{
-			prj = GetProject(dte, file.ProjectName);			
-		}
-		
-		if (String.IsNullOrEmpty(file.FolderName) == true && prj != null)
-		{
-			return FindProjectItem(prj.ProjectItems, fullName, true);
-		}
-		else if (prj != null && String.IsNullOrEmpty(file.FolderName) == false)
-		{
-			item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.Name == file.FolderName).First();
-		}
-		else if (String.IsNullOrEmpty(file.FolderName) == false)
-		{
-			item = GetAllProjectItemsRecursive(
-				dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
-				Where(i=>i.Name == file.FolderName).First();
-		}
-		
-		if (item != null)
-		{
-			return FindProjectItem(item.ProjectItems, fullName, true);
-		}
-		
-		return defaultItem;
-	}
-	
-	private static EnvDTE.ProjectItem FindProjectItem(EnvDTE.ProjectItems items, string fullName, bool canCreateIfNotExists)
-	{
-		EnvDTE.ProjectItem item = (from i in items.Cast<EnvDTE.ProjectItem>()
-								  where i.Name == Path.GetFileName(fullName)
-								  select i).FirstOrDefault();
-		if (item == null)
-		{
-			File.CreateText(fullName);
-			item = items.AddFromFile(fullName);
-		}
-		
-		return item;
-	}
-	
-	public static EnvDTE.Project GetProject(EnvDTE.DTE dte, string projectName)
-	{
-		return GetAllProjects(dte).Where(p=>p.Name == projectName).First();
-	}
-	
-	public static IEnumerable<EnvDTE.Project> GetAllProjects(EnvDTE.DTE dte)
-	{
-		List<EnvDTE.Project> projectList = new List<EnvDTE.Project>();
-		
-		var folders = dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p=>p.Kind == EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+        return VSHelper.GetAllSolutionItems(dte).Where(f => fileNames.Contains(f.Name));
+    }
+    
+    public static string GetOutputPath(EnvDTE.DTE dte, Block block, string defaultPath)
+    {
+        if (String.IsNullOrEmpty(block.ProjectName) == true && String.IsNullOrEmpty(block.FolderName) == true)
+        {
+            return defaultPath;
+        }
+        
+        EnvDTE.Project prj = null;
+        EnvDTE.ProjectItem item = null;
+        
+        if (String.IsNullOrEmpty(block.ProjectName) == false)
+        {
+            prj = GetProject(dte, block.ProjectName);			
+        }
+        
+        if (String.IsNullOrEmpty(block.FolderName) == true && prj != null)
+        {
+            return Path.GetDirectoryName(prj.FullName);
+        }
+        else if (prj != null && String.IsNullOrEmpty(block.FolderName) == false)
+        {
+            item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.Name == block.FolderName).First();
+        }
+        else if (String.IsNullOrEmpty(block.FolderName) == false)
+        {
+            item = GetAllProjectItemsRecursive(
+                dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
+                Where(i=>i.Name == block.FolderName).First();
+        }
+        
+        if (item != null)
+        {
+            return GetProjectItemFullPath(item);
+        }
+        
+        return defaultPath;
+    }
+    public static string GetTemplatePlaceholderName(EnvDTE.ProjectItem item)
+    {
+        return String.Format("{0}.txt4", Path.GetFileNameWithoutExtension(item.Name));
+    }
+    
+    public static EnvDTE.ProjectItem GetTemplateProjectItem(EnvDTE.DTE dte, OutputFile file, EnvDTE.ProjectItem defaultItem)
+    {
+        if (String.IsNullOrEmpty(file.ProjectName) == true && String.IsNullOrEmpty(file.FolderName) == true)
+        {
+            return defaultItem;
+        }
+        
+        string templatePlaceholder = GetTemplatePlaceholderName(defaultItem);
+        string itemPath = Path.GetDirectoryName(file.FileName); 
+        string fullName = Path.Combine(itemPath, templatePlaceholder);
+        EnvDTE.Project prj = null;
+        EnvDTE.ProjectItem item = null;
+        
+        if (String.IsNullOrEmpty(file.ProjectName) == false)
+        {
+            prj = GetProject(dte, file.ProjectName);			
+        }
+        
+        if (String.IsNullOrEmpty(file.FolderName) == true && prj != null)
+        {
+            return FindProjectItem(prj.ProjectItems, fullName, true);
+        }
+        else if (prj != null && String.IsNullOrEmpty(file.FolderName) == false)
+        {
+            item = GetAllProjectItemsRecursive(prj.ProjectItems).Where(i=>i.Name == file.FolderName).First();
+        }
+        else if (String.IsNullOrEmpty(file.FolderName) == false)
+        {
+            item = GetAllProjectItemsRecursive(
+                dte.ActiveDocument.ProjectItem.ContainingProject.ProjectItems).
+                Where(i=>i.Name == file.FolderName).First();
+        }
+        
+        if (item != null)
+        {
+            return FindProjectItem(item.ProjectItems, fullName, true);
+        }
+        
+        return defaultItem;
+    }
+    
+    private static EnvDTE.ProjectItem FindProjectItem(EnvDTE.ProjectItems items, string fullName, bool canCreateIfNotExists)
+    {
+        EnvDTE.ProjectItem item = (from i in items.Cast<EnvDTE.ProjectItem>()
+                                  where i.Name == Path.GetFileName(fullName)
+                                  select i).FirstOrDefault();
+        if (item == null)
+        {
+            File.CreateText(fullName);
+            item = items.AddFromFile(fullName);
+        }
+        
+        return item;
+    }
+    
+    public static EnvDTE.Project GetProject(EnvDTE.DTE dte, string projectName)
+    {
+        return GetAllProjects(dte).Where(p=>p.Name == projectName).First();
+    }
+    
+    public static IEnumerable<EnvDTE.Project> GetAllProjects(EnvDTE.DTE dte)
+    {
+        List<EnvDTE.Project> projectList = new List<EnvDTE.Project>();
+        
+        var folders = dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p=>p.Kind == EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
 
-		foreach (EnvDTE.Project folder in folders)
-		{
-			if (folder.ProjectItems == null) continue;
-			
-			foreach (EnvDTE.ProjectItem item in folder.ProjectItems)
-			{
-				if (item.Object is EnvDTE.Project)
-					projectList.Add(item.Object as EnvDTE.Project);
-			}
-		}
-		
-		var projects = dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p=>p.Kind != EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
+        foreach (EnvDTE.Project folder in folders)
+        {
+            if (folder.ProjectItems == null) continue;
+            
+            foreach (EnvDTE.ProjectItem item in folder.ProjectItems)
+            {
+                if (item.Object is EnvDTE.Project)
+                    projectList.Add(item.Object as EnvDTE.Project);
+            }
+        }
+        
+        var projects = dte.Solution.Projects.Cast<EnvDTE.Project>().Where(p=>p.Kind != EnvDTE80.ProjectKinds.vsProjectKindSolutionFolder);
 
-		if (projects.Count() > 0)
-			projectList.AddRange(projects);
-		
-		return projectList;
-	}
-	
-	public static EnvDTE.ProjectItem GetProjectItemWithName(EnvDTE.ProjectItems items, string itemName)
-	{
-		return GetAllProjectItemsRecursive(items).Cast<ProjectItem>().Where(i=>i.Name == itemName).First();
-	}
-	
-	public static string GetProjectItemFullPath(EnvDTE.ProjectItem item)
-	{
-		return item.Properties.Item("FullPath").Value.ToString();
-	}
-	
-	public static IEnumerable<EnvDTE.ProjectItem> GetAllSolutionItems(EnvDTE.DTE dte)
-	{
-		List<EnvDTE.ProjectItem> itemList = new List<EnvDTE.ProjectItem>();
+        if (projects.Count() > 0)
+            projectList.AddRange(projects);
+        
+        return projectList;
+    }
+    
+    public static EnvDTE.ProjectItem GetProjectItemWithName(EnvDTE.ProjectItems items, string itemName)
+    {
+        return GetAllProjectItemsRecursive(items).Cast<ProjectItem>().Where(i=>i.Name == itemName).First();
+    }
+    
+    public static string GetProjectItemFullPath(EnvDTE.ProjectItem item)
+    {
+        return item.Properties.Item("FullPath").Value.ToString();
+    }
+    
+    public static IEnumerable<EnvDTE.ProjectItem> GetAllSolutionItems(EnvDTE.DTE dte)
+    {
+        List<EnvDTE.ProjectItem> itemList = new List<EnvDTE.ProjectItem>();
 
-		foreach (Project item in GetAllProjects(dte))
-		{
-			if (item == null || item.ProjectItems == null) continue;
-			
-			itemList.AddRange(GetAllProjectItemsRecursive(item.ProjectItems));	 
-		}
-		
-		return itemList;
-	}
-	
-	public static IEnumerable<EnvDTE.ProjectItem> GetAllProjectItemsRecursive(EnvDTE.ProjectItems projectItems) 
-	{
-    	foreach (EnvDTE.ProjectItem projectItem in projectItems) 
-		{
-			if (projectItem.ProjectItems == null) continue;
+        foreach (Project item in GetAllProjects(dte))
+        {
+            if (item == null || item.ProjectItems == null) continue;
+            
+            itemList.AddRange(GetAllProjectItemsRecursive(item.ProjectItems));	 
+        }
+        
+        return itemList;
+    }
+    
+    public static IEnumerable<EnvDTE.ProjectItem> GetAllProjectItemsRecursive(EnvDTE.ProjectItems projectItems) 
+    {
+        foreach (EnvDTE.ProjectItem projectItem in projectItems) 
+        {
+            if (projectItem.ProjectItems == null) continue;
 
-        	foreach (EnvDTE.ProjectItem subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
-        	{
-            	yield return subItem;
-        	}
-			
-			
-        	yield return projectItem;
-    	}
-	}
+            foreach (EnvDTE.ProjectItem subItem in GetAllProjectItemsRecursive(projectItem.ProjectItems))
+            {
+                yield return subItem;
+            }
+            
+            
+            yield return projectItem;
+        }
+    }
 }
 
 public sealed class OutputFile
 {
-	public OutputFile()
-	{
-		this.FileProperties = new FileProperties
-		{
-			CustomTool = String.Empty,
-			BuildAction = BuildAction.None
-		};
-	}
-	
-	public string FileName { get; set; }
-	public string ProjectName { get; set; }
-	public string FolderName { get; set; }
-	public string Content { get; set; }
-	public FileProperties FileProperties { get; set; }
+    public OutputFile()
+    {
+        this.FileProperties = new FileProperties
+        {
+            CustomTool = String.Empty,
+            BuildAction = BuildAction.None
+        };
+    }
+    
+    public string FileName { get; set; }
+    public string ProjectName { get; set; }
+    public string FolderName { get; set; }
+    public string Content { get; set; }
+    public FileProperties FileProperties { get; set; }
 }
 
 public class BuildAction
 {
-	public const string None = "None";
-	public const string Compile = "Compile";
-	public const string Content = "Content";
-	public const string EmbeddedResource = "EmbeddedResource";
-	public const string EntityDeploy = "EntityDeploy";
+    public const string None = "None";
+    public const string Compile = "Compile";
+    public const string Content = "Content";
+    public const string EmbeddedResource = "EmbeddedResource";
+    public const string EntityDeploy = "EntityDeploy";
 }
 
 public sealed class FileProperties
 {
-	public FileProperties ()
-	{
-		this.TemplateParameter = new Dictionary<string,string>();	
-	}
-	
-	public string CustomTool { get; set; }
-	public string BuildAction { get; set; }
-	public Dictionary<string, string> TemplateParameter { get; set; }
-	
-	internal string BuildActionString
-	{
-		get
-		{
-			return this.BuildAction;
-		}
-	}
+    public FileProperties ()
+    {
+        this.TemplateParameter = new Dictionary<string,string>();	
+    }
+    
+    public string CustomTool { get; set; }
+    public string BuildAction { get; set; }
+    public Dictionary<string, string> TemplateParameter { get; set; }
+    
+    internal string BuildActionString
+    {
+        get
+        {
+            return this.BuildAction;
+        }
+    }
 }
 
 
