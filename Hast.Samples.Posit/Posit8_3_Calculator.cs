@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
@@ -132,7 +131,7 @@ namespace Hast.Samples.Posit
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null)
         {
-            var memory =  var memory = hastlayer is null
+            var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(2)
                 : hastlayer.CreateMemory(configuration, 2);
 
@@ -157,9 +156,9 @@ namespace Hast.Samples.Posit
                      Posit8_3_Calculator.MaxDegreeOfParallelism + ")");
             }
 
-            var memory =  var memory = hastlayer is null
+            var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(Posit8_3_Calculator.MaxDegreeOfParallelism)
-                : hastlayer.CreateMemory(configuration, Posit8_3_Calculator.MaxDegreeOfParallelism));
+                : hastlayer.CreateMemory(configuration, Posit8_3_Calculator.MaxDegreeOfParallelism);
 
             for (int i = 0; i < numbers.Length; i++)
             {
@@ -184,7 +183,7 @@ namespace Hast.Samples.Posit
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null)
         {
-            var memory =  var memory = hastlayer is null
+            var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(positArray.Length + 1)
                 : hastlayer.CreateMemory(configuration, positArray.Length + 1);
 

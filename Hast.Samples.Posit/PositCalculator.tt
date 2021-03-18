@@ -26,9 +26,8 @@ for (var i = 0; i<3; i++){
 #>
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
@@ -158,7 +157,7 @@ namespace Hast.Samples.Posit
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null)
         {
-            var memory =  var memory = hastlayer is null
+            var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(2)
                 : hastlayer.CreateMemory(configuration, 2);
 
@@ -183,9 +182,9 @@ namespace Hast.Samples.Posit
                      <#= className#>.MaxDegreeOfParallelism + ")");
             }
 
-            var memory =  var memory = hastlayer is null
+            var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(<#= className#>.MaxDegreeOfParallelism)
-                : hastlayer.CreateMemory(configuration, <#= className#>.MaxDegreeOfParallelism));
+                : hastlayer.CreateMemory(configuration, <#= className#>.MaxDegreeOfParallelism);
 
             for (int i = 0; i < numbers.Length; i++)
             {
@@ -210,7 +209,7 @@ namespace Hast.Samples.Posit
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null)
         {
-            var memory =  var memory = hastlayer is null
+            var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(positArray.Length + 1)
                 : hastlayer.CreateMemory(configuration, positArray.Length + 1);
 
