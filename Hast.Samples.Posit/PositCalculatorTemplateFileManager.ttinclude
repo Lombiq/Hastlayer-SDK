@@ -2,13 +2,13 @@
 <#@ assembly name="System.Data" #>
 <#@ assembly name="System.Data.Entity" #>
 <#@ assembly name="System.Xml" #>
-<#@ assembly name="System.Xml.Linq"#>
+<#@ assembly name="System.Xml.Linq" #>
 <#@ assembly name="System.Windows.Forms" #>
-<#@ assembly name="EnvDTE"#>
+<#@ assembly name="EnvDTE" #>
 <#@ assembly name="EnvDTE80" #>
-<#@ assembly name="Microsoft.VisualStudio.Shell.15.0"#>
-<#@ assembly name="Microsoft.VisualStudio.Shell.Interop"#>
-<#@ import namespace="Microsoft.VisualStudio.Shell.Interop"#>
+<#@ assembly name="Microsoft.VisualStudio.Shell.15.0" #>
+<#@ assembly name="Microsoft.VisualStudio.Shell.Interop" #>
+<#@ import namespace="Microsoft.VisualStudio.Shell.Interop" #>
 <#@ import namespace="System" #>
 <#@ import namespace="System.Data" #>
 <#@ import namespace="System.Data.Objects" #>
@@ -23,8 +23,8 @@
 <#@ import namespace="System.Reflection" #>
 <#@ import namespace="System.CodeDom" #>
 <#@ import namespace="System.CodeDom.Compiler" #>
-<#@ import namespace="Microsoft.CSharp"#>
-<#@ import namespace="System.Text"#>
+<#@ import namespace="Microsoft.CSharp" #>
+<#@ import namespace="System.Text" #>
 <#@ import namespace="EnvDTE" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <#+ 
