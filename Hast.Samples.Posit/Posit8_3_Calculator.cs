@@ -109,9 +109,15 @@ namespace Hast.Samples.Posit
 
     public static class Posit8_3_CalculatorCalculatorExtensions
     {
-        public static int CalculateIntegerSumUpToNumber(this  Posit8_3_Calculator  positCalculator, int number)
+        public static int CalculateIntegerSumUpToNumber(
+            this  Posit8_3_Calculator  positCalculator,
+            int number,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = new SimpleMemory(1);
+             var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(1)
+                : hastlayer.CreateMemory(configuration, 1);
 
             memory.WriteInt32( Posit8_3_Calculator.CalculateLargeIntegerSum_InputInt32Index, number);
             positCalculator.CalculateIntegerSumUpToNumber(memory);
@@ -119,9 +125,16 @@ namespace Hast.Samples.Posit
             return memory.ReadInt32( Posit8_3_Calculator.CalculateLargeIntegerSum_OutputInt32Index);
         }
 
-        public static float CalculatePowerOfReal(this  Posit8_3_Calculator  positCalculator, int number, float real)
+        public static float CalculatePowerOfReal(
+            this  Posit8_3_Calculator  positCalculator,
+            int number,
+            float real,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = new SimpleMemory(2);
+            var memory =  var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(2)
+                : hastlayer.CreateMemory(configuration, 2);
 
             memory.WriteInt32( Posit8_3_Calculator.CalculatePowerOfReal_InputInt32Index, number);
             memory.WriteUInt32( Posit8_3_Calculator.CalculatePowerOfReal_InputPosit32Index, new  Posit8_3(real).PositBits);
@@ -131,7 +144,11 @@ namespace Hast.Samples.Posit
             return (float)new Posit8_3((byte)memory.ReadUInt32( Posit8_3_Calculator.CalculatePowerOfReal_OutputPosit32Index), true);
         }
 
-        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this  Posit8_3_Calculator positCalculator, int[] numbers)
+        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(
+            this  Posit8_3_Calculator positCalculator,
+            int[] numbers,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             if (numbers.Length !=  Posit8_3_Calculator.MaxDegreeOfParallelism)
             {
@@ -140,7 +157,9 @@ namespace Hast.Samples.Posit
                      Posit8_3_Calculator.MaxDegreeOfParallelism + ")");
             }
 
-            var memory = new SimpleMemory( Posit8_3_Calculator.MaxDegreeOfParallelism);
+            var memory =  var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(Posit8_3_Calculator.MaxDegreeOfParallelism)
+                : hastlayer.CreateMemory(configuration, Posit8_3_Calculator.MaxDegreeOfParallelism));
 
             for (int i = 0; i < numbers.Length; i++)
             {
@@ -159,9 +178,15 @@ namespace Hast.Samples.Posit
             return results;
         }
 
-        public static float AddPositsInArray(this  Posit8_3_Calculator positCalculator, uint[] positArray)
+        public static float AddPositsInArray(
+            this  Posit8_3_Calculator positCalculator,
+            uint[] positArray,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
-            var memory = new SimpleMemory( positArray.Length + 1);
+            var memory =  var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(positArray.Length + 1)
+                : hastlayer.CreateMemory(configuration, positArray.Length + 1);
 
             memory.WriteUInt32( Posit8_3_Calculator.AddPositsInArray_InputPosit32CountIndex, (uint) positArray.Length);
 
