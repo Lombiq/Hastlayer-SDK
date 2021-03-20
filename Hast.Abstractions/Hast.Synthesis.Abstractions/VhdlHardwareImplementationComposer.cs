@@ -39,7 +39,7 @@ namespace Hast.Synthesis.Abstractions
                 var stop = buildProvider
                     .Shortcuts
                     .Select(pair => new { pair.Key, pair.Value }) // Make it nullable.
-                    .FirstOrDefault(item => item.Value(context, implementation));
+                    .FirstOrDefault(item => item.Value(context));
 
                 if (stop != null)
                 {

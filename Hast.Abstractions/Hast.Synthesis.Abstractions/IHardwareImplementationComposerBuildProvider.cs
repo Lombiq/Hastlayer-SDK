@@ -12,7 +12,8 @@ namespace Hast.Synthesis.Abstractions
     public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IDependency
     {
         /// <summary>
-        /// Gets the functions installed by other providers. If any of them returns true this provider is skipped.
+        /// Gets the functions installed by other providers. If any of them returns <see langword="true"/> this provider
+        /// is skipped.
         /// </summary>
         Dictionary<string, BuildProviderShortcut> Shortcuts { get; }
 
