@@ -31,8 +31,39 @@ If you want to build for a platform not in your */opt/xilinx/platforms* director
 
 Be sure that all .NET software dependencies are on the same version on both the target and the source computers. Otherwise the source code won't match during transformation. This will result in a different Transformation ID and the XCLBIN file won't be found, prompting a recompilation on the target machine. To mitigate this risk you can try some of the following strategies:
 * Perform a system update on both machines before starting, so both are on the most up-to-date frameworks.
-* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true` (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions)).
+* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true Samples/Hast.Samples.Consumer/Hast.Samples.Consuumer.csproj` (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions)).
 
+
+### Cross Compilation with Docker
+
+This way you can compile on your Windows machine, or just any machine where you don't want to install XRT permanently.
+
+0. [Docker should be installed.](https://docs.docker.com/get-docker/)
+1. Clone the Xilinx Base Runtime from their GitHub:
+```powershell
+git clone https://github.com/Xilinx/Xilinx_Base_Runtime.git
+```
+2. Navigate to the directory with the 2020.2 image for CentOS 7 and build it:
+```powershell
+cd Xilinx_Base_Runtime/Dockerfiles/2020.2/centos-7/
+docker build -t xrt .
+```
+3. Open Docker Desktop and select the *Images* tab from the sidebar.
+4. Click *Run* and expand the *Optional Settings*.
+5. Create a shared directory by selecting a *Host Path* and entering "/data" into the *Container Path* field.
+6. Copy the `centos7-install.sh` script and the platform install files to the shared directory.   
+7. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
+8. There is no `sudo` but the CLI starts you as root so use the following command to run the installer:
+```sh
+cd /data
+cat centos7-install.sh | sed '1d' | sed 's/\r$//' | sed 's/sudo //' > centos7-install-docker.sh
+sh centos7-install-docker.sh
+dotnet --version # Just to verify the successful install.
+```
+9. Install the platform RPM packages you copied over:
+```sh
+for package in *.rpm; do rpm -Uvh "$package"; done
+```
 
 ## Using Azure Attestation
 
@@ -88,6 +119,22 @@ To get the rest from your Azure account:
 9. The Tenant ID in the Overview page becomes `ClientTenantId`.
 
 Additionally, during compilation only a netlist is generated instead of a bitstream so there won't be any reports based on simulation data.
+
+
+### Execution
+
+At least during the private preview, the Azure VMs aren't meant online compilation and there isn't enough space to install the full Vitis SDK. So you have to build and run attestation on a separate machine. The build machine must have Vitis 2020.2, but doesn't need Alveo hardware.
+
+On the build machine:
+1. Navigate to the application directory.
+2. Configure appsettings.json as described above.
+3. Run the Hastlayer application with the "Azure Alveo U250" device selected. It will terminate with an exception after the build is finished because there is no hardware.
+4. Copy the application to the Azure VM. If you already did that, copy the `HardwareFramework/bi`n directory and the `appsettings.json` file.
+
+On the Azure virtual machine:
+1. Run `export XILINX_VITIS=/; source /opt/xilinx/xrt/setup.sh` to set up the environment. You may want to copy this into your `~/.bashrc` for future convenience.
+2. Navigate to the application directory.
+3. Run the Hastlayer application with the same parameters you did on the build machine.
 
 
 ## Other Remarks
