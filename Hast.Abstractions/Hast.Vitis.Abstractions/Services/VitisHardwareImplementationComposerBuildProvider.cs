@@ -139,9 +139,7 @@ namespace Hast.Vitis.Abstractions.Services
             var hashId = context.HardwareDescription.TransformationId;
             _logger.LogInformation("HASH ID: {0}", hashId);
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
-            implementation.BinaryPath = Path.Combine(
-                EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
-                hashId + ".xclbin");
+            implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             Cleanup(hardwareFrameworkPath, hashId);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
@@ -650,5 +648,16 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         public void Dispose() => _buildOutput?.Dispose();
+
+        public static string GetBinaryPath(
+            IHardwareGenerationConfiguration configuration,
+            IHardwareDescription hardwareDescription)
+        {
+            var hashId = hardwareDescription.TransformationId;
+            var hardwareFrameworkPath = Path.GetFullPath(configuration.HardwareFrameworkPath);
+            return Path.Combine(
+                EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
+                hashId + ".xclbin");
+        }
     }
 }

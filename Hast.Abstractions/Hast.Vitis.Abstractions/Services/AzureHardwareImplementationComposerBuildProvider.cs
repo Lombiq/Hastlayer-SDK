@@ -67,7 +67,11 @@ namespace Hast.Vitis.Abstractions.Services
                 .Shortcuts;
             shortcuts.Add(
                 nameof(AzureHardwareImplementationComposerBuildProvider),
-                (_, implementation) => File.Exists(implementation.BinaryPath.Replace(".xclbin", ".bit.xclbin")));
+                context =>
+                    File.Exists(
+                        VitisHardwareImplementationComposerBuildProvider
+                            .GetBinaryPath(context.Configuration, context.HardwareDescription)
+                            .Replace(".xclbin", ".bit.xclbin")));
         }
 
         private async Task UploadToStorageAsync(
