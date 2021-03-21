@@ -31,39 +31,28 @@ If you want to build for a platform not in your */opt/xilinx/platforms* director
 
 Be sure that all .NET software dependencies are on the same version on both the target and the source computers. Otherwise the source code won't match during transformation. This will result in a different Transformation ID and the XCLBIN file won't be found, prompting a recompilation on the target machine. To mitigate this risk you can try some of the following strategies:
 * Perform a system update on both machines before starting, so both are on the most up-to-date frameworks.
-* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true Samples/Hast.Samples.Consumer/Hast.Samples.Consuumer.csproj` (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions)).
+* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true` (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions)).
 
 
 ### Cross Compilation with Docker
 
-This way you can compile on your Windows machine, or just any machine where you don't want to install XRT permanently.
+This way you can compile on your Windows machine, or any machine where you don't want to install XRT permanently. Note that you still need to download the complete Vitis XDK separately for licensing reasons and it takes about 125GB (and at least 50GB more temporarily) to set up the image. Of course you need [Docker installed](https://docs.docker.com/get-docker/) too. However there are no alternatives on Windows so please bear with it. Following these steps you will get container with Vitis XDK and .Net Core 3.1 SDK installed. Please remember not to distribute the resulting image!
 
-0. [Docker should be installed.](https://docs.docker.com/get-docker/)
-1. Clone the Xilinx Base Runtime from their GitHub:
-```powershell
-git clone https://github.com/Xilinx/Xilinx_Base_Runtime.git
-```
-2. Navigate to the directory with the 2020.2 image for CentOS 7 and build it:
-```powershell
-cd Xilinx_Base_Runtime/Dockerfiles/2020.2/centos-7/
-docker build -t xrt .
-```
-3. Open Docker Desktop and select the *Images* tab from the sidebar.
-4. Click *Run* and expand the *Optional Settings*.
-5. Create a shared directory by selecting a *Host Path* and entering "/data" into the *Container Path* field.
-6. Copy the `centos7-install.sh` script and the platform install files to the shared directory.   
-7. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
-8. There is no `sudo` but the CLI starts you as root so use the following command to run the installer:
-```sh
-cd /data
-cat centos7-install.sh | sed '1d' | sed 's/\r$//' | sed 's/sudo //' > centos7-install-docker.sh
-sh centos7-install-docker.sh
-dotnet --version # Just to verify the successful install.
-```
-9. Install the platform RPM packages you copied over:
-```sh
-for package in *.rpm; do rpm -Uvh "$package"; done
-```
+1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
+2. Extract it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the folder into the `Docs/Container` folder inside this project.
+3. Download the appropriate CentOS 7 packages from the Vitis Downloads page, or from the Xilinx Lounge if you use Azure.
+4. Extract and copy the RPM files into the `Docs/Container/platform` folder.
+5. Copy the `centos7-install.sh` to the `Docs/Container` as well.
+6. Open a shell of your choice and type `docker build -t vitis .` to create an image. This will take a while.
+7. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
+8. Clean up after the build is finished with the `docker builder prune -a -f` command.
+9. Go back to Docker Desktop and click *Run* on the "vitis" image.
+10. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path*, and entering "/data" into the *Container Path* field.
+11. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
+12. A window with `sh` shell will appear. Type `bash` as it already has the XRT setup configured. 
+13. Copy your Hastlayer project into the shared folder and access it through the `/data` directory.
+    
+As you can see it was as simple as 1, 2, 13!
 
 ## Using Azure Attestation
 
