@@ -9,7 +9,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
   </ItemGroup>
-  <PropertyGroup Condition="$(SolutionName) == 'Hastlayer.SDK'">
+  <PropertyGroup Condition="$(SolutionName) == 'Hastlayer.SDK' or $(SolutionName) == 'Hastlayer.SDK.Linux'">
     <DefineConstants>WITH_HAST_CORE</DefineConstants>
   </PropertyGroup>
   <ItemGroup Condition="$(DefineConstants.Contains(WITH_HAST_CORE))">
