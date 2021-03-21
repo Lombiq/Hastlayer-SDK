@@ -23,6 +23,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PositCalculatorSampleRunner.cs</LastGenOutput>
     </Content>
+    <Content Include="Program.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Program.cs</LastGenOutput>
+    </Content>
     <Content Include="Sample.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Sample.cs</LastGenOutput>
@@ -44,6 +48,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>PositCalculatorSampleRunner.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Program.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Program.tt</DependentUpon>
     </Compile>
     <Compile Update="Sample.cs">
       <DesignTime>True</DesignTime>
