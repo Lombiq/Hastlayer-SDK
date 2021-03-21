@@ -4,34 +4,31 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ output extension=".cs" #>
-
 <#
-    var positSizes = new byte[] {8,16,32,64};
-    var calculatorTypes = new string[] {"Calculator", "AdvancedCalculator", "FusedCalculator"};
-    List<string> calculatorNames = new List<string>();	
+    var positSizes = new byte[] { 8, 16, 32, 64 };
+    var calculatorTypes = new string[] { "Calculator", "AdvancedCalculator", "FusedCalculator" };
+    var exponentSizes = Enumerable.Range(0, 4);
 
-    for (var positSize = 2; positSize >= 0; positSize--){ 
-            for (var type = 2; type>=0; type--){
-                for (var exponentSize = 4; exponentSize>=0; exponentSize--){
-                var positCalculatorName = "Posit" + positSizes[positSize] + "_" + exponentSize + "_" + calculatorTypes[type];
-                calculatorNames.Add(positCalculatorName);
-                }
+    List<string> calculatorNames = new List<string>();
+
+    foreach (var positSize in positSizes)
+    {
+        foreach (var exponentSize in exponentSizes)
+        {
+            foreach (var calculatorType in calculatorTypes)
+            {
+                calculatorNames.Add($"Posit{positSize}_{exponentSize}_{calculatorType}");
             }
+        }
     }
-#> 
-
+#>
 namespace Hast.Samples.Posit
 {
     internal enum Sample
     {
     <#
-    var last = calculatorNames.First();
-    calculatorNames.RemoveAt(0);
-    calculatorNames.Reverse();
     foreach (var name in calculatorNames)
-       {  #>
-            <#=name#>, 		 
-    <#  } #> 
-    <#=last#>
-    }
+    {#>
+    <#= name #>,
+    <#}#>}
 }
