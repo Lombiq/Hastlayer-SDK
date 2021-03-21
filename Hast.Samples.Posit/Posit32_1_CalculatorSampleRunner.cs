@@ -19,12 +19,12 @@ namespace Hast.Samples.Posit
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
-            RunSoftwareBenchmarks();
+            RunSoftwareBenchmarks(hastlayer, hardwareRepresentation);
 
             var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32_1_Calculator());
 
 
-            positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
                         positCalculator.CalculatePowerOfReal( 100000, (float)1.015625,  hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             
@@ -34,7 +34,7 @@ namespace Hast.Samples.Posit
                 numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
             }
 
-            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers,  hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers,  hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
 
             var Posit32_1Array = new uint[100000];
@@ -45,10 +45,10 @@ namespace Hast.Samples.Posit
                 else Posit32_1Array[i] = new Posit32_1((float)0.25 * -2 * i).PositBits;
             }
 
-            positCalculator.AddPositsInArray(Posit32_1Array);
+            var positsInArraySum = positCalculator.AddPositsInArray(Posit32_1Array);
         }
 
-        public static void RunSoftwareBenchmarks()
+        public static void RunSoftwareBenchmarks(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
             var positCalculator = new Posit32_1_Calculator();
 
@@ -56,7 +56,7 @@ namespace Hast.Samples.Posit
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
             positCalculator.CalculateIntegerSumUpToNumber(100000);
             var sw = Stopwatch.StartNew();
-            positCalculator.CalculateIntegerSumUpToNumber(
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(
                 100000,
                 hastlayer,
                 hardwareRepresentation.HardwareGenerationConfiguration);
@@ -70,11 +70,11 @@ namespace Hast.Samples.Posit
             positCalculator.CalculatePowerOfReal(100000, (float)1.0001, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw = Stopwatch.StartNew();
             
-                            positCalculator.CalculatePowerOfReal(
-                    100000,
-                    (float)1.015625,
-                    hastlayer,
-                    hardwareRepresentation.HardwareGenerationConfiguration);
+                         var powerOfReal = positCalculator.CalculatePowerOfReal(
+                100000,
+                (float)1.015625,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
             
             sw.Stop();
 
@@ -91,7 +91,7 @@ namespace Hast.Samples.Posit
 
             positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers,hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw = Stopwatch.StartNew();
-            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(
                 numbers,
                 hastlayer,
                 hardwareRepresentation.HardwareGenerationConfiguration);
@@ -112,7 +112,7 @@ namespace Hast.Samples.Posit
 
             positCalculator.AddPositsInArray( Posit32_1Array,hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw = Stopwatch.StartNew();
-            positCalculator.AddPositsInArray( Posit32_1Array, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var positsInArraySum = positCalculator.AddPositsInArray( Posit32_1Array, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
 
             Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);
