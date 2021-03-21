@@ -1,7 +1,7 @@
 ﻿#!/bin/bash
 
 # Ensures that the XRT environment is set up.
-[ -z $XILINX_XRT ] && source /opt/xilinx/xrt/setup.sh
+[ -z $XILINX_XRT ] && [ -f /opt/xilinx/xrt/setup.sh ] && source /opt/xilinx/xrt/setup.sh
 
 # Includes the EPEL (needed for GDI+) and Microsoft package repositories.
 sudo yum install -y epel-release
