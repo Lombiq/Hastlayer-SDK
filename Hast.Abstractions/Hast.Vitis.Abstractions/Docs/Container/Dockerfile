@@ -9,7 +9,7 @@ COPY centos7-install.sh /root/
 COPY platform /root/platform/
 
 # Install dependencies
-RUN yum install -y wget sudo;
+RUN yum install -y wget sudo unzip;
 RUN ["/bin/sh", "-c", "cd /root/Xilinx_Unified_2020.2/; echo 1 | ./xsetup -b ConfigGen"]
 RUN ["/bin/sh", "-c", "cd /root/Xilinx_Unified_2020.2/; ./xsetup --a XilinxEULA,3rdPartyEULA,WebTalkTerms -b Install -c /root/.Xilinx/install_config.txt"]
 RUN yum install -y /root/platform/*.rpm
