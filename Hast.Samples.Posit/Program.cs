@@ -9,9 +9,8 @@ namespace Hast.Samples.Posit
 {
     internal static class Configuration
     {
-        public static string VhdlOutputFilePath = @"Hast_IP.vhd";
-
         public static Sample SampleToRun = Sample.Posit32_0_Calculator;
+        public static string HardwareFrameworkPath = "HardwareFramework";
     }
 
     class Program
@@ -57,7 +56,7 @@ namespace Hast.Samples.Posit
                     var devices = hastlayer.GetSupportedDevices();
                     // Let's just use the first one that is available. However you might want to use a specific
                     // device, not just any first one.
-                    var configuration = new HardwareGenerationConfiguration(devices.First().Name, null);
+                    var configuration = new HardwareGenerationConfiguration(devices.First().Name, Configuration.HardwareFrameworkPath);
 
                     // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                     // here:
@@ -75,43 +74,43 @@ namespace Hast.Samples.Posit
                     // Letting the configuration of samples run. Check out those methods too!
                     switch (Configuration.SampleToRun)
                     {
-                                                    case Sample.Posit8_0_Calculator:
-                                    Posit8_0_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit8_1_Calculator:
-                                    Posit8_1_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit8_2_Calculator:
-                                    Posit8_2_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit8_3_Calculator:
-                                    Posit8_3_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit16_0_Calculator:
-                                    Posit16_0_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit16_1_Calculator:
-                                    Posit16_1_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit16_2_Calculator:
-                                    Posit16_2_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit16_3_Calculator:
-                                    Posit16_3_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit32_0_Calculator:
-                                    Posit32_0_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit32_1_Calculator:
-                                    Posit32_1_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit32_2_Calculator:
-                                    Posit32_2_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                                            case Sample.Posit32_3_Calculator:
-                                    Posit32_3_CalculatorSampleRunner.Configure(configuration);
-                                    break;
-                                              
+                        case Sample.Posit8_0_Calculator:
+                            Posit8_0_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit8_1_Calculator:
+                            Posit8_1_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit8_2_Calculator:
+                            Posit8_2_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit8_3_Calculator:
+                            Posit8_3_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit16_0_Calculator:
+                            Posit16_0_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit16_1_Calculator:
+                            Posit16_1_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit16_2_Calculator:
+                            Posit16_2_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit16_3_Calculator:
+                            Posit16_3_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit32_0_Calculator:
+                            Posit32_0_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit32_1_Calculator:
+                            Posit32_1_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit32_2_Calculator:
+                            Posit32_2_CalculatorSampleRunner.Configure(configuration);
+                            break;
+                        case Sample.Posit32_3_Calculator:
+                            Posit32_3_CalculatorSampleRunner.Configure(configuration);
+                            break;
+
                         default:
                             break;
                     }
@@ -127,6 +126,7 @@ namespace Hast.Samples.Posit
                         new[]
                         {
                             typeof(Posit8_0).Assembly,
+                            typeof(Posit8_0_Calculator).Assembly,
                         },
                         configuration);
 
@@ -144,59 +144,48 @@ namespace Hast.Samples.Posit
                         Console.WriteLine();
                     }
 
-                    if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
-                    {
-                        Console.WriteLine("Writing VHDL source to file.");
-
-                        // TODO: Re-enable VHDL source update.
-                        //await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
-
-                        Console.WriteLine("VHDL source written to file.");
-                        Console.WriteLine();
-                    }
-
                     Console.WriteLine("Starting hardware execution.");
 
                     // Running samples.
                     switch (Configuration.SampleToRun)
                     {
-                                                    case Sample.Posit8_0_Calculator:
-                                    await Posit8_0_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit8_1_Calculator:
-                                    await Posit8_1_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit8_2_Calculator:
-                                    await Posit8_2_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit8_3_Calculator:
-                                    await Posit8_3_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit16_0_Calculator:
-                                    await Posit16_0_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit16_1_Calculator:
-                                    await Posit16_1_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit16_2_Calculator:
-                                    await Posit16_2_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit16_3_Calculator:
-                                    await Posit16_3_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit32_0_Calculator:
-                                    await Posit32_0_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit32_1_Calculator:
-                                    await Posit32_1_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit32_2_Calculator:
-                                    await Posit32_2_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                                            case Sample.Posit32_3_Calculator:
-                                    await Posit32_3_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                                              
+                        case Sample.Posit8_0_Calculator:
+                            await Posit8_0_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit8_1_Calculator:
+                            await Posit8_1_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit8_2_Calculator:
+                            await Posit8_2_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit8_3_Calculator:
+                            await Posit8_3_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit16_0_Calculator:
+                            await Posit16_0_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit16_1_Calculator:
+                            await Posit16_1_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit16_2_Calculator:
+                            await Posit16_2_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit16_3_Calculator:
+                            await Posit16_3_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit32_0_Calculator:
+                            await Posit32_0_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit32_1_Calculator:
+                            await Posit32_1_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit32_2_Calculator:
+                            await Posit32_2_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+                        case Sample.Posit32_3_Calculator:
+                            await Posit32_3_CalculatorSampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+
                         default:
                             break;
                     }
