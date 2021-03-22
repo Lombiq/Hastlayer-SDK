@@ -86,19 +86,19 @@ namespace Hast.Samples.Posit
                     // Letting the configuration of samples run. Check out those methods too!
                     switch (Configuration.SampleToRun)
                     {
-                    <# foreach (var positSize in positSizes)
-                    {
-                        foreach (var exponentSize in exponentSizes)
-                        {
-                            foreach (var calculatorType in calculatorTypes)
-                            {
-                                var positCalculatorName = $"Posit{positSize}_{exponentSize}_{calculatorType}";#>
-                                case Sample.<#=positCalculatorName#>:
-                                    <#=positCalculatorName#>SampleRunner.Configure(configuration);
-                                    break;
-                            <#}
-                        }
-                    }#>                  
+<#foreach (var positSize in positSizes)
+{
+    foreach (var exponentSize in exponentSizes)
+    {
+        foreach (var calculatorType in calculatorTypes)
+        {
+            var positCalculatorName = $"Posit{positSize}_{exponentSize}_{calculatorType}";#>
+                        case Sample.<#=positCalculatorName#>:
+                            <#=positCalculatorName#>SampleRunner.Configure(configuration);
+                            break;
+<#      }
+    }
+}#>
                         default:
                             break;
                     }
@@ -137,19 +137,19 @@ namespace Hast.Samples.Posit
                     // Running samples.
                     switch (Configuration.SampleToRun)
                     {
-                    <# foreach (var positSize in positSizes)
-                    {
-                        foreach (var exponentSize in exponentSizes)
-                        {
-                            foreach (var calculatorType in calculatorTypes)
-                            {
-                                var positCalculatorName = $"Posit{positSize}_{exponentSize}_{calculatorType}";#>
-                                case Sample.<#=positCalculatorName#>:
-                                    await <#=positCalculatorName#>SampleRunner.Run(hastlayer, hardwareRepresentation);
-                                    break;
-                            <#}
-                        }
-                    }#>                  
+<#foreach (var positSize in positSizes)
+{
+    foreach (var exponentSize in exponentSizes)
+    {
+        foreach (var calculatorType in calculatorTypes)
+        {
+            var positCalculatorName = $"Posit{positSize}_{exponentSize}_{calculatorType}";#>
+                        case Sample.<#=positCalculatorName#>:
+                            await <#=positCalculatorName#>SampleRunner.Run(hastlayer, hardwareRepresentation);
+                            break;
+<#      }
+    }
+}#>
                         default:
                             break;
                     }
