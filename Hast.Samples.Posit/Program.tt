@@ -20,9 +20,9 @@ namespace Hast.Samples.Posit
 {
     internal static class Configuration
     {
-        public static string VhdlOutputFilePath = @"Hast_IP.vhd";
-
+        public static string DeviceName = "Nexys A7";
         public static Sample SampleToRun = Sample.Posit32_0_Calculator;
+        public static string HardwareFrameworkPath = "HardwareFramework";
     }
 
     class Program
@@ -68,7 +68,7 @@ namespace Hast.Samples.Posit
                     var devices = hastlayer.GetSupportedDevices();
                     // Let's just use the first one that is available. However you might want to use a specific
                     // device, not just any first one.
-                    var configuration = new HardwareGenerationConfiguration(devices.First().Name, null);
+                    var configuration = new HardwareGenerationConfiguration(Configuration.DeviceName, Configuration.HardwareFrameworkPath);
 
                     // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                     // here:
@@ -114,6 +114,7 @@ namespace Hast.Samples.Posit
                         new[]
                         {
                             typeof(Posit8_0).Assembly,
+                            typeof(Posit8_0_Calculator).Assembly,
                         },
                         configuration);
 
@@ -128,17 +129,6 @@ namespace Hast.Samples.Posit
                             "There were the following transformation warnings, which may hint on issues that can cause the hardware implementation to produce incorrect results:" +
                             Environment.NewLine +
                             string.Join(Environment.NewLine, hardwareRepresentation.HardwareDescription.Warnings.Select(warning => "* " + warning.ToString())));
-                        Console.WriteLine();
-                    }
-
-                    if (!string.IsNullOrEmpty(Configuration.VhdlOutputFilePath))
-                    {
-                        Console.WriteLine("Writing VHDL source to file.");
-
-                        // TODO: Re-enable VHDL source update.
-                        //await hardwareRepresentation.HardwareDescription.WriteSource(Configuration.VhdlOutputFilePath);
-
-                        Console.WriteLine("VHDL source written to file.");
                         Console.WriteLine();
                     }
 
