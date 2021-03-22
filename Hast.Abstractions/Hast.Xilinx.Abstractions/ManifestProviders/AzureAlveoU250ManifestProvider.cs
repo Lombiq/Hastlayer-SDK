@@ -19,7 +19,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 // SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
                 AvailableMemoryBytes = 2 * DataSize.GigaByte,
                 SupportsHbm = false,
-                SupportedPlatforms = new[] { "xilinx_u250" },
+                SupportedPlatforms = new[] { "xilinx_u250_gen3x16_xdma_2_1_202010_1" }, // Need a very specific version.
                 ToolChainName = CommonToolChainNames.Vitis,
                 RequiresDcpBinary = true,
             };
