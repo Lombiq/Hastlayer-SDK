@@ -9,6 +9,7 @@ namespace Hast.Samples.Posit
 {
     internal static class Configuration
     {
+        public static string DeviceName = "Nexys A7";
         public static Sample SampleToRun = Sample.Posit32_0_Calculator;
         public static string HardwareFrameworkPath = "HardwareFramework";
     }
@@ -56,7 +57,7 @@ namespace Hast.Samples.Posit
                     var devices = hastlayer.GetSupportedDevices();
                     // Let's just use the first one that is available. However you might want to use a specific
                     // device, not just any first one.
-                    var configuration = new HardwareGenerationConfiguration(devices.First().Name, Configuration.HardwareFrameworkPath);
+                    var configuration = new HardwareGenerationConfiguration(Configuration.DeviceName, Configuration.HardwareFrameworkPath);
 
                     // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                     // here:
