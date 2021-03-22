@@ -61,7 +61,9 @@ namespace Hast.Samples.Posit
                 var devices = hastlayer.GetSupportedDevices();
                 // Let's just use the first one that is available. However you might want to use a specific
                 // device, not just any first one.
-                var configuration = new HardwareGenerationConfiguration(Configuration.DeviceName, Configuration.HardwareFrameworkPath);
+                var configuration = new HardwareGenerationConfiguration(
+                    Configuration.DeviceName,
+                    Configuration.HardwareFrameworkPath);
 
                 // If you're running Hastlayer in the Client flavor, you also need to configure some credentials
                 // here:
@@ -71,8 +73,8 @@ namespace Hast.Samples.Posit
                 if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
                     remoteClientConfiguration.AppSecret == "appsecret")
                 {
-                    throw new InvalidOperationException(
-                        "You haven't changed the default remote credentials! Write to crew@hastlayer.com to receive access if you don't have yet.");
+                    throw new InvalidOperationException("You haven't changed the default remote credentials!" +
+                        " Write to crew@hastlayer.com to receive access if you don't have yet.");
                 }
 
 
@@ -98,7 +100,8 @@ namespace Hast.Samples.Posit
 
                 // The generated VHDL code will contain debug-level information, though it will be slower to
                 // create.
-                configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+                configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration =
+                    VhdlGenerationConfiguration.Debug;
 
                 Console.WriteLine("Hardware generation starts.");
 
@@ -111,18 +114,19 @@ namespace Hast.Samples.Posit
                     },
                     configuration);
 
-                Console.WriteLine("Hardware generation finished.");
-                Console.WriteLine();
+                Console.WriteLine($"Hardware generation finished.{Environment.NewLine}");
 
                 // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't
                 // cause any problems, but sometimes they can.
                 if (hardwareRepresentation.HardwareDescription.Warnings.Any())
                 {
                     Console.WriteLine(
-                        "There were the following transformation warnings, which may hint on issues that can cause the hardware implementation to produce incorrect results:" +
-                        Environment.NewLine +
-                        string.Join(Environment.NewLine, hardwareRepresentation.HardwareDescription.Warnings.Select(warning => "* " + warning.ToString())));
-                    Console.WriteLine();
+                        "There were the following transformation warnings, which may hint on issues " +
+                        $"that can cause the hardware implementation to produce incorrect results:{Environment.NewLine}" +
+                        string.Join(
+                            Environment.NewLine,
+                            hardwareRepresentation.HardwareDescription.Warnings.Select(warning => $"* {warning}")) +
+                        Environment.NewLine);
                 }
 
                 Console.WriteLine("Starting hardware execution.");
