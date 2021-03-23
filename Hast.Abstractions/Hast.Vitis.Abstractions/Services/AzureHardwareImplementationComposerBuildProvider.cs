@@ -1,7 +1,4 @@
-﻿using Azure.Storage;
-using Azure.Storage.Blobs;
-using Azure.Storage.Sas;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
@@ -17,7 +14,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -25,8 +21,8 @@ namespace Hast.Vitis.Abstractions.Services
     public class AzureHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
         private const string BlobContainerName = "hastlayer-attestation";
+        private readonly IAzureStorageServiceFactory _azureStorageServiceFactory;
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
-        private bool _containerChecked;
 
         public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
 
@@ -36,8 +32,12 @@ namespace Hast.Vitis.Abstractions.Services
         };
 
         public AzureHardwareImplementationComposerBuildProvider(
-            ILogger<AzureHardwareImplementationComposerBuildProvider> logger) =>
+            IAzureStorageServiceFactory azureStorageServiceFactory,
+            ILogger<AzureHardwareImplementationComposerBuildProvider> logger)
+        {
+            _azureStorageServiceFactory = azureStorageServiceFactory;
             _logger = logger;
+        }
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
@@ -49,15 +49,42 @@ namespace Hast.Vitis.Abstractions.Services
         {
             // Update xclbin file path. Skip if the validated bit file already exists.
             var oldBinaryPath = implementation.BinaryPath;
-            implementation.BinaryPath = Regex.Replace(implementation.BinaryPath, @"\.xclbin$", ".bit.xclbin");
+            var directoryPath = Path.GetDirectoryName(oldBinaryPath);
+            var fileNameBase = Path.GetFileNameWithoutExtension(oldBinaryPath);
+            implementation.BinaryPath = UpdateBinaryPath(implementation.BinaryPath);
             if (File.Exists(implementation.BinaryPath)) return;
 
-            var configuration = context.Configuration.GetOrAddAzureAttestationConfiguration();
-            configuration.SetupAndVerify();
+            var configuration = context.Configuration
+                .GetOrAddAzureAttestationConfiguration()
+                .SetupAndVerify();
 
-            await UploadToStorageAsync(configuration, oldBinaryPath);
-            await PerformAttestationAsync(configuration, oldBinaryPath);
-            await DownloadValidatedFileAsync(configuration, implementation.BinaryPath);
+            _logger.LogInformation("Setting up storage client...");
+            var azureStorageService = _azureStorageServiceFactory.CreateForBlob(configuration, BlobContainerName);
+
+            try
+            {
+                await azureStorageService.UploadAsync(oldBinaryPath);
+
+                var sharedAccessSignature = await azureStorageService.GetSharedAccessSignatureAsync();
+                await PerformAttestationAsync(configuration, oldBinaryPath, sharedAccessSignature);
+
+                _logger.LogInformation("Downloading validated xclbin files...");
+                await azureStorageService.DownloadAsync(
+                    directoryPath,
+                    fileNameBase + ".bit.xclbin",
+                    fileNameBase + ".azure.xclbin");
+            }
+            finally
+            {
+                _logger.LogInformation("Downloading log files...");
+                await azureStorageService.DownloadMaybeAsync(
+                    directoryPath,
+                    fileNameBase + "-log.txt",
+                    fileNameBase + "-logPhase0.txt",
+                    fileNameBase + "-logPhase1.txt",
+                    fileNameBase + "-logPhase2.txt",
+                    fileNameBase + "-logPhase3.txt");
+            }
         }
 
         public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
@@ -69,38 +96,22 @@ namespace Hast.Vitis.Abstractions.Services
                 nameof(AzureHardwareImplementationComposerBuildProvider),
                 context =>
                     File.Exists(
-                        VitisHardwareImplementationComposerBuildProvider
-                            .GetBinaryPath(context.Configuration, context.HardwareDescription)
-                            .Replace(".xclbin", ".bit.xclbin")));
+                        UpdateBinaryPath(
+                            VitisHardwareImplementationComposerBuildProvider
+                                .GetBinaryPath(context.Configuration, context.HardwareDescription))));
         }
 
-        private async Task UploadToStorageAsync(
+        private async Task PerformAttestationAsync(
             AzureAttestationConfiguration configuration,
-            string binaryPath)
-        {
-            _logger.LogInformation("Setting up storage client...");
-            var containerClient = await GetBlobContainerClientAsync(configuration);
-            var blobClient = containerClient.GetBlobClient(Path.GetFileName(binaryPath));
-
-            if ((await blobClient.ExistsAsync()).Value)
-            {
-                _logger.LogInformation("The xclbin file is already uploaded to the storage container!");
-                return;
-            }
-
-            _logger.LogInformation("Uploading file...");
-            await using var xclbinToUploadStream = File.OpenRead(binaryPath);
-            await blobClient.UploadAsync(xclbinToUploadStream, true, CancellationToken.None);
-        }
-
-        private async Task PerformAttestationAsync(AzureAttestationConfiguration configuration, string binaryPath)
+            string binaryPath,
+            string sharedAccessSignature)
         {
             _logger.LogInformation("Sending attestation start request...");
             var instanceId = (await GetResponseAsync<AzureResponseData>(
                 configuration.StartFunctionUrl,
                 new AzureStartPostData(configuration)
                 {
-                    BlobContainerSignature = await GetSharedAccessSignatureAsync(configuration),
+                    BlobContainerSignature = sharedAccessSignature,
                     Container = BlobContainerName,
                     NetlistName = Path.GetFileName(binaryPath),
                 })).InstanceId;
@@ -137,122 +148,8 @@ namespace Hast.Vitis.Abstractions.Services
                     : "- Unknown issue";
                 _logger.LogError("Attestation failed:\n{0}", outputString);
 
-                await DownloadLogsAsync(configuration, binaryPath);
                 throw new InvalidOperationException("Attestation failed.");
             }
-        }
-
-        private async Task DownloadLogsAsync(AzureAttestationConfiguration configuration, string binaryPath)
-        {
-            const string extensionRegexp = @"\.xclbin$";
-            var logFiles = new []
-            {
-                Regex.Replace(binaryPath, extensionRegexp, "-log.txt"),
-                Regex.Replace(binaryPath, extensionRegexp, "-logPhase0.txt"),
-                Regex.Replace(binaryPath, extensionRegexp, "-logPhase1.txt"),
-                Regex.Replace(binaryPath, extensionRegexp, "-logPhase2.txt"),
-                Regex.Replace(binaryPath, extensionRegexp, "-logPhase3.txt"),
-            }; // The logPhase files are either 0-2 or 1-3, the doc doesn't make this clear.
-
-            var containerClient = await GetBlobContainerClientAsync(configuration);
-            foreach (var logFile in logFiles)
-            {
-                var logFileName = Path.GetFileName(logFile);
-                var blobClient = containerClient.GetBlobClient(logFileName);
-                if (!await blobClient.ExistsAsync()) continue;
-
-                try
-                {
-                    if (File.Exists(logFile)) File.Delete(logFile);
-
-                    await DownloadAsync(blobClient, logFile);
-                    _logger.LogInformation("Log file downloaded: {0}", logFile);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning(ex, "Failed to download log file: {0}", logFileName);
-                }
-            }
-        }
-
-        private async Task DownloadValidatedFileAsync(AzureAttestationConfiguration configuration, string binaryPath)
-        {
-            _logger.LogInformation("Downloading validated files...");
-            var containerClient = await GetBlobContainerClientAsync(configuration);
-            var blobClient = containerClient.GetBlobClient(Path.GetFileName(binaryPath));
-
-            await DownloadAsync(blobClient, binaryPath);
-        }
-
-        private async ValueTask<string> GetSharedAccessSignatureAsync(AzureAttestationConfiguration configuration)
-        {
-            //directly build BlobContainerClient, then pass it to GetServiceSasUriForContainer() method
-            var blobContainer = await GetBlobContainerClientAsync(configuration);
-
-            var sasUri = GetServiceSasUriForContainer(blobContainer);
-            return sasUri.Query.Substring(1);
-        }
-
-        private ValueTask<BlobContainerClient> GetBlobContainerClientAsync(AzureAttestationConfiguration configuration)
-        {
-            var blobServiceClient = new BlobServiceClient(configuration.GenerateStorageConnectionString());
-
-            var client = new BlobContainerClient(
-                new Uri($"https://{configuration.StorageAccountName}.blob.core.windows.net/{BlobContainerName}"),
-                new StorageSharedKeyCredential(configuration.StorageAccountName, configuration.StorageAccountKey));
-            return _containerChecked
-                ? new ValueTask<BlobContainerClient>(client)
-                : EnsureBlobContainerExistsAsync(client, blobServiceClient);
-        }
-
-        private async ValueTask<BlobContainerClient> EnsureBlobContainerExistsAsync(
-            BlobContainerClient client,
-            BlobServiceClient blobServiceClient)
-        {
-            if (!await client.ExistsAsync())
-            {
-                var containerClientResponse = await blobServiceClient.CreateBlobContainerAsync(BlobContainerName);
-                client = containerClientResponse.Value;
-            }
-
-            _containerChecked = true;
-            return client;
-        }
-
-        // Based on: https://docs.microsoft.com/en-us/azure/storage/blobs/sas-service-create?tabs=dotnet
-        private Uri GetServiceSasUriForContainer(
-            BlobContainerClient containerClient,
-            string storedPolicyName = null,
-            BlobContainerSasPermissions permissions = BlobContainerSasPermissions.All)
-        {
-            // Check whether this BlobContainerClient object has been authorized with Shared Key.
-            if (!containerClient.CanGenerateSasUri)
-            {
-                throw new InvalidOperationException(
-                    "BlobContainerClient must be authorized with Shared Key credentials to create a service SAS.");
-            }
-
-            // Create a SAS token that's valid for one hour.
-            var sasBuilder = new BlobSasBuilder
-            {
-                BlobContainerName = containerClient.Name,
-                Resource = "c",
-            };
-
-            if (storedPolicyName == null)
-            {
-                sasBuilder.ExpiresOn = DateTimeOffset.UtcNow.AddHours(1);
-                sasBuilder.SetPermissions(permissions);
-            }
-            else
-            {
-                sasBuilder.Identifier = storedPolicyName;
-            }
-
-            var sasUri = containerClient.GenerateSasUri(sasBuilder);
-            _logger.LogInformation("SAS URI for blob container is: {0}", sasUri);
-
-            return sasUri;
         }
 
         private async Task<T> GetResponseAsync<T>(Uri url, object post)
@@ -288,12 +185,6 @@ namespace Hast.Vitis.Abstractions.Services
                 : new WebException(response.StatusCode.ToString());
         }
 
-        private static async Task DownloadAsync(BlobClient blobClient, string filePath)
-        {
-            var download = await blobClient.DownloadAsync();
-            await using var stream = File.OpenWrite(filePath);
-            await download.Value.Content.CopyToAsync(stream);
-            stream.Close();
-        }
+        private static string UpdateBinaryPath(string input) => Regex.Replace(input, @"\.xclbin$", ".azure.xclbin");
     }
 }
