@@ -3,7 +3,7 @@ using System;
 
 namespace Hast.Vitis.Abstractions.Models
 {
-    public class AzureAttestationConfiguration
+    public class AzureAttestationConfiguration : AzureStorageConfiguration
     {
         /// <summary>
         /// Gets or sets the Azure function URL for blob attestation submission.
@@ -14,17 +14,6 @@ namespace Hast.Vitis.Abstractions.Models
         /// Gets or sets the Azure function URL for polling the status of the attestation process.
         /// </summary>
         public Uri PollFunctionUrl { get; set; }
-
-        /// <summary>
-        /// Gets or sets the storage account name. See <see href="https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-dotnet#copy-your-credentials-from-the-azure-portal">
-        /// here</see> for instructions.
-        /// </summary>
-        public string StorageAccountName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the key to access the account of <see cref="StorageAccountName"/>.
-        /// </summary>
-        public string StorageAccountKey { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the user hosting the storage blob. You can retrieve it using:
@@ -42,18 +31,11 @@ namespace Hast.Vitis.Abstractions.Models
         /// </summary>
         public string ClientTenantId { get; set; }
 
-        public string GenerateStorageConnectionString() =>
-            string.Join(
-                separator: ";",
-                "DefaultEndpointsProtocol=https",
-                $"AccountName={StorageAccountName}",
-                $"AccountKey={StorageAccountKey}",
-                "EndpointSuffix=core.windows.net");
-
-        public void SetupAndVerify()
+        public AzureAttestationConfiguration SetupAndVerify()
         {
             VerifyConfiguration();
             Environment.SetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING", GenerateStorageConnectionString());
+            return this;
         }
 
         private void VerifyConfiguration()
