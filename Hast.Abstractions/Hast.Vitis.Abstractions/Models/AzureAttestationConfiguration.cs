@@ -27,7 +27,7 @@ namespace Hast.Vitis.Abstractions.Models
         public string StorageAccountKey { get; set; }
 
         /// <summary>
-        /// Gets or sets the ID of the user hosting the storage blob. You can retreive it using:
+        /// Gets or sets the ID of the user hosting the storage blob. You can retrieve it using:
         /// <code>
         /// az account show --output tsv --query id
         /// </code>
@@ -35,7 +35,7 @@ namespace Hast.Vitis.Abstractions.Models
         public string ClientSubscriptionId { get; set; }
 
         /// <summary>
-        /// Gets or sets the ID of the tenant hosting the storage blob. You can retreive it using:
+        /// Gets or sets the ID of the tenant hosting the storage blob. You can retrieve it using:
         /// <code>
         /// az account show --output tsv --query tenantId
         /// </code>
