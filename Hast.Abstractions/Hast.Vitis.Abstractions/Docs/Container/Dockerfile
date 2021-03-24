@@ -12,8 +12,8 @@ COPY platform /root/platform/
 RUN yum install -y wget sudo unzip;
 RUN ["/bin/sh", "-c", "cd /root/Xilinx_Unified_2020.2/; echo 1 | ./xsetup -b ConfigGen"]
 RUN ["/bin/sh", "-c", "cd /root/Xilinx_Unified_2020.2/; ./xsetup --a XilinxEULA,3rdPartyEULA,WebTalkTerms -b Install -c /root/.Xilinx/install_config.txt"]
-RUN yum install -y /root/platform/*.rpm
 RUN cat /root/centos7-install.sh | sed '1d' | sed 's/\r$//' | sed 's/sudo //' | sh
+RUN yum install -y /root/platform/*.rpm
 
 # Setup for future sessions
 RUN ["/bin/sh", "-c", "echo '[ -z $XILINX_XRT ] && [ -f /opt/xilinx/xrt/setup.sh ] && source /opt/xilinx/xrt/setup.sh' >> /root/.bashrc"]
