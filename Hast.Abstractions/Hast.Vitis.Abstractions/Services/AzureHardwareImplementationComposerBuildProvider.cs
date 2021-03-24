@@ -80,7 +80,6 @@ namespace Hast.Vitis.Abstractions.Services
                 await azureStorageService.DownloadMaybeAsync(
                     directoryPath,
                     fileNameBase + "-log.txt",
-                    fileNameBase + "-logPhase0.txt",
                     fileNameBase + "-logPhase1.txt",
                     fileNameBase + "-logPhase2.txt",
                     fileNameBase + "-logPhase3.txt");

@@ -53,7 +53,7 @@ namespace Hast.Vitis.Abstractions.Services
             DownloadInnerAsync(localDirectoryPath, remoteFileNames, true);
 
         public Task<IEnumerable<string>> DownloadMaybeAsync(string localDirectoryPath, params string[] remoteFileNames) =>
-            DownloadInnerAsync(localDirectoryPath, remoteFileNames, true);
+            DownloadInnerAsync(localDirectoryPath, remoteFileNames, false);
 
         public async ValueTask<string> GetSharedAccessSignatureAsync()
         {
