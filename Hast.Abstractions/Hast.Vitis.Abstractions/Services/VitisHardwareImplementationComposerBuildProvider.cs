@@ -120,16 +120,7 @@ namespace Hast.Vitis.Abstractions.Services
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
-            if (buildConfiguration.SynthesisOnly)
-            {
-                MajorStepsTotal = 3;
-            }
-            // Synthesis doesn't need the device.
-            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
-            {
-                _firstRun = false;
-                await EnsureDeviceReady();
-            }
+            await InitializeAsync(buildConfiguration);
 
             ProgressMajor(
                 "Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more complex " +
@@ -142,20 +133,7 @@ namespace Hast.Vitis.Abstractions.Services
             implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             Cleanup(hardwareFrameworkPath, hashId);
 
-            // If the xclbin exists then we are done here.
-            if (File.Exists(implementation.BinaryPath))
-            {
-                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
-
-                if (!File.Exists(implementation.BinaryPath + InfoFileExtension))
-                {
-                    _logger.LogInformation(
-                        "The info file (\"{0}\") does not exist. You may generate it using `xclbinutil --info`.",
-                        implementation.BinaryPath + InfoFileExtension);
-                }
-
-                return;
-            }
+            if (CheckIfDoneAlready(implementation)) return;
 
             _logger.LogInformation(
                 "The xclbin file (\"{0}\") does not exist. Starting build...",
@@ -181,48 +159,17 @@ namespace Hast.Vitis.Abstractions.Services
                 .Where(path => path != null && Directory.Exists(path))
                 .Select(path => new DirectoryInfo(path))
                 .ToList();
+            var device = GetPlatformFilePath(deviceManifest, platformsDirectories);
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
-            // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
-            // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
-            // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
-            // We are looking for platform directories first, then xpfm files. Then by SupportedPlatforms and location:
-            // 1. $XILINX_PLATFORM,
-            // 2. /opt/xilinx/platforms
-            // 3. ./HardwareFramework/platforms
-            var device = deviceManifest.SupportedPlatforms!
-                .SelectMany(platformName => platformsDirectories
-                    .SelectMany(directoryInfo => directoryInfo
-                        .GetDirectories($"{platformName}*")
-                        .SelectMany(directory => directory.GetFiles("*.xpfm"))
-                        .OrderByDescending(fileInfo => fileInfo.FullName))
-                    .Union(platformsDirectories
-                        .SelectMany(directoryInfo => directoryInfo.GetFiles($"{platformName}*.xpfm"))
-                        .OrderByDescending(fileInfo => fileInfo.FullName))
-                )
-                .FirstOrDefault()?
-                .FullName;
 
-            if (device == null)
-            {
-                throw new FileNotFoundException(
-                    "Unable to find the platform xpfm file. The supported platforms are: " +
-                    string.Join(", ", deviceManifest.SupportedPlatforms));
-            }
 
             var xclbinDirectoryPath = EnsureDirectoryExists(
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
 
             await CreateSourceFilesAsync(context, hardwareFrameworkPath, hashId);
-
-            // If the xclbin exists then we are done here.
-            if (AllExist(implementation.BinaryPath, implementation.BinaryPath + ".info"))
-            {
-                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
-                return;
-            }
 
             if (buildConfiguration.SynthesisOnly)
             {
@@ -261,6 +208,57 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             Cleanup(hardwareFrameworkPath, hashId);
+        }
+
+        private Task InitializeAsync(VitisBuildConfiguration buildConfiguration)
+        {
+            if (buildConfiguration.SynthesisOnly)
+            {
+                MajorStepsTotal = 3;
+                return Task.CompletedTask;
+            }
+            // Synthesis doesn't need the device.
+            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
+            {
+                _firstRun = false;
+                return EnsureDeviceReady();
+            }
+
+            return Task.CompletedTask;
+        }
+
+        private string GetPlatformFilePath(
+            XilinxDeviceManifest deviceManifest,
+            List<DirectoryInfo> platformsDirectories)
+        {
+            // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
+            // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
+            // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
+            // We are looking for platform directories first, then xpfm files. Then by SupportedPlatforms and location:
+            // 1. $XILINX_PLATFORM,
+            // 2. /opt/xilinx/platforms
+            // 3. ./HardwareFramework/platforms
+            var device = deviceManifest.SupportedPlatforms!
+                .SelectMany(platformName => platformsDirectories
+                    .SelectMany(directoryInfo => directoryInfo
+                        .GetDirectories($"{platformName}*")
+                        .SelectMany(directory => directory.GetFiles("*.xpfm"))
+                        .OrderByDescending(fileInfo => fileInfo.FullName))
+                    .Union(platformsDirectories
+                        .SelectMany(directoryInfo => directoryInfo.GetFiles($"{platformName}*.xpfm"))
+                        .OrderByDescending(fileInfo => fileInfo.FullName))
+                )
+                .FirstOrDefault()?
+                .FullName;
+
+            if (device == null)
+            {
+                throw new FileNotFoundException(
+                    "Unable to find the platform xpfm file. The supported platforms are: " +
+                    string.Join(", ", deviceManifest.SupportedPlatforms));
+            }
+
+            return device;
         }
 
         private void ProgressMajor(string message)
@@ -514,6 +512,26 @@ namespace Hast.Vitis.Abstractions.Services
             if (tmpDirectory.Exists) tmpDirectory.Delete(recursive: true);
 
             ProgressMajor("Build directory cleaned up.");
+        }
+
+        private bool CheckIfDoneAlready(IHardwareImplementation implementation)
+        {
+            // If the xclbin exists then we are done here.
+            var exists = File.Exists(implementation.BinaryPath);
+
+            if (exists)
+            {
+                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
+
+                if (!File.Exists(implementation.BinaryPath + InfoFileExtension))
+                {
+                    _logger.LogInformation(
+                        "The info file (\"{0}\") does not exist. You may generate it using `xclbinutil --info`.",
+                        implementation.BinaryPath + InfoFileExtension);
+                }
+            }
+
+            return exists;
         }
 
         private async Task EnsureDeviceReady()
