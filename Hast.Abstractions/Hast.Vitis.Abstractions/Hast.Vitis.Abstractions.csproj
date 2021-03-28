@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="AdvancedDLSupport" Version="3.2.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.7.0" />
+    <PackageReference Include="RestEase" Version="1.5.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="nimbix-install.sh">
+    <None Update="*.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

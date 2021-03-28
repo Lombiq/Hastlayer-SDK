@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 
 namespace Hast.Common.Helpers
 {
@@ -14,5 +15,11 @@ namespace Hast.Common.Helpers
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             return path;
         }
+
+        /// <summary>
+        /// Returns <see langword="true"/> if all items in <paramref name="paths"/> exist according to
+        /// <see cref="File.Exists"/>.
+        /// </summary>
+        public static bool AllExist(params string[] paths) => paths.All(File.Exists);
     }
 }

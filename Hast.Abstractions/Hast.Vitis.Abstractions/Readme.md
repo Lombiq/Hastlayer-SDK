@@ -34,6 +34,98 @@ Be sure that all .NET software dependencies are on the same version on both the 
 * [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true` (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions)).
 
 
+### Cross Compilation with Docker
+
+This way you can compile on your Windows machine, or any machine where you don't want to install XRT permanently. Note that you still need to download the complete Vitis XDK separately for licensing reasons and it takes about 125GB (and at least 50GB more temporarily) to set up the image. Of course you need [Docker installed](https://docs.docker.com/get-docker/) too. However there are no alternatives on Windows so please bear with it. Following these steps you will get container with Vitis XDK and .Net Core 3.1 SDK installed. Please remember not to distribute the resulting image!
+
+1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
+2. Extract it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the folder into the `Docs/Container` folder inside this project.
+3. Download the appropriate CentOS 7 packages from the Vitis Downloads page, or from the Xilinx Lounge if you use Azure.
+4. Extract and copy the RPM files into the `Docs/Container/platform` folder.
+5. Copy the `centos7-install.sh` to the `Docs/Container` as well.
+6. Open a shell of your choice and type `docker build -t vitis .` to create an image. This will take a while.
+7. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
+8. Clean up after the build is finished with the `docker builder prune -a -f` command.
+9. Go back to Docker Desktop and click *Run* on the "vitis" image.
+10. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path*, and entering "/data" into the *Container Path* field.
+11. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
+12. A window with `sh` shell will appear. Type `bash` as it already has the XRT setup configured. 
+13. Copy your Hastlayer project into the shared folder and access it through the `/data` directory.
+    
+As you can see it was as simple as 1, 2, 13!
+
+## Using Azure Attestation
+
+If you want work with an Alveo card on an Azure VM, you need to use the Azure-specific driver. (Currently only `Azure Alveo U250`.) This alters some of the automatic compilation steps and after compilation submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
+
+### Preparation
+
+You should have received documentation on how to set up the Azure VM, please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .Net runtime or SDK. Transfer all package files into the same directory. Then while in that directory type the following to install them at once:
+
+**Ubuntu**
+```shell
+sudo apt install *.deb
+source ubuntu-install.sh
+```
+
+**CentOS 7**
+```shell
+sudo yum localinstall *.rpm
+source centos7-install.sh
+```
+
+You also need to install .Net 5 and prepare the environment. Source the Ubuntu or CentOS install scripts by typing `source ubuntu-install.sh` or `source centos7-install.sh` respectively. 
+
+
+### Configuration
+
+This feature is currently in the private preview stage. We can't share some specific setting values as they are confidential and you need to set them using information in the validation scripts. If you don't have access to them, please wait until the project leaves the private phase whereupon we will update the fields' default values so you won't have to set them.
+
+The approval process requires addition configuration. Fill out and add the below `AzureAttestationConfiguration` property to the `CustomConfiguration` in your `appsettings.json` file.
+
+```json
+{
+    "AzureAttestationConfiguration": {
+        "StartFunctionUrl": "Look for $FunctionUrl in Validate-FPGAImage.ps1 inside the validation.zip archive.",
+        "PollFunctionUrl": "Look for $FunctionUrl in Monitor-Validation.ps1 inside the validation.zip archive.",
+        "StorageAccountName": "From portal.",
+        "StorageAccountKey": "From portal.",
+        "ClientSubscriptionId": "From portal.",
+        "ClientTenantId": "From portal."
+    }
+}
+```
+
+To get the rest from your Azure account:
+1. Go to the [Azure Portal](https://portal.azure.com/).
+2. Click Storage Accounts.
+3. Select your account or create a new one with *Blob Storage*.
+4. The Subscription ID in the Overview page becomes `ClientSubscriptionId`.
+5. CLick Settings | Access Keys on the side bar.
+6. Click the Show Keys button.
+7. The "Storage account name" field becomes `StorageAccountName` and the "Key" becomes `StorageAccountKey`.
+8. Go back to the home page and select Active Directory.
+9. The Tenant ID in the Overview page becomes `ClientTenantId`.
+
+Additionally, during compilation only a netlist is generated instead of a bitstream so there won't be any reports based on simulation data.
+
+
+### Execution
+
+At least during the private preview, the Azure VMs aren't meant online compilation and there isn't enough space to install the full Vitis SDK. So you have to build and run attestation on a separate machine. The build machine must have Vitis 2020.2, but doesn't need Alveo hardware.
+
+On the build machine:
+1. Navigate to the application directory.
+2. Configure appsettings.json as described above.
+3. Run the Hastlayer application with the "Azure Alveo U250" device selected. It will terminate with an exception after the build is finished because there is no hardware.
+4. Copy the application to the Azure VM. If you already did that, copy the `HardwareFramework/bi`n directory and the `appsettings.json` file.
+
+On the Azure virtual machine:
+1. Run `export XILINX_VITIS=/; source /opt/xilinx/xrt/setup.sh` to set up the environment. You may want to copy this into your `~/.bashrc` for future convenience.
+2. Navigate to the application directory.
+3. Run the Hastlayer application with the same parameters you did on the build machine.
+
+
 ## Other Remarks
 
 If you ever get an error *\[XRT\] ERROR: some device is already programmed* due to a crashed or interrupted execution, you can reset the card using `xbutil reset` command. See more info about the Xilinx Board Utility [here](https://www.xilinx.com/html_docs/xilinx2019_1/sdaccel_doc/yrx1536963262111.html).
