@@ -2,7 +2,9 @@ using CliWrap;
 using CliWrap.Buffered;
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
+using Hast.Common.Enums;
 using Hast.Common.Helpers;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Abstractions.Helpers;
@@ -38,6 +40,7 @@ namespace Hast.Vitis.Abstractions.Services
         private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
 
         private readonly ILogger _logger;
+        private readonly IHastlayerFlavorProvider _flavorProvider;
         private readonly string _buildOutputPath;
         private readonly StreamWriter _buildOutput;
 
@@ -50,10 +53,12 @@ namespace Hast.Vitis.Abstractions.Services
 
 
         public VitisHardwareImplementationComposerBuildProvider(
-            ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
+            ILogger<VitisHardwareImplementationComposerBuildProvider> logger,
+            IHastlayerFlavorProvider flavorProvider)
         {
             Progress += OnProgress;
             _logger = logger;
+            _flavorProvider = flavorProvider;
 
             var buildOutputPath = EnsureDirectoryExists("App_Data", "logs");
             for (var i = 0; i < 100 && _buildOutput == null; i++)
@@ -134,7 +139,15 @@ namespace Hast.Vitis.Abstractions.Services
             implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             Cleanup(hardwareFrameworkPath, hashId);
 
-            await CreateSourceFilesAsync(context, hardwareFrameworkPath, hashId);
+            var promptBeforeBuild =
+                buildConfiguration.PromptBeforeBuild &&
+                _flavorProvider.Flavor != HastlayerFlavor.Client;
+            await CreateSourceAsync(
+                context,
+                hardwareFrameworkPath,
+                hashId,
+                implementation.BinaryPath,
+                promptBeforeBuild);
 
             if (CheckIfDoneAlready(implementation)) return;
 
@@ -644,18 +657,31 @@ namespace Hast.Vitis.Abstractions.Services
             _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
         }
 
-
-        private static Task<bool> CreateSourceFilesAsync(
+        private static async Task CreateSourceAsync(
             IHardwareImplementationCompositionContext context,
             string hardwareFrameworkPath,
-            string hashId)
+            string hashId,
+            string binaryPath,
+            bool promptBeforeBuild)
         {
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
             var ipDirectoryPath = EnsureDirectoryExists(rtlDirectoryPath, "src", "IP");
             var vhdlFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.vhd");
             var xdcFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.xdc");
 
-            return VhdlHelper.CreateVhdlAndXdcFilesAsync(context, xdcFilePath, vhdlFilePath);
+            await VhdlHelper.CreateVhdlAndXdcFilesAsync(context, xdcFilePath, vhdlFilePath);
+
+            if (promptBeforeBuild)
+            {
+                Console.WriteLine(
+                    $"The source files have been written to:\n" +
+                    $"    {vhdlFilePath}\n" +
+                    $"    {xdcFilePath}\n" +
+                    $"Expected result:\n" +
+                    $"    {binaryPath}\n\n" +
+                    $"Press [enter] when you are ready to continue.");
+                Console.ReadLine();
+            }
         }
 
         private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
