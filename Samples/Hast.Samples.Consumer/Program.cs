@@ -1,4 +1,5 @@
 using Hast.Algorithms;
+using Hast.Common.Enums;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;

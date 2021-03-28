@@ -1,4 +1,5 @@
 using Hast.Catapult.Abstractions;
+using Hast.Common.Enums;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
