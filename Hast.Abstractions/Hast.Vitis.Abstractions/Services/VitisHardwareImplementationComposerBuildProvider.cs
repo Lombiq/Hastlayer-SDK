@@ -205,7 +205,7 @@ namespace Hast.Vitis.Abstractions.Services
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
 
-            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
+            await CreateSourceFilesAsync(context, hardwareFrameworkPath, hashId);
 
             if (buildConfiguration.SynthesisOnly)
             {
@@ -597,7 +597,7 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
 
-        private static Task<bool> CreateSourceFilesAwait(
+        private static Task<bool> CreateSourceFilesAsync(
             IHardwareImplementationCompositionContext context,
             string hardwareFrameworkPath,
             string hashId)
