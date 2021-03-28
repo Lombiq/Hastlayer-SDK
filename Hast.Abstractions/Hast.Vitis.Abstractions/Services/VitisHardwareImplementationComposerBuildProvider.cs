@@ -120,6 +120,9 @@ namespace Hast.Vitis.Abstractions.Services
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
+            var hashId = context.HardwareDescription.TransformationId;
+            _logger.LogInformation("HASH ID: {0}", hashId);
+
             await InitializeAsync(buildConfiguration);
 
             ProgressMajor(
@@ -127,11 +130,11 @@ namespace Hast.Vitis.Abstractions.Services
                 "ones usually up to 4. Although 15 hours are also possible if the hardware is completely utilized " +
                 "with extremely complex and/or very highly parallelized algorithms.");
 
-            var hashId = context.HardwareDescription.TransformationId;
-            _logger.LogInformation("HASH ID: {0}", hashId);
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
             implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             Cleanup(hardwareFrameworkPath, hashId);
+
+            await CreateSourceFilesAsync(context, hardwareFrameworkPath, hashId);
 
             if (CheckIfDoneAlready(implementation)) return;
 
@@ -168,8 +171,6 @@ namespace Hast.Vitis.Abstractions.Services
             var xclbinDirectoryPath = EnsureDirectoryExists(
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
-
-            await CreateSourceFilesAsync(context, hardwareFrameworkPath, hashId);
 
             if (buildConfiguration.SynthesisOnly)
             {
