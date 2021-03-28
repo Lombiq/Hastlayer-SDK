@@ -1,5 +1,6 @@
 using Hast.Catapult.Abstractions;
 using Hast.Common.Enums;
+using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -57,6 +58,7 @@ namespace Hast.Layer
             var services = new ServiceCollection();
             services.AddSingleton<IHastlayer>(this);
             services.AddSingleton(configuration);
+            services.AddSingleton<IHastlayerFlavorProvider>(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
             services.AddIDependencyContainer(assemblies);
