@@ -56,7 +56,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             var configuration = context.Configuration
                 .GetOrAddAzureAttestationConfiguration()
-                .SetupAndVerify();
+                .Verify();
 
             _logger.LogInformation("Setting up storage client...");
             var azureStorageService = _azureStorageServiceFactory.CreateForBlob(configuration, BlobContainerName);

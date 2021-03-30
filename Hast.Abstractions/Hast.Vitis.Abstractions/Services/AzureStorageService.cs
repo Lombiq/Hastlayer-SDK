@@ -19,7 +19,6 @@ namespace Hast.Vitis.Abstractions.Services
 
         private bool _containerChecked;
 
-
         public AzureStorageService(
             ILogger<AzureStorageService> logger,
             AzureStorageConfiguration storageConfiguration,

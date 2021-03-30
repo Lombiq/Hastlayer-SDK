@@ -31,20 +31,15 @@ namespace Hast.Vitis.Abstractions.Models
         /// </summary>
         public string ClientTenantId { get; set; }
 
-        public AzureAttestationConfiguration SetupAndVerify()
-        {
-            VerifyConfiguration();
-            Environment.SetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING", GenerateStorageConnectionString());
-            return this;
-        }
-
-        private void VerifyConfiguration()
+        public AzureAttestationConfiguration Verify()
         {
             if (StartFunctionUrl == null) ThrowMissing(nameof(StartFunctionUrl));
             if (PollFunctionUrl == null) ThrowMissing(nameof(PollFunctionUrl));
             if (string.IsNullOrEmpty(StorageAccountName)) ThrowMissing(nameof(StorageAccountName));
             if (string.IsNullOrEmpty(ClientTenantId)) ThrowMissing(nameof(ClientTenantId));
             if (string.IsNullOrEmpty(ClientSubscriptionId)) ThrowMissing(nameof(ClientSubscriptionId));
+
+            return this;
         }
 
         private static void ThrowMissing(string name) =>
