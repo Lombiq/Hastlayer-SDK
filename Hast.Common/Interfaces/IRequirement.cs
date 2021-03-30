@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 
 namespace Hast.Common.Interfaces
@@ -11,7 +10,7 @@ namespace Hast.Common.Interfaces
     public interface IRequirement<T>
     {
         /// <summary>
-        /// Gets the identifier other implementations may use to refer to this type..
+        /// Gets the identifier other implementations may use to refer to this type.
         /// </summary>
         T Name => typeof(T) == typeof(string) ? (T)(object)GetType().Name : default;
 

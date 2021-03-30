@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 
 namespace Hast.Vitis.Abstractions.Models
@@ -49,9 +49,9 @@ namespace Hast.Vitis.Abstractions.Models
 
         private static void ThrowMissing(string name) =>
             throw new InvalidOperationException(
-                $"The property '{name}' is missing or empty. It is required to deal with the attestation service. " +
+                $"The property \"{name}\" is missing or empty. It is required to deal with the attestation service. " +
                 $"Please specify it in the appsettings.json or otherwise set the " +
-                $"{nameof(IHardwareGenerationConfiguration)}. See the readme of the Hast.Vitis.Abstractions library " +
+                $"{nameof(IHardwareGenerationConfiguration)}. See the Readme of the Hast.Vitis.Abstractions library " +
                 $"for further details.");
     }
 }

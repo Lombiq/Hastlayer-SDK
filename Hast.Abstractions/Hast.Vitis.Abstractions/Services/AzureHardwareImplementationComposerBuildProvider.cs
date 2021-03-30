@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
@@ -116,7 +116,7 @@ namespace Hast.Vitis.Abstractions.Services
                 })).InstanceId;
 
             _logger.LogInformation(
-                "Attestation request was submitted successfully with orchestration instance ID: {0}",
+                "Attestation request was submitted successfully with the following orchestration instance ID: {0}",
                 instanceId);
             _logger.LogInformation("Checking the status of attestation using {0}", configuration.PollFunctionUrl);
 
@@ -175,7 +175,7 @@ namespace Hast.Vitis.Abstractions.Services
             if (!hasErrorMessage && response.IsSuccessStatusCode) return result;
 
             _logger.LogError(
-                "There was an error in the response to the request for {0}. (request: {1}; response: {2})",
+                "There was an error in the response to the request for {0}. (Request: {1}; response: {2})",
                 url,
                 postJson,
                 JsonConvert.SerializeObject(result));
