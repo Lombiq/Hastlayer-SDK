@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Common.Models;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace Hast.Common.Extensions
     {
         /// <summary>
         /// Returns a new collection where the items required by others are guaranteed to be prior to the ones requiring
-        /// them. This way their load order will make satisfy their requirements. Beside this, the order of items is an
+        /// them. This way their load order will satisfy their requirements. Beside this, the order of items is an
         /// undefined implementation detail. If there are no requirements the <paramref name="source"/> order is kept.
         /// </summary>
         /// <param name="source">The original collection.</param>
@@ -48,14 +48,14 @@ namespace Hast.Common.Extensions
         private static void CheckRequirements<TItem, TKey>(IList<TItem> items, IList<TKey> keys)
             where TItem : IRequirement<TKey>
         {
-            // Look impossible requirements.
+            // Look for impossible requirements.
             foreach (var item in items)
             {
                 foreach (var requirement in item.Requirements)
                 {
                     if (!keys.Contains(requirement))
                     {
-                        throw new KeyNotFoundException($"The required service '{requirement}' was not found!");
+                        throw new KeyNotFoundException($"The required service \"{requirement}\" was not found!");
                     }
                 }
             }

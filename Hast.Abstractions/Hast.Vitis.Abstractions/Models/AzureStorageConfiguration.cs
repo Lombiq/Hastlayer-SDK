@@ -1,4 +1,4 @@
-﻿using Azure.Storage;
+using Azure.Storage;
 using Azure.Storage.Blobs;
 using System;
 

@@ -33,7 +33,9 @@ namespace Hast.Synthesis.Abstractions
             var buildProviders = _buildProviders
                 .Where(provider => provider.CanCompose(context))
                 .OrderByRequirements<IHardwareImplementationComposerBuildProvider, string>();
+
             foreach (var buildProvider in buildProviders) buildProvider.AddShortcutsToOtherProviders(buildProviders);
+
             foreach (var buildProvider in buildProviders)
             {
                 var stop = buildProvider
