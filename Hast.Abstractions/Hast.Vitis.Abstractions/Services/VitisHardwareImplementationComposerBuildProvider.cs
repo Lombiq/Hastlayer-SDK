@@ -43,7 +43,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public event EventHandler<BuildProgressEventArgs> Progress;
 
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
+        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
 
         public int MajorStepsTotal { get; private set; } = 8;
         public int MajorStep { get; private set; }
