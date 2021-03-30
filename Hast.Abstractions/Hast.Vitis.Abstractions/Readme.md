@@ -85,13 +85,17 @@ The approval process requires addition configuration. Fill out and add the below
 
 ```json
 {
-    "AzureAttestationConfiguration": {
-        "StartFunctionUrl": "Look for $FunctionUrl in Validate-FPGAImage.ps1 inside the validation.zip archive.",
-        "PollFunctionUrl": "Look for $FunctionUrl in Monitor-Validation.ps1 inside the validation.zip archive.",
-        "StorageAccountName": "From portal.",
-        "StorageAccountKey": "From portal.",
-        "ClientSubscriptionId": "From portal.",
-        "ClientTenantId": "From portal."
+    "HardwareGenerationConfiguration": {
+        "CustomConfiguration": {
+            "AzureAttestationConfiguration": {
+                "StartFunctionUrl": "Look for $FunctionUrl in Validate-FPGAImage.ps1 inside the validation.zip archive.",
+                "PollFunctionUrl": "Look for $FunctionUrl in Monitor-Validation.ps1 inside the validation.zip archive.",
+                "StorageAccountName": "From portal.",
+                "StorageAccountKey": "From portal.",
+                "ClientSubscriptionId": "From portal.",
+                "ClientTenantId": "From portal."
+            }
+        }
     }
 }
 ```
