@@ -124,6 +124,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Vitis.Abstractions.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Vitis.Abstractions.HardwareFramework", "Hastlayer-Hardware-Framework---Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj", "{38198457-A60A-4F35-9604-29B39B6D03A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lombiq.HelpfulLibraries.RestEase", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj", "{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -298,6 +300,10 @@ Global
 		{38198457-A60A-4F35-9604-29B39B6D03A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38198457-A60A-4F35-9604-29B39B6D03A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38198457-A60A-4F35-9604-29B39B6D03A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
