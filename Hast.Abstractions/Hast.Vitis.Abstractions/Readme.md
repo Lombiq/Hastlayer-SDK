@@ -60,7 +60,7 @@ If you want work with an Alveo card on an Azure VM, you need to pick the Azure-s
 
 ### Preparation
 
-[You must request access for your Azure subscription ID](https://aka.ms/AzureFPGAAttestationPreview) to use the feature. Once that's confirmed you will receive the documentation on how to set up the Azure VM and acquire the drivers. Please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
+[You must request access for your Azure subscription ID](https://aka.ms/AzureFPGAAttestationPreview) to use the feature. [The feature will reach general availability on May 1st, 2021.](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) Once that's confirmed you will receive the documentation on how to set up the Azure VM and acquire the drivers. Please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
 
 **Ubuntu**
 ```shell
