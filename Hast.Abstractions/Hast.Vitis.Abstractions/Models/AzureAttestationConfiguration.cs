@@ -8,12 +8,12 @@ namespace Hast.Vitis.Abstractions.Models
         /// <summary>
         /// Gets or sets the Azure function URL for blob attestation submission.
         /// </summary>
-        public Uri StartFunctionUrl { get; set; }
+        public Uri StartFunctionUrl { get; set; } = new("https://fpga-attestation.azurewebsites.net/api/ComputeFPGA_HttpStart");
 
         /// <summary>
         /// Gets or sets the Azure function URL for polling the status of the attestation process.
         /// </summary>
-        public Uri PollFunctionUrl { get; set; }
+        public Uri PollFunctionUrl { get; set; } = new("https://fpga-attestation.azurewebsites.net/api/ComputeFPGA_HttpGetStatus");
 
         /// <summary>
         /// Gets or sets the ID of the user hosting the storage blob. You can retrieve it using:

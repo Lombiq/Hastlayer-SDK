@@ -54,13 +54,13 @@ This way you can compile on your Windows machine, or any machine where you don't
     
 As you can see it was as simple as 1, 2, 13!
 
-## Using Azure Attestation
+## Using Vitis on Azure NP Servers
 
-If you want work with an Alveo card on an Azure VM, you need to use the Azure-specific driver. (Currently only `Azure Alveo U250`.) This alters some of the automatic compilation steps and after compilation submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
+If you want work with an Alveo card on an Azure VM, you need to pick the Azure-specific device (currently only `Azure Alveo U250`). This alters some of the automatic compilation steps. After compilation it submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
 
 ### Preparation
 
-You should have received documentation on how to set up the Azure VM, please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory. Then while in that directory type the following to install them at once:
+[You must request access for your Azure subscription ID](https://aka.ms/AzureFPGAAttestationPreview) to use the feature. Once that's confirmed you will receive the documentation on how to set up the Azure VM and acquire the drivers. Please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
 
 **Ubuntu**
 ```shell
@@ -74,12 +74,8 @@ sudo yum localinstall *.rpm
 source centos7-install.sh
 ```
 
-You also need to install .NET 5 and prepare the environment. Source the Ubuntu or CentOS install scripts by typing `source ubuntu-install.sh` or `source centos7-install.sh` respectively. 
-
 
 ### Configuration
-
-This feature is currently in the private preview stage. We can't share some specific setting values as they are confidential and you need to set them using information in the validation scripts. If you don't have access to them, please wait until the project leaves the private phase whereupon we will update the fields' default values so you won't have to set them.
 
 The approval process requires addition configuration. Fill out and add the below `AzureAttestationConfiguration` property to the `CustomConfiguration` in your `appsettings.json` file.
 
@@ -88,8 +84,6 @@ The approval process requires addition configuration. Fill out and add the below
     "HardwareGenerationConfiguration": {
         "CustomConfiguration": {
             "AzureAttestationConfiguration": {
-                "StartFunctionUrl": "Look for $FunctionUrl in Validate-FPGAImage.ps1 inside the validation.zip archive.",
-                "PollFunctionUrl": "Look for $FunctionUrl in Monitor-Validation.ps1 inside the validation.zip archive.",
                 "StorageAccountName": "From portal.",
                 "StorageAccountKey": "From portal.",
                 "ClientSubscriptionId": "From portal.",
@@ -100,7 +94,7 @@ The approval process requires addition configuration. Fill out and add the below
 }
 ```
 
-To get the rest from your Azure account:
+To get this information from your Azure account:
 1. Go to the [Azure Portal](https://portal.azure.com/).
 2. Click Storage Accounts.
 3. Select your account or create a new one with *Blob Storage*.
@@ -116,7 +110,7 @@ Additionally, during compilation only a netlist is generated instead of a bitstr
 
 ### Execution
 
-At least during the private preview, the Azure VMs aren't meant for online compilation and there isn't enough space to install the full Vitis SDK. So you have to build and run attestation on a separate machine. The build machine must have Vitis 2020.2, but doesn't need Alveo hardware.
+As of writing this document, the Azure VMs aren't meant for online compilation and there isn't enough space to install the full Vitis SDK. So you have to build and run attestation on a separate machine. The build machine must have Vitis 2020.2, but doesn't need Alveo hardware.
 
 On the build machine:
 1. Navigate to the application directory.
