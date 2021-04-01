@@ -4,15 +4,11 @@ using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
+using RestEase;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -105,9 +101,12 @@ namespace Hast.Vitis.Abstractions.Services
             string binaryPath,
             string sharedAccessSignature)
         {
+            var attestationBaseUri = new Uri(configuration.StartFunctionUrl, "/");
+            var api = RestClient.For<IAzureAttestationApi>(attestationBaseUri);
+
             _logger.LogInformation("Sending attestation start request...");
-            var instanceId = (await GetResponseAsync<AzureResponseData>(
-                configuration.StartFunctionUrl,
+            var instanceId = (await api.Start(
+                configuration.StartFunctionUrl.AbsolutePath.TrimStart('/'),
                 new AzureStartPostData(configuration)
                 {
                     BlobContainerSignature = sharedAccessSignature,
@@ -122,8 +121,8 @@ namespace Hast.Vitis.Abstractions.Services
 
             while (true)
             {
-                var (statusText, output) = await GetResponseAsync<AzurePollResponseData>(
-                    configuration.PollFunctionUrl,
+                var (statusText, output) = await api.Poll(
+                    configuration.PollFunctionUrl.AbsolutePath.TrimStart('/'),
                     new AzurePollPostData(configuration, instanceId));
                 var statusUpper = statusText.ToUpperInvariant();
 
@@ -149,39 +148,6 @@ namespace Hast.Vitis.Abstractions.Services
 
                 throw new InvalidOperationException("Attestation failed.");
             }
-        }
-
-        private async Task<T> GetResponseAsync<T>(Uri url, object post)
-            where T : AzureResponseData
-        {
-            const string jsonContentType = "application/json";
-
-            var postJson = JsonConvert.SerializeObject(post);
-            var postContent = new StringContent(postJson, Encoding.UTF8, jsonContentType);
-
-            using var client = new HttpClient();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(jsonContentType));
-            var response = await client.PostAsync(url, postContent);
-
-            var content = await response.Content.ReadAsStringAsync();
-            if (string.IsNullOrWhiteSpace(content) || !(JsonConvert.DeserializeObject<T>(content) is { } result))
-            {
-                throw response.IsSuccessStatusCode
-                    ? new InvalidOperationException("Response is empty.")
-                    : new WebException(response.StatusCode.ToString());
-            }
-
-            var hasErrorMessage = !string.IsNullOrWhiteSpace(result.ErrorMessage);
-            if (!hasErrorMessage && response.IsSuccessStatusCode) return result;
-
-            _logger.LogError(
-                "There was an error in the response to the request for {0}. (Request: {1}; response: {2})",
-                url,
-                postJson,
-                JsonConvert.SerializeObject(result));
-            throw hasErrorMessage
-                ? new InvalidOperationException(result.ErrorMessage)
-                : new WebException(response.StatusCode.ToString());
         }
 
         private static string UpdateBinaryPath(string input) => Regex.Replace(input, @"\.xclbin$", ".azure.xclbin");
