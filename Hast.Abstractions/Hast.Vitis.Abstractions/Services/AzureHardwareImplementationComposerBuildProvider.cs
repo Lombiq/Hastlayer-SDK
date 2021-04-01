@@ -1,10 +1,13 @@
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
+using Lombiq.HelpfulLibraries.RestEase;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using RestEase;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,9 +17,12 @@ using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
 {
+    [IDependencyInitializer(nameof(InitializeService))]
     public class AzureHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
         private const string BlobContainerName = "hastlayer-attestation";
+
+        private readonly IAzureAttestationApi _azureAttestationApi;
         private readonly IAzureStorageServiceFactory _azureStorageServiceFactory;
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
 
@@ -28,9 +34,11 @@ namespace Hast.Vitis.Abstractions.Services
         };
 
         public AzureHardwareImplementationComposerBuildProvider(
+            IAzureAttestationApi azureAttestationApi,
             IAzureStorageServiceFactory azureStorageServiceFactory,
             ILogger<AzureHardwareImplementationComposerBuildProvider> logger)
         {
+            _azureAttestationApi = azureAttestationApi;
             _azureStorageServiceFactory = azureStorageServiceFactory;
             _logger = logger;
         }
@@ -101,11 +109,8 @@ namespace Hast.Vitis.Abstractions.Services
             string binaryPath,
             string sharedAccessSignature)
         {
-            var attestationBaseUri = new Uri(configuration.StartFunctionUrl, "/");
-            var api = RestClient.For<IAzureAttestationApi>(attestationBaseUri);
-
             _logger.LogInformation("Sending attestation start request...");
-            var instanceId = (await api.Start(
+            var instanceId = (await _azureAttestationApi.Start(
                 configuration.StartFunctionUrl.AbsolutePath.TrimStart('/'),
                 new AzureStartPostData(configuration)
                 {
@@ -121,7 +126,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             while (true)
             {
-                var (statusText, output) = await api.Poll(
+                var (statusText, output) = await _azureAttestationApi.Poll(
                     configuration.PollFunctionUrl.AbsolutePath.TrimStart('/'),
                     new AzurePollPostData(configuration, instanceId));
                 var statusUpper = statusText.ToUpperInvariant();
@@ -151,5 +156,25 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         private static string UpdateBinaryPath(string input) => Regex.Replace(input, @"\.xclbin$", ".azure.xclbin");
+
+        public static void InitializeService(IServiceCollection services) =>
+            services.AddRestEaseHttpClient<IAzureAttestationApi>(
+                nameof(IAzureAttestationApi),
+                provider =>
+                {
+                    using var scope = provider.CreateScope();
+
+                    // Can't use HardwareGenerationConfiguration because we are in a singleton lifecycle.
+                    var configuration = new AzureAttestationConfiguration();
+                    scope
+                        .ServiceProvider
+                        .GetRequiredService<IConfiguration>()
+                        .GetSection(nameof(HardwareGenerationConfiguration))
+                        .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
+                        .GetSection(nameof(AzureAttestationConfiguration))
+                        .Bind(configuration);
+
+                    return new Uri(configuration.StartFunctionUrl, "/").AbsoluteUri;
+                });
     }
 }
