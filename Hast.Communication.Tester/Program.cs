@@ -9,16 +9,17 @@ using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Bmp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using BindingFlags = System.Reflection.BindingFlags;
 
 namespace Hast.Communication.Tester
 {
@@ -71,7 +72,7 @@ namespace Hast.Communication.Tester
             }
 
             var hardwareGenerationConfiguration = new HardwareGenerationConfiguration(selectedDevice.Name, null);
-            var (memory, accessor) = GenerateMemory(
+            var (memory, accessor) = await GenerateMemoryAsync(
                 hastlayer,
                 hardwareGenerationConfiguration,
                 CommandLineOptions.PayloadType,
@@ -81,7 +82,7 @@ namespace Hast.Communication.Tester
 
 
             // Save input to file using the format of the output file type.
-            SaveFile(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.InputFileName, true, memory);
+            await SaveFileAsync(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.InputFileName, true, memory);
 
             // Create reference copy of input to compare against output.
             SimpleMemory referenceMemory = null;
@@ -116,7 +117,7 @@ namespace Hast.Communication.Tester
                 info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
             // Save output to file.
-            SaveFile(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.OutputFileName, false, memory);
+            await SaveFileAsync(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.OutputFileName, false, memory);
 
             if (!string.IsNullOrWhiteSpace(CommandLineOptions.JsonOutputFileName))
             {
@@ -136,7 +137,7 @@ namespace Hast.Communication.Tester
                                       x.GetParameters()[0].ParameterType == typeof(SimpleMemory));
 
 
-        private static (SimpleMemory, SimpleMemoryAccessor) GenerateMemory(
+        private static async Task<(SimpleMemory, SimpleMemoryAccessor)> GenerateMemoryAsync(
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration,
             PayloadType type,
@@ -167,8 +168,10 @@ namespace Hast.Communication.Tester
                     accessor.Load(inputFileName, memory.PrefixCellCount);
                     break;
                 case PayloadType.Bitmap:
-                    using (var bitmap = (Bitmap)Image.FromFile(inputFileName))
+                    await using (var stream = File.OpenRead(inputFileName))
                     {
+                        using var bitmap = await Image.LoadAsync<Rgba32>(stream);
+
                         memory = BitmapHelper.ToSimpleMemory(configuration, hastlayer, bitmap, prependCells);
                         accessor = new SimpleMemoryAccessor(memory);
                     }
@@ -180,7 +183,7 @@ namespace Hast.Communication.Tester
             return (memory, accessor);
         }
 
-        private static void SaveFile(OutputFileType fileType,
+        private static async Task SaveFileAsync(OutputFileType fileType,
             PayloadType payloadType,
             string fileName,
             bool isInput,
@@ -201,7 +204,7 @@ namespace Hast.Communication.Tester
                     }
                     else
                     {
-                        using var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8);
+                        await using var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8);
                         WriteHexdump(streamWriter, memory);
                     }
                     break;
@@ -214,10 +217,12 @@ namespace Hast.Communication.Tester
                     }
                     break;
                 case OutputFileType.BitmapJpeg:
-                    using (var input = (Bitmap)Image.FromFile(CommandLineOptions.InputFileName))
-                    using (var output = BitmapHelper.FromSimpleMemory(memory, input, CommandLineOptions.Prepend?.Length ?? 0))
+                    await using (var stream = File.OpenRead(CommandLineOptions.InputFileName))
                     {
-                        output.Save(fileName, ImageFormat.Jpeg);
+                        using var input = await Image.LoadAsync<Rgba32>(stream, new BmpDecoder());
+                        using var output = BitmapHelper.FromSimpleMemory(memory, input, CommandLineOptions.Prepend?.Length ?? 0);
+
+                        await output.SaveAsync(fileName, new JpegEncoder());
                     }
                     break;
                 default:
