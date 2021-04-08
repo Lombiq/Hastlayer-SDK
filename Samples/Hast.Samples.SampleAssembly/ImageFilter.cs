@@ -1,13 +1,13 @@
-﻿using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Drawing;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running convolution image processing on images. Also see <c>ImageProcessingAlgorithmsSampleRunner</c>
-    /// on what to configure to make this work.
+    /// Algorithm for running convolution image processing on images. Also see <see cref="ImageFilterSampleRunner"/> on
+    /// what to configure to make this work.
     ///
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
@@ -149,7 +149,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the smoothed image.</returns>
-        public Image<Rgba32> ApplyGaussFilter(Image<Rgba32> image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public Bitmap ApplyGaussFilter(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -168,7 +168,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image.</returns>
-        public Image<Rgba32> ApplySobelFilter(Image<Rgba32> image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public Bitmap ApplySobelFilter(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -186,7 +186,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image containing only horizontal edges.</returns>
-        public Image<Rgba32> DetectHorizontalEdges(Image<Rgba32> image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public Bitmap DetectHorizontalEdges(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -204,7 +204,7 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image containing only vertical edges.</returns>
-        public Image<Rgba32> DetectVerticalEdges(Image<Rgba32> image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public Bitmap DetectVerticalEdges(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -235,7 +235,7 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private SimpleMemory CreateSimpleMemory(
-            Image<Rgba32> image,
+            Bitmap image,
             IHastlayer hastlayer, IHardwareGenerationConfiguration configuration,
             int topLeft, int topMiddle, int topRight,
             int middleLeft, int pixel, int middleRight,
@@ -263,20 +263,19 @@ namespace Hast.Samples.SampleAssembly
 
             int size = image.Width * image.Height;
 
-            for (int y = 0; y < image.Height; y++)
+            for (int x = 0; x < image.Height; x++)
             {
-                var row = image.GetPixelRowSpan(y);
-                for (int x = 0; x < image.Width; x++)
+                for (int y = 0; y < image.Width; y++)
                 {
-                    var pixelValue = row[x];
+                    var pixelValue = image.GetPixel(y, x);
 
-                    memory.WriteUInt32((y * image.Width + x) * 3 + FilterImage_ImageStartIndex, pixelValue.R);
-                    memory.WriteUInt32((y * image.Width + x) * 3 + 1 + FilterImage_ImageStartIndex, pixelValue.G);
-                    memory.WriteUInt32((y * image.Width + x) * 3 + 2 + FilterImage_ImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + FilterImage_ImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + FilterImage_ImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + FilterImage_ImageStartIndex, pixelValue.B);
 
-                    memory.WriteUInt32((y * image.Width + x) * 3 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.R);
-                    memory.WriteUInt32((y * image.Width + x) * 3 + 1 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.G);
-                    memory.WriteUInt32((y * image.Width + x) * 3 + 2 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.B);
                 }
             }
 
@@ -289,20 +288,21 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
         /// <param name="image">The original image.</param>
         /// <returns>Returns the processed image.</returns>
-        private Image<Rgba32> CreateImage(SimpleMemory memory, Image<Rgba32> image)
+        private Bitmap CreateImage(SimpleMemory memory, Bitmap image)
         {
-            var newImage = image.Clone();
+            var newImage = new Bitmap(image);
 
-            for (int y = 0; y < newImage.Height; y++)
+            int r, g, b;
+
+            for (int x = 0; x < newImage.Height; x++)
             {
-                var row = image.GetPixelRowSpan(y);
-                for (int x = 0; x < newImage.Width; x++)
+                for (int y = 0; y < newImage.Width; y++)
                 {
-                    var offset = (y * newImage.Width + x) * 3 + FilterImage_ImageStartIndex;
-                    row[x] = new(
-                        memory.ReadInt32(offset),
-                        memory.ReadInt32(offset + 1),
-                        memory.ReadInt32(offset + 2));
+                    r = memory.ReadInt32((x * newImage.Width + y) * 3 + FilterImage_ImageStartIndex);
+                    g = memory.ReadInt32((x * newImage.Width + y) * 3 + 1 + FilterImage_ImageStartIndex);
+                    b = memory.ReadInt32((x * newImage.Width + y) * 3 + 2 + FilterImage_ImageStartIndex);
+
+                    newImage.SetPixel(y, x, Color.FromArgb(r, g, b));
                 }
             }
 

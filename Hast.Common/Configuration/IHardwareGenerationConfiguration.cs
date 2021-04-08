@@ -110,7 +110,7 @@ namespace Hast.Layer
         /// implementation.
         /// </summary>
         /// <typeparam name="T">The type of the object that will be later fed to the proxy generator.</typeparam>
-        public static IHardwareGenerationConfiguration AddHardwareEntryPointType<T>(this IHardwareGenerationConfiguration configuration)
+        public static void AddHardwareEntryPointType<T>(this IHardwareGenerationConfiguration configuration)
         {
             // Object base methods are not needed.
             var excludedMethodNames = new[]
@@ -126,8 +126,6 @@ namespace Hast.Layer
             {
                 configuration.HardwareEntryPointMemberFullNames.Add(method.GetFullName());
             }
-
-            return configuration;
         }
 
         // Properties could be added similarly once properties are supported for direct hardware invocation. This is
