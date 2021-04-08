@@ -27,7 +27,7 @@ For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions
 
 ## Cross Compilation
 
-If you want to build for a platform not in your */opt/xilinx/platforms* directory, you can set the `XILINX_PLATFORM` environment variable to the directory that contains the platform directories. For example `export XILINX_PLATFORM=$HOME/platforms`. If the environment variable is not set or if its value isn't an existing directory then */opt/xilinx/platforms* is used as fallback.
+If you want to build for a platform not in your */opt/xilinx/platforms* directory, you can set the `XILINX_PLATFORM` environment variable to the directory that contains the platform directories. For example: `export XILINX_PLATFORM=$HOME/platforms`. If the environment variable is not set or if its value isn't an existing directory then */opt/xilinx/platforms* is used as fallback.
 
 Be sure that all .NET software dependencies are on the same version on both the target and the source computers. Otherwise the source code won't match during transformation. This will result in a different Transformation ID and the XCLBIN file won't be found, prompting a recompilation on the target machine. To mitigate this risk you can try some of the following strategies:
 * Perform a system update on both machines before starting, so both are on the most up-to-date frameworks.
@@ -36,7 +36,7 @@ Be sure that all .NET software dependencies are on the same version on both the 
 
 ### Cross Compilation with Docker
 
-This way you can compile on your Windows machine, or any machine where you don't want to install XRT permanently. Note that you still need to download the complete Vitis XDK separately for licensing reasons and it takes about 125GB (and at least 50GB more temporarily) to set up the image. Of course you need [Docker installed](https://docs.docker.com/get-docker/) too. However there are no alternatives on Windows so please bear with it. Following these steps you will get container with Vitis XDK and .Net Core 3.1 SDK installed. Please remember not to distribute the resulting image!
+This way you can compile on your Windows machine, or any machine where you don't want to install XRT permanently. Note that you still need to download the complete Vitis XDK separately for licensing reasons and it takes about 125GB (and at least 50GB more temporarily) to set up the image. Of course you need [Docker installed](https://docs.docker.com/get-docker/) too. However there are no alternatives on Windows so please bear with it. Following these steps you will get a container with Vitis XDK and .NET Core 3.1 SDK installed. Please remember not to distribute the resulting image!
 
 1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
 2. Extract it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the folder into the `Docs/Container` folder inside this project.
@@ -54,13 +54,13 @@ This way you can compile on your Windows machine, or any machine where you don't
     
 As you can see it was as simple as 1, 2, 13!
 
-## Using Azure Attestation
+## Using Vitis on Azure NP Servers
 
-If you want work with an Alveo card on an Azure VM, you need to use the Azure-specific driver. (Currently only `Azure Alveo U250`.) This alters some of the automatic compilation steps and after compilation submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
+If you want work with an Alveo card on an Azure VM, you need to pick the Azure-specific device (currently only `Azure Alveo U250`). This alters some of the automatic compilation steps. After compilation it submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
 
 ### Preparation
 
-You should have received documentation on how to set up the Azure VM, please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .Net runtime or SDK. Transfer all package files into the same directory. Then while in that directory type the following to install them at once:
+[You must request access for your Azure subscription ID](https://aka.ms/AzureFPGAAttestationPreview) to use the feature. [The feature will reach general availability on May 1st, 2021.](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) Once that's confirmed you will receive the documentation on how to set up the Azure VM and acquire the drivers. Please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
 
 **Ubuntu**
 ```shell
@@ -74,51 +74,49 @@ sudo yum localinstall *.rpm
 source centos7-install.sh
 ```
 
-You also need to install .Net 5 and prepare the environment. Source the Ubuntu or CentOS install scripts by typing `source ubuntu-install.sh` or `source centos7-install.sh` respectively. 
-
 
 ### Configuration
-
-This feature is currently in the private preview stage. We can't share some specific setting values as they are confidential and you need to set them using information in the validation scripts. If you don't have access to them, please wait until the project leaves the private phase whereupon we will update the fields' default values so you won't have to set them.
 
 The approval process requires addition configuration. Fill out and add the below `AzureAttestationConfiguration` property to the `CustomConfiguration` in your `appsettings.json` file.
 
 ```json
 {
-    "AzureAttestationConfiguration": {
-        "StartFunctionUrl": "Look for $FunctionUrl in Validate-FPGAImage.ps1 inside the validation.zip archive.",
-        "PollFunctionUrl": "Look for $FunctionUrl in Monitor-Validation.ps1 inside the validation.zip archive.",
-        "StorageAccountName": "From portal.",
-        "StorageAccountKey": "From portal.",
-        "ClientSubscriptionId": "From portal.",
-        "ClientTenantId": "From portal."
+    "HardwareGenerationConfiguration": {
+        "CustomConfiguration": {
+            "AzureAttestationConfiguration": {
+                "StorageAccountName": "From portal.",
+                "StorageAccountKey": "From portal.",
+                "ClientSubscriptionId": "From portal.",
+                "ClientTenantId": "From portal."
+            }
+        }
     }
 }
 ```
 
-To get the rest from your Azure account:
+To get this information from your Azure account:
 1. Go to the [Azure Portal](https://portal.azure.com/).
 2. Click Storage Accounts.
 3. Select your account or create a new one with *Blob Storage*.
-4. The Subscription ID in the Overview page becomes `ClientSubscriptionId`.
+4. The Subscription ID on the Overview page becomes `ClientSubscriptionId`.
 5. CLick Settings | Access Keys on the side bar.
 6. Click the Show Keys button.
 7. The "Storage account name" field becomes `StorageAccountName` and the "Key" becomes `StorageAccountKey`.
 8. Go back to the home page and select Active Directory.
-9. The Tenant ID in the Overview page becomes `ClientTenantId`.
+9. The Tenant ID on the Overview page becomes `ClientTenantId`.
 
 Additionally, during compilation only a netlist is generated instead of a bitstream so there won't be any reports based on simulation data.
 
 
 ### Execution
 
-At least during the private preview, the Azure VMs aren't meant online compilation and there isn't enough space to install the full Vitis SDK. So you have to build and run attestation on a separate machine. The build machine must have Vitis 2020.2, but doesn't need Alveo hardware.
+As of writing this document, the Azure VMs aren't meant for online compilation and there isn't enough space to install the full Vitis SDK. So you have to build and run attestation on a separate machine. The build machine must have Vitis 2020.2, but doesn't need Alveo hardware.
 
 On the build machine:
 1. Navigate to the application directory.
-2. Configure appsettings.json as described above.
+2. Configure *appsettings.json* as described above.
 3. Run the Hastlayer application with the "Azure Alveo U250" device selected. It will terminate with an exception after the build is finished because there is no hardware.
-4. Copy the application to the Azure VM. If you already did that, copy the `HardwareFramework/bi`n directory and the `appsettings.json` file.
+4. Copy the application to the Azure VM. If you already did that, copy the *HardwareFramework/bin* directory and the *appsettings.json* file.
 
 On the Azure virtual machine:
 1. Run `export XILINX_VITIS=/; source /opt/xilinx/xrt/setup.sh` to set up the environment. You may want to copy this into your `~/.bashrc` for future convenience.

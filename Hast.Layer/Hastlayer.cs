@@ -1,4 +1,3 @@
-using Hast.Catapult.Abstractions;
 using Hast.Common.Enums;
 using Hast.Common.Interfaces;
 using Hast.Common.Services;
@@ -10,7 +9,6 @@ using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
-using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -44,16 +42,11 @@ namespace Hast.Layer
             // Since the DI prefers services in order of registration, we take the user assemblies first followed by
             // dynamic lookup of Hast.*.dll files.
             var assemblies = new List<Assembly>(configuration.Extensions);
-            assemblies.AddRange(new[]
-            {
-                typeof(Hastlayer).Assembly,
-                typeof(IProxyGenerator).Assembly,
-                typeof(IHardwareImplementationComposer).Assembly,
-                typeof(ITransformer).Assembly,
-                typeof(NexysA7ManifestProvider).Assembly,
-                typeof(CatapultManifestProvider).Assembly
-            });
-            assemblies.AddRange(GetHastLibraries());
+            assemblies.AddRange(
+                Assembly
+                    .GetExecutingAssembly()
+                    .GetReferencedAssemblies()
+                    .Select(Assembly.Load));
 
             var services = new ServiceCollection();
             services.AddSingleton<IHastlayer>(this);
@@ -61,6 +54,7 @@ namespace Hast.Layer
             services.AddSingleton<IHastlayerFlavorProvider>(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
+            services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
             services.AddIDependencyContainer(assemblies);
 
             services.AddSingleton(LoggerFactory.Create(builder =>
@@ -95,8 +89,20 @@ namespace Hast.Layer
                 }
             }
 
+            // To test that deferred logging works:
+            //// services.Log(LogLevel.Critical, "Critical message!");
+            //// services.Log(LogLevel.Error, "Error message!");
+            //// services.Log(LogLevel.Warning, "Warning message!");
+            //// services.Log(LogLevel.Critical, "Critical message {0} {1} {2}!", "with", 3, "parameters");
+
             _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.FullName));
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+
+            var logger = GetLogger<IDeferredLogEntry>();
+            foreach (var logEntry in _serviceProvider.GetRequiredService<IEnumerable<IDeferredLogEntry>>())
+            {
+                logEntry.Log(logger);
+            }
         }
 
 
@@ -129,7 +135,7 @@ namespace Hast.Layer
                 .Build();
 
 
-        public void Dispose() => _serviceProvider.Dispose();
+        public void Dispose() => _serviceProvider?.Dispose();
 
         ~Hastlayer() => Dispose();
 
@@ -157,6 +163,9 @@ namespace Hast.Layer
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
+                    scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
+                        .Value = configuration;
+
                     var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
                     var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
@@ -405,8 +414,5 @@ namespace Hast.Layer
                 throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
             }
         }
-
-        private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
-            DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));
     }
 }

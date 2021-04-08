@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 
 namespace Hast.Vitis.Abstractions.Models
@@ -8,12 +8,12 @@ namespace Hast.Vitis.Abstractions.Models
         /// <summary>
         /// Gets or sets the Azure function URL for blob attestation submission.
         /// </summary>
-        public Uri StartFunctionUrl { get; set; }
+        public Uri StartFunctionUrl { get; set; } = new("https://fpga-attestation.azurewebsites.net/api/ComputeFPGA_HttpStart");
 
         /// <summary>
         /// Gets or sets the Azure function URL for polling the status of the attestation process.
         /// </summary>
-        public Uri PollFunctionUrl { get; set; }
+        public Uri PollFunctionUrl { get; set; } = new("https://fpga-attestation.azurewebsites.net/api/ComputeFPGA_HttpGetStatus");
 
         /// <summary>
         /// Gets or sets the ID of the user hosting the storage blob. You can retrieve it using:
@@ -31,27 +31,22 @@ namespace Hast.Vitis.Abstractions.Models
         /// </summary>
         public string ClientTenantId { get; set; }
 
-        public AzureAttestationConfiguration SetupAndVerify()
-        {
-            VerifyConfiguration();
-            Environment.SetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING", GenerateStorageConnectionString());
-            return this;
-        }
-
-        private void VerifyConfiguration()
+        public AzureAttestationConfiguration Verify()
         {
             if (StartFunctionUrl == null) ThrowMissing(nameof(StartFunctionUrl));
             if (PollFunctionUrl == null) ThrowMissing(nameof(PollFunctionUrl));
             if (string.IsNullOrEmpty(StorageAccountName)) ThrowMissing(nameof(StorageAccountName));
             if (string.IsNullOrEmpty(ClientTenantId)) ThrowMissing(nameof(ClientTenantId));
             if (string.IsNullOrEmpty(ClientSubscriptionId)) ThrowMissing(nameof(ClientSubscriptionId));
+
+            return this;
         }
 
         private static void ThrowMissing(string name) =>
             throw new InvalidOperationException(
-                $"The property '{name}' is missing or empty. It is required to deal with the attestation service. " +
+                $"The property \"{name}\" is missing or empty. It is required to deal with the attestation service. " +
                 $"Please specify it in the appsettings.json or otherwise set the " +
-                $"{nameof(IHardwareGenerationConfiguration)}. See the readme of the Hast.Vitis.Abstractions library " +
+                $"{nameof(IHardwareGenerationConfiguration)}. See the Readme of the Hast.Vitis.Abstractions library " +
                 $"for further details.");
     }
 }

@@ -1,4 +1,4 @@
-﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
 using Hast.Vitis.Abstractions.Models;
 using Microsoft.Extensions.Logging;
@@ -18,7 +18,6 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly string _blobContainerName;
 
         private bool _containerChecked;
-
 
         public AzureStorageService(
             ILogger<AzureStorageService> logger,
@@ -156,7 +155,8 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         /// <summary>
-        /// Downloads the remote file identified by the <paramref name="blobClient"/> and saves it to the <paramref name="localFilePath"/>.
+        /// Downloads the remote file identified by the <paramref name="blobClient"/> and saves it to the <paramref
+        /// name="localFilePath"/>.
         /// </summary>
         public static async Task DownloadAsync(BlobClient blobClient, string localFilePath)
         {
