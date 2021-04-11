@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -14,8 +15,11 @@ namespace Hast.Common.Services
         // https://stackoverflow.com/questions/44934511/does-net-core-dependency-injection-support-lazyt
         internal class Lazier<T> : Lazy<T> where T : class
         {
-            public Lazier(IServiceProvider provider) : base(provider.GetRequiredService<T>) { }
+            public Lazier(IServiceProvider provider) : base(() => provider.GetRequiredService<T>()) { }
         }
+
+        public static IEnumerable<Assembly> LoadAssemblies(IEnumerable<string> paths) =>
+            paths.Select(x => Assembly.LoadFrom(Path.GetFullPath(x)));
 
         public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies = null)
         {
