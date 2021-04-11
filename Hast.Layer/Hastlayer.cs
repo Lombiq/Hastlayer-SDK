@@ -420,6 +420,12 @@ namespace Hast.Layer
         }
 
         private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
-            DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));
+            DependencyInterfaceContainer.LoadAssemblies(
+                Directory
+                    .GetFiles(path, "Hast.*.dll")
+                    .Where(path => !Path.GetFileName(path)
+                        // Check any core project names that aren't referenced by Hastlayer to avoid accidental loading.
+                        .StartsWith("Hast.Remote.Worker", StringComparison.Ordinal)
+                    ));
     }
 }
