@@ -75,6 +75,12 @@ namespace Hast.Layer
         /// hardware description.
         /// </summary>
         bool EnableHardwareImplementationComposition { get; }
+
+        /// <summary>
+        /// Gets or sets the path to a the only binary this application should support. If not <see langword="null"/>
+        /// and the binary exists, then all hardware generation is skipped.
+        /// </summary>
+        string SingleBinaryPath { get; set; }
     }
 
 

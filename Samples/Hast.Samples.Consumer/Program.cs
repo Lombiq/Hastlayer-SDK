@@ -83,7 +83,7 @@ namespace Hast.Samples.Consumer
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
                 var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
@@ -125,6 +125,8 @@ namespace Hast.Samples.Consumer
             var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, Configuration.HardwareFrameworkPath);
             var proxyConfiguration = new ProxyGenerationConfiguration();
             if (argsList.Contains("-verify")) proxyConfiguration.VerifyHardwareResults = true;
+
+            configuration.SingleBinaryPath = GetArgument("bin") ?? GetArgument("binary");
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
             var remoteClientConfiguration = configuration.RemoteClientConfiguration();
