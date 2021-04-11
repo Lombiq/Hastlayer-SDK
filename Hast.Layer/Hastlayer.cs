@@ -1,3 +1,4 @@
+using Hast.Catapult.Abstractions;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -7,6 +8,7 @@ using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -40,11 +42,16 @@ namespace Hast.Layer
             // Since the DI prefers services in order of registration, we take the user assemblies first followed by
             // dynamic lookup of Hast.*.dll files.
             var assemblies = new List<Assembly>(configuration.Extensions);
-            assemblies.AddRange(
-                Assembly
-                    .GetExecutingAssembly()
-                    .GetReferencedAssemblies()
-                    .Select(Assembly.Load));
+            assemblies.AddRange(new[]
+            {
+                typeof(Hastlayer).Assembly,
+                typeof(IProxyGenerator).Assembly,
+                typeof(IHardwareImplementationComposer).Assembly,
+                typeof(ITransformer).Assembly,
+                typeof(NexysA7ManifestProvider).Assembly,
+                typeof(CatapultManifestProvider).Assembly
+            });
+            assemblies.AddRange(GetHastLibraries());
 
             var services = new ServiceCollection();
             services.AddSingleton<IHastlayer>(this);
@@ -411,5 +418,8 @@ namespace Hast.Layer
                 throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
             }
         }
+
+        private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
+            DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));
     }
 }
