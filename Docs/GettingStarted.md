@@ -46,3 +46,9 @@ These would be your first steps on starting to work with Hastlayer by getting th
 6. You should be able to see the results of the sample in its console window.
 
 If everything is alright follow up with the rest of this documentation to write your first own Hastlayer-using algorithm. You can also check out the many documented samples under the *Samples* solution folder.
+
+
+## Device specific documentation
+
+You can find out more about these devices from their Hastlayer driver's documentation:
+- [Xilinx Vitis, Azure NP](../Hast.Abstractions/Hast.Vitis.Abstractions/Readme.md)
