@@ -52,7 +52,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Schedules a new log entry to be displayed when the service collection is build.
         /// </summary>
-        public static IServiceCollection Log(
+        public static IServiceCollection LogDeferred(
             this IServiceCollection services,
             LogLevel level,
             string message,
@@ -71,7 +71,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Schedules a new log entry to be displayed when the service collection is build.
         /// </summary>
-        public static IServiceCollection DeferredLogEntry(
+        public static IServiceCollection LogDeferred(
             this IServiceCollection services,
             Exception exception,
             string message,

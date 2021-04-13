@@ -40,7 +40,7 @@ This way you can compile on your Windows machine, or any machine where you don't
 
 1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
 2. Extract it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the folder into the `Docs/Container` folder inside this project.
-3. Download the appropriate CentOS 7 packages from the Vitis Downloads page, or from the Xilinx Lounge if you use Azure.
+3. Download the CentOS 7 packages from the Getting Started section of the card's product page (eg. [U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted)), or from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html) if you use Azure.
 4. Extract and copy the RPM files into the `Docs/Container/platform` folder.
 5. Copy the `centos7-install.sh` to the `Docs/Container` as well.
 6. Open a shell of your choice and type `docker build -t vitis .` to create an image. This will take a while.
@@ -60,7 +60,7 @@ If you want work with an Alveo card on an Azure VM, you need to pick the Azure-s
 
 ### Preparation
 
-[You must request access for your Azure subscription ID](https://aka.ms/AzureFPGAAttestationPreview) to use the feature. [The feature will reach general availability on May 1st, 2021.](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) Once that's confirmed you will receive the documentation on how to set up the Azure VM and acquire the drivers. Please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
+[You must request access for your Azure subscription ID](https://aka.ms/AzureFPGAAttestationPreview) to use the feature. [The feature will reach general availability on May 1st, 2021.](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) Once that's confirmed you will receive an NP Quik-Start document on how to set up the Azure VM and acquire the drivers. Please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
 
 **Ubuntu**
 ```shell

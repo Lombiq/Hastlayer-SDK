@@ -162,12 +162,11 @@ namespace Hast.Vitis.Abstractions.Services
                 nameof(IAzureAttestationApi),
                 provider =>
                 {
-                    using var scope = provider.CreateScope();
-
-                    // Can't use HardwareGenerationConfiguration because we are in a singleton lifecycle.
+                    // The service provider we receive is not scoped so we can't reach the
+                    // IHardwareGenerationConfigurationAccessor service through if. Even if we created a new scope its
+                    // content would be uninitialized so we have to build it form configuration.
                     var configuration = new AzureAttestationConfiguration();
-                    scope
-                        .ServiceProvider
+                    provider
                         .GetRequiredService<IConfiguration>()
                         .GetSection(nameof(HardwareGenerationConfiguration))
                         .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
