@@ -107,21 +107,13 @@ namespace Hast.Vitis.Abstractions.Services
                     "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html.");
             }
 
-            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
-            if (!Directory.Exists(xilinxDirectoryPath))
-            {
-                throw new InvalidOperationException(
-                    "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
-            }
-
-            return BuildInnerAsync(context, implementation, deviceManifest, xilinxDirectoryPath);
+            return BuildInnerAsync(context, implementation, deviceManifest);
         }
 
         private async Task BuildInnerAsync(
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation,
-            XilinxDeviceManifest deviceManifest,
-            string xilinxDirectoryPath)
+            XilinxDeviceManifest deviceManifest)
         {
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
@@ -166,6 +158,13 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
+
+            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
+            if (!Directory.Exists(xilinxDirectoryPath))
+            {
+                throw new InvalidOperationException(
+                    "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
+            }
 
             var platformsDirectories = (new[]
                 {
