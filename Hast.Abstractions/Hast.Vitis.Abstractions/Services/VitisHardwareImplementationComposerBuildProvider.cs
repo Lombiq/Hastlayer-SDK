@@ -101,10 +101,10 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
             {
-                // When cross-compiling, the build machine needs Vivado and XRT, but the run  machine only needs XRT.
+                // When cross-compiling, the build machine needs Vivado and XRT, but the FPGA machine only needs XRT.
                 _logger.LogWarning(
-                    "XILINX_VITIS variable is not set. This is required build using Vivado. For further instructions " +
-                    "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html");
+                    "XILINX_VITIS variable is not set. This is required to build using Vivado. For further instructions " +
+                    "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html.");
             }
 
             var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
