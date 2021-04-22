@@ -13,8 +13,8 @@ For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
 
 ## Requirements
 
-* The system running the FPGA card must be 64-bit Linux (e.g. Ubuntu 18.04.2 LTS or CentOS 7.6) The installation instructions can be found here [in the platform documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/vhc1571429852245.html).
-* The device specific software requirements can be found in the card's Getting Started page, e.g. [Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted).
+* The system running the FPGA card must be 64-bit Linux (e.g. Ubuntu 18.04.2 LTS or CentOS 7.6). The installation instructions can be found here [in the platform documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/vhc1571429852245.html).
+* The device-specific software requirements can be found in the card's Getting Started page, e.g. [Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted).
 * Hastlayer has its own software requirements which can be found in the repository's *GettingStarted.md* file.
 
 
@@ -39,18 +39,18 @@ Be sure that all .NET software dependencies are on the same version on both the 
 This way you can compile on your Windows machine, or any machine where you don't want to install XRT permanently. Note that you still need to download the complete Vitis XDK separately for licensing reasons and it takes about 125GB (and at least 50GB more temporarily) to set up the image. Of course you need [Docker installed](https://docs.docker.com/get-docker/) too. However there are no alternatives on Windows so please bear with it. Following these steps you will get a container with Vitis XDK and .NET Core 3.1 SDK installed. Please remember not to distribute the resulting image!
 
 1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
-2. Extract it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the folder into the `Docs/Container` folder inside this project.
+2. Extract the Xilinx_Unified_2020.2_* folder from it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the the folder into _Docs/Container_ inside this project.
 3. Download the CentOS 7 packages from the Getting Started section of the card's product page (eg. [U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted)), or from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html) if you use Azure.
-4. Extract and copy the RPM files into the `Docs/Container/platform` folder.
-5. Copy the `centos7-install.sh` to the `Docs/Container` as well.
-6. Open a shell of your choice and type `docker build -t vitis .` to create an image. This will take a while.
+4. Extract and copy the RPM files into the _Docs/Container/platform_ folder.
+5. Copy the `centos7-install.sh` to the _Docs/Container_ as well.
+6. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
 7. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
 8. Clean up after the build is finished with the `docker builder prune -a -f` command.
 9. Go back to Docker Desktop and click *Run* on the "vitis" image.
 10. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path*, and entering "/data" into the *Container Path* field.
 11. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
 12. A window with `sh` shell will appear. Type `bash` as it already has the XRT setup configured. 
-13. Copy your Hastlayer project into the shared folder and access it through the `/data` directory.
+13. Copy your Hastlayer project into the shared folder and access it through the _/data_ directory.
     
 As you can see it was as simple as 1, 2, 13!
 
