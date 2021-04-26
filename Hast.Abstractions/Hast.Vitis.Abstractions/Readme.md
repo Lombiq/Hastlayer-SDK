@@ -54,6 +54,8 @@ This way you can compile on your Windows machine, or any machine where you don't
     
 As you can see it was as simple as 1, 2, 13!
 
+If you'd like to move the Docker WLS files (which can be upwards of 100 GB) to another folder/drive then follow [this guide](https://github.com/docker/for-win/issues/7348#issuecomment-647160351).
+
 ## Using Vitis on Azure NP Servers
 
 If you want work with an Alveo card on an Azure VM, you need to pick the Azure-specific device (currently only `Azure Alveo U250`). This alters some of the automatic compilation steps. After compilation it submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
