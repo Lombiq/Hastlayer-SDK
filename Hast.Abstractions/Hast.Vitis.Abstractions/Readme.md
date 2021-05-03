@@ -45,15 +45,15 @@ This way you can compile on your Windows machine, or any machine where you don't
     * If you are using Azure, all device specific packages must be downloaded from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html) instead. The NP servers currently require the _RedHat / CentOS 7.6 & 7.8_ files from the _Alveo U250 Gen3x16 XDMA Platform 2.1 Downloads_ section. Make sure to download both packages for XRT and Deployment Target Platform, not just the ones marked Azure.
 4. Copy the files into the _Docs/Container/platform_ folder.
 5. Extract any tar.gz archive in _Docs/Container/platform_ and delete the archives. In the end you should only have rpm files.
-5. Copy the `centos7-install.sh` to the _Docs/Container_ as well.
-6. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
-7. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
-8. Clean up after the build is finished with the `docker builder prune -a -f` command.
-9. Go back to Docker Desktop and click *Run* on the "vitis" image.
-10. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path*, and entering "/data" into the *Container Path* field.
-11. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
-12. A window with `sh` shell will appear. Type `bash` as it already has the XRT setup configured. 
-13. Copy your Hastlayer project into the shared folder and access it through the _/data_ directory.
+6. Copy the `centos7-install.sh` to the _Docs/Container_ as well.
+7. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
+8. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
+9. Clean up after the build is finished with the `docker builder prune -a -f` command.
+10. Go back to Docker Desktop and click *Run* on the "vitis" image.
+11. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path*, and entering "/data" into the *Container Path* field.
+12. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
+13. A window with `sh` shell will appear. Type `bash` as it already has the XRT setup configured. 
+14. Copy your Hastlayer project into the shared folder and access it through the _/data_ directory.
     
 As you can see it was as simple as 1, 2, 13!
 
