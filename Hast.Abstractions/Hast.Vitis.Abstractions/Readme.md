@@ -40,8 +40,11 @@ This way you can compile on your Windows machine, or any machine where you don't
 
 1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
 2. Extract the Xilinx_Unified_2020.2_* folder from it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the the folder into _Docs/Container_ inside this project.
-3. Download the CentOS 7 packages from the Getting Started section of the card's product page (eg. [U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted)), or from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html) if you use Azure.
-4. Extract and copy the RPM files into the _Docs/Container/platform_ folder.
+3. Download the XRT, deployment platform and development platform packages for CentOS 7:
+    * You can download the latest released packages from the Getting Started section of the card's product page (eg. [U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted)).
+    * If you are using Azure, all device specific packages must be downloaded from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html) instead. The NP servers currently require the _RedHat / CentOS 7.6 & 7.8_ files from the _Alveo U250 Gen3x16 XDMA Platform 2.1 Downloads_ section. Make sure to download both packages for XRT and Deployment Target Platform, not just the ones marked Azure.
+4. Copy the files into the _Docs/Container/platform_ folder.
+5. Extract any tar.gz archive in _Docs/Container/platform_ and delete the archives. In the end you should only have rpm files.
 5. Copy the `centos7-install.sh` to the _Docs/Container_ as well.
 6. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
 7. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
