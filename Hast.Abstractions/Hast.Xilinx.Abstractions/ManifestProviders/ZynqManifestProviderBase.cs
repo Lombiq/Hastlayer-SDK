@@ -16,7 +16,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
             _deviceManifest ??= new XilinxDeviceManifest
             {
                 Name = _deviceName,
-                ClockFrequencyHz = 100 * Mhz,
+                ClockFrequencyHz = 150 * Mhz,
                 SupportedCommunicationChannelNames = new[] { Constants.VitisCommunicationChannelName },
                 AvailableMemoryBytes = 1 * GigaByte,
                 SupportsHbm = false,
