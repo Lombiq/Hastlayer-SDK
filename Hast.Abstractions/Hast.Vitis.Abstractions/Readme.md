@@ -39,13 +39,13 @@ Be sure that all .NET software dependencies are on the same version on both the 
 This way you can compile on your Windows machine, or any machine where you don't want to install XRT permanently. Note that you still need to download the complete Vitis XDK separately for licensing reasons and it takes about 125GB (and at least 50GB more temporarily) to set up the image. Of course you need [Docker installed](https://docs.docker.com/get-docker/) too. However there are no alternatives on Windows so please bear with it. Following these steps you will get a container with Vitis XDK and .NET Core 3.1 SDK installed. Please remember not to distribute the resulting image!
 
 1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis.html).
-2. Extract the Xilinx_Unified_2020.2_* folder from it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the the folder into _Docs/Container_ inside this project.
+2. Extract the Xilinx_Unified_2020.2_* folder from it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the the folder into _Container_ inside this project.
 3. Download the XRT, deployment platform and development platform packages for CentOS 7:
     * You can download the latest released packages from the Getting Started section of the card's product page (eg. [U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted)).
     * If you are using Azure, all device specific packages must be downloaded from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html) instead. The NP servers currently require the _RedHat / CentOS 7.6 & 7.8_ files from the _Alveo U250 Gen3x16 XDMA Platform 2.1 Downloads_ section. Make sure to download both packages for XRT and Deployment Target Platform, not just the ones marked Azure.
-4. Copy the files into the _Docs/Container/platform_ folder.
-5. Extract any tar.gz archive in _Docs/Container/platform_ and delete the archives. In the end you should only have rpm files.
-6. Copy the `centos7-install.sh` to the _Docs/Container_ as well.
+4. Copy the files into the _Container/platform_ folder.
+5. Extract any tar.gz archive in _Container/platform_ and delete the archives. In the end you should only have rpm files.
+6. Copy the `centos7-install.sh` to the _Container_ as well.
 7. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
 8. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
 9. Clean up after the build is finished with the `docker builder prune -a -f` command.
