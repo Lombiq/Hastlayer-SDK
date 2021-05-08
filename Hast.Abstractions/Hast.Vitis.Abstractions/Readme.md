@@ -65,7 +65,22 @@ If you want work with an Alveo card on an Azure VM, you need to pick the Azure-s
 
 ### Preparation
 
-[You must request access for your Azure subscription ID](https://aka.ms/AzureFPGAAttestationPreview) to use the feature. [The feature will reach general availability on May 1st, 2021.](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/) Once that's confirmed you will receive an NP Quik-Start document on how to set up the Azure VM and acquire the drivers. Please follow its steps. Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
+You have to set up an NP10s virtual machine via the Azure Portal.
+1. Go to the [Select an image](https://portal.azure.com/#create/Microsoft.VirtualMachine) page.
+2. Enter "xilinx" into the search bar.
+3. Select the Centos 7 deployment image (Xilinx Alveo U250 Deployment VM - Centos7.8).
+4. Fill out the _Create a virtual machine_ form:
+    - Fill the _Virtual machine name_ field.
+    - Set the _Region_ to East US, West US2, West Europe or SouthEast Asia.
+    - Click _See all sizes_ and search for "np10s".
+    - Set up the administrator account's SSH key or specify the user/password.
+5. Click _Next : Disks_ and decide if you need additional disks.
+6. The rest should be fine as-is, click _Review + create_.
+
+    
+**Troubleshooting**: if you don't see the _Standard_NP10s_ size option, [see the first FAQ item on this page](https://docs.microsoft.com/en-us/azure/virtual-machines/np-series#frequently-asked-questions) as you might need to request quota or the available regions might've changed since the writing of this document.
+
+Once the VM is running, you have to install the correct platform and runtime files from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html), the Vitis SDK and the .NET runtime or SDK. Transfer all package files into the same directory, navigate into it and type the following to install them at once:
 
 **Ubuntu**
 ```shell
