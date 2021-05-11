@@ -51,7 +51,7 @@ This way you can compile on your Windows machine, or any machine where you don't
 8. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
 9. Clean up after the build is finished with the `docker builder prune -a -f` command. If you notice excessive RAM usage by the Vmmem process then close down Docker Desktop, shut down WSL with the `wsl --shutdown` command, then restart Docker Desktop and continue with the next steps.
 10. Go back to Docker Desktop and click *Run* on the "vitis" image.
-11. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path*, and entering "/data" into the *Container Path* field.
+11. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path* (this can be anywhere), and entering "/data" into the *Container Path* field.
 12. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
 13. A window with `sh` shell will appear. Type `bash` as it already has the XRT setup configured. 
 14. Copy your Hastlayer project into the shared folder and access it through the _/data_ directory.
