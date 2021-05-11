@@ -119,7 +119,7 @@ To get this information from your Azure account:
 2. Click Storage Accounts.
 3. Select your account or create a new one with *Blob Storage*.
 4. The Subscription ID on the Overview page becomes `ClientSubscriptionId`.
-5. CLick Settings | Access Keys on the side bar.
+5. Click Settings | Access Keys on the side bar.
 6. Click the Show Keys button.
 7. The "Storage account name" field becomes `StorageAccountName` and the "Key" becomes `StorageAccountKey`.
 8. Go back to the home page and select Active Directory.
