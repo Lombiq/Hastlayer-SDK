@@ -48,7 +48,7 @@ This way you can compile on your Windows machine, or any machine where you don't
 6. Copy the `centos7-install.sh` to the _Container_ as well.
 7. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
 8. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
-9. Clean up after the build is finished with the `docker builder prune -a -f` command.
+9. Clean up after the build is finished with the `docker builder prune -a -f` command. If you notice excessive RAM usage by the Vmmem process then close down Docker Desktop, shut down WSL with the `wsl --shutdown` command, then restart Docker Desktop and continue with the next steps.
 10. Go back to Docker Desktop and click *Run* on the "vitis" image.
 11. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path*, and entering "/data" into the *Container Path* field.
 12. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
@@ -58,6 +58,7 @@ This way you can compile on your Windows machine, or any machine where you don't
 As you can see it was as simple as 1, 2, 13!
 
 If you'd like to move the Docker WLS files (which can be upwards of 100 GB) to another folder/drive then follow [this guide](https://github.com/docker/for-win/issues/7348#issuecomment-647160351).
+
 
 ## Using Vitis on Azure NP Servers
 
