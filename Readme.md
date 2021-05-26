@@ -18,7 +18,7 @@ Created by [Lombiq Technologies](https://lombiq.com/), an open source .NET web d
 
 Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies.
 
-![TeamCity build status](https://ci.lombiq.com/app/rest/builds/buildType:id:Hastlayer_PullAndBuild/statusIcon.svg)
+[![TeamCity build status](https://ci.lombiq.com/app/rest/builds/buildType:id:Hastlayer_PullAndBuild/statusIcon.svg)](https://ci.lombiq.com/buildConfiguration/Hastlayer_PullAndBuild?mode=builds#all-projects)
 
 
 ## Notes on Hastlayer's documentation
