@@ -273,11 +273,12 @@ namespace Hast.Communication.Services
 
                             try
                             {
+                                // An UnauthorizedAccessException happens here if the port is used by another app.
                                 serialPort.Open();
                                 serialPort.Write(CommandTypes.WhoIsAvailable);
                             }
                             catch (IOException) { }
-                            catch (UnauthorizedAccessException) { } // This happens if the port is used by another app.
+                            catch (UnauthorizedAccessException) { }
 
                             // Waiting a maximum of 3s for a response from the port.
                             taskCompletionSource.Task.Wait(3000);
