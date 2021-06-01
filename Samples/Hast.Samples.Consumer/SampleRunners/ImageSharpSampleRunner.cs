@@ -24,8 +24,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             using var sample = Image.Load("fpga.jpg");
             var sw = System.Diagnostics.Stopwatch.StartNew();
             sample.Mutate(x => x.HastResize(sample.Width/2, sample.Height/2, System.Environment.ProcessorCount));
-            sample.Save("resized_fpga.jpg");
             sw.Stop();
+            sample.Save("resized_fpga.jpg");
             System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
 
             // Accelerated by hastlayer
