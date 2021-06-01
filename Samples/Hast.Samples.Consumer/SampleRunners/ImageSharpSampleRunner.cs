@@ -29,11 +29,11 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var resizeImage = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ImageSharpSample(), configuration);
-            var modifiedImage = resizeImage.HastResize(image, hastlayer);
+            var modifiedImage = resizeImage.HastResize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             modifiedImage.Save("resized_with_hastlayer_fpga.jpg");
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ImageSharpSample().HastResize(image, hastlayer);
+            var cpuOutput = new ImageSharpSample().HastResize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
             System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
         }

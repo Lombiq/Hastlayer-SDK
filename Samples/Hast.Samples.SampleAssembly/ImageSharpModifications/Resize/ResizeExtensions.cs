@@ -3,6 +3,8 @@
 // Modified file, original is found at:
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Extensions/Transforms/ResizeExtensions.cs
 
+using Hast.Layer;
+using HastlayerResizeParameters = Hast.Samples.SampleAssembly.ImageSharpSample.HastlayerResizeParameters;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
@@ -21,13 +23,15 @@ namespace ImageSharpHastlayerExtension.Resize
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
         /// <remarks>Passing zero for one of height or width will automatically preserve
         /// the aspect ratio of the original image or the nearest possible ratio.</remarks>
-        public static IImageProcessingContext HastResize(this IImageProcessingContext source, int width, int height, bool isHastlayer = false)
+        public static IImageProcessingContext HastResize(
+            this IImageProcessingContext source,
+            int width,
+            int height)
             => HastResize(
                 source,
                 width,
                 height,
-                Environment.ProcessorCount,
-                isHastlayer);
+                Environment.ProcessorCount);
 
         /// <summary>
         /// Resizes an image to the given width and height.
@@ -35,6 +39,28 @@ namespace ImageSharpHastlayerExtension.Resize
         /// <param name="source">The image to resize.</param>
         /// <param name="width">The target image width.</param>
         /// <param name="height">The target image height.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <returns></returns>
+        public static IImageProcessingContext HastResize(
+            this IImageProcessingContext source,
+            int width,
+            int height,
+            int maxDegreeOfParallelism)
+            => HastResize(
+                source,
+                width,
+                height,
+                Environment.ProcessorCount,
+                null);
+
+        /// <summary>
+        /// Resizes an image to the given width and height.
+        /// </summary>
+        /// <param name="source">The image to resize.</param>
+        /// <param name="width">The target image width.</param>
+        /// <param name="height">The target image height.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="hastlayerResizeParameters">Parameters for Hastlayer.</param>
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
         /// <remarks>Passing zero for one of height or width will automatically preserve
         /// the aspect ratio of the original image or the nearest possible ratio.</remarks>
@@ -43,7 +69,7 @@ namespace ImageSharpHastlayerExtension.Resize
             int width,
             int height,
             int maxDegreeOfParallelism,
-            bool isHastlayer = false)
+            HastlayerResizeParameters hastlayerResizeParameters)
             => HastResize(
                 source,
                 width,
@@ -52,7 +78,7 @@ namespace ImageSharpHastlayerExtension.Resize
                 KnownResamplers.NearestNeighbor,
                 new Rectangle(0, 0, width, height),
                 false,
-                isHastlayer);
+                hastlayerResizeParameters);
 
         /// <summary>
         /// Resizes an image to the given width and height with the given sampler and source rectangle.
@@ -60,12 +86,14 @@ namespace ImageSharpHastlayerExtension.Resize
         /// <param name="source">The image to resize.</param>
         /// <param name="width">The target image width.</param>
         /// <param name="height">The target image height.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
         /// <param name="sampler">The <see cref="IResampler"/> to perform the resampling.</param>
         /// <param name="targetRectangle">
         /// The <see cref="Rectangle"/> structure that specifies the portion of the target image object to draw to.
         /// </param>
         /// <param name="compand">Whether to compress and expand the image color-space to gamma correct the image 
         /// during processing.</param>
+        /// <param name="hastlayerResizeParameters">Parameters for Hastlayer.</param>
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
         /// <remarks>Passing zero for one of height or width will automatically preserve the aspect ratio of the 
         /// original image or the nearest possible ratio.</remarks>
@@ -77,7 +105,7 @@ namespace ImageSharpHastlayerExtension.Resize
             IResampler sampler,
             Rectangle targetRectangle,
             bool compand,
-            bool isHastlayer = false)
+            HastlayerResizeParameters hastlayerResizeParameters)
         {
             var options = new ResizeOptions
             {
@@ -88,7 +116,7 @@ namespace ImageSharpHastlayerExtension.Resize
                 Compand = compand
             };
 
-            return HastResize(source, options, maxDegreeOfParallelism, isHastlayer);
+            return HastResize(source, options, maxDegreeOfParallelism, hastlayerResizeParameters);
         }
 
         /// <summary>
@@ -96,6 +124,8 @@ namespace ImageSharpHastlayerExtension.Resize
         /// </summary>
         /// <param name="source">The image to resize.</param>
         /// <param name="options">The resize options.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="hastlayerResizeParameters">Parameters for Hastlayer.</param>
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
         /// <remarks>Passing zero for one of height or width within the resize options will automatically preserve 
         /// the aspect ratio of the original image or the nearest possible ratio.</remarks>
@@ -103,12 +133,17 @@ namespace ImageSharpHastlayerExtension.Resize
             this IImageProcessingContext source,
             ResizeOptions options,
             int maxDegreeOfParallelism,
-            bool isHastlayer = false)
+            HastlayerResizeParameters hastlayerResizeParameters)
         {
-            if (isHastlayer)
+            if (hastlayerResizeParameters != null)
             {
                 return source.ApplyProcessor(
-                    new HastlayerResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));
+                    new HastlayerResizeProcessor(
+                        options,
+                        source.GetCurrentSize(),
+                        maxDegreeOfParallelism,
+                        hastlayerResizeParameters)
+                    );
             }
 
             return source.ApplyProcessor(new ResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));

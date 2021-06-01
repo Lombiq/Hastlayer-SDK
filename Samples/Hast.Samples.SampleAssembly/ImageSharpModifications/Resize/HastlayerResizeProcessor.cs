@@ -3,10 +3,12 @@
 // Modified file, original is found at:  
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeProcessor.cs 
 
+using Hast.Layer;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using static Hast.Samples.SampleAssembly.ImageSharpSample;
 
 
 // namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
@@ -14,7 +16,11 @@ namespace ImageSharpHastlayerExtension.Resize
 {
     class HastlayerResizeProcessor : CloningImageProcessor
     {
-        public HastlayerResizeProcessor(ResizeOptions options, Size sourceSize, int maxDegreeOfParallelism)
+        public HastlayerResizeProcessor(
+            ResizeOptions options,
+            Size sourceSize,
+            int maxDegreeOfParallelism,
+            HastlayerResizeParameters hastlayerResizeParameters)
         {
             Guard.NotNull(options, nameof(options));
             Guard.NotNull(options.Sampler, nameof(options.Sampler));
@@ -28,6 +34,7 @@ namespace ImageSharpHastlayerExtension.Resize
             DestinationRectangle = rectangle;
             Compand = options.Compand;
             MaxDegreeOfParallelism = maxDegreeOfParallelism;
+            HastlayerResizeParameters = hastlayerResizeParameters;
         }
 
         /// <summary>
@@ -64,6 +71,10 @@ namespace ImageSharpHastlayerExtension.Resize
         /// Gets a value indicating the max degree of parallelism.
         /// </summary>
         public int MaxDegreeOfParallelism { get; }
+        /// <summary>
+        /// Necessary values for hastlayer.
+        /// </summary>
+        public HastlayerResizeParameters HastlayerResizeParameters { get; }
 
         public override ICloningImageProcessor<TPixel> CreatePixelSpecificCloningProcessor<TPixel>(
             Configuration configuration,
@@ -71,7 +82,7 @@ namespace ImageSharpHastlayerExtension.Resize
             Rectangle sourceRectangle)
         {
             configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
-            return new HastlayerResizeProcessor<TPixel>(configuration, this, source, sourceRectangle);
+            return new HastlayerResizeProcessor<TPixel>(configuration, this, source, sourceRectangle, HastlayerResizeParameters);
         }
     }
 }

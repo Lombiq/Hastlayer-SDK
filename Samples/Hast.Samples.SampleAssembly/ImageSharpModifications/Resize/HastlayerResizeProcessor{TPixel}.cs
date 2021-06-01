@@ -4,6 +4,8 @@
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeProcessor%7BTPixel%7D.cs
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Advanced/ParallelRowIterator.cs
 
+using Hast.Layer;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
@@ -11,6 +13,7 @@ using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using static Hast.Samples.SampleAssembly.ImageSharpSample;
 
 namespace ImageSharpHastlayerExtension.Resize
 {
@@ -22,18 +25,23 @@ namespace ImageSharpHastlayerExtension.Resize
         private readonly IResampler _resampler;
         private readonly Rectangle _destinationRectangle;
         private Image<TPixel> _destination;
+        private IHastlayer _hastlayer;
+        private IHardwareGenerationConfiguration _hardwareConfiguration;
 
         public HastlayerResizeProcessor(
             Configuration configuration,
             HastlayerResizeProcessor definition,
             Image<TPixel> source,
-            Rectangle sourceRectangle)
+            Rectangle sourceRectangle,
+            HastlayerResizeParameters hastlayerResizeParameters)
             : base(configuration, source, sourceRectangle)
         {
             _destinationWidth = definition.DestinationWidth;
             _destinationHeight = definition.DestinationHeight;
             _destinationRectangle = definition.DestinationRectangle;
             _resampler = definition.Sampler;
+            _hastlayer = hastlayerResizeParameters.Hastlayer;
+            _hardwareConfiguration = hastlayerResizeParameters.HardwareGenerationConfiguration;
         }
 
         /// <inheritdoc/>
@@ -66,6 +74,20 @@ namespace ImageSharpHastlayerExtension.Resize
             var interest = Rectangle.Intersect(destinationRectangle, destination.Bounds());
 
             if (!(sampler is NearestNeighborResampler)) return;
+
+            // Hastlayerization
+            var maxDegreeOfParallelism = ParallelExecutionSettings.FromConfiguration(configuration).MaxDegreeOfParallelism;
+            var pixelCount = source.Width * source.Height;
+            var cellCount = pixelCount + (pixelCount % maxDegreeOfParallelism != 0 ? maxDegreeOfParallelism : 0) + 3;
+            var memory = _hastlayer.CreateMemory(_hardwareConfiguration, cellCount);
+
+            // Write stuff needed to memory here:
+            memory.WriteUInt32(0, (uint)source.Width);
+            // memory.WriteUInt32() etc...
+
+
+
+
 
             // TODO: Hastlyerize here
             for (int i = 0; i < source.Frames.Count; i++)

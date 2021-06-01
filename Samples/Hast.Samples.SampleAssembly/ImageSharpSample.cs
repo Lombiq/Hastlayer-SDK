@@ -36,11 +36,26 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         internal virtual void Run(SimpleMemory memory) => Resize(memory);
 
-        public Image HastResize(Image image, IHastlayer hastlayer)
+        public Image HastResize(Image image, IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
             // TODO
 
+            var parameters = new HastlayerResizeParameters
+            {
+                ImageWidthIndex = 0,
+                ImageHeightIndex = 1,
+                Hastlayer = hastlayer,
+                HardwareGenerationConfiguration = hardwareGenerationConfiguration,
+            };
+
             return null;
+        }
+        public class HastlayerResizeParameters
+        {
+            public int ImageWidthIndex { get; set; }
+            public int ImageHeightIndex { get; set; }
+            public IHastlayer Hastlayer { get; set; }
+            public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
         }
     }
 }
