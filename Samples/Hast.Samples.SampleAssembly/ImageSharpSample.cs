@@ -1,8 +1,9 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
-using System.Drawing;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -17,5 +18,23 @@ namespace Hast.Samples.SampleAssembly
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
+
+        // Main logic here
+        public virtual void Resize(SimpleMemory memory)
+        {
+            // TODO
+        }
+
+        /// <summary>
+        /// Changes the contrast of an image. Same as <see cref="ChangeContrast"/>. Used for Hast.Communication.Tester
+        /// to access this sample by a common method name just for testing. Internal so it doesn't bother otherwise.
+        /// </summary>
+        /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
+        internal virtual void Run(SimpleMemory memory) => Resize(memory);
+
+        public Image HastResize(Image image)
+        {
+            return null;
+        }
     }
 }
