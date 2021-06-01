@@ -1,4 +1,4 @@
-﻿// Copyright (c) Six Labors.
+// Copyright (c) Six Labors.
 // Licensed under the Apache License, Version 2.0.
 // Modified file, original is found at:
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Common/Helpers/Guard.cs
@@ -8,7 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Hastlayer_ImageSharp_PracticeDemo
+namespace ImageSharpHastlayerExtension
 {
     /// <summary>
     /// Provides methods to protect against invalid parameters.

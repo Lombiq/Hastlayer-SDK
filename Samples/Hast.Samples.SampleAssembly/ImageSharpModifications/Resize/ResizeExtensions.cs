@@ -1,4 +1,4 @@
-﻿// Copyright (c) Six Labors.
+// Copyright (c) Six Labors.
 // Licensed under the Apache License, Version 2.0.
 // Modified file, original is found at:
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Extensions/Transforms/ResizeExtensions.cs
@@ -8,9 +8,9 @@ using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 
-namespace Hastlayer_ImageSharp_PracticeDemo.Resize
+namespace ImageSharpHastlayerExtension.Resize
 {
-    public static class HastResizeExtensions
+    public static class ResizeExtensions
     {
         /// <summary>
         /// Resizes an image to the given width and height.
@@ -21,12 +21,13 @@ namespace Hastlayer_ImageSharp_PracticeDemo.Resize
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
         /// <remarks>Passing zero for one of height or width will automatically preserve
         /// the aspect ratio of the original image or the nearest possible ratio.</remarks>
-        public static IImageProcessingContext HastResize(this IImageProcessingContext source, int width, int height)
+        public static IImageProcessingContext HastResize(this IImageProcessingContext source, int width, int height, bool isHastlayer = false)
             => HastResize(
                 source,
                 width,
                 height,
-                Environment.ProcessorCount);
+                Environment.ProcessorCount,
+                isHastlayer);
 
         /// <summary>
         /// Resizes an image to the given width and height.
@@ -41,7 +42,8 @@ namespace Hastlayer_ImageSharp_PracticeDemo.Resize
             this IImageProcessingContext source,
             int width,
             int height,
-            int maxDegreeOfParallelism)
+            int maxDegreeOfParallelism,
+            bool isHastlayer = false)
             => HastResize(
                 source,
                 width,
@@ -49,7 +51,8 @@ namespace Hastlayer_ImageSharp_PracticeDemo.Resize
                 maxDegreeOfParallelism,
                 KnownResamplers.NearestNeighbor,
                 new Rectangle(0, 0, width, height),
-                false);
+                false,
+                isHastlayer);
 
         /// <summary>
         /// Resizes an image to the given width and height with the given sampler and source rectangle.
@@ -73,7 +76,8 @@ namespace Hastlayer_ImageSharp_PracticeDemo.Resize
             int maxDegreeOfParallelism,
             IResampler sampler,
             Rectangle targetRectangle,
-            bool compand)
+            bool compand,
+            bool isHastlayer = false)
         {
             var options = new ResizeOptions
             {
@@ -84,7 +88,7 @@ namespace Hastlayer_ImageSharp_PracticeDemo.Resize
                 Compand = compand
             };
 
-            return HastResize(source, options, maxDegreeOfParallelism);
+            return HastResize(source, options, maxDegreeOfParallelism, isHastlayer);
         }
 
         /// <summary>
@@ -98,7 +102,15 @@ namespace Hastlayer_ImageSharp_PracticeDemo.Resize
         public static IImageProcessingContext HastResize(
             this IImageProcessingContext source,
             ResizeOptions options,
-            int maxDegreeOfParallelism)
-            => source.ApplyProcessor(new HastResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));
+            int maxDegreeOfParallelism,
+            bool isHastlayer = false)
+        {
+            if (isHastlayer)
+            {
+
+            }
+
+            return source.ApplyProcessor(new ResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));
+        }
     }
 }

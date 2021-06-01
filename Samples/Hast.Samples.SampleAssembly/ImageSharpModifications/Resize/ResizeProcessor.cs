@@ -1,4 +1,4 @@
-﻿// Copyright (c) Six Labors.
+// Copyright (c) Six Labors.
 // Licensed under the Apache License, Version 2.0.
 // Modified file, original is found at:  
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeProcessor.cs 
@@ -8,16 +8,16 @@ using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 
-namespace Hastlayer_ImageSharp_PracticeDemo.Resize
+namespace ImageSharpHastlayerExtension.Resize
 {
-    public class HastResizeProcessor : CloningImageProcessor
+    public class ResizeProcessor : CloningImageProcessor
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ResizeProcessor"/> class.
+        /// Initializes a new instance of the <see cref="SixLabors.ImageSharp.Processing.Processors.Transforms.ResizeProcessor"/> class.
         /// </summary>
         /// <param name="options">The resize options.</param>
         /// <param name="sourceSize">The source image size.</param>
-        public HastResizeProcessor(ResizeOptions options, Size sourceSize, int maxDegreeOfParallelism)
+        public ResizeProcessor(ResizeOptions options, Size sourceSize, int maxDegreeOfParallelism)
         {
             Guard.NotNull(options, nameof(options));
             Guard.NotNull(options.Sampler, nameof(options.Sampler));

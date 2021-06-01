@@ -1,10 +1,10 @@
-﻿// Copyright (c) Six Labors.
+// Copyright (c) Six Labors.
 // Licensed under the Apache License, Version 2.0.
 
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Hastlayer_ImageSharp_PracticeDemo
+namespace ImageSharpHastlayerExtension
 {
     /// <summary>
     /// Helper methods to throw exceptions

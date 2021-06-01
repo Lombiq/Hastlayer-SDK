@@ -7,7 +7,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 using SixLabors.ImageSharp.PixelFormats;
 
-namespace Hastlayer_ImageSharp_PracticeDemo
+namespace ImageSharpHastlayerExtension
 {
     class TransformProcessorHelpers
     {

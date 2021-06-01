@@ -7,7 +7,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors;
 
-namespace Hastlayer_ImageSharp_PracticeDemo
+namespace ImageSharpHastlayerExtension
 {
     /// <summary>
     /// The base class for all transform processors. Any processor that changes the dimensions of the image should inherit from this.

@@ -1,9 +1,9 @@
-﻿// Copyright (c) Six Labors.
+// Copyright (c) Six Labors.
 // Licensed under the Apache License, Version 2.0.
 
 using System.Runtime.CompilerServices;
 
-namespace Hastlayer_ImageSharp_PracticeDemo
+namespace ImageSharpHastlayerExtension
 {
     /// <summary>
     /// Global inlining options. Helps temporarily disable inlining for better profiler output.
