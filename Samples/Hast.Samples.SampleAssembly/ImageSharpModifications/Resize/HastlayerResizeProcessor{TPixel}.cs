@@ -85,7 +85,7 @@ namespace ImageSharpHastlayerExtension.Resize
             memory.WriteUInt32(0, (uint)source.Width);
             // memory.WriteUInt32() etc...
 
-
+            // Resize Logic here.
 
 
 

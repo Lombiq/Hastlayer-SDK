@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using SixLabors.ImageSharp;
+using ImageSharpHastlayerExtension.Resize;
 using SixLabors.ImageSharp.Processing;
 using Bitmap = System.Drawing.Bitmap;
 using System.IO;
@@ -18,13 +19,13 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ImageSharpSample
     {
-        private const ushort Divisor = 2;
-        // some values here probably
+        private const int Resize_ImageWidthIndex = 0;
+        private const int Resize_ImageHeightIndex = 1;
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
 
-        public virtual void Resize(SimpleMemory memory)
+        public virtual void VirtualResize(SimpleMemory memory)
         {
             // TODO
         }
@@ -34,21 +35,21 @@ namespace Hast.Samples.SampleAssembly
         /// to access this sample by a common method name just for testing. Internal so it doesn't bother otherwise.
         /// </summary>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
-        internal virtual void Run(SimpleMemory memory) => Resize(memory);
+        internal virtual void Run(SimpleMemory memory) => VirtualResize(memory); // Re-think this??
 
-        public Image HastResize(Image image, IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+        public Image Resize(Image image, IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            // TODO
-
             var parameters = new HastlayerResizeParameters
             {
-                ImageWidthIndex = 0,
-                ImageHeightIndex = 1,
+                ImageWidthIndex = Resize_ImageWidthIndex,
+                ImageHeightIndex = Resize_ImageHeightIndex,
                 Hastlayer = hastlayer,
                 HardwareGenerationConfiguration = hardwareGenerationConfiguration,
             };
 
-            return null;
+            image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, parameters));
+
+            return image;
         }
         public class HastlayerResizeParameters
         {
