@@ -17,17 +17,18 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
+            // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
+            // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
+
             // Not accelerated by hastlayer
-            using var img = Image.Load("fpga.jpg");
+            using var sample = Image.Load("fpga.jpg");
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            img.Mutate(x => x.HastResize(img.Width/2, img.Height/2, System.Environment.ProcessorCount));
-            img.Save("resized_fpga.jpg");
+            sample.Mutate(x => x.HastResize(sample.Width/2, sample.Height/2, System.Environment.ProcessorCount));
+            sample.Save("resized_fpga.jpg");
             sw.Stop();
             System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
 
-
-            // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
-            // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
+            // Accelerated by hastlayer
             //using var image = new Bitmap("fpga.jpg");
             using var image = Image.Load("fpga.jpg");
 
