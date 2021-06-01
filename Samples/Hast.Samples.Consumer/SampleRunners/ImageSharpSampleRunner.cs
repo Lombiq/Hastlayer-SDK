@@ -1,6 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Hastlayer_ImageSharp_PracticeDemo.Resize;
+using ImageSharpHastlayerExtension.Resize;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System.Drawing.Imaging;
@@ -21,12 +21,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
 
             // Not accelerated by hastlayer
-            using var sample = Image.Load("fpga.jpg");
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            sample.Mutate(x => x.HastResize(sample.Width/2, sample.Height/2, System.Environment.ProcessorCount));
-            sw.Stop();
-            sample.Save("resized_fpga.jpg");
-            System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
+            RunSoftwareBenchmarks();
 
             // Accelerated by hastlayer
             //using var image = new Bitmap("fpga.jpg");
@@ -34,12 +29,22 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var resizeImage = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ImageSharpSample(), configuration);
-            var modifiedImage = resizeImage.HastResize(image);
+            var modifiedImage = resizeImage.HastResize(image, hastlayer);
             modifiedImage.Save("resized_with_hastlayer_fpga.jpg");
 
-            sw.Restart();
-            var cpuOutput = new ImageSharpSample().HastResize(image);
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var cpuOutput = new ImageSharpSample().HastResize(image, hastlayer);
             sw.Stop();
+            System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
+        }
+
+        public static void RunSoftwareBenchmarks()
+        {
+            using var image = Image.Load("fpga.jpg");
+            var sw = System.Diagnostics.Stopwatch.StartNew();
+            image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
+            sw.Stop();
+            image.Save("resized_fpga.jpg");
             System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
         }
     }

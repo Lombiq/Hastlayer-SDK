@@ -4,6 +4,12 @@ using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using Bitmap = System.Drawing.Bitmap;
+using System.IO;
+using SixLabors.ImageSharp.Advanced;
+using SixLabors.ImageSharp.Formats.Png;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -13,13 +19,11 @@ namespace Hast.Samples.SampleAssembly
     public class ImageSharpSample
     {
         private const ushort Divisor = 2;
-
         // some values here probably
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
 
-        // Main logic here
         public virtual void Resize(SimpleMemory memory)
         {
             // TODO
@@ -32,8 +36,10 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         internal virtual void Run(SimpleMemory memory) => Resize(memory);
 
-        public Image HastResize(Image image)
+        public Image HastResize(Image image, IHastlayer hastlayer)
         {
+            // TODO
+
             return null;
         }
     }

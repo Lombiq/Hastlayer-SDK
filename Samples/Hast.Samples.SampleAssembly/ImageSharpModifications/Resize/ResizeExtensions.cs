@@ -107,7 +107,8 @@ namespace ImageSharpHastlayerExtension.Resize
         {
             if (isHastlayer)
             {
-
+                return source.ApplyProcessor(
+                    new HastlayerResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));
             }
 
             return source.ApplyProcessor(new ResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));

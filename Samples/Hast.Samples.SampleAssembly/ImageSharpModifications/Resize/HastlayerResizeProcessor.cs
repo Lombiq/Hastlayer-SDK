@@ -8,16 +8,13 @@ using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 
+
+// namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 namespace ImageSharpHastlayerExtension.Resize
 {
-    public class ResizeProcessor : CloningImageProcessor
+    class HastlayerResizeProcessor : CloningImageProcessor
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SixLabors.ImageSharp.Processing.Processors.Transforms.ResizeProcessor"/> class.
-        /// </summary>
-        /// <param name="options">The resize options.</param>
-        /// <param name="sourceSize">The source image size.</param>
-        public ResizeProcessor(ResizeOptions options, Size sourceSize, int maxDegreeOfParallelism)
+        public HastlayerResizeProcessor(ResizeOptions options, Size sourceSize, int maxDegreeOfParallelism)
         {
             Guard.NotNull(options, nameof(options));
             Guard.NotNull(options.Sampler, nameof(options.Sampler));
@@ -68,14 +65,13 @@ namespace ImageSharpHastlayerExtension.Resize
         /// </summary>
         public int MaxDegreeOfParallelism { get; }
 
-        /// <inheritdoc />
         public override ICloningImageProcessor<TPixel> CreatePixelSpecificCloningProcessor<TPixel>(
             Configuration configuration,
             Image<TPixel> source,
             Rectangle sourceRectangle)
         {
             configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
-            return new ResizeProcessor<TPixel>(configuration, this, source, sourceRectangle);
+            return new HastlayerResizeProcessor<TPixel>(configuration, this, source, sourceRectangle);
         }
     }
 }

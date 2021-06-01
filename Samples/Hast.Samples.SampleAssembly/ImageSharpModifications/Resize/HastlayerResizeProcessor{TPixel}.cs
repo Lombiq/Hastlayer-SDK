@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace ImageSharpHastlayerExtension.Resize
 {
-    class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
+   class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
         where TPixel : unmanaged, IPixel<TPixel>
     {
         private readonly int _destinationWidth;
@@ -23,9 +23,9 @@ namespace ImageSharpHastlayerExtension.Resize
         private readonly Rectangle _destinationRectangle;
         private Image<TPixel> _destination;
 
-        public ResizeProcessor(
+        public HastlayerResizeProcessor(
             Configuration configuration,
-            ResizeProcessor definition,
+            HastlayerResizeProcessor definition,
             Image<TPixel> source,
             Rectangle sourceRectangle)
             : base(configuration, source, sourceRectangle)
@@ -67,11 +67,13 @@ namespace ImageSharpHastlayerExtension.Resize
 
             if (!(sampler is NearestNeighborResampler)) return;
 
+            // TODO: Hastlyerize here
             for (int i = 0; i < source.Frames.Count; i++)
             {
                 var sourceFrame = source.Frames[i];
                 var destinationFrame = destination.Frames[i];
 
+                // TODO: Or Hastlyerize here
                 ApplyNNResizeFrameTransform(
                     configuration,
                     sourceFrame,
