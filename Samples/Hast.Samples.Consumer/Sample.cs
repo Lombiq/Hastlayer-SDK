@@ -6,6 +6,7 @@ namespace Hast.Samples.Consumer
         FSharpParallelAlgorithm,
         GenomeMatcher,
         ImageProcessingAlgorithms,
+        ImageSharpSample,
         Loopback,
         MemoryTest,
         MonteCarloPiEstimator,
@@ -19,6 +20,5 @@ namespace Hast.Samples.Consumer
         RecursiveAlgorithms,
         SimdCalculator,
         UnumCalculator,
-        ImageSharpSample
     }
 }

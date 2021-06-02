@@ -48,7 +48,7 @@ namespace Hast.Samples.Consumer
         /// up-to-date enough and shouldn't be really taken as good examples (check out the other ones).
         /// You can also provide this in the -sample command line argument.
         /// </summary>
-        public static Sample SampleToRun = Sample.Loopback;
+        public static Sample SampleToRun = Sample.ImageSharpSample;
 
         /// <summary>
         /// Specify a path here where the hardware framework is located. The file describing the hardware to be
@@ -150,6 +150,7 @@ namespace Hast.Samples.Consumer
                 Sample.GenomeMatcher => new GenomeMatcherSampleRunner(),
                 Sample.ParallelAlgorithm => new ParallelAlgorithmSampleRunner(),
                 Sample.ImageProcessingAlgorithms => new ImageProcessingAlgorithmsSampleRunner(),
+                Sample.ImageSharpSample => new ImageSharpSampleRunner(),
                 Sample.Loopback => new LoopbackSampleRunner(),
                 Sample.MemoryTest => new MemoryTestSampleRunner(),
                 Sample.MonteCarloPiEstimator => new MonteCarloPiEstimatorSampleRunner(),
@@ -162,7 +163,6 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                Sample.ImageSharpSample => new ImageSharpSampleRunner(),
                 _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
             };
             sampleRunner.Configure(configuration);
