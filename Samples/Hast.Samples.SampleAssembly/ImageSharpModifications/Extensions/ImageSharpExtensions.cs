@@ -4,6 +4,7 @@
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.Formats.Png;
+using SixLabors.ImageSharp.PixelFormats;
 using System.IO;
 using Bitmap = System.Drawing.Bitmap;
 
@@ -11,7 +12,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions
 {
     public static class ImageSharpExtensions
     {
-        public static Bitmap ToBitmap(Image image)
+        public static Bitmap ToBitmap<TPixel>(Image<TPixel> image) where TPixel : unmanaged, IPixel<TPixel>
         {
             using (var memoryStream = new MemoryStream())
             {
@@ -24,7 +25,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions
             }
         }
 
-        public static Image ToImageSharpImage(Bitmap bitmap)
+        public static Image<TPixel> ToImageSharpImage<TPixel>(Bitmap bitmap) where TPixel : unmanaged, IPixel<TPixel>
         {
             using (var memoryStream = new MemoryStream())
             {
@@ -32,7 +33,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions
 
                 memoryStream.Seek(0, SeekOrigin.Begin);
 
-                return Image.Load(memoryStream);
+                return Image.Load<TPixel>(memoryStream);
             }
         }
     }
