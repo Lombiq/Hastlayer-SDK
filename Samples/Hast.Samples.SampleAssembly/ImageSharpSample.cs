@@ -21,28 +21,84 @@ namespace Hast.Samples.SampleAssembly
     {
         private const int Resize_ImageWidthIndex = 0;
         private const int Resize_ImageHeightIndex = 1;
+        private const int Resize_DestinationImageWidthIndex = 2;
+        private const int Resize_DestinationImageHeightIndex = 3;
+
+        private const int Resize_SourceX = 4;
+        private const int Resize_SourceY = 5;
+        private const int Resize_DestOriginX = 6;
+        private const int Resize_DestOriginY = 7;
+        private const int Resize_DestLeft = 8;
+        private const int Resize_DestRight = 9;
+
+        private const int Resize_ImageStartIndex = 10;
+
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
 
-        public virtual void VirtualResize(SimpleMemory memory)
+        public virtual void ApplyTransform(SimpleMemory memory)
         {
-            // TODO
+            var widthFactor = memory.ReadUInt32(Resize_ImageWidthIndex) / memory.ReadUInt32(Resize_DestinationImageWidthIndex);
+            var heightFactor = memory.ReadUInt32(Resize_ImageHeightIndex) / memory.ReadUInt32(Resize_DestinationImageHeightIndex);
+
+            var operation = new Operation(widthFactor, heightFactor);
         }
 
-        /// <summary>
-        /// Changes the contrast of an image. Same as <see cref="ChangeContrast"/>. Used for Hast.Communication.Tester
-        /// to access this sample by a common method name just for testing. Internal so it doesn't bother otherwise.
-        /// </summary>
-        /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
-        internal virtual void Run(SimpleMemory memory) => VirtualResize(memory); // Re-think this??
+        private readonly struct Operation
+        {
+            private readonly uint _widthFactor;
+            private readonly uint _heightFactor;
+
+            public Operation(
+                uint widthFactor,
+                uint heightFactor)
+            {
+                _widthFactor = widthFactor;
+                _heightFactor = heightFactor;
+            }
+
+            public void Invoke(int y)
+            {
+                var sourceX = _sourceBounds.X;
+                var sourceY = _sourceBounds.Y;
+                var destOriginX = _destinationBounds.X;
+                var destOriginY = _destinationBounds.Y;
+                var destLeft = _interest.Left;
+                var destRight = _interest.Right;
+
+                // Span<Rgba32> types, RGBA 4 byte data. 
+                // Y coordinates of source points
+                var sourceRow = _source.GetPixelRowSpan((int)(((y - destOriginY) * _heightFactor) + sourceY));
+                var targetRow = _destination.GetPixelRowSpan(y);
+
+                for (int x = destLeft; x < destRight; x++)
+                {
+                    // X coordinates of source points
+                    targetRow[x] = sourceRow[(int)(((x - destOriginX) * _widthFactor) + sourceX)];
+
+                }
+            }
+        }
+
+        internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);
 
         public Image Resize(Image image, IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
             var parameters = new HastlayerResizeParameters
             {
+                MaxDegreeOfParallelism = MaxDegreeOfParallelism,
                 ImageWidthIndex = Resize_ImageWidthIndex,
                 ImageHeightIndex = Resize_ImageHeightIndex,
+                DestinationImageWidthIndex = Resize_DestinationImageWidthIndex,
+                DestinationImageHeightIndex = Resize_ImageHeightIndex,
+                SourceX = Resize_SourceX,
+                SourceY = Resize_SourceY,
+                DestOriginX = Resize_DestOriginX,
+                DestOriginY = Resize_DestOriginY,
+                DestLeft = Resize_DestLeft,
+                DestRight = Resize_DestRight,
+                ImageStartIndex = Resize_ImageStartIndex,
                 Hastlayer = hastlayer,
                 HardwareGenerationConfiguration = hardwareGenerationConfiguration,
             };
@@ -51,12 +107,27 @@ namespace Hast.Samples.SampleAssembly
 
             return image;
         }
+
         public class HastlayerResizeParameters
         {
+            public int MaxDegreeOfParallelism { get; set; }
             public int ImageWidthIndex { get; set; }
             public int ImageHeightIndex { get; set; }
+            public int DestinationImageWidthIndex { get; set; }
+            public int DestinationImageHeightIndex { get; set; }
+            public int SourceX { get; set; }
+            public int SourceY { get; set; }
+            public int DestOriginX { get; set; }
+            public int DestOriginY { get; set; }
+            public int DestLeft { get; set; }
+            public int DestRight { get; set; }
+            public int ImageStartIndex { get; set; }
             public IHastlayer Hastlayer { get; set; }
             public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
         }
+
+
+
+
     }
 }

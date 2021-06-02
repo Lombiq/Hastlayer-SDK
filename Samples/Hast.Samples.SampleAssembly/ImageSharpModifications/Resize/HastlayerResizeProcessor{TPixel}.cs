@@ -6,6 +6,7 @@
 
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Samples.SampleAssembly;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
@@ -14,6 +15,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static Hast.Samples.SampleAssembly.ImageSharpSample;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 
 namespace ImageSharpHastlayerExtension.Resize
 {
@@ -25,8 +27,7 @@ namespace ImageSharpHastlayerExtension.Resize
         private readonly IResampler _resampler;
         private readonly Rectangle _destinationRectangle;
         private Image<TPixel> _destination;
-        private IHastlayer _hastlayer;
-        private IHardwareGenerationConfiguration _hardwareConfiguration;
+        private HastlayerResizeParameters _parameters;
 
         public HastlayerResizeProcessor(
             Configuration configuration,
@@ -40,8 +41,7 @@ namespace ImageSharpHastlayerExtension.Resize
             _destinationHeight = definition.DestinationHeight;
             _destinationRectangle = definition.DestinationRectangle;
             _resampler = definition.Sampler;
-            _hastlayer = hastlayerResizeParameters.Hastlayer;
-            _hardwareConfiguration = hastlayerResizeParameters.HardwareGenerationConfiguration;
+            _parameters = hastlayerResizeParameters;
         }
 
         /// <inheritdoc/>
@@ -75,27 +75,23 @@ namespace ImageSharpHastlayerExtension.Resize
 
             if (!(sampler is NearestNeighborResampler)) return;
 
+
+
             // Hastlayerization
-            var maxDegreeOfParallelism = ParallelExecutionSettings.FromConfiguration(configuration).MaxDegreeOfParallelism;
-            var pixelCount = source.Width * source.Height;
-            var cellCount = pixelCount + (pixelCount % maxDegreeOfParallelism != 0 ? maxDegreeOfParallelism : 0) + 3;
-            var memory = _hastlayer.CreateMemory(_hardwareConfiguration, cellCount);
-
-            // Write stuff needed to memory here:
-            memory.WriteUInt32(0, (uint)source.Width);
-            // memory.WriteUInt32() etc...
-
-            // Resize Logic here.
+            var hastlayerSample = new ImageSharpSample();
+            var memory = CreateSimpleMemory(source, _parameters);
+            hastlayerSample.ApplyTransform(memory);
+            // After the memory transform convert back to IS.Image
+            destination = ConvertToImage(memory); // Maybe to frame???
 
 
 
-            // TODO: Hastlyerize here
+            // Remove this once completed above
             for (int i = 0; i < source.Frames.Count; i++)
             {
                 var sourceFrame = source.Frames[i];
                 var destinationFrame = destination.Frames[i];
-
-                // TODO: Or Hastlyerize here
+                                
                 ApplyNNResizeFrameTransform(
                     configuration,
                     sourceFrame,
@@ -106,6 +102,48 @@ namespace ImageSharpHastlayerExtension.Resize
             }
         }
 
+        // NEW METHODS
+        public SimpleMemory CreateSimpleMemory(Image image, HastlayerResizeParameters parameters)
+        {
+            var pixelCount = image.Width * image.Height;
+            var cellCount = pixelCount
+                + (pixelCount % parameters.MaxDegreeOfParallelism != 0 ? parameters.MaxDegreeOfParallelism : 0)
+                + 4;
+            var memory = parameters.Hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : parameters.Hastlayer.CreateMemory(parameters.HardwareGenerationConfiguration, cellCount);
+
+            memory.WriteUInt32(parameters.ImageWidthIndex, (uint)image.Width);
+            memory.WriteUInt32(parameters.ImageHeightIndex, (uint)image.Height);
+            memory.WriteUInt32(parameters.DestinationImageWidthIndex, (uint)image.Width / 2);   // TODO: get the value
+            memory.WriteUInt32(parameters.DestinationImageHeightIndex, (uint)image.Height / 2); // TODO: get the value
+
+            var bitmapImage = ImageSharpExtensions.ToBitmap(image);
+
+            for (int x = 0; x < bitmapImage.Height; x++)
+            {
+                for (int y = 0; y < bitmapImage.Width; y++)
+                {
+                    var pixel = bitmapImage.GetPixel(x, y);
+
+                    memory.Write4Bytes(
+                        x * bitmapImage.Width + y + parameters.ImageStartIndex,
+                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                }
+            }
+
+            return memory;
+        }
+
+        public Image<TPixel> ConvertToImage(SimpleMemory memory)
+        {
+            // TODO
+            return null;
+        }
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+
+        // OLD METHODS
         private static void ApplyNNResizeFrameTransform(
             Configuration configuration,
             ImageFrame<TPixel> source,
@@ -169,6 +207,7 @@ namespace ImageSharpHastlayerExtension.Resize
                 var destLeft = _interest.Left;
                 var destRight = _interest.Right;
 
+                // Span<Rgba32> types, RGBA 4 byte data. 
                 // Y coordinates of source points
                 var sourceRow = _source.GetPixelRowSpan((int)(((y - destOriginY) * _heightFactor) + sourceY));
                 var targetRow = _destination.GetPixelRowSpan(y);
