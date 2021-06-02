@@ -16,6 +16,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static Hast.Samples.SampleAssembly.ImageSharpSample;
 using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
+using Bitmap = System.Drawing.Bitmap;
+using Color = System.Drawing.Color;
 
 namespace ImageSharpHastlayerExtension.Resize
 {
@@ -75,14 +77,12 @@ namespace ImageSharpHastlayerExtension.Resize
 
             if (!(sampler is NearestNeighborResampler)) return;
 
-
-
             // Hastlayerization
             var hastlayerSample = new ImageSharpSample();
             var memory = CreateSimpleMemory(source, _parameters);
             hastlayerSample.ApplyTransform(memory);
             // After the memory transform convert back to IS.Image
-            destination = ConvertToImage(memory); // Maybe to frame???
+            destination = ConvertToImage(memory, _parameters); // Maybe to frame???
 
 
 
@@ -103,7 +103,7 @@ namespace ImageSharpHastlayerExtension.Resize
         }
 
         // NEW METHODS
-        public SimpleMemory CreateSimpleMemory(Image image, HastlayerResizeParameters parameters)
+        public SimpleMemory CreateSimpleMemory(Image<TPixel> image, HastlayerResizeParameters parameters)
         {
             var pixelCount = image.Width * image.Height;
             var cellCount = pixelCount
@@ -135,10 +135,29 @@ namespace ImageSharpHastlayerExtension.Resize
             return memory;
         }
 
-        public Image<TPixel> ConvertToImage(SimpleMemory memory)
+        public Image<TPixel> ConvertToImage(SimpleMemory memory, HastlayerResizeParameters parameters)
         {
-            // TODO
-            return null;
+            var width = (ushort)memory.ReadUInt32(parameters.ImageWidthIndex);
+            var height = (ushort)memory.ReadUInt32(parameters.ImageHeightIndex);
+            var destWidth = (ushort)memory.ReadUInt32(parameters.DestinationImageWidthIndex);
+            var destHeight = (ushort)memory.ReadUInt32(parameters.DestinationImageHeightIndex);
+            int destinationStartIndex = width * height + 4;
+
+            var bmp = new Bitmap(destWidth, destHeight);
+
+            for(int y = 0; y < destHeight; y++)
+            {
+                for(int x = 0; x < destWidth; x++)
+                {
+                    var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
+                    var color = Color.FromArgb(pixel[3], pixel[0], pixel[1], pixel[2]);
+                    bmp.SetPixel(x, y, color);
+                }
+            }
+
+            var image = ImageSharpExtensions.ToImageSharpImage<TPixel>(bmp);
+
+            return image;
         }
 
         /* ---------------------------------------------------------------------------------------------------------- */
