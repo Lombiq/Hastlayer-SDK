@@ -14,3 +14,7 @@
 	path = Hastlayer-Hardware-Framework---Vitis
 	url = https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis
 	branch = dev
+[submodule "Libraries/Lombiq.HelpfulLibraries"]
+	path = Libraries/Lombiq.HelpfulLibraries
+	url = https://github.com/Lombiq/Helpful-Libraries.git
+	branch = orchard-core-preview

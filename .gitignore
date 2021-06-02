@@ -11,3 +11,7 @@ packages/
 .idea/
 publish/
 ~*.xlsx
+/Hast.Abstractions/Hast.Vitis.Abstractions/Container/centos7-install.sh
+/Hast.Abstractions/Hast.Vitis.Abstractions/Container/platform/*.rpm
+/Hast.Abstractions/Hast.Vitis.Abstractions/Container/Xilinx_Unified_2020.2_1118_1232
+TestResults/*.trx

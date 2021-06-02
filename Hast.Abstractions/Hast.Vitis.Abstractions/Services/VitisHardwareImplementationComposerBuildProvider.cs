@@ -43,6 +43,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         public event EventHandler<BuildProgressEventArgs> Progress;
 
+        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
+
         public int MajorStepsTotal { get; private set; } = 8;
         public int MajorStep { get; private set; }
 
@@ -74,7 +76,7 @@ namespace Hast.Vitis.Abstractions.Services
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest.ToolChainName == CommonToolChainNames.Vitis;
 
-        public async Task BuildAsync(
+        public Task BuildAsync(
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
@@ -106,6 +108,15 @@ namespace Hast.Vitis.Abstractions.Services
                     "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
             }
 
+            return BuildInnerAsync(context, implementation, deviceManifest, xilinxDirectoryPath);
+        }
+
+        private async Task BuildInnerAsync(
+            IHardwareImplementationCompositionContext context,
+            IHardwareImplementation implementation,
+            XilinxDeviceManifest deviceManifest,
+            string xilinxDirectoryPath)
+        {
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
@@ -126,10 +137,9 @@ namespace Hast.Vitis.Abstractions.Services
                 "with extremely complex and/or very highly parallelized algorithms.");
 
             var hashId = context.HardwareDescription.TransformationId;
+            _logger.LogInformation("HASH ID: {0}", hashId);
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
-            implementation.BinaryPath = Path.Combine(
-                EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
-                hashId + ".xclbin");
+            implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             Cleanup(hardwareFrameworkPath, hashId);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
@@ -155,10 +165,12 @@ namespace Hast.Vitis.Abstractions.Services
             // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
             // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
             var device = deviceManifest.SupportedPlatforms!
-                .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
-                .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
-                .OrderByDescending(name => name)
-                .First();
+                             .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
+                             .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
+                             .OrderByDescending(name => name)
+                             .FirstOrDefault() ??
+                         throw new InvalidOperationException(
+                             "No device platform was found. Did you set the $XILINX_PLATFORM environment variable?");
 
             var xclbinDirectoryPath = EnsureDirectoryExists(
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
@@ -167,7 +179,7 @@ namespace Hast.Vitis.Abstractions.Services
             await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
 
             // If the xclbin exists then we are done here.
-            if (File.Exists(implementation.BinaryPath) && File.Exists(implementation.BinaryPath + ".info"))
+            if (AllExist(implementation.BinaryPath, implementation.BinaryPath + ".info"))
             {
                 ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
                 return;
@@ -198,20 +210,25 @@ namespace Hast.Vitis.Abstractions.Services
             var disableHbm = deviceManifest.SupportsHbm && !openClConfiguration.UseHbm;
             CopyBinaries(target, implementation.BinaryPath, hashId, disableHbm);
 
-            ProgressMajor("Collecting reports.");
-            try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
-            catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
+            if (deviceManifest.RequiresDcpBinary)
+            {
+                ProgressMajor("There are no reports when then the project is compiled as netlist.");
+            }
+            else
+            {
+                ProgressMajor("Collecting reports.");
+                try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
+                catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
+            }
 
             Cleanup(hardwareFrameworkPath, hashId);
         }
-
 
         private void ProgressMajor(string message)
         {
             MajorStep++;
             Progress?.Invoke(this, new BuildProgressEventArgs(message, isMajorStep: true));
         }
-
 
         private async Task BuildKernelAsync(
             string hardwareFrameworkPath,
@@ -258,6 +275,13 @@ namespace Hast.Vitis.Abstractions.Services
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm
                 ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
                 : Array.Empty<string>());
+
+            if (deviceManifest.RequiresDcpBinary)
+            {
+                vppArguments.Add("--advanced.param");
+                vppArguments.Add("compiler.acceleratorBinaryContent=dcp");
+            }
+
             vppArguments.AddRange(new[]
             {
                 "-g",
@@ -624,5 +648,16 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         public void Dispose() => _buildOutput?.Dispose();
+
+        public static string GetBinaryPath(
+            IHardwareGenerationConfiguration configuration,
+            IHardwareDescription hardwareDescription)
+        {
+            var hashId = hardwareDescription.TransformationId;
+            var hardwareFrameworkPath = Path.GetFullPath(configuration.HardwareFrameworkPath);
+            return Path.Combine(
+                EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
+                hashId + ".xclbin");
+        }
     }
 }
