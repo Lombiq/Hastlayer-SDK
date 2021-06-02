@@ -52,16 +52,17 @@ namespace Hast.Samples.SampleAssembly
             var tasks = new Task[MaxDegreeOfParallelism];
 
 
-            for (int t = 0; t < MaxDegreeOfParallelism; t++)
-            {
-                tasks[t] = Task.Factory.StartNew(
-                    inputObject =>
-                    {
-                        // TODO
-                    }, t);
-            }
+            //for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            //{
+            //    tasks[t] = Task.Factory.StartNew(
+            //        inputObject =>
+            //        {
+            //            // írjak valamit be ide.
+            //            // TODO Check SIMD
+            //        }, t);
+            //}
 
-            Task.WhenAll(tasks).Wait();
+            //Task.WhenAll(tasks).Wait();
 
             //// Serialized
             //for (int y = 0; y < destHeight; y++)
