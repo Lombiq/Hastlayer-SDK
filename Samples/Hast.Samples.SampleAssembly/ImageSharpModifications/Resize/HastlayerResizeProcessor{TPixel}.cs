@@ -143,9 +143,9 @@ namespace ImageSharpHastlayerExtension.Resize
 
             var bmp = new Bitmap(destWidth, destHeight);
 
-            for (int x = 0; x < destWidth; x++)
+            for (int y = 0; y < destHeight; y++)
             {
-                for (int y = 0; y < destHeight; y++)
+                for (int x = 0; x < destWidth; x++)
                 {
                     var pixel = memory.Read4Bytes(x + y * destWidth + destinationStartIndex);
                     var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
