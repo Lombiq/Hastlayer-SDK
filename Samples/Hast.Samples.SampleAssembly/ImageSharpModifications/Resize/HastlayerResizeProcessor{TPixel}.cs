@@ -119,7 +119,6 @@ namespace ImageSharpHastlayerExtension.Resize
             memory.WriteUInt32(parameters.DestinationImageHeightIndex, (uint)_destinationHeight); // TODO: get the value
 
             var bitmapImage = ImageSharpExtensions.ToBitmap(image);
-
             for (int y = 0; y < bitmapImage.Height; y++)
             {
                 for (int x = 0; x < bitmapImage.Width; x++)
