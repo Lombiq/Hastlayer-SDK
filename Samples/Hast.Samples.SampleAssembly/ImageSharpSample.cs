@@ -71,16 +71,6 @@ namespace Hast.Samples.SampleAssembly
             }
 
             Task.WhenAll(tasks).Wait();
-
-            //// Serialized
-            //for (int y = 0; y < destHeight; y++)
-            //{
-            //    for (int x = 0; x < destWidth; x++)
-            //    {
-            //        var pixel = memory.Read4Bytes(x * widthFactor + y * heightFactor);
-            //        memory.Write4Bytes(x + destWidth * y + destinationStartIndex, pixel);
-            //    }
-            //}
         }
 
         internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);
@@ -104,9 +94,6 @@ namespace Hast.Samples.SampleAssembly
             return image;
         }
 
-        //[MethodImpl(InliningOptions.ShortMethod)] TODO átnézni hogy ez most valid e
-        private static int DivideCeil(int dividend, int divisor) => 1 + ((dividend - 1) / divisor);
-
         public class HastlayerResizeParameters
         {
             public int MaxDegreeOfParallelism { get; set; }
@@ -118,9 +105,5 @@ namespace Hast.Samples.SampleAssembly
             public IHastlayer Hastlayer { get; set; }
             public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
         }
-
-
-
-
     }
 }
