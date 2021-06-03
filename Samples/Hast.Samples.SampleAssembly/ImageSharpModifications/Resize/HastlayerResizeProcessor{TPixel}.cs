@@ -21,8 +21,8 @@ using Color = System.Drawing.Color;
 
 namespace ImageSharpHastlayerExtension.Resize
 {
-   class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
-        where TPixel : unmanaged, IPixel<TPixel>
+    class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
+         where TPixel : unmanaged, IPixel<TPixel>
     {
         private readonly int _destinationWidth;
         private readonly int _destinationHeight;
@@ -91,7 +91,7 @@ namespace ImageSharpHastlayerExtension.Resize
             {
                 var sourceFrame = source.Frames[i];
                 var destinationFrame = destination.Frames[i];
-                                
+
                 ApplyNNResizeFrameTransform(
                     configuration,
                     sourceFrame,
@@ -115,8 +115,8 @@ namespace ImageSharpHastlayerExtension.Resize
 
             memory.WriteUInt32(parameters.ImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(parameters.ImageHeightIndex, (uint)image.Height);
-            memory.WriteUInt32(parameters.DestinationImageWidthIndex, (uint)image.Width / 2);   // TODO: get the value
-            memory.WriteUInt32(parameters.DestinationImageHeightIndex, (uint)image.Height / 2); // TODO: get the value
+            memory.WriteUInt32(parameters.DestinationImageWidthIndex, (uint)_destinationWidth);   // TODO: get the value
+            memory.WriteUInt32(parameters.DestinationImageHeightIndex, (uint)_destinationHeight); // TODO: get the value
 
             var bitmapImage = ImageSharpExtensions.ToBitmap(image);
 
@@ -127,8 +127,10 @@ namespace ImageSharpHastlayerExtension.Resize
                     var pixel = bitmapImage.GetPixel(x, y);
 
                     memory.Write4Bytes(
-                        x * bitmapImage.Width + y + parameters.ImageStartIndex,
-                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                       x + y * bitmapImage.Width + parameters.ImageStartIndex,
+                       new[] { pixel.R, pixel.G, pixel.B });
+
+
                 }
             }
 
@@ -145,15 +147,26 @@ namespace ImageSharpHastlayerExtension.Resize
 
             var bmp = new Bitmap(destWidth, destHeight);
 
-            for(int y = 0; y < destHeight; y++)
+            //for (int y = 0; y < destHeight; y++)
+            //{
+            //    for (int x = 0; x < destWidth; x++)
+            //    {
+            //        var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
+            //        var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
+            //        bmp.SetPixel(x, y, color);
+            //    }
+            //}
+
+            for (int x = 0; x < destWidth; x++)
             {
-                for(int x = 0; x < destWidth; x++)
+                for (int y = 0; y < destHeight; y++)
                 {
-                    var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
-                    var color = Color.FromArgb(pixel[3], pixel[0], pixel[1], pixel[2]);
+                    var pixel = memory.Read4Bytes(x + y * destWidth + destinationStartIndex);
+                    var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
                     bmp.SetPixel(x, y, color);
                 }
             }
+
 
             var image = ImageSharpExtensions.ToImageSharpImage<TPixel>(bmp);
 

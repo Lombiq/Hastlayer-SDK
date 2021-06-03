@@ -85,7 +85,7 @@ namespace Hast.Samples.SampleAssembly
                 ImageWidthIndex = Resize_ImageWidthIndex,
                 ImageHeightIndex = Resize_ImageHeightIndex,
                 DestinationImageWidthIndex = Resize_DestinationImageWidthIndex,
-                DestinationImageHeightIndex = Resize_ImageHeightIndex,
+                DestinationImageHeightIndex = Resize_DestinationImageHeightIndex,
                 ImageStartIndex = Resize_ImageStartIndex,
                 Hastlayer = hastlayer,
                 HardwareGenerationConfiguration = hardwareGenerationConfiguration,
