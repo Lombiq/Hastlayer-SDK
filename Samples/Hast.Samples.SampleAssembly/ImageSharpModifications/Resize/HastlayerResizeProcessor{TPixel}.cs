@@ -120,17 +120,15 @@ namespace ImageSharpHastlayerExtension.Resize
 
             var bitmapImage = ImageSharpExtensions.ToBitmap(image);
 
-            for (int x = 0; x < bitmapImage.Width; x++)
+            for (int y = 0; y < bitmapImage.Height; y++)
             {
-                for (int y = 0; y < bitmapImage.Height; y++)
+                for (int x = 0; x < bitmapImage.Width; x++)
                 {
                     var pixel = bitmapImage.GetPixel(x, y);
 
                     memory.Write4Bytes(
                        x + y * bitmapImage.Width + parameters.ImageStartIndex,
                        new[] { pixel.R, pixel.G, pixel.B });
-
-
                 }
             }
 
