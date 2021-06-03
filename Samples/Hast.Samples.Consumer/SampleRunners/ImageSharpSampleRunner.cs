@@ -45,7 +45,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
             sw.Stop();
             image.Save("resized_fpga.jpg");
-            System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
+            System.Console.WriteLine($"Non-hastlyer algorithm took {sw.ElapsedMilliseconds} ms");
         }
     }
 }
