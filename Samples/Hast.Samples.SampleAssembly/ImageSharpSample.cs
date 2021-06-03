@@ -49,20 +49,34 @@ namespace Hast.Samples.SampleAssembly
                 stepCount += 1;
             }
 
+            // u sure? TODO
+            var verticalStep = 1 + ((destHeight - 1) / stepCount);
+
             var tasks = new Task[MaxDegreeOfParallelism];
 
+            for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            {
+                tasks[t] = Task.Factory.StartNew(
+                    inputObject =>
+                    {
+                        var yMin = 0 + (int)inputObject * verticalStep;
+                        if (yMin > destHeight) return;
 
-            //for (int t = 0; t < MaxDegreeOfParallelism; t++)
-            //{
-            //    tasks[t] = Task.Factory.StartNew(
-            //        inputObject =>
-            //        {
-            //            // írjak valamit be ide.
-            //            // TODO Check SIMD
-            //        }, t);
-            //}
+                        var yMax = System.Math.Min(yMin + verticalStep, destHeight);
 
-            //Task.WhenAll(tasks).Wait();
+                        for (int y = yMin; y < yMax; y++)
+                        {
+                            for (int x = 0; x < destWidth; x++)
+                            {
+                                var sourcePixel = memory.Read4Bytes(y * destWidth * heightFactor + x * widthFactor + Resize_ImageStartIndex);
+                                memory.Write4Bytes(y * destWidth + x + destinationStartIndex, sourcePixel);
+                            }
+                        }
+
+                    }, t);
+            }
+
+            Task.WhenAll(tasks).Wait();
 
             //// Serialized
             //for (int y = 0; y < destHeight; y++)
@@ -95,6 +109,9 @@ namespace Hast.Samples.SampleAssembly
 
             return image;
         }
+
+        //[MethodImpl(InliningOptions.ShortMethod)] TODO átnézni hogy ez most valid e
+        private static int DivideCeil(int dividend, int divisor) => 1 + ((dividend - 1) / divisor);
 
         public class HastlayerResizeParameters
         {
