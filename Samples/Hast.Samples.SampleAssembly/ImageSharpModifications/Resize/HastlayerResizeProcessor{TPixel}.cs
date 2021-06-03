@@ -105,7 +105,7 @@ namespace ImageSharpHastlayerExtension.Resize
         // NEW METHODS
         public SimpleMemory CreateSimpleMemory(Image<TPixel> image, HastlayerResizeParameters parameters)
         {
-            var pixelCount = image.Width * image.Height;
+            var pixelCount = image.Width * image.Height + (image.Width / 2) * (image.Height / 2); // TODO: get the value
             var cellCount = pixelCount
                 + (pixelCount % parameters.MaxDegreeOfParallelism != 0 ? parameters.MaxDegreeOfParallelism : 0)
                 + 4;
