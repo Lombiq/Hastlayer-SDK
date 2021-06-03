@@ -1,16 +1,10 @@
-using Hast.Transformer.Abstractions.SimpleMemory;
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
-using SixLabors.ImageSharp;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using ImageSharpHastlayerExtension.Resize;
+using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
-using Bitmap = System.Drawing.Bitmap;
-using System.IO;
-using SixLabors.ImageSharp.Advanced;
-using SixLabors.ImageSharp.Formats.Png;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
-using SixLabors.ImageSharp.PixelFormats;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
 {

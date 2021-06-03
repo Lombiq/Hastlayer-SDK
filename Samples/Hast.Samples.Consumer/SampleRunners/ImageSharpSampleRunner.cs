@@ -3,7 +3,6 @@ using Hast.Samples.SampleAssembly;
 using ImageSharpHastlayerExtension.Resize;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
-using System.Drawing.Imaging;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners

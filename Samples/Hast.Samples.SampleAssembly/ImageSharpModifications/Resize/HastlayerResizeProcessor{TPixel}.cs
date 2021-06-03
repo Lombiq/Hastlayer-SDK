@@ -4,9 +4,9 @@
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeProcessor%7BTPixel%7D.cs
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Advanced/ParallelRowIterator.cs
 
-using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Samples.SampleAssembly;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
@@ -15,7 +15,6 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using static Hast.Samples.SampleAssembly.ImageSharpSample;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
 
