@@ -4,6 +4,7 @@
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeProcessor%7BTPixel%7D.cs
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Advanced/ParallelRowIterator.cs
 
+using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 using Hast.Transformer.Abstractions.SimpleMemory;
@@ -18,7 +19,7 @@ using static Hast.Samples.SampleAssembly.ImageSharpSample;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
 
-namespace ImageSharpHastlayerExtension.Resize
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
     class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
          where TPixel : unmanaged, IPixel<TPixel>
@@ -28,21 +29,24 @@ namespace ImageSharpHastlayerExtension.Resize
         private readonly IResampler _resampler;
         private readonly Rectangle _destinationRectangle;
         private Image<TPixel> _destination;
-        private HastlayerResizeParameters _parameters;
+        private IHastlayer _hastlayer;
+        private IHardwareGenerationConfiguration _hardwareConfiguration;
 
         public HastlayerResizeProcessor(
             Configuration configuration,
             HastlayerResizeProcessor definition,
             Image<TPixel> source,
             Rectangle sourceRectangle,
-            HastlayerResizeParameters hastlayerResizeParameters)
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
             : base(configuration, source, sourceRectangle)
         {
             _destinationWidth = definition.DestinationWidth;
             _destinationHeight = definition.DestinationHeight;
             _destinationRectangle = definition.DestinationRectangle;
             _resampler = definition.Sampler;
-            _parameters = hastlayerResizeParameters;
+            _hastlayer = hastlayer;
+            _hardwareConfiguration = hardwareGenerationConfiguration;
         }
 
         /// <inheritdoc/>
@@ -78,10 +82,10 @@ namespace ImageSharpHastlayerExtension.Resize
 
             // Hastlayerization
             var hastlayerSample = new ImageSharpSample();
-            var memory = CreateSimpleMemory(source, _parameters);
+            var memory = hastlayerSample.CreateSimpleMemory(source, _hastlayer, _hardwareConfiguration);
             hastlayerSample.ApplyTransform(memory);
             // After the memory transform convert back to IS.Image
-            destination = ConvertToImage(memory, _parameters); // Maybe to frame???
+            destination = (Image<TPixel>)hastlayerSample.ConvertToImage(memory, _hastlayer, _hardwareConfiguration); // Maybe to frame???
 
 
 
@@ -100,75 +104,7 @@ namespace ImageSharpHastlayerExtension.Resize
                     interest);
             }
         }
-
-        // NEW METHODS
-        public SimpleMemory CreateSimpleMemory(Image<TPixel> image, HastlayerResizeParameters parameters)
-        {
-            var pixelCount = image.Width * image.Height + (image.Width / 2) * (image.Height / 2); // TODO: get the value
-            var cellCount = pixelCount
-                + (pixelCount % parameters.MaxDegreeOfParallelism != 0 ? parameters.MaxDegreeOfParallelism : 0)
-                + 4;
-            var memory = parameters.Hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(cellCount)
-                : parameters.Hastlayer.CreateMemory(parameters.HardwareGenerationConfiguration, cellCount);
-
-            memory.WriteUInt32(parameters.ImageWidthIndex, (uint)image.Width);
-            memory.WriteUInt32(parameters.ImageHeightIndex, (uint)image.Height);
-            memory.WriteUInt32(parameters.DestinationImageWidthIndex, (uint)_destinationWidth);   // TODO: get the value
-            memory.WriteUInt32(parameters.DestinationImageHeightIndex, (uint)_destinationHeight); // TODO: get the value
-
-            var bitmapImage = ImageSharpExtensions.ToBitmap(image);
-            for (int y = 0; y < bitmapImage.Height; y++)
-            {
-                for (int x = 0; x < bitmapImage.Width; x++)
-                {
-                    var pixel = bitmapImage.GetPixel(x, y);
-
-                    memory.Write4Bytes(
-                       x + y * bitmapImage.Width + parameters.ImageStartIndex,
-                       new[] { pixel.R, pixel.G, pixel.B });
-                }
-            }
-
-            return memory;
-        }
-
-        public Image<TPixel> ConvertToImage(SimpleMemory memory, HastlayerResizeParameters parameters)
-        {
-            var width = (ushort)memory.ReadUInt32(parameters.ImageWidthIndex);
-            var height = (ushort)memory.ReadUInt32(parameters.ImageHeightIndex);
-            var destWidth = (ushort)memory.ReadUInt32(parameters.DestinationImageWidthIndex);
-            var destHeight = (ushort)memory.ReadUInt32(parameters.DestinationImageHeightIndex);
-            int destinationStartIndex = width * height + 4;
-
-            var bmp = new Bitmap(destWidth, destHeight);
-
-            //for (int y = 0; y < destHeight; y++)
-            //{
-            //    for (int x = 0; x < destWidth; x++)
-            //    {
-            //        var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
-            //        var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
-            //        bmp.SetPixel(x, y, color);
-            //    }
-            //}
-
-            for (int x = 0; x < destWidth; x++)
-            {
-                for (int y = 0; y < destHeight; y++)
-                {
-                    var pixel = memory.Read4Bytes(x + y * destWidth + destinationStartIndex);
-                    var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
-                    bmp.SetPixel(x, y, color);
-                }
-            }
-
-
-            var image = ImageSharpExtensions.ToImageSharpImage<TPixel>(bmp);
-
-            return image;
-        }
-
+                
         /* ---------------------------------------------------------------------------------------------------------- */
 
         // OLD METHODS

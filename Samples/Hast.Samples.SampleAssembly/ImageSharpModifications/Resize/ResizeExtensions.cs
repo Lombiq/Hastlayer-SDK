@@ -4,13 +4,12 @@
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Extensions/Transforms/ResizeExtensions.cs
 
 using Hast.Layer;
-using HastlayerResizeParameters = Hast.Samples.SampleAssembly.ImageSharpSample.HastlayerResizeParameters;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 
-namespace ImageSharpHastlayerExtension.Resize
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
     public static class ResizeExtensions
     {
@@ -51,6 +50,7 @@ namespace ImageSharpHastlayerExtension.Resize
                 width,
                 height,
                 Environment.ProcessorCount,
+                null,
                 null);
 
         /// <summary>
@@ -69,14 +69,16 @@ namespace ImageSharpHastlayerExtension.Resize
             int width,
             int height,
             int maxDegreeOfParallelism,
-            HastlayerResizeParameters hastlayerResizeParameters)
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
             => HastResize(
                 source,
                 width,
                 height,
                 maxDegreeOfParallelism,
                 KnownResamplers.NearestNeighbor,
-                hastlayerResizeParameters);
+                hastlayer,
+                hardwareGenerationConfiguration);
 
         /// <summary>
         /// Resizes an image to the given width and height with the given sampler and source rectangle.
@@ -96,7 +98,8 @@ namespace ImageSharpHastlayerExtension.Resize
             int height,
             int maxDegreeOfParallelism,
             IResampler sampler,
-            HastlayerResizeParameters hastlayerResizeParameters) => HastResize(
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration) => HastResize(
                 source,
                 width,
                 height,
@@ -104,7 +107,8 @@ namespace ImageSharpHastlayerExtension.Resize
                 KnownResamplers.NearestNeighbor,
                 new Rectangle(0, 0, width, height),
                 false,
-                hastlayerResizeParameters);
+                hastlayer,
+                hardwareGenerationConfiguration);
 
         /// <summary>
         /// Resizes an image to the given width and height with the given sampler and source rectangle.
@@ -131,7 +135,8 @@ namespace ImageSharpHastlayerExtension.Resize
             IResampler sampler,
             Rectangle targetRectangle,
             bool compand,
-            HastlayerResizeParameters hastlayerResizeParameters)
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
             var options = new ResizeOptions
             {
@@ -142,7 +147,7 @@ namespace ImageSharpHastlayerExtension.Resize
                 Compand = compand
             };
 
-            return HastResize(source, options, maxDegreeOfParallelism, hastlayerResizeParameters);
+            return HastResize(source, options, maxDegreeOfParallelism, hastlayer, hardwareGenerationConfiguration);
         }
 
         /// <summary>
@@ -159,16 +164,18 @@ namespace ImageSharpHastlayerExtension.Resize
             this IImageProcessingContext source,
             ResizeOptions options,
             int maxDegreeOfParallelism,
-            HastlayerResizeParameters hastlayerResizeParameters)
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            if (hastlayerResizeParameters != null)
+            if (hastlayer != null)
             {
                 return source.ApplyProcessor(
                     new HastlayerResizeProcessor(
                         options,
                         source.GetCurrentSize(),
                         maxDegreeOfParallelism,
-                        hastlayerResizeParameters)
+                        hastlayer,
+                        hardwareGenerationConfiguration)
                     );
             }
 

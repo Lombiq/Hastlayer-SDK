@@ -1,10 +1,14 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using ImageSharpHastlayerExtension.Resize;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System.Threading.Tasks;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
+using Bitmap = System.Drawing.Bitmap;
+using Color = System.Drawing.Color;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -28,7 +32,7 @@ namespace Hast.Samples.SampleAssembly
             var height = (ushort)memory.ReadUInt32(Resize_ImageHeightIndex);
             var destWidth = (ushort)memory.ReadUInt32(Resize_DestinationImageWidthIndex);
             var destHeight = (ushort)memory.ReadUInt32(Resize_DestinationImageHeightIndex);
-            int destinationStartIndex = width * height + 4;
+            var destinationStartIndex = width * height + 4;
 
             var widthFactor = width / destWidth;
             var heightFactor = height / destHeight;
@@ -77,33 +81,73 @@ namespace Hast.Samples.SampleAssembly
 
         public Image Resize(Image image, IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            var parameters = new HastlayerResizeParameters
-            {
-                MaxDegreeOfParallelism = MaxDegreeOfParallelism,
-                ImageWidthIndex = Resize_ImageWidthIndex,
-                ImageHeightIndex = Resize_ImageHeightIndex,
-                DestinationImageWidthIndex = Resize_DestinationImageWidthIndex,
-                DestinationImageHeightIndex = Resize_DestinationImageHeightIndex,
-                ImageStartIndex = Resize_ImageStartIndex,
-                Hastlayer = hastlayer,
-                HardwareGenerationConfiguration = hardwareGenerationConfiguration,
-            };
-
-            image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, parameters));
+            //image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, parameters));
+            image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, hastlayer, hardwareGenerationConfiguration));
 
             return image;
         }
 
-        public class HastlayerResizeParameters
+        // NEW METHODS
+        public SimpleMemory CreateSimpleMemory(
+            Image image,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            public int MaxDegreeOfParallelism { get; set; }
-            public int ImageWidthIndex { get; set; }
-            public int ImageHeightIndex { get; set; }
-            public int DestinationImageWidthIndex { get; set; }
-            public int DestinationImageHeightIndex { get; set; }
-            public int ImageStartIndex { get; set; }
-            public IHastlayer Hastlayer { get; set; }
-            public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
+            var pixelCount = image.Width * image.Height + (image.Width / 2) * (image.Height / 2); // TODO: get the value
+            var cellCount = pixelCount
+                + (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0)
+                + 4;
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(hardwareGenerationConfiguration, cellCount);
+
+            memory.WriteUInt32(Resize_ImageWidthIndex, (uint)image.Width);
+            memory.WriteUInt32(Resize_ImageHeightIndex, (uint)image.Height);
+            memory.WriteUInt32(Resize_DestinationImageWidthIndex, (uint)image.Width/2);   // TODO: get the value
+            memory.WriteUInt32(Resize_DestinationImageHeightIndex, (uint)image.Height/2); // TODO: get the value
+
+            var bitmapImage = ImageSharpExtensions.ToBitmap(image);
+            for (int y = 0; y < bitmapImage.Height; y++)
+            {
+                for (int x = 0; x < bitmapImage.Width; x++)
+                {
+                    var pixel = bitmapImage.GetPixel(x, y);
+
+                    memory.Write4Bytes(
+                       x + y * bitmapImage.Width + Resize_ImageStartIndex,
+                       new[] { pixel.R, pixel.G, pixel.B });
+                }
+            }
+
+            return memory;
+        }
+
+        public Image ConvertToImage(
+            SimpleMemory memory,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+        {
+            var width = (ushort)memory.ReadUInt32(Resize_ImageWidthIndex);
+            var height = (ushort)memory.ReadUInt32(Resize_ImageHeightIndex);
+            var destWidth = (ushort)memory.ReadUInt32(Resize_DestinationImageWidthIndex);
+            var destHeight = (ushort)memory.ReadUInt32(Resize_DestinationImageHeightIndex);
+            int destinationStartIndex = width * height + 4;
+
+            var bmp = new Bitmap(destWidth, destHeight);
+
+            for (int y = 0; y < destHeight; y++)
+            {
+                for (int x = 0; x < destWidth; x++)
+                {
+                    var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
+                    var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
+                    bmp.SetPixel(x, y, color);
+                }
+            }
+
+            var image = ImageSharpExtensions.ToImageSharpImage(bmp);
+
+            return image;
         }
     }
 }
