@@ -76,6 +76,32 @@ namespace ImageSharpHastlayerExtension.Resize
                 height,
                 maxDegreeOfParallelism,
                 KnownResamplers.NearestNeighbor,
+                hastlayerResizeParameters);
+
+        /// <summary>
+        /// Resizes an image to the given width and height with the given sampler and source rectangle.
+        /// </summary>
+        /// <param name="source">The image to resize.</param>
+        /// <param name="width">The target image width.</param>
+        /// <param name="height">The target image height.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="sampler">The <see cref="IResampler"/> to perform the resampling.</param>
+        /// <param name="hastlayerResizeParameters">Parameters for Hastlayer.</param>
+        /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
+        /// <remarks>Passing zero for one of height or width will automatically preserve the aspect ratio of the 
+        /// original image or the nearest possible ratio.</remarks>
+        public static IImageProcessingContext HastResize(
+            this IImageProcessingContext source,
+            int width,
+            int height,
+            int maxDegreeOfParallelism,
+            IResampler sampler,
+            HastlayerResizeParameters hastlayerResizeParameters) => HastResize(
+                source,
+                width,
+                height,
+                maxDegreeOfParallelism,
+                KnownResamplers.NearestNeighbor,
                 new Rectangle(0, 0, width, height),
                 false,
                 hastlayerResizeParameters);
