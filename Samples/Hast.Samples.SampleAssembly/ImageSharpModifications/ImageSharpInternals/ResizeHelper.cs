@@ -7,7 +7,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System;
 
-namespace ImageSharpHastlayerExtension
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications
 {
     static class ResizeHelper
     {

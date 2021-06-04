@@ -8,7 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace ImageSharpHastlayerExtension
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications
 {
     /// <summary>
     /// Provides methods to protect against invalid parameters.

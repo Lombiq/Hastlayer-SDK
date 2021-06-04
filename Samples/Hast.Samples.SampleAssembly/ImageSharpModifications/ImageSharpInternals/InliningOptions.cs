@@ -3,7 +3,7 @@
 
 using System.Runtime.CompilerServices;
 
-namespace ImageSharpHastlayerExtension
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications
 {
     /// <summary>
     /// Global inlining options. Helps temporarily disable inlining for better profiler output.

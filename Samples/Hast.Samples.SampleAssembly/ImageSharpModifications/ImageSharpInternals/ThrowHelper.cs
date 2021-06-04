@@ -4,7 +4,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace ImageSharpHastlayerExtension
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications
 {
     /// <summary>
     /// Helper methods to throw exceptions

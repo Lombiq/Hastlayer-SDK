@@ -8,7 +8,7 @@ using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 
-namespace ImageSharpHastlayerExtension.Resize
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
     public class ResizeProcessor : CloningImageProcessor
     {

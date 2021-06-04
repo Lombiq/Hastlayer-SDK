@@ -12,7 +12,7 @@ using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace ImageSharpHastlayerExtension.Resize
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
     class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
         where TPixel : unmanaged, IPixel<TPixel>
