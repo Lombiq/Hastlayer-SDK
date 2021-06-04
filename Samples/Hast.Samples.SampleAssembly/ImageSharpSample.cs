@@ -25,6 +25,7 @@ namespace Hast.Samples.SampleAssembly
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
+        private static readonly int Size = 42588;
 
         public virtual void ApplyTransform(SimpleMemory memory)
         {
@@ -37,57 +38,69 @@ namespace Hast.Samples.SampleAssembly
             var widthFactor = width / destWidth;
             var heightFactor = height / destHeight;
 
-            var pixelCount = destHeight * destWidth;
-            var stepCount = pixelCount / MaxDegreeOfParallelism;
+            var tasks = new Task<PixelProcessingTaskOutput>[MaxDegreeOfParallelism];
 
-            if (pixelCount % MaxDegreeOfParallelism != 0)
+            var stepCount = destWidth / MaxDegreeOfParallelism;
+            var wastedSteps = destWidth % MaxDegreeOfParallelism;
+
+            if (wastedSteps != 0)
             {
-                // This will take care of the rest of the pixels. This is wasteful as on the last step not all Tasks
-                // will work on something but it's a way to keep the number of Tasks constant.
                 stepCount += 1;
             }
 
-            // u sure? TODO
-            var verticalStep = 1 + ((destHeight - 1) / stepCount);
-
-            var tasks = new Task[MaxDegreeOfParallelism];
-
-            for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            for (int y = 0; y < destHeight; y++)
             {
-                tasks[t] = Task.Factory.StartNew(
-                    inputObject =>
+                for (int x = 0; x < stepCount; x++)
+                {
+                    for (int t = 0; t < MaxDegreeOfParallelism; t++)
                     {
-                        var yMin = 0 + (int)inputObject * verticalStep;
-                        if (yMin > destHeight) return;
+                        var pixelBytes = memory.Read4Bytes(
+                            y * heightFactor * destWidth * heightFactor + x * widthFactor + t + Resize_ImageStartIndex);
 
-                        var yMax = System.Math.Min(yMin + verticalStep, destHeight);
-
-                        for (int y = yMin; y < yMax; y++)
+                        tasks[t] = Task.Factory.StartNew(inputObject =>
                         {
-                            for (int x = 0; x < destWidth; x++)
+                            var input = (PixelProcessingTaskInput)inputObject;
+
+                            return new PixelProcessingTaskOutput
                             {
-                                var sourcePixel = memory.Read4Bytes(y * destWidth * heightFactor + x * widthFactor + Resize_ImageStartIndex);
-                                memory.Write4Bytes(y * destWidth + x + destinationStartIndex, sourcePixel);
-                            }
+                                R = input.PixelBytes[0],
+                                G = input.PixelBytes[1],
+                                B = input.PixelBytes[2]
+                            };
+
+                        },
+                        new PixelProcessingTaskInput { PixelBytes = pixelBytes });
+                    }
+
+                    Task.WhenAll(tasks).Wait();
+
+                    for (int t = 0; t < MaxDegreeOfParallelism; t++)
+                    {
+                        // Don't write unnecessary stuff leftover from the process
+                        if (x + t >= destWidth)
+                        {
+                            break;
                         }
 
-                    }, t);
+                        memory.Write4Bytes(
+                           destinationStartIndex + x + y * destWidth + t,
+                           new[] { tasks[t].Result.R, tasks[t].Result.G, tasks[t].Result.B });
+                    }
+                }
             }
 
-            Task.WhenAll(tasks).Wait();
+
         }
 
         internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);
 
         public Image Resize(Image image, IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            //image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, parameters));
             image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, hastlayer, hardwareGenerationConfiguration));
 
             return image;
         }
 
-        // NEW METHODS
         public SimpleMemory CreateSimpleMemory(
             Image image,
             IHastlayer hastlayer,
@@ -103,8 +116,8 @@ namespace Hast.Samples.SampleAssembly
 
             memory.WriteUInt32(Resize_ImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(Resize_ImageHeightIndex, (uint)image.Height);
-            memory.WriteUInt32(Resize_DestinationImageWidthIndex, (uint)image.Width/2);   // TODO: get the value
-            memory.WriteUInt32(Resize_DestinationImageHeightIndex, (uint)image.Height/2); // TODO: get the value
+            memory.WriteUInt32(Resize_DestinationImageWidthIndex, (uint)image.Width / 2);   // TODO: get the value
+            memory.WriteUInt32(Resize_DestinationImageHeightIndex, (uint)image.Height / 2); // TODO: get the value
 
             var bitmapImage = ImageSharpExtensions.ToBitmap(image);
             for (int y = 0; y < bitmapImage.Height; y++)
@@ -148,6 +161,18 @@ namespace Hast.Samples.SampleAssembly
             var image = ImageSharpExtensions.ToImageSharpImage(bmp);
 
             return image;
+        }
+
+        private class PixelProcessingTaskInput
+        {
+            public byte[] PixelBytes { get; set; }
+        }
+
+        private class PixelProcessingTaskOutput
+        {
+            public byte R { get; set; }
+            public byte G { get; set; }
+            public byte B { get; set; }
         }
     }
 }
