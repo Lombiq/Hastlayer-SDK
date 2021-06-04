@@ -1,14 +1,13 @@
 using Hast.Layer;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System.Threading.Tasks;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
-using SixLabors.ImageSharp.PixelFormats;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -25,7 +24,6 @@ namespace Hast.Samples.SampleAssembly
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
-        private static readonly int Size = 42588;
 
         public virtual void ApplyTransform(SimpleMemory memory)
         {
