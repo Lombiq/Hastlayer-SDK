@@ -36,5 +36,30 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions
                 return Image.Load<TPixel>(memoryStream);
             }
         }
+
+        public static Bitmap ToBitmap(Image image)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                var imageEncoder = image.GetConfiguration().ImageFormatsManager.FindEncoder(PngFormat.Instance);
+                image.Save(memoryStream, imageEncoder);
+
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                return new Bitmap(memoryStream);
+            }
+        }
+
+        public static Image ToImageSharpImage(Bitmap bitmap)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+
+                memoryStream.Seek(0, SeekOrigin.Begin);
+
+                return Image.Load(memoryStream);
+            }
+        }
     }
 }
