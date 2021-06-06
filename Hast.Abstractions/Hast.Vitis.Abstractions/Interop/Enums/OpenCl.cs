@@ -123,7 +123,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// devices or all OpenCL devices available.
     /// </summary>
     [Flags]
-    public enum DeviceType : ulong
+    public enum DeviceTypes : ulong
     {
         /// <summary>
         /// An OpenCL device that is the host processor. The host processor runs the OpenCL implementations and is a
@@ -147,11 +147,6 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// The default OpenCL device in the system.
         /// </summary>
         Default = 1 << 0,
-
-        /// <summary>
-        /// All OpenCL devices available in the system.
-        /// </summary>
-        All = 0x_FFFF_FFFF,
     }
 
     /// <summary>
@@ -159,7 +154,11 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// used to allocate the buffer object and how it will be used.
     /// </summary>
     [Flags]
-    public enum MemoryFlag : ulong
+    [SuppressMessage(
+        "Minor Code Smell",
+        "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes",
+        Justification = "This is the name in the original library and changing it would be confusing.")]
+    public enum MemoryFlags : ulong
     {
         /// <summary>
         /// This flag specifies that the memory object will be read and written by a kernel. This is the default.
@@ -222,13 +221,17 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// </summary>
     [Flags]
     [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "From external library.")]
-    public enum MemoryMigrationFlag : ulong
+    [SuppressMessage(
+        "Minor Code Smell",
+        "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes",
+        Justification = "This is the name in the original library and changing it would be confusing.")]
+    public enum MemoryMigrationFlags : ulong
     {
         /// <summary>
-        /// This flag indicates that the specified set of memory objects are to be migrated to the device, regardless
-        /// of the target command-queue.
+        /// This flag indicates that <see cref="Host"/> is not used, so the specified set of memory objects are to be
+        /// migrated to the device.
         /// </summary>
-        Device = 0,
+        None = 0,
 
         /// <summary>
         /// This flag indicates that the specified set of memory objects are to be migrated to the host, regardless of
@@ -245,8 +248,10 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     }
 
     [Flags]
-    public enum CommandQueueProperty : ulong
+    public enum CommandQueueProperties : ulong
     {
+        None = 0,
+
         /// <summary>
         /// Determines whether the commands queued in the command-queue are executed in-order or out-of-order. If set,
         /// the commands in the command-queue are executed out-of-order. Otherwise, commands are executed in-order.

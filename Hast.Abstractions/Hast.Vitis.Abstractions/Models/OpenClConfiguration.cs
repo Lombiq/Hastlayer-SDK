@@ -5,7 +5,7 @@ namespace Hast.Vitis.Abstractions.Models
     public class OpenClConfiguration : IOpenClConfiguration
     {
         public bool DeviceIsBigEndian { get; set; }
-        public DeviceType DeviceType { get; set; } = DeviceType.Accelerator;
+        public DeviceTypes DeviceTypes { get; set; } = DeviceTypes.Accelerator;
         public int HeaderCellCount { get; set; } = 4;
         public string VendorName { get; set; } = "Xilinx";
         public bool UseEmulation { get; set; }

@@ -20,7 +20,7 @@ namespace Hast.Vitis.Abstractions.Interop
         public static XilinxMemoryExtension Create(IntPtr data, ulong bank) =>
             new XilinxMemoryExtension
             {
-                Flags = bank | (ulong)MemoryFlag.ExtensionXilinxTopology,
+                Flags = bank | (ulong)MemoryFlags.ExtensionXilinxTopology,
                 Object = data,
                 Parameters = IntPtr.Zero,
             };

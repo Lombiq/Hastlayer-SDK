@@ -33,9 +33,9 @@ namespace Hast.Vitis.Abstractions.Models
         bool DeviceIsBigEndian { get; set; }
 
         /// <summary>
-        /// Gets or sets the OpenCL <see cref="DeviceType"/>.
+        /// Gets or sets the OpenCL <see cref="DeviceTypes"/>.
         /// </summary>
-        DeviceType DeviceType { get; set; }
+        DeviceTypes DeviceTypes { get; set; }
 
         /// <summary>
         /// Gets or sets the number of cells (<see cref="SimpleMemory.MemoryCellSizeBytes"/> byte units) to be occupied in the

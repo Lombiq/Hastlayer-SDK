@@ -23,7 +23,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         void CreateCommandQueue(
             int deviceIndex,
-            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable);
+            CommandQueueProperties propertieses = CommandQueueProperties.ProfilingEnable);
 
         void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true);
         Task AwaitDeviceAsync(int deviceIndex);
@@ -31,7 +31,7 @@ namespace Hast.Vitis.Abstractions.Services
         IntPtr SetKernelArgumentWithNewBuffer(
             string kernelName, int index, MemoryHandle data, int length, IntPtr buffer = default);
 
-        IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags);
+        IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlags memoryFlagses);
         void PrepareDevices(IOpenClConfiguration configuration);
     }
 }

@@ -20,7 +20,7 @@ namespace Hast.Vitis.Abstractions.Services
     {
         #region Fields and properties
 
-        public const MemoryFlag DefaultMemoryFlags = MemoryFlag.UseHostPointer | MemoryFlag.ReadWrite;
+        public const MemoryFlags DefaultMemoryFlags = MemoryFlags.UseHostPointer | MemoryFlags.ReadWrite;
         private static readonly UIntPtr _intPtrSize = new UIntPtr((uint)Marshal.SizeOf(IntPtr.Zero));
 
         private readonly IOpenCl _cl;
@@ -67,15 +67,15 @@ namespace Hast.Vitis.Abstractions.Services
         #region Methods
 
         public void PrepareDevices(IOpenClConfiguration configuration) => _devicesLazy ??= new Lazy<IntPtr[]>(() =>
-                                                                                 GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
+                                                                                 GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceTypes).ToArray());
 
         public void CreateCommandQueue(
             int deviceIndex,
-            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
+            CommandQueueProperties propertieses = CommandQueueProperties.ProfilingEnable)
         {
             if (_queues.ContainsKey(deviceIndex)) return;
 
-            var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], properties, out var result);
+            var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], propertieses, out var result);
             VerifyResult(result);
             _queues[deviceIndex] = queue;
         }
@@ -98,9 +98,9 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags)
+        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlags memoryFlagses)
         {
-            var buffer = _cl.CreateBuffer(_context.Value, memoryFlags, hostBytes, hostPointer, out var result);
+            var buffer = _cl.CreateBuffer(_context.Value, memoryFlagses, hostBytes, hostPointer, out var result);
             VerifyResult(result);
             return buffer;
         }
@@ -182,23 +182,23 @@ namespace Hast.Vitis.Abstractions.Services
                 });
         }
 
-        private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceType deviceType)
+        private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceTypes deviceTypes)
         {
-            VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, null, out uint numberOfAvailableDevices));
+            VerifyResult(_cl.GetDeviceIDs(platform, deviceTypes, 0, null, out uint numberOfAvailableDevices));
 
             var devicePointers = new IntPtr[numberOfAvailableDevices];
-            VerifyResult(_cl.GetDeviceIDs(platform, deviceType, numberOfAvailableDevices, devicePointers, out _));
+            VerifyResult(_cl.GetDeviceIDs(platform, deviceTypes, numberOfAvailableDevices, devicePointers, out _));
 
             return devicePointers;
         }
 
-        private IEnumerable<IntPtr> GetDeviceHandlesOfVendor(string vendorName, DeviceType deviceType)
+        private IEnumerable<IntPtr> GetDeviceHandlesOfVendor(string vendorName, DeviceTypes deviceTypes)
         {
             var foundDevice = false;
 
             foreach (var platform in GetPlatformHandles(vendorName))
             {
-                foreach (var device in GetDeviceHandles(platform, deviceType))
+                foreach (var device in GetDeviceHandles(platform, deviceTypes))
                 {
                     foundDevice = true;
                     yield return device;
@@ -206,7 +206,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             if (!foundDevice)
-                _logger?.LogWarning($"Failed to find '{vendorName}' platform that has '{deviceType}' type devices.");
+                _logger?.LogWarning($"Failed to find '{vendorName}' platform that has '{deviceTypes}' type devices.");
         }
 
         private IntPtr CreateProgramWithBinary(IntPtr binary, int binaryLength)
@@ -251,7 +251,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private IntPtr EnqueueMemoryMigration(IntPtr queue, IntPtr[] memoryObjects, bool toHost, IntPtr waitEvent)
         {
-            var flags = toHost ? MemoryMigrationFlag.Host : MemoryMigrationFlag.Device;
+            var flags = toHost ? MemoryMigrationFlags.Host : MemoryMigrationFlags.None;
             VerifyResult(_cl.EnqueueMigrateMemObjects(
                 queue,
                 (uint)memoryObjects.Length,

@@ -51,7 +51,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (!isHbm) return IntPtr.Zero;
 
-            const MemoryFlag flags = BinaryOpenCl.DefaultMemoryFlags | MemoryFlag.ExtensionXilinxPointer;
+            const MemoryFlags flags = BinaryOpenCl.DefaultMemoryFlags | MemoryFlags.ExtensionXilinxPointer;
             XilinxMemoryExtension bank;
             IntPtr hostPointer;
             unsafe

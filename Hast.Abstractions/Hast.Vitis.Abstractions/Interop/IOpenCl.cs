@@ -12,13 +12,13 @@ namespace Hast.Vitis.Abstractions.Interop
 
         Result GetPlatformInfo(IntPtr platform, PlatformInformation parameterName, UIntPtr parameterValueSize, byte[] parameterValue, out UIntPtr parameterValueSizeReturned);
 
-        Result GetDeviceIDs(IntPtr platform, DeviceType deviceType, uint numberOfEntries, IntPtr[] devices, out uint numberOfDevicesReturned);
+        Result GetDeviceIDs(IntPtr platform, DeviceTypes deviceTypes, uint numberOfEntries, IntPtr[] devices, out uint numberOfDevicesReturned);
 
         IntPtr CreateContext(IntPtr properties, uint numberOfDevices, IntPtr[] devices, IntPtr notificationCallback, IntPtr userData, out Result errorCode);
 
         Result ReleaseContext(IntPtr context);
 
-        IntPtr CreateCommandQueue(IntPtr context, IntPtr device, CommandQueueProperty properties, out Result errorCode);
+        IntPtr CreateCommandQueue(IntPtr context, IntPtr device, CommandQueueProperties propertieses, out Result errorCode);
 
         Result ReleaseCommandQueue(IntPtr commandQueue);
 
@@ -30,7 +30,7 @@ namespace Hast.Vitis.Abstractions.Interop
 
         Result ReleaseKernel(IntPtr kernel);
 
-        IntPtr CreateBuffer(IntPtr context, MemoryFlag flags, int size, IntPtr hostPointer, out Result errorCode);
+        IntPtr CreateBuffer(IntPtr context, MemoryFlags flagses, int size, IntPtr hostPointer, out Result errorCode);
 
         Result ReleaseMemObject(IntPtr buffer);
 
@@ -40,7 +40,7 @@ namespace Hast.Vitis.Abstractions.Interop
             IntPtr commandQueue,
             uint numberOfMemoryObjects,
             IntPtr[] memoryObjects,
-            MemoryMigrationFlag memoryMigrationFlags,
+            MemoryMigrationFlags memoryMigrationFlagses,
             uint numberOfEventsInWaitList,
             IntPtr[] eventWaitList,
             out IntPtr waitEvent);
