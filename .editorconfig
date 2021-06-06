@@ -13,7 +13,7 @@
 # Basics
 
 charset = utf-8
-guidelines = 120
+guidelines = 120 1px dotted 80ff0000, 150 1px solid 80ff0000
 
 # Indentation and spacing
 indent_size = 4
@@ -92,6 +92,9 @@ dotnet_diagnostic.IDE0011.severity = none
 # Quite dangerous as we most frequently use anonymous types to interface with other APIs (like generating routes) and
 # those can fail on this silently in runtime while building correctly.
 dotnet_diagnostic.IDE0050.severity = none
+# IDE0052: Private member can be removed as the value assigned to it is never used.
+# We use S4487 for that.
+dotnet_diagnostic.IDE0052.severity = none
 # IDE0072: Populate switch
 # Also signals on switches with discards, by design: https://github.com/dotnet/roslyn/issues/48876.
 dotnet_diagnostic.IDE0072.severity = none
@@ -250,9 +253,6 @@ dotnet_diagnostic.CA1810.severity = none
 
 # Don't apply "CA1822: Mark members as static" to the public API
 dotnet_code_quality.ca1822.api_surface = private, internal
-
-# S3937: Number patterns should be regular. Doesn't work well with hex literals.
-dotnet_diagnostic.S3937.severity = none
 
 # Various config files
 [*.{config,csproj,json,props,targets}]
