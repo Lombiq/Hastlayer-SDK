@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -22,6 +23,10 @@ using BindingFlags = System.Reflection.BindingFlags;
 
 namespace Hast.Communication.Tester
 {
+    [SuppressMessage(
+        "Globalization",
+        "CA1303:Do not pass literals as localized parameters",
+        Justification = "This is a simple tester utility, there is no need for localization.")]
     public static class Program
     {
         public const string DefaultHexdumpFileName = "dump.txt";
@@ -129,12 +134,15 @@ namespace Hast.Communication.Tester
         }
 
         private static MethodInfo GetReferenceAction(Type type) =>
+            // In at least one case (ImageContrastModifier) Run can't be public because it would cause issues with the transformation.
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields.
             type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                 .SingleOrDefault(x => x.Name == nameof(MemoryTest.Run) &&
                                       x.GetParameters().Length == 1 &&
                                       x.GetParameters()[0].ParameterType == typeof(SimpleMemory));
+#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields.
 
-        private static (SimpleMemory, SimpleMemoryAccessor) GenerateMemory(
+        private static (SimpleMemory Memory, SimpleMemoryAccessor Accessor) GenerateMemory(
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration,
             PayloadType type,
@@ -157,14 +165,8 @@ namespace Hast.Communication.Tester
                     for (int i = prependCells.Length; i < memory.CellCount; i++) memory.WriteInt32(i, i);
                     break;
                 case PayloadType.Random:
-                    var random = new Random();
-                    for (int i = prependCells.Length; i < memory.CellCount; i++)
-                    {
-                        // Doesn't matter, it's not for crypto.
-#pragma warning disable SCS0005 // Weak random generator
-                        memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
-#pragma warning restore SCS0005 // Weak random generator
-                    }
+                    var random = new Lombiq.HelpfulLibraries.Libraries.Utilities.NonSecurityRandomizer();
+                    for (int i = prependCells.Length; i < memory.CellCount; i++) memory.WriteInt32(i, random.Get());
 
                     break;
                 case PayloadType.BinaryFile:
