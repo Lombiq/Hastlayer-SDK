@@ -24,7 +24,7 @@ namespace Hast.Vitis.Abstractions.Interop
         public IntPtr Parameters { get; set; }
 
         public static XilinxMemoryExtension Create(IntPtr data, ulong bank) =>
-            new ()
+            new()
             {
                 Flags = bank | (ulong)MemoryFlags.ExtensionXilinxTopology,
                 Object = data,

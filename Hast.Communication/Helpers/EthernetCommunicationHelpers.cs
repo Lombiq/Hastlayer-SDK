@@ -19,8 +19,12 @@ namespace Hast.Communication.Helpers
         /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent.</param>
         /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
         /// <returns>Result object containing UDP datagram received from the remote host. It is null if nothing has arrived.</returns>
-        public static async Task<UdpReceiveResult> UdpSendAndReceiveAsync(byte[] datagram, IPEndPoint bindingEndpoint, IPEndPoint targetEndpoint, int receiveTimeoutMilliseconds) =>
-            await UdpSendAndReceiveAnyAsync(
+        public static Task<UdpReceiveResult> UdpSendAndReceiveAsync(
+            byte[] datagram,
+            IPEndPoint bindingEndpoint,
+            IPEndPoint targetEndpoint,
+            int receiveTimeoutMilliseconds) =>
+            UdpSendAndReceiveAnyAsync(
                 client => client.ReceiveAsync(receiveTimeoutMilliseconds),
                 datagram,
                 bindingEndpoint,
