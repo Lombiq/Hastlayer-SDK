@@ -45,7 +45,8 @@ namespace Hast.Transformer.Abstractions.Configuration
             {
                 if (value < 1)
                 {
-                    throw new ArgumentOutOfRangeException("The max degree of parallelism should be at least 1, otherwise the member wouldn't be transformed at all.");
+                    throw new InvalidOperationException(
+                        "The max degree of parallelism should be at least 1, otherwise the member wouldn't be transformed at all.");
                 }
 
                 _maxDegreeOfParallelism = value;
@@ -69,6 +70,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// <summary>
         /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix
         /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
+        /// </summary>
         public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
             simpleName + ".LambdaExpression." + lambdaExpressionIndex.ToString(CultureInfo.InvariantCulture);
     }
