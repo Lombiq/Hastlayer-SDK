@@ -18,3 +18,8 @@
 	path = tools/Lombiq.Analyzers
 	url = https://github.com/Lombiq/.NET-Analyzers.git
 	branch = dev
+[submodule "Libraries/Lombiq.HelpfulLibraries"]
+	path = Libraries/Lombiq.HelpfulLibraries
+	url = https://github.com/Lombiq/Helpful-Libraries.git
+	branch = orchard-core-preview
+
