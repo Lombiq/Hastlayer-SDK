@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Hast.Algorithms.Tests
 {
+    [SuppressMessage(
+        "Globalization",
+        "CA1303:Do not pass literals as localized parameters",
+        Justification = "There should be no localization for testing.")]
     public class Fix64Tests
     {
         private readonly long[] _testCases = new[]
