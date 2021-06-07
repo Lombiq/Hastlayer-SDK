@@ -181,7 +181,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="cellCount">The size of the usable memory.</param>
         /// <returns>The instance with a <c>byte[]</c> of capacity for the require payload size.</returns>
         public static SimpleMemory CreateSoftwareMemory(int cellCount) =>
-            new SimpleMemory(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
+            new(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
     }
 
     /// <summary>
@@ -190,7 +190,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     public static class MemoryExtensions
     {
         /// <summary>
-        /// Gets the internal array to be used for <see cref="System.IO.Stream.Write(byte[], int, int)"/>.
+        /// Gets the internal array to be used for <see cref="Stream.Write(byte[], int, int)"/>.
         /// </summary>
         /// <param name="bytes">The source.</param>
         /// <returns>The underlying array.</returns>

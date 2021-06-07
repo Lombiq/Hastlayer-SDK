@@ -8,13 +8,15 @@ namespace Hast.Transformer.Abstractions.Configuration
 {
     public class TransformerConfiguration
     {
-        private readonly ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration> _memberInvocationInstanceCountConfigurations =
-            new ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration>();
+        private readonly ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration>
+            _memberInvocationInstanceCountConfigurations = new();
 
         /// <summary>
         /// Gets the list of the member invocation instance counts, i.e. how many times a member can be invoked
         /// at a given time.
         /// </summary>
+#pragma warning disable S2365 // Properties should not make collection or array copies
+#pragma warning disable S4275 // Getters and setters should access the expected fields
         public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations
         {
             // Since _memberInvocationInstanceCountConfigurations is a ConcurrentDictionary the order of its items is
@@ -33,6 +35,8 @@ namespace Hast.Transformer.Abstractions.Configuration
                 }
             }
         }
+#pragma warning restore S4275 // Getters and setters should access the expected fields
+#pragma warning restore S2365 // Properties should not make collection or array copies
 
         /// <summary>
         /// Gets or sets a value indicating whether to use the SimpleMemory memory model that maps a runtime-defined memory space to a byte
@@ -82,7 +86,8 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         public bool EnableConstantSubstitution { get; set; } = true;
 
-        public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration) => _memberInvocationInstanceCountConfigurations
+        public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration) =>
+            _memberInvocationInstanceCountConfigurations
                 .AddOrUpdate(configuration.MemberNamePrefix, configuration, (key, previousConfiguration) => configuration);
 
         public MemberInvocationInstanceCountConfiguration GetMaxInvocationInstanceCountConfigurationForMember(

@@ -30,7 +30,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public Memory<byte> Get(int prefixCellCount)
         {
             if (prefixCellCount < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(prefixCellCount)} must be positive!");
+                throw new ArgumentOutOfRangeException(nameof(prefixCellCount), $"{nameof(prefixCellCount)} must be positive!");
 
             if (prefixCellCount == 0) return Get();
 
