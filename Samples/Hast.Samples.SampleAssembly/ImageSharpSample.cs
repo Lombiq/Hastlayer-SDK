@@ -23,7 +23,7 @@ namespace Hast.Samples.SampleAssembly
         private const int Resize_ImageStartIndex = 4;
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
-        private static readonly int MaxDegreeOfParallelism = 25;
+        private static readonly int MaxDegreeOfParallelism = 8; // TODO: 25(?)
 
         public virtual void ApplyTransform(SimpleMemory memory)
         {
@@ -134,34 +134,6 @@ namespace Hast.Samples.SampleAssembly
             }
 
             return memory;
-        }
-
-        public Image ConvertToImage(
-            SimpleMemory memory,
-            IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
-        {
-            var width = (ushort)memory.ReadUInt32(Resize_ImageWidthIndex);
-            var height = (ushort)memory.ReadUInt32(Resize_ImageHeightIndex);
-            var destWidth = (ushort)memory.ReadUInt32(Resize_DestinationImageWidthIndex);
-            var destHeight = (ushort)memory.ReadUInt32(Resize_DestinationImageHeightIndex);
-            int destinationStartIndex = width * height + 4;
-
-            var bmp = new Bitmap(destWidth, destHeight);
-
-            for (int y = 0; y < destHeight; y++)
-            {
-                for (int x = 0; x < destWidth; x++)
-                {
-                    var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
-                    var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
-                    bmp.SetPixel(x, y, color);
-                }
-            }
-
-            var image = ImageSharpExtensions.ToImageSharpImage(bmp);
-
-            return image;
         }
 
         private class PixelProcessingTaskInput
