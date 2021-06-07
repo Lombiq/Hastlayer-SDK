@@ -7,7 +7,7 @@ namespace Hast.Console.Attributes
     /// class should take over from <see cref="Program"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class SubcommandAttribute : Attribute
+    public sealed class SubcommandAttribute : Attribute
     {
         /// <summary>
         /// Gets the name of the subcommand to look for in the positional arguments.

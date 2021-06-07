@@ -3,11 +3,13 @@ using CommandLine.Text;
 using Hast.Common.Models;
 using Hast.Console.Attributes;
 using Hast.Console.Options;
+using Hast.Console.Services;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Vitis.Abstractions.Services;
 using Hast.Xilinx.Abstractions;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json;
@@ -23,12 +25,17 @@ namespace Hast.Console.Subcommands
     [Subcommand("vitis")]
     public class VitisSubcommand : ISubcommand
     {
-        private readonly string[] _rawArguments;
+        private readonly IList<string> _rawArguments;
+        private readonly IStringLocalizer<VitisSubcommand> T;
 
         public ILogger<VitisHardwareImplementationComposerBuildProvider> BuildLogger { get; set; } =
             new NullLogger<VitisHardwareImplementationComposerBuildProvider>();
 
-        public VitisSubcommand(string[] rawArguments) => _rawArguments = rawArguments;
+        public VitisSubcommand(IArgumentsAccessor rawArguments, IStringLocalizer<VitisSubcommand> stringLocalizer)
+        {
+            _rawArguments = rawArguments.Arguments;
+            T = stringLocalizer;
+        }
 
         public void Run()
         {
@@ -48,7 +55,7 @@ namespace Hast.Console.Subcommands
             switch (instruction)
             {
                 case Instruction.Help:
-                    WriteLine("The Vitis-specific help:");
+                    WriteLine(T["The Vitis-specific help:"]);
                     WriteLine(
                         HelpText.AutoBuild(
                             parserResult,
@@ -60,7 +67,7 @@ namespace Hast.Console.Subcommands
                     var input = new FileInfo(options.InputFilePath);
                     if (!input.Exists)
                     {
-                        throw new ArgumentException("Please set the -i option to file you wish to convert.");
+                        throw new ArgumentException(T["Please set the -i option to file you wish to convert."]);
                     }
 
                     return JsonAsync(options, input);
@@ -73,15 +80,15 @@ namespace Hast.Console.Subcommands
             var hardwareFrameworkPath = options.InputFilePath ?? "HardwareFramework";
             if (!Directory.Exists(hardwareFrameworkPath))
             {
-                throw new ArgumentException("Please set the -i option to point to the directory that contains the " +
-                                            "rtl directory! (eg. ./HardwareFramework)");
+                throw new ArgumentException(
+                    T["Please set the -i option to point to the directory that contains the rtl directory! (eg. ./HardwareFramework)"]);
             }
 
             var outputSet = !string.IsNullOrWhiteSpace(options.OutputFilePath);
             if (outputSet && !options.OutputFilePath.EndsWith(".xclbin", StringComparison.Ordinal))
             {
-                throw new ArgumentException("Please set the -o option to point to the location of the xclbin file " +
-                                            "(eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
+                throw new ArgumentException(
+                    T["Please set the -o option to point to the location of the xclbin file (eg. ./VitisOutput/Hastlayer.xclbin) or omit it!"]);
             }
 
             var manifest = new XilinxDeviceManifest(true, options.Platform ?? string.Empty);
@@ -94,7 +101,7 @@ namespace Hast.Console.Subcommands
                 HardwareDescription = new VhdlHardwareDescription
                 {
                     HardwareEntryPointNamesToMemberIdMappings = new Dictionary<string, int>(),
-                    TransformationId = options.Hash ?? "Hastlayer",
+                    TransformationId = options.Hash ?? nameof(Hastlayer),
                     Warnings = Array.Empty<ITransformationWarning>(),
                 },
             };
@@ -113,10 +120,8 @@ namespace Hast.Console.Subcommands
                 .BuildAsync(context, implementation)
                 .ThenAsync(() =>
                 {
-                    provider?.Dispose();
-                    WriteLine(
-                        "Build Completed. Find files under: {0}",
-                        Path.GetFullPath(implementation.BinaryPath));
+                    provider.Dispose();
+                    WriteLine(T["Build Completed. Find files under: {0}", Path.GetFullPath(implementation.BinaryPath)]);
                 });
         }
 
