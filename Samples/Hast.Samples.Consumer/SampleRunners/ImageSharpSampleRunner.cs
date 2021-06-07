@@ -1,7 +1,9 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.Threading.Tasks;
 
@@ -23,17 +25,19 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
 
             // Accelerated by hastlayer
-            //using var image = new Bitmap("fpga.jpg");
             using var image = Image.Load("fpga.jpg");
 
             var resizeImage = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ImageSharpSample(), configuration);
-            var modifiedImage = resizeImage.Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            modifiedImage.Save("resized_with_hastlayer_fpga.jpg");
+            var modifiedImage = resizeImage
+                .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            modifiedImage.Save("0resized_with_hastlayer_fpga.jpg");
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ImageSharpSample().Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var cpuOutput = new ImageSharpSample()
+                .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
+            cpuOutput.Save("0resized_with_cpu.jpg");
             System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
         }
 
@@ -43,7 +47,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var sw = System.Diagnostics.Stopwatch.StartNew();
             image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
             sw.Stop();
-            image.Save("resized_fpga.jpg");
+            image.Save("0resized_fpga.jpg");
             System.Console.WriteLine($"Non-hastlyer algorithm took {sw.ElapsedMilliseconds} ms");
         }
     }
