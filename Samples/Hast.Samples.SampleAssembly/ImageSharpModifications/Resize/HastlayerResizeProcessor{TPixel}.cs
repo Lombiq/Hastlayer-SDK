@@ -96,8 +96,6 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             memory.WriteUInt32(2, (uint)image.Width / 2);  // TODO: get the value
             memory.WriteUInt32(3, (uint)image.Height / 2); // TODO: get the value
 
-            //var bitmapImage = ImageSharpExtensions.ToBitmap(image);
-
             for (int y = 0; y < image.Height; y++)
             {
                 var row = image.GetPixelRowSpan(y);
@@ -110,18 +108,6 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                     memory.Write4Bytes(x + y * _destinationWidth + 4, new[] { rgba.R, rgba.G, rgba.B });
                 }
             }
-
-            //for (int y = 0; y < bitmapImage.Height; y++)
-            //{
-            //    for (int x = 0; x < bitmapImage.Width; x++)
-            //    {
-            //        var pixel = bitmapImage.GetPixel(x, y);
-
-            //        memory.Write4Bytes(
-            //           x + y * bitmapImage.Width + 4,
-            //           new[] { pixel.R, pixel.G, pixel.B });
-            //    }
-            //}
 
             return memory;
         }
