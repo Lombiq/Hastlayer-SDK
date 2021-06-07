@@ -11,6 +11,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using Bitmap = System.Drawing.Bitmap;
+using Color = System.Drawing.Color;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
@@ -41,7 +42,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             _resampler = definition.Sampler;
             _hastlayer = hastlayer;
             _hardwareConfiguration = hardwareGenerationConfiguration;
-            MaxDegreeOfParallelism = configuration.MaxDegreeOfParallelism;            
+            MaxDegreeOfParallelism = configuration.MaxDegreeOfParallelism;
         }
 
         /// <inheritdoc/>
@@ -72,7 +73,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             //var memory = hastlayerSample.CreateSimpleMemory(source, _hastlayer, _hardwareConfiguration);
             var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
             hastlayerSample.ApplyTransform(memory);
-            var newImage = (Image<TPixel>)hastlayerSample.ConvertToImage(memory, _hastlayer, _hardwareConfiguration);
+            var newImage = ConvertToImage(memory, _hastlayer, _hardwareConfiguration);
 
             _destination = newImage;
         }
@@ -110,6 +111,34 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             }
 
             return memory;
+        }
+
+        public Image<TPixel> ConvertToImage(
+            SimpleMemory memory,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+        {
+            var width = (ushort)memory.ReadUInt32(0);
+            var height = (ushort)memory.ReadUInt32(1);
+            var destWidth = (ushort)memory.ReadUInt32(2);
+            var destHeight = (ushort)memory.ReadUInt32(3);
+            int destinationStartIndex = width * height + 4;
+
+            var bmp = new Bitmap(destWidth, destHeight);
+
+            for (int y = 0; y < destHeight; y++)
+            {
+                for (int x = 0; x < destWidth; x++)
+                {
+                    var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
+                    var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
+                    bmp.SetPixel(x, y, color);
+                }
+            }
+
+            var image = ImageSharpExtensions.ToImageSharpImage<TPixel>(bmp);
+
+            return image;
         }
     }
 }
