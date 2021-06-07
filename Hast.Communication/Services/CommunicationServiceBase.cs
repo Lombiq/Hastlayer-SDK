@@ -2,6 +2,7 @@ using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -35,6 +36,16 @@ namespace Hast.Communication.Services
             context.HardwareExecutionInformation.FullExecutionTimeMilliseconds = context.Stopwatch.ElapsedMilliseconds;
 
             Logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
+        }
+
+        protected async Task<CommunicationStateContext> RunExecutionAsync(
+            Func<CommunicationStateContext, Task> executionAction)
+        {
+            var context = BeginExecution();
+            await executionAction(context);
+            EndExecution(context);
+
+            return context;
         }
 
         protected void SetHardwareExecutionTime(

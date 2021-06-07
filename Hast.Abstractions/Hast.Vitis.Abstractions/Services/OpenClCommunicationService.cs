@@ -98,7 +98,7 @@ namespace Hast.Vitis.Abstractions.Services
             });
 
             using var device = await _devicePoolManager.ReserveDeviceAsync();
-            var context = BeginExecution();
+            return (await RunExecutionAsync(async context =>
             {
                 int deviceIndex = device.Metadata;
                 var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
@@ -137,11 +137,7 @@ namespace Hast.Vitis.Abstractions.Services
                     executionContext,
                     resultMetadata.ExecutionTime,
                     clockFrequency);
-            }
-
-            EndExecution(context);
-
-            return context.HardwareExecutionInformation;
+            })).HardwareExecutionInformation;
         }
 
         protected virtual IntPtr GetBuffer(

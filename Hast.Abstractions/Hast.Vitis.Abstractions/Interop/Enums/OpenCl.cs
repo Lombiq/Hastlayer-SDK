@@ -207,7 +207,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// <summary>
         /// Make clCreateBuffer to interpret host_ptr argument as cl_mem_ext_ptr_t.
         /// </summary>
-        /// <remarks><para>https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h</para></remarks>
+        /// <remarks><para>See <see href="https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h" />.</para></remarks>
         ExtensionXilinxPointer = 1ul << 31,
 
         // Blame Xilinx.

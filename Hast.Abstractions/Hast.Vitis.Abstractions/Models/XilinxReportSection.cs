@@ -13,7 +13,7 @@ namespace Hast.Vitis.Abstractions.Models
         public const string Key = nameof(Key);
         public const string Value = nameof(Value);
         private const string TableBorderLine = "+---";
-        private static readonly List<string> SimpleColumns = new List<string> { "Key", "Value" };
+        private static readonly List<string> SimpleColumns = new() { "Key", "Value" };
 
         private readonly string[][] _data;
 
