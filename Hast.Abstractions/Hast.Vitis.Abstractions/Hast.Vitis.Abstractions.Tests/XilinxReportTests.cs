@@ -1,4 +1,4 @@
-﻿using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Abstractions.Models;
 using Shouldly;
 using System.Collections.Generic;
 using System.IO;
@@ -21,7 +21,8 @@ namespace Hast.Vitis.Abstractions.Tests
             ["Design State"] = "Synthesized",
         };
 
-        private static readonly string[] _expectedSections = {
+        private static readonly string[] _expectedSections =
+        {
             "1. CLB Logic",
             "1.1 Summary of Registers by Type",
             "2. BLOCKRAM",
@@ -39,7 +40,8 @@ namespace Hast.Vitis.Abstractions.Tests
             "14. SLR IO Utilization",
         };
 
-        private static readonly string[] _expectedColumns = {
+        private static readonly string[] _expectedColumns =
+        {
             "Site Type",
             "Used",
             "Fixed",
