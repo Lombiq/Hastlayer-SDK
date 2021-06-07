@@ -63,16 +63,19 @@ namespace Hast.Samples.Kpz
         private void ButtonStart_Click(object sender, EventArgs e)
         {
             panelTop.Enabled = false;
+
+#pragma warning disable CA1303 // Do not pass literals as localized parameters. It's fine since we don't localize the rest either.
+            buttonStart.Text = _backgroundWorker.IsBusy ? "Start" : "Stop";
+#pragma warning restore CA1303 // Do not pass literals as localized parameters. It's fine since we don't localize the rest either.
+
             if (!_backgroundWorker.IsBusy)
             {
-                buttonStart.Text = "Stop";
                 progressBar.Maximum = NumKpzIterations;
                 ComputationTarget = CurrentComputationTarget; // ComboBox value cannot be accessed from BackgroundWorker
                 _backgroundWorker.RunWorkerAsync(2_000);
             }
             else
             {
-                buttonStart.Text = "Start";
                 _backgroundWorker.CancelAsync();
             }
         }

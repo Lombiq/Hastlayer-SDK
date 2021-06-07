@@ -2,10 +2,15 @@ using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
 {
+    [SuppressMessage(
+        "Globalization",
+        "CA1303:Do not pass literals as localized parameters",
+        Justification = "We are trying to keep this sample to-the-point so there is no localization.")]
     public static class Program
     {
         private static async Task Main()
