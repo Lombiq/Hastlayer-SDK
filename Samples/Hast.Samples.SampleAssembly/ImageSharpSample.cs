@@ -52,6 +52,11 @@ namespace Hast.Samples.SampleAssembly
                 {
                     for (int t = 0; t < MaxDegreeOfParallelism; t++)
                     {
+                        if (x + t >= destWidth)
+                        {
+                            break;
+                        }
+
                         var pixelBytes = memory.Read4Bytes(
                             y * heightFactor * destWidth * heightFactor + x * widthFactor + t + Resize_ImageStartIndex);
 
@@ -86,8 +91,6 @@ namespace Hast.Samples.SampleAssembly
                     }
                 }
             }
-
-
         }
 
         internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);
