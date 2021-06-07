@@ -65,14 +65,12 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         public void ApplyTransform<TResampler>(in TResampler sampler)
             where TResampler : struct, IResampler
         {
-            var source = Source;
-
             if (!(sampler is NearestNeighborResampler)) return;
 
             // Hastlayerization
             var hastlayerSample = new ImageSharpSample();
             //var memory = hastlayerSample.CreateSimpleMemory(source, _hastlayer, _hardwareConfiguration);
-            var memory = CreateSimpleMemory(source, _hastlayer, _hardwareConfiguration);
+            var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
             hastlayerSample.ApplyTransform(memory);
             var newImage = (Image<TPixel>)hastlayerSample.ConvertToImage(memory, _hastlayer, _hardwareConfiguration);
 
