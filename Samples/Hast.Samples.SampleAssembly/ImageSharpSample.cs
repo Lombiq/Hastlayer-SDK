@@ -52,13 +52,15 @@ namespace Hast.Samples.SampleAssembly
                 {
                     for (int t = 0; t < MaxDegreeOfParallelism; t++)
                     {
-                        if (x + t >= destWidth)
+                        if (x * widthFactor * MaxDegreeOfParallelism + t * widthFactor >= width)
                         {
                             break;
                         }
 
                         var pixelBytes = memory.Read4Bytes(
-                            y * heightFactor * destWidth * heightFactor + x * widthFactor + t + Resize_ImageStartIndex);
+                            y * heightFactor * destWidth * heightFactor
+                                + x * widthFactor * MaxDegreeOfParallelism
+                                + t * widthFactor + Resize_ImageStartIndex);
 
                         tasks[t] = Task.Factory.StartNew(inputObject =>
                         {
@@ -80,17 +82,42 @@ namespace Hast.Samples.SampleAssembly
                     for (int t = 0; t < MaxDegreeOfParallelism; t++)
                     {
                         // Don't write unnecessary stuff leftover from the process
-                        if (x + t >= destWidth)
+                        if (x * widthFactor * MaxDegreeOfParallelism + t * widthFactor >= width)
                         {
                             break;
                         }
 
                         memory.Write4Bytes(
-                           destinationStartIndex + x + y * destWidth + t,
+                           destinationStartIndex + x * MaxDegreeOfParallelism + y * destWidth + t,
                            new[] { tasks[t].Result.R, tasks[t].Result.G, tasks[t].Result.B });
                     }
                 }
             }
+
+            //for (int y = 0; y < destHeight; y++)
+            //{
+            //    for (int x = 0; x < destWidth; x++)
+            //    {
+            //        var pixelBytes = memory.Read4Bytes(
+            //            y * heightFactor * destWidth * heightFactor + x * widthFactor + Resize_ImageStartIndex);
+
+            //        tasks[0] = Task.Factory.StartNew(inputObject =>
+            //        {
+            //            var input = (PixelProcessingTaskInput)inputObject;
+
+            //            return new PixelProcessingTaskOutput
+            //            {
+            //                R = input.PixelBytes[0],
+            //                G = input.PixelBytes[1],
+            //                B = input.PixelBytes[2]
+            //            };
+            //        }, new PixelProcessingTaskInput { PixelBytes = pixelBytes });
+
+            //        memory.Write4Bytes(
+            //               destinationStartIndex + x + y * destWidth,
+            //               new[] { tasks[0].Result.R, tasks[0].Result.G, tasks[0].Result.B });
+            //    }
+            //}
         }
 
         internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);

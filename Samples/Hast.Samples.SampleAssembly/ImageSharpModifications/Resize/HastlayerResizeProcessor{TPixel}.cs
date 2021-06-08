@@ -73,9 +73,10 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             //var memory = hastlayerSample.CreateSimpleMemory(source, _hastlayer, _hardwareConfiguration);
             var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
             hastlayerSample.ApplyTransform(memory);
-            var newImage = ConvertToImage(memory, _hastlayer, _hardwareConfiguration);
+            var newImage = ConvertToImage(memory);
 
             _destination = newImage;
+            newImage.Save("../../../../../../OutputImages/newImage.jpg");
         }
 
         public SimpleMemory CreateSimpleMemory(
@@ -106,17 +107,14 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                     var rgba = new Rgba32();
                     pixel.ToRgba32(ref rgba);
 
-                    memory.Write4Bytes(x + y * _destinationWidth + 4, new[] { rgba.R, rgba.G, rgba.B });
+                    memory.Write4Bytes(x + y * image.Width + 4, new[] { rgba.R, rgba.G, rgba.B });
                 }
             }
 
             return memory;
         }
 
-        public Image<TPixel> ConvertToImage(
-            SimpleMemory memory,
-            IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+        public Image<TPixel> ConvertToImage(SimpleMemory memory)
         {
             var width = (ushort)memory.ReadUInt32(0);
             var height = (ushort)memory.ReadUInt32(1);
@@ -136,6 +134,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 }
             }
 
+            bmp.Save("../../../../../../OutputImages/bmp_before_conversion.bmp");
             var image = ImageSharpExtensions.ToImageSharpImage<TPixel>(bmp);
 
             return image;
