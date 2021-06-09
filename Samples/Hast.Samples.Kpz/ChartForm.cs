@@ -255,7 +255,7 @@ namespace Hast.Samples.Kpz
             }
         }
 
-        private (IHastlayer, IHardwareGenerationConfiguration) InitializeHastlayer()
+        private (IHastlayer Hastlayer, IHardwareGenerationConfiguration Configuration) InitializeHastlayer()
         {
             AsyncLogIt("Initializing Hastlayer...");
             _kpz.LogItFunction = AsyncLogIt;
@@ -278,10 +278,9 @@ namespace Hast.Samples.Kpz
         {
             nudTableWidth.Enabled = nudTableHeight.Enabled = comboTarget.SelectedIndex == 0;
             checkStep.Enabled = comboTarget.SelectedIndex != 0;
-            checkVerifyOutput.Enabled =
-                comboTarget.SelectedIndex == 2 || comboTarget.SelectedIndex == 4 || comboTarget.SelectedIndex == 5;
+            checkVerifyOutput.Enabled = comboTarget.SelectedIndex is 2 or 4 or 5;
             if (comboTarget.SelectedIndex == 5) checkVerifyOutput.Checked = true;
-            if (comboTarget.SelectedIndex > 0 && comboTarget.SelectedIndex <= 2)
+            if (comboTarget.SelectedIndex is > 0 and <= 2)
             {
                 nudTableWidth.Value = nudTableHeight.Value = 8;
                 nudIterations.Value = 1;

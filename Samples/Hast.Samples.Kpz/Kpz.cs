@@ -19,16 +19,16 @@ namespace Hast.Samples.Kpz
     public static class KpzTargetExtensions
     {
         public static bool HastlayerSimulation(this KpzTarget target) =>
-            target == KpzTarget.FpgaSimulation || target == KpzTarget.FpgaSimulationParallelized;
+            target is KpzTarget.FpgaSimulation or KpzTarget.FpgaSimulationParallelized;
 
         public static bool HastlayerOnFpga(this KpzTarget target) =>
-            target == KpzTarget.Fpga || target == KpzTarget.FpgaParallelized || target == KpzTarget.PrngTest;
+            target is KpzTarget.Fpga or KpzTarget.FpgaParallelized or KpzTarget.PrngTest;
 
         public static bool HastlayerParallelizedAlgorithm(this KpzTarget target) =>
-            target == KpzTarget.FpgaParallelized || target == KpzTarget.FpgaSimulationParallelized;
+            target is KpzTarget.FpgaParallelized or KpzTarget.FpgaSimulationParallelized;
 
         public static bool HastlayerPlainAlgorithm(this KpzTarget target) =>
-            target == KpzTarget.Fpga || target == KpzTarget.FpgaSimulation;
+            target is KpzTarget.Fpga or KpzTarget.FpgaSimulation;
     }
 
     /// <summary>
@@ -305,7 +305,7 @@ namespace Hast.Samples.Kpz
 
             if (_enableStateLogger) StateLogger.NewKpzIteration();
 
-            if (_kpzTarget == KpzTarget.FpgaParallelized || _kpzTarget == KpzTarget.FpgaSimulationParallelized)
+            if (_kpzTarget is KpzTarget.FpgaParallelized or KpzTarget.FpgaSimulationParallelized)
             {
                 KernelsParallelized.DoIterationsWrapper(
                     hastlayer,

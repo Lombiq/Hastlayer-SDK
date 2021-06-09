@@ -83,7 +83,7 @@ namespace Hast.Samples.Kpz
             LogItFunction("Running TestPrng...");
 
             var kernelsCpu = new PrngTestInterface();
-            const ulong randomSeed = 0x_37a9_2d76_a96e_f210UL;
+            const ulong randomSeed = 0x37a9_2d76_a96e_f210;
             var smCpu = kernelsCpu.PushRandomSeed(randomSeed, null, null);
             var smFpga = KernelsP.PushRandomSeed(randomSeed, hastlayer, configuration);
             LogItFunction("PRNG results:");
@@ -109,7 +109,8 @@ namespace Hast.Samples.Kpz
                 {
                     typeof(KpzKernelsParallelizedInterface).Assembly,
                     typeof(RandomMwc64X).Assembly,
-                }, configuration);
+                },
+                configuration);
 
             var proxyConf = new ProxyGenerationConfiguration
             {
