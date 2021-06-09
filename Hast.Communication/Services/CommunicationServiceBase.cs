@@ -23,7 +23,7 @@ namespace Hast.Communication.Services
             int memberId,
             IHardwareExecutionContext executionContext);
 
-        protected CommunicationStateContext BeginExecution() => new CommunicationStateContext
+        protected CommunicationStateContext BeginExecution() => new()
         {
             Stopwatch = Stopwatch.StartNew(),
             HardwareExecutionInformation = new HardwareExecutionInformation(),

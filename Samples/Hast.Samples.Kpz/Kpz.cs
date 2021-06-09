@@ -44,7 +44,7 @@ namespace Hast.Samples.Kpz
         private readonly double _probabilityQ;
 
         /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
-        private readonly Random _random = new Random();
+        private readonly Random _random = new();
 
         /// <summary>See <see cref="StateLogger" />.</summary>
         private readonly bool _enableStateLogger;

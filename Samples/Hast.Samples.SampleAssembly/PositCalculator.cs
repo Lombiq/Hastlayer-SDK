@@ -34,6 +34,6 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteInt32(CalculateLargeIntegerSumOutputInt32Index, result);
         }
 
-        public static PositEnvironment EnvironmentFactory() => new PositEnvironment(32, 3);
+        public static PositEnvironment EnvironmentFactory() => new(32, 3);
     }
 }

@@ -76,10 +76,10 @@ namespace Hast.Algorithms
         // public static readonly Fix64 PiInv = (Fix64)0.3183098861837906715377675267M;
         // public static readonly Fix64 PiOver2Inv = (Fix64)0.6366197723675813430755350535M;
 
-        public static Fix64 MaxValue() => new Fix64(MaxRawValue);
-        public static Fix64 MinValue() => new Fix64(MinRawValue);
-        public static Fix64 One() => new Fix64(OneRawValue);
-        public static Fix64 Zero() => new Fix64();
+        public static Fix64 MaxValue() => new(MaxRawValue);
+        public static Fix64 MinValue() => new(MinRawValue);
+        public static Fix64 One() => new(OneRawValue);
+        public static Fix64 Zero() => new();
 
         // static readonly Fix64 LutInterval = (Fix64)(LUT_SIZE - 1) / PiOver2;
 
@@ -160,7 +160,7 @@ namespace Hast.Algorithms
         /// </summary>
         public static Fix64 Floor(Fix64 value) =>
             // Just zero out the fractional part
-            new Fix64((long)((ulong)value._rawValue & 0x_FFFF_FFFF_0000_0000));
+            new((long)((ulong)value._rawValue & 0x_FFFF_FFFF_0000_0000));
 
         /// <summary>
         /// Returns the smallest integral value that is greater than or equal to the specified number.
@@ -304,7 +304,7 @@ namespace Hast.Algorithms
         /// <summary>
         /// Adds x and y without performing overflow checking. Should be inlined by the CLR.
         /// </summary>
-        public static Fix64 FastAdd(Fix64 x, Fix64 y) => new Fix64(x._rawValue + y._rawValue);
+        public static Fix64 FastAdd(Fix64 x, Fix64 y) => new(x._rawValue + y._rawValue);
 
         /// <summary>
         /// Subtracts y from x. Performs saturating subtraction, i.e. in case of overflow,
@@ -328,7 +328,7 @@ namespace Hast.Algorithms
         /// <summary>
         /// Subtracts y from x without performing overflow checking. Should be inlined by the CLR.
         /// </summary>
-        public static Fix64 FastSub(Fix64 x, Fix64 y) => new Fix64(x._rawValue - y._rawValue);
+        public static Fix64 FastSub(Fix64 x, Fix64 y) => new(x._rawValue - y._rawValue);
 
         public static Fix64 operator *(Fix64 x, Fix64 y)
         {
@@ -502,7 +502,7 @@ namespace Hast.Algorithms
         }
 
         public static Fix64 operator %(Fix64 x, Fix64 y) =>
-            new Fix64(
+            new(
                 x._rawValue == MinRawValue & y._rawValue == -1 ?
                 0 :
                 x._rawValue % y._rawValue);
@@ -511,7 +511,7 @@ namespace Hast.Algorithms
         /// Performs modulo as fast as possible; throws if x == MinValue and y == -1.
         /// Use the operator (%) for a more reliable but slower modulo.
         /// </summary>
-        public static Fix64 FastMod(Fix64 x, Fix64 y) => new Fix64(x._rawValue % y._rawValue);
+        public static Fix64 FastMod(Fix64 x, Fix64 y) => new(x._rawValue % y._rawValue);
 
         public static Fix64 operator -(Fix64 x) => x._rawValue == MinRawValue ? MaxValue() : new Fix64(-x._rawValue);
 
@@ -531,19 +531,19 @@ namespace Hast.Algorithms
 
         #region Casts
 
-        public static explicit operator Fix64(long value) => new Fix64(value * OneRawValue);
+        public static explicit operator Fix64(long value) => new(value * OneRawValue);
 
         public static explicit operator long(Fix64 value) => value._rawValue >> FractionalPlaces;
 
-        public static explicit operator Fix64(float value) => new Fix64((long)(value * OneRawValue));
+        public static explicit operator Fix64(float value) => new((long)(value * OneRawValue));
 
         public static explicit operator float(Fix64 value) => (float)value._rawValue / OneRawValue;
 
-        public static explicit operator Fix64(double value) => new Fix64((long)(value * OneRawValue));
+        public static explicit operator Fix64(double value) => new((long)(value * OneRawValue));
 
         public static explicit operator double(Fix64 value) => (double)value._rawValue / OneRawValue;
 
-        public static explicit operator Fix64(decimal value) => new Fix64((long)(value * OneRawValue));
+        public static explicit operator Fix64(decimal value) => new((long)(value * OneRawValue));
 
         public static explicit operator decimal(Fix64 value) => (decimal)value._rawValue / OneRawValue;
 
@@ -551,7 +551,7 @@ namespace Hast.Algorithms
 
         #region Factories
 
-        public static Fix64 FromRaw(long rawValue) => new Fix64(rawValue);
+        public static Fix64 FromRaw(long rawValue) => new(rawValue);
 
         public static Fix64 FromRawInts(int[] integers)
         {

@@ -8,7 +8,7 @@ namespace Hast.Communication.Services
 {
     public class DevicePoolPopulator : IDevicePoolPopulator
     {
-        private readonly object _lock = new object();
+        private readonly object _lock = new();
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly ILogger _logger;
         private bool _poolIsPopulated;

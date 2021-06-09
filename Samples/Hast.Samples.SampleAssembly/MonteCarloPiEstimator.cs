@@ -84,7 +84,7 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteUInt32(EstimatePiInCircleCountSumUInt32Index, inCircleCountSum);
         }
 
-        private readonly Random _random = new Random();
+        private readonly Random _random = new();
 
         public double EstimatePi(uint iterationsCount, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {

@@ -10,12 +10,12 @@ namespace Hast.Communication.Services
     public sealed class DevicePoolManager : IDevicePoolManager
     {
         private readonly ILogger<DevicePoolManager> _logger;
-        private readonly object _lock = new object();
-        private readonly Queue<Action<IReservedDevice>> _waitQueue = new Queue<Action<IReservedDevice>>();
+        private readonly object _lock = new();
+        private readonly Queue<Action<IReservedDevice>> _waitQueue = new();
 
         private bool _isDisposed;
 
-        private Dictionary<string, PooledDevice> _devicePool = new Dictionary<string, PooledDevice>();
+        private Dictionary<string, PooledDevice> _devicePool = new();
 
         public DevicePoolManager(ILogger<DevicePoolManager> logger) => _logger = logger;
 
