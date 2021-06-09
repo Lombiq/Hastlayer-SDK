@@ -30,7 +30,7 @@ namespace Hast.Common.Interfaces
     /// service is added to the <see cref="IServiceCollection"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class DependencyInitializerAttribute : Attribute
+    public sealed class DependencyInitializerAttribute : Attribute
     {
         /// <summary>
         /// Gets the name of the public static method which will be invoked.

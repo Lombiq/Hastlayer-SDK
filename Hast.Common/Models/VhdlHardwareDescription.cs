@@ -45,7 +45,7 @@ namespace Hast.Common.Models
         }
 
         private static JsonSerializerSettings GetJsonSerializerSettings() =>
-            new JsonSerializerSettings
+            new()
             {
                 TypeNameHandling = TypeNameHandling.None,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
