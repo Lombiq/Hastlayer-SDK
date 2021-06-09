@@ -8,6 +8,7 @@
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Algorithms\Hast.Algorithms.csproj" />
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
+    <ProjectReference Include="..\..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
+    <ProjectReference Include="..\..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.csproj" />
     <ProjectReference Include="..\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj" />
   </ItemGroup>
   <ItemGroup>

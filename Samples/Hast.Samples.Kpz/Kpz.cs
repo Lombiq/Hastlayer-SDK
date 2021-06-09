@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -44,7 +45,7 @@ namespace Hast.Samples.Kpz
         private readonly double _probabilityQ;
 
         /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
-        private readonly Random _random = new();
+        private readonly NonSecurityRandomizer _random = new();
 
         /// <summary>See <see cref="StateLogger" />.</summary>
         private readonly bool _enableStateLogger;
@@ -112,10 +113,8 @@ namespace Hast.Samples.Kpz
                     Grid[x, y] = new KpzNode
                     {
                         // Not crypto.
-#pragma warning disable SCS0005 // Weak random generator
-                        dx = _random.Next(0, 2) == 0,
-                        dy = _random.Next(0, 2) == 0,
-#pragma warning restore SCS0005 // Weak random generator
+                        dx = _random.GetFromRange(2) == 0,
+                        dy = _random.GetFromRange(2) == 0,
                     };
                 }
             }
@@ -277,12 +276,10 @@ namespace Hast.Samples.Kpz
 
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
-#pragma warning disable SCS0005 // Weak random generator
                 // If we get the pattern {01, 01} we have a pyramid:
-                (currentPoint.dx && !neighbours.nx.dx && currentPoint.dy && !neighbours.ny.dy && _random.NextDouble() < _probabilityP) ||
+                (currentPoint.dx && !neighbours.nx.dx && currentPoint.dy && !neighbours.ny.dy && _random.GetDouble() < _probabilityP) ||
                 // If we get the pattern {10, 10} we have a hole:
-                (!currentPoint.dx && neighbours.nx.dx && !currentPoint.dy && neighbours.ny.dy && _random.NextDouble() < _probabilityQ)
-#pragma warning restore SCS0005 // Weak random generator
+                (!currentPoint.dx && neighbours.nx.dx && !currentPoint.dy && neighbours.ny.dy && _random.GetDouble() < _probabilityQ)
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
@@ -376,9 +373,7 @@ namespace Hast.Samples.Kpz
                 // If there is a pyramid or hole, we randomly switch them.
 
                 // Not crypto.
-#pragma warning disable SCS0005 // Weak random generator
-                var randomPoint = new KpzCoords { x = _random.Next(0, GridWidth), y = _random.Next(0, GridHeight) };
-#pragma warning restore SCS0005 // Weak random generator
+                var randomPoint = new KpzCoords { x = _random.GetFromRange(GridWidth), y = _random.GetFromRange(GridHeight) };
                 RandomlySwitchFourCells(Grid, randomPoint);
             }
         }
@@ -412,19 +407,16 @@ namespace Hast.Samples.Kpz
     }
 
     /// <summary>
-    /// This class extends the built-in Random class with convenience functions.
+    /// This class extends the <see cref="NonSecurityRandomizer"/> class with convenience functions.
     /// </summary>
     internal static class RandomExtensions
     {
-        public static ulong NextUInt64(this Random random)
+        public static ulong NextUInt64(this NonSecurityRandomizer random)
         {
-            // Not crypto.
-#pragma warning disable SCS0005 // Weak random generator
-            uint val1 = (uint)random.Next();
-            uint val2 = (uint)random.Next();
-#pragma warning restore SCS0005 // Weak random generator
-            ulong toReturn = val1 | (ulong)val2 << 32;
-            return toReturn;
+            ulong val1 = (uint)random.Get();
+            ulong val2 = (uint)random.Get();
+
+            return val1 | (val2 << 32);
         }
     }
 }

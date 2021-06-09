@@ -1,7 +1,7 @@
 using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using System;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz.Algorithms
@@ -331,12 +331,12 @@ namespace Hast.Samples.Kpz.Algorithms
 
             sm.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexNumberOfIterations, numberOfIterations);
 
-            var rnd = new Random();
+            var random = new NonSecurityRandomizer();
             for (int randomWriteIndex = 0; randomWriteIndex < numRandomUints; randomWriteIndex++)
             {
                 sm.WriteUInt32(
                     KpzKernelsParallelizedInterface.MemIndexRandomSeed + randomWriteIndex,
-                    randomSeedEnable ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
+                    randomSeedEnable ? (uint)random.Get() : (uint)notRandomSeed[randomWriteIndex]);
                 // See comment on notRandomSeed if you get an index out of bounds error here.
             }
 
