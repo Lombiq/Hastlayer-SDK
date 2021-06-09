@@ -320,7 +320,8 @@ namespace Hast.Catapult.Abstractions
             MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], ref sliceIndex);
             MemoryMarshal.Write(
                 data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
-                + InputHeaderSizes.SliceIndex)..], ref sliceCountValue);
+                + InputHeaderSizes.SliceIndex)..],
+                ref sliceCountValue);
             inputData.CopyTo(data[InputHeaderSizes.Total..]);
 
             // This job will contain the current call.

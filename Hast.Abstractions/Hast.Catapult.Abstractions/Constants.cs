@@ -46,7 +46,7 @@ namespace Hast.Catapult.Abstractions
         public const double WaitOutputBufferTimeoutDefaultSeconds = 10.0;
         public const int PcieHipNumber = 0;
         public const int MaxBufferSizeBytes = 65_536;
-        public static readonly Version LibraryVersion = new Version(3, 40);
+        public static readonly Version LibraryVersion = new(3, 40);
         #endregion
 
         #region Grouped constants from header files
@@ -158,19 +158,19 @@ namespace Hast.Catapult.Abstractions
 
         public static class HandleFlag
         {
-            public const uint None = 0x_000_0000u;
-            public const uint Verbose = 0x_000_0001u;
-            public const uint Diagnostics = 0x_000_0002u;
+            public const uint None = 0x0000u;
+            public const uint Verbose = 0x0001u;
+            public const uint Diagnostics = 0x0002u;
 
             /// <summary>
             /// Must be passed to use functions in FPGAManagementLib.h (e.g., flash write, reconfig).
             /// </summary>
-            public const uint Exclusive = 0x_000_1000u;
+            public const uint Exclusive = 0x1000u;
 
             /// <summary>
             /// Must be passed in when updating the golden image.
             /// </summary>
-            public const uint WriteGolden = 0x_000_2000u;
+            public const uint WriteGolden = 0x2000u;
         }
 
         [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "Not applicable.")]
