@@ -63,7 +63,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var sourceRectangle = SourceRectangle;
             var destinationRectangle = _destinationRectangle;
 
-            var interest = Rectangle.Intersect(destinationRectangle, destination.Bounds());
+            var intersect = Rectangle.Intersect(destinationRectangle, destination.Bounds());
 
             if (!(sampler is NearestNeighborResampler)) return;
 
@@ -78,7 +78,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                     destinationFrame,
                     sourceRectangle,
                     destinationRectangle,
-                    interest);
+                    intersect);
             }
         }
 
@@ -88,7 +88,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             ImageFrame<TPixel> destination,
             Rectangle sourceRectangle,
             Rectangle destinationRectangle,
-            Rectangle interest)
+            Rectangle intersect)
         {
             // Scaling factors
             var widthFactor = sourceRectangle.Width / (float)destinationRectangle.Width;
@@ -97,20 +97,20 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var operation = new NNRowOperation(
                 sourceRectangle,
                 destinationRectangle,
-                interest,
+                intersect,
                 widthFactor,
                 heightFactor,
                 source,
                 destination);
 
-            IterateRows(configuration, interest, operation);
+            IterateRows(configuration, intersect, operation);
         }
 
         private readonly struct NNRowOperation : IRowOperation
         {
             private readonly Rectangle _sourceBounds;
             private readonly Rectangle _destinationBounds;
-            private readonly Rectangle _interest;
+            private readonly Rectangle _intersect;
             private readonly float _widthFactor;
             private readonly float _heightFactor;
             private readonly ImageFrame<TPixel> _source;
@@ -120,7 +120,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             public NNRowOperation(
                 Rectangle sourceBounds,
                 Rectangle destinationBounds,
-                Rectangle interest,
+                Rectangle intersect,
                 float widthFactor,
                 float heightFactor,
                 ImageFrame<TPixel> source,
@@ -128,7 +128,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             {
                 _sourceBounds = sourceBounds;
                 _destinationBounds = destinationBounds;
-                _interest = interest;
+                _intersect = intersect;
                 _widthFactor = widthFactor;
                 _heightFactor = heightFactor;
                 _source = source;
@@ -142,8 +142,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 var sourceY = _sourceBounds.Y;
                 var destOriginX = _destinationBounds.X;
                 var destOriginY = _destinationBounds.Y;
-                var destLeft = _interest.Left;
-                var destRight = _interest.Right;
+                var destLeft = _intersect.Left;
+                var destRight = _intersect.Right;
 
                 // Y coordinates of source points
                 var sourceRow = _source.GetPixelRowSpan((int)(((y - destOriginY) * _heightFactor) + sourceY));
