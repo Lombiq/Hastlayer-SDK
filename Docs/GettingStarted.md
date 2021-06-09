@@ -38,7 +38,10 @@ These would be your first steps on starting to work with Hastlayer by getting th
 
 1. Clone the necessary repositories with git. Always checkout the `client` or `dev` branch corresponding to your flavor. Make sure to allow Git to initialize submodules!
    1. Clone the [Hastlayer SDK repo](https://github.com/Lombiq/Hastlayer-SDK).
-   2. Clone of the the Hardware Framework repos corresponding to your choice of hardware platform: The [Hastlayer Hardware Framework - Xilinx repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Xilinx) or the [Hastlayer Hardware Framework - Catapult repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Catapult).
+   2. Clone of the the Hardware Framework repos corresponding to your choice of hardware platform:
+      - The [Hastlayer Hardware Framework - Xilinx repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Xilinx) for the Nexys A7.
+      - The [Hastlayer Hardware Framework - Xilinx Vitis repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis) for Alveo Data Center Accelerator Cards.
+      - The [Hastlayer Hardware Framework - Catapult repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Catapult) for Microsoft Catapult.
 2. Set up the hardware project as explained in the Hardware Framework's documentation and program the FPGA for the first time.
 3. Open the Visual Studio solution of the SDK corresponding to your flavor of Hastlayer.
 4. Set the `Hast.Samples.Consumer` project (under the *Samples* folder) as the startup project here. If you're working in the *client* flavor then you'll need to configure your credentials, see that project's documentation.
@@ -46,3 +49,9 @@ These would be your first steps on starting to work with Hastlayer by getting th
 6. You should be able to see the results of the sample in its console window.
 
 If everything is alright follow up with the rest of this documentation to write your first own Hastlayer-using algorithm. You can also check out the many documented samples under the *Samples* solution folder.
+
+
+## Device-specific documentation
+
+You can find out more about these devices from their Hastlayer driver's documentation:
+- [Xilinx Vitis, Azure NP](../Hast.Abstractions/Hast.Vitis.Abstractions/Readme.md)

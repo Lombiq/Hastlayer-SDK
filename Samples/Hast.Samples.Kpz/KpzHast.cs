@@ -36,9 +36,7 @@ namespace Hast.Samples.Kpz
                     e.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
                 );
 
-            var configuration = new HardwareGenerationConfiguration(
-                hastlayer.GetSupportedDevices().First().Name,
-                "HardwareFramework");
+            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;
 
