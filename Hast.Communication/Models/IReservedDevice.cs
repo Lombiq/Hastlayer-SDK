@@ -1,5 +1,3 @@
-using System;
-
 namespace Hast.Communication.Models
 {
     /// <summary>
