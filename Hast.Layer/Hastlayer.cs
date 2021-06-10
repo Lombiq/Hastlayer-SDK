@@ -143,7 +143,7 @@ namespace Hast.Layer
 
         ~Hastlayer() => Dispose();
 
-        public async Task<IHardwareRepresentation> GenerateHardware(
+        public async Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration)
         {
@@ -191,7 +191,7 @@ namespace Hast.Layer
                     }
 
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
-                        await transformer.Transform(assembliesPaths, configuration) :
+                        await transformer.TransformAsync(assembliesPaths, configuration) :
                         EmptyHardwareDescriptionFactory.Create(configuration);
 
                     foreach (var warning in hardwareDescription.Warnings)
@@ -254,7 +254,7 @@ namespace Hast.Layer
             }
         }
 
-        public async Task<T> GenerateProxy<T>(
+        public async Task<T> GenerateProxyAsync<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
             IProxyGenerationConfiguration configuration = null) where T : class

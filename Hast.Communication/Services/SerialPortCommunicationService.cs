@@ -42,7 +42,7 @@ namespace Hast.Communication.Services
         }
 
 
-        public override async Task<IHardwareExecutionInformation> Execute(
+        public override async Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
@@ -53,7 +53,7 @@ namespace Hast.Communication.Services
                     return portNames.Select(portName => new Device { Identifier = portName });
                 });
 
-            using (var device = await _devicePoolManager.ReserveDevice())
+            using (var device = await _devicePoolManager.ReserveDeviceAsync())
             {
                 var context = BeginExecution();
 
@@ -175,11 +175,11 @@ namespace Hast.Communication.Services
 
                                     Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
-                                    communicationState = Serial.CommunicationState.ReceivingOuput;
+                                    communicationState = Serial.CommunicationState.ReceivingOutput;
                                     serialPort.Write(Serial.Signals.Ready);
                                 }
                                 break;
-                            case Serial.CommunicationState.ReceivingOuput:
+                            case Serial.CommunicationState.ReceivingOutput:
                                 // There is a padding of PrefixCellCount cells for the unlikely case that the user
                                 // would directly feed back the output as the next call's input. This way Prefix space
                                 // is maintained.
