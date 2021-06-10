@@ -1,6 +1,5 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -18,30 +17,24 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public class PrngTestInterface
     {
-        public virtual void MWC64X(SimpleMemory memory)
+        public virtual void Mwc64X(SimpleMemory memory)
         {
+            const ulong wordSize = 0x_FFFE_B81B;
+
             uint stateHighWord = memory.ReadUInt32(1);
-            uint stateLowWord = memory.ReadUInt32(0); ;
-            ulong randomState = (stateLowWord * 0x_FFFE_B81BUL) + stateHighWord;
+            uint stateLowWord = memory.ReadUInt32(0);
+            ulong randomState = (stateLowWord * wordSize) + stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
             memory.WriteUInt32(0, (uint)randomState); // LE: 1 is high byte, 0 is low byte
             memory.WriteUInt32(1, (uint)(randomState >> 32));
             memory.WriteUInt32(2, randomWord);
         }
-    }
 
-    /// <summary>
-    /// These are host-side functions for <see cref="PrngTestExtensions"/>.
-    /// </summary>
-    public static class PrngTestExtensions
-    {
         /// <summary>
         /// This copies random seed from the host to the FPGA.
         /// </summary>
-        [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
-        public static SimpleMemory PushRandomSeed(
-            this PrngTestInterface kernels,
+        public SimpleMemory PushRandomSeed(
             ulong seed,
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration)
@@ -55,12 +48,10 @@ namespace Hast.Samples.Kpz.Algorithms
         }
 
         /// <summary>It runs the PRNG on the FPGA and returns a random 32-bit uint.</summary>
-        public static uint GetNextRandom(this PrngTestInterface kernels, SimpleMemory memory)
+        public uint GetNextRandom(SimpleMemory memory)
         {
-            kernels.MWC64X(memory);
+            Mwc64X(memory);
             return memory.ReadUInt32(2);
         }
-
     }
 }
-

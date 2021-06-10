@@ -106,9 +106,9 @@ namespace Hast.Samples.Kpz
             {
                 for (int y = 0; y < grid.GetLength(1); y++)
                 {
-                    if (gridBefore[x, y].dx != grid[x, y].dx || gridBefore[x, y].dy != grid[x, y].dy)
+                    if (gridBefore[x, y].Dx != grid[x, y].Dx || gridBefore[x, y].Dy != grid[x, y].Dy)
                     {
-                        highlightedCoords.Add(new KpzCoords { x = x, y = y });
+                        highlightedCoords.Add(new KpzCoords { X = x, Y = y });
                     }
                 }
             }
@@ -139,9 +139,9 @@ namespace Hast.Samples.Kpz
         {
             var highlightedCoords = new List<KpzCoords>
             {
-                new KpzCoords { x = center.x, y = center.y },
-                new KpzCoords { x = neighbours.nxCoords.x, y = neighbours.nxCoords.y },
-                new KpzCoords { x = neighbours.nyCoords.x, y = neighbours.nyCoords.y },
+                new KpzCoords { X = center.X, Y = center.Y },
+                new KpzCoords { X = neighbours.NxCoords.X, Y = neighbours.NxCoords.Y },
+                new KpzCoords { X = neighbours.NyCoords.X, Y = neighbours.NyCoords.Y },
             };
 
             var kpzAction = new KpzAction
@@ -180,8 +180,8 @@ namespace Hast.Samples.Kpz
                 {
                     var lines = Enumerable
                         .Range(0, action.Grid.GetLength(0))
-                        .Select(x => (action.Grid[x, y].dx ? "1" : "0") +
-                            (action.Grid[x, y].dy ? "1" : "0") + " ");
+                        .Select(x => (action.Grid[x, y].Dx ? "1" : "0") +
+                            (action.Grid[x, y].Dy ? "1" : "0") + " ");
 
                     file.WriteLine(string.Join(string.Empty, lines));
                 }
@@ -201,8 +201,8 @@ namespace Hast.Samples.Kpz
                 {
                     toReturn[x, y] = new KpzNode
                     {
-                        dx = grid[x, y].dx,
-                        dy = grid[x, y].dy,
+                        Dx = grid[x, y].Dx,
+                        Dy = grid[x, y].Dy,
                     };
                 }
             }

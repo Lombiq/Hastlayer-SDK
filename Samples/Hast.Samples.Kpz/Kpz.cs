@@ -113,8 +113,8 @@ namespace Hast.Samples.Kpz
                     Grid[x, y] = new KpzNode
                     {
                         // Not crypto.
-                        dx = _random.GetFromRange(2) == 0,
-                        dy = _random.GetFromRange(2) == 0,
+                        Dx = _random.GetFromRange(2) == 0,
+                        Dy = _random.GetFromRange(2) == 0,
                     };
                 }
             }
@@ -133,8 +133,8 @@ namespace Hast.Samples.Kpz
                 {
                     Grid[x, y] = new KpzNode
                     {
-                        dx = (x & 1) != 0,
-                        dy = (y & 1) != 0,
+                        Dx = (x & 1) != 0,
+                        Dy = (y & 1) != 0,
                     };
                 }
             }
@@ -144,7 +144,7 @@ namespace Hast.Samples.Kpz
 
         /// <summary>
         /// It is used during heightmap generation.
-        /// It converts <see cref="KpzNode.dx" /> and <see cref="KpzNode.dy" /> boolean values to +1 and -1 integer
+        /// It converts <see cref="KpzNode.Dx" /> and <see cref="KpzNode.Dy" /> boolean values to +1 and -1 integer
         /// values.
         /// </summary>
         private static int Bool2Delta(bool what) => what ? 1 : -1;
@@ -201,12 +201,12 @@ namespace Hast.Samples.Kpz
             {
                 for (int x = 0; x < GridWidth; x++)
                 {
-                    heightNow += Bool2Delta(Grid[(x + 1) % GridWidth, y].dx);
+                    heightNow += Bool2Delta(Grid[(x + 1) % GridWidth, y].Dx);
                     heightMap[x, y] = heightNow;
                     mean += heightNow;
                 }
 
-                if (heightNow + Bool2Delta(Grid[1, y].dx) != heightMap[0, y])
+                if (heightNow + Bool2Delta(Grid[1, y].Dx) != heightMap[0, y])
                 {
                     periodicityValid = false;
                     periodicityInvalidXCount++;
@@ -214,16 +214,16 @@ namespace Hast.Samples.Kpz
                         Console.WriteLine($"periodicityInvalidX at line {y}");
                 }
 
-                heightNow += Bool2Delta(Grid[0, (y + 1) % GridHeight].dy);
+                heightNow += Bool2Delta(Grid[0, (y + 1) % GridHeight].Dy);
             }
 
-            if (heightMap[0, GridHeight - 1] + Bool2Delta(Grid[0, 0].dy) != heightMap[0, 0])
+            if (heightMap[0, GridHeight - 1] + Bool2Delta(Grid[0, 0].Dy) != heightMap[0, 0])
             {
                 periodicityValid = false;
                 periodicityInvalidYCount++;
                 if (doVerboseLoggingToConsole)
                 {
-                    Console.WriteLine($"periodicityInvalidY {heightMap[0, GridHeight - 1]} + {Bool2Delta(Grid[0, 0].dy)} != {heightMap[0, 0]}");
+                    Console.WriteLine($"periodicityInvalidY {heightMap[0, GridHeight - 1]} + {Bool2Delta(Grid[0, 0].Dy)} != {heightMap[0, 0]}");
                 }
             }
 
@@ -271,22 +271,22 @@ namespace Hast.Samples.Kpz
         private void RandomlySwitchFourCells(KpzNode[,] grid, KpzCoords p)
         {
             var neighbours = GetNeighbours(grid, p);
-            var currentPoint = grid[p.x, p.y];
+            var currentPoint = grid[p.X, p.Y];
             bool changedGrid = false;
 
             // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
-                (currentPoint.dx && !neighbours.nx.dx && currentPoint.dy && !neighbours.ny.dy && _random.GetDouble() < _probabilityP) ||
+                (currentPoint.Dx && !neighbours.Nx.Dx && currentPoint.Dy && !neighbours.Ny.Dy && _random.GetDouble() < _probabilityP) ||
                 // If we get the pattern {10, 10} we have a hole:
-                (!currentPoint.dx && neighbours.nx.dx && !currentPoint.dy && neighbours.ny.dy && _random.GetDouble() < _probabilityQ)
+                (!currentPoint.Dx && neighbours.Nx.Dx && !currentPoint.Dy && neighbours.Ny.Dy && _random.GetDouble() < _probabilityQ)
             )
             {
                 // We make a hole into a pyramid, and a pyramid into a hole.
-                currentPoint.dx = !currentPoint.dx;
-                currentPoint.dy = !currentPoint.dy;
-                neighbours.nx.dx = !neighbours.nx.dx;
-                neighbours.ny.dy = !neighbours.ny.dy;
+                currentPoint.Dx = !currentPoint.Dx;
+                currentPoint.Dy = !currentPoint.Dy;
+                neighbours.Nx.Dx = !neighbours.Nx.Dx;
+                neighbours.Ny.Dy = !neighbours.Ny.Dy;
                 changedGrid = true;
             }
 
@@ -319,13 +319,16 @@ namespace Hast.Samples.Kpz
             {
                 Kernels.DoIterationsWrapper(
                     hastlayer,
-                    configuration,
-                    Grid,
-                    false,
-                    false,
-                    _random.NextUInt64(),
-                    _random.NextUInt64(),
-                    numberOfIterations);
+                    new KpzKernelsInterface.DoIterationsContext
+                    {
+                        Configuration = configuration,
+                        HostGrid = Grid,
+                        PushToFpga = false,
+                        TestMode = false,
+                        RandomSeed1 = _random.NextUInt64(),
+                        RandomSeed2 = _random.NextUInt64(),
+                        NumberOfIterations = numberOfIterations,
+                    });
             }
 
             if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
@@ -347,13 +350,16 @@ namespace Hast.Samples.Kpz
             {
                 Kernels.DoIterationsWrapper(
                     hastlayer,
-                    configuration,
-                    Grid,
-                    true,
-                    true,
-                    _random.NextUInt64(),
-                    _random.NextUInt64(),
-                    1);
+                    new KpzKernelsInterface.DoIterationsContext
+                    {
+                        Configuration = configuration,
+                        HostGrid = Grid,
+                        PushToFpga = true,
+                        TestMode = true,
+                        RandomSeed1 = _random.NextUInt64(),
+                        RandomSeed2 = _random.NextUInt64(),
+                        NumberOfIterations = 1,
+                    });
                 if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", Grid, gridBefore);
             }
         }
@@ -373,7 +379,7 @@ namespace Hast.Samples.Kpz
                 // If there is a pyramid or hole, we randomly switch them.
 
                 // Not crypto.
-                var randomPoint = new KpzCoords { x = _random.GetFromRange(GridWidth), y = _random.GetFromRange(GridHeight) };
+                var randomPoint = new KpzCoords { X = _random.GetFromRange(GridWidth), Y = _random.GetFromRange(GridHeight) };
                 RandomlySwitchFourCells(Grid, randomPoint);
             }
         }
@@ -386,21 +392,21 @@ namespace Hast.Samples.Kpz
         {
             var toReturn = new KpzNeighbours
             {
-                nxCoords = new KpzCoords
+                NxCoords = new KpzCoords
                 {
-                    x = p.x < GridWidth - 1 ? p.x + 1 : 0,
-                    y = p.y,
+                    X = p.X < GridWidth - 1 ? p.X + 1 : 0,
+                    Y = p.Y,
                 },
 
-                nyCoords = new KpzCoords
+                NyCoords = new KpzCoords
                 {
-                    x = p.x,
-                    y = p.y < GridHeight - 1 ? p.y + 1 : 0,
+                    X = p.X,
+                    Y = p.Y < GridHeight - 1 ? p.Y + 1 : 0,
                 },
             };
 
-            toReturn.nx = grid[toReturn.nxCoords.x, toReturn.nxCoords.y];
-            toReturn.ny = grid[toReturn.nyCoords.x, toReturn.nyCoords.y];
+            toReturn.Nx = grid[toReturn.NxCoords.X, toReturn.NxCoords.Y];
+            toReturn.Ny = grid[toReturn.NyCoords.X, toReturn.NyCoords.Y];
 
             return toReturn;
         }
