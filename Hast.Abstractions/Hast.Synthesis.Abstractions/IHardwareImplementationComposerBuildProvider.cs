@@ -31,6 +31,9 @@ namespace Hast.Synthesis.Abstractions
         /// <summary>
         /// If implemented, it adds to the <see cref="Shortcuts"/> of other providers.
         /// </summary>
-        void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers) { }
+        void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        {
+            // May be implemented by the deriving class if necessary.
+        }
     }
 }

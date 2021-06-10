@@ -14,7 +14,7 @@ namespace Hast.Synthesis.Abstractions
             get => _alignment;
             set
             {
-                if (value < 0 || (value & value - 1) != 0)
+                if (value < 0 || (value & (value - 1)) != 0)
                 {
                     throw new InvalidOperationException("The alignment value must be a power of 2.");
                 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Hast.Synthesis.Abstractions
 {
@@ -9,7 +9,7 @@ namespace Hast.Synthesis.Abstractions
     /// for further information on usage.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class ReplaceableAttribute : Attribute
+    public sealed class ReplaceableAttribute : Attribute
     {
         public static readonly string Name = "ReplaceableDynamicConstants";
 
