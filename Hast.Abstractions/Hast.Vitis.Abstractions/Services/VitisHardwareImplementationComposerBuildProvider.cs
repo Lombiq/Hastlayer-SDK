@@ -19,9 +19,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Globalization.CultureInfo;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
-using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -34,12 +34,13 @@ namespace Hast.Vitis.Abstractions.Services
         private const string TryToMakeItSmaller = "Try to make your code simpler (make it shorter, use smaller data " +
                                                   "types, use a lower degree of parallelism) until it goes below 80%.";
 
-        private static bool _firstRun = true;
         private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
 
         private readonly ILogger _logger;
         private readonly string _buildOutputPath;
         private readonly StreamWriter _buildOutput;
+
+        private static bool _firstRun = true;
 
         public event EventHandler<BuildProgressEventArgs> Progress;
 
@@ -55,7 +56,9 @@ namespace Hast.Vitis.Abstractions.Services
             _logger = logger;
 
             var buildOutputPath = EnsureDirectoryExists("App_Data", "logs");
+#pragma warning disable IDE0078 // Use pattern matching. This is false positive.
             for (var i = 0; i < 100 && _buildOutput == null; i++)
+#pragma warning restore IDE0078 // Use pattern matching. This is false positive.
             {
                 var fileName = i == 0 ? "build.out" : $"build~{i}.out";
                 _buildOutputPath = Path.Combine(buildOutputPath, fileName);
@@ -78,7 +81,7 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
-            if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
+            if (context.DeviceManifest is not XilinxDeviceManifest deviceManifest)
             {
                 throw new InvalidOperationException(
                     $"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
@@ -122,11 +125,13 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 MajorStepsTotal = 3;
             }
-
-            // Synthesis doesn't need the device.
             else if (buildConfiguration.ResetOnFirstRun && _firstRun)
             {
+                // Synthesis doesn't need the device.
+
+#pragma warning disable S2696 // Instance members should not write to "static" fields. Optimization.
                 _firstRun = false;
+#pragma warning restore S2696 // Instance members should not write to "static" fields. Optimization.
                 await EnsureDeviceReadyAsync();
             }
 
@@ -209,16 +214,7 @@ namespace Hast.Vitis.Abstractions.Services
             var disableHbm = deviceManifest.SupportsHbm && !openClConfiguration.UseHbm;
             CopyBinaries(target, implementation.BinaryPath, hashId, disableHbm);
 
-            if (deviceManifest.RequiresDcpBinary)
-            {
-                ProgressMajor("There are no reports when then the project is compiled as netlist.");
-            }
-            else
-            {
-                ProgressMajor("Collecting reports.");
-                try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
-                catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
-            }
+            await TryCollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId, deviceManifest);
 
             Cleanup(hardwareFrameworkPath, hashId);
         }
@@ -349,6 +345,25 @@ namespace Hast.Vitis.Abstractions.Services
             File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
             if (disableHbm) File.Create(binaryPath + NoHbmFlagExtension).Dispose();
             ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
+        }
+
+        private async Task TryCollectReportsAsync(
+            string hardwareFrameworkPath,
+            IHardwareImplementationCompositionContext context,
+            IHardwareImplementation implementation,
+            string hashId,
+            XilinxDeviceManifest deviceManifest)
+        {
+            if (deviceManifest.RequiresDcpBinary)
+            {
+                ProgressMajor("There are no reports when then the project is compiled as netlist.");
+            }
+            else
+            {
+                ProgressMajor("Collecting reports.");
+                try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
+                catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
+            }
         }
 
         private async Task CollectReportsAsync(
@@ -487,7 +502,7 @@ namespace Hast.Vitis.Abstractions.Services
             var result = await (yes | xbutil).ExecuteBufferedAsync();
 
             _logger.LogWarning("xbutil: {0}", result.StandardOutput);
-            _buildOutput.WriteLine("xbutil stdout: {0}", result.StandardOutput);
+            await _buildOutput.WriteLineAsync($"xbutil stdout: {result.StandardOutput}");
         }
 
         private void OnProgress(object sender, BuildProgressEventArgs e) =>
@@ -511,13 +526,13 @@ namespace Hast.Vitis.Abstractions.Services
                             name,
                             $"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}",
                             "started");
-                        break;
+                        return;
                     case StandardOutputCommandEvent output:
                         Log(LogLevel.Trace, name, output.Text, "stdout");
-                        break;
+                        return;
                     case StandardErrorCommandEvent error:
                         Log(LogLevel.Warning, name, error.Text, "stderr");
-                        break;
+                        return;
                     case ExitedCommandEvent exited:
                         var message = (exited.ExitCode == 0 ? "success" : "failure") + "\n\n\n";
                         Log(LogLevel.Information, name, message, "finished");
@@ -529,7 +544,9 @@ namespace Hast.Vitis.Abstractions.Services
                                 $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
                         }
 
-                        break;
+                        return;
+                    default:
+                        return;
                 }
             }
 
@@ -610,7 +627,7 @@ namespace Hast.Vitis.Abstractions.Services
                 .FullName;
             if (executableName == null)
             {
-                throw new FileNotFoundException($"The executable '{executable}' was not found. Is it in your PATH?");
+                throw new FileNotFoundException($"The {nameof(executable)} '{executable}' was not found. Is it in your PATH?");
             }
 
             return executableName;
@@ -641,7 +658,6 @@ namespace Hast.Vitis.Abstractions.Services
                 EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
                 await File.WriteAllTextAsync(targetFilePath, result);
             }
-
         }
 
         public void Dispose() => _buildOutput?.Dispose();

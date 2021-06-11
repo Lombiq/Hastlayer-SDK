@@ -30,7 +30,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
-            nameof(VitisHardwareImplementationComposerBuildProvider)
+            nameof(VitisHardwareImplementationComposerBuildProvider),
         };
 
         public AzureHardwareImplementationComposerBuildProvider(
@@ -110,7 +110,7 @@ namespace Hast.Vitis.Abstractions.Services
             string sharedAccessSignature)
         {
             _logger.LogInformation("Sending attestation start request...");
-            var instanceId = (await _azureAttestationApi.Start(
+            var instanceId = (await _azureAttestationApi.StartAsync(
                 configuration.StartFunctionUrl.AbsolutePath.TrimStart('/'),
                 new AzureStartPostData(configuration)
                 {
@@ -126,14 +126,14 @@ namespace Hast.Vitis.Abstractions.Services
 
             while (true)
             {
-                var (statusText, output) = await _azureAttestationApi.Poll(
+                var (statusText, output) = await _azureAttestationApi.PollAsync(
                     configuration.PollFunctionUrl.AbsolutePath.TrimStart('/'),
                     new AzurePollPostData(configuration, instanceId));
                 var statusUpper = statusText.ToUpperInvariant();
 
                 _logger.LogInformation("Polled status: {0}", statusText);
 
-                if (statusUpper == "PENDING" || statusUpper == "RUNNING")
+                if (statusUpper is "PENDING" or "RUNNING")
                 {
                     await Task.Delay(TimeSpan.FromSeconds(30));
                     continue;

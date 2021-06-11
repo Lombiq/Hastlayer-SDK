@@ -69,16 +69,17 @@ namespace Hast.Vitis.Abstractions.Services
 
         #region Methods
 
-        public void PrepareDevices(IOpenClConfiguration configuration) => _devicesLazy ??= new Lazy<IntPtr[]>(() =>
-                                                                                 GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceTypes).ToArray());
+        public void PrepareDevices(IOpenClConfiguration configuration) =>
+            _devicesLazy ??= new Lazy<IntPtr[]>(() =>
+                GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceTypes).ToArray());
 
         public void CreateCommandQueue(
             int deviceIndex,
-            CommandQueueProperties propertieses = CommandQueueProperties.ProfilingEnable)
+            CommandQueueProperties properties = CommandQueueProperties.ProfilingEnable)
         {
             if (_queues.ContainsKey(deviceIndex)) return;
 
-            var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], propertieses, out var result);
+            var queue = _cl.CreateCommandQueue(_context.Value, Devices[deviceIndex], properties, out var result);
             VerifyResult(result);
             _queues[deviceIndex] = queue;
         }
@@ -101,9 +102,9 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlags memoryFlagses)
+        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlags memoryFlags)
         {
-            var buffer = _cl.CreateBuffer(_context.Value, memoryFlagses, hostBytes, hostPointer, out var result);
+            var buffer = _cl.CreateBuffer(_context.Value, memoryFlags, hostBytes, hostPointer, out var result);
             VerifyResult(result);
             return buffer;
         }

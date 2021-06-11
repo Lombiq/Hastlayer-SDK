@@ -16,7 +16,9 @@ namespace Hast.Vitis.Abstractions.Models
         public Uri PollFunctionUrl { get; set; } = new("https://fpga-attestation.azurewebsites.net/api/ComputeFPGA_HttpGetStatus");
 
         /// <summary>
+        /// <para>
         /// Gets or sets the ID of the user hosting the storage blob. You can retrieve it using:
+        /// </para>
         /// <code>
         /// az account show --output tsv --query id
         /// </code>
@@ -24,7 +26,9 @@ namespace Hast.Vitis.Abstractions.Models
         public string ClientSubscriptionId { get; set; }
 
         /// <summary>
+        /// <para>
         /// Gets or sets the ID of the tenant hosting the storage blob. You can retrieve it using:
+        /// </para>
         /// <code>
         /// az account show --output tsv --query tenantId
         /// </code>
