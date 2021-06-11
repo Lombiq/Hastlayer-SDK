@@ -10,6 +10,7 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using System.Runtime.InteropServices;
 using Bitmap = System.Drawing.Bitmap;
 using Color = System.Drawing.Color;
 
@@ -88,28 +89,24 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var cellCount = pixelCount
                 + (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0)
                 + 4;
+
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(hardwareGenerationConfiguration, cellCount);
 
+            var accessor = new SimpleMemoryAccessor(memory);
+
+            var span = accessor.Get().Span.Slice(16, image.Width * image.Height * 4);
+
+            image.Frames[0].TryGetSinglePixelSpan(out var imageSpan);
+
+            MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(span);
+            
             // TODO: get constants???
             memory.WriteUInt32(0, (uint)image.Width);
             memory.WriteUInt32(1, (uint)image.Height);
             memory.WriteUInt32(2, (uint)image.Width / 2);  // TODO: get the value
             memory.WriteUInt32(3, (uint)image.Height / 2); // TODO: get the value
-
-            for (int y = 0; y < image.Height; y++)
-            {
-                var row = image.GetPixelRowSpan(y);
-                for (int x = 0; x < row.Length; x++)
-                {
-                    var pixel = row[x];
-                    var rgba = new Rgba32();
-                    pixel.ToRgba32(ref rgba);
-
-                    memory.Write4Bytes(x + y * image.Width + 4, new[] { rgba.R, rgba.G, rgba.B });
-                }
-            }
 
             return memory;
         }
