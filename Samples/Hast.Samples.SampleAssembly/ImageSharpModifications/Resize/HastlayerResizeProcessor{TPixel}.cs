@@ -80,15 +80,15 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             newImage.Save("../../../../../../OutputImages/newImage.jpg");
         }
 
-        public SimpleMemory CreateSimpleMemory(
+        public SimpleMemory CreateSimpleMemory( // TODO: Add GIF support 
             Image<TPixel> image,
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
             var pixelCount = image.Width * image.Height + (image.Width / 2) * (image.Height / 2); // TODO: get the value
-            var cellCount = pixelCount
-                + (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0)
-                + 4;
+            var frameCount = image.Frames.Count;
+
+            var cellCount = pixelCount * frameCount + 4;
 
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
@@ -96,12 +96,15 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 
             var accessor = new SimpleMemoryAccessor(memory);
 
-            var span = accessor.Get().Span.Slice(16, image.Width * image.Height * 4);
+            for (int i = 0; i < frameCount; i++)
+            {
+                var span = accessor.Get().Span.Slice(16 + i * pixelCount, image.Width * image.Height * 4);
 
-            image.Frames[0].TryGetSinglePixelSpan(out var imageSpan);
+                image.Frames[i].TryGetSinglePixelSpan(out var imageSpan);
 
-            MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(span);
-            
+                MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(span);
+            }
+
             // TODO: get constants???
             memory.WriteUInt32(0, (uint)image.Width);
             memory.WriteUInt32(1, (uint)image.Height);
