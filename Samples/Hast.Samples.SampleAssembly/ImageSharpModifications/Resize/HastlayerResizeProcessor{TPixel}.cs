@@ -73,14 +73,28 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var hastlayerSample = new ImageSharpSample();
             //var memory = hastlayerSample.CreateSimpleMemory(source, _hastlayer, _hardwareConfiguration);
             var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
+
+
+
             hastlayerSample.ApplyTransform(memory);
+
+
+            for (int i = 0; i < Source.Frames.Count; i++)
+            {
+                var sourceFrame = Source.Frames[i];
+                var destinationFrame = _destination.Frames[i];
+
+                ApplyTransformFromMemory(sourceFrame, destinationFrame, memory);
+            }
+
+
             var newImage = ConvertToImage(memory);
 
             _destination = newImage;
             newImage.Save("../../../../../../OutputImages/newImage.jpg");
         }
 
-        public SimpleMemory CreateSimpleMemory( // TODO: Add GIF support 
+        public SimpleMemory CreateSimpleMemory(
             Image<TPixel> image,
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration hardwareGenerationConfiguration)
@@ -115,6 +129,43 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             return memory;
         }
 
+        public void ApplyTransformFromMemory(
+            ImageFrame<TPixel> source,
+            ImageFrame<TPixel> destination,
+            SimpleMemory memory)
+        {
+            var destinationStartIndex = source.Width * source.Height + 5;
+            var accessor = new SimpleMemoryAccessor(memory);
+
+            for (int y = 0; y < destination.Height; y++)
+            {
+                var destinationRow = destination.GetPixelRowSpan(y);
+                var span = accessor.Get().Span
+                    .Slice(destinationStartIndex + y * destination.Width * 4, destination.Width * 4);
+
+                var newSpan = MemoryMarshal.Cast<byte, TPixel>(span);
+
+                for (int x = 0; x < destination.Width; x++)
+                {
+                    destinationRow[x] = newSpan[x];
+                }
+            }
+        }
+
+        public void ApplyTestTransform(ImageFrame<TPixel> source, ImageFrame<TPixel> destination)
+        {
+            for (int y = 0; y < destination.Height; y++)
+            {
+                var sourceRow = source.GetPixelRowSpan(y);
+                var row = destination.GetPixelRowSpan(y);
+
+                for (int x = 0; x < destination.Width; x++)
+                {
+                    row[x] = sourceRow[sourceRow.Length / 4];
+                }
+            }
+        }
+
         public Image<TPixel> ConvertToImage(SimpleMemory memory)
         {
             var width = (ushort)memory.ReadUInt32(0);
@@ -136,7 +187,9 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 }
             }
 
-            bmp.Save("../../../../../../OutputImages/bmp_before_conversion.bmp");
+            bmp.Save($"../../../../../../OutputImages/bmp_before_conversion_frame.bmp");
+
+
             var image = ImageSharpExtensions.ToImageSharpImage<TPixel>(bmp);
 
             return image;
