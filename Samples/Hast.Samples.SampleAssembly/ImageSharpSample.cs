@@ -93,31 +93,6 @@ namespace Hast.Samples.SampleAssembly
                     }
                 }
             }
-
-            //for (int y = 0; y < destHeight; y++)
-            //{
-            //    for (int x = 0; x < destWidth; x++)
-            //    {
-            //        var pixelBytes = memory.Read4Bytes(
-            //            y * heightFactor * destWidth * heightFactor + x * widthFactor + Resize_ImageStartIndex);
-
-            //        tasks[0] = Task.Factory.StartNew(inputObject =>
-            //        {
-            //            var input = (PixelProcessingTaskInput)inputObject;
-
-            //            return new PixelProcessingTaskOutput
-            //            {
-            //                R = input.PixelBytes[0],
-            //                G = input.PixelBytes[1],
-            //                B = input.PixelBytes[2]
-            //            };
-            //        }, new PixelProcessingTaskInput { PixelBytes = pixelBytes });
-
-            //        memory.Write4Bytes(
-            //               destinationStartIndex + x + y * destWidth,
-            //               new[] { tasks[0].Result.R, tasks[0].Result.G, tasks[0].Result.B });
-            //    }
-            //}
         }
 
         internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);
