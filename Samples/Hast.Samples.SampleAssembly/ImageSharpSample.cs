@@ -6,8 +6,6 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System.Threading.Tasks;
-using Bitmap = System.Drawing.Bitmap;
-using Color = System.Drawing.Color;
 
 namespace Hast.Samples.SampleAssembly
 {
