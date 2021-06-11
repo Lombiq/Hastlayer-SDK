@@ -88,7 +88,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var pixelCount = image.Width * image.Height + (image.Width / 2) * (image.Height / 2); // TODO: get the value
             var frameCount = image.Frames.Count;
 
-            var cellCount = pixelCount * frameCount + 4;
+            var cellCount = pixelCount * frameCount + 5;
 
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
@@ -98,7 +98,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 
             for (int i = 0; i < frameCount; i++)
             {
-                var span = accessor.Get().Span.Slice(16 + i * pixelCount, image.Width * image.Height * 4);
+                var span = accessor.Get().Span.Slice(20 + i * pixelCount, image.Width * image.Height * 4);
 
                 image.Frames[i].TryGetSinglePixelSpan(out var imageSpan);
 
@@ -110,6 +110,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             memory.WriteUInt32(1, (uint)image.Height);
             memory.WriteUInt32(2, (uint)image.Width / 2);  // TODO: get the value
             memory.WriteUInt32(3, (uint)image.Height / 2); // TODO: get the value
+            memory.WriteUInt32(4, (uint)frameCount);
 
             return memory;
         }
@@ -120,6 +121,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var height = (ushort)memory.ReadUInt32(1);
             var destWidth = (ushort)memory.ReadUInt32(2);
             var destHeight = (ushort)memory.ReadUInt32(3);
+            var frameCount = (ushort)memory.ReadUInt32(4);
             int destinationStartIndex = width * height + 4;
 
             var bmp = new Bitmap(destWidth, destHeight);

@@ -18,7 +18,8 @@ namespace Hast.Samples.SampleAssembly
         private const int Resize_ImageHeightIndex = 1;
         private const int Resize_DestinationImageWidthIndex = 2;
         private const int Resize_DestinationImageHeightIndex = 3;
-        private const int Resize_ImageStartIndex = 4;
+        private const int Resize_FrameCount = 4;
+        private const int Resize_ImageStartIndex = 5;
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 8; // TODO: 25(?)
@@ -29,7 +30,8 @@ namespace Hast.Samples.SampleAssembly
             var height = (ushort)memory.ReadUInt32(Resize_ImageHeightIndex);
             var destWidth = (ushort)memory.ReadUInt32(Resize_DestinationImageWidthIndex);
             var destHeight = (ushort)memory.ReadUInt32(Resize_DestinationImageHeightIndex);
-            var destinationStartIndex = width * height + 4;
+            var frameCount = (ushort)memory.ReadUInt32(Resize_FrameCount);
+            var destinationStartIndex = width * height + 5;
 
             var widthFactor = width / destWidth;
             var heightFactor = height / destHeight;
@@ -44,50 +46,54 @@ namespace Hast.Samples.SampleAssembly
                 stepCount += 1;
             }
 
-            for (int y = 0; y < destHeight; y++)
+            for (int f = 0; f < frameCount; f++)
             {
-                for (int x = 0; x < stepCount; x++)
+                for (int y = 0; y < destHeight; y++)
                 {
-                    for (int t = 0; t < MaxDegreeOfParallelism; t++)
+                    for (int x = 0; x < stepCount; x++)
                     {
-                        if (x * widthFactor * MaxDegreeOfParallelism + t * widthFactor >= width)
+                        for (int t = 0; t < MaxDegreeOfParallelism; t++)
                         {
-                            break;
-                        }
-
-                        var pixelBytes = memory.Read4Bytes(
-                            y * heightFactor * destWidth * heightFactor
-                                + x * widthFactor * MaxDegreeOfParallelism
-                                + t * widthFactor + Resize_ImageStartIndex);
-
-                        tasks[t] = Task.Factory.StartNew(inputObject =>
-                        {
-                            var input = (PixelProcessingTaskInput)inputObject;
-
-                            return new PixelProcessingTaskOutput
+                            if (x * widthFactor * MaxDegreeOfParallelism + t * widthFactor >= width)
                             {
-                                R = input.PixelBytes[0],
-                                G = input.PixelBytes[1],
-                                B = input.PixelBytes[2]
-                            };
+                                break;
+                            }
 
-                        },
-                        new PixelProcessingTaskInput { PixelBytes = pixelBytes });
-                    }
+                            var pixelBytes = memory.Read4Bytes(
+                                (1 + f) * (y * heightFactor * destWidth * heightFactor
+                                    + x * widthFactor * MaxDegreeOfParallelism
+                                    + t * widthFactor) + Resize_ImageStartIndex);
 
-                    Task.WhenAll(tasks).Wait();
+                            tasks[t] = Task.Factory.StartNew(inputObject =>
+                            {
+                                var input = (PixelProcessingTaskInput)inputObject;
 
-                    for (int t = 0; t < MaxDegreeOfParallelism; t++)
-                    {
-                        // Don't write unnecessary stuff leftover from the process
-                        if (x * widthFactor * MaxDegreeOfParallelism + t * widthFactor >= width)
-                        {
-                            break;
+                                return new PixelProcessingTaskOutput
+                                {
+                                    R = input.PixelBytes[0],
+                                    G = input.PixelBytes[1],
+                                    B = input.PixelBytes[2],
+                                    A = input.PixelBytes[3]
+                                };
+
+                            },
+                            new PixelProcessingTaskInput { PixelBytes = pixelBytes });
                         }
 
-                        memory.Write4Bytes(
-                           destinationStartIndex + x * MaxDegreeOfParallelism + y * destWidth + t,
-                           new[] { tasks[t].Result.R, tasks[t].Result.G, tasks[t].Result.B });
+                        Task.WhenAll(tasks).Wait();
+
+                        for (int t = 0; t < MaxDegreeOfParallelism; t++)
+                        {
+                            // Don't write unnecessary stuff leftover from the process
+                            if (x * widthFactor * MaxDegreeOfParallelism + t * widthFactor >= width)
+                            {
+                                break;
+                            }
+
+                            memory.Write4Bytes(
+                               destinationStartIndex + (1 + f) * (x * MaxDegreeOfParallelism + y * destWidth + t),
+                               new[] { tasks[t].Result.R, tasks[t].Result.G, tasks[t].Result.B, tasks[t].Result.A });
+                        }
                     }
                 }
             }
@@ -112,6 +118,7 @@ namespace Hast.Samples.SampleAssembly
             public byte R { get; set; }
             public byte G { get; set; }
             public byte B { get; set; }
+            public byte A { get; set; }
         }
     }
 }
