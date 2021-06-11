@@ -8,19 +8,20 @@ using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Newtonsoft.Json.Linq;
 
 namespace Hast.Layer
 {
@@ -34,6 +35,10 @@ namespace Hast.Layer
         public event InvokingEventHandler Invoking;
 
         // Private so the static factory should be used.
+        [SuppressMessage(
+            "Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Stuff created here is disposed by the DI system.")]
         private Hastlayer(IHastlayerConfiguration configuration)
         {
             _configuration = configuration;
@@ -49,12 +54,17 @@ namespace Hast.Layer
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
                 typeof(NexysA7ManifestProvider).Assembly,
-                typeof(CatapultManifestProvider).Assembly
+                typeof(CatapultManifestProvider).Assembly,
             });
             assemblies.AddRange(GetHastLibraries());
 
             var services = new ServiceCollection();
+
+#pragma warning disable S3366 // "this" should not be exposed from constructors
+            // This is safe because it doesn't actually become usable until the service provider is returned at the end.
             services.AddSingleton<IHastlayer>(this);
+#pragma warning restore S3366 // "this" should not be exposed from constructors
+
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
@@ -109,15 +119,14 @@ namespace Hast.Layer
             }
         }
 
-
         public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
 
         /// <summary>
         /// Instantiates a new <see cref="IHastlayer"/> implementation.
         /// </summary>
         /// <remarks>
-        /// Point of this factory is that it returns an interface type instead of the implementation and can throw
-        /// exceptions.
+        /// <para>Point of this factory is that it returns an interface type instead of the implementation and can throw
+        /// exceptions.</para>
         /// </remarks>
         /// <param name="configuration">Configuration for Hastlayer.</param>
         /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
@@ -138,117 +147,130 @@ namespace Hast.Layer
                 .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
-
-        public void Dispose() => _serviceProvider?.Dispose();
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            _serviceProvider?.Dispose();
+        }
 
         ~Hastlayer() => Dispose();
 
-        public async Task<IHardwareRepresentation> GenerateHardwareAsync(
+        public Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration)
         {
             // Avoid repeated multiple enumerations.
-            var assembliesPaths = assemblyPaths.ToList();
+            var assemblyPathsList = assemblyPaths.ToList();
 
-            Argument.ThrowIfNull(assembliesPaths, nameof(assembliesPaths));
-            if (!assembliesPaths.Any())
+            Argument.ThrowIfNull(assemblyPathsList, nameof(assemblyPathsList));
+            if (!assemblyPathsList.Any())
             {
                 throw new ArgumentException("No assemblies were specified.");
             }
 
-            if (assembliesPaths.Count != assembliesPaths.Distinct().Count())
+            if (assemblyPathsList.Count != assemblyPathsList.Distinct().Count())
             {
                 throw new ArgumentException(
                     "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
             }
 
+            return GenerateHardwareInnerAsync(configuration, assemblyPathsList);
+        }
+
+        private async Task<IHardwareRepresentation> GenerateHardwareInnerAsync(
+            IHardwareGenerationConfiguration configuration,
+            List<string> assemblyPaths)
+        {
             try
             {
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
-                using (var scope = _serviceProvider.CreateScope())
+                using var scope = _serviceProvider.CreateScope();
+
+                scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
+                    .Value = configuration;
+
+                var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
+                var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
+                var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
+                var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+
+                // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
+                // CustomConfiguration into the current hardware generation configuration.
+                var newCustomConfigurations = appConfiguration
+                    .GetSection(nameof(HardwareGenerationConfiguration))
+                    .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
+                    .GetChildren()
+                    .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
+                foreach (var item in newCustomConfigurations)
                 {
-                    scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
-                        .Value = configuration;
-
-                    var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
-                    var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
-                    var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
-                    var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-
-                    // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
-                    // CustomConfiguration into the current hardware generation configuration.
-                    var newCustomConfigurations = appConfiguration
-                        .GetSection(nameof(HardwareGenerationConfiguration))
-                        .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
-                        .GetChildren()
-                        .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
-                    foreach (var item in newCustomConfigurations)
-                    {
-                        configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize())
-                            [nameof(HardwareGenerationConfiguration)]?
-                            [nameof(HardwareGenerationConfiguration.CustomConfiguration)]?
-                            [item.Key];
-                    }
-
-                    var hardwareDescription = configuration.EnableHardwareTransformation ?
-                        await transformer.TransformAsync(assembliesPaths, configuration) :
-                        EmptyHardwareDescriptionFactory.Create(configuration);
-
-                    foreach (var warning in hardwareDescription.Warnings)
-                    {
-                        loggerService.LogWarning(
-                            "Hastlayer transformation warning (code: {0}): {1}",
-                            warning.Code,
-                            warning.Message);
-                    }
-
-                    var deviceManifest = deviceManifestSelector
-                        .GetSupportedDevices()
-                        .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
-
-                    if (deviceManifest == null)
-                    {
-                        throw new HastlayerException(
-                            "There is no supported device with the name \"" + configuration.DeviceName + "\".");
-                    }
-
-                    var hardwareImplementationComposerSelector =
-                        scope.ServiceProvider.GetRequiredService<IHardwareImplementationComposerSelector>();
-
-                    IHardwareImplementation hardwareImplementation;
-                    if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
-                    {
-                        var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
-                        {
-                            Configuration = configuration,
-                            HardwareDescription = hardwareDescription,
-                            DeviceManifest = deviceManifest
-                        };
-
-                        var hardwareImplementationComposer = hardwareImplementationComposerSelector
-                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
-                            throw new HastlayerException("No suitable hardware implementation composer was found.");
-
-                        hardwareImplementation = await hardwareImplementationComposer
-                            .ComposeAsync(hardwareImplementationCompositionContext);
-                    }
-                    else hardwareImplementation = EmptyHardwareImplementationFactory.Create();
-
-                    return new HardwareRepresentation
-                    {
-                        SoftAssemblyPaths = assembliesPaths,
-                        HardwareDescription = hardwareDescription,
-                        HardwareImplementation = hardwareImplementation,
-                        DeviceManifest = deviceManifest,
-                        HardwareGenerationConfiguration = configuration
-                    };
+                    var cloned = JObject.Parse(item.Serialize());
+                    configuration.CustomConfiguration[item.Key] =
+                        cloned[nameof(HardwareGenerationConfiguration)]?
+                        [nameof(HardwareGenerationConfiguration.CustomConfiguration)]?
+                        [item.Key];
                 }
+
+                var hardwareDescription = configuration.EnableHardwareTransformation ?
+                    await transformer.TransformAsync(assemblyPaths, configuration) :
+                    EmptyHardwareDescriptionFactory.Create(configuration);
+
+                foreach (var warning in hardwareDescription.Warnings)
+                {
+                    loggerService.LogWarning(
+                        "Hastlayer transformation warning (code: {0}): {1}",
+                        warning.Code,
+                        warning.Message);
+                }
+
+                var deviceManifest = deviceManifestSelector
+                    .GetSupportedDevices()
+                    .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
+
+                if (deviceManifest == null)
+                {
+                    throw new HastlayerException(
+                        "There is no supported device with the name \"" + configuration.DeviceName + "\".");
+                }
+
+                var hardwareImplementationComposerSelector =
+                    scope.ServiceProvider.GetRequiredService<IHardwareImplementationComposerSelector>();
+
+                IHardwareImplementation hardwareImplementation;
+                if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
+                {
+                    var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
+                    {
+                        Configuration = configuration,
+                        HardwareDescription = hardwareDescription,
+                        DeviceManifest = deviceManifest,
+                    };
+
+                    var hardwareImplementationComposer = hardwareImplementationComposerSelector
+                        .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
+                        throw new HastlayerException("No suitable hardware implementation composer was found.");
+
+                    hardwareImplementation = await hardwareImplementationComposer
+                        .ComposeAsync(hardwareImplementationCompositionContext);
+                }
+                else
+                {
+                    hardwareImplementation = EmptyHardwareImplementationFactory.Create();
+                }
+
+                return new HardwareRepresentation
+                {
+                    SoftAssemblyPaths = assemblyPaths,
+                    HardwareDescription = hardwareDescription,
+                    HardwareImplementation = hardwareImplementation,
+                    DeviceManifest = deviceManifest,
+                    HardwareGenerationConfiguration = configuration,
+                };
             }
             catch (Exception ex) when (!ex.IsFatal())
             {
                 var message =
                     "An error happened during generating the Hastlayer hardware representation for the following assemblies: " +
-                    string.Join(", ", assembliesPaths);
+                    string.Join(", ", assemblyPaths);
                 LogException(ex, message);
                 throw new HastlayerException(message, ex);
             }
@@ -257,7 +279,8 @@ namespace Hast.Layer
         public async Task<T> GenerateProxyAsync<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
-            IProxyGenerationConfiguration configuration = null) where T : class
+            IProxyGenerationConfiguration configuration = null)
+            where T : class
         {
             if (configuration is null) configuration = ProxyGenerationConfiguration.Default;
             if (!hardwareRepresentation.SoftAssemblyPaths.Contains(hardwareObject.GetType().Assembly.Location))
@@ -287,7 +310,10 @@ namespace Hast.Layer
             IServiceScope scope = null;
             try
             {
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                // This is done by DisposableContainer.
                 scope = _serviceProvider.CreateScope();
+#pragma warning restore CA2000 // Dispose objects before losing scope
                 var communicationService = scope.ServiceProvider
                     .GetService<ICommunicationServiceSelector>()
                     .GetCommunicationService(communicationChannelName);
@@ -318,38 +344,34 @@ namespace Hast.Layer
                     provider.GetService<IEnumerable<IDeviceManifestProvider>>())
             );
 
-
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {
             // This is fine because IDeviceManifest doesn't contain anything that relies on the scope.
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
-            }
+            using var scope = _serviceProvider.CreateScope();
+            return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
         }
 
         public async Task RunAsync<T>(Func<T, Task> process)
         {
-            using (var scope = _serviceProvider.CreateScope())
-                await process(scope.ServiceProvider.GetRequiredService<T>());
+            using var scope = _serviceProvider.CreateScope();
+            await process(scope.ServiceProvider.GetRequiredService<T>());
         }
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
             ThrowIfService<TOut>();
-            using (var scope = _serviceProvider.CreateScope())
-                return await process(scope.ServiceProvider);
+            using var scope = _serviceProvider.CreateScope();
+            return await process(scope.ServiceProvider);
         }
 
         public TOut RunGet<TOut>(Func<IServiceProvider, TOut> process)
         {
             ThrowIfService<TOut>();
-            using (var scope = _serviceProvider.CreateScope())
-                return process(scope.ServiceProvider);
+            using var scope = _serviceProvider.CreateScope();
+            return process(scope.ServiceProvider);
         }
 
         public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();
-
 
         private void LoadHost()
         {
@@ -363,6 +385,7 @@ namespace Hast.Layer
             {
                 abstractionsPath = Path.GetDirectoryName(abstractionsPath);
             }
+
             currentDirectory = Path.GetFileName(abstractionsPath);
             if (currentDirectory.Equals("bin", StringComparison.OrdinalIgnoreCase))
             {
