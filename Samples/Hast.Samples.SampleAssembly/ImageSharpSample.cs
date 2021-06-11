@@ -102,40 +102,6 @@ namespace Hast.Samples.SampleAssembly
             return newImage;
         }
 
-        public SimpleMemory CreateSimpleMemory(
-            Image image,
-            IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
-        {
-            var pixelCount = image.Width * image.Height + (image.Width / 2) * (image.Height / 2); // TODO: get the value
-            var cellCount = pixelCount
-                + (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0)
-                + 4;
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(cellCount)
-                : hastlayer.CreateMemory(hardwareGenerationConfiguration, cellCount);
-
-            memory.WriteUInt32(Resize_ImageWidthIndex, (uint)image.Width);
-            memory.WriteUInt32(Resize_ImageHeightIndex, (uint)image.Height);
-            memory.WriteUInt32(Resize_DestinationImageWidthIndex, (uint)image.Width / 2);   // TODO: get the value
-            memory.WriteUInt32(Resize_DestinationImageHeightIndex, (uint)image.Height / 2); // TODO: get the value
-
-            var bitmapImage = ImageSharpExtensions.ToBitmap(image);
-            for (int y = 0; y < bitmapImage.Height; y++)
-            {
-                for (int x = 0; x < bitmapImage.Width; x++)
-                {
-                    var pixel = bitmapImage.GetPixel(x, y);
-
-                    memory.Write4Bytes(
-                       x + y * bitmapImage.Width + Resize_ImageStartIndex,
-                       new[] { pixel.R, pixel.G, pixel.B });
-                }
-            }
-
-            return memory;
-        }
-
         private class PixelProcessingTaskInput
         {
             public byte[] PixelBytes { get; set; }
