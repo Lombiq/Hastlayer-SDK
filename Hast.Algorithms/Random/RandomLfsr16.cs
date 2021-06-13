@@ -18,8 +18,8 @@ namespace Hast.Algorithms.Random
         public ushort NextUInt16()
         {
             // Using the taps from https://en.wikipedia.org/wiki/Linear-feedback_shift_register
-            ushort tapBits = (ushort)(State >> 0 ^ State >> 1 ^ State >> 3 ^ State >> 15);
-            State = (ushort)(State >> 1 | tapBits << 15);
+            ushort tapBits = (ushort)((State >> 0) ^ (State >> 1) ^ (State >> 3) ^ (State >> 15));
+            State = (ushort)((State >> 1) | (tapBits << 15));
             return State;
         }
     }

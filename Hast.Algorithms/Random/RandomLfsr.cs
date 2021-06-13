@@ -20,12 +20,12 @@ namespace Hast.Algorithms.Random
         public uint NextUInt32()
         {
             // Using the taps from https://www.xilinx.com/support/documentation/application_notes/xapp052.pdf
-            uint tapBits = State >> 0 ^ State >> 10 ^ State >> 30 ^ State >> 31;
+            uint tapBits = (State >> 0) ^ (State >> 10) ^ (State >> 30) ^ (State >> 31);
             // Could also be
-            // uint tapBits = State >> 0 ^ State >> 2 ^ State >> 6 ^ State >> 7;
+            //// uint tapBits = State >> 0 ^ State >> 2 ^ State >> 6 ^ State >> 7;
             // according to the taps here: https://web.archive.org/web/20161007061934/http://courses.cse.tamu.edu/csce680/walker/lfsr_table.pdf
 
-            State = State >> 1 | tapBits << 31;
+            State = (State >> 1) | (tapBits << 31);
             return State;
         }
     }
