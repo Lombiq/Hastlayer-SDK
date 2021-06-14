@@ -69,7 +69,11 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         {
             if (!(sampler is NearestNeighborResampler)) return;
 
+            var hastResizer = new ImageSharpSample();
+
             var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
+             
+            hastResizer.ApplyTransform(memory);
 
             for (int i = 0; i < Source.Frames.Count; i++)
             {
