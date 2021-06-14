@@ -10,6 +10,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
@@ -62,11 +63,9 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         {
             if (!(sampler is NearestNeighborResampler)) return;
 
-            var hastResizer = new ImageSharpSample();
-
             var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
-             
-            hastResizer.ApplyTransform(memory);
+
+            new ImageSharpSample().ApplyTransform(memory);
 
             for (int i = 0; i < Source.Frames.Count; i++)
             {
@@ -95,11 +94,11 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 
             for (int i = 0; i < frameCount; i++)
             {
-                var span = accessor.Get().Span.Slice(20 + i * pixelCount, image.Width * image.Height * 4);
+                var memorySpan = accessor.Get().Span.Slice(20 + i * pixelCount, image.Width * image.Height * 4);
 
                 image.Frames[i].TryGetSinglePixelSpan(out var imageSpan);
 
-                MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(span);
+                MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(memorySpan);
             }
 
             memory.WriteUInt32(0, (uint)image.Width);
@@ -119,13 +118,16 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var destinationStartIndex = source.Width * source.Height + 5;
             var accessor = new SimpleMemoryAccessor(memory);
 
+            var memSpan = accessor.Get().Span
+                .Slice(destinationStartIndex * 4, _destinationWidth * _destinationHeight * 4);
+
             for (int y = 0; y < destination.Height; y++)
             {
                 var destinationRow = destination.GetPixelRowSpan(y);
-                var span = accessor.Get().Span
-                    .Slice(destinationStartIndex * 4 + y * destination.Width * 4, destination.Width * 4);
+                
+                var memorySpan = memSpan.Slice(y * destination.Width * 4, destination.Width * 4);
 
-                var sourceRow = MemoryMarshal.Cast<byte, TPixel>(span);
+                var sourceRow = MemoryMarshal.Cast<byte, TPixel>(memorySpan);
 
                 for (int x = 0; x < destination.Width; x++)
                 {

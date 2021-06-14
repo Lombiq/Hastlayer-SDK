@@ -9,8 +9,6 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class ImageSharpSampleRunner : ISampleRunner
     {
-        const string prefix = "../../../../../../OutputImages/";
-
         public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<ImageSharpSample>();
@@ -31,13 +29,13 @@ namespace Hast.Samples.Consumer.SampleRunners
                 .GenerateProxy(hardwareRepresentation, new ImageSharpSample(), configuration);
             var modifiedImage = resizeImage
                 .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            modifiedImage.Save(prefix + "resized_with_hastlayer_fpga.jpg");
+            modifiedImage.Save("fpga_resized_with_hastlayer_fpga.jpg");
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
             var cpuOutput = new ImageSharpSample()
                 .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
-            cpuOutput.Save(prefix + "resized_with_cpu.jpg");
+            cpuOutput.Save("fpga_resized_with_hastlayer_cpu.jpg");
             System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
         }
 
@@ -45,10 +43,16 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             using var image = Image.Load("fpga.jpg");
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            image.Mutate(x => x.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
+            var newImage = image.Clone(x => x.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
             sw.Stop();
-            image.Save(prefix + "resized_wtih_imagesharp_fpga.jpg");
-            System.Console.WriteLine($"Non-hastlyer algorithm took {sw.ElapsedMilliseconds} ms");
+            newImage.Save("fpga_resized_wtih_modified_imagesharp.jpg");
+            System.Console.WriteLine($"Modified ImageSharp algorithm took {sw.ElapsedMilliseconds} ms");
+
+            sw.Restart();
+            newImage = image.Clone(x => x.Resize(image.Width / 2, image.Height / 2));
+            sw.Stop();
+            newImage.Save("fpga_resized_wtih_original_imagesharp.jpg");
+            System.Console.WriteLine($"Original ImageSharp algorithm took {sw.ElapsedMilliseconds} ms");
         }
     }
 }

@@ -8,7 +8,6 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
-using static Hast.Samples.SampleAssembly.ImageSharpSample;
 
 
 // namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
@@ -73,10 +72,12 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         /// Gets a value indicating the max degree of parallelism.
         /// </summary>
         public int MaxDegreeOfParallelism { get; }
+
         /// <summary>
         /// Necessary values for hastlayer.
         /// </summary>
         public IHastlayer Hastlayer { get; }
+
         /// <summary>
         /// Necessary values for hastlayer.
         /// </summary>
@@ -88,7 +89,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             Rectangle sourceRectangle)
         {
             configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
-            return new HastlayerResizeProcessor<TPixel>(configuration, this, source, sourceRectangle, Hastlayer, HardwareGenerationConfiguration);
+            return new HastlayerResizeProcessor<TPixel>(
+                configuration, this, source, sourceRectangle, Hastlayer, HardwareGenerationConfiguration);
         }
     }
 }

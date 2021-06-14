@@ -24,6 +24,5 @@
   <ItemGroup>
     <Folder Include="ImageSharpModifications\ImageSharpInternals\" />
     <Folder Include="ImageSharpModifications\Resize\" />
-    <Folder Include="ImageSharpModifications\Extensions\" />
   </ItemGroup>
 </Project>

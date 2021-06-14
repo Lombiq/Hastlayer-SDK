@@ -100,9 +100,13 @@ namespace Hast.Samples.SampleAssembly
 
         internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);
 
-        public Image Resize(Image image, IHastlayer hastlayer, IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+        public Image Resize(
+            Image image,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            var newImage = image.Clone(x => x.HastResize(image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, hastlayer, hardwareGenerationConfiguration));
+            var newImage = image.Clone(x => x.HastResize(
+                image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, hastlayer, hardwareGenerationConfiguration));
 
             return newImage;
         }
