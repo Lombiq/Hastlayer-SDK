@@ -136,48 +136,5 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 }
             }
         }
-
-        public void ApplyTestTransform(ImageFrame<TPixel> source, ImageFrame<TPixel> destination)
-        {
-            for (int y = 0; y < destination.Height; y++)
-            {
-                var sourceRow = source.GetPixelRowSpan(y);
-                var row = destination.GetPixelRowSpan(y);
-
-                for (int x = 0; x < destination.Width; x++)
-                {
-                    row[x] = sourceRow[sourceRow.Length / 4];
-                }
-            }
-        }
-
-        public Image<TPixel> ConvertToImage(SimpleMemory memory)
-        {
-            var width = (ushort)memory.ReadUInt32(0);
-            var height = (ushort)memory.ReadUInt32(1);
-            var destWidth = (ushort)memory.ReadUInt32(2);
-            var destHeight = (ushort)memory.ReadUInt32(3);
-            var frameCount = (ushort)memory.ReadUInt32(4);
-            int destinationStartIndex = width * height + 4;
-
-            var bmp = new Bitmap(destWidth, destHeight);
-
-            for (int y = 0; y < destHeight; y++)
-            {
-                for (int x = 0; x < destWidth; x++)
-                {
-                    var pixel = memory.Read4Bytes(x + destWidth * y + destinationStartIndex);
-                    var color = Color.FromArgb(pixel[0], pixel[1], pixel[2]);
-                    bmp.SetPixel(x, y, color);
-                }
-            }
-
-            bmp.Save($"../../../../../../OutputImages/bmp_before_conversion_frame.bmp");
-
-
-            var image = ImageSharpExtensions.ToImageSharpImage<TPixel>(bmp);
-
-            return image;
-        }
     }
 }
