@@ -1,9 +1,7 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.Threading.Tasks;
 

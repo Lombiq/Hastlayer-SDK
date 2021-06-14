@@ -1,5 +1,4 @@
 using Hast.Layer;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
@@ -22,7 +21,7 @@ namespace Hast.Samples.SampleAssembly
         private const int Resize_ImageStartIndex = 5;
 
         [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
-        private static readonly int MaxDegreeOfParallelism = 8; // TODO: 25(?)
+        private static readonly int MaxDegreeOfParallelism = 25;
 
         public virtual void ApplyTransform(SimpleMemory memory)
         {

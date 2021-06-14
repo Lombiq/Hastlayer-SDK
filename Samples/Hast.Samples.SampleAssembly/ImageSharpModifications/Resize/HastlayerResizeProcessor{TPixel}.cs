@@ -5,14 +5,11 @@
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Advanced/ParallelRowIterator.cs
 
 using Hast.Layer;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Extensions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System.Runtime.InteropServices;
-using Bitmap = System.Drawing.Bitmap;
-using Color = System.Drawing.Color;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
@@ -22,11 +19,9 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         private readonly int _destinationWidth;
         private readonly int _destinationHeight;
         private readonly IResampler _resampler;
-        private readonly Rectangle _destinationRectangle;
         private Image<TPixel> _destination;
         private IHastlayer _hastlayer;
         private IHardwareGenerationConfiguration _hardwareConfiguration;
-        private readonly int MaxDegreeOfParallelism;
 
         public HastlayerResizeProcessor(
             Configuration configuration,
@@ -39,11 +34,9 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         {
             _destinationWidth = definition.DestinationWidth;
             _destinationHeight = definition.DestinationHeight;
-            _destinationRectangle = definition.DestinationRectangle;
             _resampler = definition.Sampler;
             _hastlayer = hastlayer;
             _hardwareConfiguration = hardwareGenerationConfiguration;
-            MaxDegreeOfParallelism = configuration.MaxDegreeOfParallelism;
         }
 
         /// <inheritdoc/>
