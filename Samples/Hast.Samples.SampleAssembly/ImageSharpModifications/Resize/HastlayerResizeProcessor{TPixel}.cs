@@ -69,15 +69,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         {
             if (!(sampler is NearestNeighborResampler)) return;
 
-            // Hastlayerization
-            var hastlayerSample = new ImageSharpSample();
-            //var memory = hastlayerSample.CreateSimpleMemory(source, _hastlayer, _hardwareConfiguration);
             var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
-
-
-
-            hastlayerSample.ApplyTransform(memory);
-
 
             for (int i = 0; i < Source.Frames.Count; i++)
             {
@@ -86,12 +78,6 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 
                 ApplyTransformFromMemory(sourceFrame, destinationFrame, memory);
             }
-
-
-            var newImage = ConvertToImage(memory);
-
-            _destination = newImage;
-            newImage.Save("../../../../../../OutputImages/newImage.jpg");
         }
 
         public SimpleMemory CreateSimpleMemory(
