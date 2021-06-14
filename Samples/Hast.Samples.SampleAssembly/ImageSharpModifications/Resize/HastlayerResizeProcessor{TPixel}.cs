@@ -85,7 +85,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            var pixelCount = image.Width * image.Height + (image.Width / 2) * (image.Height / 2); // TODO: get the value
+            var pixelCount = image.Width * image.Height + _destinationWidth * _destinationHeight;
             var frameCount = image.Frames.Count;
 
             var cellCount = pixelCount * frameCount + 5;
@@ -105,11 +105,10 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(span);
             }
 
-            // TODO: get constants???
             memory.WriteUInt32(0, (uint)image.Width);
             memory.WriteUInt32(1, (uint)image.Height);
-            memory.WriteUInt32(2, (uint)image.Width / 2);  // TODO: get the value
-            memory.WriteUInt32(3, (uint)image.Height / 2); // TODO: get the value
+            memory.WriteUInt32(2, (uint)_destinationWidth);
+            memory.WriteUInt32(3, (uint)_destinationHeight);
             memory.WriteUInt32(4, (uint)frameCount);
 
             return memory;
