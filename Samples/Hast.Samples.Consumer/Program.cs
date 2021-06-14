@@ -48,7 +48,7 @@ namespace Hast.Samples.Consumer
         /// up-to-date enough and shouldn't be really taken as good examples (check out the other ones).
         /// You can also provide this in the -sample command line argument.
         /// </summary>
-        public static Sample SampleToRun = Sample.ImageSharpSample;
+        public static Sample SampleToRun = Sample.Loopback;
 
         /// <summary>
         /// Specify a path here where the hardware framework is located. The file describing the hardware to be
