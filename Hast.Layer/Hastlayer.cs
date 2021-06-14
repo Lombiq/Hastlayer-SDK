@@ -70,6 +70,7 @@ namespace Hast.Layer
             services.AddSingleton(BuildConfiguration());
             services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
             services.AddIDependencyContainer(assemblies);
+            services.AddScoped(typeof(ServiceEventArgs<>));
 
             services.AddSingleton(LoggerFactory.Create(builder =>
             {
@@ -427,8 +428,8 @@ namespace Hast.Layer
             }
 
             var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
-            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, context);
-            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, context);
+            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, context.Arguments);
+            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, context.Arguments);
         }
 
         private void LogException(Exception exception, string message) =>

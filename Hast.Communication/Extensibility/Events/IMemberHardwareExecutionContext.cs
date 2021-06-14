@@ -1,4 +1,5 @@
 using Hast.Layer;
+using System;
 
 namespace Hast.Communication.Extensibility.Events
 {

@@ -16,6 +16,8 @@ namespace Hast.Layer
         // The envent objects are interfaces becuase we reuse a common context object for them.
 #pragma warning disable S3906 // Event Handlers should have the correct signature
 #pragma warning disable S3908 // Generic event handlers should be used
+#pragma warning disable CA1003 // Use generic event handler instances
+
         /// <summary>
         /// Occurs when the member invocation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
@@ -25,6 +27,7 @@ namespace Hast.Layer
         /// Occurs before the proxy is executed.
         /// </summary>
         event InvokingEventHandler Invoking;
+#pragma warning restore CA1003 // Use generic event handler instances
 #pragma warning restore S3908 // Generic event handlers should be used
 #pragma warning restore S3906 // Event Handlers should have the correct signature
 

@@ -1,6 +1,7 @@
 using Castle.DynamicProxy;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
+using Hast.Common.Services;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
@@ -23,10 +24,8 @@ namespace Hast.Communication
     {
         private readonly IServiceProvider _serviceProvider;
 
-#pragma warning disable S3906 // Event Handlers should have the correct signature
-        public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
-        public event EventHandler<IMemberInvocationContext> MemberInvoking;
-#pragma warning restore S3906 // Event Handlers should have the correct signature
+        public event EventHandler<ServiceEventArgs<IMemberHardwareExecutionContext>> MemberExecutedOnHardware;
+        public event EventHandler<ServiceEventArgs<IMemberInvocationContext>> MemberInvoking;
 
         public MemberInvocationHandlerFactory(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
@@ -73,12 +72,14 @@ namespace Hast.Communication
                 HardwareRepresentation = hardwareRepresentation,
             };
 
-            MemberInvoking?.Invoke(this, invocationContext);
+            MemberInvoking?.Invoke(this, new ServiceEventArgs<IMemberInvocationContext>(invocationContext));
 
-            scope.ServiceProvider.GetService<IEnumerable<IMemberInvocationPipelineStep>>().InvokePipelineSteps(step =>
-            {
-                invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext);
-            });
+            scope
+                .ServiceProvider
+                .GetService<IEnumerable<IMemberInvocationPipelineStep>>()
+                .InvokePipelineSteps(step =>
+                    invocationContext.HardwareExecutionIsCancelled =
+                        step.CanContinueHardwareExecution(invocationContext));
 
             if (!invocationContext.HardwareExecutionIsCancelled)
             {
@@ -191,7 +192,7 @@ namespace Hast.Communication
 
             if (configuration.VerifyHardwareResults) OnVerifying(softMemory, memory);
 
-            MemberExecutedOnHardware?.Invoke(this, invocationContext);
+            MemberExecutedOnHardware?.Invoke(this, new ServiceEventArgs<IMemberHardwareExecutionContext>(invocationContext));
         }
 
         private static void OnVerifying(SimpleMemory softMemory, SimpleMemory memory)
@@ -256,7 +257,9 @@ namespace Hast.Communication
             if (returnType == typeof(Task)) return MethodAsynchronicity.AsyncAction;
 
             if (returnType.IsGenericType && returnType.GetGenericTypeDefinition() == typeof(Task<>))
+            {
                 return MethodAsynchronicity.AsyncFunction;
+            }
 
             return MethodAsynchronicity.Synchronous;
         }
