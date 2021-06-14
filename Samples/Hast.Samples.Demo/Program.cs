@@ -45,9 +45,9 @@ namespace Hast.Samples.Demo
             hastlayer.ExecutedOnHardware += (_, e) =>
                 Console.WriteLine(
                     "Executing on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
                     " milliseconds (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                     " milliseconds (all together).");
 
             return configuration;

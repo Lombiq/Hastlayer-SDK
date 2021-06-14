@@ -263,7 +263,7 @@ namespace Hast.Samples.Kpz
 
             result.Hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
             result.Hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
-                $"(took {e.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
+                $"(took {e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
 
             return result;
         }

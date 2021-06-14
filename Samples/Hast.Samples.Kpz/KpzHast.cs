@@ -31,8 +31,8 @@ namespace Hast.Samples.Kpz
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
             LogItFunction("Hastlayer timer: " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
+                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
+                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
                 );
 
             var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");

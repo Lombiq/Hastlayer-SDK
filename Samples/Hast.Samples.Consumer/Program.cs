@@ -84,18 +84,18 @@ namespace Hast.Samples.Consumer
             // console.
             hastlayer.ExecutedOnHardware += (_, e) =>
             {
-                var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
-                var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
+                var netTime = e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
+                var grossTime = e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
 
                 Console.WriteLine(
-                    $"Executing {e.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
+                    $"Executing {e.Arguments.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
                     $"{grossTime:0.####} milliseconds (all together).");
 
-                if (e.SoftwareExecutionInformation == null) return;
+                if (e.Arguments.SoftwareExecutionInformation == null) return;
 
                 // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
                 // see the notes below, or if the hardware execution was canceled.
-                var softwareTime = e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
+                var softwareTime = e.Arguments.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
                 Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
             };
 

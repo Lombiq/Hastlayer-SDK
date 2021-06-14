@@ -2,9 +2,10 @@ using Hast.Catapult.Abstractions;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
+using Hast.Communication.Extensibility;
+using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Services;
 using Hast.Layer.EmptyRepresentationFactories;
-using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
@@ -31,8 +32,8 @@ namespace Hast.Layer
         private readonly ServiceProvider _serviceProvider;
         private readonly HashSet<string> _serviceNames;
 
-        public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
-        public event InvokingEventHandler Invoking;
+        public event EventHandler<ServiceEventArgs<IMemberHardwareExecutionContext>> ExecutedOnHardware;
+        public event EventHandler<ServiceEventArgs<IMemberInvocationContext>> Invoking;
 
         // Private so the static factory should be used.
         [SuppressMessage(
@@ -428,8 +429,8 @@ namespace Hast.Layer
             }
 
             var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
-            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, context.Arguments);
-            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, context.Arguments);
+            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, context);
+            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, context);
         }
 
         private void LogException(Exception exception, string message) =>
