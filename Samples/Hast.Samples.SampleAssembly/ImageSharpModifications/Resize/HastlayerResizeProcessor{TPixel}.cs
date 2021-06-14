@@ -128,11 +128,11 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 var span = accessor.Get().Span
                     .Slice(destinationStartIndex + y * destination.Width * 4, destination.Width * 4);
 
-                var newSpan = MemoryMarshal.Cast<byte, TPixel>(span);
+                var sourceRow = MemoryMarshal.Cast<byte, TPixel>(span);
 
                 for (int x = 0; x < destination.Width; x++)
                 {
-                    destinationRow[x] = newSpan[x];
+                    destinationRow[x] = sourceRow[x];
                 }
             }
         }
