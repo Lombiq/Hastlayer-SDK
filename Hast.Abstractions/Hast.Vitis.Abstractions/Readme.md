@@ -96,6 +96,7 @@ sudo yum localinstall *.rpm
 source centos7-install.sh
 ```
 
+You can use any SSH client of your choice but we recommend checking out [MobaXterm](https://mobaxterm.mobatek.net/).
 
 ### Configuration
 
