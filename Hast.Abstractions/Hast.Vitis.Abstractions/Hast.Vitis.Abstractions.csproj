@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <DefaultItemExcludes>$(DefaultItemExcludes);Hast.Vitis.Abstractions.Tests\**</DefaultItemExcludes>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Hast.Vitis.Abstractions.Tests\**;Container\**</DefaultItemExcludes>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
@@ -29,7 +29,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Hast.Vitis.Abstractions.Tests\**" />
+    <None Remove="Container\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Container\Dockerfile" />
   </ItemGroup>
 
 </Project>
