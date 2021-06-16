@@ -23,16 +23,19 @@ namespace Hast.Samples.Consumer.SampleRunners
             // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
             using var bitmap = await Image.LoadAsync<Rgba32>("fpga.jpg");
 
-            var imageContrastModifier = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
-            var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            await modifiedImage.SaveAsync("contrast.bmp", new BmpEncoder());
+            for (int i = 0; i < 3; i++)
+            {
+                var imageContrastModifier = await hastlayer
+                    .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
+                var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+                await modifiedImage.SaveAsync("contrast.bmp", new BmpEncoder());
+            }
+
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
             new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
             System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
-
             // ImageFilter disabled until it's improved.
             //var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
             //var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);

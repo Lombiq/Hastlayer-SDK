@@ -14,6 +14,8 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ImageContrastModifier
     {
+        internal const int ParallelismBoost = 0;
+
         private const ushort Multiplier = 1000;
 
         private const int ChangeContrast_ImageWidthIndex = 0;
@@ -22,7 +24,7 @@ namespace Hast.Samples.SampleAssembly
         private const int ChangeContrast_ImageStartIndex = 3;
 
         [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
-        private static readonly int MaxDegreeOfParallelism = 25;
+        private static readonly int MaxDegreeOfParallelism = 25 + ParallelismBoost;
 
 
         /// <summary>
