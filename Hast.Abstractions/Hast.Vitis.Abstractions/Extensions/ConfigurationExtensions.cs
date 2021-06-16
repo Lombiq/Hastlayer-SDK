@@ -1,5 +1,4 @@
-﻿using Hast.Common.Services;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Vitis.Abstractions.Models;
 
 namespace Hast.Vitis.Abstractions.Extensions
@@ -11,5 +10,8 @@ namespace Hast.Vitis.Abstractions.Extensions
 
         public static VitisBuildConfiguration GetOrAddVitisBuildConfiguration(this IHardwareGenerationConfiguration configuration) =>
             configuration.GetOrAddCustomConfiguration<VitisBuildConfiguration>(nameof(VitisBuildConfiguration));
+
+        public static AzureAttestationConfiguration GetOrAddAzureAttestationConfiguration(this IHardwareGenerationConfiguration configuration) =>
+            configuration.GetOrAddCustomConfiguration<AzureAttestationConfiguration>(nameof(AzureAttestationConfiguration));
     }
 }

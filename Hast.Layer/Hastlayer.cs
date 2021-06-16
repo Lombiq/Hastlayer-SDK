@@ -58,6 +58,7 @@ namespace Hast.Layer
             services.AddSingleton(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
+            services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
             services.AddIDependencyContainer(assemblies);
 
             services.AddSingleton(LoggerFactory.Create(builder =>
@@ -92,8 +93,20 @@ namespace Hast.Layer
                 }
             }
 
+            // To test that deferred logging works:
+            //// services.Log(LogLevel.Critical, "Critical message!");
+            //// services.Log(LogLevel.Error, "Error message!");
+            //// services.Log(LogLevel.Warning, "Warning message!");
+            //// services.Log(LogLevel.Critical, "Critical message {0} {1} {2}!", "with", 3, "parameters");
+
             _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.FullName));
             _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
+
+            var logger = GetLogger<IDeferredLogEntry>();
+            foreach (var logEntry in _serviceProvider.GetRequiredService<IEnumerable<IDeferredLogEntry>>())
+            {
+                logEntry.Log(logger);
+            }
         }
 
 
@@ -126,7 +139,7 @@ namespace Hast.Layer
                 .Build();
 
 
-        public void Dispose() => _serviceProvider.Dispose();
+        public void Dispose() => _serviceProvider?.Dispose();
 
         ~Hastlayer() => Dispose();
 
@@ -154,6 +167,9 @@ namespace Hast.Layer
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
+                    scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
+                        .Value = configuration;
+
                     var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
                     var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
@@ -404,6 +420,12 @@ namespace Hast.Layer
         }
 
         private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
-            DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(path, "Hast.*.dll"));
+            DependencyInterfaceContainer.LoadAssemblies(
+                Directory
+                    .GetFiles(path, "Hast.*.dll")
+                    .Where(path => !Path.GetFileName(path)
+                        // Check any core project names that aren't referenced by Hastlayer to avoid accidental loading.
+                        .StartsWith("Hast.Remote.Worker", StringComparison.Ordinal)
+                    ));
     }
 }

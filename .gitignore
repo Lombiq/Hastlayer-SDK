@@ -11,3 +11,6 @@ packages/
 .idea/
 publish/
 ~*.xlsx
+# While there are files in the Container folder that are in the repo, a set up container's files shouldn't be.
+/Hast.Abstractions/Hast.Vitis.Abstractions/Container/
+TestResults/*.trx
