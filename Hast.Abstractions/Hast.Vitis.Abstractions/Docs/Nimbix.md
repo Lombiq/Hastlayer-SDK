@@ -40,7 +40,7 @@ This is assuming that you are going to run `Hast.Samples.Consumer` with the imag
 3. If it ran successfully, check the output picture by typing `thunar contrast.bmp`.
 
 
-## Restaring
+## Restarting
 
 To save on compute costs, shut down the job (i.e. turn off the instance) when not needed. At that point everything outside the */data* folder is lost, including all personal settings.
 
