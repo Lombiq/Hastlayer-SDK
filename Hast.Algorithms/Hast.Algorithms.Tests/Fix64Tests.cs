@@ -404,17 +404,23 @@ namespace Hast.Algorithms.Tests
             "Major Bug",
             "S1244:Floating point numbers should not be tested for equality",
             Justification = "They should match precisely.")]
+        [SuppressMessage(
+            "Major Bug",
+            "S2589:Change this condition so that it does not always evaluate to 'false'.",
+            Justification = "We are trying to verify that, so it's a success state rather than a certainty.")]
         public void EqualityAndInequalityOperators()
         {
             var sources = _testCases.Select(Fix64.FromRaw).ToList();
-            foreach (var (op1, op2) in GetCartesianProduct(sources))
+            foreach (var op1 in sources)
             {
-                var d1 = (double)op1;
-                var d2 = (double)op2;
-                Assert.True(op1 == op2 == (d1 == d2));
-                Assert.True(op1 != op2 == (d1 != d2));
-                Assert.False(op1 == op2);
-                Assert.False(op1 != op2);
+                foreach (var op2 in sources)
+                {
+                    var d1 = (double)op1;
+                    var d2 = (double)op2;
+                    Assert.True((op1 == op2) == (d1 == d2));
+                    Assert.True((op1 != op2) == (d1 != d2));
+                    Assert.False(op1 == op2 && op1 != op2);
+                }
             }
         }
 
