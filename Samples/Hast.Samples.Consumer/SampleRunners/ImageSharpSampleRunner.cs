@@ -4,6 +4,7 @@ using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -40,14 +41,15 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void RunSoftwareBenchmarks()
         {
             using var image = Image.Load("fpga.jpg");
-            var newImage = image.Clone(x => x.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
             var sw = Stopwatch.StartNew();
+            var newImage = image.Clone(img =>
+                img.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
             sw.Stop();
             newImage.Save("FpgaResizedWithModifiedImageSharp.jpg");
             System.Console.WriteLine($"Modified ImageSharp algorithm took {sw.ElapsedMilliseconds} ms");
 
             sw.Restart();
-            newImage = image.Clone(x => x.Resize(image.Width / 2, image.Height / 2));
+            newImage = image.Clone(img => img.Resize(image.Width / 2, image.Height / 2));
             sw.Stop();
             newImage.Save("FpgaResizedWithOriginalImageSharp.jpg");
             System.Console.WriteLine($"Original ImageSharp algorithm took {sw.ElapsedMilliseconds} ms");

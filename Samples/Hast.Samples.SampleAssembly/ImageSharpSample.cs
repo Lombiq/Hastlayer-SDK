@@ -105,7 +105,7 @@ namespace Hast.Samples.SampleAssembly
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration hardwareGenerationConfiguration)
         {
-            var newImage = image.Clone(x => x.HastResize(
+            var newImage = image.Clone(img => img.HastResize(
                 image.Width / 2, image.Height / 2, MaxDegreeOfParallelism, hastlayer, hardwareGenerationConfiguration));
 
             return newImage;
