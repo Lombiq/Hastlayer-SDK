@@ -98,8 +98,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-        internal virtual void Run(SimpleMemory memory) => ApplyTransform(memory);
-
         public Image Resize(
             Image image,
             IHastlayer hastlayer,
