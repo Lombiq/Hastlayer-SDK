@@ -29,7 +29,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             modifiedImage.Save("FpgaResizedWithHastlayerFpga.jpg");
 
-            var sw = System.Diagnostics.Stopwatch.StartNew();
+            var sw = Stopwatch.StartNew();
             var cpuOutput = new ImageSharpSample()
                 .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
@@ -40,8 +40,8 @@ namespace Hast.Samples.Consumer.SampleRunners
         public static void RunSoftwareBenchmarks()
         {
             using var image = Image.Load("fpga.jpg");
-            var sw = System.Diagnostics.Stopwatch.StartNew();
             var newImage = image.Clone(x => x.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
+            var sw = Stopwatch.StartNew();
             sw.Stop();
             newImage.Save("FpgaResizedWithModifiedImageSharp.jpg");
             System.Console.WriteLine($"Modified ImageSharp algorithm took {sw.ElapsedMilliseconds} ms");
