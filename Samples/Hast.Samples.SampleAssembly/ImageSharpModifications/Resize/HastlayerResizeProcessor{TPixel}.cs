@@ -65,6 +65,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 
             var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
 
+            // Hastlayer configurálása.
+            // Proxy generated object használása. resizeimage 
             new ImageSharpSample().ApplyTransform(memory);
 
             for (int i = 0; i < Source.Frames.Count; i++)
@@ -101,11 +103,11 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(memorySpan);
             }
 
-            memory.WriteUInt32(0, (uint)image.Width);
-            memory.WriteUInt32(1, (uint)image.Height);
-            memory.WriteUInt32(2, (uint)_destinationWidth);
-            memory.WriteUInt32(3, (uint)_destinationHeight);
-            memory.WriteUInt32(4, (uint)frameCount);
+            memory.WriteInt32(0, image.Width);
+            memory.WriteInt32(1, image.Height);
+            memory.WriteInt32(2, _destinationWidth);
+            memory.WriteInt32(3, _destinationHeight);
+            memory.WriteInt32(4, frameCount);
 
             return memory;
         }
