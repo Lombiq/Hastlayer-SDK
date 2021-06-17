@@ -38,7 +38,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         /// <param name="source">The image to resize.</param>
         /// <param name="width">The target image width.</param>
         /// <param name="height">The target image height.</param>
-        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of parallelism.</param>
         /// <returns></returns>
         public static IImageProcessingContext HastResize(
             this IImageProcessingContext source,
@@ -59,7 +59,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         /// <param name="source">The image to resize.</param>
         /// <param name="width">The target image width.</param>
         /// <param name="height">The target image height.</param>
-        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of parallelism.</param>
         /// <param name="hastlayerResizeParameters">Parameters for Hastlayer.</param>
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
         /// <remarks>Passing zero for one of height or width will automatically preserve
@@ -86,7 +86,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         /// <param name="source">The image to resize.</param>
         /// <param name="width">The target image width.</param>
         /// <param name="height">The target image height.</param>
-        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of parallelism.</param>
         /// <param name="sampler">The <see cref="IResampler"/> to perform the resampling.</param>
         /// <param name="hastlayerResizeParameters">Parameters for Hastlayer.</param>
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
@@ -116,7 +116,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         /// <param name="source">The image to resize.</param>
         /// <param name="width">The target image width.</param>
         /// <param name="height">The target image height.</param>
-        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of parallelism.</param>
         /// <param name="sampler">The <see cref="IResampler"/> to perform the resampling.</param>
         /// <param name="targetRectangle">
         /// The <see cref="Rectangle"/> structure that specifies the portion of the target image object to draw to.
@@ -155,7 +155,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         /// </summary>
         /// <param name="source">The image to resize.</param>
         /// <param name="options">The resize options.</param>
-        /// <param name="maxDegreeOfParallelism">Maximum degree of paralellism.</param>
+        /// <param name="maxDegreeOfParallelism">Maximum degree of parallelism.</param>
         /// <param name="hastlayerResizeParameters">Parameters for Hastlayer.</param>
         /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
         /// <remarks>Passing zero for one of height or width within the resize options will automatically preserve 

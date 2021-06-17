@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for resizing image with a modified Image Sharp library
+    /// Algorithm for resizing images with a modified ImageSharp library.
     /// </summary>
     public class ImageSharpSample
     {

@@ -17,10 +17,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
             // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
             
-            // Not accelerated by hastlayer
+            // Not accelerated by Hastlayer.
             RunSoftwareBenchmarks();
 
-            // Accelerated by hastlayer
+            // Accelerated by Hastlayer.
             using var image = Image.Load("fpga.jpg");
 
             var resizeImage = await hastlayer
