@@ -417,8 +417,8 @@ namespace Hast.Algorithms.Tests
                 {
                     var d1 = (double)op1;
                     var d2 = (double)op2;
-                    Assert.True((op1 == op2) == (d1 == d2));
-                    Assert.True((op1 != op2) == (d1 != d2));
+                    Assert.True(op1 == op2 == (d1 == d2));
+                    Assert.True(op1 != op2 == (d1 != d2));
                     Assert.False(op1 == op2 && op1 != op2);
                 }
             }
