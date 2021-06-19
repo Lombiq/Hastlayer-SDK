@@ -1,9 +1,10 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
-    // SimpleMemory map:
+    //SimpleMemory map:
     // * 0 .. 1  :
     //      64-bit random seed
     // * 2  :
@@ -17,24 +18,30 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public class PrngTestInterface
     {
-        public virtual void Mwc64X(SimpleMemory memory)
+        public virtual void MWC64X(SimpleMemory memory)
         {
-            const ulong wordSize = 0x_FFFE_B81B;
-
             uint stateHighWord = memory.ReadUInt32(1);
-            uint stateLowWord = memory.ReadUInt32(0);
-            ulong randomState = (stateLowWord * wordSize) + stateHighWord;
+            uint stateLowWord = memory.ReadUInt32(0); ;
+            ulong randomState = stateLowWord * 0xFFFEB81BUL + stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
-            memory.WriteUInt32(0, (uint)randomState); // LE: 1 is high byte, 0 is low byte
+            memory.WriteUInt32(0, (uint)randomState); //LE: 1 is high byte, 0 is low byte
             memory.WriteUInt32(1, (uint)(randomState >> 32));
             memory.WriteUInt32(2, randomWord);
         }
+    }
 
+    /// <summary>
+    /// These are host-side functions for <see cref="PrngTestExtensions"/>.
+    /// </summary>
+    public static class PrngTestExtensions
+    {
         /// <summary>
         /// This copies random seed from the host to the FPGA.
         /// </summary>
-        public SimpleMemory PushRandomSeed(
+        [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
+        public static SimpleMemory PushRandomSeed(
+            this PrngTestInterface kernels,
             ulong seed,
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration)
@@ -42,16 +49,18 @@ namespace Hast.Samples.Kpz.Algorithms
             var sm = configuration is null ?
                 SimpleMemory.CreateSoftwareMemory(3) :
                 hastlayer.CreateMemory(configuration, 3);
-            sm.WriteUInt32(0, (uint)seed); // LE: 0 is low byte, 1 is high byte
+            sm.WriteUInt32(0, (uint)seed); //LE: 0 is low byte, 1 is high byte
             sm.WriteUInt32(1, (uint)(seed >> 32));
             return sm;
         }
 
         /// <summary>It runs the PRNG on the FPGA and returns a random 32-bit uint.</summary>
-        public uint GetNextRandom(SimpleMemory memory)
+        public static uint GetNextRandom(this PrngTestInterface kernels, SimpleMemory memory)
         {
-            Mwc64X(memory);
+            kernels.MWC64X(memory);
             return memory.ReadUInt32(2);
         }
+
     }
 }
+
