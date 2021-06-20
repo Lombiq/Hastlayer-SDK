@@ -1,6 +1,10 @@
-using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -25,6 +29,7 @@ namespace Hast.Samples.SampleAssembly
         // selected as the hardware entry point (i.e. only it will be transformed into hardware, see the config in
         // Posit32CalculatorSampleRunner) then with a MaxDegreeOfParallelism of 5 it'll take 75% as well.
         public const int MaxDegreeOfParallelism = 2;
+
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
@@ -61,6 +66,8 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
         {
+            var numbers = new int[MaxDegreeOfParallelism];
+
             var tasks = new Task<int>[MaxDegreeOfParallelism];
 
             for (int i = 0; i < MaxDegreeOfParallelism; i++)
@@ -79,8 +86,7 @@ namespace Hast.Samples.SampleAssembly
                         }
 
                         return (int)a;
-                    },
-                    upToNumber);
+                    }, upToNumber);
             }
 
             Task.WhenAll(tasks).Wait();

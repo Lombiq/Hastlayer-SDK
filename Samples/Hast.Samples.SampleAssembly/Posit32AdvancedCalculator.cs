@@ -1,10 +1,13 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
 {
     public class Posit32AdvancedCalculator
     {
+
         public const int RepeatedDivisionInputInt32Index = 0;
         public const int RepeatedDivisionFirstInputPosit32Index = 1;
         public const int RepeatedDivisionSecondInputPosit32Index = 2;
@@ -36,7 +39,7 @@ namespace Hast.Samples.SampleAssembly
         {
             uint numberCount = memory.ReadUInt32(SqrtOfPositsInArrayInputPosit32CountIndex);
 
-            Posit32 result;
+            var result = new Posit32(memory.ReadUInt32(SqrtOfPositsInArrayInputPosit32sStartIndex), true);
 
             for (int i = 0; i < numberCount; i++)
             {

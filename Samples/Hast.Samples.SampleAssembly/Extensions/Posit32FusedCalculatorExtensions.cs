@@ -16,7 +16,9 @@ namespace Hast.Samples.SampleAssembly.Extensions
                 ? SimpleMemory.CreateSoftwareMemory(posit32Array.Length + 1)
                 : hastlayer.CreateMemory(configuration, posit32Array.Length + 1);
 
-            memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSumInputPosit32CountIndex, (uint)posit32Array.Length);
+            memory.WriteUInt32(
+                Posit32FusedCalculator.CalculateFusedSumInputPosit32CountIndex,
+                (uint)posit32Array.Length);
 
             for (var i = 0; i < posit32Array.Length; i++)
             {
@@ -25,7 +27,9 @@ namespace Hast.Samples.SampleAssembly.Extensions
 
             posit32FusedCalculator.CalculateFusedSum(memory);
 
-            return (float)new Posit32(memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSumOutputPosit32Index), true);
+            return (float)new Posit32(
+                memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSumOutputPosit32Index),
+                true);
         }
 
         public static readonly string[] ManuallySizedArrays = new[]

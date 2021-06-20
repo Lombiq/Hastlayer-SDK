@@ -1,5 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
+
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -15,6 +23,7 @@ namespace Hast.Samples.SampleAssembly
         public const int MaxArrayChunkSize = 160;
         public const int QuireSizeIn32BitChunks = Posit32.QuireSize >> 5;
         public const int QuireSizeIn64BitChunks = Posit32.QuireSize >> 6;
+
 
         public virtual void CalculateFusedSum(SimpleMemory memory)
         {
@@ -33,9 +42,11 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (var j = 0; j < posit32ArrayChunk.Length; j++)
                 {
-                    posit32ArrayChunk[j] = (i * MaxArrayChunkSize) + j < numberCount
-                        ? new Posit32(memory.ReadUInt32(CalculateFusedSumInputPosit32StartIndex + (i * MaxArrayChunkSize) + j), true)
-                        : new Posit32(0);
+                    if (i * MaxArrayChunkSize + j < numberCount)
+                    {
+                        posit32ArrayChunk[j] = new Posit32(memory.ReadUInt32(CalculateFusedSumInputPosit32StartIndex + i * MaxArrayChunkSize + j), true);
+                    }
+                    else posit32ArrayChunk[j] = new Posit32(0);
                 }
 
                 quire = Posit32.FusedSum(posit32ArrayChunk, quire);

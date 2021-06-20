@@ -1,15 +1,23 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample on using unum floating point numbers. <see href="http://www.johngustafson.net/unums.html">Some info on unums</see>.
+    /// A sample on using unum floating point numbers. For some info on unums see: http://www.johngustafson.net/unums.html
     /// </summary>
     public class UnumCalculator
     {
         public const int CalculateSumOfPowersofTwoInputUInt32Index = 0;
         public const int CalculateSumOfPowersofTwoOutputUInt32Index = 0;
+
 
         public virtual void CalculateSumOfPowersofTwo(SimpleMemory memory)
         {
@@ -36,6 +44,6 @@ namespace Hast.Samples.SampleAssembly
         // Needed so UnumCalculatorSampleRunner can retrieve BitMask.SegmentCount.
         // On the Nexys 4 DDR only a total of 6b environment will fit and work (9b would fit but wouldn't execute for
         // some reason).
-        public static UnumEnvironment EnvironmentFactory() => new(2, 4);
+        public static UnumEnvironment EnvironmentFactory() => new UnumEnvironment(2, 4);
     }
 }

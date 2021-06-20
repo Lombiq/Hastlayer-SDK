@@ -1,19 +1,16 @@
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Threading.Tasks;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer. Also see
-    /// <c>ParallelAlgorithmSampleRunner</c> on what to configure to make this work.
+    /// <see cref="ParallelAlgorithmSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class ParallelAlgorithm
     {
-        private const int RunInputInt32Index = 0;
-        private const int RunOutputInt32Index = 0;
-
         // While 270 will also fit with ~77% of the resources being used that's very slow to compile in the Xilinx
         // toolchain for the Nexys A7.
         // The [Replaceable] enables the substitution of this static readonly field into constant literals wherever it
@@ -21,9 +18,13 @@ namespace Hast.Samples.SampleAssembly
         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 260;
 
+        private const int Run_InputInt32Index = 0;
+        private const int Run_OutputInt32Index = 0;
+
+
         public virtual void Run(SimpleMemory memory)
         {
-            var input = memory.ReadInt32(RunInputInt32Index);
+            var input = memory.ReadInt32(Run_InputInt32Index);
             var tasks = new Task<int>[MaxDegreeOfParallelism];
 
             // Hastlayer will figure out how many Tasks you want to start if you kick them off in a loop like this.
@@ -35,10 +36,10 @@ namespace Hast.Samples.SampleAssembly
                     indexObject =>
                     {
                         var index = (int)indexObject;
-                        int result = input + (index * 2);
+                        int result = input + index * 2;
 
                         var even = true;
-                        for (int j = 2; j < 9_999_999; j++)
+                        for (int j = 2; j < 9999999; j++)
                         {
                             if (even)
                             {
@@ -66,7 +67,7 @@ namespace Hast.Samples.SampleAssembly
                 output += tasks[i].Result;
             }
 
-            memory.WriteInt32(RunOutputInt32Index, output);
+            memory.WriteInt32(Run_OutputInt32Index, output);
         }
 
         public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
@@ -74,9 +75,9 @@ namespace Hast.Samples.SampleAssembly
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(1)
                 : hastlayer.CreateMemory(configuration, 1);
-            memory.WriteInt32(RunInputInt32Index, input);
+            memory.WriteInt32(Run_InputInt32Index, input);
             Run(memory);
-            return memory.ReadInt32(RunOutputInt32Index);
+            return memory.ReadInt32(Run_OutputInt32Index);
         }
     }
 }

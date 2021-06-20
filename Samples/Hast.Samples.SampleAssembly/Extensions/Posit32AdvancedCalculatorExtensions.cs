@@ -19,12 +19,18 @@ namespace Hast.Samples.SampleAssembly.Extensions
                 : hastlayer.CreateMemory(configuration, 3);
 
             memory.WriteInt32(Posit32AdvancedCalculator.RepeatedDivisionInputInt32Index, number);
-            memory.WriteUInt32(Posit32AdvancedCalculator.RepeatedDivisionFirstInputPosit32Index, new Posit32(dividend).PositBits);
-            memory.WriteUInt32(Posit32AdvancedCalculator.RepeatedDivisionSecondInputPosit32Index, new Posit32(divisor).PositBits);
+            memory.WriteUInt32(
+                Posit32AdvancedCalculator.RepeatedDivisionFirstInputPosit32Index,
+                new Posit32(dividend).PositBits);
+            memory.WriteUInt32(
+                Posit32AdvancedCalculator.RepeatedDivisionSecondInputPosit32Index,
+                new Posit32(divisor).PositBits);
 
             positCalculator.RepeatedDivision(memory);
 
-            return (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.RepeatedDivisionOutputPosit32Index), true);
+            return (float)new Posit32(
+                memory.ReadUInt32(Posit32AdvancedCalculator.RepeatedDivisionOutputPosit32Index),
+                true);
         }
 
         public static float[] SqrtOfPositsInArray(
@@ -38,11 +44,15 @@ namespace Hast.Samples.SampleAssembly.Extensions
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
 
-            memory.WriteUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArrayInputPosit32CountIndex, (uint)posit32Array.Length);
+            memory.WriteUInt32(
+                Posit32AdvancedCalculator.SqrtOfPositsInArrayInputPosit32CountIndex,
+                (uint)posit32Array.Length);
 
             for (var i = 0; i < posit32Array.Length; i++)
             {
-                memory.WriteUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArrayInputPosit32sStartIndex + i, posit32Array[i]);
+                memory.WriteUInt32(
+                    Posit32AdvancedCalculator.SqrtOfPositsInArrayInputPosit32sStartIndex + i,
+                    posit32Array[i]);
             }
 
             posit32Calculator.SqrtOfPositsInArray(memory);
@@ -50,7 +60,10 @@ namespace Hast.Samples.SampleAssembly.Extensions
 
             for (var i = 0; i < resultArray.Length; i++)
             {
-                resultArray[i] = (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArrayOutputPosit32StartIndex + i), true);
+                resultArray[i] =
+                    (float)new Posit32(
+                        memory.ReadUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArrayOutputPosit32StartIndex + i),
+                        true);
             }
 
             return resultArray;

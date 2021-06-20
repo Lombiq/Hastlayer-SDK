@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 
 namespace System
 {
@@ -11,8 +11,9 @@ namespace System
         /// </summary>
         public static T[] PadToMultipleOf<T>(this T[] arrayToPad, int multipleOf)
         {
+
             var originalNumberCount = arrayToPad.Length;
-            var remainderToMaxDegreeOfParallelism = originalNumberCount % multipleOf;
+            var remainderToMaxDegreeOfParallelism = arrayToPad.Length % multipleOf;
             if (remainderToMaxDegreeOfParallelism != 0)
             {
                 return arrayToPad

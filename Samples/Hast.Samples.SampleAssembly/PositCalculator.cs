@@ -1,4 +1,11 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
@@ -8,13 +15,14 @@ namespace Hast.Samples.SampleAssembly
     /// can be used with Hastlayer.
     /// </summary>
     /// <remarks>
-    /// <para>This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable,
-    /// <see cref="Posit32Calculator"/>.</para>
+    /// This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable,
+    /// <see cref="Posit32Calculator"/>;
     /// </remarks>
     public class PositCalculator
     {
         public const int CalculateLargeIntegerSumInputInt32Index = 0;
         public const int CalculateLargeIntegerSumOutputInt32Index = 0;
+
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
@@ -34,6 +42,6 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteInt32(CalculateLargeIntegerSumOutputInt32Index, result);
         }
 
-        public static PositEnvironment EnvironmentFactory() => new(32, 3);
+        public static PositEnvironment EnvironmentFactory() => new PositEnvironment(32, 3);
     }
 }

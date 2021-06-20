@@ -1,4 +1,5 @@
-using Hast.Layer;
+﻿using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -11,13 +12,14 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class MemoryTest
     {
-        private const int RunStartIndexInt32Index = 0;
-        private const int RunLengthInt32Index = 1;
+        private const int Run_StartIndexInt32Index = 0;
+        private const int Run_LengthInt32Index = 1;
+
 
         public virtual void Run(SimpleMemory memory)
         {
-            var startIndex = memory.ReadInt32(RunStartIndexInt32Index);
-            var length = memory.ReadInt32(RunLengthInt32Index);
+            var startIndex = memory.ReadInt32(Run_StartIndexInt32Index);
+            var length = memory.ReadInt32(Run_LengthInt32Index);
             var endIndex = startIndex + length;
 
             for (int i = startIndex; i < endIndex; i++)
@@ -28,16 +30,17 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
+
         public int Run(int startIndex, int length, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var cellCount = startIndex + length < 2 ? 2 : startIndex + length;
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
-            memory.WriteInt32(RunStartIndexInt32Index, startIndex);
-            memory.WriteInt32(RunLengthInt32Index, length);
+            memory.WriteInt32(Run_StartIndexInt32Index, startIndex);
+            memory.WriteInt32(Run_LengthInt32Index, length);
             Run(memory);
-            return memory.ReadInt32(RunStartIndexInt32Index);
+            return memory.ReadInt32(Run_StartIndexInt32Index);
         }
     }
 }
