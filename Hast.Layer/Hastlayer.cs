@@ -56,6 +56,7 @@ namespace Hast.Layer
                 typeof(ITransformer).Assembly,
                 typeof(NexysA7ManifestProvider).Assembly,
                 typeof(CatapultManifestProvider).Assembly,
+                typeof(Math).Assembly,
             });
             assemblies.AddRange(GetHastLibraries());
 
