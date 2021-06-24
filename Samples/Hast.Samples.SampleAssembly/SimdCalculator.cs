@@ -1,8 +1,7 @@
-﻿using Hast.Common.Numerics;
+using Hast.Common.Numerics;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -20,9 +19,11 @@ namespace Hast.Samples.SampleAssembly
     /// this work.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// System.Numerics.Vectors (including the NuGet package version of it: http://www.nuget.org/packages/System.Numerics.Vectors)
-    /// could be used for SIMD processing on x64 systems. However Vector<T> can only contain that many elements that can
+    /// could be used for SIMD processing on x64 systems. However Vector&lt;T&gt; can only contain that many elements that can
     /// fit into the processor's SIMD register and thus is quite inconvenient to use. So using a custom implementation.
+    /// </para>
     /// </remarks>
     public class SimdCalculator
     {
@@ -36,7 +37,6 @@ namespace Hast.Samples.SampleAssembly
         // more than 500.
         // On Catapult 170 will fit.
         public const int MaxDegreeOfParallelism = 20;
-
 
         public virtual void AddVectors(SimpleMemory memory)
         {
@@ -57,7 +57,6 @@ namespace Hast.Samples.SampleAssembly
         {
             RunSimdOperation(memory, SimdOperation.Divide);
         }
-
 
         private void RunSimdOperation(SimpleMemory memory, SimdOperation operation)
         {
@@ -108,7 +107,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
 
@@ -120,7 +118,6 @@ namespace Hast.Samples.SampleAssembly
 
         public int[] DivideVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
-
 
         private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {

@@ -1,6 +1,4 @@
-﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly

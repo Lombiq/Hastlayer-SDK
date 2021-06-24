@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -22,7 +21,6 @@ namespace Hast.Samples.SampleAssembly
         private const ushort GetLCS_DiagonalCellPointerValue = 2;
         private const ushort GetLCS_OutOfBorderDiagonalCellPointerValue = 3;
 
-
         /// <summary>
         /// Calculates the longest common subsequence of two byte arrays with the Smith-Waterman algorithm.
         /// </summary>
@@ -32,7 +30,6 @@ namespace Hast.Samples.SampleAssembly
             FillTable(memory);
             Traceback(memory);
         }
-
 
         private void FillTable(SimpleMemory memory)
         {
@@ -177,7 +174,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         /// <summary>
         /// Calculates the longest common subsequence of two strings.
         /// </summary>
@@ -192,7 +188,6 @@ namespace Hast.Samples.SampleAssembly
 
             return GetResult(simpleMemory, inputOne, inputTwo);
         }
-
 
         /// <summary>
         /// Creates a <see cref="SimpleMemory"/> object filled with the input values.

@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample on using unum floating point numbers. For some info on unums see: http://www.johngustafson.net/unums.html
+    /// A sample on using unum floating point numbers. For some info on unums see: http://www.johngustafson.net/unums.html .
     /// </summary>
     public class UnumCalculator
     {
         public const int CalculateSumOfPowersofTwoInputUInt32Index = 0;
         public const int CalculateSumOfPowersofTwoOutputUInt32Index = 0;
-
 
         public virtual void CalculateSumOfPowersofTwo(SimpleMemory memory)
         {

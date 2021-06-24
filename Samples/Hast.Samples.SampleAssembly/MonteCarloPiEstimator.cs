@@ -11,9 +11,9 @@ namespace Hast.Samples.SampleAssembly
     /// Algorithm to calculate Pi with a random <see href="https://en.wikipedia.org/wiki/Monte_Carlo_method"> Monte
     /// Carlo method</see> in a parallelized manner. For an overview  of the idea see <see
     /// href="https://www.coursera.org/lecture/parprog1/monte-carlo-method-to-estimate-pi-Zgm76">this video</see>;
-    /// <see href="http://www.software-architects.com/devblog/2014/09/22/C-Parallel-and-Async-Programming"/>this
-    /// blog post's implementation</see> was used as an inspiration too. Also see <see
-    /// cref="MonteCarloAlgorithmSampleRunner"/> on what to configure to make this work.
+    /// <see href="http://www.software-architects.com/devblog/2014/09/22/C-Parallel-and-Async-Programming">this
+    /// blog post's implementation</see> was used as an inspiration too. Also see <c>MonteCarloAlgorithmSampleRunner</c>
+    /// on what to configure to make this work.
     /// </summary>
     public class MonteCarloPiEstimator
     {
@@ -26,7 +26,6 @@ namespace Hast.Samples.SampleAssembly
         // since then we changed Hastlayer slightly.
         [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
         public static readonly int MaxDegreeOfParallelism = 77;
-
 
         public virtual void EstimatePi(SimpleMemory memory)
         {
@@ -79,7 +78,6 @@ namespace Hast.Samples.SampleAssembly
 
             memory.WriteUInt32(EstimatePi_InCircleCountSumUInt32Index, inCircleCountSum);
         }
-
 
         private readonly Random _random = new Random();
 

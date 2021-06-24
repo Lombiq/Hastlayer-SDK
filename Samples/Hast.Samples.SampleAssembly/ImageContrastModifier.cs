@@ -22,7 +22,6 @@ namespace Hast.Samples.SampleAssembly
         [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
 
-
         /// <summary>
         /// Changes the contrast of an image.
         /// </summary>
@@ -121,7 +120,6 @@ namespace Hast.Samples.SampleAssembly
             return (byte)correctedPixel;
         }
 
-
         private class PixelProcessingTaskInput
         {
             public byte[] PixelBytes { get; set; }
@@ -134,7 +132,6 @@ namespace Hast.Samples.SampleAssembly
             public byte G { get; set; }
             public byte B { get; set; }
         }
-
 
         /// <summary>
         /// Changes the contrast of an image.
@@ -152,7 +149,6 @@ namespace Hast.Samples.SampleAssembly
             ChangeContrast(memory);
             return CreateImage(memory, image);
         }
-
 
         /// <summary>
         /// Creates a <see cref="SimpleMemory"/> instance that stores the image.

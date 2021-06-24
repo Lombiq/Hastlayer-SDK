@@ -1,5 +1,4 @@
 ﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -12,7 +11,6 @@ namespace Hast.Samples.SampleAssembly
     {
         public const int Run_InputUInt32Index = 0;
         private const int Run_OutputUInt32Index = 0;
-
 
         public virtual void Run(SimpleMemory memory)
         {
@@ -40,7 +38,6 @@ namespace Hast.Samples.SampleAssembly
             numberContainers1[3].IncreaseNumberByParameterTimes10(ref increaseBy, out uint originalNumber);
             numberContainers1[3].IncreaseNumber(increaseBy + originalNumber);
 
-
             // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
             // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a
             // variable then its value should be computable from all other values at compile-time).
@@ -65,7 +62,6 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteUInt32(Run_OutputUInt32Index, SumNumberContainers(numberContainers1));
         }
 
-
         private uint SumNumberContainers(NumberContainer[] numberContainers)
         {
             uint sum = 0;
@@ -78,7 +74,6 @@ namespace Hast.Samples.SampleAssembly
             return sum;
         }
 
-
         public uint Run(uint input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
@@ -89,7 +84,6 @@ namespace Hast.Samples.SampleAssembly
             return memory.ReadUInt32(Run_OutputUInt32Index);
         }
     }
-
 
     // Although this is a public class it could also be an inner class and/or a non-public one too.
     public class NumberContainer
@@ -109,7 +103,6 @@ namespace Hast.Samples.SampleAssembly
             set { Number = value - 5; }
         }
 
-
         // Constructors can be used, with or without parameters.
         public NumberContainer()
         {
@@ -119,7 +112,6 @@ namespace Hast.Samples.SampleAssembly
         {
             Number = number;
         }
-
 
         // Instance methods can be added as usual.
         public uint IncreaseNumber(uint increaseBy)
@@ -140,25 +132,21 @@ namespace Hast.Samples.SampleAssembly
         }
     }
 
-
     public static class NumberContainerExtensions
     {
         // You can also write extension methods.
         public static uint IncreaseNumberBy20(this NumberContainer numberContainer) => numberContainer.IncreaseNumber(20);
     }
 
-
     public class MemoryContainer
     {
         // The SimpleMemory object can be passed around as usual.
         private readonly SimpleMemory _memory;
 
-
         public MemoryContainer(SimpleMemory memory)
         {
             _memory = memory;
         }
-
 
         public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.Run_InputUInt32Index);
     }

@@ -1,7 +1,7 @@
 using Hast.Algorithms.Random;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Diagnostics.CodeAnalysis;
-using Hast.Layer;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -40,7 +40,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// 0 and 1, and writing the result to cell 2.
         /// </summary>
         public virtual void TestAdd(SimpleMemory memory) => memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
-
 
         /// <summary>
         /// This function is for testing how Hastlayer works by running a random generator, writing the results into
@@ -111,7 +110,6 @@ namespace Hast.Samples.Kpz.Algorithms
         }
     }
 
-
     /// <summary>
     /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM
     /// or LUT RAM of the FPGA, thus it can only handle small table sizes.
@@ -125,7 +123,11 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int GridHeight = 8;
         // The probability of turning a pyramid into a hole (IntegerProbabilityP),
         // or a hole into a pyramid (IntegerProbabilityQ).
-        public const uint IntegerProbabilityP = 32767, IntegerProbabilityQ = 32767;
+        public const uint IntegerProbabilityP = 32767;
+
+        // The probability of turning a pyramid into a hole (IntegerProbabilityP),
+        // or a hole into a pyramid (IntegerProbabilityQ).
+        public const uint IntegerProbabilityQ = 32767;
         // ==== </CONFIGURABLE PARAMETERS> ====
 
         public const int MemIndexNumberOfIterations = 0;
@@ -136,16 +138,15 @@ namespace Hast.Samples.Kpz.Algorithms
 
         private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
-        public RandomMwc64X Random1, Random2;
+        public RandomMwc64X Random1;
+        public RandomMwc64X Random2;
         public bool TestMode = false;
         public uint NumberOfIterations = 1;
-
 
         /// <summary>
         /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at
         /// the beginning.
         /// </summary>
-        /// <param name="memory"></param>
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
 
@@ -235,7 +236,6 @@ namespace Hast.Samples.Kpz.Algorithms
             }
         }
 
-
         /// <summary>
         /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for the
         /// item's place in the grid.
@@ -266,7 +266,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// </summary>
         private void SetGridDy(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~2U) | (value ? 2U : 0);
     }
-
 
     /// <summary>
     /// These are host-side helper functions for <see cref="KpzKernels"/>.
@@ -318,11 +317,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// This function pushes parameters and PRNG seed to the FPGA.
         /// </summary>
-        /// <param name="memoryDst"></param>
-        /// <param name="testMode"></param>
-        /// <param name="randomSeed1"></param>
-        /// <param name="randomSeed2"></param>
-        /// <param name="numberOfIterations"></param>
         public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1,
             ulong randomSeed2, uint numberOfIterations)
         {
@@ -337,32 +331,28 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// This is a wrapper for running the KPZ algorithm on the FPGA.
         /// </summary>
-        /// <param name="kernels"></param>
-        /// <param name="configuration"></param>
         /// <param name="hostGrid">
-        ///     This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.
+        ///     <para>This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.</para>
         /// </param>
         /// <param name="pushToFpga">
-        ///     If this parameter is false, the FPGA will work on the grid currently available in it,
-        ///     instead of the grid in the <see cref="hostGrid"/> parameter.
+        ///     <para>If this parameter is false, the FPGA will work on the grid currently available in it,
+        ///     instead of the grid in the <see cref="hostGrid"/> parameter.</para>
         /// </param>
         /// <param name="testMode">
-        ///     does several things:
+        ///     <para>does several things:</para>
         ///     <list type="bullet">
         ///         <item>
-        ///             if it is true, <see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the cells
-        ///             if it finds an adequate place,
+        ///             <description>
+        ///             if it is true, <see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the cells if it finds an adequate place,
+        ///             </description>
         ///         </item>
         ///         <item>
-        ///             it also does only a single poke, then sends the grid back to the host so that the algorithm
-        ///             can be analyzed in the step-by-step window.
+        ///             <description>
+        ///             it also does only a single poke, then sends the grid back to the host so that the algorithm can be analyzed in the step-by-step window.
+        ///             </description>
         ///         </item>
         ///     </list>
         /// </param>
-        /// <param name="randomSeed1">is a random seed for the algorithm.</param>
-        /// <param name="randomSeed2">is a random seed for the algorithm.</param>
-        /// <param name="numberOfIterations">is the number of iterations to perform.</param>
-        /// <param name="hastlayer"></param>
         public static void DoIterationsWrapper(
             this KpzKernelsInterface kernels,
             IHastlayer hastlayer,
@@ -384,7 +374,6 @@ namespace Hast.Samples.Kpz.Algorithms
             kernels.DoIterations(sm);
             CopyFromSimpleMemoryToGrid(context.HostGrid, sm);
         }
-
 
         /// <summary>Push table into FPGA.</summary>
         public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)

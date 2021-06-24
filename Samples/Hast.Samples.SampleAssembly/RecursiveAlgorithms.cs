@@ -16,7 +16,7 @@ namespace Hast.Samples.SampleAssembly
     /// memory operations makes the algorithm much slower.
     /// </summary>
     /// <remarks>
-    /// The private methods' names are prefixed so they can targeted for recursion configuration.
+    /// <para>The private methods' names are prefixed so they can targeted for recursion configuration.</para>
     /// </remarks>
     public class RecursiveAlgorithms
     {
@@ -26,7 +26,6 @@ namespace Hast.Samples.SampleAssembly
         private const int CalculateFactorial_InputShortIndex = 0;
         private const int CalculateFactorial_OutputUInt32Index = 0;
         private const int CalculateFactorial_InvocationCounterUInt32Index = 1;
-
 
         public virtual void CalculateFibonacchiSeries(SimpleMemory memory)
         {
@@ -43,7 +42,6 @@ namespace Hast.Samples.SampleAssembly
             var number = (short)memory.ReadInt32(CalculateFactorial_InputShortIndex);
             memory.WriteUInt32(CalculateFactorial_OutputUInt32Index, RecursivelyCalculateFactorial(memory, number));
         }
-
 
         // The return value should be a type with a bigger range than the input. Although we can use 64b numbers
         // internally we can't write the to memory yet so the input needs to be a short.
@@ -66,7 +64,6 @@ namespace Hast.Samples.SampleAssembly
             if (number == 0) return 1;
             return (uint)(number * RecursivelyCalculateFactorial(memory, (short)(number - 1)));
         }
-
 
         public uint CalculateFibonacchiSeries(short number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {

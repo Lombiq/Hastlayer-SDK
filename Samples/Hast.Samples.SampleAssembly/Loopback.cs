@@ -1,5 +1,4 @@
 ﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -12,7 +11,6 @@ namespace Hast.Samples.SampleAssembly
     public class Loopback
     {
         private const int Run_InputOutputInt32Index = 0;
-
 
         public virtual void Run(SimpleMemory memory)
         {

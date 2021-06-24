@@ -11,7 +11,6 @@ namespace Hast.Samples.Kpz.Algorithms
         public bool Dx; // Right
         public bool Dy; // Bottom
 
-
         public uint SerializeToUInt32() => ((Dx) ? 1U : 0) | ((Dy) ? 2U : 0);
 
         public static KpzNode DeserializeFromUInt32(uint value)
@@ -26,8 +25,6 @@ namespace Hast.Samples.Kpz.Algorithms
 
     }
 
-
-
     /// <summary>
     /// This struct stores the right and bottom neighbours of a particular node on the grid.
     /// It stores both their values and coordinates.
@@ -40,7 +37,6 @@ namespace Hast.Samples.Kpz.Algorithms
         public KpzCoords NxCoords; // Right neighbour coordinates
         public KpzCoords NyCoords; // Left neighbour coordinates
     }
-
 
     /// <summary>
     /// This struct stores the coordinates of a <see cref="KpzNode" /> on the grid.

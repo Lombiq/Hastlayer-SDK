@@ -31,12 +31,12 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates whether a number is prime.
         /// </summary>
         /// <remarks>
-        /// This demonstrates a simple hardware entry point. Note that the entry point of SimpleMemory-using algorithms
+        /// <para>This demonstrates a simple hardware entry point. Note that the entry point of SimpleMemory-using algorithms
         /// should be void methods having a single <see cref="SimpleMemory"/> argument. You can find the corresponding
         /// wrapper method below as IsPrimeNumber(uint number).
         ///
         /// Note that hardware entry points need to be public and virtual, and they mustn't have any other parameters
-        /// than a single SimpleMemory one.
+        /// than a single SimpleMemory one.</para>
         /// </remarks>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void IsPrimeNumberSync(SimpleMemory memory)
@@ -51,8 +51,8 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates whether the number is prime, in an async way.
         /// </summary>
         /// <remarks>
-        /// For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized hardware
-        /// entry point method async like this.
+        /// <para>For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized hardware
+        /// entry point method async like this.</para>
         /// </remarks>
         public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
         {
@@ -66,7 +66,7 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates for multiple numbers whether they're primes.
         /// </summary>
         /// <remarks>
-        /// A simple demonstration on how you can manage an array of inputs and outputs.
+        /// <para>A simple demonstration on how you can manage an array of inputs and outputs.</para>
         /// </remarks>
         public virtual void ArePrimeNumbers(SimpleMemory memory)
         {
@@ -84,10 +84,10 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates for multiple numbers whether they're primes, in a parallelized way.
         /// </summary>
         /// <remarks>
-        /// This demonstrates how you can write parallelized code that Hastlayer will process and turn into hardware-level
+        /// <para>This demonstrates how you can write parallelized code that Hastlayer will process and turn into hardware-level
         /// parallelization: the Tasks' bodies will be copied in hardware as many times as many Tasks you start; thus,
         /// the actual level of parallelism you get on the hardware corresponds to the number of Tasks, not the number
-        /// of CPU cores.
+        /// of CPU cores.</para>
         /// </remarks>
         public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
         {
@@ -124,13 +124,13 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         /// <summary>
         /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods.
         /// Because when you want to pass data between methods you can freely use supported types as arguments, you
         /// don't need to pass data through SimpleMemory.
         /// </summary>
         /// <remarks>
+        /// <para>
         /// Note the usage of the AggressiveInlining option, which tells Hastlayer that the method can be inlined, i.e.
         /// basically its implementation can be copied over to where it is called. This is a performance optimization:
         /// this way the overhead of method calls is eliminated and thus execution will be faster (very useful if you
@@ -145,11 +145,12 @@ namespace Hast.Samples.SampleAssembly
         ///   limits further use).
         ///
         /// Methods can also be inlined with the help of the
-        /// <c>TransformerConfiguration().AddAdditionalInlinableMethod<T>()</c> configuration.
+        /// <c>TransformerConfiguration().AddAdditionalInlinableMethod&lt;T&gt;()</c> configuration.
         ///
         /// WARNING: be sure not to overdo inlining, because just inlining everything (especially if inlined methods
         /// also call inlined methods...) can quickly create giant hardware implementations that won't be just most
         /// possibly too big for the FPGA but also very slow to transform.
+        /// </para>
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private bool IsPrimeNumberInternal(uint number)
@@ -167,7 +168,6 @@ namespace Hast.Samples.SampleAssembly
 
             return i == factor + 1;
         }
-
 
         // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
         // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
@@ -227,9 +227,7 @@ namespace Hast.Samples.SampleAssembly
                 memory.WriteUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, numbers[i]);
             }
 
-
             methodRunner(memory);
-
 
             var output = new bool[numbers.Length];
             for (int i = 0; i < numbers.Length; i++)

@@ -1,10 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
@@ -15,14 +8,13 @@ namespace Hast.Samples.SampleAssembly
     /// can be used with Hastlayer.
     /// </summary>
     /// <remarks>
-    /// This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable,
-    /// <see cref="Posit32Calculator"/>;
+    /// <para>This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable,
+    /// <see cref="Posit32Calculator"/>.</para>
     /// </remarks>
     public class PositCalculator
     {
         public const int CalculateLargeIntegerSumInputInt32Index = 0;
         public const int CalculateLargeIntegerSumOutputInt32Index = 0;
-
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {

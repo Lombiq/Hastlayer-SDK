@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hast.Algorithms;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -21,7 +20,6 @@ namespace Hast.Samples.SampleAssembly
         private const int ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex = 0;
 
         public const int MaxDegreeOfParallelism = 10;
-
 
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
@@ -82,13 +80,11 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         private class TaskResult
         {
             public int Fix64Low { get; set; }
             public int Fix64High { get; set; }
         }
-
 
         public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {
