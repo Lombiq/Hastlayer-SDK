@@ -284,8 +284,8 @@ namespace Hast.Communication.Services
                         {
                             _logger.LogInformation(
                                 ex,
-                                "Couldn't authorize while getting port names. This may be because the port is used " +
-                                "by another application.");
+                                "Couldn't access device while trying to get port names. This may be because the port " +
+                                "is used by another application. Checking the next port...");
                         }
 
                         // Waiting a maximum of 3s for a response from the port.
