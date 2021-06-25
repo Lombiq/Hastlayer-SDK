@@ -58,7 +58,7 @@ namespace Hast.Communication.Models
         /// </summary>
         public void Reset(int knownCount, int startIndex = 0)
         {
-            if (_data.Length < knownCount + startIndex) _data = new T[knownCount + startIndex];
+            if (_data == null || _data.Length < knownCount + startIndex) _data = new T[knownCount + startIndex];
             Count = 0;
             KnownCount = knownCount;
             StartIndex = startIndex;
