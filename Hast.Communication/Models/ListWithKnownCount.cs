@@ -65,14 +65,19 @@ namespace Hast.Communication.Models
         }
 
         /// <summary>
-        /// Casts the internal array into a <see cref="Memory{T}"/> and hand over ownership to the caller. It is
-        /// necessary to <see cref="Reset"/> afterwards to keep using this object.
+        /// Casts the complete internal array into a <see cref="Memory{T}"/> and hands over ownership to the caller.
+        /// If you only want the segment used with <see cref="Add"/>, slice the result with <see cref="StartIndex"/>
+        /// which is preserved after this call for that reason. If you do that, the resulting <see cref="Memory{T}"/>
+        /// will have the same length as <see cref="KnownCount"/> had.
+        /// If you want to reuse this object, you must call <see cref="Reset"/>, because the internal array is removed
+        /// and <see cref="KnownCount"/> is set to 0 to ensure the result's exclusivity.
         /// </summary>
         public Memory<T> HandOver()
         {
-            var currentData = ((Memory<T>)_data)[(KnownCount + StartIndex)..];
+            var currentData = (Memory<T>)_data;
             _data = Array.Empty<T>();
-            Reset(0);
+            Count = 0;
+            KnownCount = 0;
 
             return currentData;
         }
