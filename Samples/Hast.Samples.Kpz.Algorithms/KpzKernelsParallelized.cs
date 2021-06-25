@@ -66,7 +66,7 @@ namespace Hast.Samples.Kpz.Algorithms
 
         public const int MemIndexNumberOfIterations = 0;
         public const int MemIndexRandomSeed = MemIndexNumberOfIterations + 1;
-        public const int MemIndexGrid = MemIndexRandomSeed + ParallelTasks * 4 + 2;
+        public const int MemIndexGrid = MemIndexRandomSeed + (ParallelTasks * 4) + 2;
 
         public virtual void ScheduleIterations(SimpleMemory memory)
         {
@@ -127,13 +127,13 @@ namespace Hast.Samples.Kpz.Algorithms
                     {
                         // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex
                         // (and the random added value)
-                        int localGridIndex = parallelTaskIndex + scheduleIndex * ParallelTasks;
+                        int localGridIndex = parallelTaskIndex + (scheduleIndex * ParallelTasks);
                         // The X and Y coordinate within the small table (local grid):
                         int partitionX = localGridIndex % LocalGridPartitions;
                         int partitionY = localGridIndex / LocalGridPartitions;
                         // The X and Y coordinate within the big table (grid):
-                        int baseX = partitionX * LocalGridSize + randomXOffset;
-                        int baseY = partitionY * LocalGridSize + randomYOffset;
+                        int baseX = (partitionX * LocalGridSize) + randomXOffset;
+                        int baseY = (partitionY * LocalGridSize) + randomYOffset;
 
                         // Copy to local memory
                         for (int copyDstX = 0; copyDstX < LocalGridSize; copyDstX++)
@@ -143,10 +143,10 @@ namespace Hast.Samples.Kpz.Algorithms
                                 //Prevent going out of grid memory area (e.g. reading into random seed):
                                 int copySrcX = (baseX + copyDstX) % GridSize;
                                 int copySrcY = (baseY + CopyDstY) % GridSize;
-                                uint value = memory.ReadUInt32(MemIndexGrid + copySrcX + copySrcY * GridSize);
-                                taskLocals[parallelTaskIndex].BramDx[copyDstX + CopyDstY * LocalGridSize] =
+                                uint value = memory.ReadUInt32(MemIndexGrid + copySrcX + (copySrcY * GridSize));
+                                taskLocals[parallelTaskIndex].BramDx[copyDstX + (CopyDstY * LocalGridSize)] =
                                     (value & 1) == 1;
-                                taskLocals[parallelTaskIndex].BramDy[copyDstX + CopyDstY * LocalGridSize] =
+                                taskLocals[parallelTaskIndex].BramDy[copyDstX + (CopyDstY * LocalGridSize)] =
                                     (value & 2) == 2;
                             }
                         }
@@ -167,7 +167,7 @@ namespace Hast.Samples.Kpz.Algorithms
                                 // The existence of var-1 in code is a good indicator of that it is assumed to be 2^N:
                                 int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1));
                                 int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
-                                int pokeCenterIndex = pokeCenterX + pokeCenterY * LocalGridSize;
+                                int pokeCenterIndex = pokeCenterX + (pokeCenterY * LocalGridSize);
                                 uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
                                 uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
 
@@ -180,8 +180,8 @@ namespace Hast.Samples.Kpz.Algorithms
                                 int rightNeighbourY = pokeCenterY;
                                 int bottomNeighbourX = pokeCenterX;
                                 int bottomNeighbourY = pokeCenterY + 1;
-                                rightNeighbourIndex = rightNeighbourY * LocalGridSize + rightNeighbourX;
-                                bottomNeighbourIndex = bottomNeighbourY * LocalGridSize + bottomNeighbourX;
+                                rightNeighbourIndex = (rightNeighbourY * LocalGridSize) + rightNeighbourX;
+                                bottomNeighbourIndex = (bottomNeighbourY * LocalGridSize) + bottomNeighbourX;
 
                                 // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
 
@@ -215,13 +215,13 @@ namespace Hast.Samples.Kpz.Algorithms
                     for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
                     {
                         // Calculate these things again
-                        int localGridIndex = parallelTaskIndex + scheduleIndex * ParallelTasks;
+                        int localGridIndex = parallelTaskIndex + (scheduleIndex * ParallelTasks);
                         // The X and Y coordinate within the small table (local grid):
                         int partitionX = localGridIndex % LocalGridPartitions;
                         int partitionY = localGridIndex / LocalGridPartitions;
                         // The X and Y coordinate within the big table (grid):
-                        int baseX = partitionX * LocalGridSize + randomXOffset;
-                        int baseY = partitionY * LocalGridSize + randomYOffset;
+                        int baseX = (partitionX * LocalGridSize) + randomXOffset;
+                        int baseY = (partitionY * LocalGridSize) + randomYOffset;
 
                         for (int copySrcX = 0; copySrcX < LocalGridSize; copySrcX++)
                         {
@@ -230,11 +230,11 @@ namespace Hast.Samples.Kpz.Algorithms
                                 int copyDstX = (baseX + copySrcX) % GridSize;
                                 int copyDstY = (baseY + copySrcY) % GridSize;
                                 uint value =
-                                    (tasks[parallelTaskIndex].Result.BramDx[copySrcX + copySrcY * LocalGridSize] ? 1U : 0U) |
-                                    (tasks[parallelTaskIndex].Result.BramDy[copySrcX + copySrcY * LocalGridSize] ? 2U : 0U);
+                                    (tasks[parallelTaskIndex].Result.BramDx[copySrcX + (copySrcY * LocalGridSize)] ? 1U : 0U) |
+                                    (tasks[parallelTaskIndex].Result.BramDy[copySrcX + (copySrcY * LocalGridSize)] ? 2U : 0U);
                                 // Note: use (tasks[parallelTaskIndex].Result), because
                                 //(TaskLocals[ParallelTaskIndex]) won't work.
-                                memory.WriteUInt32(MemIndexGrid + copyDstX + copyDstY * GridSize, value);
+                                memory.WriteUInt32(MemIndexGrid + copyDstX + (copyDstY * GridSize), value);
                             }
                         }
 
@@ -317,9 +317,9 @@ namespace Hast.Samples.Kpz.Algorithms
                 93473713, -937734760, -279968717, -1457028170, -389060750, -1888789492, -1109047524, 171427933
             };
 
-            int numRandomUints = 2 + KpzKernelsParallelizedInterface.ParallelTasks * 4;
-            var sm = hastlayer.CreateMemory(configuration, KpzKernelsParallelizedInterface.GridSize *
-                KpzKernelsParallelizedInterface.GridSize + numRandomUints + 1);
+            int numRandomUints = 2 + (KpzKernelsParallelizedInterface.ParallelTasks * 4);
+            var sm = hastlayer.CreateMemory(configuration, (KpzKernelsParallelizedInterface.GridSize *
+                KpzKernelsParallelizedInterface.GridSize) + numRandomUints + 1);
 
             if (pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
 
@@ -346,7 +346,7 @@ namespace Hast.Samples.Kpz.Algorithms
                 for (int y = 0; y < KpzKernelsParallelizedInterface.GridSize; y++)
                 {
                     var node = gridSrc[x, y];
-                    memoryDst.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + y * KpzKernelsParallelizedInterface.GridSize + x, node.SerializeToUInt32());
+                    memoryDst.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + (y * KpzKernelsParallelizedInterface.GridSize) + x, node.SerializeToUInt32());
                 }
             }
         }
@@ -359,7 +359,7 @@ namespace Hast.Samples.Kpz.Algorithms
                 for (int y = 0; y < KpzKernelsParallelizedInterface.GridSize; y++)
                 {
                     gridDst[x, y] = KpzNode.DeserializeFromUInt32(
-                        memorySrc.ReadUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + y * KpzKernelsParallelizedInterface.GridSize + x));
+                        memorySrc.ReadUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + (y * KpzKernelsParallelizedInterface.GridSize) + x));
                 }
             }
         }

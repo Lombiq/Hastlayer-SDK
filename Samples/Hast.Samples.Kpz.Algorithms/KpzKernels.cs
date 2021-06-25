@@ -134,7 +134,7 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int MemIndexStepMode = 1;
         public const int MemIndexRandomStates = 2;
         public const int MemIndexGrid = 6;
-        public const int SizeOfSimpleMemory = GridWidth * GridHeight + 6;
+        public const int SizeOfSimpleMemory = (GridWidth * GridHeight) + 6;
 
         private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
@@ -153,12 +153,12 @@ namespace Hast.Samples.Kpz.Algorithms
             Random1 = new RandomMwc64X
             {
                 State =
-                    (ulong)memory.ReadUInt32(MemIndexRandomStates) << 32 | memory.ReadUInt32(MemIndexRandomStates + 1)
+                    ((ulong)memory.ReadUInt32(MemIndexRandomStates) << 32) | memory.ReadUInt32(MemIndexRandomStates + 1)
             };
             Random2 = new RandomMwc64X
             {
                 State =
-                    (ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32 | memory.ReadUInt32(MemIndexRandomStates + 3)
+                    ((ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32) | memory.ReadUInt32(MemIndexRandomStates + 3)
             };
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);
@@ -173,7 +173,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 for (int x = 0; x < GridWidth; x++)
                 {
-                    int index = y * GridWidth + x;
+                    int index = (y * GridWidth) + x;
                     memory.WriteUInt32(MemIndexGrid + index, _gridRaw[index]);
                 }
             }
@@ -188,7 +188,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 for (int y = 0; y < GridHeight; y++)
                 {
-                    int index = y * GridWidth + x;
+                    int index = (y * GridWidth) + x;
                     _gridRaw[index] = memory.ReadUInt32(MemIndexGrid + index);
                 }
             }
@@ -214,8 +214,8 @@ namespace Hast.Samples.Kpz.Algorithms
             int rightNeighbourY = centerY;
             int bottomNeighbourX = centerX;
             int bottomNeighbourY = (centerY < GridHeight - 1) ? centerY + 1 : 0;
-            rightNeighbourIndex = rightNeighbourY * GridWidth + rightNeighbourX;
-            bottomNeighbourIndex = bottomNeighbourY * GridWidth + bottomNeighbourX;
+            rightNeighbourIndex = (rightNeighbourY * GridWidth) + rightNeighbourX;
+            bottomNeighbourIndex = (bottomNeighbourY * GridWidth) + bottomNeighbourX;
             // We check our own {dx,dy} values, and the right neighbor's dx, and bottom neighbor's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
@@ -240,7 +240,7 @@ namespace Hast.Samples.Kpz.Algorithms
         /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for the
         /// item's place in the grid.
         /// </summary>
-        private int GetIndexFromXY(int x, int y) => x + y * GridWidth;
+        private int GetIndexFromXY(int x, int y) => x + (y * GridWidth);
 
         /// <summary>
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
@@ -383,7 +383,7 @@ namespace Hast.Samples.Kpz.Algorithms
                 for (int y = 0; y < KpzKernels.GridWidth; y++)
                 {
                     var node = gridSrc[x, y];
-                    memoryDst.WriteUInt32(KpzKernels.MemIndexGrid + y * KpzKernels.GridWidth + x, node.SerializeToUInt32());
+                    memoryDst.WriteUInt32(KpzKernels.MemIndexGrid + (y * KpzKernels.GridWidth) + x, node.SerializeToUInt32());
                 }
             }
         }
@@ -395,7 +395,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 for (int y = 0; y < KpzKernels.GridHeight; y++)
                 {
-                    gridDst[x, y] = KpzNode.DeserializeFromUInt32(memorySrc.ReadUInt32(KpzKernels.MemIndexGrid + y * KpzKernels.GridWidth + x));
+                    gridDst[x, y] = KpzNode.DeserializeFromUInt32(memorySrc.ReadUInt32(KpzKernels.MemIndexGrid + (y * KpzKernels.GridWidth) + x));
                 }
             }
         }

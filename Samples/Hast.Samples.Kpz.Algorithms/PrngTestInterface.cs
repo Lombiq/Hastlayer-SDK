@@ -22,7 +22,7 @@ namespace Hast.Samples.Kpz.Algorithms
         {
             uint stateHighWord = memory.ReadUInt32(1);
             uint stateLowWord = memory.ReadUInt32(0); ;
-            ulong randomState = stateLowWord * 0xFFFEB81BUL + stateHighWord;
+            ulong randomState = (stateLowWord * 0xFFFEB81BUL) + stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
             memory.WriteUInt32(0, (uint)randomState); //LE: 1 is high byte, 0 is low byte

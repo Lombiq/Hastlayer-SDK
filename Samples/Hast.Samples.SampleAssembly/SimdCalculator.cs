@@ -129,7 +129,7 @@ namespace Hast.Samples.SampleAssembly
             vector2 = vector2.PadToMultipleOf(MaxDegreeOfParallelism);
 
             var elementCount = vector1.Length;
-            var cellCount = 1 + elementCount * 2;
+            var cellCount = 1 + (elementCount * 2);
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
