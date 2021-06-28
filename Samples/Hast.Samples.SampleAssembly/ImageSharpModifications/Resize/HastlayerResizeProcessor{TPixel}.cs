@@ -63,19 +63,72 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         {
             if (!(sampler is NearestNeighborResampler)) return;
 
-            var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
+            // var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
+            var memory = CreateMatrixMemory(Source, _destinationWidth, _destinationHeight, _hastlayer, _hardwareConfiguration);
 
             // Hastlayer configurálása.
             // Proxy generated object használása. resizeimage 
-            new ImageSharpSample().ApplyTransform(memory);
+            // new ImageSharpSample().ApplyTransform(memory);
+
+            new ImageSharpSample().CreateMatrix(memory);
+
+            var accessor = new SimpleMemoryAccessor(memory);
+
+            var rowIndecesSpan = accessor.Get().Span.Slice(16, _destinationHeight * 4);
+            var rowIndeces = MemoryMarshal.Cast<byte, int>(rowIndecesSpan);
+
+            var pixelIndecesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth);
+            var pixelIndeces = MemoryMarshal.Cast<byte, int>(pixelIndecesSpan);
 
             for (int i = 0; i < Source.Frames.Count; i++)
             {
                 var sourceFrame = Source.Frames[i];
                 var destinationFrame = _destination.Frames[i];
 
-                ApplyTransformFromMemory(sourceFrame, destinationFrame, memory);
+                for (int y = 0; y < destinationFrame.Height; y++)
+                {
+                    var destinationRow = destinationFrame.GetPixelRowSpan(y);
+
+                    var sourceRow = sourceFrame.GetPixelRowSpan(rowIndeces[y]);
+
+                    for (int x = 0; x < destinationFrame.Width; x++)
+                    {
+                        destinationRow[x] = sourceRow[pixelIndeces[x]];
+                    }
+                }
             }
+
+            //for (int i = 0; i < Source.Frames.Count; i++)
+            //{
+            //    var sourceFrame = Source.Frames[i];
+            //    var destinationFrame = _destination.Frames[i];
+
+            //    ApplyTransformFromMemory(sourceFrame, destinationFrame, memory);
+            //}
+        }
+
+        public SimpleMemory CreateMatrixMemory(
+            Image<TPixel> image,
+            int destinationWidth,
+            int destinationHeight,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+        {
+            var width = image.Width;
+            var height = image.Height;
+
+            var cellCount = destinationWidth + destinationHeight + 4;
+
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(hardwareGenerationConfiguration, cellCount);
+
+            memory.WriteUInt32(0, (uint)destinationWidth);
+            memory.WriteUInt32(1, (uint)destinationHeight);
+            memory.WriteUInt32(2, (uint)width);
+            memory.WriteUInt32(3, (uint)height);
+
+            return memory;
         }
 
         public SimpleMemory CreateSimpleMemory(
@@ -126,7 +179,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             for (int y = 0; y < destination.Height; y++)
             {
                 var destinationRow = destination.GetPixelRowSpan(y);
-                
+
                 var memorySpan = memSpan.Slice(y * destination.Width * 4, destination.Width * 4);
 
                 var sourceRow = MemoryMarshal.Cast<byte, TPixel>(memorySpan);
