@@ -121,7 +121,7 @@ You can read such files e.g. with Notepad++'s [HEX-Editor plugin](https://commun
 
 ## Extensibility
 
-Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability to override implementations of services through the DI container) provides three kind of extension points:Hastlayer offers similar extensibility found in standard Orchard 1.x. (Although with the caveat that service implementations don't overrider each other so the user needs to manage it in the HastlayerConfiguration.) Additionally, it provides these extension points:Hastlayer, apart from the standard Orchard-style extensibility (e.g. the ability to override implementations of services through the DI container) provides three kind of extension points:
+Hastlayer, apart from the standard dependency injection extensibility (e.g. the ability to override implementations of services through the DI container, although with the caveat that service implementations don't overrider each other so the user needs to manage it in the `HastlayerConfiguration`.) provides these extension points:
 
 - .NET-style events: standard .NET events.
 - Pipeline steps: unlike event handlers, pipeline steps are executed in deterministic order and usually have a return value that is fed to the next pipeline step.
