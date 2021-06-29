@@ -18,7 +18,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             Size sourceSize,
             int maxDegreeOfParallelism,
             IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+            IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration configuration)
         {
             Guard.NotNull(options, nameof(options));
             Guard.NotNull(options.Sampler, nameof(options.Sampler));
@@ -33,7 +34,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             Compand = options.Compand;
             MaxDegreeOfParallelism = maxDegreeOfParallelism;
             Hastlayer = hastlayer;
-            HardwareGenerationConfiguration = hardwareGenerationConfiguration;
+            HardwareRepresentation = hardwareRepresentation;
+            Configuration = configuration;
         }
 
         /// <summary>
@@ -79,7 +81,12 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         /// <summary>
         /// Necessary values for hastlayer.
         /// </summary>
-        public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; }
+        public IHardwareRepresentation HardwareRepresentation { get; }
+
+        /// <summary>
+        /// Necessary values for hastlayer.
+        /// </summary>
+        public IProxyGenerationConfiguration Configuration { get; }
 
         public override ICloningImageProcessor<TPixel> CreatePixelSpecificCloningProcessor<TPixel>(
             Configuration configuration,
@@ -88,7 +95,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         {
             configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
             return new HastlayerResizeProcessor<TPixel>(
-                configuration, this, source, sourceRectangle, Hastlayer, HardwareGenerationConfiguration);
+                configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation, Configuration);
         }
     }
 }

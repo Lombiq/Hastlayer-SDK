@@ -11,6 +11,10 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using Hast.Samples.SampleAssembly;
+using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
+using SixLabors.ImageSharp.Processing;
+using System.Diagnostics;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
 {
@@ -22,7 +26,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         private readonly IResampler _resampler;
         private Image<TPixel> _destination;
         private IHastlayer _hastlayer;
-        private IHardwareGenerationConfiguration _hardwareConfiguration;
+        private IHardwareRepresentation _hardwareRepresentation;
+        private IProxyGenerationConfiguration _proxyConfiguration;
 
         public HastlayerResizeProcessor(
             Configuration configuration,
@@ -30,14 +35,16 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             Image<TPixel> source,
             Rectangle sourceRectangle,
             IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+            IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration proxyConfiguration)
             : base(configuration, source, sourceRectangle)
         {
             _destinationWidth = definition.DestinationWidth;
             _destinationHeight = definition.DestinationHeight;
             _resampler = definition.Sampler;
             _hastlayer = hastlayer;
-            _hardwareConfiguration = hardwareGenerationConfiguration;
+            _hardwareRepresentation = hardwareRepresentation;
+            _proxyConfiguration = proxyConfiguration;
         }
 
         /// <inheritdoc/>
@@ -63,14 +70,18 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
         {
             if (!(sampler is NearestNeighborResampler)) return;
 
-            // var memory = CreateSimpleMemory(Source, _hastlayer, _hardwareConfiguration);
-            var memory = CreateMatrixMemory(Source, _destinationWidth, _destinationHeight, _hastlayer, _hardwareConfiguration);
+            var memory = CreateMatrixMemory(
+                Source,
+                _destinationWidth,
+                _destinationHeight,
+                _hastlayer,
+                _hardwareRepresentation.HardwareGenerationConfiguration);
 
             // Hastlayer configurálása.
-            // Proxy generated object használása. resizeimage 
-            // new ImageSharpSample().ApplyTransform(memory);
+            // Proxy generated object használása. resizeimage
 
-            new ImageSharpSample().CreateMatrix(memory);
+            var resizeImage = _hastlayer.GenerateProxy(_hardwareRepresentation, new ImageSharpSample(), _proxyConfiguration).Result;
+            resizeImage.CreateMatrix(memory);
 
             var accessor = new SimpleMemoryAccessor(memory);
 
@@ -97,14 +108,6 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                     }
                 }
             }
-
-            //for (int i = 0; i < Source.Frames.Count; i++)
-            //{
-            //    var sourceFrame = Source.Frames[i];
-            //    var destinationFrame = _destination.Frames[i];
-
-            //    ApplyTransformFromMemory(sourceFrame, destinationFrame, memory);
-            //}
         }
 
         public SimpleMemory CreateMatrixMemory(

@@ -51,6 +51,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 height,
                 Environment.ProcessorCount,
                 null,
+                null,
                 null);
 
         /// <summary>
@@ -70,7 +71,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             int height,
             int maxDegreeOfParallelism,
             IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+            IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration configuration)
             => HastResize(
                 source,
                 width,
@@ -78,7 +80,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 maxDegreeOfParallelism,
                 KnownResamplers.NearestNeighbor,
                 hastlayer,
-                hardwareGenerationConfiguration);
+                hardwareRepresentation,
+                configuration);
 
         /// <summary>
         /// Resizes an image to the given width and height with the given sampler and source rectangle.
@@ -99,7 +102,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             int maxDegreeOfParallelism,
             IResampler sampler,
             IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration) => HastResize(
+            IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration configuration) => HastResize(
                 source,
                 width,
                 height,
@@ -108,7 +112,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 new Rectangle(0, 0, width, height),
                 false,
                 hastlayer,
-                hardwareGenerationConfiguration);
+                hardwareRepresentation,
+                configuration);
 
         /// <summary>
         /// Resizes an image to the given width and height with the given sampler and source rectangle.
@@ -136,7 +141,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             Rectangle targetRectangle,
             bool compand,
             IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+            IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration configuration)
         {
             var options = new ResizeOptions
             {
@@ -147,7 +153,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 Compand = compand
             };
 
-            return HastResize(source, options, maxDegreeOfParallelism, hastlayer, hardwareGenerationConfiguration);
+            return HastResize(source, options, maxDegreeOfParallelism, hastlayer, hardwareRepresentation, configuration);
         }
 
         /// <summary>
@@ -165,7 +171,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             ResizeOptions options,
             int maxDegreeOfParallelism,
             IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+            IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration configuration)
         {
             if (hastlayer != null)
             {
@@ -175,7 +182,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                         source.GetCurrentSize(),
                         maxDegreeOfParallelism,
                         hastlayer,
-                        hardwareGenerationConfiguration)
+                        hardwareRepresentation,
+                        configuration)
                     );
             }
 
