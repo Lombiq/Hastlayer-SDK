@@ -77,7 +77,7 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             var rowIndecesSpan = accessor.Get().Span.Slice(16, _destinationHeight * 4);
             var rowIndeces = MemoryMarshal.Cast<byte, int>(rowIndecesSpan);
 
-            var pixelIndecesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth);
+            var pixelIndecesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth * 4);
             var pixelIndeces = MemoryMarshal.Cast<byte, int>(pixelIndecesSpan);
 
             for (int i = 0; i < Source.Frames.Count; i++)
