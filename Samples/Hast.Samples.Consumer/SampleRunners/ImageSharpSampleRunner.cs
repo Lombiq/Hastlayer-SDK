@@ -24,17 +24,11 @@ namespace Hast.Samples.Consumer.SampleRunners
             // Accelerated by Hastlayer.
             using var image = Image.Load("fpga.jpg");
 
-            var resizeImage = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new ImageSharpSample(), configuration);
-            var modifiedImage = resizeImage
-                .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            modifiedImage.Save("FpgaResizedWithHastlayerFpga.jpg");
-
             var sw = Stopwatch.StartNew();
-            var cpuOutput = new ImageSharpSample()
-                .Resize(image, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var newImage = image.Clone(img => img.HastResize(
+                image.Width / 2, image.Height / 2, System.Environment.ProcessorCount, hastlayer, hardwareRepresentation, configuration));
             sw.Stop();
-            cpuOutput.Save("FpgaResizedWithHastlayerCpu.jpg");
+            newImage.Save("FpgaResizedWithHastlayer.jpg");
             System.Console.WriteLine($"On CPU it took {sw.ElapsedMilliseconds} ms");
         }
 
