@@ -1,9 +1,5 @@
-using Hast.Layer;
-using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
@@ -34,17 +30,50 @@ namespace Hast.Samples.SampleAssembly
 
             var Resize_WidthStartIndex = Resize_HeightStartIndex + destinationHeight;
 
-            for (int y = 0; y < destinationHeight; y++)
-            {
-                int rowStartIndex = y * heightFactor; // Add value to an array
-                memory.WriteInt32(Resize_HeightStartIndex + y, rowStartIndex);
-            }
+            var verticalSteps = 1 + ((height - 1) / MaxDegreeOfParallelism);
+            var horizontalSteps = 1 + ((width - 1) / MaxDegreeOfParallelism);
 
-            for (int x = 0; x < destinationWidth; x++)
+            var tasks = new Task[MaxDegreeOfParallelism];
+
+            var rowIndeces = new int[destinationHeight];
+            var pixelIndeces = new int[destinationWidth];
+
+            for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
-                int pixelIndex = x * widthFactor; // Add value to an array
-                memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
+                tasks[t] = Task.Factory.StartNew(inputObject =>
+                {
+                    for (int x = 0; x < horizontalSteps; x++)
+                    {
+                        var pixelIndex = (1 + t) * x * widthFactor;
+                    }
+
+                    for (int y = 0; y < verticalSteps; y++)
+                    {
+                        var rowStartIndex = (1 + t) * y * heightFactor;
+                    }
+
+                }, new PixelProcessingInput { RowIndeces = rowIndeces, PixelIndeces = pixelIndeces});
+
             }
+        }
+
+        //for (int y = 0; y < destinationHeight; y++)
+        //{
+        //    int rowStartIndex = y * heightFactor; // Add value to an array
+        //    memory.WriteInt32(Resize_HeightStartIndex + y, rowStartIndex);
+        //}
+
+        //for (int x = 0; x < destinationWidth; x++)
+        //{
+        //    int pixelIndex = x * widthFactor; // Add value to an array
+        //    memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
+        //}
+
+        private class PixelProcessingInput
+        {
+            public int[] RowIndeces { get; set; }
+
+            public int[] PixelIndeces { get; set; }
         }
     }
 }

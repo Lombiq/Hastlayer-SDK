@@ -77,18 +77,16 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
                 _hastlayer,
                 _hardwareRepresentation.HardwareGenerationConfiguration);
 
-            // Hastlayer configurálása.
-            // Proxy generated object használása. resizeimage
-
-            var resizeImage = _hastlayer.GenerateProxy(_hardwareRepresentation, new ImageSharpSample(), _proxyConfiguration).Result;
+            var resizeImage = _hastlayer
+                .GenerateProxy(_hardwareRepresentation, new ImageSharpSample(), _proxyConfiguration).Result;
             resizeImage.CreateMatrix(memory);
 
             var accessor = new SimpleMemoryAccessor(memory);
 
             var rowIndecesSpan = accessor.Get().Span.Slice(16, _destinationHeight * 4);
-            var rowIndeces = MemoryMarshal.Cast<byte, int>(rowIndecesSpan);
-
             var pixelIndecesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth * 4);
+
+            var rowIndeces = MemoryMarshal.Cast<byte, int>(rowIndecesSpan);
             var pixelIndeces = MemoryMarshal.Cast<byte, int>(pixelIndecesSpan);
 
             for (int i = 0; i < Source.Frames.Count; i++)
@@ -132,66 +130,6 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
             memory.WriteUInt32(3, (uint)height);
 
             return memory;
-        }
-
-        public SimpleMemory CreateSimpleMemory(
-            Image<TPixel> image,
-            IHastlayer hastlayer,
-            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
-        {
-            var pixelCount = image.Width * image.Height + _destinationWidth * _destinationHeight;
-            var frameCount = image.Frames.Count;
-
-            var cellCount = pixelCount * frameCount + 5;
-
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(cellCount)
-                : hastlayer.CreateMemory(hardwareGenerationConfiguration, cellCount);
-
-            var accessor = new SimpleMemoryAccessor(memory);
-
-            for (int i = 0; i < frameCount; i++)
-            {
-                var memorySpan = accessor.Get().Span.Slice(20 + i * pixelCount, image.Width * image.Height * 4);
-
-                image.Frames[i].TryGetSinglePixelSpan(out var imageSpan);
-
-                MemoryMarshal.Cast<TPixel, byte>(imageSpan).CopyTo(memorySpan);
-            }
-
-            memory.WriteInt32(0, image.Width);
-            memory.WriteInt32(1, image.Height);
-            memory.WriteInt32(2, _destinationWidth);
-            memory.WriteInt32(3, _destinationHeight);
-            memory.WriteInt32(4, frameCount);
-
-            return memory;
-        }
-
-        public void ApplyTransformFromMemory(
-            ImageFrame<TPixel> source,
-            ImageFrame<TPixel> destination,
-            SimpleMemory memory)
-        {
-            var destinationStartIndex = source.Width * source.Height + 5;
-            var accessor = new SimpleMemoryAccessor(memory);
-
-            var memSpan = accessor.Get().Span
-                .Slice(destinationStartIndex * 4, _destinationWidth * _destinationHeight * 4);
-
-            for (int y = 0; y < destination.Height; y++)
-            {
-                var destinationRow = destination.GetPixelRowSpan(y);
-
-                var memorySpan = memSpan.Slice(y * destination.Width * 4, destination.Width * 4);
-
-                var sourceRow = MemoryMarshal.Cast<byte, TPixel>(memorySpan);
-
-                for (int x = 0; x < destination.Width; x++)
-                {
-                    destinationRow[x] = sourceRow[x];
-                }
-            }
         }
     }
 }
