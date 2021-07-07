@@ -33,29 +33,63 @@ namespace Hast.Samples.SampleAssembly
             var verticalSteps = 1 + ((height - 1) / MaxDegreeOfParallelism);
             var horizontalSteps = 1 + ((width - 1) / MaxDegreeOfParallelism);
 
-            var tasks = new Task[MaxDegreeOfParallelism];
+            var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
 
             var rowIndeces = new int[destinationHeight];
             var pixelIndeces = new int[destinationWidth];
 
-            for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            for (int x = 0; x < horizontalSteps; x++)
             {
-                tasks[t] = Task.Factory.StartNew(inputObject =>
+                for (int t = 0; t < MaxDegreeOfParallelism; t++)
                 {
-                    for (int x = 0; x < horizontalSteps; x++)
+                    tasks[t] = Task.Factory.StartNew(() =>
                     {
-                        var pixelIndex = (1 + t) * x * widthFactor;
-                    }
+                        return new IndexOutput
+                        {
+                            Index = t + x * widthFactor * MaxDegreeOfParallelism
+                        };
+                    });
+                }
 
-                    for (int y = 0; y < verticalSteps; y++)
+                Task.WhenAll(tasks).Wait();
+
+                for (int t = 0; t < MaxDegreeOfParallelism; t++)
+                {
+                    if (x * MaxDegreeOfParallelism + t > destinationWidth) break;
+
+                    memory.WriteInt32(
+                        Resize_HeightStartIndex + x * MaxDegreeOfParallelism + t,
+                        tasks[t].Result.Index);
+                }
+            }
+
+            for (int y = 0; y < verticalSteps; y++)
+            {
+                for (int t = 0; t < MaxDegreeOfParallelism; t++)
+                {
+                    tasks[t] = Task.Factory.StartNew(() =>
                     {
-                        var rowStartIndex = (1 + t) * y * heightFactor;
-                    }
+                        return new IndexOutput
+                        {
+                            Index = t + y * widthFactor * MaxDegreeOfParallelism
+                        };
+                    });
+                }
 
-                }, new PixelProcessingInput { RowIndeces = rowIndeces, PixelIndeces = pixelIndeces});
+                Task.WhenAll(tasks).Wait();
 
+                for (int t = 0; t < MaxDegreeOfParallelism; t++)
+                {
+                    if (y * MaxDegreeOfParallelism + t > destinationHeight) break;
+
+                    memory.WriteInt32(
+                        Resize_HeightStartIndex + destinationHeight + y * MaxDegreeOfParallelism + t,
+                        tasks[t].Result.Index);
+                }
             }
         }
+
+        // Serialized 
 
         //for (int y = 0; y < destinationHeight; y++)
         //{
@@ -69,11 +103,9 @@ namespace Hast.Samples.SampleAssembly
         //    memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
         //}
 
-        private class PixelProcessingInput
+        private class IndexOutput
         {
-            public int[] RowIndeces { get; set; }
-
-            public int[] PixelIndeces { get; set; }
+            public int Index { get; set; }
         }
     }
 }
