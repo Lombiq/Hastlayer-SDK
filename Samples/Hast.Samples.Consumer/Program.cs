@@ -217,6 +217,7 @@ namespace Hast.Samples.Consumer
             {
                 for (var i = 0; i < 3; i++)
                 {
+                    Console.WriteLine("\n\n\n\n\n\nAttempt #{0:0}:", i + 1);
                     await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
                 }
             }
