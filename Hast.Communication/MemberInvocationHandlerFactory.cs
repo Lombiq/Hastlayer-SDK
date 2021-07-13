@@ -10,6 +10,7 @@ using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,14 +23,18 @@ namespace Hast.Communication
     public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly ILogger<MemberInvocationHandlerFactory> _logger;
 
         public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
         public event EventHandler<IMemberInvocationContext> MemberInvoking;
 
 
-        public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)
+        public MemberInvocationHandlerFactory(
+            IServiceProvider serviceProvider,
+            ILogger<MemberInvocationHandlerFactory> logger)
         {
             _serviceProvider = serviceProvider;
+            _logger = logger;
         }
 
         public MemberInvocationHandler CreateMemberInvocationHandler(
@@ -173,6 +178,7 @@ namespace Hast.Communication
                                     $"No communication service was found for the channel \"{communicationChannelName}\".");
                             }
 
+                            _logger.LogInformation("Starting communication service execution...");
                             invocationContext.HardwareExecutionInformation = await communicationService
                                 .Execute(
                                     memory,
