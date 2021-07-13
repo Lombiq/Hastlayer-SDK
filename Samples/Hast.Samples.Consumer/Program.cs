@@ -215,7 +215,10 @@ namespace Hast.Samples.Consumer
             // Running samples.
             try
             {
-                await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
+                for (var i = 0; i < 3; i++)
+                {
+                    await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
+                }
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {

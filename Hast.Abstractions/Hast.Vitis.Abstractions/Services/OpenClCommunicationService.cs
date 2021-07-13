@@ -101,48 +101,75 @@ namespace Hast.Vitis.Abstractions.Services
 
             using var device = await _devicePoolManager.ReserveDevice();
             var context = BeginExecution();
+
+            int deviceIndex = device.Metadata;
+            var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
+
+            // Prepare host buffer.
+            var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
+            hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
+            var timeHostBufferPrepared = context.Stopwatch.ElapsedMilliseconds;
+
+            Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
+            var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
+            if (hostMemory.Length <= headerSize)
             {
-                int deviceIndex = device.Metadata;
-                var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
-
-                // Prepare host buffer.
-                var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
-                hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
-
-                Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
-                var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
-                if (hostMemory.Length <= headerSize)
-                {
-                    throw new IndexOutOfRangeException(
-                        $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
-                        $"{headerSize}b.");
-                }
-
-                using (var hostMemoryHandle = hostMemory.Pin())
-                {
-                    // Send data and execute.
-                    var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
-                        KernelName,
-                        index: 0,
-                        hostMemoryHandle,
-                        hostMemory.Length,
-                        GetBuffer(hostMemory, hostMemoryHandle, executionContext));
-                    Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
-                    Logger.LogInformation("LAUNCHING KERNEL...");
-                    _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
-                    Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
-                    await _binaryOpenCl.AwaitDevice(deviceIndex);
-                    var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
-
-                    // Read out metadata.
-                    SetHardwareExecutionTime(
-                        context,
-                        executionContext,
-                        resultMetadata.ExecutionTime,
-                        clockFrequency);
-                }
+                throw new IndexOutOfRangeException(
+                    $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
+                    $"{headerSize}b.");
             }
+
+            using var hostMemoryHandle = hostMemory.Pin();
+            var timeHostMemoryPinned = context.Stopwatch.ElapsedMilliseconds;
+
+            // Send data and execute.
+            var buffer = GetBuffer(hostMemory, hostMemoryHandle, executionContext);
+            var timeXilinxBufferInited = context.Stopwatch.ElapsedMilliseconds;
+            var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
+                KernelName,
+                index: 0,
+                hostMemoryHandle,
+                hostMemory.Length,
+                buffer);
+            var timeKernelArgumentSet = context.Stopwatch.ElapsedMilliseconds;
+            Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
+            Logger.LogInformation("LAUNCHING KERNEL...");
+            var timeLogOverheadTest = context.Stopwatch.ElapsedMilliseconds;
+            _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+            Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
+            var timeKernelLaunched = context.Stopwatch.ElapsedMilliseconds;
+            await _binaryOpenCl.AwaitDevice(deviceIndex);
+            var timeResultsAwaited = context.Stopwatch.ElapsedMilliseconds;
+            var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
+            var timeMetadataRetrieved = context.Stopwatch.ElapsedMilliseconds;
+
+            // Read out metadata.
+            SetHardwareExecutionTime(
+                context,
+                executionContext,
+                resultMetadata.ExecutionTime,
+                clockFrequency);
+            var timeMetadataProcessed = context.Stopwatch.ElapsedMilliseconds;
+
             EndExecution(context);
+
+            Logger.LogInformation($@"
+EXECUTION TIME STOPWATCH BREAKDOWN
+****************************************
+
+Host Buffer Prepared      : {timeHostBufferPrepared:####0} ms
+Host Memory Pinned        : {timeHostMemoryPinned - timeHostBufferPrepared:####0} ms
+Xilinx Buffer Initialized : {timeXilinxBufferInited - timeHostMemoryPinned:####0} ms
+Kernel Argument Set       : {timeKernelArgumentSet - timeXilinxBufferInited:####0} ms
+Log Overhead Test         : {timeLogOverheadTest - timeKernelArgumentSet:####0} ms (time it took to output two Log.LogInformation calls)
+Kernel Launched           : {timeKernelLaunched - timeLogOverheadTest:####0} ms
+Results Awaited           : {timeResultsAwaited - timeKernelLaunched:####0} ms
+Metadata Retrieved        : {timeMetadataRetrieved - timeResultsAwaited:####0} ms
+Metadata Processed        : {timeMetadataProcessed - timeMetadataRetrieved:####0} ms
+----------------------------------------
+Total                     : {timeMetadataProcessed:####0} ms
+
+");
 
             return context.HardwareExecutionInformation;
         }
