@@ -108,9 +108,12 @@ namespace Hast.Vitis.Abstractions.Services
             // Prepare host buffer.
             var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
             hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
+            var hostMemoryLength = hostMemory.Length;
             var timeHostBufferPrepared = context.Stopwatch.ElapsedMilliseconds;
 
-            Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
+            Logger.LogInformation("Input buffer size: {0}b", hostMemoryLength);
+            var timeLogOverheadTest = context.Stopwatch.ElapsedMilliseconds;
+
             var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
             if (hostMemory.Length <= headerSize)
             {
@@ -135,7 +138,6 @@ namespace Hast.Vitis.Abstractions.Services
             var timeKernelArgumentSet = context.Stopwatch.ElapsedMilliseconds;
             Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
             Logger.LogInformation("LAUNCHING KERNEL...");
-            var timeLogOverheadTest = context.Stopwatch.ElapsedMilliseconds;
             _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
             Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
             var timeKernelLaunched = context.Stopwatch.ElapsedMilliseconds;
@@ -160,12 +162,12 @@ namespace Hast.Vitis.Abstractions.Services
 | EXECUTION TIME STOPWATCH BREAKDOWN   |
 |======================================|
 | Host Buffer Prepared      : {timeHostBufferPrepared,5:####0} ms |
-| Host Memory Verified      : {timeHostMemoryVerified - timeHostBufferPrepared,5:####0} ms |
+| Log Overhead Test         : {timeLogOverheadTest - timeHostBufferPrepared,5:####0} ms | <= (time it took to output the first Log.LogInformation call)
+| Host Memory Verified      : {timeHostMemoryVerified - timeLogOverheadTest,5:####0} ms |
 | Host Memory Pinned        : {timeHostMemoryPinned - timeHostMemoryVerified,5:####0} ms |
 | Xilinx Buffer Initialized : {timeXilinxBufferInited - timeHostMemoryPinned,5:####0} ms |
 | Kernel Argument Set       : {timeKernelArgumentSet - timeXilinxBufferInited,5:####0} ms |
-| Log Overhead Test         : {timeLogOverheadTest - timeKernelArgumentSet,5:####0} ms | <= (time it took to output two Log.LogInformation calls)
-| Kernel Launched           : {timeKernelLaunched - timeLogOverheadTest,5:####0} ms |
+| Kernel Launched           : {timeKernelLaunched - timeKernelArgumentSet,5:####0} ms |
 | Results Awaited           : {timeResultsAwaited - timeKernelLaunched,5:####0} ms |
 | Metadata Retrieved        : {timeMetadataRetrieved - timeResultsAwaited,5:####0} ms |
 | Metadata Processed        : {timeMetadataProcessed - timeMetadataRetrieved,5:####0} ms |
