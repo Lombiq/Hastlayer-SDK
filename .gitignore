@@ -11,7 +11,6 @@ packages/
 .idea/
 publish/
 ~*.xlsx
-/Hast.Abstractions/Hast.Vitis.Abstractions/Docs/Container/centos7-install.sh
-/Hast.Abstractions/Hast.Vitis.Abstractions/Docs/Container/platform/*.rpm
-/Hast.Abstractions/Hast.Vitis.Abstractions/Docs/Container/Xilinx_Unified_2020.2_1118_1232
+# While there are files in the Container folder that are in the repo, a set up container's files shouldn't be.
+/Hast.Abstractions/Hast.Vitis.Abstractions/Container/
 TestResults/*.trx

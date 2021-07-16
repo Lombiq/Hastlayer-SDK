@@ -163,8 +163,8 @@ namespace Hast.Vitis.Abstractions.Services
                 provider =>
                 {
                     // The service provider we receive is not scoped so we can't reach the
-                    // IHardwareGenerationConfigurationAccessor service through if. Even if we created a new scope its
-                    // content would be uninitialized so we have to build it form configuration.
+                    // IHardwareGenerationConfigurationAccessor service through it. Even if we created a new scope its
+                    // content would be uninitialized so we have to build it from configuration.
                     var configuration = new AzureAttestationConfiguration();
                     provider
                         .GetRequiredService<IConfiguration>()
