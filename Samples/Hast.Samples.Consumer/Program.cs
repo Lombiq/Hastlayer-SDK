@@ -1,4 +1,5 @@
 using Hast.Algorithms;
+using Hast.Common.Enums;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
@@ -70,11 +71,8 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
-            // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
-            // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
-            // transformation. In most cases the flavor defaults to the one you need.
-            // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
-            var hastlayerConfiguration = new HastlayerConfiguration();
+            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
+            IHastlayerConfiguration hastlayerConfiguration = new HastlayerConfiguration();
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
             // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
@@ -82,7 +80,7 @@ namespace Hast.Samples.Consumer
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
                 var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
@@ -125,6 +123,8 @@ namespace Hast.Samples.Consumer
             var proxyConfiguration = new ProxyGenerationConfiguration();
             if (argsList.Contains("-verify")) proxyConfiguration.VerifyHardwareResults = true;
 
+            configuration.SingleBinaryPath = GetArgument("bin") ?? GetArgument("binary");
+
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
             var remoteClientConfiguration = configuration.RemoteClientConfiguration();
             remoteClientConfiguration.AppName = GetArgument("appname") ?? Configuration.AppName;
@@ -162,7 +162,7 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
+                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'."),
             };
             sampleRunner.Configure(configuration);
             configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
@@ -209,10 +209,16 @@ namespace Hast.Samples.Consumer
 
             Console.WriteLine("Starting hardware execution.");
 
-            // Running samples.
+            // Running the selected sample. It is executed 3 times to ensure all JIT compilation overhead has been
+            // eliminated by successive reruns. The last attempt is a better representation of performance in
+            // long-running applications.
             try
             {
-                await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
+                for (var i = 0; i < 3; i++)
+                {
+                    Console.WriteLine("\n\n\n\n\n\nAttempt #{0:0}:", i + 1);
+                    await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
+                }
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {

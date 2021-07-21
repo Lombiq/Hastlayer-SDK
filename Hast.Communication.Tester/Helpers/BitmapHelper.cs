@@ -1,7 +1,9 @@
 using System;
-using System.Drawing;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace Hast.Communication.Tester.Helpers
 {
@@ -9,16 +11,18 @@ namespace Hast.Communication.Tester.Helpers
     {
         private const int MaxDegreeOfParallelism = 25;
 
-        public static Bitmap FromSimpleMemory(SimpleMemory memory, Bitmap image, int prependCellCount = 0)
+        public static Image<Rgba32> FromSimpleMemory(SimpleMemory memory, Image<Rgba32> image, int prependCellCount = 0)
         {
-            var newImage = new Bitmap(image);
+            var newImage = new Image<Rgba32>(image.GetConfiguration(), image.Width, image.Height);
 
-            for (int x = 0; x < newImage.Height; x++)
+            for (int y = 0; y < newImage.Height; y++)
             {
-                for (int y = 0; y < newImage.Width; y++)
+                var row = newImage.GetPixelRowSpan(y);
+
+                for (int x = 0; x < newImage.Width; x++)
                 {
-                    var bytes = memory.Read4Bytes(x * newImage.Width + y + prependCellCount);
-                    newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
+                    var bytes = memory.Read4Bytes(y * newImage.Width + x + prependCellCount);
+                    row[x] = new Rgba32(bytes[0], bytes[1], bytes[2], bytes[3]);
                 }
             }
 
@@ -28,7 +32,7 @@ namespace Hast.Communication.Tester.Helpers
         public static SimpleMemory ToSimpleMemory(
             IHardwareGenerationConfiguration configuration,
             IHastlayer hastlayer,
-            Bitmap image,
+            Image<Rgba32> image,
             int[] prependCells = null)
         {
             prependCells ??= Array.Empty<int>();
@@ -45,15 +49,16 @@ namespace Hast.Communication.Tester.Helpers
                 memory.WriteInt32(i, prependCells[i]);
             }
 
-            for (int x = 0; x < image.Height; x++)
+            for (int y = 0; y < image.Height; y++)
             {
-                for (int y = 0; y < image.Width; y++)
+                var row = image.GetPixelRowSpan(y);
+                for (int x = 0; x < image.Width; x++)
                 {
-                    var pixel = image.GetPixel(y, x);
+                    var pixel = row[x];
 
                     memory.Write4Bytes(
-                        x * image.Width + y + prependCells.Length,
-                        new[] { pixel.R, pixel.G, pixel.B });
+                        y * image.Width + x + prependCells.Length,
+                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
                 }
             }
 

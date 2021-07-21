@@ -1,4 +1,6 @@
+using Hast.Common.Enums;
 using Hast.Catapult.Abstractions;
+using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -56,6 +58,7 @@ namespace Hast.Layer
             var services = new ServiceCollection();
             services.AddSingleton<IHastlayer>(this);
             services.AddSingleton(configuration);
+            services.AddSingleton<IHastlayerFlavorProvider>(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
             services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
@@ -175,6 +178,31 @@ namespace Hast.Layer
                     var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
                     var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
 
+                    var deviceManifest = deviceManifestSelector
+                        .GetSupportedDevices()
+                        .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
+
+                    if (deviceManifest == null)
+                    {
+                        throw new HastlayerException(
+                            "There is no supported device with the name \"" + configuration.DeviceName + "\".");
+                    }
+
+                    if (File.Exists(configuration.SingleBinaryPath))
+                    {
+                        return new HardwareRepresentation
+                        {
+                            DeviceManifest = deviceManifest,
+                            HardwareDescription = EmptyHardwareDescriptionFactory.Create(configuration),
+                            HardwareImplementation = new HardwareImplementation
+                            {
+                                BinaryPath = configuration.SingleBinaryPath,
+                            },
+                            HardwareGenerationConfiguration = configuration,
+                            SoftAssemblyPaths = assembliesPaths,
+                        };
+                    }
+
                     // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
                     // CustomConfiguration into the current hardware generation configuration.
                     var newCustomConfigurations = appConfiguration
@@ -200,16 +228,6 @@ namespace Hast.Layer
                             "Hastlayer transformation warning (code: {0}): {1}",
                             warning.Code,
                             warning.Message);
-                    }
-
-                    var deviceManifest = deviceManifestSelector
-                        .GetSupportedDevices()
-                        .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
-
-                    if (deviceManifest == null)
-                    {
-                        throw new HastlayerException(
-                            "There is no supported device with the name \"" + configuration.DeviceName + "\".");
                     }
 
                     var hardwareImplementationComposerSelector =
@@ -322,30 +340,28 @@ namespace Hast.Layer
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {
             // This is fine because IDeviceManifest doesn't contain anything that relies on the scope.
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
-            }
+            using var scope = _serviceProvider.CreateScope();
+            return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
         }
 
         public async Task RunAsync<T>(Func<T, Task> process)
         {
-            using (var scope = _serviceProvider.CreateScope())
-                await process(scope.ServiceProvider.GetRequiredService<T>());
+            using var scope = _serviceProvider.CreateScope();
+            await process(scope.ServiceProvider.GetRequiredService<T>());
         }
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
             ThrowIfService<TOut>();
-            using (var scope = _serviceProvider.CreateScope())
-                return await process(scope.ServiceProvider);
+            using var scope = _serviceProvider.CreateScope();
+            return await process(scope.ServiceProvider);
         }
 
         public TOut RunGet<TOut>(Func<IServiceProvider, TOut> process)
         {
             ThrowIfService<TOut>();
-            using (var scope = _serviceProvider.CreateScope())
-                return process(scope.ServiceProvider);
+            using var scope = _serviceProvider.CreateScope();
+            return process(scope.ServiceProvider);
         }
 
         public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();

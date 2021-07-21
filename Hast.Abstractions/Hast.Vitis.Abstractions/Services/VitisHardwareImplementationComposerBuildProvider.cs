@@ -2,7 +2,9 @@ using CliWrap;
 using CliWrap.Buffered;
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
+using Hast.Common.Enums;
 using Hast.Common.Helpers;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Abstractions.Helpers;
@@ -38,6 +40,7 @@ namespace Hast.Vitis.Abstractions.Services
         private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
 
         private readonly ILogger _logger;
+        private readonly IHastlayerFlavorProvider _flavorProvider;
         private readonly string _buildOutputPath;
         private readonly StreamWriter _buildOutput;
 
@@ -50,10 +53,12 @@ namespace Hast.Vitis.Abstractions.Services
 
 
         public VitisHardwareImplementationComposerBuildProvider(
-            ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
+            ILogger<VitisHardwareImplementationComposerBuildProvider> logger,
+            IHastlayerFlavorProvider flavorProvider)
         {
             Progress += OnProgress;
             _logger = logger;
+            _flavorProvider = flavorProvider;
 
             var buildOutputPath = EnsureDirectoryExists("App_Data", "logs");
             for (var i = 0; i < 100 && _buildOutput == null; i++)
@@ -96,51 +101,52 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
             {
-                throw new InvalidOperationException(
-                    "XILINX_VITIS variable is not set. This is required to run Vivado. For further instructions see " +
-                    "https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html");
+                // When cross-compiling, the build machine needs Vivado and XRT, but the FPGA machine only needs XRT.
+                _logger.LogWarning(
+                    "XILINX_VITIS variable is not set. This is required to build using Vivado. For further instructions " +
+                    "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html.");
             }
 
-            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
-            if (!Directory.Exists(xilinxDirectoryPath))
-            {
-                throw new InvalidOperationException(
-                    "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
-            }
-
-            return BuildInnerAsync(context, implementation, deviceManifest, xilinxDirectoryPath);
+            return BuildInnerAsync(context, implementation, deviceManifest);
         }
 
         private async Task BuildInnerAsync(
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation,
-            XilinxDeviceManifest deviceManifest,
-            string xilinxDirectoryPath)
+            XilinxDeviceManifest deviceManifest)
         {
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
-            if (buildConfiguration.SynthesisOnly)
-            {
-                MajorStepsTotal = 3;
-            }
-            // Synthesis doesn't need the device.
-            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
-            {
-                _firstRun = false;
-                await EnsureDeviceReady();
-            }
+            var hashId = context.HardwareDescription.TransformationId;
+            _logger.LogInformation("HASH ID: {0}", hashId);
+
+            await InitializeAsync(buildConfiguration);
 
             ProgressMajor(
                 "Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more complex " +
                 "ones usually up to 4. Although 15 hours are also possible if the hardware is completely utilized " +
                 "with extremely complex and/or very highly parallelized algorithms.");
 
-            var hashId = context.HardwareDescription.TransformationId;
-            _logger.LogInformation("HASH ID: {0}", hashId);
             var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
             implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             Cleanup(hardwareFrameworkPath, hashId);
+
+            var promptBeforeBuild =
+                buildConfiguration.PromptBeforeBuild &&
+                _flavorProvider.Flavor != HastlayerFlavor.Client;
+            await CreateSourceAsync(
+                context,
+                hardwareFrameworkPath,
+                hashId,
+                implementation.BinaryPath,
+                promptBeforeBuild);
+
+            if (CheckIfDoneAlready(implementation)) return;
+
+            _logger.LogInformation(
+                "The xclbin file (\"{0}\") does not exist. Starting build...",
+                implementation.BinaryPath);
 
             // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
             var ipDirectoryPath = Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "src", "IP");
@@ -153,37 +159,31 @@ namespace Hast.Vitis.Abstractions.Services
 
             await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
 
-            var platformsDirectoryPath = new DirectoryInfo(
-                Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
-                Directory.Exists(platformVariable)
-                    ? Path.GetFullPath(platformVariable)
-                    : Path.Combine(xilinxDirectoryPath!, "platforms"));
+            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
+            if (!Directory.Exists(xilinxDirectoryPath))
+            {
+                throw new InvalidOperationException(
+                    "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
+            }
+
+            var platformsDirectories = (new[]
+                {
+                    Environment.GetEnvironmentVariable("XILINX_PLATFORM"),
+                    Path.Combine(xilinxDirectoryPath!, "platforms"),
+                    Path.Combine(hardwareFrameworkPath, "platforms"),
+                })
+                .Where(path => path != null && Directory.Exists(path))
+                .Select(path => new DirectoryInfo(path))
+                .ToList();
+            var device = GetPlatformFilePath(deviceManifest, platformsDirectories);
 
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
-            // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
-            // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
-            // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
-            var device = deviceManifest.SupportedPlatforms!
-                             .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
-                             .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
-                             .OrderByDescending(name => name)
-                             .FirstOrDefault() ??
-                         throw new InvalidOperationException(
-                             "No device platform was found. Did you set the $XILINX_PLATFORM environment variable?");
+
 
             var xclbinDirectoryPath = EnsureDirectoryExists(
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
-
-            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
-
-            // If the xclbin exists then we are done here.
-            if (AllExist(implementation.BinaryPath, implementation.BinaryPath + ".info"))
-            {
-                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
-                return;
-            }
 
             if (buildConfiguration.SynthesisOnly)
             {
@@ -222,6 +222,57 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             Cleanup(hardwareFrameworkPath, hashId);
+        }
+
+        private Task InitializeAsync(VitisBuildConfiguration buildConfiguration)
+        {
+            if (buildConfiguration.SynthesisOnly)
+            {
+                MajorStepsTotal = 3;
+                return Task.CompletedTask;
+            }
+            // Synthesis doesn't need the device.
+            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
+            {
+                _firstRun = false;
+                return EnsureDeviceReady();
+            }
+
+            return Task.CompletedTask;
+        }
+
+        private string GetPlatformFilePath(
+            XilinxDeviceManifest deviceManifest,
+            List<DirectoryInfo> platformsDirectories)
+        {
+            // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
+            // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
+            // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
+            // We are looking for platform directories first, then xpfm files. Then by SupportedPlatforms and location:
+            // 1. $XILINX_PLATFORM,
+            // 2. /opt/xilinx/platforms
+            // 3. ./HardwareFramework/platforms
+            var device = deviceManifest.SupportedPlatforms!
+                .SelectMany(platformName => platformsDirectories
+                    .SelectMany(directoryInfo => directoryInfo
+                        .GetDirectories($"{platformName}*")
+                        .SelectMany(directory => directory.GetFiles("*.xpfm"))
+                        .OrderByDescending(fileInfo => fileInfo.FullName))
+                    .Union(platformsDirectories
+                        .SelectMany(directoryInfo => directoryInfo.GetFiles($"{platformName}*.xpfm"))
+                        .OrderByDescending(fileInfo => fileInfo.FullName))
+                )
+                .FirstOrDefault()?
+                .FullName;
+
+            if (device == null)
+            {
+                throw new FileNotFoundException(
+                    "Unable to find the platform xpfm file. The supported platforms are: " +
+                    string.Join(", ", deviceManifest.SupportedPlatforms));
+            }
+
+            return device;
         }
 
         private void ProgressMajor(string message)
@@ -477,6 +528,26 @@ namespace Hast.Vitis.Abstractions.Services
             ProgressMajor("Build directory cleaned up.");
         }
 
+        private bool CheckIfDoneAlready(IHardwareImplementation implementation)
+        {
+            // If the xclbin exists then we are done here.
+            var exists = File.Exists(implementation.BinaryPath);
+
+            if (exists)
+            {
+                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
+
+                if (!File.Exists(implementation.BinaryPath + InfoFileExtension))
+                {
+                    _logger.LogInformation(
+                        "The info file (\"{0}\") does not exist. You may generate it using `xclbinutil --info`.",
+                        implementation.BinaryPath + InfoFileExtension);
+                }
+            }
+
+            return exists;
+        }
+
         private async Task EnsureDeviceReady()
         {
             _logger.LogWarning(
@@ -586,18 +657,31 @@ namespace Hast.Vitis.Abstractions.Services
             _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
         }
 
-
-        private static Task<bool> CreateSourceFilesAwait(
+        private static async Task CreateSourceAsync(
             IHardwareImplementationCompositionContext context,
             string hardwareFrameworkPath,
-            string hashId)
+            string hashId,
+            string binaryPath,
+            bool promptBeforeBuild)
         {
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
             var ipDirectoryPath = EnsureDirectoryExists(rtlDirectoryPath, "src", "IP");
             var vhdlFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.vhd");
             var xdcFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.xdc");
 
-            return VhdlHelper.CreateVhdlAndXdcFilesAsync(context, xdcFilePath, vhdlFilePath);
+            await VhdlHelper.CreateVhdlAndXdcFilesAsync(context, xdcFilePath, vhdlFilePath);
+
+            if (promptBeforeBuild)
+            {
+                Console.WriteLine(
+                    $"The source files have been written to:\n" +
+                    $"    {vhdlFilePath}\n" +
+                    $"    {xdcFilePath}\n" +
+                    $"Expected result:\n" +
+                    $"    {binaryPath}\n\n" +
+                    $"Press [enter] when you are ready to continue.");
+                Console.ReadLine();
+            }
         }
 
         private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>

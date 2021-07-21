@@ -17,7 +17,7 @@
     <ProjectReference Include="..\..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 </Project>
