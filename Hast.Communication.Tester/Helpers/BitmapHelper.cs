@@ -2,6 +2,7 @@ using System;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace Hast.Communication.Tester.Helpers
@@ -12,7 +13,7 @@ namespace Hast.Communication.Tester.Helpers
 
         public static Image<Rgba32> FromSimpleMemory(SimpleMemory memory, Image<Rgba32> image, int prependCellCount = 0)
         {
-            var newImage = image.Clone();
+            var newImage = new Image<Rgba32>(image.GetConfiguration(), image.Width, image.Height);
 
             for (int y = 0; y < newImage.Height; y++)
             {
