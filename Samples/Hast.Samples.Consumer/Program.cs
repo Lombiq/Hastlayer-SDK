@@ -71,10 +71,7 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
-            // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
-            // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
-            // transformation. In most cases the flavor defaults to the one you need.
-            // IHastlayerConfiguration hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
+            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
             IHastlayerConfiguration hastlayerConfiguration = new HastlayerConfiguration();
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
