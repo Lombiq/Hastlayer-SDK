@@ -16,7 +16,7 @@ namespace Hast.Samples.SampleAssembly
         // The [Replaceable] enables the substitution of this static readonly field into constant literals wherever it
         // is used. Check out the xmldoc of ReplaceableAttribute for further instructions.
         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
-        private static readonly int MaxDegreeOfParallelism = 260 + ImageContrastModifier.ParallelismBoost;
+        private static readonly int MaxDegreeOfParallelism = 260;
 
         private const int Run_InputInt32Index = 0;
         private const int Run_OutputInt32Index = 0;
