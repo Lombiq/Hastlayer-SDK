@@ -88,7 +88,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                     }
                 }
 
-                var addressLong = Environment.Is64BitProcess ? address.ToInt64() : (long)address.ToInt32();
+                var addressLong = Environment.Is64BitProcess ? address.ToInt64() : address.ToInt32();
                 var alignmentOffset = Environment.Is64BitProcess
                     ? alignment - (int)(address.ToInt64() % alignment)
                     : alignment - (int)((uint)address % alignment);

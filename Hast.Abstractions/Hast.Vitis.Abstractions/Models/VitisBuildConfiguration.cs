@@ -28,6 +28,5 @@ namespace Hast.Vitis.Abstractions.Models
         /// </para>
         /// </remarks>
         public bool PromptBeforeBuild { get; set; }
-
     }
 }
