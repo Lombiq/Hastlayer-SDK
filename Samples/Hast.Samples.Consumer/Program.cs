@@ -212,7 +212,9 @@ namespace Hast.Samples.Consumer
 
             Console.WriteLine("Starting hardware execution.");
 
-            // Running samples.
+            // Running the selected sample. It is executed 3 times to ensure all JIT compilation overhead has been
+            // eliminated by successive reruns. The last attempt is a better representation of performance in
+            // long-running applications.
             try
             {
                 for (var i = 0; i < 3; i++)

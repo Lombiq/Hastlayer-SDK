@@ -17,7 +17,7 @@ namespace Hast.Vitis.Abstractions.Models
 
         /// <summary>
         /// If <see langword="true"/>, the composer will pause after saving the vhd files to disk and before checking if
-        /// the xclbin files exist. This gives the user opportunity to perform manual build and create save their own
+        /// the xclbin files exist. This gives the user opportunity to perform manual build and create their own
         /// binaries to the location where Hastlayer normally looks for it.
         /// </summary>
         /// <remarks>

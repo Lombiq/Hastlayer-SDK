@@ -14,6 +14,11 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ImageContrastModifier
     {
+        /// <summary>
+        /// Using this variable you can simultaneously increase parallelism for <see cref="ImageContrastModifier"/>,
+        /// <see cref="MonteCarloPiEstimator"/> and <see cref="ParallelAlgorithm"/> that we mainly use in the benchmark
+        /// documentation. It is helpful in experimentally dialling in the right parallelism numbers.
+        /// </summary>
         internal const int ParallelismBoost = 0;
 
         private const ushort Multiplier = 1000;

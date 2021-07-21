@@ -95,7 +95,7 @@ Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same 
 ### Details
 
 - FPGA: Xilinx Zynq XC7Z030-1SBG485C SoC FPGA. Main clock is 150 Mhz.
-- Host: ARM dual-core Cortex-A9 MPCore CPU. Power consumption is around 95 W under load (based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/64611/intel-xeon-processor-e5-2450-20m-cache-2-10-ghz-8-00-gt-s-intel-qpi.html); the power draw is likely larger when the CPU increases its clock speed under load).
+- Host: ARM dual-core Cortex-A9 MPCore CPU.
 - Both has access to 1 GB (32-bit) DDR3L SDRAM.
 - The power consumption is [unspecified in the official documentation](https://wiki.trenz-electronic.de/display/PD/TE0715+TRM#TE0715TRM-PowerConsumption), but it's less than 21.5W because that's the maximum rating of the power supply we've used. The _Power advantage_ column is omitted due to this lack of information and because of the difficulty of measuring power consumption over such short time spans with the lab equipment we can access at the moment. Assuming max consumption, it would be the same as the _Speed advantage_ columns.
 
