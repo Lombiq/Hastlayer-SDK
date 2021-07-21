@@ -17,7 +17,8 @@ namespace Hast.Communication.Tester.Helpers
 
             for (int y = 0; y < newImage.Height; y++)
             {
-                var row = image.GetPixelRowSpan(y);
+                var row = newImage.GetPixelRowSpan(y);
+
                 for (int x = 0; x < newImage.Width; x++)
                 {
                     var bytes = memory.Read4Bytes(y * newImage.Width + x + prependCellCount);
