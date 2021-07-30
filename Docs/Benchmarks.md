@@ -97,15 +97,15 @@ Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same 
 - FPGA: Xilinx Zynq XC7Z030-1SBG485C SoC FPGA. Main clock is 150 Mhz.
 - Host: ARM dual-core Cortex-A9 MPCore CPU.
 - Both has access to 1 GB (32-bit) DDR3L SDRAM.
-- The power consumption is [unspecified in the official documentation](https://wiki.trenz-electronic.de/display/PD/TE0715+TRM#TE0715TRM-PowerConsumption), but it's less than 21.5W because that's the maximum rating of the power supply we've used. The _Power advantage_ column is omitted due to this lack of information and because of the difficulty of measuring power consumption over such short time spans with the lab equipment we can access at the moment. Assuming max consumption, it would be the same as the _Speed advantage_ columns.
+- Trenz reported the typical power consumption as about 5W. Using an inline mains energy meter we've measured 4.6W minimum. The numbers in the table below show the measured maximums. Two separate builds were repeatedly executed in a loops during measurement. One build only executed the CPU version, while the other only the FPGA version.
 
 ### Measurements
 
-| Algorithm             | Speed advantage |   Parallelism  |    CPU   | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA power |
-|:----------------------|:---------------:|:--------------:|:--------:|:---------:|:----------------:|:--------:|:----------:|:----------:|
-| ImageContrastModifier |       4864%     |        25      |  2780 ms |   59.8 Ws |        41%       |   29 ms  |    56 ms   |   1.2 Ws   |
-| MonteCarloPiEstimator |       8646%     |        77      |  3236 ms |   69.6 Ws |        33%       |   31 ms  |    37 ms   |   0.8 Ws   |
-| ParallelAlgorithm     |       30582%    |       260      | 66273 ms | 1424.9 Ws |        55%       |  210 ms  |   216 ms   |   4.6  Ws  |
+| Algorithm             | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU watts | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts | FPGA power |
+|:----------------------|:---------------:|:---------------:|:--------------:|:--------:|:---------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:----------:|
+| ImageContrastModifier |       4864%     |     4333%       |        25      |  2780 ms |    4.8 W  |   13.3 Ws |        41%       |   29 ms  |    56 ms   |     4.7 W  |   0.3 Ws   |
+| MonteCarloPiEstimator |       8646%     |     7500%       |        77      |  3236 ms |    4.7 W  |   15.2 Ws |        33%       |   31 ms  |    37 ms   |     4.6 W  |   0.2 Ws   |
+| ParallelAlgorithm     |      30582%     |    31050%       |       260      | 66273 ms |    4.7 W  |  311.5 Ws |        55%       |  210 ms  |   216 ms   |     4.7 W  |   1.0 Ws   |
 
 You can find more measurements in the [attached table](Attachments/TE0715-04-30-1C_benchmark.pdf).
 
