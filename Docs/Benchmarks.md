@@ -101,13 +101,16 @@ Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same 
 
 ### Measurements
 
-| Algorithm             | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU watts | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts | FPGA power |
-|:----------------------|:---------------:|:---------------:|:--------------:|:--------:|:---------:|:---------:|:----------------:|:--------:|:----------:|:----------:|:----------:|
-| ImageContrastModifier |       4864%     |     4333%       |        25      |  2780 ms |    4.8 W  |   13.3 Ws |        41%       |   29 ms  |    56 ms   |     4.7 W  |   0.3 Ws   |
-| MonteCarloPiEstimator |       8646%     |     7500%       |        77      |  3236 ms |    4.7 W  |   15.2 Ws |        33%       |   31 ms  |    37 ms   |     4.6 W  |   0.2 Ws   |
-| ParallelAlgorithm     |      30582%     |    31050%       |       260      | 66273 ms |    4.7 W  |  311.5 Ws |        55%       |  210 ms  |   216 ms   |     4.7 W  |   1.0 Ws   |
+| Algorithm             | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU watts<sup>1</sup> | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts<sup>2</sup> | FPGA power |
+|:----------------------|:---------------:|:---------------:|:--------------:|:--------:|:---------------------:|:---------:|:----------------:|:--------:|:----------:|:----------------------:|:----------:|
+| ImageContrastModifier |       4864%     |     4333%       |        25      |  2780 ms |                4.8 W  |   13.3 Ws |        41%       |   29 ms  |    56 ms   |                 4.7 W  |   0.3 Ws   |
+| MonteCarloPiEstimator |       8646%     |     7500%       |        77      |  3236 ms |                4.7 W  |   15.2 Ws |        33%       |   31 ms  |    37 ms   |                 4.6 W  |   0.2 Ws   |
+| ParallelAlgorithm     |      30582%     |    31050%       |       260      | 66273 ms |                4.7 W  |  311.5 Ws |        55%       |  210 ms  |   216 ms   |                 4.7 W  |   1.0 Ws   |
 
 You can find more measurements in the [attached table](Attachments/TE0715-04-30-1C%20benchmark.pdf).
+
+1. Total system watts with CPU payload.
+2. Total system watts with FPGA payload.
 
 ## Catapult
 
@@ -130,9 +133,8 @@ Comparing the performance of the Catapult FPGA to the Catapult node's host PC's 
 | ParallelAlgorithm     |       99%       |       535%      |       650      | 397 ms |   38 Ws   |        80%       |  200 ms  |   200 ms   |    6 Ws    |
 
 
-<sup>1</sup>More would fit actually, needs more testing.
-
-<sup>2</sup>Uses 88% of the DSPs. With a degree of parallelism of 400 it would be 101% of DSPs.
+1. More would fit actually, needs more testing.
+2. Uses 88% of the DSPs. With a degree of parallelism of 400 it would be 101% of DSPs.
 
 
 ## Nexys
@@ -154,11 +156,9 @@ Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an I
 | MonteCarloPiEstimator             |       15%       |      5233%      | 78<sup>2</sup> |  120 ms |   16 Ws   |        61%       |   34 ms  |   104 ms   |   0.3 Ws   |
 | ParallelAlgorithm                 |       391%      |      23600%     |270<sup>3</sup> | 1818 ms |   236 Ws  |        77%       |  300 ms  |   370 ms   |    1 Ws    |
 
-<sup>1</sup>The low degree of parallelism available due to the resource constraints of the FPGA coupled with the slow serial connection makes this sample worse than on the CPU. Due to data transfer using only a fraction of the resources compared to doing the actual computations the power advantage of the FPGA implementation is most possibly closer to +4700%.
-
-<sup>2</sup> With a degree of parallelism of 79 the FPGA resource utilization would jump to 101% so this is the limit of efficiency.
-
-<sup>3</sup> With a degree of parallelism of 270 the resource utilization goes above 90% (94% post-synthesis) and the implementation step of bitstream generation fails.
+1. The low degree of parallelism available due to the resource constraints of the FPGA coupled with the slow serial connection makes this sample worse than on the CPU. Due to data transfer using only a fraction of the resources compared to doing the actual computations the power advantage of the FPGA implementation is most possibly closer to +4700%.
+2. With a degree of parallelism of 79 the FPGA resource utilization would jump to 101% so this is the limit of efficiency.
+3. With a degree of parallelism of 270 the resource utilization goes above 90% (94% post-synthesis) and the implementation step of bitstream generation fails.
 
 
 ## Further data
