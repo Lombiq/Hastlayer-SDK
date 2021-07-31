@@ -32,7 +32,7 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280/250/200/50
   - [Alveo U200 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u200.html), PCI Express® Gen3 x16, 225 W Maximum Total Power
   - [Alveo U50 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u50.html), PCI Express® Gen3 x16, 75 W Maximum Total Power
 - Host: A [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance with 16 x Intel Xeon E5-2640 v3 CPUs with 8 physical, 16 logical cores each, with a base clock of 2.6 GHz. Power consumption is around 90 W under load (based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/83359/intel-xeon-processor-e5-2640-v3-20m-cache-2-60-ghz.html); the power draw is likely larger when the CPU increases its clock speed under load).
-- Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](Attachments/BenchmarksVitis.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
+- Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](Attachments/Vitis%20benchmark.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
 - The kernels were built on the initial 2019.2 version of the Vitis Unified Software Platform. We have seen in one case 20% improvement in frequency (leading to shorter run times and lower total power consumption) by compiling with the newer 2020.1 version.
 
 ### Measurements
@@ -107,7 +107,7 @@ Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same 
 | MonteCarloPiEstimator |       8646%     |     7500%       |        77      |  3236 ms |    4.7 W  |   15.2 Ws |        33%       |   31 ms  |    37 ms   |     4.6 W  |   0.2 Ws   |
 | ParallelAlgorithm     |      30582%     |    31050%       |       260      | 66273 ms |    4.7 W  |  311.5 Ws |        55%       |  210 ms  |   216 ms   |     4.7 W  |   1.0 Ws   |
 
-You can find more measurements in the [attached table](Attachments/TE0715-04-30-1C_benchmark.pdf).
+You can find more measurements in the [attached table](Attachments/TE0715-04-30-1C%20benchmark.pdf).
 
 ## Catapult
 
