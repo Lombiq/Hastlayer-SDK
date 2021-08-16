@@ -24,6 +24,7 @@ using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
 using static System.Globalization.CultureInfo;
+using SearchOption = System.IO.SearchOption;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -252,11 +253,16 @@ namespace Hast.Vitis.Abstractions.Services
             // 1. $XILINX_PLATFORM,
             // 2. /opt/xilinx/platforms
             // 3. ./HardwareFramework/platforms
+            var caseInsensitiveEnumerationOptions = new EnumerationOptions
+            {
+                RecurseSubdirectories = true,
+                MatchCasing = MatchCasing.CaseInsensitive,
+            };
             var device = deviceManifest.SupportedPlatforms!
                 .SelectMany(platformName => platformsDirectories
                     .SelectMany(directoryInfo => directoryInfo
-                        .GetDirectories($"{platformName}*")
-                        .SelectMany(directory => directory.GetFiles("*.xpfm"))
+                        .GetDirectories($"{platformName}*", caseInsensitiveEnumerationOptions)
+                        .SelectMany(directory => directory.GetFiles("*.xpfm", caseInsensitiveEnumerationOptions))
                         .OrderByDescending(fileInfo => fileInfo.FullName))
                     .Union(platformsDirectories
                         .SelectMany(directoryInfo => directoryInfo.GetFiles($"{platformName}*.xpfm"))
