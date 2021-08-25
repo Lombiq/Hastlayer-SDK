@@ -279,6 +279,8 @@ namespace Hast.Communication.Services
                             }
                             catch (IOException) { }
                             catch (UnauthorizedAccessException) { }
+                            // This might happen if a non-FPGA port tries to be opened.
+                            catch (ArgumentOutOfRangeException) { }
 
                             // Waiting a maximum of 3s for a response from the port.
                             taskCompletionSource.Task.Wait(3000);
