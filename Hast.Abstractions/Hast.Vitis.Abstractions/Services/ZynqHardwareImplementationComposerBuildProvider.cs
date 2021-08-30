@@ -22,7 +22,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
-            nameof(VitisHardwareImplementationComposerBuildProvider)
+            nameof(VitisHardwareImplementationComposerBuildProvider),
         };
 
         public ZynqHardwareImplementationComposerBuildProvider(
@@ -63,6 +63,8 @@ namespace Hast.Vitis.Abstractions.Services
             File.Move(xclbinFilePath, xclbinFilePath + ".org");
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.name"), context.Configuration.Label);
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.hash"), context.HardwareDescription.TransformationId);
+            MajorProgress($"The xclbin file was moved to {xclbinFilePath}.org.");
+
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
             var vivadoArguments = new[]
             {
@@ -76,6 +78,8 @@ namespace Hast.Vitis.Abstractions.Services
                 "myxpr",
             };
             await _buildLogger.ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
+            MajorProgress("Frequency scaling profile created.");
+
             await ExecuteXclbinutil(
                 "--input",
                 xclbinFilePath + ".org",
@@ -84,23 +88,28 @@ namespace Hast.Vitis.Abstractions.Services
                 "--output",
                 xclbinFilePath,
                 "--force");
+            MajorProgress("Xbutil update completed. (1/3)");
             await ExecuteXclbinutil(
                 "--input",
                 xclbinFilePath,
                 "--info",
                 xclbinFilePath + ".info",
                 "--force");
+            MajorProgress("Xbutil update completed. (2/3)");
             await ExecuteXclbinutil(
                 "--input",
                 xclbinFilePath,
                 "--dump-section",
                 "BITSTREAM:RAW:" + bitFilePath,
                 "--force");
+            MajorProgress("Xbutil update completed. (3/3)");
+
             await ExecutePython3(
                 GetScriptFile(hardwareFrameworkPath, "scale_frequency.tcl"),
                 "-f",
                 bitFilePath,
                 bitFilePath + ".bin");
+            MajorProgress("Frequency scaling in bin file completed.");
         }
 
         public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
@@ -121,5 +130,8 @@ namespace Hast.Vitis.Abstractions.Services
             if (eventArgs.IsMajorStep) MajorStep++;
             BuildLogger.OnProgress(_logger, MajorStep, total: 0, eventArgs);
         }
+
+        private void MajorProgress(string message) =>
+            InvokeProgress(new BuildProgressEventArgs(message, isMajorStep: true));
     }
 }

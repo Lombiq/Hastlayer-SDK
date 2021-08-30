@@ -30,7 +30,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
-            nameof(VitisHardwareImplementationComposerBuildProvider)
+            nameof(VitisHardwareImplementationComposerBuildProvider),
         };
 
         public AzureHardwareImplementationComposerBuildProvider(
@@ -175,5 +175,7 @@ namespace Hast.Vitis.Abstractions.Services
 
                     return new Uri(configuration.StartFunctionUrl, "/").AbsoluteUri;
                 });
+
+        public void InvokeProgress(BuildProgressEventArgs eventArgs) { }
     }
 }
