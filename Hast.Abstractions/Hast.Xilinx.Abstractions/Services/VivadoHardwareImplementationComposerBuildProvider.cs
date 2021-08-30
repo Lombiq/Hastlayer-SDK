@@ -13,7 +13,7 @@ namespace Hast.Vitis.Abstractions.Services
         public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest.ToolChainName == CommonToolChainNames.Vivado;
+            context.DeviceManifest.GetBaseToolChainName() == CommonToolChainNames.Vivado;
 
         public Task BuildAsync(
             IHardwareImplementationCompositionContext context,

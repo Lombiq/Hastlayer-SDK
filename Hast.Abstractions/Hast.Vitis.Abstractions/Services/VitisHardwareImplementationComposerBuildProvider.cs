@@ -61,7 +61,7 @@ namespace Hast.Vitis.Abstractions.Services
 
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest.ToolChainName == CommonToolChainNames.Vitis;
+            context.DeviceManifest.GetBaseToolChainName() == CommonToolChainNames.Vitis;
 
         public Task BuildAsync(
             IHardwareImplementationCompositionContext context,
