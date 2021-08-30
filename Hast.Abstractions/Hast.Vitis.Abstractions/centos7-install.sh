@@ -7,6 +7,10 @@
 sudo yum install -y epel-release
 sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm
 
+# Installs the latest Python 3.x, needed for the bit-to-bin conversion. See:
+# https://github.com/topic-embedded-products/meta-topic/blob/master/recipes-bsp/fpga/fpga-bit-to-bin/fpga-bit-to-bin.py
+yum install -y python3
+
 # This installs the full SDK allowing you to build from source. If you only want to run the compiled application, you
 # can install just the runtime by swapping the comment on the two lines below.
 sudo yum install -y dotnet-sdk-3.1 dotnet-sdk-5.0
