@@ -117,7 +117,7 @@ namespace Hast.Vitis.Abstractions.Services
             MajorProgress("Xbutil update completed. (3/3)");
 
             await ExecutePython3(
-                GetScriptFile(hardwareFrameworkPath, "scale_frequency.tcl"),
+                GetScriptFile(hardwareFrameworkPath, "fpga-bit-to-bin.py"),
                 "-f",
                 bitFilePath,
                 bitFilePath + ".bin");

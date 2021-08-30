@@ -54,6 +54,12 @@ namespace Hast.Synthesis.Abstractions
                 await buildProvider.BuildAsync(context, implementation);
             }
 
+            // Cleanup is only executed once all build providers are done. This is necessary in case a provider needs
+            // the temporary files of its dependency. This also means dependent build providers don't need to implement
+            // CleanupAsync even if they have their own temporary files as long as they are in a directory that the
+            // dependency cleans up anyway.
+            foreach (var buildProvider in buildProviders) await buildProvider.CleanupAsync(context);
+
             return implementation;
         }
     }

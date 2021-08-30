@@ -196,8 +196,15 @@ namespace Hast.Vitis.Abstractions.Services
                 try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
                 catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
             }
+        }
+
+        public Task CleanupAsync(IHardwareImplementationCompositionContext context)
+        {
+            var hashId = context.HardwareDescription.TransformationId;
+            var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
 
             Cleanup(hardwareFrameworkPath, hashId);
+            return Task.CompletedTask;
         }
 
         private Task InitializeAsync(VitisBuildConfiguration buildConfiguration)
