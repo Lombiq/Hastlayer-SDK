@@ -25,5 +25,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(hardwareFrameworkPath, "Nexys4DDR_Master.xdc"),
                 Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "IPRepo"), "Hast_IP.vhd"));
         }
+
+        public void InvokeProgress(BuildProgressEventArgs eventArgs) { }
     }
 }

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Services.VitisHardwareImplementationComposerBuildProvider;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -63,7 +64,9 @@ namespace Hast.Vitis.Abstractions.Services
             File.Move(xclbinFilePath, xclbinFilePath + ".org");
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.name"), context.Configuration.Label);
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.hash"), context.HardwareDescription.TransformationId);
+            var tmpXclbinDirectoryPath = EnsureDirectoryExists(tmpDirectoryPath, "xclbin");
             MajorProgress($"The xclbin file was moved to {xclbinFilePath}.org.");
+            MajorProgress($"Created {tmpXclbinDirectoryPath}.");
 
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
             var vivadoArguments = new[]
@@ -74,7 +77,7 @@ namespace Hast.Vitis.Abstractions.Services
                 GetScriptFile(hardwareFrameworkPath, "scale_frequency.tcl"),
                 Path.Combine(tmpDirectoryPath, "_x/link/vivado/vpl/prj/prj.xpr"),
                 "-tclargs",
-                xclbinDirectoryPath,
+                tmpXclbinDirectoryPath,
                 "myxpr",
             };
             await _buildLogger.ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
@@ -84,7 +87,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--input",
                 xclbinFilePath + ".org",
                 "--replace-section",
-                "CLOCK_FREQ_TOPOLOGY:json:" + Path.Join(xclbinDirectoryPath, "clock_freq_topology.json"),
+                "CLOCK_FREQ_TOPOLOGY:json:" + Path.Join(tmpXclbinDirectoryPath, "clock_freq_topology.json"),
                 "--output",
                 xclbinFilePath,
                 "--force");
