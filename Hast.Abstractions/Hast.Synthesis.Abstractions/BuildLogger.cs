@@ -125,7 +125,9 @@ namespace Hast.Synthesis.Abstractions
     public static class BuildLogger
     {
         public static (BuildLogger<T> BuildLogger, TextWriter BuildOutput) Create<T>(
-            ILogger<T> logger, T progressInvoker)
+            ILogger<T> logger,
+            T progressInvoker,
+            string outFileName = "build")
             where T: IProgressInvoker
         {
             string buildOutputPath = null;
@@ -134,7 +136,7 @@ namespace Hast.Synthesis.Abstractions
             var buildOutputDirectoryPath = EnsureDirectoryExists("App_Data", "logs");
             for (var i = 0; i < 100 && buildOutput == null; i++)
             {
-                var fileName = i == 0 ? "build.out" : $"build~{i}.out";
+                var fileName = i == 0 ? $"{outFileName}.out" : $"{outFileName}~{i}.out";
                 buildOutputPath = Path.Combine(buildOutputDirectoryPath, fileName);
 
                 try

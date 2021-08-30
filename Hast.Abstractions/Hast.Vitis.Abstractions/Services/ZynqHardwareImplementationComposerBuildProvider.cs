@@ -2,6 +2,7 @@
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,10 +12,12 @@ using static Hast.Vitis.Abstractions.Services.VitisHardwareImplementationCompose
 
 namespace Hast.Vitis.Abstractions.Services
 {
-    public class ZynqHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
+    public sealed class ZynqHardwareImplementationComposerBuildProvider
+        : IHardwareImplementationComposerBuildProvider, IDisposable
     {
         private readonly ILogger<ZynqHardwareImplementationComposerBuildProvider> _logger;
         private readonly BuildLogger<ZynqHardwareImplementationComposerBuildProvider> _buildLogger;
+        private readonly TextWriter _buildOutput;
 
         private int MajorStep { get; set; }
 
@@ -29,7 +32,7 @@ namespace Hast.Vitis.Abstractions.Services
             ILogger<ZynqHardwareImplementationComposerBuildProvider> logger)
         {
             _logger = logger;
-            (_buildLogger, _) = BuildLogger.Create(logger, this);
+            (_buildLogger, _buildOutput) = BuildLogger.Create(logger, this, "build-zynq");
         }
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
@@ -59,12 +62,20 @@ namespace Hast.Vitis.Abstractions.Services
             // @xclbinutil --input ./xclbin/hastip.hw.xclbin --info ./xclbin/hastip.hw.xclbin.info --force
             // @xclbinutil --input ./xclbin/hastip.hw.xclbin --dump-section BITSTREAM:RAW:./xclbin/hastip.hw.bit --force
             // @python3 ./src/scripts/FPGA-BIT-TO-BIN.PY -f ./xclbin/hastip.hw.bit ./xclbin/hastip.hw.bit.bin
-            File.Move(xclbinFilePath, xclbinFilePath + ".org");
+
+            if (File.Exists(xclbinFilePath))
+            {
+                File.Move(xclbinFilePath, xclbinFilePath + ".org");
+            }
+            else
+            {
+                File.Copy(GetBinaryPath(context.Configuration, context.HardwareDescription), xclbinFilePath + ".org");
+            }
+
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.name"), context.Configuration.Label);
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.hash"), context.HardwareDescription.TransformationId);
             var tmpXclbinDirectoryPath = EnsureDirectoryExists(tmpDirectoryPath, "xclbin");
             MajorProgress($"The xclbin file was moved to {xclbinFilePath}.org.");
-            MajorProgress($"Created {tmpXclbinDirectoryPath}.");
 
             var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
             var vivadoArguments = new[]
@@ -136,5 +147,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private static string GetBitBinPath(IHardwareImplementationCompositionContext context) =>
             GetBinaryPath(context.Configuration, context.HardwareDescription).Replace(".xclbin", ".bit.bin");
+
+        public void Dispose() => _buildOutput?.Dispose();
     }
 }
