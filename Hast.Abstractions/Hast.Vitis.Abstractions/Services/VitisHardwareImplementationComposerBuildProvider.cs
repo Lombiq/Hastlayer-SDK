@@ -162,11 +162,6 @@ namespace Hast.Vitis.Abstractions.Services
             // Using the variable names in the Makefile.
             var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
 
-
-            var xclbinDirectoryPath = EnsureDirectoryExists(
-                GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
-                "xclbin");
-
             if (buildConfiguration.SynthesisOnly)
             {
                 await SynthKernelAsync(hardwareFrameworkPath, hashId);
@@ -181,12 +176,11 @@ namespace Hast.Vitis.Abstractions.Services
 
             ProgressMajor("Staring build.");
             await BuildKernelAsync(
-                hardwareFrameworkPath,
+                context,
                 target,
                 device,
                 hashId,
                 deviceManifest,
-                xclbinDirectoryPath,
                 openClConfiguration);
 
             var disableHbm = deviceManifest.SupportsHbm && !openClConfiguration.UseHbm;
@@ -269,19 +263,17 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         private async Task BuildKernelAsync(
-            string hardwareFrameworkPath,
+            IHardwareImplementationCompositionContext context,
             string target,
             string device,
             string hashId,
             XilinxDeviceManifest deviceManifest,
-            string xclbinDirectoryPath,
             IOpenClConfiguration openClConfiguration)
         {
-            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
+            var (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, xclbinDirectoryPath) = GetBuildPaths(context);
 
+            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
             var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
-            var xclbinFilePath = Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin");
 
             // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
             //        $(PATH_TO_HDL) $(KERNEL_TCL) $(KERNEL_XML)
@@ -588,7 +580,7 @@ namespace Hast.Vitis.Abstractions.Services
         private static string GetTmpDirectoryPath(string hashId) =>
             Path.Combine(Path.DirectorySeparatorChar.ToString(), "tmp", "hastlayer", hashId);
 
-        private static async Task<string> GetExecutablePathAsync(string executable)
+        public static async Task<string> GetExecutablePathAsync(string executable)
         {
             var executableName = (await CliHelper.WhichAsync(executable))
                 .FirstOrDefault(fileInfo => fileInfo.Exists)?
@@ -650,9 +642,25 @@ namespace Hast.Vitis.Abstractions.Services
                 hashId + ".xclbin");
         }
 
-        private static string GetScriptFile(string hardwareFrameworkPath, string fileName) =>
+        public static string GetScriptFile(string hardwareFrameworkPath, string fileName) =>
             Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", fileName);
 
         public void InvokeProgress(BuildProgressEventArgs eventArgs) => Progress?.Invoke(this, eventArgs);
+
+        public static (string HardwareFrameworkPath, string TmpDirectoryPath, string XclbinFilePath, string XclbinDirectoryPath)
+            GetBuildPaths(IHardwareImplementationCompositionContext context)
+        {
+            var hashId = context.HardwareDescription.TransformationId;
+            var target = context.Configuration.GetOrAddOpenClConfiguration().UseEmulation ? "hw_emu" : "hw";
+
+            var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
+            var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
+            var xclbinFilePath = Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin");
+            var xclbinDirectoryPath = EnsureDirectoryExists(
+                GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
+                "xclbin");
+
+            return (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, xclbinDirectoryPath);
+        }
     }
 }
