@@ -325,8 +325,19 @@ namespace Hast.Vitis.Abstractions.Services
                 "compiler.skipTimingCheckAndFrequencyScaling=1",
                 "--optimize",
                 "3",
-                //"--kernel_frequency",
-                //(deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
+            });
+
+            if (deviceManifest.BuildWithClockFrequencyHz)
+            {
+                vppArguments.AddRange(new[]
+                {
+                    "--kernel_frequency",
+                    (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
+                });
+            }
+
+            vppArguments.AddRange(new[]
+            {
                 "-lo",
                 xclbinFilePath,
                 xoFilePath,

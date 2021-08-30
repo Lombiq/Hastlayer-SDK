@@ -22,5 +22,11 @@ namespace Hast.Xilinx.Abstractions
         /// bitstream.
         /// </summary>
         public bool RequiresDcpBinary { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether <see cref="DeviceManifest.ClockFrequencyHz"/> can be passed to the
+        /// device during hardware implementation composition. This is ignored by the Nexys devices.
+        /// </summary>
+        public bool BuildWithClockFrequencyHz { get; set; } = true;
     }
 }

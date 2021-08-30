@@ -26,6 +26,8 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                     "hw_platform",
                 },
                 ToolChainName = CommonToolChainNames.Vitis,
+                // The frequency set by ZynqHardwareImplementationComposerBuildProvider after build.
+                BuildWithClockFrequencyHz = false,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>
