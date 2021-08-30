@@ -9,7 +9,7 @@ namespace Hast.Vitis.Abstractions.Models
         public int HeaderCellCount { get; set; } = 4;
         public string VendorName { get; set; } = "Xilinx";
         public bool UseEmulation { get; set; }
-        public int AxiBusWith { get; set; } = 512;
+        public int AxiBusWith { get; set; } = 1024;
         public bool UseCache { get; set; } = true;
         public bool UseHbm { get; set; } = true;
     }
