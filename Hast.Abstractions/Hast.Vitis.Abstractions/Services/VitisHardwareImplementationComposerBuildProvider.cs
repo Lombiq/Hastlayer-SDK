@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
@@ -36,11 +35,10 @@ namespace Hast.Vitis.Abstractions.Services
 
         private static bool _firstRun = true;
 
-        private readonly ILogger _logger;
+        private readonly ILogger<VitisHardwareImplementationComposerBuildProvider> _logger;
         private readonly IHastlayerFlavorProvider _flavorProvider;
         private readonly BuildLogger<VitisHardwareImplementationComposerBuildProvider> _buildLogger;
-        private readonly string _buildOutputPath;
-        private readonly StreamWriter _buildOutput;
+        private readonly TextWriter _buildOutput;
 
         public event EventHandler<BuildProgressEventArgs> Progress;
 
@@ -58,27 +56,7 @@ namespace Hast.Vitis.Abstractions.Services
             _logger = logger;
             _flavorProvider = flavorProvider;
 
-            var buildOutputPath = EnsureDirectoryExists("App_Data", "logs");
-            for (var i = 0; i < 100 && _buildOutput == null; i++)
-            {
-                var fileName = i == 0 ? "build.out" : $"build~{i}.out";
-                _buildOutputPath = Path.Combine(buildOutputPath, fileName);
-
-                try
-                {
-                    _buildOutput = new StreamWriter(_buildOutputPath, append: false, Encoding.UTF8);
-                }
-                catch (IOException ex)
-                {
-                    _logger.LogWarning(ex, "Failed to open {0} for writing.", fileName);
-                }
-            }
-
-            _buildLogger = new BuildLogger<VitisHardwareImplementationComposerBuildProvider>(
-                logger,
-                _buildOutputPath,
-                this,
-                _buildOutput);
+            (_buildLogger, _buildOutput) = BuildLogger.Create(logger, this);
         }
 
 
@@ -303,6 +281,7 @@ namespace Hast.Vitis.Abstractions.Services
             var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
 
             var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
+            var xclbinFilePath = Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin");
 
             // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
             //        $(PATH_TO_HDL) $(KERNEL_TCL) $(KERNEL_XML)
@@ -312,24 +291,23 @@ namespace Hast.Vitis.Abstractions.Services
                 "-mode",
                 "batch",
                 "-source",
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "gen_xo.tcl"),
+                GetScriptFile(hardwareFrameworkPath, "gen_xo.tcl"),
                 "-tclargs",
                 xoFilePath,
                 target,
                 device,
                 Path.Combine(rtlDirectoryPath, "src", "IP"),
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "package_kernel.tcl"),
+                GetScriptFile(hardwareFrameworkPath, "package_kernel.tcl"),
                 Path.Combine(rtlDirectoryPath, "src", "xml", "kernel.xml"),
             };
             await _buildLogger.ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
-
             // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
             //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
             // endif
-            // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
-            // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
+            // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --advanced.param compiler.skipTimingCheckAndFrequencyScaling=1 --optimize 3
+            // v++ $(CLFLAGS) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
             var vppExecutable = (await GetExecutablePathAsync(Vpp));
             var vppArguments = new List<string>(
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm
@@ -351,12 +329,14 @@ namespace Hast.Vitis.Abstractions.Services
                 target,
                 "--platform",
                 device,
-                "--dk",
-                "chipscope:hastip_1:m_axi_gmem",
-                "--kernel_frequency",
-                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
+                "--advanced.param",
+                "compiler.skipTimingCheckAndFrequencyScaling=1",
+                "--optimize",
+                "3",
+                //"--kernel_frequency",
+                //(deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
                 "-lo",
-                Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
+                xclbinFilePath,
                 xoFilePath,
             });
 
@@ -388,7 +368,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "-mode",
                 "batch",
                 "-source",
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "synth_util.tcl"),
+                GetScriptFile(hardwareFrameworkPath, "synth_util.tcl"),
                 "-tclargs",
                 Path.Combine(rtlDirectoryPath, "src", "IP", "Hast_IP.vhd"),
                 Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
@@ -573,12 +553,7 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         private void OnProgress(object sender, BuildProgressEventArgs e) =>
-            _logger.LogInformation(
-                "Message on build step {0}/{1}{3}: {2}",
-                MajorStep,
-                MajorStepsTotal,
-                e.Message,
-                e.IsMajorStep ? " (new)" : string.Empty);
+            BuildLogger.OnProgress(_logger, MajorStep, MajorStepsTotal, e);
 
         private static async Task CreateSourceAsync(
             IHardwareImplementationCompositionContext context,
@@ -652,6 +627,14 @@ namespace Hast.Vitis.Abstractions.Services
                 await File.WriteAllTextAsync(targetFilePath, result);
             }
 
+            // Also copy all IP files.
+            foreach (var file in Directory.GetFiles(Path.Combine(sourceDirectoryPath, "IP")))
+            {
+                if (file.EndsWith(".template", StringComparison.OrdinalIgnoreCase)) continue;
+
+                var targetFilePath = Path.Combine(targetDirectoryPath, "IP", Path.GetFileName(file));
+                if (!File.Exists(targetFilePath)) File.Copy(file, targetFilePath);
+            }
         }
 
         public void Dispose() => _buildOutput?.Dispose();
@@ -666,5 +649,10 @@ namespace Hast.Vitis.Abstractions.Services
                 EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
                 hashId + ".xclbin");
         }
+
+        private static string GetScriptFile(string hardwareFrameworkPath, string fileName) =>
+            Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", fileName);
+
+        public void InvokeProgress(BuildProgressEventArgs eventArgs) => Progress?.Invoke(this, eventArgs);
     }
 }

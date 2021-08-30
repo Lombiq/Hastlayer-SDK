@@ -7,7 +7,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using static Hast.Common.Helpers.FileSystemHelper;
 
 namespace Hast.Synthesis.Abstractions
 {
@@ -118,5 +120,49 @@ namespace Hast.Synthesis.Abstractions
             _logger.Log(logLevel, "{0}: {1}", name, message);
             _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
         }
+    }
+
+    public static class BuildLogger
+    {
+        public static (BuildLogger<T> BuildLogger, TextWriter BuildOutput) Create<T>(
+            ILogger<T> logger, T progressInvoker)
+            where T: IProgressInvoker
+        {
+            string buildOutputPath = null;
+            TextWriter buildOutput = null;
+
+            var buildOutputDirectoryPath = EnsureDirectoryExists("App_Data", "logs");
+            for (var i = 0; i < 100 && buildOutput == null; i++)
+            {
+                var fileName = i == 0 ? "build.out" : $"build~{i}.out";
+                buildOutputPath = Path.Combine(buildOutputDirectoryPath, fileName);
+
+                try
+                {
+                    buildOutput = new StreamWriter(buildOutputPath, append: false, Encoding.UTF8);
+                }
+                catch (IOException ex)
+                {
+                    logger.LogWarning(ex, "Failed to open {0} for writing.", fileName);
+                }
+            }
+
+            if (string.IsNullOrEmpty(buildOutputPath))
+            {
+                throw new InvalidOperationException("Failed to initialize the build output path.");
+            }
+
+            var buildLogger = new BuildLogger<T>(logger, buildOutputPath, progressInvoker, buildOutput);
+
+            return (buildLogger, buildOutput);
+        }
+
+        public static void OnProgress<T>(ILogger<T> logger, int majorStepCount, int total, BuildProgressEventArgs e) =>
+            logger.LogInformation(
+                total == 0 ? "Message on build step {0}{3}: {2}" : "Message on build step {0}/{1}{3}: {2}",
+                majorStepCount,
+                total,
+                e.Message,
+                e.IsMajorStep ? " (new)" : string.Empty);
     }
 }
