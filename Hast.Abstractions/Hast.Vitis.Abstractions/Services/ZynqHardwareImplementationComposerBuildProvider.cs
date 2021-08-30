@@ -1,8 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
-using Hast.Xilinx.Abstractions;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,14 +33,13 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
-            xilinxDeviceManifest.Name.StartsWith("Azure", StringComparison.InvariantCulture);
+            context.DeviceManifest.ToolChainName == ZynqManifestProviderBase.ToolChainName;
 
         public async Task BuildAsync(
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
-            var (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, xclbinDirectoryPath) = GetBuildPaths(context);
+            var (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, _) = GetBuildPaths(context);
 
             var xclbinutilExecutable = (await GetExecutablePathAsync("xclbinutil"));
             Task ExecuteXclbinutil(params string[] arguments) =>
@@ -113,6 +111,8 @@ namespace Hast.Vitis.Abstractions.Services
                 bitFilePath,
                 bitFilePath + ".bin");
             MajorProgress("Frequency scaling in bin file completed.");
+
+            File.Copy(bitFilePath + ".bin", GetBitBinPath(context));
         }
 
         public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
@@ -122,10 +122,7 @@ namespace Hast.Vitis.Abstractions.Services
                 .Shortcuts;
             shortcuts.Add(
                 nameof(ZynqHardwareImplementationComposerBuildProvider),
-                context =>
-                    File.Exists(
-                        GetBinaryPath(context.Configuration, context.HardwareDescription)
-                            .Replace(".xclbin", ".bit.bin")));
+                context => File.Exists(GetBitBinPath(context)));
         }
 
         public void InvokeProgress(BuildProgressEventArgs eventArgs)
@@ -136,5 +133,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         private void MajorProgress(string message) =>
             InvokeProgress(new BuildProgressEventArgs(message, isMajorStep: true));
+
+        private static string GetBitBinPath(IHardwareImplementationCompositionContext context) =>
+            GetBinaryPath(context.Configuration, context.HardwareDescription).Replace(".xclbin", ".bit.bin");
     }
 }

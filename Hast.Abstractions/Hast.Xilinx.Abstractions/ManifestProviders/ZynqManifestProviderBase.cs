@@ -9,6 +9,8 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
     public abstract class ZynqManifestProviderBase : IDeviceManifestProvider
     {
+        public const string ToolChainName = CommonToolChainNames.Vitis + " - Zynq";
+
         protected string _deviceName;
 
         private IDeviceManifest _deviceManifest;
@@ -25,7 +27,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                     Regex.Replace(_deviceName.ToLower(), @"[^a-z0-9]+", "-"),
                     "hw_platform",
                 },
-                ToolChainName = CommonToolChainNames.Vitis,
+                ToolChainName = ToolChainName,
                 // The frequency set by ZynqHardwareImplementationComposerBuildProvider after build.
                 BuildWithClockFrequencyHz = false,
             };
