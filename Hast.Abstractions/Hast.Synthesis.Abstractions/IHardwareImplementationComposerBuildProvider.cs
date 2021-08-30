@@ -9,7 +9,7 @@ namespace Hast.Synthesis.Abstractions
     /// If <see cref="CanCompose"/> returns <see langword="true"/> it performs any build actions and fills in the
     /// <see cref="IHardwareImplementation"/> given by the <see cref="VhdlHardwareImplementationComposer"/>.
     /// </summary>
-    public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IDependency
+    public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IProgressInvoker, IDependency
     {
         /// <summary>
         /// Gets the functions installed by other providers. If any of them returns <see langword="true"/> this provider
@@ -32,5 +32,17 @@ namespace Hast.Synthesis.Abstractions
         /// If implemented, it adds to the <see cref="Shortcuts"/> of other providers.
         /// </summary>
         void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers) { }
+    }
+
+    /// <summary>
+    /// Exposes the Progress event.
+    /// </summary>
+    public interface IProgressInvoker
+    {
+        /// <summary>
+        /// Invokes the progress event, if any.
+        /// </summary>
+        /// <param name="eventArgs"></param>
+        void InvokeProgress(BuildProgressEventArgs eventArgs);
     }
 }
