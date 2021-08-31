@@ -4,5 +4,6 @@
     {
         public const string InfoFileExtension = ".info";
         public const string NoHbmFlagExtension = ".no-hbm";
+        public const string SetScaleExtension = ".set-scale-path";
     }
 }

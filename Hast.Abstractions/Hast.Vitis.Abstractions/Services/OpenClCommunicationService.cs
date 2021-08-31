@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -78,6 +79,13 @@ namespace Hast.Vitis.Abstractions.Services
                 clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
                     .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
                     .Frequency;
+                if (File.Exists(implementation.BinaryPath + SetScaleExtension))
+                {
+                    var setScaleFilePath = await File.ReadAllTextAsync(implementation.BinaryPath + SetScaleExtension);
+                    await File.WriteAllTextAsync(
+                        setScaleFilePath,
+                        clockFrequency!.Value.ToString(CultureInfo.InvariantCulture));
+                }
             }
 
             var kernelBinary = File.ReadAllBytes(implementation.BinaryPath);

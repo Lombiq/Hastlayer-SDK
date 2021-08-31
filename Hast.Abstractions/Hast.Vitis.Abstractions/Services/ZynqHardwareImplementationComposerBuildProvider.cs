@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
+using static Hast.Vitis.Abstractions.Constants.Extensions;
 using static Hast.Vitis.Abstractions.Services.VitisHardwareImplementationComposerBuildProvider;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -52,6 +53,7 @@ namespace Hast.Vitis.Abstractions.Services
             Task ExecutePython3(params string[] arguments) =>
                 _buildLogger.ExecuteWithLogging(python3Executable, arguments, tmpDirectoryPath);
 
+            var binaryFilePath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             var bitFilePath = xclbinFilePath.Replace(".xclbin", ".bit");
 
             // mv $(XCLBIN)/hastip.$(TARGET).xclbin $(XCLBIN)/hastip.$(TARGET).xclbin.org
@@ -63,14 +65,7 @@ namespace Hast.Vitis.Abstractions.Services
             // @xclbinutil --input ./xclbin/hastip.hw.xclbin --dump-section BITSTREAM:RAW:./xclbin/hastip.hw.bit --force
             // @python3 ./src/scripts/FPGA-BIT-TO-BIN.PY -f ./xclbin/hastip.hw.bit ./xclbin/hastip.hw.bit.bin
 
-            if (File.Exists(xclbinFilePath))
-            {
-                File.Move(xclbinFilePath, xclbinFilePath + ".org");
-            }
-            else
-            {
-                File.Copy(GetBinaryPath(context.Configuration, context.HardwareDescription), xclbinFilePath + ".org");
-            }
+            if (File.Exists(xclbinFilePath)) File.Move(xclbinFilePath, xclbinFilePath + ".org");
 
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.name"), context.Configuration.Label);
             await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.hash"), context.HardwareDescription.TransformationId);
@@ -100,21 +95,30 @@ namespace Hast.Vitis.Abstractions.Services
                 "--output",
                 xclbinFilePath,
                 "--force");
-            MajorProgress("Xbutil update completed. (1/3)");
+            MajorProgress("Xclbinutil update completed. (1/3)");
             await ExecuteXclbinutil(
                 "--input",
                 xclbinFilePath,
                 "--info",
                 xclbinFilePath + ".info",
                 "--force");
-            MajorProgress("Xbutil update completed. (2/3)");
+            MajorProgress("Xclbinutil update completed. (2/3)");
             await ExecuteXclbinutil(
                 "--input",
                 xclbinFilePath,
                 "--dump-section",
                 "BITSTREAM:RAW:" + bitFilePath,
                 "--force");
-            MajorProgress("Xbutil update completed. (3/3)");
+            MajorProgress("Xclbinutil update completed. (3/3)");
+
+            if (File.Exists(binaryFilePath + InfoFileExtension)) File.Delete(binaryFilePath + InfoFileExtension);
+            await ExecuteXclbinutil(
+                "--input",
+                xclbinFilePath,
+                "--info",
+                "--output",
+                binaryFilePath + InfoFileExtension);
+            MajorProgress("Xclbinutil info file recreated.");
 
             await ExecutePython3(
                 GetScriptFile(hardwareFrameworkPath, "fpga-bit-to-bin.py"),
@@ -123,7 +127,15 @@ namespace Hast.Vitis.Abstractions.Services
                 bitFilePath + ".bin");
             MajorProgress("Frequency scaling in bin file completed.");
 
-            File.Copy(bitFilePath + ".bin", GetBitBinPath(context));
+            var setScaleFilePath = "/sys/devices/soc0/fclk0/set_rate";
+            var binFilePath = GetBitBinPath(context);
+
+            File.Copy(bitFilePath + ".bin", binFilePath);
+
+            if (File.Exists(setScaleFilePath))
+            {
+                await File.WriteAllTextAsync(binaryFilePath + SetScaleExtension, setScaleFilePath);
+            }
         }
 
         public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
