@@ -127,15 +127,11 @@ namespace Hast.Vitis.Abstractions.Services
                 bitFilePath + ".bin");
             MajorProgress("Frequency scaling in bin file completed.");
 
-            var setScaleFilePath = "/sys/devices/soc0/fclk0/set_rate";
             var binFilePath = GetBitBinPath(context);
 
             File.Copy(bitFilePath + ".bin", binFilePath);
 
-            if (File.Exists(setScaleFilePath))
-            {
-                await File.WriteAllTextAsync(binaryFilePath + SetScaleExtension, setScaleFilePath);
-            }
+            await File.WriteAllTextAsync(binaryFilePath + SetScaleExtension, "/sys/devices/soc0/fclk0/set_rate");
         }
 
         public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)

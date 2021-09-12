@@ -75,16 +75,22 @@ namespace Hast.Vitis.Abstractions.Services
             }
             else
             {
-                using var stream = new FileStream(infoFilePath, FileMode.Open);
+                await using var stream = new FileStream(infoFilePath, FileMode.Open);
                 clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
                     .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
                     .Frequency;
-                if (File.Exists(implementation.BinaryPath + SetScaleExtension))
+
+                if (clockFrequency == null)
+                {
+                    _logger.LogWarning("Unknown clock frequency!");
+                }
+                else if (File.Exists(implementation.BinaryPath + SetScaleExtension))
                 {
                     var setScaleFilePath = await File.ReadAllTextAsync(implementation.BinaryPath + SetScaleExtension);
                     await File.WriteAllTextAsync(
                         setScaleFilePath,
-                        clockFrequency!.Value.ToString(CultureInfo.InvariantCulture));
+                        clockFrequency.Value.ToString(CultureInfo.InvariantCulture));
+                    _logger.LogInformation("Frequency is set to {0}Hz.", await File.ReadAllTextAsync(setScaleFilePath));
                 }
             }
 
@@ -99,7 +105,7 @@ namespace Hast.Vitis.Abstractions.Services
                     devices.Add(new Device
                     {
                         Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}",
-                        Metadata = i
+                        Metadata = i,
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
                 }
