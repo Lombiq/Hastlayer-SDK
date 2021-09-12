@@ -35,7 +35,11 @@ namespace Hast.Synthesis.Abstractions
             _buildOutput = buildOutput;
         }
 
-        public Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory = null)
+        public Task ExecuteWithLogging(
+            string executable,
+            IList<string> arguments,
+            string workingDirectory = null,
+            TextWriter outputWriter = null)
         {
             var name = Path.GetFileName(executable);
             void OnCommandEvent(CommandEvent commandEvent)
@@ -50,6 +54,7 @@ namespace Hast.Synthesis.Abstractions
                             "started");
                         break;
                     case StandardOutputCommandEvent output:
+                        outputWriter?.WriteLine(output.Text);
                         Log(LogLevel.Trace, name, output.Text, "stdout");
                         break;
                     case StandardErrorCommandEvent error:

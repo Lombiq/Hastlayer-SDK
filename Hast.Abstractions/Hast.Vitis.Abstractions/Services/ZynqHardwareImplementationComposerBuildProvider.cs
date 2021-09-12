@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
@@ -46,8 +47,8 @@ namespace Hast.Vitis.Abstractions.Services
             var (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, _) = GetBuildPaths(context);
 
             var xclbinutilExecutable = (await GetExecutablePathAsync("xclbinutil"));
-            Task ExecuteXclbinutil(params string[] arguments) =>
-                _buildLogger.ExecuteWithLogging(xclbinutilExecutable, arguments, tmpDirectoryPath);
+            Task ExecuteXclbinutil(TextWriter output, params string[] arguments) =>
+                _buildLogger.ExecuteWithLogging(xclbinutilExecutable, arguments, tmpDirectoryPath, output);
 
             var python3Executable = (await GetExecutablePathAsync("python3"));
             Task ExecutePython3(params string[] arguments) =>
@@ -88,6 +89,7 @@ namespace Hast.Vitis.Abstractions.Services
             MajorProgress("Frequency scaling profile created.");
 
             await ExecuteXclbinutil(
+                output: null,
                 "--input",
                 xclbinFilePath + ".org",
                 "--replace-section",
@@ -97,6 +99,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--force");
             MajorProgress("Xclbinutil update completed. (1/3)");
             await ExecuteXclbinutil(
+                output: null,
                 "--input",
                 xclbinFilePath,
                 "--info",
@@ -104,6 +107,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--force");
             MajorProgress("Xclbinutil update completed. (2/3)");
             await ExecuteXclbinutil(
+                output: null,
                 "--input",
                 xclbinFilePath,
                 "--dump-section",
@@ -111,14 +115,18 @@ namespace Hast.Vitis.Abstractions.Services
                 "--force");
             MajorProgress("Xclbinutil update completed. (3/3)");
 
-            if (File.Exists(binaryFilePath + InfoFileExtension)) File.Delete(binaryFilePath + InfoFileExtension);
-            await ExecuteXclbinutil(
-                "--input",
-                xclbinFilePath,
-                "--info",
-                "--output",
-                binaryFilePath + InfoFileExtension);
-            MajorProgress("Xclbinutil info file recreated.");
+            await using (var infoFileWriter =
+                new StreamWriter(binaryFilePath + InfoFileExtension, append: false, Encoding.UTF8))
+            {
+                await ExecuteXclbinutil(
+                    output: infoFileWriter,
+                    "--input",
+                    xclbinFilePath,
+                    "--info",
+                    "--output",
+                    binaryFilePath + InfoFileExtension);
+                MajorProgress("Xclbinutil info file recreated.");
+            }
 
             await ExecutePython3(
                 GetScriptFile(hardwareFrameworkPath, "fpga-bit-to-bin.py"),
