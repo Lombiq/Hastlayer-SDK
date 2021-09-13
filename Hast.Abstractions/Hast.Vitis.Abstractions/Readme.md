@@ -31,7 +31,8 @@ If you want to build for a platform not in your */opt/xilinx/platforms* director
 
 Be sure that all .NET software dependencies are on the same version on both the target and the source computers. Otherwise the source code won't match during transformation. This will result in a different Transformation ID and the XCLBIN file won't be found, prompting a recompilation on the target machine. To mitigate this risk you can try some of the following strategies:
 * Perform a system update on both machines before starting, so both are on the most up-to-date frameworks.
-* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true Hastlayer.SDK.Linux.sln` (note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions)). Replace `linux-x64` with `linux-arm` to build the binaries for a 32-bit ARM device like the Zynq boards.
+* [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true Hastlayer.SDK.Linux.sln`. Replace `linux-x64` with `linux-arm` to build the binaries for a 32-bit ARM device like the Zynq boards.
+  * Note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions). Up to .Net 5 you need a Linux platform for Linux builds. So if you are on Windows you need a Linux virtual machine (for example using Docker as described in the next chapter). Starting with .Net 6 you can build Linux targets from Windows and macOS too. 
 
 
 ### Cross Compilation with Docker
