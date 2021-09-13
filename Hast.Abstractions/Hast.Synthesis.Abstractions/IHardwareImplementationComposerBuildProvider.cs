@@ -31,7 +31,7 @@ namespace Hast.Synthesis.Abstractions
         /// <summary>
         /// If implemented, it adds to the <see cref="Shortcuts"/> of other providers.
         /// </summary>
-        void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers) { }
+        void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers) { }
 
         /// <summary>
         /// If implemented, it performs cleanup tasks and removes temporary resources. This is deferred until all build

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
@@ -142,7 +141,7 @@ namespace Hast.Vitis.Abstractions.Services
             await File.WriteAllTextAsync(binaryFilePath + SetScaleExtension, "/sys/devices/soc0/fclk0/set_rate");
         }
 
-        public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        public void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
         {
             foreach (var provider in providers)
             {

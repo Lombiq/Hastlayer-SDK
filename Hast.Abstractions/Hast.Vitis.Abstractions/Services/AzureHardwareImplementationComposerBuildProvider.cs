@@ -90,7 +90,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        public void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
         {
             var shortcuts = providers
                 .Single(provider => provider.Name == nameof(VitisHardwareImplementationComposerBuildProvider))
