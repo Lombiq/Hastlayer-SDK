@@ -432,7 +432,9 @@ namespace Hast.Vitis.Abstractions.Services
                 File.Copy(reportFile, Path.Combine(reportSavePath, Path.GetFileName(reportFile)));
             }
 
-            var reportFilePath = Directory.GetFiles(reportSavePath, "*_bb_locked_power_routed.rpt").FirstOrDefault();
+            var reportFilePath =
+                Directory.GetFiles(reportSavePath, "*_bb_locked_power_routed.rpt").FirstOrDefault() ??
+                Directory.GetFiles(reportSavePath, "*_power_routed.rpt").FirstOrDefault();
             if (reportFilePath == null)
             {
                 throw new FileNotFoundException(
