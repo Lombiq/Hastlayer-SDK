@@ -121,9 +121,7 @@ namespace Hast.Vitis.Abstractions.Services
                     output: infoFileWriter,
                     "--input",
                     xclbinFilePath,
-                    "--info",
-                    "--output",
-                    binaryFilePath + InfoFileExtension);
+                    "--info");
                 MajorProgress("Xclbinutil info file recreated.");
             }
 

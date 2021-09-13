@@ -64,35 +64,7 @@ namespace Hast.Vitis.Abstractions.Services
                     $"Please make sure the file at '{implementation.BinaryPath}' exists and is accessible.");
             }
 
-            uint? clockFrequency = null;
-            var infoFilePath = implementation.BinaryPath + InfoFileExtension;
-            if (!File.Exists(infoFilePath))
-            {
-                Logger.LogWarning(
-                    "The info file is required to learn the kernel clock frequency and report the execution time " +
-                    "accurately. Please copy it to '{0}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
-                    infoFilePath);
-            }
-            else
-            {
-                await using var stream = new FileStream(infoFilePath, FileMode.Open);
-                clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
-                    .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
-                    .Frequency;
-
-                if (clockFrequency == null)
-                {
-                    _logger.LogWarning("Unknown clock frequency!");
-                }
-                else if (File.Exists(implementation.BinaryPath + SetScaleExtension))
-                {
-                    var setScaleFilePath = await File.ReadAllTextAsync(implementation.BinaryPath + SetScaleExtension);
-                    await File.WriteAllTextAsync(
-                        setScaleFilePath,
-                        clockFrequency.Value.ToString(CultureInfo.InvariantCulture));
-                    _logger.LogInformation("Frequency is set to {0}Hz.", await File.ReadAllTextAsync(setScaleFilePath));
-                }
-            }
+            uint? clockFrequency = await GetClockFrequencyAsync(implementation);
 
             var kernelBinary = File.ReadAllBytes(implementation.BinaryPath);
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
@@ -192,6 +164,51 @@ namespace Hast.Vitis.Abstractions.Services
 ");
 
             return context.HardwareExecutionInformation;
+        }
+
+        private async Task<uint?> GetClockFrequencyAsync(IHardwareImplementation implementation)
+        {
+            var infoFilePath = implementation.BinaryPath + InfoFileExtension;
+
+            if (!File.Exists(infoFilePath))
+            {
+                Logger.LogWarning(
+                    "The info file is required to learn the kernel clock frequency and report the execution time " +
+                    "accurately. Please copy it to '{0}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
+                    infoFilePath);
+                return null;
+            }
+
+            await using var stream = new FileStream(infoFilePath, FileMode.Open);
+            var clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
+                .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
+                .Frequency;
+
+            if (clockFrequency == null)
+            {
+                _logger.LogWarning("Unknown clock frequency!");
+                return null;
+            }
+
+            if (!File.Exists(implementation.BinaryPath + SetScaleExtension)) return clockFrequency;
+
+            var setScaleFilePath = (await File.ReadAllTextAsync(implementation.BinaryPath + SetScaleExtension))?.Trim();
+            if (setScaleFilePath != null && File.Exists(setScaleFilePath))
+            {
+                await File.WriteAllTextAsync(
+                    setScaleFilePath,
+                    clockFrequency.Value.ToString(CultureInfo.InvariantCulture));
+
+                var frequency = await File.ReadAllTextAsync(setScaleFilePath);
+                var frequencyHz = uint.Parse(frequency.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture);
+                _logger.LogInformation("Frequency is set to {0:0.##}MHz.", frequencyHz / 1_000_000.0);
+                return frequencyHz;
+            }
+
+            _logger.LogWarning(
+                "The frequency setter system file at the path '{0}' doesn't exist.",
+                setScaleFilePath ?? "<NULL>");
+            return clockFrequency;
         }
 
 
