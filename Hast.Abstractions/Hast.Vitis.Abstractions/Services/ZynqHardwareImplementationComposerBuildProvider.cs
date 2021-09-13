@@ -144,12 +144,18 @@ namespace Hast.Vitis.Abstractions.Services
 
         public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
         {
-            var shortcuts = providers
-                .Single(provider => provider.Name == nameof(VitisHardwareImplementationComposerBuildProvider))
-                .Shortcuts;
-            shortcuts.Add(
-                nameof(ZynqHardwareImplementationComposerBuildProvider),
-                context => File.Exists(GetBitBinPath(context)));
+            foreach (var provider in providers)
+            {
+                if (provider.Name == nameof(VitisHardwareImplementationComposerBuildProvider) ||
+                    provider.Name == nameof(ZynqHardwareImplementationComposerBuildProvider))
+                {
+                    provider
+                        .Shortcuts
+                        .Add(
+                        nameof(ZynqHardwareImplementationComposerBuildProvider),
+                        context => File.Exists(GetBitBinPath(context)));
+                }
+            }
         }
 
         public void InvokeProgress(BuildProgressEventArgs eventArgs)
