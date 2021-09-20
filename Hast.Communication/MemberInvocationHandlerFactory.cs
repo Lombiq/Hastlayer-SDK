@@ -218,7 +218,7 @@ namespace Hast.Communication
 
                                 if (mismatches.Any())
                                 {
-                                    throw new HardwareExecutionResultMismatchException(mismatches);
+                                    throw new HardwareExecutionResultMismatchException(mismatches, memory.CellCount);
                                 }
                             }
                         }

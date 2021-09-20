@@ -247,7 +247,7 @@ namespace Hast.Communication.Tester
             if (mismatches.Count > 0)
             {
                 Console.WriteLine("MISMATCH:");
-                Console.WriteLine(new HardwareExecutionResultMismatchException(mismatches));
+                Console.WriteLine(new HardwareExecutionResultMismatchException(mismatches, memory.CellCount));
             }
             if (memory.CellCount != referenceMemory.CellCount)
             {

@@ -230,7 +230,10 @@ namespace Hast.Samples.Consumer
                     .Mismatches?
                     .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
                 var mismatchCount = mismatches.Count;
-                Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : "es")}:");
+                Console.WriteLine(
+                    $"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between " +
+                    $"the software and hardware execution's results! The memory length is {exception.CellCount}. " +
+                    $"Mismatch{(mismatchCount == 1 ? string.Empty : "es")}:");
 
                 foreach (var mismatch in mismatches)
                 {
