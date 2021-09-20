@@ -25,12 +25,13 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var imageContrastModifier = await hastlayer
                 .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
-            var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            await modifiedImage.SaveAsync("contrast.bmp", new BmpEncoder());
+            var modifiedImageFpga = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            await modifiedImageFpga.SaveAsync("contrast-fpga.bmp", new BmpEncoder());
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var modifiedImageCpu = new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
+            await modifiedImageCpu.SaveAsync("contrast-cpu.bmp", new BmpEncoder());
             System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
             // ImageFilter disabled until it's improved.
             //var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
