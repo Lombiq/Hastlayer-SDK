@@ -20,6 +20,7 @@ namespace Hast.Samples.SampleAssembly
         private const int ChangeContrast_ImageHeightIndex = 1;
         private const int ChangeContrast_ContrastValueIndex = 2;
         private const int ChangeContrast_ImageStartIndex = 3;
+        private const int HeaderSize = ChangeContrast_ImageStartIndex;
 
         [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
@@ -173,11 +174,13 @@ namespace Hast.Samples.SampleAssembly
             IHardwareGenerationConfiguration configuration = null)
         {
             var pixelCount = image.Width * image.Height;
+            // Padding rounds up to MaxDegreeOfParallelism.
+            var padding = (MaxDegreeOfParallelism - (pixelCount % MaxDegreeOfParallelism)) % MaxDegreeOfParallelism;
             var cellCount =
+                HeaderSize +
                 pixelCount +
-                (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0) +
-                3;
-            var memory = hastlayer is null
+                padding;
+            var memory = hastlayer == null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
 
