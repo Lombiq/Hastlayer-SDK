@@ -7,7 +7,7 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer. Also see
-    /// <see cref="ParallelAlgorithmSampleRunner"/> on what to configure to make this work.
+    /// <c>Hast.Samples.Consumer.SampleRunners.ParallelAlgorithmSampleRunner</c> on what to configure to make this work.
     /// </summary>
     public class ParallelAlgorithm
     {
@@ -18,13 +18,13 @@ namespace Hast.Samples.SampleAssembly
         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 260;
 
-        private const int Run_InputInt32Index = 0;
-        private const int Run_OutputInt32Index = 0;
+        private const int RunInputInt32Index = 0;
+        private const int RunOutputInt32Index = 0;
 
 
         public virtual void Run(SimpleMemory memory)
         {
-            var input = memory.ReadInt32(Run_InputInt32Index);
+            var input = memory.ReadInt32(RunInputInt32Index);
             var tasks = new Task<int>[MaxDegreeOfParallelism];
 
             // Hastlayer will figure out how many Tasks you want to start if you kick them off in a loop like this.
@@ -67,7 +67,7 @@ namespace Hast.Samples.SampleAssembly
                 output += tasks[i].Result;
             }
 
-            memory.WriteInt32(Run_OutputInt32Index, output);
+            memory.WriteInt32(RunOutputInt32Index, output);
         }
 
         public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
@@ -75,9 +75,9 @@ namespace Hast.Samples.SampleAssembly
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(1)
                 : hastlayer.CreateMemory(configuration, 1);
-            memory.WriteInt32(Run_InputInt32Index, input);
+            memory.WriteInt32(RunInputInt32Index, input);
             Run(memory);
-            return memory.ReadInt32(Run_OutputInt32Index);
+            return memory.ReadInt32(RunOutputInt32Index);
         }
     }
 }
