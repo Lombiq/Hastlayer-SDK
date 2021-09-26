@@ -33,16 +33,18 @@ ConsumerPath="/media/sd-mmcblk0p1/Hast.Samples.Consumer"
 function run-benchmark-inner()
 {
   XclbinFileName="$1"
+  shift
+
   Label="$(cat "$XclbinFileName.name")"
 
   title "$XclbinFileName - $Label - $(date)"
-  
+
   echo fpgautil -b "$(echo $XclbinFileName | sed 's/\.xclbin$/.bit.bin/')"
   time fpgautil -b "$(echo $XclbinFileName | sed 's/\.xclbin$/.bit.bin/')"
-  
+
   pushd "$ConsumerPath"
-    echo dotnet Hast.Samples.Consumer.dll -device "TE0715-04-30-1C" -sample $(echo "$Label" | sed 's/\s.*//') -verify true -bin "$ProjectPath/$XclbinFileName"
-    time dotnet Hast.Samples.Consumer.dll -device "TE0715-04-30-1C" -sample $(echo "$Label" | sed 's/\s.*//') -verify true -bin "$ProjectPath/$XclbinFileName"
+    echo dotnet Hast.Samples.Consumer.dll -device "TE0715-04-30-1C" -sample $(echo "$Label" | sed 's/\s.*//') "$@" -bin "$ProjectPath/$XclbinFileName"
+    time dotnet Hast.Samples.Consumer.dll -device "TE0715-04-30-1C" -sample $(echo "$Label" | sed 's/\s.*//') "$@" -bin "$ProjectPath/$XclbinFileName"
   popd
 
   echo "FCLK0 = $(cat /sys/devices/soc0/fclk0/set_rate)Hz"
@@ -50,8 +52,20 @@ function run-benchmark-inner()
 
 function run-benchmark()
 {
+  if [ $# -eq 0 ]; then
+    echo "USAGE: $0 'filename.xclbin'"
+    echo "    The filename must be a relative path to the current directory."
+    return
+  fi
+
   XclbinFileName="$1"
+  shift
+
   [ -f "$XclbinFileName.log" ] && rm "$XclbinFileName.log"
-  run-benchmark-inner "$XclbinFileName" | tee "$XclbinFileName.log"
+  run-benchmark-inner "$XclbinFileName" "$@" | tee "$XclbinFileName.log"
 }
 
+function run-and-verify()
+{
+    run-benchmark "$1" -verify true
+}
