@@ -2,6 +2,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using System;
+using System.Linq;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -77,7 +79,16 @@ namespace Hast.Samples.SampleAssembly
                 : hastlayer.CreateMemory(configuration, 1);
             memory.WriteInt32(RunInputInt32Index, input);
             Run(memory);
-            return memory.ReadInt32(RunOutputInt32Index);
+
+            var output = memory.ReadInt32(RunOutputInt32Index);
+            var a = new SimpleMemoryAccessor(memory);
+            var dump = a.Get().ToArray().Select(x => x.ToString("X").PadLeft(2, '0'));
+            Console.WriteLine("run log\n  input: {0}\n  output: {1}\n  length: {2}\n  {3}",
+                input,
+                output,
+                a.Get().Length,
+                string.Join("\n  ", dump));
+            return output;
         }
     }
 }
