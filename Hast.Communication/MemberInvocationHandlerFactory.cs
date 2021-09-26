@@ -215,7 +215,7 @@ namespace Hast.Communication
                                         mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
                                             index,
                                             hardBytes[index..SimpleMemory.MemoryCellSizeBytes].ToArray(),
-                                            hardBytes[index..SimpleMemory.MemoryCellSizeBytes].ToArray()));
+                                            softBytes[index..SimpleMemory.MemoryCellSizeBytes].ToArray()));
                                     }
                                 }
 
