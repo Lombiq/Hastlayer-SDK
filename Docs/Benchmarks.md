@@ -102,16 +102,19 @@ Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same 
 
 ### Measurements
 
-| Algorithm             | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU watts<sup>1</sup> | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts<sup>2</sup> | FPGA power |
-|:----------------------|:---------------:|:---------------:|:--------------:|:--------:|:---------------------:|:---------:|:----------------:|:--------:|:----------:|:----------------------:|:----------:|
-| ImageContrastModifier |       4864%     |     4333%       |        25      |  2780 ms |                4.8 W  |   13.3 Ws |        41%       |   29 ms  |    56 ms   |                 4.7 W  |   0.3 Ws   |
-| MonteCarloPiEstimator |       8646%     |     7500%       |        77      |  3236 ms |                4.7 W  |   15.2 Ws |        33%       |   31 ms  |    37 ms   |                 4.6 W  |   0.2 Ws   |
-| ParallelAlgorithm     |      30582%     |    31050%       |       260      | 66273 ms |                4.7 W  |  311.5 Ws |        55%       |  210 ms  |   216 ms   |                 4.7 W  |   1.0 Ws   |
+| Algorithm                         | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU watts<sup>1</sup> | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts<sup>2</sup> | FPGA power |
+|:---------------------------------:|:---------------:|:---------------:|:--------------:|:--------:|:---------------------:|:---------:|:----------------:|:--------:|:----------:|:----------------------:|:----------:|
+| ImageContrastModifier<sup>3</sup> |       2324%     |     2580%       |        35      |  2788 ms |                4.8 W  |   13.4 Ws |     60.03%       |   26 ms  |   115 ms   |                 4.7 W  |   0.5 Ws   |
+| MonteCarloPiEstimator<sup>4</sup> |      10850%     |    15300%       |        97      |  3285 ms |                4.7 W  |   15.4 Ws |     37.76%       |   25 ms  |    30 ms   |                 4.6 W  |   0.1 Ws   |
+| ParallelAlgorithm<sup>5</sup>     |      11753%     |    11417%       |       280      | 29395 ms |                4.7 W  |  138.2 Ws |     58.81%       |  240 ms  |   248 ms   |                 4.7 W  |   1.2 Ws   |
 
 You can find more measurements in the [attached table](Attachments/TE0715-04-30-1C%20benchmark.pdf).
 
 1. Total system watts with CPU payload.
 2. Total system watts with FPGA payload.
+3. Peak for this device, both ±10 parallelism resulted in very slight performance degradation with very similar extent. 
+4. Near peak. Perhaps it could be further adjusted to squeeze out 1-2 ms, but the returns are very diminishing. We've also tried +30 parallelism but that displayed drastic performance degradation (50-52ms compared to 30-36ms with all lower values).
+5. The xclbin build takes a very long time and ultimately crashes when parallelism is 290 or higher.
 
 ## Catapult
 
