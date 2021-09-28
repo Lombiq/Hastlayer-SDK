@@ -14,7 +14,7 @@ function cls() { clear; echo -e '\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 # Initialize .NET and other environment settings.
 
-export DOTNET_ROOT=/media/sd-mmcblk0p1/dotnet-sdk-5.0.400-linux-arm/
+export DOTNET_ROOT=/media/sd-mmcblk0p1/dotnet-sdk-5*-linux-arm/
 export PATH=$PATH:$DOTNET_ROOT
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
