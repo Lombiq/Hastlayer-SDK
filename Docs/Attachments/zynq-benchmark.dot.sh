@@ -27,7 +27,6 @@ export BENCHMARK_RUN_DOT_READY=1
 
 # Define program
 
-ProjectPath="$PWD"
 ConsumerPath="/media/sd-mmcblk0p1/Hast.Samples.Consumer"
 
 function run-benchmark-inner()
@@ -42,6 +41,7 @@ function run-benchmark-inner()
   echo fpgautil -b "$(echo $XclbinFileName | sed 's/\.xclbin$/.bit.bin/')"
   time fpgautil -b "$(echo $XclbinFileName | sed 's/\.xclbin$/.bit.bin/')"
 
+  ProjectPath="$PWD"
   pushd "$ConsumerPath"
     echo dotnet Hast.Samples.Consumer.dll -device "TE0715-04-30-1C" -sample $(echo "$Label" | sed 's/\s.*//') "$@" -bin "$ProjectPath/$XclbinFileName"
     time dotnet Hast.Samples.Consumer.dll -device "TE0715-04-30-1C" -sample $(echo "$Label" | sed 's/\s.*//') "$@" -bin "$ProjectPath/$XclbinFileName"
