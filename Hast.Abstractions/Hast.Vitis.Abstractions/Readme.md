@@ -165,7 +165,7 @@ You can't build _xlbin_ files on a Zynq device. So you have to cross compile on 
 dotnet Hast.Samples.Consumer.dll \
     -device "TE0715-04-30-1C" \
     -sample "ParallelAlgorithm" \
-    -name "Parallel Algorithm Sample" |
+    -name "Parallel Algorithm Sample" \
     -build
 ``` 
 
