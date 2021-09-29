@@ -171,7 +171,7 @@ dotnet Hast.Samples.Consumer.dll \
 
 This command will get you through code transformation and build composition without actually trying to execute the result thanks to the `-build` flag. You can run it on any machine with XRT installed even if it doesn't have any FPGAs.
 
-If you are running a different project you can either introduce a flag or environment checker logic to exit after `hastlayer.GenerateHardware()` was called. Or simply accept that that application will exit with an exception on the cross compiler machine. Also you have to set the `HardwareGenerationConfiguration.SingleBinaryPath` property to ensure the executable on your device knows where to look the for _xclbin_ and its auxiliary files. You can see examples for that in _Samples/Hast.Samples.Consumer/Program.cs_.
+If you are running a different project you can either introduce a flag or environment checker logic to exit after `hastlayer.GenerateHardware()` was called. Or simply accept that that application will exit with an exception on the cross compiler machine. Also, you have to set the `HardwareGenerationConfiguration.SingleBinaryPath` property to ensure the executable on your device knows where to look the for _xclbin_ and its auxiliary files. You can see examples for that in _Samples/Hast.Samples.Consumer/Program.cs_.
 
 For maximum performance you should compile a Ready-to-Run build of Hastlayer. This requires a Linux host or a Linux virtual machine, for example using Docker. See more details in the _Cross Compilation with Docker_ section above.
 
@@ -180,11 +180,11 @@ For maximum performance you should compile a Ready-to-Run build of Hastlayer. Th
 
 You need to upload some files to your microSD card to have a usable system:
 
-* Copy the _boot.bin_, _boot.scr_ and _image.ub_ files mentioned in _Before you Start_ into your SD root.
-* Download the Linux Arm32 **binary** version of the .Net 5 SDK from [here](https://dotnet.microsoft.com/download/dotnet/5.0) and extract it into a directory with the same name as the _tar.gz_ file on the SD card (e.g. _/dotnet-sdk-5.0.400-linux-arm_). This is important.
-* Copy the application directory with your Hastlayer project, for example _/Hast.Samples.Consumer_.
-* Copy all files from your _HardwareFramework/bin` directory to the card. Doesn't matter where, in this example we copy it to the _/benchmarks_ directory.
-* Copy the [_zynq-benchmark.dot.sh_](../../Docs/Attachments/zynq-benchmark.dot.sh) file to the root of your card. This is helpful even if you are running a different project.
+1. Copy the _boot.bin_, _boot.scr_ and _image.ub_ files mentioned in _Before you Start_ into your SD root.
+2. Download the Linux Arm32 **binary** version of the .Net 5 SDK from [here](https://dotnet.microsoft.com/download/dotnet/5.0) and extract it into a directory with the same name as the _tar.gz_ file on the SD card (e.g. _/dotnet-sdk-5.0.400-linux-arm_). This is important.
+3. Copy the application directory with your Hastlayer project, for example _/Hast.Samples.Consumer_.
+4. Copy all files from your _HardwareFramework/bin__ directory to the card. Doesn't matter where, in this example we copy it to the _/benchmarks_ directory.
+5. Copy the [_zynq-benchmark.dot.sh_](../../Docs/Attachments/zynq-benchmark.dot.sh) file to the root of your card. This is helpful even if you are running a different project.
 
 
 ### Hardware and Network Setup
