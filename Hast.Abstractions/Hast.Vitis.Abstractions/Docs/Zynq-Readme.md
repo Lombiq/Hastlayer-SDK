@@ -43,7 +43,7 @@ Connect your device to your router with an Ethernet cable. For the TE0706 carrie
 
 Once powered up, you need to know its IP address. You can use your router's web UI or other network discovery tools. Alternatively, if your device has a JTAG connector you can connect using USB serial shell and type `ifconfig`. When you have the IP address set up an SSH connection for future convenience. You should be able to log in with "root" as your user name and password.
 
-You can also transfer files via SSH using an SFTP client (e.g. FileZilla) so you won't need to take out the SD card from this point.
+You can also transfer files via SSH using an SFTP client (e.g. FileZilla) so you won't need to take out the SD card from this point. **Don't** upload files to anywhere except _/media/sd-mmcblk0p1/_. The rest of the file system is volatile and will be reset after each reboot. 
 
 
 ## Running your Program through SSH
