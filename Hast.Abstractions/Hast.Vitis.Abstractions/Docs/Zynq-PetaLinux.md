@@ -73,7 +73,7 @@ cd petalinux
 petalinux-config --get-hw-description=../trenz_te0715_04_30_1c_base_202020_2/hw/
 ```
 
-There is no need to change anything, just press the ESC key and save the configuration before exit.
+There is no need to change anything, just press <kbd>ESC</kbd> and save the configuration before exit.
 
 > ⚠️ If you run into an error during this step you can learn more by typing `less build/config.log`.
 
@@ -88,14 +88,23 @@ Configure the kernel:
 petalinux-config -c kernel
 ```
 
+Navigate the menu like this:
+* Select _**D**evice Drivers_ and press <kbd>Enter</kbd>.
+* Select _**S**taging drivers_.
+  * Press <kbd>Space</kbd> to enable the feature.
+  * Press <kbd>Enter</kbd>.
+* Select _**X**ilinx PL clock enabler_.
+  * Press <kbd>Space</kbd> twice so it displays `<*>` next to it.
+
+You can-quick navigate visible elements by pressing the highlighted letter on your keyboard. Press <kbd>ESC</kbd> and save the configuration before exit.
+
 ![Kernel Configuration](Images/PetalinuxKernelStagingXilinxPlClockEnabler.png)
 
-Select _**D**evice Drivers_, then _**S**taging drivers_, then _**X**ilinx PL clock enabler_ option to `<*>` built-in.
-Press <kbd>ESC</kbd> and save the configuration before exit.
+Amend these config files and then configure the root filesystem:
 
-Replace ./project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi file with the following:
-
-```
+```shell
+(
+cat <<'EOF'
 /include/ "system-conf.dtsi"
 / {
     fclk0: fclk0 {
@@ -111,11 +120,9 @@ Replace ./project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi 
     status = "okay";
   };
 };
-```
+EOF
+) > project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi
 
-Amend these config files and then configure the root filesystem:
-
-```shell
 echo 'EXTRA_IMAGE_FEATURES = "debug-tweaks"' >> project-spec/meta-user/conf/petalinuxbsp.conf
 echo 'IMAGE_AUTOLOGIN = "1"' >> project-spec/meta-user/conf/petalinuxbsp.conf
 
@@ -127,11 +134,10 @@ echo 'CONFIG_zocl' >> project-spec/meta-user/conf/user-rootfsconfig
 petalinux-config -c rootfs
 ```
 
+Enter the _user packages_ group and press <kbd>Space</kbd> on each item so the indicators display `[*]` for all of them.
+Then press <kbd>ESC</kbd> and save the configuration before exit.
+
 ![Rootfs Configuration](Images/PetalinuxRootfsUserPackages.png)
-
-In "user packages" group choose [*] built-in option for all items.
-
-Press the ESC key and save the configuration before exit.
 
 Build the SD card images:
 
