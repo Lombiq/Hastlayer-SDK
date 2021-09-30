@@ -53,7 +53,7 @@ mkdir ~/petalinux_2020_2_trenz
 cd ~/petalinux_2020_2_trenz
 ```
 
-[Create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html) and export it into your working directory. Extract it like this:
+Copy the [trenz_te0715_04_30_1c_base_202020_2.zip](Attachments/trenz_te0715_04_30_1c_base_202020_2.zip) to your working directory. On docker copy it to the shared data directory instead and type `cp /data/trenz_te0715_04_30_1c_base_202020_2.zip ~/petalinux_2020_2_trenz`. (For users targetting a device other than Trenz TE0715-04-30-1C, [create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html).) Extract it like this:
 
 ```
 unzip trenz_te0715_04_30_1c_base_202020_2.zip
