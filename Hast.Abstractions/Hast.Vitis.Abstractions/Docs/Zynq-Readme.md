@@ -7,7 +7,7 @@ This section has both generic instructions and specific steps for setting up `Ha
 
 ## Before you Start
 
-You need to create your own PetaLinux 2020.2 boot image first. We have a tutorial for that in a separate document [here](BuildingPetaLinuxForHastlayer.md)
+You need to create your own PetaLinux 2020.2 boot image first. We have a tutorial for that in a separate document [here](Zynq-PetaLinux.md)
 
 
 ## Cross Compilation
@@ -25,7 +25,7 @@ This command will get you through code transformation and build composition with
 
 If you are running a different project you can either introduce a flag or environment checker logic to exit after `hastlayer.GenerateHardware()` was called. Or simply accept that that application will exit with an exception on the cross compiler machine. Also, you have to set the `HardwareGenerationConfiguration.SingleBinaryPath` property to ensure the executable on your device knows where to look the for _xclbin_ and its auxiliary files. You can see examples for that in _Samples/Hast.Samples.Consumer/Program.cs_.
 
-For maximum performance you should compile a Ready-to-Run build of Hastlayer. This requires a Linux host or a Linux virtual machine, for example using Docker. See more details in the _Cross Compilation with Docker_ section above.
+For maximum performance you should compile a Ready-to-Run build of Hastlayer. This requires a Linux host or a Linux virtual machine, for example using Docker. See more details in the _Cross Compilation with Docker_ section in [the root Readme](../Readme.md).
 
 
 ## SD Card Preparation Steps

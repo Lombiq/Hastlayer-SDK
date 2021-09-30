@@ -163,7 +163,7 @@ Copy the following three files to the root directory in the first partition on t
 
 The _BOOT.BIN_ and the _boot.scr_ contains the [U-Boot](https://www.denx.de/wiki/U-Boot/) and the initial FPGA image. The _image.ub_ contains the kernel and the root file system.
 
-If required you can put additional content on the SD card, and after booting PetaLinux you can access the SD card content in cd /media/sd-mmcblk0p1/ directory.
+If required you can put additional content on the SD card, and after booting PetaLinux you can access the SD card content in `cd /media/sd-mmcblk0p1/` directory.
 
 To run Hastlayer accelerated .NET applications you should log in as root (the default password is root).
 
