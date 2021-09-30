@@ -1,4 +1,6 @@
-﻿# Using Hastlayer with Zynq SoC modules
+# Using Hastlayer with Zynq SoC modules
+
+
 
 This section has both generic instructions and specific steps for setting up `Hast.Samples.Consumer` for the _Trenz TE0715-04-30-1C_ module. Use the latter as template for your own projects.
 

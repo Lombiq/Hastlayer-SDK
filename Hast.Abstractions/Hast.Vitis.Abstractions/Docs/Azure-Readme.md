@@ -1,8 +1,11 @@
-﻿## Using Hastlayer with Vitis boards on Azure NP Servers
+# Using Hastlayer with Vitis boards on Azure NP Servers
+
+
 
 If you want work with an Alveo card on an Azure VM, you need to pick the Azure-specific device (currently only `Azure Alveo U250`). This alters some of the automatic compilation steps. After compilation it submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
 
-### Preparation
+
+## Preparation
 
 You have to set up an NP10s virtual machine via the Azure Portal.
 1. Go to the [Select an image](https://portal.azure.com/#create/Microsoft.VirtualMachine) page.
@@ -35,7 +38,8 @@ source centos7-install.sh
 
 You can use any SSH client of your choice but we recommend checking out [MobaXterm](https://mobaxterm.mobatek.net/).
 
-### Configuration
+
+## Configuration
 
 The approval process requires addition configuration. Fill out and add the below `AzureAttestationConfiguration` property to the `CustomConfiguration` in your `appsettings.json` file.
 
@@ -68,7 +72,7 @@ To get this information from your Azure account:
 Additionally, during compilation only a netlist is generated instead of a bitstream so there won't be any reports based on simulation data.
 
 
-### Execution
+## Execution
 
 As of writing this document, the Azure VMs aren't meant for online compilation and there isn't enough space to install the full Vitis SDK. So you have to build and run attestation on a separate machine. The build machine must have Vitis 2020.2, but doesn't need Alveo hardware.
 
