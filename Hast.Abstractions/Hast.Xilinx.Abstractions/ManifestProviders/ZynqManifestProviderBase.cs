@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.Helpers;
 using System.Text.RegularExpressions;
@@ -28,7 +28,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                     "hw_platform",
                 },
                 ToolChainName = ToolChainName,
-                // The frequency set by ZynqHardwareImplementationComposerBuildProvider after build.
+                // The frequency is set by ZynqHardwareImplementationComposerBuildProvider after build.
                 BuildWithClockFrequencyHz = false,
             };
 
