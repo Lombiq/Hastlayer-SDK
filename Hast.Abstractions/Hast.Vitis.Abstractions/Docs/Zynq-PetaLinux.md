@@ -1,26 +1,26 @@
  # Building PetaLinux 2020.2 SD card image for Hastlayer (Trenz TE0715-04-30-1C module)
 
-To be able to run Hastlayer accelerated .NET applications on Trenz Electronics TE0715-04-30-1C Zynq 7030 SOM SoC module you have to build PetaLinux with certain features enabled. This document describes the required steps.
+To be able to run Hastlayer accelerated .NET applications on Trenz Electronics TE0715-04-30-1C Zynq 7030 SOM SoC module you have to build [PetaLinux](https://www.xilinx.com/products/design-tools/embedded-software/petalinux-sdk.html) with certain features enabled. This document describes the required steps.
 
 ## Install Xilinx PetaLinux Tools 2020.2
 
-Download PetaLinux 2020.2 installer from Xilinx website (https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2020-2.html) and install it. 
+Download PetaLinux 2020.2 installer from [Xilinx website](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/2020-2.html):
 
 ![Download PetaLinux Installer](Images/PetalinuxDownloadInstaller.png)
 
-PetaLinux building requires a 64-bit Linux machine with supported RedHat 7-8, CentOS 7-8, or Ubuntu 16-18-20. The actual PetaLinux tools installation must be done as a regular user, but you need root access to install additional packages. Note that you will need about 18GB temporary free disk space on the same drive to generate the output files. For more details see [the documentation](https://www.xilinx.com/content/dam/xilinx/support/documentation/sw_manuals/xilinx2021_1/ug1144-petalinux-tools-reference-guide.pdf).
+Building PetaLinux requires a 64-bit Linux machine with supported RedHat 7-8, CentOS 7-8, or Ubuntu 16-18-20. The actual PetaLinux tools installation must be done as a regular user, but you need root access to install additional packages. Note that you will need about 18GB temporary free disk space on the same drive to generate the output files. For more details see [the documentation](https://www.xilinx.com/content/dam/xilinx/support/documentation/sw_manuals/xilinx2021_1/ug1144-petalinux-tools-reference-guide.pdf).
 
-> ℹ️ If you are using the Centos 7 Docker image you don't have a regular root user. Perform the following to get yourself set up first:
+> ℹ️ If you are using the Centos 7 Docker image you don't have a regular root user. Perform the following to create a very regular user called "user" and to install all software dependencies:
 > ```shell
 > function user-setup() {
 >     # Creates non-root user and lets it take over /data.
 >     useradd user && passwd user && usermod -G wheel user || return
 >     chown user:user /data -R
+>     locale-gen en_US.UTF-8 && update-locale
+>     echo 'export LANG=en_US.UTF-8' >> /home/user/.bashrc
 >      
 >     # Installs the necessary dependencies.
 >     yum install -y git diffstat unzip texinfo python chrpath wget xterm sdl rpcsvc-proto socat cpio inetutils python2 net-tools tftp-hpa python-virtualenv xorg-server-xvfb bison flex gnupg ncurses autoconf libtool tar gcc sdl sdl2 glib2 screen pax pax-utils libstdc++5 python-django iproute2 lib32-zlib openssl gawk python-pexpect python-pip python-gitpython python-jinja xz iputils python-pylint ncurses-devel gcc-c++ xfce4-terminal
->     locale-gen en_US.UTF-8 && update-locale
->     echo 'export LANG=en_US.UTF-8' >> /home/user/.bashrc
 >     
 >     # Logs you in as "user".
 >     su user
@@ -28,45 +28,47 @@ PetaLinux building requires a 64-bit Linux machine with supported RedHat 7-8, Ce
 > 
 > user-setup
 > ```
+> 
+> If there were no issues this have just logged you in as "user". Next move the installer to your home directory:
+> ```shell
+> cd
+> mv /data/petalinux-*-installer.run ~
+> ```
 
 Continue with the PetaLinux installation:
 
-```
-./petalinux-v2020.2-final-installer.run --dir ${HOME}/petalinux20202 --platform "arm"
+```shell
+./petalinux-v2020.2-final-installer.run --dir ~/petalinux20202 --platform "arm"
 ```
 
-If everything was all right the above command will prompt you with several licence viewers. Naturally you carefully read through each navigating with PageDown and then exiting with Q.
+If everything was all right the above command will prompt you with several licence viewers. Naturally you carefully read through each navigating with <kbd>PageDown</kbd> and then exiting with <kbd>Q</kbd>.
 
 Before using the PetaLinux tools you first have to set up the environment:
 
-```
-source ${HOME}/petalinux20202/settings.sh
+```shell
+. ~/petalinux20202/settings.sh
+echo '. ~/petalinux20202/settings.sh' >> ~/.bashrc
 ```
 
 ## Configuring and building PetaLinux images
 
 Create a working directory to avoid making a mess.
 
-```
+```shell
 mkdir ~/petalinux_2020_2_trenz
 cd ~/petalinux_2020_2_trenz
 ```
 
-Copy the [trenz_te0715_04_30_1c_base_202020_2.zip](Attachments/trenz_te0715_04_30_1c_base_202020_2.zip) to your working directory. On docker copy it to the shared data directory instead and type `cp /data/trenz_te0715_04_30_1c_base_202020_2.zip ~/petalinux_2020_2_trenz`. (For users targetting a device other than Trenz TE0715-04-30-1C, [create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html).) Extract it like this:
+Copy the [trenz_te0715_04_30_1c_base_202020_2.zip](Attachments/trenz_te0715_04_30_1c_base_202020_2.zip) to your working directory.
 
-```
+> ℹ️ On Docker copy it to the shared data directory instead and then type `cp /data/trenz_te0715_04_30_1c_base_202020_2.zip ~/petalinux_2020_2_trenz`.
+> For users targetting a device other than Trenz TE0715-04-30-1C, [create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html).
+> 
+Extract it, create an empty PetaLinux project based on Zynq template and configure the hardware:
+
+```shell
 unzip trenz_te0715_04_30_1c_base_202020_2.zip
-```
-
-Create an empty PetaLinux project based on Zynq template:
-
-```
 petalinux-create -t project --template zynq --name petalinux
-```
-
-Configure the hardware:
-
-```
 cd petalinux
 petalinux-config --get-hw-description=../trenz_te0715_04_30_1c_base_202020_2/hw/
 ```
@@ -77,14 +79,19 @@ There is no need to change anything, just press the ESC key and save the configu
 
 Configure the kernel:
 
-```
+> ℹ️ If you are a text-mode user (e.g. using Docker or SSH) you will have issues with spawning GUI terminal emulators that the installer expects. You have to tell OpenEmbedded to use [GNU Screen](https://www.gnu.org/software/screen/) as your terminal of choise:
+> ```shell
+> echo 'OE_TERMINAL = "screen"' >> project-spec/meta-user/conf/petalinuxbsp.conf
+> ```
+
+```shell
 petalinux-config -c kernel
 ```
 
 ![Kernel Configuration](Images/PetalinuxKernelStagingXilinxPlClockEnabler.png)
 
-Set "Kernel Configuration - Device Drivers - Staging drivers - Xilinx PL clock enabler" option to [*] built-in.
-Press the ESC key and save the configuration before exit.
+Select _**D**evice Drivers_, then _**S**taging drivers_, then _**X**ilinx PL clock enabler_ option to `<*>` built-in.
+Press <kbd>ESC</kbd> and save the configuration before exit.
 
 Replace ./project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi file with the following:
 
@@ -106,25 +113,17 @@ Replace ./project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi 
 };
 ```
 
-Edit ./project-spec/meta-user/conf/petalinuxbsp.conf and add the following lines at the end:
+Amend these config files and then configure the root filesystem:
 
-```
-EXTRA_IMAGE_FEATURES = "debug-tweaks"
-IMAGE_AUTOLOGIN = "1"
-```
+```shell
+echo 'EXTRA_IMAGE_FEATURES = "debug-tweaks"' >> project-spec/meta-user/conf/petalinuxbsp.conf
+echo 'IMAGE_AUTOLOGIN = "1"' >> project-spec/meta-user/conf/petalinuxbsp.conf
 
-Edit ./project-spec/meta-user/conf/user-rootfsconfig and add the following lines at the end:
+echo 'CONFIG_opencl-clhpp-dev' >> project-spec/meta-user/conf/user-rootfsconfig
+echo 'CONFIG_opencl-headers-dev' >> project-spec/meta-user/conf/user-rootfsconfig
+echo 'CONFIG_xrt' >> project-spec/meta-user/conf/user-rootfsconfig
+echo 'CONFIG_zocl' >> project-spec/meta-user/conf/user-rootfsconfig
 
-```
-CONFIG_opencl-clhpp-dev
-CONFIG_opencl-headers-dev
-CONFIG_xrt
-CONFIG_zocl
-```
-
-Configure the root filesystem:
-
-```
 petalinux-config -c rootfs
 ```
 
@@ -136,7 +135,7 @@ Press the ESC key and save the configuration before exit.
 
 Build the SD card images:
 
-```
+```shell
 petalinux-build
 petalinux-package --boot --fsbl ./images/linux/zynq_fsbl.elf --fpga ./images/linux/system.bit --u-boot --force
 ```
@@ -151,7 +150,7 @@ Copy the following three files to the root directory in the first partition on t
 ./images/linux/image.ub
 ```
 
-The BOOT.BIN and the boot.scr contains the U-Boot and the initial FPGA image. The image.ub contains the kernel and the root file system.
+The _BOOT.BIN_ and the _boot.scr_ contains the [U-Boot](https://www.denx.de/wiki/U-Boot/) and the initial FPGA image. The _image.ub_ contains the kernel and the root file system.
 
 If required you can put additional content on the SD card, and after booting PetaLinux you can access the SD card content in cd /media/sd-mmcblk0p1/ directory.
 
@@ -161,4 +160,4 @@ To run Hastlayer accelerated .NET applications you should log in as root (the de
 
 ![FPGA configuration done](Images/TE0715-04-30-LED.jpg)
 
-To test the SD card image put the card into the Micro SD card slot on the carrier board. After switching on the power, the D2 LED becomes green, and if the FPGA is successfully programed from SD card it will goes off.
+To test the image put the card into the microSD slot on the carrier board. After switching on the power, the D2 LED becomes green, and if the FPGA is successfully programed from SD card it will go off.
