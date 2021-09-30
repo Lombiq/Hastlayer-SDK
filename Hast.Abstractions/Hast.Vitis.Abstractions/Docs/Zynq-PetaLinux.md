@@ -8,27 +8,26 @@ Download PetaLinux 2020.2 installer from Xilinx website (https://www.xilinx.com/
 
 ![Download PetaLinux Installer](Images/PetalinuxDownloadInstaller.png)
 
-PetaLinux building requires a 64-bit Linux machine with supported RedHat 7-8, CentOS 7-8, or Ubuntu 16-18-20. The actual PetaLinux tools installation must be done as a regular user, but for installing the required packages you need root access too. For more details see the documentation (https://www.xilinx.com/content/dam/xilinx/support/documentation/sw_manuals/xilinx2021_1/ug1144-petalinux-tools-reference-guide.pdf).
+PetaLinux building requires a 64-bit Linux machine with supported RedHat 7-8, CentOS 7-8, or Ubuntu 16-18-20. The actual PetaLinux tools installation must be done as a regular user, but you need root access to install additional packages. Note that you will need about 18GB temporary free disk space on the same drive to generate the output files. For more details see [the documentation](https://www.xilinx.com/content/dam/xilinx/support/documentation/sw_manuals/xilinx2021_1/ug1144-petalinux-tools-reference-guide.pdf).
 
-If you are using the Centos 7 Docker image you don't have a regular root user. Perform the following to get yourself set up first:
-
-```shell
-function user-setup() {
-    # Creates non-root user and lets it take over /data.
-    useradd user && passwd user && usermod -G wheel user || return
-    chown user:user /data -R
-     
-    # Installs the necessary dependencies.
-    yum install -y git diffstat unzip texinfo python chrpath wget xterm sdl rpcsvc-proto socat cpio inetutils python2 net-tools tftp-hpa python-virtualenv xorg-server-xvfb bison flex gnupg ncurses autoconf libtool tar gcc sdl sdl2 glib2 screen pax pax-utils libstdc++5 python-django iproute2 lib32-zlib openssl gawk python-pexpect python-pip python-gitpython python-jinja xz iputils python-pylint ncurses-devel
-    locale-gen en_US.UTF-8 && update-locale
-    echo 'export LANG=en_US.UTF-8' >> /home/user/.bashrc
-    
-    # Logs you in as "user".
-    su user
-}
-
-user-setup
-```
+> ℹ️ If you are using the Centos 7 Docker image you don't have a regular root user. Perform the following to get yourself set up first:
+> ```shell
+> function user-setup() {
+>     # Creates non-root user and lets it take over /data.
+>     useradd user && passwd user && usermod -G wheel user || return
+>     chown user:user /data -R
+>      
+>     # Installs the necessary dependencies.
+>     yum install -y git diffstat unzip texinfo python chrpath wget xterm sdl rpcsvc-proto socat cpio inetutils python2 net-tools tftp-hpa python-virtualenv xorg-server-xvfb bison flex gnupg ncurses autoconf libtool tar gcc sdl sdl2 glib2 screen pax pax-utils libstdc++5 python-django iproute2 lib32-zlib openssl gawk python-pexpect python-pip python-gitpython python-jinja xz iputils python-pylint ncurses-devel gcc-c++
+>     locale-gen en_US.UTF-8 && update-locale
+>     echo 'export LANG=en_US.UTF-8' >> /home/user/.bashrc
+>     
+>     # Logs you in as "user".
+>     su user
+> }
+> 
+> user-setup
+> ```
 
 Continue with the PetaLinux installation:
 
@@ -73,6 +72,8 @@ petalinux-config --get-hw-description=../trenz_te0715_04_30_1c_base_202020_2/hw/
 ```
 
 There is no need to change anything, just press the ESC key and save the configuration before exit.
+
+> ⚠️ If you run into an error during this step you can learn more by typing `less build/config.log`.
 
 Configure the kernel:
 
