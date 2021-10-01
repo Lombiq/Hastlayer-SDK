@@ -65,9 +65,9 @@ If you'd like to move the Docker WLS files (which can be upwards of 100 GB) to a
 ## Specialized Targets
 
 Aside from general Vitis accelerator card support, there are a couple specialized targets that have their own documentation:
-- [Using Hastlayer with Vitis boards on Azure NP Servers](Docs/Azure-Readme.md)
-- [Using Hastlayer with Zynq SoC modules](Docs/Zynq-Readme.md)
-  - [Building PetaLinux 2020.2 SD card image for Hastlayer](Docs/Zynq-PetaLinux.md)
+- [Using Hastlayer with Vitis boards on Azure NP Servers](Docs/AzureReadme.md)
+- [Using Hastlayer with Zynq SoC modules](Docs/ZynqReadme.md)
+  - [Building PetaLinux 2020.2 SD card image for Hastlayer](Docs/ZynqPetaLinux.md)
 
 
 ## Other Remarks

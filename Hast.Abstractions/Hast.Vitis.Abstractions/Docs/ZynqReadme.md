@@ -7,7 +7,7 @@ This section has both generic instructions and specific steps for setting up `Ha
 
 ## Before you Start
 
-You need to create your own PetaLinux 2020.2 boot image first. We have a tutorial for that in a separate document [here](Zynq-PetaLinux.md)
+You need to create your own PetaLinux 2020.2 boot image first. We have a tutorial for that in a separate document [here](ZynqPetaLinux.md)
 
 
 ## Cross Compilation
