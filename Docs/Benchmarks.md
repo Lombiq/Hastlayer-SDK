@@ -90,7 +90,7 @@ The utilization and power usage information was inside the *HardwareFramework/re
 
 ## Zynq
 
-Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same system-on-module. The benchmarks use the [Trenz Electric TE0715-04-30-1C](https://shop.trenz-electronic.de/en/TE0715-04-30-1C-SoC-Module-with-Xilinx-Zynq-XC7Z030-1SBG485C-1-GByte-DDR3L-SDRAM-4-x-5-cm) module connected to a [TE0706 carrier board](https://shop.trenz-electronic.de/en/TE0706-03-TE0706-Carrierboard-for-Trenz-Electronic-Modules-with-4-x-5-cm-Form-Factor) (form factor similar to a Raspberri Pi).
+Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same system-on-module. The benchmarks use the [Trenz Electronic TE0715-04-30-1C](https://shop.trenz-electronic.de/en/TE0715-04-30-1C-SoC-Module-with-Xilinx-Zynq-XC7Z030-1SBG485C-1-GByte-DDR3L-SDRAM-4-x-5-cm) module connected to a [TE0706 carrier board](https://shop.trenz-electronic.de/en/TE0706-03-TE0706-Carrierboard-for-Trenz-Electronic-Modules-with-4-x-5-cm-Form-Factor) (form factor similar to a Raspberri Pi).
 
 ### Details
 
