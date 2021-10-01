@@ -28,5 +28,11 @@ namespace Hast.Xilinx.Abstractions
         /// device during hardware implementation composition. This is ignored by the Nexys devices.
         /// </summary>
         public bool BuildWithClockFrequencyHz { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the bandwidth of the Advanced eXtensible Interface (AXI) bus in bits. This is ignored by the
+        /// Nexys devices.
+        /// </summary>
+        public int AxiBusWith { get; set; } = 512;
     }
 }

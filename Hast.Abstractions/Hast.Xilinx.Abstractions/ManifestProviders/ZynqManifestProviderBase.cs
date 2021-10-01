@@ -1,4 +1,4 @@
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.Helpers;
 using System.Text.RegularExpressions;
@@ -30,6 +30,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 ToolChainName = ToolChainName,
                 // The frequency is set by ZynqHardwareImplementationComposerBuildProvider after build.
                 BuildWithClockFrequencyHz = false,
+                AxiBusWith = 1024,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

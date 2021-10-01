@@ -139,7 +139,7 @@ namespace Hast.Vitis.Abstractions.Services
                     ipDirectoryPath);
             }
 
-            await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
+            await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration, deviceManifest);
 
             var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
             if (!Directory.Exists(xilinxDirectoryPath))
@@ -622,7 +622,8 @@ namespace Hast.Vitis.Abstractions.Services
         private static async Task ApplyTemplatesAsync(
             string hardwareFrameworkPath,
             string hashId,
-            IOpenClConfiguration openClConfiguration)
+            IOpenClConfiguration openClConfiguration,
+            XilinxDeviceManifest manifest)
         {
             var sourceDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", "src");
             var targetDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src");
@@ -638,7 +639,7 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var file in files)
             {
                 var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
-                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture))
+                    .Replace("###hastipAxiDWidth###", manifest.AxiBusWith.ToString(InvariantCulture))
                     .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
                 var targetFilePath = Path.Combine(targetDirectoryPath, file);
                 EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
