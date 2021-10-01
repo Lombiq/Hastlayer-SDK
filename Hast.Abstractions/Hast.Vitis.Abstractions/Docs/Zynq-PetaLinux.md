@@ -1,6 +1,9 @@
  # Building PetaLinux 2020.2 SD card image for Hastlayer (Trenz TE0715-04-30-1C module)
 
+
+
 To be able to run Hastlayer accelerated .NET applications on Trenz Electronics TE0715-04-30-1C Zynq 7030 SOM SoC module you have to build [PetaLinux](https://www.xilinx.com/products/design-tools/embedded-software/petalinux-sdk.html) with certain features enabled. This document describes the required steps.
+
 
 ## Install Xilinx PetaLinux Tools 2020.2
 
@@ -49,6 +52,7 @@ Before using the PetaLinux tools you first have to set up the environment:
 . ~/petalinux20202/settings.sh
 echo '. ~/petalinux20202/settings.sh' >> ~/.bashrc
 ```
+
 
 ## Configuring and building PetaLinux images
 
@@ -146,6 +150,7 @@ petalinux-build
 petalinux-package --boot --fsbl ./images/linux/zynq_fsbl.elf --fpga ./images/linux/system.bit --u-boot --force
 ```
 
+
 ## Preparing the SD card
 
 Copy the following three files to the root directory in the first partition on the SD card (it should be less than 32 GB and FAT32 formatted):
@@ -158,7 +163,7 @@ Copy the following three files to the root directory in the first partition on t
 
 The _BOOT.BIN_ and the _boot.scr_ contains the [U-Boot](https://www.denx.de/wiki/U-Boot/) and the initial FPGA image. The _image.ub_ contains the kernel and the root file system.
 
-If required you can put additional content on the SD card, and after booting PetaLinux you can access the SD card content in cd /media/sd-mmcblk0p1/ directory.
+If required you can put additional content on the SD card, and after booting PetaLinux you can access the SD card content in `cd /media/sd-mmcblk0p1/` directory.
 
 To run Hastlayer accelerated .NET applications you should log in as root (the default password is root).
 

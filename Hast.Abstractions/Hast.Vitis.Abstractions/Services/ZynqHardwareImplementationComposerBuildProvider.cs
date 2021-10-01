@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Logging;
@@ -57,8 +57,8 @@ namespace Hast.Vitis.Abstractions.Services
             var bitFilePath = xclbinFilePath.Replace(".xclbin", ".bit");
 
             // mv $(XCLBIN)/hastip.$(TARGET).xclbin $(XCLBIN)/hastip.$(TARGET).xclbin.org
-	        // cp ./src/IP/Hast_IP.vhd.name $(XCLBIN)/
-	        // cp ./src/IP/Hast_IP.vhd.hash $(XCLBIN)/
+            // cp ./src/IP/Hast_IP.vhd.name $(XCLBIN)/
+            // cp ./src/IP/Hast_IP.vhd.hash $(XCLBIN)/
             // @$(VIVADO) -mode batch -source ./src/scripts/scale_frequency.tcl ./_x/link/vivado/vpl/prj/prj.xpr -tclargs ./xclbin myxpr
             // @xclbinutil --input ./xclbin/hastip.hw.xclbin.org --replace-section CLOCK_FREQ_TOPOLOGY:json:./xclbin/clock_freq_topology.json --output ./xclbin/hastip.hw.xclbin --force
             // @xclbinutil --input ./xclbin/hastip.hw.xclbin --info ./xclbin/hastip.hw.xclbin.info --force
