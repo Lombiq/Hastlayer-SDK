@@ -25,7 +25,7 @@ namespace Hast.Samples.SampleAssembly
         // is the limit of efficiency. Note that this is one lower than in the currently measured benchmark because
         // since then we changed Hastlayer slightly.
         [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
-        public static readonly int MaxDegreeOfParallelism = 97;
+        public static readonly int MaxDegreeOfParallelism = 77;
 
 
         public virtual void EstimatePi(SimpleMemory memory)

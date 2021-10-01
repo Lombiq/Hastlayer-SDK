@@ -23,7 +23,7 @@ namespace Hast.Samples.SampleAssembly
         private const int HeaderSize = ChangeContrast_ImageStartIndex;
 
         [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
-        private static readonly int MaxDegreeOfParallelism = 35;
+        private static readonly int MaxDegreeOfParallelism = 25;
 
 
         /// <summary>

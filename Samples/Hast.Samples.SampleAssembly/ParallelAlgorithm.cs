@@ -21,7 +21,7 @@ namespace Hast.Samples.SampleAssembly
         // HardwareGenerationConfiguration.SingleBinaryPath make sure you are running with the same value it was built
         // with. Otherwise you'll get mismatches.
         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
-        private static readonly int MaxDegreeOfParallelism = 280;
+        private static readonly int MaxDegreeOfParallelism = 260;
 
         private const int RunInputInt32Index = 0;
         private const int RunOutputInt32Index = 0;
