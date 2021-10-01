@@ -23,9 +23,26 @@ dotnet Hast.Samples.Consumer.dll \
 
 This command will get you through code transformation and build composition without actually trying to execute the result thanks to the `-build` flag. You can run it on any machine with XRT installed even if it doesn't have any FPGAs.
 
-If you are running a different project you can either introduce a flag or environment checker logic to exit after `hastlayer.GenerateHardware()` was called. Or simply accept that that application will exit with an exception on the cross compiler machine. Also, you have to set the `HardwareGenerationConfiguration.SingleBinaryPath` property to ensure the executable on your device knows where to look the for _xclbin_ and its auxiliary files. You can see examples for that in _Samples/Hast.Samples.Consumer/Program.cs_.
-
 For maximum performance you should compile a Ready-to-Run build of Hastlayer. This requires a Linux host or a Linux virtual machine, for example using Docker. See more details in the _Cross Compilation with Docker_ section in [the root Readme](../Readme.md).
+
+### Running your own Project
+
+You can either introduce a flag or environment checker logic to exit after `hastlayer.GenerateHardware()` was called. Or simply accept that that application will exit with an exception on the cross compiler machine.
+
+You also have to set the `HardwareGenerationConfiguration.SingleBinaryPath` property to the expected path of the _xclbin_ file. You will upload the contents of the _HardwareFramework/bin_ directory on the embedded device and that's what the `SingleBinaryPath` value should reflect. If there is no file in that path then the build will start as normal, so you can hard code it to a suitable value if necessary. For example you include the following line in your code:
+```csharp
+configuration.SingleBinaryPath = "/media/sd-mmcblk0p1/my-payload.xclbin"
+ ```
+That won't have an effect on the build machine because no file will be on that path. When the build is complete, you will have the following files in your _HardwareFramework/bin_ directory (the actual file names are hash codes so they will differ):
+- 003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee.bit.bin
+- 003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee.xclbin
+- 003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee.xclbin.info
+- 003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee.xclbin.name
+- 003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee.xclbin.set-scale-path
+
+Then rename each file replacing the _003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee_ with _my-payload_ and copy them to the SD card using SFTP (_/media/sd-mmcblk0p1/_ directory).
+
+You can see an example of `HardwareGenerationConfiguration.SingleBinaryPath` usage in _Samples/Hast.Samples.Consumer/Program.cs_.
 
 
 ## SD Card Preparation Steps
