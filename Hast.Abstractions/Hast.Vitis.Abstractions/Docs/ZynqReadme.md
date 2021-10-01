@@ -55,6 +55,8 @@ You need to upload some files to your microSD card to have a usable system:
 4. Copy all files from your _HardwareFramework/bin__ directory to the card. Doesn't matter where, in this example we copy it to the _/benchmarks_ directory.
 5. Copy the [_zynq-benchmark.dot.sh_](Attachments/zynq-benchmark.dot.sh) file to the root of your card. This is helpful even if you are running a different project.
 
+> ℹ️ If you plan using the _Hast.Samples.Demo_ project, then copy the [_run-demo.sh_](Attachments/run-demo.sh) file to the root as well. This is a launcher script for presentations, it makes use of _zynq-benchmark.dot.sh_ to prepare and launch the Hastlayer demonstration.
+
 
 ## Hardware and Network Setup
 
