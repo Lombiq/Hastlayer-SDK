@@ -1,7 +1,10 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using System;
+using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
@@ -13,7 +16,9 @@ namespace Hast.Samples.Demo
             using var hastlayer = Hastlayer.Create();
 
             #region Configuration
-            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+            var configuration = new HardwareGenerationConfiguration(TrenzTE071504301CManifestProvider.DeviceName, "HardwareFramework");
+            configuration.SingleBinaryPath = "/media/sd-mmcblk0p1/demo/parallel_algorithm.xclbin";
+            var isDevice = File.Exists(configuration.SingleBinaryPath);
 
             configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
@@ -40,6 +45,12 @@ namespace Hast.Samples.Demo
                 configuration);
             #endregion
 
+            if (!isDevice)
+            {
+                Console.WriteLine("This is a build machine. No execution will be performed.");
+                return;
+            }
+
             #region Execution
             Console.WriteLine("Hardware generated, starting software execution.");
             Console.WriteLine();
@@ -59,6 +70,11 @@ namespace Hast.Samples.Demo
             var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             var output2 = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             var output3 = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+
+            var stopwatch = Stopwatch.StartNew();
+            new ParallelAlgorithm().Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            stopwatch.Stop();
+            Console.WriteLine("On CPU it took {0}ms.", stopwatch.ElapsedMilliseconds);
             #endregion
         }
     }
