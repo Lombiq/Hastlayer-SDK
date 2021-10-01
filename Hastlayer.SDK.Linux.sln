@@ -23,7 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{E8043A55-8
 		Docs\Roadmap.md = Docs\Roadmap.md
 		Docs\Support.md = Docs\Support.md
 		Docs\WorkingWithHastlayer.md = Docs\WorkingWithHastlayer.md
-		Docs\Attachments\zynq-benchmark.dot.sh = Docs\Attachments\zynq-benchmark.dot.sh
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Samples.SampleAssembly", "Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj", "{CB4A8CF6-7DD4-4493-B5CD-E5E51EE5C73B}"

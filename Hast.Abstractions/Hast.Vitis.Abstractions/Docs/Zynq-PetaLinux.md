@@ -50,8 +50,12 @@ Before using the PetaLinux tools you first have to set up the environment:
 
 ```shell
 . ~/petalinux20202/settings.sh
+petalinux-util --webtalk off
 echo '. ~/petalinux20202/settings.sh' >> ~/.bashrc
+echo 'petalinux-util --webtalk off' >> ~/.bashrc
 ```
+
+Pay attention to this output, as it will notify you if you are lacking free space, have network connection problems, or missing any dependencies. Don't worry about the not supported OS warning though.
 
 
 ## Configuring and building PetaLinux images
@@ -146,6 +150,7 @@ Then press <kbd>ESC</kbd> and save the configuration before exit.
 Build the SD card images:
 
 ```shell
+petalinux-build -x distclean
 petalinux-build
 petalinux-package --boot --fsbl ./images/linux/zynq_fsbl.elf --fpga ./images/linux/system.bit --u-boot --force
 ```

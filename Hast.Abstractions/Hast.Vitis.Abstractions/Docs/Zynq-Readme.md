@@ -53,7 +53,7 @@ You need to upload some files to your microSD card to have a usable system:
 2. Download the Linux Arm32 **binary** version of the .Net 5 SDK from [here](https://dotnet.microsoft.com/download/dotnet/5.0) and extract it into a directory with the same name as the _tar.gz_ file on the SD card (e.g. _/dotnet-sdk-5.0.400-linux-arm_). This is important.
 3. Copy the application directory with your Hastlayer project, for example _/Hast.Samples.Consumer_.
 4. Copy all files from your _HardwareFramework/bin__ directory to the card. Doesn't matter where, in this example we copy it to the _/benchmarks_ directory.
-5. Copy the [_zynq-benchmark.dot.sh_](../../../Docs/Attachments/zynq-benchmark.dot.sh) file to the root of your card. This is helpful even if you are running a different project.
+5. Copy the [_zynq-benchmark.dot.sh_](Attachments/zynq-benchmark.dot.sh) file to the root of your card. This is helpful even if you are running a different project.
 
 
 ## Hardware and Network Setup
