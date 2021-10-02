@@ -10,7 +10,7 @@ namespace Hast.Catapult.Abstractions
         public const string DeviceName = "Catapult";
 
         public IDeviceManifest DeviceManifest { get; } =
-            new DeviceManifest
+            new CatapultDeviceManifest
             {
                 Name = DeviceName,
                 ClockFrequencyHz = 150 * Mhz,
