@@ -15,10 +15,5 @@ namespace Hast.Synthesis.Abstractions
         public virtual string DefaultCommunicationChannelName => SupportedCommunicationChannelNames.First();
         public ulong AvailableMemoryBytes { get; set; }
         public uint DataBusWidthBytes { get; set; }
-        public string ToolChainName { get; set; }
-
-
-        public Exception GetUnknownToolChainException() =>
-            new InvalidOperationException($"Unknown tool chain: {ToolChainName}");
     }
 }

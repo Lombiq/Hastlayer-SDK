@@ -61,16 +61,16 @@ namespace Hast.Vitis.Abstractions.Services
 
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest.GetBaseToolChainName() == CommonToolChainNames.Vitis;
+            context.DeviceManifest is VitisDeviceManifest;
 
         public Task BuildAsync(
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
-            if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
+            if (!(context.DeviceManifest is VitisDeviceManifest deviceManifest))
             {
                 throw new InvalidOperationException(
-                    $"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
+                    $"The device manifest must be {nameof(VitisDeviceManifest)} for " +
                     $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
             }
 
@@ -78,7 +78,7 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 throw new InvalidOperationException(
                     $"The device manifest for '{deviceManifest.Name}' doesn't have any " +
-                    $"{nameof(XilinxDeviceManifest.SupportedPlatforms)} which is required to build.");
+                    $"{nameof(VitisDeviceManifest.SupportedPlatforms)} which is required to build.");
             }
 
             if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
@@ -95,7 +95,7 @@ namespace Hast.Vitis.Abstractions.Services
         private async Task BuildInnerAsync(
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation,
-            XilinxDeviceManifest deviceManifest)
+            VitisDeviceManifest deviceManifest)
         {
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
@@ -231,7 +231,7 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         private string GetPlatformFilePath(
-            XilinxDeviceManifest deviceManifest,
+            VitisDeviceManifest deviceManifest,
             List<DirectoryInfo> platformsDirectories)
         {
             // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
@@ -280,7 +280,7 @@ namespace Hast.Vitis.Abstractions.Services
             string target,
             string device,
             string hashId,
-            XilinxDeviceManifest deviceManifest,
+            VitisDeviceManifest deviceManifest,
             IOpenClConfiguration openClConfiguration)
         {
             var (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, xclbinDirectoryPath) = GetBuildPaths(context);
@@ -623,7 +623,7 @@ namespace Hast.Vitis.Abstractions.Services
             string hardwareFrameworkPath,
             string hashId,
             IOpenClConfiguration openClConfiguration,
-            XilinxDeviceManifest manifest)
+            VitisDeviceManifest manifest)
         {
             var sourceDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", "src");
             var targetDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src");

@@ -36,8 +36,8 @@ namespace Hast.Vitis.Abstractions.Services
                 .HardwareGenerationConfiguration
                 .GetOrAddOpenClConfiguration();
 
-            var xilinxDeviceManifest = (XilinxDeviceManifest)executionContext.HardwareRepresentation.DeviceManifest;
-            var isHbm = configuration.UseHbm && data.Length <= HbmSizeBytes && xilinxDeviceManifest.SupportsHbm;
+            var vitisDeviceManifest = (VitisDeviceManifest)executionContext.HardwareRepresentation.DeviceManifest;
+            var isHbm = configuration.UseHbm && data.Length <= HbmSizeBytes && vitisDeviceManifest.SupportsHbm;
 
             var implementation = executionContext.HardwareRepresentation.HardwareImplementation;
             if (isHbm && File.Exists(implementation.BinaryPath + NoHbmFlagExtension))

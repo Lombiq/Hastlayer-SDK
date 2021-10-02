@@ -86,7 +86,7 @@ namespace Hast.Console.Subcommands
                                             "(eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
             }
 
-            var manifest = new XilinxDeviceManifest { SupportedPlatforms = new[] { options.Platform ?? string.Empty } };
+            var manifest = new VitisDeviceManifest { SupportedPlatforms = new[] { options.Platform ?? string.Empty } };
             var context = new HardwareImplementationCompositionContext
             {
                 DeviceManifest = manifest,

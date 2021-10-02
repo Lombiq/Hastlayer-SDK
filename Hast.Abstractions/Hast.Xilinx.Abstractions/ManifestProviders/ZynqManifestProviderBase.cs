@@ -9,13 +9,11 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
 {
     public abstract class ZynqManifestProviderBase : IDeviceManifestProvider
     {
-        public const string ToolChainName = CommonToolChainNames.Vitis + " - Zynq";
-
         protected string _deviceName;
 
         private IDeviceManifest _deviceManifest;
         public IDeviceManifest DeviceManifest =>
-            _deviceManifest ??= new XilinxDeviceManifest
+            _deviceManifest ??= new ZynqDeviceManifest
             {
                 Name = _deviceName,
                 ClockFrequencyHz = 150 * Mhz,
@@ -27,7 +25,6 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                     Regex.Replace(_deviceName.ToLower(), @"[^a-z0-9]+", "-"),
                     "hw_platform",
                 },
-                ToolChainName = ToolChainName,
                 // The frequency is set by ZynqHardwareImplementationComposerBuildProvider after build.
                 BuildWithClockFrequencyHz = false,
                 AxiBusWith = 1024,

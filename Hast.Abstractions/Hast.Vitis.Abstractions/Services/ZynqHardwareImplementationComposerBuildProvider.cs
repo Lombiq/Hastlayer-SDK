@@ -1,6 +1,6 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
-using Hast.Xilinx.Abstractions.ManifestProviders;
+using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -37,7 +37,7 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest.ToolChainName == ZynqManifestProviderBase.ToolChainName;
+            context.DeviceManifest is ZynqDeviceManifest;
 
         public async Task BuildAsync(
             IHardwareImplementationCompositionContext context,

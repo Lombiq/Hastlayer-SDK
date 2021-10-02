@@ -21,8 +21,8 @@ namespace Hast.Vitis.Abstractions.Services
             var binaryPath = hardwareRepresentation.HardwareImplementation.BinaryPath;
 
             if (memoryByteCount > Limits.HbmSizeBytes &&
-                hardwareRepresentation.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
-                xilinxDeviceManifest.SupportsHbm &&
+                hardwareRepresentation.DeviceManifest is VitisDeviceManifest vitisDeviceManifest &&
+                vitisDeviceManifest.SupportsHbm &&
                 !File.Exists(binaryPath + NoHbmFlagExtension))
             {
                 return new MemoryResourceProblem

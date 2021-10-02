@@ -1,6 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Abstractions.Helpers;
+using Hast.Xilinx.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ namespace Hast.Vitis.Abstractions.Services
         public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest.GetBaseToolChainName() == CommonToolChainNames.Vivado;
+            context.DeviceManifest is NexysDeviceManifest;
 
         public Task BuildAsync(
             IHardwareImplementationCompositionContext context,

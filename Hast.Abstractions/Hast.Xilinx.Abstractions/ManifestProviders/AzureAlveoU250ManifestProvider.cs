@@ -10,7 +10,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
         public const string DeviceName = "Azure Alveo U250";
 
         public IDeviceManifest DeviceManifest { get; } =
-            new XilinxDeviceManifest
+            new AzureNpDeviceManifest
             {
                 Name = DeviceName,
                 ClockFrequencyHz = 300 * Frequency.Mhz,
@@ -20,7 +20,6 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 AvailableMemoryBytes = 2 * DataSize.GigaByte,
                 SupportsHbm = false,
                 SupportedPlatforms = new[] { "xilinx_u250_gen3x16_xdma_2_1_202010_1" }, // Need a very specific version.
-                ToolChainName = CommonToolChainNames.Vitis,
                 RequiresDcpBinary = true,
             };
 
