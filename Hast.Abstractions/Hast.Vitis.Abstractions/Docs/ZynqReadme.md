@@ -47,22 +47,23 @@ You can see an example of `HardwareGenerationConfiguration.SingleBinaryPath` usa
 
 ## SD Card Preparation Steps
 
-You need to upload some files to your microSD card to have a usable system:
+You need to upload some files to your microSD card to have a usable system. Prefer to use a card reader; copying the files via an Android phone may cause the device not to be able to boot from the card for some unknown reason.
 
-1. Copy the _boot.bin_, _boot.scr_ and _image.ub_ files mentioned in _Before you Start_ into your SD root.
-2. Download the Linux Arm32 **binary** version of the .Net 5 SDK from [here](https://dotnet.microsoft.com/download/dotnet/5.0) and extract it into a directory with the same name as the _tar.gz_ file on the SD card (e.g. _/dotnet-sdk-5.0.400-linux-arm_). This is important.
-3. Copy the application directory with your Hastlayer project, for example _/Hast.Samples.Consumer_.
-4. Copy all files from your _HardwareFramework/bin__ directory to the card. Doesn't matter where, in this example we copy it to the _/benchmarks_ directory.
-5. Copy the [_zynq-benchmark.dot.sh_](Attachments/zynq-benchmark.dot.sh) file to the root of your card. This is helpful even if you are running a different project.
+1. Format the SD card to FAT32.
+2. Copy the _boot.bin_, _boot.scr_ and _image.ub_ files mentioned in _Before you Start_ into your SD root.
+3. Download the Linux Arm32 **binary** version of the .Net 5 SDK from [here](https://dotnet.microsoft.com/download/dotnet/5.0) and extract it into a directory with the same name as the _tar.gz_ file on the SD card (e.g. _/dotnet-sdk-5.0.400-linux-arm_). This is important.
+4. Copy the application directory with your Hastlayer project, for example _/Hast.Samples.Consumer_.
+5. Copy all files from your _HardwareFramework/bin__ directory to the card. Doesn't matter where, in this example we copy it to the _/benchmarks_ directory.
+6. Copy the [_zynq-benchmark.dot.sh_](Attachments/zynq-benchmark.dot.sh) file to the root of your card. This is helpful even if you are running a different project.
 
 > ℹ️ If you plan using the _Hast.Samples.Demo_ project, then copy the [_run-demo.sh_](Attachments/run-demo.sh) file to the root as well. This is a launcher script for presentations, it makes use of _zynq-benchmark.dot.sh_ to prepare and launch the Hastlayer demonstration.
 
 
 ## Hardware and Network Setup
 
-Connect your device to your router with an Ethernet cable. For the TE0706 carrier board it's the port that's _not_ lit. Then plug in the power adapter into the barrel jack.
+Connect your device to your router with an Ethernet cable. For the TE0706 carrier board it's the port that's _not_ lit (and won't light up when you plug it in either). Then plug in the power adapter into the barrel jack.
 
-Once powered up, you need to know its IP address. You can use your router's web UI or other network discovery tools. Alternatively, if your device has a JTAG connector you can connect using USB serial shell and type `ifconfig`. When you have the IP address set up an SSH connection for future convenience. You should be able to log in with "root" as your user name and password.
+Once powered up, you need to know its IP address. You can use your router's web UI or other network discovery tools (like [Advanced IP Scanner](https://www.advanced-ip-scanner.com/)). Alternatively, if your device has a JTAG connector you can connect using USB serial shell and type `ifconfig` (with e.g. [MobaXterm](https://mobaxterm.mobatek.net/) select the "Serial" session type, choose a serial port and set the speed to 115200 bps). When you have the IP address set up an SSH connection for future convenience. You should be able to log in with "root" as your user name and password.
 
 You can also transfer files via SSH using an SFTP client (e.g. FileZilla) so you won't need to take out the SD card from this point. **Don't** upload files to anywhere except _/media/sd-mmcblk0p1/_. The rest of the file system is volatile and will be reset after each reboot. 
 
