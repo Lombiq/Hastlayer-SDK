@@ -1,12 +1,14 @@
 ﻿using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Drawing;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Algorithm for running convolution image processing on images. Also see <see cref="ImageFilterSampleRunner"/> on
     /// what to configure to make this work.
-    /// 
+    ///
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
     public class ImageFilter
@@ -147,10 +149,12 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the smoothed image.</returns>
-        public Bitmap ApplyGaussFilter(Bitmap image)
+        public Bitmap ApplyGaussFilter(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
+                hastlayer,
+                configuration,
                 1, 2, 1,
                 2, 4, 2,
                 1, 2, 1,
@@ -164,10 +168,12 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image.</returns>
-        public Bitmap ApplySobelFilter(Bitmap image)
+        public Bitmap ApplySobelFilter(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
+                hastlayer,
+                configuration,
                 1, 2, 1,
                 0, 0, 0,
                 -1, -2, -1);
@@ -180,10 +186,12 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image containing only horizontal edges.</returns>
-        public Bitmap DetectHorizontalEdges(Bitmap image)
+        public Bitmap DetectHorizontalEdges(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
+                hastlayer,
+                configuration,
                 1, 1, 1,
                 0, 0, 0,
                 -1, -1, -1);
@@ -196,10 +204,12 @@ namespace Hast.Samples.SampleAssembly
         /// </summary>
         /// <param name="image">The image to modify.</param>
         /// <returns>Returns the edge map of the image containing only vertical edges.</returns>
-        public Bitmap DetectVerticalEdges(Bitmap image)
+        public Bitmap DetectVerticalEdges(Bitmap image, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
+                hastlayer,
+                configuration,
                 1, 0, -1,
                 1, 0, -1,
                 1, 0, -1);
@@ -226,12 +236,16 @@ namespace Hast.Samples.SampleAssembly
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private SimpleMemory CreateSimpleMemory(
             Bitmap image,
+            IHastlayer hastlayer, IHardwareGenerationConfiguration configuration,
             int topLeft, int topMiddle, int topRight,
             int middleLeft, int pixel, int middleRight,
             int bottomLeft, int bottomMiddle, int bottomRight,
             int factor = 1, int offset = 0)
         {
-            var memory = new SimpleMemory(image.Width * image.Height * 6 + 13);
+            var cellCount = image.Width * image.Height * 6 + 13;
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             memory.WriteUInt32(FilterImage_ImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(FilterImage_ImageHeightIndex, (uint)image.Height);

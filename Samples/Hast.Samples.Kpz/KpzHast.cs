@@ -1,8 +1,7 @@
-﻿using Hast.Algorithms.Random;
+using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +12,6 @@ namespace Hast.Samples.Kpz
         private bool _verifyOutput;
         private bool _randomSeedEnable;
 
-        public string VhdlOutputFilePath = @"Hast_IP.vhd";
         public delegate void LogItDelegate(string toLog);
         public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
         public KpzKernelsInterface Kernels;
@@ -21,14 +19,17 @@ namespace Hast.Samples.Kpz
         public PrngTestInterface KernelsP;
 
 
-        public async Task<IHastlayer> InitializeHastlayer(bool verifyOutput, bool randomSeedEnable)
+        public async Task<(IHastlayer, IHardwareGenerationConfiguration)> InitializeHastlayer(
+            bool verifyOutput,
+            bool randomSeedEnable)
         {
             _verifyOutput = verifyOutput;
             _randomSeedEnable = randomSeedEnable;
 
             LogItFunction("Creating Hastlayer Factory...");
 
-            var hastlayer = await Hastlayer.Create();
+            // No "using" here since we are returning this object.
+            var hastlayer = Hastlayer.Create();
 
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
@@ -38,7 +39,7 @@ namespace Hast.Samples.Kpz
                 );
             };
 
-            var configuration = new HardwareGenerationConfiguration((await hastlayer.GetSupportedDevices()).First().Name);
+            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;
 
@@ -64,8 +65,6 @@ namespace Hast.Samples.Kpz
                     typeof(RandomMwc64X).Assembly
                 }, configuration);
 
-            await hardwareRepresentation.HardwareDescription.WriteSource(VhdlOutputFilePath);
-
             LogItFunction("Generating proxy...");
 
             if (_kpzTarget.HastlayerOnFpga())
@@ -89,7 +88,7 @@ namespace Hast.Samples.Kpz
                         new KpzKernelsParallelizedInterface(),
                         proxyConf);
                 }
-                else //if(kpzTarget == KpzTarget.PrngTest) 
+                else //if(kpzTarget == KpzTarget.PrngTest)
                 {
                     KernelsP = await hastlayer.GenerateProxy(
                         hardwareRepresentation,
@@ -109,7 +108,7 @@ namespace Hast.Samples.Kpz
             if (_kpzTarget.HastlayerPlainAlgorithm())
             {
                 LogItFunction("Running TestAdd...");
-                uint resultFpga = Kernels.TestAddWrapper(4313, 123);
+                uint resultFpga = Kernels.TestAddWrapper(hastlayer, configuration, 4313, 123);
                 uint resultCpu = 4313 + 123;
                 if (resultCpu == resultFpga) LogItFunction(string.Format("Success: {0} == {1}", resultFpga, resultCpu));
                 else LogItFunction(string.Format("Fail: {0} != {1}", resultFpga, resultCpu));
@@ -121,8 +120,8 @@ namespace Hast.Samples.Kpz
 
                 var kernelsCpu = new PrngTestInterface();
                 ulong randomSeed = 0x37a92d76a96ef210UL;
-                var smCpu = kernelsCpu.PushRandomSeed(randomSeed);
-                var smFpga = KernelsP.PushRandomSeed(randomSeed);
+                var smCpu = kernelsCpu.PushRandomSeed(randomSeed, null, null);
+                var smFpga = KernelsP.PushRandomSeed(randomSeed, hastlayer, configuration);
                 LogItFunction("PRNG results:");
                 bool success = true;
 
@@ -131,13 +130,13 @@ namespace Hast.Samples.Kpz
                     uint prngCpuResult = kernelsCpu.GetNextRandom(smCpu);
                     uint prngFpgaResult = KernelsP.GetNextRandom(smFpga);
                     if (prngCpuResult != prngFpgaResult) { success = false; }
-                    LogItFunction(String.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
+                    LogItFunction(string.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
                 }
 
                 if (success) LogItFunction("TestPrng succeeded!");
                 else LogItFunction("TestPrng failed!");
             }
-            return hastlayer;
+            return (hastlayer, configuration);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hast.Samples.Kpz.Algorithms;
+using Hast.Layer;
+using Hast.Samples.Kpz.Algorithms;
 using System;
 
 
@@ -18,7 +19,7 @@ namespace Hast.Samples.Kpz
         public static bool HastlayerOnFpga(this KpzTarget target) =>
             target == KpzTarget.Fpga || target == KpzTarget.FpgaParallelized || target == KpzTarget.PrngTest;
 
-        public static bool HastlayerParallelizedAlgorithm(this KpzTarget target) => 
+        public static bool HastlayerParallelizedAlgorithm(this KpzTarget target) =>
             target == KpzTarget.FpgaParallelized || target == KpzTarget.FpgaSimulationParallelized;
 
         public static bool HastlayerPlainAlgorithm(this KpzTarget target) =>
@@ -32,24 +33,24 @@ namespace Hast.Samples.Kpz
     public partial class Kpz
     {
         /// <summary>The probability of pyramid to hole change.</summary>
-        private double _probabilityP = 0.5d;
+        private readonly double _probabilityP = 0.5d;
 
         /// <summary>The probability of hole to pyramid change.</summary>
-        private double _probabilityQ = 0.5d;
+        private readonly double _probabilityQ = 0.5d;
 
         /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
-        private Random _random = new Random();
+        private readonly Random _random = new Random();
 
         /// <summary>See <see cref="StateLogger" /></summary>
-        private bool _enableStateLogger = false;
+        private readonly bool _enableStateLogger = false;
 
-        private KpzTarget _kpzTarget = KpzTarget.Cpu;
+        private readonly KpzTarget _kpzTarget = KpzTarget.Cpu;
 
         /// <summary>It returns the width of the grid.</summary>
-        public int GridWidth { get { return Grid.GetLength(0); } }
+        public int GridWidth => Grid.GetLength(0);
 
         /// <summary>It returns the height of the grid.</summary>
-        public int GridHeight { get { return Grid.GetLength(1); } }
+        public int GridHeight => Grid.GetLength(1);
 
         /// <summary>The 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.</summary>
         public KpzNode[,] Grid;
@@ -97,9 +98,11 @@ namespace Hast.Samples.Kpz
             {
                 for (int y = 0; y < GridHeight; y++)
                 {
-                    Grid[x, y] = new KpzNode();
-                    Grid[x, y].dx = _random.Next(0, 2) == 0;
-                    Grid[x, y].dy = _random.Next(0, 2) == 0;
+                    Grid[x, y] = new KpzNode
+                    {
+                        dx = _random.Next(0, 2) == 0,
+                        dy = _random.Next(0, 2) == 0
+                    };
                 }
             }
 
@@ -115,9 +118,11 @@ namespace Hast.Samples.Kpz
             {
                 for (int y = 0; y < GridHeight; y++)
                 {
-                    Grid[x, y] = new KpzNode();
-                    Grid[x, y].dx = (bool)((x & 1) != 0);
-                    Grid[x, y].dy = (bool)((y & 1) != 0);
+                    Grid[x, y] = new KpzNode
+                    {
+                        dx = (bool)((x & 1) != 0),
+                        dy = (bool)((y & 1) != 0)
+                    };
                 }
             }
             if (_enableStateLogger) StateLogger.AddKpzAction("InitializeGrid", Grid);
@@ -128,7 +133,7 @@ namespace Hast.Samples.Kpz
         /// It converts <see cref="KpzNode.dx" /> and <see cref="KpzNode.dy" /> boolean values to +1 and -1 integer
         /// values.
         /// </summary>
-        static int Bool2Delta(bool what) => (what) ? 1 : -1;
+        private static int Bool2Delta(bool what) => (what) ? 1 : -1;
 
         /// <summary>
         /// It generates a heightmap from the <see cref="Grid" />.
@@ -174,7 +179,7 @@ namespace Hast.Samples.Kpz
                     periodicityValid = false;
                     periodicityInvalidXCount++;
                     if (doVerboseLoggingToConsole)
-                        Console.WriteLine(String.Format("periodicityInvalidX at line {0}", y));
+                        Console.WriteLine(string.Format("periodicityInvalidX at line {0}", y));
                 }
                 heightNow += Bool2Delta(Grid[0, (y + 1) % GridHeight].dy);
             }
@@ -184,7 +189,7 @@ namespace Hast.Samples.Kpz
                 periodicityValid = false;
                 periodicityInvalidYCount++;
                 if (doVerboseLoggingToConsole)
-                    Console.WriteLine(String.Format("periodicityInvalidY {0} + {1} != {2}", heightMap[0, GridHeight - 1],
+                    Console.WriteLine(string.Format("periodicityInvalidY {0} + {1} != {2}", heightMap[0, GridHeight - 1],
                         Bool2Delta(Grid[0, 0].dy), heightMap[0, 0]));
             }
 
@@ -217,7 +222,7 @@ namespace Hast.Samples.Kpz
             double standardDeviation = Math.Sqrt(variance);
 
             if (_enableStateLogger)
-                StateLogger.AddKpzAction(String.Format("HeightMapStandardDeviation: {0}", standardDeviation));
+                StateLogger.AddKpzAction(string.Format("HeightMapStandardDeviation: {0}", standardDeviation));
 
             return standardDeviation;
         }
@@ -256,24 +261,40 @@ namespace Hast.Samples.Kpz
             if (_enableStateLogger) StateLogger.AddKpzAction("RandomlySwitchFourCells", grid, p, neighbours, changedGrid);
         }
 
-        bool HastlayerGridAlreadyPushed = false;
+        private readonly bool HastlayerGridAlreadyPushed = false;
 
 
         /// <summary>
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// </summary>
-        public void DoHastIterations(uint numberOfIterations)
+        public void DoHastIterations(IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
+            uint numberOfIterations)
         {
-            var numberOfStepsInIteration = GridWidth * GridHeight;
-            KpzNode[,] gridBefore = (KpzNode[,])Grid.Clone();
+            var gridBefore = (KpzNode[,])Grid.Clone();
 
             if (_enableStateLogger) StateLogger.NewKpzIteration();
 
             if (_kpzTarget == KpzTarget.FpgaParallelized || _kpzTarget == KpzTarget.FpgaSimulationParallelized)
-                KernelsParallelized.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, _randomSeedEnable, numberOfIterations);
+            {
+                KernelsParallelized.DoIterationsWrapper(
+                    hastlayer,
+                    configuration,
+                    Grid,
+                    !HastlayerGridAlreadyPushed,
+                    _randomSeedEnable,
+                    numberOfIterations);
+            }
             else
-                Kernels.DoIterationsWrapper(Grid, !HastlayerGridAlreadyPushed, false,
-                    _random.NextUInt64(), _random.NextUInt64(), numberOfIterations);
+                Kernels.DoIterationsWrapper(
+                    hastlayer,
+                    configuration,
+                    Grid,
+                    !HastlayerGridAlreadyPushed,
+                    false,
+                    _random.NextUInt64(),
+                    _random.NextUInt64(),
+                    numberOfIterations);
 
             if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoHastIterations", Grid, gridBefore);
             //HastlayerGridAlreadyPushed = true; // If not commented out, push always
@@ -283,16 +304,24 @@ namespace Hast.Samples.Kpz
         /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
         /// It allows us to debug the steps of the algorithms one by one.
         /// </summary>
-        public void DoHastIterationDebug()
+        public void DoHastIterationDebug(IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {
             var numberOfStepsInIteration = GridWidth * GridHeight;
-            KpzNode[,] gridBefore = (KpzNode[,])Grid.Clone();
+            var gridBefore = (KpzNode[,])Grid.Clone();
 
             if (_enableStateLogger) StateLogger.NewKpzIteration();
 
             for (int i = 0; i < numberOfStepsInIteration; i++)
             {
-                Kernels.DoIterationsWrapper(Grid, true, true, _random.NextUInt64(), _random.NextUInt64(), 1);
+                Kernels.DoIterationsWrapper(
+                    hastlayer,
+                    configuration,
+                    Grid,
+                    true,
+                    true,
+                    _random.NextUInt64(),
+                    _random.NextUInt64(),
+                    1);
                 if (_enableStateLogger) StateLogger.AddKpzAction("Kernels.DoSingleIterationWrapper", Grid, gridBefore);
             }
         }

@@ -1,4 +1,6 @@
-﻿using Hast.Algorithms.Random;
+using Hast.Algorithms.Random;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Threading.Tasks;
@@ -10,7 +12,7 @@ namespace Hast.Samples.SampleAssembly
     /// Carlo method</see> in a parallelized manner. For an overview  of the idea see <see
     /// href="https://www.coursera.org/lecture/parprog1/monte-carlo-method-to-estimate-pi-Zgm76">this video</see>;
     /// <see href="http://www.software-architects.com/devblog/2014/09/22/C-Parallel-and-Async-Programming"/>this
-    /// blogpost's implementation</see> was used as an inspiration too. Also see <see
+    /// blog post's implementation</see> was used as an inspiration too. Also see <see
     /// cref="MonteCarloAlgorithmSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class MonteCarloPiEstimator
@@ -19,10 +21,11 @@ namespace Hast.Samples.SampleAssembly
         private const int EstimatePi_RandomSeedUInt32Index = 1;
         private const int EstimatePi_InCircleCountSumUInt32Index = 0;
 
-        // With 78 about 61% of resources are used on a Nexys A7, but with 79 101%, so this is the limit of efficiency.
-        // On Catapult, however, 350 will fit (which uses 58% of the logic cells but almost all of the DSPs, so more
-        // won't fit).
-        public const int MaxDegreeOfParallelism = 78;
+        // With a degree of parallelism of 78 the resource utilization of the Nexys A7 board would jump to 101% so this
+        // is the limit of efficiency. Note that this is one lower than in the currently measured benchmark because
+        // since then we changed Hastlayer slightly.
+        [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
+        public static readonly int MaxDegreeOfParallelism = 77;
 
 
         public virtual void EstimatePi(SimpleMemory memory)
@@ -80,14 +83,16 @@ namespace Hast.Samples.SampleAssembly
 
         private readonly Random _random = new Random();
 
-        public double EstimatePi(uint iterationsCount)
+        public double EstimatePi(uint iterationsCount, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             if (iterationsCount % MaxDegreeOfParallelism != 0)
             {
                 throw new Exception($"The number of iterations must be divisible by {MaxDegreeOfParallelism}.");
             }
 
-            var memory = new SimpleMemory(2);
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(2)
+                : hastlayer.CreateMemory(configuration, 2);
             memory.WriteUInt32(EstimatePi_IteractionsCountUInt32Index, iterationsCount);
             memory.WriteUInt32(EstimatePi_RandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
 

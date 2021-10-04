@@ -8,7 +8,7 @@ namespace Hast.Communication.Constants.CommunicationConstants
         public const Parity DefaultParity = Parity.None;
         public const StopBits DefaultStopBits = StopBits.One;
         public const int DefaultWriteTimeoutMilliseconds = 10000;
-        public const string ChannelName = "Serial";
+        public const string ChannelName = nameof(Serial);
 
 
         public static class Signals

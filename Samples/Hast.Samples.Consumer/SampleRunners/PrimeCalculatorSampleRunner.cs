@@ -1,13 +1,14 @@
-﻿using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Abstractions.Configuration;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class PrimeCalculatorSampleRunner
+    internal class PrimeCalculatorSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             // You can add complete types whose methods you'd like to invoke on the hardware from the outside like this.
             configuration.AddHardwareEntryPointType<PrimeCalculator>();
@@ -16,16 +17,30 @@ namespace Hast.Samples.Consumer.SampleRunners
             // Note that the bottom version can also be used to add multiple types from under a namespace.
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator());
+            var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), configuration);
 
-            var isPrime = primeCalculator.IsPrimeNumber(15);
-            var isPrime2 = primeCalculator.IsPrimeNumber(13);
-            var isPrime3 = await primeCalculator.IsPrimeNumberAsync(21);
+            foreach (var number in new uint[] { 15, 13, 20 })
+            {
+                Console.WriteLine("primeCalculator.IsPrimeNumber: {0}", number);
+                var result = primeCalculator.IsPrimeNumber(
+                    number,
+                    hastlayer,
+                    hardwareRepresentation.HardwareGenerationConfiguration);
+                Console.WriteLine("primeCalculator.IsPrimeNumber: {0} => {1}", number, result);
+            }
+
             // Only 2341 is prime.
-            var arePrimes = primeCalculator.ArePrimeNumbers(new uint[] { 15, 493, 2341, 99237 });
-            var arePrimes2 = primeCalculator.ArePrimeNumbers(new uint[] { 13, 493 });
+            foreach (var numbersToCheck in new[] { new uint[] { 15, 493, 2341, 99237 }, new uint[] { 13, 493 } })
+            {
+                WriteOutPrimes(
+                    nameof(primeCalculator.ArePrimeNumbers),
+                    primeCalculator.ArePrimeNumbers,
+                    numbersToCheck,
+                    hastlayer,
+                    hardwareRepresentation.HardwareGenerationConfiguration);
+            }
 
             // You can also launch hardware-executed method calls in parallel. If there are multiple boards
             // connected then all of them will be utilized. If the whole device pool is utilized calls will
@@ -41,8 +56,8 @@ namespace Hast.Samples.Consumer.SampleRunners
 
 
             // In-algorithm parallelization:
-            // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism 
-            // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see 
+            // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism
+            // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see
             // comments in the method). Thus the communication round-trip will be slower for ParallelizedArePrimeNumbers.
             // Because of this since PrimeCalculator.MaxDegreeOfParallelism is 30 we use 30 numbers here.
             // All of these numbers except for 9999 are primes.
@@ -56,8 +71,39 @@ namespace Hast.Samples.Consumer.SampleRunners
                 9749, 9973, 902119, 907469, 915851
             };
 
-            var arePrimes3 = primeCalculator.ArePrimeNumbers(numbers);
-            var arePrimes4 = primeCalculator.ParallelizedArePrimeNumbers(numbers);
+            WriteOutPrimes(
+                nameof(primeCalculator.ArePrimeNumbers),
+                primeCalculator.ArePrimeNumbers,
+                numbers,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
+            WriteOutPrimes(
+                nameof(primeCalculator.ParallelizedArePrimeNumbers),
+                primeCalculator.ParallelizedArePrimeNumbers,
+                numbers,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
+        }
+
+        private static void WriteOutPrimes(
+            string methodName,
+            Func<uint[], IHastlayer, IHardwareGenerationConfiguration, bool[]> method,
+            uint[] numbers,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration hardwareGenerationConfiguration)
+        {
+            var concatenated = string.Join(", ", numbers);
+            Console.WriteLine("primeCalculator.{0}: {1}", methodName, concatenated);
+            var result = method(
+                numbers,
+                hastlayer,
+                hardwareGenerationConfiguration);
+            var resultString = string.Join(", ", numbers.Where((number, index) => result[index]));
+            Console.WriteLine(
+                "primeCalculator.{0}: {1} => {2}",
+                methodName,
+                concatenated,
+                string.IsNullOrEmpty(resultString) ? "NONE" : resultString);
         }
     }
 }

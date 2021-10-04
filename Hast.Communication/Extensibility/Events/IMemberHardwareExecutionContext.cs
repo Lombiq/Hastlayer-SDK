@@ -10,6 +10,6 @@ namespace Hast.Communication.Extensibility.Events
         /// <summary>
         /// Debug and runtime information about the hardware execution.
         /// </summary>
-        IHardwareExecutionInformation ExecutionInformation { get; }
+        IHardwareExecutionInformation HardwareExecutionInformation { get; }
     }
 }

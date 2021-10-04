@@ -4,33 +4,33 @@ using Hast.Samples.SampleAssembly;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class GenomeMatcherSampleRunner
+    internal class GenomeMatcherSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<GenomeMatcher>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher());
+            var genomeMatcher = await hastlayer.GenerateProxy(hardwareRepresentation, new GenomeMatcher(), configuration);
 
             // Sample from IBM.
             var inputOne = "GCCCTAGCG";
             var inputTwo = "GCGCAATG";
 
-            var result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+            var result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             // Sample from Wikipedia.
             inputOne = "ACACACTA";
             inputTwo = "AGCACACA";
 
-            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             inputOne = "lombiqtech";
             inputTwo = "coulombtech";
 
-            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo);
+            result = genomeMatcher.CalculateLongestCommonSubsequence(inputOne, inputTwo, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
     }
 }

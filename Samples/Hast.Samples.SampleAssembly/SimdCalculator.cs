@@ -1,6 +1,8 @@
 ﻿using Hast.Common.Numerics;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -14,7 +16,7 @@ namespace Hast.Samples.SampleAssembly
 
     /// <summary>
     /// Sample to showcase SIMD (Simple Instruction Multiple Data) processing usage, i.e. operations executed in parallel
-    /// on multiple elements of vectors. Also see <see cref="SimdCalculatorSampleRunner"/> on what to configure to make 
+    /// on multiple elements of vectors. Also see <see cref="SimdCalculatorSampleRunner"/> on what to configure to make
     /// this work.
     /// </summary>
     /// <remarks>
@@ -107,20 +109,20 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        public int[] AddVectors(int[] vector1, int[] vector2) =>
-            RunSimdOperation(vector1, vector2, memory => AddVectors(memory));
+        public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
 
-        public int[] SubtractVectors(int[] vector1, int[] vector2) =>
-            RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory));
+        public int[] SubtractVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), hastlayer, configuration);
 
-        public int[] MultiplyVectors(int[] vector1, int[] vector2) =>
-            RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory));
+        public int[] MultiplyVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), hastlayer, configuration);
 
-        public int[] DivideVectors(int[] vector1, int[] vector2) =>
-            RunSimdOperation(vector1, vector2, memory => DivideVectors(memory));
+        public int[] DivideVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
 
 
-        private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation)
+        private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             SimdOperations.ThrowIfVectorsNotEquallyLong(vector1, vector2);
 
@@ -130,7 +132,10 @@ namespace Hast.Samples.SampleAssembly
             vector2 = vector2.PadToMultipleOf(MaxDegreeOfParallelism);
 
             var elementCount = vector1.Length;
-            var memory = new SimpleMemory(1 + elementCount * 2);
+            var cellCount = 1 + elementCount * 2;
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(cellCount)
+                : hastlayer.CreateMemory(configuration, cellCount);
 
             memory.WriteInt32(VectorsElementCountInt32Index, elementCount);
 

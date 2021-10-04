@@ -56,13 +56,13 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.listLog = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.chartKPZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.chartKPZ)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelTop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudTableHeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudTableWidth)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIterations)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.nudTableHeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.nudTableWidth)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.nudIterations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -146,7 +146,7 @@
             // labelRandomSeed
             // 
             this.labelRandomSeed.AutoSize = true;
-            this.labelRandomSeed.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelRandomSeed.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.labelRandomSeed.Location = new System.Drawing.Point(470, 47);
             this.labelRandomSeed.Name = "labelRandomSeed";
             this.labelRandomSeed.Size = new System.Drawing.Size(119, 23);
@@ -166,7 +166,7 @@
             // labelWriteToFile
             // 
             this.labelWriteToFile.AutoSize = true;
-            this.labelWriteToFile.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelWriteToFile.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.labelWriteToFile.Location = new System.Drawing.Point(470, 8);
             this.labelWriteToFile.Name = "labelWriteToFile";
             this.labelWriteToFile.Size = new System.Drawing.Size(104, 23);
@@ -186,7 +186,7 @@
             // labelVerifyOutput
             // 
             this.labelVerifyOutput.AutoSize = true;
-            this.labelVerifyOutput.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelVerifyOutput.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.labelVerifyOutput.Location = new System.Drawing.Point(311, 86);
             this.labelVerifyOutput.Name = "labelVerifyOutput";
             this.labelVerifyOutput.Size = new System.Drawing.Size(116, 23);
@@ -197,7 +197,7 @@
             // labelStepByStep
             // 
             this.labelStepByStep.AutoSize = true;
-            this.labelStepByStep.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelStepByStep.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.labelStepByStep.Location = new System.Drawing.Point(311, 47);
             this.labelStepByStep.Name = "labelStepByStep";
             this.labelStepByStep.Size = new System.Drawing.Size(109, 23);
@@ -217,7 +217,7 @@
             // labelShowInspector
             // 
             this.labelShowInspector.AutoSize = true;
-            this.labelShowInspector.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelShowInspector.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.labelShowInspector.Location = new System.Drawing.Point(309, 8);
             this.labelShowInspector.Name = "labelShowInspector";
             this.labelShowInspector.Size = new System.Drawing.Size(134, 23);
@@ -228,7 +228,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label4.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.label4.Location = new System.Drawing.Point(9, 125);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(134, 23);
@@ -238,15 +238,9 @@
             // comboTarget
             // 
             this.comboTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboTarget.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.comboTarget.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.comboTarget.FormattingEnabled = true;
-            this.comboTarget.Items.AddRange(new object[] {
-            "Original algorithm (CPU)",
-            "Hastlayer simulation, sequential (CPU)",
-            "Hastlayer accelerated, sequential (FPGA)",
-            "Hastlayer simulation, parallelized (CPU) ",
-            "Hastlayer accelerated, parallelized (FPGA) ",
-            "PRNG test (FPGA)"});
+            this.comboTarget.Items.AddRange(new object[] { "Original algorithm (CPU)", "Hastlayer simulation, sequential (CPU)", "Hastlayer accelerated, sequential (FPGA)", "Hastlayer simulation, parallelized (CPU) ", "Hastlayer accelerated, parallelized (FPGA) ", "PRNG test (FPGA)" });
             this.comboTarget.Location = new System.Drawing.Point(202, 125);
             this.comboTarget.Name = "comboTarget";
             this.comboTarget.Size = new System.Drawing.Size(408, 31);
@@ -266,31 +260,19 @@
             // 
             // nudTableHeight
             // 
-            this.nudTableHeight.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.nudTableHeight.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.nudTableHeight.Location = new System.Drawing.Point(202, 84);
-            this.nudTableHeight.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.nudTableHeight.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.nudTableHeight.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            this.nudTableHeight.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
             this.nudTableHeight.Name = "nudTableHeight";
             this.nudTableHeight.Size = new System.Drawing.Size(93, 31);
             this.nudTableHeight.TabIndex = 5;
-            this.nudTableHeight.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
+            this.nudTableHeight.Value = new decimal(new int[] { 8, 0, 0, 0 });
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label3.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.label3.Location = new System.Drawing.Point(9, 86);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(107, 23);
@@ -299,31 +281,19 @@
             // 
             // nudTableWidth
             // 
-            this.nudTableWidth.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.nudTableWidth.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.nudTableWidth.Location = new System.Drawing.Point(202, 45);
-            this.nudTableWidth.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.nudTableWidth.Minimum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
+            this.nudTableWidth.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            this.nudTableWidth.Minimum = new decimal(new int[] { 4, 0, 0, 0 });
             this.nudTableWidth.Name = "nudTableWidth";
             this.nudTableWidth.Size = new System.Drawing.Size(93, 31);
             this.nudTableWidth.TabIndex = 3;
-            this.nudTableWidth.Value = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
+            this.nudTableWidth.Value = new decimal(new int[] { 8, 0, 0, 0 });
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.label2.Location = new System.Drawing.Point(9, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 23);
@@ -333,7 +303,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.label1.Location = new System.Drawing.Point(9, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(162, 23);
@@ -342,26 +312,14 @@
             // 
             // nudIterations
             // 
-            this.nudIterations.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.nudIterations.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.nudIterations.Location = new System.Drawing.Point(202, 6);
-            this.nudIterations.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.nudIterations.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.nudIterations.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
+            this.nudIterations.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             this.nudIterations.Name = "nudIterations";
             this.nudIterations.Size = new System.Drawing.Size(93, 31);
             this.nudIterations.TabIndex = 0;
-            this.nudIterations.Value = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+            this.nudIterations.Value = new decimal(new int[] { 1000, 0, 0, 0 });
             // 
             // progressBar
             // 
@@ -375,7 +333,7 @@
             // buttonStart
             // 
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonStart.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonStart.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.buttonStart.Location = new System.Drawing.Point(433, 175);
             this.buttonStart.Margin = new System.Windows.Forms.Padding(10);
             this.buttonStart.Name = "buttonStart";
@@ -407,7 +365,7 @@
             // listLog
             // 
             this.listLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listLog.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listLog.Font = new System.Drawing.Font("Calibri", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
             this.listLog.FormattingEnabled = true;
             this.listLog.ItemHeight = 23;
             this.listLog.Location = new System.Drawing.Point(0, 0);
@@ -424,47 +382,46 @@
             this.MinimumSize = new System.Drawing.Size(639, 548);
             this.Name = "ChartForm";
             this.Text = "KPZ";
-            ((System.ComponentModel.ISupportInitialize)(this.chartKPZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.chartKPZ)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudTableHeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudTableWidth)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudIterations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.nudTableHeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.nudTableWidth)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.nudIterations)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
-        #endregion
-
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartKPZ;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ListBox listLog;
-        private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown nudIterations;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartKPZ;
+        private System.Windows.Forms.CheckBox checkRandomSeed;
         private System.Windows.Forms.CheckBox checkShowInspector;
-        private System.Windows.Forms.NumericUpDown nudTableHeight;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.NumericUpDown nudTableWidth;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboTarget;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox checkStep;
+        private System.Windows.Forms.CheckBox checkVerifyOutput;
+        private System.Windows.Forms.CheckBox checkWriteToFile;
+        private System.Windows.Forms.ComboBox comboTarget;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelRandomSeed;
         private System.Windows.Forms.Label labelShowInspector;
         private System.Windows.Forms.Label labelStepByStep;
-        private System.Windows.Forms.CheckBox checkVerifyOutput;
         private System.Windows.Forms.Label labelVerifyOutput;
-        private System.Windows.Forms.CheckBox checkWriteToFile;
         private System.Windows.Forms.Label labelWriteToFile;
-        private System.Windows.Forms.CheckBox checkRandomSeed;
-        private System.Windows.Forms.Label labelRandomSeed;
+        private System.Windows.Forms.ListBox listLog;
+        private System.Windows.Forms.NumericUpDown nudIterations;
+        private System.Windows.Forms.NumericUpDown nudTableHeight;
+        private System.Windows.Forms.NumericUpDown nudTableWidth;
+        private System.Windows.Forms.Panel panelTop;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+
+        #endregion
     }
 }

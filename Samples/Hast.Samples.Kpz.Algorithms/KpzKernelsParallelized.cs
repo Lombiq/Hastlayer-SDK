@@ -1,5 +1,5 @@
-﻿
 using Hast.Algorithms.Random;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Threading.Tasks;
@@ -22,32 +22,32 @@ namespace Hast.Samples.Kpz.Algorithms
     // * 0  (1 address)  :
     //      The number of iterations to perform (NumberOfIterations).
     // * 1 .. 1+ParallelTasks*4+2  (ParallelTasks*4+2 addresses)  :
-    //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler 
+    //      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler
     //      level. Each random seed number is 64-bit (2 uints)
     // * 1+ParallelTasks*4+2 .. 1+ParallelTasks*4+2+GridSize^2-1  (GridSize^2 addresses)  :
     //      The input KPZ nodes as 32 bit numbers, with bit 0 as dx and bit 1 as dy.
 
     /// <summary>
     /// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, with a parallelized architecture
-    /// similar to GPUs. It makes use of a given number of Tasks as parallel execution engines 
-    /// (see <see cref="ReschedulesPerTaskIteration">).
-    /// 
+    /// similar to GPUs. It makes use of a given number of Tasks as parallel execution engines
+    /// (see <see cref="ReschedulesPerTaskIteration" />).
+    ///
     /// For each iteration:
     /// <list type="bullet">
     /// <item>it loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks,</item>
     /// <item>it runs the algorithm on these local tables,</item>
     /// <item>it loads back the local tables into the original grid.</item>
     /// </list>
-    /// 
-    /// It changes the offset of the local grids within the global grid a given number of times for each iteration 
-    /// (see <see cref="ReschedulesPerTaskIteration"/>). 
+    ///
+    /// It changes the offset of the local grids within the global grid a given number of times for each iteration
+    /// (see <see cref="ReschedulesPerTaskIteration"/>).
     /// </summary>
     public class KpzKernelsParallelizedInterface
     {
         // ==== <CONFIGURABLE PARAMETERS> ====
         // Full grid width and height.
         public const int GridSize = 64;
-        // Local grid width and height. Each Task has a local grid, on which it works. 
+        // Local grid width and height. Each Task has a local grid, on which it works.
         public const int LocalGridSize = 8;
         // Furthermore, for LocalGridSize and GridSize the following expressions should have an integer result:
         //    (GridSize^2)/(LocalGridSize^2)
@@ -61,7 +61,7 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int ParallelTasks = 8;
         // The number of reschedules (thus global grid offset changing) within one iteration.
         public const int ReschedulesPerTaskIteration = 2;
-        // This should be 1 or 2 (the latter if you want to be very careful). 
+        // This should be 1 or 2 (the latter if you want to be very careful).
         // ==== </CONFIGURABLE PARAMETERS> ====
 
         public const int MemIndexNumberOfIterations = 0;
@@ -77,16 +77,16 @@ namespace Hast.Samples.Kpz.Algorithms
             int iterationGroupSize = numberOfIterations * ReschedulesPerTaskIteration;
             const int PokesInsideTask = LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration;
             const int LocalGridPartitions = GridSize / LocalGridSize;
-            //Note: TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == 
+            //Note: TotalNumberOfTasks = TasksPerIteration * NumberOfIterations ==
             //  ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
             int parallelTaskRandomIndex = 0;
             uint randomSeedTemp;
             var random0 = new RandomMwc64X();
 
             var taskLocals = new KpzKernelsTaskState[ParallelTasks];
-            for (int TaskLocalsIndex = 0; TaskLocalsIndex < ParallelTasks; TaskLocalsIndex++)
+            for (int taskLocalsIndex = 0; taskLocalsIndex < ParallelTasks; taskLocalsIndex++)
             {
-                taskLocals[TaskLocalsIndex] = new KpzKernelsTaskState
+                taskLocals[taskLocalsIndex] = new KpzKernelsTaskState
                 {
                     BramDx = new bool[LocalGridSize * LocalGridSize],
                     BramDy = new bool[LocalGridSize * LocalGridSize],
@@ -96,14 +96,14 @@ namespace Hast.Samples.Kpz.Algorithms
                     }
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random1.State |= ((ulong)randomSeedTemp) << 32;
 
-                taskLocals[TaskLocalsIndex].Random2 = new RandomMwc64X
+                taskLocals[taskLocalsIndex].Random2 = new RandomMwc64X
                 {
                     State = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++)
                 };
                 randomSeedTemp = memory.ReadUInt32(MemIndexRandomSeed + parallelTaskRandomIndex++);
-                taskLocals[TaskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
+                taskLocals[taskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
             }
 
             // What is iterationGroupIndex good for?
@@ -126,7 +126,7 @@ namespace Hast.Samples.Kpz.Algorithms
                     var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
                     for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
                     {
-                        // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex 
+                        // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex
                         // (and the random added value)
                         int localGridIndex = parallelTaskIndex + scheduleIndex * ParallelTasks;
                         // The X and Y coordinate within the small table (local grid):
@@ -172,7 +172,7 @@ namespace Hast.Samples.Kpz.Algorithms
                                 uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
                                 uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
 
-                                // get neighbour indexes:
+                                // Get neighbour indexes:
                                 int rightNeighbourIndex;
                                 int bottomNeighbourIndex;
                                 // We skip if neighbours would fall out of the local grid:
@@ -190,11 +190,11 @@ namespace Hast.Samples.Kpz.Algorithms
                                     // If we get the pattern {01, 01} we have a pyramid:
                                     ((taskLocal.BramDx[pokeCenterIndex] && !taskLocal.BramDx[rightNeighbourIndex]) &&
                                     (taskLocal.BramDy[pokeCenterIndex] && !taskLocal.BramDy[bottomNeighbourIndex]) &&
-                                    (false || randomVariable1 < IntegerProbabilityP)) ||
+                                    (randomVariable1 < IntegerProbabilityP)) ||
                                     // If we get the pattern {10, 10} we have a hole:
                                     ((!taskLocal.BramDx[pokeCenterIndex] && taskLocal.BramDx[rightNeighbourIndex]) &&
                                     (!taskLocal.BramDy[pokeCenterIndex] && taskLocal.BramDy[bottomNeighbourIndex]) &&
-                                    (false || randomVariable2 < IntegerProbabilityQ))
+                                    (randomVariable2 < IntegerProbabilityQ))
                                 )
                                 {
                                     // We make a hole into a pyramid, and a pyramid into a hole.
@@ -223,7 +223,6 @@ namespace Hast.Samples.Kpz.Algorithms
                         // The X and Y coordinate within the big table (grid):
                         int baseX = partitionX * LocalGridSize + randomXOffset;
                         int baseY = partitionY * LocalGridSize + randomYOffset;
-                        //Console.WriteLine("CopyBack | Task={0}, To: {1},{2}", ParallelTaskIndex, BaseX, BaseY);
 
                         for (int copySrcX = 0; copySrcX < LocalGridSize; copySrcX++)
                         {
@@ -234,8 +233,8 @@ namespace Hast.Samples.Kpz.Algorithms
                                 uint value =
                                     (tasks[parallelTaskIndex].Result.BramDx[copySrcX + copySrcY * LocalGridSize] ? 1U : 0U) |
                                     (tasks[parallelTaskIndex].Result.BramDy[copySrcX + copySrcY * LocalGridSize] ? 2U : 0U);
-                                //Note: use (tasks[parallelTaskIndex].Result), because 
-                                //    (TaskLocals[ParallelTaskIndex]) won't work.
+                                // Note: use (tasks[parallelTaskIndex].Result), because
+                                //(TaskLocals[ParallelTaskIndex]) won't work.
                                 memory.WriteUInt32(MemIndexGrid + copyDstX + copyDstY * GridSize, value);
                             }
                         }
@@ -257,20 +256,29 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// Wrapper for calling <see cref="KpzKernelsParallelizedInterface.ScheduleIterations"/>.
         /// </summary>
+        /// <param name="kernels"></param>
+        /// <param name="hastlayer">Required to properly create <see cref="SimpleMemory"/>.</param>
+        /// <param name="configuration">Required to properly create <see cref="SimpleMemory"/>.</param>
         /// <param name="hostGrid">The grid that we work on.</param>
         /// <param name="pushToFpga">Force pushing the grid into the FPGA (or work on the grid already there).</param>
         /// <param name="randomSeedEnable">
-        /// If it is disabled, preprogrammed random numbers will be written into 
+        /// If it is disabled, preprogrammed random numbers will be written into
         /// SimpleMemory instead of real random generated numbers. This helps debugging, keeping the output more
         /// consistent across runs.
         /// </param>
         /// <param name="numberOfIterations">The number of iterations to perform.</param>
-        public static void DoIterationsWrapper(this KpzKernelsParallelizedInterface kernels, KpzNode[,] hostGrid, bool pushToFpga,
-            bool randomSeedEnable, uint numberOfIterations)
+        public static void DoIterationsWrapper(
+            this KpzKernelsParallelizedInterface kernels,
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
+            KpzNode[,] hostGrid,
+            bool pushToFpga,
+            bool randomSeedEnable,
+            uint numberOfIterations)
         {
-            // The following numbers will be used when random seed is disabled in GUI. 
+            // The following numbers will be used when random seed is disabled in GUI.
             // This makes the result more predictable while debugging.
-            // Add more random numbers manually if you get an out of bounds exception on notRandomSeed. 
+            // Add more random numbers manually if you get an out of bounds exception on notRandomSeed.
             // This might happen if you increase KpzKernelsGInterface.ParallelTasks.
             // You can generate these with the following python expression (even in an online tool like:
             // https://www.tutorialspoint.com/execute_python_online.php):
@@ -312,8 +320,8 @@ namespace Hast.Samples.Kpz.Algorithms
             };
 
             int numRandomUints = 2 + KpzKernelsParallelizedInterface.ParallelTasks * 4;
-            var sm = new SimpleMemory(
-                KpzKernelsParallelizedInterface.GridSize * KpzKernelsParallelizedInterface.GridSize + numRandomUints + 1);
+            var sm = hastlayer.CreateMemory(configuration, KpzKernelsParallelizedInterface.GridSize *
+                KpzKernelsParallelizedInterface.GridSize + numRandomUints + 1);
 
             if (pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
 
@@ -339,7 +347,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 for (int y = 0; y < KpzKernelsParallelizedInterface.GridSize; y++)
                 {
-                    KpzNode node = gridSrc[x, y];
+                    var node = gridSrc[x, y];
                     memoryDst.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + y * KpzKernelsParallelizedInterface.GridSize + x, node.SerializeToUInt32());
                 }
             }

@@ -1,19 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="FSharpParallelAlgorithmContainer.fs" />
-  </ItemGroup>
+    <ItemGroup>
+        <Compile Include="FSharpParallelAlgorithmContainer.fs"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Memory" Version="4.5.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Memory" Version="4.5.3"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj"/>
+        <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj"/>
+    </ItemGroup>
 
 </Project>

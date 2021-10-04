@@ -1,4 +1,4 @@
-﻿# Hastlayer Algorithms readme
+# Hastlayer Algorithms
 
 
 

@@ -5,6 +5,23 @@
 Note that the Hardware Framework projects have their own release cycle and release notes.
 
 
+## v1.2, 04.10.2021
+
+- Added support for the high-end [Xilinx Alveo U50, U200, U250 or U280 Data Center Accelerator Cards](https://www.xilinx.com/products/boards-and-kits/alveo.html). These are suitable hardware for any kind of demanding production-level workload. Apart from using such devices on-premise they're also available in the cloud.
+- Added support for the high-end [AWS EC2 F1 FPGA cloud instances](https://aws.amazon.com/ec2/instance-types/f1/).
+- Added support for [Azure NP-series VMs](https://docs.microsoft.com/en-us/azure/virtual-machines/np-series) that use Xilinx Alveo U250s.
+- Generating the hardware for the new high-end FPGAs is fully automatic, including driving the Xilinx toolchain.
+- Migrated the code generating Transformer to the latest version of [ILSpy](https://github.com/icsharpcode/ILSpy), see [the issue](https://github.com/Lombiq/Hastlayer-SDK/issues/20). Hastlayer uses the .NET decompilation tool ILSpy in the background to process .NET assemblies. Previously Hastlayer depended on an old version of ILSpy, 2.3.1, which came out in 2015. Now ILSpy is at version 7 so you can imagine all the changes such a jump brings! This Hastlayer release is updated to the most recent ILSpy binaries, bringing better support for .NET language features. Shoutout to the ILSpy developers for their awesome work!
+- Migrated to .NET Core ([see issue](https://github.com/Lombiq/Hastlayer-SDK/issues/34)). Now not only can Hastlayer process .NET Standard assemblies as before but now the whole projects is built on .NET Core.
+- Improved how hardware is generated for Xilinx devices a lot. This means that the resulting hardware implementations fit better on devices, there is a smaller chance for incorrect hardware results and the hardware implementation phase (with the Xilinx tools) is faster too.
+- Added support for extension methods.
+- Added support for inlining methods with multiple return statements.
+- Added a documentation page with benchmarks.
+- Various smaller bugfixes and improvements.
+
+Note that running Hastlayer now requires Visual Studio 2019 or greater (any edition will work).
+
+
 ## v1.1, 20.12.2019
 
 After a lot of work we're finally ready with support for much larger FPGAs that can provide acceleration for much more complex applications! Apart from this there are a lot of other news as well so we've bumped up Hastlayer's version number to v1.1. Check the details out below!

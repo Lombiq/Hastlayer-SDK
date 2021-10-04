@@ -44,9 +44,11 @@ namespace Hast.Communication.Exceptions
             public override string ToString() =>
                 HardwareResult == null || SoftwareResult == null ?
                     "The hardware or software result was not supplied." :
-                    "index: " + ResultMemoryIndex + ", " +
-                        "hardware result: { " + string.Join(", ", HardwareResult) + " }, " +
-                        "software result: { " + string.Join(", ", SoftwareResult) + " }";
+                    $"index: {ResultMemoryIndex}, " +
+                        $"hardware result: {{ {string.Join(", ", HardwareResult)} }} " +
+                        $"{{ {string.Join(", ", HardwareResult.Select(r => Convert.ToString(r, 16)))} }}, " +
+                        $"software result: {{ {string.Join(", ", SoftwareResult)} }} " +
+                        $"{{ {string.Join(", ", SoftwareResult.Select(r => Convert.ToString(r, 16)))} }}";
         }
 
         [DebuggerDisplay("{ToString()}")]

@@ -1,35 +1,27 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
     public abstract class CommunicationServiceBase : ICommunicationService
     {
-        public ILogger Logger { get; set; }
+        protected ILogger Logger { get; }
 
         abstract public string ChannelName { get; }
+        public TextWriter TesterOutput { get; set; }
 
-        private TextWriter _testerOutput;
-        public TextWriter TesterOutput
-        {
-            get => _testerOutput;
-            set => _testerOutput = value;
-        }
 
-        public CommunicationServiceBase()
-        {
-            Logger = NullLogger.Instance;
-        }
+        protected CommunicationServiceBase(ILogger logger) => Logger = logger;
 
 
         abstract public Task<IHardwareExecutionInformation> Execute(
-            SimpleMemory simpleMemory, 
-            int memberId, 
+            SimpleMemory simpleMemory,
+            int memberId,
             IHardwareExecutionContext executionContext);
 
 
@@ -48,18 +40,26 @@ namespace Hast.Communication.Services
 
             context.HardwareExecutionInformation.FullExecutionTimeMilliseconds = context.Stopwatch.ElapsedMilliseconds;
 
-            Logger.Information("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
+            Logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
         }
 
         protected void SetHardwareExecutionTime(
             CommunicationStateContext context,
-            IHardwareExecutionContext executionContext, 
-            ulong executionTimeClockCycles)
+            IHardwareExecutionContext executionContext,
+            ulong executionTimeClockCycles,
+            uint? clockFrequency = null)
         {
-            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = 
-                1M / executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz * 1000 * executionTimeClockCycles;
+            var frequency = clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz;
 
-            Logger.Information("Hardware execution took " + context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms.");
+            var milliseconds = 1M / frequency * 1000 * executionTimeClockCycles;
+            context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = milliseconds;
+
+            Logger.LogInformation(
+                "The {0} clock frequency is {1:0.###} MHz",
+                clockFrequency == null ? "standard" : "specified",
+                frequency / 1_000_000.0);
+
+            Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
 
 

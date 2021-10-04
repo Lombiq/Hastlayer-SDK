@@ -1,4 +1,4 @@
-﻿using Orchard;
+﻿using Hast.Common.Interfaces;
 
 namespace Hast.Communication.Services
 {
@@ -8,7 +8,7 @@ namespace Hast.Communication.Services
     public interface ICommunicationServiceSelector : IDependency
     {
         /// <summary>
-        /// Returns the communication service based on the given channel name. 
+        /// Retrieves the communication service based on the given channel name. 
         /// If channel name is empty it returns with the default communication service.
         /// </summary>
         /// <param name="channelName">Name of the channel used to communicate.</param>

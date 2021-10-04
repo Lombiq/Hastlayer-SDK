@@ -1,6 +1,7 @@
 ﻿using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
+using Hast.Xilinx.Abstractions.ManifestProviders;
 using System.IO.Ports;
 
 namespace Hast.Xilinx.Abstractions

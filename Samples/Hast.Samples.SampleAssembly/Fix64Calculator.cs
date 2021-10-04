@@ -1,14 +1,16 @@
-﻿using Hast.Algorithms;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Hast.Algorithms;
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Sample using the <see cref="Fix64"/> 64 fixed-point number type. This is useful if you need more involved
-    /// calculations with fractions where simply scaling the numbers up and down is not enough. Also see 
+    /// calculations with fractions where simply scaling the numbers up and down is not enough. Also see
     /// <see cref="Fix64CalculatorSampleRunner"/> on what to configure to make this work.
     /// </summary>
     public class Fix64Calculator
@@ -88,9 +90,9 @@ namespace Hast.Samples.SampleAssembly
         }
 
 
-        public Fix64 CalculateIntegerSumUpToNumber(int input)
+        public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {
-            var memory = new SimpleMemory(2);
+            var memory = hastlayer.CreateMemory(configuration, 2);
 
             memory.WriteInt32(CalculateLargeIntegerSum_InputInt32Index, input);
 
@@ -103,7 +105,7 @@ namespace Hast.Samples.SampleAssembly
             });
         }
 
-        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers)
+        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
             if (numbers.Length != MaxDegreeOfParallelism)
             {
@@ -112,7 +114,9 @@ namespace Hast.Samples.SampleAssembly
                     MaxDegreeOfParallelism + ")");
             }
 
-            var memory = new SimpleMemory(2 * MaxDegreeOfParallelism);
+            var memory = hastlayer is null ?
+                SimpleMemory.CreateSoftwareMemory(2 * MaxDegreeOfParallelism) :
+                hastlayer.CreateMemory(configuration, 2 * MaxDegreeOfParallelism);
 
             for (int i = 0; i < numbers.Length; i++)
             {

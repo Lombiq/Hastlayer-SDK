@@ -8,5 +8,6 @@ namespace Hast.Layer.Models
         public IHardwareDescription HardwareDescription { get; set; }
         public IHardwareImplementation HardwareImplementation { get; set; }
         public IDeviceManifest DeviceManifest { get; set; }
+        public IHardwareGenerationConfiguration HardwareGenerationConfiguration { get; set; }
     }
 }

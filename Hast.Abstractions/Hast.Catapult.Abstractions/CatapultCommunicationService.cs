@@ -2,7 +2,7 @@
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -15,6 +15,7 @@ namespace Hast.Catapult.Abstractions
     {
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
+        private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
 
 
         public override string ChannelName => Constants.ChannelName;
@@ -22,13 +23,16 @@ namespace Hast.Catapult.Abstractions
 
         public CatapultCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
-            IDevicePoolManager devicePoolManager)
+            IDevicePoolManager devicePoolManager,
+            ILogger<CatapultCommunicationService> logger,
+            ILogger<CatapultLibrary> catapultLibraryLogger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
+            _catapultLibraryLogger = catapultLibraryLogger;
         }
 
-        private void Device_Disposing(object sender, EventArgs e) => 
+        private void Device_Disposing(object sender, EventArgs e) =>
             ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
         #region Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
@@ -76,18 +80,18 @@ namespace Hast.Catapult.Abstractions
                         try
                         {
                             var config = executionContext.ProxyGenerationConfiguration.CustomConfiguration;
-                            return CatapultLibrary.Create(config, Logger, i);
+                            return CatapultLibrary.Create(config, _catapultLibraryLogger, i);
                         }
                         catch (CatapultFunctionResultException ex)
                         {
                             // The illegal endpoint number messages are normal for higher endpoints if they aren't
                             // populated, so it's OK to suppress them.
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
-                                Logger.Error(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
+                                Logger.LogError(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;
                         }
                     })));
-                
+
                 return libraries
                     .Where(x => x != null)
                     .Select(x => new Device(x.InstanceName, x, Device_Disposing));
@@ -102,7 +106,6 @@ namespace Hast.Catapult.Abstractions
                 var dma = new SimpleMemoryAccessor(simpleMemory);
 
                 // Sending the data.
-                //var task = lib.AssignJob(memberId, dma.Get());
                 var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
                 var outputBuffer = await task;
 
@@ -116,8 +119,8 @@ namespace Hast.Catapult.Abstractions
                     outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
 
                 if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
-                dma.Set(outputBuffer, Constants.OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
-                Logger.Information("Incoming data size in bytes: {0}", outputPayloadByteCount);
+                dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
+                Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
                 EndExecution(context);
 

@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Hast.Common.Services;
+using Hast.Communication.Constants;
+using Hast.Communication.Constants.CommunicationConstants;
+using Hast.Communication.Helpers;
+using Hast.Communication.Models;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Threading.Tasks;
-using Hast.Communication.Constants;
-using Hast.Communication.Constants.CommunicationConstants;
-using Hast.Communication.Helpers;
-using Hast.Communication.Models;
-using Orchard.Logging;
-using Orchard.Services;
 
 namespace Hast.Communication.Services
 {
@@ -18,20 +18,15 @@ namespace Hast.Communication.Services
     {
         private const int AvailabilityCheckerTimeout = 1000;
         private const int BroadcastRetryCount = 2;
-        private const string FpgaEndpointsCacheKey = "Hast.Communication.FpgaEndpoints";
-
 
         private readonly IClock _clock;
+        private readonly ILogger _logger;
 
 
-        public ILogger Logger { get; set; }
-
-
-        public FpgaIpEndpointFinder(IClock clock)
+        public FpgaIpEndpointFinder(IClock clock, ILogger<FpgaIpEndpointFinder> logger)
         {
             _clock = clock;
-
-            Logger = NullLogger.Instance;
+            _logger = logger;
         }
 
 
@@ -41,7 +36,7 @@ namespace Hast.Communication.Services
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
             // We need retries because somehow the FPGA doesn't always catch our request.
-            Logger.Information("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
+            _logger.LogInformation("Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
 
             var currentRetries = 0;
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();
@@ -51,14 +46,14 @@ namespace Hast.Communication.Services
 
                 // Send request to all broadcast addresses on all the supported network interfaces.
                 foreach (var suppertedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
-                    .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up && 
+                    .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up &&
                         networkInterface.SupportsMulticast == true))
                 {
                     // Currently we are supporting only IPv4 addresses.
                     var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
                         .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork);
 
-                    endpoints.AddRange(ipv4AddressInformations.Select(addressInformation => 
+                    endpoints.AddRange(ipv4AddressInformations.Select(addressInformation =>
                         new IPEndPoint(addressInformation.Address, Ethernet.Ports.WhoIsAvailableResponse)));
                 }
 

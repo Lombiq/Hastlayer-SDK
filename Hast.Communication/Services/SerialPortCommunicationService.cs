@@ -1,11 +1,3 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.IO;
-using System.IO.Ports;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
@@ -14,7 +6,15 @@ using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Orchard.Logging;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Ports;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace Hast.Communication.Services
 {
@@ -27,19 +27,14 @@ namespace Hast.Communication.Services
         private const int MemoryPrefixCellCount = 3;
         private const int FirstCellPadding = sizeof(int) - 1;
 
-        public override string ChannelName
-        {
-            get
-            {
-                return Serial.ChannelName;
-            }
-        }
+        public override string ChannelName => Serial.ChannelName;
 
 
         public SerialPortCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
-            IEnumerable<ISerialPortConfigurator> serialPortConfigurators)
+            IEnumerable<ISerialPortConfigurator> serialPortConfigurators,
+            ILogger<SerialPortCommunicationService> logger) : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
@@ -78,18 +73,18 @@ namespace Hast.Communication.Services
                     catch (IOException ex)
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.", 
+                            "Communication with the FPGA board through the serial port failed. Probably the FPGA board is not connected.",
                             ex);
                     }
 
                     if (serialPort.IsOpen)
                     {
-                        Logger.Information("The port {0} is ours.", serialPort.PortName);
+                        Logger.LogInformation("The port {0} is ours.", serialPort.PortName);
                     }
                     else
                     {
                         throw new SerialPortCommunicationException(
-                            "Communication with the FPGA board through the serial port failed. The " + 
+                            "Communication with the FPGA board through the serial port failed. The " +
                             serialPort.PortName + " exists but it's used by another process.");
                     }
 
@@ -132,7 +127,7 @@ namespace Hast.Communication.Services
                     var outputByteCountByteCounter = 0;
                     var outputByteCount = 0; // The incoming byte buffer size.
                     var outputBytesReceivedCount = 0; // Just used to know when the data is ready.
-                    var outputBytes = new byte[0]; // The incoming buffer.
+                    var outputBytes = Array.Empty<byte>(); // The incoming buffer.
                     var executionTimeBytes = new byte[8];
                     var executionTimeByteCounter = 0;
 
@@ -178,7 +173,7 @@ namespace Hast.Communication.Services
                                     // we take the explicit size into account.
                                     outputBytes = new byte[outputByteCount + MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes];
 
-                                    Logger.Information("Incoming data size in bytes: {0}", outputByteCount);
+                                    Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
                                     communicationState = Serial.CommunicationState.ReceivingOuput;
                                     serialPort.Write(Serial.Signals.Ready);
@@ -278,11 +273,12 @@ namespace Hast.Communication.Services
 
                             try
                             {
+                                // An UnauthorizedAccessException happens here if the port is used by another app.
                                 serialPort.Open();
                                 serialPort.Write(CommandTypes.WhoIsAvailable);
                             }
                             catch (IOException) { }
-                            catch (UnauthorizedAccessException) { } // This happens if the port is used by another app.
+                            catch (UnauthorizedAccessException) { }
 
                             // Waiting a maximum of 3s for a response from the port.
                             taskCompletionSource.Task.Wait(3000);

@@ -1,10 +1,14 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Hast.Common.Helpers
 {
     public static class Sha2456Helper
     {
+        private static Lazy<string> EmptyLazy = new Lazy<string>(() => ComputeHash(string.Empty));
+
+
         public static string ComputeHash(string text)
         {
             var hashedIdBytes = new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(text));
@@ -18,5 +22,7 @@ namespace Hast.Common.Helpers
 
             return stringBuilder.ToString();
         }
+
+        public static string Empty() => EmptyLazy.Value;
     }
 }

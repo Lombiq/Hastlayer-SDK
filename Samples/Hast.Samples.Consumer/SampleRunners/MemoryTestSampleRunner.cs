@@ -4,24 +4,25 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
-    internal static class MemoryTestSampleRunner
+    internal class MemoryTestSampleRunner : ISampleRunner
     {
-        public static void Configure(HardwareGenerationConfiguration configuration)
+        public void Configure(HardwareGenerationConfiguration configuration)
         {
             configuration.AddHardwareEntryPointType<MemoryTest>();
         }
 
-        public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
+        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation,
+            IProxyGenerationConfiguration configuration)
         {
-            var memoryTest = await hastlayer.GenerateProxy(hardwareRepresentation, new MemoryTest());
+            var memoryTest = await hastlayer.GenerateProxy(hardwareRepresentation, new MemoryTest(), configuration);
 
-            var output1 = memoryTest.Run(0, 1);
-            var output2 = memoryTest.Run(0, 3);
-            var output3 = memoryTest.Run(0, 7);
-            var output4 = memoryTest.Run(0, 50);
-            var output5 = memoryTest.Run(1, 1);
-            var output6 = memoryTest.Run(3, 7);
-            var output7 = memoryTest.Run(47, 100);
+            var output1 = memoryTest.Run(0, 1, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output2 = memoryTest.Run(0, 3, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output3 = memoryTest.Run(0, 7, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output4 = memoryTest.Run(0, 50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output5 = memoryTest.Run(1, 1, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output6 = memoryTest.Run(3, 7, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var output7 = memoryTest.Run(47, 100, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
     }
 }

@@ -20,6 +20,11 @@
         /// <summary>
         /// File gets read as binary.
         /// </summary>
-        BinaryFile
+        BinaryFile,
+        
+        /// <summary>
+        /// File gets read as a bitmap. 
+        /// </summary>
+        Bitmap
     }
 }
