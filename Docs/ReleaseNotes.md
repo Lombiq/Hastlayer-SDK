@@ -5,7 +5,7 @@
 Note that the Hardware Framework projects have their own release cycle and release notes.
 
 
-## vNext
+## v1.2, 04.10.2021
 
 - Added support for the high-end [Xilinx Alveo U50, U200, U250 or U280 Data Center Accelerator Cards](https://www.xilinx.com/products/boards-and-kits/alveo.html). These are suitable hardware for any kind of demanding production-level workload. Apart from using such devices on-premise they're also available in the cloud.
 - Added support for the high-end [AWS EC2 F1 FPGA cloud instances](https://aws.amazon.com/ec2/instance-types/f1/).
