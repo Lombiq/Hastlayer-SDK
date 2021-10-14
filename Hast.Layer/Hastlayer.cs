@@ -61,18 +61,7 @@ namespace Hast.Layer
             services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
             services.AddIDependencyContainer(assemblies);
 
-            services.AddSingleton(LoggerFactory.Create(builder =>
-            {
-                if (configuration.ConfigureLogging is null)
-                {
-                    builder.AddNLog("NLog.config");
-                }
-                else
-                {
-                    configuration.ConfigureLogging(builder);
-                }
-            }));
-            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
+            ConfigureLogging(services, configuration.ConfigureLogging);
 
             configuration.OnServiceRegistration?.Invoke(configuration, services);
 
@@ -109,6 +98,22 @@ namespace Hast.Layer
             }
         }
 
+        public static void ConfigureLogging(ServiceCollection services, Action<ILoggingBuilder> configureLogging = null)
+        {
+
+            services.AddSingleton(LoggerFactory.Create(builder =>
+            {
+                if (configureLogging is null)
+                {
+                    builder.AddNLog("NLog.config");
+                }
+                else
+                {
+                    configureLogging(builder);
+                }
+            }));
+            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
+        }
 
         public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
 
@@ -222,7 +227,7 @@ namespace Hast.Layer
                         {
                             Configuration = configuration,
                             HardwareDescription = hardwareDescription,
-                            DeviceManifest = deviceManifest
+                            DeviceManifest = deviceManifest,
                         };
 
                         var hardwareImplementationComposer = hardwareImplementationComposerSelector
@@ -240,7 +245,7 @@ namespace Hast.Layer
                         HardwareDescription = hardwareDescription,
                         HardwareImplementation = hardwareImplementation,
                         DeviceManifest = deviceManifest,
-                        HardwareGenerationConfiguration = configuration
+                        HardwareGenerationConfiguration = configuration,
                     };
                 }
             }
