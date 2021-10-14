@@ -49,7 +49,7 @@ namespace Hast.Layer
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
                 typeof(NexysA7ManifestProvider).Assembly,
-                typeof(CatapultManifestProvider).Assembly
+                typeof(CatapultManifestProvider).Assembly,
             });
             assemblies.AddRange(GetHastLibraries());
 
@@ -98,7 +98,7 @@ namespace Hast.Layer
             }
         }
 
-        public static void ConfigureLogging(ServiceCollection services, Action<ILoggingBuilder> configureLogging = null)
+        public static void ConfigureLogging(IServiceCollection services, Action<ILoggingBuilder> configureLogging = null)
         {
 
             services.AddSingleton(LoggerFactory.Create(builder =>
