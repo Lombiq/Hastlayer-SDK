@@ -137,8 +137,9 @@ namespace Hast.Layer
 
         public static IConfiguration BuildConfiguration() =>
             new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables()
+                .AddUserSecrets(Assembly.GetEntryAssembly(), optional: true)
                 .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
