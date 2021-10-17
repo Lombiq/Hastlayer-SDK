@@ -3,31 +3,58 @@
 namespace Hast.Common.Services
 {
     /// <summary>
-    /// Contains a value of T that is attached to an <see cref="IDisposable"/> context while manages their lifecylce together.
+    /// Contains a values that are attached to an <see cref="IDisposable"/> context while manages their lifecycle
+    /// together.
     /// </summary>
-    /// <typeparam name="T">The type of the value wich is exposed.</typeparam>
-    public sealed class DisposableContainer<T> : IDisposable
+    public class DisposableContainer : IDisposable
     {
-        private bool _disposed = false;
+        private bool _disposed;
         private IDisposable _context;
 
-        public T Value { get; }
+        public object[] Values { get; }
 
-
-        public DisposableContainer(IDisposable context, T value)
+        public DisposableContainer(IDisposable context, params object[] values)
         {
             _context = context;
-            Value = value;
+            Values = values;
         }
 
         public void Dispose()
         {
             if (_disposed) return;
-            
+
             _context?.Dispose();
             _context = null;
-            if (Value is IDisposable disposableValue) disposableValue.Dispose();
+
+            foreach (var value in Values)
+            {
+                if (value is IDisposable disposableValue)
+                {
+                    disposableValue.Dispose();
+                }
+            }
+
             _disposed = true;
+        }
+    }
+
+    /// <inheritdoc cref="DisposableContainer"/>
+    public sealed class DisposableContainer<T> : DisposableContainer
+    {
+        public T Value => (T)Values[0];
+
+        public DisposableContainer(IDisposable context, T value) : base(context, value) { }
+    }
+
+    /// <inheritdoc cref="DisposableContainer"/>
+    public sealed class DisposableContainer<T1, T2> : DisposableContainer
+    {
+        public DisposableContainer(IDisposable context, T1 value1, T2 value2) : base(context, value1, value2) { }
+
+        public void Deconstruct(out T1 first, out T2 second)
+        {
+            first = (T1)Values[0];
+            second = (T2)Values[1];
         }
     }
 }

@@ -2,7 +2,6 @@ using Hast.Catapult.Abstractions;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
-using Hast.Communication.Services;
 using Hast.Layer.EmptyRepresentationFactories;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
@@ -287,16 +286,31 @@ namespace Hast.Layer
             }
         }
 
-        public DisposableContainer<ICommunicationService> GetCommunicationService(string communicationChannelName)
+        public DisposableContainer<TServiceInterface> GetService<TServiceInterface>()
         {
             IServiceScope scope = null;
             try
             {
                 scope = _serviceProvider.CreateScope();
-                var communicationService = scope.ServiceProvider
-                    .GetService<ICommunicationServiceSelector>()
-                    .GetCommunicationService(communicationChannelName);
-                return new DisposableContainer<ICommunicationService>(scope, communicationService);
+                var service = scope.ServiceProvider.GetService<TServiceInterface>();
+                return new DisposableContainer<TServiceInterface>(scope, service);
+            }
+            catch
+            {
+                scope?.Dispose();
+                throw;
+            }
+        }
+
+        public DisposableContainer<TServiceInterface1, TServiceInterface2> GetServices<TServiceInterface1, TServiceInterface2>()
+        {
+            IServiceScope scope = null;
+            try
+            {
+                scope = _serviceProvider.CreateScope();
+                var service1 = scope.ServiceProvider.GetService<TServiceInterface1>();
+                var service2 = scope.ServiceProvider.GetService<TServiceInterface2>();
+                return new DisposableContainer<TServiceInterface1, TServiceInterface2>(scope, service1, service2);
             }
             catch
             {
@@ -327,30 +341,28 @@ namespace Hast.Layer
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {
             // This is fine because IDeviceManifest doesn't contain anything that relies on the scope.
-            using (var scope = _serviceProvider.CreateScope())
-            {
-                return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
-            }
+            using var scope = _serviceProvider.CreateScope();
+            return scope.ServiceProvider.GetService<IDeviceManifestSelector>().GetSupportedDevices();
         }
 
         public async Task RunAsync<T>(Func<T, Task> process)
         {
-            using (var scope = _serviceProvider.CreateScope())
-                await process(scope.ServiceProvider.GetRequiredService<T>());
+            using var scope = _serviceProvider.CreateScope();
+            await process(scope.ServiceProvider.GetRequiredService<T>());
         }
 
         public async Task<TOut> RunGetAsync<TOut>(Func<IServiceProvider, Task<TOut>> process)
         {
             ThrowIfService<TOut>();
-            using (var scope = _serviceProvider.CreateScope())
-                return await process(scope.ServiceProvider);
+            using var scope = _serviceProvider.CreateScope();
+            return await process(scope.ServiceProvider);
         }
 
         public TOut RunGet<TOut>(Func<IServiceProvider, TOut> process)
         {
             ThrowIfService<TOut>();
-            using (var scope = _serviceProvider.CreateScope())
-                return process(scope.ServiceProvider);
+            using var scope = _serviceProvider.CreateScope();
+            return process(scope.ServiceProvider);
         }
 
         public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();

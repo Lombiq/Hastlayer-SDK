@@ -55,11 +55,17 @@ namespace Hast.Layer
             IProxyGenerationConfiguration configuration = null) where T : class;
 
         /// <summary>
-        /// Gets the <see cref="ICommunicationService"/> based on the channel name.
+        /// Gets a registered service for the interface <typeparamref name="TServiceInterface"/> inside a disposable
+        /// container that maintains an independent dependency injection scope as long as the host <see
+        /// cref="IHastlayer"/> object isn't disposed.
         /// </summary>
-        /// <param name="communicationChannelName">The <see cref="ICommunicationService.ChannelName"/> value.</param>
         /// <returns>The matching communication service.</returns>
-        DisposableContainer<ICommunicationService> GetCommunicationService(string communicationChannelName);
+        /// <remarks>
+        /// <para>
+        /// If you need a communication service, use this to request an <see cref="ICommunicationServiceSelector"/>.
+        /// </para>
+        /// </remarks>
+        DisposableContainer<TServiceInterface> GetService<TServiceInterface>();
 
         /// <summary>
         /// Constructs a new <see cref="SimpleMemory"/> object that represents a simplified memory model available on
