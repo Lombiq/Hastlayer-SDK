@@ -1,5 +1,6 @@
 using Hast.Algorithms;
 using Hast.Communication.Exceptions;
+using Hast.Communication.Extensibility.Events;
 using Hast.Layer;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.FSharpSampleAssembly;
@@ -18,49 +19,11 @@ namespace Hast.Samples.Consumer
     // references other projects (and the sample assembly as well), so check out those too on hints which Hastlayer
     // projects to reference from your own projects.
 
-    // Configure the whole sample project here or in command line arguments:
-    internal static class Configuration
-    {
-        /// <summary>
-        /// Which supported hardware device to use? If you leave this empty the first one will be used. If you're
-        /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for
-        /// high-performance local or cloud FPGAs see the docs.
-        /// You can also provide this in the -device command line argument.
-        /// </summary>
-        public static string DeviceName = "Nexys A7";
-
-        /// <summary>
-        /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
-        /// name of your app.
-        /// You can also provide this in the -appname command line argument.
-        /// </summary>
-        public static string AppName = "appname";
-
-        /// <summary>
-        /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
-        /// app secret corresponding to of your app.
-        /// You can also provide this in the -appsecret command line argument.
-        /// </summary>
-        public static string AppSecret = "appsecret";
-
-        /// <summary>
-        /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not
-        /// up-to-date enough and shouldn't be really taken as good examples (check out the other ones).
-        /// You can also provide this in the -sample command line argument.
-        /// </summary>
-        public static Sample SampleToRun = Sample.Loopback;
-
-        /// <summary>
-        /// Specify a path here where the hardware framework is located. The file describing the hardware to be
-        /// generated will be saved there as well as anything else necessary. If the path is relative (like the
-        /// default) then the file will be saved along this project's executable in the bin output directory.
-        /// </summary>
-        public static string HardwareFrameworkPath = "HardwareFramework";
-    }
+    // Configure the whole sample project in Configuration.cs or in command line arguments.
 
     internal static class Program
     {
-        private static async Task MainTask(string[] args)
+        private static async Task MainTaskAsync(string[] args)
         {
             /*
             * On a high level these are the steps to use Hastlayer:
@@ -82,34 +45,11 @@ namespace Hast.Samples.Consumer
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
-            hastlayer.ExecutedOnHardware += (sender, e) =>
-            {
-                var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
-                var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
-
-                Console.WriteLine(
-                    $"Executing {e.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
-                    $"{grossTime:0.####} milliseconds (all together).");
-
-                if (e.SoftwareExecutionInformation == null) return;
-
-                // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
-                // see the notes below, or if the hardware execution was canceled.
-                var softwareTime = e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
-                Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
-            };
-
+            hastlayer.ExecutedOnHardware += OnHastlayerOnExecutedOnHardware;
 
             // A little helper for later.
             var argsList = (IList<string>)args;
-            string GetArgument(string name)
-            {
-                name = "-" + name;
-                int index = argsList.IndexOf(name) + 1;
-                if (index <= 0) return null;
-                if (index == args.Length) index--; // if it's the last element just return the switch.
-                return args[index];
-            }
+            string GetArgument(string name) => GetArgumentFromArgsList(argsList, args, name);
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
             var devices = hastlayer.GetSupportedDevices()?.ToList();
@@ -162,7 +102,7 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
+                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'."),
             };
             sampleRunner.Configure(configuration);
             configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
@@ -233,12 +173,36 @@ namespace Hast.Samples.Consumer
             }
         }
 
+        private static void OnHastlayerOnExecutedOnHardware(IHastlayer sender, IMemberHardwareExecutionContext e)
+        {
+            var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
+            var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
+
+            Console.WriteLine($"Executing {e.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " + $"{grossTime:0.####} milliseconds (all together).");
+
+            if (e.SoftwareExecutionInformation == null) return;
+
+            // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
+            // see the notes below, or if the hardware execution was canceled.
+            var softwareTime = e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
+            Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
+        }
+
+        private static string GetArgumentFromArgsList(IList<string> argsList, string[] args, string name)
+        {
+            name = "-" + name;
+            int index = argsList.IndexOf(name) + 1;
+            if (index <= 0) return null;
+            if (index == args.Length) index--; // if it's the last element just return the switch.
+            return args[index];
+        }
+
         private static async Task Main(string[] args)
         {
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
             try
             {
-                await MainTask(args);
+                await MainTaskAsync(args);
             }
             catch (Exception ex)
             {
