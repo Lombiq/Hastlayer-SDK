@@ -7,10 +7,12 @@ using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,8 +20,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Newtonsoft.Json.Linq;
 
 namespace Hast.Layer
 {
@@ -99,7 +99,6 @@ namespace Hast.Layer
 
         public static void ConfigureLogging(IServiceCollection services, Action<ILoggingBuilder> configureLogging = null)
         {
-
             services.AddSingleton(LoggerFactory.Create(builder =>
             {
                 if (configureLogging is null)
@@ -111,6 +110,7 @@ namespace Hast.Layer
                     configureLogging(builder);
                 }
             }));
+
             services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
         }
 
