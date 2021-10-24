@@ -74,6 +74,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.Res
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.Abstractions", "Hast.Abstractions\Hast.Vitis.Abstractions\Hast.Vitis.Abstractions.csproj", "{AF23A68E-B9EF-4697-A73B-ED55DEC363A0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.Abstractions.HardwareFramework", "Hastlayer-Hardware-Framework---Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj", "{353E3B8E-74E8-41FA-9AA6-750A5827080F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -172,6 +174,10 @@ Global
 		{AF23A68E-B9EF-4697-A73B-ED55DEC363A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF23A68E-B9EF-4697-A73B-ED55DEC363A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF23A68E-B9EF-4697-A73B-ED55DEC363A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{353E3B8E-74E8-41FA-9AA6-750A5827080F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{353E3B8E-74E8-41FA-9AA6-750A5827080F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{353E3B8E-74E8-41FA-9AA6-750A5827080F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{353E3B8E-74E8-41FA-9AA6-750A5827080F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +196,7 @@ Global
 		{EE140765-5088-40AA-9621-D4B0A971EE2C} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
 		{A2D4C4BD-4C4A-4ED7-B74F-B2C79F31F2D0} = {765A6EB0-438E-422C-ACDD-13544EFE6467}
 		{AF23A68E-B9EF-4697-A73B-ED55DEC363A0} = {B88EC5D8-5D8A-4C87-81B3-F4F8C7FB2BF8}
+		{353E3B8E-74E8-41FA-9AA6-750A5827080F} = {B88EC5D8-5D8A-4C87-81B3-F4F8C7FB2BF8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C7FC230-A7A8-4206-A533-E41B96D6E222}
