@@ -25,6 +25,8 @@ namespace Hast.Layer
 {
     public sealed class Hastlayer : IHastlayer
     {
+        public const string AppsettingsJsonFileName = "appsettings.json";
+
         private readonly IHastlayerConfiguration _configuration;
         private readonly ServiceProvider _serviceProvider;
         private readonly HashSet<string> _serviceNames;
@@ -137,7 +139,7 @@ namespace Hast.Layer
 
         public static IConfiguration BuildConfiguration() =>
             new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                .AddJsonFile(AppsettingsJsonFileName, optional: true, reloadOnChange: false)
                 .AddEnvironmentVariables()
                 .AddUserSecrets(Assembly.GetEntryAssembly(), optional: true)
                 .AddCommandLine(Environment.GetCommandLineArgs())
