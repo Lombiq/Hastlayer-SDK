@@ -184,6 +184,8 @@ namespace Hast.Samples.Consumer
                     // ImmutableArray.
                     typeof(Posit).Assembly,
                     typeof(ImmutableArray).Assembly,
+                    // Only necessary for the F# sample.
+                    typeof(Microsoft.FSharp.Core.LiteralAttribute).Assembly
                 },
                 configuration);
 
