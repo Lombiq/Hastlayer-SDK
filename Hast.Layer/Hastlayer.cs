@@ -172,13 +172,15 @@ namespace Hast.Layer
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
+                    var provider = scope.ServiceProvider;
+                    provider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
                         .Value = configuration;
 
-                    var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
-                    var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
-                    var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
-                    var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+                    var transformer = provider.GetRequiredService<ITransformer>();
+                    var deviceManifestSelector = provider.GetRequiredService<IDeviceManifestSelector>();
+                    var loggerService = provider.GetRequiredService<ILogger<Hastlayer>>();
+                    var appConfiguration = provider.GetRequiredService<IConfiguration>();
+                    var transformationEvents = provider.GetRequiredService<IEnumerable<ITransformationEvents>>().ToList();
 
                     // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
                     // CustomConfiguration into the current hardware generation configuration.
@@ -195,9 +197,19 @@ namespace Hast.Layer
                             [item.Key];
                     }
 
+                    foreach (var transformationEvent in transformationEvents)
+                    {
+                        await transformationEvent.BeforeTransformAsync();
+                    }
+
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
                         await transformer.Transform(assembliesPaths, configuration) :
                         EmptyHardwareDescriptionFactory.Create(configuration);
+
+                    foreach (var transformationEvent in transformationEvents)
+                    {
+                        await transformationEvent.AfterTransformAsync(hardwareDescription);
+                    }
 
                     foreach (var warning in hardwareDescription.Warnings)
                     {
@@ -218,7 +230,7 @@ namespace Hast.Layer
                     }
 
                     var hardwareImplementationComposerSelector =
-                        scope.ServiceProvider.GetRequiredService<IHardwareImplementationComposerSelector>();
+                        provider.GetRequiredService<IHardwareImplementationComposerSelector>();
 
                     IHardwareImplementation hardwareImplementation;
                     if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
