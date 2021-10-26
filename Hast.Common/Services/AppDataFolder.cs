@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace Hast.Common.Services
@@ -40,6 +39,7 @@ namespace Hast.Common.Services
         public string Combine(params string[] parts) => MapPath(Path.Combine(parts));
 
         public bool FileExists(string fileName) => File.Exists(MapPath(fileName));
+
         public FileStream CreateFile(string fileName)
         {
             var directoryName = Path.GetDirectoryName(fileName);
@@ -48,6 +48,7 @@ namespace Hast.Common.Services
         }
 
         public FileStream OpenFile(string fileName) => File.OpenRead(MapPath(fileName));
+
         public void DeleteFile(string fileName)
         {
             if (File.Exists(fileName)) File.Delete(MapPath(fileName));
