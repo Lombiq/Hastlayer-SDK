@@ -70,11 +70,23 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
+            // A little helper for later.
+            var argsList = (IList<string>)args;
+            string GetArgument(string name)
+            {
+                name = "-" + name;
+                int index = argsList.IndexOf(name) + 1;
+                if (index <= 0) return null;
+                if (index == args.Length) index--; // if it's the last element just return the switch.
+                return args[index];
+            }
+
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
             // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
             // transformation. In most cases the flavor defaults to the one you need.
             // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
             var hastlayerConfiguration = new HastlayerConfiguration();
+            if (!string.IsNullOrWhiteSpace(GetArgument("appsecret"))) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
             // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
@@ -82,7 +94,7 @@ namespace Hast.Samples.Consumer
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
                 var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
@@ -99,18 +111,6 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
             };
 
-
-            // A little helper for later.
-            var argsList = (IList<string>)args;
-            string GetArgument(string name)
-            {
-                name = "-" + name;
-                int index = argsList.IndexOf(name) + 1;
-                if (index <= 0) return null;
-                if (index == args.Length) index--; // if it's the last element just return the switch.
-                return args[index];
-            }
-
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
             var devices = hastlayer.GetSupportedDevices()?.ToList();
             if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
@@ -126,15 +126,7 @@ namespace Hast.Samples.Consumer
             if (argsList.Contains("-verify")) proxyConfiguration.VerifyHardwareResults = true;
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
-            var remoteClientConfiguration = configuration.RemoteClientConfiguration();
-            remoteClientConfiguration.AppName = GetArgument("appname") ?? Configuration.AppName;
-            remoteClientConfiguration.AppSecret = GetArgument("appsecret") ?? Configuration.AppSecret;
-            if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
-                remoteClientConfiguration.AppSecret == "appsecret")
-            {
-                throw new InvalidOperationException(
-                    "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
-            }
+            ConfigureClientFlavor(configuration, hastlayerConfiguration, GetArgument);
 
             // If the sample was selected in the command line use that, or otherwise the default.
             Configuration.SampleToRun = (Sample)Enum.Parse(
@@ -162,7 +154,7 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'.")
+                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'."),
             };
             sampleRunner.Configure(configuration);
             configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
@@ -230,6 +222,30 @@ namespace Hast.Samples.Consumer
                 {
                     Console.WriteLine("* " + mismatch);
                 }
+            }
+        }
+
+        private static void ConfigureClientFlavor(
+            HardwareGenerationConfiguration configuration,
+            HastlayerConfiguration hastlayerConfiguration,
+            Func<string, string> getArgument)
+        {
+            if (hastlayerConfiguration.Flavor != HastlayerFlavor.Client) return;
+            var remoteClientConfiguration = configuration.RemoteClientConfiguration();
+
+            if (getArgument("endpoint") is { } endpointUrl &&
+                Uri.TryCreate(endpointUrl, UriKind.Absolute, out var endpointUri))
+            {
+                remoteClientConfiguration.EndpointBaseUri = endpointUri;
+            }
+
+            remoteClientConfiguration.AppName = getArgument("appname") ?? Configuration.AppName;
+            remoteClientConfiguration.AppSecret = getArgument("appsecret") ?? Configuration.AppSecret;
+
+            if (remoteClientConfiguration.AppSecret == "appsecret")
+            {
+                throw new InvalidOperationException(
+                    "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
             }
         }
 
