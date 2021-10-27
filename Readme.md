@@ -3,7 +3,7 @@
 
 
 
-[![TeamCity build status](https://ci.lombiq.com/app/rest/builds/buildType:id:Hastlayer_PullAndBuild/statusIcon.svg)](https://ci.lombiq.com/buildConfiguration/Hastlayer_PullAndBuild?mode=builds#all-projects)
+[![TeamCity build status](https://ci.lombiq.com/app/rest/builds/buildType:id:Hastlayer_Developer_PullAndBuild/statusIcon.svg)](https://ci.lombiq.com/buildConfiguration/Hastlayer_Developer_PullAndBuild?mode=builds#all-projects)
 
 
 ## About
