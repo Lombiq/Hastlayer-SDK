@@ -25,7 +25,7 @@ Be sure to also check out the [general docs](../Readme.md).
 5. Click on the Nimbix ("start") menu at the bottom left and select Terminal Emulator.
 6. Type in the following to set up dependencies:<br>
   `cd /data/host_programs_directory`<br>
-  `source nimbix-install.sh`
+  `source ubuntu-install.sh`
 7. Execute the host program, see below. On first execution it will start to build the new xclbin file. Upon subsequent runs the binary will be detected and the compilation step skipped. 
 8. Wait for a long time. The baseline time requirements (when compiling `MemoryTest` for U280) is around 2h 15m. U50, as the smallest board, is the fastest to compile for.
 
@@ -40,7 +40,7 @@ This is assuming that you are going to run `Hast.Samples.Consumer` with the imag
 3. If it ran successfully, check the output picture by typing `thunar contrast.bmp`.
 
 
-## Restaring
+## Restarting
 
 To save on compute costs, shut down the job (i.e. turn off the instance) when not needed. At that point everything outside the */data* folder is lost, including all personal settings.
 

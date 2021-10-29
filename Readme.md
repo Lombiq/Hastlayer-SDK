@@ -2,6 +2,10 @@
 
 
 
+
+[![TeamCity build status](https://ci.lombiq.com/app/rest/builds/buildType:id:Hastlayer_Developer_PullAndBuild/statusIcon.svg)](https://ci.lombiq.com/buildConfiguration/Hastlayer_Developer_PullAndBuild?mode=builds#all-projects)
+
+
 ## About
 
 [Hastlayer](https://hastlayer.com/) - be the hardware. Hastlayer automatically transforms [.NET](https://www.microsoft.com/net/) assemblies into computer chips, improving performance and lowering power consumption for massively parallel applications. For some figures check out [the benchmarks](Docs/Benchmarks.md).

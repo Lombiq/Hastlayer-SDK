@@ -39,9 +39,7 @@ namespace Hast.Samples.Kpz
                 );
             };
 
-            var configuration = new HardwareGenerationConfiguration(
-                hastlayer.GetSupportedDevices().First().Name,
-                "HardwareFramework");
+            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
             configuration.EnableCaching = false;
 

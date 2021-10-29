@@ -1,4 +1,4 @@
-﻿// Common file for storing version data. On what this trick is and what to do if you add a new project see:
+// Common file for storing version data. On what this trick is and what to do if you add a new project see:
 // https://stackoverflow.com/questions/980753/change-assembly-version-for-multiple-projects/980763#980763
 // When creating a new project remove the attributes listed here from its AssemblyInfo.cs file and link this file to
 // the project.
@@ -7,7 +7,7 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("Lombiq Technologies Ltd.")]
 [assembly: AssemblyProduct("Hastlayer (hastlayer.com)")]
-[assembly: AssemblyCopyright("Copyright © 2015-2020")]
+[assembly: AssemblyCopyright("Copyright © 2015-2021")]
 [assembly: AssemblyTrademark("")]
 
 #if DEBUG
@@ -26,5 +26,5 @@ using System.Reflection;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
