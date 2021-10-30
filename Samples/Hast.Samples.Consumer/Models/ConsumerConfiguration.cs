@@ -90,8 +90,20 @@ namespace Hast.Samples.Consumer.Models
         /// <paramref name="args"/>.
         /// </summary>
         /// <param name="args">The command line arguments received from the shell.</param>
-        public static ConsumerConfiguration FromCommandLine(IList<string> args)
+        /// <param name="consumerConfigurations"></param>
+        public static ConsumerConfiguration FromCommandLine(
+            IList<string> args,
+            Dictionary<string, ConsumerConfiguration> consumerConfigurations)
         {
+            var loadIndex = args
+                .Select((argument, index) => (Argument: argument.ToUpperInvariant(), Index: index))
+                .Aggregate(-1, (current, item) => current == -1 && item.Argument == "-LOAD" ? item.Index : current);
+
+            if (loadIndex >= 0 && loadIndex + 1  < args.Count)
+            {
+                return consumerConfigurations[args[loadIndex + 1]];
+            }
+
             var configuration = new ConsumerConfiguration();
 
             var properties = typeof(ConsumerConfiguration)

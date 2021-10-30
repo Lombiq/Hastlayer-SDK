@@ -40,9 +40,13 @@ namespace Hast.Samples.Consumer
                 ? JsonConvert.DeserializeObject<Dictionary<string, ConsumerConfiguration>>(
                     await File.ReadAllTextAsync($"{nameof(ConsumerConfiguration)}.json"))
                 : new Dictionary<string, ConsumerConfiguration>();
+            // Make the name case insensitive.
+            savedConfigurations = new Dictionary<string, ConsumerConfiguration>(
+                savedConfigurations,
+                StringComparer.InvariantCultureIgnoreCase);
 
             var consumerConfiguration = args.Any()
-                ? ConsumerConfiguration.FromCommandLine(args)
+                ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
                 : await new Gui(savedConfigurations).BuildConfiguration();
 
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
