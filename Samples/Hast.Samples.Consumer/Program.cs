@@ -8,11 +8,10 @@ using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.Arithmetics;
-using Newtonsoft.Json;
+using Microsoft.FSharp.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -135,7 +134,7 @@ namespace Hast.Samples.Consumer
                     typeof(Posit).Assembly,
                     typeof(ImmutableArray).Assembly,
                     // Only necessary for the F# sample.
-                    typeof(Microsoft.FSharp.Core.LiteralAttribute).Assembly,
+                    typeof(LiteralAttribute).Assembly,
                 },
                 configuration);
 

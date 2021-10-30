@@ -2,15 +2,6 @@ namespace Terminal.Gui
 {
     public static class GuiExtensions
     {
-        public static FrameView WithShortcut(this FrameView frameView, Key shortcutKeys)
-        {
-            frameView.Shortcut = shortcutKeys;
-            frameView.Title = $"{frameView.Title} ({frameView.ShortcutTag})";
-            frameView.ShortcutAction = frameView.SetFocus;
-
-            return frameView;
-        }
-
         public static void TileHorizontally(
             this View parent,
             View left,
