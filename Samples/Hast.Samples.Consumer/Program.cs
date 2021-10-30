@@ -36,15 +36,7 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
-            var savedConfigurations = File.Exists($"{nameof(ConsumerConfiguration)}.json")
-                ? JsonConvert.DeserializeObject<Dictionary<string, ConsumerConfiguration>>(
-                    await File.ReadAllTextAsync($"{nameof(ConsumerConfiguration)}.json"))
-                : new Dictionary<string, ConsumerConfiguration>();
-            // Make the name case insensitive.
-            savedConfigurations = new Dictionary<string, ConsumerConfiguration>(
-                savedConfigurations,
-                StringComparer.InvariantCultureIgnoreCase);
-
+            var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
             var consumerConfiguration = args.Any()
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
                 : await new Gui(savedConfigurations).BuildConfiguration();

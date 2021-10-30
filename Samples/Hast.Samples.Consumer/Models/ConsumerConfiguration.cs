@@ -1,9 +1,14 @@
+using Castle.Core.Internal;
 using Hast.Layer;
 using Hast.Samples.Consumer.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.Models
 {
@@ -15,6 +20,8 @@ namespace Hast.Samples.Consumer.Models
     /// </summary>
     public class ConsumerConfiguration
     {
+        private const string StorageFileName = nameof(ConsumerConfiguration) + ".json";
+
         /// <summary>
         /// Gets or sets the name of the device to use. If you leave this empty the first one will be used. If you're
         /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for
@@ -83,7 +90,15 @@ namespace Hast.Samples.Consumer.Models
         /// where the Hast.Samples.Consumer.dll is located. Otherwise you will see unexpected issues with this and other
         /// relative paths.
         /// </para></remarks>
+        [Argument]
         public string HardwareFrameworkPath { get; set; } = "HardwareFramework";
+
+        /// <summary>
+        /// Gets or sets the name of this configuration, if you want to save it for later reuse with the <c>-load</c>
+        /// argument.
+        /// </summary>
+        [Argument("save")]
+        private string SaveName { get; set; }
 
         /// <summary>
         /// Returns new instance of <see cref="ConsumerConfiguration"/> with values set according to the arguments in
@@ -107,7 +122,7 @@ namespace Hast.Samples.Consumer.Models
             var configuration = new ConsumerConfiguration();
 
             var properties = typeof(ConsumerConfiguration)
-                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                 .Where(property => property.GetCustomAttributes<ArgumentAttribute>().Any())
                 .ToDictionary(
                     property => property,
@@ -130,7 +145,36 @@ namespace Hast.Samples.Consumer.Models
                 }
             }
 
+            if (!configuration.SaveName.IsNullOrEmpty())
+            {
+                consumerConfigurations[configuration.SaveName] = configuration;
+                SaveConfigurations(consumerConfigurations);
+            }
+
             return configuration;
+        }
+
+        public static async Task<Dictionary<string, ConsumerConfiguration>> LoadConfigurationsAsync()
+        {
+            var configurations = File.Exists(StorageFileName)
+                ? JsonConvert.DeserializeObject<Dictionary<string, ConsumerConfiguration>>(
+                    await File.ReadAllTextAsync(StorageFileName))
+                : new Dictionary<string, ConsumerConfiguration>();
+
+            // Make the name case-insensitive.
+            configurations = new Dictionary<string, ConsumerConfiguration>(
+                configurations,
+                StringComparer.InvariantCultureIgnoreCase);
+
+            return configurations;
+        }
+
+        public static void SaveConfigurations(Dictionary<string, ConsumerConfiguration> configurations)
+        {
+            using var writer = new StreamWriter(StorageFileName, append: false, Encoding.UTF8);
+            var serializer = new JsonSerializer { Formatting = Formatting.Indented };
+
+            serializer.Serialize(writer, configurations);
         }
     }
 }
