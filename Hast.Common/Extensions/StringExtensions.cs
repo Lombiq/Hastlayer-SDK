@@ -16,7 +16,18 @@ namespace System
         public static string ToSnakeCase(this string input) =>
             string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x : x.ToString()));
 
+        /// <summary>
+        /// Returns <paramref name="text"/> if it's not <see langword="null"/>, empty or whitespace. Otherwise returns
+        /// <paramref name="alternative"/>;
+        /// </summary>
         public static string OrIfEmpty(this string text, string alternative) =>
             string.IsNullOrWhiteSpace(text) ? alternative : text;
+
+        /// <summary>
+        /// Returns <see langword="true"/> if the value is <see langword="true"/> or <c>True</c>.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsTrueString(this object value) => value?.ToString() == bool.TrueString;
     }
 }

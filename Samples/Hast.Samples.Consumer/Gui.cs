@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Terminal.Gui;
 
 namespace Hast.Samples.Consumer
@@ -25,9 +26,11 @@ namespace Hast.Samples.Consumer
         private Action<string> _currentOptionsTextFieldEventHandler;
 
         private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
-        private Action<ListViewItemEventArgs> _currentOptionsListViewEventHandler;
+        private Action<object> _currentOptionsListViewEventHandler;
 
         private ConsumerConfiguration _configuration;
+
+        private Task<List<string>> _deviceNamesTask;
 
         public Dictionary<string, ConsumerConfiguration> SavedConfigurations { get; }
 
@@ -37,6 +40,13 @@ namespace Hast.Samples.Consumer
         public ConsumerConfiguration BuildConfiguration()
         {
             _configuration = new ConsumerConfiguration();
+
+            _deviceNamesTask = Task.Run(() =>
+                Hastlayer
+                    .Create(new HastlayerConfiguration())
+                    .GetSupportedDevices()?
+                    .Select(device => device.Name)
+                    .ToList() ?? new List<string>());
 
             Application.UseSystemConsole = true;
 
@@ -94,21 +104,17 @@ namespace Hast.Samples.Consumer
             rightPane.Add(_optionsTextField);
             rightPane.Add(_optionsListView);
 
-            _optionsTextField.KeyPress += args =>
-            {
-                if (!_optionsTextField.HasFocus) return;
-                if (args.KeyEvent.Key == Key.Enter)
+            _optionsTextField.KeyPress += CreateKeyboardEventHandler(
+                _optionsListView,
+                () => _currentOptionsTextFieldEventHandler?.Invoke(_optionsTextField.Text.ToString()));
+
+            _optionsListView.KeyPress += CreateKeyboardEventHandler(
+                _optionsListView,
+                () =>
                 {
-                    _currentOptionsTextFieldEventHandler(_optionsTextField.Text.ToString());
-                    _propertiesListView.SetFocus();
-                    args.Handled = true;
-                }
-                else if (args.KeyEvent.Key == Key.Esc)
-                {
-                    _propertiesListView.SetFocus();
-                    args.Handled = true;
-                }
-            };
+                    var item = _optionsListView.Source.ToList()[_optionsListView.SelectedItem];
+                    _currentOptionsListViewEventHandler?.Invoke(item);
+                });
 
             Application.Run (top);
 
@@ -120,8 +126,6 @@ namespace Hast.Samples.Consumer
 
         private void PropertiesListView_SelectedChanged(ListViewItemEventArgs obj)
         {
-            _optionsListView.SelectedItemChanged -= _currentOptionsListViewEventHandler;
-
             switch (obj.Value?.ToString())
             {
                 case nameof(ConsumerConfiguration.AppName):
@@ -140,16 +144,12 @@ namespace Hast.Samples.Consumer
                     ShowTextField(true);
                     break;
                 case nameof(ConsumerConfiguration.DeviceName):
-                    var deviceNames = Hastlayer
-                        .Create(new HastlayerConfiguration())
-                        .GetSupportedDevices()?
-                        .Select(device => device.Name) ?? Enumerable.Empty<string>();
-                    _optionsListView.Source = new ListWrapper(deviceNames.ToList());
-                    ShowTextField(false);
+                    ShowDeviceNames();
                     break;
                 case nameof(ConsumerConfiguration.DontRun):
                     _optionsListView.Source = new ListWrapper(new object[] { true, false });
                     _optionsListView.SelectedItem = _configuration.DontRun ? 0 : 1;
+                    _currentOptionsListViewEventHandler = item => { _configuration.DontRun = item.IsTrueString(); };
                     ShowTextField(false);
                     break;
                 case nameof(ConsumerConfiguration.Endpoint):
@@ -166,19 +166,31 @@ namespace Hast.Samples.Consumer
                     var sampleNames = Enum.GetNames(typeof(Sample)).ToList();
                     _optionsListView.Source = new ListWrapper(sampleNames);
                     _optionsListView.SelectedItem = sampleNames.IndexOf(_configuration.SampleToRun.ToString());
+                    _currentOptionsListViewEventHandler = item => { _configuration.SampleToRun = Enum.Parse<Sample>(item.ToString()!); };
                     ShowTextField(false);
                     break;
                 case nameof(ConsumerConfiguration.VerifyResults):
                     _optionsListView.Source = new ListWrapper(new object[] { true, false });
-                    _optionsListView.SelectedItem = _configuration.DontRun ? 0 : 1;
+                    _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
+                    _currentOptionsListViewEventHandler = item => { _configuration.VerifyResults = item.IsTrueString(); };
                     ShowTextField(false);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown menu item selected ({obj.Value}).");
             }
+        }
 
-            if (_optionsTextField.Visible) _optionsTextField.CursorPosition = _optionsTextField.Text.Length;
-            _optionsListView.SelectedItemChanged += _currentOptionsListViewEventHandler;
+        private void ShowDeviceNames()
+        {
+            var deviceNames = _deviceNamesTask.Result;
+            _optionsListView.Source = new ListWrapper(deviceNames);
+            if (_configuration.DeviceName is { } deviceName)
+            {
+                var index = deviceNames.IndexOf(deviceName);
+                if (index >= 0) _optionsListView.SelectedItem = index;
+            }
+            _currentOptionsListViewEventHandler = item => { _configuration.DeviceName = item.ToString(); };
+            ShowTextField(false);
         }
 
         private void SaveConfiguration(ConsumerConfiguration configuration)
@@ -195,6 +207,7 @@ namespace Hast.Samples.Consumer
         {
             _optionsTextField.Visible = visible;
             _optionsListView.Visible = !visible;
+            if (visible) _optionsTextField.CursorPosition = _optionsTextField.Text.Length;
         }
 
         private Action SetConfigurationAndStop(Func<ConsumerConfiguration> set) =>
@@ -202,6 +215,17 @@ namespace Hast.Samples.Consumer
             {
                 _configuration = set?.Invoke();
                 Application.RequestStop();
+            };
+
+        private Action<View.KeyEventEventArgs> CreateKeyboardEventHandler(View view, Action onEnter) =>
+            args =>
+            {
+                if (!view.HasFocus || args.KeyEvent.Key is not (Key.Esc or Key.Enter)) return;
+
+                if (args.KeyEvent.Key == Key.Enter) onEnter();
+
+                _propertiesListView.SetFocus();
+                args.Handled = true;
             };
     }
 }
