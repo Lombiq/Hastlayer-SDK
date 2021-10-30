@@ -39,7 +39,8 @@ namespace Hast.Samples.Consumer
             var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
             var consumerConfiguration = args.Any()
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
-                : await new Gui(savedConfigurations).BuildConfiguration();
+                : new Gui(savedConfigurations).BuildConfiguration();
+            if (consumerConfiguration == null) return;
 
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
             // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
