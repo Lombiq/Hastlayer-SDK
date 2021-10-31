@@ -100,7 +100,7 @@ namespace Hast.Samples.Consumer
             rightPane.Add(_optionsListView);
 
             AddKeyboardEventHandler(
-                _optionsListView,
+                _optionsTextField,
                 () => _currentOptionsTextFieldEventHandler?.Invoke(_optionsTextField.Text.ToString()));
 
             AddKeyboardEventHandler(
@@ -203,7 +203,14 @@ namespace Hast.Samples.Consumer
         private void AddAndStart(Dialog dialog, View view)
         {
             dialog.Add(view);
-            view.SetFocus();
+            if (view.CanFocus)
+            {
+                view.SetFocus();
+            }
+            else
+            {
+                view.FocusFirst();
+            }
 
             Application.Run(
                 dialog,
@@ -267,7 +274,7 @@ namespace Hast.Samples.Consumer
                 if (args.KeyEvent.Key == Key.Enter) OkClicked();
             };
 
-            AddAndStart(dialog, list);
+            AddAndStart(dialog, scrollView);
 
         }
 
