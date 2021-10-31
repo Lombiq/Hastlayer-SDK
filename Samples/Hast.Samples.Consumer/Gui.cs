@@ -205,20 +205,17 @@ namespace Hast.Samples.Consumer
             dialog.Add(view);
             view.SetFocus();
 
-            // For some reason the dialog title is missing but a quick refresh fixes it.
-            Task.WaitAll(
-                Task.Run(() => Application.Run(
-                        dialog,
-                        exception =>
-                        {
-                            _hastlayerTask
-                                .Result
-                                .GetLogger<Gui>()
-                                .LogError(exception, "an error in {0} dialog", dialog.Title);
-                            Application.RequestStop(dialog);
-                            return true;
-                        })),
-                    Task.Delay(500).ContinueWith(_ => Application.Refresh()));
+            Application.Run(
+                dialog,
+                exception =>
+                {
+                    _hastlayerTask
+                        .Result
+                        .GetLogger<Gui>()
+                        .LogError(exception, "an error in {0} dialog", dialog.Title);
+                    Application.RequestStop(dialog);
+                    return true;
+                });
         }
 
         private void SaveConfiguration()
