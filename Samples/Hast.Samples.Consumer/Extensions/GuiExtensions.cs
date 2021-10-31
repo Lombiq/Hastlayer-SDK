@@ -1,3 +1,5 @@
+using System;
+
 namespace Terminal.Gui
 {
     public static class GuiExtensions
@@ -25,8 +27,8 @@ namespace Terminal.Gui
         {
             view.X = 0;
             view.Y = 0;
-            view.Width = Dim.Fill();
-            view.Height = Dim.Fill();
+            view.Width = Dim.Percent(100);
+            view.Height = Dim.Percent(100);
 
             return view;
         }
@@ -36,10 +38,23 @@ namespace Terminal.Gui
         {
             view.X = horizontalMargin;
             if (verticalCenter) view.Y = Pos.Center();
-            view.Width = Dim.Fill(horizontalMargin);
+            view.Width = Dim.Percent(100) - (horizontalMargin * 2);
             view.Height = 1;
 
             return view;
         }
+
+        public static void OnKeyPressed(this View view, Key key, Action action) =>
+            view.KeyPress += args =>
+            {
+                if (args.KeyEvent.Key == key)
+                {
+                    action();
+                    args.Handled = true;
+                }
+            };
+
+        public static void OnEnterKeyPressed(this View view, Action action) => OnKeyPressed(view, Key.Enter, action);
+        public static void OnEscKeyPressed(this View view, Action action) => OnKeyPressed(view, Key.Esc, action);
     }
 }

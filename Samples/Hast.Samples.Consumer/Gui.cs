@@ -66,13 +66,13 @@ namespace Hast.Samples.Consumer
                         shortcut: Key.Q | Key.CtrlMask),
                 }),
                 new MenuBarItem (
-                    "_Start",
+                    "_Start (F5)",
                     string.Empty,
                     () => Application.RequestStop()),
             });
 
-            var leftPane = new FrameView("Properties");
-            var rightPane = new FrameView("Options");
+            var leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
+            var rightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
             var confiurationDictionary =
                 JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(_configuration));
@@ -90,7 +90,6 @@ namespace Hast.Samples.Consumer
             };
 
             var top = Application.Top;
-            top.ColorScheme = Colors.Base;
             top.Add(menu);
             top.Add(leftPane);
             top.Add(rightPane);
@@ -98,6 +97,11 @@ namespace Hast.Samples.Consumer
             leftPane.Add(_propertiesListView);
             rightPane.Add(_optionsTextField);
             rightPane.Add(_optionsListView);
+
+            top.KeyPress += args =>
+            {
+                if (args.KeyEvent.Key == Key.F5) Application.RequestStop();
+            };
 
             AddKeyboardEventHandler(
                 _optionsTextField,
@@ -111,7 +115,20 @@ namespace Hast.Samples.Consumer
                     _currentOptionsListViewEventHandler?.Invoke(item);
                 });
 
-            Application.Run (top);
+            Application.Run(
+                top,
+                exception =>
+                {
+                    _hastlayerTask
+                        .Result
+                        .GetLogger<Gui>()
+                        .LogError(exception, "an error during GUI operation");
+                    _configuration = null;
+                    Console.WriteLine(
+                        "An error occurred while in GUI mode. Please check the logs in the App_Data/logs directory.");
+                    Application.RequestStop();
+                    return true;
+                });
 
             Application.Shutdown();
             var result = _configuration;
@@ -188,49 +205,60 @@ namespace Hast.Samples.Consumer
             ShowTextField(false);
         }
 
-        private (Button Ok, Dialog Dialog) CreateDialog(string title, string label)
+        private (Button Ok, FrameView Dialog, Action Close) CreateDialog(
+            string title,
+            string label,
+            float widthPercent,
+            float heightPercent)
         {
-            var cancel = new Button("_Cancel");
-            var ok = new Button("_Ok");
-            var dialog = new Dialog(title, ok, cancel) { ColorScheme = Colors.Dialog };
-            dialog.Add(new Label(1, 1, label));
-
-            cancel.Clicked += () => { Application.RequestStop(dialog); };
-
-            return (ok, dialog);
-        }
-
-        private void AddAndStart(Dialog dialog, View view)
-        {
-            dialog.Add(view);
-            if (view.CanFocus)
+            var dialogFrame = new FrameView(title)
             {
-                view.SetFocus();
-            }
-            else
-            {
-                view.FocusFirst();
-            }
+                ColorScheme = Colors.Dialog,
+                X = Pos.Center() - Pos.Percent(widthPercent / 2),
+                Y = Pos.Center() - Pos.Percent(heightPercent / 2),
+                Width = Dim.Percent(widthPercent),
+                Height = Dim.Percent(heightPercent),
+            };
+            Application.Top.Add(dialogFrame);
 
-            Application.Run(
-                dialog,
-                exception =>
-                {
-                    _hastlayerTask
-                        .Result
-                        .GetLogger<Gui>()
-                        .LogError(exception, "an error in {0} dialog", dialog.Title);
-                    Application.RequestStop(dialog);
-                    return true;
-                });
+            void Close() => Application.Top.Remove(dialogFrame);
+
+            var buttonOk = new Button("_Ok")
+            {
+                X = 1,
+                Y = Pos.Percent(100) - 1,
+                Width = Dim.Percent(50),
+                Height = 1,
+            };
+            var buttonCancel = new Button("_Cancel")
+            {
+                X = Pos.Center() + 1,
+                Y = Pos.Percent(100) - 1,
+                Width = Dim.Percent(50),
+                Height = 1,
+            };
+            buttonCancel.Clicked += Close;
+
+            dialogFrame.Add(
+                new Label(label) { Y = 1, CanFocus = false }.FillHorizontally(verticalCenter: false),
+                buttonOk,
+                buttonCancel);
+
+            return (buttonOk, dialogFrame, Close);
         }
 
         private void SaveConfiguration()
         {
-            var (ok, dialog) = CreateDialog("Save", "Please enter the name of the configuration!");
+            var title = "Save";
+            var label = "Please enter the name of the configuration!";
+            var widthPercent = 60f;
+            var heightPercent = 30f;
+
+            var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
 
             var input = new TextField().FillHorizontally();
-            ok.Clicked += () =>
+
+            void OkClicked()
             {
                 var text = input.Text.ToString();
                 if (string.IsNullOrWhiteSpace(text))
@@ -240,42 +268,60 @@ namespace Hast.Samples.Consumer
                 }
 
                 _savedConfigurations[text] = _configuration;
-                Application.RequestStop(dialog);
+                close();
                 ConsumerConfiguration.SaveConfigurations(_savedConfigurations);
-            };
+            }
 
-            AddAndStart(dialog, input);
+            buttonOk.Clicked += OkClicked;
+            input.OnEnterKeyPressed(OkClicked);
+            input.OnEscKeyPressed(close);
+
+            dialogFrame.Add(input);
+            input.SetFocus();
         }
 
         private void LoadConfiguration()
         {
-            var (ok, dialog) = CreateDialog("Load", "Please select the configuration to load!");
+            var title = "Load";
+            var label = "Please select the configuration to load!";
+            var widthPercent = 60f;
+            var heightPercent = 60f;
+
+            var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
 
             var names = _savedConfigurations.Keys.ToList();
             var list = new ListView(names)
             {
+                X = 0,
+                Y = 0,
+                Width = Dim.Percent(100),
+                Height = Dim.Percent(100),
+            };
+
+            var scrollView = new ScrollView
+            {
                 X = 1,
                 Y = 3,
-                Width = Dim.Fill(1),
-                Height = names.Count,
+                Width = Dim.Percent(100) - 2,
+                Height = Dim.Percent(100) - 2,
+                CanFocus = false,
+                ContentSize = new Size(names.Max(name => name.Length), names.Count),
             };
-            dialog.Height = names.Count + 10;
 
             void OkClicked()
             {
                 _configuration = _savedConfigurations[names[list.SelectedItem]];
-                Application.RequestStop(dialog);
+                close();
                 PropertiesListView_SelectedChanged(_propertiesListView.Source.ToList()[0]?.ToString());
             }
 
-            ok.Clicked += OkClicked;
-            list.KeyPress += args =>
-            {
-                if (args.KeyEvent.Key == Key.Enter) OkClicked();
-            };
+            buttonOk.Clicked += OkClicked;
+            list.OnEnterKeyPressed(OkClicked);
+            list.OnEscKeyPressed(close);
 
-            AddAndStart(dialog, scrollView);
-
+            dialogFrame.Add(scrollView);
+            scrollView.Add(list);
+            list.SetFocus();
         }
 
         private void ShowTextField(bool visible)
