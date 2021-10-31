@@ -67,18 +67,18 @@ mkdir ~/petalinux_2020_2_trenz
 cd ~/petalinux_2020_2_trenz
 ```
 
-Copy the [trenz_te0715_04_30_1c_base_202020_2.zip](Attachments/trenz_te0715_04_30_1c_base_202020_2.zip) to your working directory.
+Copy the [trenz_te0715_04_30_1c_base_202020_2.zip](Attachments/trenz_te0715_04_30_1c_base_202020_2.zip) and [export_xsa_2020_2.zip](Attachments/export_xsa_2020_2.zip) files to your working directory.
 
-> ℹ️ On Docker copy it to the shared data directory instead and then type `cp /data/trenz_te0715_04_30_1c_base_202020_2.zip ~/petalinux_2020_2_trenz`.
+> ℹ️ On Docker copy it to the shared data directory instead and then type `cp /data/*.zip ~/petalinux_2020_2_trenz`.
 > For users targeting a device other than Trenz TE0715-04-30-1C, [create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html).
 
 Extract it, create an empty PetaLinux project based on Zynq template and configure the hardware:
 
 ```shell
-unzip trenz_te0715_04_30_1c_base_202020_2.zip
+ls *.zip | xargs -l unzip
 petalinux-create -t project --template zynq --name petalinux
 cd petalinux
-petalinux-config --get-hw-description=../trenz_te0715_04_30_1c_base_202020_2/hw/
+petalinux-config --get-hw-description=../zsys_wrapper.xsa
 ```
 
 There is no need to change anything, just press <kbd>ESC</kbd> and save the configuration before exit.
@@ -164,6 +164,8 @@ Copy the following three files to the root directory in the first partition on t
 ./images/linux/boot.scr
 ./images/linux/image.ub
 ```
+
+> ℹ️ On Docker type `cp -r images/linux/ /data` to move it all into the shared directory.
 
 The _BOOT.BIN_ and the _boot.scr_ contains the [U-Boot](https://www.denx.de/wiki/U-Boot/) and the initial FPGA image. The _image.ub_ contains the kernel and the root file system.
 
