@@ -30,5 +30,16 @@ namespace Terminal.Gui
 
             return view;
         }
+
+        public static T FillHorizontally<T>(this T view, int horizontalMargin = 1, bool verticalCenter = true)
+            where T : View
+        {
+            view.X = horizontalMargin;
+            if (verticalCenter) view.Y = Pos.Center();
+            view.Width = Dim.Fill(horizontalMargin);
+            view.Height = 1;
+
+            return view;
+        }
     }
 }

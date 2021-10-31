@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.Consumer.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,18 +12,11 @@ namespace Hast.Samples.Consumer
 {
     public class Gui
     {
+        private readonly Dictionary<string, ConsumerConfiguration> _savedConfigurations;
         private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
 
         private readonly TextField _optionsTextField =
-            new()
-            {
-                X = 1,
-                Y = Pos.Center(),
-                Width = Dim.Fill(),
-                Height = 1,
-                CanFocus = true,
-                Visible = false,
-            };
+            new TextField { CanFocus = true, Visible = false }.FillHorizontally();
         private Action<string> _currentOptionsTextFieldEventHandler;
 
         private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
@@ -30,20 +24,20 @@ namespace Hast.Samples.Consumer
 
         private ConsumerConfiguration _configuration;
 
+        private Task<Hastlayer> _hastlayerTask;
         private Task<List<string>> _deviceNamesTask;
 
-        public Dictionary<string, ConsumerConfiguration> SavedConfigurations { get; }
-
         public Gui(Dictionary<string, ConsumerConfiguration> savedConfigurations) =>
-            SavedConfigurations = savedConfigurations;
+            _savedConfigurations = savedConfigurations;
 
         public ConsumerConfiguration BuildConfiguration()
         {
             _configuration = new ConsumerConfiguration();
 
-            _deviceNamesTask = Task.Run(() =>
-                Hastlayer
-                    .Create(new HastlayerConfiguration())
+            _hastlayerTask = Task.Run(() => (Hastlayer)Hastlayer.Create(new HastlayerConfiguration()));
+            _deviceNamesTask = _hastlayerTask.ContinueWith(hastlayer =>
+                hastlayer
+                    .Result
                     .GetSupportedDevices()?
                     .Select(device => device.Name)
                     .ToList() ?? new List<string>());
@@ -58,12 +52,12 @@ namespace Hast.Samples.Consumer
                     new MenuItem (
                         "_Load",
                         "Selects a saved configuration.",
-                        SetConfigurationAndStop(LoadConfiguration),
+                        LoadConfiguration,
                         shortcut: Key.Q | Key.L),
                     new MenuItem (
                         "_Save",
                         "Saves the current configuration.",
-                        () => SaveConfiguration(_configuration),
+                        SaveConfiguration,
                         shortcut: Key.Q | Key.S),
                     new MenuItem (
                         "_Quit (Ctrl + Q)",
@@ -88,7 +82,7 @@ namespace Hast.Samples.Consumer
             );
 
             _propertiesListView.SetSource(confiurationDictionary.Keys.OrderBy(key => key).ToList());
-            _propertiesListView.SelectedItemChanged += PropertiesListView_SelectedChanged;
+            _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
             _propertiesListView.OpenSelectedItem += _ =>
             {
                 if (_optionsListView.Visible) _optionsListView.SetFocus();
@@ -96,6 +90,7 @@ namespace Hast.Samples.Consumer
             };
 
             var top = Application.Top;
+            top.ColorScheme = Colors.Base;
             top.Add(menu);
             top.Add(leftPane);
             top.Add(rightPane);
@@ -104,11 +99,11 @@ namespace Hast.Samples.Consumer
             rightPane.Add(_optionsTextField);
             rightPane.Add(_optionsListView);
 
-            _optionsTextField.KeyPress += CreateKeyboardEventHandler(
+            AddKeyboardEventHandler(
                 _optionsListView,
                 () => _currentOptionsTextFieldEventHandler?.Invoke(_optionsTextField.Text.ToString()));
 
-            _optionsListView.KeyPress += CreateKeyboardEventHandler(
+            AddKeyboardEventHandler(
                 _optionsListView,
                 () =>
                 {
@@ -124,9 +119,9 @@ namespace Hast.Samples.Consumer
             return result;
         }
 
-        private void PropertiesListView_SelectedChanged(ListViewItemEventArgs obj)
+        private void PropertiesListView_SelectedChanged(string value)
         {
-            switch (obj.Value?.ToString())
+            switch (value)
             {
                 case nameof(ConsumerConfiguration.AppName):
                     _optionsTextField.Text = _configuration.AppName ?? string.Empty;
@@ -176,7 +171,7 @@ namespace Hast.Samples.Consumer
                     ShowTextField(false);
                     break;
                 default:
-                    throw new InvalidOperationException($"Unknown menu item selected ({obj.Value}).");
+                    throw new InvalidOperationException($"Unknown menu item selected ({value}).");
             }
         }
 
@@ -193,14 +188,90 @@ namespace Hast.Samples.Consumer
             ShowTextField(false);
         }
 
-        private void SaveConfiguration(ConsumerConfiguration configuration)
+        private (Button Ok, Dialog Dialog) CreateDialog(string title, string label)
         {
-            throw new NotImplementedException();
+            var cancel = new Button("_Cancel");
+            var ok = new Button("_Ok");
+            var dialog = new Dialog(title, ok, cancel) { ColorScheme = Colors.Dialog };
+            dialog.Add(new Label(1, 1, label));
+
+            cancel.Clicked += () => { Application.RequestStop(dialog); };
+
+            return (ok, dialog);
         }
 
-        private ConsumerConfiguration LoadConfiguration()
+        private void AddAndStart(Dialog dialog, View view)
         {
-            throw new NotImplementedException();
+            dialog.Add(view);
+            view.SetFocus();
+
+            // For some reason the dialog title is missing but a quick refresh fixes it.
+            Task.WaitAll(
+                Task.Run(() => Application.Run(
+                        dialog,
+                        exception =>
+                        {
+                            _hastlayerTask
+                                .Result
+                                .GetLogger<Gui>()
+                                .LogError(exception, "an error in {0} dialog", dialog.Title);
+                            Application.RequestStop(dialog);
+                            return true;
+                        })),
+                    Task.Delay(500).ContinueWith(_ => Application.Refresh()));
+        }
+
+        private void SaveConfiguration()
+        {
+            var (ok, dialog) = CreateDialog("Save", "Please enter the name of the configuration!");
+
+            var input = new TextField().FillHorizontally();
+            ok.Clicked += () =>
+            {
+                var text = input.Text.ToString();
+                if (string.IsNullOrWhiteSpace(text))
+                {
+                    input.SetFocus();
+                    return;
+                }
+
+                _savedConfigurations[text] = _configuration;
+                Application.RequestStop(dialog);
+                ConsumerConfiguration.SaveConfigurations(_savedConfigurations);
+            };
+
+            AddAndStart(dialog, input);
+        }
+
+        private void LoadConfiguration()
+        {
+            var (ok, dialog) = CreateDialog("Load", "Please select the configuration to load!");
+
+            var names = _savedConfigurations.Keys.ToList();
+            var list = new ListView(names)
+            {
+                X = 1,
+                Y = 3,
+                Width = Dim.Fill(1),
+                Height = names.Count,
+            };
+            dialog.Height = names.Count + 10;
+
+            void OkClicked()
+            {
+                _configuration = _savedConfigurations[names[list.SelectedItem]];
+                Application.RequestStop(dialog);
+                PropertiesListView_SelectedChanged(_propertiesListView.Source.ToList()[0]?.ToString());
+            }
+
+            ok.Clicked += OkClicked;
+            list.KeyPress += args =>
+            {
+                if (args.KeyEvent.Key == Key.Enter) OkClicked();
+            };
+
+            AddAndStart(dialog, list);
+
         }
 
         private void ShowTextField(bool visible)
@@ -217,8 +288,9 @@ namespace Hast.Samples.Consumer
                 Application.RequestStop();
             };
 
-        private Action<View.KeyEventEventArgs> CreateKeyboardEventHandler(View view, Action onEnter) =>
-            args =>
+        private void AddKeyboardEventHandler(View view, Action onEnter)
+        {
+            void EventHandler(View.KeyEventEventArgs args)
             {
                 if (!view.HasFocus || args.KeyEvent.Key is not (Key.Esc or Key.Enter)) return;
 
@@ -226,6 +298,9 @@ namespace Hast.Samples.Consumer
 
                 _propertiesListView.SetFocus();
                 args.Handled = true;
-            };
+            }
+
+            view.KeyPress += EventHandler;
+        }
     }
 }
