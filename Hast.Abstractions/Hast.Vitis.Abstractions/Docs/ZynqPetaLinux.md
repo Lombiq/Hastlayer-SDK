@@ -70,8 +70,8 @@ cd ~/petalinux_2020_2_trenz
 Copy the [trenz_te0715_04_30_1c_base_202020_2.zip](Attachments/trenz_te0715_04_30_1c_base_202020_2.zip) to your working directory.
 
 > ℹ️ On Docker copy it to the shared data directory instead and then type `cp /data/trenz_te0715_04_30_1c_base_202020_2.zip ~/petalinux_2020_2_trenz`.
-> For users targetting a device other than Trenz TE0715-04-30-1C, [create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html).
-> 
+> For users targeting a device other than Trenz TE0715-04-30-1C, [create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html).
+
 Extract it, create an empty PetaLinux project based on Zynq template and configure the hardware:
 
 ```shell
@@ -87,7 +87,7 @@ There is no need to change anything, just press <kbd>ESC</kbd> and save the conf
 
 Configure the kernel:
 
-> ℹ️ If you are a text-mode user (e.g. using Docker or SSH) you will have issues with spawning GUI terminal emulators that the installer expects. You have to tell OpenEmbedded to use [GNU Screen](https://www.gnu.org/software/screen/) as your terminal of choise:
+> ℹ️ If you are a text-mode user (e.g. using Docker or SSH) you will have issues with spawning GUI terminal emulators that the installer expects. You have to tell OpenEmbedded to use [GNU Screen](https://www.gnu.org/software/screen/) as your terminal of choice:
 > ```shell
 > echo 'OE_TERMINAL = "screen"' >> project-spec/meta-user/conf/petalinuxbsp.conf
 > ```
