@@ -31,7 +31,7 @@ namespace Hast.Samples.Consumer.Models
         public string DeviceName { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL of the hastlayer API.
+        /// Gets or sets the URL of the Hastlayer API.
         /// </summary>
         [Argument]
         public string Endpoint { get; set; }
