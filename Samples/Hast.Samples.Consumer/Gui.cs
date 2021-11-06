@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Terminal.Gui;
 
@@ -92,7 +93,8 @@ namespace Hast.Samples.Consumer
             var confiurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
                     JsonConvert.SerializeObject(_configuration))
                 .Keys
-                .OrderBy(key => key)
+                .Select(key => Regex.Replace(key, @"[A-Z]", " $0").TrimStart())
+                .OrderBy(text => text)
                 .ToList();
             _propertiesListView.SetSource(confiurationKeys);
             _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
@@ -156,10 +158,11 @@ namespace Hast.Samples.Consumer
 
         private void PropertiesListView_SelectedChanged(string value)
         {
+            var key = value.Replace(" ", string.Empty);
             var hintDictionary = ConsumerConfiguration.HintDictionary.Value;
-            _hintLabel.Text = hintDictionary.TryGetValue(value, out var hint) ? hint : string.Empty;
+            _hintLabel.Text = hintDictionary.TryGetValue(key, out var hint) ? hint : string.Empty;
 
-            switch (value)
+            switch (key)
             {
                 case nameof(ConsumerConfiguration.AppName):
                     _optionsTextField.Text = _configuration.AppName ?? string.Empty;
@@ -209,7 +212,7 @@ namespace Hast.Samples.Consumer
                     ShowTextField(false);
                     break;
                 default:
-                    throw new InvalidOperationException($"Unknown menu item selected ({value}).");
+                    throw new InvalidOperationException($"Unknown menu item selected ({key}).");
             }
         }
 
