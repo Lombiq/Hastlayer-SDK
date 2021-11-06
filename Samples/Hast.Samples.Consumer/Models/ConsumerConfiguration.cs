@@ -117,7 +117,9 @@ namespace Hast.Samples.Consumer.Models
         /// <paramref name="args"/>.
         /// </summary>
         /// <param name="args">The command line arguments received from the shell.</param>
-        /// <param name="consumerConfigurations"></param>
+        /// <param name="consumerConfigurations">
+        /// The saved configs loaded from the <c>ConsumerConfiguration.json</c> file.
+        /// </param>
         public static ConsumerConfiguration FromCommandLine(
             IList<string> args,
             Dictionary<string, ConsumerConfiguration> consumerConfigurations)

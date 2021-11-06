@@ -8,12 +8,12 @@ using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.Arithmetics;
-using Microsoft.FSharp.Core;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using LiteralAttribute = Microsoft.FSharp.Core.LiteralAttribute;
 
 namespace Hast.Samples.Consumer
 {
@@ -35,6 +35,12 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
+            // Here we create the ConsumerConfiguration used to set up this application. Check out the
+            // ConsumerConfiguration class to see what can be changed to try out the various samples and available
+            // devices!
+            // If there were command line arguments, they are used to create one. Otherwise we open an interactive user
+            // interface where you can hand pick the options, load or save them. You can also use <c>-load name</c> and
+            // the <c>-save name</c> command line arguments directly.
             var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
             var consumerConfiguration = args.Any()
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
