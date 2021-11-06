@@ -50,8 +50,6 @@ namespace Hast.Samples.Consumer
 
             if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
-            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
-            IHastlayerConfiguration hastlayerConfiguration = new HastlayerConfiguration();
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
             hastlayer.ExecutedOnHardware += (_, e) =>
