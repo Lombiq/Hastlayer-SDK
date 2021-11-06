@@ -65,7 +65,7 @@ namespace Hast.Samples.Consumer.Models
         [Hint(
             "Do you want to skip the sample execution? This flag is useful if you are cross-compiling a sample with",
             "this program for a different machine.")]
-        public bool DontRun { get; set; }
+        public bool GenerateHardwareOnly { get; set; }
 
         [Argument("verify")]
         [Hint(

@@ -179,10 +179,10 @@ namespace Hast.Samples.Consumer
                 case nameof(ConsumerConfiguration.DeviceName):
                     ShowDeviceNames();
                     break;
-                case nameof(ConsumerConfiguration.DontRun):
+                case nameof(ConsumerConfiguration.GenerateHardwareOnly):
                     _optionsListView.Source = new ListWrapper(new object[] { true, false });
-                    _optionsListView.SelectedItem = _configuration.DontRun ? 0 : 1;
-                    _currentOptionsListViewEventHandler = item => { _configuration.DontRun = item.IsTrueString(); };
+                    _optionsListView.SelectedItem = _configuration.GenerateHardwareOnly ? 0 : 1;
+                    _currentOptionsListViewEventHandler = item => { _configuration.GenerateHardwareOnly = item.IsTrueString(); };
                     ShowTextField(false);
                     break;
                 case nameof(ConsumerConfiguration.Endpoint):

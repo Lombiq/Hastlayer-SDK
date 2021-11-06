@@ -148,7 +148,7 @@ namespace Hast.Samples.Consumer
                                   "cause the hardware implementation to produce incorrect results.\n");
             }
 
-            if (consumerConfiguration.DontRun) Environment.Exit(0);
+            if (consumerConfiguration.GenerateHardwareOnly) Environment.Exit(0);
 
             Console.WriteLine("Starting hardware execution.");
 
