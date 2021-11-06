@@ -24,7 +24,6 @@ namespace Hast.Samples.Consumer
 
         private ConsumerConfiguration _configuration;
 
-        private Task<Hastlayer> _hastlayerTask;
         private Task<List<string>> _deviceNamesTask;
 
         public Gui(Dictionary<string, ConsumerConfiguration> savedConfigurations) =>
@@ -34,8 +33,17 @@ namespace Hast.Samples.Consumer
         {
             _configuration = new ConsumerConfiguration();
 
-            _hastlayerTask = Task.Run(() => (Hastlayer)Hastlayer.Create(new HastlayerConfiguration()));
-            _deviceNamesTask = _hastlayerTask.ContinueWith(hastlayer =>
+            // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and
+            // the device list are generated on a separate thread in the background. This is safe because there are no
+            // other async operations at the time so there is no danger of a deadlock. This class needs to create its
+            // own Hastlayer instance because it is used prior to the main one's creation, to configure it.
+
+            // This task is used to request a logger inside the Application.Run call, so the exception is logged with
+            // NLog normally. It's also used by the next task.
+            var hastlayerTask = Task.Run(() => (Hastlayer)Hastlayer.Create(new HastlayerConfiguration()));
+            // This task starts prefetching the device list in the background. Without it the application would hang for
+            // a second or so, when you select the DeviceName option.
+            _deviceNamesTask = hastlayerTask.ContinueWith(hastlayer =>
                 hastlayer
                     .Result
                     .GetSupportedDevices()?
@@ -119,7 +127,7 @@ namespace Hast.Samples.Consumer
                 top,
                 exception =>
                 {
-                    _hastlayerTask
+                    hastlayerTask
                         .Result
                         .GetLogger<Gui>()
                         .LogError(exception, "an error during GUI operation");
