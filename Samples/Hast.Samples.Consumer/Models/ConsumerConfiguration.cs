@@ -97,6 +97,22 @@ namespace Hast.Samples.Consumer.Models
         private string SaveName { get; set; }
 
         /// <summary>
+        /// Gets a lazy string dictionary that maps the property names that have <see cref="HintAttribute"/> in this
+        /// class to their hint texts.
+        /// </summary>
+        /// <returns></returns>
+        public static Lazy<Dictionary<string, string>> HintDictionary { get; } = new(() =>
+            GetPropertyAttributes<HintAttribute>()
+                .ToDictionary(pair => pair.Property.Name, pair => pair.Attribute.Text));
+
+        private static IEnumerable<(PropertyInfo Property, T Attribute)> GetPropertyAttributes<T>()
+            where T : Attribute =>
+            typeof(ConsumerConfiguration)
+                .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                .Select(property => (Property: property, Attribute: property.GetCustomAttributes<T>().FirstOrDefault()))
+                .Where(pair => pair.Attribute != null);
+
+        /// <summary>
         /// Returns new instance of <see cref="ConsumerConfiguration"/> with values set according to the arguments in
         /// <paramref name="args"/>.
         /// </summary>
@@ -117,12 +133,8 @@ namespace Hast.Samples.Consumer.Models
 
             var configuration = new ConsumerConfiguration();
 
-            var properties = typeof(ConsumerConfiguration)
-                .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                .Where(property => property.GetCustomAttributes<ArgumentAttribute>().Any())
-                .ToDictionary(
-                    property => property,
-                    property => property.GetCustomAttributes<ArgumentAttribute>().Single().Aliases);
+            var properties = GetPropertyAttributes<ArgumentAttribute>()
+                .ToDictionary(pair => pair.Property, pair => pair.Attribute.Aliases);
 
             foreach (var (property, aliases) in properties)
             {

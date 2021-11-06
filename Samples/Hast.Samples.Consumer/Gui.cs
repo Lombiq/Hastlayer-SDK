@@ -15,12 +15,18 @@ namespace Hast.Samples.Consumer
         private readonly Dictionary<string, ConsumerConfiguration> _savedConfigurations;
         private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
 
+        private readonly Label _hintLabel = new Label(string.Empty) { CanFocus = false }.Fill();
+
         private readonly TextField _optionsTextField =
             new TextField { CanFocus = true, Visible = false }.FillHorizontally();
         private Action<string> _currentOptionsTextFieldEventHandler;
 
         private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
         private Action<object> _currentOptionsListViewEventHandler;
+
+        private FrameView _leftPane;
+        private FrameView _topRightPane;
+        private FrameView _bottomRightPane;
 
         private ConsumerConfiguration _configuration;
 
@@ -79,16 +85,12 @@ namespace Hast.Samples.Consumer
                     () => Application.RequestStop()),
             });
 
-            var leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
-            var rightPane = new FrameView("Options") { ColorScheme = Colors.Base };
+            _leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
+            _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
+            _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
             var confiurationDictionary =
                 JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(_configuration));
-            var sidebarWidth = Math.Max(
-                confiurationDictionary.Select(pair => pair.Key.Length).Max() + 2,
-                leftPane.Title.Length + 5
-            );
-
             _propertiesListView.SetSource(confiurationDictionary.Keys.OrderBy(key => key).ToList());
             _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
             _propertiesListView.OpenSelectedItem += _ =>
@@ -99,12 +101,16 @@ namespace Hast.Samples.Consumer
 
             var top = Application.Top;
             top.Add(menu);
-            top.Add(leftPane);
-            top.Add(rightPane);
-            top.TileHorizontally(leftPane, rightPane, sidebarWidth, (1, 0, 0, 0));
-            leftPane.Add(_propertiesListView);
-            rightPane.Add(_optionsTextField);
-            rightPane.Add(_optionsListView);
+            top.Add(_leftPane);
+            top.Add(_bottomRightPane);
+            top.Add(_topRightPane);
+
+            Retile(top);
+
+            _leftPane.Add(_propertiesListView);
+            _topRightPane.Add(_hintLabel);
+            _bottomRightPane.Add(_optionsTextField);
+            _bottomRightPane.Add(_optionsListView);
 
             top.KeyPress += args =>
             {
@@ -146,6 +152,9 @@ namespace Hast.Samples.Consumer
 
         private void PropertiesListView_SelectedChanged(string value)
         {
+            var hintDictionary = ConsumerConfiguration.HintDictionary.Value;
+            _hintLabel.Text = hintDictionary.TryGetValue(value, out var hint) ? hint : string.Empty;
+
             switch (value)
             {
                 case nameof(ConsumerConfiguration.AppName):
@@ -359,6 +368,28 @@ namespace Hast.Samples.Consumer
             }
 
             view.KeyPress += EventHandler;
+        }
+
+        private void Retile(Toplevel top)
+        {
+            var longestOption = 0;
+            foreach (var item in _propertiesListView.Source.ToList())
+            {
+                if (item?.ToString()?.Length is { } length && length > longestOption) longestOption = length;
+            }
+
+            var sidebarWidth = Math.Max(
+                longestOption + 2,
+                _leftPane.Title.Length + 5
+            );
+
+            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 0, 0));
+            _topRightPane.Height = Dim.Percent(50) - 1;
+            _bottomRightPane.X = _topRightPane.X;
+            _bottomRightPane.Y = Pos.Bottom(_topRightPane);
+            _bottomRightPane.Width = _topRightPane.Width;
+            _bottomRightPane.Height = Dim.Fill();
+            _topRightPane.Height -= 1;
         }
     }
 }
