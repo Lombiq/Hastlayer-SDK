@@ -4,16 +4,17 @@ using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
-using Hast.Communication.Services;
 using Hast.Layer.EmptyRepresentationFactories;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Xilinx.Abstractions.ManifestProviders;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Newtonsoft.Json.Linq;
 
 namespace Hast.Layer
 {
     public sealed class Hastlayer : IHastlayer
     {
+        public const string AppsettingsJsonFileName = "appsettings.json";
+
         private readonly IHastlayerConfiguration _configuration;
         private readonly ServiceProvider _serviceProvider;
         private readonly HashSet<string> _serviceNames;
@@ -51,7 +52,7 @@ namespace Hast.Layer
                 typeof(IHardwareImplementationComposer).Assembly,
                 typeof(ITransformer).Assembly,
                 typeof(NexysA7ManifestProvider).Assembly,
-                typeof(CatapultManifestProvider).Assembly
+                typeof(CatapultManifestProvider).Assembly,
             });
             assemblies.AddRange(GetHastLibraries());
 
@@ -64,18 +65,7 @@ namespace Hast.Layer
             services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
             services.AddIDependencyContainer(assemblies);
 
-            services.AddSingleton(LoggerFactory.Create(builder =>
-            {
-                if (configuration.ConfigureLogging is null)
-                {
-                    builder.AddNLog("NLog.config");
-                }
-                else
-                {
-                    configuration.ConfigureLogging(builder);
-                }
-            }));
-            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
+            ConfigureLogging(services, configuration.ConfigureLogging);
 
             configuration.OnServiceRegistration?.Invoke(configuration, services);
 
@@ -112,6 +102,22 @@ namespace Hast.Layer
             }
         }
 
+        public static void ConfigureLogging(IServiceCollection services, Action<ILoggingBuilder> configureLogging = null)
+        {
+            services.AddSingleton(LoggerFactory.Create(builder =>
+            {
+                if (configureLogging is null)
+                {
+                    builder.AddNLog("NLog.config");
+                }
+                else
+                {
+                    configureLogging(builder);
+                }
+            }));
+
+            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
+        }
 
         public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
 
@@ -136,8 +142,9 @@ namespace Hast.Layer
 
         public static IConfiguration BuildConfiguration() =>
             new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile(AppsettingsJsonFileName, optional: true, reloadOnChange: false)
                 .AddEnvironmentVariables()
+                .AddUserSecrets(Assembly.GetEntryAssembly(), optional: true)
                 .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
@@ -170,13 +177,15 @@ namespace Hast.Layer
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
                 using (var scope = _serviceProvider.CreateScope())
                 {
-                    scope.ServiceProvider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
+                    var provider = scope.ServiceProvider;
+                    provider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
                         .Value = configuration;
 
-                    var transformer = scope.ServiceProvider.GetRequiredService<ITransformer>();
-                    var deviceManifestSelector = scope.ServiceProvider.GetRequiredService<IDeviceManifestSelector>();
-                    var loggerService = scope.ServiceProvider.GetRequiredService<ILogger<Hastlayer>>();
-                    var appConfiguration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+                    var transformer = provider.GetRequiredService<ITransformer>();
+                    var deviceManifestSelector = provider.GetRequiredService<IDeviceManifestSelector>();
+                    var loggerService = provider.GetRequiredService<ILogger<Hastlayer>>();
+                    var appConfiguration = provider.GetRequiredService<IConfiguration>();
+                    var transformationEvents = provider.GetRequiredService<IEnumerable<ITransformationEvents>>().ToList();
 
                     var deviceManifest = deviceManifestSelector
                         .GetSupportedDevices()
@@ -218,9 +227,19 @@ namespace Hast.Layer
                             [item.Key];
                     }
 
+                    foreach (var transformationEvent in transformationEvents)
+                    {
+                        await transformationEvent.BeforeTransformAsync();
+                    }
+
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
                         await transformer.Transform(assembliesPaths, configuration) :
                         EmptyHardwareDescriptionFactory.Create(configuration);
+
+                    foreach (var transformationEvent in transformationEvents)
+                    {
+                        await transformationEvent.AfterTransformAsync(hardwareDescription);
+                    }
 
                     foreach (var warning in hardwareDescription.Warnings)
                     {
@@ -231,7 +250,7 @@ namespace Hast.Layer
                     }
 
                     var hardwareImplementationComposerSelector =
-                        scope.ServiceProvider.GetRequiredService<IHardwareImplementationComposerSelector>();
+                        provider.GetRequiredService<IHardwareImplementationComposerSelector>();
 
                     IHardwareImplementation hardwareImplementation;
                     if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
@@ -240,7 +259,7 @@ namespace Hast.Layer
                         {
                             Configuration = configuration,
                             HardwareDescription = hardwareDescription,
-                            DeviceManifest = deviceManifest
+                            DeviceManifest = deviceManifest,
                         };
 
                         var hardwareImplementationComposer = hardwareImplementationComposerSelector
@@ -258,7 +277,7 @@ namespace Hast.Layer
                         HardwareDescription = hardwareDescription,
                         HardwareImplementation = hardwareImplementation,
                         DeviceManifest = deviceManifest,
-                        HardwareGenerationConfiguration = configuration
+                        HardwareGenerationConfiguration = configuration,
                     };
                 }
             }
@@ -300,16 +319,31 @@ namespace Hast.Layer
             }
         }
 
-        public DisposableContainer<ICommunicationService> GetCommunicationService(string communicationChannelName)
+        public DisposableContainer<TServiceInterface> GetService<TServiceInterface>()
         {
             IServiceScope scope = null;
             try
             {
                 scope = _serviceProvider.CreateScope();
-                var communicationService = scope.ServiceProvider
-                    .GetService<ICommunicationServiceSelector>()
-                    .GetCommunicationService(communicationChannelName);
-                return new DisposableContainer<ICommunicationService>(scope, communicationService);
+                var service = scope.ServiceProvider.GetService<TServiceInterface>();
+                return new DisposableContainer<TServiceInterface>(scope, service);
+            }
+            catch
+            {
+                scope?.Dispose();
+                throw;
+            }
+        }
+
+        public DisposableContainer<TServiceInterface1, TServiceInterface2> GetServices<TServiceInterface1, TServiceInterface2>()
+        {
+            IServiceScope scope = null;
+            try
+            {
+                scope = _serviceProvider.CreateScope();
+                var service1 = scope.ServiceProvider.GetService<TServiceInterface1>();
+                var service2 = scope.ServiceProvider.GetService<TServiceInterface2>();
+                return new DisposableContainer<TServiceInterface1, TServiceInterface2>(scope, service1, service2);
             }
             catch
             {

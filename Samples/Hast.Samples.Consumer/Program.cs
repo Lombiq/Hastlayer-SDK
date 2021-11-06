@@ -71,8 +71,18 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
-            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
-            IHastlayerConfiguration hastlayerConfiguration = new HastlayerConfiguration();
+            // A little helper for later.
+            var argsList = (IList<string>)args;
+            string GetArgument(string name)
+            {
+                name = "-" + name;
+                int index = argsList.IndexOf(name) + 1;
+                if (index <= 0) return null;
+                if (index == args.Length) index--; // if it's the last element just return the switch.
+                return args[index];
+            }
+
+            if (!string.IsNullOrWhiteSpace(GetArgument("appsecret"))) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
             // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
@@ -97,18 +107,6 @@ namespace Hast.Samples.Consumer
                 Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
             };
 
-
-            // A little helper for later.
-            var argsList = (IList<string>)args;
-            string GetArgument(string name)
-            {
-                name = "-" + name;
-                int index = argsList.IndexOf(name) + 1;
-                if (index <= 0) return null;
-                if (index == args.Length) index--; // if it's the last element just return the switch.
-                return args[index];
-            }
-
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
             var devices = hastlayer.GetSupportedDevices()?.ToList();
             if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
@@ -126,15 +124,7 @@ namespace Hast.Samples.Consumer
             configuration.SingleBinaryPath = GetArgument("bin") ?? GetArgument("binary");
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
-            var remoteClientConfiguration = configuration.RemoteClientConfiguration();
-            remoteClientConfiguration.AppName = GetArgument("appname") ?? Configuration.AppName;
-            remoteClientConfiguration.AppSecret = GetArgument("appsecret") ?? Configuration.AppSecret;
-            if (hastlayerConfiguration.Flavor == HastlayerFlavor.Client &&
-                remoteClientConfiguration.AppSecret == "appsecret")
-            {
-                throw new InvalidOperationException(
-                    "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
-            }
+            ConfigureClientFlavor(configuration, hastlayerConfiguration, GetArgument);
 
             // If the sample was selected in the command line use that, or otherwise the default.
             Configuration.SampleToRun = (Sample)Enum.Parse(
@@ -192,6 +182,8 @@ namespace Hast.Samples.Consumer
                     // ImmutableArray.
                     typeof(Posit).Assembly,
                     typeof(ImmutableArray).Assembly,
+                    // Only necessary for the F# sample.
+                    typeof(Microsoft.FSharp.Core.LiteralAttribute).Assembly
                 },
                 configuration);
 
@@ -239,6 +231,30 @@ namespace Hast.Samples.Consumer
                 {
                     Console.WriteLine("* " + mismatch);
                 }
+            }
+        }
+
+        private static void ConfigureClientFlavor(
+            HardwareGenerationConfiguration configuration,
+            HastlayerConfiguration hastlayerConfiguration,
+            Func<string, string> getArgument)
+        {
+            if (hastlayerConfiguration.Flavor != HastlayerFlavor.Client) return;
+            var remoteClientConfiguration = configuration.RemoteClientConfiguration();
+
+            if (getArgument("endpoint") is { } endpointUrl &&
+                Uri.TryCreate(endpointUrl, UriKind.Absolute, out var endpointUri))
+            {
+                remoteClientConfiguration.EndpointBaseUri = endpointUri;
+            }
+
+            remoteClientConfiguration.AppName = getArgument("appname") ?? Configuration.AppName;
+            remoteClientConfiguration.AppSecret = getArgument("appsecret") ?? Configuration.AppSecret;
+
+            if (remoteClientConfiguration.AppSecret == "appsecret")
+            {
+                throw new InvalidOperationException(
+                    "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
             }
         }
 
