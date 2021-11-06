@@ -147,7 +147,7 @@ namespace Hast.Samples.Consumer
                     Console.WriteLine(
                         "An error occurred while in GUI mode. Please check the logs in the App_Data/logs directory.");
                     Application.RequestStop();
-                    return true;
+                    return false;
                 });
 
             Application.Shutdown();
@@ -210,6 +210,11 @@ namespace Hast.Samples.Consumer
                     _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
                     _currentOptionsListViewEventHandler = item => { _configuration.VerifyResults = item.IsTrueString(); };
                     ShowTextField(false);
+                    break;
+                case nameof(ConsumerConfiguration.SingleBinaryPath):
+                    _optionsTextField.Text = _configuration.SingleBinaryPath ?? string.Empty;
+                    _currentOptionsTextFieldEventHandler = text => { _configuration.SingleBinaryPath = text; };
+                    ShowTextField(true);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown menu item selected ({key}).");

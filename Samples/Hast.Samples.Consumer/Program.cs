@@ -36,6 +36,9 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
+            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
+            var hastlayerConfiguration = new HastlayerConfiguration();
+
             // Here we create the ConsumerConfiguration used to set up this application. Check out the
             // ConsumerConfiguration class to see what can be changed to try out the various samples and available
             // devices!
@@ -47,8 +50,12 @@ namespace Hast.Samples.Consumer
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
                 : new Gui(savedConfigurations).BuildConfiguration();
             if (consumerConfiguration == null) return;
-
             if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
+
+            // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
+            // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
+            // make sure to Dispose() it before the program terminates.
+            using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
 
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
@@ -80,11 +87,10 @@ namespace Hast.Samples.Consumer
 
             var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, consumerConfiguration.HardwareFrameworkPath);
             var proxyConfiguration = new ProxyGenerationConfiguration
-            configuration.SingleBinaryPath = GetArgument("bin") ?? GetArgument("binary");
-
             {
                 VerifyHardwareResults = consumerConfiguration.VerifyResults,
             };
+            configuration.SingleBinaryPath = consumerConfiguration.SingleBinaryPath;
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
             ConfigureClientFlavor(configuration, hastlayerConfiguration, consumerConfiguration);

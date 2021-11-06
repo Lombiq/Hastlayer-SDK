@@ -64,7 +64,9 @@ namespace Hast.Samples.Consumer.Models
         [Argument("build")]
         [Hint(
             "Do you want to skip the sample execution? This flag is useful if you are cross-compiling a sample with",
-            "this program for a different machine.")]
+            "this program for a different machine where you can use the",
+            nameof(SingleBinaryPath),
+            "option or the corresponding \"-bin\" command line switch.")]
         public bool GenerateHardwareOnly { get; set; }
 
         [Argument("verify")]
@@ -82,6 +84,12 @@ namespace Hast.Samples.Consumer.Models
             "where the Hast.Samples.Consumer.dll is located. Otherwise you will see unexpected issues with this and",
             "other relative paths.")]
         public string HardwareFrameworkPath { get; set; } = "HardwareFramework";
+
+        [Argument("bin", "binary")]
+        [Hint(
+            "Do you already have a cross-compiled binary? Enter the path here and the driver will use it instead of",
+            "going through the normal hardware generation build process. ")]
+        public string SingleBinaryPath { get; set; }
 
         /// <summary>
         /// Gets or sets the name of this configuration, if you want to save it for later reuse with the <c>-load</c>
