@@ -22,81 +22,77 @@ namespace Hast.Samples.Consumer.Models
     {
         private const string StorageFileName = nameof(ConsumerConfiguration) + ".json";
 
-        /// <summary>
-        /// Gets or sets the name of the device to use. If you leave this empty the first one will be used. If you're
-        /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for
-        /// high-performance local or cloud FPGAs see the docs.
-        /// </summary>
         [Argument("device")]
+        [Hint(
+            "Which supported hardware device to use? If you leave this empty the first one will be used. If you're",
+            "testing Hastlayer locally then you'll need to use the \"Nexys A7\" or \"Nexys4 DDR\" devices; for",
+            "high-performance local or cloud FPGAs see the docs.")]
         public string DeviceName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the URL of the Hastlayer API.
-        /// </summary>
         [Argument]
+        [Hint(
+            "The base URL for the Hastlayer API. Unless you are testing the Hast.Remote services locally, you should",
+              "leave it empty.")]
         public string Endpoint { get; set; }
 
-        /// <summary>
-        /// Gets or sets the application's name you've specified on the Hastlayer Application Management Dashboard. This
-        /// is necessary to authenticate if you're running Hastlayer in the Client flavor.
-        /// </summary>
         [Argument]
+        [Hint(
+            "The application's name you've specified on the Hastlayer Application Management Dashboard. This is",
+            "necessary to authenticate if you're running Hastlayer in the Client flavor.")]
         public string AppName { get; set; }
 
-        /// <summary>
-        /// Gets or sets the application's password you've received when creating the app in the Hastlayer Application
-        /// Management Dashboard. This is necessary to authenticate if you're running Hastlayer in the Client flavor. If
-        /// this value is specified (not null or empty) then the program switches into Client Flavor on its own.
-        /// </summary>
         [Argument]
+        [Hint(
+            "The application's password you've received when creating the app in the Hastlayer Application Management",
+            "Dashboard. This is necessary to authenticate if you're running Hastlayer in the Client flavor. If this",
+            "value is specified (not null or empty) then the program switches into Client Flavor on its own.")]
         public string AppSecret { get; set; }
 
-        /// <summary>
-        /// Gets or sets which sample algorithm to transform and run, by name. You can choose one from the list in the
-        /// Sample.cs file. Currently the GenomeMatcher sample is not up-to-date enough and shouldn't really be taken as
-        /// a good example (check out the other ones).
-        /// </summary>
         [Argument("sample")]
+        [Hint(
+            "Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not",
+            "up-to-date enough and shouldn't be really taken as good examples (check out the other ones).")]
         public Sample SampleToRun { get; set; }
 
         /// <summary>
-        /// Gets or sets the value of <see cref="HardwareGenerationConfiguration.Label"/> that helps you identify
-        /// individual builds when you run this program in a batch with different configurations.
+        /// Gets or sets the value of <see cref="HardwareGenerationConfiguration.Label"/>.
         /// </summary>
         [Argument("name", "label")]
+        [Hint("This label helps you identify individual builds when you run this program in a batch with different configurations")]
         public string BuildLabel { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the sample execution should be skipped after the build is completed.
-        /// This flag is useful if you are cross-compiling a sample with this program for a different machine.
-        /// </summary>
         [Argument("build")]
+        [Hint(
+            "Do you want to skip the sample execution? This flag is useful if you are cross-compiling a sample with",
+            "this program for a different machine.")]
         public bool DontRun { get; set; }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether the results of the hardware execution should be verified against a
-        /// software run as well. If there are any discrepancies the program will throw an exception with details.
-        /// </summary>
         [Argument("verify")]
+        [Hint(
+            "Do you want to check the FPGA results against a CPU run? If there are any discrepancies the program will",
+            "throw an exception with details.")]
         public bool VerifyResults { get; set; }
 
-        /// <summary>
-        /// Gets or sets the path where the hardware framework is located. The file describing the hardware to be
-        /// generated will be saved there as well as anything else necessary. If the path is relative (like the
-        /// default) then the file will be saved along this project's executable in the bin output directory.
-        /// </summary>
-        /// <remarks><para>
-        /// You should always run this program from its own directory. In other words the working directory should be
-        /// where the Hast.Samples.Consumer.dll is located. Otherwise you will see unexpected issues with this and other
-        /// relative paths.
-        /// </para></remarks>
         [Argument]
+        [Hint(
+            "Specify a path here where the hardware framework is located. The file describing the hardware to be",
+            "generated will be saved there as well as anything else necessary. If the path is relative (like the",
+            "default) then the file will be saved along this project's executable in the bin output directory.\nYou",
+            "should always run this program from its own directory. In other words the working directory should be",
+            "where the Hast.Samples.Consumer.dll is located. Otherwise you will see unexpected issues with this and",
+            "other relative paths.")]
         public string HardwareFrameworkPath { get; set; } = "HardwareFramework";
 
         /// <summary>
         /// Gets or sets the name of this configuration, if you want to save it for later reuse with the <c>-load</c>
         /// argument.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This is <see langword="private"/> because it's only used by <see cref="FromCommandLine"/> to immediately
+        /// save the parsed object and doesn't need to be made available outside.
+        /// </para>
+        /// </remarks>
         [Argument("save")]
         private string SaveName { get; set; }
 

@@ -184,8 +184,8 @@ namespace Hast.Samples.Consumer
             if (hastlayerConfiguration.Flavor != HastlayerFlavor.Client) return;
             var remoteClientConfiguration = configuration.RemoteClientConfiguration();
 
-            if (consumerConfiguration.Endpoint is { } endpointUrl &&
-                Uri.TryCreate(endpointUrl, UriKind.Absolute, out var endpointUri))
+            if (!string.IsNullOrWhiteSpace(consumerConfiguration.Endpoint) &&
+                Uri.TryCreate(consumerConfiguration.Endpoint, UriKind.Absolute, out var endpointUri))
             {
                 remoteClientConfiguration.EndpointBaseUri = endpointUri;
             }
