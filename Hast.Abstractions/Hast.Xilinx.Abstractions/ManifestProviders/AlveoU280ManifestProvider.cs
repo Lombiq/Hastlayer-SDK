@@ -11,7 +11,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
         public const string DeviceName = "Alveo U280";
 
         public IDeviceManifest DeviceManifest { get; } =
-            new XilinxDeviceManifest
+            new VitisDeviceManifest
             {
                 Name = DeviceName,
                 ClockFrequencyHz = 300 * Mhz,
@@ -20,7 +20,6 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 // add paging to SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
                 AvailableMemoryBytes = 2 * GigaByte,
                 SupportedPlatforms = new[] { "xilinx_u280" },
-                ToolChainName = CommonToolChainNames.Vitis,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

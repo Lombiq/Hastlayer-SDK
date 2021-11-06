@@ -1,5 +1,6 @@
 using Castle.Core.Internal;
 using Hast.Algorithms;
+using Hast.Common.Enums;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
 using Hast.Samples.Consumer.Models;
@@ -47,17 +48,10 @@ namespace Hast.Samples.Consumer
                 : new Gui(savedConfigurations).BuildConfiguration();
             if (consumerConfiguration == null) return;
 
-            // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
-            // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
-            // transformation. In most cases the flavor defaults to the one you need.
-            // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
-            var hastlayerConfiguration = new HastlayerConfiguration();
             if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
-            // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
-            // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
-            // make sure to Dispose() it before the program terminates.
-            using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
+            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
+            IHastlayerConfiguration hastlayerConfiguration = new HastlayerConfiguration();
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
             hastlayer.ExecutedOnHardware += (_, e) =>
@@ -88,6 +82,8 @@ namespace Hast.Samples.Consumer
 
             var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, consumerConfiguration.HardwareFrameworkPath);
             var proxyConfiguration = new ProxyGenerationConfiguration
+            configuration.SingleBinaryPath = GetArgument("bin") ?? GetArgument("binary");
+
             {
                 VerifyHardwareResults = consumerConfiguration.VerifyResults,
             };
@@ -158,10 +154,16 @@ namespace Hast.Samples.Consumer
 
             Console.WriteLine("Starting hardware execution.");
 
-            // Running samples.
+            // Running the selected sample. It is executed 3 times to ensure all JIT compilation overhead has been
+            // eliminated by successive reruns. The last attempt is a better representation of performance in
+            // long-running applications.
             try
             {
-                await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
+                for (var i = 0; i < 3; i++)
+                {
+                    Console.WriteLine("\n\n\n\n\n\nAttempt #{0:0}:", i + 1);
+                    await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
+                }
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {
@@ -173,7 +175,10 @@ namespace Hast.Samples.Consumer
                     .Mismatches?
                     .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
                 var mismatchCount = mismatches.Count;
-                Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : "es")}:");
+                Console.WriteLine(
+                    $"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between " +
+                    $"the software and hardware execution's results! The memory length is {exception.CellCount}. " +
+                    $"Mismatch{(mismatchCount == 1 ? string.Empty : "es")}:");
 
                 foreach (var mismatch in mismatches)
                 {

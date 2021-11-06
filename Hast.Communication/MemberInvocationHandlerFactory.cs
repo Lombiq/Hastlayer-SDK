@@ -10,6 +10,7 @@ using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,14 +23,18 @@ namespace Hast.Communication
     public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly ILogger<MemberInvocationHandlerFactory> _logger;
 
         public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
         public event EventHandler<IMemberInvocationContext> MemberInvoking;
 
 
-        public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)
+        public MemberInvocationHandlerFactory(
+            IServiceProvider serviceProvider,
+            ILogger<MemberInvocationHandlerFactory> logger)
         {
             _serviceProvider = serviceProvider;
+            _logger = logger;
         }
 
         public MemberInvocationHandler CreateMemberInvocationHandler(
@@ -60,7 +65,7 @@ namespace Hast.Communication
                         {
                             Invocation = invocation,
                             MemberFullName = memberFullName,
-                            HardwareRepresentation = hardwareRepresentation
+                            HardwareRepresentation = hardwareRepresentation,
                         };
 
                         MemberInvoking?.Invoke(this, invocationContext);
@@ -87,7 +92,7 @@ namespace Hast.Communication
                             softwareExecutionStopwatch.Stop();
                             invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
                             {
-                                SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
+                                SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds,
                             };
 
                             if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
@@ -148,7 +153,7 @@ namespace Hast.Communication
                                 softwareExecutionStopwatch.Stop();
                                 invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
                                 {
-                                    SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds
+                                    SoftwareExecutionTimeMilliseconds = softwareExecutionStopwatch.ElapsedMilliseconds,
                                 };
 
                                 if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
@@ -173,6 +178,7 @@ namespace Hast.Communication
                                     $"No communication service was found for the channel \"{communicationChannelName}\".");
                             }
 
+                            _logger.LogInformation("Starting communication service execution...");
                             invocationContext.HardwareExecutionInformation = await communicationService
                                 .Execute(
                                     memory,
@@ -200,19 +206,22 @@ namespace Hast.Communication
                                 }
                                 else
                                 {
-                                    for (int i = 0; i < memory.CellCount; i++)
+                                    var hardBytes = new SimpleMemoryAccessor(memory).Get();
+                                    var softBytes = new SimpleMemoryAccessor(softMemory).Get();
+
+                                    for (var index = 0; index < hardBytes.Length; index += 4)
                                     {
-                                        if (!memory.Read4Bytes(i).SequenceEqual(softMemory.Read4Bytes(i)))
-                                        {
-                                            mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
-                                                i, memory.Read4Bytes(i), softMemory.Read4Bytes(i)));
-                                        }
+                                        if (CellEquals(hardBytes, softBytes, index)) continue;
+                                        mismatches.Add(new HardwareExecutionResultMismatchException.Mismatch(
+                                            index,
+                                            hardBytes[index..SimpleMemory.MemoryCellSizeBytes].ToArray(),
+                                            softBytes[index..SimpleMemory.MemoryCellSizeBytes].ToArray()));
                                     }
                                 }
 
                                 if (mismatches.Any())
                                 {
-                                    throw new HardwareExecutionResultMismatchException(mismatches);
+                                    throw new HardwareExecutionResultMismatchException(mismatches, memory.CellCount);
                                 }
                             }
                         }
@@ -237,6 +246,19 @@ namespace Hast.Communication
                 }
             };
 
+        private bool CellEquals(Memory<byte> thisMemory, Memory<byte> thatMemory, int index)
+        {
+            var thisCell = thisMemory.Slice(index, SimpleMemory.MemoryCellSizeBytes).Span;
+            var thatCell = thatMemory.Slice(index, SimpleMemory.MemoryCellSizeBytes).Span;
+
+            for (int offset = 0; offset < SimpleMemory.MemoryCellSizeBytes; offset++)
+            {
+                if (thisCell[offset] != thatCell[offset]) return false;
+            }
+
+            return true;
+        }
+
         // Code taken from http://stackoverflow.com/a/28374134/220230
         private static MethodAsynchronicity GetMethodAsynchronicity(IInvocation invocation)
         {
@@ -255,7 +277,7 @@ namespace Hast.Communication
         {
             Synchronous,
             AsyncAction,
-            AsyncFunction
+            AsyncFunction,
         }
 
         private class MemberInvocationContext : IMemberInvocationPipelineStepContext, IMemberHardwareExecutionContext

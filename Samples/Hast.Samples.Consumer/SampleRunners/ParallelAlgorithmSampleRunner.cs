@@ -1,5 +1,8 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
@@ -21,16 +24,34 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm(), configuration);
+            long RunLogAndTime(ParallelAlgorithm parallelAlgorithm, int input)
+            {
+                var stopwatch = Stopwatch.StartNew();
 
-            var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            var output2 = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            var output3 = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+                var output = parallelAlgorithm.Run(input, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+                Console.WriteLine(
+                    "{0}.{1}({2}) == {3}",
+                    nameof(ParallelAlgorithm),
+                    nameof(ParallelAlgorithm.Run),
+                    input,
+                    output);
 
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ParallelAlgorithm().Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            sw.Stop();
-            System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + "ms.");
+                stopwatch.Stop();
+                return stopwatch.ElapsedMilliseconds;
+            }
+
+            var numbers = new [] { 234234, 123, 9999 };
+
+            // Execute with FPGA.
+            var parallel = await hastlayer.GenerateProxy(
+                hardwareRepresentation,
+                new ParallelAlgorithm(),
+                configuration);
+            foreach (var number in numbers) RunLogAndTime(parallel, number);
+
+            // Execute with CPU.
+            parallel = new ParallelAlgorithm(); // Replace proxy with CPU implementation.
+            foreach (var number in numbers) Console.WriteLine("On CPU it took {0}ms.", RunLogAndTime(parallel, number));
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
-            nameof(VitisHardwareImplementationComposerBuildProvider)
+            nameof(VitisHardwareImplementationComposerBuildProvider),
         };
 
         public AzureHardwareImplementationComposerBuildProvider(
@@ -44,8 +44,7 @@ namespace Hast.Vitis.Abstractions.Services
         }
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
-            xilinxDeviceManifest.Name.StartsWith("Azure", StringComparison.InvariantCulture);
+            context.DeviceManifest is AzureNpDeviceManifest;
 
         public async Task BuildAsync(
             IHardwareImplementationCompositionContext context,
@@ -90,7 +89,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        public void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        public void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
         {
             var shortcuts = providers
                 .Single(provider => provider.Name == nameof(VitisHardwareImplementationComposerBuildProvider))
@@ -175,5 +174,7 @@ namespace Hast.Vitis.Abstractions.Services
 
                     return new Uri(configuration.StartFunctionUrl, "/").AbsoluteUri;
                 });
+
+        public void InvokeProgress(BuildProgressEventArgs eventArgs) { }
     }
 }

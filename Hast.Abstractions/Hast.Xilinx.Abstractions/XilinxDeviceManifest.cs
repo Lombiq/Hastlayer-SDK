@@ -5,6 +5,14 @@ namespace Hast.Xilinx.Abstractions
 {
     public class XilinxDeviceManifest : DeviceManifest
     {
+    }
+
+    public class NexysDeviceManifest : XilinxDeviceManifest
+    {
+    }
+
+    public class VitisDeviceManifest : XilinxDeviceManifest
+    {
         /// <summary>
         /// Gets or sets a value indicating whether High Bandwidth Memory is available on this device.
         /// </summary>
@@ -22,5 +30,25 @@ namespace Hast.Xilinx.Abstractions
         /// bitstream.
         /// </summary>
         public bool RequiresDcpBinary { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether <see cref="DeviceManifest.ClockFrequencyHz"/> can be passed to the
+        /// device during hardware implementation composition.
+        /// </summary>
+        public bool BuildWithClockFrequencyHz { get; set; } = true;
+
+        /// <summary>
+        /// Gets or sets the bandwidth of the Advanced eXtensible Interface (AXI) bus in bits.
+        /// </summary>
+        public int AxiBusWith { get; set; } = 512;
+    }
+
+    public class AzureNpDeviceManifest : VitisDeviceManifest
+    {
+    }
+
+    public class ZynqDeviceManifest : VitisDeviceManifest
+    {
+
     }
 }

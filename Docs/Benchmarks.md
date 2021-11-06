@@ -32,7 +32,7 @@ Comparing the performance of a Vitis platform FPGA (Xilinx Alveo U280/250/200/50
   - [Alveo U200 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u200.html), PCI Express® Gen3 x16, 225 W Maximum Total Power
   - [Alveo U50 Data Center Accelerator Card](https://www.xilinx.com/products/boards-and-kits/alveo/u50.html), PCI Express® Gen3 x16, 75 W Maximum Total Power
 - Host: A [Nimbix](https://www.nimbix.net/alveo) "Xilinx Vitis Unified Software Platform 2020.1" instance with 16 x Intel Xeon E5-2640 v3 CPUs with 8 physical, 16 logical cores each, with a base clock of 2.6 GHz. Power consumption is around 90 W under load (based on the processor's TDP, [see here](https://ark.intel.com/content/www/us/en/ark/products/83359/intel-xeon-processor-e5-2640-v3-20m-cache-2-60-ghz.html); the power draw is likely larger when the CPU increases its clock speed under load).
-- Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](Attachments/BenchmarksVitis.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
+- Only a single CPU is assumed to be running under 100% load for the power usage figures for the sake of simplicity. The table has a matching [Excel sheet](Attachments/Vitis%20benchmark.xlsx) that was converted using [this VS Code extension](https://marketplace.visualstudio.com/items?itemName=csholmq.excel-to-markdown-table).
 - The kernels were built on the initial 2019.2 version of the Vitis Unified Software Platform. We have seen in one case 20% improvement in frequency (leading to shorter run times and lower total power consumption) by compiling with the newer 2020.1 version.
 
 ### Measurements
@@ -88,6 +88,34 @@ benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.moon.log
 The utilization and power usage information was inside the *HardwareFramework/reports* directory.
 
 
+## Zynq
+
+Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same system-on-module. The benchmarks use the [Trenz Electronic TE0715-04-30-1C](https://shop.trenz-electronic.de/en/TE0715-04-30-1C-SoC-Module-with-Xilinx-Zynq-XC7Z030-1SBG485C-1-GByte-DDR3L-SDRAM-4-x-5-cm) module connected to a [TE0706 carrier board](https://shop.trenz-electronic.de/en/TE0706-03-TE0706-Carrierboard-for-Trenz-Electronic-Modules-with-4-x-5-cm-Form-Factor) (form factor similar to a Raspberri Pi).
+
+### Details
+
+- FPGA: Xilinx Zynq XC7Z030-1SBG485C SoC FPGA. Main clock is 150 Mhz.
+- Host: [ARM dual-core Cortex-A9 MPCore APU with a base clock of 667 MHz.](https://www.xilinx.com/support/documentation/data_sheets/ds190-Zynq-7000-Overview.pdf)
+- Both have access to 1 GB (32-bit) DDR3L SDRAM.
+- Trenz reported the typical power consumption as about 5W. Using an inline mains energy meter we've measured 4.6W minimum. The numbers in the table below show the measured maximums. Two separate builds were repeatedly executed in a loops during measurement. One build only executed the CPU version, while the other only the FPGA version.
+- The script _[zynq-benchmark.dot.sh](../Hast.Abstractions/Hast.Vitis.Abstractions/Docs/Attachments/zynq-benchmark.dot.sh)_ with helpful functions used for the benchmarking is attached. The _dot_ in the name indicates that it should be sourced with the [dot command](https://en.wikipedia.org/wiki/Dot_(command)) in Bash.
+
+### Measurements
+
+| Algorithm                         | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU watts<sup>1</sup> | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts<sup>2</sup> | FPGA power |
+|:---------------------------------:|:---------------:|:---------------:|:--------------:|:--------:|:---------------------:|:---------:|:----------------:|:--------:|:----------:|:----------------------:|:----------:|
+| ImageContrastModifier<sup>3</sup> |       2324%     |     2580%       |        35      |  2788 ms |                4.8 W  |   13.4 Ws |     60.03%       |   26 ms  |   115 ms   |                 4.7 W  |   0.5 Ws   |
+| MonteCarloPiEstimator<sup>4</sup> |      10850%     |    15300%       |        97      |  3285 ms |                4.7 W  |   15.4 Ws |     37.76%       |   25 ms  |    30 ms   |                 4.6 W  |   0.1 Ws   |
+| ParallelAlgorithm<sup>5</sup>     |      11753%     |    11417%       |       280      | 29395 ms |                4.7 W  |  138.2 Ws |     58.81%       |  240 ms  |   248 ms   |                 4.7 W  |   1.2 Ws   |
+
+You can find more measurements in the [attached table](Attachments/TE0715-04-30-1C%20benchmark.pdf).
+
+1. Total system watts with CPU payload.
+2. Total system watts with FPGA payload.
+3. Peak for this device, both ±10 parallelism resulted in very slight performance degradation with very similar extent. 
+4. Near peak. Perhaps it could be further adjusted to squeeze out 1-2 ms, but the returns are very diminishing. We've also tried +30 parallelism but that displayed drastic performance degradation (50-52ms compared to 30-36ms with all lower values).
+5. The xclbin build takes a very long time and ultimately crashes when parallelism is 290 or higher.
+
 ## Catapult
 
 Comparing the performance of the Catapult FPGA to the Catapult node's host PC's performance.
@@ -109,9 +137,8 @@ Comparing the performance of the Catapult FPGA to the Catapult node's host PC's 
 | ParallelAlgorithm     |       99%       |       535%      |       650      | 397 ms |   38 Ws   |        80%       |  200 ms  |   200 ms   |    6 Ws    |
 
 
-<sup>1</sup>More would fit actually, needs more testing.
-
-<sup>2</sup>Uses 88% of the DSPs. With a degree of parallelism of 400 it would be 101% of DSPs.
+1. More would fit actually, needs more testing.
+2. Uses 88% of the DSPs. With a degree of parallelism of 400 it would be 101% of DSPs.
 
 
 ## Nexys
@@ -133,11 +160,9 @@ Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an I
 | MonteCarloPiEstimator             |       15%       |      5233%      | 78<sup>2</sup> |  120 ms |   16 Ws   |        61%       |   34 ms  |   104 ms   |   0.3 Ws   |
 | ParallelAlgorithm                 |       391%      |      23600%     |270<sup>3</sup> | 1818 ms |   236 Ws  |        77%       |  300 ms  |   370 ms   |    1 Ws    |
 
-<sup>1</sup>The low degree of parallelism available due to the resource constraints of the FPGA coupled with the slow serial connection makes this sample worse than on the CPU. Due to data transfer using only a fraction of the resources compared to doing the actual computations the power advantage of the FPGA implementation is most possibly closer to +4700%.
-
-<sup>2</sup> With a degree of parallelism of 79 the FPGA resource utilization would jump to 101% so this is the limit of efficiency.
-
-<sup>3</sup> With a degree of parallelism of 270 the resource utilization goes above 90% (94% post-synthesis) and the implementation step of bitstream generation fails.
+1. The low degree of parallelism available due to the resource constraints of the FPGA coupled with the slow serial connection makes this sample worse than on the CPU. Due to data transfer using only a fraction of the resources compared to doing the actual computations the power advantage of the FPGA implementation is most possibly closer to +4700%.
+2. With a degree of parallelism of 79 the FPGA resource utilization would jump to 101% so this is the limit of efficiency.
+3. With a degree of parallelism of 270 the resource utilization goes above 90% (94% post-synthesis) and the implementation step of bitstream generation fails.
 
 
 ## Further data

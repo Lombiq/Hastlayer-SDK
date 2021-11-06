@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -63,22 +64,7 @@ namespace Hast.Vitis.Abstractions.Services
                     $"Please make sure the file at '{implementation.BinaryPath}' exists and is accessible.");
             }
 
-            uint? clockFrequency = null;
-            var infoFilePath = implementation.BinaryPath + InfoFileExtension;
-            if (!File.Exists(infoFilePath))
-            {
-                Logger.LogWarning(
-                    "The info file is required to learn the kernel clock frequency and report the execution time " +
-                    "accurately. Please copy it to '{0}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
-                    infoFilePath);
-            }
-            else
-            {
-                using var stream = new FileStream(infoFilePath, FileMode.Open);
-                clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
-                    .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
-                    .Frequency;
-            }
+            uint? clockFrequency = await GetClockFrequencyAsync(implementation);
 
             var kernelBinary = File.ReadAllBytes(implementation.BinaryPath);
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
@@ -91,7 +77,7 @@ namespace Hast.Vitis.Abstractions.Services
                     devices.Add(new Device
                     {
                         Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}",
-                        Metadata = i
+                        Metadata = i,
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
                 }
@@ -101,50 +87,128 @@ namespace Hast.Vitis.Abstractions.Services
 
             using var device = await _devicePoolManager.ReserveDevice();
             var context = BeginExecution();
+
+            int deviceIndex = device.Metadata;
+            var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
+
+            // Prepare host buffer.
+            var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
+            hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
+            var hostMemoryLength = hostMemory.Length;
+            var timeHostBufferPrepared = context.Stopwatch.ElapsedMilliseconds;
+
+            Logger.LogInformation("Input buffer size: {0}b", hostMemoryLength);
+            var timeLogOverheadTest = context.Stopwatch.ElapsedMilliseconds;
+
+            var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
+            if (hostMemory.Length <= headerSize)
             {
-                int deviceIndex = device.Metadata;
-                var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
-
-                // Prepare host buffer.
-                var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
-                hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
-
-                Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
-                var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
-                if (hostMemory.Length <= headerSize)
-                {
-                    throw new IndexOutOfRangeException(
-                        $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
-                        $"{headerSize}b.");
-                }
-
-                using (var hostMemoryHandle = hostMemory.Pin())
-                {
-                    // Send data and execute.
-                    var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
-                        KernelName,
-                        index: 0,
-                        hostMemoryHandle,
-                        hostMemory.Length,
-                        GetBuffer(hostMemory, hostMemoryHandle, executionContext));
-                    Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
-                    Logger.LogInformation("LAUNCHING KERNEL...");
-                    _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
-                    Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
-                    await _binaryOpenCl.AwaitDevice(deviceIndex);
-                    var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
-
-                    // Read out metadata.
-                    SetHardwareExecutionTime(
-                        context,
-                        executionContext,
-                        resultMetadata.ExecutionTime,
-                        clockFrequency);
-                }
+                throw new IndexOutOfRangeException(
+                    $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
+                    $"{headerSize}b.");
             }
+            var timeHostMemoryVerified = context.Stopwatch.ElapsedMilliseconds;
+
+            using var hostMemoryHandle = hostMemory.Pin();
+            var timeHostMemoryPinned = context.Stopwatch.ElapsedMilliseconds;
+
+            // Send data and execute.
+            var buffer = GetBuffer(hostMemory, hostMemoryHandle, executionContext);
+            var timeXilinxBufferInited = context.Stopwatch.ElapsedMilliseconds;
+            var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
+                KernelName,
+                index: 0,
+                hostMemoryHandle,
+                hostMemory.Length,
+                buffer);
+            var timeKernelArgumentSet = context.Stopwatch.ElapsedMilliseconds;
+            Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
+            Logger.LogInformation("LAUNCHING KERNEL...");
+            _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+            Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
+            var timeKernelLaunched = context.Stopwatch.ElapsedMilliseconds;
+            await _binaryOpenCl.AwaitDevice(deviceIndex);
+            var timeResultsAwaited = context.Stopwatch.ElapsedMilliseconds;
+            var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
+            var timeMetadataRetrieved = context.Stopwatch.ElapsedMilliseconds;
+
+            // Read out metadata.
+            SetHardwareExecutionTime(
+                context,
+                executionContext,
+                resultMetadata.ExecutionTime,
+                clockFrequency);
+            var timeMetadataProcessed = context.Stopwatch.ElapsedMilliseconds;
+
             EndExecution(context);
 
+            Logger.LogInformation($@"
+
+/--------------------------------------\
+| EXECUTION TIME STOPWATCH BREAKDOWN   |
+|======================================|
+| Host Buffer Prepared      : {timeHostBufferPrepared,5:####0} ms |
+| Log Overhead Test         : {timeLogOverheadTest - timeHostBufferPrepared,5:####0} ms | <= (time it took to output the first Log.LogInformation call)
+| Host Memory Verified      : {timeHostMemoryVerified - timeLogOverheadTest,5:####0} ms |
+| Host Memory Pinned        : {timeHostMemoryPinned - timeHostMemoryVerified,5:####0} ms |
+| Xilinx Buffer Initialized : {timeXilinxBufferInited - timeHostMemoryPinned,5:####0} ms |
+| Kernel Argument Set       : {timeKernelArgumentSet - timeXilinxBufferInited,5:####0} ms |
+| Kernel Launched           : {timeKernelLaunched - timeKernelArgumentSet,5:####0} ms |
+| Results Awaited           : {timeResultsAwaited - timeKernelLaunched,5:####0} ms |
+| Metadata Retrieved        : {timeMetadataRetrieved - timeResultsAwaited,5:####0} ms |
+| Metadata Processed        : {timeMetadataProcessed - timeMetadataRetrieved,5:####0} ms |
+|--------------------------------------|
+| Total                     : {timeMetadataProcessed,5:####0} ms |
+\--------------------------------------/
+
+");
+
             return context.HardwareExecutionInformation;
+        }
+
+        private async Task<uint?> GetClockFrequencyAsync(IHardwareImplementation implementation)
+        {
+            var infoFilePath = implementation.BinaryPath + InfoFileExtension;
+
+            if (!File.Exists(infoFilePath))
+            {
+                Logger.LogWarning(
+                    "The info file is required to learn the kernel clock frequency and report the execution time " +
+                    "accurately. Please copy it to '{0}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
+                    infoFilePath);
+                return null;
+            }
+
+            await using var stream = new FileStream(infoFilePath, FileMode.Open);
+            var clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
+                .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
+                .Frequency;
+
+            if (clockFrequency == null)
+            {
+                _logger.LogWarning("Unknown clock frequency!");
+                return null;
+            }
+
+            if (!File.Exists(implementation.BinaryPath + SetScaleExtension)) return clockFrequency;
+
+            var setScaleFilePath = (await File.ReadAllTextAsync(implementation.BinaryPath + SetScaleExtension))?.Trim();
+            if (setScaleFilePath != null && File.Exists(setScaleFilePath))
+            {
+                await File.WriteAllTextAsync(
+                    setScaleFilePath,
+                    clockFrequency.Value.ToString(CultureInfo.InvariantCulture));
+
+                var frequency = await File.ReadAllTextAsync(setScaleFilePath);
+                var frequencyHz = uint.Parse(frequency.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture);
+                _logger.LogInformation("Frequency is set to {0:0.##}MHz.", frequencyHz / 1_000_000.0);
+                return frequencyHz;
+            }
+
+            _logger.LogWarning(
+                "The frequency setter system file at the path '{0}' doesn't exist.",
+                setScaleFilePath ?? "<NULL>");
+            return clockFrequency;
         }
 
 
