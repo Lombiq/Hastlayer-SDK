@@ -322,7 +322,9 @@ namespace Hast.Samples.Consumer
                 Width = Dim.Percent(100) - 2,
                 Height = Dim.Percent(100) - 2,
                 CanFocus = false,
-                ContentSize = new Size(names.Max(name => name.Length), names.Count),
+                ContentSize = new Size(
+                    names.Select(name => name.Length).Concat(new [] { Console.WindowWidth / 2 }).Max(),
+                    names.Count),
             };
 
             void OkClicked()
