@@ -89,9 +89,12 @@ namespace Hast.Samples.Consumer
             _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
             _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
-            var confiurationDictionary =
-                JsonConvert.DeserializeObject<Dictionary<string, object>>(JsonConvert.SerializeObject(_configuration));
-            _propertiesListView.SetSource(confiurationDictionary.Keys.OrderBy(key => key).ToList());
+            var confiurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
+                    JsonConvert.SerializeObject(_configuration))
+                .Keys
+                .OrderBy(key => key)
+                .ToList();
+            _propertiesListView.SetSource(confiurationKeys);
             _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
             _propertiesListView.OpenSelectedItem += _ =>
             {
@@ -330,9 +333,14 @@ namespace Hast.Samples.Consumer
 
             void OkClicked()
             {
-                _configuration = _savedConfigurations[names[list.SelectedItem]];
+                var clone = JsonConvert.DeserializeObject<ConsumerConfiguration>(
+                    JsonConvert.SerializeObject(_savedConfigurations[names[list.SelectedItem]]));
+                _configuration = clone; // This way the saved configuration is unaltered until you click Save.
                 close();
-                PropertiesListView_SelectedChanged(_propertiesListView.Source.ToList()[0]?.ToString());
+
+                var selectedPropertyIndex = Math.Max(0, _propertiesListView.SelectedItem);
+                var selectedProperty =  _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString();
+                PropertiesListView_SelectedChanged(selectedProperty);
             }
 
             buttonOk.Clicked += OkClicked;
