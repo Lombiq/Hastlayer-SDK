@@ -106,6 +106,7 @@ namespace Hast.Samples.Consumer
             top.Add(_topRightPane);
 
             Retile(top);
+            Application.Resized = _ => Retile(top);
 
             _leftPane.Add(_propertiesListView);
             _topRightPane.Add(_hintLabel);
@@ -374,6 +375,9 @@ namespace Hast.Samples.Consumer
 
         private void Retile(Toplevel top)
         {
+            top.Height = Console.WindowHeight;
+            top.Width = Console.WindowWidth;
+
             var longestOption = 0;
             foreach (var item in _propertiesListView.Source.ToList())
             {
