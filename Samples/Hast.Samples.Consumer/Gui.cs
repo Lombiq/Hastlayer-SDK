@@ -38,6 +38,10 @@ namespace Hast.Samples.Consumer
 
         public ConsumerConfiguration BuildConfiguration()
         {
+            // Console.BufferHeight is overwritten by the Retile method to get rid of the vertical scrollbar.
+            var bufferWidth = Console.BufferWidth;
+            var bufferHeight = Console.BufferHeight;
+
             _configuration = new ConsumerConfiguration();
 
             // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and
@@ -151,6 +155,8 @@ namespace Hast.Samples.Consumer
                 });
 
             Application.Shutdown();
+            Console.SetBufferSize(bufferWidth, bufferHeight);
+
             var result = _configuration;
             _configuration = null;
             return result;
@@ -386,6 +392,15 @@ namespace Hast.Samples.Consumer
 
         private void Retile(Toplevel top)
         {
+            try
+            {
+                Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
+            }
+            catch
+            {
+                // This can only occur if you manically resize the window and it's not a big deal.
+            }
+
             top.Height = Console.WindowHeight;
             top.Width = Console.WindowWidth;
 
@@ -400,12 +415,12 @@ namespace Hast.Samples.Consumer
                 _leftPane.Title.Length + 5
             );
 
-            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 0, 0));
+            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 1, 0));
             _topRightPane.Height = Dim.Percent(50) - 1;
             _bottomRightPane.X = _topRightPane.X;
             _bottomRightPane.Y = Pos.Bottom(_topRightPane);
             _bottomRightPane.Width = _topRightPane.Width;
-            _bottomRightPane.Height = Dim.Fill();
+            _bottomRightPane.Height = Dim.Fill(1);
             _topRightPane.Height -= 1;
         }
     }
