@@ -28,6 +28,7 @@ namespace Hast.Samples.Consumer
         private FrameView _leftPane;
         private FrameView _topRightPane;
         private FrameView _bottomRightPane;
+        private Label _bottomLabel;
 
         private ConsumerConfiguration _configuration;
 
@@ -94,6 +95,11 @@ namespace Hast.Samples.Consumer
             _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
             _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
+            _bottomLabel = new Label("After selecting a value in the Options pane, press [Enter] to confirm it.")
+            {
+                ColorScheme = Colors.TopLevel,
+            };
+
             var confiurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
                     JsonConvert.SerializeObject(_configuration))
                 .Keys
@@ -113,6 +119,7 @@ namespace Hast.Samples.Consumer
             top.Add(_leftPane);
             top.Add(_bottomRightPane);
             top.Add(_topRightPane);
+            top.Add(_bottomLabel);
 
             Retile(top);
             Application.Resized = _ => Retile(top);
@@ -422,6 +429,11 @@ namespace Hast.Samples.Consumer
             _bottomRightPane.Width = _topRightPane.Width;
             _bottomRightPane.Height = Dim.Fill(1);
             _topRightPane.Height -= 1;
+
+            _bottomLabel.X = 0;
+            _bottomLabel.Y = Console.WindowHeight - 1;
+            _bottomLabel.Width = Dim.Percent(100);
+            _bottomLabel.Height = 1;
         }
     }
 }
