@@ -39,6 +39,12 @@ namespace Hast.Samples.Consumer
 
         public ConsumerConfiguration BuildConfiguration()
         {
+            // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there
+            // won't be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from
+            // the temporary variable before this method closes.
+            var originalBufferHeight = Console.BufferHeight;
+            Console.BufferHeight = Console.WindowHeight;
+
             _configuration = new ConsumerConfiguration();
 
             // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and
@@ -157,6 +163,7 @@ namespace Hast.Samples.Consumer
                 });
 
             Application.Shutdown();
+            Console.BufferHeight = originalBufferHeight;
 
             var result = _configuration;
             _configuration = null;
