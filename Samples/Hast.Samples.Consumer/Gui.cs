@@ -25,8 +25,6 @@ namespace Hast.Samples.Consumer
         private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
         private Action<object> _currentOptionsListViewEventHandler;
 
-        private readonly Button _optionsConfirmButton = new("Confirm");
-
         private FrameView _leftPane;
         private FrameView _topRightPane;
         private FrameView _bottomRightPane;
@@ -98,9 +96,8 @@ namespace Hast.Samples.Consumer
             _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
             _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
-            _bottomLabel = new Label
+            _bottomLabel = new Label("After selecting a value in the Options pane, press [Enter] to confirm it.")
             {
-                Text = "After selecting a value in the Options pane, press the \"Confirm\" button or the [Enter] key to confirm it.",
                 ColorScheme = Colors.TopLevel,
             };
 
@@ -132,19 +129,11 @@ namespace Hast.Samples.Consumer
             _topRightPane.Add(_hintLabel);
             _bottomRightPane.Add(_optionsTextField);
             _bottomRightPane.Add(_optionsListView);
-            _bottomRightPane.Add(_optionsConfirmButton);
 
             top.KeyPress += args =>
             {
                 if (args.KeyEvent.Key == Key.F5) Application.RequestStop();
             };
-
-            var buttonWidth = _optionsConfirmButton.Text.Length + 4;
-            _optionsConfirmButton.X = Pos.Percent(100) - buttonWidth - 1;
-            _optionsConfirmButton.Y = Pos.Center();
-            _optionsConfirmButton.Width = buttonWidth;
-            _optionsListView.Width -= _optionsConfirmButton.Width;
-            _optionsTextField.Width -= _optionsConfirmButton.Width;
 
             AddKeyboardEventHandler(
                 _optionsTextField,
@@ -405,15 +394,6 @@ namespace Hast.Samples.Consumer
                 _propertiesListView.SetFocus();
                 args.Handled = true;
             }
-
-            _optionsConfirmButton.MouseClick += args =>
-            {
-                if (!view.Visible) return;
-
-                onEnter();
-                _propertiesListView.SetFocus();
-                args.Handled = true;
-            };
 
             view.KeyPress += EventHandler;
         }
