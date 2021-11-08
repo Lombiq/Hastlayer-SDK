@@ -39,10 +39,6 @@ namespace Hast.Samples.Consumer
 
         public ConsumerConfiguration BuildConfiguration()
         {
-            // Console.BufferHeight is overwritten by the Retile method to get rid of the vertical scrollbar.
-            var bufferWidth = Console.BufferWidth;
-            var bufferHeight = Console.BufferHeight;
-
             _configuration = new ConsumerConfiguration();
 
             // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and
@@ -63,9 +59,8 @@ namespace Hast.Samples.Consumer
                     .ToList() ?? new List<string>());
 
             Application.UseSystemConsole = true;
-
             Application.Init();
-            Application.HeightAsBuffer = true;
+            Application.HeightAsBuffer = false;
 
             var menu = new MenuBar (new[] {
                 new MenuBarItem ("_File", new[] {
@@ -162,7 +157,6 @@ namespace Hast.Samples.Consumer
                 });
 
             Application.Shutdown();
-            Console.SetBufferSize(bufferWidth, bufferHeight);
 
             var result = _configuration;
             _configuration = null;
@@ -399,18 +393,6 @@ namespace Hast.Samples.Consumer
 
         private void Retile(Toplevel top)
         {
-            try
-            {
-                Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
-            }
-            catch
-            {
-                // This can only occur if you manically resize the window and it's not a big deal.
-            }
-
-            top.Height = Console.WindowHeight;
-            top.Width = Console.WindowWidth;
-
             var longestOption = 0;
             foreach (var item in _propertiesListView.Source.ToList())
             {
