@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Terminal.Gui;
@@ -47,7 +48,7 @@ namespace Hast.Samples.Consumer
             // won't be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from
             // the temporary variable before this method closes.
             var originalBufferHeight = Console.BufferHeight;
-            Console.BufferHeight = Console.WindowHeight;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) Console.BufferHeight = Console.WindowHeight;
 
             _configuration = new ConsumerConfiguration();
 
@@ -170,7 +171,7 @@ namespace Hast.Samples.Consumer
                 });
 
             Application.Shutdown();
-            Console.BufferHeight = originalBufferHeight;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) Console.BufferHeight = originalBufferHeight;
 
             var result = _configuration;
             _configuration = null;
