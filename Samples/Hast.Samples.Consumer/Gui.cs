@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Terminal.Gui;
@@ -25,16 +26,18 @@ namespace Hast.Samples.Consumer
         private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
         private Action<object> _currentOptionsListViewEventHandler;
 
-        private readonly Button _optionsConfirmButton = new("Confirm");
-
         private FrameView _leftPane;
         private FrameView _topRightPane;
         private FrameView _bottomRightPane;
         private Label _bottomLabel;
 
+        private MenuBarItem _startMenuItem;
+
         private ConsumerConfiguration _configuration;
 
         private Task<List<string>> _deviceNamesTask;
+
+        private string _latestValue;
 
         public Gui(Dictionary<string, ConsumerConfiguration> savedConfigurations) =>
             _savedConfigurations = savedConfigurations;
@@ -45,7 +48,7 @@ namespace Hast.Samples.Consumer
             // won't be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from
             // the temporary variable before this method closes.
             var originalBufferHeight = Console.BufferHeight;
-            Console.BufferHeight = Console.WindowHeight;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) Console.BufferHeight = Console.WindowHeight;
 
             _configuration = new ConsumerConfiguration();
 
@@ -66,10 +69,14 @@ namespace Hast.Samples.Consumer
                     .Select(device => device.Name)
                     .ToList() ?? new List<string>());
 
-            Application.UseSystemConsole = true;
+            Application.UseSystemConsole = false;
             Application.Init();
             Application.HeightAsBuffer = false;
 
+            _startMenuItem = new MenuBarItem(
+                "_Start (F5)",
+                string.Empty,
+                () => { /* Intentionally empty. */ });
             var menu = new MenuBar (new[] {
                 new MenuBarItem ("_File", new[] {
                     new MenuItem (
@@ -83,24 +90,20 @@ namespace Hast.Samples.Consumer
                         SaveConfiguration,
                         shortcut: Key.Q | Key.S),
                     new MenuItem (
-                        "_Quit (Ctrl + Q)",
+                        "_Quit",
                         "Closes the application.",
                         SetConfigurationAndStop(null),
                         shortcut: Key.Q | Key.CtrlMask),
                 }),
-                new MenuBarItem (
-                    "_Start (F5)",
-                    string.Empty,
-                    () => Application.RequestStop()),
+                _startMenuItem,
             });
 
             _leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
             _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
             _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
-            _bottomLabel = new Label
+            _bottomLabel = new Label("After selecting a value in the Options pane, press [Enter] to confirm it.")
             {
-                Text = "After selecting a value in the Options pane, press the \"Confirm\" button or the [Enter] key to confirm it.",
                 ColorScheme = Colors.TopLevel,
             };
 
@@ -132,19 +135,11 @@ namespace Hast.Samples.Consumer
             _topRightPane.Add(_hintLabel);
             _bottomRightPane.Add(_optionsTextField);
             _bottomRightPane.Add(_optionsListView);
-            _bottomRightPane.Add(_optionsConfirmButton);
 
             top.KeyPress += args =>
             {
                 if (args.KeyEvent.Key == Key.F5) Application.RequestStop();
             };
-
-            var buttonWidth = _optionsConfirmButton.Text.Length + 4;
-            _optionsConfirmButton.X = Pos.Percent(100) - buttonWidth - 1;
-            _optionsConfirmButton.Y = Pos.Center();
-            _optionsConfirmButton.Width = buttonWidth;
-            _optionsListView.Width -= _optionsConfirmButton.Width;
-            _optionsTextField.Width -= _optionsConfirmButton.Width;
 
             AddKeyboardEventHandler(
                 _optionsTextField,
@@ -157,6 +152,8 @@ namespace Hast.Samples.Consumer
                     var item = _optionsListView.Source.ToList()[_optionsListView.SelectedItem];
                     _currentOptionsListViewEventHandler?.Invoke(item);
                 });
+
+            _startMenuItem.Action += () => Application.RequestStop(top);
 
             Application.Run(
                 top,
@@ -174,15 +171,22 @@ namespace Hast.Samples.Consumer
                 });
 
             Application.Shutdown();
-            Console.BufferHeight = originalBufferHeight;
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) Console.BufferHeight = originalBufferHeight;
 
             var result = _configuration;
             _configuration = null;
             return result;
         }
 
-        private void PropertiesListView_SelectedChanged(string value)
+        private void PropertiesListView_SelectedChanged(string value = null, bool forceUpdate = false)
         {
+            var selectedPropertyIndex = Math.Max(0, _propertiesListView.SelectedItem);
+
+            // This indicates that the same item has been reselected so nothing needs to be done.
+            if (!forceUpdate && value != null && _latestValue == value) return;
+
+            value ??= _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString() ?? string.Empty;
+
             var key = value.Replace(" ", string.Empty);
             var hintDictionary = ConsumerConfiguration.HintDictionary.Value;
             _hintLabel.Text = hintDictionary.TryGetValue(key, out var hint) ? hint : string.Empty;
@@ -244,6 +248,8 @@ namespace Hast.Samples.Consumer
                 default:
                     throw new InvalidOperationException($"Unknown menu item selected ({key}).");
             }
+
+            _latestValue = value;
         }
 
         private void ShowDeviceNames()
@@ -371,9 +377,7 @@ namespace Hast.Samples.Consumer
                 _configuration = clone; // This way the saved configuration is unaltered until you click Save.
                 close();
 
-                var selectedPropertyIndex = Math.Max(0, _propertiesListView.SelectedItem);
-                var selectedProperty =  _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString();
-                PropertiesListView_SelectedChanged(selectedProperty);
+                PropertiesListView_SelectedChanged(forceUpdate: true);
             }
 
             buttonOk.Clicked += OkClicked;
@@ -401,26 +405,29 @@ namespace Hast.Samples.Consumer
 
         private void AddKeyboardEventHandler(View view, Action onEnter)
         {
-            void EventHandler(View.KeyEventEventArgs args)
+            view.KeyPress += args =>
             {
-                if (!view.HasFocus || args.KeyEvent.Key is not (Key.Esc or Key.Enter)) return;
+                if (!view.HasFocus) return;
 
-                if (args.KeyEvent.Key == Key.Enter) onEnter();
+                if (args.KeyEvent.Key == Key.Esc)
+                {
+                    PropertiesListView_SelectedChanged(forceUpdate: true);
+                }
+                else if (args.KeyEvent.Key != Key.Enter)
+                {
+                    return;
+                }
 
-                _propertiesListView.SetFocus();
-                args.Handled = true;
-            }
-
-            _optionsConfirmButton.MouseClick += args =>
-            {
-                if (!view.Visible) return;
-
-                onEnter();
                 _propertiesListView.SetFocus();
                 args.Handled = true;
             };
 
-            view.KeyPress += EventHandler;
+            view.Leave += _ => onEnter();
+
+            _startMenuItem.Action += () =>
+            {
+                if (view.HasFocus) onEnter();
+            };
         }
 
         private void Retile(Toplevel top)
