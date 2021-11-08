@@ -30,9 +30,13 @@ namespace Hast.Samples.Consumer
         private FrameView _bottomRightPane;
         private Label _bottomLabel;
 
+        private MenuBarItem _startMenuItem;
+
         private ConsumerConfiguration _configuration;
 
         private Task<List<string>> _deviceNamesTask;
+
+        private string _latestValue;
 
         public Gui(Dictionary<string, ConsumerConfiguration> savedConfigurations) =>
             _savedConfigurations = savedConfigurations;
@@ -64,10 +68,14 @@ namespace Hast.Samples.Consumer
                     .Select(device => device.Name)
                     .ToList() ?? new List<string>());
 
-            Application.UseSystemConsole = true;
+            Application.UseSystemConsole = false;
             Application.Init();
             Application.HeightAsBuffer = false;
 
+            _startMenuItem = new MenuBarItem(
+                "_Start (F5)",
+                string.Empty,
+                () => { /* Intentionally empty. */ });
             var menu = new MenuBar (new[] {
                 new MenuBarItem ("_File", new[] {
                     new MenuItem (
@@ -81,15 +89,12 @@ namespace Hast.Samples.Consumer
                         SaveConfiguration,
                         shortcut: Key.Q | Key.S),
                     new MenuItem (
-                        "_Quit (Ctrl + Q)",
+                        "_Quit",
                         "Closes the application.",
                         SetConfigurationAndStop(null),
                         shortcut: Key.Q | Key.CtrlMask),
                 }),
-                new MenuBarItem (
-                    "_Start (F5)",
-                    string.Empty,
-                    () => Application.RequestStop()),
+                _startMenuItem,
             });
 
             _leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
@@ -147,6 +152,8 @@ namespace Hast.Samples.Consumer
                     _currentOptionsListViewEventHandler?.Invoke(item);
                 });
 
+            _startMenuItem.Action += () => Application.RequestStop(top);
+
             Application.Run(
                 top,
                 exception =>
@@ -159,7 +166,7 @@ namespace Hast.Samples.Consumer
                     Console.WriteLine(
                         "An error occurred while in GUI mode. Please check the logs in the App_Data/logs directory.");
                     Application.RequestStop();
-                    return true;
+                    return false;
                 });
 
             Application.Shutdown();
@@ -170,8 +177,15 @@ namespace Hast.Samples.Consumer
             return result;
         }
 
-        private void PropertiesListView_SelectedChanged(string value)
+        private void PropertiesListView_SelectedChanged(string value = null, bool forceUpdate = false)
         {
+            var selectedPropertyIndex = Math.Max(0, _propertiesListView.SelectedItem);
+
+            // This indicates that the same item has been reselected so nothing needs to be done.
+            if (!forceUpdate && value != null && _latestValue == value) return;
+
+            value ??= _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString() ?? string.Empty;
+
             var key = value.Replace(" ", string.Empty);
             var hintDictionary = ConsumerConfiguration.HintDictionary.Value;
             _hintLabel.Text = hintDictionary.TryGetValue(key, out var hint) ? hint : string.Empty;
@@ -228,6 +242,8 @@ namespace Hast.Samples.Consumer
                 default:
                     throw new InvalidOperationException($"Unknown menu item selected ({key}).");
             }
+
+            _latestValue = value;
         }
 
         private void ShowDeviceNames()
@@ -355,9 +371,7 @@ namespace Hast.Samples.Consumer
                 _configuration = clone; // This way the saved configuration is unaltered until you click Save.
                 close();
 
-                var selectedPropertyIndex = Math.Max(0, _propertiesListView.SelectedItem);
-                var selectedProperty =  _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString();
-                PropertiesListView_SelectedChanged(selectedProperty);
+                PropertiesListView_SelectedChanged(forceUpdate: true);
             }
 
             buttonOk.Clicked += OkClicked;
@@ -385,17 +399,29 @@ namespace Hast.Samples.Consumer
 
         private void AddKeyboardEventHandler(View view, Action onEnter)
         {
-            void EventHandler(View.KeyEventEventArgs args)
+            view.KeyPress += args =>
             {
-                if (!view.HasFocus || args.KeyEvent.Key is not (Key.Esc or Key.Enter)) return;
+                if (!view.HasFocus) return;
 
-                if (args.KeyEvent.Key == Key.Enter) onEnter();
+                if (args.KeyEvent.Key == Key.Esc)
+                {
+                    PropertiesListView_SelectedChanged(forceUpdate: true);
+                }
+                else if (args.KeyEvent.Key != Key.Enter)
+                {
+                    return;
+                }
 
                 _propertiesListView.SetFocus();
                 args.Handled = true;
-            }
+            };
 
-            view.KeyPress += EventHandler;
+            view.Leave += _ => onEnter();
+
+            _startMenuItem.Action += () =>
+            {
+                if (view.HasFocus) onEnter();
+            };
         }
 
         private void Retile(Toplevel top)
