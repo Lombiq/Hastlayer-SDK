@@ -51,7 +51,9 @@ namespace Hast.Samples.Consumer.Models
         [Argument("sample")]
         [Hint(
             "Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not",
-            "up-to-date enough and shouldn't be really taken as good examples (check out the other ones).")]
+            "up-to-date enough and shouldn't be really taken as good examples (check out the other ones). If you want",
+            "to learn more about what each sample does, check out matching *SampleRunner.cs file in the project's",
+            "SampleRunners directory.")]
         public Sample SampleToRun { get; set; }
 
         /// <summary>

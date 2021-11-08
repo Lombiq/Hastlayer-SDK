@@ -25,9 +25,12 @@ namespace Hast.Samples.Consumer
         private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
         private Action<object> _currentOptionsListViewEventHandler;
 
+        private readonly Button _optionsConfirmButton = new("Confirm");
+
         private FrameView _leftPane;
         private FrameView _topRightPane;
         private FrameView _bottomRightPane;
+        private Label _bottomLabel;
 
         private ConsumerConfiguration _configuration;
 
@@ -38,6 +41,12 @@ namespace Hast.Samples.Consumer
 
         public ConsumerConfiguration BuildConfiguration()
         {
+            // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there
+            // won't be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from
+            // the temporary variable before this method closes.
+            var originalBufferHeight = Console.BufferHeight;
+            Console.BufferHeight = Console.WindowHeight;
+
             _configuration = new ConsumerConfiguration();
 
             // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and
@@ -58,9 +67,8 @@ namespace Hast.Samples.Consumer
                     .ToList() ?? new List<string>());
 
             Application.UseSystemConsole = true;
-
             Application.Init();
-            Application.HeightAsBuffer = true;
+            Application.HeightAsBuffer = false;
 
             var menu = new MenuBar (new[] {
                 new MenuBarItem ("_File", new[] {
@@ -90,6 +98,12 @@ namespace Hast.Samples.Consumer
             _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
             _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
+            _bottomLabel = new Label
+            {
+                Text = "After selecting a value in the Options pane, press the \"Confirm\" button or the [Enter] key to confirm it.",
+                ColorScheme = Colors.TopLevel,
+            };
+
             var confiurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
                     JsonConvert.SerializeObject(_configuration))
                 .Keys
@@ -109,6 +123,7 @@ namespace Hast.Samples.Consumer
             top.Add(_leftPane);
             top.Add(_bottomRightPane);
             top.Add(_topRightPane);
+            top.Add(_bottomLabel);
 
             Retile(top);
             Application.Resized = _ => Retile(top);
@@ -117,11 +132,19 @@ namespace Hast.Samples.Consumer
             _topRightPane.Add(_hintLabel);
             _bottomRightPane.Add(_optionsTextField);
             _bottomRightPane.Add(_optionsListView);
+            _bottomRightPane.Add(_optionsConfirmButton);
 
             top.KeyPress += args =>
             {
                 if (args.KeyEvent.Key == Key.F5) Application.RequestStop();
             };
+
+            var buttonWidth = _optionsConfirmButton.Text.Length + 4;
+            _optionsConfirmButton.X = Pos.Percent(100) - buttonWidth - 1;
+            _optionsConfirmButton.Y = Pos.Center();
+            _optionsConfirmButton.Width = buttonWidth;
+            _optionsListView.Width -= _optionsConfirmButton.Width;
+            _optionsTextField.Width -= _optionsConfirmButton.Width;
 
             AddKeyboardEventHandler(
                 _optionsTextField,
@@ -151,6 +174,8 @@ namespace Hast.Samples.Consumer
                 });
 
             Application.Shutdown();
+            Console.BufferHeight = originalBufferHeight;
+
             var result = _configuration;
             _configuration = null;
             return result;
@@ -386,14 +411,20 @@ namespace Hast.Samples.Consumer
                 args.Handled = true;
             }
 
+            _optionsConfirmButton.MouseClick += args =>
+            {
+                if (!view.Visible) return;
+
+                onEnter();
+                _propertiesListView.SetFocus();
+                args.Handled = true;
+            };
+
             view.KeyPress += EventHandler;
         }
 
         private void Retile(Toplevel top)
         {
-            top.Height = Console.WindowHeight;
-            top.Width = Console.WindowWidth;
-
             var longestOption = 0;
             foreach (var item in _propertiesListView.Source.ToList())
             {
@@ -405,13 +436,18 @@ namespace Hast.Samples.Consumer
                 _leftPane.Title.Length + 5
             );
 
-            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 0, 0));
+            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 1, 0));
             _topRightPane.Height = Dim.Percent(50) - 1;
             _bottomRightPane.X = _topRightPane.X;
             _bottomRightPane.Y = Pos.Bottom(_topRightPane);
             _bottomRightPane.Width = _topRightPane.Width;
-            _bottomRightPane.Height = Dim.Fill();
+            _bottomRightPane.Height = Dim.Fill(1);
             _topRightPane.Height -= 1;
+
+            _bottomLabel.X = 0;
+            _bottomLabel.Y = Console.WindowHeight - 1;
+            _bottomLabel.Width = Dim.Percent(100);
+            _bottomLabel.Height = 1;
         }
     }
 }
