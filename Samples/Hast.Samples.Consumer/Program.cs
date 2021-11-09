@@ -42,9 +42,11 @@ namespace Hast.Samples.Consumer
             // Here we create the ConsumerConfiguration used to set up this application. Check out the
             // ConsumerConfiguration class to see what can be changed to try out the various samples and available
             // devices!
-            // If there were command line arguments, they are used to create one. Otherwise we open an interactive user
-            // interface where you can hand pick the options, load or save them. You can also use <c>-load name</c> and
-            // the <c>-save name</c> command line arguments directly.
+            // If there are command line arguments, they are used to create the configuration. Otherwise we open an
+            // interactive user interface where you can hand pick the options, load or save them. This GUI has mouse
+            // support on Windows and certain Linux platforms, though no through SSH. You can fully navigate using the
+            // keyboard too. Use the <c>-load name</c> and the <c>-save name</c> command line arguments to save/load
+            // configurations into the ConsumerConfiguration.json file without the GUI.
             var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
             var consumerConfiguration = args.Any()
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
