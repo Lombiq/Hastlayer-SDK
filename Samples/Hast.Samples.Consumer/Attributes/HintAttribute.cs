@@ -10,6 +10,6 @@ namespace Hast.Samples.Consumer.Attributes
     {
         public string Text { get; }
 
-        public HintAttribute(params string[] text) => Text = string.Join(" ", text.Select(line => line.Trim()));
+        public HintAttribute(params string[] text) => Text = string.Join(" ", text.Select(fragment => fragment.Trim()));
     }
 }
