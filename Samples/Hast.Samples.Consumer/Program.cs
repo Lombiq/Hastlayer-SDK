@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using LiteralAttribute = Microsoft.FSharp.Core.LiteralAttribute;
 
 namespace Hast.Samples.Consumer
 {
@@ -142,7 +141,7 @@ namespace Hast.Samples.Consumer
                     typeof(Posit).Assembly,
                     typeof(ImmutableArray).Assembly,
                     // Only necessary for the F# sample.
-                    typeof(LiteralAttribute).Assembly,
+                    typeof(Microsoft.FSharp.Core.LiteralAttribute).Assembly,
                 },
                 configuration);
 
