@@ -25,8 +25,8 @@ namespace Hast.Samples.Consumer.Models
         [Argument("device")]
         [Hint(
             "Which supported hardware device to use? If you leave this empty the first one will be used. If you're",
-            "testing Hastlayer locally then you'll need to use the \"Nexys A7\" or \"Nexys4 DDR\" devices; for",
-            "high-performance local or cloud FPGAs see the docs.")]
+            "testing Hastlayer locally then most possibly you'll need to use the \"Nexys A7\" or \"Nexys4 DDR\" devices;" +
+            "for high-performance local or cloud FPGAs, or embedded devices, see the docs.")]
         public string DeviceName { get; set; }
 
         [Argument]
@@ -138,7 +138,7 @@ namespace Hast.Samples.Consumer.Models
                 .Select((argument, index) => (Argument: argument.ToUpperInvariant(), Index: index))
                 .Aggregate(-1, (current, item) => current == -1 && item.Argument == "-LOAD" ? item.Index : current);
 
-            if (loadIndex >= 0 && loadIndex + 1  < args.Count)
+            if (loadIndex >= 0 && loadIndex + 1 < args.Count)
             {
                 return consumerConfigurations[args[loadIndex + 1]];
             }
@@ -151,7 +151,7 @@ namespace Hast.Samples.Consumer.Models
             foreach (var (property, aliases) in properties)
             {
                 var names = aliases
-                    .Concat(new [] { property.Name.ToUpperInvariant() })
+                    .Concat(new[] { property.Name.ToUpperInvariant() })
                     .Select(name => "-" + name)
                     .ToList();
 

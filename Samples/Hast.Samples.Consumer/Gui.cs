@@ -29,7 +29,6 @@ namespace Hast.Samples.Consumer
         private FrameView _leftPane;
         private FrameView _topRightPane;
         private FrameView _bottomRightPane;
-        private Label _bottomLabel;
 
         private MenuBarItem _startMenuItem;
 
@@ -106,11 +105,6 @@ namespace Hast.Samples.Consumer
             _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
             _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
-            _bottomLabel = new Label("After selecting a value in the Options pane, press [Enter] to confirm it.")
-            {
-                ColorScheme = Colors.TopLevel,
-            };
-
             var confiurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
                     JsonConvert.SerializeObject(_configuration))
                 .Keys
@@ -130,7 +124,6 @@ namespace Hast.Samples.Consumer
             top.Add(_leftPane);
             top.Add(_bottomRightPane);
             top.Add(_topRightPane);
-            top.Add(_bottomLabel);
 
             Retile(top);
             Application.Resized = _ => Retile(top);
@@ -447,18 +440,12 @@ namespace Hast.Samples.Consumer
                 _leftPane.Title.Length + 5
             );
 
-            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 1, 0));
+            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 0, 0));
             _topRightPane.Height = Dim.Percent(50) - 1;
             _bottomRightPane.X = _topRightPane.X;
             _bottomRightPane.Y = Pos.Bottom(_topRightPane);
             _bottomRightPane.Width = _topRightPane.Width;
-            _bottomRightPane.Height = Dim.Fill(1);
-            _topRightPane.Height -= 1;
-
-            _bottomLabel.X = 0;
-            _bottomLabel.Y = Console.WindowHeight - 1;
-            _bottomLabel.Width = Dim.Percent(100);
-            _bottomLabel.Height = 1;
+            _bottomRightPane.Height = Dim.Fill();
         }
     }
 }
