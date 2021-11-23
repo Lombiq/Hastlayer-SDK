@@ -1,6 +1,10 @@
 namespace Hast.Samples.Consumer
 {
-    internal enum Sample
+    /// <summary>
+    /// The names of the available samples to run. You can find more info in the matching sample runners in the
+    /// SampleRunners directory of this project.
+    /// </summary>
+    public enum Sample
     {
         Fix64Calculator,
         FSharpParallelAlgorithm,
