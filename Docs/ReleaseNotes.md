@@ -5,6 +5,10 @@
 Note that the Hardware Framework projects have their own release cycle and release notes.
 
 
+## vNext
+
+- The consumer sample app now uses [Terminal.Gui](https://github.com/migueldeicaza/gui.cs) to provide an easy to use GUI within a terminal window. Command-line configurability remains and is even extended.
+
 ## v1.2.1, 27.10.2021
 
 Bugfix release to make Hastlayer Remote Services reliably work. If you tried to connect to Hastlayer recently, and didn't get the transformation completed, this fixes it.
