@@ -60,25 +60,14 @@ echo 'petalinux-util --webtalk off' >> ~/.bashrc
 
 ## Configuring and building PetaLinux images
 
-Create a working directory to avoid making a mess.
+Create a working directory to avoid making a mess. Then create an empty PetaLinux project based on Zynq template and configure the hardware:
 
 ```shell
-mkdir ~/petalinux_2020_2_trenz
-cd ~/petalinux_2020_2_trenz
-```
-
-Copy the [trenz_te0715_04_30_1c_base_202020_2.zip](Attachments/trenz_te0715_04_30_1c_base_202020_2.zip) and [export_xsa_2020_2.zip](Attachments/export_xsa_2020_2.zip) files to your working directory.
-
-> ℹ️ On Docker copy it to the shared data directory instead and then type `cp /data/*.zip ~/petalinux_2020_2_trenz`.
-> For users targeting a device other than Trenz TE0715-04-30-1C, [create a platform from the Vitis IDE](https://www.xilinx.com/html_docs/xilinx2020_2/vitis_doc/ake1565072995407.html).
-
-Extract it, create an empty PetaLinux project based on Zynq template and configure the hardware:
-
-```shell
-ls *.zip | xargs -l unzip
+mkdir ~/trenz_te0715_04_30_1c
+cd ~/trenz_te0715_04_30_1c
 petalinux-create -t project --template zynq --name petalinux
 cd petalinux
-petalinux-config --get-hw-description=../zsys_wrapper.xsa
+petalinux-config --silentconfig  --get-hw-description=../vivado/test_board/vivado
 ```
 
 There is no need to change anything, just press <kbd>ESC</kbd> and save the configuration before exit.
