@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Remote.Bridge.Models;
 using Hast.Transformer.Abstractions;
@@ -21,10 +21,15 @@ namespace Hast.Remote.Client
         {
             var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
-            var assemblyContainers = assemblyPaths
-                .Select(path => new AssemblyContainer(
-                    Path.GetFileNameWithoutExtension(path),
-                    File.ReadAllBytes(path)));
+            var assemblyContainers = new List<AssemblyContainer>(assemblyPaths.Count);
+            for (var i = 0; i < assemblyPaths.Count; i++)
+            {
+                var path = assemblyPaths[i];
+                var fileName = Path.GetFileNameWithoutExtension(path);
+                var fileContent = await File.ReadAllBytesAsync(path);
+
+                assemblyContainers.Add(new AssemblyContainer(fileName, fileContent));
+            }
 
             var apiConfiguration = new HardwareGenerationConfiguration(
                 configuration.DeviceName,

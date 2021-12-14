@@ -17,4 +17,7 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.2" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.csproj" />
+  </ItemGroup>
 </Project>
