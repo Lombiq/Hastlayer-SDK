@@ -23,7 +23,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             RunSoftwareBenchmarks();
 
             var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32FusedCalculator(), configuration);
-            var result = positCalculator.CalculateFusedSum(CreateTestPosit32BitsArray(), hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var result = positCalculator.CalculateFusedSum(
+                CreateTestPosit32BitsArray(),
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
         public static void RunSoftwareBenchmarks()

@@ -54,7 +54,8 @@ namespace Hast.Samples.SampleAssembly
                 memory.ReadUInt32(CalculateFibonacchiSeries_InvocationCounterUInt32Index) + 1);
 
             if (number == 0 || number == 1) return (uint)number;
-            return RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 2)) + RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 1));
+            return RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 2)) +
+                RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 1));
         }
 
         private uint RecursivelyCalculateFactorial(SimpleMemory memory, short number)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
 
@@ -43,7 +43,9 @@ namespace Hast.Transformer.Abstractions.Configuration
             {
                 if (value < 1)
                 {
-                    throw new ArgumentOutOfRangeException("The max degree of parallelism should be at least 1, otherwise the member wouldn't be transformed at all.");
+                    throw new ArgumentOutOfRangeException(
+                        "The max degree of parallelism should be at least 1, otherwise the member wouldn't be " +
+                        "transformed at all.");
                 }
 
                 _maxDegreeOfParallelism = value;

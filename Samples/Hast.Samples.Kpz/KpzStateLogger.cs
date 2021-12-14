@@ -27,7 +27,10 @@ namespace Hast.Samples.Kpz
     /// </item></description>
     /// </list>
     /// </summary>
-    [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
+    [SuppressMessage(
+        "Performance",
+        "CA1815:Override equals and operator equals on value types",
+        Justification = "The type's never checked for equality.")]
     public struct KpzAction
     {
         public string Description;

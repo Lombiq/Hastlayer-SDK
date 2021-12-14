@@ -142,7 +142,11 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="image">The image that we modify.</param>
         /// <param name="contrast">The value of the intensity to calculate the new pixel values.</param>
         /// <returns>Returns an image with changed contrast values.</returns>
-        public Bitmap ChangeImageContrast(Bitmap image, int contrast, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public Bitmap ChangeImageContrast(
+            Bitmap image,
+            int contrast,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var memory = CreateSimpleMemory(
                 image,
@@ -160,7 +164,11 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="image">The image to process.</param>
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
-        private SimpleMemory CreateSimpleMemory(Bitmap image, int contrastValue, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        private SimpleMemory CreateSimpleMemory(
+            Bitmap image,
+            int contrastValue,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var pixelCount = image.Width * image.Height;
             var cellCount =

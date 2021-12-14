@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -193,7 +193,11 @@ namespace Hast.Algorithms.Tests
                     }
                 }
             }
-            Console.WriteLine("{0} total, {1} per multiplication", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
+
+            Console.WriteLine(
+                "{0} total, {1} per multiplication",
+                sw.ElapsedMilliseconds,
+                (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
 
@@ -243,7 +247,10 @@ namespace Hast.Algorithms.Tests
                     }
                 }
             }
-            Console.WriteLine("{0} total, {1} per division", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
+            Console.WriteLine(
+                "{0} total, {1} per division",
+                sw.ElapsedMilliseconds,
+                (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
 

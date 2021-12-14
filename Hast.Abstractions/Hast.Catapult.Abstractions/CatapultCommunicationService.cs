@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Models;
+using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
@@ -87,7 +87,13 @@ namespace Hast.Catapult.Abstractions
                             // The illegal endpoint number messages are normal for higher endpoints if they aren't
                             // populated, so it's OK to suppress them.
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
-                                Logger.LogError(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
+                            {
+                                Logger.LogError(
+                                    ex,
+                                    $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint " +
+                                    $"{i}. This device won't be used.");
+                            }
+
                             return null;
                         }
                     })));

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hast.Layer;
 
 namespace Hast.Communication
@@ -16,7 +16,10 @@ namespace Hast.Communication
         }
 
 
-        public T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target, IProxyGenerationConfiguration configuration) where T : class
+        public T CreateCommunicationProxy<T>(
+            IHardwareRepresentation hardwareRepresentation,
+            T target,
+            IProxyGenerationConfiguration configuration) where T : class
         {
             var memberInvocationHandler = _memberInvocationHandlerFactory.CreateMemberInvocationHandler(
                 hardwareRepresentation, target, configuration);

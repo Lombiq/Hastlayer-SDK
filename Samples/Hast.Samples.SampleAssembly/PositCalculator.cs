@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -67,7 +67,11 @@ namespace Hast.Samples.SampleAssembly
         };
 
 
-        public static int CalculateIntegerSumUpToNumber(this PositCalculator positCalculator, int number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static int CalculateIntegerSumUpToNumber(
+            this PositCalculator positCalculator,
+            int number,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(1)

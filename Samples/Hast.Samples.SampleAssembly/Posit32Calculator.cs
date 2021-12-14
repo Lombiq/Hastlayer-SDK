@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
@@ -115,7 +115,11 @@ namespace Hast.Samples.SampleAssembly
 
     public static class Posit32CalculatorExtensions
     {
-        public static int CalculateIntegerSumUpToNumber(this Posit32Calculator positCalculator, int number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static int CalculateIntegerSumUpToNumber(
+            this Posit32Calculator positCalculator,
+            int number,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(1)
@@ -127,7 +131,12 @@ namespace Hast.Samples.SampleAssembly
             return memory.ReadInt32(Posit32Calculator.CalculateLargeIntegerSum_OutputInt32Index);
         }
 
-        public static float CalculatePowerOfReal(this Posit32Calculator positCalculator, int number, float real, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static float CalculatePowerOfReal(
+            this Posit32Calculator positCalculator,
+            int number,
+            float real,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(2)
@@ -141,7 +150,11 @@ namespace Hast.Samples.SampleAssembly
             return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.CalculatePowerOfReal_OutputPosit32Index), true);
         }
 
-        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(this Posit32Calculator positCalculator, int[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(
+            this Posit32Calculator positCalculator,
+            int[] numbers,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             if (numbers.Length != Posit32Calculator.MaxDegreeOfParallelism)
             {
@@ -171,7 +184,11 @@ namespace Hast.Samples.SampleAssembly
             return results;
         }
 
-        public static float AddPositsInArray(this Posit32Calculator posit32Calculator, uint[] posit32Array, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static float AddPositsInArray(
+            this Posit32Calculator posit32Calculator,
+            uint[] posit32Array,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var cellCount = posit32Array.Length + 1;
             var memory = hastlayer is null

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -8,7 +8,8 @@ namespace Hast.Layer
     public static class HastlayerExtensions
     {
         /// <summary>
-        /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation using the default proxy generation configuration.
+        /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation
+        /// using the default proxy generation configuration.
         /// </summary>
         /// <typeparam name="T">Type of the object to generate a proxy for.</typeparam>
         /// <param name="hardwareRepresentation">The representation of the assemblies implemented as hardware.</param>

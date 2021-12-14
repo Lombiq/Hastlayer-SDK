@@ -436,8 +436,10 @@ namespace Hast.Layer
             }
 
             var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
-            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, new ServiceEventArgs<IMemberHardwareExecutionContext>(context));
-            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, new ServiceEventArgs<IMemberInvocationContext>(context));
+            factory.MemberExecutedOnHardware += (_, context) =>
+                ExecutedOnHardware?.Invoke(this, new ServiceEventArgs<IMemberHardwareExecutionContext>(context));
+            factory.MemberInvoking += (_, context) =>
+                Invoking?.Invoke(this, new ServiceEventArgs<IMemberInvocationContext>(context));
         }
 
         private void LogException(Exception exception, string message) =>

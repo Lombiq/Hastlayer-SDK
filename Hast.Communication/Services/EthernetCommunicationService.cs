@@ -92,7 +92,9 @@ namespace Hast.Communication.Services
 
                 if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
                 {
-                    throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
+                    throw new EthernetCommunicationException(
+                        "Awaited a ready signal from the FPGA after the execution byte was sent but received the " +
+                        "following byte instead: " + executionCommandTypeResponseByte[0]);
                 }
 
                 // Here we put together the data stream.

@@ -24,17 +24,25 @@ namespace Hast.Samples.Consumer.SampleRunners
             using var bitmap = new Bitmap("fpga.jpg");
 
             var imageContrastModifier = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ImageContrastModifier(), configuration);
-            var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var modifiedImage = imageContrastModifier.ChangeImageContrast(
+                bitmap,
+                -50,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
             modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ImageContrastModifier().ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var cpuOutput = new ImageContrastModifier().ChangeImageContrast(
+                bitmap,
+                -50,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
             System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
 
-            // ImageFilter disabled until it's improved.
-            //var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
-            //var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
+            //// ImageFilter disabled until it's improved.
+            ////var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
+            ////var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
         }
     }
 }

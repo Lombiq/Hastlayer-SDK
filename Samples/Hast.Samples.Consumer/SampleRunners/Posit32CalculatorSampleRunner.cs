@@ -23,7 +23,10 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32Calculator(), configuration);
 
-            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(
+                100000,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
 
 
             positCalculator.CalculatePowerOfReal(100000, (float)1.0001, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
@@ -35,7 +38,10 @@ namespace Hast.Samples.Consumer.SampleRunners
                 numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
             }
 
-            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(
+                numbers,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
 
 
             var posit32Array = new uint[100000];
@@ -46,7 +52,10 @@ namespace Hast.Samples.Consumer.SampleRunners
                 else posit32Array[i] = new Posit32((float)0.25 * -2 * i).PositBits;
             }
 
-            var positsInArraySum = positCalculator.AddPositsInArray(posit32Array, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var positsInArraySum = positCalculator.AddPositsInArray(
+                posit32Array,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
         public static void RunSoftwareBenchmarks()

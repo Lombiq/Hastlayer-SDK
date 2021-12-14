@@ -11,6 +11,7 @@ using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,7 +25,11 @@ namespace Hast.Samples.Consumer
 
     internal static class Program
     {
-        private static async Task MainTask(string[] args)
+        [SuppressMessage(
+            "Globalization",
+            "CA1303:Do not pass literals as localized parameters",
+            Justification = "This program is not localized.")]
+        private static async Task MainTaskAsync(string[] args)
         {
             /*
             * On a high level these are the steps to use Hastlayer:
@@ -175,7 +180,10 @@ namespace Hast.Samples.Consumer
                     .Mismatches?
                     .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
                 var mismatchCount = mismatches.Count;
-                Console.WriteLine($"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between the software and hardware execution's results! Mismatch{(mismatchCount == 1 ? string.Empty : "es")}:");
+                Console.WriteLine(
+                    "There {0} between the software and hardware execution's results! Mismatch{1}:",
+                    mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches",
+                    mismatchCount == 1 ? string.Empty : "es");
 
                 foreach (var mismatch in mismatches)
                 {
@@ -213,7 +221,7 @@ namespace Hast.Samples.Consumer
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
             try
             {
-                await MainTask(args);
+                await MainTaskAsync(args);
             }
             catch (Exception ex)
             {

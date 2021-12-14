@@ -176,7 +176,11 @@ namespace Hast.Communication
                             .ExecuteAsync(
                                 memory,
                                 memberId,
-                                new HardwareExecutionContext { ProxyGenerationConfiguration = configuration, HardwareRepresentation = hardwareRepresentation });
+                                new HardwareExecutionContext
+                                {
+                                    ProxyGenerationConfiguration = configuration,
+                                    HardwareRepresentation = hardwareRepresentation,
+                                });
 
                         if (configuration.VerifyHardwareResults)
                         {
@@ -218,7 +222,8 @@ namespace Hast.Communication
                     else
                     {
                         throw new NotSupportedException(
-                            "Only SimpleMemory-using implementations are supported for hardware execution. The invocation didn't include a SimpleMemory argument.");
+                            "Only SimpleMemory-using implementations are supported for hardware execution. The " +
+                            "invocation didn't include a SimpleMemory argument.");
                     }
 
                     MemberExecutedOnHardware?.Invoke(this, invocationContext);

@@ -1,10 +1,13 @@
-﻿using System;
+using System;
 
 
 // Some of the enums are taken from OpenCL.NET:
-// PlatformInformation is sourced from https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Platforms/PlatformInformation.cs
-// Result is sourced from https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Result.cs
-// DeviceType is sourced from https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Devices/DeviceType.cs
+// PlatformInformation is sourced from
+//     https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Platforms/PlatformInformation.cs
+// Result is sourced from
+//     https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Result.cs
+// DeviceType is sourced from
+//     https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Devices/DeviceType.cs
 
 // The rest are created using a similar format from the official C API documentation at the Khronos OpenCL Registry:
 // MemoryFlag is described at https://www.khronos.org/registry/OpenCL/sdk/1.0/docs/man/xhtml/clCreateBuffer.html

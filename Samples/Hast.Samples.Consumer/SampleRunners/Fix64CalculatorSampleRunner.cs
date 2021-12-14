@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +39,10 @@ namespace Hast.Samples.Consumer.SampleRunners
                 numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1);
             }
 
-            var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(
+                numbers,
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
         public static void RunSoftwareBenchmark()
@@ -51,6 +54,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 numbers[i] = 10000000 + (i % 2 == 0 ? -1 : 1);
             }
+
             var sums = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();

@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -59,7 +59,12 @@ namespace Hast.Common.Services
                     if (!string.IsNullOrEmpty(initializerName))
                     {
                         var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static);
-                        if (method is null) throw new ArgumentException($"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
+                        if (method is null)
+                        {
+                            throw new ArgumentException(
+                                $"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
+                        }
+
                         method.Invoke(null, new object[] { services });
                     }
                 }

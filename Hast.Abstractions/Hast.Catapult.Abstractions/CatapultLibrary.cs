@@ -171,7 +171,10 @@ namespace Hast.Catapult.Abstractions
         }
 
 
-        public static CatapultLibrary Create(IDictionary<string, object> config, ILogger<CatapultLibrary> logger, int endpointNumber = Constants.PcieHipNumber)
+        public static CatapultLibrary Create(
+            IDictionary<string, object> config,
+            ILogger<CatapultLibrary> logger,
+            int endpointNumber = Constants.PcieHipNumber)
         {
             var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
                 config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :

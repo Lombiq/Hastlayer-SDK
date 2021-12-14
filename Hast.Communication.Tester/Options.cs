@@ -2,9 +2,14 @@ using CommandLine;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Communication.Tester
 {
+    [SuppressMessage(
+        "Major Code Smell",
+        "S103:Lines should not be too long",
+        Justification = "We can deal with long HelpText.")]
     public class Options
     {
         // Be sure to update the when changing these!

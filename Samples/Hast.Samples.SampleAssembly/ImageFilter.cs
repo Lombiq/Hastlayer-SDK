@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Drawing;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
@@ -67,17 +67,21 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 3; y < imageWidthHelper - 3; y++)
                 {
-                    topLeft = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper - 3 + FilterImage_ImageStartIndex);
-                    topMiddle = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + FilterImage_ImageStartIndex);
-                    topRight = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - imageWidthHelper + 3 + FilterImage_ImageStartIndex);
-                    middleLeft = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper - 3 + FilterImage_ImageStartIndex);
-                    pixel = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + FilterImage_ImageStartIndex);
-                    middleRight = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + 3 + FilterImage_ImageStartIndex);
-                    bottomLeft = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper - 3 + FilterImage_ImageStartIndex);
-                    bottomMiddle = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
-                    bottomRight = (ushort)memory.ReadUInt32(x * imageWidthHelper + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
+                    // Warpping all these wouldn't be an improvement.
+#pragma warning disable S103 // Lines should not be too long
+                    topLeft = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper - imageWidthHelper - 3 + FilterImage_ImageStartIndex);
+                    topMiddle = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper - imageWidthHelper + FilterImage_ImageStartIndex);
+                    topRight = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper - imageWidthHelper + 3 + FilterImage_ImageStartIndex);
+                    middleLeft = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper - 3 + FilterImage_ImageStartIndex);
+                    pixel = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper + FilterImage_ImageStartIndex);
+                    middleRight = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper + 3 + FilterImage_ImageStartIndex);
+                    bottomLeft = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper + imageWidthHelper - 3 + FilterImage_ImageStartIndex);
+                    bottomMiddle = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper + imageWidthHelper + FilterImage_ImageStartIndex);
+                    bottomRight = (ushort)memory.ReadUInt32((x * imageWidthHelper) + y + pixelCountHelper + imageWidthHelper + 3 + FilterImage_ImageStartIndex);
 
-                    memory.WriteUInt32(x * imageWidthHelper + y + FilterImage_ImageStartIndex, CalculatePixelValue(
+                    // We are trying to represent the value as a 3x3 matrix.
+#pragma warning disable SA1117 // Parameters should be on same line or separate lines
+                    memory.WriteUInt32((x * imageWidthHelper) + y + FilterImage_ImageStartIndex, CalculatePixelValue(
                         topLeft, topMiddle, topRight,
                         middleLeft, pixel, middleRight,
                         bottomLeft, bottomMiddle, bottomRight,
@@ -85,6 +89,8 @@ namespace Hast.Samples.SampleAssembly
                         middleLeftValue, pixelValue, middleRightValue,
                         bottomLeftValue, bottomMiddleValue, bottomRightValue,
                         factor, offset));
+#pragma warning restore SA1117 // Parameters should be on same line or separate lines
+#pragma warning restore S103 // Lines should not be too long
                 }
             }
         }
@@ -242,7 +248,7 @@ namespace Hast.Samples.SampleAssembly
             int bottomLeft, int bottomMiddle, int bottomRight,
             int factor = 1, int offset = 0)
         {
-            var cellCount = image.Width * image.Height * 6 + 13;
+            var cellCount = (image.Width * image.Height * 6) + 13;
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
@@ -269,13 +275,13 @@ namespace Hast.Samples.SampleAssembly
                 {
                     var pixelValue = image.GetPixel(y, x);
 
-                    memory.WriteUInt32((x * image.Width + y) * 3 + FilterImage_ImageStartIndex, pixelValue.R);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + FilterImage_ImageStartIndex, pixelValue.G);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + FilterImage_ImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((((x * image.Width) + y) * 3) + FilterImage_ImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 1 + FilterImage_ImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 2 + FilterImage_ImageStartIndex, pixelValue.B);
 
-                    memory.WriteUInt32((x * image.Width + y) * 3 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.R);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 1 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.G);
-                    memory.WriteUInt32((x * image.Width + y) * 3 + 2 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((((x * image.Width) + y) * 3) + (size * 3) + FilterImage_ImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 1 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 2 + (size * 3) + FilterImage_ImageStartIndex, pixelValue.B);
                 }
             }
 
@@ -298,9 +304,9 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    r = memory.ReadInt32((x * newImage.Width + y) * 3 + FilterImage_ImageStartIndex);
-                    g = memory.ReadInt32((x * newImage.Width + y) * 3 + 1 + FilterImage_ImageStartIndex);
-                    b = memory.ReadInt32((x * newImage.Width + y) * 3 + 2 + FilterImage_ImageStartIndex);
+                    r = memory.ReadInt32((((x * newImage.Width) + y) * 3) + FilterImage_ImageStartIndex);
+                    g = memory.ReadInt32((((x * newImage.Width) + y) * 3) + 1 + FilterImage_ImageStartIndex);
+                    b = memory.ReadInt32((((x * newImage.Width) + y) * 3) + 2 + FilterImage_ImageStartIndex);
 
                     newImage.SetPixel(y, x, Color.FromArgb(r, g, b));
                 }

@@ -1,4 +1,4 @@
-﻿using Castle.DynamicProxy;
+using Castle.DynamicProxy;
 using Hast.Common.Interfaces;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
@@ -27,6 +27,9 @@ namespace Hast.Communication
         event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
         event EventHandler<IMemberInvocationContext> MemberInvoking;
 
-        MemberInvocationHandler CreateMemberInvocationHandler(IHardwareRepresentation hardwareRepresentation, object target, IProxyGenerationConfiguration configuration);
+        MemberInvocationHandler CreateMemberInvocationHandler(
+            IHardwareRepresentation hardwareRepresentation,
+            object target,
+            IProxyGenerationConfiguration configuration);
     }
 }

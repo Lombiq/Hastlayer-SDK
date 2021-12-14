@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 
 namespace Hast.Communication
@@ -9,6 +9,9 @@ namespace Hast.Communication
     /// </summary>
     public interface IProxyGenerator : ISingletonDependency
     {
-        T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target, IProxyGenerationConfiguration configuration) where T : class;
+        T CreateCommunicationProxy<T>(
+            IHardwareRepresentation hardwareRepresentation,
+            T target,
+            IProxyGenerationConfiguration configuration) where T : class;
     }
 }

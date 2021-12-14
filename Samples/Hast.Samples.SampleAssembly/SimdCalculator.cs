@@ -1,4 +1,4 @@
-﻿using Hast.Common.Numerics;
+using Hast.Common.Numerics;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using Hast.Layer;
@@ -108,21 +108,36 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
 
-        public int[] SubtractVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+        public int[] SubtractVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), hastlayer, configuration);
 
-        public int[] MultiplyVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+        public int[] MultiplyVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), hastlayer, configuration);
 
-        public int[] DivideVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+        public int[] DivideVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
 
-
-        private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        private int[] RunSimdOperation(
+            int[] vector1,
+            int[] vector2,
+            Action<SimpleMemory> operation,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             SimdOperations.ThrowIfVectorsNotEquallyLong(vector1, vector2);
 

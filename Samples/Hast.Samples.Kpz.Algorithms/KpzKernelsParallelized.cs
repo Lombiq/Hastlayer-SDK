@@ -348,7 +348,9 @@ namespace Hast.Samples.Kpz.Algorithms
                 for (int y = 0; y < KpzKernelsParallelizedInterface.GridSize; y++)
                 {
                     var node = gridSrc[x, y];
-                    memoryDst.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + y * KpzKernelsParallelizedInterface.GridSize + x, node.SerializeToUInt32());
+                    memoryDst.WriteUInt32(
+                        KpzKernelsParallelizedInterface.MemIndexGrid + (y * KpzKernelsParallelizedInterface.GridSize) + x,
+                        node.SerializeToUInt32());
                 }
             }
         }

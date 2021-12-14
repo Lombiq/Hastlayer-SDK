@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hast.Algorithms;
@@ -105,7 +105,10 @@ namespace Hast.Samples.SampleAssembly
             });
         }
 
-        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(int[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(
+            int[] numbers,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             if (numbers.Length != MaxDegreeOfParallelism)
             {

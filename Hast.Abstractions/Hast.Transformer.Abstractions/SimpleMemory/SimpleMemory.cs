@@ -205,7 +205,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
 
         public static ArraySegment<byte> GetUnderlyingArray(this ReadOnlyMemory<byte> bytes)
         {
-            if (!MemoryMarshal.TryGetArray(bytes, out var arraySegment)) throw new NotSupportedException("This Memory does not support exposing the underlying array.");
+            if (!MemoryMarshal.TryGetArray(bytes, out var arraySegment))
+            {
+                throw new NotSupportedException("This Memory does not support exposing the underlying array.");
+            }
+
             return arraySegment;
         }
     }

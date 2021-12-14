@@ -32,7 +32,10 @@ namespace Hast.Samples.Kpz.Algorithms
     /// This struct stores the right and bottom neighbours of a particular node on the grid.
     /// It stores both their values and coordinates.
     /// </summary>
-    [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
+    [SuppressMessage(
+        "Performance",
+        "CA1815:Override equals and operator equals on value types",
+        Justification = "The type's never checked for equality.")]
     public struct KpzNeighbours
     {
         public KpzNode nx; // Right neighbour value
@@ -41,11 +44,13 @@ namespace Hast.Samples.Kpz.Algorithms
         public KpzCoords nyCoords; // Left neighbour coordinates
     }
 
-
     /// <summary>
     /// This struct stores the coordinates of a <see cref="KpzNode" /> on the grid.
     /// </summary>
-    [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
+    [SuppressMessage(
+        "Performance",
+        "CA1815:Override equals and operator equals on value types",
+        Justification = "The type's never checked for equality.")]
     public struct KpzCoords
     {
         public int x;
