@@ -45,7 +45,7 @@ namespace Hast.Communication.Services
             }
         }
 
-        public Task<IReservedDevice> ReserveDevice()
+        public Task<IReservedDevice> ReserveDeviceAsync()
         {
             lock (_lock)
             {

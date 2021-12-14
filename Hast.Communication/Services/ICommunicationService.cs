@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
@@ -12,12 +12,12 @@ namespace Hast.Communication.Services
     public interface ICommunicationService : IDependency
     {
         /// <summary>
-        /// Name of the channel used for the communication.
+        /// Gets the name of the channel used for the communication.
         /// </summary>
         string ChannelName { get; }
 
         /// <summary>
-        /// The TextWriter which the communication service may use to communicate diagnostics information.
+        /// Gets or sets the TextWriter which the communication service may use to communicate diagnostics information.
         /// </summary>
         System.IO.TextWriter TesterOutput { get; set; }
 
@@ -30,10 +30,10 @@ namespace Hast.Communication.Services
         /// <param name="memberId">The member ID identifies the class member that we want to run on the FPGA board.</param>
         /// <param name="executionContext">The contextual information of the execution.</param>
         /// <returns>
-        /// An <see cref="IHardwareExecutionInformation"/> object containing debug and runtime information about the 
+        /// An <see cref="IHardwareExecutionInformation"/> object containing debug and runtime information about the
         /// hardware execution.
         /// </returns>
-        Task<IHardwareExecutionInformation> Execute(
+        Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext);

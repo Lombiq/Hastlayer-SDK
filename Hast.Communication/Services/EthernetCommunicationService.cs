@@ -46,7 +46,7 @@ namespace Hast.Communication.Services
         }
 
 
-        public override async Task<IHardwareExecutionInformation> Execute(
+        public override async Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
@@ -66,7 +66,7 @@ namespace Hast.Communication.Services
                 });
 
 
-            using var device = await _devicePoolManager.ReserveDevice();
+            using var device = await _devicePoolManager.ReserveDeviceAsync();
             var context = BeginExecution();
 
             IFpgaEndpoint fpgaEndpoint = device.Metadata;

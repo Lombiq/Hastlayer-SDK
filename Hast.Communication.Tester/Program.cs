@@ -110,7 +110,7 @@ namespace Hast.Communication.Tester
             communicationService.TesterOutput = Console.Out;
             var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
                 selectedDevice.DefaultCommunicationChannelName);
-            var info = await communicationService.Execute(memory, CommandLineOptions.MemberId, executionContext);
+            var info = await communicationService.ExecuteAsync(memory, CommandLineOptions.MemberId, executionContext);
 
             Console.WriteLine("Executing test on hardware took {0:0.##} ms (net) {1:0.##} ms (all together)",
                 info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
