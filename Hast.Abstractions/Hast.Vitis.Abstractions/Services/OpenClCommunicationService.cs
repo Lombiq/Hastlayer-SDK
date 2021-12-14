@@ -23,19 +23,18 @@ namespace Hast.Vitis.Abstractions.Services
     {
         public const string KernelName = "hastip";
 
-
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
 
         protected readonly IBinaryOpenCl _binaryOpenCl;
         protected readonly ILogger _logger;
 
-
         protected OpenClCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
-            ILogger<OpenClCommunicationService> logger) : base(logger)
+            ILogger<OpenClCommunicationService> logger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
@@ -43,8 +42,7 @@ namespace Hast.Vitis.Abstractions.Services
             _logger = logger;
         }
 
-
-        public override async Task<IHardwareExecutionInformation> Execute(
+        public override async Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
@@ -74,13 +72,13 @@ namespace Hast.Vitis.Abstractions.Services
             }
             else
             {
-                using var stream = new FileStream(infoFilePath, FileMode.Open);
+                await using var stream = new FileStream(infoFilePath, FileMode.Open);
                 clockFrequency = XclbinClockInfo.FromStream(stream, Encoding.Default)
                     .FirstOrDefault(info => info.Type == XclbinClockInfoType.Data)?
                     .Frequency;
             }
 
-            var kernelBinary = File.ReadAllBytes(implementation.BinaryPath);
+            var kernelBinary = await File.ReadAllBytesAsync(implementation.BinaryPath);
             _binaryOpenCl.CreateBinaryKernel(kernelBinary, KernelName);
 
             _devicePoolPopulator.PopulateDevicePoolIfNew(() =>
@@ -91,7 +89,7 @@ namespace Hast.Vitis.Abstractions.Services
                     devices.Add(new Device
                     {
                         Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}",
-                        Metadata = i
+                        Metadata = i,
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
                 }
@@ -99,52 +97,16 @@ namespace Hast.Vitis.Abstractions.Services
                 return Task.FromResult<IEnumerable<IDevice>>(devices);
             });
 
-            using var device = await _devicePoolManager.ReserveDevice();
+            using var device = await _devicePoolManager.ReserveDeviceAsync();
             var context = BeginExecution();
-            {
-                int deviceIndex = device.Metadata;
-                var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
 
-                // Prepare host buffer.
-                var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
-                hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
+            var resultMetadata = await PerformExecutionAsync(device, simpleMemory, configuration, memberId, executionContext);
+            SetHardwareExecutionTime(context, executionContext, resultMetadata.ExecutionTime, clockFrequency);
 
-                Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
-                var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
-                if (hostMemory.Length <= headerSize)
-                {
-                    throw new IndexOutOfRangeException(
-                        $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
-                        $"{headerSize}b.");
-                }
-
-                using var hostMemoryHandle = hostMemory.Pin();
-                // Send data and execute.
-                var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
-                    KernelName,
-                    index: 0,
-                    hostMemoryHandle,
-                    hostMemory.Length,
-                    GetBuffer(hostMemory, hostMemoryHandle, executionContext));
-                Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
-                Logger.LogInformation("LAUNCHING KERNEL...");
-                _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
-                Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
-                await _binaryOpenCl.AwaitDevice(deviceIndex);
-                var resultMetadata = GetResultMetadata(hostMemory.Span, configuration);
-
-                // Read out metadata.
-                SetHardwareExecutionTime(
-                    context,
-                    executionContext,
-                    resultMetadata.ExecutionTime,
-                    clockFrequency);
-            }
             EndExecution(context);
 
             return context.HardwareExecutionInformation;
         }
-
 
         protected virtual IntPtr GetBuffer(
             Memory<byte> data,
@@ -152,6 +114,44 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareExecutionContext executionContext) =>
             IntPtr.Zero;
 
+        private async Task<OpenClResultMetadata> PerformExecutionAsync(
+            IReservedDevice device,
+            SimpleMemory simpleMemory,
+            IOpenClConfiguration configuration,
+            int memberId,
+            IHardwareExecutionContext executionContext)
+        {
+            int deviceIndex = device.Metadata;
+            var memoryAccessor = new SimpleMemoryAccessor(simpleMemory);
+
+            // Prepare host buffer.
+            var hostMemory = memoryAccessor.Get(configuration.HeaderCellCount);
+            hostMemory.Span.SetIntegers(0, configuration.HeaderCellCount, memberId);
+
+            Logger.LogInformation("Input buffer size: {0}b", hostMemory.Length);
+            var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
+            if (hostMemory.Length <= headerSize)
+            {
+                throw new InvalidOperationException(
+                    $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
+                    $"{headerSize}b.");
+            }
+
+            using var hostMemoryHandle = hostMemory.Pin();
+            // Send data and execute.
+            var fpgaBuffer = _binaryOpenCl.SetKernelArgumentWithNewBuffer(
+                KernelName,
+                index: 0,
+                hostMemoryHandle,
+                hostMemory.Length,
+                GetBuffer(hostMemory, hostMemoryHandle, executionContext));
+            Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
+            Logger.LogInformation("LAUNCHING KERNEL...");
+            _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+            Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
+            await _binaryOpenCl.AwaitDevice(deviceIndex);
+            return GetResultMetadata(hostMemory.Span, configuration);
+        }
 
         private OpenClResultMetadata GetResultMetadata(Span<byte> bufferSpan, IOpenClConfiguration configuration)
         {
@@ -162,7 +162,7 @@ namespace Hast.Vitis.Abstractions.Services
             var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
             if (bufferSpan.Length <= headerSize)
             {
-                throw new IndexOutOfRangeException(
+                throw new InvalidOperationException(
                     $"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b.");
             }
 
@@ -173,14 +173,14 @@ namespace Hast.Vitis.Abstractions.Services
             bool canLogDebug = Logger.IsEnabled(LogLevel.Debug);
             if (canLogInfo || canLogDebug)
             {
-                bufferSpan = bufferSpan.Slice(headerSize);
+                bufferSpan = bufferSpan[headerSize..];
 
                 if (canLogDebug)
                 {
                     int logAmount = bufferSpan.Length / MemoryCellSizeBytes;
                     for (int i = 0; i < logAmount; i++)
                     {
-                        var value = MemoryMarshal.Read<int>(bufferSpan.Slice(i * MemoryCellSizeBytes));
+                        var value = MemoryMarshal.Read<int>(bufferSpan[(i * MemoryCellSizeBytes)..]);
                         Logger.LogDebug("HOST: buffer[{0}] = 0x{1:X8}", i, value);
                     }
                 }
