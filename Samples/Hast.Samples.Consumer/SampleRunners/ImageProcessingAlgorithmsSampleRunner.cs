@@ -23,8 +23,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
             using var bitmap = new Bitmap("fpga.jpg");
 
-            var imageContrastModifier = await hastlayer
-                .GenerateProxy(hardwareRepresentation, new ImageContrastModifier(), configuration);
+            var imageContrastModifier = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ImageContrastModifier(), configuration);
             var modifiedImage = imageContrastModifier.ChangeImageContrast(bitmap, -50, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 

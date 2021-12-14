@@ -2,7 +2,6 @@ using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz
@@ -34,8 +33,8 @@ namespace Hast.Samples.Kpz
             hastlayer.ExecutedOnHardware += (sender, e) =>
             {
                 LogItFunction("Hastlayer timer: " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
+                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
+                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
                 );
             };
 
@@ -60,7 +59,7 @@ namespace Hast.Samples.Kpz
             }
 
 
-            var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(new[] {
                     typeof(KpzKernelsParallelizedInterface).Assembly,
                     typeof(RandomMwc64X).Assembly
                 }, configuration);
@@ -76,22 +75,19 @@ namespace Hast.Samples.Kpz
 
                 if (_kpzTarget == KpzTarget.Fpga)
                 {
-                    Kernels = await hastlayer.GenerateProxy(
-                        hardwareRepresentation,
+                    Kernels = await hastlayer.GenerateProxyAsync(hardwareRepresentation,
                         new KpzKernelsInterface(),
                         proxyConf);
                 }
                 else if (_kpzTarget == KpzTarget.FpgaParallelized)
                 {
-                    KernelsParallelized = await hastlayer.GenerateProxy(
-                        hardwareRepresentation,
+                    KernelsParallelized = await hastlayer.GenerateProxyAsync(hardwareRepresentation,
                         new KpzKernelsParallelizedInterface(),
                         proxyConf);
                 }
                 else //if(kpzTarget == KpzTarget.PrngTest)
                 {
-                    KernelsP = await hastlayer.GenerateProxy(
-                        hardwareRepresentation,
+                    KernelsP = await hastlayer.GenerateProxyAsync(hardwareRepresentation,
                         new PrngTestInterface(),
                         proxyConf);
                 }

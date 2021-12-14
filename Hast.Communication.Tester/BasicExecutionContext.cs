@@ -20,7 +20,7 @@ namespace Hast.Communication.Tester
             {
                 EnableHardwareTransformation = false,
             };
-            HardwareRepresentation = hastlayer.GenerateHardware(assemblies, configuration).Result;
+            HardwareRepresentation = hastlayer.GenerateHardwareAsync(assemblies, configuration).Result;
 
             ProxyGenerationConfiguration = new ProxyGenerationConfiguration()
             {

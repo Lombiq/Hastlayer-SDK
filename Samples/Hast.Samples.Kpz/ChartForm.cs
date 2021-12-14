@@ -205,7 +205,7 @@ namespace Hast.Samples.Kpz
                 (hastlayer, configuration) = hastlayerInitializationTask.Result;
                 hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
                 hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
-                    $"(took {e.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
+                    $"(took {e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
             }
 
             try

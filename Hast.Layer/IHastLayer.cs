@@ -1,6 +1,7 @@
 using Hast.Common.Services;
+using Hast.Communication.Extensibility;
+using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Services;
-using Hast.Layer.Extensibility.Events;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,20 @@ using System.Threading.Tasks;
 
 namespace Hast.Layer
 {
+    /// <summary>
+    /// The main container that manages Hastlayer features and services.
+    /// </summary>
     public interface IHastlayer : IDisposable
     {
         /// <summary>
         /// Occurs when the member invocation (e.g. a method call) was transferred to hardware and finished there.
         /// </summary>
-        event ExecutedOnHardwareEventHandler ExecutedOnHardware;
-        event InvokingEventHandler Invoking;
+        event EventHandler<ServiceEventArgs<IMemberHardwareExecutionContext>> ExecutedOnHardware;
+
+        /// <summary>
+        /// Occurs before the proxy is executed.
+        /// </summary>
+        event EventHandler<ServiceEventArgs<IMemberInvocationContext>> Invoking;
 
         /// <summary>
         /// Gets those devices which have their support drivers loaded.
@@ -32,7 +40,7 @@ namespace Hast.Layer
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during hardware generation.
         /// </exception>
-        Task<IHardwareRepresentation> GenerateHardware(
+        Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration);
 
@@ -44,15 +52,16 @@ namespace Hast.Layer
         /// <param name="hardwareObject">The object to generate the proxy for.</param>
         /// <param name="configuration">
         /// Configuration for how the proxy generation should happen. If null, it will be substituted with
-        /// <see cref="ProxyGenerationConfiguration.Default"/></param>
+        /// <see cref="ProxyGenerationConfiguration.Default"/>.</param>
         /// <returns>The generated proxy object.</returns>
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
-        Task<T> GenerateProxy<T>(
+        Task<T> GenerateProxyAsync<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
-            IProxyGenerationConfiguration configuration = null) where T : class;
+            IProxyGenerationConfiguration configuration = null)
+            where T : class;
 
         /// <summary>
         /// Gets a registered service for the interface <typeparamref name="TServiceInterface"/> inside a disposable
@@ -77,7 +86,7 @@ namespace Hast.Layer
         /// allocated memory space is calculated from the cell count and the cell size indicated in
         /// <see cref="SimpleMemory.MemoryCellSizeBytes"/>.
         /// </param>
-        /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
+        /// <returns>A new instance of <see cref="SimpleMemory"/>.</returns>
         SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, int cellCount);
 
         /// <summary>
@@ -91,10 +100,10 @@ namespace Hast.Layer
         /// <param name="configuration">The configuration with the device information.</param>
         /// <param name="data">
         /// The input data which is referenced by or copied into the <see cref="SimpleMemory"/> depending on the
-        /// selected device's characteristics, particularly its <see cref="MemoryConfiguration{T}.MinimumPrefix"/>.
+        /// selected device's characteristics, particularly its <c>MemoryConfiguration.MinimumPrefix</c>.
         /// </param>
-        /// <param name="withPrefixCells">The amount of empty header space reserved in the <see cref="data"/>.</param>
-        /// <returns>A new instance of <see cref="SimpleMemory"/></returns>
+        /// <param name="withPrefixCells">The amount of empty header space reserved in the <paramref name="data"/>.</param>
+        /// <returns>A new instance of <see cref="SimpleMemory"/>.</returns>
         // Here we use Memory&lt;byte&gt; because xmldoc doesn't support generics with a definite type in <see> and in
         // the generated documentation they get replaced with <T>. See https://stackoverflow.com/a/41208166.
         SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0);

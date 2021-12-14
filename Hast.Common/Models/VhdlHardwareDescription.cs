@@ -30,7 +30,7 @@ namespace Hast.Common.Models
         public IEnumerable<ITransformationWarning> Warnings { get; set; }
 
 
-        public async Task Serialize(Stream stream)
+        public async Task SerializeAsync(Stream stream)
         {
             if (string.IsNullOrEmpty(VhdlSource)) throw new InvalidOperationException("There is no VHDL source set.");
 
@@ -44,7 +44,7 @@ namespace Hast.Common.Models
         }
 
 
-        public static async Task<VhdlHardwareDescription> Deserialize(Stream stream)
+        public static async Task<VhdlHardwareDescription> DeserializeAsync(Stream stream)
         {
             using (var reader = new StreamReader(stream))
             {

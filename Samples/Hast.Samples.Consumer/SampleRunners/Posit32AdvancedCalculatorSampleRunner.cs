@@ -20,7 +20,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);
+            var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);
 
             positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 

@@ -57,6 +57,6 @@ namespace Hast.Layer
         /// <remarks>To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.</remarks>
         /// <param name="stream"></param>
         /// <returns></returns>
-        Task Serialize(Stream stream);
+        Task SerializeAsync(Stream stream);
     }
 }

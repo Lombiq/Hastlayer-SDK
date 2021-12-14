@@ -39,7 +39,7 @@ namespace Hast.Samples.SampleAssembly
         /// than a single SimpleMemory one.
         /// </remarks>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
-        public virtual void IsPrimeNumber(SimpleMemory memory)
+        public virtual void IsPrimeNumberSync(SimpleMemory memory)
         {
             // Reading out the input parameter.
             var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
@@ -56,7 +56,7 @@ namespace Hast.Samples.SampleAssembly
         /// </remarks>
         public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
         {
-            IsPrimeNumber(memory);
+            IsPrimeNumberSync(memory);
 
             // In .NET <4.6 Task.FromResult(true) can be used too.
             return Task.CompletedTask;
@@ -174,9 +174,9 @@ namespace Hast.Samples.SampleAssembly
         // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
         // in them that is not Hastlayer-compatible.
 
-        public bool IsPrimeNumber(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
-            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumber(memory)), hastlayer, configuration).Result;
+            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
         }
 
         public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)

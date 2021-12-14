@@ -2,6 +2,8 @@ using Hast.Catapult.Abstractions;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
+using Hast.Communication.Extensibility;
+using Hast.Communication.Extensibility.Events;
 using Hast.Layer.EmptyRepresentationFactories;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
@@ -31,8 +33,8 @@ namespace Hast.Layer
         private readonly ServiceProvider _serviceProvider;
         private readonly HashSet<string> _serviceNames;
 
-        public event ExecutedOnHardwareEventHandler ExecutedOnHardware;
-        public event InvokingEventHandler Invoking;
+        public event EventHandler<ServiceEventArgs<IMemberHardwareExecutionContext>> ExecutedOnHardware;
+        public event EventHandler<ServiceEventArgs<IMemberInvocationContext>> Invoking;
 
         // Private so the static factory should be used.
         private Hastlayer(IHastlayerConfiguration configuration)
@@ -150,7 +152,7 @@ namespace Hast.Layer
 
         ~Hastlayer() => Dispose();
 
-        public async Task<IHardwareRepresentation> GenerateHardware(
+        public async Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration)
         {
@@ -205,7 +207,7 @@ namespace Hast.Layer
                     }
 
                     var hardwareDescription = configuration.EnableHardwareTransformation ?
-                        await transformer.Transform(assembliesPaths, configuration) :
+                        await transformer.TransformAsync(assembliesPaths, configuration) :
                         EmptyHardwareDescriptionFactory.Create(configuration);
 
                     foreach (var transformationEvent in transformationEvents)
@@ -273,7 +275,7 @@ namespace Hast.Layer
             }
         }
 
-        public async Task<T> GenerateProxy<T>(
+        public async Task<T> GenerateProxyAsync<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
             IProxyGenerationConfiguration configuration = null) where T : class
@@ -436,8 +438,8 @@ namespace Hast.Layer
             }
 
             var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
-            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, context);
-            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, context);
+            factory.MemberExecutedOnHardware += (_, context) => ExecutedOnHardware?.Invoke(this, new ServiceEventArgs<IMemberHardwareExecutionContext>(context));
+            factory.MemberInvoking += (_, context) => Invoking?.Invoke(this, new ServiceEventArgs<IMemberInvocationContext>(context));
         }
 
         private void LogException(Exception exception, string message) =>

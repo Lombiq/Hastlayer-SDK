@@ -22,7 +22,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var recursiveAlgorithms = await hastlayer.GenerateProxy(hardwareRepresentation, new RecursiveAlgorithms(), configuration);
+            var recursiveAlgorithms = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new RecursiveAlgorithms(), configuration);
 
             // 720
             var factorial = recursiveAlgorithms.CalculateFactorial(6, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

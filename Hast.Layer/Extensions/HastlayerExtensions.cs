@@ -17,11 +17,11 @@ namespace Hast.Layer
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during proxy generation.
         /// </exception>
-        public static Task<T> GenerateProxy<T>(
+        public static Task<T> GenerateProxyAsync<T>(
             this IHastlayer hastlayer,
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject) where T : class =>
-            hastlayer.GenerateProxy(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
+            hastlayer.GenerateProxyAsync(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
 
         /// <summary>
         /// Generates and implements a hardware representation of the given assemblies. Be sure to use assemblies built
@@ -33,10 +33,10 @@ namespace Hast.Layer
         /// <exception cref="HastlayerException">
         /// Thrown if any lower-level exception or other error happens during hardware generation.
         /// </exception>
-        public static Task<IHardwareRepresentation> GenerateHardware(
+        public static Task<IHardwareRepresentation> GenerateHardwareAsync(
             this IHastlayer hastlayer,
             IEnumerable<Assembly> assemblies,
             IHardwareGenerationConfiguration configuration) =>
-            hastlayer.GenerateHardware(assemblies.Select(assembly => assembly.Location), configuration);
+            hastlayer.GenerateHardwareAsync(assemblies.Select(assembly => assembly.Location), configuration);
     }
 }

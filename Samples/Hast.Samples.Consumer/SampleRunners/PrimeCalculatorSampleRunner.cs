@@ -19,12 +19,12 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var primeCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new PrimeCalculator(), configuration);
+            var primeCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new PrimeCalculator(), configuration);
 
             foreach (var number in new uint[] { 15, 13, 20 })
             {
                 Console.WriteLine("primeCalculator.IsPrimeNumber: {0}", number);
-                var result = primeCalculator.IsPrimeNumber(
+                var result = primeCalculator.IsPrimeNumberSync(
                     number,
                     hastlayer,
                     hardwareRepresentation.HardwareGenerationConfiguration);

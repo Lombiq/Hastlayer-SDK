@@ -17,7 +17,7 @@ namespace Hast.Remote.Client
 {
     public class RemoteTransformer : ITransformer
     {
-        public async Task<IHardwareDescription> Transform(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
+        public async Task<IHardwareDescription> TransformAsync(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration)
         {
             var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
@@ -101,7 +101,7 @@ namespace Hast.Remote.Client
 
                 using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(hardwareDescription.SerializedHardwareDescription)))
                 {
-                    return await VhdlHardwareDescription.Deserialize(memoryStream);
+                    return await VhdlHardwareDescription.DeserializeAsync(memoryStream);
                 }
             }
             catch (ApiException ex)
