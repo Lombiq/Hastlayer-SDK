@@ -41,7 +41,7 @@ namespace Hast.Console.Subcommands
         }
 
 
-        private Task RunOptionsAsync(VitisOptions options, ParserResult<VitisOptions> parserResult)
+        private async Task RunOptionsAsync(VitisOptions options, ParserResult<VitisOptions> parserResult)
         {
             if (!Enum.TryParse(options.Instruction, ignoreCase: true, out Instruction instruction))
             {
@@ -57,13 +57,14 @@ namespace Hast.Console.Subcommands
                             parserResult,
                             error => error,
                             example => example));
-                    return Task.CompletedTask;
-                case Instruction.Build: return BuildAsync(options);
-                case Instruction.Json: return JsonAsync(options);
+                    return;
+                case Instruction.Build: return;
+                case Instruction.Json: return;
                 default:
-                    System.Console.Error.WriteLine(
-                        "The valid options are: {0}",
-                        string.Join(", ", Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant())));
+                    var validOptions = string.Join(
+                        ", ",
+                        Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant()));
+                    await System.Console.Error.WriteLineAsync($"The valid options are: {validOptions}");
                     throw new ArgumentOutOfRangeException(options.Instruction);
             }
         }

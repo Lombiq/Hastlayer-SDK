@@ -217,7 +217,7 @@ namespace Hast.Samples.Consumer
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex);
+                await Console.Error.WriteLineAsync(ex.ToString());
             }
         }
     }

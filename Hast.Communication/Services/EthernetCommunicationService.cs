@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Constants;
+using Hast.Communication.Constants;
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Models;
@@ -89,7 +89,7 @@ namespace Hast.Communication.Services
                         {
                             // We send an execution signal to make the FPGA ready to receive the data stream.
                             var executionCommandTypeByte = new byte[] { (byte)CommandTypes.Execution };
-                            stream.Write(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
+                            await stream.WriteAsync(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
 
                             var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
 
@@ -110,7 +110,7 @@ namespace Hast.Communication.Services
 
                             // Sending data to the FPGA board.
                             var segment = memory.GetUnderlyingArray();
-                            stream.Write(segment.Array, segment.Offset, memory.Length);
+                            await stream.WriteAsync(segment.Array, segment.Offset, memory.Length);
 
 
                             // Read the first batch of the TcpServer response bytes that will represent the execution time.

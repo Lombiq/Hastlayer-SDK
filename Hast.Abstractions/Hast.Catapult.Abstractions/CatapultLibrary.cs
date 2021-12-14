@@ -1,4 +1,4 @@
-﻿using AdvancedDLSupport;
+using AdvancedDLSupport;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
@@ -368,7 +368,8 @@ namespace Hast.Catapult.Abstractions
 
                 currentSlot = _currentSlot;
                 _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
-                    .ContinueWith(_ => RunJob(currentSlot, data, ignoreResponse).Result);
+                    .ContinueWith(_ => RunJob(currentSlot, data, ignoreResponse), TaskScheduler.Current)
+                    .Unwrap();
             }
 
             var jobResult = await job;

@@ -489,7 +489,7 @@ namespace Hast.Vitis.Abstractions.Services
             var result = await (yes | xbutil).ExecuteBufferedAsync();
 
             _logger.LogWarning("xbutil: {0}", result.StandardOutput);
-            _buildOutput.WriteLine("xbutil stdout: {0}", result.StandardOutput);
+            await _buildOutput.WriteLineAsync($"xbutil stdout: {result.StandardOutput}");
         }
 
         private void OnProgress(object sender, BuildProgressEventArgs e) =>

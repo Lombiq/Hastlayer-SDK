@@ -16,7 +16,7 @@ namespace System.Net.Sockets
             var receiveTask = client.ReceiveAsync();
 
             if (await Task.WhenAny(receiveTask, Task.Delay(receiveTimeoutMilliseconds)) == receiveTask)
-                return receiveTask.Result;
+                return await receiveTask;
 
             return default(UdpReceiveResult);
         }
