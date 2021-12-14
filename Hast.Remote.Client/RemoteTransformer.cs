@@ -22,19 +22,15 @@ namespace Hast.Remote.Client
             var apiClient = ApiClientFactory.CreateApiClient(configuration.RemoteClientConfiguration());
 
             var assemblyContainers = assemblyPaths
-                .Select(path => new AssemblyContainer
-                {
-                    Name = Path.GetFileNameWithoutExtension(path),
-                    FileContent = File.ReadAllBytes(path)
-                });
+                .Select(path => new AssemblyContainer(
+                    Path.GetFileNameWithoutExtension(path),
+                    File.ReadAllBytes(path)));
 
-            var apiConfiguration = new HardwareGenerationConfiguration
-            {
-                CustomConfiguration = configuration.CustomConfiguration,
-                DeviceName = configuration.DeviceName,
-                HardwareEntryPointMemberFullNames = configuration.HardwareEntryPointMemberFullNames,
-                HardwareEntryPointMemberNamePrefixes = configuration.HardwareEntryPointMemberNamePrefixes
-            };
+            var apiConfiguration = new HardwareGenerationConfiguration(
+                configuration.DeviceName,
+                configuration.CustomConfiguration,
+                configuration.HardwareEntryPointMemberFullNames,
+                configuration.HardwareEntryPointMemberNamePrefixes);
 
             try
             {
