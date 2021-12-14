@@ -34,24 +34,20 @@ namespace Hast.Common.Models
         {
             if (string.IsNullOrEmpty(VhdlSource)) throw new InvalidOperationException("There is no VHDL source set.");
 
-            using (var writer = new StreamWriter(stream))
-            {
-                await writer.WriteAsync(JsonConvert.SerializeObject(
-                    this,
-                    Formatting.None,
-                    GetJsonSerializerSettings()));
-            }
+            using var writer = new StreamWriter(stream);
+            await writer.WriteAsync(JsonConvert.SerializeObject(
+                this,
+                Formatting.None,
+                GetJsonSerializerSettings()));
         }
 
 
         public static async Task<VhdlHardwareDescription> DeserializeAsync(Stream stream)
         {
-            using (var reader = new StreamReader(stream))
-            {
-                return JsonConvert.DeserializeObject<VhdlHardwareDescription>(
-                        await reader.ReadToEndAsync(),
-                        GetJsonSerializerSettings());
-            }
+            using var reader = new StreamReader(stream);
+            return JsonConvert.DeserializeObject<VhdlHardwareDescription>(
+                await reader.ReadToEndAsync(),
+                GetJsonSerializerSettings());
         }
 
 

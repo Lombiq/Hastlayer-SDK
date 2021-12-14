@@ -174,96 +174,94 @@ namespace Hast.Layer
             try
             {
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
-                using (var scope = _serviceProvider.CreateScope())
+                using var scope = _serviceProvider.CreateScope();
+                var provider = scope.ServiceProvider;
+                provider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
+                    .Value = configuration;
+
+                var transformer = provider.GetRequiredService<ITransformer>();
+                var deviceManifestSelector = provider.GetRequiredService<IDeviceManifestSelector>();
+                var loggerService = provider.GetRequiredService<ILogger<Hastlayer>>();
+                var appConfiguration = provider.GetRequiredService<IConfiguration>();
+                var transformationEvents = provider.GetRequiredService<IEnumerable<ITransformationEvents>>().ToList();
+
+                // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
+                // CustomConfiguration into the current hardware generation configuration.
+                var newCustomConfigurations = appConfiguration
+                    .GetSection(nameof(HardwareGenerationConfiguration))
+                    .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
+                    .GetChildren()
+                    .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
+                foreach (var item in newCustomConfigurations)
                 {
-                    var provider = scope.ServiceProvider;
-                    provider.GetRequiredService<IHardwareGenerationConfigurationAccessor>()
-                        .Value = configuration;
-
-                    var transformer = provider.GetRequiredService<ITransformer>();
-                    var deviceManifestSelector = provider.GetRequiredService<IDeviceManifestSelector>();
-                    var loggerService = provider.GetRequiredService<ILogger<Hastlayer>>();
-                    var appConfiguration = provider.GetRequiredService<IConfiguration>();
-                    var transformationEvents = provider.GetRequiredService<IEnumerable<ITransformationEvents>>().ToList();
-
-                    // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
-                    // CustomConfiguration into the current hardware generation configuration.
-                    var newCustomConfigurations = appConfiguration
-                        .GetSection(nameof(HardwareGenerationConfiguration))
-                        .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
-                        .GetChildren()
-                        .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
-                    foreach (var item in newCustomConfigurations)
-                    {
-                        configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize())
-                            [nameof(HardwareGenerationConfiguration)]?
-                            [nameof(HardwareGenerationConfiguration.CustomConfiguration)]?
-                            [item.Key];
-                    }
-
-                    foreach (var transformationEvent in transformationEvents)
-                    {
-                        await transformationEvent.BeforeTransformAsync();
-                    }
-
-                    var hardwareDescription = configuration.EnableHardwareTransformation ?
-                        await transformer.TransformAsync(assembliesPaths, configuration) :
-                        EmptyHardwareDescriptionFactory.Create(configuration);
-
-                    foreach (var transformationEvent in transformationEvents)
-                    {
-                        await transformationEvent.AfterTransformAsync(hardwareDescription);
-                    }
-
-                    foreach (var warning in hardwareDescription.Warnings)
-                    {
-                        loggerService.LogWarning(
-                            "Hastlayer transformation warning (code: {0}): {1}",
-                            warning.Code,
-                            warning.Message);
-                    }
-
-                    var deviceManifest = deviceManifestSelector
-                        .GetSupportedDevices()
-                        .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
-
-                    if (deviceManifest == null)
-                    {
-                        throw new HastlayerException(
-                            "There is no supported device with the name \"" + configuration.DeviceName + "\".");
-                    }
-
-                    var hardwareImplementationComposerSelector =
-                        provider.GetRequiredService<IHardwareImplementationComposerSelector>();
-
-                    IHardwareImplementation hardwareImplementation;
-                    if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
-                    {
-                        var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
-                        {
-                            Configuration = configuration,
-                            HardwareDescription = hardwareDescription,
-                            DeviceManifest = deviceManifest,
-                        };
-
-                        var hardwareImplementationComposer = hardwareImplementationComposerSelector
-                            .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
-                            throw new HastlayerException("No suitable hardware implementation composer was found.");
-
-                        hardwareImplementation = await hardwareImplementationComposer
-                            .ComposeAsync(hardwareImplementationCompositionContext);
-                    }
-                    else hardwareImplementation = EmptyHardwareImplementationFactory.Create();
-
-                    return new HardwareRepresentation
-                    {
-                        SoftAssemblyPaths = assembliesPaths,
-                        HardwareDescription = hardwareDescription,
-                        HardwareImplementation = hardwareImplementation,
-                        DeviceManifest = deviceManifest,
-                        HardwareGenerationConfiguration = configuration,
-                    };
+                    configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize())
+                        [nameof(HardwareGenerationConfiguration)]?
+                        [nameof(HardwareGenerationConfiguration.CustomConfiguration)]?
+                        [item.Key];
                 }
+
+                foreach (var transformationEvent in transformationEvents)
+                {
+                    await transformationEvent.BeforeTransformAsync();
+                }
+
+                var hardwareDescription = configuration.EnableHardwareTransformation ?
+                    await transformer.TransformAsync(assembliesPaths, configuration) :
+                    EmptyHardwareDescriptionFactory.Create(configuration);
+
+                foreach (var transformationEvent in transformationEvents)
+                {
+                    await transformationEvent.AfterTransformAsync(hardwareDescription);
+                }
+
+                foreach (var warning in hardwareDescription.Warnings)
+                {
+                    loggerService.LogWarning(
+                        "Hastlayer transformation warning (code: {0}): {1}",
+                        warning.Code,
+                        warning.Message);
+                }
+
+                var deviceManifest = deviceManifestSelector
+                    .GetSupportedDevices()
+                    .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
+
+                if (deviceManifest == null)
+                {
+                    throw new HastlayerException(
+                        "There is no supported device with the name \"" + configuration.DeviceName + "\".");
+                }
+
+                var hardwareImplementationComposerSelector =
+                    provider.GetRequiredService<IHardwareImplementationComposerSelector>();
+
+                IHardwareImplementation hardwareImplementation;
+                if (configuration.EnableHardwareImplementationComposition && configuration.EnableHardwareTransformation)
+                {
+                    var hardwareImplementationCompositionContext = new HardwareImplementationCompositionContext
+                    {
+                        Configuration = configuration,
+                        HardwareDescription = hardwareDescription,
+                        DeviceManifest = deviceManifest,
+                    };
+
+                    var hardwareImplementationComposer = hardwareImplementationComposerSelector
+                                                             .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
+                                                         throw new HastlayerException("No suitable hardware implementation composer was found.");
+
+                    hardwareImplementation = await hardwareImplementationComposer
+                        .ComposeAsync(hardwareImplementationCompositionContext);
+                }
+                else hardwareImplementation = EmptyHardwareImplementationFactory.Create();
+
+                return new HardwareRepresentation
+                {
+                    SoftAssemblyPaths = assembliesPaths,
+                    HardwareDescription = hardwareDescription,
+                    HardwareImplementation = hardwareImplementation,
+                    DeviceManifest = deviceManifest,
+                    HardwareGenerationConfiguration = configuration,
+                };
             }
             catch (Exception ex) when (!ex.IsFatal())
             {

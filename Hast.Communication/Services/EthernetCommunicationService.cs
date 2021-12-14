@@ -66,79 +66,73 @@ namespace Hast.Communication.Services
                 });
 
 
-            using (var device = await _devicePoolManager.ReserveDevice())
+            using var device = await _devicePoolManager.ReserveDevice();
+            var context = BeginExecution();
+
+            IFpgaEndpoint fpgaEndpoint = device.Metadata;
+            var fpgaIpEndpoint = fpgaEndpoint.Endpoint;
+
+            Logger.LogInformation("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
+
+            try
             {
-                var context = BeginExecution();
-
-                IFpgaEndpoint fpgaEndpoint = device.Metadata;
-                var fpgaIpEndpoint = fpgaEndpoint.Endpoint;
-
-                Logger.LogInformation("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
-
-                try
+                using var client = new TcpClient();
+                // Initialize the connection.
+                if (!await client.ConnectAsync(fpgaIpEndpoint, TcpConnectionTimeout))
                 {
-                    using (var client = new TcpClient())
-                    {
-                        // Initialize the connection.
-                        if (!await client.ConnectAsync(fpgaIpEndpoint, TcpConnectionTimeout))
-                        {
-                            throw new EthernetCommunicationException("Couldn't connect to FPGA before the timeout exceeded.");
-                        }
-
-                        using (var stream = client.GetStream())
-                        {
-                            // We send an execution signal to make the FPGA ready to receive the data stream.
-                            var executionCommandTypeByte = new byte[] { (byte)CommandTypes.Execution };
-                            await stream.WriteAsync(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
-
-                            var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
-
-                            if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
-                            {
-                                throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
-                            }
-
-                            // Here we put together the data stream.
-                            var dma = new SimpleMemoryAccessor(simpleMemory);
-                            var memory = dma.Get(MemoryPrefixCellCount); // This way memory doesn't have to be copied.
-                            var memoryDataLength = memory.Length - MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
-
-                            // Copying the input length, represented as bytes, to the output buffer.
-                            MemoryMarshal.Write(memory.Span, ref memoryDataLength);
-                            // Copying the member ID, represented as bytes, to the output buffer.
-                            MemoryMarshal.Write(memory.Span.Slice(sizeof(int)), ref memberId);
-
-                            // Sending data to the FPGA board.
-                            var segment = memory.GetUnderlyingArray();
-                            await stream.WriteAsync(segment.Array, segment.Offset, memory.Length);
-
-
-                            // Read the first batch of the TcpServer response bytes that will represent the execution time.
-                            var executionTimeBytes = await GetBytesFromStream(stream, sizeof(ulong));
-                            var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
-                            SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
-
-                            // Read the bytes representing the length of the simple memory.
-                            var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStream(stream, sizeof(uint)), 0);
-
-                            Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
-
-                            // Finally read the memory itself.
-                            var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
-
-                            dma.Set(outputBytes, MemoryPrefixCellCount);
-                        }
-                    }
-                }
-                catch (SocketException ex)
-                {
-                    throw new EthernetCommunicationException("An unexpected error occurred during the Ethernet communication.", ex);
+                    throw new EthernetCommunicationException("Couldn't connect to FPGA before the timeout exceeded.");
                 }
 
-                EndExecution(context);
+                using var stream = client.GetStream();
+                // We send an execution signal to make the FPGA ready to receive the data stream.
+                var executionCommandTypeByte = new byte[] { (byte)CommandTypes.Execution };
+                await stream.WriteAsync(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
 
-                return context.HardwareExecutionInformation;
+                var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
+
+                if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
+                {
+                    throw new EthernetCommunicationException("Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " + executionCommandTypeResponseByte[0]);
+                }
+
+                // Here we put together the data stream.
+                var dma = new SimpleMemoryAccessor(simpleMemory);
+                var memory = dma.Get(MemoryPrefixCellCount); // This way memory doesn't have to be copied.
+                var memoryDataLength = memory.Length - MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
+
+                // Copying the input length, represented as bytes, to the output buffer.
+                MemoryMarshal.Write(memory.Span, ref memoryDataLength);
+                // Copying the member ID, represented as bytes, to the output buffer.
+                MemoryMarshal.Write(memory.Span.Slice(sizeof(int)), ref memberId);
+
+                // Sending data to the FPGA board.
+                var segment = memory.GetUnderlyingArray();
+                await stream.WriteAsync(segment.Array, segment.Offset, memory.Length);
+
+
+                // Read the first batch of the TcpServer response bytes that will represent the execution time.
+                var executionTimeBytes = await GetBytesFromStream(stream, sizeof(ulong));
+                var executionTimeClockCycles = BitConverter.ToUInt64(executionTimeBytes, 0);
+                SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+
+                // Read the bytes representing the length of the simple memory.
+                var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStream(stream, sizeof(uint)), 0);
+
+                Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
+
+                // Finally read the memory itself.
+                var outputBytes = await GetBytesFromStream(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
+
+                dma.Set(outputBytes, MemoryPrefixCellCount);
             }
+            catch (SocketException ex)
+            {
+                throw new EthernetCommunicationException("An unexpected error occurred during the Ethernet communication.", ex);
+            }
+
+            EndExecution(context);
+
+            return context.HardwareExecutionInformation;
         }
 
 

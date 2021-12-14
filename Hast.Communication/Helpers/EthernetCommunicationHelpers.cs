@@ -44,16 +44,14 @@ namespace Hast.Communication.Helpers
         {
             // We need two UDP clients for sending and receiving datagrams. 
             // See: http://stackoverflow.com/questions/221783/udpclient-receive-right-after-send-does-not-work/222503#222503
-            using (var receiverClient = CreateUdpClient(bindingEndpoint))
-            using (var senderClient = CreateUdpClient(bindingEndpoint))
-            {
-                var receiveTask = receiverTaskFactory(receiverClient);
-                var sendTask = senderClient.SendAsync(datagram, datagram.Length, targetEndpoint);
+            using var receiverClient = CreateUdpClient(bindingEndpoint);
+            using var senderClient = CreateUdpClient(bindingEndpoint);
+            var receiveTask = receiverTaskFactory(receiverClient);
+            var sendTask = senderClient.SendAsync(datagram, datagram.Length, targetEndpoint);
 
-                await Task.WhenAll(receiveTask, sendTask);
+            await Task.WhenAll(receiveTask, sendTask);
 
-                return await receiveTask;
-            }
+            return await receiveTask;
         }
 
         private static UdpClient CreateUdpClient(IPEndPoint bindingEndpoint)
