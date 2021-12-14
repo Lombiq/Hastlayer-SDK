@@ -9,7 +9,7 @@ namespace Hast.Common.Extensions
     public static class MemberNameExtensions
     {
         /// <summary>
-        /// Creates an alternate versions of a member name if the full member name contains both a class and an interface 
+        /// Creates an alternate versions of a member name if the full member name contains both a class and an interface
         /// reference (as it is with explicitly implemented members).
         /// </summary>
         /// <remarks>

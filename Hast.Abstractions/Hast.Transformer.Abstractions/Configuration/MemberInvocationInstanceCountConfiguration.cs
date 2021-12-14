@@ -8,7 +8,7 @@ namespace Hast.Transformer.Abstractions.Configuration
     public class MemberInvocationInstanceCountConfiguration
     {
         /// <summary>
-        /// Gets the prefix of the member's name. Use the same convention as with 
+        /// Gets the prefix of the member's name. Use the same convention as with
         /// <see cref="HardwareGenerationConfiguration.HardwareEntryPointMemberNamePrefixes"/>. For lambda expressions use
         /// the pattern "Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0",
         /// i.e. specify the name prefix of the calling member, then add ".LambdaExpression" and finally add the lambda's

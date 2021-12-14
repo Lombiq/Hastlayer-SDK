@@ -5,7 +5,7 @@ namespace System.Linq.Expressions
     public static class ExpressionExtensions
     {
         /// <summary>
-        /// Gets the full name (namespace, type name, method name, return type and argument types) of an instance method 
+        /// Gets the full name (namespace, type name, method name, return type and argument types) of an instance method
         /// called in an expression.
         /// </summary>
         /// <typeparam name="T">The type of the method's object.</typeparam>

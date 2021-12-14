@@ -17,10 +17,10 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations
         {
-            // Since _memberInvocationInstanceCountConfigurations is a ConcurrentDictionary the order of its items is 
-            // not necessarily the same on all machines or during all executions. Thus we need sorting so the 
+            // Since _memberInvocationInstanceCountConfigurations is a ConcurrentDictionary the order of its items is
+            // not necessarily the same on all machines or during all executions. Thus we need sorting so the
             // transformation ID is deterministic (see DefaultTransformer in Hast.Transformer).
-            // Also, ToArray() and the setter are needed for JSON de/serialization when doing remote transformation. 
+            // Also, ToArray() and the setter are needed for JSON de/serialization when doing remote transformation.
             get { return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray(); }
 
             private set
@@ -56,10 +56,10 @@ namespace Hast.Transformer.Abstractions.Configuration
         public IList<string> AdditionalInlinableMethodsFullNames { get; set; } = new List<string>();
 
         /// <summary>
-        /// The lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer 
-        /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use 
+        /// The lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer
+        /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use
         /// this to specify array lengths.
-        /// 
+        ///
         /// Key should be the full name of the array (<see cref="IHardwareGenerationConfiguration.HardwareEntryPointMemberFullNames"/>)
         /// and value should be the length. If you get exceptions due to arrays missing their sizes the exception will
         /// indicate the full array name too.
@@ -67,7 +67,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         public IDictionary<string, int> ArrayLengths { get; set; } = new Dictionary<string, int>();
 
         /// <summary>
-        /// Gets or sets whether interfaces that are implemented by transformed types are processed. Currently such 
+        /// Gets or sets whether interfaces that are implemented by transformed types are processed. Currently such
         /// interfaces don't affect the resulting hardware implementation, but the assemblies of all referenced
         /// interfaces need to be loaded. If set to <c>false</c> such loading is not necessary. Defaults to <c>false</c>.
         /// </summary>
@@ -115,7 +115,7 @@ namespace Hast.Transformer.Abstractions.Configuration
 
         /// <summary>
         /// Adds a method to the list of methods that should be inlined in addition to methods already marked with a
-        /// suitable <c>MethodImpl</c> attribute. See <see cref="AdditionalInlinableMethodsFullNames"/> for more 
+        /// suitable <c>MethodImpl</c> attribute. See <see cref="AdditionalInlinableMethodsFullNames"/> for more
         /// information.
         /// </summary>
         /// <typeparam name="T">The type of the object that will be later fed to the hardware transformer.</typeparam>

@@ -21,7 +21,7 @@ namespace Hast.Communication.Exceptions
 
 
         public override string ToString() =>
-            "The hardware and software executions resulted in different results: " + 
+            "The hardware and software executions resulted in different results: " +
             string.Join("; ", Mismatches.Select(mismatch => mismatch.ToString()));
 
 
@@ -58,7 +58,7 @@ namespace Hast.Communication.Exceptions
             public int SoftwareCellCount { get; private set; }
 
 
-            public LengthMismatch(int hardwareCellCount, int softwareCellCount, int overflowIndex, byte[] hardwareResult, byte[] softwareResult) : 
+            public LengthMismatch(int hardwareCellCount, int softwareCellCount, int overflowIndex, byte[] hardwareResult, byte[] softwareResult) :
                 base(overflowIndex, hardwareResult, softwareResult)
             {
                 HardwareCellCount = hardwareCellCount;

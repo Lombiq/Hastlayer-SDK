@@ -6,7 +6,7 @@ namespace System.Net.Sockets
     internal static class UdpClientExtensions
     {
         /// <summary>
-        /// Receives an UDP datagram if there is one in present or wait one until the timeout expires. 
+        /// Receives an UDP datagram if there is one in present or wait one until the timeout expires.
         /// In that case a default object will be returned.
         /// </summary>
         /// <param name="receiveTimeoutMilliseconds">Timeout within the client needs to wait for an UDP datagram.</param>
@@ -22,7 +22,7 @@ namespace System.Net.Sockets
         }
 
         /// <summary>
-        /// Receives all the UDP datagrams coming simultaneously. 
+        /// Receives all the UDP datagrams coming simultaneously.
         /// Stops receiving when the timeout has expired after the last datagram.
         /// </summary>
         /// <param name="receiveTimeoutMilliseconds">Timeout within the client needs to wait for a single datagram.</param>
