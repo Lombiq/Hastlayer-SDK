@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
@@ -10,12 +10,12 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class ObjectOrientedShowcase
     {
-        public const int Run_InputUInt32Index = 0;
-        private const int Run_OutputUInt32Index = 0;
+        public const int RunInputUInt32Index = 0;
+        private const int RunOutputUInt32Index = 0;
 
         public virtual void Run(SimpleMemory memory)
         {
-            var inputNumber = memory.ReadUInt32(Run_InputUInt32Index);
+            var inputNumber = memory.ReadUInt32(RunInputUInt32Index);
             // Or:
             inputNumber = new MemoryContainer(memory).GetInput();
 
@@ -60,7 +60,7 @@ namespace Hast.Samples.SampleAssembly
             }
 
             // You can also pass arrays and other objects around to other methods.
-            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberContainers(numberContainers1));
+            memory.WriteUInt32(RunOutputUInt32Index, SumNumberContainers(numberContainers1));
         }
 
         private uint SumNumberContainers(NumberContainer[] numberContainers)
@@ -80,9 +80,9 @@ namespace Hast.Samples.SampleAssembly
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(10)
                 : hastlayer.CreateMemory(configuration, 10);
-            memory.WriteUInt32(Run_InputUInt32Index, input);
+            memory.WriteUInt32(RunInputUInt32Index, input);
             Run(memory);
-            return memory.ReadUInt32(Run_OutputUInt32Index);
+            return memory.ReadUInt32(RunOutputUInt32Index);
         }
     }
 
@@ -149,6 +149,6 @@ namespace Hast.Samples.SampleAssembly
             _memory = memory;
         }
 
-        public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.Run_InputUInt32Index);
+        public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.RunInputUInt32Index);
     }
 }

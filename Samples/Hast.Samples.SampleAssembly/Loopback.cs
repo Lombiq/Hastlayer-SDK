@@ -11,13 +11,13 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class Loopback
     {
-        private const int Run_InputOutputInt32Index = 0;
+        private const int RunInputOutputInt32Index = 0;
 
         public virtual void Run(SimpleMemory memory)
         {
             // Adding 1 to the input so it's visible whether this actually has run, not just the untouched data was
             // sent back.
-            memory.WriteInt32(Run_InputOutputInt32Index, memory.ReadInt32(Run_InputOutputInt32Index) + 1);
+            memory.WriteInt32(RunInputOutputInt32Index, memory.ReadInt32(RunInputOutputInt32Index) + 1);
         }
 
         public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
@@ -25,9 +25,9 @@ namespace Hast.Samples.SampleAssembly
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(1)
                 : hastlayer.CreateMemory(configuration, 1);
-            memory.WriteInt32(Run_InputOutputInt32Index, input);
+            memory.WriteInt32(RunInputOutputInt32Index, input);
             Run(memory);
-            return memory.ReadInt32(Run_InputOutputInt32Index);
+            return memory.ReadInt32(RunInputOutputInt32Index);
         }
     }
 }

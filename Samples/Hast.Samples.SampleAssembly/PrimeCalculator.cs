@@ -14,11 +14,11 @@ namespace Hast.Samples.SampleAssembly
     {
         // It's good to have common cell indices in constants like this, so they can be used from multiple methods
         // like below. Note the Hungarian notation-like prefixes. These add some clarity but are not mandatory.
-        private const int IsPrimeNumber_InputUInt32Index = 0;
-        private const int IsPrimeNumber_OutputBooleanIndex = 0;
-        private const int ArePrimeNumbers_InputUInt32CountIndex = 0;
-        private const int ArePrimeNumbers_InputUInt32sStartIndex = 1;
-        private const int ArePrimeNumbers_OutputBooleansStartIndex = 1;
+        private const int IsPrimeNumberInputUInt32Index = 0;
+        private const int IsPrimeNumberOutputBooleanIndex = 0;
+        private const int ArePrimeNumbersInputUInt32CountIndex = 0;
+        private const int ArePrimeNumbersInputUInt32sStartIndex = 1;
+        private const int ArePrimeNumbersOutputBooleansStartIndex = 1;
 
         private const int MaxDegreeOfParallelism = 30;
 
@@ -42,9 +42,9 @@ namespace Hast.Samples.SampleAssembly
         public virtual void IsPrimeNumberSync(SimpleMemory memory)
         {
             // Reading out the input parameter.
-            var number = memory.ReadUInt32(IsPrimeNumber_InputUInt32Index);
+            var number = memory.ReadUInt32(IsPrimeNumberInputUInt32Index);
             // Writing back the output.
-            memory.WriteBoolean(IsPrimeNumber_OutputBooleanIndex, IsPrimeNumberInternal(number));
+            memory.WriteBoolean(IsPrimeNumberOutputBooleanIndex, IsPrimeNumberInternal(number));
         }
 
         /// <summary>
@@ -71,12 +71,12 @@ namespace Hast.Samples.SampleAssembly
         public virtual void ArePrimeNumbers(SimpleMemory memory)
         {
             // We need this information explicitly as we can't store arrays directly in memory.
-            uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
+            uint numberCount = memory.ReadUInt32(ArePrimeNumbersInputUInt32CountIndex);
 
             for (int i = 0; i < numberCount; i++)
             {
-                uint number = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i);
-                memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i, IsPrimeNumberInternal(number));
+                uint number = memory.ReadUInt32(ArePrimeNumbersInputUInt32sStartIndex + i);
+                memory.WriteBoolean(ArePrimeNumbersOutputBooleansStartIndex + i, IsPrimeNumberInternal(number));
             }
         }
 
@@ -92,7 +92,7 @@ namespace Hast.Samples.SampleAssembly
         public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
         {
             // We need this information explicitly as we can't store arrays directly in memory.
-            uint numberCount = memory.ReadUInt32(ArePrimeNumbers_InputUInt32CountIndex);
+            uint numberCount = memory.ReadUInt32(ArePrimeNumbersInputUInt32CountIndex);
 
             // At the moment Hastlayer only supports a fixed degree of parallelism so we need to pad the input array
             // if necessary, see PrimeCalculatorExtensions.
@@ -102,7 +102,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    var currentNumber = memory.ReadUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i + m);
+                    var currentNumber = memory.ReadUInt32(ArePrimeNumbersInputUInt32sStartIndex + i + m);
 
                     // Note that you can just call (thread-safe) methods from inside Tasks as usual. In hardware those
                     // invoked methods will be copied together with the Tasks' bodies too.
@@ -117,7 +117,7 @@ namespace Hast.Samples.SampleAssembly
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
-                    memory.WriteBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i + m, tasks[m].Result);
+                    memory.WriteBoolean(ArePrimeNumbersOutputBooleansStartIndex + i + m, tasks[m].Result);
                 }
 
                 i += MaxDegreeOfParallelism;
@@ -209,11 +209,11 @@ namespace Hast.Samples.SampleAssembly
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(1)
                 : hastlayer.CreateMemory(configuration, 1);
-            memory.WriteUInt32(IsPrimeNumber_InputUInt32Index, number);
+            memory.WriteUInt32(IsPrimeNumberInputUInt32Index, number);
 
             await methodRunner(memory);
 
-            return memory.ReadBoolean(IsPrimeNumber_OutputBooleanIndex);
+            return memory.ReadBoolean(IsPrimeNumberOutputBooleanIndex);
         }
 
         private bool[] RunArePrimeNumbersMethod(
@@ -227,10 +227,10 @@ namespace Hast.Samples.SampleAssembly
                 ? SimpleMemory.CreateSoftwareMemory(numbers.Length + 1)
                 : hastlayer.CreateMemory(configuration, numbers.Length + 1);
 
-            memory.WriteUInt32(ArePrimeNumbers_InputUInt32CountIndex, (uint)numbers.Length);
+            memory.WriteUInt32(ArePrimeNumbersInputUInt32CountIndex, (uint)numbers.Length);
             for (int i = 0; i < numbers.Length; i++)
             {
-                memory.WriteUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, numbers[i]);
+                memory.WriteUInt32(ArePrimeNumbersInputUInt32sStartIndex + i, numbers[i]);
             }
 
             methodRunner(memory);
@@ -238,7 +238,7 @@ namespace Hast.Samples.SampleAssembly
             var output = new bool[numbers.Length];
             for (int i = 0; i < numbers.Length; i++)
             {
-                output[i] = memory.ReadBoolean(ArePrimeNumbers_OutputBooleansStartIndex + i);
+                output[i] = memory.ReadBoolean(ArePrimeNumbersOutputBooleansStartIndex + i);
             }
             return output;
         }

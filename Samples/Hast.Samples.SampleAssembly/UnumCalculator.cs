@@ -15,12 +15,12 @@ namespace Hast.Samples.SampleAssembly
     /// </summary>
     public class UnumCalculator
     {
-        public const int CalculateSumOfPowersofTwo_InputUInt32Index = 0;
-        public const int CalculateSumOfPowersofTwo_OutputUInt32Index = 0;
+        public const int CalculateSumOfPowersofTwoInputUInt32Index = 0;
+        public const int CalculateSumOfPowersofTwoOutputUInt32Index = 0;
 
         public virtual void CalculateSumOfPowersofTwo(SimpleMemory memory)
         {
-            var number = memory.ReadUInt32(CalculateSumOfPowersofTwo_InputUInt32Index);
+            var number = memory.ReadUInt32(CalculateSumOfPowersofTwoInputUInt32Index);
 
             var environment = EnvironmentFactory();
 
@@ -36,7 +36,7 @@ namespace Hast.Samples.SampleAssembly
             var resultArray = b.FractionToUintArray();
             for (var i = 0; i < resultArray.Length; i++)
             {
-                memory.WriteUInt32(CalculateSumOfPowersofTwo_OutputUInt32Index + i, resultArray[i]);
+                memory.WriteUInt32(CalculateSumOfPowersofTwoOutputUInt32Index + i, resultArray[i]);
             }
         }
 
@@ -81,12 +81,12 @@ namespace Hast.Samples.SampleAssembly
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(9)
                 : hastlayer.CreateMemory(configuration, 9);
-            memory.WriteUInt32(UnumCalculator.CalculateSumOfPowersofTwo_InputUInt32Index, number);
+            memory.WriteUInt32(UnumCalculator.CalculateSumOfPowersofTwoInputUInt32Index, number);
             unumCalculator.CalculateSumOfPowersofTwo(memory);
             var resultArray = new uint[9];
             for (var i = 0; i < 9; i++)
             {
-                resultArray[i] = memory.ReadUInt32(UnumCalculator.CalculateSumOfPowersofTwo_OutputUInt32Index + i);
+                resultArray[i] = memory.ReadUInt32(UnumCalculator.CalculateSumOfPowersofTwoOutputUInt32Index + i);
             }
             return resultArray;
         }

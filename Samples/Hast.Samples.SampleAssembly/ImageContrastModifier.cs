@@ -14,10 +14,10 @@ namespace Hast.Samples.SampleAssembly
     {
         private const ushort Multiplier = 1000;
 
-        private const int ChangeContrast_ImageWidthIndex = 0;
-        private const int ChangeContrast_ImageHeightIndex = 1;
-        private const int ChangeContrast_ContrastValueIndex = 2;
-        private const int ChangeContrast_ImageStartIndex = 3;
+        private const int ChangeContrastImageWidthIndex = 0;
+        private const int ChangeContrastImageHeightIndex = 1;
+        private const int ChangeContrastContrastValueIndex = 2;
+        private const int ChangeContrastImageStartIndex = 3;
 
         [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
@@ -28,9 +28,9 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void ChangeContrast(SimpleMemory memory)
         {
-            var imageWidth = (ushort)memory.ReadUInt32(ChangeContrast_ImageWidthIndex);
-            var imageHeight = (ushort)memory.ReadUInt32(ChangeContrast_ImageHeightIndex);
-            int contrastValue = memory.ReadInt32(ChangeContrast_ContrastValueIndex);
+            var imageWidth = (ushort)memory.ReadUInt32(ChangeContrastImageWidthIndex);
+            var imageHeight = (ushort)memory.ReadUInt32(ChangeContrastImageHeightIndex);
+            int contrastValue = memory.ReadInt32(ChangeContrastContrastValueIndex);
 
             if (contrastValue > 100) contrastValue = 100;
             else if (contrastValue < -100) contrastValue = -100;
@@ -55,7 +55,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int t = 0; t < MaxDegreeOfParallelism; t++)
                 {
-                    var pixelBytes = memory.Read4Bytes(i * MaxDegreeOfParallelism + t + ChangeContrast_ImageStartIndex);
+                    var pixelBytes = memory.Read4Bytes(i * MaxDegreeOfParallelism + t + ChangeContrastImageStartIndex);
 
                     // Using an input class to also pass contrastValue because it's currently not supported to access
                     // variables from the parent scope from inside Tasks (you need to explicitly pass in all inputs).
@@ -82,7 +82,7 @@ namespace Hast.Samples.SampleAssembly
                 {
                     // It's no problem that we write just 3 bytes to a 4-byte slot.
                     memory.Write4Bytes(
-                        i * MaxDegreeOfParallelism + t + ChangeContrast_ImageStartIndex,
+                        i * MaxDegreeOfParallelism + t + ChangeContrastImageStartIndex,
                         new[] { tasks[t].Result.R, tasks[t].Result.G, tasks[t].Result.B });
                 }
             }
@@ -175,9 +175,9 @@ namespace Hast.Samples.SampleAssembly
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
 
-            memory.WriteUInt32(ChangeContrast_ImageWidthIndex, (uint)image.Width);
-            memory.WriteUInt32(ChangeContrast_ImageHeightIndex, (uint)image.Height);
-            memory.WriteInt32(ChangeContrast_ContrastValueIndex, contrastValue);
+            memory.WriteUInt32(ChangeContrastImageWidthIndex, (uint)image.Width);
+            memory.WriteUInt32(ChangeContrastImageHeightIndex, (uint)image.Height);
+            memory.WriteInt32(ChangeContrastContrastValueIndex, contrastValue);
 
             for (int x = 0; x < image.Height; x++)
             {
@@ -189,7 +189,7 @@ namespace Hast.Samples.SampleAssembly
                     // complicated, so good enough for a sample; if we'd want to optimize memory usage, that would be
                     // needed.
                     memory.Write4Bytes(
-                        x * image.Width + y + ChangeContrast_ImageStartIndex,
+                        x * image.Width + y + ChangeContrastImageStartIndex,
                         new[] { pixel.R, pixel.G, pixel.B });
                 }
             }
@@ -211,7 +211,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    var bytes = memory.Read4Bytes(x * newImage.Width + y + ChangeContrast_ImageStartIndex);
+                    var bytes = memory.Read4Bytes(x * newImage.Width + y + ChangeContrastImageStartIndex);
                     newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
                 }
             }

@@ -12,12 +12,12 @@ namespace Hast.Samples.SampleAssembly
 {
     public class Posit32FusedCalculator
     {
-        public const int CalculateFusedSum_InputPosit32CountIndex = 0;
-        public const int CalculateFusedSum_InputPosit32StartIndex = 1;
-        public const int CalculateFusedSum_OutputPosit32Index = 0;
-        public const int CalculateFusedDotProduct_InputPosit32CountIndex = 0;
-        public const int CalculateFusedDotProduct_InputPosit32sStartIndex = 1;
-        public const int CalculateFusedDotProduct_OutputPosit32Index = 2;
+        public const int CalculateFusedSumInputPosit32CountIndex = 0;
+        public const int CalculateFusedSumInputPosit32StartIndex = 1;
+        public const int CalculateFusedSumOutputPosit32Index = 0;
+        public const int CalculateFusedDotProductInputPosit32CountIndex = 0;
+        public const int CalculateFusedDotProductInputPosit32sStartIndex = 1;
+        public const int CalculateFusedDotProductOutputPosit32Index = 2;
 
         public const int MaxArrayChunkSize = 160;
         public const int QuireSizeIn32BitChunks = Posit32.QuireSize >> 5;
@@ -25,7 +25,7 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void CalculateFusedSum(SimpleMemory memory)
         {
-            var numberCount = memory.ReadUInt32(CalculateFusedSum_InputPosit32CountIndex);
+            var numberCount = memory.ReadUInt32(CalculateFusedSumInputPosit32CountIndex);
             var posit32ArrayChunk = new Posit32[MaxArrayChunkSize];
 
             var quire = (Quire)new Posit32(0);
@@ -43,7 +43,7 @@ namespace Hast.Samples.SampleAssembly
                     if (i * MaxArrayChunkSize + j < numberCount)
                     {
                         posit32ArrayChunk[j] = new Posit32(
-                            memory.ReadUInt32(CalculateFusedSum_InputPosit32StartIndex + i * MaxArrayChunkSize + j),
+                            memory.ReadUInt32(CalculateFusedSumInputPosit32StartIndex + i * MaxArrayChunkSize + j),
                             fromBitMask: true);
                     }
                     else posit32ArrayChunk[j] = new Posit32(0);
@@ -53,7 +53,7 @@ namespace Hast.Samples.SampleAssembly
             }
 
             var result = new Posit32(quire);
-            memory.WriteUInt32(CalculateFusedSum_OutputPosit32Index, result.PositBits);
+            memory.WriteUInt32(CalculateFusedSumOutputPosit32Index, result.PositBits);
         }
     }
 
@@ -69,16 +69,16 @@ namespace Hast.Samples.SampleAssembly
                 ? SimpleMemory.CreateSoftwareMemory(posit32Array.Length + 1)
                 : hastlayer.CreateMemory(configuration, posit32Array.Length + 1);
 
-            memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32CountIndex, (uint)posit32Array.Length);
+            memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSumInputPosit32CountIndex, (uint)posit32Array.Length);
 
             for (var i = 0; i < posit32Array.Length; i++)
             {
-                memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSum_InputPosit32StartIndex + i, posit32Array[i]);
+                memory.WriteUInt32(Posit32FusedCalculator.CalculateFusedSumInputPosit32StartIndex + i, posit32Array[i]);
             }
 
             posit32FusedCalculator.CalculateFusedSum(memory);
 
-            return (float)new Posit32(memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSum_OutputPosit32Index), true);
+            return (float)new Posit32(memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSumOutputPosit32Index), true);
         }
 
         public static readonly string[] ManuallySizedArrays = new[]
