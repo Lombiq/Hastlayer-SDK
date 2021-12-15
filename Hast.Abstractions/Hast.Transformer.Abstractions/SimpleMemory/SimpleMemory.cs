@@ -27,7 +27,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <returns>A span starting at cellIndex * MemoryCellSizeBytes.</returns>
         private Span<byte> this[int cellIndex] => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
 
-
         /// <summary>
         /// The number of extra cells used for header information like memberId or data length.
         /// </summary>
@@ -96,7 +95,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             PrefixCellCount = prefixCellCount;
         }
 
-
         public void Write4Bytes(int cellIndex, byte[] bytes)
         {
             var target = this[cellIndex];
@@ -127,7 +125,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
             WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
         public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
-
 
         /// <summary>
         /// Creates a new instance of <see cref="SimpleMemory"/> with a specific size of payload in cells using a
@@ -185,7 +182,6 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public static SimpleMemory CreateSoftwareMemory(int cellCount) =>
             new SimpleMemory(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
     }
-
 
     /// <summary>
     /// Extensions for older Framework features which don't support Memory or Span yet.

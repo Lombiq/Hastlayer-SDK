@@ -147,7 +147,6 @@ namespace Hast.Layer
                 .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
-
         public void Dispose() => _serviceProvider?.Dispose();
 
         ~Hastlayer() => Dispose();
@@ -352,7 +351,6 @@ namespace Hast.Layer
                     provider.GetService<IEnumerable<IDeviceManifestProvider>>())
             );
 
-
         public IEnumerable<IDeviceManifest> GetSupportedDevices()
         {
             // This is fine because IDeviceManifest doesn't contain anything that relies on the scope.
@@ -381,7 +379,6 @@ namespace Hast.Layer
         }
 
         public ILogger<T> GetLogger<T>() => _serviceProvider.GetService<ILogger<T>>();
-
 
         private void LoadHost()
         {

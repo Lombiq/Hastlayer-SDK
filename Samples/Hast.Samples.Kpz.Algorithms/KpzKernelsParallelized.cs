@@ -17,7 +17,6 @@ namespace Hast.Samples.Kpz.Algorithms
         public RandomMwc64X Random2;
     }
 
-
     // SimpleMemory map:
     // * 0  (1 address)  :
     //      The number of iterations to perform (NumberOfIterations).
@@ -67,7 +66,6 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int MemIndexNumberOfIterations = 0;
         public const int MemIndexRandomSeed = MemIndexNumberOfIterations + 1;
         public const int MemIndexGrid = MemIndexRandomSeed + ParallelTasks * 4 + 2;
-
 
         public virtual void ScheduleIterations(SimpleMemory memory)
         {

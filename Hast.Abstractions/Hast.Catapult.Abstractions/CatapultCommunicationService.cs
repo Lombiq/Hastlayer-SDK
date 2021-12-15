@@ -17,9 +17,7 @@ namespace Hast.Catapult.Abstractions
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
 
-
         public override string ChannelName => Constants.ChannelName;
-
 
         public CatapultCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,

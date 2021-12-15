@@ -106,7 +106,6 @@ namespace Hast.Algorithms
             _rawValue = value * OneRawValue;
         }
 
-
         #region Instance methods
 
         public override bool Equals(object obj) => obj is Fix64 && ((Fix64)obj)._rawValue == _rawValue;
@@ -165,7 +164,6 @@ namespace Hast.Algorithms
             var mask = value._rawValue >> 63;
             return new Fix64((value._rawValue + mask) ^ mask);
         }
-
 
         /// <summary>
         /// Returns the largest integer less than or equal to the specified number.
@@ -467,7 +465,6 @@ namespace Hast.Algorithms
             var quotient = 0UL;
             var bitPos = BitCount / 2 + 1;
 
-
             // If the divider is divisible by 2^n, take advantage of it.
             while ((divider & 0xF) == 0 && bitPos >= 4)
             {
@@ -573,7 +570,6 @@ namespace Hast.Algorithms
 
         #endregion
 
-
         private static long AddOverflowHelper(long x, long y, ref bool overflow)
         {
             var sum = x + y;
@@ -603,7 +599,6 @@ namespace Hast.Algorithms
 
             while ((x & 0xF000000000000000) == 0) { result += 4; x <<= 4; }
             while ((x & 0x8000000000000000) == 0) { result += 1; x <<= 1; }
-
 
             return result;
         }

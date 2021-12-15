@@ -15,7 +15,6 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public Constants.Status Status { get; private set; }
 
-
         public CatapultFunctionResultException() { }
 
         public CatapultFunctionResultException(Constants.Status status, string message)

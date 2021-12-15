@@ -20,12 +20,10 @@ namespace Hast.Catapult.Abstractions
         private bool _isDisposed = false;
         private readonly IntPtr _handle;
 
-
         /// <summary>
         /// Returns the name of the instance (Catapult:N where N is the PCIe endpoint number).
         /// </summary>
         public string InstanceName => $"{Constants.ChannelName}:{PcieEndpointNumber}";
-
 
         /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
@@ -106,7 +104,6 @@ namespace Hast.Catapult.Abstractions
 
         public System.IO.TextWriter TesterOutput { get; set; }
 
-
         /// <summary>
         /// Initializes a new instance of the CatapultLibrary class.
         /// </summary>
@@ -170,7 +167,6 @@ namespace Hast.Catapult.Abstractions
             for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
         }
 
-
         public static CatapultLibrary Create(
             IDictionary<string, object> config,
             ILogger<CatapultLibrary> logger,
@@ -206,7 +202,6 @@ namespace Hast.Catapult.Abstractions
                         logger.LogWarning(text);
                 });
         }
-
 
         /// <summary>
         /// Finalizer to ensure the instance is disposed at some point after the end of its lifecycle.

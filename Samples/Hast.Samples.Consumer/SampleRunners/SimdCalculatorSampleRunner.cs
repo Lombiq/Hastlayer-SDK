@@ -34,7 +34,6 @@ namespace Hast.Samples.Consumer.SampleRunners
                 calculator => calculator.DivideVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
         }
 
-
         // Checking if the hardware result is correct by running it against the software implementation. Note that this
         // can be also done by Hastlayer automatically on the SimpleMemory level by setting
         // ProxyGenerationConfiguration.VerifyHardwareResults to true when calling GenerateProxy().

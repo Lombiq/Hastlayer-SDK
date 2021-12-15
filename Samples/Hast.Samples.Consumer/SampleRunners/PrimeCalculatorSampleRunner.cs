@@ -54,7 +54,6 @@ namespace Hast.Samples.Consumer.SampleRunners
             //}
             //var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
-
             // In-algorithm parallelization:
             // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism
             // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see

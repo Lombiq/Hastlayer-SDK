@@ -16,7 +16,6 @@
         /// </remarks>
         public ushort State = 49813; // Just some starting number.
 
-
         public ushort NextUInt16()
         {
             State ^= (ushort)(State >> 7);

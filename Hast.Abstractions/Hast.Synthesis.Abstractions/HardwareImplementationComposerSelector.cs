@@ -10,12 +10,10 @@ namespace Hast.Synthesis.Abstractions
     {
         private readonly IEnumerable<IHardwareImplementationComposer> _hardwareImplementationComposers;
 
-
         public HardwareImplementationComposerSelector(IEnumerable<IHardwareImplementationComposer> hardwareImplementationComposers)
         {
             _hardwareImplementationComposers = hardwareImplementationComposers;
         }
-
 
         public IHardwareImplementationComposer GetHardwareImplementationComposer(IHardwareImplementationCompositionContext context)
         {

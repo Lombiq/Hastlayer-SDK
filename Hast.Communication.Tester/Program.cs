@@ -50,11 +50,9 @@ namespace Hast.Communication.Tester
                 return;
             }
 
-
             // If there is an output file name, then the file type can not be None.
             if (CommandLineOptions.OutputFileType == OutputFileType.None && !string.IsNullOrEmpty(CommandLineOptions.OutputFileName))
                 CommandLineOptions.OutputFileType = OutputFileType.Hexdump;
-
 
             // Try to load selected device or pick the first available if none were selected.
             if (string.IsNullOrEmpty(CommandLineOptions.DeviceName)) CommandLineOptions.DeviceName = devices.First().Name;
@@ -78,7 +76,6 @@ namespace Hast.Communication.Tester
                 CommandLineOptions.PayloadLengthCells,
                 prepend,
                 CommandLineOptions.InputFileName);
-
 
             // Save input to file using the format of the output file type.
             SaveFile(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.InputFileName, true, memory);
@@ -124,7 +121,6 @@ namespace Hast.Communication.Tester
                 await File.WriteAllTextAsync(CommandLineOptions.JsonOutputFileName, json);
             }
 
-
             // Verify results if wanted.
             if (!CommandLineOptions.NoCheck) Verify(memory, referenceMemory);
         }
@@ -134,7 +130,6 @@ namespace Hast.Communication.Tester
                 .SingleOrDefault(x => x.Name == nameof(MemoryTest.Run) &&
                                       x.GetParameters().Length == 1 &&
                                       x.GetParameters()[0].ParameterType == typeof(SimpleMemory));
-
 
         private static (SimpleMemory, SimpleMemoryAccessor) GenerateMemory(
             IHastlayer hastlayer,
@@ -266,7 +261,6 @@ namespace Hast.Communication.Tester
                 writer.WriteLine();
             }
         }
-
 
         private static void Main(string[] args)
         {

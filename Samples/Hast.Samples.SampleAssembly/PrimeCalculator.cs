@@ -124,7 +124,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         /// <summary>
         /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods.
         /// Because when you want to pass data between methods you can freely use supported types as arguments, you
@@ -167,7 +166,6 @@ namespace Hast.Samples.SampleAssembly
 
             return i == factor + 1;
         }
-
 
         // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
         // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
@@ -235,9 +233,7 @@ namespace Hast.Samples.SampleAssembly
                 memory.WriteUInt32(ArePrimeNumbers_InputUInt32sStartIndex + i, numbers[i]);
             }
 
-
             methodRunner(memory);
-
 
             var output = new bool[numbers.Length];
             for (int i = 0; i < numbers.Length; i++)

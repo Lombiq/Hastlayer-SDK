@@ -10,7 +10,6 @@ namespace Hast.Communication.Models
         public string Identifier { get; set; }
         public dynamic Metadata { get; set; }
 
-
         public Device()
         {
         }
@@ -21,7 +20,6 @@ namespace Hast.Communication.Models
             Metadata = metadata;
             Disposing += disposingEventHandler;
         }
-
 
         public Device(IDevice previousDevice)
         {

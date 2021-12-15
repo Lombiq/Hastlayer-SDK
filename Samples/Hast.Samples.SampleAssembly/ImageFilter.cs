@@ -28,7 +28,6 @@ namespace Hast.Samples.SampleAssembly
         private const int FilterImage_OffsetIndex = 12;
         private const int FilterImage_ImageStartIndex = 13;
 
-
         /// <summary>
         /// Makes the changes according to the matrix on the image.
         /// </summary>
@@ -95,7 +94,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         /// <summary>
         /// Makes the required changes on the selected pixel.
         /// </summary>
@@ -148,7 +146,6 @@ namespace Hast.Samples.SampleAssembly
 
             return (ushort)newPixel;
         }
-
 
         /// <summary>
         /// Applies Gauss filter to an image.
@@ -222,7 +219,6 @@ namespace Hast.Samples.SampleAssembly
             FilterImage(memory);
             return CreateImage(memory, image);
         }
-
 
         /// <summary>
         /// Creates a <see cref="SimpleMemory"/> instance that stores the image.

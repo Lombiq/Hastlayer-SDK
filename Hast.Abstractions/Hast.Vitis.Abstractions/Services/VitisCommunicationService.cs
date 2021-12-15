@@ -17,14 +17,12 @@ namespace Hast.Vitis.Abstractions.Services
         private const int HbmSizeBytes = (int)Constants.Limits.HbmSizeBytes;
         public override string ChannelName { get; } = Hast.Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
 
-
         public VitisCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
             ILogger<VitisCommunicationService> logger)
             : base(devicePoolPopulator, devicePoolManager, binaryOpenCl, logger) { }
-
 
         protected override IntPtr GetBuffer(
             Memory<byte> data,

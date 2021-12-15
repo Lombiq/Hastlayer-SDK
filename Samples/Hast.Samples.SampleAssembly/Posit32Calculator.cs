@@ -30,7 +30,6 @@ namespace Hast.Samples.SampleAssembly
         // Posit32CalculatorSampleRunner) then with a MaxDegreeOfParallelism of 5 it'll take 75% as well.
         public const int MaxDegreeOfParallelism = 2;
 
-
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
             var number = memory.ReadUInt32(CalculateLargeIntegerSum_InputInt32Index);
@@ -111,7 +110,6 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteUInt32(AddPositsInArray_OutputPosit32Index, result.PositBits);
         }
     }
-
 
     public static class Posit32CalculatorExtensions
     {

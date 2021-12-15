@@ -82,7 +82,6 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         public bool EnableConstantSubstitution { get; set; } = true;
 
-
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)
         {
             _memberInvocationInstanceCountConfigurations

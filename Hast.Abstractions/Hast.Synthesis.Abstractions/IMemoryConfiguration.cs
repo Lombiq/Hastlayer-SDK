@@ -9,7 +9,6 @@ namespace Hast.Synthesis.Abstractions
         /// </summary>
         int Alignment { get; }
 
-
         /// <summary>
         /// The minimum cell count to be reserved in front of the payload. It's required for device-specific headers.
         /// </summary>

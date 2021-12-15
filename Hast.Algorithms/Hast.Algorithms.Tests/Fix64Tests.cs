@@ -46,7 +46,6 @@ namespace Hast.Algorithms.Tests
             -376, 435, -311, 116, 715, -1024, -487, 59, 724, 993
         };
 
-
         [Fact]
         public void Precision()
         {
@@ -337,7 +336,6 @@ namespace Hast.Algorithms.Tests
             Assert.Equal(Fix64.MaxValue(), Fix64.Round(Fix64.MaxValue()));
         }
 
-
         [Fact]
         public void Sqrt()
         {
@@ -460,7 +458,6 @@ namespace Hast.Algorithms.Tests
                 Assert.Equal(testCase, Fix64.FromRawInts(testCase.ToIntegers()));
             }
         }
-
 
         static void EqualWithinPrecision(decimal value1, decimal value2)
         {

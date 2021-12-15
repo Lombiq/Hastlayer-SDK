@@ -99,7 +99,6 @@ namespace Hast.Common.Numerics
             }
         }
 
-
         private static int[] RunInt32VectorOperation(int[] vector1, int[] vector2, Func<int, int, int> operation)
         {
             ThrowIfVectorsNotEquallyLong(vector1, vector2);

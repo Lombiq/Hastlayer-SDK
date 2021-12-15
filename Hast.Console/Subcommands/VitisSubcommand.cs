@@ -28,9 +28,7 @@ namespace Hast.Console.Subcommands
         public ILogger<VitisHardwareImplementationComposerBuildProvider> BuildLogger { get; set; } =
             new NullLogger<VitisHardwareImplementationComposerBuildProvider>();
 
-
         public VitisSubcommand(string[] rawArguments) => _rawArguments = rawArguments;
-
 
         public void Run()
         {
@@ -39,7 +37,6 @@ namespace Hast.Console.Subcommands
                 .WithParsed(options => RunOptionsAsync(options, result).Wait())
                 .WithNotParsed(errors => WriteLine(string.Join("\n", errors)));
         }
-
 
         private async Task RunOptionsAsync(VitisOptions options, ParserResult<VitisOptions> parserResult)
         {
@@ -106,7 +103,6 @@ namespace Hast.Console.Subcommands
                     : Path.Combine("VitisOutput", context.HardwareDescription.TransformationId + ".xclbin"),
             };
 
-
             await new VitisHardwareImplementationComposerBuildProvider(BuildLogger)
                 .BuildAsync(context, implementation);
 
@@ -133,7 +129,6 @@ namespace Hast.Console.Subcommands
                     break;
             }
         }
-
 
         private enum Instruction
         {

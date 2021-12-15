@@ -24,7 +24,6 @@ namespace System.Linq.Expressions
             return methodInfo.DeclaringType.FullName + "." + methodInfo.Name;
         }
 
-
         private static MethodInfo GetInvokedMethodInfo<T>(this Expression<Action<T>> expression)
         {
             // Since we need a specific method (i.e. if there are multiple overloads of it, then still one of them)

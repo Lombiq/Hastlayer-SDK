@@ -27,7 +27,6 @@ namespace Hast.Samples.SampleAssembly
         [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
         public static readonly int MaxDegreeOfParallelism = 77;
 
-
         public virtual void EstimatePi(SimpleMemory memory)
         {
             var iterationsCount = memory.ReadUInt32(EstimatePi_IteractionsCountUInt32Index);
@@ -79,7 +78,6 @@ namespace Hast.Samples.SampleAssembly
 
             memory.WriteUInt32(EstimatePi_InCircleCountSumUInt32Index, inCircleCountSum);
         }
-
 
         private readonly Random _random = new Random();
 

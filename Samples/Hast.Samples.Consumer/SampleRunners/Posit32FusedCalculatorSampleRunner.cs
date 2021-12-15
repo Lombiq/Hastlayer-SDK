@@ -48,7 +48,6 @@ namespace Hast.Samples.Consumer.SampleRunners
             Console.WriteLine();
         }
 
-
         private static uint[] CreateTestPosit32BitsArray()
         {
             var posit32Array = new uint[201];

@@ -13,8 +13,6 @@ namespace Hast.Samples.Kpz
         public List<KpzAction> Actions = new List<KpzAction>();
     }
 
-
-
     /// <summary>
     /// A KPZ action consists of a description, the full grid or heightmap and the highlight in it.
     /// There are three typical types of KPZ actions:
@@ -40,7 +38,6 @@ namespace Hast.Samples.Kpz
         public Color HightlightColor;
     }
 
-
     /// <summary>
     /// It logs the state of the KPZ algorithm at particular steps.
     /// <note type="caution">As it stores the full KPZ grid at every step, it can use up a lot of memory.</note>
@@ -50,10 +47,8 @@ namespace Hast.Samples.Kpz
         /// <summary>The KPZ iteration list.</summary>
         public List<KpzIteration> Iterations = new List<KpzIteration>();
 
-
         /// <summary>We add an iteration when the constructor is called, so actions can be added right away.</summary>
         public KpzStateLogger() => NewKpzIteration();
-
 
         /// <summary>Add a new <see cref="KpzIteration" />.</summary>
         public void NewKpzIteration() => Iterations.Add(new KpzIteration());
@@ -187,7 +182,6 @@ namespace Hast.Samples.Kpz
                 }
             }
         }
-
 
         /// <summary>Make a deep copy of a heightmap (2D int array).</summary>
         private static int[,] CopyOfHeightMap(int[,] HeightMap) => (int[,])HeightMap.Clone();

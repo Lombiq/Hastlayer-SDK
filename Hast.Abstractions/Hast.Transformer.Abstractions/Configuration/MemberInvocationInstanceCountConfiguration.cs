@@ -54,7 +54,6 @@ namespace Hast.Transformer.Abstractions.Configuration
 
         public int MaxInvocationInstanceCount { get { return (MaxRecursionDepth + 1) * MaxDegreeOfParallelism; } }
 
-
         /// <summary>
         /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object.
         /// </summary>
@@ -67,14 +66,12 @@ namespace Hast.Transformer.Abstractions.Configuration
             MaxDegreeOfParallelism = 1;
         }
 
-
         /// <summary>
         /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix
         /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
         public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
             simpleName + ".LambdaExpression." + lambdaExpressionIndex.ToString();
     }
-
 
     public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration
     {

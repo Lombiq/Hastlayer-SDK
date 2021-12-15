@@ -21,7 +21,6 @@ namespace Hast.Layer
         string Message { get; }
     }
 
-
     /// <summary>
     /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented
     /// logic and any corresponding config files.

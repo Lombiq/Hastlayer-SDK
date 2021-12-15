@@ -26,7 +26,6 @@ namespace Hast.Communication
         public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
         public event EventHandler<IMemberInvocationContext> MemberInvoking;
 
-
         public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
@@ -44,7 +43,6 @@ namespace Hast.Communication
                 {
                     throw new NotSupportedException("Only async methods that return a Task, not Task<T>, are supported.");
                 }
-
 
                 async Task InvocationHandler()
                 {
@@ -229,7 +227,6 @@ namespace Hast.Communication
                     MemberExecutedOnHardware?.Invoke(this, invocationContext);
                 }
 
-
                 if (methodAsynchronicity == MethodAsynchronicity.AsyncAction)
                 {
                     invocation.ReturnValue = InvocationHandler();
@@ -252,7 +249,6 @@ namespace Hast.Communication
 
             return MethodAsynchronicity.Synchronous;
         }
-
 
         private enum MethodAsynchronicity
         {

@@ -13,13 +13,11 @@ namespace Hast.Communication.Services
         private readonly ILogger _logger;
         private bool _poolIsPopulated = false;
 
-
         public DevicePoolPopulator(IDevicePoolManager devicePoolManager, ILogger<DevicePoolPopulator> logger)
         {
             _devicePoolManager = devicePoolManager;
             _logger = logger;
         }
-
 
         public void PopulateDevicePoolIfNew(Func<Task<IEnumerable<IDevice>>> devicesFactory)
         {

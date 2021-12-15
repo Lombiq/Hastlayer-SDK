@@ -20,7 +20,6 @@ namespace Hast.Layer.EmptyRepresentationFactories
             return new HardwareDescription(mockHardwareEntryPointMappings);
         }
 
-
         private class HardwareDescription : IHardwareDescription
         {
             public string TransformationId { get; } = Sha256Helper.Empty();
@@ -30,12 +29,10 @@ namespace Hast.Layer.EmptyRepresentationFactories
 
             public IEnumerable<ITransformationWarning> Warnings => Enumerable.Empty<ITransformationWarning>();
 
-
             public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings)
             {
                 HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
             }
-
 
             public Task SerializeAsync(Stream stream)
             {

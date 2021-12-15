@@ -17,12 +17,10 @@ namespace Hast.Communication.Services
 
         private Dictionary<string, PooledDevice> _devicePool = new Dictionary<string, PooledDevice>();
 
-
         public DevicePoolManager(ILogger<DevicePoolManager> logger)
         {
             _logger = logger;
         }
-
 
         public void SetDevicePool(IEnumerable<IDevice> devices)
         {
@@ -118,7 +116,6 @@ namespace Hast.Communication.Services
         private class ReservedDevice : Device, IReservedDevice
         {
             private readonly Action<ReservedDevice> _disposer;
-
 
             public ReservedDevice(IDevice baseDevice, Action<ReservedDevice> disposer) : base(baseDevice)
             {

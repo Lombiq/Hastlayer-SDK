@@ -22,7 +22,6 @@ namespace Hast.Samples.SampleAssembly
 
         public const int MaxDegreeOfParallelism = 10;
 
-
         public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
         {
             var number = memory.ReadInt32(CalculateLargeIntegerSum_InputInt32Index);
@@ -82,13 +81,11 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-
         private class TaskResult
         {
             public int Fix64Low { get; set; }
             public int Fix64High { get; set; }
         }
-
 
         public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
         {

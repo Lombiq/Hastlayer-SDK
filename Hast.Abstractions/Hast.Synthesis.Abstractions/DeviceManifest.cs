@@ -17,7 +17,6 @@ namespace Hast.Synthesis.Abstractions
         public uint DataBusWidthBytes { get; set; }
         public string ToolChainName { get; set; }
 
-
         public Exception GetUnknownToolChainException() =>
             new InvalidOperationException($"Unknown tool chain: {ToolChainName}");
     }

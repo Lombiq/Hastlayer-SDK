@@ -14,7 +14,6 @@ namespace Hast.Console
     {
         private static Dictionary<string, SubcommandInfo> _subcommands;
 
-
         private static void RunOptions(MainOptions mainOptions, string[] arguments)
         {
             if (mainOptions.ListCommands)
@@ -69,7 +68,6 @@ namespace Hast.Console
                 .WithParsed(options => RunOptions(options, args))
                 .WithNotParsed(HandleParseError);
         }
-
 
         private class SubcommandInfo
         {

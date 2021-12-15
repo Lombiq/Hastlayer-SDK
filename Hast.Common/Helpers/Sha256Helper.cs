@@ -8,7 +8,6 @@ namespace Hast.Common.Helpers
     {
         private static Lazy<string> EmptyLazy = new Lazy<string>(() => ComputeHash(string.Empty));
 
-
         public static string ComputeHash(string text)
         {
             var hashedIdBytes = new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(text));

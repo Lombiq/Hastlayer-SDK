@@ -17,7 +17,6 @@ namespace Hast.Samples.Kpz
         public KpzKernelsParallelizedInterface KernelsParallelized;
         public PrngTestInterface KernelsP;
 
-
         public async Task<(IHastlayer, IHardwareGenerationConfiguration)> InitializeHastlayer(
             bool verifyOutput,
             bool randomSeedEnable)
@@ -57,7 +56,6 @@ namespace Hast.Samples.Kpz
             {
                 configuration.AddHardwareEntryPointType<PrngTestInterface>();
             }
-
 
             var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(new[] {
                     typeof(KpzKernelsParallelizedInterface).Assembly,

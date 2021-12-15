@@ -10,9 +10,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     {
         private readonly SimpleMemory _simpleMemory;
 
-
         public SimpleMemoryAccessor(SimpleMemory simpleMemory) => _simpleMemory = simpleMemory;
-
 
         /// <summary>
         /// Gets the memory contents without an additional prefix.

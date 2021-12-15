@@ -37,7 +37,6 @@ namespace Hast.Samples.SampleAssembly
         // On Catapult 170 will fit.
         public const int MaxDegreeOfParallelism = 20;
 
-
         public virtual void AddVectors(SimpleMemory memory)
         {
             RunSimdOperation(memory, SimdOperation.Add);
@@ -57,7 +56,6 @@ namespace Hast.Samples.SampleAssembly
         {
             RunSimdOperation(memory, SimdOperation.Divide);
         }
-
 
         private void RunSimdOperation(SimpleMemory memory, SimdOperation operation)
         {

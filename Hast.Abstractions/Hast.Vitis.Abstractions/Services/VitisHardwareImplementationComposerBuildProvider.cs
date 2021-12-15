@@ -48,7 +48,6 @@ namespace Hast.Vitis.Abstractions.Services
         public int MajorStepsTotal { get; private set; } = 8;
         public int MajorStep { get; private set; }
 
-
         public VitisHardwareImplementationComposerBuildProvider(
             ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
         {
@@ -71,7 +70,6 @@ namespace Hast.Vitis.Abstractions.Services
                 }
             }
         }
-
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest.ToolChainName == CommonToolChainNames.Vitis;
@@ -263,7 +261,6 @@ namespace Hast.Vitis.Abstractions.Services
             };
             await ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
-
 
             // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
             //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
@@ -541,7 +538,6 @@ namespace Hast.Vitis.Abstractions.Services
                 return command.WithValidation(CommandResultValidation.None);
             }
 
-
             _logger.LogInformation(
                 "Starting program: {0} {1} (working directory: {2})",
                 executable,
@@ -585,7 +581,6 @@ namespace Hast.Vitis.Abstractions.Services
             _logger.Log(logLevel, "{0}: {1}", name, message);
             _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
         }
-
 
         private static Task<bool> CreateSourceFilesAwait(
             IHardwareImplementationCompositionContext context,

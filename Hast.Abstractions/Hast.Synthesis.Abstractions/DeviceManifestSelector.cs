@@ -8,12 +8,10 @@ namespace Hast.Synthesis.Abstractions
     {
         private readonly IEnumerable<IDeviceManifestProvider> _deviceManifestProviders;
 
-
         public DeviceManifestSelector(IEnumerable<IDeviceManifestProvider> deviceManifestProviders)
         {
             _deviceManifestProviders = deviceManifestProviders;
         }
-
 
         public IEnumerable<IDeviceManifest> GetSupportedDevices() =>
             _deviceManifestProviders

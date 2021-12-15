@@ -13,7 +13,6 @@ namespace Hast.Samples.SampleAssembly
     {
         private const int Run_InputOutputInt32Index = 0;
 
-
         public virtual void Run(SimpleMemory memory)
         {
             // Adding 1 to the input so it's visible whether this actually has run, not just the untouched data was

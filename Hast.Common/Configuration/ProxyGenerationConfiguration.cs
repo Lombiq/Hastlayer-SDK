@@ -22,7 +22,6 @@ namespace Hast.Layer
         /// </summary>
         public bool VerifyHardwareResults { get; set; }
 
-
         private static IProxyGenerationConfiguration _default;
         public static IProxyGenerationConfiguration Default
         {
