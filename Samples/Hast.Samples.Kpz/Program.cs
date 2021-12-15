@@ -13,7 +13,9 @@ namespace Hast.Samples.Kpz
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChartForm());
+
+            using var form = new ChartForm();
+            Application.Run(form);
         }
     }
 }
