@@ -1,6 +1,8 @@
+using Castle.Core.Internal;
 using Hast.Algorithms;
 using Hast.Communication.Exceptions;
 using Hast.Layer;
+using Hast.Samples.Consumer.Models;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
@@ -18,45 +20,7 @@ namespace Hast.Samples.Consumer
     // references other projects (and the sample assembly as well), so check out those too on hints which Hastlayer
     // projects to reference from your own projects.
 
-    // Configure the whole sample project here or in command line arguments:
-    internal static class Configuration
-    {
-        /// <summary>
-        /// Which supported hardware device to use? If you leave this empty the first one will be used. If you're
-        /// testing Hastlayer locally then you'll need to use the "Nexys A7" or "Nexys4 DDR" devices; for
-        /// high-performance local or cloud FPGAs see the docs.
-        /// You can also provide this in the -device command line argument.
-        /// </summary>
-        public static string DeviceName = "Nexys A7";
-
-        /// <summary>
-        /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
-        /// name of your app.
-        /// You can also provide this in the -appname command line argument.
-        /// </summary>
-        public static string AppName = "appname";
-
-        /// <summary>
-        /// If you're running Hastlayer in the Client flavor, you need to configure your credentials here. Here the
-        /// app secret corresponding to of your app.
-        /// You can also provide this in the -appsecret command line argument.
-        /// </summary>
-        public static string AppSecret = "appsecret";
-
-        /// <summary>
-        /// Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not
-        /// up-to-date enough and shouldn't be really taken as good examples (check out the other ones).
-        /// You can also provide this in the -sample command line argument.
-        /// </summary>
-        public static Sample SampleToRun = Sample.Loopback;
-
-        /// <summary>
-        /// Specify a path here where the hardware framework is located. The file describing the hardware to be
-        /// generated will be saved there as well as anything else necessary. If the path is relative (like the
-        /// default) then the file will be saved along this project's executable in the bin output directory.
-        /// </summary>
-        public static string HardwareFrameworkPath = "HardwareFramework";
-    }
+    // Configure the whole sample project in command line arguments. See Models/ConsumerConfiguration.cs for details.
 
     internal static class Program
     {
@@ -70,23 +34,26 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
-            // A little helper for later.
-            var argsList = (IList<string>)args;
-            string GetArgument(string name)
-            {
-                name = "-" + name;
-                int index = argsList.IndexOf(name) + 1;
-                if (index <= 0) return null;
-                if (index == args.Length) index--; // if it's the last element just return the switch.
-                return args[index];
-            }
+            // Here we create the ConsumerConfiguration used to set up this application. Check out the
+            // ConsumerConfiguration class to see what can be changed to try out the various samples and available
+            // devices!
+            // If there are command line arguments, they are used to create the configuration. Otherwise we open an
+            // interactive user interface where you can hand pick the options, load or save them. This GUI has mouse
+            // support on Windows and certain Linux platforms, though not through SSH. You can fully navigate using the
+            // keyboard too. Use the <c>-load name</c> and the <c>-save name</c> command line arguments to save/load
+            // configurations into the ConsumerConfiguration.json file without the GUI.
+            var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
+            var consumerConfiguration = args.Any()
+                ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
+                : new Gui(savedConfigurations).BuildConfiguration();
+            if (consumerConfiguration == null) return;
 
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
             // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
             // transformation. In most cases the flavor defaults to the one you need.
             // var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
             var hastlayerConfiguration = new HastlayerConfiguration();
-            if (!string.IsNullOrWhiteSpace(GetArgument("appsecret"))) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
+            if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
             // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
@@ -116,26 +83,21 @@ namespace Hast.Samples.Consumer
             if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
 
             // Let's just use the first one that is available unless it's specified.
-            if (string.IsNullOrEmpty(Configuration.DeviceName)) Configuration.DeviceName = devices.First().Name;
-            var targetDeviceName = GetArgument("device") ?? Configuration.DeviceName;
+            var targetDeviceName = consumerConfiguration.DeviceName.OrIfEmpty(devices.First().Name);
             var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
             if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
 
-            var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, Configuration.HardwareFrameworkPath);
-            var proxyConfiguration = new ProxyGenerationConfiguration();
-            if (argsList.Contains("-verify")) proxyConfiguration.VerifyHardwareResults = true;
+            var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, consumerConfiguration.HardwareFrameworkPath);
+            var proxyConfiguration = new ProxyGenerationConfiguration
+            {
+                VerifyHardwareResults = consumerConfiguration.VerifyResults,
+            };
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
-            ConfigureClientFlavor(configuration, hastlayerConfiguration, GetArgument);
-
-            // If the sample was selected in the command line use that, or otherwise the default.
-            Configuration.SampleToRun = (Sample)Enum.Parse(
-                typeof(Sample),
-                GetArgument("sample") ?? Configuration.SampleToRun.ToString(),
-                ignoreCase: true);
+            ConfigureClientFlavor(configuration, hastlayerConfiguration, consumerConfiguration);
 
             // Letting the configuration of samples run. Check out those methods too!
-            ISampleRunner sampleRunner = Configuration.SampleToRun switch
+            ISampleRunner sampleRunner = consumerConfiguration.SampleToRun switch
             {
                 Sample.Fix64Calculator => new Fix64CalculatorSampleRunner(),
                 Sample.FSharpParallelAlgorithm => new FSharpParallelAlgorithmSampleRunner(),
@@ -154,16 +116,10 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{Configuration.SampleToRun}'."),
+                _ => throw new Exception($"Unknown sample '{consumerConfiguration.SampleToRun}'."),
             };
             sampleRunner.Configure(configuration);
-            configuration.Label = GetArgument("name") ?? Configuration.SampleToRun.ToString();
-
-            if (GetArgument("replace") is { } replacement)
-            {
-                var parts = replacement.Split('=', 2);
-                configuration.GetOrAddReplacements()[parts[0]] = parts[1];
-            }
+            configuration.Label = consumerConfiguration.BuildLabel ?? consumerConfiguration.SampleToRun.ToString();
 
             // The generated VHDL code will contain debug-level information, though it will be slower to create.
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
@@ -185,7 +141,7 @@ namespace Hast.Samples.Consumer
                     typeof(Posit).Assembly,
                     typeof(ImmutableArray).Assembly,
                     // Only necessary for the F# sample.
-                    typeof(Microsoft.FSharp.Core.LiteralAttribute).Assembly
+                    typeof(Microsoft.FSharp.Core.LiteralAttribute).Assembly,
                 },
                 configuration);
 
@@ -199,7 +155,7 @@ namespace Hast.Samples.Consumer
                                   "cause the hardware implementation to produce incorrect results.\n");
             }
 
-            if (GetArgument("build") != null) Environment.Exit(0);
+            if (consumerConfiguration.GenerateHardwareOnly) Environment.Exit(0);
 
             Console.WriteLine("Starting hardware execution.");
 
@@ -230,24 +186,24 @@ namespace Hast.Samples.Consumer
         private static void ConfigureClientFlavor(
             HardwareGenerationConfiguration configuration,
             HastlayerConfiguration hastlayerConfiguration,
-            Func<string, string> getArgument)
+            ConsumerConfiguration consumerConfiguration)
         {
             if (hastlayerConfiguration.Flavor != HastlayerFlavor.Client) return;
             var remoteClientConfiguration = configuration.RemoteClientConfiguration();
 
-            if (getArgument("endpoint") is { } endpointUrl &&
-                Uri.TryCreate(endpointUrl, UriKind.Absolute, out var endpointUri))
+            if (!string.IsNullOrWhiteSpace(consumerConfiguration.Endpoint) &&
+                Uri.TryCreate(consumerConfiguration.Endpoint, UriKind.Absolute, out var endpointUri))
             {
                 remoteClientConfiguration.EndpointBaseUri = endpointUri;
             }
 
-            remoteClientConfiguration.AppName = getArgument("appname") ?? Configuration.AppName;
-            remoteClientConfiguration.AppSecret = getArgument("appsecret") ?? Configuration.AppSecret;
+            remoteClientConfiguration.AppName = consumerConfiguration.AppName;
+            remoteClientConfiguration.AppSecret = consumerConfiguration.AppSecret;
 
-            if (remoteClientConfiguration.AppSecret == "appsecret")
+            if (string.IsNullOrEmpty(remoteClientConfiguration.AppSecret))
             {
                 throw new InvalidOperationException(
-                    "You haven't changed the default remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
+                    "You haven't provided the remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
             }
         }
 
