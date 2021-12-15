@@ -40,10 +40,10 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (var j = 0; j < posit32ArrayChunk.Length; j++)
                 {
-                    if (i * MaxArrayChunkSize + j < numberCount)
+                    if ((i * MaxArrayChunkSize) + j < numberCount)
                     {
                         posit32ArrayChunk[j] = new Posit32(
-                            memory.ReadUInt32(CalculateFusedSumInputPosit32StartIndex + i * MaxArrayChunkSize + j),
+                            memory.ReadUInt32(CalculateFusedSumInputPosit32StartIndex + (i * MaxArrayChunkSize) + j),
                             fromBitMask: true);
                     }
                     else posit32ArrayChunk[j] = new Posit32(0);

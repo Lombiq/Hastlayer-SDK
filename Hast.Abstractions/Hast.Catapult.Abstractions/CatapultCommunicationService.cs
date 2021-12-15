@@ -51,7 +51,7 @@ namespace Hast.Catapult.Abstractions
         private Memory<byte> HotfixOutput(Memory<byte> memory)
         {
             var memoryBody = memory.Slice(OutputHeaderSizes.Total);
-            var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + memoryBody.Length / HardwareCellMultiplier);
+            var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + (memoryBody.Length / HardwareCellMultiplier));
             var softwareCellsBody = softwareCells.Slice(OutputHeaderSizes.Total);
 
             // first one is already at the right place

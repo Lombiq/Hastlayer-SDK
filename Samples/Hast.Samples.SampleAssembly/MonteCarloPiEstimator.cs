@@ -18,7 +18,7 @@ namespace Hast.Samples.SampleAssembly
     public class MonteCarloPiEstimator
     {
         private const int EstimatePiIteractionsCountUInt32Index = 0;
-        private const int EstimatePi_RandomSeedUInt32Index = 1;
+        private const int EstimatePiRandomSeedUInt32Index = 1;
         private const int EstimatePiInCircleCountSumUInt32Index = 0;
 
         // With a degree of parallelism of 78 the resource utilization of the Nexys A7 board would jump to 101% so this
@@ -30,7 +30,7 @@ namespace Hast.Samples.SampleAssembly
         public virtual void EstimatePi(SimpleMemory memory)
         {
             var iterationsCount = memory.ReadUInt32(EstimatePiIteractionsCountUInt32Index);
-            var randomSeed = (ushort)memory.ReadUInt32(EstimatePi_RandomSeedUInt32Index);
+            var randomSeed = (ushort)memory.ReadUInt32(EstimatePiRandomSeedUInt32Index);
             var iterationsPerTask = iterationsCount / MaxDegreeOfParallelism;
             var tasks = new Task<uint>[MaxDegreeOfParallelism];
 
@@ -56,7 +56,7 @@ namespace Hast.Samples.SampleAssembly
                             //var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
                             //var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
 
-                            if ((ulong)(a * a) + b * b <= ((uint)ushort.MaxValue * ushort.MaxValue))
+                            if ((ulong)(a * a) + (b * b) <= ((uint)ushort.MaxValue * ushort.MaxValue))
                             //if ((ulong)products[0] + products[1] <= ((uint)ushort.MaxValue * ushort.MaxValue))
                             {
                                 inCircleCount++;
@@ -92,7 +92,7 @@ namespace Hast.Samples.SampleAssembly
                 ? SimpleMemory.CreateSoftwareMemory(2)
                 : hastlayer.CreateMemory(configuration, 2);
             memory.WriteUInt32(EstimatePiIteractionsCountUInt32Index, iterationsCount);
-            memory.WriteUInt32(EstimatePi_RandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
+            memory.WriteUInt32(EstimatePiRandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
 
             EstimatePi(memory);
 

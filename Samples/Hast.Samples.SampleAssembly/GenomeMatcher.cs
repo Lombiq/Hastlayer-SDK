@@ -45,7 +45,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 for (ushort column = 0; column < inputOneLength; column++)
                 {
-                    ushort position = (ushort)(resultStartIndex + column + row * inputOneLength);
+                    ushort position = (ushort)(resultStartIndex + column + (row * inputOneLength));
 
                     ushort topCell = 0;
                     ushort leftCell = 0;
@@ -162,12 +162,12 @@ namespace Hast.Samples.SampleAssembly
                 if (pointer == GetLCSDiagonalCellPointerValue && (currentCell == previousCell + 1 || previousPosition < resultStartIndex))
                 {
                     var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
-                    memory.WriteUInt32(resultStartIndex + 2 * resultLength + column, originalValue);
+                    memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);
                 }
                 else if (pointer == GetLCSOutOfBorderDiagonalCellPointerValue)
                 {
                     var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
-                    memory.WriteUInt32(resultStartIndex + 2 * resultLength + column, originalValue);
+                    memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);
                 }
 
                 currentCell = previousCell;
@@ -244,7 +244,7 @@ namespace Hast.Samples.SampleAssembly
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
             var result = "";
-            var startIndex = GetLCSInputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length) * 2;
+            var startIndex = GetLCSInputOneStartIndex + inputOne.Length + inputTwo.Length + ((inputOne.Length * inputTwo.Length) * 2);
 
             for (int i = 0; i < maxInputLength; i++)
             {

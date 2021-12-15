@@ -213,7 +213,7 @@ namespace Hast.Samples.Kpz
                 }
             }
 
-            variance /= GridWidth * GridHeight - 1;
+            variance /= (GridWidth * GridHeight) - 1;
             double standardDeviation = Math.Sqrt(variance);
 
             if (_enableStateLogger)

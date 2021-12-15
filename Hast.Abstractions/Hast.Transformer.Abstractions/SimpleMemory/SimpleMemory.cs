@@ -135,7 +135,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <returns>The instance with a byte[] of capacity for the require payload size.</returns>
         public static SimpleMemory Create(IMemoryConfiguration memoryConfiguration, int cellCount)
         {
-            var memory = new byte[(cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes +
+            var memory = new byte[((cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes) +
                                   memoryConfiguration.Alignment];
             return new SimpleMemory(memory, memoryConfiguration.MinimumPrefix, memoryConfiguration.Alignment);
         }

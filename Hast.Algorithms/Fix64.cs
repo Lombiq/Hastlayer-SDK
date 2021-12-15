@@ -274,7 +274,7 @@ namespace Hast.Algorithms
                         result <<= (BitCount / 2);
                     }
 
-                    bit = 1UL << (BitCount / 2 - 2);
+                    bit = 1UL << ((BitCount / 2) - 2);
                 }
             }
             // Finally, if next bit would have been 1, round the result upwards.
@@ -463,7 +463,7 @@ namespace Hast.Algorithms
             var dividerSigned = yl >= 0 ? yl : -yl;
             var divider = (ulong)dividerSigned;
             var quotient = 0UL;
-            var bitPos = BitCount / 2 + 1;
+            var bitPos = (BitCount / 2) + 1;
 
             // If the divider is divisible by 2^n, take advantage of it.
             while ((divider & 0xF) == 0 && bitPos >= 4)

@@ -17,7 +17,7 @@ namespace Hast.Communication.Tester.Helpers
             {
                 for (int y = 0; y < newImage.Width; y++)
                 {
-                    var bytes = memory.Read4Bytes(x * newImage.Width + y + prependCellCount);
+                    var bytes = memory.Read4Bytes((x * newImage.Width) + y + prependCellCount);
                     newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
                 }
             }
@@ -52,7 +52,7 @@ namespace Hast.Communication.Tester.Helpers
                     var pixel = image.GetPixel(y, x);
 
                     memory.Write4Bytes(
-                        x * image.Width + y + prependCells.Length,
+                        (x * image.Width) + y + prependCells.Length,
                         new[] { pixel.R, pixel.G, pixel.B });
                 }
             }

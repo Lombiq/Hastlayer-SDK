@@ -97,7 +97,7 @@ namespace Hast.Communication.Services
                 // Here we put together the data stream.
                 var dma = new SimpleMemoryAccessor(simpleMemory);
                 var memory = dma.Get(MemoryPrefixCellCount); // This way memory doesn't have to be copied.
-                var memoryDataLength = memory.Length - MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
+                var memoryDataLength = memory.Length - (MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
 
                 // Copying the input length, represented as bytes, to the output buffer.
                 MemoryMarshal.Write(memory.Span, ref memoryDataLength);

@@ -330,7 +330,7 @@ namespace Hast.Catapult.Abstractions
 
                 // Create output array and fill it with the responses that have a positive slice index.
                 var payloadTotalCells = MemoryMarshal.Read<int>(responses[0].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
-                Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
+                Memory<byte> result = new byte[(payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) + OutputHeaderSizes.Total];
                 responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
                 var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
                 Parallel.For(0, responses.Length, (i) =>
@@ -415,7 +415,7 @@ namespace Hast.Catapult.Abstractions
             var payloadBytes = inputData.Length - InputHeaderSizes.Total;
             if (payloadBytes % Constants.BufferChunkBytes != 0)
             {
-                int paddedPayloadSize = Constants.BufferChunkBytes * (payloadBytes / Constants.BufferChunkBytes + 1);
+                int paddedPayloadSize = Constants.BufferChunkBytes * ((payloadBytes / Constants.BufferChunkBytes) + 1);
                 if (paddedPayloadSize <= BufferPayloadSize)
                 {
                     LogFunction((uint)Constants.Log.Warn, $"Incoming payload ({payloadBytes}B) must be aligned to " +

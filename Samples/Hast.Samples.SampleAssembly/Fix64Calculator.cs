@@ -74,7 +74,7 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < MaxDegreeOfParallelism; i++)
             {
-                var itemOutputStartIndex = ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex + i * 2;
+                var itemOutputStartIndex = ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex + (i * 2);
 
                 memory.WriteInt32(itemOutputStartIndex, tasks[i].Result.Fix64Low);
                 memory.WriteInt32(itemOutputStartIndex + 1, tasks[i].Result.Fix64High);
@@ -129,7 +129,7 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < MaxDegreeOfParallelism; i++)
             {
-                var itemOutputStartIndex = ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex + i * 2;
+                var itemOutputStartIndex = ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex + (i * 2);
 
                 results[i] = Fix64.FromRawInts(new[]
                 {
