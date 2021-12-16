@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer
 {
+    /// <summary>
+    /// Configuration for <c>IHastlayer.GenerateProxyAsync</c>.
+    /// </summary>
     public interface IProxyGenerationConfiguration
     {
         /// <summary>
@@ -15,8 +18,8 @@ namespace Hast.Layer
         string CommunicationChannelName { get; }
 
         /// <summary>
-        /// Gets or whether the results coming from the hardware implementation should be checked against a software
-        /// execution. If set to <c>true</c> then both a hardware and software invocation will happen and the result of
+        /// Gets a value indicating whether the results coming from the hardware implementation should be checked against a software
+        /// execution. If set to <see langword="true"/> then both a hardware and software invocation will happen and the result of
         /// the two compared. If there is a mismatch then an exception will be thrown.
         /// </summary>
         bool VerifyHardwareResults { get; }
