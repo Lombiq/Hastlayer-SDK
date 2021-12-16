@@ -328,7 +328,8 @@ namespace Hast.Samples.Kpz.Algorithms
             var rnd = new Random();
             for (int randomWriteIndex = 0; randomWriteIndex < numRandomUints; randomWriteIndex++)
             {
-                sm.WriteUInt32(KpzKernelsParallelizedInterface.MemIndexRandomSeed + randomWriteIndex,
+                sm.WriteUInt32(
+                    KpzKernelsParallelizedInterface.MemIndexRandomSeed + randomWriteIndex,
                     (randomSeedEnable) ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
                 //See comment on notRandomSeed if you get an index out of bounds error here.
             }

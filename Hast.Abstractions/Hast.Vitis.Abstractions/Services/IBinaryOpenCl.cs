@@ -21,7 +21,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         void CreateBinaryKernel(byte[] binary, string kernelName);
 
-        void CreateCommandQueue(int deviceIndex,
+        void CreateCommandQueue(
+            int deviceIndex,
             CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable);
 
         void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true);

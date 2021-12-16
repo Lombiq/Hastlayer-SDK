@@ -109,7 +109,8 @@ namespace Hast.Communication.Tester
                 selectedDevice.DefaultCommunicationChannelName);
             var info = await communicationService.ExecuteAsync(memory, CommandLineOptions.MemberId, executionContext);
 
-            Console.WriteLine("Executing test on hardware took {0:0.##} ms (net) {1:0.##} ms (all together)",
+            Console.WriteLine(
+                "Executing test on hardware took {0:0.##} ms (net) {1:0.##} ms (all together)",
                 info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
 
             // Save output to file.
@@ -175,7 +176,8 @@ namespace Hast.Communication.Tester
             return (memory, accessor);
         }
 
-        private static void SaveFile(OutputFileType fileType,
+        private static void SaveFile(
+            OutputFileType fileType,
             PayloadType payloadType,
             string fileName,
             bool isInput,
@@ -241,7 +243,8 @@ namespace Hast.Communication.Tester
             }
             if (memory.CellCount != referenceMemory.CellCount)
             {
-                Console.WriteLine("MISMATCH IN LENGTH:{0}Hardware: {1}{0}Software: {2}",
+                Console.WriteLine(
+                    "MISMATCH IN LENGTH:{0}Hardware: {1}{0}Software: {2}",
                     Environment.NewLine, memory.CellCount, referenceMemory.CellCount);
             }
             else if (mismatches.Count == 0)
