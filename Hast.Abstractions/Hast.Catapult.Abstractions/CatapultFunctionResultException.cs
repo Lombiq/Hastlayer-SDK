@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using Hast.Communication.Constants.CommunicationConstants;
 
 namespace Hast.Catapult.Abstractions
 {

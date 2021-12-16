@@ -1,7 +1,6 @@
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Drawing;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {

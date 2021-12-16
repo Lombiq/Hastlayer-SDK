@@ -1,6 +1,5 @@
 ﻿using Hast.Common.Interfaces;
 using Hast.Layer;
-using Microsoft.Extensions.Configuration;
 
 namespace Hast.Synthesis.Abstractions
 {
