@@ -38,7 +38,7 @@ namespace Hast.Samples.SampleAssembly
                         int result = input + (index * 2);
 
                         var even = true;
-                        for (int j = 2; j < 9999999; j++)
+                        for (int j = 2; j < 9_999_999; j++)
                         {
                             if (even)
                             {

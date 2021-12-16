@@ -21,8 +21,8 @@ namespace Hast.Samples.Kpz.Algorithms
         public virtual void MWC64X(SimpleMemory memory)
         {
             uint stateHighWord = memory.ReadUInt32(1);
-            uint stateLowWord = memory.ReadUInt32(0); ;
-            ulong randomState = (stateLowWord * 0xFFFEB81BUL) + stateHighWord;
+            uint stateLowWord = memory.ReadUInt32(0);
+            ulong randomState = (stateLowWord * 0x_FFFE_B81BUL) + stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
             memory.WriteUInt32(0, (uint)randomState); //LE: 1 is high byte, 0 is low byte
