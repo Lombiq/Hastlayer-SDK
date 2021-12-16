@@ -1,15 +1,18 @@
-using Hast.Transformer.Abstractions.SimpleMemory;
-using System.Drawing;
 using Hast.Layer;
+using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running convolution image processing on images. Also see <see cref="ImageFilterSampleRunner"/> on
+    /// Algorithm for running convolution image processing on images. Also see <c>ImageFilterSampleRunner</c> on
     /// what to configure to make this work.
     ///
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
+    [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Transformed code.")]
+    [SuppressMessage("Major Code Smell", "S107:Methods should not have too many parameters", Justification = "Transformed code.")]
     public class ImageFilter
     {
         private const int FilterImageImageHeightIndex = 0;
@@ -118,13 +121,26 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>Returns the value of the filtered pixel in matrix.</returns>
         private ushort CalculatePixelValue(
-            ushort topLeft, ushort topMiddle, ushort topRight,
-            ushort middleLeft, ushort pixel, ushort middleRight,
-            ushort bottomLeft, ushort bottomMiddle, ushort bottomRight,
-            int topLeftValue, int topMiddleValue, int topRightValue,
-            int middleLeftValue, int pixelValue, int middleRightValue,
-            int bottomLeftValue, int bottomMiddleValue, int bottomRightValue,
-            int factor, int offset)
+            ushort topLeft,
+            ushort topMiddle,
+            ushort topRight,
+            ushort middleLeft,
+            ushort pixel,
+            ushort middleRight,
+            ushort bottomLeft,
+            ushort bottomMiddle,
+            ushort bottomRight,
+            int topLeftValue,
+            int topMiddleValue,
+            int topRightValue,
+            int middleLeftValue,
+            int pixelValue,
+            int middleRightValue,
+            int bottomLeftValue,
+            int bottomMiddleValue,
+            int bottomRightValue,
+            int factor,
+            int offset)
         {
             if (factor == 0)
                 return pixel;
@@ -157,9 +173,9 @@ namespace Hast.Samples.SampleAssembly
                 image,
                 hastlayer,
                 configuration,
-                1, 2, 1,
-                2, 4, 2,
-                1, 2, 1,
+                (1, 2, 1),
+                (2, 4, 2),
+                (1, 2, 1),
                 16);
             FilterImage(memory);
             return CreateImage(memory, image);
@@ -176,9 +192,9 @@ namespace Hast.Samples.SampleAssembly
                 image,
                 hastlayer,
                 configuration,
-                1, 2, 1,
-                0, 0, 0,
-                -1, -2, -1);
+                (1, 2, 1),
+                (0, 0, 0),
+                (-1, -2, -1));
             FilterImage(memory);
             return CreateImage(memory, image);
         }
@@ -194,9 +210,9 @@ namespace Hast.Samples.SampleAssembly
                 image,
                 hastlayer,
                 configuration,
-                1, 1, 1,
-                0, 0, 0,
-                -1, -1, -1);
+                (1, 1, 1),
+                (0, 0, 0),
+                (-1, -1, -1));
             FilterImage(memory);
             return CreateImage(memory, image);
         }
@@ -212,9 +228,9 @@ namespace Hast.Samples.SampleAssembly
                 image,
                 hastlayer,
                 configuration,
-                1, 0, -1,
-                1, 0, -1,
-                1, 0, -1);
+                (1, 0, -1),
+                (1, 0, -1),
+                (1, 0, -1));
             FilterImage(memory);
             return CreateImage(memory, image);
         }
@@ -223,25 +239,21 @@ namespace Hast.Samples.SampleAssembly
         /// Creates a <see cref="SimpleMemory"/> instance that stores the image.
         /// </summary>
         /// <param name="image">The image to process.</param>
-        /// <param name="topLeft">Top left value.</param>
-        /// <param name="topMiddle">Top middle value.</param>
-        /// <param name="topRight">Top right value.</param>
-        /// <param name="middleLeft">Middle left value.</param>
-        /// <param name="pixel">The current pixel value.</param>
-        /// <param name="middleRight">Middle right value.</param>
-        /// <param name="bottomLeft">Bottom left value.</param>
-        /// <param name="bottomMiddle">Bottom middle value.</param>
-        /// <param name="bottomRight">Bottom right value.</param>
+        /// <param name="top">Top values.</param>
+        /// <param name="middle">Middle values.</param>
+        /// <param name="bottom">Bottom values.</param>
         /// <param name="factor">The value to divide the summed matrix values with.</param>
         /// <param name="offset">Offset value added to the result.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private SimpleMemory CreateSimpleMemory(
             Bitmap image,
-            IHastlayer hastlayer, IHardwareGenerationConfiguration configuration,
-            int topLeft, int topMiddle, int topRight,
-            int middleLeft, int pixel, int middleRight,
-            int bottomLeft, int bottomMiddle, int bottomRight,
-            int factor = 1, int offset = 0)
+            IHastlayer hastlayer,
+            IHardwareGenerationConfiguration configuration,
+            (int Left, int Middle, int Right) top,
+            (int Left, int Middle, int Right) middle,
+            (int Left, int Middle, int Right) bottom,
+            int factor = 1,
+            int offset = 0)
         {
             var cellCount = (image.Width * image.Height * 6) + 13;
             var memory = hastlayer is null
@@ -250,15 +262,15 @@ namespace Hast.Samples.SampleAssembly
 
             memory.WriteUInt32(FilterImageImageWidthIndex, (uint)image.Width);
             memory.WriteUInt32(FilterImageImageHeightIndex, (uint)image.Height);
-            memory.WriteInt32(FilterImageTopLeftIndex, topLeft);
-            memory.WriteInt32(FilterImageTopMiddleIndex, topMiddle);
-            memory.WriteInt32(FilterImageTopRightIndex, topRight);
-            memory.WriteInt32(FilterImageMiddleLeftIndex, middleLeft);
-            memory.WriteInt32(FilterImagePixelIndex, pixel);
-            memory.WriteInt32(FilterImageMiddleRightIndex, middleRight);
-            memory.WriteInt32(FilterImageBottomLeftIndex, bottomLeft);
-            memory.WriteInt32(FilterImageBottomMiddleIndex, bottomMiddle);
-            memory.WriteInt32(FilterImageBottomRightIndex, bottomRight);
+            memory.WriteInt32(FilterImageTopLeftIndex, top.Left);
+            memory.WriteInt32(FilterImageTopMiddleIndex, top.Middle);
+            memory.WriteInt32(FilterImageTopRightIndex, top.Right);
+            memory.WriteInt32(FilterImageMiddleLeftIndex, middle.Left);
+            memory.WriteInt32(FilterImagePixelIndex, middle.Middle);
+            memory.WriteInt32(FilterImageMiddleRightIndex, middle.Right);
+            memory.WriteInt32(FilterImageBottomLeftIndex, bottom.Left);
+            memory.WriteInt32(FilterImageBottomMiddleIndex, bottom.Middle);
+            memory.WriteInt32(FilterImageBottomRightIndex, bottom.Right);
             memory.WriteInt32(FilterImageFactorIndex, factor);
             memory.WriteInt32(FilterImageOffsetIndex, offset);
 

@@ -66,7 +66,8 @@ namespace Hast.Samples.SampleAssembly
                             Fix64Low = integers[0],
                             Fix64High = integers[1]
                         };
-                    }, upToNumber);
+                    },
+                    upToNumber);
             }
 
             Task.WhenAll(tasks).Wait();

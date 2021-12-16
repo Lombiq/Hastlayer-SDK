@@ -266,8 +266,12 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <param name="randomSeed1"></param>
         /// <param name="randomSeed2"></param>
         /// <param name="numberOfIterations"></param>
-        public static void CopyParametersToMemory(SimpleMemory memoryDst, bool testMode, ulong randomSeed1,
-            ulong randomSeed2, uint numberOfIterations)
+        public static void CopyParametersToMemory(
+            SimpleMemory memoryDst,
+            bool testMode,
+            ulong randomSeed1,
+            ulong randomSeed2,
+            uint numberOfIterations)
         {
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0xFFFFFFFFUL));
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0xFFFFFFFFUL));

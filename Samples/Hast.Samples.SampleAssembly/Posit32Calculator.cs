@@ -84,7 +84,8 @@ namespace Hast.Samples.SampleAssembly
                         }
 
                         return (int)a;
-                    }, upToNumber);
+                    },
+                    upToNumber);
             }
 
             Task.WhenAll(tasks).Wait();

@@ -105,13 +105,16 @@ namespace Hast.Communication.Tester
             Console.WriteLine("Starting hardware execution.");
             var communicationService = provider.GetService<ICommunicationServiceSelector>().GetCommunicationService(channelName);
             communicationService.TesterOutput = Console.Out;
-            var executionContext = new BasicExecutionContext(hastlayer, selectedDevice.Name,
+            var executionContext = new BasicExecutionContext(
+                hastlayer,
+                selectedDevice.Name,
                 selectedDevice.DefaultCommunicationChannelName);
             var info = await communicationService.ExecuteAsync(memory, CommandLineOptions.MemberId, executionContext);
 
             Console.WriteLine(
                 "Executing test on hardware took {0:0.##} ms (net) {1:0.##} ms (all together)",
-                info.HardwareExecutionTimeMilliseconds, info.FullExecutionTimeMilliseconds);
+                info.HardwareExecutionTimeMilliseconds,
+                info.FullExecutionTimeMilliseconds);
 
             // Save output to file.
             SaveFile(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.OutputFileName, false, memory);
@@ -245,7 +248,9 @@ namespace Hast.Communication.Tester
             {
                 Console.WriteLine(
                     "MISMATCH IN LENGTH:{0}Hardware: {1}{0}Software: {2}",
-                    Environment.NewLine, memory.CellCount, referenceMemory.CellCount);
+                    Environment.NewLine,
+                    memory.CellCount,
+                    referenceMemory.CellCount);
             }
             else if (mismatches.Count == 0)
             {
