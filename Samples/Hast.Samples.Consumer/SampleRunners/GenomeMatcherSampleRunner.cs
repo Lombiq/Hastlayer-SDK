@@ -18,8 +18,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // Sample from IBM.
             var inputOne = "GCCCTAGCG";
             var inputTwo = "GCGCAATG";
-
-            var result = genomeMatcher.CalculateLongestCommonSubsequence(
+            _ = genomeMatcher.CalculateLongestCommonSubsequence(
                 inputOne,
                 inputTwo,
                 hastlayer,
@@ -29,7 +28,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             inputOne = "ACACACTA";
             inputTwo = "AGCACACA";
 
-            result = genomeMatcher.CalculateLongestCommonSubsequence(
+            _ = genomeMatcher.CalculateLongestCommonSubsequence(
                 inputOne,
                 inputTwo,
                 hastlayer,
@@ -38,7 +37,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             inputOne = "lombiqtech";
             inputTwo = "coulombtech";
 
-            result = genomeMatcher.CalculateLongestCommonSubsequence(
+            _ = genomeMatcher.CalculateLongestCommonSubsequence(
                 inputOne,
                 inputTwo,
                 hastlayer,

@@ -32,7 +32,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             modifiedImage.Save("contrast.bmp", ImageFormat.Bmp);
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ImageContrastModifier().ChangeImageContrast(
+            _ = new ImageContrastModifier().ChangeImageContrast(
                 bitmap,
                 -50,
                 hastlayer,

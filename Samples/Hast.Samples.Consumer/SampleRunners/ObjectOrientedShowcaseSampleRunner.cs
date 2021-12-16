@@ -14,7 +14,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var ooShowcase = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ObjectOrientedShowcase(), configuration);
-            var sum = ooShowcase.Run(93, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 293
+            _ = ooShowcase.Run(93, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration); // 293
         }
     }
 }

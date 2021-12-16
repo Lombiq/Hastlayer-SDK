@@ -64,8 +64,6 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
         {
-            var numbers = new int[MaxDegreeOfParallelism];
-
             var tasks = new Task<int>[MaxDegreeOfParallelism];
 
             for (int i = 0; i < MaxDegreeOfParallelism; i++)
