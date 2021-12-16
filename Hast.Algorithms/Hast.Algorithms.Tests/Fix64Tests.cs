@@ -12,7 +12,7 @@ namespace Hast.Algorithms.Tests
     {
         private readonly ITestOutputHelper _testOutputHelper;
 
-        private readonly long[] _testCases =
+        private readonly long[] _testCases = new[]
         {
             // Small numbers
             0L, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -68,10 +68,7 @@ namespace Hast.Algorithms.Tests
         }
 
         [Fact]
-        [SuppressMessage(
-            "Blocker Code Smell",
-            "S2699:Tests should include assertions",
-            Justification = nameof(EqualWithinPrecision) + " is an assertion.")]
+        [SuppressMessage("Blocker Code Smell", "S2699:Tests should include assertions", Justification = nameof(EqualWithinPrecision) + " is an assertion.")]
         public void DoubleToFix64AndBack()
         {
             var sources = new[]
@@ -135,7 +132,7 @@ namespace Hast.Algorithms.Tests
         }
 
         [Fact]
-        public void Subtraction()
+        public void Substraction()
         {
             var terms1 = new[] { Fix64.MinValue(), (Fix64)(-1), Fix64.Zero(), Fix64.One(), Fix64.MaxValue() };
             var terms2 = new[] { Fix64.One(), (Fix64)(-2), (Fix64)1.5m, (Fix64)2, (Fix64)(-1) };
@@ -191,10 +188,7 @@ namespace Hast.Algorithms.Tests
                 }
             }
 
-            _testOutputHelper.WriteLine(
-                "{0} total, {1} per multiplication",
-                sw.ElapsedMilliseconds,
-                (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
+            _testOutputHelper.WriteLine("{0} total, {1} per multiplication", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
 
@@ -236,10 +230,7 @@ namespace Hast.Algorithms.Tests
                 }
             }
 
-            _testOutputHelper.WriteLine(
-                "{0} total, {1} per division",
-                sw.ElapsedMilliseconds,
-                (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
+            _testOutputHelper.WriteLine("{0} total, {1} per division", sw.ElapsedMilliseconds, (double)sw.Elapsed.Milliseconds / (_testCases.Length * _testCases.Length));
             Assert.True(failures < 1);
         }
 
