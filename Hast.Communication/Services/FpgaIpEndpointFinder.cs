@@ -80,7 +80,7 @@ namespace Hast.Communication.Services
             {
                 IsAvailable = isAvailable,
                 Endpoint = new IPEndPoint(ipAddress, port),
-                LastCheckedUtc = _clock.UtcNow
+                LastCheckedUtc = _clock.UtcNow,
             };
         }
 

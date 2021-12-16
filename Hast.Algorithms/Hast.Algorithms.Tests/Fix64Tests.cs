@@ -41,7 +41,7 @@ namespace Hast.Algorithms.Tests
             // Tiny random numbers
             - 171,
             -359, 491, 844, 158, -413, -422, -737, -575, -330,
-            -376, 435, -311, 116, 715, -1024, -487, 59, 724, 993
+            -376, 435, -311, 116, 715, -1024, -487, 59, 724, 993,
         };
 
         [Fact]
@@ -77,7 +77,7 @@ namespace Hast.Algorithms.Tests
                 1.0,
                 (double)Math.PI,
                 (double)Math.E,
-                (double)int.MaxValue
+                (double)int.MaxValue,
             };
 
             foreach (var value in sources)
@@ -103,7 +103,7 @@ namespace Hast.Algorithms.Tests
                 1.0m,
                 (decimal)Math.PI,
                 (decimal)Math.E,
-                int.MaxValue
+                int.MaxValue,
             };
 
             foreach (var value in sources)

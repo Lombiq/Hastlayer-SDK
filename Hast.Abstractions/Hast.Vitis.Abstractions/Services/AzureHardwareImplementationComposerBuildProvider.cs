@@ -30,7 +30,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
-            nameof(VitisHardwareImplementationComposerBuildProvider)
+            nameof(VitisHardwareImplementationComposerBuildProvider),
         };
 
         public AzureHardwareImplementationComposerBuildProvider(

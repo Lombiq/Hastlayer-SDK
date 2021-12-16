@@ -53,7 +53,7 @@ namespace Hast.Common.Models
             {
                 TypeNameHandling = TypeNameHandling.Auto,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
-                ContractResolver = new PrivateSetterContractResolver()
+                ContractResolver = new PrivateSetterContractResolver(),
             };
     }
 }

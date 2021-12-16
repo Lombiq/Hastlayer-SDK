@@ -54,7 +54,7 @@ namespace Hast.Console
                     CommandName = ((SubcommandAttribute)result.Attribute)!.Name,
                     Instance = (ISubcommand)result.Type!
                             .GetConstructor(new[] { typeof(string[]) })!
-                        .Invoke(new object[] { args })
+                        .Invoke(new object[] { args }),
                 })
                 .ToDictionary(info => info.CommandName);
 

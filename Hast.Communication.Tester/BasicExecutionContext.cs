@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -27,7 +27,7 @@ namespace Hast.Communication.Tester
             {
                 CommunicationChannelName = communicationChannelName,
                 CustomConfiguration = customConfiguration ?? new Dictionary<string, object>(),
-                VerifyHardwareResults = false
+                VerifyHardwareResults = false,
             };
         }
     }

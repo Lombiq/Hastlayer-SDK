@@ -43,7 +43,7 @@ namespace Hast.Remote.Client
                     .RequestTransformation(new TransformationRequest
                     {
                         Assemblies = assemblyContainers,
-                        Configuration = apiConfiguration
+                        Configuration = apiConfiguration,
                     });
 
                 TransformationResult transformationResult = null;

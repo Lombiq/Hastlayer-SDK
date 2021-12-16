@@ -10,7 +10,7 @@
         public static VhdlGenerationConfiguration Debug { get; } = new VhdlGenerationConfiguration
         {
             AddComments = true,
-            ShortenNames = true
+            ShortenNames = true,
         };
 
         /// <summary>
@@ -20,7 +20,7 @@
         /// </summary>
         public static VhdlGenerationConfiguration Compact { get; } = new VhdlGenerationConfiguration
         {
-            ShortenNames = true
+            ShortenNames = true,
         };
 
         /// <summary>

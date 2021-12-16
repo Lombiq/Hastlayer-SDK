@@ -137,7 +137,7 @@ namespace Hast.Catapult.Abstractions
             FlashMutexTimeout = 79,
             EnumerationMoreDevices = 80,
             EnumerationNoList = 81,
-            UnknownError = 10000
+            UnknownError = 10000,
         }
 
         /// <summary>

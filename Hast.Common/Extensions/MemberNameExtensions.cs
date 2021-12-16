@@ -39,7 +39,7 @@ namespace Hast.Common.Extensions
                 // 1. alternate:
                 sides[0] + "::" + sides[1].Substring(sides[1].IndexOf(methodName + "(")),
                 // 2. alternate:
-                returnType + " " + sides[1].Replace("." + methodName + "(", "::" + methodName + "(")
+                returnType + " " + sides[1].Replace("." + methodName + "(", "::" + methodName + "("),
             };
         }
     }

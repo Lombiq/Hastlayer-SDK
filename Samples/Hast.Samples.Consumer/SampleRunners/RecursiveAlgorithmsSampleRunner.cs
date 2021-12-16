@@ -16,7 +16,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 {
                     // If we give these algorithms inputs causing a larger recursion depth then that will cause runtime
                     // problems.
-                    MaxRecursionDepth = 20
+                    MaxRecursionDepth = 20,
                 });
         }
 

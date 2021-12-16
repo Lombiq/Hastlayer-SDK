@@ -10,7 +10,7 @@ namespace Hast.Samples.SampleAssembly
         Add,
         Subtract,
         Multiply,
-        Divide
+        Divide,
     }
 
     /// <summary>

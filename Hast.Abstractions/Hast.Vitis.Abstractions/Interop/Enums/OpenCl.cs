@@ -116,7 +116,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         PlatformNotFoundKhr = -1001,
         DevicePartitionFailedExt = -1057,
         InvalidPartitionCountExt = -1058,
-        InvalidPartitionNameExt = -1059
+        InvalidPartitionNameExt = -1059,
     }
 
     /// <summary>
@@ -152,7 +152,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// <summary>
         /// All OpenCL devices available in the system.
         /// </summary>
-        All = 0xFFFFFFFF
+        All = 0xFFFFFFFF,
     }
 
     /// <summary>
@@ -238,7 +238,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// specified set of memory objects are migrated to the device associated with command_queue without incurring
         /// the overhead of migrating their contents.
         /// </summary>
-        ContentUndefined = 1 << 1
+        ContentUndefined = 1 << 1,
     }
 
     [Flags]

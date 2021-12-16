@@ -25,6 +25,6 @@
         /// <summary>
         /// File gets read as a bitmap.
         /// </summary>
-        Bitmap
+        Bitmap,
     }
 }

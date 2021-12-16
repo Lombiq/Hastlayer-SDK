@@ -24,7 +24,7 @@ namespace Hast.Samples.SampleAssembly
                 new NumberContainer { Number = inputNumber },
                 new NumberContainer { Number = inputNumber + 4 },
                 new NumberContainer { Number = 24 },
-                new NumberContainer(9)
+                new NumberContainer(9),
             };
 
             // Array elements can be accessed and modified as usual.
@@ -44,7 +44,7 @@ namespace Hast.Samples.SampleAssembly
             var numberContainers2 = new NumberContainer[1];
             var numberContainer = new NumberContainer
             {
-                Number = 5
+                Number = 5,
             };
             numberContainer.Number = numberContainer.NumberPlusFive;
             if (!numberContainer.WasIncreased)

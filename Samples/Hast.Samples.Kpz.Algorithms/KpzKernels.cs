@@ -97,12 +97,12 @@ namespace Hast.Samples.Kpz.Algorithms
             Random1 = new RandomMwc64X
             {
                 State =
-                    (ulong)memory.ReadUInt32(MemIndexRandomStates) << 32 | memory.ReadUInt32(MemIndexRandomStates + 1)
+                    (ulong)memory.ReadUInt32(MemIndexRandomStates) << 32 | memory.ReadUInt32(MemIndexRandomStates + 1),
             };
             Random2 = new RandomMwc64X
             {
                 State =
-                    (ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32 | memory.ReadUInt32(MemIndexRandomStates + 3)
+                    (ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32 | memory.ReadUInt32(MemIndexRandomStates + 3),
             };
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);

@@ -18,7 +18,7 @@ namespace Hast.Samples.Kpz.Algorithms
             var node = new KpzNode
             {
                 dx = (value & 1) != 0,
-                dy = (value & 2) != 0
+                dy = (value & 2) != 0,
             };
             return node;
         }
