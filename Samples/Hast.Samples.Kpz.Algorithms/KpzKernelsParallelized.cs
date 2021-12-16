@@ -70,7 +70,7 @@ namespace Hast.Samples.Kpz.Algorithms
         public virtual void ScheduleIterations(SimpleMemory memory)
         {
             int numberOfIterations = memory.ReadInt32(MemIndexNumberOfIterations);
-            const int TasksPerIteration = (GridSize * GridSize) / (LocalGridSize * LocalGridSize);
+            const int TasksPerIteration = GridSize * GridSize / (LocalGridSize * LocalGridSize);
             const int SchedulesPerIteration = TasksPerIteration / ParallelTasks;
             int iterationGroupSize = numberOfIterations * ReschedulesPerTaskIteration;
             const int PokesInsideTask = LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration;
@@ -186,12 +186,12 @@ namespace Hast.Samples.Kpz.Algorithms
 
                                 if (
                                     // If we get the pattern {01, 01} we have a pyramid:
-                                    ((taskLocal.BramDx[pokeCenterIndex] && !taskLocal.BramDx[rightNeighbourIndex]) &&
-                                    (taskLocal.BramDy[pokeCenterIndex] && !taskLocal.BramDy[bottomNeighbourIndex]) &&
+                                    (taskLocal.BramDx[pokeCenterIndex] && !taskLocal.BramDx[rightNeighbourIndex] &&
+                                    taskLocal.BramDy[pokeCenterIndex] && !taskLocal.BramDy[bottomNeighbourIndex] &&
                                     (randomVariable1 < IntegerProbabilityP)) ||
                                     // If we get the pattern {10, 10} we have a hole:
-                                    ((!taskLocal.BramDx[pokeCenterIndex] && taskLocal.BramDx[rightNeighbourIndex]) &&
-                                    (!taskLocal.BramDy[pokeCenterIndex] && taskLocal.BramDy[bottomNeighbourIndex]) &&
+                                    (!taskLocal.BramDx[pokeCenterIndex] && taskLocal.BramDx[rightNeighbourIndex] &&
+                                    !taskLocal.BramDy[pokeCenterIndex] && taskLocal.BramDy[bottomNeighbourIndex] &&
                                     (randomVariable2 < IntegerProbabilityQ))
                                 )
                                 {
@@ -332,7 +332,7 @@ namespace Hast.Samples.Kpz.Algorithms
             {
                 sm.WriteUInt32(
                     KpzKernelsParallelizedInterface.MemIndexRandomSeed + randomWriteIndex,
-                    (randomSeedEnable) ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
+                    randomSeedEnable ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
                 //See comment on notRandomSeed if you get an index out of bounds error here.
             }
 

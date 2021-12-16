@@ -117,7 +117,7 @@ namespace Hast.Samples.SampleAssembly
         public uint IncreaseNumber(uint increaseBy)
         {
             WasIncreased = true;
-            return (Number += increaseBy);
+            return Number += increaseBy;
         }
 
         // Methods can call each other as usual.

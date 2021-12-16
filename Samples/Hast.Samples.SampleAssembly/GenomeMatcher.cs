@@ -243,7 +243,7 @@ namespace Hast.Samples.SampleAssembly
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
             var result = "";
-            var startIndex = GetLCSInputOneStartIndex + inputOne.Length + inputTwo.Length + ((inputOne.Length * inputTwo.Length) * 2);
+            var startIndex = GetLCSInputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length * 2);
 
             for (int i = 0; i < maxInputLength; i++)
             {

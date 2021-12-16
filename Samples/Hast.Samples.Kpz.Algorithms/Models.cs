@@ -11,7 +11,7 @@ namespace Hast.Samples.Kpz.Algorithms
         public bool dx; // Right
         public bool dy; // Bottom
 
-        public uint SerializeToUInt32() => ((dx) ? 1U : 0) | ((dy) ? 2U : 0);
+        public uint SerializeToUInt32() => (dx ? 1U : 0) | (dy ? 2U : 0);
 
         public static KpzNode DeserializeFromUInt32(uint value)
         {

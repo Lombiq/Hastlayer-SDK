@@ -62,7 +62,7 @@ namespace Hast.Algorithms
         // CPU still.
 
         // Precision of this type is 2^-32, that is 2,3283064365386962890625E-10
-        public static readonly decimal Precision = (decimal)(new Fix64(1L));//0.00000000023283064365386962890625m;
+        public static readonly decimal Precision = (decimal)new Fix64(1L);//0.00000000023283064365386962890625m;
         //public static readonly Fix64 MaxValue = new Fix64(MAX_VALUE);
         //public static readonly Fix64 MinValue = new Fix64(MIN_VALUE);
         //public static readonly Fix64 One = new Fix64(ONE);
@@ -266,8 +266,8 @@ namespace Hast.Algorithms
                     }
                     else
                     {
-                        num <<= (BitCount / 2);
-                        result <<= (BitCount / 2);
+                        num <<= BitCount / 2;
+                        result <<= BitCount / 2;
                     }
 
                     bit = 1UL << ((BitCount / 2) - 2);
@@ -296,7 +296,7 @@ namespace Hast.Algorithms
             var sum = xl + yl;
 
             // If signs of operands are equal and signs of sum and x are different
-            if (((~(xl ^ yl) & (xl ^ sum)) & MinRawValue) != 0)
+            if ((~(xl ^ yl) & (xl ^ sum) & MinRawValue) != 0)
             {
                 sum = xl > 0 ? MaxRawValue : MinRawValue;
             }
@@ -320,7 +320,7 @@ namespace Hast.Algorithms
             var diff = xl - yl;
 
             // Ff signs of operands are different and signs of sum and x are different
-            if ((((xl ^ yl) & (xl ^ diff)) & MinRawValue) != 0)
+            if (((xl ^ yl) & (xl ^ diff) & MinRawValue) != 0)
             {
                 diff = xl < 0 ? MinRawValue : MaxRawValue;
             }

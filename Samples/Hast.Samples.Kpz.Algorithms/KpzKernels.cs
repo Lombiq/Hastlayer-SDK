@@ -163,12 +163,12 @@ namespace Hast.Samples.Kpz.Algorithms
             // We check our own {dx,dy} values, and the right neighbor's dx, and bottom neighbor's dx.
             if (
                 // If we get the pattern {01, 01} we have a pyramid:
-                ((GetGridDx(centerIndex) && !GetGridDx(rightNeighbourIndex)) &&
-                (GetGridDy(centerIndex) && !GetGridDy(bottomNeighbourIndex)) &&
+                (GetGridDx(centerIndex) && !GetGridDx(rightNeighbourIndex) &&
+                GetGridDy(centerIndex) && !GetGridDy(bottomNeighbourIndex) &&
                 (forceSwitch || randomVariable1 < IntegerProbabilityP)) ||
                 // If we get the pattern {10, 10} we have a hole:
-                ((!GetGridDx(centerIndex) && GetGridDx(rightNeighbourIndex)) &&
-                (!GetGridDy(centerIndex) && GetGridDy(bottomNeighbourIndex)) &&
+                (!GetGridDx(centerIndex) && GetGridDx(rightNeighbourIndex) &&
+                !GetGridDy(centerIndex) && GetGridDy(bottomNeighbourIndex) &&
                 (forceSwitch || randomVariable2 < IntegerProbabilityQ))
             )
             {
@@ -277,7 +277,7 @@ namespace Hast.Samples.Kpz.Algorithms
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0x_FFFF_FFFFUL));
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 2, (uint)(randomSeed2 & 0x_FFFF_FFFFUL));
             memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)((randomSeed2 >> 32) & 0x_FFFF_FFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, (testMode) ? 1U : 0U);
+            memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, testMode ? 1U : 0U);
             memoryDst.WriteUInt32(KpzKernels.MemIndexNumberOfIterations, numberOfIterations);
         }
 
