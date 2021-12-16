@@ -1,5 +1,6 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
+using static Hast.Communication.ProxyGenerator;
 
 namespace Hast.Communication
 {
@@ -9,9 +10,11 @@ namespace Hast.Communication
     /// </summary>
     public interface IProxyGenerator : ISingletonDependency
     {
-        T CreateCommunicationProxy<T>(
-            IHardwareRepresentation hardwareRepresentation,
-            T target,
-            IProxyGenerationConfiguration configuration) where T : class;
+        /// <summary>
+        /// Returns a proxied version of <paramref name="target"/> via <see cref="MemberInvocationInterceptor"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the object to proxy.</typeparam>
+        T CreateCommunicationProxy<T>(IHardwareRepresentation hardwareRepresentation, T target, IProxyGenerationConfiguration configuration)
+            where T : class;
     }
 }

@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using System;
 using System.Buffers;
@@ -54,7 +54,7 @@ namespace Hast.Vitis.Abstractions.Services
         /// Asynchronously waits for the device identified by the numeric index <paramref name="deviceIndex"/> to finish
         /// any scheduled executions.
         /// </summary>
-        Task AwaitDeviceAsync(int deviceIndex);
+        Task AwaitDevice(int deviceIndex);
 
         /// <summary>
         /// Registers the <paramref name="buffer"/> as an argument for the kernel. If the buffer doesn't yet exist, it
