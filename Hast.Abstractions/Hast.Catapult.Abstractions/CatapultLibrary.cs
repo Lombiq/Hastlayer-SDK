@@ -455,7 +455,6 @@ namespace Hast.Catapult.Abstractions
 
         private async Task<Memory<byte>> ReceiveJobResults(uint slot)
         {
-
             // Wait for the interrupt and download results from output buffer.
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
             var resultSize = await Task.Run(() =>

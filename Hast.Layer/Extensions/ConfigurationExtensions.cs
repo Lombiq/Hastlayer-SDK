@@ -10,7 +10,6 @@ namespace Microsoft.Extensions.Configuration
     // Source: https://stackoverflow.com/a/55050425
     public static class ConfigurationExtensions
     {
-
         /// <summary>
         /// Serializes the configuration into JSON.
         /// </summary>
