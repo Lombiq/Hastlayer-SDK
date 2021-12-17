@@ -42,6 +42,7 @@ namespace Hast.Common.Services
                     {
                         continue;
                     }
+
                     if (implementedInterfaces.Name == nameof(ISingletonDependency))
                     {
                         lifetime = ServiceLifetime.Singleton;

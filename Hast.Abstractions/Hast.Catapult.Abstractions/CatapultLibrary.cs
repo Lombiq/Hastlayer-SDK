@@ -321,7 +321,7 @@ namespace Hast.Catapult.Abstractions
                     {
                         tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
                         if ((i + 1) % BufferCount == 0) await Task.WhenAll(tasks);
-                    };
+                    }
                 }
 
                 // Make sure that all slots are done.
@@ -438,6 +438,7 @@ namespace Hast.Catapult.Abstractions
             {
                 inputData.Span.CopyTo(new Span<byte>(inputBuffer.ToPointer(), inputData.Length));
             }
+
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
             TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes", slot, inputData.Length);
