@@ -45,7 +45,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <remarks>
         /// This is internal so the property can be read when handling communication with the FPGA but not by user code.
         /// </remarks>
-        internal Memory<byte> Memory => PrefixedMemory.Slice(PrefixCellCount * MemoryCellSizeBytes);
+        internal Memory<byte> Memory => PrefixedMemory[(PrefixCellCount * MemoryCellSizeBytes)..];
 
         /// <summary>
         /// Gets the number of bytes of this memory allocation.
@@ -164,7 +164,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                 logger?.LogWarning("Not enough prefix cells available. An extra copy occurs.");
                 var additionalBytes = (memoryConfiguration.MinimumPrefix - withPrefixCells) * MemoryCellSizeBytes;
                 Memory<byte> newMemory = new byte[memory.Length + additionalBytes];
-                memory.CopyTo(newMemory.Slice(additionalBytes));
+                memory.CopyTo(newMemory[additionalBytes..]);
 
                 memory = newMemory;
                 withPrefixCells = memoryConfiguration.MinimumPrefix;

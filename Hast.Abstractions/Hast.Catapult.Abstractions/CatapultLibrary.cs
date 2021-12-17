@@ -303,7 +303,7 @@ namespace Hast.Catapult.Abstractions
                 for (int i = 0; i < currentSliceCount; i++)
                 {
                     var slice = i < currentSliceCount - 1 ? inputData.Slice(i * BufferPayloadSize, BufferPayloadSize) :
-                        inputData.Slice(tasks.Count * BufferPayloadSize);
+                        inputData[(tasks.Count * BufferPayloadSize)..];
                     tasks.Add(AssignJob(
                         memberId,
                         slice,
@@ -328,7 +328,7 @@ namespace Hast.Catapult.Abstractions
                 var responses = await Task.WhenAll(tasks);
 
                 // Create output array and fill it with the responses that have a positive slice index.
-                var payloadTotalCells = MemoryMarshal.Read<int>(responses[0].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
+                var payloadTotalCells = MemoryMarshal.Read<int>(responses[0][OutputHeaderSizes.HardwareExecutionTime..].Span);
                 Memory<byte> result = new byte[(payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) + OutputHeaderSizes.Total];
                 responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
                 var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
@@ -336,10 +336,10 @@ namespace Hast.Catapult.Abstractions
                 {
                     int size = i < responses.Length - 1 ? BufferPayloadSize :
                         (payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) - (i * BufferPayloadSize);
-                    var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
+                    var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span[sliceIndexPosition..]);
                     if (offset < 0 || offset >= result.Length) return;
 
-                    var targetSlice = result.Slice(OutputHeaderSizes.Total + offset);
+                    var targetSlice = result[(OutputHeaderSizes.Total + offset)..];
                     responses[i].Slice(OutputHeaderSizes.Total, size).CopyTo(targetSlice);
                 });
 
@@ -348,12 +348,12 @@ namespace Hast.Catapult.Abstractions
 
             Memory<byte> data = new byte[InputHeaderSizes.Total + inputData.Length];
             MemoryMarshal.Write(data.Span, ref memberId);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId), ref totalDataSize);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells), ref sliceIndex);
+            MemoryMarshal.Write(data.Span[InputHeaderSizes.MemberId..], ref totalDataSize);
+            MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], ref sliceIndex);
             MemoryMarshal.Write(
-                data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
-                + InputHeaderSizes.SliceIndex), ref sliceCountValue);
-            inputData.CopyTo(data.Slice(InputHeaderSizes.Total));
+                data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
+                + InputHeaderSizes.SliceIndex)..], ref sliceCountValue);
+            inputData.CopyTo(data[InputHeaderSizes.Total..]);
 
             // This job will contain the current call.
             Task<Memory<byte>> job = null;
@@ -379,8 +379,8 @@ namespace Hast.Catapult.Abstractions
                     Environment.NewLine,
                     currentSlot,
                     MemoryMarshal.Read<long>(jobResult.Span),
-                    MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime).Span),
-                    MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells).Span));
+                    MemoryMarshal.Read<int>(jobResult[OutputHeaderSizes.HardwareExecutionTime..].Span),
+                    MemoryMarshal.Read<int>(jobResult[(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells)..].Span));
             return jobResult;
         }
 

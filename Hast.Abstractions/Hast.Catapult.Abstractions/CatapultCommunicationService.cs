@@ -43,20 +43,20 @@ namespace Hast.Catapult.Abstractions
             Memory<byte> hardwareCells = new byte[memory.Length * HardwareCellMultiplier];
 
             for (int i = 0; i < memory.Length; i += SimpleMemory.MemoryCellSizeBytes)
-                memory.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(hardwareCells.Slice(i * HardwareCellMultiplier));
+                memory.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(hardwareCells[(i * HardwareCellMultiplier)..]);
 
             return hardwareCells;
         }
 
         private static Memory<byte> HotfixOutput(Memory<byte> memory)
         {
-            var memoryBody = memory.Slice(OutputHeaderSizes.Total);
+            var memoryBody = memory[OutputHeaderSizes.Total..];
             var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + (memoryBody.Length / HardwareCellMultiplier));
-            var softwareCellsBody = softwareCells.Slice(OutputHeaderSizes.Total);
+            var softwareCellsBody = softwareCells[OutputHeaderSizes.Total..];
 
             // first one is already at the right place
             for (int i = HardwareCellIncrement; i < memoryBody.Length; i += HardwareCellIncrement)
-                memoryBody.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(softwareCellsBody.Slice(i / HardwareCellMultiplier));
+                memoryBody.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(softwareCellsBody[(i / HardwareCellMultiplier)..]);
 
             return softwareCells;
         }
@@ -117,7 +117,7 @@ namespace Hast.Catapult.Abstractions
             SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
             var outputPayloadByteCount = SimpleMemory.MemoryCellSizeBytes * (int)MemoryMarshal.Read<uint>(
-                outputBuffer.Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
+                outputBuffer[OutputHeaderSizes.HardwareExecutionTime..].Span);
             if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
                 outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
 
