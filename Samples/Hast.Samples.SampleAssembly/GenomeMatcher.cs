@@ -6,8 +6,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <see cref="GenomeMatcherSampleRunner"/> on what
-    /// to configure to make this work.
+    /// Algorithm for running Smith-Waterman Genome Matcher. Also see <c>GenomeMatcherSampleRunner</c> on what to
+    /// configure to make this work.
     ///
     /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
     /// </summary>
@@ -29,6 +29,25 @@ namespace Hast.Samples.SampleAssembly
         {
             FillTable(memory);
             Traceback(memory);
+        }
+
+        /// <summary>
+        /// Calculates the longest common subsequence of two strings.
+        /// </summary>
+        /// <param name="inputOne">The first string to compare.</param>
+        /// <param name="inputTwo">The second string to compare.</param>
+        /// <returns>Returns the longest common subsequence of the two strings.</returns>
+        public string CalculateLongestCommonSubsequence(
+            string inputOne,
+            string inputTwo,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
+        {
+            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo, hastlayer, configuration);
+
+            CalculateLongestCommonSubsequence(simpleMemory);
+
+            return GetResult(simpleMemory, inputOne, inputTwo);
         }
 
         private void FillTable(SimpleMemory memory)
@@ -175,25 +194,6 @@ namespace Hast.Samples.SampleAssembly
         }
 
         /// <summary>
-        /// Calculates the longest common subsequence of two strings.
-        /// </summary>
-        /// <param name="inputOne">The first string to compare.</param>
-        /// <param name="inputTwo">The second string to compare.</param>
-        /// <returns>Returns the longest common subsequence of the two strings.</returns>
-        public string CalculateLongestCommonSubsequence(
-            string inputOne,
-            string inputTwo,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
-        {
-            var simpleMemory = CreateSimpleMemory(inputOne, inputTwo, hastlayer, configuration);
-
-            CalculateLongestCommonSubsequence(simpleMemory);
-
-            return GetResult(simpleMemory, inputOne, inputTwo);
-        }
-
-        /// <summary>
         /// Creates a <see cref="SimpleMemory"/> object filled with the input values.
         /// </summary>
         /// <param name="inputOne">The first string to compare.</param>
@@ -242,7 +242,7 @@ namespace Hast.Samples.SampleAssembly
         {
             var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
-            var result = "";
+            var result = string.Empty;
             var startIndex = GetLCSInputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length * 2);
 
             for (int i = 0; i < maxInputLength; i++)
@@ -254,7 +254,7 @@ namespace Hast.Samples.SampleAssembly
                 result += chars[0];
             }
 
-            return result.Replace("\0", "");
+            return result.Replace("\0", string.Empty);
         }
     }
 }

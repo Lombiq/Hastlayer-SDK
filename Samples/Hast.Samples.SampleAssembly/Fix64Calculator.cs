@@ -10,7 +10,7 @@ namespace Hast.Samples.SampleAssembly
     /// <summary>
     /// Sample using the <see cref="Fix64"/> 64 fixed-point number type. This is useful if you need more involved
     /// calculations with fractions where simply scaling the numbers up and down is not enough. Also see
-    /// <see cref="Fix64CalculatorSampleRunner"/> on what to configure to make this work.
+    /// <c>Fix64CalculatorSampleRunner</c> on what to configure to make this work.
     /// </summary>
     public class Fix64Calculator
     {
@@ -36,6 +36,21 @@ namespace Hast.Samples.SampleAssembly
             var integers = a.ToIntegers();
             memory.WriteInt32(CalculateLargeIntegerSumOutputInt32Index, integers[0]);
             memory.WriteInt32(CalculateLargeIntegerSumOutputInt32Index + 1, integers[1]);
+        }
+
+        public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
+        {
+            var memory = hastlayer.CreateMemory(configuration, 2);
+
+            memory.WriteInt32(CalculateLargeIntegerSumInputInt32Index, input);
+
+            CalculateIntegerSumUpToNumber(memory);
+
+            return Fix64.FromRawInts(new[]
+            {
+                memory.ReadInt32(CalculateLargeIntegerSumOutputInt32Index),
+                memory.ReadInt32(CalculateLargeIntegerSumOutputInt32Index + 1),
+            });
         }
 
         public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
@@ -79,27 +94,6 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
-        private class TaskResult
-        {
-            public int Fix64Low { get; set; }
-            public int Fix64High { get; set; }
-        }
-
-        public Fix64 CalculateIntegerSumUpToNumber(int input, IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
-        {
-            var memory = hastlayer.CreateMemory(configuration, 2);
-
-            memory.WriteInt32(CalculateLargeIntegerSumInputInt32Index, input);
-
-            CalculateIntegerSumUpToNumber(memory);
-
-            return Fix64.FromRawInts(new[]
-            {
-                memory.ReadInt32(CalculateLargeIntegerSumOutputInt32Index),
-                memory.ReadInt32(CalculateLargeIntegerSumOutputInt32Index + 1),
-            });
-        }
-
         public IEnumerable<Fix64> ParallelizedCalculateIntegerSumUpToNumbers(
             int[] numbers,
             IHastlayer hastlayer = null,
@@ -137,6 +131,12 @@ namespace Hast.Samples.SampleAssembly
             }
 
             return results;
+        }
+
+        private class TaskResult
+        {
+            public int Fix64Low { get; set; }
+            public int Fix64High { get; set; }
         }
     }
 }

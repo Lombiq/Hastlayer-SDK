@@ -1,14 +1,14 @@
+using Hast.Layer;
+using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Drawing;
 using System.Threading.Tasks;
-using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Algorithm for changing the contrast of an image. Also see <see cref="ImageContrastModifiermSampleRunner"/> on
-    /// what to configure to make this work.
+    /// Algorithm for changing the contrast of an image. Also see <c>ImageContrastModifiermSampleRunner</c> on what to
+    /// configure to make this work.
     /// </summary>
     public class ImageContrastModifier
     {
@@ -73,7 +73,7 @@ namespace Hast.Samples.SampleAssembly
                                 B = ChangePixelValue(input.PixelBytes[2], input.ContrastValue),
                             };
                         },
-                    new PixelProcessingTaskInput { PixelBytes = pixelBytes, ContrastValue = contrastValue });
+                        new PixelProcessingTaskInput { PixelBytes = pixelBytes, ContrastValue = contrastValue });
                 }
 
                 Task.WhenAll(tasks).Wait();
@@ -179,17 +179,17 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteUInt32(ChangeContrastImageHeightIndex, (uint)image.Height);
             memory.WriteInt32(ChangeContrastContrastValueIndex, contrastValue);
 
-            for (int x = 0; x < image.Height; x++)
+            for (int y = 0; y < image.Height; y++)
             {
-                for (int y = 0; y < image.Width; y++)
+                for (int x = 0; x < image.Width; x++)
                 {
-                    var pixel = image.GetPixel(y, x);
+                    var pixel = image.GetPixel(x, y);
 
                     // This leaves 1 byte unused in each memory cell, but that would make the whole logic a lot more
                     // complicated, so good enough for a sample; if we'd want to optimize memory usage, that would be
                     // needed.
                     memory.Write4Bytes(
-                        (x * image.Width) + y + ChangeContrastImageStartIndex,
+                        (y * image.Width) + x + ChangeContrastImageStartIndex,
                         new[] { pixel.R, pixel.G, pixel.B });
                 }
             }
@@ -207,12 +207,12 @@ namespace Hast.Samples.SampleAssembly
         {
             var newImage = new Bitmap(image);
 
-            for (int x = 0; x < newImage.Height; x++)
+            for (int y = 0; y < newImage.Height; y++)
             {
-                for (int y = 0; y < newImage.Width; y++)
+                for (int x = 0; x < newImage.Width; x++)
                 {
-                    var bytes = memory.Read4Bytes((x * newImage.Width) + y + ChangeContrastImageStartIndex);
-                    newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
+                    var bytes = memory.Read4Bytes((y * newImage.Width) + x + ChangeContrastImageStartIndex);
+                    newImage.SetPixel(x, y, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
                 }
             }
 
