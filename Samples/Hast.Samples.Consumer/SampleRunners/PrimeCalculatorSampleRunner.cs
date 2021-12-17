@@ -47,13 +47,13 @@ namespace Hast.Samples.Consumer.SampleRunners
             // connected then all of them will be utilized. If the whole device pool is utilized calls will
             // wait for their turn.
             // Uncomment if you have multiple boards connected.
-            //var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
-            //for (uint i = 100; i < 110; i++)
-            //{
-            //    parallelLaunchedIsPrimeTasks
-            //        .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
-            //}
-            //var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
+            //// var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
+            //// for (uint i = 100; i < 110; i++)
+            //// {
+            ////     parallelLaunchedIsPrimeTasks
+            ////         .Add(Task.Factory.StartNew(indexObject => primeCalculator.IsPrimeNumber((uint)indexObject), i));
+            //// }
+            //// var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
             // In-algorithm parallelization:
             // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism

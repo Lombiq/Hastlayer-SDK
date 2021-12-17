@@ -262,11 +262,13 @@ namespace Hast.Vitis.Abstractions.Services
             await ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
+#pragma warning disable S125 // Sections of code should not be commented out. But this is not C# code.
             // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
             //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
             // endif
             // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
             // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
+#pragma warning restore S125 // Sections of code should not be commented out. But this is not C# code.
             var vppExecutable = await GetExecutablePathAsync(Vpp);
             var vppArguments = new List<string>(
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm
@@ -563,7 +565,9 @@ namespace Hast.Vitis.Abstractions.Services
                 };
             }
 
+#pragma warning disable S125 // Sections of code should not be commented out. But this is not C# code.
             // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
+#pragma warning restore S125 // Sections of code should not be commented out. But this is not C# code.
             if (name == Vpp && text?.StartsWith("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
             {
                 if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;

@@ -53,11 +53,10 @@ namespace Hast.Samples.SampleAssembly
                             // A bit of further parallelization can be exploited with SIMD to shave off some execution
                             // time. However, this needs so much resources on the hardware that the degree of
                             // parallelism needs to be lowered substantially (below 60).
-                            //var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
-                            //var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
+                            //// var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
+                            //// var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
 
                             if ((ulong)(a * a) + (b * b) <= ((uint)ushort.MaxValue * ushort.MaxValue))
-                            //if ((ulong)products[0] + products[1] <= ((uint)ushort.MaxValue * ushort.MaxValue))
                             {
                                 inCircleCount++;
                             }

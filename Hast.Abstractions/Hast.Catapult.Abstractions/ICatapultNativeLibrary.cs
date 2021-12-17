@@ -75,13 +75,6 @@ namespace Hast.Catapult.Abstractions
             string RpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
 
-        // Excluded from managed API since it's deprecated.
-        // /// <summary>
-        // /// This function is preserved for backwards compatibility. Unlike <see cref="WriteFlashImageEx(IntPtr, bool, string, uint)"/>,
-        // /// this function requires an exclusive handle.
-        // /// </summary>
-        // Constants.Status WriteFlashImage(IntPtr fpgaHandle, bool writeToGolden, string RpdFilename);
-
         /// <summary>
         /// This function is used to read the flash images from the FPGA to a file. It can either be used to read the
         /// golden or app image.
@@ -98,13 +91,6 @@ namespace Hast.Catapult.Abstractions
             bool isGolden,
             string RpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
-
-        // Excluded from managed API since it's deprecated.
-        // /// <summary>
-        // /// This function is preserved for backwards compatibility. Unlike
-        // /// <see cref="CaptureFlashImageEx(IntPtr, bool, string, uint)"/>, this function requires an exclusive handle.
-        // /// </summary>
-        // Constants.Status CaptureFlashImage(IntPtr fpgaHandle, bool isGolden, string RpdFilename);
 
         /// <summary>
         /// Disable non-maskable interrupt error reporting.  Needed during FPGA reconfiguration. It is not multithreaded-
@@ -251,12 +237,6 @@ namespace Hast.Catapult.Abstractions
         /// This function should be called to release and close an FPGA handle.
         /// </summary>
         Constants.Status CloseHandle(IntPtr fpgaHandle);
-
-        // Not presently supported by the native API.
-        // /// <summary>
-        // /// This function retrieves the total number of available PCIe endpoints on an FPGA.
-        // /// </summary>
-        // Constants.Status GetNumberEndpoints(IntPtr fpgaHandle, out uint numEndpoints);
 
         /// <summary>
         /// This function retrieves the total number of PCIe buffers available for host-to-FPGA communication.

@@ -52,9 +52,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                     if (hardwareResult[i] != softwareResult[i])
                     {
                         // Uncomment this to list errors in a file.
-                        //System.IO.File.AppendAllText(
-                        //    "Errors.txt",
-                        //    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
+                        ////System.IO.File.AppendAllText(
+                        ////    "Errors.txt",
+                        ////    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
 
                         throw new InvalidOperationException(
                             "The hardware result and the software result is not the same on index " + i.ToString() + ": " +
