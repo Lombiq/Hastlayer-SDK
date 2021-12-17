@@ -25,7 +25,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="prefixCellCount">
         /// The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.
-        /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>
+        /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>.
         /// </param>
         public Memory<byte> Get(int prefixCellCount)
         {
@@ -71,11 +71,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format.
         /// </summary>
         /// <param name="stream">The stream to write the storage data to.</param>
-        public void Store(Stream stream)
-        {
-            var segment = Get().GetUnderlyingArray();
-            stream.Write(segment.Array, segment.Offset, _simpleMemory.ByteCount);
-        }
+        public void Store(Stream stream) => stream.Write(Get().Span);
 
         /// <summary>
         /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format to a file. Overwrites the file

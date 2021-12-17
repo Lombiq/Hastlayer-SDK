@@ -194,8 +194,12 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="bytes">The source.</param>
         /// <returns>The underlying array.</returns>
         /// <remarks>
-        /// Once Stream.Read(Span) based overload is available, use that instead!
-        /// https://docs.microsoft.com/en-us/dotnet/api/system.io.stream.read?view=netcore-2.2#System_IO_Stream_Read_System_Span_System_Byte__
+        /// <para>
+        /// Don't use this for writing into streams, <see cref="ReadOnlySpan{T}"/> can do that now. Only for
+        /// <c>System.IO.Ports.SerialPort</c> which as of yet doesn't support <see cref="Span{T}"/>. Follow <see
+        /// href="https://github.com/dotnet/runtime/issues/27941">this issue</see> to see progress on the SerialPort API
+        /// update.
+        /// </para>
         /// </remarks>
         public static ArraySegment<byte> GetUnderlyingArray(this Memory<byte> bytes) => GetUnderlyingArray((ReadOnlyMemory<byte>)bytes);
 

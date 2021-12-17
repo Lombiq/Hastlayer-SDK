@@ -105,8 +105,7 @@ namespace Hast.Communication.Services
                 MemoryMarshal.Write(memory.Span.Slice(sizeof(int)), ref memberId);
 
                 // Sending data to the FPGA board.
-                var segment = memory.GetUnderlyingArray();
-                await stream.WriteAsync(segment.Array, segment.Offset, memory.Length);
+                await stream.WriteAsync(memory);
 
                 // Read the first batch of the TcpServer response bytes that will represent the execution time.
                 var executionTimeBytes = await GetBytesFromStream(stream, sizeof(ulong));

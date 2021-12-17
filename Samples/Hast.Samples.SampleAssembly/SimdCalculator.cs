@@ -2,6 +2,7 @@ using Hast.Common.Numerics;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using Hast.Layer;
+using System.Numerics;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -14,14 +15,17 @@ namespace Hast.Samples.SampleAssembly
     }
 
     /// <summary>
-    /// Sample to showcase SIMD (Simple Instruction Multiple Data) processing usage, i.e. operations executed in parallel
-    /// on multiple elements of vectors. Also see <see cref="SimdCalculatorSampleRunner"/> on what to configure to make
-    /// this work.
+    /// Sample to showcase SIMD (Simple Instruction Multiple Data) processing usage, i.e. operations executed in
+    /// parallel on multiple elements of vectors. Also see <c>SimdCalculatorSampleRunner</c> on what to configure to
+    /// make this work.
     /// </summary>
     /// <remarks>
-    /// System.Numerics.Vectors (including the NuGet package version of it: http://www.nuget.org/packages/System.Numerics.Vectors)
-    /// could be used for SIMD processing on x64 systems. However Vector<T> can only contain that many elements that can
-    /// fit into the processor's SIMD register and thus is quite inconvenient to use. So using a custom implementation.
+    /// <para>
+    /// <c>System.Numerics.Vector</c>s (including the NuGet package version of it
+    /// (http://www.nuget.org/packages/System.Numerics.Vectors) could be used for SIMD processing on x64 systems.
+    /// However <see cref="Vector{T}"/> can only contain as many elements that can fit into the processor's SIMD
+    /// register and thus is quite inconvenient to use. So using a custom implementation.
+    /// </para>
     /// </remarks>
     public class SimdCalculator
     {
