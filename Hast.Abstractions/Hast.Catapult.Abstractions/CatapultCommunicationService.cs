@@ -23,7 +23,8 @@ namespace Hast.Catapult.Abstractions
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             ILogger<CatapultCommunicationService> logger,
-            ILogger<CatapultLibrary> catapultLibraryLogger) : base(logger)
+            ILogger<CatapultLibrary> catapultLibraryLogger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;

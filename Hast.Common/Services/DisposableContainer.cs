@@ -43,13 +43,15 @@ namespace Hast.Common.Services
     {
         public T Value => (T)Values[0];
 
-        public DisposableContainer(IDisposable context, T value) : base(context, value) { }
+        public DisposableContainer(IDisposable context, T value)
+            : base(context, value) { }
     }
 
     /// <inheritdoc cref="DisposableContainer"/>
     public sealed class DisposableContainer<T1, T2> : DisposableContainer
     {
-        public DisposableContainer(IDisposable context, T1 value1, T2 value2) : base(context, value1, value2) { }
+        public DisposableContainer(IDisposable context, T1 value1, T2 value2)
+            : base(context, value1, value2) { }
 
         public void Deconstruct(out T1 first, out T2 second)
         {

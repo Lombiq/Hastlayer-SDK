@@ -1,6 +1,7 @@
 using Hast.Vitis.Abstractions.Interop.Enums;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 
@@ -61,7 +62,7 @@ namespace Hast.Vitis.Abstractions.Models
                         item.Name = value;
                         break;
                     case nameof(Index):
-                        item.Index = int.Parse(value);
+                        item.Index = int.Parse(value, CultureInfo.InvariantCulture);
                         break;
                     case nameof(Type):
                         item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, true);
@@ -71,10 +72,10 @@ namespace Hast.Vitis.Abstractions.Models
                         value = parts[0];
                         item.Frequency = parts[1].Trim().ToUpperInvariant() switch
                         {
-                            "MHZ" => uint.Parse(value) * 1_000_000,
-                            "KHZ" => uint.Parse(value) * 1_000,
-                            "HZ" => uint.Parse(value),
-                            "" => uint.Parse(value),
+                            "MHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000_000,
+                            "KHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000,
+                            "HZ" => uint.Parse(value, CultureInfo.InvariantCulture),
+                            "" => uint.Parse(value, CultureInfo.InvariantCulture),
                             _ => throw new InvalidCastException($"Unknown frequency unit '{parts[1]}'."),
                         };
                         break;

@@ -7,11 +7,13 @@ namespace Hast.Layer
     /// </summary>
     public class HastlayerException : Exception
     {
-        public HastlayerException(string message) : base(message)
+        public HastlayerException(string message)
+            : base(message)
         {
         }
 
-        public HastlayerException(string message, Exception innerException) : base(message, innerException)
+        public HastlayerException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
     }

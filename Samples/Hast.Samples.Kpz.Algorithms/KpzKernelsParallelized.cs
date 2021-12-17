@@ -204,6 +204,7 @@ namespace Hast.Samples.Kpz.Algorithms
 
                                 // ==== </Now randomly switch four cells> ====
                             }
+
                             return taskLocal;
                         },
                         taskLocals[parallelTaskIndex]);

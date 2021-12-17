@@ -22,7 +22,6 @@ namespace Hast.Samples.Kpz.Algorithms
             };
             return node;
         }
-
     }
 
     /// <summary>

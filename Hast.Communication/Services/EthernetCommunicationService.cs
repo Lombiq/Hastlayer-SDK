@@ -37,7 +37,8 @@ namespace Hast.Communication.Services
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IFpgaIpEndpointFinder fpgaIpEndpointFinder,
-            ILogger<EthernetCommunicationService> logger) : base(logger)
+            ILogger<EthernetCommunicationService> logger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;

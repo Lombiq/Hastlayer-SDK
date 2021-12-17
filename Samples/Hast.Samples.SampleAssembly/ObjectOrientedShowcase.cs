@@ -51,6 +51,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 numberContainer.IncreaseNumber(5);
             }
+
             numberContainers2[0] = numberContainer;
 
             for (int i = 0; i < numberContainers1.Length; i++)

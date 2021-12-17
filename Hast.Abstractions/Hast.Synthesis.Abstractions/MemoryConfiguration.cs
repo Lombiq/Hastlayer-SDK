@@ -37,6 +37,5 @@ namespace Hast.Synthesis.Abstractions
             deviceManifestProvider.ConfigureMemory(memoryConfiguration, hardwareGenerationConfiguration);
             return memoryConfiguration;
         }
-
     }
 }

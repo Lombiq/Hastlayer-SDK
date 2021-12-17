@@ -70,7 +70,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix
         /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
         public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
-            simpleName + ".LambdaExpression." + lambdaExpressionIndex.ToString();
+            $"{simpleName}.LambdaExpression.{lambdaExpressionIndex}";
     }
 
     public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration
@@ -81,14 +81,16 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         /// <param name="methodNamePrefix">The prefix of the method's name (or methods' names).</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
-            string methodNamePrefix) : base(typeof(T).FullName + "." + methodNamePrefix) { }
+            string methodNamePrefix)
+            : base(typeof(T).FullName + "." + methodNamePrefix) { }
 
         /// <summary>
         /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a method.
         /// </summary>
         /// <param name="expression">An expression with a call to the method.</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
-            Expression<Action<T>> expression) : base(expression.GetMethodSimpleName()) { }
+            Expression<Action<T>> expression)
+            : base(expression.GetMethodSimpleName()) { }
 
         /// <summary>
         /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a lambda expression

@@ -57,8 +57,8 @@ namespace Hast.Samples.Consumer.SampleRunners
                         ////    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
 
                         throw new InvalidOperationException(
-                            "The hardware result and the software result is not the same on index " + i.ToString() + ": " +
-                            hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + ".");
+                            $"The hardware result and the software result is not the same on index {i}: " +
+                            $"{hardwareResult[i]} vs {softwareResult[i]}.");
                     }
                 }
                 catch (Exception)

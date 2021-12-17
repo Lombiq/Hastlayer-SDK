@@ -122,6 +122,7 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 MajorStepsTotal = 3;
             }
+
             // Synthesis doesn't need the device.
             else if (buildConfiguration.ResetOnFirstRun && _firstRun)
             {
@@ -529,6 +530,7 @@ namespace Hast.Vitis.Abstractions.Services
                                 $"The command {name} exited with code {exited.ExitCode}. " +
                                 $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
                         }
+
                         break;
                 }
             }
@@ -643,7 +645,6 @@ namespace Hast.Vitis.Abstractions.Services
                 EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
                 await File.WriteAllTextAsync(targetFilePath, result);
             }
-
         }
 
         public void Dispose() => _buildOutput?.Dispose();

@@ -7,8 +7,10 @@ namespace Hast.Communication.Exceptions
     /// </summary>
     public class SerialPortCommunicationException : Exception
     {
-        public SerialPortCommunicationException(string message) : base(message) { }
+        public SerialPortCommunicationException(string message)
+            : base(message) { }
 
-        public SerialPortCommunicationException(string message, Exception inner) : base(message, inner) { }
+        public SerialPortCommunicationException(string message, Exception inner)
+            : base(message, inner) { }
     }
 }

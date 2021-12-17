@@ -60,7 +60,6 @@ namespace Hast.Samples.Kpz.Algorithms
             kernels.MWC64X(memory);
             return memory.ReadUInt32(2);
         }
-
     }
 }
 

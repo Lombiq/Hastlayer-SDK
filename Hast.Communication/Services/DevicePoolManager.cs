@@ -117,7 +117,8 @@ namespace Hast.Communication.Services
         {
             private readonly Action<ReservedDevice> _disposer;
 
-            public ReservedDevice(IDevice baseDevice, Action<ReservedDevice> disposer) : base(baseDevice)
+            public ReservedDevice(IDevice baseDevice, Action<ReservedDevice> disposer)
+                : base(baseDevice)
             {
                 _disposer = disposer;
             }

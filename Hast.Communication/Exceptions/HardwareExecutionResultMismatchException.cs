@@ -52,8 +52,8 @@ namespace Hast.Communication.Exceptions
             public int HardwareCellCount { get; private set; }
             public int SoftwareCellCount { get; private set; }
 
-            public LengthMismatch(int hardwareCellCount, int softwareCellCount, int overflowIndex, byte[] hardwareResult, byte[] softwareResult) :
-                base(overflowIndex, hardwareResult, softwareResult)
+            public LengthMismatch(int hardwareCellCount, int softwareCellCount, int overflowIndex, byte[] hardwareResult, byte[] softwareResult)
+                : base(overflowIndex, hardwareResult, softwareResult)
             {
                 HardwareCellCount = hardwareCellCount;
                 SoftwareCellCount = softwareCellCount;

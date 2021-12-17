@@ -249,6 +249,7 @@ namespace Hast.Samples.Consumer
                 var index = deviceNames.IndexOf(deviceName);
                 if (index >= 0) _optionsListView.SelectedItem = index;
             }
+
             _currentOptionsListViewEventHandler = item => { _configuration.DeviceName = item.ToString(); };
             ShowTextField(false);
         }
