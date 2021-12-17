@@ -20,16 +20,16 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             var simdCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new SimdCalculator(), configuration);
 
-            var sumVector = ThrowIfNotCorrect(
+            ThrowIfNotCorrect(
                 simdCalculator,
                 calculator => calculator.AddVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
-            var differenceVector = ThrowIfNotCorrect(
+            ThrowIfNotCorrect(
                 simdCalculator,
                 calculator => calculator.SubtractVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
-            var productVector = ThrowIfNotCorrect(
+            ThrowIfNotCorrect(
                 simdCalculator,
                 calculator => calculator.MultiplyVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
-            var quotientVector = ThrowIfNotCorrect(
+            ThrowIfNotCorrect(
                 simdCalculator,
                 calculator => calculator.DivideVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
         }
