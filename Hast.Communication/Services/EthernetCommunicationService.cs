@@ -82,7 +82,7 @@ namespace Hast.Communication.Services
 
                 using var stream = client.GetStream();
                 // We send an execution signal to make the FPGA ready to receive the data stream.
-                var executionCommandTypeByte = new byte[] { (byte)CommandTypes.Execution };
+                var executionCommandTypeByte = new[] { (byte)CommandTypes.Execution };
                 await stream.WriteAsync(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
 
                 var executionCommandTypeResponseByte = await GetBytesFromStream(stream, 1);
