@@ -351,8 +351,8 @@ namespace Hast.Catapult.Abstractions
             MemoryMarshal.Write(data.Span[InputHeaderSizes.MemberId..], ref totalDataSize);
             MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], ref sliceIndex);
             MemoryMarshal.Write(
-                data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
-                + InputHeaderSizes.SliceIndex)..], ref sliceCountValue);
+                data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells + InputHeaderSizes.SliceIndex)..],
+                ref sliceCountValue);
             inputData.CopyTo(data[InputHeaderSizes.Total..]);
 
             // This job will contain the current call.
@@ -459,8 +459,12 @@ namespace Hast.Catapult.Abstractions
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
             var resultSize = await Task.Run(() =>
             {
-                VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived,
-                    useInterrupt: true, timeoutInSeconds: int.MaxValue));
+                VerifyResult(NativeLibrary.WaitOutputBuffer(
+                    _handle,
+                    slot,
+                    out uint bytesReceived,
+                    useInterrupt: true,
+                    timeoutInSeconds: int.MaxValue));
                 return (int)bytesReceived;
             });
 
