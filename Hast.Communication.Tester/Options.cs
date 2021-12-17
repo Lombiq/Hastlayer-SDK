@@ -52,14 +52,19 @@ namespace Hast.Communication.Tester
         [Option('n', "no-check", HelpText = "Skips result check at the end.")]
         public bool NoCheck { get; set; }
 
-        [Option('L', "log-level", HelpText = "Sets the logging level for 'hastlayer', 0 for most verbose, 6 for nothing. (Trace, Debug, Info, Warning, Error, Critical, None)")]
+        [Option(
+            'L',
+            "log-level",
+            HelpText = "Sets the logging level for 'hastlayer', 0 for most verbose, 6 for nothing. (Trace, Debug, " +
+            "Info, Warning, Error, Critical, None)")]
         public int LogLevelInt { get => (int)LogLevel; set => LogLevel = (LogLevel)value; }
         public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
         [Option(
             'a',
             "action",
-            HelpText = "What sample to run on the reference memory (e.g. MemoryTest). Note that the given sample should have a method with the exact signature \"Run(SimpleMemory memory)\".")]
+            HelpText = "What sample to run on the reference memory (e.g. MemoryTest). Note that the given sample " +
+            "should have a method with the exact signature \"Run(SimpleMemory memory)\".")]
         public string ReferenceAction { get; set; }
 
         [Option('p', "prepend", HelpText = "Prepend a list of integers to the SimpleMemory.")]
