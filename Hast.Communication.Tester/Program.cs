@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -22,6 +23,10 @@ using BindingFlags = System.Reflection.BindingFlags;
 
 namespace Hast.Communication.Tester
 {
+    [SuppressMessage(
+        "Globalization",
+        "CA1303:Do not pass literals as localized parameters",
+        Justification = "This is a simple tester utility, there is no need for localization.")]
     public static class Program
     {
         public const string DefaultHexdumpFileName = "dump.txt";
@@ -36,13 +41,13 @@ namespace Hast.Communication.Tester
         private static void OnServiceGeneration(object sender, IServiceCollection services) =>
             services.RemoveImplementations<ITransformer>();
 
-        private static async Task MainTask(IServiceProvider provider)
+        private static async Task MainTaskAsync(IServiceProvider provider)
         {
             var hastlayer = provider.GetService<IHastlayer>();
 
             // Get devices and if asked exit with the device list.
             var devices = provider.GetService<IDeviceManifestSelector>().GetSupportedDevices()?.ToList();
-            if (devices?.Any() != true) throw new Exception("No devices are available!");
+            if (devices?.Any() != true) throw new InvalidOperationException("No devices are available!");
 
             if (CommandLineOptions.ListDevices)
             {
@@ -57,7 +62,7 @@ namespace Hast.Communication.Tester
             // Try to load selected device or pick the first available if none were selected.
             if (string.IsNullOrEmpty(CommandLineOptions.DeviceName)) CommandLineOptions.DeviceName = devices.First().Name;
             var selectedDevice = devices.FirstOrDefault(device => device.Name == CommandLineOptions.DeviceName);
-            if (selectedDevice == null) throw new Exception($"Target device '{CommandLineOptions.DeviceName}' not found!");
+            if (selectedDevice == null) throw new InvalidOperationException($"Target device '{CommandLineOptions.DeviceName}' not found!");
             var channelName = selectedDevice.DefaultCommunicationChannelName;
 
             var prepend = Array.Empty<int>();
@@ -84,17 +89,16 @@ namespace Hast.Communication.Tester
             SimpleMemory referenceMemory = null;
             if (!CommandLineOptions.NoCheck)
             {
-
                 Memory<byte> newMemory = new byte[memory.ByteCount];
                 accessor.Get().CopyTo(newMemory);
                 referenceMemory = SimpleMemory.CreateSoftwareMemory(memory.CellCount);
                 if (!string.IsNullOrEmpty(CommandLineOptions.ReferenceAction))
                 {
-                    string name = CommandLineOptions.ReferenceAction.ToLower();
+                    string name = CommandLineOptions.ReferenceAction.ToUpperInvariant();
                     var type = typeof(MemoryTest)
                         .Assembly
                         .GetTypes()
-                        .Single(x => x.Name.ToLower() == name &&
+                        .Single(x => x.Name.ToUpperInvariant() == name &&
                                      x.GetConstructor(Array.Empty<Type>()) != null &&
                                      GetReferenceAction(x) != null);
                     var sample = type.GetConstructor(Array.Empty<Type>())?.Invoke(Array.Empty<object>());
@@ -130,12 +134,15 @@ namespace Hast.Communication.Tester
         }
 
         private static MethodInfo GetReferenceAction(Type type) =>
+            // In at least one case (ImageContrastModifier) Run can't be public because it would cause issues with the transformation.
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields.
             type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                 .SingleOrDefault(x => x.Name == nameof(MemoryTest.Run) &&
                                       x.GetParameters().Length == 1 &&
                                       x.GetParameters()[0].ParameterType == typeof(SimpleMemory));
+#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields.
 
-        private static (SimpleMemory, SimpleMemoryAccessor) GenerateMemory(
+        private static (SimpleMemory Memory, SimpleMemoryAccessor Accessor) GenerateMemory(
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration,
             PayloadType type,
@@ -158,9 +165,9 @@ namespace Hast.Communication.Tester
                     for (int i = prependCells.Length; i < memory.CellCount; i++) memory.WriteInt32(i, i);
                     break;
                 case PayloadType.Random:
-                    var random = new Random();
-                    for (int i = prependCells.Length; i < memory.CellCount; i++)
-                        memory.WriteInt32(i, random.Next(int.MinValue, int.MaxValue));
+                    var random = new Lombiq.HelpfulLibraries.Libraries.Utilities.NonSecurityRandomizer();
+                    for (int i = prependCells.Length; i < memory.CellCount; i++) memory.WriteInt32(i, random.Get());
+
                     break;
                 case PayloadType.BinaryFile:
                     accessor.Load(inputFileName, memory.PrefixCellCount);
@@ -171,6 +178,7 @@ namespace Hast.Communication.Tester
                         memory = BitmapHelper.ToSimpleMemory(configuration, hastlayer, bitmap, prependCells);
                         accessor = new SimpleMemoryAccessor(memory);
                     }
+
                     break;
                 default:
                     throw new ArgumentException($"Unknown payload type: {type}.");
@@ -204,6 +212,7 @@ namespace Hast.Communication.Tester
                         using var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8);
                         WriteHexdump(streamWriter, memory);
                     }
+
                     break;
                 case OutputFileType.Binary:
                     if (payloadType != PayloadType.BinaryFile)
@@ -212,6 +221,7 @@ namespace Hast.Communication.Tester
                         Console.WriteLine("Saving {0} binary file to '{1}'...", direction, fileName);
                         new SimpleMemoryAccessor(memory).Store(fileName);
                     }
+
                     break;
                 case OutputFileType.BitmapJpeg:
                     using (var input = (Bitmap)Image.FromFile(CommandLineOptions.InputFileName))
@@ -219,6 +229,7 @@ namespace Hast.Communication.Tester
                     {
                         output.Save(fileName, ImageFormat.Jpeg);
                     }
+
                     break;
                 default:
                     throw new ArgumentException($"Unknown {direction} file type: {fileType}");
@@ -244,6 +255,7 @@ namespace Hast.Communication.Tester
                 Console.WriteLine("MISMATCH:");
                 Console.WriteLine(new HardwareExecutionResultMismatchException(mismatches));
             }
+
             if (memory.CellCount != referenceMemory.CellCount)
             {
                 Console.WriteLine(
@@ -264,8 +276,9 @@ namespace Hast.Communication.Tester
             {
                 for (int j = 0; j < HexDumpBlocksPerLine && i + j < memory.CellCount; j++)
                 {
-                    writer.Write("{0}{1:X8}", j == 0 ? "" : " ", memory.ReadUInt32(i + j));
+                    writer.Write("{0}{1:X8}", j == 0 ? string.Empty : " ", memory.ReadUInt32(i + j));
                 }
+
                 writer.WriteLine();
             }
         }
@@ -279,9 +292,13 @@ namespace Hast.Communication.Tester
 
                 var hastlayerConfiguration = new HastlayerConfiguration();
                 hastlayerConfiguration.OnServiceRegistration += OnServiceGeneration;
-                _hastlayer = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
 
-                _hastlayer.RunAsync<IServiceProvider>(MainTask).Wait();
+                // It's not in the interface because the feature is for internal use only.
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+                _hastlayer = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
+
+                _hastlayer.RunAsync<IServiceProvider>(MainTaskAsync).Wait();
             }
             catch (AggregateException ex)
             {
@@ -295,7 +312,10 @@ namespace Hast.Communication.Tester
                         Console.WriteLine(exception);
                     }
                 }
-                else Console.WriteLine(ex.InnerExceptions[0]);
+                else
+                {
+                    Console.WriteLine(ex.InnerExceptions[0]);
+                }
             }
             catch (Exception ex)
             {

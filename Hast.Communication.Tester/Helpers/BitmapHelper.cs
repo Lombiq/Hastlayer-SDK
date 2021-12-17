@@ -13,12 +13,12 @@ namespace Hast.Communication.Tester.Helpers
         {
             var newImage = new Bitmap(image);
 
-            for (int x = 0; x < newImage.Height; x++)
+            for (int y = 0; y < newImage.Height; y++)
             {
-                for (int y = 0; y < newImage.Width; y++)
+                for (int x = 0; x < newImage.Width; x++)
                 {
-                    var bytes = memory.Read4Bytes((x * newImage.Width) + y + prependCellCount);
-                    newImage.SetPixel(y, x, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
+                    var bytes = memory.Read4Bytes((y * newImage.Width) + x + prependCellCount);
+                    newImage.SetPixel(x, y, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
                 }
             }
 
@@ -45,14 +45,14 @@ namespace Hast.Communication.Tester.Helpers
                 memory.WriteInt32(i, prependCells[i]);
             }
 
-            for (int x = 0; x < image.Height; x++)
+            for (int y = 0; y < image.Height; y++)
             {
-                for (int y = 0; y < image.Width; y++)
+                for (int x = 0; x < image.Width; x++)
                 {
-                    var pixel = image.GetPixel(y, x);
+                    var pixel = image.GetPixel(x, y);
 
                     memory.Write4Bytes(
-                        (x * image.Width) + y + prependCells.Length,
+                        (y * image.Width) + x + prependCells.Length,
                         new[] { pixel.R, pixel.G, pixel.B });
                 }
             }
