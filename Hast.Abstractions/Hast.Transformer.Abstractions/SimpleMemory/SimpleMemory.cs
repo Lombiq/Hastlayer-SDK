@@ -180,7 +180,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="cellCount">The size of the usable memory.</param>
         /// <returns>The instance with a <c>byte[]</c> of capacity for the require payload size.</returns>
         public static SimpleMemory CreateSoftwareMemory(int cellCount) =>
-            new SimpleMemory(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
+            new(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
     }
 
     /// <summary>

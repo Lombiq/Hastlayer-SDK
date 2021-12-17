@@ -9,7 +9,7 @@ namespace Hast.Transformer.Abstractions.Configuration
     public class TransformerConfiguration
     {
         private readonly ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration> _memberInvocationInstanceCountConfigurations =
-            new ConcurrentDictionary<string, MemberInvocationInstanceCountConfiguration>();
+            new();
 
         /// <summary>
         /// Gets or sets the list of the member invocation instance counts, i.e. how many times a member can be invoked

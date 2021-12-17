@@ -6,7 +6,7 @@ namespace Hast.Common.Helpers
 {
     public static class Sha256Helper
     {
-        private static Lazy<string> EmptyLazy = new Lazy<string>(() => ComputeHash(string.Empty));
+        private static Lazy<string> EmptyLazy = new(() => ComputeHash(string.Empty));
 
         public static string ComputeHash(string text)
         {

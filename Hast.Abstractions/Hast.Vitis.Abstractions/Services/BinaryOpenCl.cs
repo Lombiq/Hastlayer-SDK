@@ -21,7 +21,7 @@ namespace Hast.Vitis.Abstractions.Services
         #region Fields and properties
 
         public const MemoryFlag DefaultMemoryFlags = MemoryFlag.UseHostPointer | MemoryFlag.ReadWrite;
-        private static readonly UIntPtr _intPtrSize = new UIntPtr((uint)Marshal.SizeOf(IntPtr.Zero));
+        private static readonly UIntPtr _intPtrSize = new((uint)Marshal.SizeOf(IntPtr.Zero));
 
         private readonly IOpenCl _cl;
         private readonly ILogger _logger;
@@ -29,9 +29,9 @@ namespace Hast.Vitis.Abstractions.Services
         private Lazy<IntPtr[]> _devicesLazy;
         private readonly Lazy<IntPtr> _context;
 
-        private readonly Dictionary<int, IntPtr> _queues = new Dictionary<int, IntPtr>();
-        private readonly Dictionary<string, IntPtr> _kernels = new Dictionary<string, IntPtr>();
-        private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = new Dictionary<string, List<IntPtr>>();
+        private readonly Dictionary<int, IntPtr> _queues = new();
+        private readonly Dictionary<string, IntPtr> _kernels = new();
+        private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = new();
 
         private IntPtr[] Devices => _devicesLazy.Value;
         public int DeviceCount => Devices.Length;

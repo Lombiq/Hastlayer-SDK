@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Hast.Catapult.Abstractions
 {
@@ -41,7 +41,7 @@ namespace Hast.Catapult.Abstractions
         public const string ErrorLabels = "hr:min:sec:ms,cycles,pid,tid,filename,line,errmsg,";
         public const string DefaultVersionManifestFile = "FPGADefaultVersionManifest.ini";
         public const string VersionDefinitionsFile = "FPGAVersionDefinitions.ini";
-        public static readonly Version LibraryVersion = new Version(3, 40);
+        public static readonly Version LibraryVersion = new(3, 40);
         public const int SoftResetRole = 14;
         public const double WaitOutputBufferTimeoutDefaultSeconds = 10.0;
         public const int PcieHipNumber = 0;
