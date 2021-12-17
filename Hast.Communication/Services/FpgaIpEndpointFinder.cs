@@ -86,15 +86,11 @@ namespace Hast.Communication.Services
 
         private class UdpReceiveResultEqualityComparer : IEqualityComparer<UdpReceiveResult>
         {
-            public bool Equals(UdpReceiveResult firstResult, UdpReceiveResult secondResult)
-            {
-                return firstResult.RemoteEndPoint.Equals(secondResult.RemoteEndPoint);
-            }
+            public bool Equals(UdpReceiveResult firstResult, UdpReceiveResult secondResult) =>
+                firstResult.RemoteEndPoint.Equals(secondResult.RemoteEndPoint);
 
-            public int GetHashCode(UdpReceiveResult result)
-            {
-                return result.RemoteEndPoint.GetHashCode();
-            }
+            public int GetHashCode(UdpReceiveResult result) =>
+                result.RemoteEndPoint.GetHashCode();
         }
     }
 }

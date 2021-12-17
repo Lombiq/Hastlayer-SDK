@@ -180,20 +180,14 @@ namespace Hast.Samples.SampleAssembly
         // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
         // in them that is not Hastlayer-compatible.
 
-        public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            return RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
-        }
+        public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
 
-        public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            return RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
-        }
+        public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
 
-        public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            return RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), hastlayer, configuration);
-        }
+        public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), hastlayer, configuration);
 
         public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {
@@ -248,6 +242,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 output[i] = memory.ReadBoolean(ArePrimeNumbersOutputBooleansStartIndex + i);
             }
+
             return output;
         }
     }

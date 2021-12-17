@@ -1,4 +1,5 @@
 using Hast.Common.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -29,15 +30,10 @@ namespace Hast.Layer.EmptyRepresentationFactories
 
             public IEnumerable<ITransformationWarning> Warnings => Enumerable.Empty<ITransformationWarning>();
 
-            public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings)
-            {
+            public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings) =>
                 HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
-            }
 
-            public Task SerializeAsync(Stream stream)
-            {
-                throw new System.NotImplementedException();
-            }
+            public Task SerializeAsync(Stream stream) => throw new NotSupportedException();
         }
     }
 }

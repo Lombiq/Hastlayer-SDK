@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Hast.Common.Numerics
 {
@@ -11,85 +11,53 @@ namespace Hast.Common.Numerics
     /// </remarks>
     public static class SimdOperations
     {
-        public static int[] AddVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
-        }
+        public static int[] AddVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism) =>
+            RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
 
-        public static uint[] AddVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
-        }
+        public static uint[] AddVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
 
-        public static long[] AddVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
-        }
+        public static long[] AddVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism) =>
+            RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
 
-        public static ulong[] AddVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
-        }
+        public static ulong[] AddVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 + element2);
 
-        public static int[] SubtractVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
-        }
+        public static int[] SubtractVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism) =>
+            RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
 
-        public static uint[] SubtractVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
-        }
+        public static uint[] SubtractVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
 
-        public static long[] SubtractVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
-        }
+        public static long[] SubtractVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism) =>
+            RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
 
-        public static ulong[] SubtractVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
-        }
+        public static ulong[] SubtractVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 - element2);
 
-        public static int[] MultiplyVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
-        }
+        public static int[] MultiplyVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism) =>
+            RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
 
-        public static uint[] MultiplyVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
-        }
+        public static uint[] MultiplyVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
 
-        public static long[] MultiplyVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
-        }
+        public static long[] MultiplyVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism) =>
+            RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
 
-        public static ulong[] MultiplyVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
-        }
+        public static ulong[] MultiplyVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 * element2);
 
-        public static int[] DivideVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
-        }
+        public static int[] DivideVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism) =>
+            RunInt32VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
 
-        public static uint[] DivideVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
-        }
+        public static uint[] DivideVectors(uint[] vector1, uint[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt32VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
 
-        public static long[] DivideVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
-        }
+        public static long[] DivideVectors(long[] vector1, long[] vector2, int maxDegreeOfParallelism) =>
+            RunInt64VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
 
-        public static ulong[] DivideVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism)
-        {
-            return RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
-        }
+        public static ulong[] DivideVectors(ulong[] vector1, ulong[] vector2, int maxDegreeOfParallelism) =>
+            RunUInt64VectorOperation(vector1, vector2, (element1, element2) => element1 / element2);
 
         public static void ThrowIfVectorsNotEquallyLong<T>(T[] vector1, T[] vector2)
         {

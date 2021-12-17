@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -82,11 +82,9 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         public bool EnableConstantSubstitution { get; set; } = true;
 
-        public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration)
-        {
+        public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration) =>
             _memberInvocationInstanceCountConfigurations
                 .AddOrUpdate(configuration.MemberNamePrefix, configuration, (key, previousConfiguration) => configuration);
-        }
 
         public MemberInvocationInstanceCountConfiguration GetMaxInvocationInstanceCountConfigurationForMember(
             string simpleMemberName)

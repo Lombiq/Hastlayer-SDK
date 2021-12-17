@@ -23,12 +23,13 @@ namespace Hast.Communication.Helpers
             byte[] datagram,
             IPEndPoint bindingEndpoint,
             IPEndPoint targetEndpoint,
-            int receiveTimeoutMilliseconds)
-        {
-            return UdpSendAndReceiveAnyAsync(
+            int receiveTimeoutMilliseconds) =>
+            UdpSendAndReceiveAnyAsync(
                 client => client.ReceiveAsync(receiveTimeoutMilliseconds),
-                datagram, bindingEndpoint, targetEndpoint, receiveTimeoutMilliseconds);
-        }
+                datagram,
+                bindingEndpoint,
+                targetEndpoint,
+                receiveTimeoutMilliseconds);
 
         /// <summary>
         /// Sends an UDP datagram to an endpoint (possibly to a broadcast address) and receives every datagrams arriving within a period of time.
@@ -42,12 +43,13 @@ namespace Hast.Communication.Helpers
             byte[] datagram,
             IPEndPoint bindingEndpoint,
             IPEndPoint targetEndpoint,
-            int receiveTimeoutMilliseconds)
-        {
-            return UdpSendAndReceiveAnyAsync(
+            int receiveTimeoutMilliseconds) =>
+            UdpSendAndReceiveAnyAsync(
                 client => client.ReceiveAllAsync(receiveTimeoutMilliseconds),
-                datagram, bindingEndpoint, targetEndpoint, receiveTimeoutMilliseconds);
-        }
+                datagram,
+                bindingEndpoint,
+                targetEndpoint,
+                receiveTimeoutMilliseconds);
 
         private static async Task<T> UdpSendAndReceiveAnyAsync<T>(
             Func<UdpClient, Task<T>> receiverTaskFactory,

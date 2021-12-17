@@ -6,10 +6,8 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class MemoryTestSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
+        public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<MemoryTest>();
-        }
 
         public async Task Run(
             IHastlayer hastlayer,

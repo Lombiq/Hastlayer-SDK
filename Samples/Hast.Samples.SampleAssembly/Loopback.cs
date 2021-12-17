@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
@@ -12,12 +12,10 @@ namespace Hast.Samples.SampleAssembly
     {
         private const int RunInputOutputInt32Index = 0;
 
-        public virtual void Run(SimpleMemory memory)
-        {
+        public virtual void Run(SimpleMemory memory) =>
             // Adding 1 to the input so it's visible whether this actually has run, not just the untouched data was
             // sent back.
             memory.WriteInt32(RunInputOutputInt32Index, memory.ReadInt32(RunInputOutputInt32Index) + 1);
-        }
 
         public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
         {

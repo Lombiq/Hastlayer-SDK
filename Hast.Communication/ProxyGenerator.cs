@@ -33,15 +33,11 @@ namespace Hast.Communication
         {
             private readonly MemberInvocationHandler _memberInvocationHandler;
 
-            public MemberInvocationInterceptor(MemberInvocationHandler memberInvocationHandler)
-            {
+            public MemberInvocationInterceptor(MemberInvocationHandler memberInvocationHandler) =>
                 _memberInvocationHandler = memberInvocationHandler;
-            }
 
-            public void Intercept(Castle.DynamicProxy.IInvocation invocation)
-            {
+            public void Intercept(Castle.DynamicProxy.IInvocation invocation) =>
                 _memberInvocationHandler(invocation);
-            }
         }
     }
 }

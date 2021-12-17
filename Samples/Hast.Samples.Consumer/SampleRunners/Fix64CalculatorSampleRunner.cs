@@ -7,10 +7,8 @@ namespace Hast.Samples.Consumer.SampleRunners
 {
     internal class Fix64CalculatorSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
+        public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<Fix64Calculator>();
-        }
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {

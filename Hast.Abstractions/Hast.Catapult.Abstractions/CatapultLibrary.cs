@@ -269,10 +269,8 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         /// <param name="address">The memory address.</param>
         /// <param name="value">The new value.</param>
-        public void SetSoftRegister(uint address, ulong value)
-        {
+        public void SetSoftRegister(uint address, ulong value) =>
             VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value));
-        }
 
         /// <summary>
         /// Uploads the data to the selected slot's input buffer and awaits the output.
