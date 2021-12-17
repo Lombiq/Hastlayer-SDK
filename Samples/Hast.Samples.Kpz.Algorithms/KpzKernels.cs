@@ -1,7 +1,7 @@
 using Hast.Algorithms.Random;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System.Diagnostics.CodeAnalysis;
-using Hast.Layer;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -45,7 +45,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// This function is for testing how Hastlayer works by running a random generator, writing the results into
         /// SimpleMemory.
         /// </summary>
-        [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "It's a hardware entry point.")]
         public void TestPrng(SimpleMemory memory)
         {
             var kernels = new KpzKernels();
@@ -71,7 +70,8 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int GridHeight = 8;
         // The probability of turning a pyramid into a hole (IntegerProbabilityP),
         // or a hole into a pyramid (IntegerProbabilityQ).
-        public const uint IntegerProbabilityP = 32_767, IntegerProbabilityQ = 32_767;
+        public const uint IntegerProbabilityP = 32_767;
+        public const uint IntegerProbabilityQ = 32_767;
         // ==== </CONFIGURABLE PARAMETERS> ====
 
         public const int MemIndexNumberOfIterations = 0;
@@ -82,27 +82,26 @@ namespace Hast.Samples.Kpz.Algorithms
 
         private readonly uint[] _gridRaw = new uint[GridWidth * GridHeight];
 
-        public RandomMwc64X Random1, Random2;
-        public bool TestMode = false;
+        public RandomMwc64X Random1;
+        public RandomMwc64X Random2;
+        public bool TestMode;
         public uint NumberOfIterations = 1;
 
         /// <summary>
         /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at
         /// the beginning.
         /// </summary>
-        /// <param name="memory"></param>
         public void InitializeParametersFromMemory(SimpleMemory memory)
         {
-
             Random1 = new RandomMwc64X
             {
                 State =
-                    (ulong)memory.ReadUInt32(MemIndexRandomStates) << 32 | memory.ReadUInt32(MemIndexRandomStates + 1),
+                    ((ulong)memory.ReadUInt32(MemIndexRandomStates) << 32) | memory.ReadUInt32(MemIndexRandomStates + 1),
             };
             Random2 = new RandomMwc64X
             {
                 State =
-                    (ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32 | memory.ReadUInt32(MemIndexRandomStates + 3),
+                    ((ulong)memory.ReadUInt32(MemIndexRandomStates + 2) << 32) | memory.ReadUInt32(MemIndexRandomStates + 3),
             };
             TestMode = (memory.ReadUInt32(MemIndexStepMode) & 1) == 1;
             NumberOfIterations = memory.ReadUInt32(MemIndexNumberOfIterations);
@@ -184,7 +183,7 @@ namespace Hast.Samples.Kpz.Algorithms
         /// It calculates the index offset inside the SimpleMemory for a given item based on the 2D coordinates for the
         /// item's place in the grid.
         /// </summary>
-        private int GetIndexFromXY(int x, int y) => x + (y * GridWidth);
+        private static int GetIndexFromXY(int x, int y) => x + (y * GridWidth);
 
         /// <summary>
         /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
@@ -216,7 +215,6 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public static class KpzKernelsExtensions
     {
-
         /// <summary>
         /// This function adds two numbers on the FPGA using <see cref="KpzKernelsInterface.TestAdd(SimpleMemory)"/>.
         /// </summary>
@@ -261,11 +259,6 @@ namespace Hast.Samples.Kpz.Algorithms
         /// <summary>
         /// This function pushes parameters and PRNG seed to the FPGA.
         /// </summary>
-        /// <param name="memoryDst"></param>
-        /// <param name="testMode"></param>
-        /// <param name="randomSeed1"></param>
-        /// <param name="randomSeed2"></param>
-        /// <param name="numberOfIterations"></param>
         public static void CopyParametersToMemory(
             SimpleMemory memoryDst,
             bool testMode,
@@ -273,19 +266,21 @@ namespace Hast.Samples.Kpz.Algorithms
             ulong randomSeed2,
             uint numberOfIterations)
         {
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0x_FFFF_FFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0x_FFFF_FFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 2, (uint)(randomSeed2 & 0x_FFFF_FFFFUL));
-            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)((randomSeed2 >> 32) & 0x_FFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates, (uint)(randomSeed1 & 0xFFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 1, (uint)((randomSeed1 >> 32) & 0xFFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 2, (uint)(randomSeed2 & 0xFFFF_FFFFUL));
+            memoryDst.WriteUInt32(KpzKernels.MemIndexRandomStates + 3, (uint)((randomSeed2 >> 32) & 0xFFFF_FFFFUL));
             memoryDst.WriteUInt32(KpzKernels.MemIndexStepMode, testMode ? 1U : 0U);
             memoryDst.WriteUInt32(KpzKernels.MemIndexNumberOfIterations, numberOfIterations);
         }
 
+
         /// <summary>
-        /// This is a wrapper for running the KPZ algorithm on the FPGA.
+        /// A wrapper for running the KPZ algorithm on the FPGA.
         /// </summary>
-        /// <param name="kernels"></param>
-        /// <param name="configuration"></param>
+        /// <param name="kernels">The implementation of the KPZ algorithm for FPGAs through Hastlayer.</param>
+        /// <param name="hastlayer">The <see cref="Hastlayer"/> instance.</param>
+        /// <param name="configuration">The hardware generation configuration.</param>
         /// <param name="hostGrid">
         ///     This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.
         /// </param>
@@ -294,22 +289,17 @@ namespace Hast.Samples.Kpz.Algorithms
         ///     instead of the grid in the <see cref="hostGrid"/> parameter.
         /// </param>
         /// <param name="testMode">
-        ///     does several things:
-        ///     <list type="bullet">
-        ///         <item>
-        ///             if it is true, <see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the cells
-        ///             if it finds an adequate place,
-        ///         </item>
-        ///         <item>
-        ///             it also does only a single poke, then sends the grid back to the host so that the algorithm
-        ///             can be analyzed in the step-by-step window.
-        ///         </item>
-        ///     </list>
+        ///     If <see langword="true"/> <see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the
+        ///     cells if it finds an adequate place. It also does only a single poke, then sends the grid back to the
+        ///     host so that the algorithm can be analyzed in the step-by-step window.
         /// </param>
-        /// <param name="randomSeed1">is a random seed for the algorithm.</param>
-        /// <param name="randomSeed2">is a random seed for the algorithm.</param>
-        /// <param name="numberOfIterations">is the number of iterations to perform.</param>
-        /// <param name="hastlayer"></param>
+        /// <param name="randomSeed1">The first random seed for the algorithm.</param>
+        /// <param name="randomSeed2">The second random seed for the algorithm.</param>
+        /// <param name="numberOfIterations">The number of iterations to perform.</param>
+        [SuppressMessage(
+            "Major Code Smell",
+            "S107:Methods should not have too many parameters",
+            Justification = "It's necessary to pass all these arguments.")]
         public static void DoIterationsWrapper(
             this KpzKernelsInterface kernels,
             IHastlayer hastlayer,
