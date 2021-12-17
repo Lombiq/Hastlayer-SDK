@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
@@ -7,12 +8,11 @@ using Lombiq.Arithmetics;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
+    [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
     internal class Posit32AdvancedCalculatorSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
+        public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();
-        }
 
         public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
@@ -56,6 +56,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 Console.Write(resultOfSqrt[i] + ", ");
             }
+
             Console.WriteLine();
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
         }

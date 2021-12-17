@@ -1,11 +1,13 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
+    [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
     internal class PrimeCalculatorSampleRunner : ISampleRunner
     {
         public void Configure(HardwareGenerationConfiguration configuration)
@@ -13,7 +15,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             // You can add complete types whose methods you'd like to invoke on the hardware from the outside like this.
             configuration.AddHardwareEntryPointType<PrimeCalculator>();
             // A not statically typed way of doing the same as above would be:
-            //configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
+            // configuration.PublicHardwareMemberNamePrefixes.Add("Hast.Samples.SampleAssembly.PrimeCalculator");
             // Note that the bottom version can also be used to add multiple types from under a namespace.
         }
 

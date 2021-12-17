@@ -5,11 +5,13 @@ using Hast.Console.Options;
 using Hast.Console.Subcommands;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using static System.Console;
 
 namespace Hast.Console
 {
+    [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
     internal class Program
     {
         private static Dictionary<string, SubcommandInfo> _subcommands;
