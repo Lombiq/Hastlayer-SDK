@@ -151,7 +151,7 @@ namespace Hast.Samples.SampleAssembly
                             (middleLeft * middleLeftValue) +
                             (pixel * pixelValue) +
                             (middleRight * middleRightValue) +
-                            (bottomRight * bottomLeftValue) +
+                            (bottomLeft * bottomLeftValue) +
                             (bottomMiddle * bottomMiddleValue) +
                             (bottomRight * bottomRightValue))
                             / factor) + offset;

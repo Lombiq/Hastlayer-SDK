@@ -62,10 +62,13 @@ namespace Hast.Communication.Helpers
             // See: http://stackoverflow.com/questions/221783/udpclient-receive-right-after-send-does-not-work/222503#222503
             using var receiverClient = CreateUdpClient(bindingEndpoint);
             using var senderClient = CreateUdpClient(bindingEndpoint);
+
             var receiveTask = receiverTaskFactory(receiverClient);
             var sendTask = senderClient.SendAsync(datagram, datagram.Length, targetEndpoint);
+            var timeoutTask = Task.Delay(receiveTimeoutMilliseconds);
 
-            await Task.WhenAll(receiveTask, sendTask);
+            await Task.WhenAny(Task.WhenAll(receiveTask, sendTask), timeoutTask);
+            if (!receiveTask.IsCompletedSuccessfully) throw new TimeoutException();
 
             return await receiveTask;
         }
