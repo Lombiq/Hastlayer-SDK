@@ -110,7 +110,7 @@ namespace Hast.Vitis.Abstractions.Services
             string sharedAccessSignature)
         {
             _logger.LogInformation("Sending attestation start request...");
-            var instanceId = (await _azureAttestationApi.Start(
+            var instanceId = (await _azureAttestationApi.StartAsync(
                 configuration.StartFunctionUrl.AbsolutePath.TrimStart('/'),
                 new AzureStartPostData(configuration)
                 {
@@ -126,7 +126,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             while (true)
             {
-                var (statusText, output) = await _azureAttestationApi.Poll(
+                var (statusText, output) = await _azureAttestationApi.PollAsync(
                     configuration.PollFunctionUrl.AbsolutePath.TrimStart('/'),
                     new AzurePollPostData(configuration, instanceId));
                 var statusUpper = statusText.ToUpperInvariant();

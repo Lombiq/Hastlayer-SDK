@@ -117,7 +117,7 @@ namespace Hast.Vitis.Abstractions.Services
             if (copyBack) EnqueueMemoryMigration(queue, buffers, true, waitEvent);
         }
 
-        public async Task AwaitDevice(int deviceIndex)
+        public async Task AwaitDeviceAsync(int deviceIndex)
         {
             var queue = GetQueue(deviceIndex);
             VerifyResult(await Task.Run(() => _cl.Finish(queue)));

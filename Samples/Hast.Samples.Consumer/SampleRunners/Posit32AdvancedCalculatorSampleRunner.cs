@@ -14,7 +14,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
             var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);

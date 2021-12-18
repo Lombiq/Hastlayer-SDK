@@ -9,7 +9,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<GenomeMatcher>();
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var genomeMatcher = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new GenomeMatcher(), configuration);
 

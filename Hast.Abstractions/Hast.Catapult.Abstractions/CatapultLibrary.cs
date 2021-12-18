@@ -279,10 +279,10 @@ namespace Hast.Catapult.Abstractions
         /// <param name="memberId">Identifies the program on the hardware.</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) =>
-            AssignJob(memberId, inputData, 0, 1, -1, false);
+        public Task<Memory<byte>> AssignJobAsync(int memberId, Memory<byte> inputData) =>
+            AssignJobAsync(memberId, inputData, 0, 1, -1, false);
 
-        private async Task<Memory<byte>> AssignJob(
+        private async Task<Memory<byte>> AssignJobAsync(
             int memberId,
             Memory<byte> inputData,
             int sliceIndex,
@@ -304,7 +304,7 @@ namespace Hast.Catapult.Abstractions
                 {
                     var slice = i < currentSliceCount - 1 ? inputData.Slice(i * BufferPayloadSize, BufferPayloadSize) :
                         inputData[(tasks.Count * BufferPayloadSize)..];
-                    tasks.Add(AssignJob(
+                    tasks.Add(AssignJobAsync(
                         memberId,
                         slice,
                         i,
@@ -319,7 +319,7 @@ namespace Hast.Catapult.Abstractions
                     tasks.Clear();
                     for (int i = 0; i < currentSliceCount; i++)
                     {
-                        tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
+                        tasks.Add(ReceiveJobResultsAsync((uint)(i % BufferCount)));
                         if ((i + 1) % BufferCount == 0) await Task.WhenAll(tasks);
                     }
                 }
@@ -366,7 +366,7 @@ namespace Hast.Catapult.Abstractions
 
                 currentSlot = _currentSlot;
                 _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
-                    .ContinueWith(_ => RunJob(currentSlot, data, ignoreResponse), TaskScheduler.Current)
+                    .ContinueWith(_ => RunJobAsync(currentSlot, data, ignoreResponse), TaskScheduler.Current)
                     .Unwrap();
             }
 
@@ -394,7 +394,7 @@ namespace Hast.Catapult.Abstractions
         /// <param name="inputData">The hardware program's input.</param>
         /// <param name="ignoreResponse">If true, the scheduler won't wait for the output to appear.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        private async Task<Memory<byte>> RunJob(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
+        private async Task<Memory<byte>> RunJobAsync(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
         {
             LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} starting...{Environment.NewLine}");
             Debug.Assert(bufferIndex < BufferCount);
@@ -450,10 +450,10 @@ namespace Hast.Catapult.Abstractions
             });
             TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
 
-            return ignoreResponse ? null : await ReceiveJobResults(slot);
+            return ignoreResponse ? null : await ReceiveJobResultsAsync(slot);
         }
 
-        private async Task<Memory<byte>> ReceiveJobResults(uint slot)
+        private async Task<Memory<byte>> ReceiveJobResultsAsync(uint slot)
         {
             // Wait for the interrupt and download results from output buffer.
             VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));

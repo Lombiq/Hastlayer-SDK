@@ -181,10 +181,10 @@ namespace Hast.Samples.SampleAssembly
         // in them that is not Hastlayer-compatible.
 
         public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunIsPrimeNumber(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
+            RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
 
         public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunIsPrimeNumber(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
+            RunIsPrimeNumberAsync(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
 
         public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), hastlayer, configuration);
@@ -201,7 +201,7 @@ namespace Hast.Samples.SampleAssembly
             return results.CutToLength(numbers.Length);
         }
 
-        private async Task<bool> RunIsPrimeNumber(
+        private async Task<bool> RunIsPrimeNumberAsync(
             uint number,
             Func<SimpleMemory, Task> methodRunner,
             IHastlayer hastlayer = null,

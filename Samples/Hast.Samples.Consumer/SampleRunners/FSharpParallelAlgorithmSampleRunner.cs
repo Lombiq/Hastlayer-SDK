@@ -9,7 +9,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm>();
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             _ = new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm()
                 .Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

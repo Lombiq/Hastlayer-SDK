@@ -17,7 +17,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         ////         MaxDegreeOfParallelism = ParallelAlgorithm.MaxDegreeOfParallelism
         ////     });
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             var parallelAlgorithm = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ParallelAlgorithm(), configuration);
 

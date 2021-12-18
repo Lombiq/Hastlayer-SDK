@@ -110,7 +110,7 @@ namespace Hast.Catapult.Abstractions
             var dma = new SimpleMemoryAccessor(simpleMemory);
 
             // Sending the data.
-            var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
+            var task = lib.AssignJobAsync(memberId, HotfixInput(dma.Get()));
             var outputBuffer = await task;
 
             // Processing the response.

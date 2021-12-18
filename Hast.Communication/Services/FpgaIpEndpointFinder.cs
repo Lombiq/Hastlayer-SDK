@@ -28,7 +28,7 @@ namespace Hast.Communication.Services
             _logger = logger;
         }
 
-        public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints()
+        public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpointsAsync()
         {
             var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, Ethernet.Ports.WhoIsAvailableRequest);
             var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };

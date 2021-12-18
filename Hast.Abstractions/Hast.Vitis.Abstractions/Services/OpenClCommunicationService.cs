@@ -149,7 +149,7 @@ namespace Hast.Vitis.Abstractions.Services
             Logger.LogInformation("LAUNCHING KERNEL...");
             _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
             Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
-            await _binaryOpenCl.AwaitDevice(deviceIndex);
+            await _binaryOpenCl.AwaitDeviceAsync(deviceIndex);
             return GetResultMetadata(hostMemory.Span, configuration);
         }
 
