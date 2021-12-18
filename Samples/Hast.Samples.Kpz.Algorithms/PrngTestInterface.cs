@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
-    //SimpleMemory map:
+    // SimpleMemory map:
     // * 0 .. 1  :
     //      64-bit random seed
     // * 2  :
@@ -25,7 +25,7 @@ namespace Hast.Samples.Kpz.Algorithms
             ulong randomState = (stateLowWord * 0x_FFFE_B81BUL) + stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
-            memory.WriteUInt32(0, (uint)randomState); //LE: 1 is high byte, 0 is low byte
+            memory.WriteUInt32(0, (uint)randomState); // LE: 1 is high byte, 0 is low byte
             memory.WriteUInt32(1, (uint)(randomState >> 32));
             memory.WriteUInt32(2, randomWord);
         }
@@ -49,7 +49,7 @@ namespace Hast.Samples.Kpz.Algorithms
             var sm = configuration is null ?
                 SimpleMemory.CreateSoftwareMemory(3) :
                 hastlayer.CreateMemory(configuration, 3);
-            sm.WriteUInt32(0, (uint)seed); //LE: 0 is low byte, 1 is high byte
+            sm.WriteUInt32(0, (uint)seed); // LE: 0 is low byte, 1 is high byte
             sm.WriteUInt32(1, (uint)(seed >> 32));
             return sm;
         }

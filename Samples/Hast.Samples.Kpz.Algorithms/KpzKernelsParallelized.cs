@@ -75,7 +75,7 @@ namespace Hast.Samples.Kpz.Algorithms
             int iterationGroupSize = numberOfIterations * ReschedulesPerTaskIteration;
             const int PokesInsideTask = LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration;
             const int LocalGridPartitions = GridSize / LocalGridSize;
-            //Note: TotalNumberOfTasks = TasksPerIteration * NumberOfIterations ==
+            // Note: TotalNumberOfTasks = TasksPerIteration * NumberOfIterations ==
             //  ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
             int parallelTaskRandomIndex = 0;
             uint randomSeedTemp;
@@ -139,7 +139,7 @@ namespace Hast.Samples.Kpz.Algorithms
                         {
                             for (int CopyDstY = 0; CopyDstY < LocalGridSize; CopyDstY++)
                             {
-                                //Prevent going out of grid memory area (e.g. reading into random seed):
+                                // Prevent going out of grid memory area (e.g. reading into random seed):
                                 int copySrcX = (baseX + copyDstX) % GridSize;
                                 int copySrcY = (baseY + CopyDstY) % GridSize;
                                 uint value = memory.ReadUInt32(MemIndexGrid + copySrcX + (copySrcY * GridSize));
@@ -234,7 +234,7 @@ namespace Hast.Samples.Kpz.Algorithms
                                     (tasks[parallelTaskIndex].Result.BramDx[copySrcX + (copySrcY * LocalGridSize)] ? 1U : 0U) |
                                     (tasks[parallelTaskIndex].Result.BramDy[copySrcX + (copySrcY * LocalGridSize)] ? 2U : 0U);
                                 // Note: use (tasks[parallelTaskIndex].Result), because
-                                //(TaskLocals[ParallelTaskIndex]) won't work.
+                                // (TaskLocals[ParallelTaskIndex]) won't work.
                                 memory.WriteUInt32(MemIndexGrid + copyDstX + (copyDstY * GridSize), value);
                             }
                         }
@@ -334,7 +334,7 @@ namespace Hast.Samples.Kpz.Algorithms
                 sm.WriteUInt32(
                     KpzKernelsParallelizedInterface.MemIndexRandomSeed + randomWriteIndex,
                     randomSeedEnable ? (uint)rnd.Next() : (uint)notRandomSeed[randomWriteIndex]);
-                //See comment on notRandomSeed if you get an index out of bounds error here.
+                // See comment on notRandomSeed if you get an index out of bounds error here.
             }
 
             kernels.ScheduleIterations(sm);
