@@ -191,8 +191,8 @@ namespace Hast.Communication
                                     memory.CellCount,
                                     softMemory.CellCount,
                                     overflowIndex,
-                                    memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : new byte[0],
-                                    softMemory.CellCount > memory.CellCount ? softMemory.Read4Bytes(overflowIndex) : new byte[0]));
+                                    memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : Array.Empty<byte>(),
+                                    softMemory.CellCount > memory.CellCount ? softMemory.Read4Bytes(overflowIndex) : Array.Empty<byte>()));
                             }
                             else
                             {
