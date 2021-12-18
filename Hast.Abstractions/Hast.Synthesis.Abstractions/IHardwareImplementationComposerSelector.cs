@@ -14,7 +14,7 @@ namespace Hast.Synthesis.Abstractions
         /// </summary>
         /// <param name="context">All the data necessary for the hardware implementation composition to happen.</param>
         /// <returns>
-        /// The matching <see cref="IHardwareImplementationComposer"/> instance if one is found, <c>null</c> otherwise.
+        /// The matching <see cref="IHardwareImplementationComposer"/> instance if one is found, <see langword="null"/> otherwise.
         /// </returns>
         IHardwareImplementationComposer GetHardwareImplementationComposer(IHardwareImplementationCompositionContext context);
     }

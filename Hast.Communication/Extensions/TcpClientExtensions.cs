@@ -9,7 +9,7 @@ namespace System.Net.Sockets
         /// </summary>
         /// <param name="endpoint">Endpoint where the client needs to connect to.</param>
         /// <param name="connectionTimeoutMilliseconds">Timeout within the client needs to connect to the remote TCP host.</param>
-        /// <returns>Returns <c>true</c> if the connection was established before the timeout exceeded.</returns>
+        /// <returns>Returns <see langword="true"/> if the connection was established before the timeout exceeded.</returns>
         public static async Task<bool> ConnectAsync(this TcpClient client, IPEndPoint endpoint, int connectionTimeoutMilliseconds)
         {
             var connectTask = client.ConnectAsync(endpoint.Address, endpoint.Port);
