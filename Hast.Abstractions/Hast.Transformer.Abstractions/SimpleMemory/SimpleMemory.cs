@@ -10,11 +10,11 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     /// NOT thread-safe, there shouldn't be any concurrent access to it.
     /// </summary>
     /// <remarks>
-    /// All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
+    /// <para>All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
     ///
     /// WARNING: changes here should be in sync with the VHDL library. The signatures of the methods of this class
     /// mustn't be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL
-    /// library too.
+    /// library too.</para>
     /// </remarks>
     public class SimpleMemory
     {
@@ -43,7 +43,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// Gets or sets the contents of the memory representation.
         /// </summary>
         /// <remarks>
-        /// This is internal so the property can be read when handling communication with the FPGA but not by user code.
+        /// <para>This is internal so the property can be read when handling communication with the FPGA but not by user code.</para>
         /// </remarks>
         internal Memory<byte> Memory => PrefixedMemory[(PrefixCellCount * MemoryCellSizeBytes)..];
 

@@ -31,12 +31,12 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates whether a number is prime.
         /// </summary>
         /// <remarks>
-        /// This demonstrates a simple hardware entry point. Note that the entry point of SimpleMemory-using algorithms
+        /// <para>This demonstrates a simple hardware entry point. Note that the entry point of SimpleMemory-using algorithms
         /// should be void methods having a single <see cref="SimpleMemory"/> argument. You can find the corresponding
         /// wrapper method below as IsPrimeNumber(uint number).
         ///
         /// Note that hardware entry points need to be public and virtual, and they mustn't have any other parameters
-        /// than a single SimpleMemory one.
+        /// than a single SimpleMemory one.</para>
         /// </remarks>
         /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
         public virtual void IsPrimeNumberSync(SimpleMemory memory)
@@ -51,8 +51,8 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates whether the number is prime, in an async way.
         /// </summary>
         /// <remarks>
-        /// For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized hardware
-        /// entry point method async like this.
+        /// <para>For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized hardware
+        /// entry point method async like this.</para>
         /// </remarks>
         public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
         {
@@ -66,7 +66,7 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates for multiple numbers whether they're primes.
         /// </summary>
         /// <remarks>
-        /// A simple demonstration on how you can manage an array of inputs and outputs.
+        /// <para>A simple demonstration on how you can manage an array of inputs and outputs.</para>
         /// </remarks>
         public virtual void ArePrimeNumbers(SimpleMemory memory)
         {
@@ -84,10 +84,10 @@ namespace Hast.Samples.SampleAssembly
         /// Calculates for multiple numbers whether they're primes, in a parallelized way.
         /// </summary>
         /// <remarks>
-        /// This demonstrates how you can write parallelized code that Hastlayer will process and turn into hardware-level
+        /// <para>This demonstrates how you can write parallelized code that Hastlayer will process and turn into hardware-level
         /// parallelization: the Tasks' bodies will be copied in hardware as many times as many Tasks you start; thus,
         /// the actual level of parallelism you get on the hardware corresponds to the number of Tasks, not the number
-        /// of CPU cores.
+        /// of CPU cores.</para>
         /// </remarks>
         public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
         {

@@ -12,7 +12,7 @@ namespace System
         /// The input converted to snake_Case. It doesn't alter case so you can call either ToUpper or ToLower without
         /// any additional penalties.
         /// </returns>
-        /// <remarks>Source: https://stackoverflow.com/a/18781533 </remarks>
+        /// <remarks><para>Source: https://stackoverflow.com/a/18781533</para> </remarks>
         public static string ToSnakeCase(this string input) =>
             string.Concat(input.Select((x, i) => i > 0 && char.IsUpper(x) ? "_" + x : x.ToString()));
 
