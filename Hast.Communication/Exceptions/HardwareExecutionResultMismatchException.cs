@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -13,10 +13,7 @@ namespace Hast.Communication.Exceptions
         public IEnumerable<Mismatch> Mismatches { get; private set; }
         public override string Message { get { return ToString(); } }
 
-        public HardwareExecutionResultMismatchException(IEnumerable<Mismatch> mismatches)
-        {
-            Mismatches = mismatches;
-        }
+        public HardwareExecutionResultMismatchException(IEnumerable<Mismatch> mismatches) => Mismatches = mismatches;
 
         public override string ToString() =>
             "The hardware and software executions resulted in different results: " +

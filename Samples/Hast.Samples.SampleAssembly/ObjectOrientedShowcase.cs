@@ -109,10 +109,7 @@ namespace Hast.Samples.SampleAssembly
         {
         }
 
-        public NumberContainer(uint number)
-        {
-            Number = number;
-        }
+        public NumberContainer(uint number) => Number = number;
 
         // Instance methods can be added as usual.
         public uint IncreaseNumber(uint increaseBy)
@@ -144,10 +141,7 @@ namespace Hast.Samples.SampleAssembly
         // The SimpleMemory object can be passed around as usual.
         private readonly SimpleMemory _memory;
 
-        public MemoryContainer(SimpleMemory memory)
-        {
-            _memory = memory;
-        }
+        public MemoryContainer(SimpleMemory memory) => _memory = memory;
 
         public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.RunInputUInt32Index);
     }

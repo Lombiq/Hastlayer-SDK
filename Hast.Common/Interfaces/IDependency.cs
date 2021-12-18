@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Hast.Common.Interfaces
@@ -38,9 +38,6 @@ namespace Hast.Common.Interfaces
         /// <param name="memberName">
         /// The name of a public static method that takes one <see cref="IServiceCollection" /> argument and returns void.
         /// </param>
-        public IDependencyInitializerAttribute(string memberName)
-        {
-            MemberName = memberName;
-        }
+        public IDependencyInitializerAttribute(string memberName) => MemberName = memberName;
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Hast.Layer;
 
@@ -8,10 +8,8 @@ namespace Hast.Synthesis.Abstractions
     {
         private readonly IEnumerable<IDeviceManifestProvider> _deviceManifestProviders;
 
-        public DeviceManifestSelector(IEnumerable<IDeviceManifestProvider> deviceManifestProviders)
-        {
+        public DeviceManifestSelector(IEnumerable<IDeviceManifestProvider> deviceManifestProviders) =>
             _deviceManifestProviders = deviceManifestProviders;
-        }
 
         public IEnumerable<IDeviceManifest> GetSupportedDevices() =>
             _deviceManifestProviders

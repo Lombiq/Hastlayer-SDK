@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Models;
+using Hast.Communication.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,10 +17,7 @@ namespace Hast.Communication.Services
 
         private Dictionary<string, PooledDevice> _devicePool = new();
 
-        public DevicePoolManager(ILogger<DevicePoolManager> logger)
-        {
-            _logger = logger;
-        }
+        public DevicePoolManager(ILogger<DevicePoolManager> logger) => _logger = logger;
 
         public void SetDevicePool(IEnumerable<IDevice> devices)
         {
@@ -118,10 +115,8 @@ namespace Hast.Communication.Services
             private readonly Action<ReservedDevice> _disposer;
 
             public ReservedDevice(IDevice baseDevice, Action<ReservedDevice> disposer)
-                : base(baseDevice)
-            {
+                : base(baseDevice) =>
                 _disposer = disposer;
-            }
 
             public override void Dispose()
             {

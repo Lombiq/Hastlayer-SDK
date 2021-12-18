@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
 
 namespace Hast.Catapult.Abstractions
@@ -17,10 +17,8 @@ namespace Hast.Catapult.Abstractions
         public CatapultFunctionResultException() { }
 
         public CatapultFunctionResultException(Constants.Status status, string message)
-            : this(string.IsNullOrWhiteSpace(message) ? status.ToString() : message)
-        {
+            : this(string.IsNullOrWhiteSpace(message) ? status.ToString() : message) =>
             Status = status;
-        }
 
         public CatapultFunctionResultException(string message)
             : base(message) { }

@@ -27,10 +27,7 @@ namespace Hast.Communication
         public event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
         public event EventHandler<IMemberInvocationContext> MemberInvoking;
 
-        public MemberInvocationHandlerFactory(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+        public MemberInvocationHandlerFactory(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
         public MemberInvocationHandler CreateMemberInvocationHandler(
             IHardwareRepresentation hardwareRepresentation,

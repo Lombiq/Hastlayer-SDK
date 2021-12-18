@@ -1,4 +1,4 @@
-﻿using Hast.Common.Validation;
+using Hast.Common.Validation;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,10 +8,8 @@ namespace Hast.Communication.Services
     {
         private readonly IEnumerable<ICommunicationService> _communicationServices;
 
-        public CommunicationServiceSelector(IEnumerable<ICommunicationService> communicationServices)
-        {
+        public CommunicationServiceSelector(IEnumerable<ICommunicationService> communicationServices) =>
             _communicationServices = communicationServices;
-        }
 
         public ICommunicationService GetCommunicationService(string channelName)
         {
