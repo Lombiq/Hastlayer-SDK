@@ -47,6 +47,13 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteBoolean(IsPrimeNumberOutputBooleanIndex, IsPrimeNumberInternal(number));
         }
 
+        // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
+        // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
+        // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
+        // in them that is not Hastlayer-compatible.
+        public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
+
         /// <summary>
         /// Calculates whether the number is prime, in an async way.
         /// </summary>
@@ -61,6 +68,9 @@ namespace Hast.Samples.SampleAssembly
             // In .NET <4.6 Task.FromResult(true) can be used too.
             return Task.CompletedTask;
         }
+
+        public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunIsPrimeNumberAsync(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
 
         /// <summary>
         /// Calculates for multiple numbers whether they're primes.
@@ -79,6 +89,9 @@ namespace Hast.Samples.SampleAssembly
                 memory.WriteBoolean(ArePrimeNumbersOutputBooleansStartIndex + i, IsPrimeNumberInternal(number));
             }
         }
+
+        public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), hastlayer, configuration);
 
         /// <summary>
         /// Calculates for multiple numbers whether they're primes, in a parallelized way.
@@ -122,6 +135,18 @@ namespace Hast.Samples.SampleAssembly
 
                 i += MaxDegreeOfParallelism;
             }
+        }
+
+        public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        {
+            var results = RunArePrimeNumbersMethod(
+                numbers.PadToMultipleOf(MaxDegreeOfParallelism),
+                ParallelizedArePrimeNumbers,
+                hastlayer,
+                configuration);
+
+            // The result might be longer than the input due to padding.
+            return results.CutToLength(numbers.Length);
         }
 
         /// <summary>
@@ -173,32 +198,6 @@ namespace Hast.Samples.SampleAssembly
             }
 
             return i == factor + 1;
-        }
-
-        // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
-        // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
-        // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
-        // in them that is not Hastlayer-compatible.
-
-        public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
-
-        public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunIsPrimeNumberAsync(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
-
-        public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), hastlayer, configuration);
-
-        public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            var results = RunArePrimeNumbersMethod(
-                numbers.PadToMultipleOf(MaxDegreeOfParallelism),
-                ParallelizedArePrimeNumbers,
-                hastlayer,
-                configuration);
-
-            // The result might be longer than the input due to padding.
-            return results.CutToLength(numbers.Length);
         }
 
         private async Task<bool> RunIsPrimeNumberAsync(

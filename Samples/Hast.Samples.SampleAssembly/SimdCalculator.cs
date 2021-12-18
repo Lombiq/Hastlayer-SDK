@@ -1,7 +1,7 @@
 using Hast.Common.Numerics;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
-using Hast.Layer;
 using System.Numerics;
 
 namespace Hast.Samples.SampleAssembly
@@ -42,11 +42,35 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void AddVectors(SimpleMemory memory) => RunSimdOperation(memory, SimdOperation.Add);
 
+        public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
+
         public virtual void SubtractVectors(SimpleMemory memory) => RunSimdOperation(memory, SimdOperation.Subtract);
+
+        public int[] SubtractVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), hastlayer, configuration);
 
         public virtual void MultiplyVectors(SimpleMemory memory) => RunSimdOperation(memory, SimdOperation.Multiply);
 
+        public int[] MultiplyVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), hastlayer, configuration);
+
         public virtual void DivideVectors(SimpleMemory memory) => RunSimdOperation(memory, SimdOperation.Divide);
+
+        public int[] DivideVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
+            RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
 
         private void RunSimdOperation(SimpleMemory memory, SimdOperation operation)
         {
@@ -58,7 +82,6 @@ namespace Hast.Samples.SampleAssembly
             {
                 var vector1 = new int[MaxDegreeOfParallelism];
                 var vector2 = new int[MaxDegreeOfParallelism];
-                var resultVector = new int[MaxDegreeOfParallelism];
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
@@ -70,23 +93,14 @@ namespace Hast.Samples.SampleAssembly
                     vector2[m] = memory.ReadInt32(VectorElementsStartInt32Index + i + m + elementCount);
                 }
 
-                switch (operation)
+                int[] resultVector = operation switch
                 {
-                    case SimdOperation.Add:
-                        resultVector = SimdOperations.AddVectors(vector1, vector2, MaxDegreeOfParallelism);
-                        break;
-                    case SimdOperation.Subtract:
-                        resultVector = SimdOperations.SubtractVectors(vector1, vector2, MaxDegreeOfParallelism);
-                        break;
-                    case SimdOperation.Multiply:
-                        resultVector = SimdOperations.MultiplyVectors(vector1, vector2, MaxDegreeOfParallelism);
-                        break;
-                    case SimdOperation.Divide:
-                        resultVector = SimdOperations.DivideVectors(vector1, vector2, MaxDegreeOfParallelism);
-                        break;
-                    default:
-                        break;
-                }
+                    SimdOperation.Add => SimdOperations.AddVectors(vector1, vector2, MaxDegreeOfParallelism),
+                    SimdOperation.Subtract => SimdOperations.SubtractVectors(vector1, vector2, MaxDegreeOfParallelism),
+                    SimdOperation.Multiply => SimdOperations.MultiplyVectors(vector1, vector2, MaxDegreeOfParallelism),
+                    SimdOperation.Divide => SimdOperations.DivideVectors(vector1, vector2, MaxDegreeOfParallelism),
+                    _ => new int[MaxDegreeOfParallelism],
+                };
 
                 for (int m = 0; m < MaxDegreeOfParallelism; m++)
                 {
@@ -96,30 +110,6 @@ namespace Hast.Samples.SampleAssembly
                 i += MaxDegreeOfParallelism;
             }
         }
-
-        public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
-
-        public int[] SubtractVectors(
-            int[] vector1,
-            int[] vector2,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), hastlayer, configuration);
-
-        public int[] MultiplyVectors(
-            int[] vector1,
-            int[] vector2,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), hastlayer, configuration);
-
-        public int[] DivideVectors(
-            int[] vector1,
-            int[] vector2,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null) =>
-            RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
 
         private int[] RunSimdOperation(
             int[] vector1,

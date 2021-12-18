@@ -35,12 +35,32 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteUInt32(CalculateFibonacchiSeriesOutputUInt32Index, RecursivelyCalculateFibonacchiSeries(memory, number));
         }
 
+        public uint CalculateFibonacchiSeries(short number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        {
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(2)
+                : hastlayer.CreateMemory(configuration, 2);
+            memory.WriteInt32(CalculateFibonacchiSeriesInputShortIndex, number);
+            CalculateFibonacchiSeries(memory);
+            return memory.ReadUInt32(CalculateFibonacchiSeriesOutputUInt32Index);
+        }
+
         public virtual void CalculateFactorial(SimpleMemory memory)
         {
             memory.WriteUInt32(CalculateFactorialInvocationCounterUInt32Index, 1);
 
             var number = (short)memory.ReadInt32(CalculateFactorialInputShortIndex);
             memory.WriteUInt32(CalculateFactorialOutputUInt32Index, RecursivelyCalculateFactorial(memory, number));
+        }
+
+        public uint CalculateFactorial(short number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        {
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(2)
+                : hastlayer.CreateMemory(configuration, 2);
+            memory.WriteInt32(CalculateFactorialInputShortIndex, number);
+            CalculateFactorial(memory);
+            return memory.ReadUInt32(CalculateFactorialOutputUInt32Index);
         }
 
         // The return value should be a type with a bigger range than the input. Although we can use 64b numbers
@@ -64,26 +84,6 @@ namespace Hast.Samples.SampleAssembly
 
             if (number == 0) return 1;
             return (uint)(number * RecursivelyCalculateFactorial(memory, (short)(number - 1)));
-        }
-
-        public uint CalculateFibonacchiSeries(short number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(2)
-                : hastlayer.CreateMemory(configuration, 2);
-            memory.WriteInt32(CalculateFibonacchiSeriesInputShortIndex, number);
-            CalculateFibonacchiSeries(memory);
-            return memory.ReadUInt32(CalculateFibonacchiSeriesOutputUInt32Index);
-        }
-
-        public uint CalculateFactorial(short number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(2)
-                : hastlayer.CreateMemory(configuration, 2);
-            memory.WriteInt32(CalculateFactorialInputShortIndex, number);
-            CalculateFactorial(memory);
-            return memory.ReadUInt32(CalculateFactorialOutputUInt32Index);
         }
     }
 }

@@ -63,6 +63,16 @@ namespace Hast.Samples.SampleAssembly
             memory.WriteUInt32(RunOutputUInt32Index, SumNumberContainers(numberContainers1));
         }
 
+        public uint Run(uint input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        {
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(10)
+                : hastlayer.CreateMemory(configuration, 10);
+            memory.WriteUInt32(RunInputUInt32Index, input);
+            Run(memory);
+            return memory.ReadUInt32(RunOutputUInt32Index);
+        }
+
         private uint SumNumberContainers(NumberContainer[] numberContainers)
         {
             uint sum = 0;
@@ -73,16 +83,6 @@ namespace Hast.Samples.SampleAssembly
             }
 
             return sum;
-        }
-
-        public uint Run(uint input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(10)
-                : hastlayer.CreateMemory(configuration, 10);
-            memory.WriteUInt32(RunInputUInt32Index, input);
-            Run(memory);
-            return memory.ReadUInt32(RunOutputUInt32Index);
         }
     }
 
