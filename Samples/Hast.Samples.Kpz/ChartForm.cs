@@ -261,8 +261,8 @@ namespace Hast.Samples.Kpz
             _kpz.LogItFunction = AsyncLogIt;
             var result = _kpz.InitializeHastlayerAsync(VerifyOutput, RandomSeedEnable).Result;
 
-            result.Hastlayer.Invoking += (s, e) => AsyncLogIt("Hastlayer: Invoking member...");
-            result.Hastlayer.ExecutedOnHardware += (s, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
+            result.Hastlayer.Invoking += (_, _) => AsyncLogIt("Hastlayer: Invoking member...");
+            result.Hastlayer.ExecutedOnHardware += (_, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
                 $"(took {e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
 
             return result;

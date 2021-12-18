@@ -180,7 +180,7 @@ namespace Hast.Samples.SampleAssembly
         // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
         // in them that is not Hastlayer-compatible.
 
-        public bool IsPrimeNumber(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+        public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
 
         public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>

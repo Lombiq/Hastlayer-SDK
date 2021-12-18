@@ -98,7 +98,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 numbers,
                 hastlayer,
                 hardwareGenerationConfiguration);
-            var resultString = string.Join(", ", numbers.Where((number, index) => result[index]));
+            var resultString = string.Join(", ", numbers.Where((_, index) => result[index]));
             Console.WriteLine(
                 "primeCalculator.{0}: {1} => {2}",
                 methodName,

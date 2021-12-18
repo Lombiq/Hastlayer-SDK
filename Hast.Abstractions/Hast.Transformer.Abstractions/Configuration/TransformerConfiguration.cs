@@ -85,7 +85,7 @@ namespace Hast.Transformer.Abstractions.Configuration
 
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration) =>
             _memberInvocationInstanceCountConfigurations
-                .AddOrUpdate(configuration.MemberNamePrefix, configuration, (key, previousConfiguration) => configuration);
+                .AddOrUpdate(configuration.MemberNamePrefix, configuration, (_, _) => configuration);
 
         public MemberInvocationInstanceCountConfiguration GetMaxInvocationInstanceCountConfigurationForMember(
             string simpleMemberName)

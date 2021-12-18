@@ -29,7 +29,7 @@ namespace Hast.Samples.Kpz
             // No "using" here since we are returning this object.
             var hastlayer = Hastlayer.Create();
 
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
             LogItFunction("Hastlayer timer: " +
                     e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
                     e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"

@@ -19,7 +19,7 @@ namespace Hast.Samples.Demo
 
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 Console.WriteLine(
                     "Executing on hardware took " +
