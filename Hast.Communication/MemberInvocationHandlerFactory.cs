@@ -1,6 +1,7 @@
 using Castle.DynamicProxy;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Common.Extensions;
+using Hast.Common.Validation;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
@@ -182,10 +183,7 @@ namespace Hast.Communication
 
                         if (configuration.VerifyHardwareResults)
                         {
-                            if (softMemory == null)
-                            {
-                                throw new NullReferenceException(nameof(softMemory) + " was not initialized.");
-                            }
+                            Argument.ThrowIfNull(softMemory, nameof(softMemory));
 
                             var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
 

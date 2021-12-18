@@ -87,12 +87,12 @@ namespace Hast.Samples.Consumer
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
             var devices = hastlayer.GetSupportedDevices()?.ToList();
-            if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
+            if (devices == null || !devices.Any()) throw new InvalidOperationException("No devices are available!");
 
             // Let's just use the first one that is available unless it's specified.
             var targetDeviceName = consumerConfiguration.DeviceName.OrIfEmpty(devices.First().Name);
             var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
-            if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
+            if (selectedDevice == null) throw new InvalidOperationException($"Target device '{targetDeviceName}' not found!");
 
             var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, consumerConfiguration.HardwareFrameworkPath);
             var proxyConfiguration = new ProxyGenerationConfiguration
@@ -123,7 +123,7 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{consumerConfiguration.SampleToRun}'."),
+                _ => throw consumerConfiguration.SampleToRun.UnknownEnumException(),
             };
             sampleRunner.Configure(configuration);
             configuration.Label = consumerConfiguration.BuildLabel ?? consumerConfiguration.SampleToRun.ToString();
