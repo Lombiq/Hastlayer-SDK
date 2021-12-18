@@ -347,12 +347,9 @@ namespace Hast.Algorithms
                     return MaxValue();
                 }
             }
-            else
+            else if (sum > 0)
             {
-                if (sum > 0)
-                {
-                    return MinValue();
-                }
+                return MinValue();
             }
 
             // if the top 32 bits of hihi (unused in the result) are neither all 0s or 1s,
