@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Catapult.Abstractions
 {
@@ -37,18 +38,19 @@ namespace Hast.Catapult.Abstractions
         }
 
         #region Unique constants from header files
-        public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1000;
+        public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1_000;
         public const string ErrorLabels = "hr:min:sec:ms,cycles,pid,tid,filename,line,errmsg,";
         public const string DefaultVersionManifestFile = "FPGADefaultVersionManifest.ini";
-        public const string VersionDefinitionsFile = "FPGAVersionDefinitions.ini";
-        public static readonly Version LibraryVersion = new(3, 40);
+        public const string VersionDefinitionsFilePath = "FPGAVersionDefinitions.ini";
         public const int SoftResetRole = 14;
         public const double WaitOutputBufferTimeoutDefaultSeconds = 10.0;
         public const int PcieHipNumber = 0;
-        public const int MaxBufferSizeBytes = 65536;
+        public const int MaxBufferSizeBytes = 65_536;
+        public static readonly Version LibraryVersion = new(3, 40);
         #endregion
 
         #region Grouped constants from header files
+
         /// <summary>
         /// The return value of the functions in the native Catapult FPGA library.
         /// It indicates the success or error state of the function call.
@@ -137,39 +139,41 @@ namespace Hast.Catapult.Abstractions
             FlashMutexTimeout = 79,
             EnumerationMoreDevices = 80,
             EnumerationNoList = 81,
-            UnknownError = 10000,
+            UnknownError = 10_000,
         }
 
         /// <summary>
         /// The type flags used in the logger function.
         /// </summary>
-        [Flags]
         public enum Log
         {
-            None = 0x00,
-            Info = 0x01,
-            Debug = 0x03,
-            Verbose = 0x04,
-            Error = 0x08,
-            Fatal = 0x10,
-            Warn = 0x20,
+            None = 0x_00,
+            Info = 0x_01,
+            Debug = 0x_03,
+            Verbose = 0x_04,
+            Error = 0x_08,
+            Fatal = 0x_10,
+            Warn = 0x_20,
         }
 
         public static class HandleFlag
         {
-            public const uint None = 0x0000000u;
-            public const uint Verbose = 0x0000001u;
-            public const uint Diagnostics = 0x0000002u;
+            public const uint None = 0x0000u;
+            public const uint Verbose = 0x0001u;
+            public const uint Diagnostics = 0x0002u;
+
             /// <summary>
             /// Must be passed to use functions in FPGAManagementLib.h (e.g., flash write, reconfig).
             /// </summary>
-            public const uint Exclusive = 0x0001000u;
+            public const uint Exclusive = 0x1000u;
+
             /// <summary>
             /// Must be passed in when updating the golden image.
             /// </summary>
-            public const uint WriteGolden = 0x0002000u;
+            public const uint WriteGolden = 0x2000u;
         }
 
+        [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "Not applicable.")]
         public enum Stat
         {
             CyclesLower = 8,
@@ -189,6 +193,7 @@ namespace Hast.Catapult.Abstractions
         #endregion
 
         #region Header sizes
+
         /// <summary>
         /// Sizes of the input headers in bytes.
         /// </summary>
@@ -243,7 +248,7 @@ namespace Hast.Catapult.Abstractions
             /// <summary>
             /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is
             /// more than what would fit into a single slot then the header for the second slot will contain the
-            /// SliceIndex 1, for the third 2, and for the last one <see cref="InputHeaderSizes.SliceCount"/> - 1.
+            /// SliceIndex 1, for the third 2, and for the last one <see cref="Total"/> - 1.
             /// </summary>
             public const int SliceIndex = sizeof(int);
 

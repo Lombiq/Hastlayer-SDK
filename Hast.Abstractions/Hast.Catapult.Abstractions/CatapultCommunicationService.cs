@@ -13,6 +13,9 @@ namespace Hast.Catapult.Abstractions
 {
     public class CatapultCommunicationService : CommunicationServiceBase
     {
+        private const int HardwareCellMultiplier = 16;
+        private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
+
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
@@ -35,9 +38,6 @@ namespace Hast.Catapult.Abstractions
             ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
         #region Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
-        private const int HardwareCellMultiplier = 16;
-        private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
-
         private static Memory<byte> HotfixInput(Memory<byte> memory)
         {
             if (memory.Length <= SimpleMemory.MemoryCellSizeBytes) return memory;
@@ -86,13 +86,9 @@ namespace Hast.Catapult.Abstractions
                             // The illegal endpoint number messages are normal for higher endpoints if they aren't
                             // populated, so it's OK to suppress them.
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
-                            {
                                 Logger.LogError(
                                     ex,
-                                    $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint " +
-                                    $"{i}. This device won't be used.");
-                            }
-
+                                    $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;
                         }
                     })));

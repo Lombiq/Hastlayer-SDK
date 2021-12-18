@@ -58,29 +58,30 @@ namespace Hast.Catapult.Abstractions
 
         /// <summary>
         /// This function is used to update the flash images on the FPGA. It can either be used to update the golden or
-        /// app image. Writing to the golden image requires explicitly passing in <see
-        /// cref="Constants.HandleFlag.WriteGolden"/> during handle creation. WARNING: writing a bad golden image to
-        /// the FPGA is a career-limiting move and can cause irreparable damage.
-        /// This function is protected by an internal mutex against other calls to <see cref="WriteFlashImageEx"/> and
-        /// <see cref="CaptureFlashImageEx"/>.
+        /// app image. Writing to the golden image requires explicitly passing in <see cref="Constants.HandleFlag.WriteGolden"/>
+        /// during handle creation. WARNING: writing a bad golden image to the FPGA is a career-limiting move and can
+        /// cause irreparable damage.
+        /// This function is protected by an internal mutex against other calls to <c>WriteFlashImage(IntPtr,
+        /// bool, string)</c>c>, <see cref="WriteFlashImageEx(IntPtr, bool, string, uint)"/>, <c>CaptureFlashImage
+        /// (IntPtr, bool, string)</c> and <see cref="CaptureFlashImageEx(IntPtr, bool, string, uint)"/>.
         /// </summary>
         /// <param name="timeoutInMs">
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according
-        /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the
-        /// timeout.
+        /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the timeout.
         /// </param>
         /// <returns>When a timeout is triggered, it returns <see cref="Constants.Status.FlashMutexTimeout"/>.</returns>
         Constants.Status WriteFlashImageEx(
             IntPtr fpgaHandle,
             bool writeToGolden,
-            string RpdFilename,
+            string rpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
 
         /// <summary>
         /// This function is used to read the flash images from the FPGA to a file. It can either be used to read the
         /// golden or app image.
-        /// This function is protected by an internal mutex against other calls to <see cref="WriteFlashImageEx"/> and
-        /// <see cref="CaptureFlashImageEx"/>.
+        /// This function is protected by an internal mutex against other calls to <c>WriteFlashImage(IntPtr,
+        /// bool, string)</c>, <see cref="WriteFlashImageEx(IntPtr, bool, string, uint)"/>, <c>CaptureFlashImage
+        /// (IntPtr, bool, string)</c> and <see cref="CaptureFlashImageEx(IntPtr, bool, string, uint)"/>.
         /// </summary>
         /// <param name="timeoutInMs">
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according
@@ -89,14 +90,14 @@ namespace Hast.Catapult.Abstractions
         Constants.Status CaptureFlashImageEx(
             IntPtr fpgaHandle,
             bool isGolden,
-            string RpdFilename,
+            string rpdFilename,
             uint timeoutInMs = Constants.DefaultFlashAccessTimeoutInMilliseconds);
 
         /// <summary>
         /// Disable non-maskable interrupt error reporting.  Needed during FPGA reconfiguration. It is not multithreaded-
         /// or multiprocess-safe.
         /// </summary>
-        Constants.Status DisableNMI(IntPtr fpgaHandle);
+        Constants.Status DisableNmi(IntPtr fpgaHandle);
 
         /// <summary>
         /// Sanity check: FPGA reconfig often fails simply because the FPGA vendor/device ID changed after reconfig
@@ -192,7 +193,7 @@ namespace Hast.Catapult.Abstractions
         /// </returns>
         Constants.Status IsDevicePresent(
             string pchVerManifestFile,
-            [MarshalAs(UnmanagedType.FunctionPtr)]CatapultLogFunction logFunc);
+            [MarshalAs(UnmanagedType.FunctionPtr)] CatapultLogFunction logFunc);
 
         /// <summary>
         /// This function instantiates and returns a handle to an FPGA device. If the device is disabled  and the caller
@@ -221,15 +222,15 @@ namespace Hast.Catapult.Abstractions
             out IntPtr fpgaHandle,
             uint endpointNumber,
             uint flags,
-            [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVerDefnsFile,
-            [MarshalAs(UnmanagedType.LPStr)]StringBuilder pchVersionManifestFile,
-            [MarshalAs(UnmanagedType.FunctionPtr)]CatapultLogFunction logFunc = null);
+            [MarshalAs(UnmanagedType.LPStr)] StringBuilder pchVerDefnsFile,
+            [MarshalAs(UnmanagedType.LPStr)] StringBuilder pchVersionManifestFile,
+            [MarshalAs(UnmanagedType.FunctionPtr)] CatapultLogFunction logFunc = null);
 
         /// <summary>
         /// This function allows the library user to query the version of both software and hardware components. All
-        /// queryable version keys are defined in the 'pchVerDefnsFile' argument of <see cref="CreateHandle(out IntPtr,
-        /// uint, uint, StringBuilder, StringBuilder, CatapultLogFunction)"/>. By default, the definitions are listed in
-        /// VersionDefinitions.ini.
+        /// queryable version keys are defined in the 'pchVerDefnsFile' argument of
+        /// <see cref="CreateHandle(out IntPtr, uint, uint, StringBuilder, StringBuilder, CatapultLogFunction)"/>.
+        /// By default, the definitions are listed in VersionDefinitions.ini.
         /// </summary>
         Constants.Status GetVersion(IntPtr fpgaHandle, string pchVerKey, out uint pVersion);
 
@@ -256,7 +257,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Provides error string for the last error occurred.
         /// </summary>
-        Constants.Status GetLastErrorText([MarshalAs(UnmanagedType.LPStr)]StringBuilder pErrorTextBuf, int cbBufSize);
+        Constants.Status GetLastErrorText([MarshalAs(UnmanagedType.LPStr)] StringBuilder pErrorTextBuf, int cbBufSize);
 
         /// <summary>
         /// This function retrieves a user-mapped pointer to a pinned region of kernel memory that is typically written

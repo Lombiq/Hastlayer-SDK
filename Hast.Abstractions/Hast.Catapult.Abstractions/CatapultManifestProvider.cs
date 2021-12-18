@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;
@@ -21,6 +21,9 @@ namespace Hast.Catapult.Abstractions
                 ToolChainName = CommonToolChainNames.QuartusPrime,
             };
 
-        public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) { }
+        public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration)
+        {
+            // Method intentionally left empty. There is nothing to do with this device.
+        }
     }
 }

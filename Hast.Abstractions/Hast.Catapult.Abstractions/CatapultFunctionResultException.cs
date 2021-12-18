@@ -17,8 +17,7 @@ namespace Hast.Catapult.Abstractions
         public CatapultFunctionResultException() { }
 
         public CatapultFunctionResultException(Constants.Status status, string message)
-            : this(string.IsNullOrWhiteSpace(message) ? status.ToString() : message) =>
-            Status = status;
+            : this(string.IsNullOrWhiteSpace(message) ? status.ToString() : message) => Status = status;
 
         public CatapultFunctionResultException(string message)
             : base(message) { }
