@@ -91,10 +91,9 @@ namespace Hast.Samples.SampleAssembly
                         {
                             currentCell = diagonalCell;
 
-                            if (row == 0 || column == 0)
-                                cellPointer = GetLCSOutOfBorderDiagonalCellPointerValue;
-                            else
-                                cellPointer = GetLCSDiagonalCellPointerValue;
+                            cellPointer = row == 0 || column == 0
+                                ? GetLCSOutOfBorderDiagonalCellPointerValue
+                                : GetLCSDiagonalCellPointerValue;
                         }
                         else
                         {

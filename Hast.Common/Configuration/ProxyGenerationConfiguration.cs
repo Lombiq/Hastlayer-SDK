@@ -27,10 +27,7 @@ namespace Hast.Layer
         {
             get
             {
-                if (_default == null)
-                {
-                    _default = new ProxyGenerationConfiguration();
-                }
+                _default ??= new ProxyGenerationConfiguration();
 
                 return _default;
             }

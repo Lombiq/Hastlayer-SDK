@@ -106,17 +106,10 @@ namespace Hast.Remote.Client
             {
                 var message = "Remote transformation failed: ";
 
-                if (ex.StatusCode == HttpStatusCode.Unauthorized)
-                {
-                    message += "Authorizing with Hastlayer Remote Services failed. Maybe you mistyped your credentials?";
-                }
-                else
-                {
-                    message +=
-                        $"The response code was {ex.StatusCode}. Most possibly there is some issue with Hastlayer " +
-                        $"Remote Services. If this error persists please get in touch with us under " +
-                        $"https://hastlayer.com/contact.";
-                }
+                message += ex.StatusCode == HttpStatusCode.Unauthorized
+                    ? "Authorizing with Hastlayer Remote Services failed. Maybe you mistyped your credentials?"
+                    : ($"The response code was {ex.StatusCode}. Most possibly there is some issue with Hastlayer " +
+                        "Remote Services. If this error persists please get in touch with us under https://hastlayer.com/contact.");
 
                 throw new RemoteTransformationException(message, ex);
             }

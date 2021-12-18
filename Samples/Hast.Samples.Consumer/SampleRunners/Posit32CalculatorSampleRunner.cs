@@ -43,8 +43,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             for (var i = 0; i < 100000; i++)
             {
-                if (i % 2 == 0) posit32Array[i] = new Posit32(0.25F * 2 * i).PositBits;
-                else posit32Array[i] = new Posit32(0.25F * -2 * i).PositBits;
+                posit32Array[i] = i % 2 == 0
+                    ? new Posit32(0.25F * 2 * i).PositBits
+                    : new Posit32(0.25F * -2 * i).PositBits;
             }
 
             _ = positCalculator.AddPositsInArray(
@@ -98,8 +99,9 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             for (var i = 0; i < 100000; i++)
             {
-                if (i % 2 == 0) posit32Array[i] = new Posit32(0.25F * 2 * i).PositBits;
-                else posit32Array[i] = new Posit32(0.25F * -2 * i).PositBits;
+                posit32Array[i] = i % 2 == 0
+                    ? new Posit32(0.25F * 2 * i).PositBits
+                    : new Posit32(0.25F * -2 * i).PositBits;
             }
 
             positCalculator.AddPositsInArray(posit32Array);
