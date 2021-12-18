@@ -36,14 +36,14 @@ namespace Hast.Remote.Client
             /// Sends the configuration and assemblies requesting transformation.
             /// </summary>
             [Post("TransformationRequests")]
-            Task<TransformationTicket> RequestTransformation([Body] TransformationRequest transformationRequest);
+            Task<TransformationTicket> RequestTransformationAsync([Body] TransformationRequest transformationRequest);
 
             /// <summary>
             /// Retrieves the result of the transformation when it's finished using the ticket from
             /// <see cref="RequestTransformationAsync(TransformationRequest)"/>.
             /// </summary>
             [Get("TransformationResults"), AllowAnyStatusCode]
-            Task<Response<TransformationResult>> GetTransformationResult([Query] string transformationToken);
+            Task<Response<TransformationResult>> GetTransformationResultAsync([Query] string transformationToken);
         }
     }
 }

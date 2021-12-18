@@ -7,7 +7,7 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// A massively parallel algorithm that is well suited to be accelerated with Hastlayer. Also see
-    /// <see cref="ParallelAlgorithmSampleRunner"/> on what to configure to make this work.
+    /// <c>ParallelAlgorithmSampleRunner</c> on what to configure to make this work.
     /// </summary>
     public class ParallelAlgorithm
     {

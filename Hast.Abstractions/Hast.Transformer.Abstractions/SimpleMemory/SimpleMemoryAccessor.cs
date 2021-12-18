@@ -16,7 +16,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// Gets the memory contents without an additional prefix.
         /// </summary>
         /// <remarks>
-        /// Here besides <see cref="Get(int)"/> so for simpler cases there's no branching necessary.
+        /// <para>Here besides <see cref="Get(int)"/> so for simpler cases there's no branching necessary.</para>
         /// </remarks>
         public Memory<byte> Get() => _simpleMemory.Memory;
 
@@ -30,7 +30,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         public Memory<byte> Get(int prefixCellCount)
         {
             if (prefixCellCount < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(prefixCellCount)} must be positive!");
+                throw new ArgumentOutOfRangeException(nameof(prefixCellCount), $"{nameof(prefixCellCount)} must be positive!");
 
             if (prefixCellCount == 0) return Get();
 
@@ -57,9 +57,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <see cref="SimpleMemory"/>.
         /// </param>
         /// <remarks>
-        /// Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you
+        /// <para>Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you
         /// must use at least as many prefixCellCount for Set as for Get if the <see cref="SimpleMemory"/> is reused,
-        /// otherwise the memory has to be copied and that incurs a performance hit.
+        /// otherwise the memory has to be copied and that incurs a performance hit.</para>
         /// </remarks>
         public void Set(Memory<byte> data, int prefixCellCount = 0)
         {

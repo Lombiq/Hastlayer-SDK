@@ -5,7 +5,7 @@ namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Object-oriented code can be written with Hastlayer as usual. This will also be directly mapped to hardware.
-    /// Also see <see cref="ObjectOrientedShowcaseSampleRunner"/> on what to configure to make this work.
+    /// Also see <c>ObjectOrientedShowcaseSampleRunner</c> on what to configure to make this work.
     /// </summary>
     public class ObjectOrientedShowcase
     {

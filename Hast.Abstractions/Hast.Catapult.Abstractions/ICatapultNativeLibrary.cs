@@ -24,6 +24,7 @@ namespace Hast.Catapult.Abstractions
     public interface ICatapultNativeLibrary : IDisposable
     {
         #region FPGAManagementLib
+
         /// <summary>
         /// This function retrieves the total number of shell registers.
         /// </summary>
@@ -57,16 +58,16 @@ namespace Hast.Catapult.Abstractions
 
         /// <summary>
         /// This function is used to update the flash images on the FPGA. It can either be used to update the golden or
-        /// app image. Writing to the golden image requires explicitly passing in <see cref="Constants.HandleFlag.WriteGolden"/>
-        /// during handle creation. WARNING: writing a bad golden image to the FPGA is a career-limiting move and can
-        /// cause irreparable damage.
-        /// This function is protected by an internal mutex against other calls to <see cref="WriteFlashImage(IntPtr,
-        /// bool, string)"/>, <see cref="WriteFlashImageEx(IntPtr, bool, string, uint)"/>, <see cref="CaptureFlashImage
-        /// (IntPtr, bool, string)"/> and <see cref="CaptureFlashImageEx(IntPtr, bool, string, uint)"/>.
+        /// app image. Writing to the golden image requires explicitly passing in <see
+        /// cref="Constants.HandleFlag.WriteGolden"/> during handle creation. WARNING: writing a bad golden image to
+        /// the FPGA is a career-limiting move and can cause irreparable damage.
+        /// This function is protected by an internal mutex against other calls to <see cref="WriteFlashImageEx"/> and
+        /// <see cref="CaptureFlashImageEx"/>.
         /// </summary>
         /// <param name="timeoutInMs">
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according
-        /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the timeout.
+        /// to the worst-case flash write time multiplied by 2 (five minutes). Setting it to INFINITE removes the
+        /// timeout.
         /// </param>
         /// <returns>When a timeout is triggered, it returns <see cref="Constants.Status.FlashMutexTimeout"/>.</returns>
         Constants.Status WriteFlashImageEx(
@@ -78,9 +79,8 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// This function is used to read the flash images from the FPGA to a file. It can either be used to read the
         /// golden or app image.
-        /// This function is protected by an internal mutex against other calls to <see cref="WriteFlashImage(IntPtr,
-        /// bool, string)"/>, <see cref="WriteFlashImageEx(IntPtr, bool, string, uint)"/>, <see cref="CaptureFlashImage
-        /// (IntPtr, bool, string)"/> and <see cref="CaptureFlashImageEx(IntPtr, bool, string, uint)"/>.
+        /// This function is protected by an internal mutex against other calls to <see cref="WriteFlashImageEx"/> and
+        /// <see cref="CaptureFlashImageEx"/>.
         /// </summary>
         /// <param name="timeoutInMs">
         /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according

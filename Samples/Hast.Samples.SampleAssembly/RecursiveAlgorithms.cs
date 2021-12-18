@@ -7,7 +7,7 @@ namespace Hast.Samples.SampleAssembly
     /// Showcasing some simple recursive algorithms, since recursive method calls are also supported by Hastlayer. Do
     /// note however that recursive algorithms is not the best use-case of Hastlayer and should generally be avoided.
     ///
-    /// Also see <see cref="RecursiveAlgorithmsSampleRunner"/> on what to configure to make this work.
+    /// Also see <c>RecursiveAlgorithmsSampleRunner</c> on what to configure to make this work.
     ///
     /// There is also an invocation counter for each of the methods, i.e. we'll be able to see how many times the
     /// methods were invoked. This is only interesting when debugging the hardware side: writing debug data to the

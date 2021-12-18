@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// Example for a SimpleMemory-using algorithm. Also see <see cref="PrimeCalculatorSampleRunner"/> on what to
-    /// configure to make this work.
+    /// Example for a SimpleMemory-using algorithm. Also see <c>PrimeCalculatorSampleRunner</c> on what to configure
+    /// to make this work.
     /// </summary>
     public class PrimeCalculator
     {
