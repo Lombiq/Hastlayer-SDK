@@ -25,6 +25,11 @@ using System.Diagnostics.CodeAnalysis;
     "CA1822:Mark members as static",
     Justification = "Same.",
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Minor Code Smell",
+    "S4226:Extensions should be in separate namespaces",
+    Justification = "Same.",
+    Scope = "module")]
 
 [assembly: SuppressMessage(
     "Usage",

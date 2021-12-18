@@ -246,17 +246,10 @@ namespace Hast.Samples.Kpz.Algorithms
                 }
             }
         }
-    }
 
-    /// <summary>
-    /// These are host-side functions for <see cref="KpzKernelsParallelizedInterface"/>.
-    /// </summary>
-    public static class KpzKernelsParallelizedExtensions
-    {
         /// <summary>
         /// Wrapper for calling <see cref="KpzKernelsParallelizedInterface.ScheduleIterations"/>.
         /// </summary>
-        /// <param name="kernels"></param>
         /// <param name="hastlayer">Required to properly create <see cref="SimpleMemory"/>.</param>
         /// <param name="configuration">Required to properly create <see cref="SimpleMemory"/>.</param>
         /// <param name="hostGrid">The grid that we work on.</param>
@@ -267,8 +260,7 @@ namespace Hast.Samples.Kpz.Algorithms
         /// consistent across runs.
         /// </param>
         /// <param name="numberOfIterations">The number of iterations to perform.</param>
-        public static void DoIterationsWrapper(
-            this KpzKernelsParallelizedInterface kernels,
+        public void DoIterationsWrapper(
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration,
             KpzNode[,] hostGrid,
@@ -337,13 +329,13 @@ namespace Hast.Samples.Kpz.Algorithms
                 // See comment on notRandomSeed if you get an index out of bounds error here.
             }
 
-            kernels.ScheduleIterations(sm);
+            ScheduleIterations(sm);
 
             CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
 
         /// <summary>Push table into FPGA.</summary>
-        public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
+        private static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
         {
             for (int x = 0; x < KpzKernelsParallelizedInterface.GridSize; x++)
             {
@@ -358,7 +350,7 @@ namespace Hast.Samples.Kpz.Algorithms
         }
 
         /// <summary>Pull table from the FPGA.</summary>
-        public static void CopyFromSimpleMemoryToGrid(KpzNode[,] gridDst, SimpleMemory memorySrc)
+        private static void CopyFromSimpleMemoryToGrid(KpzNode[,] gridDst, SimpleMemory memorySrc)
         {
             for (int x = 0; x < KpzKernelsParallelizedInterface.GridSize; x++)
             {

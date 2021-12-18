@@ -1,6 +1,5 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -29,19 +28,11 @@ namespace Hast.Samples.Kpz.Algorithms
             memory.WriteUInt32(1, (uint)(randomState >> 32));
             memory.WriteUInt32(2, randomWord);
         }
-    }
 
-    /// <summary>
-    /// These are host-side functions for <see cref="PrngTestExtensions"/>.
-    /// </summary>
-    public static class PrngTestExtensions
-    {
         /// <summary>
         /// This copies random seed from the host to the FPGA.
         /// </summary>
-        [SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
-        public static SimpleMemory PushRandomSeed(
-            this PrngTestInterface kernels,
+        public SimpleMemory PushRandomSeed(
             ulong seed,
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration)
@@ -55,11 +46,10 @@ namespace Hast.Samples.Kpz.Algorithms
         }
 
         /// <summary>It runs the PRNG on the FPGA and returns a random 32-bit uint.</summary>
-        public static uint GetNextRandom(this PrngTestInterface kernels, SimpleMemory memory)
+        public uint GetNextRandom(SimpleMemory memory)
         {
-            kernels.MWC64X(memory);
+            MWC64X(memory);
             return memory.ReadUInt32(2);
         }
     }
 }
-
