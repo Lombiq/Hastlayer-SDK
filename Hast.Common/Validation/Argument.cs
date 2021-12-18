@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
 namespace Hast.Common.Validation
 {
-    public class Argument
+    public static class Argument
     {
         public static void Validate(bool condition, string name)
         {
@@ -20,7 +20,8 @@ namespace Hast.Common.Validation
             }
         }
 
-        public static void ThrowIfNull<T>(T value, string name) where T : class
+        public static void ThrowIfNull<T>(T value, string name)
+            where T : class
         {
             if (value == null)
             {
@@ -28,7 +29,8 @@ namespace Hast.Common.Validation
             }
         }
 
-        public static void ThrowIfNull<T>(T value, string name, string message) where T : class
+        public static void ThrowIfNull<T>(T value, string name, string message)
+            where T : class
         {
             if (value == null)
             {

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer
 {
@@ -8,7 +8,7 @@ namespace Hast.Layer
         /// Gets or sets a dictionary that can contain settings for non-default configuration options (like the name of
         /// the communication channel).
         /// </summary>
-        public IDictionary<string, object> CustomConfiguration { get; set; } = new Dictionary<string, object>();
+        public IDictionary<string, object> CustomConfiguration { get; } = new Dictionary<string, object>();
 
         /// <summary>
         /// Gets or sets the communication channel used for communicating with the hardware device (eg. Ethernet).

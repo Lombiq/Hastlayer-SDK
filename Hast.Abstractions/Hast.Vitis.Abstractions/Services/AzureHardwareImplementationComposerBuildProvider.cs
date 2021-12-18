@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
 {
-    [IDependencyInitializer(nameof(InitializeService))]
+    [DependencyInitializer(nameof(InitializeService))]
     public class AzureHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
         private const string BlobContainerName = "hastlayer-attestation";

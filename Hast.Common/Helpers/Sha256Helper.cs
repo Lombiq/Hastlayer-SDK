@@ -11,7 +11,8 @@ namespace Hast.Common.Helpers
 
         public static string ComputeHash(string text)
         {
-            var hashedIdBytes = new SHA256Managed().ComputeHash(Encoding.UTF8.GetBytes(text));
+            using var sha256 = new SHA256Managed();
+            var hashedIdBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(text));
 
             var stringBuilder = new StringBuilder();
 

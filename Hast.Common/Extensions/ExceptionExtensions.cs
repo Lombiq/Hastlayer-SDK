@@ -6,8 +6,6 @@ namespace System
     public static class ExceptionExtensions
     {
         public static bool IsFatal(this Exception ex) =>
-            ex is OutOfMemoryException ||
-            ex is SecurityException ||
-            ex is SEHException;
+            ex is OutOfMemoryException or SecurityException or SEHException;
     }
 }

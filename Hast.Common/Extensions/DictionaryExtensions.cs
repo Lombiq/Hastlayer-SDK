@@ -1,4 +1,4 @@
-﻿using Hast.Common.ContractResolvers;
+using Hast.Common.ContractResolvers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -24,7 +24,9 @@ namespace System.Collections.Generic
                 return (T)config;
             }
 
-            return (T)(customConfiguration[key] = new T());
+            var newInstance = new T();
+            customConfiguration[key] = newInstance;
+            return newInstance;
         }
 
         public static void Deconstruct<TKey, TValue>(this KeyValuePair<TKey, TValue> pair, out TKey key, out TValue value)

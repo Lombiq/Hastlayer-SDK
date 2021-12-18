@@ -7,7 +7,7 @@ namespace Hast.Synthesis.Abstractions
 {
     public class MemoryConfiguration : IMemoryConfiguration
     {
-        private int _alignment = 0;
+        private int _alignment;
 
         public int Alignment
         {

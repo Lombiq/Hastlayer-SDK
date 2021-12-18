@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
 namespace Hast.Common.Services
 {
@@ -11,7 +12,7 @@ namespace Hast.Common.Services
         private bool _disposed;
         private IDisposable _context;
 
-        public object[] Values { get; }
+        public IList<object> Values { get; }
 
         public DisposableContainer(IDisposable context, params object[] values)
         {
@@ -22,6 +23,8 @@ namespace Hast.Common.Services
         public void Dispose()
         {
             if (_disposed) return;
+
+            GC.SuppressFinalize(this);
 
             _context?.Dispose();
             _context = null;

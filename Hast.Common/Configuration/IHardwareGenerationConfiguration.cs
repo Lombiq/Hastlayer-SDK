@@ -50,7 +50,8 @@ namespace Hast.Layer
         IList<string> HardwareEntryPointMemberNamePrefixes { get; }
 
         /// <summary>
-        /// Gets a value indicating whether the caching of the generated hardware is allowed. If set to <see langword="false"/> no caching will happen.
+        /// Gets a value indicating whether the caching of the generated hardware is allowed. If set to <see
+        /// langword="false"/> no caching will happen.
         /// </summary>
         bool EnableCaching { get; }
 

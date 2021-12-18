@@ -18,7 +18,7 @@ namespace Hast.Common.Extensions
         /// ComplexTypes.IInterface1.Interface1Method1(System.Int32)"
         /// We create two alternates from this:
         /// 1) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Interface1Method1(System.Int32)"
-        /// 2) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)"</para>
+        /// 2) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)".</para>
         /// </remarks>
         /// <returns>Alternate member names, if any.</returns>
         public static IEnumerable<string> GetMemberNameAlternates(this string memberFullName)

@@ -13,7 +13,7 @@ namespace Hast.Communication.Services
         private readonly object _lock = new();
         private readonly Queue<Action<IReservedDevice>> _waitQueue = new();
 
-        private bool _isDisposed = false;
+        private bool _isDisposed;
 
         private Dictionary<string, PooledDevice> _devicePool = new();
 

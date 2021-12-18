@@ -1,4 +1,4 @@
-﻿using Hast.Common.ContractResolvers;
+using Hast.Common.ContractResolvers;
 using Hast.Layer;
 using Newtonsoft.Json;
 using System;
@@ -12,7 +12,8 @@ namespace Hast.Common.Models
     {
         public const string LanguageName = "VHDL";
 
-        [JsonProperty] public string TransformationId { get; set; }
+        [JsonProperty]
+        public string TransformationId { get; set; }
 
         [JsonProperty]
         public string Language => LanguageName;

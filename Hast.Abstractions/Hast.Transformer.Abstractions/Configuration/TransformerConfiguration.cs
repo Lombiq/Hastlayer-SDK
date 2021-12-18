@@ -72,7 +72,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// interfaces don't affect the resulting hardware implementation, but the assemblies of all referenced
         /// interfaces need to be loaded. If set to <see langword="false"/> such loading is not necessary. Defaults to <see langword="false"/>.
         /// </summary>
-        public bool ProcessImplementedInterfaces { get; set; } = false;
+        public bool ProcessImplementedInterfaces { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether constant values are propagated through the processed code and variables that actually
