@@ -28,19 +28,19 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         private Span<byte> this[int cellIndex] => Memory.Slice(cellIndex * MemoryCellSizeBytes, MemoryCellSizeBytes).Span;
 
         /// <summary>
-        /// The number of extra cells used for header information like memberId or data length.
+        /// Gets the number of extra cells used for header information like memberId or data length.
         /// </summary>
         public int PrefixCellCount { get; internal set; }
 
         /// <summary>
-        /// This is the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be
+        /// Gets or sets the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be
         /// used for passing in extra input parameters (like memberId) without having to copy the operative memory
         /// contents into an auxiliary array.
         /// </summary>
         internal Memory<byte> PrefixedMemory { get; set; }
 
         /// <summary>
-        /// Gets or sets the contents of the memory representation.
+        /// Gets the contents of the memory representation.
         /// </summary>
         /// <remarks>
         /// <para>This is internal so the property can be read when handling communication with the FPGA but not by user code.</para>

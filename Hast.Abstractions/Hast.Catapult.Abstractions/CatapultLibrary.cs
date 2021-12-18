@@ -21,7 +21,7 @@ namespace Hast.Catapult.Abstractions
         private readonly IntPtr _handle;
 
         /// <summary>
-        /// Returns the name of the instance (Catapult:N where N is the PCIe endpoint number).
+        /// Gets the name of the instance (Catapult:N where N is the PCIe endpoint number).
         /// </summary>
         public string InstanceName => $"{Constants.ChannelName}:{PcieEndpointNumber}";
 
@@ -81,7 +81,7 @@ namespace Hast.Catapult.Abstractions
         public int BufferPayloadSize { get; private set; }
 
         /// <summary>
-        /// Gets whether the PCIe access is enabled on the device.
+        /// Gets a value indicating whether the PCIe access is enabled on the device.
         /// </summary>
         public bool PcieEnabled
         {

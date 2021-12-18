@@ -28,12 +28,12 @@ namespace Hast.Layer
     public interface IHardwareDescription
     {
         /// <summary>
-        /// A hash string suitable to identify the transformation that originated this hardware description.
+        /// Gets a hash string suitable to identify the transformation that originated this hardware description.
         /// </summary>
         string TransformationId { get; }
 
         /// <summary>
-        /// The hardware description language used.
+        /// Gets the hardware description language used.
         /// </summary>
         string Language { get; }
 

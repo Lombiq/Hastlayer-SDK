@@ -25,7 +25,7 @@ namespace Hast.Communication.Extensibility
         IHardwareRepresentation HardwareRepresentation { get; }
 
         /// <summary>
-        /// Debug information about the software execution of hardware-executed members in case the hardware execution
+        /// Gets debug information about the software execution of hardware-executed members in case the hardware execution
         /// was canceled or verified in software.
         /// </summary>
         ISoftwareExecutionInformation SoftwareExecutionInformation { get; }

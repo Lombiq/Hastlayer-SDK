@@ -16,7 +16,7 @@ namespace Hast.Layer
         public string CommunicationChannelName { get; set; }
 
         /// <summary>
-        /// Gets or sets whether the results coming from the hardware implementation should be checked against a
+        /// Gets or sets a value indicating whether the results coming from the hardware implementation should be checked against a
         /// software execution. If set to <c>true</c> then both a hardware and software invocation will happen and the
         /// result of the two compared. If there is a mismatch then an exception will be thrown.
         /// </summary>

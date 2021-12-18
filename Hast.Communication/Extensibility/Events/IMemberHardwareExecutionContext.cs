@@ -8,7 +8,7 @@ namespace Hast.Communication.Extensibility.Events
     public interface IMemberHardwareExecutionContext : IMemberInvocationContext
     {
         /// <summary>
-        /// Debug and runtime information about the hardware execution.
+        /// Gets debug and runtime information about the hardware execution.
         /// </summary>
         IHardwareExecutionInformation HardwareExecutionInformation { get; }
     }
