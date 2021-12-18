@@ -26,7 +26,9 @@ namespace Hast.Common.Extensions
             var sides = memberFullName.Split(new[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
 
             // If there are no dots before the member name that means this full name doesn't contain an interface reference.
-            if (sides.Length != 2 || sides[1].IndexOf('.') == -1 || sides[1].IndexOf('.') > sides[1].IndexOf('('))
+            if (sides.Length != 2 ||
+                !sides[1].Contains('.', StringComparison.Ordinal) ||
+                sides[1].IndexOf('.', StringComparison.Ordinal) > sides[1].IndexOf('(', StringComparison.Ordinal))
             {
                 return Enumerable.Empty<string>();
             }
@@ -37,9 +39,9 @@ namespace Hast.Common.Extensions
             return new[]
             {
                 // 1. alternate:
-                sides[0] + "::" + sides[1][sides[1].IndexOf(methodName + "(")..],
+                sides[0] + "::" + sides[1][sides[1].IndexOf(methodName + "(", StringComparison.Ordinal)..],
                 // 2. alternate:
-                returnType + " " + sides[1].Replace("." + methodName + "(", "::" + methodName + "("),
+                returnType + " " + sides[1].Replace($".{methodName}(", $"::{methodName}(", StringComparison.Ordinal),
             };
         }
     }

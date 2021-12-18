@@ -405,7 +405,7 @@ namespace Hast.Vitis.Abstractions.Services
                     continue;
                 }
 
-                if (resourceType.ToUpperInvariant().Contains("LUT AS LOGIC"))
+                if (resourceType.ContainsOrdinalIgnoreCase("LUT AS LOGIC"))
                 {
                     CheckLutUtilization(utilization);
                 }
@@ -555,7 +555,7 @@ namespace Hast.Vitis.Abstractions.Services
             var text = message as string;
 
             // Find informational messages and escalate their log level since most of them will be "trace" by default.
-            if (text?.Contains(':') == true)
+            if (text?.Contains(':', StringComparison.Ordinal) == true)
             {
                 logLevel = text.Split(':')[0].Trim().ToUpperInvariant() switch
                 {
@@ -570,13 +570,15 @@ namespace Hast.Vitis.Abstractions.Services
 #pragma warning disable S125 // Sections of code should not be commented out. But this is not C# code.
             // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
 #pragma warning restore S125 // Sections of code should not be commented out. But this is not C# code.
-            if (name == Vpp && text?.StartsWith("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
+            if (name == Vpp &&
+                text?.StartsWith("[", StringComparison.Ordinal) == true &&
+                _vppStatusLogs.Any(fragment => text.Contains(fragment, StringComparison.Ordinal)))
             {
                 if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
                 Progress?.Invoke(this, new BuildProgressEventArgs(text));
             }
 
-            if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker") == true)
+            if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker", StringComparison.Ordinal) == true)
             {
                 throw new InvalidOperationException(
                     "The linker encountered an error. This is typically because the resulting hardware design won't " +
@@ -639,8 +641,8 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var file in files)
             {
                 var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
-                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture))
-                    .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
+                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture), StringComparison.Ordinal)
+                    .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0", StringComparison.Ordinal);
                 var targetFilePath = Path.Combine(targetDirectoryPath, file);
                 EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
                 await File.WriteAllTextAsync(targetFilePath, result);

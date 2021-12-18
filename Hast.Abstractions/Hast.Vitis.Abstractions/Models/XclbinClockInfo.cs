@@ -50,7 +50,7 @@ namespace Hast.Vitis.Abstractions.Models
                     continue;
                 }
 
-                if (!line.Contains(":")) continue;
+                if (!line.Contains(":", StringComparison.Ordinal)) continue;
 
                 var parts = line.Split(new[] { ':' }, 2);
                 var key = parts[0].Trim();
