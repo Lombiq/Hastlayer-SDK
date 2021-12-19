@@ -15,7 +15,7 @@ namespace Hast.Samples.SampleAssembly
         public virtual void Run(SimpleMemory memory)
         {
             var inputNumber = new MemoryContainer(memory).GetInput();
-            // Or: "var inputNumber = memory.ReadUInt32(RunInputUInt32Index);".
+            // Or "var inputNumber = memory.ReadUInt32(RunInputUInt32Index);".
 
             // Arrays can be initialized as usual, as well as objects.
             var numberContainers1 = new[]
@@ -99,8 +99,8 @@ namespace Hast.Samples.SampleAssembly
         // Fancy custom properties that can do everything a method can.
         public uint NumberPlusFive
         {
-            get { return Number + 5; }
-            set { Number = value - 5; }
+            get => Number + 5;
+            set => Number = value - 5;
         }
 
         // Constructors can be used, with or without parameters.
