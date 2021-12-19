@@ -82,7 +82,7 @@ namespace Hast.Samples.Kpz
                 {
                     dgvRow.Cells.Add(new DataGridViewTextBoxCell
                     {
-                        Value = $"{(arr[x, y].dx ? "1" : "0")}{(arr[x, y].dy ? "1" : "0")}",
+                        Value = $"{(arr[x, y].Dx ? "1" : "0")}{(arr[x, y].Dy ? "1" : "0")}",
                     });
                 }
 
@@ -100,8 +100,8 @@ namespace Hast.Samples.Kpz
         {
             foreach (var coord in highlightedCoords)
             {
-                if (coord.x >= dgv.ColumnCount || coord.y >= dgv.RowCount) continue;
-                dgv.Rows[coord.y].Cells[coord.y].Style.BackColor = highlightColor;
+                if (coord.X >= dgv.ColumnCount || coord.Y >= dgv.RowCount) continue;
+                dgv.Rows[coord.Y].Cells[coord.Y].Style.BackColor = highlightColor;
             }
         }
 
