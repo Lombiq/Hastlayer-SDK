@@ -14,8 +14,7 @@ namespace Hast.Synthesis.Abstractions
         IDeviceManifest DeviceManifest { get; }
 
         /// <summary>
-        /// Used during <see cref="MemoryConfiguration.Create(IHardwareGenerationConfiguration, System.Collections.Generic.IEnumerable{IDeviceManifestProvider})"/>
-        /// to set up device specific configuration.
+        /// Used during <see cref="MemoryConfiguration.Create"/> to set up device specific configuration.
         /// </summary>
         void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration);
     }

@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,8 +16,5 @@ namespace Hast.Synthesis.Abstractions
         public ulong AvailableMemoryBytes { get; set; }
         public uint DataBusWidthBytes { get; set; }
         public string ToolChainName { get; set; }
-
-        public Exception GetUnknownToolChainException() =>
-            new InvalidOperationException($"Unknown tool chain: {ToolChainName}");
     }
 }
