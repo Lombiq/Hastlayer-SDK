@@ -30,6 +30,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         public int MaxRecursionDepth { get; set; }
 
         private int _maxDegreeOfParallelism;
+
         /// <summary>
         /// Gets or sets the maximal degree of parallelism that will be attempted to build into the generated hardware
         /// when constructs suitable for hardware-level parallelisation are found.
@@ -39,12 +40,13 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </example>
         public int MaxDegreeOfParallelism
         {
-            get { return _maxDegreeOfParallelism; }
+            get => _maxDegreeOfParallelism;
             set
             {
                 if (value < 1)
                 {
                     throw new ArgumentOutOfRangeException(
+                        nameof(MaxDegreeOfParallelism),
                         "The max degree of parallelism should be at least 1, otherwise the member wouldn't be " +
                         "transformed at all.");
                 }
@@ -53,10 +55,10 @@ namespace Hast.Transformer.Abstractions.Configuration
             }
         }
 
-        public int MaxInvocationInstanceCount { get { return (MaxRecursionDepth + 1) * MaxDegreeOfParallelism; } }
+        public int MaxInvocationInstanceCount => (MaxRecursionDepth + 1) * MaxDegreeOfParallelism;
 
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfiguration"/> class.
         /// </summary>
         /// <param name="memberNamePrefix">
         /// The prefix of the member's name. Use the same convention as with <see cref="MemberNamePrefix"/>.
@@ -70,6 +72,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// <summary>
         /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix
         /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
+        /// </summary>
         public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
             $"{simpleName}.LambdaExpression.{lambdaExpressionIndex}";
     }
@@ -77,8 +80,7 @@ namespace Hast.Transformer.Abstractions.Configuration
     public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration
     {
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a method (or methods)
-        /// with the given name prefix.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.
         /// </summary>
         /// <param name="methodNamePrefix">The prefix of the method's name (or methods' names).</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
@@ -86,7 +88,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             : base(typeof(T).FullName + "." + methodNamePrefix) { }
 
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a method.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.
         /// </summary>
         /// <param name="expression">An expression with a call to the method.</param>
         public MemberInvocationInstanceCountConfigurationForMethod(
@@ -94,8 +96,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             : base(expression.GetMethodSimpleName()) { }
 
         /// <summary>
-        /// Constructs a new <see cref="MemberInvocationInstanceCountConfiguration"/> object for a lambda expression
-        /// inside a method.
+        /// Initializes a new instance of the <see cref="MemberInvocationInstanceCountConfigurationForMethod{T}"/> class.
         /// </summary>
         /// <param name="expression">An expression with a call to the method.</param>
         /// <param name="lambdaExpressionIndex">

@@ -13,7 +13,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             new();
 
         /// <summary>
-        /// Gets or sets the list of the member invocation instance counts, i.e. how many times a member can be invoked
+        /// Gets the list of the member invocation instance counts, i.e. how many times a member can be invoked
         /// at a given time.
         /// </summary>
         public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations
@@ -22,8 +22,10 @@ namespace Hast.Transformer.Abstractions.Configuration
             // not necessarily the same on all machines or during all executions. Thus we need sorting so the
             // transformation ID is deterministic (see DefaultTransformer in Hast.Transformer).
             // Also, ToArray() and the setter are needed for JSON de/serialization when doing remote transformation.
-            get { return _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray(); }
+            get => _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray();
 
+            // It does so indirectly via AddMemberInvocationInstanceCountConfiguration.
+#pragma warning disable S4275 // Getters and setters should access the expected fields
             private set
             {
                 _memberInvocationInstanceCountConfigurations.Clear();
@@ -33,6 +35,7 @@ namespace Hast.Transformer.Abstractions.Configuration
                     AddMemberInvocationInstanceCountConfiguration(configuration);
                 }
             }
+#pragma warning restore S4275 // Getters and setters should access the expected fields
         }
 
         /// <summary>
@@ -50,14 +53,14 @@ namespace Hast.Transformer.Abstractions.Configuration
         public bool EnableMethodInlining { get; set; } = true;
 
         /// <summary>
-        /// Gets or sets the list of methods that should be inlined in addition to methods already marked with a
+        /// Gets the list of methods that should be inlined in addition to methods already marked with a
         /// suitable <c>MethodImpl</c> attribute. Will only work if <see cref="EnableMethodInlining"/> is <see langword="true"/>.
         /// Fore more information check the documentation.
         /// </summary>
-        public IList<string> AdditionalInlinableMethodsFullNames { get; set; } = new List<string>();
+        public IList<string> AdditionalInlinableMethodsFullNames { get; } = new List<string>();
 
         /// <summary>
-        /// Gets or sets the lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer
+        /// Gets the lengths of arrays used in the code. Array sizes should be possible to determine statically and Hastlayer
         /// can figure out what the compile-time size of an array is most of the time. Should this fail you can use
         /// this to specify array lengths.
         ///
@@ -65,7 +68,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// and value should be the length. If you get exceptions due to arrays missing their sizes the exception will
         /// indicate the full array name too.
         /// </summary>
-        public IDictionary<string, int> ArrayLengths { get; set; } = new Dictionary<string, int>();
+        public IDictionary<string, int> ArrayLengths { get; } = new Dictionary<string, int>();
 
         /// <summary>
         /// Gets or sets a value indicating whether interfaces that are implemented by transformed types are processed. Currently such
@@ -91,7 +94,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             string simpleMemberName)
         {
             var maxRecursionDepthConfig = MemberInvocationInstanceCountConfigurations
-                .Where(config => simpleMemberName.StartsWith(config.MemberNamePrefix))
+                .Where(config => simpleMemberName.StartsWith(config.MemberNamePrefix, StringComparison.Ordinal))
                 .OrderByDescending(config => config.MemberNamePrefix.Length)
                 .FirstOrDefault();
 
