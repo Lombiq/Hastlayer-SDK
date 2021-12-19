@@ -32,7 +32,7 @@ namespace Hast.Samples.Consumer.Models
         [Argument]
         [Hint(
             "The base URL for the Hastlayer API. Unless you are testing the Hast.Remote services locally, you should",
-              "leave it empty.")]
+            "leave it empty.")]
         public string Endpoint { get; set; }
 
         [Argument]
@@ -102,7 +102,6 @@ namespace Hast.Samples.Consumer.Models
         /// Gets a lazy string dictionary that maps the property names that have <see cref="HintAttribute"/> in this
         /// class to their hint texts.
         /// </summary>
-        /// <returns></returns>
         public static Lazy<Dictionary<string, string>> HintDictionary { get; } = new(() =>
             GetPropertyAttributes<HintAttribute>()
                 .ToDictionary(pair => pair.Property.Name, pair => pair.Attribute.Text));

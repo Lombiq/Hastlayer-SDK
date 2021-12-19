@@ -35,7 +35,7 @@ namespace Hast.Samples.Consumer.SampleRunners
         // Checking if the hardware result is correct by running it against the software implementation. Note that this
         // can be also done by Hastlayer automatically on the SimpleMemory level by setting
         // ProxyGenerationConfiguration.VerifyHardwareResults to true when calling GenerateProxy().
-        private static int[] ThrowIfNotCorrect(SimdCalculator proxied, Func<SimdCalculator, int[]> operation)
+        private static void ThrowIfNotCorrect(SimdCalculator proxied, Func<SimdCalculator, int[]> operation)
         {
             var hardwareResult = operation(proxied);
             var softwareResult = operation(new SimdCalculator());
@@ -47,26 +47,18 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             for (int i = 0; i < hardwareResult.Length; i++)
             {
-                try
+                if (hardwareResult[i] != softwareResult[i])
                 {
-                    if (hardwareResult[i] != softwareResult[i])
-                    {
-                        // Uncomment this to list errors in a file.
-                        ////System.IO.File.AppendAllText(
-                        ////    "Errors.txt",
-                        ////    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
+                    // Uncomment this to list errors in a file.
+                    ////System.IO.File.AppendAllText(
+                    ////    "Errors.txt",
+                    ////    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
 
-                        throw new InvalidOperationException(
-                            $"The hardware result and the software result is not the same on index {i}: " +
-                            $"{hardwareResult[i]} vs {softwareResult[i]}.");
-                    }
-                }
-                catch (Exception)
-                {
+                    throw new InvalidOperationException(
+                        $"The hardware result and the software result is not the same on index {i}: " +
+                        $"{hardwareResult[i]} vs {softwareResult[i]}.");
                 }
             }
-
-            return hardwareResult;
         }
     }
 }

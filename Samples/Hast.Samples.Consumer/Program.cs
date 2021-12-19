@@ -1,6 +1,8 @@
 using Castle.Core.Internal;
 using Hast.Algorithms;
+using Hast.Common.Services;
 using Hast.Communication.Exceptions;
+using Hast.Communication.Extensibility.Events;
 using Hast.Layer;
 using Hast.Samples.Consumer.Models;
 using Hast.Samples.Consumer.SampleRunners;
@@ -23,12 +25,12 @@ namespace Hast.Samples.Consumer
 
     // Configure the whole sample project in command line arguments. See Models/ConsumerConfiguration.cs for details.
 
+    [SuppressMessage(
+        "Globalization",
+        "CA1303:Do not pass literals as localized parameters",
+        Justification = "This program is not localized.")]
     internal static class Program
     {
-        [SuppressMessage(
-            "Globalization",
-            "CA1303:Do not pass literals as localized parameters",
-            Justification = "This program is not localized.")]
         private static async Task MainTaskAsync(string[] args)
         {
             /*
@@ -50,7 +52,7 @@ namespace Hast.Samples.Consumer
             var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
             var consumerConfiguration = args.Any()
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
-                : new Gui(savedConfigurations).BuildConfiguration();
+                : Gui.BuildConfiguration(savedConfigurations);
             if (consumerConfiguration == null) return;
 
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
@@ -67,23 +69,7 @@ namespace Hast.Samples.Consumer
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
-            hastlayer.ExecutedOnHardware += (_, e) =>
-            {
-                var arguments = e.Arguments;
-                var netTime = arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
-                var grossTime = arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
-
-                Console.WriteLine(
-                    $"Executing {arguments.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
-                    $"{grossTime:0.####} milliseconds (all together).");
-
-                if (arguments.SoftwareExecutionInformation == null) return;
-
-                // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
-                // see the notes below, or if the hardware execution was canceled.
-                var softwareTime = arguments.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
-                Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
-            };
+            hastlayer.ExecutedOnHardware += Hastlayer_ExecutedOnHardware;
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
             var devices = hastlayer.GetSupportedDevices()?.ToList();
@@ -173,23 +159,46 @@ namespace Hast.Samples.Consumer
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {
-                // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
-                // GenerateProxy()) then everything will be computed in software as well to check the hardware.
-                // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
-                // not impossible in corner cases.
-                var mismatches = exception
-                    .Mismatches?
-                    .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
-                var mismatchCount = mismatches.Count;
-                Console.WriteLine(
-                    "There {0} between the software and hardware execution's results! Mismatch{1}:",
-                    mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches",
-                    mismatchCount == 1 ? string.Empty : "es");
+                OnMismatch(exception);
+            }
+        }
 
-                foreach (var mismatch in mismatches)
-                {
-                    Console.WriteLine("* " + mismatch);
-                }
+        private static void Hastlayer_ExecutedOnHardware(object sender, ServiceEventArgs<IMemberHardwareExecutionContext> e)
+        {
+            var arguments = e.Arguments;
+            var netTime = arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
+            var grossTime = arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
+
+            Console.WriteLine(
+                $"Executing {arguments.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
+                $"{grossTime:0.####} milliseconds (all together).");
+
+            if (arguments.SoftwareExecutionInformation == null) return;
+
+            // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
+            // see the notes below, or if the hardware execution was canceled.
+            var softwareTime = arguments.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
+            Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
+        }
+
+        private static void OnMismatch(HardwareExecutionResultMismatchException exception)
+        {
+            // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
+            // GenerateProxy()) then everything will be computed in software as well to check the hardware.
+            // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
+            // not impossible in corner cases.
+            var mismatches = exception
+                .Mismatches?
+                .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
+            var mismatchCount = mismatches.Count;
+            Console.WriteLine(
+                "There {0} between the software and hardware execution's results! Mismatch{1}:",
+                mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches",
+                mismatchCount == 1 ? string.Empty : "es");
+
+            foreach (var mismatch in mismatches)
+            {
+                Console.WriteLine("* " + mismatch);
             }
         }
 
