@@ -5,7 +5,7 @@ using Newtonsoft.Json.Linq;
 
 namespace Hast.Xilinx.Abstractions.Helpers
 {
-    public class MemoryConfigurationHelper
+    public static class MemoryConfigurationHelper
     {
         public static void ConfigureMemoryForVitis(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration)
         {

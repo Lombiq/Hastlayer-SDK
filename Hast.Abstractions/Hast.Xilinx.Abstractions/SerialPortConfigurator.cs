@@ -1,4 +1,4 @@
-﻿using Hast.Common.Extensibility.Pipeline;
+using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Xilinx.Abstractions.ManifestProviders;
@@ -10,8 +10,9 @@ namespace Hast.Xilinx.Abstractions
     {
         public void ConfigureSerialPort(SerialPort serialPort, IHardwareExecutionContext hardwareExecutionContext)
         {
-            if (hardwareExecutionContext.HardwareRepresentation.DeviceManifest.Name != Nexys4DdrManifestProvider.DeviceName &&
-                hardwareExecutionContext.HardwareRepresentation.DeviceManifest.Name != NexysA7ManifestProvider.DeviceName)
+            if (hardwareExecutionContext.HardwareRepresentation.DeviceManifest.Name is
+                not Nexys4DdrManifestProvider.DeviceName and
+                not NexysA7ManifestProvider.DeviceName)
             {
                 return;
             }
