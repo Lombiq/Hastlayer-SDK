@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Hast.Remote.Client
 {
@@ -11,6 +11,10 @@ namespace Hast.Remote.Client
 
         public RemoteTransformationException(string message, Exception innerException)
             : base(message, innerException)
+        {
+        }
+
+        public RemoteTransformationException()
         {
         }
     }
