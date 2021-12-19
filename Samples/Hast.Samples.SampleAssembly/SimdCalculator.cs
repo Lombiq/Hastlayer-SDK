@@ -3,6 +3,7 @@ using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Numerics;
 
 namespace Hast.Samples.SampleAssembly
 {
