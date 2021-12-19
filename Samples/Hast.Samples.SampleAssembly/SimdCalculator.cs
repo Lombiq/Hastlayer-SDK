@@ -2,7 +2,7 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
-using System.Numerics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.SampleAssembly
 {
@@ -26,6 +26,10 @@ namespace Hast.Samples.SampleAssembly
     /// inconvenient to use. So using a custom implementation.
     /// </para>
     /// </remarks>
+    [SuppressMessage(
+        "Minor Code Smell",
+        "S4136:Method overloads should be grouped together",
+        Justification = "Helpers are moved together to a separate region")]
     public class SimdCalculator
     {
         private const int VectorsElementCountInt32Index = 0;
@@ -104,19 +108,43 @@ namespace Hast.Samples.SampleAssembly
             }
         }
 
+        // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
+        // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
+        // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
+        // in them that is not Hastlayer-compatible.
+
+        #region Helpers
+
         public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
 
-        public int[] SubtractVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+        public int[] SubtractVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), hastlayer, configuration);
 
-        public int[] MultiplyVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+        public int[] MultiplyVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), hastlayer, configuration);
 
-        public int[] DivideVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
+        public int[] DivideVectors(
+            int[] vector1,
+            int[] vector2,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null) =>
             RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
 
-        private int[] RunSimdOperation(int[] vector1, int[] vector2, Action<SimpleMemory> operation, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        private int[] RunSimdOperation(
+            int[] vector1,
+            int[] vector2,
+            Action<SimpleMemory> operation,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             SimdOperations.ThrowIfVectorsNotEquallyLong(vector1, vector2);
 
@@ -150,5 +178,7 @@ namespace Hast.Samples.SampleAssembly
 
             return result.CutToLength(originalElementCount);
         }
+
+        #endregion
     }
 }

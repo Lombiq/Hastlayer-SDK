@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -10,6 +11,10 @@ namespace Hast.Samples.SampleAssembly
     /// Example for a SimpleMemory-using algorithm. Also see <c>PrimeCalculatorSampleRunner</c> on what to configure to
     /// make this work.
     /// </summary>
+    [SuppressMessage(
+        "Minor Code Smell",
+        "S4136:Method overloads should be grouped together",
+        Justification = "Helpers are moved together to a separate region")]
     public class PrimeCalculator
     {
         // It's good to have common cell indices in constants like this, so they can be used from multiple methods
@@ -180,6 +185,7 @@ namespace Hast.Samples.SampleAssembly
         // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
         // in them that is not Hastlayer-compatible.
 
+        #region Helpers
         public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
             RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
 
@@ -245,5 +251,7 @@ namespace Hast.Samples.SampleAssembly
 
             return output;
         }
+
+        #endregion
     }
 }
