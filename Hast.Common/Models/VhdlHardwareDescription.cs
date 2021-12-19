@@ -45,14 +45,14 @@ namespace Hast.Common.Models
         {
             using var reader = new StreamReader(stream);
             return JsonConvert.DeserializeObject<VhdlHardwareDescription>(
-                await reader.ReadToEndAsync(),
-                GetJsonSerializerSettings());
+                    await reader.ReadToEndAsync(),
+                    GetJsonSerializerSettings());
         }
 
         private static JsonSerializerSettings GetJsonSerializerSettings() =>
             new()
             {
-                TypeNameHandling = TypeNameHandling.Auto,
+                TypeNameHandling = TypeNameHandling.None,
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 ContractResolver = new PrivateSetterContractResolver(),
             };

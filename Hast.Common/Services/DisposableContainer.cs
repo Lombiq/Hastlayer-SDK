@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Hast.Common.Services
@@ -22,18 +22,25 @@ namespace Hast.Common.Services
 
         public void Dispose()
         {
-            if (_disposed) return;
-
+            Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed) return;
 
             _context?.Dispose();
             _context = null;
 
-            foreach (var value in Values)
+            if (disposing)
             {
-                if (value is IDisposable disposableValue)
+                foreach (var value in Values)
                 {
-                    disposableValue.Dispose();
+                    if (value is IDisposable disposableValue)
+                    {
+                        disposableValue.Dispose();
+                    }
                 }
             }
 

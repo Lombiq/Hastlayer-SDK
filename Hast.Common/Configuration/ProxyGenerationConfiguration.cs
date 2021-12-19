@@ -5,7 +5,7 @@ namespace Hast.Layer
     public class ProxyGenerationConfiguration : IProxyGenerationConfiguration
     {
         /// <summary>
-        /// Gets or sets a dictionary that can contain settings for non-default configuration options (like the name of
+        /// Gets a dictionary that can contain settings for non-default configuration options (like the name of
         /// the communication channel).
         /// </summary>
         public IDictionary<string, object> CustomConfiguration { get; } = new Dictionary<string, object>();
