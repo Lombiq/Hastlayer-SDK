@@ -2,8 +2,7 @@ using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz.Algorithms
@@ -39,21 +38,9 @@ namespace Hast.Samples.Kpz.Algorithms
     /// For each iteration:
     /// </para>
     /// <list type="bullet">
-    ///     <item>
-    ///         <description>
-    ///             It loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks.
-    ///         </description>
-    ///     </item>
-    ///     <item>
-    ///         <description>
-    ///             It runs the algorithm on these local tables.
-    ///         </description>
-    ///     </item>
-    ///     <item>
-    ///         <description>
-    ///             It loads back the local tables into the original grid.
-    ///         </description>
-    ///     </item>
+    /// <item><description>it loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks,</description></item>
+    /// <item><description>it runs the algorithm on these local tables,</description></item>
+    /// <item><description>it loads back the local tables into the original grid.</description></item>
     /// </list>
     ///
     /// <para>
@@ -88,6 +75,23 @@ namespace Hast.Samples.Kpz.Algorithms
         public const int MemIndexRandomSeed = MemIndexNumberOfIterations + 1;
         public const int MemIndexGrid = MemIndexRandomSeed + (ParallelTasks * 4) + 2;
 
+        [SuppressMessage(
+            "Critical Code Smell",
+            "S3776:Cognitive Complexity of methods should not be too high",
+            Justification = "Unable to do that due to technical limitations.")]
+        [SuppressMessage(
+            "Critical Code Smell",
+            "S134:Control flow statements \"if\", \"switch\", \"for\", \"foreach\", \"while\", \"do\"  and \"try\" should not be nested too deeply",
+            Justification = "Same, can't safely extract parts into helper functions.")]
+        [SuppressMessage(
+            "Reliability",
+            "CA2008:Do not create tasks without passing a TaskScheduler",
+            Justification = "There is no task scheduler in hardware.")]
+        [SuppressMessage(
+            "Usage",
+            "VSTHRD105:Avoid method overloads that assume TaskScheduler.Current",
+            Justification = "Same.")]
+        [SuppressMessage("Usage", "VSTHRD104:Offer async methods", Justification = "Same.")]
         public virtual void ScheduleIterations(SimpleMemory memory)
         {
             int numberOfIterations = memory.ReadInt32(MemIndexNumberOfIterations);
@@ -151,26 +155,128 @@ namespace Hast.Samples.Kpz.Algorithms
                 int randomYOffset = (int)((LocalGridSize - 1) & (randomValue0 >> 16));
                 for (int scheduleIndex = 0; scheduleIndex < SchedulesPerIteration; scheduleIndex++)
                 {
-                    var tasks = ScheduleTasks(
-                        scheduleIndex,
-                        LocalGridPartitions,
-                        randomXOffset,
-                        randomYOffset,
-                        memory,
-                        taskLocals,
-                        PokesInsideTask);
+                    var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
+                    for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
+                    {
+                        // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex
+                        // (and the random added value)
+                        int localGridIndex = parallelTaskIndex + (scheduleIndex * ParallelTasks);
+                        // The X and Y coordinate within the small table (local grid):
+                        int partitionX = localGridIndex % LocalGridPartitions;
+                        int partitionY = localGridIndex / LocalGridPartitions;
+                        // The X and Y coordinate within the big table (grid):
+                        int baseX = (partitionX * LocalGridSize) + randomXOffset;
+                        int baseY = (partitionY * LocalGridSize) + randomYOffset;
+
+                        // Copy to local memory
+                        for (int copyDstX = 0; copyDstX < LocalGridSize; copyDstX++)
+                        {
+                            for (int copyDstY1 = 0; copyDstY1 < LocalGridSize; copyDstY1++)
+                            {
+                                // Prevent going out of grid memory area (e.g. reading into random seed):
+                                int copySrcX = (baseX + copyDstX) % GridSize;
+                                int copySrcY = (baseY + copyDstY1) % GridSize;
+                                uint value = memory.ReadUInt32(MemIndexGrid + copySrcX + (copySrcY * GridSize));
+                                taskLocals[parallelTaskIndex].BramDx[copyDstX + (copyDstY1 * LocalGridSize)] =
+                                    (value & 1) == 1;
+                                taskLocals[parallelTaskIndex].BramDy[copyDstX + (copyDstY1 * LocalGridSize)] =
+                                    (value & 2) == 2;
+                            }
+                        }
+
+                        tasks[parallelTaskIndex] = Task.Factory.StartNew(
+                        rawTaskState =>
+                        {
+                            // Then do TasksPerIteration iterations
+                            var taskLocal = (KpzKernelsTaskState)rawTaskState;
+                            for (int pokeIndex = 0; pokeIndex < PokesInsideTask; pokeIndex++)
+                            {
+                                // ==== <Now randomly switch four cells> ====
+
+                                // Generating two random numbers:
+                                uint taskRandomNumber1 = taskLocal.Random1.NextUInt32();
+                                uint taskRandomNumber2 = taskLocal.Random2.NextUInt32();
+
+                                // The existence of var-1 in code is a good indicator of that it is assumed to be 2^N:
+                                int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1));
+                                int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
+                                int pokeCenterIndex = pokeCenterX + (pokeCenterY * LocalGridSize);
+                                uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
+                                uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
+
+                                // Get neighbour indexes:
+                                int rightNeighbourIndex;
+                                int bottomNeighbourIndex;
+                                // We skip if neighbours would fall out of the local grid:
+                                if (pokeCenterX >= LocalGridSize - 1 || pokeCenterY >= LocalGridSize - 1) continue;
+                                int rightNeighbourX = pokeCenterX + 1;
+                                int rightNeighbourY = pokeCenterY;
+                                int bottomNeighbourX = pokeCenterX;
+                                int bottomNeighbourY = pokeCenterY + 1;
+                                rightNeighbourIndex = (rightNeighbourY * LocalGridSize) + rightNeighbourX;
+                                bottomNeighbourIndex = (bottomNeighbourY * LocalGridSize) + bottomNeighbourX;
+
+                                // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
+
+                                if (
+                                    // If we get the pattern {01, 01} we have a pyramid:
+                                    (taskLocal.BramDx[pokeCenterIndex] && !taskLocal.BramDx[rightNeighbourIndex] &&
+                                    taskLocal.BramDy[pokeCenterIndex] && !taskLocal.BramDy[bottomNeighbourIndex] &&
+                                    (randomVariable1 < IntegerProbabilityP)) ||
+                                    // If we get the pattern {10, 10} we have a hole:
+                                    (!taskLocal.BramDx[pokeCenterIndex] && taskLocal.BramDx[rightNeighbourIndex] &&
+                                    !taskLocal.BramDy[pokeCenterIndex] && taskLocal.BramDy[bottomNeighbourIndex] &&
+                                    (randomVariable2 < IntegerProbabilityQ))
+                                )
+                                {
+                                    // We make a hole into a pyramid, and a pyramid into a hole.
+                                    taskLocal.BramDx[pokeCenterIndex] = !taskLocal.BramDx[pokeCenterIndex];
+                                    taskLocal.BramDy[pokeCenterIndex] = !taskLocal.BramDy[pokeCenterIndex];
+                                    taskLocal.BramDx[rightNeighbourIndex] = !taskLocal.BramDx[rightNeighbourIndex];
+                                    taskLocal.BramDy[bottomNeighbourIndex] = !taskLocal.BramDy[bottomNeighbourIndex];
+                                }
+
+                                // ==== </Now randomly switch four cells> ====
+                            }
+
+                            return taskLocal;
+                        },
+                        taskLocals[parallelTaskIndex]);
+                    }
 
                     Task.WhenAll(tasks).Wait();
 
                     // Copy back to SimpleMemory
-                    CopyBackToSimpleMemory(
-                        scheduleIndex,
-                        LocalGridPartitions,
-                        randomXOffset,
-                        randomYOffset,
-                        memory,
-                        tasks,
-                        taskLocals);
+                    for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
+                    {
+                        // Calculate these things again
+                        int localGridIndex = parallelTaskIndex + (scheduleIndex * ParallelTasks);
+                        // The X and Y coordinate within the small table (local grid):
+                        int partitionX = localGridIndex % LocalGridPartitions;
+                        int partitionY = localGridIndex / LocalGridPartitions;
+                        // The X and Y coordinate within the big table (grid):
+                        int baseX = (partitionX * LocalGridSize) + randomXOffset;
+                        int baseY = (partitionY * LocalGridSize) + randomYOffset;
+
+                        for (int copySrcX = 0; copySrcX < LocalGridSize; copySrcX++)
+                        {
+                            for (int copySrcY = 0; copySrcY < LocalGridSize; copySrcY++)
+                            {
+                                int copyDstX = (baseX + copySrcX) % GridSize;
+                                int copyDstY = (baseY + copySrcY) % GridSize;
+                                uint value =
+                                    (tasks[parallelTaskIndex].Result.BramDx[copySrcX + (copySrcY * LocalGridSize)] ? 1U : 0U) |
+                                    (tasks[parallelTaskIndex].Result.BramDy[copySrcX + (copySrcY * LocalGridSize)] ? 2U : 0U);
+                                // Note: use (tasks[parallelTaskIndex].Result), because (TaskLocals[ParallelTaskIndex])
+                                // won't work.
+                                memory.WriteUInt32(MemIndexGrid + copyDstX + (copyDstY * GridSize), value);
+                            }
+                        }
+
+                        // Take PRNG current state from Result to feed it to input next time
+                        taskLocals[parallelTaskIndex].Random1.State = tasks[parallelTaskIndex].Result.Random1.State;
+                        taskLocals[parallelTaskIndex].Random2.State = tasks[parallelTaskIndex].Result.Random2.State;
+                    }
                 }
             }
         }
@@ -244,7 +350,7 @@ namespace Hast.Samples.Kpz.Algorithms
             var sm = hastlayer.CreateMemory(configuration, (GridSize *
                 GridSize) + numRandomUints + 1);
 
-            if (pushToFpga) CopyFromGridToSimpleMemory(hostGrid, sm);
+            if (pushToFpga) KpzKernelsParallelizedExtensions.CopyFromGridToSimpleMemory(hostGrid, sm);
 
             sm.WriteUInt32(MemIndexNumberOfIterations, numberOfIterations);
 
@@ -259,179 +365,40 @@ namespace Hast.Samples.Kpz.Algorithms
 
             ScheduleIterations(sm);
 
-            CopyFromSimpleMemoryToGrid(hostGrid, sm);
+            KpzKernelsParallelizedExtensions.CopyFromSimpleMemoryToGrid(hostGrid, sm);
         }
+    }
 
+    /// <summary>
+    /// These are host-side functions for <see cref="KpzKernelsParallelizedInterface"/>.
+    /// </summary>
+    public static class KpzKernelsParallelizedExtensions
+    {
         /// <summary>Push table into FPGA.</summary>
-        private static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
+        public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
         {
-            for (int x = 0; x < GridSize; x++)
+            for (int x = 0; x < KpzKernelsParallelizedInterface.GridSize; x++)
             {
-                for (int y = 0; y < GridSize; y++)
+                for (int y = 0; y < KpzKernelsParallelizedInterface.GridSize; y++)
                 {
                     var node = gridSrc[x, y];
                     memoryDst.WriteUInt32(
-                        MemIndexGrid + (y * GridSize) + x,
+                        KpzKernelsParallelizedInterface.MemIndexGrid + (y * KpzKernelsParallelizedInterface.GridSize) + x,
                         node.SerializeToUInt32());
                 }
             }
         }
 
         /// <summary>Pull table from the FPGA.</summary>
-        private static void CopyFromSimpleMemoryToGrid(KpzNode[,] gridDst, SimpleMemory memorySrc)
+        public static void CopyFromSimpleMemoryToGrid(KpzNode[,] gridDst, SimpleMemory memorySrc)
         {
-            for (int x = 0; x < GridSize; x++)
+            for (int x = 0; x < KpzKernelsParallelizedInterface.GridSize; x++)
             {
-                for (int y = 0; y < GridSize; y++)
+                for (int y = 0; y < KpzKernelsParallelizedInterface.GridSize; y++)
                 {
                     gridDst[x, y] = KpzNode.DeserializeFromUInt32(
-                        memorySrc.ReadUInt32(MemIndexGrid + (y * GridSize) + x));
+                        memorySrc.ReadUInt32(KpzKernelsParallelizedInterface.MemIndexGrid + (y * KpzKernelsParallelizedInterface.GridSize) + x));
                 }
-            }
-        }
-
-        private static Task<KpzKernelsTaskState>[] ScheduleTasks(
-            int scheduleIndex,
-            int localGridPartitions,
-            int randomXOffset,
-            int randomYOffset,
-            SimpleMemory memory,
-            KpzKernelsTaskState[] taskLocals,
-            int pokesInsideTask)
-        {
-            var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
-            for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
-            {
-                // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex
-                // (and the random added value)
-                int localGridIndex = parallelTaskIndex + (scheduleIndex * ParallelTasks);
-                // The X and Y coordinate within the small table (local grid):
-                int partitionX = localGridIndex % localGridPartitions;
-                int partitionY = localGridIndex / localGridPartitions;
-                // The X and Y coordinate within the big table (grid):
-                int baseX = (partitionX * LocalGridSize) + randomXOffset;
-                int baseY = (partitionY * LocalGridSize) + randomYOffset;
-
-                // Copy to local memory
-                foreach (var (copyDstX, copyDstY) in Enumerable.Range(0, LocalGridSize).ToList().CartesianProduct())
-                {
-                    // Prevent going out of grid memory area (e.g. reading into random seed):
-                    int copySrcX = (baseX + copyDstX) % GridSize;
-                    int copySrcY = (baseY + copyDstY) % GridSize;
-                    uint value = memory.ReadUInt32(MemIndexGrid + copySrcX + (copySrcY * GridSize));
-                    taskLocals[parallelTaskIndex].BramDx[copyDstX + (copyDstY * LocalGridSize)] =
-                        (value & 1) == 1;
-                    taskLocals[parallelTaskIndex].BramDy[copyDstX + (copyDstY * LocalGridSize)] =
-                        (value & 2) == 2;
-                }
-
-                tasks[parallelTaskIndex] = Task.Factory.StartNew(
-                    rawTaskState => ScheduleTask(rawTaskState, pokesInsideTask),
-                    taskLocals[parallelTaskIndex],
-                    default,
-                    TaskCreationOptions.None,
-                    TaskScheduler.Current);
-            }
-
-            return tasks;
-        }
-
-        private static KpzKernelsTaskState ScheduleTask(object rawTaskState, int pokesInsideTask)
-        {
-            // Then do TasksPerIteration iterations
-            var taskLocal = (KpzKernelsTaskState)rawTaskState;
-            for (int pokeIndex = 0; pokeIndex < pokesInsideTask; pokeIndex++)
-            {
-                // ==== <Now randomly switch four cells> ====
-
-                // Generating two random numbers:
-                uint taskRandomNumber1 = taskLocal.Random1.NextUInt32();
-                uint taskRandomNumber2 = taskLocal.Random2.NextUInt32();
-
-                // The existence of var-1 in code is a good indicator of that it is assumed to be 2^N:
-                int pokeCenterX = (int)(taskRandomNumber1 & (LocalGridSize - 1));
-                int pokeCenterY = (int)((taskRandomNumber1 >> 16) & (LocalGridSize - 1));
-                int pokeCenterIndex = pokeCenterX + (pokeCenterY * LocalGridSize);
-                uint randomVariable1 = taskRandomNumber2 & ((1 << 16) - 1);
-                uint randomVariable2 = (taskRandomNumber2 >> 16) & ((1 << 16) - 1);
-
-                // Get neighbour indexes:
-                // We skip if neighbours would fall out of the local grid:
-                if (pokeCenterX >= LocalGridSize - 1 || pokeCenterY >= LocalGridSize - 1) continue;
-                int rightNeighbourX = pokeCenterX + 1;
-                int rightNeighbourY = pokeCenterY;
-                int bottomNeighbourX = pokeCenterX;
-                int bottomNeighbourY = pokeCenterY + 1;
-                int rightNeighbourIndex = (rightNeighbourY * LocalGridSize) + rightNeighbourX;
-                int bottomNeighbourIndex = (bottomNeighbourY * LocalGridSize) + bottomNeighbourX;
-
-                // We check our own {dx,dy} values, and the right neighbour's dx, and bottom neighbour's dx.
-
-                if (
-                    // If we get the pattern {01, 01} we have a pyramid:
-                    (taskLocal.BramDx[pokeCenterIndex] &&
-                    !taskLocal.BramDx[rightNeighbourIndex] &&
-                    taskLocal.BramDy[pokeCenterIndex] &&
-                    !taskLocal.BramDy[bottomNeighbourIndex] &&
-                    (randomVariable1 < IntegerProbabilityP)) ||
-                    // If we get the pattern {10, 10} we have a hole:
-                    (!taskLocal.BramDx[pokeCenterIndex] &&
-                    taskLocal.BramDx[rightNeighbourIndex] &&
-                    !taskLocal.BramDy[pokeCenterIndex] &&
-                    taskLocal.BramDy[bottomNeighbourIndex] &&
-                    (randomVariable2 < IntegerProbabilityQ)))
-                {
-                    // We make a hole into a pyramid, and a pyramid into a hole.
-                    taskLocal.BramDx[pokeCenterIndex] = !taskLocal.BramDx[pokeCenterIndex];
-                    taskLocal.BramDy[pokeCenterIndex] = !taskLocal.BramDy[pokeCenterIndex];
-                    taskLocal.BramDx[rightNeighbourIndex] = !taskLocal.BramDx[rightNeighbourIndex];
-                    taskLocal.BramDy[bottomNeighbourIndex] = !taskLocal.BramDy[bottomNeighbourIndex];
-                }
-
-                // ==== </Now randomly switch four cells> ====
-            }
-
-            return taskLocal;
-        }
-
-        private static void CopyBackToSimpleMemory(
-            int scheduleIndex,
-            int localGridPartitions,
-            int randomXOffset,
-            int randomYOffset,
-            SimpleMemory memory,
-            Task<KpzKernelsTaskState>[] tasks,
-            KpzKernelsTaskState[] taskLocals)
-        {
-            for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
-            {
-                // Calculate these things again
-                int localGridIndex = parallelTaskIndex + (scheduleIndex * ParallelTasks);
-                // The X and Y coordinate within the small table (local grid):
-                int partitionX = localGridIndex % localGridPartitions;
-                int partitionY = localGridIndex / localGridPartitions;
-                // The X and Y coordinate within the big table (grid):
-                int baseX = (partitionX * LocalGridSize) + randomXOffset;
-                int baseY = (partitionY * LocalGridSize) + randomYOffset;
-
-                for (int copySrcX = 0; copySrcX < LocalGridSize; copySrcX++)
-                {
-                    for (int copySrcY = 0; copySrcY < LocalGridSize; copySrcY++)
-                    {
-                        int copyDstX = (baseX + copySrcX) % GridSize;
-                        int copyDstY = (baseY + copySrcY) % GridSize;
-                        uint value =
-                            (tasks[parallelTaskIndex].Result.BramDx[copySrcX + (copySrcY * LocalGridSize)] ? 1U : 0U) |
-                            (tasks[parallelTaskIndex].Result.BramDy[copySrcX + (copySrcY * LocalGridSize)] ? 2U : 0U);
-                        // Note: use (tasks[parallelTaskIndex].Result), because
-                        // (TaskLocals[ParallelTaskIndex]) won't work.
-                        memory.WriteUInt32(MemIndexGrid + copyDstX + (copyDstY * GridSize), value);
-                    }
-                }
-
-                // Take PRNG current state from Result to feed it to input next time
-                taskLocals[parallelTaskIndex].Random1.State = tasks[parallelTaskIndex].Result.Random1.State;
-                taskLocals[parallelTaskIndex].Random2.State = tasks[parallelTaskIndex].Result.Random2.State;
             }
         }
     }
