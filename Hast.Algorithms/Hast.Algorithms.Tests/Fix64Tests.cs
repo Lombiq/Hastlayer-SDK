@@ -135,7 +135,7 @@ namespace Hast.Algorithms.Tests
         }
 
         [Fact]
-        public void Substraction()
+        public void Subtraction()
         {
             var terms1 = new[] { Fix64.MinValue(), (Fix64)(-1), Fix64.Zero(), Fix64.One(), Fix64.MaxValue() };
             var terms2 = new[] { Fix64.One(), (Fix64)(-2), (Fix64)1.5m, (Fix64)2, (Fix64)(-1) };
@@ -452,12 +452,7 @@ namespace Hast.Algorithms.Tests
             }
         }
 
-        private IEnumerable<(long TestCaseX, long TestCaseY)> GetTestCasePairs() => GetCartesianProduct(_testCases);
-
-        private static IEnumerable<(T Left, T Right)> GetCartesianProduct<T>(ICollection<T> collection) =>
-            from left in collection
-            from right in collection
-            select (left, right);
+        private IEnumerable<(long TestCaseX, long TestCaseY)> GetTestCasePairs() => _testCases.CartesianProduct();
 
         private static void EqualWithinPrecision(decimal value1, decimal value2) =>
             Assert.True(Math.Abs(value2 - value1) < Fix64.Precision);

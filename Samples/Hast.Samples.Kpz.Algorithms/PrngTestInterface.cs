@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -17,11 +18,12 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public class PrngTestInterface
     {
+        [SuppressMessage("Minor Code Smell", "S100:Methods and properties should be named in PascalCase", Justification = "It's an acronym.")]
         public virtual void MWC64X(SimpleMemory memory)
         {
             uint stateHighWord = memory.ReadUInt32(1);
             uint stateLowWord = memory.ReadUInt32(0);
-            ulong randomState = (stateLowWord * 0x_FFFE_B81BUL) + stateHighWord;
+            ulong randomState = (stateLowWord * 0xFFFE_B81BUL) + stateHighWord;
             uint randomWord = stateLowWord ^ stateHighWord;
 
             memory.WriteUInt32(0, (uint)randomState); // LE: 1 is high byte, 0 is low byte
