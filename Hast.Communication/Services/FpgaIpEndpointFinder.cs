@@ -16,7 +16,7 @@ namespace Hast.Communication.Services
 {
     public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
     {
-        private const int AvailabilityCheckerTimeout = 1000;
+        private const int AvailabilityCheckerTimeout = 1_000;
         private const int BroadcastRetryCount = 2;
 
         private readonly IClock _clock;
@@ -35,7 +35,8 @@ namespace Hast.Communication.Services
 
             // We need retries because somehow the FPGA doesn't always catch our request.
             _logger.LogInformation(
-                "Starting to find FPGA endpoints. \"Who is available\" request will be sent " + BroadcastRetryCount + 1 + " time(s).");
+                "Starting to find FPGA endpoints. \"Who is available\" request will be sent {0} time(s).",
+                BroadcastRetryCount + 1);
 
             var currentRetries = 0;
             var receiveResults = Enumerable.Empty<UdpReceiveResult>();
@@ -46,7 +47,7 @@ namespace Hast.Communication.Services
                 // Send request to all broadcast addresses on all the supported network interfaces.
                 foreach (var suppertedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
                     .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up &&
-                        networkInterface.SupportsMulticast == true))
+                        networkInterface.SupportsMulticast))
                 {
                     // Currently we are supporting only IPv4 addresses.
                     var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
@@ -86,11 +87,9 @@ namespace Hast.Communication.Services
 
         private class UdpReceiveResultEqualityComparer : IEqualityComparer<UdpReceiveResult>
         {
-            public bool Equals(UdpReceiveResult firstResult, UdpReceiveResult secondResult) =>
-                firstResult.RemoteEndPoint.Equals(secondResult.RemoteEndPoint);
+            public bool Equals(UdpReceiveResult x, UdpReceiveResult y) => x.RemoteEndPoint.Equals(y.RemoteEndPoint);
 
-            public int GetHashCode(UdpReceiveResult result) =>
-                result.RemoteEndPoint.GetHashCode();
+            public int GetHashCode(UdpReceiveResult obj) => obj.RemoteEndPoint.GetHashCode();
         }
     }
 }

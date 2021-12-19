@@ -15,9 +15,9 @@ namespace Hast.Communication.Services
 {
     public class EthernetCommunicationService : CommunicationServiceBase
     {
-        private const int TcpConnectionTimeout = 3000;
+        private const int TcpConnectionTimeout = 3_000;
         // This has to be maximum the number set for the TCP MSS in the Hastlayer hardware project.
-        private const int ReceiveBufferSize = 1460;
+        private const int ReceiveBufferSize = 1_460;
 
         private const int MemoryPrefixCellCount = 2;
 
@@ -25,13 +25,7 @@ namespace Hast.Communication.Services
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly IFpgaIpEndpointFinder _fpgaIpEndpointFinder;
 
-        public override string ChannelName
-        {
-            get
-            {
-                return Ethernet.ChannelName;
-            }
-        }
+        public override string ChannelName => Ethernet.ChannelName;
 
         public EthernetCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
@@ -84,15 +78,15 @@ namespace Hast.Communication.Services
                 using var stream = client.GetStream();
                 // We send an execution signal to make the FPGA ready to receive the data stream.
                 var executionCommandTypeByte = new[] { (byte)CommandTypes.Execution };
-                await stream.WriteAsync(executionCommandTypeByte, 0, executionCommandTypeByte.Length);
+                await stream.WriteAsync(executionCommandTypeByte.AsMemory(0, executionCommandTypeByte.Length));
 
                 var executionCommandTypeResponseByte = await GetBytesFromStreamAsync(stream, 1);
 
                 if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
                 {
                     throw new EthernetCommunicationException(
-                        "Awaited a ready signal from the FPGA after the execution byte was sent but received the " +
-                        "following byte instead: " + executionCommandTypeResponseByte[0]);
+                        "Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " +
+                        executionCommandTypeResponseByte[0]);
                 }
 
                 // Here we put together the data stream.
@@ -106,7 +100,8 @@ namespace Hast.Communication.Services
                 MemoryMarshal.Write(memory.Span[sizeof(int)..], ref memberId);
 
                 // Sending data to the FPGA board.
-                await stream.WriteAsync(memory);
+                var segment = memory.GetUnderlyingArray();
+                await stream.WriteAsync(segment.Array.AsMemory(segment.Offset, memory.Length));
 
                 // Read the first batch of the TcpServer response bytes that will represent the execution time.
                 var executionTimeBytes = await GetBytesFromStreamAsync(stream, sizeof(ulong));
@@ -119,7 +114,10 @@ namespace Hast.Communication.Services
                 Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
 
                 // Finally read the memory itself.
-                var outputBytes = await GetBytesFromStreamAsync(stream, (int)outputByteCount, MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
+                var outputBytes = await GetBytesFromStreamAsync(
+                    stream,
+                    (int)outputByteCount,
+                    MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
 
                 dma.Set(outputBytes, MemoryPrefixCellCount);
             }
@@ -142,7 +140,8 @@ namespace Hast.Communication.Services
             var remaining = outputBytes.Length - offset;
             while (readPosition < length)
             {
-                readPosition += await stream.ReadAsync(outputBytes, readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining);
+                readPosition += await stream.ReadAsync(
+                    outputBytes.AsMemory(readPosition, remaining > ReceiveBufferSize ? ReceiveBufferSize : remaining));
                 remaining = length - readPosition;
             }
 

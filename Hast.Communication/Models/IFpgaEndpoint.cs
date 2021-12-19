@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 
 namespace Hast.Communication.Models
@@ -9,7 +9,7 @@ namespace Hast.Communication.Models
     public interface IFpgaEndpoint
     {
         /// <summary>
-        /// Gets IP address and port of the FPGA used for the communication.
+        /// Gets the IP address and port of the FPGA used for the communication.
         /// </summary>
         IPEndPoint Endpoint { get; }
 

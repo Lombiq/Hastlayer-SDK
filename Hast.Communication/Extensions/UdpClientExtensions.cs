@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace System.Net.Sockets
@@ -18,7 +18,7 @@ namespace System.Net.Sockets
             if (await Task.WhenAny(receiveTask, Task.Delay(receiveTimeoutMilliseconds)) == receiveTask)
                 return await receiveTask;
 
-            return default(UdpReceiveResult);
+            return default;
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace System.Net.Sockets
             {
                 var result = await client.ReceiveAsync(receiveTimeoutMilliseconds);
 
-                if (result != default(UdpReceiveResult)) datagramList.Add(result);
+                if (result != default) datagramList.Add(result);
                 else read = false;
             }
 

@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 
 namespace Hast.Communication.Extensibility.Events
 {
@@ -8,7 +8,7 @@ namespace Hast.Communication.Extensibility.Events
     public interface IMemberHardwareExecutionContext : IMemberInvocationContext
     {
         /// <summary>
-        /// Gets debug and runtime information about the hardware execution.
+        /// Gets the debug and runtime information about the hardware execution.
         /// </summary>
         IHardwareExecutionInformation HardwareExecutionInformation { get; }
     }

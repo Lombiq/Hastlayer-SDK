@@ -11,7 +11,7 @@ namespace Hast.Communication.Services
         public CommunicationServiceSelector(IEnumerable<ICommunicationService> communicationServices) =>
             _communicationServices = communicationServices;
 
-        public ICommunicationService GetCommunicationService(string channelName)
+        public ICommunicationService GetCommunicationService(string channelName = "")
         {
             Argument.ThrowIfNullOrEmpty(channelName, "channelName");
             return _communicationServices.FirstOrDefault(service => service.ChannelName == channelName);

@@ -1,4 +1,4 @@
-﻿using Castle.DynamicProxy;
+using Castle.DynamicProxy;
 using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Communication.Extensibility;
@@ -23,12 +23,12 @@ namespace Hast.Communication
         /// <summary>
         /// Event that fires once the hardware execution has concluded.
         /// </summary>
-        event EventHandler<IMemberHardwareExecutionContext> MemberExecutedOnHardware;
+        event EventHandler<ServiceEventArgs<IMemberHardwareExecutionContext>> MemberExecutedOnHardware;
 
         /// <summary>
         /// Event that fires before the hardware execution starts.
         /// </summary>
-        event EventHandler<IMemberInvocationContext> MemberInvoking;
+        event EventHandler<ServiceEventArgs<IMemberInvocationContext>> MemberInvoking;
 
         /// <summary>
         /// Creates a new instance of <see cref="MemberInvocationHandler"/> from the generated hardware representation.

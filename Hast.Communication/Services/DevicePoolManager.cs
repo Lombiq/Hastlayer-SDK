@@ -57,7 +57,7 @@ namespace Hast.Communication.Services
 
                 if (firstAvailableDevice != null)
                 {
-                    _logger.LogDebug("Found an available device with the identifier {0}.", firstAvailableDevice.Identifier);
+                    _logger.LogDebug("Found an available device with the identifier {0}.", (object)firstAvailableDevice.Identifier);
 
                     firstAvailableDevice.IsBusy = true;
 
@@ -79,7 +79,7 @@ namespace Hast.Communication.Services
                             {
                                 _logger.LogDebug(
                                     "No device reservation requests are in the queue so freeing up the device with the ID {0}.",
-                                    thisReservedDevice.Identifier);
+                                    (object)thisReservedDevice.Identifier);
 
                                 _devicePool[thisReservedDevice.Identifier].IsBusy = false;
                             }
@@ -115,13 +115,12 @@ namespace Hast.Communication.Services
             private readonly Action<ReservedDevice> _disposer;
 
             public ReservedDevice(IDevice baseDevice, Action<ReservedDevice> disposer)
-                : base(baseDevice) =>
-                _disposer = disposer;
+                : base(baseDevice) => _disposer = disposer;
 
-            public override void Dispose()
+            protected override void Dispose(bool disposing)
             {
                 _disposer(this);
-                base.Dispose();
+                base.Dispose(disposing);
             }
         }
     }

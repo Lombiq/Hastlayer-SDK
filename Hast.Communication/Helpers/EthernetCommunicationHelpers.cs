@@ -28,8 +28,7 @@ namespace Hast.Communication.Helpers
                 client => client.ReceiveAsync(receiveTimeoutMilliseconds),
                 datagram,
                 bindingEndpoint,
-                targetEndpoint,
-                receiveTimeoutMilliseconds);
+                targetEndpoint);
 
         /// <summary>
         /// Sends an UDP datagram to an endpoint (possibly to a broadcast address) and receives every datagrams arriving within a period of time.
@@ -48,27 +47,25 @@ namespace Hast.Communication.Helpers
                 client => client.ReceiveAllAsync(receiveTimeoutMilliseconds),
                 datagram,
                 bindingEndpoint,
-                targetEndpoint,
-                receiveTimeoutMilliseconds);
+                targetEndpoint);
 
         private static async Task<T> UdpSendAndReceiveAnyAsync<T>(
             Func<UdpClient, Task<T>> receiverTaskFactory,
             byte[] datagram,
             IPEndPoint bindingEndpoint,
-            IPEndPoint targetEndpoint,
-            int receiveTimeoutMilliseconds)
+            IPEndPoint targetEndpoint)
         {
             // We need two UDP clients for sending and receiving datagrams.
             // See: http://stackoverflow.com/questions/221783/udpclient-receive-right-after-send-does-not-work/222503#222503
             using var receiverClient = CreateUdpClient(bindingEndpoint);
             using var senderClient = CreateUdpClient(bindingEndpoint);
-
+            // It's handled by the Task.WhenAll below.
+#pragma warning disable AsyncFixer04 // Fire & forget async call inside a using block
             var receiveTask = receiverTaskFactory(receiverClient);
             var sendTask = senderClient.SendAsync(datagram, datagram.Length, targetEndpoint);
-            var timeoutTask = Task.Delay(receiveTimeoutMilliseconds);
+#pragma warning restore AsyncFixer04 // Fire & forget async call inside a using block
 
-            await Task.WhenAny(Task.WhenAll(receiveTask, sendTask), timeoutTask);
-            if (!receiveTask.IsCompletedSuccessfully) throw new TimeoutException();
+            await Task.WhenAll(receiveTask, sendTask);
 
             return await receiveTask;
         }

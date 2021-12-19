@@ -79,7 +79,7 @@ namespace Hast.Communication.Services
 
             if (serialPort.IsOpen)
             {
-                Logger.LogInformation("the port {0} is ours", serialPort.PortName);
+                Logger.LogInformation("The port {0} is ours.", serialPort.PortName);
             }
             else
             {
@@ -278,7 +278,7 @@ namespace Hast.Communication.Services
                         }
                         catch (IOException ex)
                         {
-                            _logger.LogError(ex, "IO error while getting port names");
+                            _logger.LogError(ex, "IO error while getting port names.");
                         }
                         catch (UnauthorizedAccessException ex)
                         {
