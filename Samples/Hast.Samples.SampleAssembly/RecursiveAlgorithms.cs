@@ -71,7 +71,7 @@ namespace Hast.Samples.SampleAssembly
                 CalculateFibonacchiSeriesInvocationCounterUInt32Index,
                 memory.ReadUInt32(CalculateFibonacchiSeriesInvocationCounterUInt32Index) + 1);
 
-            if (number == 0 || number == 1) return (uint)number;
+            if (number is 0 or 1) return (uint)number;
             return RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 2)) +
                 RecursivelyCalculateFibonacchiSeries(memory, (short)(number - 1));
         }

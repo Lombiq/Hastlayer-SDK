@@ -1,9 +1,9 @@
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hast.Layer;
 
 namespace Hast.Samples.SampleAssembly
 {

@@ -85,34 +85,25 @@ namespace Hast.Samples.SampleAssembly
                         diagonalCell++;
 
                     // Select the maximum of the three cells and set the value of the current cell and pointer.
-                    if (diagonalCell > leftCell)
+                    var diagonalIsGreater = diagonalCell > leftCell;
+                    var diagonalOrLeftMax = diagonalIsGreater ? diagonalCell : leftCell;
+                    if (topCell >= diagonalOrLeftMax)
                     {
-                        if (diagonalCell > topCell)
-                        {
-                            currentCell = diagonalCell;
+                        currentCell = topCell;
+                        cellPointer = GetLCSTopCellPointerValue;
+                    }
+                    else if (diagonalIsGreater && diagonalCell > topCell)
+                    {
+                        currentCell = diagonalCell;
 
-                            cellPointer = row == 0 || column == 0
-                                ? GetLCSOutOfBorderDiagonalCellPointerValue
-                                : GetLCSDiagonalCellPointerValue;
-                        }
-                        else
-                        {
-                            currentCell = topCell;
-                            cellPointer = GetLCSTopCellPointerValue;
-                        }
+                        cellPointer = row == 0 || column == 0
+                            ? GetLCSOutOfBorderDiagonalCellPointerValue
+                            : GetLCSDiagonalCellPointerValue;
                     }
                     else
                     {
-                        if (leftCell > topCell)
-                        {
-                            currentCell = leftCell;
-                            cellPointer = GetLCSLeftCellPointerValue;
-                        }
-                        else
-                        {
-                            currentCell = topCell;
-                            cellPointer = GetLCSTopCellPointerValue;
-                        }
+                        currentCell = leftCell;
+                        cellPointer = GetLCSLeftCellPointerValue;
                     }
 
                     memory.WriteUInt32(position, currentCell);

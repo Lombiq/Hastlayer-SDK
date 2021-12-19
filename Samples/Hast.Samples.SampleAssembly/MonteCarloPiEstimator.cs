@@ -2,6 +2,7 @@ using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Threading.Tasks;
 
@@ -27,7 +28,7 @@ namespace Hast.Samples.SampleAssembly
         [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
         public static readonly int MaxDegreeOfParallelism = 77;
 
-        private readonly Random _random = new();
+        private readonly NonSecurityRandomizer _random = new();
 
         public virtual void EstimatePi(SimpleMemory memory)
         {
@@ -91,7 +92,7 @@ namespace Hast.Samples.SampleAssembly
                 ? SimpleMemory.CreateSoftwareMemory(2)
                 : hastlayer.CreateMemory(configuration, 2);
             memory.WriteUInt32(EstimatePiIteractionsCountUInt32Index, iterationsCount);
-            memory.WriteUInt32(EstimatePiRandomSeedUInt32Index, (uint)_random.Next(0, int.MaxValue));
+            memory.WriteUInt32(EstimatePiRandomSeedUInt32Index, (uint)_random.Get());
 
             EstimatePi(memory);
 

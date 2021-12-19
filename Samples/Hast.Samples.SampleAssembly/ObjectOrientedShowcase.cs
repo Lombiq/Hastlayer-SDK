@@ -14,9 +14,8 @@ namespace Hast.Samples.SampleAssembly
 
         public virtual void Run(SimpleMemory memory)
         {
-            var inputNumber = memory.ReadUInt32(RunInputUInt32Index);
-            // Or:
-            inputNumber = new MemoryContainer(memory).GetInput();
+            var inputNumber = new MemoryContainer(memory).GetInput();
+            // Or: "var inputNumber = memory.ReadUInt32(RunInputUInt32Index);".
 
             // Arrays can be initialized as usual, as well as objects.
             var numberContainers1 = new[]

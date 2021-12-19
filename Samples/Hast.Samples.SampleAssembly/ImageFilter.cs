@@ -276,19 +276,19 @@ namespace Hast.Samples.SampleAssembly
 
             int size = image.Width * image.Height;
 
-            for (int x = 0; x < image.Height; x++)
+            for (int y = 0; y < image.Height; y++)
             {
-                for (int y = 0; y < image.Width; y++)
+                for (int x = 0; x < image.Width; x++)
                 {
-                    var pixelValue = image.GetPixel(y, x);
+                    var pixelValue = image.GetPixel(x, y);
 
-                    memory.WriteUInt32((((x * image.Width) + y) * 3) + FilterImageImageStartIndex, pixelValue.R);
-                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 1 + FilterImageImageStartIndex, pixelValue.G);
-                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 2 + FilterImageImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + FilterImageImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 1 + FilterImageImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 2 + FilterImageImageStartIndex, pixelValue.B);
 
-                    memory.WriteUInt32((((x * image.Width) + y) * 3) + (size * 3) + FilterImageImageStartIndex, pixelValue.R);
-                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 1 + (size * 3) + FilterImageImageStartIndex, pixelValue.G);
-                    memory.WriteUInt32((((x * image.Width) + y) * 3) + 2 + (size * 3) + FilterImageImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + (size * 3) + FilterImageImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 1 + (size * 3) + FilterImageImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 2 + (size * 3) + FilterImageImageStartIndex, pixelValue.B);
                 }
             }
 
@@ -307,15 +307,15 @@ namespace Hast.Samples.SampleAssembly
 
             int r, g, b;
 
-            for (int x = 0; x < newImage.Height; x++)
+            for (int y = 0; y < newImage.Height; y++)
             {
-                for (int y = 0; y < newImage.Width; y++)
+                for (int x = 0; x < newImage.Width; x++)
                 {
-                    r = memory.ReadInt32((((x * newImage.Width) + y) * 3) + FilterImageImageStartIndex);
-                    g = memory.ReadInt32((((x * newImage.Width) + y) * 3) + 1 + FilterImageImageStartIndex);
-                    b = memory.ReadInt32((((x * newImage.Width) + y) * 3) + 2 + FilterImageImageStartIndex);
+                    r = memory.ReadInt32((((y * newImage.Width) + x) * 3) + FilterImageImageStartIndex);
+                    g = memory.ReadInt32((((y * newImage.Width) + x) * 3) + 1 + FilterImageImageStartIndex);
+                    b = memory.ReadInt32((((y * newImage.Width) + x) * 3) + 2 + FilterImageImageStartIndex);
 
-                    newImage.SetPixel(y, x, Color.FromArgb(r, g, b));
+                    newImage.SetPixel(x, y, Color.FromArgb(r, g, b));
                 }
             }
 

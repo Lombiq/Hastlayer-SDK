@@ -37,7 +37,7 @@ namespace Hast.Samples.SampleAssembly
         {
             uint numberCount = memory.ReadUInt32(SqrtOfPositsInArrayInputPosit32CountIndex);
 
-            var result = new Posit32(memory.ReadUInt32(SqrtOfPositsInArrayInputPosit32sStartIndex), true);
+            Posit32 result;
 
             for (int i = 0; i < numberCount; i++)
             {
