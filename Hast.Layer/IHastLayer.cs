@@ -69,6 +69,9 @@ namespace Hast.Layer
         /// cref="IHastlayer"/> object isn't disposed.
         /// </summary>
         /// <returns>The matching communication service.</returns>
+        /// <typeparam name="TServiceInterface">
+        /// The type of service to return wrapped in a <see cref="DisposableContainer{T}"/>.
+        /// </typeparam>
         /// <remarks>
         /// <para>
         /// If you need a communication service, use this to request an <see cref="ICommunicationServiceSelector"/>.

@@ -21,7 +21,9 @@ namespace Hast.Layer
         public static Task<T> GenerateProxyAsync<T>(
             this IHastlayer hastlayer,
             IHardwareRepresentation hardwareRepresentation,
-            T hardwareObject) where T : class =>
+            T hardwareObject)
+            where T : class
+            =>
             hastlayer.GenerateProxyAsync(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
 
         /// <summary>

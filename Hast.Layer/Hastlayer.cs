@@ -18,6 +18,7 @@ using Newtonsoft.Json.Linq;
 using NLog.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -101,17 +102,18 @@ namespace Hast.Layer
             }
         }
 
-        public static void ConfigureLogging(IServiceCollection services, Action<ILoggingBuilder> configureLogging = null)
+        [SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "Will be disposed by the DI scope.")]
+        public static void ConfigureLogging(IServiceCollection services, Action<ILoggingBuilder> configureAction = null)
         {
             services.AddSingleton(LoggerFactory.Create(builder =>
             {
-                if (configureLogging is null)
+                if (configureAction is null)
                 {
                     builder.AddNLog("NLog.config");
                 }
                 else
                 {
-                    configureLogging(builder);
+                    configureAction(builder);
                 }
             }));
 
@@ -147,16 +149,20 @@ namespace Hast.Layer
                 .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
-        public void Dispose() => _serviceProvider?.Dispose();
+        public void Dispose()
+        {
+            _serviceProvider?.Dispose();
+            GC.SuppressFinalize(this);
+        }
 
         ~Hastlayer() => Dispose();
 
-        public async Task<IHardwareRepresentation> GenerateHardwareAsync(
+        public Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration)
         {
             // Avoid repeated multiple enumerations.
-            var assembliesPaths = assemblyPaths.ToList();
+            var assembliesPaths = assemblyPaths.AsList();
 
             Argument.ThrowIfNull(assembliesPaths, nameof(assembliesPaths));
             if (!assembliesPaths.Any())
@@ -170,6 +176,13 @@ namespace Hast.Layer
                     "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
             }
 
+            return GenerateHardwareInnerAsync(assembliesPaths, configuration);
+        }
+
+        public async Task<IHardwareRepresentation> GenerateHardwareInnerAsync(
+            IList<string> assemblyPaths,
+            IHardwareGenerationConfiguration configuration)
+        {
             try
             {
                 // This is fine because IHardwareRepresentation doesn't contain anything that relies on the scope.
@@ -193,8 +206,8 @@ namespace Hast.Layer
                     .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
                 foreach (var item in newCustomConfigurations)
                 {
-                    configuration.CustomConfiguration[item.Key] = JObject.Parse(item.Serialize())
-                        [nameof(HardwareGenerationConfiguration)]?
+                    configuration.CustomConfiguration[item.Key] =
+                        JObject.Parse(item.Serialize())[nameof(HardwareGenerationConfiguration)]?
                         [nameof(HardwareGenerationConfiguration.CustomConfiguration)]?
                         [item.Key];
                 }
@@ -205,7 +218,7 @@ namespace Hast.Layer
                 }
 
                 var hardwareDescription = configuration.EnableHardwareTransformation ?
-                    await transformer.TransformAsync(assembliesPaths, configuration) :
+                    await transformer.TransformAsync(assemblyPaths, configuration) :
                     EmptyHardwareDescriptionFactory.Create(configuration);
 
                 foreach (var transformationEvent in transformationEvents)
@@ -258,7 +271,7 @@ namespace Hast.Layer
 
                 return new HardwareRepresentation
                 {
-                    SoftAssemblyPaths = assembliesPaths,
+                    SoftAssemblyPaths = assemblyPaths,
                     HardwareDescription = hardwareDescription,
                     HardwareImplementation = hardwareImplementation,
                     DeviceManifest = deviceManifest,
@@ -269,7 +282,7 @@ namespace Hast.Layer
             {
                 var message =
                     "An error happened during generating the Hastlayer hardware representation for the following assemblies: " +
-                    string.Join(", ", assembliesPaths);
+                    string.Join(", ", assemblyPaths);
                 LogException(ex, message);
                 throw new HastlayerException(message, ex);
             }
@@ -278,9 +291,10 @@ namespace Hast.Layer
         public async Task<T> GenerateProxyAsync<T>(
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject,
-            IProxyGenerationConfiguration configuration = null) where T : class
+            IProxyGenerationConfiguration configuration = null)
+            where T : class
         {
-            if (configuration is null) configuration = ProxyGenerationConfiguration.Default;
+            configuration ??= ProxyGenerationConfiguration.Default;
             if (!hardwareRepresentation.SoftAssemblyPaths.Contains(hardwareObject.GetType().Assembly.Location))
             {
                 throw new InvalidOperationException(
@@ -308,7 +322,12 @@ namespace Hast.Layer
             IServiceScope scope = null;
             try
             {
+                // If the try block successfully returns then the scope's resources are managed by the returned
+                // DisposableContainer so scope must NOT be disposed here.
+#pragma warning disable CA2000 // Dispose objects before losing scope
                 scope = _serviceProvider.CreateScope();
+#pragma warning restore CA2000 // Dispose objects before losing scope
+
                 var service = scope.ServiceProvider.GetService<TServiceInterface>();
                 return new DisposableContainer<TServiceInterface>(scope, service);
             }
@@ -324,7 +343,11 @@ namespace Hast.Layer
             IServiceScope scope = null;
             try
             {
+                // See comment in GetService.
+#pragma warning disable CA2000 // Dispose objects before losing scope
                 scope = _serviceProvider.CreateScope();
+#pragma warning restore CA2000 // Dispose objects before losing scope
+
                 var service1 = scope.ServiceProvider.GetService<TServiceInterface1>();
                 var service2 = scope.ServiceProvider.GetService<TServiceInterface2>();
                 return new DisposableContainer<TServiceInterface1, TServiceInterface2>(scope, service1, service2);
