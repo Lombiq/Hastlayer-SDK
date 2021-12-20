@@ -19,9 +19,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Globalization.CultureInfo;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
-using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -34,18 +34,19 @@ namespace Hast.Vitis.Abstractions.Services
         private const string TryToMakeItSmaller = "Try to make your code simpler (make it shorter, use smaller data " +
                                                   "types, use a lower degree of parallelism) until it goes below 80%.";
 
-        private static bool _firstRun = true;
         private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
 
         private readonly ILogger _logger;
         private readonly string _buildOutputPath;
         private readonly StreamWriter _buildOutput;
 
+        private static bool _firstRun = true;
+
         public event EventHandler<BuildProgressEventArgs> Progress;
 
         public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
 
-        public int MajorStepsTotal { get; private set; } = 8;
+        public int MajorStepsTotal { get; private set; }
         public int MajorStep { get; private set; }
 
         public VitisHardwareImplementationComposerBuildProvider(
@@ -78,7 +79,7 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
-            if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
+            if (context.DeviceManifest is not XilinxDeviceManifest deviceManifest)
             {
                 throw new InvalidOperationException(
                     $"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
@@ -118,17 +119,10 @@ namespace Hast.Vitis.Abstractions.Services
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
-            if (buildConfiguration.SynthesisOnly)
-            {
-                MajorStepsTotal = 3;
-            }
+            MajorStepsTotal = buildConfiguration.SynthesisOnly ? 3 : 8;
 
             // Synthesis doesn't need the device.
-            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
-            {
-                _firstRun = false;
-                await EnsureDeviceReadyAsync();
-            }
+            await EnsureDeviceReadyAsync(buildConfiguration);
 
             ProgressMajor(
                 "Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more complex " +
@@ -477,8 +471,12 @@ namespace Hast.Vitis.Abstractions.Services
             ProgressMajor("Build directory cleaned up.");
         }
 
-        private async Task EnsureDeviceReadyAsync()
+        private async Task EnsureDeviceReadyAsync(VitisBuildConfiguration buildConfiguration)
         {
+            if (buildConfiguration.SynthesisOnly || !buildConfiguration.ResetOnFirstRun || !_firstRun) return;
+
+            _firstRun = false;
+
             _logger.LogWarning(
                 "This is the first build with the current process. Resetting the devices for a clean state...");
 
@@ -532,6 +530,8 @@ namespace Hast.Vitis.Abstractions.Services
                         }
 
                         break;
+                    default:
+                        throw new InvalidOperationException($"Unknown {nameof(CommandEvent)} \"{commandEvent}\".");
                 }
             }
 

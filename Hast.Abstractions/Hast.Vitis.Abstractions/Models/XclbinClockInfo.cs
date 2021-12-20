@@ -19,15 +19,7 @@ namespace Hast.Vitis.Abstractions.Models
             var results = new List<XclbinClockInfo>();
             using var reader = new StreamReader(stream, encoding);
 
-            while (reader.ReadLine() is { } line)
-            {
-                if (line == "Clocks")
-                {
-                    // Skip the "------" line.
-                    reader.ReadLine();
-                    break;
-                }
-            }
+            ReadUntilTitle(reader, "Clocks");
 
             var set = false;
             var item = new XclbinClockInfo();
@@ -36,7 +28,7 @@ namespace Hast.Vitis.Abstractions.Models
                 var line = reader.ReadLine();
 
                 // Stop at document end or at next header.
-                var sectionFinished = line?.StartsWith("---") != false;
+                var sectionFinished = line?.StartsWith("---", StringComparison.Ordinal) != false;
                 if (sectionFinished || string.IsNullOrWhiteSpace(line))
                 {
                     if (set)
@@ -52,37 +44,55 @@ namespace Hast.Vitis.Abstractions.Models
 
                 if (!line.Contains(":", StringComparison.Ordinal)) continue;
 
-                var parts = line.Split(new[] { ':' }, 2);
-                var key = parts[0].Trim();
-                var value = parts[1].Trim();
-
-                switch (key)
-                {
-                    case nameof(Name):
-                        item.Name = value;
-                        break;
-                    case nameof(Index):
-                        item.Index = int.Parse(value, CultureInfo.InvariantCulture);
-                        break;
-                    case nameof(Type):
-                        item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, true);
-                        break;
-                    case nameof(Frequency):
-                        parts = value.Split();
-                        value = parts[0];
-                        item.Frequency = parts[1].Trim().ToUpperInvariant() switch
-                        {
-                            "MHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000_000,
-                            "KHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000,
-                            "HZ" => uint.Parse(value, CultureInfo.InvariantCulture),
-                            "" => uint.Parse(value, CultureInfo.InvariantCulture),
-                            _ => throw new InvalidCastException($"Unknown frequency unit '{parts[1]}'."),
-                        };
-                        break;
-                    default: throw new InvalidDataException($"Unknown entry type: '{key}'.");
-                }
+                ParseLine(line, item);
 
                 set = true;
+            }
+        }
+
+        private static void ParseLine(string line, XclbinClockInfo item)
+        {
+            var parts = line.Split(new[] { ':' }, 2);
+            var key = parts[0].Trim();
+            var value = parts[1].Trim();
+
+            switch (key)
+            {
+                case nameof(Name):
+                    item.Name = value;
+                    break;
+                case nameof(Index):
+                    item.Index = int.Parse(value, CultureInfo.InvariantCulture);
+                    break;
+                case nameof(Type):
+                    item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, true);
+                    break;
+                case nameof(Frequency):
+                    parts = value.Split();
+                    value = parts[0];
+                    item.Frequency = parts[1].Trim().ToUpperInvariant() switch
+                    {
+                        "MHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000_000,
+                        "KHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000,
+                        "HZ" => uint.Parse(value, CultureInfo.InvariantCulture),
+                        "" => uint.Parse(value, CultureInfo.InvariantCulture),
+                        _ => throw new InvalidCastException($"Unknown frequency unit '{parts[1]}'."),
+                    };
+                    break;
+                default: throw new InvalidDataException($"Unknown entry type: '{key}'.");
+            }
+        }
+
+        private static void ReadUntilTitle(TextReader reader, string lineText)
+        {
+            while (reader.ReadLine() is { } line)
+            {
+                if (line == lineText)
+                {
+                    // Skip the "------" line.
+                    reader.ReadLine();
+                    return;
+                }
             }
         }
     }

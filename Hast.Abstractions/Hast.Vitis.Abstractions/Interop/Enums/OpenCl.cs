@@ -160,7 +160,7 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// used to allocate the buffer object and how it will be used.
     /// </summary>
     [Flags]
-    public enum MemoryFlag : ulong
+    public enum MemoryFlags : ulong
     {
         /// <summary>
         /// This flag specifies that the memory object will be read and written by a kernel. This is the default.

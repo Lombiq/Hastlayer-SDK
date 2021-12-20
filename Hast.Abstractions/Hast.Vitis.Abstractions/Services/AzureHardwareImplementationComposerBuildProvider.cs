@@ -133,7 +133,7 @@ namespace Hast.Vitis.Abstractions.Services
 
                 _logger.LogInformation("Polled status: {0}", statusText);
 
-                if (statusUpper == "PENDING" || statusUpper == "RUNNING")
+                if (statusUpper is "PENDING" or "RUNNING")
                 {
                     await Task.Delay(TimeSpan.FromSeconds(30));
                     continue;

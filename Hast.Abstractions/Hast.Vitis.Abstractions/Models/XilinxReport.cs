@@ -37,7 +37,7 @@ namespace Hast.Vitis.Abstractions.Models
             {
                 // Scroll to section start with underlined header that starts with the chapter number.
                 var header = await ReadUntilAsync(reader, title);
-                if (header == null) break;
+                if (header == null) return report;
                 await ReadUntilAsync(reader);
 
                 report.Sections[header] = await XilinxReportSection.ParseAsync(reader, header);
@@ -48,11 +48,11 @@ namespace Hast.Vitis.Abstractions.Models
 
         public static async Task<string> ReadUntilAsync(TextReader reader, string start = HorizontalLine)
         {
-            do
+            while (true)
             {
                 var line = await reader.ReadLineAsync();
                 if (line?.StartsWith(start, StringComparison.InvariantCulture) != false) return line;
-            } while (true);
+            }
         }
 
         public static async Task<List<string>> ReadWhileAsync(
@@ -61,21 +61,19 @@ namespace Hast.Vitis.Abstractions.Models
             bool includeLast = false)
         {
             var results = new List<string>();
-            do
+            while (true)
             {
                 var line = await reader.ReadLineAsync();
-                if (line == null) break;
+                if (line == null) return results;
 
                 if (!condition(line))
                 {
                     if (includeLast) results.Add(line);
-                    break;
+                    return results;
                 }
 
                 results.Add(line);
-            } while (true);
-
-            return results;
+            }
         }
     }
 }

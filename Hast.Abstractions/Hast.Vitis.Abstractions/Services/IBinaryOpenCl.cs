@@ -81,7 +81,7 @@ namespace Hast.Vitis.Abstractions.Services
         /// <param name="hostBytes">The length of the data in bytes.</param>
         /// <param name="memoryFlags">The flags to be passed to the native buffer creator method.</param>
         /// <returns>The handler for the newly created buffer.</returns>
-        IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags);
+        IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlags memoryFlags);
 
         /// <summary>
         /// Prepares the device querying logic with the provided <paramref name="configuration"/>. This must be called

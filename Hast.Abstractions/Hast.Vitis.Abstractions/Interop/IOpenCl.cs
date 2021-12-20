@@ -266,7 +266,7 @@ namespace Hast.Vitis.Abstractions.Interop
         /// <param name="errorCode">
         /// Returns an appropriate error code. If errcode_ret is NULL, no error code is returned.
         /// </param>
-        IntPtr CreateBuffer(IntPtr context, MemoryFlag flags, int size, IntPtr hostPointer, out Result errorCode);
+        IntPtr CreateBuffer(IntPtr context, MemoryFlags flags, int size, IntPtr hostPointer, out Result errorCode);
 
         /// <summary>
         /// Decrements the memory object reference count.

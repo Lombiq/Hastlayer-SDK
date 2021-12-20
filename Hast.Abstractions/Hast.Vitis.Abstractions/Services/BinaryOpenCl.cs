@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -20,18 +21,19 @@ namespace Hast.Vitis.Abstractions.Services
     {
         #region Fields and properties
 
-        public const MemoryFlag DefaultMemoryFlags = MemoryFlag.UseHostPointer | MemoryFlag.ReadWrite;
+        public const MemoryFlags DefaultMemoryFlags = MemoryFlags.UseHostPointer | MemoryFlags.ReadWrite;
         private static readonly UIntPtr _intPtrSize = new((uint)Marshal.SizeOf(IntPtr.Zero));
 
         private readonly IOpenCl _cl;
         private readonly ILogger _logger;
 
-        private Lazy<IntPtr[]> _devicesLazy;
         private readonly Lazy<IntPtr> _context;
 
         private readonly Dictionary<int, IntPtr> _queues = new();
         private readonly Dictionary<string, IntPtr> _kernels = new();
         private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = new();
+
+        private Lazy<IntPtr[]> _devicesLazy;
 
         private IntPtr[] Devices => _devicesLazy.Value;
         public int DeviceCount => Devices.Length;
@@ -61,6 +63,8 @@ namespace Hast.Vitis.Abstractions.Services
                 return context;
             });
         }
+
+        ~BinaryOpenCl() => Dispose();
 
         #endregion
 
@@ -99,7 +103,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlag memoryFlags)
+        public IntPtr CreateBuffer(IntPtr hostPointer, int hostBytes, MemoryFlags memoryFlags)
         {
             var buffer = _cl.CreateBuffer(_context.Value, memoryFlags, hostBytes, hostPointer, out var result);
             VerifyResult(result);
@@ -143,7 +147,7 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 throw new InvalidOperationException(
                     $"OpenCL error with status '{err}'. You may find more information by searching for 'opencl {err} " +
-                    $"OR CL_{err.ToString().ToSnakeCase().ToUpper()}' on the web.");
+                    $"OR CL_{err.ToString().ToSnakeCase().ToUpper(CultureInfo.InvariantCulture)}' on the web.");
             }
         }
 
@@ -318,10 +322,12 @@ namespace Hast.Vitis.Abstractions.Services
                 exceptions.Add(ex);
             }
 
-            if (exceptions.Count > 0)
+            foreach (var exception in exceptions)
             {
-                throw new AggregateException($"Error while disposing {nameof(BinaryOpenCl)}.", exceptions);
+                _logger.LogError(exception, "error while disposing " + nameof(BinaryOpenCl));
             }
+
+            GC.SuppressFinalize(this);
         }
 
         private IntPtr GetQueue(int queueIndex)
