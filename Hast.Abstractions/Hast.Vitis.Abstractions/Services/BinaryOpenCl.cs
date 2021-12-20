@@ -76,7 +76,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public void CreateCommandQueue(
             int deviceIndex,
-            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable)
+            CommandQueueProperties properties = CommandQueueProperties.ProfilingEnable)
         {
             if (_queues.ContainsKey(deviceIndex)) return;
 
@@ -187,7 +187,7 @@ namespace Hast.Vitis.Abstractions.Services
                 });
         }
 
-        private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceType deviceType)
+        private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceTypes deviceType)
         {
             VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, null, out uint numberOfAvailableDevices));
 
@@ -197,7 +197,7 @@ namespace Hast.Vitis.Abstractions.Services
             return devicePointers;
         }
 
-        private IEnumerable<IntPtr> GetDeviceHandlesOfVendor(string vendorName, DeviceType deviceType)
+        private IEnumerable<IntPtr> GetDeviceHandlesOfVendor(string vendorName, DeviceTypes deviceType)
         {
             var foundDevice = false;
 
@@ -256,7 +256,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private IntPtr EnqueueMemoryMigration(IntPtr queue, IntPtr[] memoryObjects, bool toHost, IntPtr waitEvent)
         {
-            var flags = toHost ? MemoryMigrationFlag.Host : MemoryMigrationFlag.Device;
+            var flags = toHost ? MemoryMigrationFlags.Host : MemoryMigrationFlags.None;
             VerifyResult(_cl.EnqueueMigrateMemObjects(
                 queue,
                 (uint)memoryObjects.Length,

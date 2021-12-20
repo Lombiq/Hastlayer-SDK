@@ -37,7 +37,7 @@ namespace Hast.Vitis.Abstractions.Models
         /// <summary>
         /// Gets or sets the OpenCL <see cref="DeviceType"/>.
         /// </summary>
-        DeviceType DeviceType { get; set; }
+        DeviceTypes DeviceType { get; set; }
 
         /// <summary>
         /// Gets or sets the number of cells (<see cref="SimpleMemory.MemoryCellSizeBytes"/> byte units) to be occupied in the

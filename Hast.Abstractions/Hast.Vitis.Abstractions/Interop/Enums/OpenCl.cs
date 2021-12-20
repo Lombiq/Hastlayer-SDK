@@ -1,12 +1,11 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 // Some of the enums are taken from OpenCL.NET:
 // PlatformInformation is sourced from
-//     https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Platforms/PlatformInformation.cs
-// Result is sourced from
-//     https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Result.cs
-// DeviceType is sourced from
-//     https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Devices/DeviceType.cs
+// https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Platforms/PlatformInformation.cs
+// Result is sourced from https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Result.cs
+// DeviceType is sourced from https://github.com/lecode-official/opencl-dotnet/blob/master/OpenCl.DotNetCore.Interop/Devices/DeviceType.cs
 
 // The rest are created using a similar format from the official C API documentation at the Khronos OpenCL Registry:
 // MemoryFlag is described at https://www.khronos.org/registry/OpenCL/sdk/1.0/docs/man/xhtml/clCreateBuffer.html
@@ -18,6 +17,8 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// <summary>
     /// Represents an enumeration for the different types of information that can be queried from an OpenCl platform.
     /// </summary>
+    [SuppressMessage("Design", "CA1008:Enums should have zero value", Justification = "Not applicable.")]
+    [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is uint.")]
     public enum PlatformInformation : uint
     {
         /// <summary>
@@ -27,31 +28,31 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// supported). EMBEDDED_PROFILE - if the implementation supports the OpenCL embedded profile. The embedded
         /// profile is defined to be a subset for each version of OpenCL.
         /// </summary>
-        Profile = 0x0900,
+        Profile = 0x_0900,
 
         /// <summary>
         /// OpenCL version string. Returns the OpenCL version supported by the implementation. This version string has
         /// the following format: OpenCL{space}{major_version}.{minor_version}{space}{platform-specific information}
         /// The major_version.minor_version value returned will be 1.0.
         /// </summary>
-        Version = 0x0901,
+        Version = 0x_0901,
 
         /// <summary>
         /// Platform name string.
         /// </summary>
-        Name = 0x0902,
+        Name = 0x_0902,
 
         /// <summary>
         /// Platform vendor string.
         /// </summary>
-        Vendor = 0x0903,
+        Vendor = 0x_0903,
 
         /// <summary>
         /// Returns a space-separated list of extension names (the extension names themselves do not contain any
         /// spaces) supported by the platform. Extensions defined here must be supported by all devices associated with
         /// this platform.
         /// </summary>
-        Extensions = 0x0904,
+        Extensions = 0x_0904,
     }
 
     /// <summary>
@@ -113,10 +114,10 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         InvalidDevicePartitionCount = -68,
         InvalidPipeSize = -69,
         InvalidDeviceQueue = -70,
-        PlatformNotFoundKhr = -1001,
-        DevicePartitionFailedExt = -1057,
-        InvalidPartitionCountExt = -1058,
-        InvalidPartitionNameExt = -1059,
+        PlatformNotFoundKhr = -1_001,
+        DevicePartitionFailedExt = -1_057,
+        InvalidPartitionCountExt = -1_058,
+        InvalidPartitionNameExt = -1_059,
     }
 
     /// <summary>
@@ -124,7 +125,8 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// devices or all OpenCL devices available.
     /// </summary>
     [Flags]
-    public enum DeviceType : ulong
+    [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is ulong.")]
+    public enum DeviceTypes : ulong
     {
         /// <summary>
         /// An OpenCL device that is the host processor. The host processor runs the OpenCL implementations and is a
@@ -148,11 +150,6 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// The default OpenCL device in the system.
         /// </summary>
         Default = 1 << 0,
-
-        /// <summary>
-        /// All OpenCL devices available in the system.
-        /// </summary>
-        All = 0xFFFFFFFF,
     }
 
     /// <summary>
@@ -160,6 +157,11 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     /// used to allocate the buffer object and how it will be used.
     /// </summary>
     [Flags]
+    [SuppressMessage(
+        "Minor Code Smell",
+        "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes",
+        Justification = "This is the name in the original library and changing it would be confusing.")]
+    [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is ulong.")]
     public enum MemoryFlags : ulong
     {
         /// <summary>
@@ -209,27 +211,31 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
         /// <summary>
         /// Make clCreateBuffer to interpret host_ptr argument as cl_mem_ext_ptr_t.
         /// </summary>
-        /// <remarks>
-        /// <para>
-        /// <see href="https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h"/>.
-        /// </para>
-        /// </remarks>
+        /// <remarks><para>See <see href="https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h" />.</para></remarks>
         ExtensionXilinxPointer = 1ul << 31,
 
+        // Blame Xilinx.
+#pragma warning disable CA1069 // Enums values should not be duplicated
         ExtensionXilinxTopology = 1ul << 31,
+#pragma warning restore CA1069 // Enums values should not be duplicated
     }
 
     /// <summary>
     /// A bit-field that is used to specify migration options.
     /// </summary>
     [Flags]
-    public enum MemoryMigrationFlag : ulong
+    [SuppressMessage(
+        "Minor Code Smell",
+        "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes",
+        Justification = "This is the name in the original library and changing it would be confusing.")]
+    [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is ulong.")]
+    public enum MemoryMigrationFlags : ulong
     {
         /// <summary>
-        /// This flag indicates that the specified set of memory objects are to be migrated to the device, regardless
-        /// of the target command-queue.
+        /// This flag indicates that <see cref="Host"/> is not used, so the specified set of memory objects are to be
+        /// migrated to the device.
         /// </summary>
-        Device = 0,
+        None = 0,
 
         /// <summary>
         /// This flag indicates that the specified set of memory objects are to be migrated to the host, regardless of
@@ -246,8 +252,11 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl
     }
 
     [Flags]
-    public enum CommandQueueProperty : ulong
+    [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is ulong.")]
+    public enum CommandQueueProperties : ulong
     {
+        None = 0,
+
         /// <summary>
         /// Determines whether the commands queued in the command-queue are executed in-order or out-of-order. If set,
         /// the commands in the command-queue are executed out-of-order. Otherwise, commands are executed in-order.

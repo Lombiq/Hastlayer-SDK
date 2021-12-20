@@ -33,7 +33,7 @@ namespace Hast.Vitis.Abstractions.Services
         /// </summary>
         void CreateCommandQueue(
             int deviceIndex,
-            CommandQueueProperty properties = CommandQueueProperty.ProfilingEnable);
+            CommandQueueProperties properties = CommandQueueProperties.ProfilingEnable);
 
         /// <summary>
         /// Starts execution of the kernel identified by <paramref name="kernelName"/> on the device identified by the

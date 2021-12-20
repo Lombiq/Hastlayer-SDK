@@ -88,7 +88,7 @@ namespace Hast.Vitis.Abstractions.Interop
         /// The number of OpenCL devices available that match device_type. If num_devices is NULL,
         /// this argument is ignored.
         /// </param>
-        Result GetDeviceIDs(IntPtr platform, DeviceType deviceTypes, uint numberOfEntries, IntPtr[] devices, out uint numberOfDevicesReturned);
+        Result GetDeviceIDs(IntPtr platform, DeviceTypes deviceTypes, uint numberOfEntries, IntPtr[] devices, out uint numberOfDevicesReturned);
 
         /// <summary>
         /// Creates an OpenCL context.
@@ -147,7 +147,7 @@ namespace Hast.Vitis.Abstractions.Interop
         /// <param name="errorCode">
         /// Returns an appropriate error code. If errcode_ret is NULL, no error code is returned.
         /// </param>
-        IntPtr CreateCommandQueue(IntPtr context, IntPtr device, CommandQueueProperty properties, out Result errorCode);
+        IntPtr CreateCommandQueue(IntPtr context, IntPtr device, CommandQueueProperties properties, out Result errorCode);
 
         /// <summary>
         /// Decrements the command_queue reference count.
@@ -334,7 +334,7 @@ namespace Hast.Vitis.Abstractions.Interop
             IntPtr commandQueue,
             uint numberOfMemoryObjects,
             IntPtr[] memoryObjects,
-            MemoryMigrationFlag memoryMigrationFlags,
+            MemoryMigrationFlags memoryMigrationFlags,
             uint numberOfEventsInWaitList,
             IntPtr[] eventWaitList,
             out IntPtr waitEvent);
