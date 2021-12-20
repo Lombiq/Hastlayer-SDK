@@ -12,7 +12,10 @@ namespace Hast.Common.Numerics
     /// These operations are transformed into SIMD-like operations but currently they are plainly sequential in .NET.
     /// </para>
     /// </remarks>
-    [SuppressMessage("Usage", "CA1801:Review unused parameters", Justification = "TODO: parallelize these to SIMD in .NET too.")]
+    [SuppressMessage(
+        "Usage",
+        "CA1801:Review unused parameters",
+        Justification = "TODO: parallelize these to SIMD in .NET too. (https://github.com/Lombiq/Hastlayer-SDK/issues/64)")]
     public static class SimdOperations
     {
         public static int[] AddVectors(int[] vector1, int[] vector2, int maxDegreeOfParallelism) =>
