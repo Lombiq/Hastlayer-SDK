@@ -21,7 +21,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
-using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -289,7 +288,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--dk",
                 "chipscope:hastip_1:m_axi_gmem",
                 "--kernel_frequency",
-                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
+                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.InvariantCulture),
                 "-lo",
                 Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,
@@ -394,7 +393,7 @@ namespace Hast.Vitis.Abstractions.Services
                 if (!decimal.TryParse(
                     row[UtilizationPercent],
                     NumberStyles.Any,
-                    InvariantCulture,
+                    CultureInfo.InvariantCulture,
                     out var utilization))
                 {
                     continue;
@@ -420,7 +419,7 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 implementation.PowerUsageWatts = decimal.Parse(
                     report.Sections["1. Summary"].ToDictionaryByFirstColumn()["Total On-Chip Power (W)"][Value],
-                    InvariantCulture);
+                    CultureInfo.InvariantCulture);
                 _logger.LogInformation("Total on-chip power: {0}W", implementation.PowerUsageWatts);
             }
             catch (Exception ex)
