@@ -126,6 +126,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.Vitis.Abstractions.Har
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lombiq.HelpfulLibraries.RestEase", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj", "{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Base", "Hast.Core\Hast.TestInputs.Base\Hast.TestInputs.Base.csproj", "{1B511488-0B95-4EDC-B524-1CA7ACEEB17C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -304,6 +306,10 @@ Global
 		{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A32F6B4A-7F62-4F75-B69E-D27ECC47C3EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B511488-0B95-4EDC-B524-1CA7ACEEB17C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B511488-0B95-4EDC-B524-1CA7ACEEB17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B511488-0B95-4EDC-B524-1CA7ACEEB17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B511488-0B95-4EDC-B524-1CA7ACEEB17C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -347,6 +353,7 @@ Global
 		{6C7F52DF-9AE1-48CC-AC5C-FDE111557E40} = {D7193B9D-DDDA-49ED-9503-C63F1206FA2E}
 		{75FF7B59-7860-4B45-B1F8-51C5E48B64BA} = {6C7F52DF-9AE1-48CC-AC5C-FDE111557E40}
 		{38198457-A60A-4F35-9604-29B39B6D03A7} = {B88EC5D8-5D8A-4C87-81B3-F4F8C7FB2BF8}
+		{1B511488-0B95-4EDC-B524-1CA7ACEEB17C} = {701D5B71-9A6F-47A4-A3C2-3714AF8B4115}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C7FC230-A7A8-4206-A533-E41B96D6E222}
