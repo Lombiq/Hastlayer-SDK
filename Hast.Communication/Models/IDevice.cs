@@ -8,7 +8,7 @@ namespace Hast.Communication.Models
     public interface IDevice : IDisposable
     {
         /// <summary>
-        /// Event fires if the device (not <see cref="IReservedDevice"/>) is disposing.
+        /// Event fires if the device (not <see cref="IReservedDevice"/>) is being disposed.
         /// </summary>
         event EventHandler Disposing;
 

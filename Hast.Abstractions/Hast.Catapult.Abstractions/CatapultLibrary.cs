@@ -322,8 +322,7 @@ namespace Hast.Catapult.Abstractions
             MemoryMarshal.Write(data.Span[InputHeaderSizes.MemberId..], ref totalDataSize);
             MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], ref sliceIndex);
             MemoryMarshal.Write(
-                data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
-                + InputHeaderSizes.SliceIndex)..],
+                data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells + InputHeaderSizes.SliceIndex)..],
                 ref sliceCountValue);
             inputData.CopyTo(data[InputHeaderSizes.Total..]);
 

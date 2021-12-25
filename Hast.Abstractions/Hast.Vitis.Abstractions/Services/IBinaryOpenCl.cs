@@ -1,9 +1,9 @@
 using Hast.Common.Interfaces;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
+using Hast.Vitis.Abstractions.Models;
 using System;
 using System.Buffers;
 using System.Threading.Tasks;
-using Hast.Vitis.Abstractions.Models;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -12,8 +12,10 @@ namespace Hast.Vitis.Abstractions.Services
     /// most pointer usage, within practicality.
     /// </summary>
     /// <remarks>
-    /// <para>It is of singleton lifecycle because it handles hardware and binary resources which are not expected to change
-    /// while the application is running. This way subsequent runs don't have to suffer the same initialization costs.</para>
+    /// <para>
+    /// It is of singleton lifecycle because it handles hardware and binary resources which are not expected to change
+    /// while the application is running. This way subsequent runs don't have to suffer the same initialization costs.
+    /// </para>
     /// </remarks>
     public interface IBinaryOpenCl : ISingletonDependency, IDisposable
     {

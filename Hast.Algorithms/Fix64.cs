@@ -112,8 +112,7 @@ namespace Hast.Algorithms
             };
 
         /// <summary>
-        /// Returns the absolute value of a Fix64 number.
-        /// Note: Abs(Fix64.MinValue) == Fix64.MaxValue.
+        /// Returns the absolute value of a Fix64 number. Note: Abs(Fix64.MinValue) == Fix64.MaxValue.
         /// </summary>
         public static Fix64 Abs(Fix64 value)
         {
@@ -128,8 +127,7 @@ namespace Hast.Algorithms
         }
 
         /// <summary>
-        /// Returns the absolute value of a Fix64 number.
-        /// FastAbs(Fix64.MinValue) is undefined.
+        /// Returns the absolute value of a Fix64 number. FastAbs(Fix64.MinValue) is undefined.
         /// </summary>
         public static Fix64 FastAbs(Fix64 value)
         {
@@ -173,8 +171,8 @@ namespace Hast.Algorithms
                 return integralPart + One();
             }
 
-            // if number is halfway between two values, round to the nearest even number
-            // this is the method used by System.Math.Round().
+            // if number is halfway between two values, round to the nearest even number this is the method used by
+            // System.Math.Round().
             return (integralPart.RawValue & OneRawValue) == 0
                        ? integralPart
                        : integralPart + One();
@@ -191,8 +189,8 @@ namespace Hast.Algorithms
             var xl = x.RawValue;
             if (xl < 0)
             {
-                // We cannot represent infinities like Single and Double, and Sqrt is
-                // mathematically undefined for x < 0. So we just throw an exception.
+                // We cannot represent infinities like Single and Double, and Sqrt is mathematically undefined for x <
+                // 0. So we just throw an exception.
                 throw new ArgumentOutOfRangeException(nameof(x), "Negative value passed to Sqrt");
             }
 
@@ -203,8 +201,7 @@ namespace Hast.Algorithms
             var bit = 1UL << (BitCount - 2);
             while (bit > num) bit >>= 2;
 
-            // The main part is executed twice, in order to avoid
-            // using 128 bit values in computations.
+            // The main part is executed twice, in order to avoid using 128 bit values in computations.
             SqrtInnerHigh(ref num, ref result, ref bit);
             SqrtInnerLow(ref num, ref result, out bit);
             SqrtInnerHigh(ref num, ref result, ref bit);
@@ -263,8 +260,8 @@ namespace Hast.Algorithms
         #region Operators
 
         /// <summary>
-        /// Adds x and y. Performs saturating addition, i.e. in case of overflow,
-        /// rounds to MinValue or MaxValue depending on sign of operands.
+        /// Adds x and y. Performs saturating addition, i.e. in case of overflow, rounds to MinValue or MaxValue
+        /// depending on sign of operands.
         /// </summary>
         public static Fix64 operator +(Fix64 x, Fix64 y)
         {
@@ -287,8 +284,8 @@ namespace Hast.Algorithms
         public static Fix64 FastAdd(Fix64 x, Fix64 y) => new(x.RawValue + y.RawValue);
 
         /// <summary>
-        /// Subtracts y from x. Performs saturating subtraction, i.e. in case of overflow,
-        /// rounds to MinValue or MaxRawValue depending on sign of operands.
+        /// Subtracts y from x. Performs saturating subtraction, i.e. in case of overflow, rounds to MinValue or
+        /// MaxRawValue depending on sign of operands.
         /// </summary>
         public static Fix64 operator -(Fix64 x, Fix64 y)
         {
@@ -337,9 +334,8 @@ namespace Hast.Algorithms
 
             bool opSignsEqual = ((xl ^ yl) & MinRawValue) == 0;
 
-            // if signs of operands are equal and sign of result is negative,
-            // then multiplication overflowed positively
-            // the reverse is also true
+            // If signs of operands are equal and sign of result is negative, then multiplication overflowed positively
+            // the reverse is also true.
             if (opSignsEqual)
             {
                 if (sum < 0 || (overflow && xl > 0))
@@ -352,8 +348,8 @@ namespace Hast.Algorithms
                 return MinValue();
             }
 
-            // if the top 32 bits of hihi (unused in the result) are neither all 0s or 1s,
-            // then this means the result overflowed.
+            // if the top 32 bits of hihi (unused in the result) are neither all 0s or 1s, then this means the result
+            // overflowed.
             var topCarry = hihi >> FractionalPlaces;
             if (topCarry is not 0 and not -1)
             {
@@ -362,8 +358,8 @@ namespace Hast.Algorithms
 
             if (opSignsEqual) return new Fix64(sum);
 
-            // If signs differ, both operands' magnitudes are greater than 1,
-            // and the result is greater than the negative operand, then there was negative overflow.
+            // If signs differ, both operands' magnitudes are greater than 1, and the result is greater than the
+            // negative operand, then there was negative overflow.
             var (posOp, negOp) = xl > yl ? (xl, yl) : (yl, xl);
 
             return sum > negOp && negOp < -OneRawValue && posOp > OneRawValue
@@ -372,8 +368,8 @@ namespace Hast.Algorithms
         }
 
         /// <summary>
-        /// Performs multiplication without checking for overflow.
-        /// Useful for performance-critical code where the values are guaranteed not to cause overflow.
+        /// Performs multiplication without checking for overflow. Useful for performance-critical code where the values
+        /// are guaranteed not to cause overflow.
         /// </summary>
         public static Fix64 FastMul(Fix64 x, Fix64 y)
         {
@@ -468,8 +464,8 @@ namespace Hast.Algorithms
                 x.RawValue % y.RawValue);
 
         /// <summary>
-        /// Performs modulo as fast as possible; throws if x == MinValue and y == -1.
-        /// Use the operator (%) for a more reliable but slower modulo.
+        /// Performs modulo as fast as possible; throws if x == MinValue and y == -1. Use the operator (%) for a more
+        /// reliable but slower modulo.
         /// </summary>
         public static Fix64 FastMod(Fix64 x, Fix64 y) => new(x.RawValue % y.RawValue);
 

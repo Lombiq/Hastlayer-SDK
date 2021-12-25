@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Constants.CommunicationConstants;
+using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using static Hast.Common.Constants.DataSize;

@@ -200,8 +200,8 @@ namespace Hast.Communication.Services
                     outputByteCountBytes.Add(receivedByte);
                     if (outputByteCountBytes.Count < 4) return Serial.CommunicationState.ReceivingOutputByteCount;
 
-                    // Since the output's size can differ from the input size for optimization reasons,
-                    // we take the explicit size into account.
+                    // Since the output's size can differ from the input size for optimization reasons, we take the
+                    // explicit size into account.
                     outputBytes.Reset(
                         knownCount: BitConverter.ToInt32(outputByteCountBytes.Span),
                         startIndex: MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
@@ -211,16 +211,14 @@ namespace Hast.Communication.Services
                     serialCommunicationContext.SerialPort.Write(Serial.Signals.Ready);
                     return Serial.CommunicationState.ReceivingOutput;
                 case Serial.CommunicationState.ReceivingOutput:
-                    // There is a padding of PrefixCellCount cells for the unlikely case that the user
-                    // would directly feed back the output as the next call's input. This way Prefix space
-                    // is maintained.
+                    // There is a padding of PrefixCellCount cells for the unlikely case that the user would directly
+                    // feed back the output as the next call's input. This way Prefix space is maintained.
                     outputBytes.Add(receivedByte);
 
                     if (outputBytes.Count < outputBytes.KnownCount) return Serial.CommunicationState.ReceivingOutput;
                     accessor.Set(outputBytes.HandOver(), MemoryPrefixCellCount);
 
-                    // Serial communication can give more data than we actually await, so need to
-                    // set this.
+                    // Serial communication can give more data than we actually await, so need to set this.
                     serialCommunicationContext.SerialPort.Write(Serial.Signals.Ready);
                     serialCommunicationContext.TaskCompletionSource.SetResult(true);
                     return Serial.CommunicationState.Finished;
