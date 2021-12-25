@@ -22,8 +22,7 @@ namespace Hast.Layer
             this IHastlayer hastlayer,
             IHardwareRepresentation hardwareRepresentation,
             T hardwareObject)
-            where T : class
-            =>
+            where T : class =>
             hastlayer.GenerateProxyAsync(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
 
         /// <summary>

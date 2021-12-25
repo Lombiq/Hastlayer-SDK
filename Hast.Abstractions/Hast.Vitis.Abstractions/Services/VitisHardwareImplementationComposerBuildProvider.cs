@@ -19,9 +19,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Globalization.CultureInfo;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
+using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -257,13 +257,14 @@ namespace Hast.Vitis.Abstractions.Services
             await ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
-#pragma warning disable S125 // Sections of code should not be commented out. But this is not C# code.
+            // But this is not C# code.
+#pragma warning disable S125 // Sections of code should not be commented out.
             // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
             //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
             // endif
             // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
             // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
-#pragma warning restore S125 // Sections of code should not be commented out. But this is not C# code.
+#pragma warning restore S125 // Sections of code should not be commented out.
             var vppExecutable = await GetExecutablePathAsync(Vpp);
             var vppArguments = new List<string>(
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm

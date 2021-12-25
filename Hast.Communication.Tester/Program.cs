@@ -98,9 +98,10 @@ namespace Hast.Communication.Tester
                     var type = typeof(MemoryTest)
                         .Assembly
                         .GetTypes()
-                        .Single(x => x.Name.ToUpperInvariant() == name &&
-                                     x.GetConstructor(Array.Empty<Type>()) != null &&
-                                     GetReferenceAction(x) != null);
+                        .Single(currentType =>
+                            currentType.Name.ToUpperInvariant() == name &&
+                            currentType.GetConstructor(Array.Empty<Type>()) != null &&
+                            GetReferenceAction(currentType) != null);
                     var sample = type.GetConstructor(Array.Empty<Type>())?.Invoke(Array.Empty<object>());
                     GetReferenceAction(type)?.Invoke(sample, new object[] { referenceMemory });
                 }

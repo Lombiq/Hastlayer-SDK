@@ -59,8 +59,7 @@ namespace Hast.Communication
             MethodAsynchronicity methodAsynchronicity)
         {
             using var scope = _serviceProvider.CreateScope();
-            var memoryResourceCheckers = scope.ServiceProvider
-                .GetService<IEnumerable<IMemoryResourceChecker>>();
+            var memoryResourceCheckers = scope.ServiceProvider.GetService<IEnumerable<IMemoryResourceChecker>>();
 
             // Although it says Method it can also be a property.
             var memberFullName = invocation.Method.GetFullName();
@@ -78,8 +77,7 @@ namespace Hast.Communication
                 .ServiceProvider
                 .GetService<IEnumerable<IMemberInvocationPipelineStep>>()
                 .InvokePipelineSteps(step =>
-                    invocationContext.HardwareExecutionIsCancelled =
-                        step.CanContinueHardwareExecution(invocationContext));
+                    invocationContext.HardwareExecutionIsCancelled = step.CanContinueHardwareExecution(invocationContext));
 
             if (!invocationContext.HardwareExecutionIsCancelled)
             {

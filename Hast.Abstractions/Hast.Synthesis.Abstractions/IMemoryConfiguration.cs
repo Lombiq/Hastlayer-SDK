@@ -1,7 +1,7 @@
 namespace Hast.Synthesis.Abstractions
 {
     /// <summary>
-    /// Configuration used to specify the hardware allocation requirements of the target device.
+    /// Configuration used to specify the hardware memory allocation requirements of the target device.
     /// </summary>
     public interface IMemoryConfiguration
     {

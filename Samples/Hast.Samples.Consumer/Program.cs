@@ -175,18 +175,17 @@ namespace Hast.Samples.Consumer
 
             if (arguments.SoftwareExecutionInformation == null) return;
 
-            // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
-            // see the notes below, or if the hardware execution was canceled.
+            // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true, see
+            // the notes below, or if the hardware execution was canceled.
             var softwareTime = arguments.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
             Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
         }
 
         private static void OnMismatch(HardwareExecutionResultMismatchException exception)
         {
-            // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
-            // GenerateProxy()) then everything will be computed in software as well to check the hardware.
-            // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
-            // not impossible in corner cases.
+            // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling GenerateProxy()) then
+            // everything will be computed in software as well to check the hardware. You'll get such an exception if
+            // there is any mismatch. This shouldn't normally happen, but it's not impossible in corner cases.
             var mismatches = exception
                 .Mismatches?
                 .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();

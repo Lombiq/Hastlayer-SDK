@@ -11,25 +11,21 @@ namespace Hast.Samples.Consumer.SampleRunners
 
         public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            _ = new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm()
-                .Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             var parallelAlgorithm = await hastlayer.GenerateProxyAsync(
                 hardwareRepresentation,
                 new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm(),
                 configuration);
-            _ = parallelAlgorithm.Run(
-                234234,
-                hastlayer,
-                hardwareRepresentation.HardwareGenerationConfiguration);
-            _ = parallelAlgorithm.Run(
-                123,
-                hastlayer,
-                hardwareRepresentation.HardwareGenerationConfiguration);
-            _ = parallelAlgorithm.Run(
-                9999,
-                hastlayer,
-                hardwareRepresentation.HardwareGenerationConfiguration);
 
+            // Three sample outputs.
+            _ = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            _ = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            _ = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+
+            // Warming up CPU execution (not to have wrong measurements due to JIT compilation).
+            _ = new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm()
+                .Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+
+            // CPU execution as a benchmark.
             var sw = System.Diagnostics.Stopwatch.StartNew();
             _ = new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm()
                 .Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
