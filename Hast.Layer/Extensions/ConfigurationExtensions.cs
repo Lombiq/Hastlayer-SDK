@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Globalization;
 using System.Linq;
 // ReSharper disable CheckNamespace
 
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.Configuration
                 var array = new object[keys.Length];
                 foreach (var kvp in dict)
                 {
-                    array[int.Parse(kvp.Key, CultureInfo.InvariantCulture)] = kvp.Value;
+                    array[kvp.Key.ToTechnicalInt()] = kvp.Value;
                 }
 
                 var parentDict = parent as IDictionary<string, object>;

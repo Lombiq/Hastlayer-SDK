@@ -62,7 +62,7 @@ namespace Hast.Vitis.Abstractions.Models
                     item.Name = value;
                     break;
                 case nameof(Index):
-                    item.Index = int.Parse(value, CultureInfo.InvariantCulture);
+                    item.Index = value.ToTechnicalInt();
                     break;
                 case nameof(Type):
                     item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, true);
@@ -70,14 +70,17 @@ namespace Hast.Vitis.Abstractions.Models
                 case nameof(Frequency):
                     parts = value.Split();
                     value = parts[0];
+
+                    var number = uint.Parse(value, CultureInfo.InvariantCulture);
                     item.Frequency = parts[1].Trim().ToUpperInvariant() switch
                     {
-                        "MHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000_000,
-                        "KHZ" => uint.Parse(value, CultureInfo.InvariantCulture) * 1_000,
-                        "HZ" => uint.Parse(value, CultureInfo.InvariantCulture),
-                        "" => uint.Parse(value, CultureInfo.InvariantCulture),
+                        "MHZ" => number * 1_000_000,
+                        "KHZ" => number * 1_000,
+                        "HZ" => number,
+                        "" => number,
                         _ => throw new InvalidCastException($"Unknown frequency unit '{parts[1]}'."),
                     };
+
                     break;
                 default: throw new InvalidDataException($"Unknown entry type: '{key}'.");
             }
