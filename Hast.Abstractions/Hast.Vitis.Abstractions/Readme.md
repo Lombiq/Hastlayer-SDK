@@ -48,7 +48,7 @@ This way you can compile on your Windows machine, or any machine where you don't
 4. Copy the files into the _Container/platform_ folder.
    - If you downloaded the Azure packages too, make sure you don't end up with multiple versions of the same package. For example at the time of writing this document the main _Deployment Target Platform_ archive contained the package _xilinx-u250-gen3x16-xdma-validate-2.1-**2948414**.noarch.rpm_. However a newer, Azure-specific version _xilinx-u250-gen3x16-xdma-validate-2.1-**3005608**.1.noarch.rpm_ was also up for download. Such a clash causes a multilib version problem. That can be resolved by removing older one and keeping the Azure-specific version.
 5. Extract any tar.gz archive in _Container/platform_ and delete the archives. In the end you should only have rpm files.
-6. Copy the `centos7-install.sh` to the _Container_ as well.
+6. Copy the `centos7-install.sh` and `fake-xterm.sh` to the _Container_ as well.
 7. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
 8. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
 9. Clean up after the build is finished with the `docker builder prune -a -f` command. If you notice excessive RAM usage by the Vmmem process then close down Docker Desktop, shut down WSL with the `wsl --shutdown` command, then restart Docker Desktop and continue with the next steps.
