@@ -158,7 +158,7 @@ namespace Hast.Samples.Kpz
 
         public void WriteToFiles(string path)
         {
-            if (!path.EndsWith("\\", StringComparison.Ordinal)) path += "\\";
+            if (!path.EndsWithOrdinal("\\")) path += "\\";
 
             int iterationIndex = 0;
 

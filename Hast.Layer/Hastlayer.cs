@@ -413,14 +413,15 @@ namespace Hast.Layer
             // Since Hast.Core either exists or not we need to start by probing for the Hast.Abstractions folder.
             var abstractionsPath = Path.GetDirectoryName(GetType().Assembly.Location);
             var currentDirectory = Path.GetFileName(abstractionsPath);
-            if (currentDirectory.Equals("Debug", StringComparison.OrdinalIgnoreCase) ||
-                currentDirectory.Equals("Release", StringComparison.OrdinalIgnoreCase))
+
+            if (currentDirectory?.EqualsOrdinalIgnoreCase("Debug") == true ||
+                currentDirectory?.EqualsOrdinalIgnoreCase("Release") == true)
             {
                 abstractionsPath = Path.GetDirectoryName(abstractionsPath);
             }
 
             currentDirectory = Path.GetFileName(abstractionsPath);
-            if (currentDirectory.Equals("bin", StringComparison.OrdinalIgnoreCase))
+            if (currentDirectory?.EqualsOrdinalIgnoreCase("bin") == true)
             {
                 abstractionsPath = Path.GetDirectoryName(abstractionsPath);
             }
@@ -483,7 +484,7 @@ namespace Hast.Layer
                     .GetFiles(path, "Hast.*.dll")
                     .Where(path => !Path.GetFileName(path)
                         // Check any core project names that aren't referenced by Hastlayer to avoid accidental loading.
-                        .StartsWith("Hast.Remote.Worker", StringComparison.Ordinal)
+                        .StartsWithOrdinalIgnoreCase("Hast.Remote.Worker")
                     ));
     }
 }

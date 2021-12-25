@@ -21,9 +21,9 @@ namespace Hast.Vitis.Abstractions.Models
 
             // Read the meta data (block starts with a horizontal line).
             await ReadUntilAsync(reader);
-            foreach (var metaLine in await ReadWhileAsync(reader, line => !line.StartsWith(HorizontalLine, StringComparison.Ordinal)))
+            foreach (var metaLine in await ReadWhileAsync(reader, line => !line.StartsWithOrdinal(HorizontalLine)))
             {
-                if (!metaLine.Contains(':', StringComparison.Ordinal)) continue;
+                if (!metaLine.ContainsOrdinal(":")) continue;
                 var parts = metaLine.TrimStart('|').Split(new[] { ':' }, 2);
                 report.MetaData[parts[0].Trim()] = parts[1].Trim();
             }

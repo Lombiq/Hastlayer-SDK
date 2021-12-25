@@ -188,7 +188,7 @@ namespace Hast.Samples.Consumer
 
             value ??= _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString() ?? string.Empty;
 
-            var key = value.Replace(" ", string.Empty, StringComparison.Ordinal);
+            var key = value.ReplaceOrdinal(" ");
             var hintDictionary = ConsumerConfiguration.HintDictionary.Value;
             _hintLabel.Text = hintDictionary.TryGetValue(key, out var hint) ? hint : string.Empty;
 

@@ -1,4 +1,4 @@
-using Hast.Layer;
+﻿using Hast.Layer;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -94,7 +94,7 @@ namespace Hast.Transformer.Abstractions.Configuration
             string simpleMemberName)
         {
             var maxRecursionDepthConfig = MemberInvocationInstanceCountConfigurations
-                .Where(config => simpleMemberName.StartsWith(config.MemberNamePrefix, StringComparison.Ordinal))
+                .Where(config => simpleMemberName.StartsWithOrdinal(config.MemberNamePrefix))
                 .OrderByDescending(config => config.MemberNamePrefix.Length)
                 .FirstOrDefault();
 

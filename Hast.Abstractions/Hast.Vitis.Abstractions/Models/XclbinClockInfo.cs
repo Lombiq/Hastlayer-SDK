@@ -28,7 +28,7 @@ namespace Hast.Vitis.Abstractions.Models
                 var line = reader.ReadLine();
 
                 // Stop at document end or at next header.
-                var sectionFinished = line?.StartsWith("---", StringComparison.Ordinal) != false;
+                var sectionFinished = line?.StartsWithOrdinal("---") != false;
                 if (sectionFinished || string.IsNullOrWhiteSpace(line))
                 {
                     if (set)
@@ -42,7 +42,7 @@ namespace Hast.Vitis.Abstractions.Models
                     continue;
                 }
 
-                if (!line.Contains(":", StringComparison.Ordinal)) continue;
+                if (!line.ContainsOrdinal(":")) continue;
 
                 ParseLine(line, item);
 

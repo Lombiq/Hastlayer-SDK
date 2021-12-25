@@ -60,7 +60,7 @@ namespace Hast.Vitis.Abstractions.Models
             var data = (await ReadWhileAsync(
                     reader,
                     line =>
-                        line.StartsWith("|", StringComparison.Ordinal) &&
+                        line.StartsWithOrdinal("|") &&
                         !line.StartsWith(TableBorderLine, StringComparison.InvariantCulture)))
                 .Select(line => line.Trim('|')
                     .Split('|')
@@ -70,7 +70,7 @@ namespace Hast.Vitis.Abstractions.Models
 
             // Post-table comments start with an asterisk.
             var comments = new List<string>();
-            while (await reader.ReadLineAsync() is { } line && line.StartsWith("*", StringComparison.Ordinal))
+            while (await reader.ReadLineAsync() is { } line && line.StartsWithOrdinal("*"))
             {
                 comments.Add(line);
             }

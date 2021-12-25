@@ -555,7 +555,7 @@ namespace Hast.Vitis.Abstractions.Services
             var text = message as string;
 
             // Find informational messages and escalate their log level since most of them will be "trace" by default.
-            if (text?.Contains(':', StringComparison.Ordinal) == true)
+            if (text?.ContainsOrdinal(":") == true)
             {
                 logLevel = text.Split(':')[0].Trim().ToUpperInvariant() switch
                 {
@@ -571,14 +571,15 @@ namespace Hast.Vitis.Abstractions.Services
             // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
 #pragma warning restore S125 // Sections of code should not be commented out. But this is not C# code.
             if (name == Vpp &&
-                text?.StartsWith("[", StringComparison.Ordinal) == true &&
-                _vppStatusLogs.Any(fragment => text.Contains(fragment, StringComparison.Ordinal)))
+                text?.StartsWithOrdinal("[") == true &&
+                _vppStatusLogs.Any(fragment => text.Contains(fragment, StringComparison.InvariantCulture)))
             {
                 if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
                 Progress?.Invoke(this, new BuildProgressEventArgs(text));
             }
 
-            if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker", StringComparison.Ordinal) == true)
+            if (logLevel == LogLevel.Error &&
+                text?.Contains("Failed to finish platform linker", StringComparison.InvariantCulture) == true)
             {
                 throw new InvalidOperationException(
                     "The linker encountered an error. This is typically because the resulting hardware design won't " +
@@ -641,8 +642,8 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var file in files)
             {
                 var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
-                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture), StringComparison.Ordinal)
-                    .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0", StringComparison.Ordinal);
+                    .ReplaceOrdinal("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToTechnicalString())
+                    .ReplaceOrdinal("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
                 var targetFilePath = Path.Combine(targetDirectoryPath, file);
                 EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
                 await File.WriteAllTextAsync(targetFilePath, result);
