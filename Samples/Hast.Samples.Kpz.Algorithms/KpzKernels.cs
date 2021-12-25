@@ -73,8 +73,7 @@ namespace Hast.Samples.Kpz.Algorithms
         }
 
         /// <summary>
-        /// This function generates random numbers on the FPGA using
-        /// <see cref="TestPrng(SimpleMemory)"/>.
+        /// This function generates random numbers on the FPGA using <see cref="TestPrng(SimpleMemory)"/>.
         /// </summary>
         public uint[] TestPrngWrapper(
             IHastlayer hastlayer,
