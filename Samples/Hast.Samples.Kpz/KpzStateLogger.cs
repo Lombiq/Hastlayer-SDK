@@ -2,7 +2,6 @@ using Hast.Samples.Kpz.Algorithms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -165,7 +164,7 @@ namespace Hast.Samples.Kpz
 
             foreach (var iteration in Iterations)
             {
-                using var file = new StreamWriter(path + iterationIndex.ToString(CultureInfo.InvariantCulture) + ".txt");
+                using var file = new StreamWriter(path + iterationIndex.ToTechnicalString() + ".txt");
                 iterationIndex++;
 
                 WriteToFile(iteration, file);
