@@ -38,7 +38,7 @@ namespace Hast.Communication.Models
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!_isDisposed && disposing) Disposing?.Invoke(this, new EventArgs());
+            if (!_isDisposed && disposing) Disposing?.Invoke(this, EventArgs.Empty);
             _isDisposed = true;
         }
     }
