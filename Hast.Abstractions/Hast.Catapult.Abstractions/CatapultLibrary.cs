@@ -230,7 +230,8 @@ namespace Hast.Catapult.Abstractions
             }
             catch
             {
-                // Left intentionally empty.
+                // If the dispatched slots can't be successfully awaited that's not a critical problem since we are
+                // going to close the PICe connection via `PcieEnabled = false;` right after that anyway.
             }
 
             LogFunction?.Invoke((uint)Constants.Log.Info, "Closing down the FPGA..." + Environment.NewLine);
