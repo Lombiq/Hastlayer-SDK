@@ -153,7 +153,7 @@ namespace Hast.Samples.Kpz
 
             if (updateChartInThisIteartion)
             {
-                var meta = _kpz.GenerateAndProcessHeighMap();
+                var meta = _kpz.GenerateAndProcessHeightMap();
 
                 if (!meta.PeriodicityValid)
                 {

@@ -149,7 +149,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         private static int Bool2Delta(bool what) => what ? 1 : -1;
 
-        public HeightmapMetaData GenerateAndProcessHeighMap()
+        public HeightmapMetaData GenerateAndProcessHeightMap()
         {
             var map = GenerateHeightMap(
                 out var mean,
