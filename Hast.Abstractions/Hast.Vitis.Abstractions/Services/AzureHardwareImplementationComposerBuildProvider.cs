@@ -139,7 +139,7 @@ namespace Hast.Vitis.Abstractions.Services
                     continue;
                 }
 
-                var outputList = output?.ToArray() ?? Array.Empty<string>();
+                var outputList = output?.AsList() ?? Array.Empty<string>();
                 if (outputList.Contains("Attestation process succeeded"))
                 {
                     _logger.LogInformation("Attestation process has succeeded.");
