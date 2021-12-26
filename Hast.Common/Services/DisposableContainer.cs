@@ -12,7 +12,7 @@ namespace Hast.Common.Services
         private bool _disposed;
         private IDisposable _context;
 
-        public IList<object> Values { get; }
+        public IReadOnlyList<object> Values { get; }
 
         public DisposableContainer(IDisposable context, params object[] values)
         {
