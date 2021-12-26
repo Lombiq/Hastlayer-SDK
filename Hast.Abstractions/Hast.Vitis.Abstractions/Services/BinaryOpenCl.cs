@@ -324,7 +324,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             foreach (var exception in exceptions)
             {
-                _logger.LogError(exception, "error while disposing " + nameof(BinaryOpenCl));
+                _logger.LogError(exception, "Error while disposing " + nameof(BinaryOpenCl) + ".");
             }
 
             GC.SuppressFinalize(this);
