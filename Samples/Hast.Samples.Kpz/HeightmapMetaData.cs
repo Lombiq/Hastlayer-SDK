@@ -1,6 +1,6 @@
 namespace Hast.Samples.Kpz
 {
-    public class HeighmapMetaData
+    public class HeightmapMetaData
     {
         public double StandardDeviation { get; set; }
         public double Mean { get; set; }

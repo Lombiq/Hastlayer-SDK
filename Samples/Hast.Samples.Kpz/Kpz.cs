@@ -149,7 +149,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         private static int Bool2Delta(bool what) => what ? 1 : -1;
 
-        public HeighmapMetaData GenerateAndProcessHeighMap()
+        public HeightmapMetaData GenerateAndProcessHeighMap()
         {
             var map = GenerateHeightMap(
                 out var mean,
@@ -157,7 +157,7 @@ namespace Hast.Samples.Kpz
                 out var periodicityInvalidXCount,
                 out var periodicityInvalidYCount);
 
-            return new HeighmapMetaData
+            return new HeightmapMetaData
             {
                 Mean = mean,
                 PeriodicityInvalidXCount = periodicityInvalidXCount,
