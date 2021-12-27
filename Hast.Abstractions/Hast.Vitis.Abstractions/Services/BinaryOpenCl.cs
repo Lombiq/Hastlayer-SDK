@@ -141,13 +141,22 @@ namespace Hast.Vitis.Abstractions.Services
             return buffer;
         }
 
-        private static void VerifyResult(Result err)
+        private static void VerifyResult(Result status)
         {
-            if (err != Result.Success)
+            switch (status)
             {
-                throw new InvalidOperationException(
-                    $"OpenCL error with status '{err}'. You may find more information by searching for 'opencl {err} " +
-                    $"OR CL_{err.ToString().ToSnakeCase().ToUpper(CultureInfo.InvariantCulture)}' on the web.");
+                case Result.Success:
+                    return;
+                case Result.PlatformNotFoundKhr:
+                    throw new InvalidOperationException(
+                        "No platforms were found. This usually means that the compute device is not powered or " +
+                        "connected. If you are cross-compiling for a different machine and the compilation has " +
+                        "finished you can disregard this error. (error: CL_PLATFORM_NOT_FOUND_KHR)");
+                default:
+                    var errorSymbol = "CL_" + status.ToString().ToSnakeCase().ToUpper(CultureInfo.InvariantCulture);
+                    throw new InvalidOperationException(
+                        $"OpenCL error with status '{status}'. You may find more information by searching for " +
+                        $"\"opencl {status} OR {errorSymbol}\" on the web.");
             }
         }
 
@@ -211,7 +220,12 @@ namespace Hast.Vitis.Abstractions.Services
             }
 
             if (!foundDevice)
-                _logger?.LogWarning($"Failed to find '{vendorName}' platform that has '{deviceType}' type devices.");
+            {
+                _logger?.LogWarning(
+                    "Failed to find \"{0}\" platform that has \"{1}\" type devices.",
+                    vendorName,
+                    deviceType);
+            }
         }
 
         private IntPtr CreateProgramWithBinary(IntPtr binary, int binaryLength)
