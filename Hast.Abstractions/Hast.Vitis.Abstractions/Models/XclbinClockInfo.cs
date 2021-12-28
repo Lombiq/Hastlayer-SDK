@@ -42,7 +42,7 @@ namespace Hast.Vitis.Abstractions.Models
                     continue;
                 }
 
-                if (!line.ContainsOrdinal(":")) continue;
+                if (!line.Contains(":")) continue;
 
                 ParseLine(line, item);
 

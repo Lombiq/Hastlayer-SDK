@@ -555,7 +555,7 @@ namespace Hast.Vitis.Abstractions.Services
             var text = message as string;
 
             // Find informational messages and escalate their log level since most of them will be "trace" by default.
-            if (text?.ContainsOrdinal(":") == true)
+            if (text?.Contains(":") == true)
             {
                 logLevel = text.Split(':')[0].Trim().ToUpperInvariant() switch
                 {
@@ -642,8 +642,8 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var file in files)
             {
                 var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
-                    .ReplaceOrdinal("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToTechnicalString())
-                    .ReplaceOrdinal("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
+                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToTechnicalString())
+                    .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
                 var targetFilePath = Path.Combine(targetDirectoryPath, file);
                 EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
                 await File.WriteAllTextAsync(targetFilePath, result);

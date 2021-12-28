@@ -27,7 +27,7 @@ namespace Hast.Common.Extensions
 
             // If there are no dots before the member name that means this full name doesn't contain an interface reference.
             if (sides.Length != 2 ||
-                !sides[1].ContainsOrdinal(".") ||
+                !sides[1].Contains(".") ||
                 sides[1].IndexOf('.', StringComparison.Ordinal) > sides[1].IndexOf('(', StringComparison.Ordinal))
             {
                 return Enumerable.Empty<string>();
@@ -41,7 +41,7 @@ namespace Hast.Common.Extensions
                 // 1. alternate:
                 sides[0] + "::" + sides[1][sides[1].IndexOf(methodName + "(", StringComparison.Ordinal)..],
                 // 2. alternate:
-                returnType + " " + sides[1].ReplaceOrdinal($".{methodName}(", $"::{methodName}("),
+                returnType + " " + sides[1].Replace($".{methodName}(", $"::{methodName}("),
             };
         }
     }
