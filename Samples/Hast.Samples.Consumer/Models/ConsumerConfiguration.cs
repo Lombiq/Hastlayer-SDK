@@ -1,5 +1,4 @@
 using Castle.Core.Internal;
-using Hast.Layer;
 using Hast.Samples.Consumer.Attributes;
 using Newtonsoft.Json;
 using System;
@@ -57,7 +56,7 @@ namespace Hast.Samples.Consumer.Models
         public Sample SampleToRun { get; set; }
 
         /// <summary>
-        /// Gets or sets the value of <see cref="HardwareGenerationConfiguration.Label"/>.
+        /// Gets or sets the value of <see cref="Layer.HardwareGenerationConfiguration.Label"/>.
         /// </summary>
         [Argument("name", "label")]
         [Hint("This label helps you identify individual builds when you run this program in a batch with different configurations")]
