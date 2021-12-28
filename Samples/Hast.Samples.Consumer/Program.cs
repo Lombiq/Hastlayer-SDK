@@ -246,7 +246,7 @@ namespace Hast.Samples.Consumer
 
         /// <summary>
         /// Possible application exit statuses (also known as <see cref="Environment.ExitCode"/>). This is returned from
-        /// <see cref="Program.Main"/> as <see langword="int"/> and it's useful if you call this application from a
+        /// <see cref="Main"/> as <see langword="int"/> and it's useful if you call this application from a
         /// shell script. The Windows cmd can access it using the <c>IF ERRORLEVEL n</c> expression. On Windows, Linux
         /// and macOS you can access it from Powershell using the <c>$LASTEXITCODE</c> variable or from Bash using the
         /// <c>$?</c> variable.
