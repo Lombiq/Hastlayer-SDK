@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -141,6 +142,10 @@ namespace Hast.Vitis.Abstractions.Services
             return buffer;
         }
 
+        [SuppressMessage(
+            "Style",
+            "IDE0010:Add missing cases",
+            Justification = "There are lots of cases, but we only want to treat the special ones.")]
         private static void VerifyResult(Result status)
         {
             switch (status)
