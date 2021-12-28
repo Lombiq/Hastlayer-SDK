@@ -31,7 +31,7 @@ namespace Hast.Samples.Consumer
         Justification = "This program is not localized.")]
     internal static class Program
     {
-        private static async Task MainTaskAsync(string[] args)
+        private static async Task<ExitStatus> MainTaskAsync(string[] args)
         {
             /*
             * On a high level these are the steps to use Hastlayer:
@@ -53,7 +53,7 @@ namespace Hast.Samples.Consumer
             var consumerConfiguration = args.Any()
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
                 : Gui.BuildConfiguration(savedConfigurations);
-            if (consumerConfiguration == null) return;
+            if (consumerConfiguration == null) return ExitStatus.NothingToDo;
 
             // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
             // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
@@ -156,10 +156,12 @@ namespace Hast.Samples.Consumer
             try
             {
                 await sampleRunner.RunAsync(hastlayer, hardwareRepresentation, proxyConfiguration);
+                return ExitStatus.Success;
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {
                 OnMismatch(exception);
+                return ExitStatus.Mismatch;
             }
         }
 
@@ -225,17 +227,36 @@ namespace Hast.Samples.Consumer
             }
         }
 
-        private static async Task Main(string[] args)
+        private static async Task<int> Main(string[] args)
         {
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
+            ExitStatus status;
             try
             {
-                await MainTaskAsync(args);
+                status = await MainTaskAsync(args);
             }
             catch (Exception ex)
             {
                 await Console.Error.WriteLineAsync(ex.ToString());
+                status = ExitStatus.Error;
             }
+
+            return (int)status;
+        }
+
+        /// <summary>
+        /// Possible application exit statuses (also known as <see cref="Environment.ExitCode"/>). This is returned from
+        /// <see cref="Program.Main"/> as <see langword="int"/> and it's useful if you call this application from a
+        /// shell script. The Windows cmd can access it using the <c>IF ERRORLEVEL n</c> expression. On Windows, Linux
+        /// and macOS you can access it from Powershell using the <c>$LASTEXITCODE</c> variable or from Bash using the
+        /// <c>$?</c> variable.
+        /// </summary>
+        private enum ExitStatus
+        {
+            Success = 0,
+            NothingToDo = 1,
+            Mismatch = 2,
+            Error = 3,
         }
     }
 }
