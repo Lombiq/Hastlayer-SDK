@@ -16,4 +16,3 @@ publish/
 TestResults/*.trx
 /global.json
 /.editorconfig
-/Hast.Abstractions/Hast.Vitis.Abstractions/.editorconfig
