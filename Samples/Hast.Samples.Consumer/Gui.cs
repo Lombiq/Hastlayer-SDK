@@ -450,6 +450,10 @@ namespace Hast.Samples.Consumer
 
         public void Dispose()
         {
+            // Application.Shutdown() sets Application.Top to null and recursively disposes all child objects. At that
+            // point disposing them again would cause many NREs.
+            if (Application.Top == null) return;
+
             _propertiesListView?.Dispose();
             _hintLabel?.Dispose();
             _optionsTextField?.Dispose();
