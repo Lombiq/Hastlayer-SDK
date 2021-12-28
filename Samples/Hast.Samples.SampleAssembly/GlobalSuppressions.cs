@@ -47,12 +47,6 @@ using System.Diagnostics.CodeAnalysis;
     Scope = "module")]
 
 [assembly: SuppressMessage(
-    "Globalization",
-    "CA1307:Specify StringComparison for clarity",
-    Justification = "There is no StringComparison in the transformed code.",
-    Scope = "module")]
-
-[assembly: SuppressMessage(
     "Performance",
     "CA1802:Use literals where appropriate",
     Justification = "This is related to the special build-time constant overriding feature, see more info in the WorkingWithHastlayer.md document.",
