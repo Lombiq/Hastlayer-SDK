@@ -26,9 +26,9 @@ namespace Hast.Layer
 #endif
 
         /// <inheritdoc/>
-        public string AppDataFolderPath { get; set; } = null;
+        public string AppDataFolderPath { get; set; }
 
         /// <inheritdoc/>
-        public Action<ILoggingBuilder> ConfigureLogging { get; set; } = null;
+        public Action<ILoggingBuilder> ConfigureLogging { get; set; }
     }
 }

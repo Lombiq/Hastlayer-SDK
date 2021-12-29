@@ -6,7 +6,8 @@ namespace Hast.Samples.Consumer.Attributes
     /// <summary>
     /// Represents a case-insensitive command line argument and any number of aliases for the given property.
     /// </summary>
-    public class ArgumentAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class ArgumentAttribute : Attribute
     {
         public string[] Aliases { get; }
 

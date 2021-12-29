@@ -19,7 +19,7 @@ namespace Hast.Communication.Tester
         public long PayloadLengthBytes { get; set; } = 10;
 
         [Option('k', "kilo-bytes", HelpText = "The total size of the payload in kilobytes.")]
-        public int PayloadKiloBytes { get => (int)(PayloadLengthBytes / 1024); set => PayloadLengthBytes = (long)value * 1024; }
+        public int PayloadKiloBytes { get => (int)(PayloadLengthBytes / 1_024); set => PayloadLengthBytes = (long)value * 1_024; }
 
         [Option('c', "cells", HelpText = "The total size of the payload in number of cells.")]
         public int PayloadLengthCells
@@ -29,7 +29,7 @@ namespace Hast.Communication.Tester
         }
 
         [Option('m', "member-id", HelpText = "The simulated MemberId.")]
-        public int MemberId { get; set; } = 0;
+        public int MemberId { get; set; }
 
         [Option('t', "payload-type", HelpText = "What kind of data to send (ConstantIntOne, Counter, Random, BinaryFile, Bitmap).")]
         public PayloadType PayloadType { get; set; } = PayloadType.ConstantIntOne;
@@ -52,12 +52,20 @@ namespace Hast.Communication.Tester
         [Option('n', "no-check", HelpText = "Skips result check at the end.")]
         public bool NoCheck { get; set; }
 
-        [Option('L', "log-level", HelpText = "Sets the logging level for 'hastlayer', 0 for most verbose, 6 for nothing. (Trace, Debug, Info, Warning, Error, Critical, None)")]
+        [Option(
+            'L',
+            "log-level",
+            HelpText = "Sets the logging level for 'hastlayer', 0 for most verbose, 6 for nothing. (Trace, Debug, " +
+            "Info, Warning, Error, Critical, None)")]
         public int LogLevelInt { get => (int)LogLevel; set => LogLevel = (LogLevel)value; }
         public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
-        [Option('a', "action", HelpText = "What sample to run on the reference memory (e.g. MemoryTest). Note that the given sample should have a method with the exact signature \"Run(SimpleMemory memory)\".")]
-        public string ReferenceAction { get; set; } = null;
+        [Option(
+            'a',
+            "action",
+            HelpText = "What sample to run on the reference memory (e.g. MemoryTest). Note that the given sample " +
+            "should have a method with the exact signature \"Run(SimpleMemory memory)\".")]
+        public string ReferenceAction { get; set; }
 
         [Option('p', "prepend", HelpText = "Prepend a list of integers to the SimpleMemory.")]
         public string Prepend { get; set; }

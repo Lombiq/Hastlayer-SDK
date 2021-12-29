@@ -13,7 +13,6 @@ namespace Hast.Synthesis.Abstractions
         private readonly IEnumerable<IHardwareImplementationComposerBuildProvider> _buildProviders;
         private readonly ILogger<VhdlHardwareImplementationComposer> _logger;
 
-
         public VhdlHardwareImplementationComposer(
             IEnumerable<IHardwareImplementationComposerBuildProvider> buildProviders,
             ILogger<VhdlHardwareImplementationComposer> logger)
@@ -21,7 +20,6 @@ namespace Hast.Synthesis.Abstractions
             _buildProviders = buildProviders;
             _logger = logger;
         }
-
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.HardwareDescription is VhdlHardwareDescription;

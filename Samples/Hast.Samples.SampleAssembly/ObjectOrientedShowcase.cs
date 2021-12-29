@@ -1,24 +1,21 @@
-﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
     /// Object-oriented code can be written with Hastlayer as usual. This will also be directly mapped to hardware.
-    /// Also see <see cref="ObjectOrientedShowcaseSampleRunner"/> on what to configure to make this work.
+    /// Also see <c>ObjectOrientedShowcaseSampleRunner</c> on what to configure to make this work.
     /// </summary>
     public class ObjectOrientedShowcase
     {
-        public const int Run_InputUInt32Index = 0;
-        private const int Run_OutputUInt32Index = 0;
-
+        public const int RunInputUInt32Index = 0;
+        private const int RunOutputUInt32Index = 0;
 
         public virtual void Run(SimpleMemory memory)
         {
-            var inputNumber = memory.ReadUInt32(Run_InputUInt32Index);
-            // Or:
-            inputNumber = new MemoryContainer(memory).GetInput();
+            var inputNumber = new MemoryContainer(memory).GetInput();
+            // Or "var inputNumber = memory.ReadUInt32(RunInputUInt32Index);".
 
             // Arrays can be initialized as usual, as well as objects.
             var numberContainers1 = new[]
@@ -26,7 +23,7 @@ namespace Hast.Samples.SampleAssembly
                 new NumberContainer { Number = inputNumber },
                 new NumberContainer { Number = inputNumber + 4 },
                 new NumberContainer { Number = 24 },
-                new NumberContainer(9)
+                new NumberContainer(9),
             };
 
             // Array elements can be accessed and modified as usual.
@@ -40,20 +37,20 @@ namespace Hast.Samples.SampleAssembly
             numberContainers1[3].IncreaseNumberByParameterTimes10(ref increaseBy, out uint originalNumber);
             numberContainers1[3].IncreaseNumber(increaseBy + originalNumber);
 
-
             // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
             // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a
             // variable then its value should be computable from all other values at compile-time).
             var numberContainers2 = new NumberContainer[1];
             var numberContainer = new NumberContainer
             {
-                Number = 5
+                Number = 5,
             };
             numberContainer.Number = numberContainer.NumberPlusFive;
             if (!numberContainer.WasIncreased)
             {
                 numberContainer.IncreaseNumber(5);
             }
+
             numberContainers2[0] = numberContainer;
 
             for (int i = 0; i < numberContainers1.Length; i++)
@@ -62,9 +59,18 @@ namespace Hast.Samples.SampleAssembly
             }
 
             // You can also pass arrays and other objects around to other methods.
-            memory.WriteUInt32(Run_OutputUInt32Index, SumNumberContainers(numberContainers1));
+            memory.WriteUInt32(RunOutputUInt32Index, SumNumberContainers(numberContainers1));
         }
 
+        public uint Run(uint input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        {
+            var memory = hastlayer is null
+                ? SimpleMemory.CreateSoftwareMemory(10)
+                : hastlayer.CreateMemory(configuration, 10);
+            memory.WriteUInt32(RunInputUInt32Index, input);
+            Run(memory);
+            return memory.ReadUInt32(RunOutputUInt32Index);
+        }
 
         private uint SumNumberContainers(NumberContainer[] numberContainers)
         {
@@ -77,19 +83,7 @@ namespace Hast.Samples.SampleAssembly
 
             return sum;
         }
-
-
-        public uint Run(uint input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
-        {
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(10)
-                : hastlayer.CreateMemory(configuration, 10);
-            memory.WriteUInt32(Run_InputUInt32Index, input);
-            Run(memory);
-            return memory.ReadUInt32(Run_OutputUInt32Index);
-        }
     }
-
 
     // Although this is a public class it could also be an inner class and/or a non-public one too.
     public class NumberContainer
@@ -105,27 +99,22 @@ namespace Hast.Samples.SampleAssembly
         // Fancy custom properties that can do everything a method can.
         public uint NumberPlusFive
         {
-            get { return Number + 5; }
-            set { Number = value - 5; }
+            get => Number + 5;
+            set => Number = value - 5;
         }
-
 
         // Constructors can be used, with or without parameters.
         public NumberContainer()
         {
         }
 
-        public NumberContainer(uint number)
-        {
-            Number = number;
-        }
-
+        public NumberContainer(uint number) => Number = number;
 
         // Instance methods can be added as usual.
         public uint IncreaseNumber(uint increaseBy)
         {
             WasIncreased = true;
-            return (Number += increaseBy);
+            return Number += increaseBy;
         }
 
         // Methods can call each other as usual.
@@ -140,26 +129,19 @@ namespace Hast.Samples.SampleAssembly
         }
     }
 
-
     public static class NumberContainerExtensions
     {
         // You can also write extension methods.
         public static uint IncreaseNumberBy20(this NumberContainer numberContainer) => numberContainer.IncreaseNumber(20);
     }
 
-
     public class MemoryContainer
     {
         // The SimpleMemory object can be passed around as usual.
         private readonly SimpleMemory _memory;
 
+        public MemoryContainer(SimpleMemory memory) => _memory = memory;
 
-        public MemoryContainer(SimpleMemory memory)
-        {
-            _memory = memory;
-        }
-
-
-        public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.Run_InputUInt32Index);
+        public uint GetInput() => _memory.ReadUInt32(ObjectOrientedShowcase.RunInputUInt32Index);
     }
 }

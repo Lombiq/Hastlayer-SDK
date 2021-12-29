@@ -5,17 +5,18 @@ using Hast.Console.Options;
 using Hast.Console.Subcommands;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using static System.Console;
 
 namespace Hast.Console
 {
+    [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
     internal class Program
     {
         private static Dictionary<string, SubcommandInfo> _subcommands;
 
-
-        private static void RunOptions(MainOptions mainOptions, string[] arguments)
+        private static void RunOptions(MainOptions mainOptions)
         {
             if (mainOptions.ListCommands)
             {
@@ -23,7 +24,7 @@ namespace Hast.Console
                 WriteLine("Subcommands:\n* {0}", allSubcommands);
             }
             else if (mainOptions.Subcommand?.ToUpperInvariant() is { } name &&
-                     _subcommands.SingleOrDefault(sub => sub.Key.ToUpperInvariant() == name) is { } subcommand)
+                     _subcommands.SingleOrDefault(sub => sub.Key.ToUpperInvariant() == name) is { })
             {
                 WriteLine("Please put the subcommand name as the first argument!");
             }
@@ -55,7 +56,7 @@ namespace Hast.Console
                     CommandName = ((SubcommandAttribute)result.Attribute)!.Name,
                     Instance = (ISubcommand)result.Type!
                             .GetConstructor(new[] { typeof(string[]) })!
-                        .Invoke(new object[] { args })
+                        .Invoke(new object[] { args }),
                 })
                 .ToDictionary(info => info.CommandName);
 
@@ -66,10 +67,9 @@ namespace Hast.Console
             }
 
             Parser.Default.ParseArguments<MainOptions>(args)
-                .WithParsed(options => RunOptions(options, args))
+                .WithParsed(RunOptions)
                 .WithNotParsed(HandleParseError);
         }
-
 
         private class SubcommandInfo
         {

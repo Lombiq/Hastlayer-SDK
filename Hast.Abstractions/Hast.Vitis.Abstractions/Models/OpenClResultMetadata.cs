@@ -1,4 +1,4 @@
-﻿using Hast.Vitis.Abstractions.Constants;
+using Hast.Vitis.Abstractions.Constants;
 using System;
 using System.Runtime.InteropServices;
 
@@ -19,11 +19,11 @@ namespace Hast.Vitis.Abstractions.Models
             {
                 Span<byte> temp = new byte[MemoryCellSizeBytes];
                 executionTimeSpan.Slice(0, MemoryCellSizeBytes).CopyTo(temp);
-                executionTimeSpan.Slice(MemoryCellSizeBytes).CopyTo(executionTimeSpan);
-                temp.CopyTo(executionTimeSpan.Slice(MemoryCellSizeBytes));
+                executionTimeSpan[MemoryCellSizeBytes..].CopyTo(executionTimeSpan);
+                temp.CopyTo(executionTimeSpan[MemoryCellSizeBytes..]);
             }
 
-            ExecutionTime =  MemoryMarshal.Read<ulong>(executionTimeSpan);
+            ExecutionTime = MemoryMarshal.Read<ulong>(executionTimeSpan);
         }
     }
 }

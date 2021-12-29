@@ -12,7 +12,7 @@ using Terminal.Gui;
 
 namespace Hast.Samples.Consumer
 {
-    public class Gui
+    public sealed class Gui : IDisposable
     {
         private readonly Dictionary<string, ConsumerConfiguration> _savedConfigurations;
         private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
@@ -21,15 +21,16 @@ namespace Hast.Samples.Consumer
 
         private readonly TextField _optionsTextField =
             new TextField { CanFocus = true, Visible = false }.FillHorizontally();
-        private Action<string> _currentOptionsTextFieldEventHandler;
-
         private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
+
+        private Action<string> _currentOptionsTextFieldEventHandler;
         private Action<object> _currentOptionsListViewEventHandler;
 
         private FrameView _leftPane;
         private FrameView _topRightPane;
         private FrameView _bottomRightPane;
 
+        private MenuBar _menu;
         private MenuBarItem _startMenuItem;
 
         private ConsumerConfiguration _configuration;
@@ -37,6 +38,10 @@ namespace Hast.Samples.Consumer
         private Task<List<string>> _deviceNamesTask;
 
         private string _latestValue;
+
+        private TextField _input;
+        private ListView _list;
+        private ScrollView _scrollView;
 
         public Gui(Dictionary<string, ConsumerConfiguration> savedConfigurations) =>
             _savedConfigurations = savedConfigurations;
@@ -63,12 +68,13 @@ namespace Hast.Samples.Consumer
             var hastlayerTask = Task.Run(() => (Hastlayer)Hastlayer.Create(new HastlayerConfiguration()));
             // This task starts prefetching the device list in the background. Without it the application would hang for
             // a second or so, when you select the DeviceName option.
-            _deviceNamesTask = hastlayerTask.ContinueWith(hastlayer =>
-                hastlayer
+            _deviceNamesTask = hastlayerTask.ContinueWith(
+                hastlayer => hastlayer
                     .Result
                     .GetSupportedDevices()?
                     .Select(device => device.Name)
-                    .ToList() ?? new List<string>());
+                    .ToList() ?? new List<string>(),
+                TaskScheduler.Current);
 
             // We can expect the Windows API on Windows, but not all *nix has nCurses.
             Application.UseSystemConsole = !isWindows;
@@ -80,19 +86,21 @@ namespace Hast.Samples.Consumer
                 "_Start (F5)",
                 string.Empty,
                 () => { /* Intentionally empty. */ });
-            var menu = new MenuBar (new[] {
-                new MenuBarItem ("_File", new[] {
-                    new MenuItem (
+            _menu = new MenuBar(new[]
+            {
+                new MenuBarItem("_File", new[]
+                {
+                    new MenuItem(
                         "_Load",
                         "Selects a saved configuration.",
                         LoadConfiguration,
                         shortcut: Key.Q | Key.L),
-                    new MenuItem (
+                    new MenuItem(
                         "_Save",
                         "Saves the current configuration.",
                         SaveConfiguration,
                         shortcut: Key.Q | Key.S),
-                    new MenuItem (
+                    new MenuItem(
                         "_Quit",
                         "Closes the application.",
                         SetConfigurationAndStop(null),
@@ -105,13 +113,13 @@ namespace Hast.Samples.Consumer
             _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
             _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
-            var confiurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
-                    JsonConvert.SerializeObject(_configuration))
+            var configurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
+                    JsonConvert.SerializeObject(_configuration))?
                 .Keys
                 .Select(key => Regex.Replace(key, @"[A-Z]", " $0").TrimStart())
                 .OrderBy(text => text)
                 .ToList();
-            _propertiesListView.SetSource(confiurationKeys);
+            _propertiesListView.SetSource(configurationKeys);
             _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
             _propertiesListView.OpenSelectedItem += _ =>
             {
@@ -120,7 +128,7 @@ namespace Hast.Samples.Consumer
             };
 
             var top = Application.Top;
-            top.Add(menu);
+            top.Add(_menu);
             top.Add(_leftPane);
             top.Add(_bottomRightPane);
             top.Add(_topRightPane);
@@ -192,17 +200,17 @@ namespace Hast.Samples.Consumer
             {
                 case nameof(ConsumerConfiguration.AppName):
                     _optionsTextField.Text = _configuration.AppName ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => { _configuration.AppName = text; };
+                    _currentOptionsTextFieldEventHandler = text => _configuration.AppName = text;
                     ShowTextField(true);
                     break;
                 case nameof(ConsumerConfiguration.AppSecret):
                     _optionsTextField.Text = _configuration.AppSecret ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => { _configuration.AppSecret = text; };
+                    _currentOptionsTextFieldEventHandler = text => _configuration.AppSecret = text;
                     ShowTextField(true);
                     break;
                 case nameof(ConsumerConfiguration.BuildLabel):
                     _optionsTextField.Text = _configuration.BuildLabel ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => { _configuration.BuildLabel = text; };
+                    _currentOptionsTextFieldEventHandler = text => _configuration.BuildLabel = text;
                     ShowTextField(true);
                     break;
                 case nameof(ConsumerConfiguration.DeviceName):
@@ -211,30 +219,30 @@ namespace Hast.Samples.Consumer
                 case nameof(ConsumerConfiguration.GenerateHardwareOnly):
                     _optionsListView.Source = new ListWrapper(new object[] { true, false });
                     _optionsListView.SelectedItem = _configuration.GenerateHardwareOnly ? 0 : 1;
-                    _currentOptionsListViewEventHandler = item => { _configuration.GenerateHardwareOnly = item.IsTrueString(); };
+                    _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = item.IsTrueString();
                     ShowTextField(false);
                     break;
                 case nameof(ConsumerConfiguration.Endpoint):
                     _optionsTextField.Text = _configuration.Endpoint ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => { _configuration.Endpoint = text; };
+                    _currentOptionsTextFieldEventHandler = text => _configuration.Endpoint = text;
                     ShowTextField(true);
                     break;
                 case nameof(ConsumerConfiguration.HardwareFrameworkPath):
                     _optionsTextField.Text = _configuration.HardwareFrameworkPath ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => { _configuration.HardwareFrameworkPath = text; };
+                    _currentOptionsTextFieldEventHandler = text => _configuration.HardwareFrameworkPath = text;
                     ShowTextField(true);
                     break;
                 case nameof(ConsumerConfiguration.SampleToRun):
                     var sampleNames = Enum.GetNames(typeof(Sample)).ToList();
                     _optionsListView.Source = new ListWrapper(sampleNames);
                     _optionsListView.SelectedItem = sampleNames.IndexOf(_configuration.SampleToRun.ToString());
-                    _currentOptionsListViewEventHandler = item => { _configuration.SampleToRun = Enum.Parse<Sample>(item.ToString()!); };
+                    _currentOptionsListViewEventHandler = item => _configuration.SampleToRun = Enum.Parse<Sample>(item.ToString()!);
                     ShowTextField(false);
                     break;
                 case nameof(ConsumerConfiguration.VerifyResults):
                     _optionsListView.Source = new ListWrapper(new object[] { true, false });
                     _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
-                    _currentOptionsListViewEventHandler = item => { _configuration.VerifyResults = item.IsTrueString(); };
+                    _currentOptionsListViewEventHandler = item => _configuration.VerifyResults = item.IsTrueString();
                     ShowTextField(false);
                     break;
                 case nameof(ConsumerConfiguration.SingleBinaryPath):
@@ -258,7 +266,8 @@ namespace Hast.Samples.Consumer
                 var index = deviceNames.IndexOf(deviceName);
                 if (index >= 0) _optionsListView.SelectedItem = index;
             }
-            _currentOptionsListViewEventHandler = item => { _configuration.DeviceName = item.ToString(); };
+
+            _currentOptionsListViewEventHandler = item => _configuration.DeviceName = item.ToString();
             ShowTextField(false);
         }
 
@@ -313,14 +322,14 @@ namespace Hast.Samples.Consumer
 
             var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
 
-            var input = new TextField().FillHorizontally();
+            _input = new TextField().FillHorizontally();
 
             void OkClicked()
             {
-                var text = input.Text.ToString();
+                var text = _input.Text.ToString();
                 if (string.IsNullOrWhiteSpace(text))
                 {
-                    input.SetFocus();
+                    _input.SetFocus();
                     return;
                 }
 
@@ -330,11 +339,11 @@ namespace Hast.Samples.Consumer
             }
 
             buttonOk.Clicked += OkClicked;
-            input.OnEnterKeyPressed(OkClicked);
-            input.OnEscKeyPressed(close);
+            _input.OnEnterKeyPressed(OkClicked);
+            _input.OnEscKeyPressed(close);
 
-            dialogFrame.Add(input);
-            input.SetFocus();
+            dialogFrame.Add(_input);
+            _input.SetFocus();
         }
 
         private void LoadConfiguration()
@@ -347,7 +356,7 @@ namespace Hast.Samples.Consumer
             var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
 
             var names = _savedConfigurations.Keys.ToList();
-            var list = new ListView(names)
+            _list = new ListView(names)
             {
                 X = 0,
                 Y = 0,
@@ -355,7 +364,7 @@ namespace Hast.Samples.Consumer
                 Height = Dim.Percent(100),
             };
 
-            var scrollView = new ScrollView
+            _scrollView = new ScrollView
             {
                 X = 1,
                 Y = 3,
@@ -363,14 +372,14 @@ namespace Hast.Samples.Consumer
                 Height = Dim.Percent(100) - 2,
                 CanFocus = false,
                 ContentSize = new Size(
-                    names.Select(name => name.Length).Concat(new [] { Console.WindowWidth / 2 }).Max(),
+                    names.Select(name => name.Length).Concat(new[] { Console.WindowWidth / 2 }).Max(),
                     names.Count),
             };
 
             void OkClicked()
             {
                 var clone = JsonConvert.DeserializeObject<ConsumerConfiguration>(
-                    JsonConvert.SerializeObject(_savedConfigurations[names[list.SelectedItem]]));
+                    JsonConvert.SerializeObject(_savedConfigurations[names[_list.SelectedItem]]));
                 _configuration = clone; // This way the saved configuration is unaltered until you click Save.
                 close();
 
@@ -378,12 +387,12 @@ namespace Hast.Samples.Consumer
             }
 
             buttonOk.Clicked += OkClicked;
-            list.OnEnterKeyPressed(OkClicked);
-            list.OnEscKeyPressed(close);
+            _list.OnEnterKeyPressed(OkClicked);
+            _list.OnEscKeyPressed(close);
 
-            dialogFrame.Add(scrollView);
-            scrollView.Add(list);
-            list.SetFocus();
+            dialogFrame.Add(_scrollView);
+            _scrollView.Add(_list);
+            _list.SetFocus();
         }
 
         private void ShowTextField(bool visible)
@@ -446,6 +455,33 @@ namespace Hast.Samples.Consumer
             _bottomRightPane.Y = Pos.Bottom(_topRightPane);
             _bottomRightPane.Width = _topRightPane.Width;
             _bottomRightPane.Height = Dim.Fill();
+        }
+
+        public void Dispose()
+        {
+            // Application.Shutdown() sets Application.Top to null and recursively disposes all child objects. At that
+            // point disposing them again would cause many NREs.
+            if (Application.Top == null) return;
+
+            _propertiesListView?.Dispose();
+            _hintLabel?.Dispose();
+            _optionsTextField?.Dispose();
+            _optionsListView?.Dispose();
+            _leftPane?.Dispose();
+            _topRightPane?.Dispose();
+            _bottomRightPane?.Dispose();
+            _deviceNamesTask?.Dispose();
+            _menu?.Dispose();
+            _input?.Dispose();
+            _list?.Dispose();
+            _scrollView?.Dispose();
+        }
+
+        public static ConsumerConfiguration BuildConfiguration(
+            Dictionary<string, ConsumerConfiguration> savedConfigurations)
+        {
+            using var gui = new Gui(savedConfigurations);
+            return gui.BuildConfiguration();
         }
     }
 }

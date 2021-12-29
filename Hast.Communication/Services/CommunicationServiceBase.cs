@@ -2,6 +2,7 @@ using Hast.Communication.Models;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -12,27 +13,21 @@ namespace Hast.Communication.Services
     {
         protected ILogger Logger { get; }
 
-        abstract public string ChannelName { get; }
+        public abstract string ChannelName { get; }
         public TextWriter TesterOutput { get; set; }
-
 
         protected CommunicationServiceBase(ILogger logger) => Logger = logger;
 
-
-        abstract public Task<IHardwareExecutionInformation> Execute(
+        public abstract Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext);
 
-
-        protected CommunicationStateContext BeginExecution()
+        protected CommunicationStateContext BeginExecution() => new()
         {
-            return new CommunicationStateContext
-            {
-                Stopwatch = Stopwatch.StartNew(),
-                HardwareExecutionInformation = new HardwareExecutionInformation()
-            };
-        }
+            Stopwatch = Stopwatch.StartNew(),
+            HardwareExecutionInformation = new HardwareExecutionInformation(),
+        };
 
         protected void EndExecution(CommunicationStateContext context)
         {
@@ -43,6 +38,16 @@ namespace Hast.Communication.Services
             Logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
         }
 
+        protected async Task<CommunicationStateContext> RunExecutionAsync(
+            Func<CommunicationStateContext, Task> executionAction)
+        {
+            var context = BeginExecution();
+            await executionAction(context);
+            EndExecution(context);
+
+            return context;
+        }
+
         protected void SetHardwareExecutionTime(
             CommunicationStateContext context,
             IHardwareExecutionContext executionContext,
@@ -51,7 +56,7 @@ namespace Hast.Communication.Services
         {
             var frequency = clockFrequency ?? executionContext.HardwareRepresentation.DeviceManifest.ClockFrequencyHz;
 
-            var milliseconds = 1M / frequency * 1000 * executionTimeClockCycles;
+            var milliseconds = 1M / frequency * 1_000 * executionTimeClockCycles;
             context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = milliseconds;
 
             Logger.LogInformation(
@@ -61,7 +66,6 @@ namespace Hast.Communication.Services
 
             Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
-
 
         protected class CommunicationStateContext
         {

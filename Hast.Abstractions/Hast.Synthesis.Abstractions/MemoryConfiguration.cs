@@ -7,7 +7,7 @@ namespace Hast.Synthesis.Abstractions
 {
     public class MemoryConfiguration : IMemoryConfiguration
     {
-        private int _alignment = 0;
+        private int _alignment;
 
         public int Alignment
         {
@@ -25,9 +25,7 @@ namespace Hast.Synthesis.Abstractions
 
         public int MinimumPrefix { get; set; }
 
-
         private MemoryConfiguration() { }
-
 
         public static IMemoryConfiguration Create(
             IHardwareGenerationConfiguration hardwareGenerationConfiguration,
@@ -39,6 +37,5 @@ namespace Hast.Synthesis.Abstractions
             deviceManifestProvider.ConfigureMemory(memoryConfiguration, hardwareGenerationConfiguration);
             return memoryConfiguration;
         }
-
     }
 }

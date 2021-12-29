@@ -9,15 +9,16 @@ namespace Hast.Common.Extensions
     public static class MemberNameExtensions
     {
         /// <summary>
-        /// Creates an alternate versions of a member name if the full member name contains both a class and an interface 
-        /// reference (as it is with explicitly implemented members).
+        /// Creates an alternate versions of a member name if the full member name contains both a class and an
+        /// interface reference (as it is with explicitly implemented members).
         /// </summary>
         /// <remarks>
-        /// E.g. a member name as stored in the hardware description can be:
-        /// "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.ComplexTypes.IInterface1.Interface1Method1(System.Int32)"
+        /// <para>E.g. a member name as stored in the hardware description can be:
+        /// "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Hast.Tests.TestAssembly1.
+        /// ComplexTypes.IInterface1.Interface1Method1(System.Int32)"
         /// We create two alternates from this:
         /// 1) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.ComplexTypeHierarchy::Interface1Method1(System.Int32)"
-        /// 2) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)"
+        /// 2) "System.Int32 Hast.Tests.TestAssembly1.ComplexTypes.IInterface1::Interface1Method1(System.Int32)".</para>
         /// </remarks>
         /// <returns>Alternate member names, if any.</returns>
         public static IEnumerable<string> GetMemberNameAlternates(this string memberFullName)
@@ -25,7 +26,9 @@ namespace Hast.Common.Extensions
             var sides = memberFullName.Split(new[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
 
             // If there are no dots before the member name that means this full name doesn't contain an interface reference.
-            if (sides.Length != 2 || sides[1].IndexOf('.') == -1 || sides[1].IndexOf('.') > sides[1].IndexOf('('))
+            if (sides.Length != 2 ||
+                !sides[1].Contains(".") ||
+                sides[1].IndexOfOrdinal(".") > sides[1].IndexOfOrdinal("("))
             {
                 return Enumerable.Empty<string>();
             }
@@ -36,9 +39,9 @@ namespace Hast.Common.Extensions
             return new[]
             {
                 // 1. alternate:
-                sides[0] + "::" + sides[1].Substring(sides[1].IndexOf(methodName + "(")),
+                sides[0] + "::" + sides[1][sides[1].IndexOfOrdinal(methodName + "(")..],
                 // 2. alternate:
-                returnType + " " + sides[1].Replace("." + methodName + "(", "::" + methodName + "(")
+                returnType + " " + sides[1].Replace($".{methodName}(", $"::{methodName}("),
             };
         }
     }

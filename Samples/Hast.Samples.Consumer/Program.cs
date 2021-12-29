@@ -1,7 +1,8 @@
 using Castle.Core.Internal;
 using Hast.Algorithms;
-using Hast.Common.Enums;
+using Hast.Common.Services;
 using Hast.Communication.Exceptions;
+using Hast.Communication.Extensibility.Events;
 using Hast.Layer;
 using Hast.Samples.Consumer.Models;
 using Hast.Samples.Consumer.SampleRunners;
@@ -12,6 +13,7 @@ using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,9 +25,13 @@ namespace Hast.Samples.Consumer
 
     // Configure the whole sample project in command line arguments. See Models/ConsumerConfiguration.cs for details.
 
+    [SuppressMessage(
+        "Globalization",
+        "CA1303:Do not pass literals as localized parameters",
+        Justification = "This program is not localized.")]
     internal static class Program
     {
-        private static async Task MainTask(string[] args)
+        private static async Task<ExitStatus> MainTaskAsync(string[] args)
         {
             /*
             * On a high level these are the steps to use Hastlayer:
@@ -34,9 +40,6 @@ namespace Hast.Samples.Consumer
             * 3. Generate proxies for hardware-transformed types and use these proxies to utilize hardware
             *    implementations. (You can see this inside the SampleRunners.)
             */
-
-            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
-            var hastlayerConfiguration = new HastlayerConfiguration();
 
             // Here we create the ConsumerConfiguration used to set up this application. Check out the
             // ConsumerConfiguration class to see what can be changed to try out the various samples and available
@@ -49,49 +52,39 @@ namespace Hast.Samples.Consumer
             var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
             var consumerConfiguration = args.Any()
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
-                : new Gui(savedConfigurations).BuildConfiguration();
-            if (consumerConfiguration == null) return;
+                : Gui.BuildConfiguration(savedConfigurations);
+            if (consumerConfiguration == null) return ExitStatus.NothingToDo;
+
+            // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
+            // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
+            // transformation. In most cases the flavor defaults to the one you need.
+            //// var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
+
+            var hastlayerConfiguration = new HastlayerConfiguration();
             if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
             // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
             // make sure to Dispose() it before the program terminates.
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
-
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
-            hastlayer.ExecutedOnHardware += (_, e) =>
-            {
-                var netTime = e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
-                var grossTime = e.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
-
-                Console.WriteLine(
-                    $"Executing {e.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
-                    $"{grossTime:0.####} milliseconds (all together).");
-
-                if (e.SoftwareExecutionInformation == null) return;
-
-                // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true,
-                // see the notes below, or if the hardware execution was canceled.
-                var softwareTime = e.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
-                Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
-            };
+            hastlayer.ExecutedOnHardware += Hastlayer_ExecutedOnHardware;
 
             // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
             var devices = hastlayer.GetSupportedDevices()?.ToList();
-            if (devices == null || !devices.Any()) throw new Exception("No devices are available!");
+            if (devices == null || !devices.Any()) throw new InvalidOperationException("No devices are available!");
 
             // Let's just use the first one that is available unless it's specified.
             var targetDeviceName = consumerConfiguration.DeviceName.OrIfEmpty(devices.First().Name);
             var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
-            if (selectedDevice == null) throw new Exception($"Target device '{targetDeviceName}' not found!");
+            if (selectedDevice == null) throw new InvalidOperationException($"Target device '{targetDeviceName}' not found!");
 
             var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, consumerConfiguration.HardwareFrameworkPath);
             var proxyConfiguration = new ProxyGenerationConfiguration
             {
                 VerifyHardwareResults = consumerConfiguration.VerifyResults,
             };
-            configuration.SingleBinaryPath = consumerConfiguration.SingleBinaryPath;
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
             ConfigureClientFlavor(configuration, hastlayerConfiguration, consumerConfiguration);
@@ -116,7 +109,7 @@ namespace Hast.Samples.Consumer
                 Sample.RecursiveAlgorithms => new RecursiveAlgorithmsSampleRunner(),
                 Sample.SimdCalculator => new SimdCalculatorSampleRunner(),
                 Sample.UnumCalculator => new UnumCalculatorSampleRunner(),
-                _ => throw new Exception($"Unknown sample '{consumerConfiguration.SampleToRun}'."),
+                _ => throw consumerConfiguration.SampleToRun.UnknownEnumException(),
             };
             sampleRunner.Configure(configuration);
             configuration.Label = consumerConfiguration.BuildLabel ?? consumerConfiguration.SampleToRun.ToString();
@@ -128,7 +121,7 @@ namespace Hast.Samples.Consumer
 
             // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug
             // assemblies!
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[]
                 {
                     // Selecting any type from the sample assembly here just to get its Assembly object.
@@ -159,36 +152,54 @@ namespace Hast.Samples.Consumer
 
             Console.WriteLine("Starting hardware execution.");
 
-            // Running the selected sample. It is executed 3 times to ensure all JIT compilation overhead has been
-            // eliminated by successive reruns. The last attempt is a better representation of performance in
-            // long-running applications.
+            // Running samples.
             try
             {
-                for (var i = 0; i < 3; i++)
-                {
-                    Console.WriteLine("\n\n\n\n\n\nAttempt #{0:0}:", i + 1);
-                    await sampleRunner.Run(hastlayer, hardwareRepresentation, proxyConfiguration);
-                }
+                await sampleRunner.RunAsync(hastlayer, hardwareRepresentation, proxyConfiguration);
+                return ExitStatus.Success;
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
             {
-                // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling
-                // GenerateProxy()) then everything will be computed in software as well to check the hardware.
-                // You'll get such an exception if there is any mismatch. This shouldn't normally happen, but it's
-                // not impossible in corner cases.
-                var mismatches = exception
-                    .Mismatches?
-                    .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
-                var mismatchCount = mismatches.Count;
-                Console.WriteLine(
-                    $"There {(mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches")} between " +
-                    $"the software and hardware execution's results! The memory length is {exception.CellCount}. " +
-                    $"Mismatch{(mismatchCount == 1 ? string.Empty : "es")}:");
+                OnMismatch(exception);
+                return ExitStatus.Mismatch;
+            }
+        }
 
-                foreach (var mismatch in mismatches)
-                {
-                    Console.WriteLine("* " + mismatch);
-                }
+        private static void Hastlayer_ExecutedOnHardware(object sender, ServiceEventArgs<IMemberHardwareExecutionContext> e)
+        {
+            var arguments = e.Arguments;
+            var netTime = arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
+            var grossTime = arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
+
+            Console.WriteLine(
+                $"Executing {arguments.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
+                $"{grossTime:0.####} milliseconds (all together).");
+
+            if (arguments.SoftwareExecutionInformation == null) return;
+
+            // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true, see
+            // the notes below, or if the hardware execution was canceled.
+            var softwareTime = arguments.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
+            Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
+        }
+
+        private static void OnMismatch(HardwareExecutionResultMismatchException exception)
+        {
+            // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling GenerateProxy()) then
+            // everything will be computed in software as well to check the hardware. You'll get such an exception if
+            // there is any mismatch. This shouldn't normally happen, but it's not impossible in corner cases.
+            var mismatches = exception
+                .Mismatches?
+                .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
+            var mismatchCount = mismatches.Count;
+            Console.WriteLine(
+                "There {0} between the software and hardware execution's results! Mismatch{1}:",
+                mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches",
+                mismatchCount == 1 ? string.Empty : "es");
+
+            foreach (var mismatch in mismatches)
+            {
+                Console.WriteLine("* " + mismatch);
             }
         }
 
@@ -216,17 +227,36 @@ namespace Hast.Samples.Consumer
             }
         }
 
-        private static async Task Main(string[] args)
+        private static async Task<int> Main(string[] args)
         {
             // Wrapping the whole program into a try-catch here so it's a bit more convenient above.
+            ExitStatus status;
             try
             {
-                await MainTask(args);
+                status = await MainTaskAsync(args);
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine(ex);
+                await Console.Error.WriteLineAsync(ex.ToString());
+                status = ExitStatus.Error;
             }
+
+            return (int)status;
+        }
+
+        /// <summary>
+        /// Possible application exit statuses (also known as <see cref="Environment.ExitCode"/>). This is returned from
+        /// <see cref="Main"/> as <see langword="int"/> and it's useful if you call this application from a
+        /// shell script. The Windows cmd can access it using the <c>IF ERRORLEVEL n</c> expression. On Windows, Linux
+        /// and macOS you can access it from Powershell using the <c>$LASTEXITCODE</c> variable or from Bash using the
+        /// <c>$?</c> variable.
+        /// </summary>
+        private enum ExitStatus
+        {
+            Success = 0,
+            NothingToDo = 1,
+            Mismatch = 2,
+            Error = 3,
         }
     }
 }

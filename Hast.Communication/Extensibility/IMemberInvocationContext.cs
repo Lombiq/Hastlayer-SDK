@@ -1,4 +1,4 @@
-﻿using Castle.DynamicProxy;
+using Castle.DynamicProxy;
 using Hast.Layer;
 
 namespace Hast.Communication.Extensibility
@@ -25,8 +25,8 @@ namespace Hast.Communication.Extensibility
         IHardwareRepresentation HardwareRepresentation { get; }
 
         /// <summary>
-        /// Debug information about the software execution of hardware-executed members in case the hardware execution
-        /// was canceled or verified in software.
+        /// Gets the debug information about the software execution of hardware-executed members in case the hardware
+        /// execution was canceled or verified in software.
         /// </summary>
         ISoftwareExecutionInformation SoftwareExecutionInformation { get; }
     }

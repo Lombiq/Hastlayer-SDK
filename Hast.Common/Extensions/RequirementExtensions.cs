@@ -19,7 +19,6 @@ namespace Hast.Common.Extensions
         /// <param name="source">The original collection.</param>
         /// <typeparam name="TItem">The <see cref="IRequirement{T}"/> type of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The <c>T</c> in <see cref="IRequirement{T}"/>.</typeparam>
-        /// <returns></returns>
         public static List<TItem> OrderByRequirements<TItem, TKey>(this IEnumerable<TItem> source)
             where TItem : IRequirement<TKey>
             where TKey : IEquatable<TKey>

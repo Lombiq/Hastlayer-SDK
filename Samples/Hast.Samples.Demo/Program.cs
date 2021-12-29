@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
 {
-    internal class Program
+    internal static class Program
     {
         private static async Task Main()
         {
@@ -19,20 +19,20 @@ namespace Hast.Samples.Demo
 
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+            hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 Console.WriteLine(
                     "Executing on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
+                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
                     " milliseconds (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
+                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
                     " milliseconds (all together).");
             };
             #endregion
 
             #region HardwareGeneration
             Console.WriteLine("Hardware generation starts.");
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[]
                 {
                     typeof(ParallelAlgorithm).Assembly,
@@ -53,7 +53,7 @@ namespace Hast.Samples.Demo
             Console.WriteLine();
             Console.WriteLine("Starting hardware execution.");
 
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
+            var parallelAlgorithm = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ParallelAlgorithm());
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

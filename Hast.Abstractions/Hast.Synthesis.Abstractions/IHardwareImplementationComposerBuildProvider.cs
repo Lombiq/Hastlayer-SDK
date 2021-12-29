@@ -29,9 +29,13 @@ namespace Hast.Synthesis.Abstractions
         Task BuildAsync(IHardwareImplementationCompositionContext context, IHardwareImplementation implementation);
 
         /// <summary>
-        /// If implemented, it adds to the <see cref="Shortcuts"/> of other providers.
+        /// If implemented, it adds <see cref="BuildProviderShortcut"/> to the <see cref="Shortcuts"/> of other <see
+        /// cref="IHardwareImplementationComposerBuildProvider"/> instances.
         /// </summary>
-        void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers) { }
+        void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        {
+            // The default behavior is to do nothing.
+        }
 
         /// <summary>
         /// If implemented, it performs cleanup tasks and removes temporary resources. This is deferred until all build

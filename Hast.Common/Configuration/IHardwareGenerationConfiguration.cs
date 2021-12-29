@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace Hast.Layer
 {
+    /// <summary>
+    /// Configuration for <c>IHastlayer.GenerateHardwareAsync</c>.
+    /// </summary>
     public interface IHardwareGenerationConfiguration
     {
         /// <summary>
@@ -15,7 +18,7 @@ namespace Hast.Layer
         IDictionary<string, object> CustomConfiguration { get; }
 
         /// <summary>
-        /// Gets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
+        /// Gets or sets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
         /// logged or saved during hardware generation but otherwise it may not be used in any activities.
         /// </summary>
         string Label { get; set; }
@@ -29,7 +32,7 @@ namespace Hast.Layer
         /// <example>
         /// Specify members with their full name, including the full namespace of the parent type(s) as well as their
         /// return type and the types of their (type) arguments, e.g.:
-        /// "System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])
+        /// <c>"System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])</c>.
         /// </example>
         IList<string> HardwareEntryPointMemberFullNames { get; }
 
@@ -47,7 +50,8 @@ namespace Hast.Layer
         IList<string> HardwareEntryPointMemberNamePrefixes { get; }
 
         /// <summary>
-        /// Gets whether the caching of the generated hardware is allowed. If set to <c>false</c> no caching will happen.
+        /// Gets a value indicating whether the caching of the generated hardware is allowed. If set to <see
+        /// langword="false"/> no caching will happen.
         /// </summary>
         bool EnableCaching { get; }
 
@@ -65,13 +69,13 @@ namespace Hast.Layer
         string HardwareFrameworkPath { get; }
 
         /// <summary>
-        /// Gets whether hardware transformation takes place. If it doesn't then
-        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <c>false</c> too.
+        /// Gets a value indicating whether hardware transformation takes place. If it doesn't then
+        /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <see langword="false"/> too.
         /// </summary>
         bool EnableHardwareTransformation { get; }
 
         /// <summary>
-        /// Gets whether a hardware implementation composer should be used to synthesize hardware from the transformed
+        /// Gets a value indicating whether a hardware implementation composer should be used to synthesize hardware from the transformed
         /// hardware description.
         /// </summary>
         bool EnableHardwareImplementationComposition { get; }
@@ -82,7 +86,6 @@ namespace Hast.Layer
         /// </summary>
         string SingleBinaryPath { get; set; }
     }
-
 
     public static class HardwareGenerationConfigurationExtensions
     {
@@ -123,7 +126,7 @@ namespace Hast.Layer
             {
                 "Boolean Equals(System.Object)",
                 "Int32 GetHashCode()", "System.Type GetType()",
-                "System.String ToString()"
+                "System.String ToString()",
             };
 
             // If we'd just add the type's name to HardwareEntryPointMemberNamePrefixes then types with just a different

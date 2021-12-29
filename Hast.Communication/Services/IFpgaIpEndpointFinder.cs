@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hast.Common.Interfaces;
 using Hast.Communication.Models;
@@ -14,6 +14,6 @@ namespace Hast.Communication.Services
         /// Returns all FPGA endpoints connected to the available networks of this computer.
         /// </summary>
         /// <returns>FPGA endpoints connected to the available networks of this computer.</returns>
-        Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpoints();
+        Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpointsAsync();
     }
 }
