@@ -1,6 +1,7 @@
 using Hast.Samples.Kpz.Algorithms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace Hast.Samples.Kpz
     /// </summary>
     public class KpzIteration
     {
+        [SuppressMessage(
+            "Design",
+            "MA0016:Prefer return collection abstraction instead of implementation",
+            Justification = "Needs to be both expandable and indexable.")]
         public List<KpzAction> Actions { get; } = new List<KpzAction>();
     }
 
@@ -37,7 +42,7 @@ namespace Hast.Samples.Kpz
         public int[,] HeightMap { get; set; }
 #pragma warning restore CA1819 // Properties should not return arrays
 
-        public List<KpzCoords> HighlightedCoords { get; } = new List<KpzCoords>();
+        public ICollection<KpzCoords> HighlightedCoords { get; } = new List<KpzCoords>();
         public Color HightlightColor { get; set; }
     }
 
@@ -48,6 +53,10 @@ namespace Hast.Samples.Kpz
     public class KpzStateLogger
     {
         /// <summary>Gets the KPZ iteration list.</summary>
+        [SuppressMessage(
+            "Design",
+            "MA0016:Prefer return collection abstraction instead of implementation",
+            Justification = "Needs to be both expandable and indexable.")]
         public List<KpzIteration> Iterations { get; } = new List<KpzIteration>();
 
         /// <summary>

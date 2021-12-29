@@ -26,7 +26,7 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IAzureStorageServiceFactory _azureStorageServiceFactory;
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
 
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
+        public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {

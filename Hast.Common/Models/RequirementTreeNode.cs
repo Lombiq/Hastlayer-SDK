@@ -7,6 +7,6 @@ namespace Hast.Common.Models
         where TItem : IRequirement<TKey>
     {
         public TItem Data { get; set; }
-        public List<RequirementTreeNode<TItem, TKey>> Children { get; } = new();
+        public IList<RequirementTreeNode<TItem, TKey>> Children { get; } = new List<RequirementTreeNode<TItem, TKey>>();
     }
 }

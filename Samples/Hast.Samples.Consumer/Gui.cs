@@ -14,7 +14,7 @@ namespace Hast.Samples.Consumer
 {
     public sealed class Gui : IDisposable
     {
-        private readonly Dictionary<string, ConsumerConfiguration> _savedConfigurations;
+        private readonly IDictionary<string, ConsumerConfiguration> _savedConfigurations;
         private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
 
         private readonly Label _hintLabel = new Label(string.Empty) { CanFocus = false }.Fill();
@@ -43,7 +43,7 @@ namespace Hast.Samples.Consumer
         private ListView _list;
         private ScrollView _scrollView;
 
-        public Gui(Dictionary<string, ConsumerConfiguration> savedConfigurations) =>
+        public Gui(IDictionary<string, ConsumerConfiguration> savedConfigurations) =>
             _savedConfigurations = savedConfigurations;
 
         public ConsumerConfiguration BuildConfiguration()
@@ -469,7 +469,7 @@ namespace Hast.Samples.Consumer
         }
 
         public static ConsumerConfiguration BuildConfiguration(
-            Dictionary<string, ConsumerConfiguration> savedConfigurations)
+            IDictionary<string, ConsumerConfiguration> savedConfigurations)
         {
             using var gui = new Gui(savedConfigurations);
             return gui.BuildConfiguration();
