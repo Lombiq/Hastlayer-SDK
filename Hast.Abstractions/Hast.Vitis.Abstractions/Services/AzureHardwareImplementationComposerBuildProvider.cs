@@ -155,7 +155,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private static string UpdateBinaryPath(string input) => Regex.Replace(input, @"\.xclbin$", ".azure.xclbin");
+        private static string UpdateBinaryPath(string input) => input.RegexReplace(@"\.xclbin$", ".azure.xclbin");
 
         public static void InitializeService(IServiceCollection services) =>
             services.AddRestEaseHttpClient<IAzureAttestationApi>(

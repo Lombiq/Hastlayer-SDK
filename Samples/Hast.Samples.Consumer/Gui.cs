@@ -112,7 +112,7 @@ namespace Hast.Samples.Consumer
             var configurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
                     JsonConvert.SerializeObject(_configuration))?
                 .Keys
-                .Select(key => Regex.Replace(key, @"[A-Z]", " $0").TrimStart())
+                .Select(key => key.RegexReplace(@"[A-Z]", " $0").TrimStart())
                 .OrderBy(text => text)
                 .ToList();
             _propertiesListView.SetSource(configurationKeys);
