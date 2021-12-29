@@ -22,7 +22,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Castle.Core" Version="4.4.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="StrictEmit" Version="2.8.0" />
     <PackageReference Include="System.Collections.Immutable" Version="5.0.0" />
