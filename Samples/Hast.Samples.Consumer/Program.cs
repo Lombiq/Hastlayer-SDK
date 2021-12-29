@@ -1,5 +1,6 @@
 using Castle.Core.Internal;
 using Hast.Algorithms;
+using Hast.Common.Enums;
 using Hast.Common.Services;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
@@ -41,6 +42,9 @@ namespace Hast.Samples.Consumer
             *    implementations. (You can see this inside the SampleRunners.)
             */
 
+            // Configuring the Hastlayer shell. You don't need to change anything for this sample.
+            var hastlayerConfiguration = new HastlayerConfiguration();
+
             // Here we create the ConsumerConfiguration used to set up this application. Check out the
             // ConsumerConfiguration class to see what can be changed to try out the various samples and available
             // devices!
@@ -54,19 +58,13 @@ namespace Hast.Samples.Consumer
                 ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
                 : Gui.BuildConfiguration(savedConfigurations);
             if (consumerConfiguration == null) return ExitStatus.NothingToDo;
-
-            // Configuring the Hastlayer shell. Which flavor should we use? If you're unsure then you'll need the
-            // Client flavor: This will let you connect to a remote Hastlayer service to run the software to hardware
-            // transformation. In most cases the flavor defaults to the one you need.
-            //// var hastlayerConfiguration = new HastlayerConfiguration { Flavor = HastlayerFlavor.Client };
-
-            var hastlayerConfiguration = new HastlayerConfiguration();
             if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
             // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
             // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
             // make sure to Dispose() it before the program terminates.
             using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
+
             // Hooking into an event of Hastlayer so some execution information can be made visible on the
             // console.
             hastlayer.ExecutedOnHardware += Hastlayer_ExecutedOnHardware;
@@ -85,6 +83,7 @@ namespace Hast.Samples.Consumer
             {
                 VerifyHardwareResults = consumerConfiguration.VerifyResults,
             };
+            configuration.SingleBinaryPath = consumerConfiguration.SingleBinaryPath;
 
             // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
             ConfigureClientFlavor(configuration, hastlayerConfiguration, consumerConfiguration);
@@ -152,10 +151,17 @@ namespace Hast.Samples.Consumer
 
             Console.WriteLine("Starting hardware execution.");
 
-            // Running samples.
+            // Running the selected sample. It is executed 3 times to ensure all JIT compilation overhead has been
+            // eliminated by successive reruns. The last attempt is a better representation of performance in
+            // long-running applications.
             try
             {
-                await sampleRunner.RunAsync(hastlayer, hardwareRepresentation, proxyConfiguration);
+                for (var i = 0; i < 3; i++)
+                {
+                    Console.WriteLine("\n\n\n\n\n\nAttempt #{0:0}:", i + 1);
+                    await sampleRunner.RunAsync(hastlayer, hardwareRepresentation, proxyConfiguration);
+                }
+
                 return ExitStatus.Success;
             }
             catch (AggregateException ex) when (ex.InnerException is HardwareExecutionResultMismatchException exception)
