@@ -3,6 +3,7 @@ using Hast.Samples.Kpz.Algorithms;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 
 namespace Hast.Samples.Kpz
 {
@@ -211,7 +212,7 @@ namespace Hast.Samples.Kpz
                     periodicityValid = false;
                     periodicityInvalidXCount++;
                     if (doVerboseLoggingToConsole)
-                        Console.WriteLine($"periodicityInvalidX at line {y}");
+                        Console.WriteLine(FormattableString.Invariant($"periodicityInvalidX at line {y}"));
                 }
 
                 heightNow += Bool2Delta(Grid[0, (y + 1) % GridHeight].Dy);
@@ -223,7 +224,8 @@ namespace Hast.Samples.Kpz
                 periodicityInvalidYCount++;
                 if (doVerboseLoggingToConsole)
                 {
-                    Console.WriteLine($"periodicityInvalidY {heightMap[0, GridHeight - 1]} + {Bool2Delta(Grid[0, 0].Dy)} != {heightMap[0, 0]}");
+                    Console.Write(FormattableString.Invariant(
+                        $"periodicityInvalidY {heightMap[0, GridHeight - 1]} + {Bool2Delta(Grid[0, 0].Dy)} != {heightMap[0, 0]}"));
                 }
             }
 

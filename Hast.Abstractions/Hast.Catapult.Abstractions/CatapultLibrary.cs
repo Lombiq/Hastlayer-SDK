@@ -1,5 +1,6 @@
 using AdvancedDLSupport;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Hast.Catapult.Abstractions
         /// <summary>
         /// Gets the name of the instance (Catapult:N where N is the PCIe endpoint number).
         /// </summary>
-        public string InstanceName => $"{Constants.ChannelName}:{PcieEndpointNumber}";
+        public string InstanceName => FormattableString.Invariant($"{Constants.ChannelName}:{PcieEndpointNumber}");
 
         /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
@@ -234,12 +235,12 @@ namespace Hast.Catapult.Abstractions
                 // going to close the PICe connection via `PcieEnabled = false;` right after that anyway.
             }
 
-            LogFunction?.Invoke((uint)Constants.Log.Info, "Closing down the FPGA..." + Environment.NewLine);
+            LogLine(Constants.Log.Info, "Closing down the FPGA...");
             PcieEnabled = false;
             NativeLibrary.CloseHandle(Handle);
 
             NativeLibrary.Dispose();
-            LogFunction?.Invoke((uint)Constants.Log.Info, "Closed down the FPGA..." + Environment.NewLine);
+            LogLine(Constants.Log.Info, "Closed down the FPGA...");
 
             _isDisposed = true;
         }
@@ -346,15 +347,18 @@ namespace Hast.Catapult.Abstractions
             var jobResult = await job;
             if (TesterOutput == null) return jobResult;
 
-            var message = $"Job Finished{Environment.NewLine}************{Environment.NewLine}Slot: {currentSlot}{Environment.NewLine}";
+            var message = FormattableString.Invariant(
+                $"Job Finished{Environment.NewLine}************{Environment.NewLine}Slot: {currentSlot}{Environment.NewLine}");
             if (!ignoreResponse)
             {
                 var payload = MemoryMarshal.Read<int>(jobResult[OutputHeaderSizes.HardwareExecutionTime..].Span);
                 var slice = MemoryMarshal.Read<int>(
                     jobResult[(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells)..].Span);
-                message += $"Time: {MemoryMarshal.Read<long>(jobResult.Span)}{Environment.NewLine}" +
-                    $"Payload: {payload} cells{Environment.NewLine}" +
-                    $"Slice: {slice}{Environment.NewLine}";
+                message += StringHelper.Join(
+                    Environment.NewLine,
+                    $"Time: {MemoryMarshal.Read<long>(jobResult.Span)}",
+                    $"Payload: {payload} cells",
+                    $"Slice: {slice}");
             }
 
             await TesterWriteLineAsync(message);
@@ -368,7 +372,7 @@ namespace Hast.Catapult.Abstractions
             int totalDataSize,
             int currentSliceCount)
         {
-            await TesterWriteLineAsync($"Slices: {currentSliceCount}");
+            await TesterWriteLineAsync(FormattableString.Invariant($"Slices: {currentSliceCount}"));
             bool slotOverflow = currentSliceCount > BufferCount;
 
             // If the data exceeds buffer size limit, then cut it into maximal slices.
@@ -431,13 +435,13 @@ namespace Hast.Catapult.Abstractions
         /// <returns>The resulting output from the FPGA.</returns>
         private async Task<Memory<byte>> RunJobAsync(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
         {
-            LogFunction?.Invoke((uint)Constants.Log.Info, $"Job on slot #{bufferIndex} starting...{Environment.NewLine}");
+            LogLineInvariant(Constants.Log.Info, $"Job on slot #{bufferIndex} starting...");
             Debug.Assert(
                 bufferIndex < BufferCount,
-                $"The buffer index is out of range. (current: {bufferIndex}, max: {BufferCount})");
+                FormattableString.Invariant($"The buffer index is out of range. (current: {bufferIndex}, max: {BufferCount})"));
             Debug.Assert(
                 inputData.Length <= BufferSize,
-                $"The input data doesn't fit in the buffer. (current: {inputData.Length}, max: {BufferSize})");
+                FormattableString.Invariant($"The input data doesn't fit in the buffer. (current: {inputData.Length}, max: {BufferSize})"));
             var slot = (uint)bufferIndex;
 
             // Makes sure the buffer is ready to be written.
@@ -459,8 +463,11 @@ namespace Hast.Catapult.Abstractions
                 int paddedPayloadSize = Constants.BufferChunkBytes * ((payloadBytes / Constants.BufferChunkBytes) + 1);
                 if (paddedPayloadSize <= BufferPayloadSize)
                 {
-                    LogFunction((uint)Constants.Log.Warn, $"Incoming payload ({payloadBytes}B) must be aligned to " +
-                        $"{Constants.BufferChunkBytes}B! Padding for {Constants.BufferChunkBytes - paddedPayloadSize}B...");
+                    LogLine(
+                        Constants.Log.Warn,
+                        StringHelper.Concatenate(
+                            $"Incoming payload ({payloadBytes}B) must be aligned to {Constants.BufferChunkBytes}B! ",
+                            $"Padding for {Constants.BufferChunkBytes - paddedPayloadSize}B..."));
                     var padded = new byte[paddedPayloadSize + InputHeaderSizes.Total];
                     inputData.CopyTo(padded);
                     inputData = padded;
@@ -469,9 +476,9 @@ namespace Hast.Catapult.Abstractions
 
             VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out var inputBuffer));
 
-            LogFunction?.Invoke(
-                (uint)Constants.Log.Debug,
-                $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}{Environment.NewLine}");
+            LogLineInvariant(
+                Constants.Log.Debug,
+                $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}");
 
             // Upload data into input buffer.
             unsafe
@@ -513,9 +520,9 @@ namespace Hast.Catapult.Abstractions
                 new Span<byte>(outputBuffer.ToPointer(), resultSize).CopyTo(resultMemory.Span);
             }
 
-            LogFunction?.Invoke(
-                (uint)Constants.Log.Debug,
-                $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}{Environment.NewLine}");
+            LogLineInvariant(
+                Constants.Log.Debug,
+                $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}");
 
             // Signal that we are done.
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
@@ -531,6 +538,12 @@ namespace Hast.Catapult.Abstractions
 
             return TesterOutput.WriteLineAsync(format);
         }
+
+        private void LogLine(Constants.Log level, string text) =>
+            LogFunction?.Invoke((uint)level, text + Environment.NewLine);
+
+        private void LogLineInvariant(Constants.Log level, FormattableString text) =>
+            LogFunction?.Invoke((uint)level, text.ToString(CultureInfo.InvariantCulture) + Environment.NewLine);
 
         public override string ToString() => InstanceName;
     }

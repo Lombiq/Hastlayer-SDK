@@ -10,10 +10,12 @@ using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -171,8 +173,8 @@ namespace Hast.Samples.Consumer
             var netTime = arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
             var grossTime = arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
 
-            Console.WriteLine(
-                $"Executing {arguments.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), " +
+            Console.Out.WriteLineInvariant(
+                $"Executing {arguments.MemberFullName} on hardware took {netTime:0.####} milliseconds (net), ",
                 $"{grossTime:0.####} milliseconds (all together).");
 
             if (arguments.SoftwareExecutionInformation == null) return;
@@ -180,7 +182,7 @@ namespace Hast.Samples.Consumer
             // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true, see
             // the notes below, or if the hardware execution was canceled.
             var softwareTime = arguments.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
-            Console.WriteLine($"The verifying software execution took {softwareTime:0.####} milliseconds.");
+            Console.Out.WriteLineInvariant($"The verifying software execution took {softwareTime:0.####} milliseconds.");
         }
 
         private static void OnMismatch(HardwareExecutionResultMismatchException exception)
@@ -191,11 +193,18 @@ namespace Hast.Samples.Consumer
             var mismatches = exception
                 .Mismatches?
                 .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
+
             var mismatchCount = mismatches.Count;
-            Console.WriteLine(
-                "There {0} between the software and hardware execution's results! Mismatch{1}:",
-                mismatchCount == 1 ? "was a mismatch" : $"were {mismatchCount} mismatches",
-                mismatchCount == 1 ? string.Empty : "es");
+            if (mismatchCount == 0)
+            {
+                Console.WriteLine(
+                    "There was a mismatch between the software and hardware execution's results! Mismatch:");
+            }
+            else
+            {
+                Console.Out.WriteLineInvariant(
+                    $"There were {mismatchCount} mismatches between the software and hardware execution's results! Mismatches:");
+            }
 
             foreach (var mismatch in mismatches)
             {

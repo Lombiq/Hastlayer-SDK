@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -94,11 +95,11 @@ namespace Hast.Samples.Kpz
         /// <summary>
         /// Adds an action with only description into the current <see cref="KpzStateLogger" /> iteration.
         /// </summary>
-        public void AddKpzAction(string description) =>
+        public void AddKpzAction(FormattableString description) =>
             // Adds a deep copy of the grid into the current iteration
             Iterations[^1].Actions.Add(new KpzAction
             {
-                Description = description,
+                Description = description.ToString(CultureInfo.InvariantCulture),
                 Grid = new KpzNode[0, 0],
                 HeightMap = new int[0, 0],
                 HightlightColor = Color.Transparent,

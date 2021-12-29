@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,8 +56,9 @@ namespace Hast.Samples.Consumer.SampleRunners
                     ////    i.ToString() + ": " + hardwareResult[i].ToString() + " vs " + softwareResult[i].ToString() + Environment.NewLine);
 
                     throw new InvalidOperationException(
-                        $"The hardware result and the software result is not the same on index {i}: " +
-                        $"{hardwareResult[i]} vs {softwareResult[i]}.");
+                        StringHelper.Concatenate(
+                            $"The hardware result and the software result is not the same on index {i}: ",
+                            $"{hardwareResult[i]} vs {softwareResult[i]}."));
                 }
             }
         }

@@ -120,7 +120,7 @@ namespace Hast.Samples.Kpz
                 listActions.Items.Clear();
                 int i = 0;
                 _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach(
-                    (a) => listActions.Items.Add($"{i++} {a.Description}"));
+                    (a) => listActions.Items.Add(FormattableString.Invariant($"{i++} {a.Description}")));
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }

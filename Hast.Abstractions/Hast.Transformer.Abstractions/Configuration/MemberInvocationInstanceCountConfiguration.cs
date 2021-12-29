@@ -74,7 +74,7 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
         /// </summary>
         public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
-            $"{simpleName}.LambdaExpression.{lambdaExpressionIndex}";
+            FormattableString.Invariant($"{simpleName}.LambdaExpression.{lambdaExpressionIndex}");
     }
 
     public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration

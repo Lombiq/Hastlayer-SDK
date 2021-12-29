@@ -3,6 +3,7 @@ using Hast.Common.Interfaces;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Vitis.Abstractions.Models;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -247,14 +248,15 @@ parameterValue: null,
             VerifyResult(result);
             VerifyResults(
                 resultsPerDevice,
-                (deviceResult, i) => new InvalidOperationException($"Error while creating program on device #{i}: {deviceResult}"));
+                (deviceResult, i) => new InvalidOperationException(
+                    FormattableString.Invariant($"Error while creating program on device #{i}: {deviceResult}")));
 
             VerifyResult(_cl.BuildProgram(
                 program,
                 Devices.Length,
                 Devices,
-options: null,
-notify: null,
+                options: null,
+                notify: null,
                 IntPtr.Zero));
 
             return program;
@@ -326,7 +328,9 @@ notify: null,
             var queues = _queues.ToList();
             var queueReleaseExceptions = VerifyResults(
                 _queues.Values.Select(_cl.ReleaseCommandQueue),
-                (result, index) => new InvalidOperationException($"Error releasing queue for device #{queues[index].Key}: {result}"));
+                (result, index) => new InvalidOperationException(
+                    FormattableString.Invariant($"Error releasing queue for device #{queues[index].Key}: {result}")));
+
             if (queueReleaseExceptions != null) exceptions.AddRange(queueReleaseExceptions.InnerExceptions);
 
             try
@@ -353,14 +357,16 @@ notify: null,
         {
             if (_queues.TryGetValue(queueIndex, out var queue)) return queue;
             throw new InvalidOperationException(
-                $"There is no command queue for device #{queueIndex}. Please use {nameof(CreateCommandQueue)} to create one!");
+                FormattableString.Invariant(
+                    $"There is no command queue for device #{queueIndex}. Please use {nameof(CreateCommandQueue)} to create one!"));
         }
 
         private IntPtr GetKernel(string kernelName)
         {
             if (_kernels.TryGetValue(kernelName, out var kernel)) return kernel;
             throw new InvalidOperationException(
-                $"The kernel '{kernelName}' does not exit. You can create a kernel with {nameof(CreateBinaryKernel)}.");
+                FormattableString.Invariant(
+                    $"The kernel '{kernelName}' does not exit. You can create a kernel with {nameof(CreateBinaryKernel)}."));
         }
 
         private List<IntPtr> GetKernelBuffers(string kernelName)
