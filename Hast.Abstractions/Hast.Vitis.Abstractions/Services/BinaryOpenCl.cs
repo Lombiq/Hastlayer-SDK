@@ -193,7 +193,7 @@ namespace Hast.Vitis.Abstractions.Services
                         platform,
                         PlatformInformation.Name,
                         UIntPtr.Zero,
-parameterValue: null,
+                        parameterValue: null,
                         out var size));
                     var output = new byte[size.ToUInt32()];
                     VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));

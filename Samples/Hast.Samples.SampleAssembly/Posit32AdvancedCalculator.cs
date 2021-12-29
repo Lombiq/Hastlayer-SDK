@@ -95,7 +95,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 resultArray[i] = (float)new Posit32(
                     memory.ReadUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArrayOutputPosit32StartIndex + i),
-fromBitMask: true);
+                    fromBitMask: true);
             }
 
             return resultArray;

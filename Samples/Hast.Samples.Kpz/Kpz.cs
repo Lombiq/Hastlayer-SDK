@@ -313,7 +313,7 @@ namespace Hast.Samples.Kpz
                     hastlayer,
                     configuration,
                     Grid,
-pushToFpga: false,
+                    pushToFpga: false,
                     _randomSeedEnable,
                     numberOfIterations);
             }
