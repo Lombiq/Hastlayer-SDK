@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Hast.Communication.Models
 {
@@ -7,6 +7,9 @@ namespace Hast.Communication.Models
     /// </summary>
     public interface IDevice : IDisposable
     {
+        /// <summary>
+        /// Event fires if the device (not <see cref="IReservedDevice"/>) is being disposed.
+        /// </summary>
         event EventHandler Disposing;
 
         /// <summary>

@@ -21,7 +21,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
-using static System.Globalization.CultureInfo;
 
 namespace Hast.Vitis.Abstractions.Services
 {
@@ -34,20 +33,20 @@ namespace Hast.Vitis.Abstractions.Services
         private const string TryToMakeItSmaller = "Try to make your code simpler (make it shorter, use smaller data " +
                                                   "types, use a lower degree of parallelism) until it goes below 80%.";
 
-        private static bool _firstRun = true;
         private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
 
         private readonly ILogger _logger;
         private readonly string _buildOutputPath;
         private readonly StreamWriter _buildOutput;
 
+        private static bool _firstRun = true;
+
         public event EventHandler<BuildProgressEventArgs> Progress;
 
         public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
 
-        public int MajorStepsTotal { get; private set; } = 8;
+        public int MajorStepsTotal { get; private set; }
         public int MajorStep { get; private set; }
-
 
         public VitisHardwareImplementationComposerBuildProvider(
             ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
@@ -72,7 +71,6 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest.ToolChainName == CommonToolChainNames.Vitis;
 
@@ -80,7 +78,7 @@ namespace Hast.Vitis.Abstractions.Services
             IHardwareImplementationCompositionContext context,
             IHardwareImplementation implementation)
         {
-            if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
+            if (context.DeviceManifest is not XilinxDeviceManifest deviceManifest)
             {
                 throw new InvalidOperationException(
                     $"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
@@ -120,16 +118,10 @@ namespace Hast.Vitis.Abstractions.Services
             var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
             var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
-            if (buildConfiguration.SynthesisOnly)
-            {
-                MajorStepsTotal = 3;
-            }
+            MajorStepsTotal = buildConfiguration.SynthesisOnly ? 3 : 8;
+
             // Synthesis doesn't need the device.
-            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
-            {
-                _firstRun = false;
-                await EnsureDeviceReady();
-            }
+            await EnsureDeviceReadyAsync(buildConfiguration);
 
             ProgressMajor(
                 "Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more complex " +
@@ -176,7 +168,7 @@ namespace Hast.Vitis.Abstractions.Services
                 GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
                 "xclbin");
 
-            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
+            await CreateSourceFilesAwaitAsync(context, hardwareFrameworkPath, hashId);
 
             // If the xclbin exists then we are done here.
             if (AllExist(implementation.BinaryPath, implementation.BinaryPath + ".info"))
@@ -246,7 +238,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
             //        $(PATH_TO_HDL) $(KERNEL_TCL) $(KERNEL_XML)
-            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
+            var vivadoExecutable = await GetExecutablePathAsync("vivado");
             var vivadoArguments = new[]
             {
                 "-mode",
@@ -261,16 +253,18 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "package_kernel.tcl"),
                 Path.Combine(rtlDirectoryPath, "src", "xml", "kernel.xml"),
             };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
+            await ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
-
+            // But this is not C# code.
+#pragma warning disable S125 // Sections of code should not be commented out.
             // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
             //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
             // endif
             // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
             // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
-            var vppExecutable = (await GetExecutablePathAsync(Vpp));
+#pragma warning restore S125 // Sections of code should not be commented out.
+            var vppExecutable = await GetExecutablePathAsync(Vpp);
             var vppArguments = new List<string>(
                 deviceManifest.SupportsHbm && openClConfiguration.UseHbm
                 ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
@@ -294,22 +288,22 @@ namespace Hast.Vitis.Abstractions.Services
                 "--dk",
                 "chipscope:hastip_1:m_axi_gmem",
                 "--kernel_frequency",
-                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
+                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.InvariantCulture),
                 "-lo",
                 Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,
             });
 
-            await ExecuteWithLogging(vppExecutable, vppArguments, tmpDirectoryPath);
+            await ExecuteWithLoggingAsync(vppExecutable, vppArguments, tmpDirectoryPath);
             ProgressMajor("v++ build is finished.");
 
             if (target.ToUpperInvariant() == "HW_EMU")
             {
                 // For example:
                 // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
-                var emConfigExecutable = (await GetExecutablePathAsync("emconfigutil"));
+                var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
                 var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
-                await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
+                await ExecuteWithLoggingAsync(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
                 File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
                 ProgressMajor("Emulation configuration (emconfig) setup is finished.");
             }
@@ -322,7 +316,7 @@ namespace Hast.Vitis.Abstractions.Services
             var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
 
             // vivado -mode batch -source synth_util.tcl $(VhdFileIn) $(RptFileOut)
-            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
+            var vivadoExecutable = await GetExecutablePathAsync("vivado");
             var vivadoArguments = new[]
             {
                 "-mode",
@@ -333,7 +327,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(rtlDirectoryPath, "src", "IP", "Hast_IP.vhd"),
                 Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
             };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
+            await ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments);
             ProgressMajor("Vivado synthesis is finished.");
         }
 
@@ -399,13 +393,13 @@ namespace Hast.Vitis.Abstractions.Services
                 if (!decimal.TryParse(
                     row[UtilizationPercent],
                     NumberStyles.Any,
-                    InvariantCulture,
+                    CultureInfo.InvariantCulture,
                     out var utilization))
                 {
                     continue;
                 }
 
-                if (resourceType.ToUpperInvariant().Contains("LUT AS LOGIC"))
+                if (resourceType.ContainsOrdinalIgnoreCase("LUT AS LOGIC"))
                 {
                     CheckLutUtilization(utilization);
                 }
@@ -425,7 +419,7 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 implementation.PowerUsageWatts = decimal.Parse(
                     report.Sections["1. Summary"].ToDictionaryByFirstColumn()["Total On-Chip Power (W)"][Value],
-                    InvariantCulture);
+                    CultureInfo.InvariantCulture);
                 _logger.LogInformation("Total on-chip power: {0}W", implementation.PowerUsageWatts);
             }
             catch (Exception ex)
@@ -477,8 +471,12 @@ namespace Hast.Vitis.Abstractions.Services
             ProgressMajor("Build directory cleaned up.");
         }
 
-        private async Task EnsureDeviceReady()
+        private async Task EnsureDeviceReadyAsync(VitisBuildConfiguration buildConfiguration)
         {
+            if (buildConfiguration.SynthesisOnly || !buildConfiguration.ResetOnFirstRun || !_firstRun) return;
+
+            _firstRun = false;
+
             _logger.LogWarning(
                 "This is the first build with the current process. Resetting the devices for a clean state...");
 
@@ -489,7 +487,7 @@ namespace Hast.Vitis.Abstractions.Services
             var result = await (yes | xbutil).ExecuteBufferedAsync();
 
             _logger.LogWarning("xbutil: {0}", result.StandardOutput);
-            _buildOutput.WriteLine("xbutil stdout: {0}", result.StandardOutput);
+            await _buildOutput.WriteLineAsync($"xbutil stdout: {result.StandardOutput}");
         }
 
         private void OnProgress(object sender, BuildProgressEventArgs e) =>
@@ -500,7 +498,7 @@ namespace Hast.Vitis.Abstractions.Services
                 e.Message,
                 e.IsMajorStep ? " (new)" : string.Empty);
 
-        private Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory = null)
+        private Task ExecuteWithLoggingAsync(string executable, IList<string> arguments, string workingDirectory = null)
         {
             var name = Path.GetFileName(executable);
             void OnCommandEvent(CommandEvent commandEvent)
@@ -530,7 +528,10 @@ namespace Hast.Vitis.Abstractions.Services
                                 $"The command {name} exited with code {exited.ExitCode}. " +
                                 $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
                         }
+
                         break;
+                    default:
+                        throw new InvalidOperationException($"Unknown {nameof(CommandEvent)} \"{commandEvent}\".");
                 }
             }
 
@@ -540,7 +541,6 @@ namespace Hast.Vitis.Abstractions.Services
                 if (hasWorkingDirectory) command = command.WithWorkingDirectory(workingDirectory!);
                 return command.WithValidation(CommandResultValidation.None);
             }
-
 
             _logger.LogInformation(
                 "Starting program: {0} {1} (working directory: {2})",
@@ -555,7 +555,7 @@ namespace Hast.Vitis.Abstractions.Services
             var text = message as string;
 
             // Find informational messages and escalate their log level since most of them will be "trace" by default.
-            if (text?.Contains(':') == true)
+            if (text?.Contains(":") == true)
             {
                 logLevel = text.Split(':')[0].Trim().ToUpperInvariant() switch
                 {
@@ -567,14 +567,19 @@ namespace Hast.Vitis.Abstractions.Services
                 };
             }
 
+#pragma warning disable S125 // Sections of code should not be commented out. But this is not C# code.
             // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
-            if (name == Vpp && text?.StartsWith("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
+#pragma warning restore S125 // Sections of code should not be commented out. But this is not C# code.
+            if (name == Vpp &&
+                text?.StartsWithOrdinal("[") == true &&
+                _vppStatusLogs.Any(fragment => text.Contains(fragment, StringComparison.InvariantCulture)))
             {
                 if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
                 Progress?.Invoke(this, new BuildProgressEventArgs(text));
             }
 
-            if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker") == true)
+            if (logLevel == LogLevel.Error &&
+                text?.Contains("Failed to finish platform linker", StringComparison.InvariantCulture) == true)
             {
                 throw new InvalidOperationException(
                     "The linker encountered an error. This is typically because the resulting hardware design won't " +
@@ -586,8 +591,7 @@ namespace Hast.Vitis.Abstractions.Services
             _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
         }
 
-
-        private static Task<bool> CreateSourceFilesAwait(
+        private static Task<bool> CreateSourceFilesAwaitAsync(
             IHardwareImplementationCompositionContext context,
             string hardwareFrameworkPath,
             string hashId)
@@ -638,13 +642,12 @@ namespace Hast.Vitis.Abstractions.Services
             foreach (var file in files)
             {
                 var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
-                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture))
+                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToTechnicalString())
                     .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
                 var targetFilePath = Path.Combine(targetDirectoryPath, file);
                 EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
                 await File.WriteAllTextAsync(targetFilePath, result);
             }
-
         }
 
         public void Dispose() => _buildOutput?.Dispose();

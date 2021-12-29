@@ -1,5 +1,6 @@
 using Hast.Synthesis.Abstractions;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Xilinx.Abstractions
 {
@@ -15,6 +16,10 @@ namespace Hast.Xilinx.Abstractions
         /// The full platform name is the name of the directory in $XILINX_PLATFORM (defaults to "$XILINX_XRT/platforms"
         /// if not set) where that directory contains an .xpfm file.
         /// </summary>
+        [SuppressMessage(
+            "Usage",
+            "CA2227:Collection properties should be read only",
+            Justification = "These aren't changed during run so it doesn't matter but it'd add unnecesary complexity.")]
         public IList<string> SupportedPlatforms { get; set; }
 
         /// <summary>

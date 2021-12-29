@@ -10,19 +10,14 @@ namespace Hast.Communication.Services
     public sealed class DevicePoolManager : IDevicePoolManager
     {
         private readonly ILogger<DevicePoolManager> _logger;
-        private readonly object _lock = new object();
-        private readonly Queue<Action<IReservedDevice>> _waitQueue = new Queue<Action<IReservedDevice>>();
+        private readonly object _lock = new();
+        private readonly Queue<Action<IReservedDevice>> _waitQueue = new();
 
-        private bool _isDisposed = false;
+        private bool _isDisposed;
 
-        private Dictionary<string, PooledDevice> _devicePool = new Dictionary<string, PooledDevice>();
+        private Dictionary<string, PooledDevice> _devicePool = new();
 
-
-        public DevicePoolManager(ILogger<DevicePoolManager> logger)
-        {
-            _logger = logger;
-        }
-
+        public DevicePoolManager(ILogger<DevicePoolManager> logger) => _logger = logger;
 
         public void SetDevicePool(IEnumerable<IDevice> devices)
         {
@@ -45,7 +40,7 @@ namespace Hast.Communication.Services
             }
         }
 
-        public Task<IReservedDevice> ReserveDevice()
+        public Task<IReservedDevice> ReserveDeviceAsync()
         {
             lock (_lock)
             {
@@ -119,16 +114,13 @@ namespace Hast.Communication.Services
         {
             private readonly Action<ReservedDevice> _disposer;
 
+            public ReservedDevice(IDevice baseDevice, Action<ReservedDevice> disposer)
+                : base(baseDevice) => _disposer = disposer;
 
-            public ReservedDevice(IDevice baseDevice, Action<ReservedDevice> disposer) : base(baseDevice)
-            {
-                _disposer = disposer;
-            }
-
-            public override void Dispose()
+            protected override void Dispose(bool disposing)
             {
                 _disposer(this);
-                base.Dispose();
+                base.Dispose(disposing);
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Abstractions.Models;
 using Shouldly;
 using System.Collections.Generic;
 using System.IO;
@@ -15,13 +15,15 @@ namespace Hast.Vitis.Abstractions.Tests
             ["Tool Version"] = "Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019",
             ["Date"] = "Sun Oct 25 03:39:12 2020",
             ["Host"] = "cluster1 running 64-bit Ubuntu 18.04.5 LTS",
-            ["Command"] = "report_utilization -file /tmp/david.el-saig/u250/HardwareFramework/reports/36a0b0eaefd20bf74638ef99659296a7a9f6c354e4dec750d7ae19275f7ea087/Hast_IP_synth_util.rpt",
+            ["Command"] = "report_utilization -file /tmp/david.el-saig/u250/HardwareFramework/reports/" +
+                "36a0b0eaefd20bf74638ef99659296a7a9f6c354e4dec750d7ae19275f7ea087/Hast_IP_synth_util.rpt",
             ["Design"] = "Hast_IP",
             ["Device"] = "xcu250figd2104-2L",
             ["Design State"] = "Synthesized",
         };
 
-        private static readonly string[] _expectedSections = {
+        private static readonly string[] _expectedSections =
+        {
             "1. CLB Logic",
             "1.1 Summary of Registers by Type",
             "2. BLOCKRAM",
@@ -39,7 +41,8 @@ namespace Hast.Vitis.Abstractions.Tests
             "14. SLR IO Utilization",
         };
 
-        private static readonly string[] _expectedColumns = {
+        private static readonly string[] _expectedColumns =
+        {
             "Site Type",
             "Used",
             "Fixed",

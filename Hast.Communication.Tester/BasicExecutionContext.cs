@@ -1,6 +1,5 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Hast.Communication.Tester
 {
@@ -10,24 +9,36 @@ namespace Hast.Communication.Tester
 
         public IHardwareRepresentation HardwareRepresentation { get; set; }
 
-        public BasicExecutionContext(IHastlayer hastlayer,
+        public BasicExecutionContext(
+            IHastlayer hastlayer,
             string deviceName,
             string communicationChannelName,
             Dictionary<string, object> customConfiguration = null)
         {
-            var assemblies = new[] { Assembly.GetExecutingAssembly() };
+            var assemblies = new[] { typeof(Program).Assembly };
             var configuration = new HardwareGenerationConfiguration(deviceName, null)
             {
                 EnableHardwareTransformation = false,
             };
-            HardwareRepresentation = hastlayer.GenerateHardware(assemblies, configuration).Result;
 
-            ProxyGenerationConfiguration = new ProxyGenerationConfiguration()
+            // This runs synchronously anyway.
+#pragma warning disable VSTHRD104 // Offer async methods
+            HardwareRepresentation = hastlayer.GenerateHardwareAsync(assemblies, configuration).Result;
+#pragma warning restore VSTHRD104 // Offer async methods
+
+            ProxyGenerationConfiguration = new ProxyGenerationConfiguration
             {
                 CommunicationChannelName = communicationChannelName,
-                CustomConfiguration = customConfiguration ?? new Dictionary<string, object>(),
-                VerifyHardwareResults = false
+                VerifyHardwareResults = false,
             };
+
+            if (customConfiguration != null)
+            {
+                foreach (var (key, value) in customConfiguration)
+                {
+                    ProxyGenerationConfiguration.CustomConfiguration[key] = value;
+                }
+            }
         }
     }
 }

@@ -6,7 +6,8 @@ namespace Hast.Samples.Consumer.Attributes
     /// <summary>
     /// Contains the hint text used to describe a configuration argument.
     /// </summary>
-    public class HintAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public sealed class HintAttribute : Attribute
     {
         public string Text { get; }
 

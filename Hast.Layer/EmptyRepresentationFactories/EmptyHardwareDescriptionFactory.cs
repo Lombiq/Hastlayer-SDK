@@ -1,4 +1,5 @@
 using Hast.Common.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,27 +21,19 @@ namespace Hast.Layer.EmptyRepresentationFactories
             return new HardwareDescription(mockHardwareEntryPointMappings);
         }
 
-
         private class HardwareDescription : IHardwareDescription
         {
-            public string TransformationId { get; } = Sha2456Helper.Empty();
+            public string TransformationId { get; } = Sha256Helper.Empty();
             public string Language => "VHDL";
 
             public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
 
             public IEnumerable<ITransformationWarning> Warnings => Enumerable.Empty<ITransformationWarning>();
 
-
-            public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings)
-            {
+            public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings) =>
                 HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
-            }
 
-
-            public Task Serialize(Stream stream)
-            {
-                throw new System.NotImplementedException();
-            }
+            public Task SerializeAsync(Stream stream) => throw new NotSupportedException();
         }
     }
 }

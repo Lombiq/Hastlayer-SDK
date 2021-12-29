@@ -60,7 +60,7 @@ namespace Hast.Vitis.Abstractions.Services
             var blobContainer = await GetBlobContainerClientAsync();
 
             var sasUri = GetServiceSasUriForContainer(blobContainer);
-            return sasUri.Query.Substring(1);
+            return sasUri.Query[1..];
         }
 
         // Based on: https://docs.microsoft.com/en-us/azure/storage/blobs/sas-service-create?tabs=dotnet

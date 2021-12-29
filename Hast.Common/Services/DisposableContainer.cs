@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Hast.Common.Services
 {
@@ -11,7 +12,7 @@ namespace Hast.Common.Services
         private bool _disposed;
         private IDisposable _context;
 
-        public object[] Values { get; }
+        public IReadOnlyList<object> Values { get; }
 
         public DisposableContainer(IDisposable context, params object[] values)
         {
@@ -21,16 +22,25 @@ namespace Hast.Common.Services
 
         public void Dispose()
         {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
             if (_disposed) return;
 
             _context?.Dispose();
             _context = null;
 
-            foreach (var value in Values)
+            if (disposing)
             {
-                if (value is IDisposable disposableValue)
+                foreach (var value in Values)
                 {
-                    disposableValue.Dispose();
+                    if (value is IDisposable disposableValue)
+                    {
+                        disposableValue.Dispose();
+                    }
                 }
             }
 
@@ -43,13 +53,15 @@ namespace Hast.Common.Services
     {
         public T Value => (T)Values[0];
 
-        public DisposableContainer(IDisposable context, T value) : base(context, value) { }
+        public DisposableContainer(IDisposable context, T value)
+            : base(context, value) { }
     }
 
     /// <inheritdoc cref="DisposableContainer"/>
     public sealed class DisposableContainer<T1, T2> : DisposableContainer
     {
-        public DisposableContainer(IDisposable context, T1 value1, T2 value2) : base(context, value1, value2) { }
+        public DisposableContainer(IDisposable context, T1 value1, T2 value2)
+            : base(context, value1, value2) { }
 
         public void Deconstruct(out T1 first, out T2 second)
         {

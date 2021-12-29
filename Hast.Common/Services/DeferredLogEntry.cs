@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,11 @@ namespace Hast.Common.Services
 
         public void Log(ILogger logger)
         {
+            // This is not relevant for strings.
+#pragma warning disable S2330 // Array covariance should not be used
             var arguments = Arguments is string[] array ? array : Arguments.ToArray();
+#pragma warning restore S2330 // Array covariance should not be used
+
             if (Exception == null)
             {
                 logger.Log(Level, Message, arguments);

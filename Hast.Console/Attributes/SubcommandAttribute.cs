@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Hast.Console.Attributes
 {
@@ -6,7 +6,8 @@ namespace Hast.Console.Attributes
     /// Indicates that if the first positional argument is the <see cref="Name"/> then an instance of the decorated
     /// class should take over from <see cref="Program"/>.
     /// </summary>
-    public class SubcommandAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class SubcommandAttribute : Attribute
     {
         /// <summary>
         /// Gets the name of the subcommand to look for in the positional arguments.

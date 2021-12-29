@@ -20,6 +20,6 @@
         /// <summary>
         /// The output is saved as a JPEG file.
         /// </summary>
-        BitmapJpeg
+        BitmapJpeg,
     }
 }

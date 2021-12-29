@@ -24,10 +24,10 @@ namespace Hast.Layer
         IEnumerable<string> SupportedCommunicationChannelNames { get; }
 
         /// <summary>
-        /// The default communication channel to be used if none is configured.
+        /// Gets the default communication channel to be used if none is configured.
         /// </summary>
         /// <remarks>
-        /// Should be one of the channels in <see cref="SupportedCommunicationChannelNames"/>.
+        /// <para>Should be one of the channels in <see cref="SupportedCommunicationChannelNames"/>.</para>
         /// </remarks>
         string DefaultCommunicationChannelName { get; }
 

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
@@ -10,19 +8,18 @@ using Lombiq.Arithmetics;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
+    [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
     internal class Posit32AdvancedCalculatorSampleRunner : ISampleRunner
     {
-        public void Configure(HardwareGenerationConfiguration configuration)
-        {
+        public void Configure(HardwareGenerationConfiguration configuration) =>
             configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();
-        }
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);
+            var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32AdvancedCalculator(), configuration);
 
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
             var sqrtInputArray = new uint[10];
             for (int i = 0; i < 10; i++)
@@ -37,9 +34,9 @@ namespace Hast.Samples.Consumer.SampleRunners
         {
             var positCalculator = new Posit32AdvancedCalculator();
 
-            positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F);
             var sw = Stopwatch.StartNew();
-            var resultOfDivision = positCalculator.RepeatedDivision(10, (float)153157.898526, (float)3.3);
+            var resultOfDivision = positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F);
             sw.Stop();
 
             Console.WriteLine("Result of repeated division: " + resultOfDivision);
@@ -50,6 +47,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 sqrtInputArray[i] = new Posit32((float)(i + 1) * (i + 1)).PositBits;
             }
+
             sw = Stopwatch.StartNew();
             var resultOfSqrt = positCalculator.SqrtOfPositsInArray(sqrtInputArray);
             sw.Stop();
@@ -59,6 +57,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             {
                 Console.Write(resultOfSqrt[i] + ", ");
             }
+
             Console.WriteLine();
             Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
         }

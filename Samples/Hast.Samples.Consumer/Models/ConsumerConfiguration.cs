@@ -1,5 +1,4 @@
 using Castle.Core.Internal;
-using Hast.Layer;
 using Hast.Samples.Consumer.Attributes;
 using Newtonsoft.Json;
 using System;
@@ -32,7 +31,7 @@ namespace Hast.Samples.Consumer.Models
         [Argument]
         [Hint(
             "The base URL for the Hastlayer API. Unless you are testing the Hast.Remote services locally, you should",
-              "leave it empty.")]
+            "leave it empty.")]
         public string Endpoint { get; set; }
 
         [Argument]
@@ -57,7 +56,7 @@ namespace Hast.Samples.Consumer.Models
         public Sample SampleToRun { get; set; }
 
         /// <summary>
-        /// Gets or sets the value of <see cref="HardwareGenerationConfiguration.Label"/>.
+        /// Gets or sets the value of <see cref="Layer.HardwareGenerationConfiguration.Label"/>.
         /// </summary>
         [Argument("name", "label")]
         [Hint("This label helps you identify individual builds when you run this program in a batch with different configurations")]
@@ -102,7 +101,6 @@ namespace Hast.Samples.Consumer.Models
         /// Gets a lazy string dictionary that maps the property names that have <see cref="HintAttribute"/> in this
         /// class to their hint texts.
         /// </summary>
-        /// <returns></returns>
         public static Lazy<Dictionary<string, string>> HintDictionary { get; } = new(() =>
             GetPropertyAttributes<HintAttribute>()
                 .ToDictionary(pair => pair.Property.Name, pair => pair.Attribute.Text));

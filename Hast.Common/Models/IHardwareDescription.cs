@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -21,7 +21,6 @@ namespace Hast.Layer
         string Message { get; }
     }
 
-
     /// <summary>
     /// Describes the hardware created from a transformed assembly, i.e. a circuit-level description of the implemented
     /// logic and any corresponding config files.
@@ -29,12 +28,12 @@ namespace Hast.Layer
     public interface IHardwareDescription
     {
         /// <summary>
-        /// A hash string suitable to identify the transformation that originated this hardware description.
+        /// Gets a hash string suitable to identify the transformation that originated this hardware description.
         /// </summary>
         string TransformationId { get; }
 
         /// <summary>
-        /// The hardware description language used.
+        /// Gets the hardware description language used.
         /// </summary>
         string Language { get; }
 
@@ -54,9 +53,11 @@ namespace Hast.Layer
         /// <summary>
         /// Serializes the hardware description instance into a storage format.
         /// </summary>
-        /// <remarks>To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.</remarks>
-        /// <param name="stream"></param>
-        /// <returns></returns>
-        Task Serialize(Stream stream);
+        /// <remarks>
+        /// <para>
+        /// To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.
+        /// </para>
+        /// </remarks>
+        Task SerializeAsync(Stream stream);
     }
 }

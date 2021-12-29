@@ -16,7 +16,7 @@ namespace Hast.Remote.Configuration
         public string AppName { get; set; }
 
         /// <summary>
-        /// Gets or sets the secret of the application registered in Hastlayer Remote Services to authenticate against 
+        /// Gets or sets the secret of the application registered in Hastlayer Remote Services to authenticate against
         /// the remote transformation service.
         /// </summary>
         public string AppSecret { get; set; }

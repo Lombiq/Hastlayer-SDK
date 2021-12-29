@@ -18,12 +18,15 @@ namespace Hast.Samples.Consumer.SampleRunners
                Posit32FusedCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
             RunSoftwareBenchmarks();
 
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit32FusedCalculator(), configuration);
-            var result = positCalculator.CalculateFusedSum(CreateTestPosit32BitsArray(), hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32FusedCalculator(), configuration);
+            _ = positCalculator.CalculateFusedSum(
+                CreateTestPosit32BitsArray(),
+                hastlayer,
+                hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
         public static void RunSoftwareBenchmarks()
@@ -33,10 +36,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             var posit32BitsArray = CreateTestPosit32BitsArray();
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
-            var result = positCalculator.CalculateFusedSum(posit32BitsArray);
+            _ = positCalculator.CalculateFusedSum(posit32BitsArray);
 
             var sw = Stopwatch.StartNew();
-            result = positCalculator.CalculateFusedSum(posit32BitsArray);
+            float result = positCalculator.CalculateFusedSum(posit32BitsArray);
             sw.Stop();
 
             Console.WriteLine("Result of Fused addition of posits in array: " + result);
@@ -45,16 +48,15 @@ namespace Hast.Samples.Consumer.SampleRunners
             Console.WriteLine();
         }
 
-
         private static uint[] CreateTestPosit32BitsArray()
         {
             var posit32Array = new uint[201];
             // All positive integers smaller than this value ("pintmax") can be exactly represented with 32-bit Posits.
-            posit32Array[0] = new Posit32(8388608).PositBits;
+            posit32Array[0] = new Posit32(8_388_608).PositBits;
 
             for (var i = 1; i < posit32Array.Length; i++)
             {
-                posit32Array[i] = new Posit32((float)0.5).PositBits;
+                posit32Array[i] = new Posit32(0.5F).PositBits;
             }
 
             return posit32Array;

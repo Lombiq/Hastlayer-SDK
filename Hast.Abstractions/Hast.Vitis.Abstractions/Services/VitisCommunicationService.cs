@@ -17,14 +17,12 @@ namespace Hast.Vitis.Abstractions.Services
         private const int HbmSizeBytes = (int)Constants.Limits.HbmSizeBytes;
         public override string ChannelName { get; } = Hast.Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
 
-
         public VitisCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             IBinaryOpenCl binaryOpenCl,
             ILogger<VitisCommunicationService> logger)
             : base(devicePoolPopulator, devicePoolManager, binaryOpenCl, logger) { }
-
 
         protected override IntPtr GetBuffer(
             Memory<byte> data,
@@ -53,7 +51,7 @@ namespace Hast.Vitis.Abstractions.Services
 
             if (!isHbm) return IntPtr.Zero;
 
-            const MemoryFlag flags = BinaryOpenCl.DefaultMemoryFlags | MemoryFlag.ExtensionXilinxPointer;
+            const MemoryFlags flags = BinaryOpenCl.DefaultMemoryFlags | MemoryFlags.ExtensionXilinxPointer;
             XilinxMemoryExtension bank;
             IntPtr hostPointer;
             unsafe

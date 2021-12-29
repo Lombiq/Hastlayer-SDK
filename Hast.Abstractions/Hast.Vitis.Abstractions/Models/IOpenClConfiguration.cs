@@ -9,10 +9,12 @@ namespace Hast.Vitis.Abstractions.Models
     /// that should work out of the box, but if configuration is necessary, the appconfig.json file should be edited.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// An example for the appsettings file can be seen below or in the Hast.Samples.Consumer project. Everything
     /// omitted will remain as default.
+    /// </para>
     ///
-    /// <c>
+    /// <code>
     /// {
     ///   "HardwareGenerationConfiguration": {
     ///     "CustomConfiguration": {
@@ -23,28 +25,28 @@ namespace Hast.Vitis.Abstractions.Models
     ///     }
     ///   }
     /// }
-    /// </c>
+    /// </code>
     /// </remarks>
     public interface IOpenClConfiguration
     {
         /// <summary>
-        /// If true, any <see cref="long"/> value in the header is considered big endian, if false then little endian.
+        /// Gets or sets a value indicating whether any <see cref="long"/> value in the header is considered big endian, if false then little endian.
         /// </summary>
         bool DeviceIsBigEndian { get; set; }
 
         /// <summary>
-        /// The OpenCL <see cref="DeviceType"/>.
+        /// Gets or sets the OpenCL <see cref="DeviceType"/>.
         /// </summary>
-        DeviceType DeviceType { get; set; }
+        DeviceTypes DeviceType { get; set; }
 
         /// <summary>
-        /// The number of cells (<see cref="SimpleMemory.MemoryCellSizeBytes"/> byte units) to be occupied in the
+        /// Gets or sets the number of cells (<see cref="SimpleMemory.MemoryCellSizeBytes"/> byte units) to be occupied in the
         /// <see cref="SimpleMemory"/> as <see cref="SimpleMemory.PrefixCellCount"/>.
         /// </summary>
         int HeaderCellCount { get; set; }
 
         /// <summary>
-        /// The vendor name used in the device's hardware information detectable by OpenCL.
+        /// Gets or sets the vendor name used in the device's hardware information detectable by OpenCL.
         /// </summary>
         string VendorName { get; set; }
 

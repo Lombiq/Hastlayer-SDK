@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Models;
+using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
@@ -13,19 +13,21 @@ namespace Hast.Catapult.Abstractions
 {
     public class CatapultCommunicationService : CommunicationServiceBase
     {
+        private const int HardwareCellMultiplier = 16;
+        private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
+
         private readonly IDevicePoolPopulator _devicePoolPopulator;
         private readonly IDevicePoolManager _devicePoolManager;
         private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
 
-
         public override string ChannelName => Constants.ChannelName;
-
 
         public CatapultCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,
             IDevicePoolManager devicePoolManager,
             ILogger<CatapultCommunicationService> logger,
-            ILogger<CatapultLibrary> catapultLibraryLogger) : base(logger)
+            ILogger<CatapultLibrary> catapultLibraryLogger)
+            : base(logger)
         {
             _devicePoolPopulator = devicePoolPopulator;
             _devicePoolManager = devicePoolManager;
@@ -36,35 +38,32 @@ namespace Hast.Catapult.Abstractions
             ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
         #region Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
-        private const int HardwareCellMultiplier = 16;
-        private const int HardwareCellIncrement = HardwareCellMultiplier * SimpleMemory.MemoryCellSizeBytes;
-
-        private Memory<byte> HotfixInput(Memory<byte> memory)
+        private static Memory<byte> HotfixInput(Memory<byte> memory)
         {
             if (memory.Length <= SimpleMemory.MemoryCellSizeBytes) return memory;
             Memory<byte> hardwareCells = new byte[memory.Length * HardwareCellMultiplier];
 
             for (int i = 0; i < memory.Length; i += SimpleMemory.MemoryCellSizeBytes)
-                memory.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(hardwareCells.Slice(i * HardwareCellMultiplier));
+                memory.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(hardwareCells[(i * HardwareCellMultiplier)..]);
 
             return hardwareCells;
         }
 
-        private Memory<byte> HotfixOutput(Memory<byte> memory)
+        private static Memory<byte> HotfixOutput(Memory<byte> memory)
         {
-            var memoryBody = memory.Slice(OutputHeaderSizes.Total);
-            var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + memoryBody.Length / HardwareCellMultiplier);
-            var softwareCellsBody = softwareCells.Slice(OutputHeaderSizes.Total);
+            var memoryBody = memory[OutputHeaderSizes.Total..];
+            var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + (memoryBody.Length / HardwareCellMultiplier));
+            var softwareCellsBody = softwareCells[OutputHeaderSizes.Total..];
 
             // first one is already at the right place
             for (int i = HardwareCellIncrement; i < memoryBody.Length; i += HardwareCellIncrement)
-                memoryBody.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(softwareCellsBody.Slice(i / HardwareCellMultiplier));
+                memoryBody.Slice(i, SimpleMemory.MemoryCellSizeBytes).CopyTo(softwareCellsBody[(i / HardwareCellMultiplier)..]);
 
             return softwareCells;
         }
         #endregion
 
-        public override async Task<IHardwareExecutionInformation> Execute(
+        public override async Task<IHardwareExecutionInformation> ExecuteAsync(
             SimpleMemory simpleMemory,
             int memberId,
             IHardwareExecutionContext executionContext)
@@ -87,7 +86,9 @@ namespace Hast.Catapult.Abstractions
                             // The illegal endpoint number messages are normal for higher endpoints if they aren't
                             // populated, so it's OK to suppress them.
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
-                                Logger.LogError(ex, $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
+                                Logger.LogError(
+                                    ex,
+                                    $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
                             return null;
                         }
                     })));
@@ -97,35 +98,33 @@ namespace Hast.Catapult.Abstractions
                     .Select(x => new Device(x.InstanceName, x, Device_Disposing));
             });
 
-            using (var device = await _devicePoolManager.ReserveDevice())
-            {
-                var context = BeginExecution();
-                CatapultLibrary lib = device.Metadata;
-                lib.WaitClean();
-                lib.TesterOutput = TesterOutput;
-                var dma = new SimpleMemoryAccessor(simpleMemory);
+            using var device = await _devicePoolManager.ReserveDeviceAsync();
+            var context = BeginExecution();
+            CatapultLibrary lib = device.Metadata;
+            lib.WaitClean();
+            lib.TesterOutput = TesterOutput;
+            var dma = new SimpleMemoryAccessor(simpleMemory);
 
-                // Sending the data.
-                var task = lib.AssignJob(memberId, HotfixInput(dma.Get()));
-                var outputBuffer = await task;
+            // Sending the data.
+            var task = lib.AssignJobAsync(memberId, HotfixInput(dma.Get()));
+            var outputBuffer = await task;
 
-                // Processing the response.
-                var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
-                SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
+            // Processing the response.
+            var executionTimeClockCycles = MemoryMarshal.Read<ulong>(outputBuffer.Span);
+            SetHardwareExecutionTime(context, executionContext, executionTimeClockCycles);
 
-                var outputPayloadByteCount = SimpleMemory.MemoryCellSizeBytes * (int)MemoryMarshal.Read<uint>(
-                    outputBuffer.Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
-                if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
-                    outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
+            var outputPayloadByteCount = SimpleMemory.MemoryCellSizeBytes * (int)MemoryMarshal.Read<uint>(
+                outputBuffer[OutputHeaderSizes.HardwareExecutionTime..].Span);
+            if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
+                outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
 
-                if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
-                dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
-                Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
+            if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
+            dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
+            Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
 
-                EndExecution(context);
+            EndExecution(context);
 
-                return context.HardwareExecutionInformation;
-            }
+            return context.HardwareExecutionInformation;
         }
     }
 }

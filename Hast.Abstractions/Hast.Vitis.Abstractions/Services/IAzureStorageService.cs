@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
 {
+    /// <summary>
+    /// Service for interacting with Azure Blob Storage.
+    /// </summary>
     public interface IAzureStorageService
     {
         /// <summary>

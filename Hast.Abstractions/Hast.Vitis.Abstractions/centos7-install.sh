@@ -9,8 +9,8 @@ sudo rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-
 
 # This installs the full SDK allowing you to build from source. If you only want to run the compiled application, you
 # can install just the runtime by swapping the comment on the two lines below.
-sudo yum install -y dotnet-sdk-3.1
-#sudo yum install dotnet-runtime-3.1
+sudo yum install -y dotnet-sdk-6.0
+#sudo yum install -y dotnet-runtime-6.0
 
 # If the version of libgdiplus changed, type 'yum whatprovides libgdiplus' to get the package name.
 sudo yum install -y libgdiplus-2.10-10.el7.x86_64

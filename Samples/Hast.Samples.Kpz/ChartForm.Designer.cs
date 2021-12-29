@@ -152,7 +152,7 @@
             this.labelRandomSeed.Size = new System.Drawing.Size(119, 23);
             this.labelRandomSeed.TabIndex = 17;
             this.labelRandomSeed.Text = "Random seed:";
-            this.labelRandomSeed.Click += new System.EventHandler(this.labelRandomSeed_Click);
+            this.labelRandomSeed.Click += new System.EventHandler(this.LabelRandomSeed_Click);
             // 
             // checkWriteToFile
             // 
@@ -172,7 +172,7 @@
             this.labelWriteToFile.Size = new System.Drawing.Size(104, 23);
             this.labelWriteToFile.TabIndex = 15;
             this.labelWriteToFile.Text = "Write to file:";
-            this.labelWriteToFile.Click += new System.EventHandler(this.labelWriteToFile_Click);
+            this.labelWriteToFile.Click += new System.EventHandler(this.LabelWriteToFile_Click);
             // 
             // checkVerifyOutput
             // 
@@ -192,7 +192,7 @@
             this.labelVerifyOutput.Size = new System.Drawing.Size(116, 23);
             this.labelVerifyOutput.TabIndex = 13;
             this.labelVerifyOutput.Text = "Verify results:";
-            this.labelVerifyOutput.Click += new System.EventHandler(this.labelVerifyOutput_Click);
+            this.labelVerifyOutput.Click += new System.EventHandler(this.LabelVerifyOutput_Click);
             // 
             // labelStepByStep
             // 
@@ -203,7 +203,7 @@
             this.labelStepByStep.Size = new System.Drawing.Size(109, 23);
             this.labelStepByStep.TabIndex = 12;
             this.labelStepByStep.Text = "Step by step:";
-            this.labelStepByStep.Click += new System.EventHandler(this.labelStepByStep_Click);
+            this.labelStepByStep.Click += new System.EventHandler(this.LabelStepByStep_Click);
             // 
             // checkStep
             // 
@@ -223,7 +223,7 @@
             this.labelShowInspector.Size = new System.Drawing.Size(134, 23);
             this.labelShowInspector.TabIndex = 10;
             this.labelShowInspector.Text = "Show inspector:";
-            this.labelShowInspector.Click += new System.EventHandler(this.labelShowInspector_Click_1);
+            this.labelShowInspector.Click += new System.EventHandler(this.LabelShowInspector_Click_1);
             // 
             // label4
             // 
@@ -245,7 +245,7 @@
             this.comboTarget.Name = "comboTarget";
             this.comboTarget.Size = new System.Drawing.Size(408, 31);
             this.comboTarget.TabIndex = 8;
-            this.comboTarget.SelectedIndexChanged += new System.EventHandler(this.comboTarget_SelectedIndexChanged);
+            this.comboTarget.SelectedIndexChanged += new System.EventHandler(this.ComboTarget_SelectedIndexChanged);
             // 
             // checkShowInspector
             // 
@@ -341,7 +341,7 @@
             this.buttonStart.TabIndex = 2;
             this.buttonStart.Text = "Start KPZ";
             this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
             // splitContainer1
             // 
