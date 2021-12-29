@@ -101,10 +101,11 @@ namespace Hast.Vitis.Abstractions.Services
             var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
             if (hostMemory.Length <= headerSize)
             {
-                throw new IndexOutOfRangeException(
+                throw new InvalidOperationException(
                     $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
                     $"{headerSize}b.");
             }
+
             var timeHostMemoryVerified = context.Stopwatch.ElapsedMilliseconds;
 
             using var hostMemoryHandle = hostMemory.Pin();
@@ -139,7 +140,8 @@ namespace Hast.Vitis.Abstractions.Services
             var timeMetadataProcessed = context.Stopwatch.ElapsedMilliseconds;
 
             EndExecution(context);
-            Logger.LogInformation(@"
+            Logger.LogInformation(
+                @"
 /--------------------------------------\
 | EXECUTION TIME STOPWATCH BREAKDOWN   |
 |======================================|

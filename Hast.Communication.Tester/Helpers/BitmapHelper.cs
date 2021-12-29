@@ -21,7 +21,7 @@ namespace Hast.Communication.Tester.Helpers
 
                 for (int x = 0; x < newImage.Width; x++)
                 {
-                    var bytes = memory.Read4Bytes(y * newImage.Width + x + prependCellCount);
+                    var bytes = memory.Read4Bytes((y * newImage.Width) + x + prependCellCount);
                     row[x] = new Rgba32(bytes[0], bytes[1], bytes[2], bytes[3]);
                 }
             }
@@ -57,7 +57,7 @@ namespace Hast.Communication.Tester.Helpers
                     var pixel = row[x];
 
                     memory.Write4Bytes(
-                        y * image.Width + x + prependCells.Length,
+                        (y * image.Width) + x + prependCells.Length,
                         new[] { pixel.R, pixel.G, pixel.B, pixel.A });
                 }
             }

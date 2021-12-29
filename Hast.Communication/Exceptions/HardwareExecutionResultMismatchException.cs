@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -14,26 +14,36 @@ namespace Hast.Communication.Exceptions
         public int CellCount { get; }
         public override string Message => ToString();
 
-
         public HardwareExecutionResultMismatchException(IEnumerable<Mismatch> mismatches, int cellCount)
         {
             Mismatches = mismatches;
             CellCount = cellCount;
         }
 
+        public HardwareExecutionResultMismatchException()
+        {
+        }
+
+        public HardwareExecutionResultMismatchException(string message)
+            : base(message)
+        {
+        }
+
+        public HardwareExecutionResultMismatchException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
 
         public override string ToString() =>
             "The hardware and software executions resulted in different results: " +
             string.Join("; ", Mismatches.Select(mismatch => mismatch.ToString()));
 
-
         [DebuggerDisplay("{ToString()}")]
         public class Mismatch
         {
-            public int ResultMemoryIndex { get; private set; }
-            public byte[] HardwareResult { get; private set; }
-            public byte[] SoftwareResult { get; private set; }
-
+            public int ResultMemoryIndex { get; }
+            public IReadOnlyList<byte> HardwareResult { get; }
+            public IReadOnlyList<byte> SoftwareResult { get; }
 
             public Mismatch(int resultMemoryIndex, byte[] hardwareResult, byte[] softwareResult)
             {
@@ -41,7 +51,6 @@ namespace Hast.Communication.Exceptions
                 HardwareResult = hardwareResult;
                 SoftwareResult = softwareResult;
             }
-
 
             public override string ToString() =>
                 HardwareResult == null || SoftwareResult == null ?
@@ -56,17 +65,15 @@ namespace Hast.Communication.Exceptions
         [DebuggerDisplay("{ToString()}")]
         public class LengthMismatch : Mismatch
         {
-            public int HardwareCellCount { get; private set; }
-            public int SoftwareCellCount { get; private set; }
+            public int HardwareCellCount { get; }
+            public int SoftwareCellCount { get; }
 
-
-            public LengthMismatch(int hardwareCellCount, int softwareCellCount, int overflowIndex, byte[] hardwareResult, byte[] softwareResult) :
-                base(overflowIndex, hardwareResult, softwareResult)
+            public LengthMismatch(int hardwareCellCount, int softwareCellCount, int overflowIndex, byte[] hardwareResult, byte[] softwareResult)
+                : base(overflowIndex, hardwareResult, softwareResult)
             {
                 HardwareCellCount = hardwareCellCount;
                 SoftwareCellCount = softwareCellCount;
             }
-
 
             public override string ToString() =>
                 "The hardware and software results don't have the same length. The hardware result is " +

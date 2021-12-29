@@ -27,6 +27,9 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "IPRepo"), "Hast_IP.vhd"));
         }
 
-        public void InvokeProgress(BuildProgressEventArgs eventArgs) { }
+        public void InvokeProgress(BuildProgressEventArgs eventArgs)
+        {
+            // There are no progress steps for Vivado.
+        }
     }
 }

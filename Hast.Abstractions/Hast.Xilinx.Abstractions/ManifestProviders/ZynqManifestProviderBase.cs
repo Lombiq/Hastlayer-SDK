@@ -22,7 +22,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 SupportsHbm = false,
                 SupportedPlatforms = new[]
                 {
-                    Regex.Replace(_deviceName.ToLower(), @"[^a-z0-9]+", "-"),
+                    Regex.Replace(_deviceName, @"[^A-Za-z0-9]+", "-"),
                     "hw_platform",
                 },
                 // The frequency is set by ZynqHardwareImplementationComposerBuildProvider after build.

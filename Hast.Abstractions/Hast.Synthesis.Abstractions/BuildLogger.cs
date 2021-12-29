@@ -35,44 +35,13 @@ namespace Hast.Synthesis.Abstractions
             _buildOutput = buildOutput;
         }
 
-        public Task ExecuteWithLogging(
+        public Task ExecuteWithLoggingAsync(
             string executable,
             IList<string> arguments,
             string workingDirectory = null,
             TextWriter outputWriter = null)
         {
             var name = Path.GetFileName(executable);
-            void OnCommandEvent(CommandEvent commandEvent)
-            {
-                switch (commandEvent)
-                {
-                    case StartedCommandEvent started:
-                        Log(
-                            LogLevel.None,
-                            name,
-                            $"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}",
-                            "started");
-                        break;
-                    case StandardOutputCommandEvent output:
-                        outputWriter?.WriteLine(output.Text);
-                        Log(LogLevel.Trace, name, output.Text, "stdout");
-                        break;
-                    case StandardErrorCommandEvent error:
-                        Log(LogLevel.Warning, name, error.Text, "stderr");
-                        break;
-                    case ExitedCommandEvent exited:
-                        var message = (exited.ExitCode == 0 ? "success" : "failure") + "\n\n\n";
-                        Log(LogLevel.Information, name, message, "finished");
-
-                        if (exited.ExitCode != 0)
-                        {
-                            throw new CommandExecutionException(
-                                $"The command {name} exited with code {exited.ExitCode}. " +
-                                $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
-                        }
-                        break;
-                }
-            }
 
             var hasWorkingDirectory = Directory.Exists(workingDirectory);
             Command Configure(Command command)
@@ -81,13 +50,56 @@ namespace Hast.Synthesis.Abstractions
                 return command.WithValidation(CommandResultValidation.None);
             }
 
-
             _logger.LogInformation(
                 "Starting program: {0} {1} (working directory: {2})",
                 executable,
                 string.Join(" ", arguments),
                 hasWorkingDirectory ? workingDirectory : ".");
-            return CliHelper.StreamAsync(executable, arguments, OnCommandEvent, Configure);
+            return CliHelper.StreamAsync(
+                executable,
+                arguments,
+                commandEvent => OnCommandEvent(commandEvent, name, arguments, outputWriter),
+                Configure);
+        }
+
+        private void OnCommandEvent(
+            CommandEvent commandEvent,
+            string name,
+            IEnumerable<string> arguments,
+            TextWriter outputWriter)
+        {
+            switch (commandEvent)
+            {
+                case StartedCommandEvent started:
+                    Log(
+                        LogLevel.None,
+                        name,
+                        $"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}",
+                        "started");
+                    break;
+                case StandardOutputCommandEvent output:
+                    outputWriter?.WriteLine(output.Text);
+                    Log(LogLevel.Trace, name, output.Text, "stdout");
+                    break;
+                case StandardErrorCommandEvent error:
+                    Log(LogLevel.Warning, name, error.Text, "stderr");
+                    break;
+                case ExitedCommandEvent exited:
+                    var message = (exited.ExitCode == 0 ? "success" : "failure") + "\n\n\n";
+                    Log(LogLevel.Information, name, message, "finished");
+
+                    if (exited.ExitCode != 0)
+                    {
+                        throw new CommandExecutionException(
+                            $"The command {name} exited with code {exited.ExitCode}. " +
+                            $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
+                    }
+
+                    break;
+                default:
+                    throw new InvalidOperationException(
+                        $"Unknown {nameof(CommandEvent)} type \"{commandEvent.GetType().Name}\".");
+            }
         }
 
         private void Log(LogLevel logLevel, string name, object message, string buildLogType)
@@ -107,8 +119,8 @@ namespace Hast.Synthesis.Abstractions
                 };
             }
 
-            // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
-            if (name == Vpp && text?.StartsWith("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
+            //// Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
+            if (name == Vpp && text?.StartsWithOrdinal("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
             {
                 if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
                 _progressInvoker.InvokeProgress(new BuildProgressEventArgs(text));
@@ -133,7 +145,7 @@ namespace Hast.Synthesis.Abstractions
             ILogger<T> logger,
             T progressInvoker,
             string outFileName = "build")
-            where T: IProgressInvoker
+            where T : IProgressInvoker
         {
             string buildOutputPath = null;
             TextWriter buildOutput = null;

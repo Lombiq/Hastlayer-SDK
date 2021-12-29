@@ -4,6 +4,5 @@ namespace Hast.Catapult.Abstractions
 {
     public class CatapultDeviceManifest : DeviceManifest
     {
-
     }
 }

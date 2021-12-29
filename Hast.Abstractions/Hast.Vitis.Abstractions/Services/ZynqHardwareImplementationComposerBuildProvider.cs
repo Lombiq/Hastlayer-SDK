@@ -45,13 +45,13 @@ namespace Hast.Vitis.Abstractions.Services
         {
             var (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, _) = GetBuildPaths(context);
 
-            var xclbinutilExecutable = (await GetExecutablePathAsync("xclbinutil"));
+            var xclbinutilExecutable = await GetExecutablePathAsync("xclbinutil");
             Task ExecuteXclbinutil(TextWriter output, params string[] arguments) =>
-                _buildLogger.ExecuteWithLogging(xclbinutilExecutable, arguments, tmpDirectoryPath, output);
+                _buildLogger.ExecuteWithLoggingAsync(xclbinutilExecutable, arguments, tmpDirectoryPath, output);
 
-            var python3Executable = (await GetExecutablePathAsync("python3"));
+            var python3Executable = await GetExecutablePathAsync("python3");
             Task ExecutePython3(params string[] arguments) =>
-                _buildLogger.ExecuteWithLogging(python3Executable, arguments, tmpDirectoryPath);
+                _buildLogger.ExecuteWithLoggingAsync(python3Executable, arguments, tmpDirectoryPath);
 
             var binaryFilePath = GetBinaryPath(context.Configuration, context.HardwareDescription);
             var bitFilePath = xclbinFilePath.Replace(".xclbin", ".bit");
@@ -60,7 +60,8 @@ namespace Hast.Vitis.Abstractions.Services
             // cp ./src/IP/Hast_IP.vhd.name $(XCLBIN)/
             // cp ./src/IP/Hast_IP.vhd.hash $(XCLBIN)/
             // @$(VIVADO) -mode batch -source ./src/scripts/scale_frequency.tcl ./_x/link/vivado/vpl/prj/prj.xpr -tclargs ./xclbin myxpr
-            // @xclbinutil --input ./xclbin/hastip.hw.xclbin.org --replace-section CLOCK_FREQ_TOPOLOGY:json:./xclbin/clock_freq_topology.json --output ./xclbin/hastip.hw.xclbin --force
+            // @xclbinutil --input ./xclbin/hastip.hw.xclbin.org --replace-section CLOCK_FREQ_TOPOLOGY:json:./xclbin/clock_freq_topology.json \
+            //             --output ./xclbin/hastip.hw.xclbin --force
             // @xclbinutil --input ./xclbin/hastip.hw.xclbin --info ./xclbin/hastip.hw.xclbin.info --force
             // @xclbinutil --input ./xclbin/hastip.hw.xclbin --dump-section BITSTREAM:RAW:./xclbin/hastip.hw.bit --force
             // @python3 ./src/scripts/FPGA-BIT-TO-BIN.PY -f ./xclbin/hastip.hw.bit ./xclbin/hastip.hw.bit.bin
@@ -72,7 +73,7 @@ namespace Hast.Vitis.Abstractions.Services
             var tmpXclbinDirectoryPath = EnsureDirectoryExists(tmpDirectoryPath, "xclbin");
             MajorProgress($"The xclbin file was moved to {xclbinFilePath}.org.");
 
-            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
+            var vivadoExecutable = await GetExecutablePathAsync("vivado");
             var vivadoArguments = new[]
             {
                 "-mode",
@@ -84,7 +85,7 @@ namespace Hast.Vitis.Abstractions.Services
                 tmpXclbinDirectoryPath,
                 "myxpr",
             };
-            await _buildLogger.ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
+            await _buildLogger.ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             MajorProgress("Frequency scaling profile created.");
 
             await ExecuteXclbinutil(
@@ -143,8 +144,9 @@ namespace Hast.Vitis.Abstractions.Services
         {
             foreach (var provider in providers)
             {
-                if (provider.Name == nameof(VitisHardwareImplementationComposerBuildProvider) ||
-                    provider.Name == nameof(ZynqHardwareImplementationComposerBuildProvider))
+                if (provider.Name is
+                    nameof(VitisHardwareImplementationComposerBuildProvider) or
+                    nameof(ZynqHardwareImplementationComposerBuildProvider))
                 {
                     provider
                         .Shortcuts

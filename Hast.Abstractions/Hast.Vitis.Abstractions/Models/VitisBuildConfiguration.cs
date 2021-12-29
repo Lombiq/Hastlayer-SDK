@@ -17,9 +17,9 @@ namespace Hast.Vitis.Abstractions.Models
         public bool ResetOnFirstRun { get; set; }
 
         /// <summary>
-        /// If <see langword="true"/>, the composer will pause after saving the vhd files to disk and before checking if
-        /// the xclbin files exist. This gives the user opportunity to perform manual build and create their own
-        /// binaries to the location where Hastlayer normally looks for it.
+        /// Gets or sets a value indicating whether the composer will pause after saving the vhd files to disk and
+        /// before checking if the xclbin files exist. This gives the user opportunity to perform manual build and
+        /// create their own binaries to the location where Hastlayer normally looks for it.
         /// </summary>
         /// <remarks>
         /// <para>It prompts via the command line so this is not suitable for GUI applications.</para>

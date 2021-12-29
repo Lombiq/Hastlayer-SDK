@@ -8,10 +8,9 @@ namespace Hast.Common.Interfaces
     /// </summary>
     public interface IHastlayerFlavorProvider
     {
-
         /// <summary>
-        /// The usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Client"/> in
-        /// the client SDK and <see cref="HastlayerFlavor.Developer"/> otherwise.
+        /// Gets the usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Client"/>
+        /// in the client SDK and <see cref="HastlayerFlavor.Developer"/> otherwise.
         /// </summary>
         HastlayerFlavor Flavor { get; }
     }

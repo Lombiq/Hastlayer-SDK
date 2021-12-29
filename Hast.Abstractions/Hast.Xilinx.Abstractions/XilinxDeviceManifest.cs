@@ -54,6 +54,5 @@ namespace Hast.Xilinx.Abstractions
 
     public class ZynqDeviceManifest : VitisDeviceManifest
     {
-
     }
 }

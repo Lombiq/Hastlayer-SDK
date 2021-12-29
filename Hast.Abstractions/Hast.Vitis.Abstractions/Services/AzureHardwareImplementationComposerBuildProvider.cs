@@ -175,6 +175,9 @@ namespace Hast.Vitis.Abstractions.Services
                     return new Uri(configuration.StartFunctionUrl, "/").AbsoluteUri;
                 });
 
-        public void InvokeProgress(BuildProgressEventArgs eventArgs) { }
+        public void InvokeProgress(BuildProgressEventArgs eventArgs)
+        {
+            // There are no numbered steps for Azure.
+        }
     }
 }

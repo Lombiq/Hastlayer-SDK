@@ -52,7 +52,6 @@ namespace Hast.Synthesis.Abstractions
         /// <summary>
         /// Invokes the progress event, if any.
         /// </summary>
-        /// <param name="eventArgs"></param>
         void InvokeProgress(BuildProgressEventArgs eventArgs);
     }
 }

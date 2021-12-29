@@ -155,12 +155,12 @@ namespace Hast.Vitis.Abstractions.Services
                     "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
             }
 
-            var platformsDirectories = (new[]
+            var platformsDirectories = new[]
                 {
                     Environment.GetEnvironmentVariable("XILINX_PLATFORM"),
                     Path.Combine(xilinxDirectoryPath!, "platforms"),
                     Path.Combine(hardwareFrameworkPath, "platforms"),
-                })
+                }
                 .Where(path => path != null && Directory.Exists(path))
                 .Select(path => new DirectoryInfo(path))
                 .ToList();
@@ -207,7 +207,7 @@ namespace Hast.Vitis.Abstractions.Services
             Cleanup(hardwareFrameworkPath, hashId);
         }
 
-        private string GetPlatformFilePath(
+        private static string GetPlatformFilePath(
             VitisDeviceManifest deviceManifest,
             List<DirectoryInfo> platformsDirectories)
         {
@@ -282,7 +282,7 @@ namespace Hast.Vitis.Abstractions.Services
                 GetScriptFile(hardwareFrameworkPath, "package_kernel.tcl"),
                 Path.Combine(rtlDirectoryPath, "src", "xml", "kernel.xml"),
             };
-            await _buildLogger.ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
+            await _buildLogger.ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
             ProgressMajor("Vivado build is finished.");
 
             // But this is not C# code.
@@ -338,7 +338,7 @@ namespace Hast.Vitis.Abstractions.Services
                 xoFilePath,
             });
 
-            await _buildLogger.ExecuteWithLogging(vppExecutable, vppArguments, tmpDirectoryPath);
+            await _buildLogger.ExecuteWithLoggingAsync(vppExecutable, vppArguments, tmpDirectoryPath);
             ProgressMajor("v++ build is finished.");
 
             if (target.ToUpperInvariant() == "HW_EMU")
@@ -347,7 +347,7 @@ namespace Hast.Vitis.Abstractions.Services
                 // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
                 var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
                 var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
-                await _buildLogger.ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
+                await _buildLogger.ExecuteWithLoggingAsync(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
                 File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
                 ProgressMajor("Emulation configuration (emconfig) setup is finished.");
             }
@@ -371,7 +371,7 @@ namespace Hast.Vitis.Abstractions.Services
                 Path.Combine(rtlDirectoryPath, "src", "IP", "Hast_IP.vhd"),
                 Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
             };
-            await _buildLogger.ExecuteWithLogging(vivadoExecutable, vivadoArguments);
+            await _buildLogger.ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments);
             ProgressMajor("Vivado synthesis is finished.");
         }
 

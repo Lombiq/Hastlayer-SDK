@@ -90,8 +90,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                 {
                     memory = memory.Slice(alignmentOffset, memory.Length - alignment);
                 }
-                else // This should never happen in production.
+                else
                 {
+                    // This should never happen in production.
 #if DEBUG
                     Console.Error.WriteLine("Alignment failed!");
                     Console.Error.WriteLine("  64-bit: {0}", Environment.Is64BitProcess);
