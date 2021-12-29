@@ -49,7 +49,7 @@ namespace Hast.Vitis.Abstractions.Models
 
             // Scroll to the table start. Each section always seems to have a table even if empty.
             await ReadUntilAsync(reader, TableBorderLine);
-            if (!title.EndsWith(". Summary", StringComparison.InvariantCulture))
+            if (!title.EndsWithOrdinal(". Summary"))
             {
                 columnNames = (await reader.ReadLineAsync())!.Trim('|').Split('|').Select(columnName => columnName.Trim())
                     .ToList();
