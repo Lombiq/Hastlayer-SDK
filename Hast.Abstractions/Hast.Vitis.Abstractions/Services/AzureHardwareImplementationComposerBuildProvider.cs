@@ -45,7 +45,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
-            xilinxDeviceManifest.Name.StartsWith("Azure", StringComparison.InvariantCulture);
+            xilinxDeviceManifest.Name.StartsWithOrdinal("Azure");
 
         public async Task BuildAsync(
             IHardwareImplementationCompositionContext context,

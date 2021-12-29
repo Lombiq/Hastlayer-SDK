@@ -61,7 +61,7 @@ namespace Hast.Vitis.Abstractions.Models
                     reader,
                     line =>
                         line.StartsWithOrdinal("|") &&
-                        !line.StartsWith(TableBorderLine, StringComparison.InvariantCulture)))
+                        !line.StartsWithOrdinal(TableBorderLine)))
                 .Select(line => line.Trim('|')
                     .Split('|')
                     .Select(cell => cell.Trim())

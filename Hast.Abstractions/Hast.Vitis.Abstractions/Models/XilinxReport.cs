@@ -51,7 +51,7 @@ namespace Hast.Vitis.Abstractions.Models
             while (true)
             {
                 var line = await reader.ReadLineAsync();
-                if (line?.StartsWith(start, StringComparison.InvariantCulture) != false) return line;
+                if (line?.StartsWithOrdinal(start) != false) return line;
             }
         }
 
