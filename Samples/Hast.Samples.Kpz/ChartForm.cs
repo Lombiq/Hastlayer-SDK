@@ -180,7 +180,8 @@ namespace Hast.Samples.Kpz
             _kpz.InitializeGrid();
 
             var (hastlayer, configuration) = ComputationTarget != KpzTarget.Cpu
-                ? InitializeHastlayer() : (null, null);
+                ? InitializeHastlayer()
+                : (Hastlayer: null, Configuration: null);
 
             try
             {

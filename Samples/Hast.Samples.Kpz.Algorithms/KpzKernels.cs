@@ -82,7 +82,7 @@ namespace Hast.Samples.Kpz.Algorithms
             var numbers = new uint[KpzKernels.GridWidth * KpzKernels.GridHeight];
             var sm = hastlayer.CreateMemory(configuration, KpzKernels.SizeOfSimpleMemory);
 
-            sm.CopyParametersToMemory(false, 0x_5289_a3b8_9ac5_f211, 0x_5289_a3b8_9ac5_f211, 0);
+            sm.CopyParametersToMemory(testMode: false, 0x_5289_a3b8_9ac5_f211, 0x_5289_a3b8_9ac5_f211, 0);
 
             TestPrng(sm);
 

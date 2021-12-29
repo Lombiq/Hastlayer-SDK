@@ -65,7 +65,7 @@ namespace Hast.Vitis.Abstractions.Models
                     item.Index = value.ToTechnicalInt();
                     break;
                 case nameof(Type):
-                    item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, true);
+                    item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, ignoreCase: true);
                     break;
                 case nameof(Frequency):
                     parts = value.Split();

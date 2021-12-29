@@ -21,8 +21,8 @@ namespace Hast.Samples.SampleAssembly
             var dividendPosit = memory.ReadUInt32(RepeatedDivisionFirstInputPosit32Index);
             var divisorPosit = memory.ReadUInt32(RepeatedDivisionSecondInputPosit32Index);
 
-            var a = new Posit32(dividendPosit, true);
-            var b = new Posit32(divisorPosit, true);
+            var a = new Posit32(dividendPosit, fromBitMask: true);
+            var b = new Posit32(divisorPosit, fromBitMask: true);
 
             for (uint i = 0; i < number; i++)
             {
@@ -41,7 +41,7 @@ namespace Hast.Samples.SampleAssembly
 
             for (int i = 0; i < numberCount; i++)
             {
-                result = Posit32.Sqrt(new Posit32(memory.ReadUInt32(SqrtOfPositsInArrayInputPosit32sStartIndex + i), true));
+                result = Posit32.Sqrt(new Posit32(memory.ReadUInt32(SqrtOfPositsInArrayInputPosit32sStartIndex + i), fromBitMask: true));
                 memory.WriteUInt32(SqrtOfPositsInArrayOutputPosit32StartIndex + i, result.PositBits);
             }
         }
@@ -67,7 +67,7 @@ namespace Hast.Samples.SampleAssembly
 
             positCalculator.RepeatedDivision(memory);
 
-            return (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.RepeatedDivisionOutputPosit32Index), true);
+            return (float)new Posit32(memory.ReadUInt32(Posit32AdvancedCalculator.RepeatedDivisionOutputPosit32Index), fromBitMask: true);
         }
 
         public static float[] SqrtOfPositsInArray(
@@ -95,7 +95,7 @@ namespace Hast.Samples.SampleAssembly
             {
                 resultArray[i] = (float)new Posit32(
                     memory.ReadUInt32(Posit32AdvancedCalculator.SqrtOfPositsInArrayOutputPosit32StartIndex + i),
-                    true);
+fromBitMask: true);
             }
 
             return resultArray;

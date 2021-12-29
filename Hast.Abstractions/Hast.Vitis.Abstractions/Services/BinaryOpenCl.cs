@@ -117,9 +117,9 @@ namespace Hast.Vitis.Abstractions.Services
             var kernel = GetKernel(kernelName);
 
             var waitEvent = IntPtr.Zero;
-            waitEvent = EnqueueMemoryMigration(queue, buffers, false, waitEvent);
+            waitEvent = EnqueueMemoryMigration(queue, buffers, toHost: false, waitEvent);
             waitEvent = EnqueueTask(queue, kernel, waitEvent);
-            if (copyBack) EnqueueMemoryMigration(queue, buffers, true, waitEvent);
+            if (copyBack) EnqueueMemoryMigration(queue, buffers, toHost: true, waitEvent);
         }
 
         public async Task AwaitDeviceAsync(int deviceIndex)
@@ -179,7 +179,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private IEnumerable<IntPtr> GetPlatformHandles(string vendorName = null)
         {
-            VerifyResult(_cl.GetPlatformIDs(0, null, out uint count));
+            VerifyResult(_cl.GetPlatformIDs(0, platforms: null, out uint count));
 
             var platforms = new IntPtr[count];
             VerifyResult(_cl.GetPlatformIDs(count, platforms, out _));
@@ -192,7 +192,7 @@ namespace Hast.Vitis.Abstractions.Services
                         platform,
                         PlatformInformation.Name,
                         UIntPtr.Zero,
-                        null,
+parameterValue: null,
                         out var size));
                     var output = new byte[size.ToUInt32()];
                     VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));
@@ -203,7 +203,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceTypes deviceType)
         {
-            VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, null, out uint numberOfAvailableDevices));
+            VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, devices: null, out uint numberOfAvailableDevices));
 
             var devicePointers = new IntPtr[numberOfAvailableDevices];
             VerifyResult(_cl.GetDeviceIDs(platform, deviceType, numberOfAvailableDevices, devicePointers, out _));
@@ -253,8 +253,8 @@ namespace Hast.Vitis.Abstractions.Services
                 program,
                 Devices.Length,
                 Devices,
-                null,
-                null,
+options: null,
+notify: null,
                 IntPtr.Zero));
 
             return program;

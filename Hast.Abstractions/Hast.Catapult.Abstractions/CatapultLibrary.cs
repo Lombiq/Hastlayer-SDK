@@ -296,7 +296,7 @@ namespace Hast.Catapult.Abstractions
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
         public Task<Memory<byte>> AssignJobAsync(int memberId, Memory<byte> inputData) =>
-            AssignJobAsync(memberId, inputData, 0, 1, -1, false);
+            AssignJobAsync(memberId, inputData, 0, 1, -1, ignoreResponse: false);
 
         private async Task<Memory<byte>> AssignJobAsync(
             int memberId,

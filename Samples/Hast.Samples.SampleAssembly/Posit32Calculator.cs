@@ -50,7 +50,7 @@ namespace Hast.Samples.SampleAssembly
             var number = memory.ReadInt32(CalculatePowerOfRealInputInt32Index);
             var positToMultiply = memory.ReadUInt32(CalculatePowerOfRealInputPosit32Index);
 
-            var a = new Posit32(positToMultiply, true);
+            var a = new Posit32(positToMultiply, fromBitMask: true);
             var b = a;
 
             for (uint i = 0; i < number; i++)
@@ -98,11 +98,11 @@ namespace Hast.Samples.SampleAssembly
         {
             uint numberCount = memory.ReadUInt32(AddPositsInArrayInputPosit32CountIndex);
 
-            var result = new Posit32(memory.ReadUInt32(AddPositsInArrayInputPosit32sStartIndex), true);
+            var result = new Posit32(memory.ReadUInt32(AddPositsInArrayInputPosit32sStartIndex), fromBitMask: true);
 
             for (int i = 1; i < numberCount; i++)
             {
-                result += new Posit32(memory.ReadUInt32(AddPositsInArrayInputPosit32sStartIndex + i), true);
+                result += new Posit32(memory.ReadUInt32(AddPositsInArrayInputPosit32sStartIndex + i), fromBitMask: true);
             }
 
             memory.WriteUInt32(AddPositsInArrayOutputPosit32Index, result.PositBits);
@@ -143,7 +143,7 @@ namespace Hast.Samples.SampleAssembly
 
             positCalculator.CalculatePowerOfReal(memory);
 
-            return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.CalculatePowerOfRealOutputPosit32Index), true);
+            return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.CalculatePowerOfRealOutputPosit32Index), fromBitMask: true);
         }
 
         public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(
@@ -200,7 +200,7 @@ namespace Hast.Samples.SampleAssembly
 
             posit32Calculator.AddPositsInArray(memory);
 
-            return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.AddPositsInArrayOutputPosit32Index), true);
+            return (float)new Posit32(memory.ReadUInt32(Posit32Calculator.AddPositsInArrayOutputPosit32Index), fromBitMask: true);
         }
     }
 }

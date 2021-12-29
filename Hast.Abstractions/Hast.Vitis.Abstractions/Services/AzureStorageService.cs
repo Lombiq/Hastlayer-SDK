@@ -44,15 +44,15 @@ namespace Hast.Vitis.Abstractions.Services
 
             _logger.LogInformation($"Uploading file \"{fileName}\"...");
             await using var fileToUploadStream = File.OpenRead(localFilePath);
-            await blobClient.UploadAsync(fileToUploadStream, true, CancellationToken.None);
+            await blobClient.UploadAsync(fileToUploadStream, overwrite: true, CancellationToken.None);
             _logger.LogInformation($"File \"{fileName}\" has been uploaded...");
         }
 
         public Task<IEnumerable<string>> DownloadAsync(string localDirectoryPath, params string[] remoteFileNames) =>
-            DownloadInnerAsync(localDirectoryPath, remoteFileNames, true);
+            DownloadInnerAsync(localDirectoryPath, remoteFileNames, throwOnError: true);
 
         public Task<IEnumerable<string>> DownloadMaybeAsync(string localDirectoryPath, params string[] remoteFileNames) =>
-            DownloadInnerAsync(localDirectoryPath, remoteFileNames, false);
+            DownloadInnerAsync(localDirectoryPath, remoteFileNames, throwOnError: false);
 
         public async ValueTask<string> GetSharedAccessSignatureAsync()
         {

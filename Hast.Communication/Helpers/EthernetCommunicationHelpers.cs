@@ -80,7 +80,7 @@ namespace Hast.Communication.Helpers
                 ExclusiveAddressUse = false,
             };
 
-            udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            udpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, optionValue: true);
             udpClient.Client.Bind(bindingEndpoint);
 
             return udpClient;

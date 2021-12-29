@@ -38,7 +38,7 @@ namespace Hast.Common.ContractResolvers
         {
             var property = member as PropertyInfo;
 
-            return property?.GetSetMethod(true) != null;
+            return property?.GetSetMethod(nonPublic: true) != null;
         }
     }
 }

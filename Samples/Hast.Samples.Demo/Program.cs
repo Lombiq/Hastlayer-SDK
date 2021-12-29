@@ -45,7 +45,7 @@ namespace Hast.Samples.Demo
             Console.WriteLine();
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ParallelAlgorithm().Run(234234, null);
+            var cpuOutput = new ParallelAlgorithm().Run(234234, hastlayer: null);
             sw.Stop();
 
             Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");

@@ -16,7 +16,7 @@ namespace Hast.Communication.Tester
             Dictionary<string, object> customConfiguration = null)
         {
             var assemblies = new[] { typeof(Program).Assembly };
-            var configuration = new HardwareGenerationConfiguration(deviceName, null)
+            var configuration = new HardwareGenerationConfiguration(deviceName, hardwareFrameworkPath: null)
             {
                 EnableHardwareTransformation = false,
             };
