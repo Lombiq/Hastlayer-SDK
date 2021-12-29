@@ -1,10 +1,13 @@
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.IO;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -39,8 +42,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var resultOfDivision = positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F);
             sw.Stop();
 
-            Console.WriteLine("Result of repeated division: " + resultOfDivision);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of repeated division: ", resultOfDivision));
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             var sqrtInputArray = new uint[10];
             for (int i = 0; i < 10; i++)
@@ -55,11 +58,11 @@ namespace Hast.Samples.Consumer.SampleRunners
             Console.WriteLine("Result of sqrt: ");
             for (int i = 0; i < resultOfSqrt.Length; i++)
             {
-                Console.Write(resultOfSqrt[i] + ", ");
+                Console.Write(resultOfSqrt[i].ToString(CultureInfo.InvariantCulture) + ", ");
             }
 
             Console.WriteLine();
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
         }
     }
 }

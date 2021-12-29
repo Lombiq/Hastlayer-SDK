@@ -1,7 +1,9 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
@@ -22,11 +24,12 @@ namespace Hast.Samples.Demo
             hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 Console.WriteLine(
-                    "Executing on hardware took " +
-                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                    " milliseconds (net) " +
-                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                    " milliseconds (all together).");
+                    StringHelper.ConcatenateConvertible(
+                        "Executing on hardware took ",
+                        e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds,
+                        " milliseconds (net) ",
+                        e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds,
+                        " milliseconds (all together)."));
             };
             #endregion
 
@@ -48,7 +51,7 @@ namespace Hast.Samples.Demo
             var cpuOutput = new ParallelAlgorithm().Run(234234, hastlayer: null);
             sw.Stop();
 
-            Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
+            Console.WriteLine(StringHelper.ConcatenateConvertible("On CPU it took ", sw.ElapsedMilliseconds, " milliseconds."));
 
             Console.WriteLine();
             Console.WriteLine("Starting hardware execution.");

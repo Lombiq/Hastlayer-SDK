@@ -204,7 +204,7 @@ namespace Hast.Samples.Kpz
                 }
 
                 sw.Stop();
-                AsyncLogIt("Done. Total time measured: " + sw.ElapsedMilliseconds + " ms");
+                AsyncLogInvariant($"Done. Total time measured: {sw.ElapsedMilliseconds} ms");
             }
             finally
             {

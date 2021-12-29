@@ -1,7 +1,9 @@
-using System;
+﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 
 namespace Hast.Samples.Consumer.SampleRunners
 {
@@ -50,7 +52,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var sw = System.Diagnostics.Stopwatch.StartNew();
             _ = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
             sw.Stop();
-            Console.WriteLine("Elapsed ms: " + sw.ElapsedMilliseconds);
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed ms: ", sw.ElapsedMilliseconds));
         }
     }
 }

@@ -1,8 +1,12 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
@@ -64,8 +68,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
             sw.Stop();
 
-            Console.WriteLine("Result of counting up to 100000: " + integerSumUpToNumber);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of counting up to 100000: ", integerSumUpToNumber));
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
 
@@ -74,8 +78,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var powerOfReal = positCalculator.CalculatePowerOfReal(100000, 1.0001F);
             sw.Stop();
 
-            Console.WriteLine("Result of power of real number: " + powerOfReal);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of power of real number: ", powerOfReal));
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
 
@@ -90,8 +94,10 @@ namespace Hast.Samples.Consumer.SampleRunners
             var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
             sw.Stop();
 
-            Console.WriteLine("Result of counting up to ~100000 parallelized: " + string.Join(", ", integerSumsUpToNumbers));
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(
+                "Result of counting up to ~100000 parallelized: " +
+                string.Join(", ", integerSumsUpToNumbers.Select(number => number.ToString(CultureInfo.InvariantCulture))));
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
 
@@ -109,8 +115,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var positsInArraySum = positCalculator.AddPositsInArray(posit32Array);
             sw.Stop();
 
-            Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of addition of posits in array: ", positsInArraySum));
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
         }

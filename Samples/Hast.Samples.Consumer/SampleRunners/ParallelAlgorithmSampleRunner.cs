@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
@@ -28,7 +29,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var sw = System.Diagnostics.Stopwatch.StartNew();
             _ = new ParallelAlgorithm().Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
-            System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + "ms.");
+            System.Console.WriteLine(StringHelper.ConcatenateConvertible("On CPU it took ", sw.ElapsedMilliseconds, "ms."));
         }
     }
 }

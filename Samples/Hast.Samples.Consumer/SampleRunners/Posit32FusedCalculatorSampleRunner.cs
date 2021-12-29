@@ -1,8 +1,10 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
@@ -42,8 +44,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             float result = positCalculator.CalculateFusedSum(posit32BitsArray);
             sw.Stop();
 
-            Console.WriteLine("Result of Fused addition of posits in array: " + result);
-            Console.WriteLine("Elapsed: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of Fused addition of posits in array: ", result));
+            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
         }
