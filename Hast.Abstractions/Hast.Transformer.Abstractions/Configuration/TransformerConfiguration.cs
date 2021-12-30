@@ -1,7 +1,8 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -86,6 +87,12 @@ namespace Hast.Transformer.Abstractions.Configuration
         /// </summary>
         public bool EnableConstantSubstitution { get; set; } = true;
 
+        [SuppressMessage(
+            "Performance",
+            "MA0105:Use the lambda parameters instead of using a closure",
+            Justification =
+                "Not applicable here, because updateValueFactory's two arguments are key and oldValue but we want " +
+                "to pass in the addValue.")]
         public void AddMemberInvocationInstanceCountConfiguration(MemberInvocationInstanceCountConfiguration configuration) =>
             _memberInvocationInstanceCountConfigurations
                 .AddOrUpdate(configuration.MemberNamePrefix, configuration, (_, _) => configuration);

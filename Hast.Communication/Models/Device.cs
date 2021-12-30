@@ -32,7 +32,7 @@ namespace Hast.Communication.Models
 
         public void Dispose()
         {
-            Dispose(true);
+            Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
 

@@ -369,7 +369,9 @@ namespace Hast.Algorithms.Tests
                     var expected = d1 % d2;
                     var delta = Math.Abs(expected - actual);
                     deltas.Add(delta);
-                    Assert.True(delta <= 60 * Fix64.Precision, $"{f1} % {f2} = expected {expected} but got {actual}");
+                    Assert.True(
+                        delta <= 60 * Fix64.Precision,
+                        FormattableString.Invariant($"{f1} % {f2} = expected {expected} but got {actual}"));
                 }
             }
 

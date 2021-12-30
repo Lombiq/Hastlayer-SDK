@@ -55,7 +55,7 @@ namespace Hast.Vitis.Abstractions.Models
             }
         }
 
-        public static async Task<List<string>> ReadWhileAsync(
+        public static async Task<IEnumerable<string>> ReadWhileAsync(
             TextReader reader,
             Func<string, bool> condition,
             bool includeLast = false)

@@ -43,7 +43,7 @@ namespace Hast.Synthesis.Abstractions.Helpers
             }
             else if (File.Exists(xdcFileTemplatePath))
             {
-                File.Copy(xdcFileTemplatePath, xdcFilePath, true);
+                File.Copy(xdcFileTemplatePath, xdcFilePath, overwrite: true);
             }
 
             if (!string.IsNullOrEmpty(vhdlHardwareDescription.XdcSource))
@@ -53,7 +53,7 @@ namespace Hast.Synthesis.Abstractions.Helpers
             else if (File.Exists(xdcFileTemplatePath))
             {
                 // The XDC file can contain constraints of previous hardware designs so clearing those out.
-                File.Copy(xdcFileTemplatePath, xdcFilePath, true);
+                File.Copy(xdcFileTemplatePath, xdcFilePath, overwrite: true);
             }
 
             await File.WriteAllTextAsync(hashFile, hashId);

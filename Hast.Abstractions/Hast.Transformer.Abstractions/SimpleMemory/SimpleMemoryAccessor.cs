@@ -97,7 +97,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         {
             int prefixBytesCount = prefixCellCount * SimpleMemory.MemoryCellSizeBytes;
             var data = new byte[stream.Length + prefixBytesCount];
-            stream.Read(data, prefixBytesCount, (int)stream.Length);
+            _ = stream.Read(data, prefixBytesCount, (int)stream.Length);
             Set(data, prefixCellCount);
         }
 

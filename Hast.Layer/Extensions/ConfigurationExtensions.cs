@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.Configuration
             }
 
             // at this stage, all arrays are seen as dictionaries with integer keys
-            ReplaceWithArray(null, null, result);
+            ReplaceWithArray(parent: null, key: null, result);
 
             return result;
         }

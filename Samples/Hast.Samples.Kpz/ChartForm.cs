@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 
@@ -133,6 +134,9 @@ namespace Hast.Samples.Kpz
         /// </summary>
         private void AsyncLogIt(string what) => Invoke(new Action(() => LogIt(what)));
 
+        private void AsyncLogInvariant(FormattableString what) =>
+            Invoke(new Action(() => LogIt(what.ToString(CultureInfo.InvariantCulture))));
+
         /// <summary>
         /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the
         /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
@@ -157,12 +161,12 @@ namespace Hast.Samples.Kpz
 
                 if (!meta.PeriodicityValid)
                 {
-                    AsyncLogIt($"Warning: Periodicity invalid (x: {meta.PeriodicityInvalidXCount}, y: {meta.PeriodicityInvalidYCount})");
+                    AsyncLogInvariant($"Warning: Periodicity invalid (x: {meta.PeriodicityInvalidXCount}, y: {meta.PeriodicityInvalidYCount})");
                 }
 
                 Invoke(new Action(() =>
                 {
-                    LogIt($"iteration: {iteration}, surfaceRoughness: {meta.StandardDeviation}");
+                    LogIt(FormattableString.Invariant($"iteration: {iteration}, surfaceRoughness: {meta.StandardDeviation}"));
                     chartKPZ.Series[0].Points.AddXY(iteration + 1, meta.StandardDeviation);
                     chartKPZ.ChartAreas[0].AxisX.IsLogarithmic = true;
                 }));
@@ -180,7 +184,8 @@ namespace Hast.Samples.Kpz
             _kpz.InitializeGrid();
 
             var (hastlayer, configuration) = ComputationTarget != KpzTarget.Cpu
-                ? InitializeHastlayer() : (null, null);
+                ? InitializeHastlayer()
+                : (Hastlayer: null, Configuration: null);
 
             try
             {
@@ -199,7 +204,7 @@ namespace Hast.Samples.Kpz
                 }
 
                 sw.Stop();
-                AsyncLogIt("Done. Total time measured: " + sw.ElapsedMilliseconds + " ms");
+                AsyncLogInvariant($"Done. Total time measured: {sw.ElapsedMilliseconds} ms");
             }
             finally
             {
@@ -243,7 +248,7 @@ namespace Hast.Samples.Kpz
             while (true)
             {
                 int iterationsToDo = currentIteration - lastIteration;
-                AsyncLogIt($"Doing {iterationsToDo} iterations at once...");
+                AsyncLogInvariant($"Doing {iterationsToDo} iterations at once...");
                 _kpz.DoHastIterations(hastlayer, configuration, (uint)iterationsToDo);
                 AsyncUpdateProgressBar(currentIteration);
                 // Force update if current iteration is the last:
@@ -263,7 +268,7 @@ namespace Hast.Samples.Kpz
 
             result.Hastlayer.Invoking += (_, _) => AsyncLogIt("Hastlayer: Invoking member...");
             result.Hastlayer.ExecutedOnHardware += (_, e) => AsyncLogIt("Hastlayer: Executed member on hardware! " +
-                $"(took {e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)");
+                FormattableString.Invariant($"(took {e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds:0.000} ms)"));
 
             return result;
         }

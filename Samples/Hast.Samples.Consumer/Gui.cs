@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Terminal.Gui;
 
@@ -14,7 +13,7 @@ namespace Hast.Samples.Consumer
 {
     public sealed class Gui : IDisposable
     {
-        private readonly Dictionary<string, ConsumerConfiguration> _savedConfigurations;
+        private readonly IDictionary<string, ConsumerConfiguration> _savedConfigurations;
         private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
 
         private readonly Label _hintLabel = new Label(string.Empty) { CanFocus = false }.Fill();
@@ -43,7 +42,7 @@ namespace Hast.Samples.Consumer
         private ListView _list;
         private ScrollView _scrollView;
 
-        public Gui(Dictionary<string, ConsumerConfiguration> savedConfigurations) =>
+        public Gui(IDictionary<string, ConsumerConfiguration> savedConfigurations) =>
             _savedConfigurations = savedConfigurations;
 
         public ConsumerConfiguration BuildConfiguration()
@@ -99,7 +98,7 @@ namespace Hast.Samples.Consumer
                     new MenuItem(
                         "_Quit",
                         "Closes the application.",
-                        SetConfigurationAndStop(null),
+                        SetConfigurationAndStop(set: null),
                         shortcut: Key.Q | Key.CtrlMask),
                 }),
                 _startMenuItem,
@@ -112,7 +111,7 @@ namespace Hast.Samples.Consumer
             var configurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
                     JsonConvert.SerializeObject(_configuration))?
                 .Keys
-                .Select(key => Regex.Replace(key, @"[A-Z]", " $0").TrimStart())
+                .Select(key => key.RegexReplace(@"[A-Z]", " $0").TrimStart())
                 .OrderBy(text => text)
                 .ToList();
             _propertiesListView.SetSource(configurationKeys);
@@ -197,17 +196,17 @@ namespace Hast.Samples.Consumer
                 case nameof(ConsumerConfiguration.AppName):
                     _optionsTextField.Text = _configuration.AppName ?? string.Empty;
                     _currentOptionsTextFieldEventHandler = text => _configuration.AppName = text;
-                    ShowTextField(true);
+                    ShowTextField(visible: true);
                     break;
                 case nameof(ConsumerConfiguration.AppSecret):
                     _optionsTextField.Text = _configuration.AppSecret ?? string.Empty;
                     _currentOptionsTextFieldEventHandler = text => _configuration.AppSecret = text;
-                    ShowTextField(true);
+                    ShowTextField(visible: true);
                     break;
                 case nameof(ConsumerConfiguration.BuildLabel):
                     _optionsTextField.Text = _configuration.BuildLabel ?? string.Empty;
                     _currentOptionsTextFieldEventHandler = text => _configuration.BuildLabel = text;
-                    ShowTextField(true);
+                    ShowTextField(visible: true);
                     break;
                 case nameof(ConsumerConfiguration.DeviceName):
                     ShowDeviceNames();
@@ -216,30 +215,30 @@ namespace Hast.Samples.Consumer
                     _optionsListView.Source = new ListWrapper(new object[] { true, false });
                     _optionsListView.SelectedItem = _configuration.GenerateHardwareOnly ? 0 : 1;
                     _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = item.IsTrueString();
-                    ShowTextField(false);
+                    ShowTextField(visible: false);
                     break;
                 case nameof(ConsumerConfiguration.Endpoint):
                     _optionsTextField.Text = _configuration.Endpoint ?? string.Empty;
                     _currentOptionsTextFieldEventHandler = text => _configuration.Endpoint = text;
-                    ShowTextField(true);
+                    ShowTextField(visible: true);
                     break;
                 case nameof(ConsumerConfiguration.HardwareFrameworkPath):
                     _optionsTextField.Text = _configuration.HardwareFrameworkPath ?? string.Empty;
                     _currentOptionsTextFieldEventHandler = text => _configuration.HardwareFrameworkPath = text;
-                    ShowTextField(true);
+                    ShowTextField(visible: true);
                     break;
                 case nameof(ConsumerConfiguration.SampleToRun):
                     var sampleNames = Enum.GetNames(typeof(Sample)).ToList();
                     _optionsListView.Source = new ListWrapper(sampleNames);
                     _optionsListView.SelectedItem = sampleNames.IndexOf(_configuration.SampleToRun.ToString());
                     _currentOptionsListViewEventHandler = item => _configuration.SampleToRun = Enum.Parse<Sample>(item.ToString()!);
-                    ShowTextField(false);
+                    ShowTextField(visible: false);
                     break;
                 case nameof(ConsumerConfiguration.VerifyResults):
                     _optionsListView.Source = new ListWrapper(new object[] { true, false });
                     _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
                     _currentOptionsListViewEventHandler = item => _configuration.VerifyResults = item.IsTrueString();
-                    ShowTextField(false);
+                    ShowTextField(visible: false);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown menu item selected ({key}).");
@@ -259,7 +258,7 @@ namespace Hast.Samples.Consumer
             }
 
             _currentOptionsListViewEventHandler = item => _configuration.DeviceName = item.ToString();
-            ShowTextField(false);
+            ShowTextField(visible: false);
         }
 
         private (Button Ok, FrameView Dialog, Action Close) CreateDialog(
@@ -469,7 +468,7 @@ namespace Hast.Samples.Consumer
         }
 
         public static ConsumerConfiguration BuildConfiguration(
-            Dictionary<string, ConsumerConfiguration> savedConfigurations)
+            IDictionary<string, ConsumerConfiguration> savedConfigurations)
         {
             using var gui = new Gui(savedConfigurations);
             return gui.BuildConfiguration();

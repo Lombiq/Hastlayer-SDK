@@ -9,6 +9,7 @@ using Hast.Synthesis.Abstractions.Helpers;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
@@ -43,7 +44,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public event EventHandler<BuildProgressEventArgs> Progress;
 
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
+        public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
 
         public int MajorStepsTotal { get; private set; }
         public int MajorStep { get; private set; }
@@ -57,7 +58,7 @@ namespace Hast.Vitis.Abstractions.Services
             var buildOutputPath = EnsureDirectoryExists("App_Data", "logs");
             for (var i = 0; i < 100 && _buildOutput == null; i++)
             {
-                var fileName = i == 0 ? "build.out" : $"build~{i}.out";
+                var fileName = i == 0 ? "build.out" : FormattableString.Invariant($"build~{i}.out");
                 _buildOutputPath = Path.Combine(buildOutputPath, fileName);
 
                 try
@@ -288,7 +289,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--dk",
                 "chipscope:hastip_1:m_axi_gmem",
                 "--kernel_frequency",
-                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.InvariantCulture),
+                (deviceManifest.ClockFrequencyHz / 1_000_000).ToTechnicalString(),
                 "-lo",
                 Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,
@@ -506,10 +507,11 @@ namespace Hast.Vitis.Abstractions.Services
                 switch (commandEvent)
                 {
                     case StartedCommandEvent started:
+                        var joinedArguments = string.Join("\n\t", arguments);
                         Log(
                             LogLevel.None,
                             name,
-                            $"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}",
+                            FormattableString.Invariant($"#{started.ProcessId} arguments:\n\t{joinedArguments}"),
                             "started");
                         break;
                     case StandardOutputCommandEvent output:
@@ -525,8 +527,9 @@ namespace Hast.Vitis.Abstractions.Services
                         if (exited.ExitCode != 0)
                         {
                             throw new CommandExecutionException(
-                                $"The command {name} exited with code {exited.ExitCode}. " +
-                                $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
+                                StringHelper.Concatenate(
+                                    $"The command {name} exited with code {exited.ExitCode}. ",
+                                    $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'."));
                         }
 
                         break;

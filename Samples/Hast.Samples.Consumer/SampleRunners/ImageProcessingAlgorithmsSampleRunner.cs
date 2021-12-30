@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 hastlayer,
                 hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
-            System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
+            System.Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, " ms."));
 
             //// ImageFilter disabled until it's improved.
             ////var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());

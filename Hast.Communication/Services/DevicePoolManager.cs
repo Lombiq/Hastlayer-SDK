@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Models;
+using Hast.Communication.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -88,16 +88,14 @@ namespace Hast.Communication.Services
 
                     return Task.FromResult<IReservedDevice>(new ReservedDevice(firstAvailableDevice, Disposer));
                 }
-                else
-                {
-                    _logger.LogDebug("Enqueuing a device reservation request.");
 
-                    var reservationCompletionSource = new TaskCompletionSource<IReservedDevice>();
+                _logger.LogDebug("Enqueuing a device reservation request.");
 
-                    _waitQueue.Enqueue(freedUpDevice => reservationCompletionSource.SetResult(freedUpDevice));
+                var reservationCompletionSource = new TaskCompletionSource<IReservedDevice>();
 
-                    return reservationCompletionSource.Task;
-                }
+                _waitQueue.Enqueue(freedUpDevice => reservationCompletionSource.SetResult(freedUpDevice));
+
+                return reservationCompletionSource.Task;
             }
         }
 

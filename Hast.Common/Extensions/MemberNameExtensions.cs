@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -33,7 +33,7 @@ namespace Hast.Common.Extensions
                 return Enumerable.Empty<string>();
             }
 
-            var methodName = Regex.Match(memberFullName, @"\.([a-z0-9]*)\(", RegexOptions.Compiled | RegexOptions.IgnoreCase).Groups[1];
+            var methodName = memberFullName.RegexMatch(@"\.([a-z0-9]*)\(", RegexOptions.Compiled | RegexOptions.IgnoreCase).Groups[1];
             var returnType = sides[0].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
 
             return new[]

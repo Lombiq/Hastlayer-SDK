@@ -85,7 +85,9 @@ namespace Hast.Samples.SampleAssembly
         {
             if (iterationsCount % MaxDegreeOfParallelism != 0)
             {
-                throw new InvalidOperationException($"The number of iterations must be divisible by {MaxDegreeOfParallelism}.");
+                throw new InvalidOperationException(
+                    FormattableString.Invariant(
+                        $"The number of iterations must be divisible by {MaxDegreeOfParallelism}."));
             }
 
             var memory = hastlayer is null
