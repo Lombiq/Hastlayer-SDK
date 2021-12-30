@@ -250,7 +250,7 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public void WaitClean()
         {
-            Task.WaitAll(_slotDispatch);
+            Task.WaitAll(_slotDispatch, TimeSpan.FromSeconds(3));
             _currentSlot = -1;
         }
 
@@ -329,7 +329,7 @@ namespace Hast.Catapult.Abstractions
             inputData.CopyTo(data[InputHeaderSizes.Total..]);
 
             // This job will contain the current call.
-            Task<Memory<byte>> job = null;
+            Task<Memory<byte>> job;
 
             int currentSlot;
             lock (_slotDispatch)
