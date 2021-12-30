@@ -3,7 +3,6 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo

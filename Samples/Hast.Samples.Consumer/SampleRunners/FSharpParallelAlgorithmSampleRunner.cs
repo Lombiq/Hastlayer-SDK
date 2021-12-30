@@ -1,7 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.FSharpSampleAssembly;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners

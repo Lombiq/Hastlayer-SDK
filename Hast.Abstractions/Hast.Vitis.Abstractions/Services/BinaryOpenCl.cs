@@ -3,7 +3,6 @@ using Hast.Common.Interfaces;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Vitis.Abstractions.Models;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;

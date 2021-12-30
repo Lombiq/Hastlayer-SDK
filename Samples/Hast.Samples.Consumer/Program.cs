@@ -10,7 +10,6 @@ using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
 using Lombiq.Arithmetics;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;

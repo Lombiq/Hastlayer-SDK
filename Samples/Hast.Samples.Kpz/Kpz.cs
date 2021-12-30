@@ -3,7 +3,6 @@ using Hast.Samples.Kpz.Algorithms;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 
 namespace Hast.Samples.Kpz
 {

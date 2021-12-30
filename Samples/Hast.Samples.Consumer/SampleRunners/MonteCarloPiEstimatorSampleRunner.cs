@@ -3,7 +3,6 @@ using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners

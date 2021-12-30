@@ -4,7 +4,6 @@ using Lombiq.Arithmetics;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
