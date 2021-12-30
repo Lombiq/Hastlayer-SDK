@@ -51,7 +51,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var sw = System.Diagnostics.Stopwatch.StartNew();
             _ = fixed64Calculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers);
             sw.Stop();
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed ms: ", sw.ElapsedMilliseconds));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed ms: ", sw.ElapsedMilliseconds));
         }
     }
 }

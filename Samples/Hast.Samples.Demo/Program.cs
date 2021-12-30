@@ -23,7 +23,7 @@ namespace Hast.Samples.Demo
             hastlayer.ExecutedOnHardware += (_, e) =>
             {
                 Console.WriteLine(
-                    StringHelper.ConcatenateConvertible(
+                    StringHelper.ConcatenateConvertiblesInvariant(
                         "Executing on hardware took ",
                         e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds,
                         " milliseconds (net) ",
@@ -50,7 +50,7 @@ namespace Hast.Samples.Demo
             var cpuOutput = new ParallelAlgorithm().Run(234234, hastlayer: null);
             sw.Stop();
 
-            Console.WriteLine(StringHelper.ConcatenateConvertible("On CPU it took ", sw.ElapsedMilliseconds, " milliseconds."));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, " milliseconds."));
 
             Console.WriteLine();
             Console.WriteLine("Starting hardware execution.");

@@ -31,7 +31,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             _ = new FSharpParallelAlgorithmContainer.FSharpParallelAlgorithm()
                 .Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
-            System.Console.WriteLine(StringHelper.ConcatenateConvertible("On CPU it took ", sw.ElapsedMilliseconds, "ms."));
+            System.Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, "ms."));
         }
     }
 }

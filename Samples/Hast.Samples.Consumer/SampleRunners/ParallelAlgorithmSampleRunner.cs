@@ -29,7 +29,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             var sw = System.Diagnostics.Stopwatch.StartNew();
             _ = new ParallelAlgorithm().Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
-            System.Console.WriteLine(StringHelper.ConcatenateConvertible("On CPU it took ", sw.ElapsedMilliseconds, "ms."));
+            System.Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, "ms."));
         }
     }
 }

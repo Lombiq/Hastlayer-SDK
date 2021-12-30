@@ -37,7 +37,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 hastlayer,
                 hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
-            System.Console.WriteLine(StringHelper.ConcatenateConvertible("On CPU it took ", sw.ElapsedMilliseconds, " ms."));
+            System.Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, " ms."));
 
             //// ImageFilter disabled until it's improved.
             ////var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());

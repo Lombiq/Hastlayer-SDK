@@ -66,8 +66,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
             sw.Stop();
 
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of counting up to 100000: ", integerSumUpToNumber));
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of counting up to 100000: ", integerSumUpToNumber));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
 
@@ -76,8 +76,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var powerOfReal = positCalculator.CalculatePowerOfReal(100000, 1.0001F);
             sw.Stop();
 
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of power of real number: ", powerOfReal));
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of power of real number: ", powerOfReal));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
 
@@ -95,7 +95,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             Console.WriteLine(
                 "Result of counting up to ~100000 parallelized: " +
                 string.Join(", ", integerSumsUpToNumbers.Select(number => number.ToTechnicalString())));
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
 
@@ -113,8 +113,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var positsInArraySum = positCalculator.AddPositsInArray(posit32Array);
             sw.Stop();
 
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of addition of posits in array: ", positsInArraySum));
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of addition of posits in array: ", positsInArraySum));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
         }

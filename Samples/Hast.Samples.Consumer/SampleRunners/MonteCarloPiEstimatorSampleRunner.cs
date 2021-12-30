@@ -25,7 +25,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 iterationsCount,
                 hastlayer,
                 hardwareRepresentation.HardwareGenerationConfiguration);
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Estimate for Pi on hardware: ", piEstimateHardware));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Estimate for Pi on hardware: ", piEstimateHardware));
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
             var piEstimateSoftware = new MonteCarloPiEstimator().EstimatePi(
@@ -33,8 +33,8 @@ namespace Hast.Samples.Consumer.SampleRunners
                 hastlayer,
                 hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Estimate for Pi on software: ", piEstimateSoftware));
-            Console.WriteLine(StringHelper.ConcatenateConvertible("On CPU it took ", sw.ElapsedMilliseconds, "ms."));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Estimate for Pi on software: ", piEstimateSoftware));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, "ms."));
         }
     }
 }

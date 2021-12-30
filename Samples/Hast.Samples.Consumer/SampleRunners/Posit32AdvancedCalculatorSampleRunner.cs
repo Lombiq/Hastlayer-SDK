@@ -41,8 +41,8 @@ namespace Hast.Samples.Consumer.SampleRunners
             var resultOfDivision = positCalculator.RepeatedDivision(10, 153157.898526F, 3.3F);
             sw.Stop();
 
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Result of repeated division: ", resultOfDivision));
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of repeated division: ", resultOfDivision));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             var sqrtInputArray = new uint[10];
             for (int i = 0; i < 10; i++)
@@ -61,7 +61,7 @@ namespace Hast.Samples.Consumer.SampleRunners
             }
 
             Console.WriteLine();
-            Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
         }
     }
 }
