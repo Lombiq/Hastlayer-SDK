@@ -289,7 +289,7 @@ namespace Hast.Vitis.Abstractions.Services
                 "--dk",
                 "chipscope:hastip_1:m_axi_gmem",
                 "--kernel_frequency",
-                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.InvariantCulture),
+                (deviceManifest.ClockFrequencyHz / 1_000_000).ToTechnicalString(),
                 "-lo",
                 Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
                 xoFilePath,

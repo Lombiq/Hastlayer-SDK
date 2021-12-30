@@ -4,7 +4,6 @@ using Lombiq.Arithmetics;
 using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -95,7 +94,7 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             Console.WriteLine(
                 "Result of counting up to ~100000 parallelized: " +
-                string.Join(", ", integerSumsUpToNumbers.Select(number => number.ToString(CultureInfo.InvariantCulture))));
+                string.Join(", ", integerSumsUpToNumbers.Select(number => number.ToTechnicalString())));
             Console.WriteLine(StringHelper.ConcatenateConvertible("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
 
             Console.WriteLine();
