@@ -65,8 +65,6 @@ namespace Hast.Vitis.Abstractions.Services
             });
         }
 
-        ~BinaryOpenCl() => Dispose();
-
         #endregion
 
         #region Methods

@@ -217,8 +217,6 @@ namespace Hast.Catapult.Abstractions
                 });
         }
 
-        ~CatapultLibrary() => Dispose();
-
         public void Dispose()
         {
             GC.SuppressFinalize(this);
