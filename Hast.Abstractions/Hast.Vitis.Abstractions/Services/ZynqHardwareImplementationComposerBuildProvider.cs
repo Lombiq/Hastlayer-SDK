@@ -22,7 +22,8 @@ namespace Hast.Vitis.Abstractions.Services
 
         private int MajorStep { get; set; }
 
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
+        public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } =
+            new Dictionary<string, BuildProviderShortcut>();
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
