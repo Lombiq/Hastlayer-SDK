@@ -23,12 +23,6 @@ namespace Hast.Communication.Services
             int memberId,
             IHardwareExecutionContext executionContext);
 
-        protected CommunicationStateContext BeginExecution() => new()
-        {
-            Stopwatch = Stopwatch.StartNew(),
-            HardwareExecutionInformation = new HardwareExecutionInformation(),
-        };
-
         protected void EndExecution(CommunicationStateContext context)
         {
             context.Stopwatch.Stop();
@@ -66,6 +60,12 @@ namespace Hast.Communication.Services
 
             Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
         }
+
+        protected static CommunicationStateContext BeginExecution() => new()
+        {
+            Stopwatch = Stopwatch.StartNew(),
+            HardwareExecutionInformation = new HardwareExecutionInformation(),
+        };
 
         protected class CommunicationStateContext
         {
