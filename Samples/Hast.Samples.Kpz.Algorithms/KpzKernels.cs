@@ -45,6 +45,8 @@ namespace Hast.Samples.Kpz.Algorithms
         /// This function is for testing how Hastlayer works by running a random generator, writing the results into
         /// SimpleMemory.
         /// </summary>
+        // Is a hardware entry point, needs to be instance-level.
+#pragma warning disable CA1822 // Mark members as static
         public void TestPrng(SimpleMemory memory)
         {
             var kernels = new KpzKernels();
@@ -55,6 +57,7 @@ namespace Hast.Samples.Kpz.Algorithms
                 memory.WriteUInt32(i, kernels.Random1.NextUInt32());
             }
         }
+#pragma warning restore S4275 // Mark members as static
 
         /// <summary>
         /// This function adds two numbers on the FPGA using <see cref="TestAdd(SimpleMemory)"/>.
