@@ -18,6 +18,10 @@ using System.Threading.Tasks;
 namespace Hast.Vitis.Abstractions.Services
 {
     [DependencyInitializer(nameof(InitializeService))]
+    [SuppressMessage(
+        "Major Code Smell",
+        "S4002:Disposable types should declare finalizers",
+        Justification = "Doesn't need finalizer because it's registered in the DI container and will automatically be disposed.")]
     public sealed class BinaryOpenCl : IBinaryOpenCl
     {
         #region Fields and properties
@@ -346,8 +350,6 @@ namespace Hast.Vitis.Abstractions.Services
             {
                 _logger.LogError(exception, "Error while disposing " + nameof(BinaryOpenCl) + ".");
             }
-
-            GC.SuppressFinalize(this);
         }
 
         private IntPtr GetQueue(int queueIndex)

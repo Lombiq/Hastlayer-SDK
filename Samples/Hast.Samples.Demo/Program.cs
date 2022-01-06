@@ -21,7 +21,6 @@ namespace Hast.Samples.Demo
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
             hastlayer.ExecutedOnHardware += (_, e) =>
-            {
                 Console.WriteLine(
                     StringHelper.ConcatenateConvertiblesInvariant(
                         "Executing on hardware took ",
@@ -29,7 +28,6 @@ namespace Hast.Samples.Demo
                         " milliseconds (net) ",
                         e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds,
                         " milliseconds (all together)."));
-            };
             #endregion
 
             #region HardwareGeneration

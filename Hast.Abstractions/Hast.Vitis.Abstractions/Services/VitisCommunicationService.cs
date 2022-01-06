@@ -1,12 +1,12 @@
 using Hast.Communication.Models;
-using System;
-using System.Buffers;
 using Hast.Communication.Services;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Interop;
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using Hast.Xilinx.Abstractions;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Buffers;
 using System.IO;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
 
@@ -15,7 +15,7 @@ namespace Hast.Vitis.Abstractions.Services
     public class VitisCommunicationService : OpenClCommunicationService
     {
         private const int HbmSizeBytes = (int)Constants.Limits.HbmSizeBytes;
-        public override string ChannelName { get; } = Hast.Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
+        public override string ChannelName { get; } = Xilinx.Abstractions.Constants.VitisCommunicationChannelName;
 
         public VitisCommunicationService(
             IDevicePoolPopulator devicePoolPopulator,

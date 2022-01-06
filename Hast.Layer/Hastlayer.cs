@@ -149,11 +149,7 @@ namespace Hast.Layer
                 .AddCommandLine(Environment.GetCommandLineArgs())
                 .Build();
 
-        public void Dispose()
-        {
-            _serviceProvider?.Dispose();
-            GC.SuppressFinalize(this);
-        }
+        public void Dispose() => _serviceProvider?.Dispose();
 
         public Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,

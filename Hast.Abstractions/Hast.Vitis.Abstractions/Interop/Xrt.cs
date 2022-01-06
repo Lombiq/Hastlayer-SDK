@@ -1,6 +1,7 @@
 using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace Hast.Vitis.Abstractions.Interop
 {
@@ -16,6 +17,8 @@ namespace Hast.Vitis.Abstractions.Interop
     /// href="https://github.com/Xilinx/Vitis_Accel_Examples/blob/master/host/hbm_bandwidth/src/host.cpp">here</see>.
     /// </para>
     /// </remarks>
+    // LayoutKind can't be Auto because this struct is exposed to unmanaged code.
+    [StructLayout(LayoutKind.Sequential)]
     public struct XilinxMemoryExtension : IEquatable<XilinxMemoryExtension>
     {
         public ulong Flags;
