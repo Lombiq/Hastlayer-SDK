@@ -12,7 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
@@ -26,7 +25,7 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IAzureStorageServiceFactory _azureStorageServiceFactory;
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
 
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
+        public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
@@ -154,7 +153,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private static string UpdateBinaryPath(string input) => Regex.Replace(input, @"\.xclbin$", ".azure.xclbin");
+        private static string UpdateBinaryPath(string input) => input.RegexReplace(@"\.xclbin$", ".azure.xclbin");
 
         public static void InitializeService(IServiceCollection services) =>
             services.AddRestEaseHttpClient<IAzureAttestationApi>(

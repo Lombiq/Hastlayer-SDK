@@ -70,7 +70,7 @@ namespace Hast.Samples.SampleAssembly
 
             posit32FusedCalculator.CalculateFusedSum(memory);
 
-            return (float)new Posit32(memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSumOutputPosit32Index), true);
+            return (float)new Posit32(memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSumOutputPosit32Index), fromBitMask: true);
         }
 
         public static readonly string[] ManuallySizedArrays = new[]

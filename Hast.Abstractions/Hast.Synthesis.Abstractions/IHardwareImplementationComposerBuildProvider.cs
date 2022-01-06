@@ -15,7 +15,7 @@ namespace Hast.Synthesis.Abstractions
         /// Gets the functions installed by other providers. If any of them returns <see langword="true"/> this provider
         /// is skipped.
         /// </summary>
-        Dictionary<string, BuildProviderShortcut> Shortcuts { get; }
+        IDictionary<string, BuildProviderShortcut> Shortcuts { get; }
 
         /// <summary>
         /// Determines if the instance is applicable to the current composition task based on the

@@ -96,7 +96,7 @@ namespace Hast.Samples.Kpz
         /// </summary>
         /// <param name="highlightedCoords">is the list of table cell indexes to be highlighted.</param>
         /// <param name="highlightColor">is the background color to be set on the given table cells.</param>
-        private void DgvAddHighlight(List<KpzCoords> highlightedCoords, Color highlightColor)
+        private void DgvAddHighlight(IEnumerable<KpzCoords> highlightedCoords, Color highlightColor)
         {
             foreach (var coord in highlightedCoords)
             {
@@ -120,7 +120,7 @@ namespace Hast.Samples.Kpz
                 listActions.Items.Clear();
                 int i = 0;
                 _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach(
-                    (a) => listActions.Items.Add($"{i++} {a.Description}"));
+                    (a) => listActions.Items.Add(FormattableString.Invariant($"{i++} {a.Description}")));
             }
             catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }

@@ -65,8 +65,6 @@ namespace Hast.Vitis.Abstractions.Services
             });
         }
 
-        ~BinaryOpenCl() => Dispose();
-
         #endregion
 
         #region Methods
@@ -117,9 +115,9 @@ namespace Hast.Vitis.Abstractions.Services
             var kernel = GetKernel(kernelName);
 
             var waitEvent = IntPtr.Zero;
-            waitEvent = EnqueueMemoryMigration(queue, buffers, false, waitEvent);
+            waitEvent = EnqueueMemoryMigration(queue, buffers, toHost: false, waitEvent);
             waitEvent = EnqueueTask(queue, kernel, waitEvent);
-            if (copyBack) EnqueueMemoryMigration(queue, buffers, true, waitEvent);
+            if (copyBack) EnqueueMemoryMigration(queue, buffers, toHost: true, waitEvent);
         }
 
         public async Task AwaitDeviceAsync(int deviceIndex)
@@ -179,7 +177,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private IEnumerable<IntPtr> GetPlatformHandles(string vendorName = null)
         {
-            VerifyResult(_cl.GetPlatformIDs(0, null, out uint count));
+            VerifyResult(_cl.GetPlatformIDs(0, platforms: null, out uint count));
 
             var platforms = new IntPtr[count];
             VerifyResult(_cl.GetPlatformIDs(count, platforms, out _));
@@ -192,7 +190,7 @@ namespace Hast.Vitis.Abstractions.Services
                         platform,
                         PlatformInformation.Name,
                         UIntPtr.Zero,
-                        null,
+                        parameterValue: null,
                         out var size));
                     var output = new byte[size.ToUInt32()];
                     VerifyResult(_cl.GetPlatformInfo(platform, PlatformInformation.Name, size, output, out _));
@@ -203,7 +201,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         private IntPtr[] GetDeviceHandles(IntPtr platform, DeviceTypes deviceType)
         {
-            VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, null, out uint numberOfAvailableDevices));
+            VerifyResult(_cl.GetDeviceIDs(platform, deviceType, 0, devices: null, out uint numberOfAvailableDevices));
 
             var devicePointers = new IntPtr[numberOfAvailableDevices];
             VerifyResult(_cl.GetDeviceIDs(platform, deviceType, numberOfAvailableDevices, devicePointers, out _));
@@ -247,14 +245,15 @@ namespace Hast.Vitis.Abstractions.Services
             VerifyResult(result);
             VerifyResults(
                 resultsPerDevice,
-                (deviceResult, i) => new InvalidOperationException($"Error while creating program on device #{i}: {deviceResult}"));
+                (deviceResult, i) => new InvalidOperationException(
+                    FormattableString.Invariant($"Error while creating program on device #{i}: {deviceResult}")));
 
             VerifyResult(_cl.BuildProgram(
                 program,
                 Devices.Length,
                 Devices,
-                null,
-                null,
+                options: null,
+                notify: null,
                 IntPtr.Zero));
 
             return program;
@@ -326,7 +325,9 @@ namespace Hast.Vitis.Abstractions.Services
             var queues = _queues.ToList();
             var queueReleaseExceptions = VerifyResults(
                 _queues.Values.Select(_cl.ReleaseCommandQueue),
-                (result, index) => new InvalidOperationException($"Error releasing queue for device #{queues[index].Key}: {result}"));
+                (result, index) => new InvalidOperationException(
+                    FormattableString.Invariant($"Error releasing queue for device #{queues[index].Key}: {result}")));
+
             if (queueReleaseExceptions != null) exceptions.AddRange(queueReleaseExceptions.InnerExceptions);
 
             try
@@ -353,14 +354,16 @@ namespace Hast.Vitis.Abstractions.Services
         {
             if (_queues.TryGetValue(queueIndex, out var queue)) return queue;
             throw new InvalidOperationException(
-                $"There is no command queue for device #{queueIndex}. Please use {nameof(CreateCommandQueue)} to create one!");
+                FormattableString.Invariant(
+                    $"There is no command queue for device #{queueIndex}. Please use {nameof(CreateCommandQueue)} to create one!"));
         }
 
         private IntPtr GetKernel(string kernelName)
         {
             if (_kernels.TryGetValue(kernelName, out var kernel)) return kernel;
             throw new InvalidOperationException(
-                $"The kernel '{kernelName}' does not exit. You can create a kernel with {nameof(CreateBinaryKernel)}.");
+                FormattableString.Invariant(
+                    $"The kernel '{kernelName}' does not exit. You can create a kernel with {nameof(CreateBinaryKernel)}."));
         }
 
         private List<IntPtr> GetKernelBuffers(string kernelName)

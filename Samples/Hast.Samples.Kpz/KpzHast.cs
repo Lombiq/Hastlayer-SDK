@@ -2,6 +2,7 @@ using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using System;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Kpz
@@ -30,10 +31,11 @@ namespace Hast.Samples.Kpz
             var hastlayer = Hastlayer.Create();
 
             hastlayer.ExecutedOnHardware += (_, e) =>
-            LogItFunction("Hastlayer timer: " +
-                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
-                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
-                );
+            {
+                var net = e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
+                var total = e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
+                LogItFunction(FormattableString.Invariant($"Hastlayer timer: {net}ms (net) / {total}ms (total)"));
+            };
 
             var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
@@ -81,7 +83,7 @@ namespace Hast.Samples.Kpz
 
             var kernelsCpu = new PrngTestInterface();
             const ulong randomSeed = 0x37a9_2d76_a96e_f210;
-            var smCpu = kernelsCpu.PushRandomSeed(randomSeed, null, null);
+            var smCpu = kernelsCpu.PushRandomSeed(randomSeed, hastlayer: null, configuration: null);
             var smFpga = KernelsP.PushRandomSeed(randomSeed, hastlayer, configuration);
             LogItFunction("PRNG results:");
             bool success = true;

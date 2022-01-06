@@ -158,8 +158,6 @@ namespace Hast.Layer
             GC.SuppressFinalize(this);
         }
 
-        ~Hastlayer() => Dispose();
-
         public Task<IHardwareRepresentation> GenerateHardwareAsync(
             IEnumerable<string> assemblyPaths,
             IHardwareGenerationConfiguration configuration)

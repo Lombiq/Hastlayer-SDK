@@ -15,7 +15,7 @@ namespace Hast.Layer
         /// <summary>
         /// Gets the utilization percentage values for hardware resources where that information is available.
         /// </summary>
-        public Dictionary<string, decimal> ResourceUsagePercent { get; }
+        public IDictionary<string, decimal> ResourceUsagePercent { get; }
 
         /// <summary>
         /// Gets or sets the wattage of the hardware design.

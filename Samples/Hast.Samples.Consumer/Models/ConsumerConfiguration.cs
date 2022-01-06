@@ -130,7 +130,7 @@ namespace Hast.Samples.Consumer.Models
         /// </param>
         public static ConsumerConfiguration FromCommandLine(
             IList<string> args,
-            Dictionary<string, ConsumerConfiguration> consumerConfigurations)
+            IDictionary<string, ConsumerConfiguration> consumerConfigurations)
         {
             var loadIndex = args
                 .Select((argument, index) => (Argument: argument.ToUpperInvariant(), Index: index))
@@ -172,7 +172,7 @@ namespace Hast.Samples.Consumer.Models
             return configuration;
         }
 
-        public static async Task<Dictionary<string, ConsumerConfiguration>> LoadConfigurationsAsync()
+        public static async Task<IDictionary<string, ConsumerConfiguration>> LoadConfigurationsAsync()
         {
             var configurations = File.Exists(StorageFileName)
                 ? JsonConvert.DeserializeObject<Dictionary<string, ConsumerConfiguration>>(
@@ -187,7 +187,7 @@ namespace Hast.Samples.Consumer.Models
             return configurations;
         }
 
-        public static void SaveConfigurations(Dictionary<string, ConsumerConfiguration> configurations)
+        public static void SaveConfigurations(IDictionary<string, ConsumerConfiguration> configurations)
         {
             using var writer = new StreamWriter(StorageFileName, append: false, Encoding.UTF8);
             var serializer = new JsonSerializer { Formatting = Formatting.Indented };

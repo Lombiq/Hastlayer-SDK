@@ -74,7 +74,7 @@ namespace Hast.Vitis.Abstractions.Services
                 {
                     devices.Add(new Device
                     {
-                        Identifier = $"{ChannelName}:{configuration.VendorName ?? "any"}:{i}",
+                        Identifier = FormattableString.Invariant($"{ChannelName}:{configuration.VendorName ?? "any"}:{i}"),
                         Metadata = i,
                     });
                     _binaryOpenCl.CreateCommandQueue(i);
@@ -102,8 +102,8 @@ namespace Hast.Vitis.Abstractions.Services
             if (hostMemory.Length <= headerSize)
             {
                 throw new InvalidOperationException(
-                    $"The result size is only {hostMemory.Length}b but it must be more than the header size of " +
-                    $"{headerSize}b.");
+                    FormattableString.Invariant(
+                        $"The result size is only {hostMemory.Length}b but it must be more than the header size of {headerSize}b."));
             }
 
             var timeHostMemoryVerified = context.Stopwatch.ElapsedMilliseconds;
@@ -238,7 +238,8 @@ namespace Hast.Vitis.Abstractions.Services
             if (bufferSpan.Length <= headerSize)
             {
                 throw new InvalidOperationException(
-                    $"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b.");
+                    FormattableString.Invariant(
+                    $"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b."));
             }
 
             var header = bufferSpan.Slice(0, headerSize);

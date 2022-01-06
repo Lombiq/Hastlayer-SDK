@@ -88,7 +88,9 @@ namespace Hast.Catapult.Abstractions
                             if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
                                 Logger.LogError(
                                     ex,
-                                    $"Received {ex.Status} while trying to instantiate CatapultLibrary on EndPoint {i}. This device won't be used.");
+                                    "Received {0} while trying to instantiate CatapultLibrary on EndPoint {1}. This device won't be used.",
+                                    ex.Status,
+                                    i);
                             return null;
                         }
                     })));

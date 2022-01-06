@@ -11,7 +11,7 @@ namespace Hast.Vitis.Abstractions.Services
 {
     public class VivadoHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
+        public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest is NexysDeviceManifest;
