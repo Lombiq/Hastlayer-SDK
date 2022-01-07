@@ -33,7 +33,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Validation" Version="16.8.33" />
+    <PackageReference Include="Microsoft.VisualStudio.Validation" Version="16.9.32" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
