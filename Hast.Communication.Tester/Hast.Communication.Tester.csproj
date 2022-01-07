@@ -11,6 +11,7 @@
     <ProjectReference Include="..\Hast.Abstractions\Hast.Vitis.Abstractions\Hast.Vitis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
     <ProjectReference Include="..\Hast.Layer\Hast.Layer.csproj" />
+    <ProjectReference Include="..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.csproj" />
     <ProjectReference Include="..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
   </ItemGroup>
   <ItemGroup>

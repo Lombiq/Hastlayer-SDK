@@ -19,8 +19,7 @@ namespace Hast.Common.Extensions
         /// <param name="source">The original collection.</param>
         /// <typeparam name="TItem">The <see cref="IRequirement{T}"/> type of <paramref name="source"/>.</typeparam>
         /// <typeparam name="TKey">The <c>T</c> in <see cref="IRequirement{T}"/>.</typeparam>
-        /// <returns></returns>
-        public static List<TItem> OrderByRequirements<TItem, TKey>(this IEnumerable<TItem> source)
+        public static IReadOnlyCollection<TItem> OrderByRequirements<TItem, TKey>(this IEnumerable<TItem> source)
             where TItem : IRequirement<TKey>
             where TKey : IEquatable<TKey>
         {
@@ -38,7 +37,7 @@ namespace Hast.Common.Extensions
                 .Select(item => new RequirementTreeNode<TItem, TKey> { Data = item })
                 .ToList();
             CreateForest(roots, descendantsByAncestor, items.ToDictionary(item => item.Name));
-            PruneDuplicates(roots, new Dictionary<TKey, List<RequirementTreeNode<TItem, TKey>>>());
+            PruneDuplicates(roots, new Dictionary<TKey, IList<RequirementTreeNode<TItem, TKey>>>());
 
             var results = new List<TItem>();
             BuildResults(results, roots);
@@ -62,7 +61,7 @@ namespace Hast.Common.Extensions
         }
 
         private static void CreateForest<TItem, TKey>(
-            IReadOnlyCollection<RequirementTreeNode<TItem, TKey>> parents,
+            IList<RequirementTreeNode<TItem, TKey>> parents,
             IReadOnlyDictionary<TKey, List<TKey>> descendantsByAncestor,
             IReadOnlyDictionary<TKey, TItem> itemsDictionary)
             where TItem : IRequirement<TKey>
@@ -83,8 +82,8 @@ namespace Hast.Common.Extensions
         }
 
         private static void PruneDuplicates<TItem, TKey>(
-            List<RequirementTreeNode<TItem, TKey>> parents,
-            IDictionary<TKey, List<RequirementTreeNode<TItem, TKey>>> containersByName)
+            IList<RequirementTreeNode<TItem, TKey>> parents,
+            IDictionary<TKey, IList<RequirementTreeNode<TItem, TKey>>> containersByName)
             where TItem : IRequirement<TKey>
             where TKey : IEquatable<TKey>
         {
@@ -103,8 +102,8 @@ namespace Hast.Common.Extensions
         }
 
         private static void BuildResults<TItem, TKey>(
-            List<TItem> results,
-            List<RequirementTreeNode<TItem, TKey>> parents)
+            ICollection<TItem> results,
+            IEnumerable<RequirementTreeNode<TItem, TKey>> parents)
             where TItem : IRequirement<TKey>
         {
             foreach (var parent in parents)

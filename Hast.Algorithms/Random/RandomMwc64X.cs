@@ -8,20 +8,24 @@ namespace Hast.Algorithms.Random
     public class RandomMwc64X
     {
         /// <summary>
-        /// The current inner state of the random number generator. If you set it when instantiating the object then 
+        /// Used for calculating the next state after random number generation.
+        /// </summary>
+        private const ulong Multiplier = 0x_FFFE_B81B;
+
+        /// <summary>
+        /// Gets or sets the current inner state of the random number generator. If you set it when instantiating the object then
         /// it'll serve as a seed.
         /// </summary>
         /// <remarks>
-        /// By not using a constructor the whole class can be inlined for maximal performance.
+        /// <para>By not using a constructor the whole class can be inlined for maximal performance.</para>
         /// </remarks>
-        public ulong State = 0xCAFEUL; // Just some starting number.
-
+        public ulong State { get; set; } = 0x_CAFEUL; // Just some starting number.
 
         public uint NextUInt32()
         {
             uint c = (uint)(State >> 32);
             uint x = (uint)State;
-            State = x * 0xFFFEB81BUL + c;
+            State = (x * Multiplier) + c;
             return x ^ c;
         }
     }

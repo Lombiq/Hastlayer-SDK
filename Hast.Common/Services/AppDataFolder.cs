@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
 
@@ -8,7 +9,12 @@ namespace Hast.Common.Services
     {
         private readonly DirectoryInfo _appDataFolder;
 
-        private static string _assemblyDirectory = null;
+        private static string _assemblyDirectory;
+
+        [SuppressMessage(
+            "Major Code Smell",
+            "S3902:\"Assembly.GetExecutingAssembly\" should not be called",
+            Justification = "As this is a library, the actual executing assembly is not known at build time.")]
         public static string AssemblyDirectory
         {
             get
@@ -16,10 +22,11 @@ namespace Hast.Common.Services
                 if (_assemblyDirectory == null)
                 {
                     string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                    UriBuilder uri = new UriBuilder(codeBase);
+                    var uri = new UriBuilder(codeBase);
                     string path = Uri.UnescapeDataString(uri.Path);
                     _assemblyDirectory = Path.GetDirectoryName(path);
                 }
+
                 return _assemblyDirectory;
             }
         }

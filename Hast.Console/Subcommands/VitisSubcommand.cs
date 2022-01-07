@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ using static System.Console;
 
 namespace Hast.Console.Subcommands
 {
+    [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
     [Subcommand("vitis")]
     public class VitisSubcommand : ISubcommand
     {
@@ -28,20 +30,20 @@ namespace Hast.Console.Subcommands
         public ILogger<VitisHardwareImplementationComposerBuildProvider> BuildLogger { get; set; } =
             new NullLogger<VitisHardwareImplementationComposerBuildProvider>();
 
-
         public VitisSubcommand(string[] rawArguments) => _rawArguments = rawArguments;
-
 
         public void Run()
         {
             var result = Parser.Default.ParseArguments<VitisOptions>(_rawArguments);
             result
-                .WithParsed(options => RunOptionsAsync(options, result).Wait())
+                .WithParsed(options => RunOptionsAsync(options, result, BuildLogger).Wait())
                 .WithNotParsed(errors => WriteLine(string.Join("\n", errors)));
         }
 
-
-        private Task RunOptionsAsync(VitisOptions options, ParserResult<VitisOptions> parserResult)
+        private static async Task RunOptionsAsync(
+            VitisOptions options,
+            ParserResult<VitisOptions> parserResult,
+            ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
         {
             if (!Enum.TryParse(options.Instruction, ignoreCase: true, out Instruction instruction))
             {
@@ -57,18 +59,26 @@ namespace Hast.Console.Subcommands
                             parserResult,
                             error => error,
                             example => example));
-                    return Task.CompletedTask;
-                case Instruction.Build: return BuildAsync(options);
-                case Instruction.Json: return JsonAsync(options);
+                    return;
+                case Instruction.Build:
+                    await BuildAsync(options, logger);
+                    return;
+                case Instruction.Json:
+                    await JsonAsync(options);
+                    return;
                 default:
-                    System.Console.Error.WriteLine(
-                        "The valid options are: {0}",
-                        string.Join(", ", Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant())));
+                    // CLI arguments can be lower case.
+#pragma warning disable CA1308
+                    var validOptions = string.Join(
+                        ", ",
+                        Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant()));
+#pragma warning restore CA1308
+                    await System.Console.Error.WriteLineAsync($"The valid options are: {validOptions}");
                     throw new ArgumentOutOfRangeException(options.Instruction);
             }
         }
 
-        private async Task BuildAsync(VitisOptions options)
+        private static Task BuildAsync(VitisOptions options, ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
         {
             var hardwareFrameworkPath = options.InputFilePath ?? "HardwareFramework";
             if (!Directory.Exists(hardwareFrameworkPath))
@@ -78,7 +88,7 @@ namespace Hast.Console.Subcommands
             }
 
             var outputSet = !string.IsNullOrWhiteSpace(options.OutputFilePath);
-            if (outputSet && !options.OutputFilePath.EndsWith(".xclbin"))
+            if (outputSet && !options.OutputFilePath.EndsWithOrdinalIgnoreCase(".xclbin"))
             {
                 throw new ArgumentException("Please set the -o option to point to the location of the xclbin file " +
                                             "(eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
@@ -105,14 +115,21 @@ namespace Hast.Console.Subcommands
                     : Path.Combine("VitisOutput", context.HardwareDescription.TransformationId + ".xclbin"),
             };
 
+            return BuildInnerAsync(context, implementation, logger);
+        }
 
-            await new VitisHardwareImplementationComposerBuildProvider(BuildLogger)
-                .BuildAsync(context, implementation);
+        private static async Task BuildInnerAsync(
+            HardwareImplementationCompositionContext context,
+            HardwareImplementation implementation,
+            ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
+        {
+            using var buildProvider = new VitisHardwareImplementationComposerBuildProvider(logger);
+            await buildProvider.BuildAsync(context, implementation);
 
             WriteLine("Build Completed. Find files under: {0}", Path.GetFullPath(implementation.BinaryPath));
         }
 
-        private async Task JsonAsync(VitisOptions options)
+        private static Task JsonAsync(VitisOptions options)
         {
             var input = new FileInfo(options.InputFilePath);
             if (!input.Exists)
@@ -120,19 +137,18 @@ namespace Hast.Console.Subcommands
                 throw new ArgumentException("Please set the -i option to file you wish to convert.");
             }
 
-            switch (input.Extension)
-            {
-                case ".rpt":
-                    using (var reader = File.OpenText(input.FullName))
-                    {
-                        var report = await XilinxReport.ParseAsync(reader);
-                        var json = JsonConvert.SerializeObject(report, Formatting.Indented);
-                        await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
-                    }
-                    break;
-            }
+            if (input.Extension == ".rpt") return RptToJsonAsync(options, input);
+
+            return Task.CompletedTask;
         }
 
+        private static async Task RptToJsonAsync(VitisOptions options, FileInfo input)
+        {
+            using var reader = File.OpenText(input.FullName);
+            var report = await XilinxReport.ParseAsync(reader);
+            var json = JsonConvert.SerializeObject(report, Formatting.Indented);
+            await File.WriteAllTextAsync(options.OutputFilePath ?? "report.json", json);
+        }
 
         private enum Instruction
         {

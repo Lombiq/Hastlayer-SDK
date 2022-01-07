@@ -11,7 +11,7 @@ namespace Hast.Samples.Kpz
     /// This form allows us to inspect the KPZ algorithm step by step.
     /// It relies heavily on the <see cref="KpzStateLogger"/> class.
     /// For large grids, it does not display the whole grid (due to speed limitations of <see cref="DataGridView"/>)
-    /// only a part of it, which can be configured with <see cref="MaxGridDisplayWidth"/> and 
+    /// only a part of it, which can be configured with <see cref="MaxGridDisplayWidth"/> and
     /// <see cref="MaxGridDisplayHeight"/>.
     /// </summary>
     public partial class InspectForm : Form
@@ -21,22 +21,20 @@ namespace Hast.Samples.Kpz
 
         private readonly KpzStateLogger _stateLogger;
 
-
         /// <summary>
-        /// When the form is loaded, <see cref="listIterations"/> is initialized with the iterations available in
-        /// <see cref="_stateLogger"/>.
+        /// Initializes a new instance of the <see cref="InspectForm"/> class. When the form is loaded,
+        /// <see cref="listIterations"/> is initialized with the iterations available in <see cref="_stateLogger"/>.
         /// </summary>
-        /// <param name="StateLogger">is the data source to be displayed on the form.</param>
-        public InspectForm(KpzStateLogger StateLogger)
+        /// <param name="stateLogger">is the data source to be displayed on the form.</param>
+        public InspectForm(KpzStateLogger stateLogger)
         {
             InitializeComponent();
-            _stateLogger = StateLogger;
+            _stateLogger = stateLogger;
 
             for (int i = 0; i < _stateLogger.Iterations.Count; i++)
             {
                 listIterations.Items.Add(i);
             }
-
         }
 
         /// <summary>
@@ -56,7 +54,7 @@ namespace Hast.Samples.Kpz
 
                 for (int x = 0; x < gridDisplayWidth; x++)
                 {
-                    dgvRow.Cells.Add(new DataGridViewTextBoxCell() { Value = arr[x, y] });
+                    dgvRow.Cells.Add(new DataGridViewTextBoxCell { Value = arr[x, y] });
                 }
 
                 dgv.Rows.Add(dgvRow);
@@ -82,9 +80,9 @@ namespace Hast.Samples.Kpz
 
                 for (int x = 0; x < gridDisplayWidth; x++)
                 {
-                    dgvRow.Cells.Add(new DataGridViewTextBoxCell()
+                    dgvRow.Cells.Add(new DataGridViewTextBoxCell
                     {
-                        Value = string.Format("{0}{1}", (arr[x, y].dx) ? "1" : "0", (arr[x, y].dy) ? "1" : "0")
+                        Value = $"{(arr[x, y].Dx ? "1" : "0")}{(arr[x, y].Dy ? "1" : "0")}",
                     });
                 }
 
@@ -96,17 +94,16 @@ namespace Hast.Samples.Kpz
         /// This function adds highlight (by applying background color) to a list of table cells in the
         /// <see cref="DataGridView" />.
         /// </summary>
-        /// <param name="HighlightedCoords">is the list of table cell indexes to be highlighted.</param>
-        /// <param name="Color">is the background color to be set on the given table cells.</param>
-        private void DgvAddHighlight(List<KpzCoords> HighlightedCoords, Color HighlightColor)
+        /// <param name="highlightedCoords">is the list of table cell indexes to be highlighted.</param>
+        /// <param name="highlightColor">is the background color to be set on the given table cells.</param>
+        private void DgvAddHighlight(IEnumerable<KpzCoords> highlightedCoords, Color highlightColor)
         {
-            foreach (var coord in HighlightedCoords)
+            foreach (var coord in highlightedCoords)
             {
-                if (coord.x >= dgv.ColumnCount || coord.y >= dgv.RowCount) continue;
-                dgv.Rows[coord.y].Cells[coord.x].Style.BackColor = HighlightColor;
+                if (coord.X >= dgv.ColumnCount || coord.Y >= dgv.RowCount) continue;
+                dgv.Rows[coord.Y].Cells[coord.Y].Style.BackColor = highlightColor;
             }
         }
-
 
         /// <summary>
         /// This function adds highlight (by applying background color) to a list of table cells in the
@@ -123,9 +120,9 @@ namespace Hast.Samples.Kpz
                 listActions.Items.Clear();
                 int i = 0;
                 _stateLogger.Iterations[listIterations.SelectedIndex].Actions.ForEach(
-                    (a) => listActions.Items.Add(string.Format("{0} {1}", i++, a.Description)));
+                    (a) => listActions.Items.Add(FormattableString.Invariant($"{i++} {a.Description}")));
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
 
         /// <summary>
@@ -161,7 +158,7 @@ namespace Hast.Samples.Kpz
                     DgvAddHighlight(action.HighlightedCoords, action.HightlightColor);
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.ToString()); }
+            catch (Exception ex) { MessageBox.Show(ex.ToString()); }
         }
     }
 }

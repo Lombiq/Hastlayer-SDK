@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.Arithmetics;
 
 namespace Hast.Samples.SampleAssembly
 {
     /// <summary>
-    /// A sample on using unum floating point numbers. For some info on unums see: http://www.johngustafson.net/unums.html
+    /// A sample on using unum floating point numbers. For some info on unums see: http://www.johngustafson.net/unums.html.
     /// </summary>
     public class UnumCalculator
     {
-        public const int CalculateSumOfPowersofTwo_InputUInt32Index = 0;
-        public const int CalculateSumOfPowersofTwo_OutputUInt32Index = 0;
-
+        public const int CalculateSumOfPowersofTwoInputUInt32Index = 0;
+        public const int CalculateSumOfPowersofTwoOutputUInt32Index = 0;
 
         public virtual void CalculateSumOfPowersofTwo(SimpleMemory memory)
         {
-            var number = memory.ReadUInt32(CalculateSumOfPowersofTwo_InputUInt32Index);
+            var number = memory.ReadUInt32(CalculateSumOfPowersofTwoInputUInt32Index);
 
             var environment = EnvironmentFactory();
 
@@ -37,16 +30,15 @@ namespace Hast.Samples.SampleAssembly
             var resultArray = b.FractionToUintArray();
             for (var i = 0; i < resultArray.Length; i++)
             {
-                memory.WriteUInt32(CalculateSumOfPowersofTwo_OutputUInt32Index + i, resultArray[i]);
+                memory.WriteUInt32(CalculateSumOfPowersofTwoOutputUInt32Index + i, resultArray[i]);
             }
         }
 
         // Needed so UnumCalculatorSampleRunner can retrieve BitMask.SegmentCount.
         // On the Nexys 4 DDR only a total of 6b environment will fit and work (9b would fit but wouldn't execute for
         // some reason).
-        public static UnumEnvironment EnvironmentFactory() => new UnumEnvironment(2, 4);
+        public static UnumEnvironment EnvironmentFactory() => new(2, 4);
     }
-
 
     public static class UnumCalculatorExtensions
     {
@@ -71,22 +63,26 @@ namespace Hast.Samples.SampleAssembly
             "System.UInt32[] Lombiq.Arithmetics.Unum::FractionToUintArray().array",
             "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32[],System.Boolean).value",
             "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.Int32).array",
-            "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32).array"
+            "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32).array",
         };
 
-
-        public static uint[] CalculateSumOfPowersofTwo(this UnumCalculator unumCalculator, uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
+        public static uint[] CalculateSumOfPowersofTwo(
+            this UnumCalculator unumCalculator,
+            uint number,
+            IHastlayer hastlayer = null,
+            IHardwareGenerationConfiguration configuration = null)
         {
             var memory = hastlayer is null
                 ? SimpleMemory.CreateSoftwareMemory(9)
                 : hastlayer.CreateMemory(configuration, 9);
-            memory.WriteUInt32(UnumCalculator.CalculateSumOfPowersofTwo_InputUInt32Index, number);
+            memory.WriteUInt32(UnumCalculator.CalculateSumOfPowersofTwoInputUInt32Index, number);
             unumCalculator.CalculateSumOfPowersofTwo(memory);
             var resultArray = new uint[9];
             for (var i = 0; i < 9; i++)
             {
-                resultArray[i] = memory.ReadUInt32(UnumCalculator.CalculateSumOfPowersofTwo_OutputUInt32Index + i);
+                resultArray[i] = memory.ReadUInt32(UnumCalculator.CalculateSumOfPowersofTwoOutputUInt32Index + i);
             }
+
             return resultArray;
         }
     }

@@ -1,9 +1,12 @@
-﻿using AdvancedDLSupport;
+using AdvancedDLSupport;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,17 +18,19 @@ namespace Hast.Catapult.Abstractions
     /// <summary>
     /// Job and configuration manager for the Catapult FPGA driver.
     /// </summary>
+    [SuppressMessage(
+        "Major Code Smell",
+        "S4002:Disposable types should declare finalizers",
+        Justification = "Doesn't need finalizer because it's disposed when DevicePoolManager is disposed automatically by the DI container.")]
     public sealed class CatapultLibrary : IDisposable
     {
-        private bool _isDisposed = false;
         private readonly IntPtr _handle;
-
+        private bool _isDisposed;
 
         /// <summary>
-        /// Returns the name of the instance (Catapult:N where N is the PCIe endpoint number).
+        /// Gets the name of the instance (Catapult:N where N is the PCIe endpoint number).
         /// </summary>
-        public string InstanceName => $"{Constants.ChannelName}:{PcieEndpointNumber}";
-
+        public string InstanceName => FormattableString.Invariant($"{Constants.ChannelName}:{PcieEndpointNumber}");
 
         /// <summary>
         /// Contains the latest tasks to be awaited when starting a new task.
@@ -69,7 +74,7 @@ namespace Hast.Catapult.Abstractions
         public int BufferCount { get; private set; }
 
         /// <summary>
-        /// Gets the maximum length of the message sent to the input buffer. (64kB)
+        /// Gets the maximum length of the message sent to the input buffer (64kB).
         /// </summary>
         public int BufferSize
         {
@@ -83,7 +88,7 @@ namespace Hast.Catapult.Abstractions
         public int BufferPayloadSize { get; private set; }
 
         /// <summary>
-        /// Gets whether the PCIe access is enabled on the device.
+        /// Gets a value indicating whether the PCIe access is enabled on the device.
         /// </summary>
         public bool PcieEnabled
         {
@@ -106,9 +111,8 @@ namespace Hast.Catapult.Abstractions
 
         public System.IO.TextWriter TesterOutput { get; set; }
 
-
         /// <summary>
-        /// Initializes a new instance of the CatapultLibrary class.
+        /// Initializes a new instance of the <see cref="CatapultLibrary"/> class.
         /// </summary>
         /// <param name="libraryPath">The path of the FPGACoreLib DLL file without the extension.</param>
         /// <param name="versionDefinitionsFile">
@@ -139,7 +143,8 @@ namespace Hast.Catapult.Abstractions
             NativeLibrary = builderWithoutDllMap.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
             // Check if device is available and connect
             VerifyResult(NativeLibrary.IsDevicePresent(versionManifestFile, logFunction));
-            var createStatus = NativeLibrary.CreateHandle(out _handle,
+            var createStatus = NativeLibrary.CreateHandle(
+                out _handle,
                 endpointNumber: (uint)endpointNumber,
                 flags: 0,
                 pchVerDefnsFile: string.IsNullOrEmpty(versionDefinitionsFile) ? null : new StringBuilder(versionDefinitionsFile),
@@ -161,17 +166,19 @@ namespace Hast.Catapult.Abstractions
 
             // Load in configuration from the soft registers
             var allowedSlots = (int)GetSoftRegister(Constants.SoftRegisters.AllowedSlots);
-            if (0 < allowedSlots && allowedSlots < BufferCount) BufferCount = allowedSlots;
+            if (allowedSlots > 0 && allowedSlots < BufferCount) BufferCount = allowedSlots;
             var bufferPayloadSize = (int)GetSoftRegister(Constants.SoftRegisters.BufferPayloadSize);
-            if (0 < bufferPayloadSize && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
+            if (bufferPayloadSize > 0 && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
 
             // Set up the task tracker.
             _slotDispatch = new Task[BufferCount];
             for (int i = 0; i < BufferCount; i++) _slotDispatch[i] = Task.CompletedTask;
         }
 
-
-        public static CatapultLibrary Create(IDictionary<string, object> config, ILogger<CatapultLibrary> logger, int endpointNumber = Constants.PcieHipNumber)
+        public static CatapultLibrary Create(
+            IDictionary<string, object> config,
+            ILogger<CatapultLibrary> logger,
+            int endpointNumber = Constants.PcieHipNumber)
         {
             var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
                 config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :
@@ -189,42 +196,52 @@ namespace Hast.Catapult.Abstractions
                 logFunction: (flagValue, text) =>
                 {
                     var flag = (Constants.Log)flagValue;
-                    if (flag == Constants.Log.None) return;
-
-                    if (flag.HasFlag(Constants.Log.Debug) || flag.HasFlag(Constants.Log.Verbose))
-                        logger.LogDebug(text);
-                    else if (flag.HasFlag(Constants.Log.Info))
-                        logger.LogInformation(text);
-                    else if (flag.HasFlag(Constants.Log.Error))
-                        logger.LogError(text);
-                    else if (flag.HasFlag(Constants.Log.Fatal))
-                        logger.LogCritical(text);
-                    else if (flag.HasFlag(Constants.Log.Warn))
-                        logger.LogWarning(text);
+                    switch (flag)
+                    {
+                        case Constants.Log.None:
+                            return;
+                        case Constants.Log.Info:
+                            logger.LogInformation(text);
+                            break;
+                        case Constants.Log.Debug:
+                        case Constants.Log.Verbose:
+                            logger.LogDebug(text);
+                            break;
+                        case Constants.Log.Error:
+                            logger.LogError(text);
+                            break;
+                        case Constants.Log.Fatal:
+                            logger.LogCritical(text);
+                            break;
+                        case Constants.Log.Warn:
+                            logger.LogWarning(text);
+                            break;
+                        default:
+                            return;
+                    }
                 });
         }
 
-
-        /// <summary>
-        /// Finalizer to ensure the instance is disposed at some point after the end of its lifecycle.
-        /// </summary>
-        ~CatapultLibrary() => Dispose();
-
-        /// <summary>
-        /// Turns off PCIe, cleans up the access handle and the library.
-        /// </summary>
         public void Dispose()
         {
             if (_isDisposed || Handle == IntPtr.Zero) return;
 
-            try { WaitClean(); } catch { }
+            try
+            {
+                WaitClean();
+            }
+            catch
+            {
+                // If the dispatched slots can't be successfully awaited that's not a critical problem since we are
+                // going to close the PICe connection via `PcieEnabled = false;` right after that anyway.
+            }
 
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closing down the FPGA..." + Environment.NewLine);
+            LogLine(Constants.Log.Info, "Closing down the FPGA...");
             PcieEnabled = false;
             NativeLibrary.CloseHandle(Handle);
 
             NativeLibrary.Dispose();
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), "Closed down the FPGA..." + Environment.NewLine);
+            LogLine(Constants.Log.Info, "Closed down the FPGA...");
 
             _isDisposed = true;
         }
@@ -234,7 +251,7 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public void WaitClean()
         {
-            Task.WaitAll(_slotDispatch);
+            Task.WaitAll(_slotDispatch, TimeSpan.FromSeconds(3));
             _currentSlot = -1;
         }
 
@@ -262,18 +279,16 @@ namespace Hast.Catapult.Abstractions
         /// <returns>The value of the soft register.</returns>
         public ulong GetSoftRegister(uint address)
         {
-            VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value)); return value;
+            VerifyResult(NativeLibrary.ReadSoftRegister(_handle, address, out ulong value));
+            return value;
         }
 
         /// <summary>
         /// Sets the value of the Soft Register. Indexed by memory address.
         /// </summary>
         /// <param name="address">The memory address.</param>
-        /// <param name="value">The new value</param>
-        public void SetSoftRegister(uint address, ulong value)
-        {
-            VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value));
-        }
+        /// <param name="value">The new value.</param>
+        public void SetSoftRegister(uint address, ulong value) => VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value));
 
         /// <summary>
         /// Uploads the data to the selected slot's input buffer and awaits the output.
@@ -282,10 +297,10 @@ namespace Hast.Catapult.Abstractions
         /// <param name="memberId">Identifies the program on the hardware.</param>
         /// <param name="inputData">The hardware program's input.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        public Task<Memory<byte>> AssignJob(int memberId, Memory<byte> inputData) =>
-            AssignJob(memberId, inputData, 0, 1, -1, false);
+        public Task<Memory<byte>> AssignJobAsync(int memberId, Memory<byte> inputData) =>
+            AssignJobAsync(memberId, inputData, 0, 1, -1, ignoreResponse: false);
 
-        private async Task<Memory<byte>> AssignJob(
+        private async Task<Memory<byte>> AssignJobAsync(
             int memberId,
             Memory<byte> inputData,
             int sliceIndex,
@@ -293,72 +308,29 @@ namespace Hast.Catapult.Abstractions
             int totalDataSize,
             bool ignoreResponse)
         {
-            int currentSliceCount = (int)Math.Ceiling(((double)inputData.Length) / BufferPayloadSize);
+            int currentSliceCount = (int)Math.Ceiling((double)inputData.Length / BufferPayloadSize);
             if (totalDataSize < 0) totalDataSize = inputData.Length / SimpleMemory.MemoryCellSizeBytes;
 
-            if (currentSliceCount >= 2)
+            if (currentSliceCount > 1)
             {
-                TesterOutput?.WriteLine("Slices: {0}", currentSliceCount);
-                bool slotOverflow = currentSliceCount > BufferCount;
-
-                // If the data exceeds buffer size limit, then cut it into maximal slices.
-                var tasks = new List<Task<Memory<byte>>>(currentSliceCount);
-                for (int i = 0; i < currentSliceCount; i++)
-                {
-                    var slice = i < currentSliceCount - 1 ? inputData.Slice(i * BufferPayloadSize, BufferPayloadSize) :
-                        inputData.Slice(tasks.Count * BufferPayloadSize);
-                    tasks.Add(AssignJob(
-                        memberId,
-                        slice,
-                        i,
-                        currentSliceCount,
-                        totalDataSize,
-                        slotOverflow));
-                }
-
-                if (slotOverflow)
-                {
-                    await Task.WhenAll(tasks);
-                    tasks.Clear();
-                    for (int i = 0; i < currentSliceCount; i++)
-                    {
-                        tasks.Add(ReceiveJobResults((uint)(i % BufferCount)));
-                        if ((i + 1) % BufferCount == 0) await Task.WhenAll(tasks);
-                    };
-                }
-
-                // Make sure that all slots are done.
-                var responses = await Task.WhenAll(tasks);
-
-                // Create output array and fill it with the responses that have a positive slice index.
-                var payloadTotalCells = MemoryMarshal.Read<int>(responses[0].Slice(OutputHeaderSizes.HardwareExecutionTime).Span);
-                Memory<byte> result = new byte[payloadTotalCells * SimpleMemory.MemoryCellSizeBytes + OutputHeaderSizes.Total];
-                responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
-                var sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
-                Parallel.For(0, responses.Length, (i) =>
-                {
-                    int size = i < responses.Length - 1 ? BufferPayloadSize :
-                        (payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) - (i * BufferPayloadSize);
-                    var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span.Slice(sliceIndexPosition));
-                    if (offset < 0 || offset >= result.Length) return;
-
-                    var targetSlice = result.Slice(OutputHeaderSizes.Total + offset);
-                    responses[i].Slice(OutputHeaderSizes.Total, size).CopyTo(targetSlice);
-                });
-
-                return result;
+                return await AssignMultiSliceJobAsync(
+                    memberId,
+                    inputData,
+                    totalDataSize,
+                    currentSliceCount);
             }
 
             Memory<byte> data = new byte[InputHeaderSizes.Total + inputData.Length];
             MemoryMarshal.Write(data.Span, ref memberId);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId), ref totalDataSize);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells), ref sliceIndex);
-            MemoryMarshal.Write(data.Span.Slice(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells
-                + InputHeaderSizes.SliceIndex), ref sliceCountValue);
-            inputData.CopyTo(data.Slice(InputHeaderSizes.Total));
+            MemoryMarshal.Write(data.Span[InputHeaderSizes.MemberId..], ref totalDataSize);
+            MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], ref sliceIndex);
+            MemoryMarshal.Write(
+                data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells + InputHeaderSizes.SliceIndex)..],
+                ref sliceCountValue);
+            inputData.CopyTo(data[InputHeaderSizes.Total..]);
 
             // This job will contain the current call.
-            Task<Memory<byte>> job = null;
+            Task<Memory<byte>> job;
 
             int currentSlot;
             lock (_slotDispatch)
@@ -367,21 +339,89 @@ namespace Hast.Catapult.Abstractions
                 _currentSlot = (_currentSlot + 1) % BufferCount;
 
                 currentSlot = _currentSlot;
+
                 _slotDispatch[currentSlot] = job = _slotDispatch[currentSlot]
-                    .ContinueWith(_ => RunJob(currentSlot, data, ignoreResponse).Result);
+                    .ContinueWith(_ => RunJobAsync(currentSlot, data, ignoreResponse), TaskScheduler.Current)
+                    .Unwrap();
             }
 
             var jobResult = await job;
-            if (ignoreResponse)
-                TesterOutput?.WriteLine("Job Finished{0}************{0}Slot: {1}{0}", Environment.NewLine, currentSlot);
-            else
-                TesterOutput?.WriteLine("Job Finished{0}************{0}Slot: {1}{0}Time: {2}{0}Payload: {3} cells{0}Slice: {4}{0}",
+            if (TesterOutput == null) return jobResult;
+
+            var message = FormattableString.Invariant(
+                $"Job Finished{Environment.NewLine}************{Environment.NewLine}Slot: {currentSlot}{Environment.NewLine}");
+            if (!ignoreResponse)
+            {
+                var payload = MemoryMarshal.Read<int>(jobResult[OutputHeaderSizes.HardwareExecutionTime..].Span);
+                var slice = MemoryMarshal.Read<int>(
+                    jobResult[(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells)..].Span);
+                message += StringHelper.Join(
                     Environment.NewLine,
-                    currentSlot,
-                    MemoryMarshal.Read<long>(jobResult.Span),
-                    MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime).Span),
-                    MemoryMarshal.Read<int>(jobResult.Slice(OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells).Span));
+                    $"Time: {MemoryMarshal.Read<long>(jobResult.Span)}",
+                    $"Payload: {payload} cells",
+                    $"Slice: {slice}");
+            }
+
+            await TesterWriteLineAsync(message);
+
             return jobResult;
+        }
+
+        private async Task<Memory<byte>> AssignMultiSliceJobAsync(
+            int memberId,
+            Memory<byte> inputData,
+            int totalDataSize,
+            int currentSliceCount)
+        {
+            await TesterWriteLineAsync(FormattableString.Invariant($"Slices: {currentSliceCount}"));
+            bool slotOverflow = currentSliceCount > BufferCount;
+
+            // If the data exceeds buffer size limit, then cut it into maximal slices.
+            var tasks = new List<Task<Memory<byte>>>(currentSliceCount);
+            for (int i = 0; i < currentSliceCount; i++)
+            {
+                var slice = i < currentSliceCount - 1 ? inputData.Slice(i * BufferPayloadSize, BufferPayloadSize) :
+                    inputData[(tasks.Count * BufferPayloadSize)..];
+                tasks.Add(AssignJobAsync(
+                    memberId,
+                    slice,
+                    i,
+                    currentSliceCount,
+                    totalDataSize,
+                    slotOverflow));
+            }
+
+            if (slotOverflow)
+            {
+                await Task.WhenAll(tasks);
+                tasks.Clear();
+                for (int i = 0; i < currentSliceCount; i++)
+                {
+                    tasks.Add(ReceiveJobResultsAsync((uint)(i % BufferCount)));
+                    if ((i + 1) % BufferCount == 0) await Task.WhenAll(tasks);
+                }
+            }
+
+            // Make sure that all slots are done.
+            var responses = await Task.WhenAll(tasks);
+
+            // Create output array and fill it with the responses that have a positive slice index.
+            var payloadTotalCells = MemoryMarshal.Read<int>(responses[0][OutputHeaderSizes.HardwareExecutionTime..].Span);
+            Memory<byte> result = new byte[(payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) + OutputHeaderSizes.Total];
+            responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
+            const int sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
+            Parallel.For(0, responses.Length, (i) =>
+            {
+                int size = i < responses.Length - 1 ? BufferPayloadSize :
+                    (payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) - (i * BufferPayloadSize);
+                var offset = BufferPayloadSize * MemoryMarshal.Read<int>(responses[i].Span[sliceIndexPosition..]);
+                if (offset < 0 || offset >= result.Length) return;
+
+                var targetSlice = result[(OutputHeaderSizes.Total + offset)..];
+                responses[i].Slice(OutputHeaderSizes.Total, size).CopyTo(targetSlice);
+            });
+
+            return result;
         }
 
         /// <summary>
@@ -394,11 +434,15 @@ namespace Hast.Catapult.Abstractions
         /// <param name="inputData">The hardware program's input.</param>
         /// <param name="ignoreResponse">If true, the scheduler won't wait for the output to appear.</param>
         /// <returns>The resulting output from the FPGA.</returns>
-        private async Task<Memory<byte>> RunJob(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
+        private async Task<Memory<byte>> RunJobAsync(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
         {
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{bufferIndex} starting...{Environment.NewLine}");
-            Debug.Assert(bufferIndex < BufferCount);
-            Debug.Assert(inputData.Length <= BufferSize);
+            LogLineInvariant(Constants.Log.Info, $"Job on slot #{bufferIndex} starting...");
+            Debug.Assert(
+                bufferIndex < BufferCount,
+                FormattableString.Invariant($"The buffer index is out of range. (current: {bufferIndex}, max: {BufferCount})"));
+            Debug.Assert(
+                inputData.Length <= BufferSize,
+                FormattableString.Invariant($"The input data doesn't fit in the buffer. (current: {inputData.Length}, max: {BufferSize})"));
             var slot = (uint)bufferIndex;
 
             // Makes sure the buffer is ready to be written.
@@ -410,56 +454,64 @@ namespace Hast.Catapult.Abstractions
                 // While unlikely, it's possible that the device has provided a result (so the previous Task is
                 // completed), but the input buffer hasn't cleared yet. In this case we should wait for it.
                 if (isInputBufferFull) await Task.Delay(1);
-            } while (isInputBufferFull);
+            }
+            while (isInputBufferFull);
 
             // If the input message isn't 64B aligned, pad it with zeros.
             var payloadBytes = inputData.Length - InputHeaderSizes.Total;
             if (payloadBytes % Constants.BufferChunkBytes != 0)
             {
-                int paddedPayloadSize = Constants.BufferChunkBytes * (payloadBytes / Constants.BufferChunkBytes + 1);
+                int paddedPayloadSize = Constants.BufferChunkBytes * ((payloadBytes / Constants.BufferChunkBytes) + 1);
                 if (paddedPayloadSize <= BufferPayloadSize)
                 {
-                    LogFunction((uint)Constants.Log.Warn, $"Incoming payload ({payloadBytes}B) must be aligned to " +
-                        $"{Constants.BufferChunkBytes}B! Padding for {Constants.BufferChunkBytes - paddedPayloadSize}B...");
+                    LogLine(
+                        Constants.Log.Warn,
+                        StringHelper.Concatenate(
+                            $"Incoming payload ({payloadBytes}B) must be aligned to {Constants.BufferChunkBytes}B! ",
+                            $"Padding for {Constants.BufferChunkBytes - paddedPayloadSize}B..."));
                     var padded = new byte[paddedPayloadSize + InputHeaderSizes.Total];
                     inputData.CopyTo(padded);
                     inputData = padded;
                 }
             }
 
-            VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out IntPtr inputBuffer));
+            VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out var inputBuffer));
 
-            LogFunction?.Invoke((uint)Constants.Log.Debug,
-                $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}{Environment.NewLine}");
+            LogLineInvariant(
+                Constants.Log.Debug,
+                $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}");
 
             // Upload data into input buffer.
             unsafe
             {
                 inputData.Span.CopyTo(new Span<byte>(inputBuffer.ToPointer(), inputData.Length));
             }
+
             VerifyResult(NativeLibrary.SendInputBuffer(_handle, slot, (uint)inputData.Length));
 
-            TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes", slot, inputData.Length);
+            await TesterWriteLineAsync("Slot: {0}, input length: {1} bytes", slot, inputData.Length);
             var resultSizeAcknowledge = await Task.Run(() =>
             {
                 VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived));
                 NativeLibrary.DiscardOutputBuffer(_handle, slot);
                 return (int)bytesReceived;
             });
-            TesterOutput?.WriteLine("Slot: {0}, input length: {1} bytes, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
+            await TesterWriteLineAsync("Slot: {0}, input length: {1} bytes, ACK bytes: {2}", slot, inputData.Length, resultSizeAcknowledge);
 
-            return ignoreResponse ? null : await ReceiveJobResults(slot);
+            return ignoreResponse ? null : await ReceiveJobResultsAsync(slot);
         }
 
-        private async Task<Memory<byte>> ReceiveJobResults(uint slot)
+        private async Task<Memory<byte>> ReceiveJobResultsAsync(uint slot)
         {
-
             // Wait for the interrupt and download results from output buffer.
-            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out IntPtr outputBuffer));
+            VerifyResult(NativeLibrary.GetOutputBufferPointer(_handle, slot, out var outputBuffer));
             var resultSize = await Task.Run(() =>
             {
-                VerifyResult(NativeLibrary.WaitOutputBuffer(_handle, slot, out uint bytesReceived,
-                    useInterrupt: true, timeoutInSeconds: int.MaxValue));
+                VerifyResult(NativeLibrary.WaitOutputBuffer(
+                    _handle,
+                    slot,
+                    out uint bytesReceived,
+                    timeoutInSeconds: int.MaxValue));
                 return (int)bytesReceived;
             });
 
@@ -469,15 +521,30 @@ namespace Hast.Catapult.Abstractions
                 new Span<byte>(outputBuffer.ToPointer(), resultSize).CopyTo(resultMemory.Span);
             }
 
-            LogFunction?.Invoke((uint)Constants.Log.Debug,
-                $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}{Environment.NewLine}");
+            LogLineInvariant(
+                Constants.Log.Debug,
+                $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}");
 
             // Signal that we are done.
             NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
-            LogFunction?.Invoke((uint)(Constants.Log.Info | Constants.Log.Verbose), $"Job on slot #{slot} finished!{Environment.NewLine}");
+            LogFunction?.Invoke((uint)Constants.Log.Info, $"Job on slot #{slot} finished!{Environment.NewLine}");
             return resultMemory;
         }
+
+        private Task TesterWriteLineAsync(string format, params object[] objects)
+        {
+            if (TesterOutput == null) return Task.CompletedTask;
+            if (objects?.Length > 0) format = string.Format(CultureInfo.InvariantCulture, format, objects);
+
+            return TesterOutput.WriteLineAsync(format);
+        }
+
+        private void LogLine(Constants.Log level, string text) =>
+            LogFunction?.Invoke((uint)level, text + Environment.NewLine);
+
+        private void LogLineInvariant(Constants.Log level, FormattableString text) =>
+            LogFunction?.Invoke((uint)level, text.ToString(CultureInfo.InvariantCulture) + Environment.NewLine);
 
         public override string ToString() => InstanceName;
     }

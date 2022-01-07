@@ -8,11 +8,11 @@ namespace Hast.Communication.Extensibility.Pipeline
     public interface IMemberInvocationPipelineStep : IPipelineStep
     {
         /// <summary>
-        /// Determines whether the invocation of the hardware-implemented member can continue as hardware-implemented 
+        /// Determines whether the invocation of the hardware-implemented member can continue as hardware-implemented
         /// logic. You can use this to decide in runtime whether a member invocation should continue on hardware.
         /// </summary>
         /// <param name="invocationContext">The context of the member invocation.</param>
-        /// <returns><c>true</c> if the execution can continue on hardware, <c>false</c> otherwise.</returns>
+        /// <returns><see langword="true"/> if the execution can continue on hardware, <see langword="false"/> otherwise.</returns>
         bool CanContinueHardwareExecution(IMemberInvocationPipelineStepContext invocationContext);
     }
 }

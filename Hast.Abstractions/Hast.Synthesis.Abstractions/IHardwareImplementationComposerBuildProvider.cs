@@ -15,7 +15,7 @@ namespace Hast.Synthesis.Abstractions
         /// Gets the functions installed by other providers. If any of them returns <see langword="true"/> this provider
         /// is skipped.
         /// </summary>
-        Dictionary<string, BuildProviderShortcut> Shortcuts { get; }
+        IDictionary<string, BuildProviderShortcut> Shortcuts { get; }
 
         /// <summary>
         /// Determines if the instance is applicable to the current composition task based on the
@@ -29,8 +29,12 @@ namespace Hast.Synthesis.Abstractions
         Task BuildAsync(IHardwareImplementationCompositionContext context, IHardwareImplementation implementation);
 
         /// <summary>
-        /// If implemented, it adds to the <see cref="Shortcuts"/> of other providers.
+        /// If implemented, it adds <see cref="BuildProviderShortcut"/> to the <see cref="Shortcuts"/> of other <see
+        /// cref="IHardwareImplementationComposerBuildProvider"/> instances.
         /// </summary>
-        void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers) { }
+        void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        {
+            // The default behavior is to do nothing.
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hast.Common.Interfaces;
@@ -27,6 +27,6 @@ namespace Hast.Communication.Services
         /// Reserves an available device from the pool.
         /// </summary>
         /// <returns>A <c>Task</c> that will complete once an available device could be reserved from the pool.</returns>
-        Task<IReservedDevice> ReserveDevice();
+        Task<IReservedDevice> ReserveDeviceAsync();
     }
 }

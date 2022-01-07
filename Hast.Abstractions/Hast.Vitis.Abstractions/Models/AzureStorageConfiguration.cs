@@ -27,7 +27,7 @@ namespace Hast.Vitis.Abstractions.Models
                 "EndpointSuffix=core.windows.net");
 
         public BlobContainerClient CreateBlobContainerClient(string blobContainerName) =>
-            new BlobContainerClient(
+            new(
                 new Uri($"https://{StorageAccountName}.blob.core.windows.net/{blobContainerName}"),
                 new StorageSharedKeyCredential(StorageAccountName, StorageAccountKey));
     }

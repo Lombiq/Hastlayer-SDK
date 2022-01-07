@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -8,47 +9,57 @@ namespace Hast.Samples.Kpz.Algorithms
     /// </summary>
     public class KpzNode
     {
-        public bool dx; // Right
-        public bool dy; // Bottom
+        public bool Dx; // Right
+        public bool Dy; // Bottom
 
-
-        public uint SerializeToUInt32() => ((dx) ? 1U : 0) | ((dy) ? 2U : 0);
+        public uint SerializeToUInt32() => (Dx ? 1U : 0) | (Dy ? 2U : 0);
 
         public static KpzNode DeserializeFromUInt32(uint value)
         {
             var node = new KpzNode
             {
-                dx = (value & 1) != 0,
-                dy = (value & 2) != 0
+                Dx = (value & 1) != 0,
+                Dy = (value & 2) != 0,
             };
             return node;
         }
-
     }
-
-
 
     /// <summary>
     /// This struct stores the right and bottom neighbours of a particular node on the grid.
     /// It stores both their values and coordinates.
     /// </summary>
-    [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
+    [SuppressMessage(
+        "Performance",
+        "CA1815:Override equals and operator equals on value types",
+        Justification = "The type's never checked for equality.")]
+    [SuppressMessage(
+        "Major Code Smell",
+        "S3898:Value types should implement \"IEquatable<T>\"",
+        Justification = "Same.")]
     public struct KpzNeighbours
     {
-        public KpzNode nx; // Right neighbour value
-        public KpzNode ny; // Left neighbour value
-        public KpzCoords nxCoords; // Right neighbour coordinates
-        public KpzCoords nyCoords; // Left neighbour coordinates
+        public KpzNode Nx; // Right neighbour value
+        public KpzNode Ny; // Left neighbour value
+        public KpzCoords NxCoords; // Right neighbour coordinates
+        public KpzCoords NyCoords; // Left neighbour coordinates
     }
-
 
     /// <summary>
     /// This struct stores the coordinates of a <see cref="KpzNode" /> on the grid.
     /// </summary>
-    [SuppressMessage("Performance", "CA1815:Override equals and operator equals on value types", Justification = "The type's never checked for equality.")]
+    [SuppressMessage(
+        "Performance",
+        "CA1815:Override equals and operator equals on value types",
+        Justification = "The type's never checked for equality.")]
+    [SuppressMessage(
+        "Major Code Smell",
+        "S3898:Value types should implement \"IEquatable<T>\"",
+        Justification = "Same.")]
+    [StructLayout(LayoutKind.Auto)]
     public struct KpzCoords
     {
-        public int x;
-        public int y;
+        public int X;
+        public int Y;
     }
 }

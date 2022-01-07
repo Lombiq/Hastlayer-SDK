@@ -1,12 +1,13 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using System;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Demo
 {
-    internal class Program
+    internal static class Program
     {
         private static async Task Main()
         {
@@ -19,20 +20,19 @@ namespace Hast.Samples.Demo
 
             configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
-            hastlayer.ExecutedOnHardware += (sender, e) =>
-            {
+            hastlayer.ExecutedOnHardware += (_, e) =>
                 Console.WriteLine(
-                    "Executing on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                    " milliseconds (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                    " milliseconds (all together).");
-            };
+                    StringHelper.ConcatenateConvertiblesInvariant(
+                        "Executing on hardware took ",
+                        e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds,
+                        " milliseconds (net) ",
+                        e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds,
+                        " milliseconds (all together)."));
             #endregion
 
             #region HardwareGeneration
             Console.WriteLine("Hardware generation starts.");
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
+            var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                 new[]
                 {
                     typeof(ParallelAlgorithm).Assembly,
@@ -45,15 +45,15 @@ namespace Hast.Samples.Demo
             Console.WriteLine();
 
             var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ParallelAlgorithm().Run(234234, null);
+            var cpuOutput = new ParallelAlgorithm().Run(234234, hastlayer: null);
             sw.Stop();
 
-            Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
+            Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, " milliseconds."));
 
             Console.WriteLine();
             Console.WriteLine("Starting hardware execution.");
 
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
+            var parallelAlgorithm = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ParallelAlgorithm());
 
             var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
             var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

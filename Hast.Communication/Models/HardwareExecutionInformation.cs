@@ -9,7 +9,6 @@ namespace Hast.Communication.Models
         public decimal FullExecutionTimeMilliseconds { get; set; }
         public DateTime StartedUtc { get; set; }
 
-
         public HardwareExecutionInformation()
         {
             StartedUtc = DateTime.UtcNow;

@@ -15,11 +15,10 @@ namespace Hast.Samples.Consumer.SampleRunners
                 UnumCalculatorExtensions.ManuallySizedArrays);
         }
 
-        public async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
+        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
         {
-            var unumCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new UnumCalculator(), configuration);
-
-            var result = unumCalculator.CalculateSumOfPowersofTwo(9, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var unumCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new UnumCalculator(), configuration);
+            _ = unumCalculator.CalculateSumOfPowersofTwo(9, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         }
     }
 }

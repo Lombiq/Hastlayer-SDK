@@ -12,12 +12,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hast.Vitis.Abstractions.Services
 {
-    [IDependencyInitializer(nameof(InitializeService))]
+    [DependencyInitializer(nameof(InitializeService))]
     public class AzureHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
     {
         private const string BlobContainerName = "hastlayer-attestation";
@@ -26,11 +25,11 @@ namespace Hast.Vitis.Abstractions.Services
         private readonly IAzureStorageServiceFactory _azureStorageServiceFactory;
         private readonly ILogger<AzureHardwareImplementationComposerBuildProvider> _logger;
 
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
+        public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
 
         public ISet<string> Requirements { get; } = new HashSet<string>
         {
-            nameof(VitisHardwareImplementationComposerBuildProvider)
+            nameof(VitisHardwareImplementationComposerBuildProvider),
         };
 
         public AzureHardwareImplementationComposerBuildProvider(
@@ -45,7 +44,7 @@ namespace Hast.Vitis.Abstractions.Services
 
         public bool CanCompose(IHardwareImplementationCompositionContext context) =>
             context.DeviceManifest is XilinxDeviceManifest xilinxDeviceManifest &&
-            xilinxDeviceManifest.Name.StartsWith("Azure", StringComparison.InvariantCulture);
+            xilinxDeviceManifest.Name.StartsWithOrdinal("Azure");
 
         public async Task BuildAsync(
             IHardwareImplementationCompositionContext context,
@@ -110,7 +109,7 @@ namespace Hast.Vitis.Abstractions.Services
             string sharedAccessSignature)
         {
             _logger.LogInformation("Sending attestation start request...");
-            var instanceId = (await _azureAttestationApi.Start(
+            var instanceId = (await _azureAttestationApi.StartAsync(
                 configuration.StartFunctionUrl.AbsolutePath.TrimStart('/'),
                 new AzureStartPostData(configuration)
                 {
@@ -126,20 +125,20 @@ namespace Hast.Vitis.Abstractions.Services
 
             while (true)
             {
-                var (statusText, output) = await _azureAttestationApi.Poll(
+                var (statusText, output) = await _azureAttestationApi.PollAsync(
                     configuration.PollFunctionUrl.AbsolutePath.TrimStart('/'),
                     new AzurePollPostData(configuration, instanceId));
                 var statusUpper = statusText.ToUpperInvariant();
 
                 _logger.LogInformation("Polled status: {0}", statusText);
 
-                if (statusUpper == "PENDING" || statusUpper == "RUNNING")
+                if (statusUpper is "PENDING" or "RUNNING")
                 {
                     await Task.Delay(TimeSpan.FromSeconds(30));
                     continue;
                 }
 
-                var outputList = output?.ToArray() ?? Array.Empty<string>();
+                var outputList = output?.AsList() ?? Array.Empty<string>();
                 if (outputList.Contains("Attestation process succeeded"))
                 {
                     _logger.LogInformation("Attestation process has succeeded.");
@@ -155,7 +154,7 @@ namespace Hast.Vitis.Abstractions.Services
             }
         }
 
-        private static string UpdateBinaryPath(string input) => Regex.Replace(input, @"\.xclbin$", ".azure.xclbin");
+        private static string UpdateBinaryPath(string input) => input.RegexReplace(@"\.xclbin$", ".azure.xclbin");
 
         public static void InitializeService(IServiceCollection services) =>
             services.AddRestEaseHttpClient<IAzureAttestationApi>(

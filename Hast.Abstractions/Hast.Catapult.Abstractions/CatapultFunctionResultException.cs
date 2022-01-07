@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Runtime.Serialization;
-using Hast.Communication.Constants.CommunicationConstants;
 
 namespace Hast.Catapult.Abstractions
 {
@@ -15,22 +14,21 @@ namespace Hast.Catapult.Abstractions
         /// </summary>
         public Constants.Status Status { get; private set; }
 
-
         public CatapultFunctionResultException() { }
 
         public CatapultFunctionResultException(Constants.Status status, string message)
-            : this(string.IsNullOrWhiteSpace(message) ? status.ToString() : message)
-        {
-            Status = status;
-        }
-        
-        public CatapultFunctionResultException(string message) : base(message) { }
-        
-        public CatapultFunctionResultException(string message, Exception inner) : base(message, inner) { }
-        
+            : this(string.IsNullOrWhiteSpace(message) ? status.ToString() : message) => Status = status;
+
+        public CatapultFunctionResultException(string message)
+            : base(message) { }
+
+        public CatapultFunctionResultException(string message, Exception inner)
+            : base(message, inner) { }
+
         protected CatapultFunctionResultException(
           SerializationInfo info,
-          StreamingContext context) : base(info, context)
+          StreamingContext context)
+            : base(info, context)
         { }
     }
 }

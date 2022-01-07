@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 
 namespace Hast.Console.Options
 {
@@ -19,6 +19,5 @@ namespace Hast.Console.Options
 
         [Value(0, HelpText = "Sub-command name, if any.")]
         public string Subcommand { get; set; }
-
     }
 }

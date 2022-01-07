@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace Microsoft.Extensions.Configuration
     // Source: https://stackoverflow.com/a/55050425
     public static class ConfigurationExtensions
     {
-
         /// <summary>
         /// Serializes the configuration into JSON.
         /// </summary>
@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.Configuration
             }
 
             // at this stage, all arrays are seen as dictionaries with integer keys
-            ReplaceWithArray(null, null, result);
+            ReplaceWithArray(parent: null, key: null, result);
 
             return result;
         }
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.Configuration
                 var array = new object[keys.Length];
                 foreach (var kvp in dict)
                 {
-                    array[int.Parse(kvp.Key)] = kvp.Value;
+                    array[kvp.Key.ToTechnicalInt()] = kvp.Value;
                 }
 
                 var parentDict = parent as IDictionary<string, object>;
@@ -83,6 +83,5 @@ namespace Microsoft.Extensions.Configuration
                 }
             }
         }
-
     }
 }

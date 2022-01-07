@@ -10,15 +10,13 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
     {
         private readonly SimpleMemory _simpleMemory;
 
-
         public SimpleMemoryAccessor(SimpleMemory simpleMemory) => _simpleMemory = simpleMemory;
-
 
         /// <summary>
         /// Gets the memory contents without an additional prefix.
         /// </summary>
         /// <remarks>
-        /// Here besides <see cref="Get(int)"/> so for simpler cases there's no branching necessary.
+        /// <para>Here besides <see cref="Get(int)"/> so for simpler cases there's no branching necessary.</para>
         /// </remarks>
         public Memory<byte> Get() => _simpleMemory.Memory;
 
@@ -27,27 +25,27 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </summary>
         /// <param name="prefixCellCount">
         /// The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.
-        /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>
+        /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>.
         /// </param>
         public Memory<byte> Get(int prefixCellCount)
         {
             if (prefixCellCount < 0)
-                throw new ArgumentOutOfRangeException($"{nameof(prefixCellCount)} must be positive!");
+                throw new ArgumentOutOfRangeException(nameof(prefixCellCount), $"{nameof(prefixCellCount)} must be positive!");
 
             if (prefixCellCount == 0) return Get();
 
             // If we need more prefix than what is available.
             if (prefixCellCount > _simpleMemory.PrefixCellCount)
             {
-                int missingBytes = prefixCellCount - _simpleMemory.PrefixCellCount * SimpleMemory.MemoryCellSizeBytes;
+                int missingBytes = prefixCellCount - (_simpleMemory.PrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
                 Memory<byte> newMemory = new byte[_simpleMemory.PrefixedMemory.Length + missingBytes];
-                _simpleMemory.PrefixedMemory.CopyTo(newMemory.Slice(missingBytes));
+                _simpleMemory.PrefixedMemory.CopyTo(newMemory[missingBytes..]);
 
                 _simpleMemory.PrefixCellCount = prefixCellCount;
                 return _simpleMemory.PrefixedMemory = newMemory;
             }
 
-            return _simpleMemory.PrefixedMemory.Slice((_simpleMemory.PrefixCellCount - prefixCellCount) * SimpleMemory.MemoryCellSizeBytes);
+            return _simpleMemory.PrefixedMemory[((_simpleMemory.PrefixCellCount - prefixCellCount) * SimpleMemory.MemoryCellSizeBytes)..];
         }
 
         /// <summary>
@@ -59,9 +57,9 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <see cref="SimpleMemory"/>.
         /// </param>
         /// <remarks>
-        /// Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you
+        /// <para>Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you
         /// must use at least as many prefixCellCount for Set as for Get if the <see cref="SimpleMemory"/> is reused,
-        /// otherwise the memory has to be copied and that incurs a performance hit.
+        /// otherwise the memory has to be copied and that incurs a performance hit.</para>
         /// </remarks>
         public void Set(Memory<byte> data, int prefixCellCount = 0)
         {
@@ -73,11 +71,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format.
         /// </summary>
         /// <param name="stream">The stream to write the storage data to.</param>
-        public void Store(Stream stream)
-        {
-            var segment = Get().GetUnderlyingArray();
-            stream.Write(segment.Array, segment.Offset, _simpleMemory.ByteCount);
-        }
+        public void Store(Stream stream) => stream.Write(Get().Span);
 
         /// <summary>
         /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format to a file. Overwrites the file
@@ -86,8 +80,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// <param name="filePath">The path under to write the storage data file to.</param>
         public void Store(string filePath)
         {
-            using (var fileStream = File.Create(filePath))
-                Store(fileStream);
+            using var fileStream = File.Create(filePath);
+            Store(fileStream);
         }
 
         /// <summary>
@@ -103,7 +97,7 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         {
             int prefixBytesCount = prefixCellCount * SimpleMemory.MemoryCellSizeBytes;
             var data = new byte[stream.Length + prefixBytesCount];
-            stream.Read(data, prefixBytesCount, (int)stream.Length);
+            _ = stream.Read(data, prefixBytesCount, (int)stream.Length);
             Set(data, prefixCellCount);
         }
 
@@ -118,8 +112,8 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
         /// </param>
         public void Load(string filePath, int prefixCellCount = 0)
         {
-            using (var fileStream = File.OpenRead(filePath))
-                Load(fileStream, prefixCellCount);
+            using var fileStream = File.OpenRead(filePath);
+            Load(fileStream, prefixCellCount);
         }
     }
 }

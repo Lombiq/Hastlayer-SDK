@@ -8,7 +8,7 @@ namespace Hast.Layer
     public interface IHardwareGenerationConfigurationAccessor : IDependency
     {
         /// <summary>
-        /// The configuration to be set by <c>IHastlayer.GenerateHardware()</c>.
+        /// Gets or sets the configuration to be set by <c>IHastlayer.GenerateHardware()</c>.
         /// </summary>
         IHardwareGenerationConfiguration Value { get; set; }
     }
