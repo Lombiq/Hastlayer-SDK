@@ -103,12 +103,15 @@ namespace Hast.Transformer.Abstractions.SimpleMemory
                     Console.Error.WriteLine("  alignmentOffset: {0}", alignmentOffset);
                     Console.Error.WriteLine("  expectedLength: {0}", expectedLength);
 #else
-                    throw new InvalidOperationException("Alignment failed! (" +
-                                                        $"64-bit: {Environment.Is64BitProcess}; " +
-                                                        $"memory length: {memory.Length}; " +
-                                                        $"alignment: {alignment}; " +
-                                                        $"alignmentOffset: {alignmentOffset}; " +
-                                                        $"expectedLength: {expectedLength})");
+                    throw new InvalidOperationException(
+                        "Alignment failed! (" +
+                        FormattableString.Invariant($"64-bit: {Environment.Is64BitProcess}; ") +
+                        FormattableString.Invariant($"address: {address}; ") +
+                        FormattableString.Invariant($"addressLong: {addressLong}; ") +
+                        FormattableString.Invariant($"memory length: {memory.Length}; ") +
+                        FormattableString.Invariant($"alignment: {alignment}; ") +
+                        FormattableString.Invariant($"alignmentOffset: {alignmentOffset}; ") +
+                        FormattableString.Invariant($"expectedLength: {expectedLength})"));
 #endif
                 }
             }
