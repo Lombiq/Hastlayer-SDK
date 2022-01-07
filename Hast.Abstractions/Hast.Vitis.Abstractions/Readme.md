@@ -37,30 +37,7 @@ Be sure that all .NET software dependencies are on the same version on both the 
 
 ### Cross Compilation with Docker
 
-This way you can compile on your Windows machine, or any machine where you don't want to install XRT permanently. Note that you still need to download the complete Vitis XDK separately for licensing reasons and it takes about 125GB (and at least 50GB more temporarily) to set up the image. Of course you need [Docker installed](https://docs.docker.com/get-docker/) too. However there are no alternatives on Windows so please bear with it. Following these steps you will get a container with Vitis XDK and .NET Core 3.1 SDK installed. Please remember not to distribute the resulting image!
-
-1. Download the _Xilinx Vitis 2020.2: All OS Installer Single-File_ version from the [Vitis Downloads](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vitis/2020-2.html).
-2. Extract the Xilinx_Unified_2020.2_* folder from it (`tar xzf Xilinx_Unified_2020.2_*`) and copy the folder into _Container_ inside this project.
-3. Download the XRT, deployment platform and development platform packages for CentOS 7:
-    * You can download the latest released packages from the Getting Started section of the card's product page (eg. [U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted)).
-    * If you are using Azure, all device specific packages must be downloaded from the [Xilinx Lounge](http://www.xilinx.com/member/alveo-platform.html) instead. The NP servers currently require the _RedHat / CentOS 7.6 & 7.8_ files from the _Alveo U250 Gen3x16 XDMA Platform 2.1 Downloads_ section. Make sure to download both packages for XRT and Deployment Target Platform, not just the ones marked Azure.
-    * If you are using Zynq, you don't need to download a platform package. The _Hast.Vitis.Abstractions.HardwareFramework_ project already copies the package files into the _HardwareFramework/packages_ directory on build. 
-4. Copy the files into the _Container/platform_ folder.
-   - If you downloaded the Azure packages too, make sure you don't end up with multiple versions of the same package. For example at the time of writing this document the main _Deployment Target Platform_ archive contained the package _xilinx-u250-gen3x16-xdma-validate-2.1-**2948414**.noarch.rpm_. However a newer, Azure-specific version _xilinx-u250-gen3x16-xdma-validate-2.1-**3005608**.1.noarch.rpm_ was also up for download. Such a clash causes a multilib version problem. That can be resolved by removing older one and keeping the Azure-specific version.
-5. Extract any tar.gz archive in _Container/platform_ and delete the archives. In the end you should only have rpm files.
-6. Copy the `centos7-install.sh` and `fake-xterm.sh` to the _Container_ as well.
-7. Open a shell of your choice while still in the _Container_ folder and type `docker build -t vitis .` to create an image. This will take a while.
-8. Open Docker Desktop to verify that the "vitis" image appeared in the *Images* tab.
-9. Clean up after the build is finished with the `docker builder prune -a -f` command. If you notice excessive RAM usage by the Vmmem process then close down Docker Desktop, shut down WSL with the `wsl --shutdown` command, then restart Docker Desktop and continue with the next steps.
-10. Go back to Docker Desktop and click *Run* on the "vitis" image.
-11. Expand the *Optional Settings* and create a shared directory by selecting a *Host Path* (this can be anywhere), and entering "/data" into the *Container Path* field.
-12. Switch to the *Containers / Apps* tab in Docker Desktop and click on the CLI (`>_`) button.
-13. A window with `sh` shell will appear. Type `bash` as it already has the XRT setup configured. 
-14. Copy your Hastlayer project into the shared folder and access it through the _/data_ directory.
-    
-As you can see it was as simple as 1, 2, 13!
-
-If you'd like to move the Docker WLS files (which can be upwards of 100 GB) to another folder/drive then follow [this guide](https://github.com/docker/for-win/issues/7348#issuecomment-647160351).
+If you are interested in using Docker, especially from a Windows host, [read this](Docs/Docker.md).
 
 
 ## Specialized Targets
