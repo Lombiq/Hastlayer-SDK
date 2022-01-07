@@ -84,6 +84,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5BF98C7-CE64-4E2E-B083-F987B33182D6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		tools\Lombiq.Analyzers\General.ruleset = tools\Lombiq.Analyzers\General.ruleset
 		Licence.md = Licence.md
 		NuGet.config = NuGet.config
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
@@ -131,11 +132,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.Res
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{75BB7270-46E1-47D9-91CA-2A7666251ED6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Terminal.Gui", "Libraries\Terminal.Gui\Terminal.Gui\Terminal.Gui.csproj", "{48BFCAEE-D73D-4A21-A67E-52EA341D4276}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Terminal.Gui", "Libraries\Terminal.Gui\Terminal.Gui\Terminal.Gui.csproj", "{48BFCAEE-D73D-4A21-A67E-52EA341D4276}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lombiq.HelpfulLibraries", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.csproj", "{1F7B4E4E-76EB-4D57-9764-7041F7CBF958}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.csproj", "{1F7B4E4E-76EB-4D57-9764-7041F7CBF958}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hast.TestInputs.Base", "Hast.Core\Hast.TestInputs.Base\Hast.TestInputs.Base.csproj", "{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Base", "Hast.Core\Hast.TestInputs.Base\Hast.TestInputs.Base.csproj", "{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

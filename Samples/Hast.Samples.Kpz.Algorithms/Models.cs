@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.InteropServices;
 
 namespace Hast.Samples.Kpz.Algorithms
 {
@@ -55,6 +56,7 @@ namespace Hast.Samples.Kpz.Algorithms
         "Major Code Smell",
         "S3898:Value types should implement \"IEquatable<T>\"",
         Justification = "Same.")]
+    [StructLayout(LayoutKind.Auto)]
     public struct KpzCoords
     {
         public int X;

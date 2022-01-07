@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,6 +18,10 @@ namespace Hast.Catapult.Abstractions
     /// <summary>
     /// Job and configuration manager for the Catapult FPGA driver.
     /// </summary>
+    [SuppressMessage(
+        "Major Code Smell",
+        "S4002:Disposable types should declare finalizers",
+        Justification = "Doesn't need finalizer because it's disposed when DevicePoolManager is disposed automatically by the DI container.")]
     public sealed class CatapultLibrary : IDisposable
     {
         private readonly IntPtr _handle;
@@ -219,8 +224,6 @@ namespace Hast.Catapult.Abstractions
 
         public void Dispose()
         {
-            GC.SuppressFinalize(this);
-
             if (_isDisposed || Handle == IntPtr.Zero) return;
 
             try

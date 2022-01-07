@@ -83,8 +83,8 @@ namespace Hast.Samples.Kpz
 
             var kernelsCpu = new PrngTestInterface();
             const ulong randomSeed = 0x37a9_2d76_a96e_f210;
-            var smCpu = kernelsCpu.PushRandomSeed(randomSeed, hastlayer: null, configuration: null);
-            var smFpga = KernelsP.PushRandomSeed(randomSeed, hastlayer, configuration);
+            var smCpu = PrngTestInterface.PushRandomSeed(randomSeed, hastlayer: null, configuration: null);
+            var smFpga = PrngTestInterface.PushRandomSeed(randomSeed, hastlayer, configuration);
             LogItFunction("PRNG results:");
             bool success = true;
 

@@ -96,8 +96,8 @@ namespace Hast.Catapult.Abstractions
                     })));
 
                 return libraries
-                    .Where(x => x != null)
-                    .Select(x => new Device(x.InstanceName, x, Device_Disposing));
+                    .Where(catapultLibrary => catapultLibrary != null)
+                    .Select(catapultLibrary => new Device(catapultLibrary.InstanceName, catapultLibrary, Device_Disposing));
             });
 
             using var device = await _devicePoolManager.ReserveDeviceAsync();

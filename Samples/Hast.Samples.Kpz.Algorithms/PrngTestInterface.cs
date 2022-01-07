@@ -31,10 +31,17 @@ namespace Hast.Samples.Kpz.Algorithms
             memory.WriteUInt32(2, randomWord);
         }
 
+        /// <summary>It runs the PRNG on the FPGA and returns a random 32-bit uint.</summary>
+        public uint GetNextRandom(SimpleMemory memory)
+        {
+            MWC64X(memory);
+            return memory.ReadUInt32(2);
+        }
+
         /// <summary>
         /// This copies random seed from the host to the FPGA.
         /// </summary>
-        public SimpleMemory PushRandomSeed(
+        public static SimpleMemory PushRandomSeed(
             ulong seed,
             IHastlayer hastlayer,
             IHardwareGenerationConfiguration configuration)
@@ -45,13 +52,6 @@ namespace Hast.Samples.Kpz.Algorithms
             sm.WriteUInt32(0, (uint)seed); // LE: 0 is low byte, 1 is high byte
             sm.WriteUInt32(1, (uint)(seed >> 32));
             return sm;
-        }
-
-        /// <summary>It runs the PRNG on the FPGA and returns a random 32-bit uint.</summary>
-        public uint GetNextRandom(SimpleMemory memory)
-        {
-            MWC64X(memory);
-            return memory.ReadUInt32(2);
         }
     }
 }
