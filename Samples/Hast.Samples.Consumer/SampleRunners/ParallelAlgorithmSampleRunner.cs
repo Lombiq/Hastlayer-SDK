@@ -48,7 +48,10 @@ namespace Hast.Samples.Consumer.SampleRunners
 
             // Execute with CPU.
             parallel = new ParallelAlgorithm(); // Replace proxy with CPU implementation.
-            foreach (var number in numbers) Console.WriteLine($"On CPU it took {RunLogAndTime(parallel, number)}ms.");
+            foreach (var number in numbers)
+            {
+                Console.WriteLine(FormattableString.Invariant($"On CPU it took {RunLogAndTime(parallel, number)}ms."));
+            }
         }
     }
 }

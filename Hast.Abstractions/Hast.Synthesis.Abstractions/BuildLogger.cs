@@ -2,6 +2,7 @@
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
 using Hast.Common.Helpers;
+using Lombiq.HelpfulLibraries.Libraries.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -74,7 +75,7 @@ namespace Hast.Synthesis.Abstractions
                     Log(
                         LogLevel.None,
                         name,
-                        $"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}",
+                        FormattableString.Invariant($"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}"),
                         "started");
                     break;
                 case StandardOutputCommandEvent output:
@@ -91,8 +92,10 @@ namespace Hast.Synthesis.Abstractions
                     if (exited.ExitCode != 0)
                     {
                         throw new CommandExecutionException(
-                            $"The command {name} exited with code {exited.ExitCode}. " +
-                            $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
+                            StringHelper.Join(
+                                " ",
+                                $"The command {name} exited with code {exited.ExitCode}.",
+                                $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'."));
                     }
 
                     break;
@@ -153,7 +156,9 @@ namespace Hast.Synthesis.Abstractions
             var buildOutputDirectoryPath = EnsureDirectoryExists("App_Data", "logs");
             for (var i = 0; i < 100 && buildOutput == null; i++)
             {
-                var fileName = i == 0 ? $"{outFileName}.out" : $"{outFileName}~{i}.out";
+                var fileName = i == 0
+                    ? FormattableString.Invariant($"{outFileName}.out")
+                    : FormattableString.Invariant($"{outFileName}~{i}.out");
                 buildOutputPath = Path.Combine(buildOutputDirectoryPath, fileName);
 
                 try

@@ -92,7 +92,7 @@ namespace Hast.Layer
         /// </param>
         public HardwareGenerationConfiguration(
             string deviceName,
-            string hardwareFrameworkPath,
+            string hardwareFrameworkPath = null,
             IDictionary<string, object> customConfiguration = null,
             IList<string> hardwareEntryPointMemberFullNames = null,
             IList<string> hardwareEntryPointMemberNamePrefixes = null)

@@ -247,7 +247,7 @@ namespace Hast.Samples.Consumer
                 case nameof(ConsumerConfiguration.SingleBinaryPath):
                     _optionsTextField.Text = _configuration.SingleBinaryPath ?? string.Empty;
                     _currentOptionsTextFieldEventHandler = text => { _configuration.SingleBinaryPath = text; };
-                    ShowTextField(true);
+                    ShowTextField(visible: true);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown menu item selected ({key}).");

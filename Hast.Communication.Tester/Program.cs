@@ -78,7 +78,7 @@ namespace Hast.Communication.Tester
                     .ToArray();
             }
 
-            var hardwareGenerationConfiguration = new HardwareGenerationConfiguration(selectedDevice.Name, null);
+            var hardwareGenerationConfiguration = new HardwareGenerationConfiguration(selectedDevice.Name);
             var (memory, accessor) = await GenerateMemoryAsync(
                 hastlayer,
                 hardwareGenerationConfiguration,
@@ -88,7 +88,12 @@ namespace Hast.Communication.Tester
                 CommandLineOptions.InputFileName);
 
             // Save input to file using the format of the output file type.
-            await SaveFileAsync(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.InputFileName, true, memory);
+            await SaveFileAsync(
+                CommandLineOptions.OutputFileType,
+                CommandLineOptions.PayloadType,
+                CommandLineOptions.InputFileName,
+                isInput: true,
+                memory);
 
             // Create reference copy of input to compare against output.
             SimpleMemory referenceMemory = null;
@@ -127,7 +132,12 @@ namespace Hast.Communication.Tester
                 info.FullExecutionTimeMilliseconds);
 
             // Save output to file.
-            await SaveFileAsync(CommandLineOptions.OutputFileType, CommandLineOptions.PayloadType, CommandLineOptions.OutputFileName, false, memory);
+            await SaveFileAsync(
+                CommandLineOptions.OutputFileType,
+                CommandLineOptions.PayloadType,
+                CommandLineOptions.OutputFileName,
+                isInput: false,
+                memory);
 
             if (!string.IsNullOrWhiteSpace(CommandLineOptions.JsonOutputFileName))
             {
@@ -215,7 +225,7 @@ namespace Hast.Communication.Tester
                     }
                     else
                     {
-                        await using var streamWriter = new StreamWriter(fileName, false, Encoding.UTF8);
+                        await using var streamWriter = new StreamWriter(fileName, append: false, Encoding.UTF8);
                         WriteHexdump(streamWriter, memory);
                     }
 

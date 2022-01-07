@@ -1,7 +1,7 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.Helpers;
-using System.Text.RegularExpressions;
+using System;
 using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;
 
@@ -22,7 +22,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 SupportsHbm = false,
                 SupportedPlatforms = new[]
                 {
-                    Regex.Replace(_deviceName, @"[^A-Za-z0-9]+", "-"),
+                    _deviceName.RegexReplace(@"[^A-Za-z0-9]+", "-"),
                     "hw_platform",
                 },
                 // The frequency is set by ZynqHardwareImplementationComposerBuildProvider after build.

@@ -3,6 +3,7 @@ using Hast.Samples.SampleAssembly;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Bmp;
 using SixLabors.ImageSharp.PixelFormats;
+using System;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners
@@ -39,7 +40,7 @@ namespace Hast.Samples.Consumer.SampleRunners
                 hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
             await modifiedImageCpu.SaveAsync("contrast-cpu.bmp", new BmpEncoder());
-            System.Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " ms.");
+            Console.WriteLine(FormattableString.Invariant($"On CPU it took {sw.ElapsedMilliseconds} ms."));
             // ImageFilter disabled until it's improved.
             //// var imageFilter = await hastlayer.GenerateProxy(hardwareRepresentation, new ImageFilter());
             //// var filteredImage = imageFilter.DetectHorizontalEdges(bitmap);
