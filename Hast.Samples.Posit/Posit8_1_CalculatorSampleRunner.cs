@@ -21,7 +21,7 @@ namespace Hast.Samples.Posit
         {
             RunSoftwareBenchmarks(hastlayer, hardwareRepresentation);
 
-            var positCalculator = await hastlayer.GenerateProxy(hardwareRepresentation, new Posit8_1_Calculator());
+            var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit8_1_Calculator());
 
 
             var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);

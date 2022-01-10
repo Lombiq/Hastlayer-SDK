@@ -41,9 +41,9 @@ namespace Hast.Samples.Posit
                 // Hooking into an event of Hastlayer so some execution information can be made visible on the
                 // console.
                 hastlayer.ExecutedOnHardware += (sender, e) =>
-                    Console.WriteLine(@$"Executing {e.MemberFullName} on hardware took
-{e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds} milliseconds (net)
-{e.HardwareExecutionInformation.FullExecutionTimeMilliseconds} milliseconds (all together).");
+                    Console.WriteLine(@$"Executing {e.Arguments.MemberFullName} on hardware took
+{e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds} milliseconds (net)
+{e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds} milliseconds (all together).");
 
 
                 // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
@@ -118,7 +118,7 @@ namespace Hast.Samples.Posit
                 Console.WriteLine("Hardware generation starts.");
 
                 // Generating hardware from the sample assembly with the given configuration.
-                var hardwareRepresentation = await hastlayer.GenerateHardware(
+                var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                     new[]
                     {
                         typeof(Posit8_0).Assembly,
