@@ -20,7 +20,7 @@ for (var i = 0; i<3; i++){
         var quireSize = 1;
         while (quireSize < (4*positSizes[i]-8)*(1<<MaximumExponentSize)+31)
         {
-             quireSize <<= 1;
+            quireSize <<= 1;
         }
         manager.StartNewFile(className + ".cs");
 #>
