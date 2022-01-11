@@ -21,7 +21,7 @@ namespace Hast.Samples.Posit
     internal static class Configuration
     {
         public static string DeviceName = "Nexys A7";
-        public static Sample SampleToRun = Sample.Posit32_0_Calculator;
+        public static Sample SampleToRun = Sample.Posit32E0Calculator;
         public static string HardwareFrameworkPath = "HardwareFramework";
     }
 
@@ -87,7 +87,7 @@ namespace Hast.Samples.Posit
     {
         foreach (var calculatorType in calculatorTypes)
         {
-            var positCalculatorName = $"Posit{positSize}_{exponentSize}_{calculatorType}";#>
+            var positCalculatorName = $"Posit{positSize}E{exponentSize}{calculatorType}";#>
                     case Sample.<#=positCalculatorName#>:
                         <#=positCalculatorName#>SampleRunner.Configure(configuration);
                         break;
@@ -109,8 +109,8 @@ namespace Hast.Samples.Posit
                 var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
                     new[]
                     {
-                        typeof(Posit8_0).Assembly,
-                        typeof(Posit8_0_Calculator).Assembly,
+                        typeof(Posit8E0).Assembly,
+                        typeof(Posit8E0Calculator).Assembly,
                     },
                     configuration);
 
@@ -140,7 +140,7 @@ namespace Hast.Samples.Posit
     {
         foreach (var calculatorType in calculatorTypes)
         {
-            var positCalculatorName = $"Posit{positSize}_{exponentSize}_{calculatorType}";#>
+            var positCalculatorName = $"Posit{positSize}E{exponentSize}{calculatorType}";#>
                     case Sample.<#=positCalculatorName#>:
                         await <#=positCalculatorName#>SampleRunner.Run(hastlayer, hardwareRepresentation);
                         break;

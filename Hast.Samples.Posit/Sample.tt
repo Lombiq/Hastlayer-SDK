@@ -17,7 +17,7 @@
         {
             foreach (var calculatorType in calculatorTypes)
             {
-                calculatorNames.Add($"Posit{positSize}_{exponentSize}_{calculatorType}");
+                calculatorNames.Add($"Posit{positSize}E{exponentSize}{calculatorType}");
             }
         }
     }

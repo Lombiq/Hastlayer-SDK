@@ -15,8 +15,8 @@ var manager = TemplateFileManager.Create(this);
 
 for (var i = 0; i<3; i++){
     for(var MaximumExponentSize = 0; MaximumExponentSize <= 4; MaximumExponentSize++){
-        var positName = "Posit"+positSizes[i] + "_" + MaximumExponentSize;
-        var className = positName + "_Calculator";
+        var positName = $"Posit{positSizes[i]}E{MaximumExponentSize}";
+        var className = $"{positName}Calculator";
         var quireSize = 1;
         while (quireSize < (4*positSizes[i]-8)*(1<<MaximumExponentSize)+31)
         {

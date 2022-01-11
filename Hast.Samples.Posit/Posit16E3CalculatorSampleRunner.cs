@@ -10,26 +10,26 @@ using Lombiq.Arithmetics;
 
 namespace Hast.Samples.Posit
 {
-    internal class Posit32_0_CalculatorSampleRunner
+    internal class Posit16E3CalculatorSampleRunner
     {
         public static void Configure(HardwareGenerationConfiguration configuration)
         {
-            configuration.AddHardwareEntryPointType<Posit32_0_Calculator>();
+            configuration.AddHardwareEntryPointType<Posit16E3Calculator>();
         }
 
         public static async Task Run(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
             RunSoftwareBenchmarks(hastlayer, hardwareRepresentation);
 
-            var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit32_0_Calculator());
+            var positCalculator = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new Posit16E3Calculator());
 
 
             var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
-                        positCalculator.CalculatePowerOfReal( 100000, (float)1.015625,  hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+                        positCalculator.CalculatePowerOfReal( 10000, (float)1.015625,  hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             
-            var numbers = new int[Posit32_0_Calculator.MaxDegreeOfParallelism];
-            for (int i = 0; i < Posit32_0_Calculator.MaxDegreeOfParallelism; i++)
+            var numbers = new int[Posit16E3Calculator.MaxDegreeOfParallelism];
+            for (int i = 0; i < Posit16E3Calculator.MaxDegreeOfParallelism; i++)
             {
                 numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
             }
@@ -37,20 +37,20 @@ namespace Hast.Samples.Posit
             var integerSumsUpToNumbers = positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(numbers,  hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
 
-            var Posit32_0Array = new uint[100000];
+            var Posit16E3Array = new uint[100000];
 
             for (var i = 0; i < 100000; i++)
             {
-                if (i % 2 == 0) Posit32_0Array[i] = new Posit32_0((float)0.25 * 2 * i).PositBits;
-                else Posit32_0Array[i] = new Posit32_0((float)0.25 * -2 * i).PositBits;
+                if (i % 2 == 0) Posit16E3Array[i] = new Posit16E3((float)0.25 * 2 * i).PositBits;
+                else Posit16E3Array[i] = new Posit16E3((float)0.25 * -2 * i).PositBits;
             }
 
-            var positsInArraySum = positCalculator.AddPositsInArray(Posit32_0Array);
+            var positsInArraySum = positCalculator.AddPositsInArray(Posit16E3Array);
         }
 
         public static void RunSoftwareBenchmarks(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation)
         {
-            var positCalculator = new Posit32_0_Calculator();
+            var positCalculator = new Posit16E3Calculator();
 
 
             // Not to run the benchmark below the first time, because JIT compiling can affect it.
@@ -71,7 +71,7 @@ namespace Hast.Samples.Posit
             sw = Stopwatch.StartNew();
             
                          var powerOfReal = positCalculator.CalculatePowerOfReal(
-                100000,
+                10000,
                 (float)1.015625,
                 hastlayer,
                 hardwareRepresentation.HardwareGenerationConfiguration);
@@ -83,8 +83,8 @@ namespace Hast.Samples.Posit
 
             Console.WriteLine();
 
-            var numbers = new int[Posit32_0_Calculator.MaxDegreeOfParallelism];
-            for (int i = 0; i < Posit32_0_Calculator.MaxDegreeOfParallelism; i++)
+            var numbers = new int[Posit16E3Calculator.MaxDegreeOfParallelism];
+            for (int i = 0; i < Posit16E3Calculator.MaxDegreeOfParallelism; i++)
             {
                 numbers[i] = 100000 + (i % 2 == 0 ? -1 : 1);
             }
@@ -102,17 +102,17 @@ namespace Hast.Samples.Posit
 
             Console.WriteLine();
 
-            var Posit32_0Array = new uint[100000];
+            var Posit16E3Array = new uint[100000];
 
             for (var i = 0; i < 100000; i++)
             {
-                if (i % 2 == 0)  Posit32_0Array[i] = new  Posit32_0((float)0.25 * 2 * i).PositBits;
-                else  Posit32_0Array[i] = new  Posit32_0((float)0.25 * -2 * i).PositBits;
+                if (i % 2 == 0)  Posit16E3Array[i] = new  Posit16E3((float)0.25 * 2 * i).PositBits;
+                else  Posit16E3Array[i] = new  Posit16E3((float)0.25 * -2 * i).PositBits;
             }
 
-            positCalculator.AddPositsInArray( Posit32_0Array,hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            positCalculator.AddPositsInArray( Posit16E3Array,hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw = Stopwatch.StartNew();
-            var positsInArraySum = positCalculator.AddPositsInArray( Posit32_0Array, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+            var positsInArraySum = positCalculator.AddPositsInArray( Posit16E3Array, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
             sw.Stop();
 
             Console.WriteLine("Result of addition of posits in array: " + positsInArraySum);
