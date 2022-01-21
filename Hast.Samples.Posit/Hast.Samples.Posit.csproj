@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
+    <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
+    <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
+    <ProjectReference Include="..\Hast.Layer\Hast.Layer.csproj" />
+    <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj" />
+    <ProjectReference Include="..\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
+    <ProjectReference Include="..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PositCalculator.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PositCalculator.cs</LastGenOutput>
+    </Content>
+    <Content Include="PositCalculatorSampleRunner.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PositCalculatorSampleRunner.cs</LastGenOutput>
+    </Content>
+    <Content Include="Program.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Program.cs</LastGenOutput>
+    </Content>
+    <Content Include="Sample.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Sample.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Validation" Version="16.9.32" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="PositCalculator.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PositCalculator.tt</DependentUpon>
+    </Compile>
+    <Compile Update="PositCalculatorSampleRunner.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PositCalculatorSampleRunner.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Program.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Program.tt</DependentUpon>
+    </Compile>
+    <Compile Update="Sample.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Sample.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
