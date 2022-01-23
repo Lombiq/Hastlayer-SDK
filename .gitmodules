@@ -22,7 +22,3 @@
 	path = Libraries/Lombiq.HelpfulLibraries
 	url = https://github.com/Lombiq/Helpful-Libraries.git
 	branch = orchard-core-preview
-[submodule "Libraries/Terminal.Gui"]
-	path = Libraries/Terminal.Gui
-	url = https://github.com/Lombiq/gui.cs.git
-	branch = issue/HAST-180
