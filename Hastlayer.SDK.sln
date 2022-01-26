@@ -87,6 +87,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		tools\Lombiq.Analyzers\General.ruleset = tools\Lombiq.Analyzers\General.ruleset
 		Licence.md = Licence.md
 		NuGet.config = NuGet.config
+		Readme.md = Readme.md
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject

@@ -30,9 +30,11 @@ For maximum performance you should compile a Ready-to-Run build of Hastlayer. Th
 You can either introduce a flag or environment checker logic to exit after `hastlayer.GenerateHardware()` was called. Or simply accept that that application will exit with an exception on the cross compiler machine.
 
 You also have to set the `HardwareGenerationConfiguration.SingleBinaryPath` property to the expected path of the _xclbin_ file. You will upload the contents of the _HardwareFramework/bin_ directory on the embedded device and that's what the `SingleBinaryPath` value should reflect. If there is no file in that path then the build will start as normal, so you can hard code it to a suitable value if necessary. For example you include the following line in your code:
+
 ```csharp
 configuration.SingleBinaryPath = "/media/sd-mmcblk0p1/my-payload.xclbin"
  ```
+
 That won't have an effect on the build machine because no file will be on that path. When the build is complete, you will have the following files in your _HardwareFramework/bin_ directory (the actual file names are hash codes so they will differ):
 - 003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee.bit.bin
 - 003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee.xclbin
