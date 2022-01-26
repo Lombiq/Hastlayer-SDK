@@ -8,25 +8,9 @@ using System.Reflection;
 namespace Hast.Layer
 {
     /// <summary>
-    /// The usage flavor of Hastlayer for different scenarios.
-    /// </summary>
-    public enum HastlayerFlavor
-    {
-        /// <summary>
-        /// Flavor for the developers of Hastlayer itself. It includes the full source code.
-        /// </summary>
-        Developer,
-
-        /// <summary>
-        /// Flavor for end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service.
-        /// </summary>
-        Client,
-    }
-
-    /// <summary>
     /// Provides settings for <see cref="IHastlayer"/> initialization.
     /// </summary>
-    public interface IHastlayerConfiguration : ISingletonDependency
+    public interface IHastlayerConfiguration : IHastlayerFlavorProvider
     {
         /// <summary>
         /// Gets the action to be invoked before the <see cref="IServiceProvider"/> for Hastlayer's dependency
@@ -39,12 +23,6 @@ namespace Hast.Layer
         /// pipeline. These should include services that implement <see cref="IDependency"/> directly or indirectly.
         /// </summary>
         IEnumerable<Assembly> Extensions { get; }
-
-        /// <summary>
-        /// Gets the usage flavor of Hastlayer for different scenarios. Defaults to <see cref="HastlayerFlavor.Client"/> in
-        /// the client SDK and <see cref="HastlayerFlavor.Developer"/> otherwise.
-        /// </summary>
-        HastlayerFlavor Flavor { get; }
 
         /// <summary>
         /// Gets the location of the App_Data folder.

@@ -9,7 +9,7 @@ namespace Hast.Synthesis.Abstractions
     /// If <see cref="CanCompose"/> returns <see langword="true"/> it performs any build actions and fills in the
     /// <see cref="IHardwareImplementation"/> given by the <see cref="VhdlHardwareImplementationComposer"/>.
     /// </summary>
-    public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IDependency
+    public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IProgressInvoker, IDependency
     {
         /// <summary>
         /// Gets the functions installed by other providers. If any of them returns <see langword="true"/> this provider
@@ -32,9 +32,26 @@ namespace Hast.Synthesis.Abstractions
         /// If implemented, it adds <see cref="BuildProviderShortcut"/> to the <see cref="Shortcuts"/> of other <see
         /// cref="IHardwareImplementationComposerBuildProvider"/> instances.
         /// </summary>
-        void AddShortcutsToOtherProviders(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
+        void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
         {
             // The default behavior is to do nothing.
         }
+
+        /// <summary>
+        /// If implemented, it performs cleanup tasks and removes temporary resources. This is deferred until all build
+        /// providers have finished.
+        /// </summary>
+        Task CleanupAsync(IHardwareImplementationCompositionContext context) => Task.CompletedTask;
+    }
+
+    /// <summary>
+    /// Exposes the Progress event.
+    /// </summary>
+    public interface IProgressInvoker
+    {
+        /// <summary>
+        /// Invokes the progress event, if any.
+        /// </summary>
+        void InvokeProgress(BuildProgressEventArgs eventArgs);
     }
 }

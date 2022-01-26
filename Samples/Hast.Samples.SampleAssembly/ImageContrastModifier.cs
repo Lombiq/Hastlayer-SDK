@@ -1,7 +1,8 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using System.Drawing;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly
@@ -18,6 +19,7 @@ namespace Hast.Samples.SampleAssembly
         private const int ChangeContrastImageHeightIndex = 1;
         private const int ChangeContrastContrastValueIndex = 2;
         private const int ChangeContrastImageStartIndex = 3;
+        private const int HeaderSize = ChangeContrastImageStartIndex;
 
         [Replaceable(nameof(ImageContrastModifier) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 25;
@@ -139,8 +141,8 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="image">The image that we modify.</param>
         /// <param name="contrast">The value of the intensity to calculate the new pixel values.</param>
         /// <returns>Returns an image with changed contrast values.</returns>
-        public Bitmap ChangeImageContrast(
-            Bitmap image,
+        public Image<Rgba32> ChangeImageContrast(
+            Image<Rgba32> image,
             int contrast,
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null)
@@ -161,17 +163,16 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="contrastValue">The contrast difference value.</param>
         /// <returns>The instance of the created <see cref="SimpleMemory"/>.</returns>
         private SimpleMemory CreateSimpleMemory(
-            Bitmap image,
+            Image<Rgba32> image,
             int contrastValue,
             IHastlayer hastlayer = null,
             IHardwareGenerationConfiguration configuration = null)
         {
             var pixelCount = image.Width * image.Height;
-            var cellCount =
-                pixelCount +
-                (pixelCount % MaxDegreeOfParallelism != 0 ? MaxDegreeOfParallelism : 0) +
-                3;
-            var memory = hastlayer is null
+            // Padding rounds up to MaxDegreeOfParallelism.
+            var padding = (MaxDegreeOfParallelism - (pixelCount % MaxDegreeOfParallelism)) % MaxDegreeOfParallelism;
+            var cellCount = HeaderSize + pixelCount + padding;
+            var memory = hastlayer == null
                 ? SimpleMemory.CreateSoftwareMemory(cellCount)
                 : hastlayer.CreateMemory(configuration, cellCount);
 
@@ -181,16 +182,17 @@ namespace Hast.Samples.SampleAssembly
 
             for (int y = 0; y < image.Height; y++)
             {
+                var row = image.GetPixelRowSpan(y);
                 for (int x = 0; x < image.Width; x++)
                 {
-                    var pixel = image.GetPixel(x, y);
+                    var pixel = row[x];
 
                     // This leaves 1 byte unused in each memory cell, but that would make the whole logic a lot more
                     // complicated, so good enough for a sample; if we'd want to optimize memory usage, that would be
                     // needed.
                     memory.Write4Bytes(
                         (y * image.Width) + x + ChangeContrastImageStartIndex,
-                        new[] { pixel.R, pixel.G, pixel.B });
+                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
                 }
             }
 
@@ -203,16 +205,17 @@ namespace Hast.Samples.SampleAssembly
         /// <param name="memory">The <see cref="SimpleMemory"/> instance.</param>
         /// <param name="image">The original image.</param>
         /// <returns>Returns the processed image.</returns>
-        private Bitmap CreateImage(SimpleMemory memory, Bitmap image)
+        private Image<Rgba32> CreateImage(SimpleMemory memory, Image<Rgba32> image)
         {
-            var newImage = new Bitmap(image);
+            var newImage = image.Clone();
 
             for (int y = 0; y < newImage.Height; y++)
             {
+                var row = newImage.GetPixelRowSpan(y);
                 for (int x = 0; x < newImage.Width; x++)
                 {
                     var bytes = memory.Read4Bytes((y * newImage.Width) + x + ChangeContrastImageStartIndex);
-                    newImage.SetPixel(x, y, Color.FromArgb(bytes[0], bytes[1], bytes[2]));
+                    row[x] = new Rgba32(bytes[0], bytes[1], bytes[2], 255);
                 }
             }
 

@@ -47,11 +47,13 @@ namespace Hast.Samples.Consumer
 
         public ConsumerConfiguration BuildConfiguration()
         {
+            var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
             // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there
             // won't be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from
             // the temporary variable before this method closes.
             var originalBufferHeight = Console.BufferHeight;
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) Console.BufferHeight = Console.WindowHeight;
+            if (isWindows) Console.BufferHeight = Console.WindowHeight;
 
             _configuration = new ConsumerConfiguration();
 
@@ -73,7 +75,9 @@ namespace Hast.Samples.Consumer
                     .ToList() ?? new List<string>(),
                 TaskScheduler.Current);
 
-            Application.UseSystemConsole = false;
+            // We can expect the Windows API on Windows, but not all *nix has nCurses.
+            Application.UseSystemConsole = !isWindows;
+
             Application.Init();
             Application.HeightAsBuffer = false;
 
@@ -171,7 +175,7 @@ namespace Hast.Samples.Consumer
                 });
 
             Application.Shutdown();
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) Console.BufferHeight = originalBufferHeight;
+            if (isWindows) Console.BufferHeight = originalBufferHeight;
 
             var result = _configuration;
             _configuration = null;
@@ -239,6 +243,11 @@ namespace Hast.Samples.Consumer
                     _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
                     _currentOptionsListViewEventHandler = item => _configuration.VerifyResults = item.IsTrueString();
                     ShowTextField(visible: false);
+                    break;
+                case nameof(ConsumerConfiguration.SingleBinaryPath):
+                    _optionsTextField.Text = _configuration.SingleBinaryPath ?? string.Empty;
+                    _currentOptionsTextFieldEventHandler = text => { _configuration.SingleBinaryPath = text; };
+                    ShowTextField(visible: true);
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown menu item selected ({key}).");

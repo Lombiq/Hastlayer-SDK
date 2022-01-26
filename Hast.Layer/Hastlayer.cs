@@ -1,4 +1,6 @@
 using Hast.Catapult.Abstractions;
+using Hast.Common.Enums;
+using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -60,6 +62,7 @@ namespace Hast.Layer
             var services = new ServiceCollection();
             services.AddSingleton<IHastlayer>(this);
             services.AddSingleton(configuration);
+            services.AddSingleton<IHastlayerFlavorProvider>(configuration);
             services.AddSingleton<IAppDataFolder>(appDataFolder);
             services.AddSingleton(BuildConfiguration());
             services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
@@ -191,6 +194,31 @@ namespace Hast.Layer
                 var appConfiguration = provider.GetRequiredService<IConfiguration>();
                 var transformationEvents = provider.GetRequiredService<IEnumerable<ITransformationEvents>>().ToList();
 
+                var deviceManifest = deviceManifestSelector
+                    .GetSupportedDevices()
+                    .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
+
+                if (deviceManifest == null)
+                {
+                    throw new HastlayerException(
+                        "There is no supported device with the name \"" + configuration.DeviceName + "\".");
+                }
+
+                if (File.Exists(configuration.SingleBinaryPath))
+                {
+                    return new HardwareRepresentation
+                    {
+                        DeviceManifest = deviceManifest,
+                        HardwareDescription = EmptyHardwareDescriptionFactory.Create(configuration),
+                        HardwareImplementation = new HardwareImplementation
+                        {
+                            BinaryPath = configuration.SingleBinaryPath,
+                        },
+                        HardwareGenerationConfiguration = configuration,
+                        SoftAssemblyPaths = assemblyPaths,
+                    };
+                }
+
                 // Load any not-yet-populated configuration with appsettings > HardwareGenerationConfiguration >
                 // CustomConfiguration into the current hardware generation configuration.
                 var newCustomConfigurations = appConfiguration
@@ -226,16 +254,6 @@ namespace Hast.Layer
                         "Hastlayer transformation warning (code: {0}): {1}",
                         warning.Code,
                         warning.Message);
-                }
-
-                var deviceManifest = deviceManifestSelector
-                    .GetSupportedDevices()
-                    .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
-
-                if (deviceManifest == null)
-                {
-                    throw new HastlayerException(
-                        "There is no supported device with the name \"" + configuration.DeviceName + "\".");
                 }
 
                 var hardwareImplementationComposerSelector =

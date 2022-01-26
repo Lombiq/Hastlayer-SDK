@@ -32,25 +32,33 @@ namespace Hast.Synthesis.Abstractions
                 .Where(provider => provider.CanCompose(context))
                 .OrderByRequirements<IHardwareImplementationComposerBuildProvider, string>();
 
-            foreach (var buildProvider in buildProviders) buildProvider.AddShortcutsToOtherProviders(buildProviders);
+            foreach (var buildProvider in buildProviders) buildProvider.AddShortcuts(buildProviders);
 
             foreach (var buildProvider in buildProviders)
             {
                 var stop = buildProvider
                     .Shortcuts
                     .Select(pair => new { pair.Key, pair.Value }) // Make it nullable.
-                    .FirstOrDefault(item => item.Value(context));
+                    .FirstOrDefault(item => item.Value(context))
+                    ?.Key;
 
                 if (stop != null)
                 {
                     _logger.LogInformation(
                         "The {0} provider asked to skip the {1} provider.",
-                        stop.Key,
+                        stop,
                         buildProvider.Name);
+                    continue;
                 }
 
                 await buildProvider.BuildAsync(context, implementation);
             }
+
+            // Cleanup is only executed once all build providers are done. This is necessary in case a provider needs
+            // the temporary files of its dependency. This also means dependent build providers don't need to implement
+            // CleanupAsync even if they have their own temporary files as long as they are in a directory that the
+            // dependency cleans up anyway.
+            foreach (var buildProvider in buildProviders) await buildProvider.CleanupAsync(context);
 
             return implementation;
         }

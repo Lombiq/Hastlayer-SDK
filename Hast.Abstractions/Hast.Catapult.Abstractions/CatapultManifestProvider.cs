@@ -10,7 +10,7 @@ namespace Hast.Catapult.Abstractions
         public const string DeviceName = "Catapult";
 
         public IDeviceManifest DeviceManifest { get; } =
-            new DeviceManifest
+            new CatapultDeviceManifest
             {
                 Name = DeviceName,
                 ClockFrequencyHz = 150 * Mhz,
@@ -18,7 +18,6 @@ namespace Hast.Catapult.Abstractions
                 SupportedCommunicationChannelNames = new[] { DeviceName },
                 // Right now the whole memory is not available due to one physical cell being equal to one logical one.
                 AvailableMemoryBytes = 8 * GigaByte / 16,
-                ToolChainName = CommonToolChainNames.QuartusPrime,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration)

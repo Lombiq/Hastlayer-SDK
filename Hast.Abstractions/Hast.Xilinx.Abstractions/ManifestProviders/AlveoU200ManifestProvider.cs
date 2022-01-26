@@ -11,7 +11,7 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
         public const string DeviceName = "Alveo U200";
 
         public IDeviceManifest DeviceManifest { get; } =
-            new XilinxDeviceManifest
+            new VitisDeviceManifest
             {
                 Name = DeviceName,
                 ClockFrequencyHz = 300 * Mhz,
@@ -21,7 +21,6 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
                 AvailableMemoryBytes = 2 * GigaByte,
                 SupportsHbm = false,
                 SupportedPlatforms = new[] { "xilinx_u200" },
-                ToolChainName = CommonToolChainNames.Vitis,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

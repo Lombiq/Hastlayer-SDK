@@ -2,30 +2,37 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Serialization;
 
 namespace Hast.Communication.Exceptions
 {
     /// <summary>
     /// Exception thrown when there is a mismatch between the results of the hardware and standard software invocation.
     /// </summary>
-    [Serializable]
     public class HardwareExecutionResultMismatchException : Exception
     {
-        public IEnumerable<Mismatch> Mismatches { get; private set; }
+        public IEnumerable<Mismatch> Mismatches { get; }
+        public int CellCount { get; }
         public override string Message => ToString();
 
-        public HardwareExecutionResultMismatchException(IEnumerable<Mismatch> mismatches) => Mismatches = mismatches;
-        public HardwareExecutionResultMismatchException() { }
+        public HardwareExecutionResultMismatchException(IEnumerable<Mismatch> mismatches, int cellCount)
+        {
+            Mismatches = mismatches;
+            CellCount = cellCount;
+        }
+
+        public HardwareExecutionResultMismatchException()
+        {
+        }
 
         public HardwareExecutionResultMismatchException(string message)
-            : base(message) { }
+            : base(message)
+        {
+        }
 
         public HardwareExecutionResultMismatchException(string message, Exception innerException)
-            : base(message, innerException) { }
-
-        protected HardwareExecutionResultMismatchException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-            : base(serializationInfo, streamingContext) { }
+            : base(message, innerException)
+        {
+        }
 
         public override string ToString() =>
             "The hardware and software executions resulted in different results: " +
@@ -58,8 +65,8 @@ namespace Hast.Communication.Exceptions
         [DebuggerDisplay("{ToString()}")]
         public class LengthMismatch : Mismatch
         {
-            public int HardwareCellCount { get; private set; }
-            public int SoftwareCellCount { get; private set; }
+            public int HardwareCellCount { get; }
+            public int SoftwareCellCount { get; }
 
             public LengthMismatch(int hardwareCellCount, int softwareCellCount, int overflowIndex, byte[] hardwareResult, byte[] softwareResult)
                 : base(overflowIndex, hardwareResult, softwareResult)

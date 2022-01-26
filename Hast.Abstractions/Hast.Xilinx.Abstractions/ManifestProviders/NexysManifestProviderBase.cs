@@ -12,14 +12,12 @@ namespace Hast.Xilinx.Abstractions.ManifestProviders
 
         private IDeviceManifest deviceManifest;
         public IDeviceManifest DeviceManifest =>
-            deviceManifest ??= new XilinxDeviceManifest
+            deviceManifest ??= new NexysDeviceManifest
             {
                 Name = _deviceName,
                 ClockFrequencyHz = 100 * Mhz,
                 SupportedCommunicationChannelNames = new[] { Serial.ChannelName, Ethernet.ChannelName },
                 AvailableMemoryBytes = 110 * MebiByte,
-                SupportsHbm = false,
-                ToolChainName = CommonToolChainNames.Vivado,
             };
 
         public void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration) =>

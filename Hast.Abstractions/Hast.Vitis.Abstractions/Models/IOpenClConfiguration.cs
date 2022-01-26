@@ -56,11 +56,6 @@ namespace Hast.Vitis.Abstractions.Models
         bool UseEmulation { get; set; }
 
         /// <summary>
-        /// Gets or sets the Advanced eXtensible Interface bus width in bits.
-        /// </summary>
-        int AxiBusWith { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether cache (for accelerating access to the on-board DDR or HBM memory on
         /// the device) should be used. Default is <see langword="true"/>.
         /// </summary>

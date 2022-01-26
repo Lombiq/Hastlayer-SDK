@@ -18,6 +18,9 @@ namespace Hast.Samples.SampleAssembly
         // toolchain for the Nexys A7.
         // The [Replaceable] enables the substitution of this static readonly field into constant literals wherever it
         // is used. Check out the xmldoc of ReplaceableAttribute for further instructions.
+        // Warning: the outcome of the algorithm depends on this value so if you are running a prepared binary using the
+        // HardwareGenerationConfiguration.SingleBinaryPath make sure you are running with the same value it was built
+        // with. Otherwise you'll get mismatches.
         [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
         private static readonly int MaxDegreeOfParallelism = 260;
 

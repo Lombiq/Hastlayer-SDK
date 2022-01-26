@@ -73,6 +73,12 @@ namespace Hast.Layer
         public bool EnableHardwareImplementationComposition { get; set; } = true;
 
         /// <summary>
+        /// Gets or sets the path to a the only binary this application should support. If not <see langword="null"/>
+        /// and the binary exists, then all hardware generation is skipped.
+        /// </summary>
+        public string SingleBinaryPath { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="HardwareGenerationConfiguration"/> class.
         /// </summary>
         /// <param name="deviceName">
@@ -86,7 +92,7 @@ namespace Hast.Layer
         /// </param>
         public HardwareGenerationConfiguration(
             string deviceName,
-            string hardwareFrameworkPath,
+            string hardwareFrameworkPath = null,
             IDictionary<string, object> customConfiguration = null,
             IList<string> hardwareEntryPointMemberFullNames = null,
             IList<string> hardwareEntryPointMemberNamePrefixes = null)
