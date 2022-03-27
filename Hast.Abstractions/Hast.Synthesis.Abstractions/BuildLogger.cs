@@ -181,11 +181,24 @@ public static class BuildLogger
         return (buildLogger, buildOutput);
     }
 
-    public static void OnProgress<T>(ILogger<T> logger, int majorStepCount, int total, BuildProgressEventArgs e) =>
-        logger.LogInformation(
-            total == 0 ? "Message on build step {0}{3}: {2}" : "Message on build step {0}/{1}{3}: {2}",
-            majorStepCount,
-            total,
-            e.Message,
-            e.IsMajorStep ? " (new)" : string.Empty);
+    public static void OnProgress<T>(ILogger<T> logger, int majorStepCount, int total, BuildProgressEventArgs e)
+    {
+        if (total == 0)
+        {
+            logger.LogInformation(
+                "Message on build step {MajorStepCount}{IsMajorStep}: {Message}",
+                majorStepCount,
+                e.IsMajorStep ? " (new)" : string.Empty,
+                e.Message);
+        }
+        else
+        {
+            logger.LogInformation(
+                "Message on build step {MajorStepCount}/{Total}{IsMajorStep}: {Message}",
+                majorStepCount,
+                total,
+                e.IsMajorStep ? " (new)" : string.Empty,
+                e.Message);
+        }
+    }
 }

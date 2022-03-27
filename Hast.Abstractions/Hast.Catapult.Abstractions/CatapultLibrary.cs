@@ -195,6 +195,9 @@ public sealed class CatapultLibrary : IDisposable
             logFunction: (flagValue, text) =>
             {
                 var flag = (Constants.Log)flagValue;
+
+                // This function proxies special log entries so they can't be static.
+#pragma warning disable CA2254 // Template should be a static expression
                 switch (flag)
                 {
                     case Constants.Log.None:
@@ -218,6 +221,7 @@ public sealed class CatapultLibrary : IDisposable
                     default:
                         return;
                 }
+#pragma warning restore CA2254 // Template should be a static expression
             });
     }
 

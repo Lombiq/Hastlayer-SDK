@@ -482,8 +482,11 @@ public sealed class Hastlayer : IHastlayer
             Invoking?.Invoke(this, new ServiceEventArgs<IMemberInvocationContext>(context.Arguments));
     }
 
+    // This method is specifically to proxy log messages.
+#pragma warning disable CA2254 // Template should be a static expression
     private void LogException(Exception exception, string message) =>
         _serviceProvider.GetService<ILogger<Hastlayer>>().LogError(exception, message);
+#pragma warning restore CA2254 // Template should be a static expression
 
     private void ThrowIfService<TOut>()
     {

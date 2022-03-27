@@ -45,7 +45,7 @@ public class VitisCommunicationService : OpenClCommunicationService
         }
         else
         {
-            _logger.LogInformation($"Using HBM: {isHbm}.");
+            _logger.LogInformation("Using HBM: {IsHbm}.", isHbm);
         }
 
         if (!isHbm) return IntPtr.Zero;

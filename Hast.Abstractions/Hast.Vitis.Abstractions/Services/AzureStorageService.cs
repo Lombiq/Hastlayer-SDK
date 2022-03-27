@@ -38,14 +38,14 @@ public class AzureStorageService
 
         if ((await blobClient.ExistsAsync()).Value)
         {
-            _logger.LogInformation($"The file \"{fileName}\" is already uploaded to the storage container!");
+            _logger.LogInformation("The file \"{FileName}\" is already uploaded to the storage container!", fileName);
             return;
         }
 
-        _logger.LogInformation($"Uploading file \"{fileName}\"...");
+        _logger.LogInformation("Uploading file \"{FileName}\"...", fileName);
         await using var fileToUploadStream = File.OpenRead(localFilePath);
         await blobClient.UploadAsync(fileToUploadStream, overwrite: true, CancellationToken.None);
-        _logger.LogInformation($"File \"{fileName}\" has been uploaded...");
+        _logger.LogInformation("File \"{FileName}\" has been uploaded...", fileName);
     }
 
     public Task<IEnumerable<string>> DownloadAsync(string localDirectoryPath, params string[] remoteFileNames) =>

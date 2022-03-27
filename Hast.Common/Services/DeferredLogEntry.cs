@@ -21,6 +21,8 @@ public class DeferredLogEntry : IDeferredLogEntry
         var arguments = Arguments is string[] array ? array : Arguments.ToArray();
 #pragma warning restore S2330 // Array covariance should not be used
 
+        // This service proxies special log entries so they can't be static.
+#pragma warning disable CA2254 // Template should be a static expression
         if (Exception == null)
         {
             logger.Log(Level, Message, arguments);
@@ -29,5 +31,6 @@ public class DeferredLogEntry : IDeferredLogEntry
         {
             logger.Log(Level, Exception, Message, arguments);
         }
+#pragma warning restore CA2254 // Template should be a static expression
     }
 }
