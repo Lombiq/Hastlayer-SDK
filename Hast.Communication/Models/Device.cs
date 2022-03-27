@@ -8,6 +8,8 @@ public class Device : IDevice
 {
     private bool _isDisposed;
 
+    protected bool _runDisposingEventHandler = true;
+
     public event EventHandler Disposing;
 
     public string Identifier { get; set; }
@@ -28,9 +30,10 @@ public class Device : IDevice
     {
         Identifier = previousDevice.Identifier;
         Metadata = previousDevice.Metadata;
-        if (this is not IReservedDevice) Disposing += (_, _) => previousDevice.Dispose();
+        Disposing += (_, _) => previousDevice.Dispose();
     }
 
+    // It is implemented like the pattern, just with an extra parameter on the protected Dispose().
     public void Dispose()
     {
         Dispose(disposing: true);
@@ -39,7 +42,7 @@ public class Device : IDevice
 
     protected virtual void Dispose(bool disposing)
     {
-        if (!_isDisposed && disposing) Disposing?.Invoke(this, EventArgs.Empty);
+        if (!_isDisposed && disposing && _runDisposingEventHandler) Disposing?.Invoke(this, EventArgs.Empty);
         _isDisposed = true;
     }
 }

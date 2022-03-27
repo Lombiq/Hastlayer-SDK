@@ -119,6 +119,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
         protected override void Dispose(bool disposing)
         {
             _disposer(this);
+            _runDisposingEventHandler = false;
             base.Dispose(disposing);
         }
     }
