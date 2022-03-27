@@ -94,7 +94,7 @@ public class AzureStorageService
         }
 
         var sasUri = containerClient.GenerateSasUri(sasBuilder);
-        _logger.LogInformation("SAS URI for blob container is: {0}", sasUri);
+        _logger.LogInformation("SAS URI for blob container is: {SasUri}", sasUri);
 
         return sasUri;
     }
@@ -120,7 +120,7 @@ public class AzureStorageService
             }
             catch (Exception ex) when (!throwOnError)
             {
-                _logger.LogWarning(ex, "Failed to download file \"{0}\".", remoteFileName);
+                _logger.LogWarning(ex, "Failed to download file \"{RemoteFileName}\".", remoteFileName);
                 continue;
             }
 

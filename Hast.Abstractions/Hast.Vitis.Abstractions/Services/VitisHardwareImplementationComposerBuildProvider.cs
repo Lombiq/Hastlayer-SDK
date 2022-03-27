@@ -18,8 +18,8 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
+using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
 namespace Hast.Vitis.Abstractions.Services;
 
@@ -107,7 +107,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
 
         var hashId = context.HardwareDescription.TransformationId;
-        _logger.LogInformation("HASH ID: {0}", hashId);
+        _logger.LogInformation("HASH ID: {HashId}", hashId);
 
         MajorStepsTotal = buildConfiguration.SynthesisOnly ? 3 : 8;
 
@@ -136,7 +136,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         if (CheckIfDoneAlready(implementation)) return;
 
         _logger.LogInformation(
-            "The xclbin file (\"{0}\") does not exist. Starting build...",
+            "The xclbin file (\"{BinaryPath}\") does not exist. Starting build...",
             implementation.BinaryPath);
 
         // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
@@ -430,11 +430,11 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
 
         var jsonFilePath = Path.Combine(reportSavePath, "report.json");
         await File.WriteAllTextAsync(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
-        _logger.LogInformation("A converted JSON file is saved to {0}.", jsonFilePath);
+        _logger.LogInformation("A converted JSON file is saved to {JsonFilePath}.", jsonFilePath);
 
         var componentsSection = report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn();
         _logger.LogInformation(
-            "On-Chip Components: {0}",
+            "On-Chip Components: {Components}",
             JsonConvert.SerializeObject(componentsSection, Formatting.Indented));
         foreach (var (resourceType, row) in componentsSection)
         {
@@ -468,7 +468,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             implementation.PowerUsageWatts = decimal.Parse(
                 report.Sections["1. Summary"].ToDictionaryByFirstColumn()["Total On-Chip Power (W)"][Value],
                 CultureInfo.InvariantCulture);
-            _logger.LogInformation("Total on-chip power: {0}W", implementation.PowerUsageWatts);
+            _logger.LogInformation("Total on-chip power: {PowerUsageWatts} W", implementation.PowerUsageWatts);
         }
         catch (Exception ex)
         {
@@ -488,7 +488,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             if (!File.Exists(implementation.BinaryPath + InfoFileExtension))
             {
                 _logger.LogInformation(
-                    "The info file (\"{0}\") does not exist. You may generate it using `xclbinutil --info`.",
+                    "The info file (\"{FilePath}\") does not exist. You may generate it using `xclbinutil --info`.",
                     implementation.BinaryPath + InfoFileExtension);
             }
         }
@@ -554,7 +554,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             .WithValidation(CommandResultValidation.None);
         var result = await (yes | xbutil).ExecuteBufferedAsync();
 
-        _logger.LogWarning("xbutil: {0}", result.StandardOutput);
+        _logger.LogWarning("xbutil: {StandardOutput}", result.StandardOutput);
         await _buildOutput.WriteLineAsync($"xbutil stdout: {result.StandardOutput}");
     }
 

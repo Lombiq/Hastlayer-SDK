@@ -95,7 +95,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
         var hostMemoryLength = hostMemory.Length;
         var timeHostBufferPrepared = context.Stopwatch.ElapsedMilliseconds;
 
-        Logger.LogInformation("Input buffer size: {0}b", hostMemoryLength);
+        Logger.LogInformation("Input buffer size: {HostMemoryLength} b", hostMemoryLength);
         var timeLogOverheadTest = context.Stopwatch.ElapsedMilliseconds;
 
         var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
@@ -121,7 +121,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
             hostMemory.Length,
             buffer);
         var timeKernelArgumentSet = context.Stopwatch.ElapsedMilliseconds;
-        Logger.LogInformation("KERNEL ARGUMENT #{0} SET", 0);
+        Logger.LogInformation("KERNEL ARGUMENT #{Argument} SET", 0);
         Logger.LogInformation("LAUNCHING KERNEL...");
         _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
         Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
@@ -145,18 +145,18 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
 /--------------------------------------\
 | EXECUTION TIME STOPWATCH BREAKDOWN   |
 |======================================|
-| Host Buffer Prepared      : {0,5:####0} ms |
-| Log Overhead Test         : {1,5:####0} ms | *
-| Host Memory Verified      : {2,5:####0} ms |
-| Host Memory Pinned        : {3,5:####0} ms |
-| Xilinx Buffer Initialized : {4,5:####0} ms |
-| Kernel Argument Set       : {5,5:####0} ms |
-| Kernel Launched           : {6,5:####0} ms |
-| Results Awaited           : {7,5:####0} ms |
-| Metadata Retrieved        : {8,5:####0} ms |
-| Metadata Processed        : {9,5:####0} ms |
+| Host Buffer Prepared      : {TimeHostBufferPrepared,5:####0} ms |
+| Log Overhead Test         : {TimeLogOverheadTest,5:####0} ms | *
+| Host Memory Verified      : {TimeHostMemoryVerified,5:####0} ms |
+| Host Memory Pinned        : {TimeHostMemoryPinned,5:####0} ms |
+| Xilinx Buffer Initialized : {TimeXilinxBufferInited,5:####0} ms |
+| Kernel Argument Set       : {TimeKernelArgumentSet,5:####0} ms |
+| Kernel Launched           : {TimeKernelLaunched,5:####0} ms |
+| Results Awaited           : {TimeResultsAwaited,5:####0} ms |
+| Metadata Retrieved        : {TimeMetadataRetrieved,5:####0} ms |
+| Metadata Processed        : {TimeMetadataProcessed,5:####0} ms |
 |--------------------------------------|
-| Total                     : {10,5:####0} ms |
+| Total                     : {TimeTotal,5:####0} ms |
 \--------------------------------------/
 
 (*The time it took to output the first Log.LogInformation call.)
@@ -191,7 +191,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
         {
             Logger.LogWarning(
                 "The info file is required to learn the kernel clock frequency and report the execution time " +
-                "accurately. Please copy it to '{0}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
+                "accurately. Please copy it to '{InfoFilePath}'! (see `xclbinutil --info --input XCLBIN_FILE_PATH`)",
                 infoFilePath);
             return null;
         }
@@ -218,21 +218,21 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
 
             var frequency = await File.ReadAllTextAsync(setScaleFilePath);
             var frequencyHz = uint.Parse(frequency.Trim(), NumberStyles.Integer, CultureInfo.InvariantCulture);
-            _logger.LogInformation("Frequency is set to {0:0.##}MHz.", frequencyHz / 1_000_000.0);
+            _logger.LogInformation("Frequency is set to {Frequency:0.##} MHz.", frequencyHz / 1_000_000.0);
             return frequencyHz;
         }
 
         _logger.LogWarning(
-            "The frequency setter system file at the path '{0}' doesn't exist.",
+            "The frequency setter system file at the path '{Path}' doesn't exist.",
             setScaleFilePath ?? "<NULL>");
         return clockFrequency;
     }
 
     private OpenClResultMetadata GetResultMetadata(Span<byte> bufferSpan, IOpenClConfiguration configuration)
     {
-        Logger.LogInformation("_configuration.HeaderCellCount: {0}", configuration.HeaderCellCount);
-        Logger.LogInformation("HeaderCellCount reported by output: {0}", MemoryMarshal.Read<uint>(bufferSpan));
-        Logger.LogInformation("Output buffer size: {0}b", bufferSpan.Length);
+        Logger.LogInformation("_configuration.HeaderCellCount: {HeaderCellCount}", configuration.HeaderCellCount);
+        Logger.LogInformation("HeaderCellCount reported by output: {HeaderCellCount}", MemoryMarshal.Read<uint>(bufferSpan));
+        Logger.LogInformation("Output buffer size: {Length} b", bufferSpan.Length);
 
         var headerSize = configuration.HeaderCellCount * MemoryCellSizeBytes;
         if (bufferSpan.Length <= headerSize)
@@ -257,11 +257,11 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
                 for (int i = 0; i < logAmount; i++)
                 {
                     var value = MemoryMarshal.Read<int>(bufferSpan[(i * MemoryCellSizeBytes)..]);
-                    Logger.LogDebug("HOST: buffer[{0}] = 0x{1:X8}", i, value);
+                    Logger.LogDebug("HOST: buffer[{Index}] = 0x{Value:X8}", i, value);
                 }
             }
 
-            if (canLogInfo) Logger.LogInformation("Execution time: {0} cycles", result.ExecutionTime);
+            if (canLogInfo) Logger.LogInformation("Execution time: {ExecutionTime} cycles", result.ExecutionTime);
         }
 
         return result;

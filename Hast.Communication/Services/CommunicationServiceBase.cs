@@ -29,7 +29,7 @@ public abstract class CommunicationServiceBase : ICommunicationService
 
         context.HardwareExecutionInformation.FullExecutionTimeMilliseconds = context.Stopwatch.ElapsedMilliseconds;
 
-        Logger.LogInformation("Full execution time: {0}ms", context.Stopwatch.ElapsedMilliseconds);
+        Logger.LogInformation("Full execution time: {ElapsedMilliseconds} ms", context.Stopwatch.ElapsedMilliseconds);
     }
 
     protected async Task<CommunicationStateContext> RunExecutionAsync(
@@ -54,11 +54,11 @@ public abstract class CommunicationServiceBase : ICommunicationService
         context.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds = milliseconds;
 
         Logger.LogInformation(
-            "The {0} clock frequency is {1:0.###} MHz",
+            "The {ClockFrequencyType} clock frequency is {Frequency:0.###} MHz",
             clockFrequency == null ? "standard" : "specified",
             frequency / 1_000_000.0);
 
-        Logger.LogInformation("Hardware execution took {0:0.0000}ms.", milliseconds);
+        Logger.LogInformation("Hardware execution took {Milliseconds:0.0000} ms.", milliseconds);
     }
 
     protected static CommunicationStateContext BeginExecution() => new()

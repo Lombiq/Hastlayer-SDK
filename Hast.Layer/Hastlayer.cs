@@ -254,7 +254,7 @@ public sealed class Hastlayer : IHastlayer
             foreach (var warning in hardwareDescription.Warnings)
             {
                 loggerService.LogWarning(
-                    "Hastlayer transformation warning (code: {0}): {1}",
+                    "Hastlayer transformation warning (code: {Code}): {Message}",
                     warning.Code,
                     warning.Message);
             }

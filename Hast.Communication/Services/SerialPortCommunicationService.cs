@@ -79,7 +79,7 @@ public class SerialPortCommunicationService : CommunicationServiceBase
 
         if (serialPort.IsOpen)
         {
-            Logger.LogInformation("The port {0} is ours.", serialPort.PortName);
+            Logger.LogInformation("The port {PortName} is ours.", serialPort.PortName);
         }
         else
         {
@@ -204,7 +204,7 @@ public class SerialPortCommunicationService : CommunicationServiceBase
                     knownCount: BitConverter.ToInt32(outputByteCountBytes.Span),
                     startIndex: MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
 
-                Logger.LogInformation("Incoming data size in bytes: {0}", outputBytes.KnownCount);
+                Logger.LogInformation("Incoming data size in bytes: {ByteCount}", outputBytes.KnownCount);
 
                 serialCommunicationContext.SerialPort.Write(Serial.Signals.Ready);
                 return Serial.CommunicationState.ReceivingOutput;

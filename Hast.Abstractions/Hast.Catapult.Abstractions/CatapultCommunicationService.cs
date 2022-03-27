@@ -90,7 +90,7 @@ public class CatapultCommunicationService : CommunicationServiceBase
                         if (!(i > 0 && ex.Status == Status.IllegalEndpointNumber))
                             Logger.LogError(
                                 ex,
-                                "Received {0} while trying to instantiate CatapultLibrary on EndPoint {1}. This device won't be used.",
+                                "Received {Status} while trying to instantiate CatapultLibrary on EndPoint {Index}. This device won't be used.",
                                 ex.Status,
                                 i);
                         return null;
@@ -124,7 +124,7 @@ public class CatapultCommunicationService : CommunicationServiceBase
 
         if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
         dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
-        Logger.LogInformation("Incoming data size in bytes: {0}", outputPayloadByteCount);
+        Logger.LogInformation("Incoming data size in bytes: {OutputPayloadByteCount}", outputPayloadByteCount);
 
         EndExecution(context);
 

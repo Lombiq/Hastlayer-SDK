@@ -45,7 +45,7 @@ public class VhdlHardwareImplementationComposer : IHardwareImplementationCompose
             if (stop != null)
             {
                 _logger.LogInformation(
-                    "The {0} provider asked to skip the {1} provider.",
+                    "The {BuildProviderName} provider asked to skip the {OtherBuildProviderName} provider.",
                     stop,
                     buildProvider.Name);
                 continue;

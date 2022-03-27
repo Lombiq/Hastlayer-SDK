@@ -35,7 +35,7 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
 
         // We need retries because somehow the FPGA doesn't always catch our request.
         _logger.LogInformation(
-            "Starting to find FPGA endpoints. \"Who is available\" request will be sent {0} time(s).",
+            "Starting to find FPGA endpoints. \"Who is available\" request will be sent {BroadcastCount} time(s).",
             BroadcastRetryCount + 1);
 
         var currentRetries = 0;

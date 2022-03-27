@@ -65,7 +65,10 @@ public class EthernetCommunicationService : CommunicationServiceBase
         IFpgaEndpoint fpgaEndpoint = device.Metadata;
         var fpgaIpEndpoint = fpgaEndpoint.Endpoint;
 
-        Logger.LogInformation("IP endpoint to communicate with via Ethernet: {0}:{1}", fpgaIpEndpoint.Address, fpgaIpEndpoint.Port);
+        Logger.LogInformation(
+            "IP endpoint to communicate with via Ethernet: {Address}:{Port}",
+            fpgaIpEndpoint.Address,
+            fpgaIpEndpoint.Port);
 
         try
         {
@@ -112,7 +115,7 @@ public class EthernetCommunicationService : CommunicationServiceBase
             // Read the bytes representing the length of the simple memory.
             var outputByteCount = BitConverter.ToUInt32(await GetBytesFromStreamAsync(stream, sizeof(uint)), 0);
 
-            Logger.LogInformation("Incoming data size in bytes: {0}", outputByteCount);
+            Logger.LogInformation("Incoming data size in bytes: {OutputByteCount}", outputByteCount);
 
             // Finally read the memory itself.
             var outputBytes = await GetBytesFromStreamAsync(

@@ -118,9 +118,9 @@ public class AzureHardwareImplementationComposerBuildProvider : IHardwareImpleme
             })).InstanceId;
 
         _logger.LogInformation(
-            "Attestation request was submitted successfully with the following orchestration instance ID: {0}",
+            "Attestation request was submitted successfully with the following orchestration instance ID: {InstanceId}",
             instanceId);
-        _logger.LogInformation("Checking the status of attestation using {0}", configuration.PollFunctionUrl);
+        _logger.LogInformation("Checking the status of attestation using {PollFunctionUrl}", configuration.PollFunctionUrl);
 
         while (true)
         {
@@ -129,7 +129,7 @@ public class AzureHardwareImplementationComposerBuildProvider : IHardwareImpleme
                 new AzurePollPostData(configuration, instanceId));
             var statusUpper = statusText.ToUpperInvariant();
 
-            _logger.LogInformation("Polled status: {0}", statusText);
+            _logger.LogInformation("Polled status: {StatusText}", statusText);
 
             if (statusUpper is "PENDING" or "RUNNING")
             {
@@ -147,7 +147,7 @@ public class AzureHardwareImplementationComposerBuildProvider : IHardwareImpleme
             var outputString = outputList.Any()
                 ? string.Join("\n", outputList.Select(item => "- " + item.Trim()))
                 : "- Unknown issue";
-            _logger.LogError("Attestation failed:\n{0}", outputString);
+            _logger.LogError("Attestation failed:\n{OutputString}", outputString);
 
             throw new InvalidOperationException("Attestation failed.");
         }

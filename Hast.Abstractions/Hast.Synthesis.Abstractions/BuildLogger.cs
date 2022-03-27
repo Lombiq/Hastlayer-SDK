@@ -52,7 +52,7 @@ public class BuildLogger<T>
         }
 
         _logger.LogInformation(
-            "Starting program: {0} {1} (working directory: {2})",
+            "Starting program: {Executable} {Arguments} (working directory: {WorkingDirectory})",
             executable,
             string.Join(" ", arguments),
             hasWorkingDirectory ? workingDirectory : ".");
@@ -137,8 +137,8 @@ public class BuildLogger<T>
                 "smaller data types and a lower degree of parallelism) until this error goes away.");
         }
 
-        _logger.Log(logLevel, "{0}: {1}", name, message);
-        _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
+        _logger.Log(logLevel, "{Name}: {Message}", name, message);
+        _buildOutput.WriteLine("{Name} {BuildLogType}: {Message}", name, buildLogType, message);
     }
 }
 
@@ -167,7 +167,7 @@ public static class BuildLogger
             }
             catch (IOException ex)
             {
-                logger.LogWarning(ex, "Failed to open {0} for writing.", fileName);
+                logger.LogWarning(ex, "Failed to open {FileName} for writing.", fileName);
             }
         }
 

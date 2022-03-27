@@ -229,7 +229,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
         if (!foundDevice)
         {
             _logger?.LogWarning(
-                "Failed to find \"{0}\" platform that has \"{1}\" type devices.",
+                "Failed to find \"{VendorName}\" platform that has \"{DeviceType}\" type devices.",
                 vendorName,
                 deviceType);
         }
