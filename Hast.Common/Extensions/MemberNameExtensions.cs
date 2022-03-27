@@ -28,7 +28,7 @@ public static class MemberNameExtensions
 
         // If there are no dots before the member name that means this full name doesn't contain an interface reference.
         if (sides.Length != 2 ||
-            !sides[1].Contains(".") ||
+            !sides[1].Contains('.') ||
             sides[1].IndexOfOrdinal(".") > sides[1].IndexOfOrdinal("("))
         {
             return Enumerable.Empty<string>();

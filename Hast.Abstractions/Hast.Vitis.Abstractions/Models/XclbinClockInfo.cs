@@ -42,7 +42,7 @@ public class XclbinClockInfo
                 continue;
             }
 
-            if (!line.Contains(":")) continue;
+            if (!line.Contains(':')) continue;
 
             ParseLine(line, item);
 
