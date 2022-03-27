@@ -62,8 +62,8 @@ public interface ICatapultNativeLibrary : IDisposable
     /// during handle creation. WARNING: writing a bad golden image to the FPGA is a career-limiting move and can cause
     /// irreparable damage. This function is protected by an internal mutex against other calls to
     /// <c>WriteFlashImage(IntPtr, bool, string)</c> c&gt;, <see cref="WriteFlashImageEx(IntPtr, bool, string, uint)"/>,
-    /// <c>CaptureFlashImage (IntPtr, bool, string)</c> and <see cref="CaptureFlashImageEx(IntPtr, bool, string,
-    /// uint)"/>.
+    /// <c>CaptureFlashImage (IntPtr, bool, string)</c> and <see
+    /// cref="CaptureFlashImageEx(IntPtr, bool, string, uint)"/>.
     /// </summary>
     /// <param name="timeoutInMs">
     /// Determines how long to wait in milliseconds for acquiring the mutex. The default wait time is set according to
@@ -225,9 +225,9 @@ public interface ICatapultNativeLibrary : IDisposable
 
     /// <summary>
     /// This function allows the library user to query the version of both software and hardware components. All
-    /// queryable version keys are defined in the 'pchVerDefnsFile' argument of <see cref="CreateHandle(out IntPtr,
-    /// uint, uint, StringBuilder, StringBuilder, CatapultLogFunction)"/>. By default, the definitions are listed in
-    /// VersionDefinitions.ini.
+    /// queryable version keys are defined in the 'pchVerDefnsFile' argument of <see
+    /// cref="CreateHandle(out IntPtr, uint, uint, StringBuilder, StringBuilder, CatapultLogFunction)"/>. By default,
+    /// the definitions are listed in VersionDefinitions.ini.
     /// </summary>
     Constants.Status GetVersion(IntPtr fpgaHandle, string pchVerKey, out uint pVersion);
 
