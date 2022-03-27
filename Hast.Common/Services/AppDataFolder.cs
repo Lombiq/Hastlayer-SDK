@@ -21,9 +21,9 @@ public class AppDataFolder : IAppDataFolder
         {
             if (_assemblyDirectory == null)
             {
-                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                var uri = new UriBuilder(codeBase);
-                string path = Uri.UnescapeDataString(uri.Path);
+                var location = Assembly.GetExecutingAssembly().Location;
+                var uri = new UriBuilder(location);
+                var path = Uri.UnescapeDataString(uri.Path);
                 _assemblyDirectory = Path.GetDirectoryName(path);
             }
 
