@@ -30,7 +30,6 @@
     <PackageReference Include="AdvancedDLSupport" Version="3.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="StrictEmit" Version="2.8.0" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.7.0" />
     <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
