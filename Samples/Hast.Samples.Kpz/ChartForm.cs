@@ -135,16 +135,16 @@ public partial class ChartForm : Form
     /// using <c>Windows.Threading.Dispatcher.Invoke</c> to schedule an update in the GUI thread. AsyncLogIt schedules a
     /// <see cref="LogIt"/> operation on the GUI thread from within the <see cref="BackgroundWorker"/>.
     /// </summary>
-    private void AsyncLogIt(string what) => Invoke(new Action(() => LogIt(what)));
+    private void AsyncLogIt(string what) => Invoke(() => LogIt(what));
 
     private void AsyncLogInvariant(FormattableString what) =>
-        Invoke(new Action(() => LogIt(what.ToString(CultureInfo.InvariantCulture))));
+        Invoke(() => LogIt(what.ToString(CultureInfo.InvariantCulture)));
 
     /// <summary>
     /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the <see
     /// cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
     /// </summary>
-    private void AsyncUpdateProgressBar(int progress) => Invoke(new Action(() => progressBar.Value = progress));
+    private void AsyncUpdateProgressBar(int progress) => Invoke(() => progressBar.Value = progress);
 
     /// <summary>
     /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the <see cref="BackgroundWorker"/>.
@@ -167,12 +167,12 @@ public partial class ChartForm : Form
                 AsyncLogInvariant($"Warning: Periodicity invalid (x: {meta.PeriodicityInvalidXCount}, y: {meta.PeriodicityInvalidYCount})");
             }
 
-            Invoke(new Action(() =>
+            Invoke(() =>
             {
                 LogIt(FormattableString.Invariant($"iteration: {iteration}, surfaceRoughness: {meta.StandardDeviation}"));
                 chartKPZ.Series[0].Points.AddXY(iteration + 1, meta.StandardDeviation);
                 chartKPZ.ChartAreas[0].AxisX.IsLogarithmic = true;
-            }));
+            });
         }
     }
 
