@@ -102,7 +102,7 @@ public class Fix64Calculator
         if (numbers.Length != MaxDegreeOfParallelism)
         {
             throw new ArgumentException(
-                "Provide as many numbers as the degree of parallelism of Fix64Calculator is (" +
+                $"Provide as many {nameof(numbers)} as the degree of parallelism of Fix64Calculator is (" +
                 MaxDegreeOfParallelism + ")");
         }
 

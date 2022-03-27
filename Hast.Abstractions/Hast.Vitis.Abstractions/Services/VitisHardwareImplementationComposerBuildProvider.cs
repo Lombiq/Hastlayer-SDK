@@ -606,7 +606,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             .FullName;
         if (executableName == null)
         {
-            throw new FileNotFoundException($"The executable '{executable}' was not found. Is it in your PATH?");
+            throw new FileNotFoundException($"The {nameof(executable)} '{executable}' was not found. Is it in your PATH?");
         }
 
         return executableName;

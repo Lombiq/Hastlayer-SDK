@@ -162,7 +162,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
             default:
                 var errorSymbol = "CL_" + status.ToString().ToSnakeCase().ToUpper(CultureInfo.InvariantCulture);
                 throw new InvalidOperationException(
-                    $"OpenCL error with status '{status}'. You may find more information by searching for " +
+                    $"OpenCL error with {nameof(status)} '{status}'. You may find more information by searching for " +
                     $"\"opencl {status} OR {errorSymbol}\" on the web.");
         }
     }

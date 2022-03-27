@@ -155,7 +155,7 @@ public static class Posit32CalculatorExtensions
         if (numbers.Length != Posit32Calculator.MaxDegreeOfParallelism)
         {
             throw new ArgumentException(
-                "Provide as many numbers as the degree of parallelism of Posit32Calculator is (" +
+                $"Provide as many {nameof(numbers)} as the degree of parallelism of Posit32Calculator is (" +
                 Posit32Calculator.MaxDegreeOfParallelism + ")");
         }
 

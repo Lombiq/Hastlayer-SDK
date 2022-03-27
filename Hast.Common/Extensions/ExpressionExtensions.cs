@@ -31,7 +31,7 @@ public static class ExpressionExtensions
 
         if (expression.Body is not MethodCallExpression methodCallExpression)
         {
-            throw new InvalidOperationException("The supplied expression is not a method call.");
+            throw new InvalidOperationException($"The supplied {nameof(expression)} is not a method call.");
         }
 
         return methodCallExpression.Method;
