@@ -89,9 +89,11 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         await _buildLogger.ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
         MajorProgress("Frequency scaling profile created.");
 
+        const string input = "--input";
+
         await ExecuteXclbinutil(
             output: null,
-            "--input",
+            input,
             xclbinFilePath + ".org",
             "--replace-section",
             "CLOCK_FREQ_TOPOLOGY:json:" + Path.Join(tmpXclbinDirectoryPath, "clock_freq_topology.json"),
@@ -101,7 +103,7 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         MajorProgress("Xclbinutil update completed. (1/3)");
         await ExecuteXclbinutil(
             output: null,
-            "--input",
+            input,
             xclbinFilePath,
             "--info",
             xclbinFilePath + ".info",
@@ -109,7 +111,7 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         MajorProgress("Xclbinutil update completed. (2/3)");
         await ExecuteXclbinutil(
             output: null,
-            "--input",
+            input,
             xclbinFilePath,
             "--dump-section",
             "BITSTREAM:RAW:" + bitFilePath,
@@ -121,7 +123,7 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         {
             await ExecuteXclbinutil(
                 output: infoFileWriter,
-                "--input",
+                input,
                 xclbinFilePath,
                 "--info");
             MajorProgress("Xclbinutil info file recreated.");
