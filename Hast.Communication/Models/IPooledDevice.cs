@@ -1,7 +1,7 @@
 namespace Hast.Communication.Models;
 
 /// <summary>
-/// Represents a compatible device for hardware exeuction that is in the managed device pool.
+/// Represents a compatible device for hardware execution that is in the managed device pool.
 /// </summary>
 public interface IPooledDevice : IDevice
 {
