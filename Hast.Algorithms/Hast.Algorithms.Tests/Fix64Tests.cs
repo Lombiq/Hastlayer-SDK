@@ -68,10 +68,6 @@ public class Fix64Tests
     }
 
     [Fact]
-    [SuppressMessage(
-        "Blocker Code Smell",
-        "S2699:Tests should include assertions",
-        Justification = nameof(EqualWithinPrecision) + " is an assertion.")]
     public void DoubleToFix64AndBack()
     {
         var sources = new[]
