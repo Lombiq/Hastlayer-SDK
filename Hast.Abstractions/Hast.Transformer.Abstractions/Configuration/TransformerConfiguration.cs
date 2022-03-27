@@ -27,8 +27,6 @@ public class TransformerConfiguration
         get => _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray();
 #pragma warning restore S2365 // Properties should not make collection or array copies
 
-        // It does so indirectly via AddMemberInvocationInstanceCountConfiguration.
-#pragma warning disable S4275 // Getters and setters should access the expected fields
         private set
         {
             _memberInvocationInstanceCountConfigurations.Clear();
@@ -38,7 +36,6 @@ public class TransformerConfiguration
                 AddMemberInvocationInstanceCountConfiguration(configuration);
             }
         }
-#pragma warning restore S4275 // Getters and setters should access the expected fields
     }
 
     /// <summary>
