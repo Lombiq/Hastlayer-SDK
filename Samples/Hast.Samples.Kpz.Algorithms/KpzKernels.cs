@@ -51,7 +51,7 @@ public class KpzKernelsInterface
     {
         var kernels = new KpzKernels();
         kernels.InitializeParametersFromMemory(memory);
-        var numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
+        const int numberOfStepsInIteration = KpzKernels.GridWidth * KpzKernels.GridHeight;
         for (int i = 0; i < numberOfStepsInIteration; i++)
         {
             memory.WriteUInt32(i, kernels.Random1.NextUInt32());

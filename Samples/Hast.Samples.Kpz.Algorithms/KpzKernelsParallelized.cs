@@ -355,7 +355,7 @@ public class KpzKernelsParallelizedInterface
             93_473_713, -937_734_760, -279_968_717, -1_457_028_170, -389_060_750, -1_888_789_492, -1_109_047_524, 171_427_933,
         };
 
-        int numRandomUints = 2 + (ParallelTasks * 4);
+        const int numRandomUints = 2 + (ParallelTasks * 4);
         var sm = hastlayer.CreateMemory(configuration, (GridSize *
             GridSize) + numRandomUints + 1);
 
