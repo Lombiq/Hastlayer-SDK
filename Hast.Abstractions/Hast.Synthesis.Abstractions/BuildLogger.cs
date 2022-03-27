@@ -138,7 +138,7 @@ public class BuildLogger<T>
         }
 
         _logger.Log(logLevel, "{Name}: {Message}", name, message);
-        _buildOutput.WriteLine("{Name} {BuildLogType}: {Message}", name, buildLogType, message);
+        _buildOutput.WriteLine("{0} {1}: {2}", name, buildLogType, message);
     }
 }
 
