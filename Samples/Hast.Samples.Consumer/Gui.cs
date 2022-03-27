@@ -77,7 +77,10 @@ public sealed class Gui : IDisposable
             TaskScheduler.Current);
 
         // We can expect the Windows API on Windows, but not all *nix has nCurses.
+        // This is how Terminal.Gui works.
+#pragma warning disable S2696 // Instance members should not write to "static" fields
         Application.UseSystemConsole = !isWindows;
+#pragma warning restore S2696 // Instance members should not write to "static" fields
 
         Application.Init();
         Application.HeightAsBuffer = false;
@@ -134,7 +137,11 @@ public sealed class Gui : IDisposable
         top.Add(_topRightPane);
 
         Retile(top);
+
+        // This is how Terminal.Gui works.
+#pragma warning disable S2696 // Instance members should not write to "static" fields
         Application.Resized = _ => Retile(top);
+#pragma warning restore S2696 // Instance members should not write to "static" fields
 
         _leftPane.Add(_propertiesListView);
         _topRightPane.Add(_hintLabel);

@@ -543,7 +543,10 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
     {
         if (buildConfiguration.SynthesisOnly || !buildConfiguration.ResetOnFirstRun || !_firstRun) return;
 
+        // It's necessary to keep track of the first run to interact with the FPGA development pipeline.
+#pragma warning disable S2696 // Instance members should not write to "static" fields
         _firstRun = false;
+#pragma warning restore S2696 // Instance members should not write to "static" fields
 
         _logger.LogWarning(
             "This is the first build with the current process. Resetting the devices for a clean state...");
