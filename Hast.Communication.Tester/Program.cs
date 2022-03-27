@@ -149,13 +149,16 @@ public static class Program
         if (!CommandLineOptions.NoCheck) Verify(memory, referenceMemory);
     }
 
+    // In at least one case (ImageContrastModifier) Run can't be public because it would cause issues with the
+    // transformation.
+#pragma warning disable S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
     private static MethodInfo GetReferenceAction(Type type) =>
-        // In at least one case (ImageContrastModifier) Run can't be public because it would cause issues with the
-        // transformation.
         type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-            .SingleOrDefault(x => x.Name == nameof(MemoryTest.Run) &&
-                                  x.GetParameters().Length == 1 &&
-                                  x.GetParameters()[0].ParameterType == typeof(SimpleMemory));
+            .SingleOrDefault(
+                methodInfo => methodInfo.Name == nameof(MemoryTest.Run) &&
+                methodInfo.GetParameters().Length == 1 &&
+                methodInfo.GetParameters()[0].ParameterType == typeof(SimpleMemory));
+#pragma warning restore S3011 // Reflection should not be used to increase accessibility of classes, methods, or fields
 
     private static async Task<(SimpleMemory Memory, SimpleMemoryAccessor Accessor)> GenerateMemoryAsync(
         IHastlayer hastlayer,

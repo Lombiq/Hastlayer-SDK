@@ -115,7 +115,7 @@ public class ConsumerConfiguration
     private static IEnumerable<(PropertyInfo Property, T Attribute)> GetPropertyAttributes<T>()
         where T : Attribute =>
         typeof(ConsumerConfiguration)
-            .GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            .GetProperties(BindingFlags.Public | BindingFlags.Instance)
             .Select(property => (Property: property, Attribute: property.GetCustomAttributes<T>().FirstOrDefault()))
             .Where(pair => pair.Attribute != null);
 
