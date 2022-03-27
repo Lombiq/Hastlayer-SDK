@@ -18,7 +18,7 @@ public class OpenClResultMetadata
         if (isBigEndian == BitConverter.IsLittleEndian)
         {
             Span<byte> temp = new byte[MemoryCellSizeBytes];
-            executionTimeSpan.Slice(0, MemoryCellSizeBytes).CopyTo(temp);
+            executionTimeSpan[..MemoryCellSizeBytes].CopyTo(temp);
             executionTimeSpan[MemoryCellSizeBytes..].CopyTo(executionTimeSpan);
             temp.CopyTo(executionTimeSpan[MemoryCellSizeBytes..]);
         }

@@ -242,7 +242,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
                 $"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b."));
         }
 
-        var header = bufferSpan.Slice(0, headerSize);
+        var header = bufferSpan[..headerSize];
         var result = new OpenClResultMetadata(header, configuration.DeviceIsBigEndian);
 
         bool canLogInfo = Logger.IsEnabled(LogLevel.Information);

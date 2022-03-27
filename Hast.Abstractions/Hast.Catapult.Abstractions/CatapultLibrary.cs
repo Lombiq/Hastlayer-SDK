@@ -411,7 +411,7 @@ public sealed class CatapultLibrary : IDisposable
         // Create output array and fill it with the responses that have a positive slice index.
         var payloadTotalCells = MemoryMarshal.Read<int>(responses[0][OutputHeaderSizes.HardwareExecutionTime..].Span);
         Memory<byte> result = new byte[(payloadTotalCells * SimpleMemory.MemoryCellSizeBytes) + OutputHeaderSizes.Total];
-        responses[0].Slice(0, OutputHeaderSizes.Total).CopyTo(result);
+        responses[0][..OutputHeaderSizes.Total].CopyTo(result);
         const int sliceIndexPosition = OutputHeaderSizes.HardwareExecutionTime + OutputHeaderSizes.PayloadLengthCells;
         Parallel.For(0, responses.Length, (i) =>
         {

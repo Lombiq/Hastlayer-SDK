@@ -53,7 +53,7 @@ public class CatapultCommunicationService : CommunicationServiceBase
     private static Memory<byte> HotfixOutput(Memory<byte> memory)
     {
         var memoryBody = memory[OutputHeaderSizes.Total..];
-        var softwareCells = memory.Slice(0, OutputHeaderSizes.Total + (memoryBody.Length / HardwareCellMultiplier));
+        var softwareCells = memory[..(OutputHeaderSizes.Total + (memoryBody.Length / HardwareCellMultiplier))];
         var softwareCellsBody = softwareCells[OutputHeaderSizes.Total..];
 
         // first one is already at the right place
@@ -120,7 +120,7 @@ public class CatapultCommunicationService : CommunicationServiceBase
         var outputPayloadByteCount = SimpleMemory.MemoryCellSizeBytes * (int)MemoryMarshal.Read<uint>(
             outputBuffer[OutputHeaderSizes.HardwareExecutionTime..].Span);
         if (outputBuffer.Length > OutputHeaderSizes.Total + outputPayloadByteCount)
-            outputBuffer = outputBuffer.Slice(0, OutputHeaderSizes.Total + outputPayloadByteCount);
+            outputBuffer = outputBuffer[..(OutputHeaderSizes.Total + outputPayloadByteCount)];
 
         if (outputPayloadByteCount > SimpleMemory.MemoryCellSizeBytes) outputBuffer = HotfixOutput(outputBuffer);
         dma.Set(outputBuffer, OutputHeaderSizes.Total / SimpleMemory.MemoryCellSizeBytes);
