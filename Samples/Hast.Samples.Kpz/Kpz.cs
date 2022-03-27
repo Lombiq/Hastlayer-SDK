@@ -1,6 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
 

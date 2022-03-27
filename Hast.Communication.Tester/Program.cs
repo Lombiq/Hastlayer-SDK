@@ -7,7 +7,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Synthesis.Abstractions;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using SixLabors.ImageSharp;

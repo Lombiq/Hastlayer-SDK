@@ -1,6 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Linq;
 using System.Threading.Tasks;

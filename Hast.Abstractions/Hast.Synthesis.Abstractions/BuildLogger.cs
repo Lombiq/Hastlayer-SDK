@@ -2,7 +2,7 @@
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
 using Hast.Common.Helpers;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

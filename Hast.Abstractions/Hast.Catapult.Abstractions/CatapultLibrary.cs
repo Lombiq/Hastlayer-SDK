@@ -1,6 +1,6 @@
 using AdvancedDLSupport;
 using Hast.Transformer.Abstractions.SimpleMemory;
-using Lombiq.HelpfulLibraries.Libraries.Utilities;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
