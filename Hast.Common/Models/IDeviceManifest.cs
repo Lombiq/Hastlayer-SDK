@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer;
 
@@ -18,8 +18,8 @@ public interface IDeviceManifest
     uint ClockFrequencyHz { get; }
 
     /// <summary>
-    /// Gets the names of those communication channels usable with the connected device. The first one will be used
-    /// as the default.
+    /// Gets the names of those communication channels usable with the connected device. The first one will be used as
+    /// the default.
     /// </summary>
     IEnumerable<string> SupportedCommunicationChannelNames { get; }
 

@@ -8,11 +8,10 @@ using System.Windows.Forms;
 namespace Hast.Samples.Kpz;
 
 /// <summary>
-/// This form allows us to inspect the KPZ algorithm step by step.
-/// It relies heavily on the <see cref="KpzStateLogger"/> class.
-/// For large grids, it does not display the whole grid (due to speed limitations of <see cref="DataGridView"/>)
-/// only a part of it, which can be configured with <see cref="MaxGridDisplayWidth"/> and
-/// <see cref="MaxGridDisplayHeight"/>.
+/// This form allows us to inspect the KPZ algorithm step by step. It relies heavily on the <see cref="KpzStateLogger"/>
+/// class. For large grids, it does not display the whole grid (due to speed limitations of <see cref="DataGridView"/>)
+/// only a part of it, which can be configured with <see cref="MaxGridDisplayWidth"/> and <see
+/// cref="MaxGridDisplayHeight"/>.
 /// </summary>
 public partial class InspectForm : Form
 {
@@ -22,8 +21,8 @@ public partial class InspectForm : Form
     private readonly KpzStateLogger _stateLogger;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="InspectForm"/> class. When the form is loaded,
-    /// <see cref="listIterations"/> is initialized with the iterations available in <see cref="_stateLogger"/>.
+    /// Initializes a new instance of the <see cref="InspectForm"/> class. When the form is loaded, <see
+    /// cref="listIterations"/> is initialized with the iterations available in <see cref="_stateLogger"/>.
     /// </summary>
     /// <param name="stateLogger">is the data source to be displayed on the form.</param>
     public InspectForm(KpzStateLogger stateLogger)
@@ -62,9 +61,9 @@ public partial class InspectForm : Form
     }
 
     /// <summary>
-    /// This function displays a 2D array of <see cref="KpzNode"/> items on the <see cref="DataGridView"/>
-    /// on the form. dx and dy values are shown as binary digits, e.g. 10 in a cell means that dx=1 and dy=0
-    /// for that <see cref="KpzNode"/>.
+    /// This function displays a 2D array of <see cref="KpzNode"/> items on the <see cref="DataGridView"/> on the form.
+    /// dx and dy values are shown as binary digits, e.g. 10 in a cell means that dx=1 and dy=0 for that <see
+    /// cref="KpzNode"/>.
     /// </summary>
     /// <param name="arr">is the input array.</param>
     private void DgvShowKpzNodeArray(KpzNode[,] arr)
@@ -91,8 +90,8 @@ public partial class InspectForm : Form
     }
 
     /// <summary>
-    /// This function adds highlight (by applying background color) to a list of table cells in the
-    /// <see cref="DataGridView" />.
+    /// This function adds highlight (by applying background color) to a list of table cells in the <see
+    /// cref="DataGridView"/>.
     /// </summary>
     /// <param name="highlightedCoords">is the list of table cell indexes to be highlighted.</param>
     /// <param name="highlightColor">is the background color to be set on the given table cells.</param>
@@ -106,8 +105,8 @@ public partial class InspectForm : Form
     }
 
     /// <summary>
-    /// This function adds highlight (by applying background color) to a list of table cells in the
-    /// <see cref="DataGridView" />.
+    /// This function adds highlight (by applying background color) to a list of table cells in the <see
+    /// cref="DataGridView"/>.
     /// </summary>
     [SuppressMessage(
         "Design",
@@ -126,7 +125,7 @@ public partial class InspectForm : Form
     }
 
     /// <summary>
-    /// If an item in <see cref="listActions" /> is clicked, the <see cref="DataGridView" /> is updated.
+    /// If an item in <see cref="listActions"/> is clicked, the <see cref="DataGridView"/> is updated.
     /// </summary>
     [SuppressMessage(
         "Design",

@@ -20,6 +20,7 @@ public sealed class Gui : IDisposable
 
     private readonly TextField _optionsTextField =
         new TextField { CanFocus = true, Visible = false }.FillHorizontally();
+
     private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
 
     private Action<string> _currentOptionsTextFieldEventHandler;
@@ -49,24 +50,24 @@ public sealed class Gui : IDisposable
     {
         var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-        // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there
-        // won't be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from
-        // the temporary variable before this method closes.
+        // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there won't
+        // be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from the
+        // temporary variable before this method closes.
         var originalBufferHeight = Console.BufferHeight;
         if (isWindows) Console.BufferHeight = Console.WindowHeight;
 
         _configuration = new ConsumerConfiguration();
 
-        // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and
-        // the device list are generated on a separate thread in the background. This is safe because there are no
-        // other async operations at the time so there is no danger of a deadlock. This class needs to create its
-        // own Hastlayer instance because it is used prior to the main one's creation, to configure it.
+        // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and the
+        // device list are generated on a separate thread in the background. This is safe because there are no other
+        // async operations at the time so there is no danger of a deadlock. This class needs to create its own
+        // Hastlayer instance because it is used prior to the main one's creation, to configure it.
 
-        // This task is used to request a logger inside the Application.Run call, so the exception is logged with
-        // NLog normally. It's also used by the next task.
+        // This task is used to request a logger inside the Application.Run call, so the exception is logged with NLog
+        // normally. It's also used by the next task.
         var hastlayerTask = Task.Run(() => (Hastlayer)Hastlayer.Create(new HastlayerConfiguration()));
-        // This task starts prefetching the device list in the background. Without it the application would hang for
-        // a second or so, when you select the DeviceName option.
+        // This task starts prefetching the device list in the background. Without it the application would hang for a
+        // second or so, when you select the DeviceName option.
         _deviceNamesTask = hastlayerTask.ContinueWith(
             hastlayer => hastlayer
                 .Result
@@ -458,8 +459,8 @@ public sealed class Gui : IDisposable
 
     public void Dispose()
     {
-        // Application.Shutdown() sets Application.Top to null and recursively disposes all child objects. At that
-        // point disposing them again would cause many NREs.
+        // Application.Shutdown() sets Application.Top to null and recursively disposes all child objects. At that point
+        // disposing them again would cause many NREs.
         if (Application.Top == null) return;
 
         _propertiesListView?.Dispose();

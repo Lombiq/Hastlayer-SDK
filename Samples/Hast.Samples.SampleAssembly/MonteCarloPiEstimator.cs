@@ -22,9 +22,9 @@ public class MonteCarloPiEstimator
     private const int EstimatePiRandomSeedUInt32Index = 1;
     private const int EstimatePiInCircleCountSumUInt32Index = 0;
 
-    // With a degree of parallelism of 78 the resource utilization of the Nexys A7 board would jump to 101% so this
-    // is the limit of efficiency. Note that this is one lower than in the currently measured benchmark because
-    // since then we changed Hastlayer slightly.
+    // With a degree of parallelism of 78 the resource utilization of the Nexys A7 board would jump to 101% so this is
+    // the limit of efficiency. Note that this is one lower than in the currently measured benchmark because since then
+    // we changed Hastlayer slightly.
     [Replaceable(nameof(MonteCarloPiEstimator) + "." + nameof(MaxDegreeOfParallelism))]
     public static readonly int MaxDegreeOfParallelism = 77;
 
@@ -53,9 +53,9 @@ public class MonteCarloPiEstimator
                         uint a = random.NextUInt16();
                         uint b = random.NextUInt16();
 
-                        // A bit of further parallelization can be exploited with SIMD to shave off some execution
-                        // time. However, this needs so much resources on the hardware that the degree of
-                        // parallelism needs to be lowered substantially (below 60).
+                        // A bit of further parallelization can be exploited with SIMD to shave off some execution time.
+                        // However, this needs so much resources on the hardware that the degree of parallelism needs to
+                        // be lowered substantially (below 60).
                         //// var randomNumbers = new uint[] { random.NextUInt16(), random.NextUInt16() };
                         //// var products = Common.Numerics.SimdOperations.MultiplyVectors(randomNumbers, randomNumbers, 2);
 
@@ -98,8 +98,8 @@ public class MonteCarloPiEstimator
 
         EstimatePi(memory);
 
-        // This single calculation takes up too much space on the FPGA, since it needs fix point arithmetic, but
-        // it doesn't take much time. So doing it on the host instead.
+        // This single calculation takes up too much space on the FPGA, since it needs fix point arithmetic, but it
+        // doesn't take much time. So doing it on the host instead.
         return (double)memory.ReadInt32(EstimatePiInCircleCountSumUInt32Index) / iterationsCount * 4;
     }
 }

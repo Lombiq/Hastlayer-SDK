@@ -11,8 +11,8 @@ public static class DictionaryExtensions
     {
         if (customConfiguration.TryGetValue(key, out var config))
         {
-            // If this is a remote transformation then custom configs won't necessarily be properly deserialized at
-            // this point, so need to handle them specifically.
+            // If this is a remote transformation then custom configs won't necessarily be properly deserialized at this
+            // point, so need to handle them specifically.
             if (config is JObject jObject)
             {
                 var deserialized = jObject

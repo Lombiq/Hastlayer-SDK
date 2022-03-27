@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// A sample showing how floating point numbers of type posit (<see href="https://posithub.org" />) can be used
-/// with Hastlayer. Using the statically-typed <see cref="Posit32"/> variant here.
+/// A sample showing how floating point numbers of type posit ( <see href="https://posithub.org"/>) can be used with
+/// Hastlayer. Using the statically-typed <see cref="Posit32"/> variant here.
 /// </summary>
 public class Posit32Calculator
 {
@@ -24,8 +24,8 @@ public class Posit32Calculator
     public const int CalculatePowerOfRealInputPosit32Index = 1;
     public const int CalculatePowerOfRealOutputPosit32Index = 0;
 
-    // This takes about 75% of a Nexys 4 DDR's FPGA. If only ParallelizedCalculateIntegerSumUpToNumbers is
-    // selected as the hardware entry point (i.e. only it will be transformed into hardware, see the config in
+    // This takes about 75% of a Nexys 4 DDR's FPGA. If only ParallelizedCalculateIntegerSumUpToNumbers is selected as
+    // the hardware entry point (i.e. only it will be transformed into hardware, see the config in
     // Posit32CalculatorSampleRunner) then with a MaxDegreeOfParallelism of 5 it'll take 75% as well.
     public const int MaxDegreeOfParallelism = 2;
 

@@ -22,8 +22,8 @@ using System.Threading.Tasks;
 namespace Hast.Samples.Consumer;
 
 // In this simple console application we generate hardware from some sample algorithms. Note that the project also
-// references other projects (and the sample assembly as well), so check out those too on hints which Hastlayer
-// projects to reference from your own projects.
+// references other projects (and the sample assembly as well), so check out those too on hints which Hastlayer projects
+// to reference from your own projects.
 
 // Configure the whole sample project in command line arguments. See Models/ConsumerConfiguration.cs for details.
 
@@ -46,14 +46,15 @@ internal static class Program
         // Configuring the Hastlayer shell. You don't need to change anything for this sample.
         var hastlayerConfiguration = new HastlayerConfiguration();
 
-        // Here we create the ConsumerConfiguration used to set up this application. Check out the
-        // ConsumerConfiguration class to see what can be changed to try out the various samples and available
-        // devices!
-        // If there are command line arguments, they are used to create the configuration. Otherwise we open an
-        // interactive user interface where you can hand pick the options, load or save them. This GUI has mouse
-        // support on Windows and certain Linux platforms, though not through SSH. You can fully navigate using the
-        // keyboard too. Use the <c>-load name</c> and the <c>-save name</c> command line arguments to save/load
-        // configurations into the ConsumerConfiguration.json file without the GUI.
+        // Here we create the ConsumerConfiguration used to set up this application. Check out the ConsumerConfiguration
+        // class to see what can be changed to try out the various samples and available devices! If there are command
+        // line arguments, they are used to create the configuration. Otherwise we open an interactive user interface
+        // where you can hand pick the options, load or save them. This GUI has mouse support on Windows and certain
+        // Linux platforms, though not through SSH. You can fully navigate using the keyboard too. Use the
+        // <c>-load name</c>
+        // and the
+        // <c>-save name</c>
+        // command line arguments to save/load configurations into the ConsumerConfiguration.json file without the GUI.
         var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
         var consumerConfiguration = args.Any()
             ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
@@ -61,13 +62,12 @@ internal static class Program
         if (consumerConfiguration == null) return ExitStatus.NothingToDo;
         if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
-        // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while
-        // the program runs and re-use it continuously. No need to always wrap it into a using() like here, just
-        // make sure to Dispose() it before the program terminates.
+        // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while the
+        // program runs and re-use it continuously. No need to always wrap it into a using() like here, just make sure
+        // to Dispose() it before the program terminates.
         using var hastlayer = Hastlayer.Create(hastlayerConfiguration);
 
-        // Hooking into an event of Hastlayer so some execution information can be made visible on the
-        // console.
+        // Hooking into an event of Hastlayer so some execution information can be made visible on the console.
         hastlayer.ExecutedOnHardware += Hastlayer_ExecutedOnHardware;
 
         // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
@@ -119,8 +119,7 @@ internal static class Program
 
         Console.WriteLine("Hardware generation starts.");
 
-        // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug
-        // assemblies!
+        // Generating hardware from the sample assembly with the given configuration. Be sure to use Debug assemblies!
         var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
             new[]
             {
@@ -128,9 +127,8 @@ internal static class Program
                 typeof(PrimeCalculator).Assembly,
                 typeof(Fix64).Assembly,
                 typeof(FSharpParallelAlgorithmContainer).Assembly,
-                // Note that the assemblies used by code to be transformed also need to be added
-                // separately. E.g. Posit is used by Hast.Samples.SampleAssembly which in turn also uses
-                // ImmutableArray.
+                // Note that the assemblies used by code to be transformed also need to be added separately. E.g. Posit
+                // is used by Hast.Samples.SampleAssembly which in turn also uses ImmutableArray.
                 typeof(Posit).Assembly,
                 typeof(ImmutableArray).Assembly,
                 // Only necessary for the F# sample.
@@ -140,8 +138,8 @@ internal static class Program
 
         Console.WriteLine("Hardware generation finished.\n");
 
-        // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause
-        // any problems, but sometimes they can.
+        // Be sure to check out transformation warnings. Most of the time the issues noticed shouldn't cause any
+        // problems, but sometimes they can.
         if (hardwareRepresentation.HardwareDescription.Warnings.Any())
         {
             Console.WriteLine("There were transformation warnings in the logs, which may hint on issues that can " +
@@ -153,8 +151,8 @@ internal static class Program
         Console.WriteLine("Starting hardware execution.");
 
         // Running the selected sample. It is executed 3 times to ensure all JIT compilation overhead has been
-        // eliminated by successive reruns. The last attempt is a better representation of performance in
-        // long-running applications.
+        // eliminated by successive reruns. The last attempt is a better representation of performance in long-running
+        // applications.
         try
         {
             for (var i = 0; i < 3; i++)
@@ -184,8 +182,8 @@ internal static class Program
 
         if (arguments.SoftwareExecutionInformation == null) return;
 
-        // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true, see
-        // the notes below, or if the hardware execution was canceled.
+        // This will be available in case we've set ProxyGenerationConfiguration.VerifyHardwareResults to true, see the
+        // notes below, or if the hardware execution was canceled.
         var softwareTime = arguments.SoftwareExecutionInformation.SoftwareExecutionTimeMilliseconds;
         Console.Out.WriteLineInvariant($"The verifying software execution took {softwareTime:0.####} milliseconds.");
     }
@@ -193,8 +191,8 @@ internal static class Program
     private static void OnMismatch(HardwareExecutionResultMismatchException exception)
     {
         // If you set ProxyGenerationConfiguration.VerifyHardwareResults to true (when calling GenerateProxy()) then
-        // everything will be computed in software as well to check the hardware. You'll get such an exception if
-        // there is any mismatch. This shouldn't normally happen, but it's not impossible in corner cases.
+        // everything will be computed in software as well to check the hardware. You'll get such an exception if there
+        // is any mismatch. This shouldn't normally happen, but it's not impossible in corner cases.
         var mismatches = exception
             .Mismatches?
             .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
@@ -260,10 +258,9 @@ internal static class Program
 
     /// <summary>
     /// Possible application exit statuses (also known as <see cref="Environment.ExitCode"/>). This is returned from
-    /// <see cref="Main"/> as <see langword="int"/> and it's useful if you call this application from a
-    /// shell script. The Windows cmd can access it using the <c>IF ERRORLEVEL n</c> expression. On Windows, Linux
-    /// and macOS you can access it from Powershell using the <c>$LASTEXITCODE</c> variable or from Bash using the
-    /// <c>$?</c> variable.
+    /// <see cref="Main"/> as <see langword="int"/> and it's useful if you call this application from a shell script.
+    /// The Windows cmd can access it using the <c>IF ERRORLEVEL n</c> expression. On Windows, Linux and macOS you can
+    /// access it from Powershell using the <c>$LASTEXITCODE</c> variable or from Bash using the <c>$?</c> variable.
     /// </summary>
     private enum ExitStatus
     {

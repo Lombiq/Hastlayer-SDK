@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Hast.Common.Services;
 
 /// <summary>
-/// Contains a values that are attached to an <see cref="IDisposable"/> context while manages their lifecycle
-/// together.
+/// Contains a values that are attached to an <see cref="IDisposable"/> context while manages their lifecycle together.
 /// </summary>
 public class DisposableContainer : IDisposable
 {

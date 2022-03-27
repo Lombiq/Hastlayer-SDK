@@ -65,12 +65,12 @@ public class ListWithKnownCount<T>
     }
 
     /// <summary>
-    /// Casts the complete internal array into a <see cref="Memory{T}"/> and hands over ownership to the caller.
-    /// If you only want the segment used with <see cref="Add"/>, slice the result with <see cref="StartIndex"/>
-    /// which is preserved after this call for that reason. If you do that, the resulting <see cref="Memory{T}"/>
-    /// will have the same length as <see cref="KnownCount"/> had.
-    /// If you want to reuse this object, you must call <see cref="Reset"/>, because the internal array is removed
-    /// and <see cref="KnownCount"/> is set to 0 to ensure the result's exclusivity.
+    /// Casts the complete internal array into a <see cref="Memory{T}"/> and hands over ownership to the caller. If you
+    /// only want the segment used with <see cref="Add"/>, slice the result with <see cref="StartIndex"/> which is
+    /// preserved after this call for that reason. If you do that, the resulting <see cref="Memory{T}"/> will have the
+    /// same length as <see cref="KnownCount"/> had. If you want to reuse this object, you must call <see
+    /// cref="Reset"/>, because the internal array is removed and <see cref="KnownCount"/> is set to 0 to ensure the
+    /// result's exclusivity.
     /// </summary>
     public Memory<T> HandOver()
     {

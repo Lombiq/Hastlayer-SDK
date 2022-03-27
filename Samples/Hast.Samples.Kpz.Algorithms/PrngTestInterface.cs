@@ -11,10 +11,10 @@ namespace Hast.Samples.Kpz.Algorithms;
 //      32-bit random output
 
 /// <summary>
-/// This class was used to debug the problems we experienced while trying to get the MWC64X PRNG working
-/// on the hardware. It is the class used when selecting "PRNG test (FPGA)" on the GUI.
-/// I'm not replacing it with Hast.Algorithms.PrngMWC64X on reason, to allow us to play with PRNG implementations
-/// later (without screwing up other algorithms.)
+/// This class was used to debug the problems we experienced while trying to get the MWC64X PRNG working on the
+/// hardware. It is the class used when selecting "PRNG test (FPGA)" on the GUI. I'm not replacing it with
+/// Hast.Algorithms.PrngMWC64X on reason, to allow us to play with PRNG implementations later (without screwing up other
+/// algorithms.)
 /// </summary>
 public class PrngTestInterface
 {
@@ -31,7 +31,9 @@ public class PrngTestInterface
         memory.WriteUInt32(2, randomWord);
     }
 
-    /// <summary>It runs the PRNG on the FPGA and returns a random 32-bit uint.</summary>
+    /// <summary>
+    /// It runs the PRNG on the FPGA and returns a random 32-bit uint.
+    /// </summary>
     public uint GetNextRandom(SimpleMemory memory)
     {
         MWC64X(memory);

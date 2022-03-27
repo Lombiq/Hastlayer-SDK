@@ -4,8 +4,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Hast.Common.Numerics;
 
 /// <summary>
-/// Special Hastlayer-supported SIMD (Single Instruction Multiple Data) operations that can be utilized to execute
-/// an operation on multiple elements at once.
+/// Special Hastlayer-supported SIMD (Single Instruction Multiple Data) operations that can be utilized to execute an
+/// operation on multiple elements at once.
 /// </summary>
 /// <remarks>
 /// <para>

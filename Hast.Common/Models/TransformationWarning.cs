@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
 using Hast.Layer;
+using System.Diagnostics;
 
 namespace Hast.Common.Models;
 

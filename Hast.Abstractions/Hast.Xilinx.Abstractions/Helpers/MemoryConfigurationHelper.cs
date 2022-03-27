@@ -1,7 +1,7 @@
-using System.Linq;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace Hast.Xilinx.Abstractions.Helpers;
 

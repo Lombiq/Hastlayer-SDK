@@ -5,12 +5,14 @@ using Lombiq.Arithmetics;
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// A sample showing how custom-sized floating point numbers of type Posit (<see href="https://posithub.org" />)
-/// can be used with Hastlayer.
+/// A sample showing how custom-sized floating point numbers of type Posit ( <see href="https://posithub.org"/>) can be
+/// used with Hastlayer.
 /// </summary>
 /// <remarks>
-/// <para>This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable,
-/// <see cref="Posit32Calculator"/>.</para>
+/// <para>
+/// This sample is added here for future use. At the time statically-sized Posits like Posit32 are better usable, <see
+/// cref="Posit32Calculator"/>.
+/// </para>
 /// </remarks>
 public class PositCalculator
 {
@@ -40,8 +42,8 @@ public class PositCalculator
 
 public static class PositCalculatorExtensions
 {
-    // While Hastlayer can figure out if an array is statically sized most of the time we need to specify the below
-    // ones manually. See UnumCalculatorSampleRunner.
+    // While Hastlayer can figure out if an array is statically sized most of the time we need to specify the below ones
+    // manually. See UnumCalculatorSampleRunner.
     public static readonly string[] ManuallySizedArrays = new[]
     {
         "System.UInt32[] Lombiq.Arithmetics.BitMask::Segments()",

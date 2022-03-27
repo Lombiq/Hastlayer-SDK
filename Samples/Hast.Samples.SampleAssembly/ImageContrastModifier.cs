@@ -48,8 +48,8 @@ public class ImageContrastModifier
 
         if (pixelCount % MaxDegreeOfParallelism != 0)
         {
-            // This will take care of the rest of the pixels. This is wasteful as on the last step not all Tasks
-            // will work on something but it's a way to keep the number of Tasks constant.
+            // This will take care of the rest of the pixels. This is wasteful as on the last step not all Tasks will
+            // work on something but it's a way to keep the number of Tasks constant.
             stepCount += 1;
         }
 
@@ -60,9 +60,9 @@ public class ImageContrastModifier
                 var pixelBytes = memory.Read4Bytes((i * MaxDegreeOfParallelism) + t + ChangeContrastImageStartIndex);
 
                 // Using an input class to also pass contrastValue because it's currently not supported to access
-                // variables from the parent scope from inside Tasks (you need to explicitly pass in all inputs).
-                // Using an output class to pass the pixel values back because returning an array from Tasks is not
-                // supported at the time either.
+                // variables from the parent scope from inside Tasks (you need to explicitly pass in all inputs). Using
+                // an output class to pass the pixel values back because returning an array from Tasks is not supported
+                // at the time either.
                 tasks[t] = Task.Factory.StartNew(
                     inputObject =>
                     {
@@ -91,8 +91,8 @@ public class ImageContrastModifier
     }
 
     /// <summary>
-    /// Changes the contrast of an image. Same as <see cref="ChangeContrast"/>. Used for Hast.Communication.Tester
-    /// to access this sample by a common method name just for testing. Internal so it doesn't bother otherwise.
+    /// Changes the contrast of an image. Same as <see cref="ChangeContrast"/>. Used for Hast.Communication.Tester to
+    /// access this sample by a common method name just for testing. Internal so it doesn't bother otherwise.
     /// </summary>
     /// <param name="memory">The <see cref="SimpleMemory"/> object representing the accessible memory space.</param>
     internal virtual void Run(SimpleMemory memory) => ChangeContrast(memory);

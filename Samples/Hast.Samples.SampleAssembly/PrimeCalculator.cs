@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// Example for a SimpleMemory-using algorithm. Also see <c>PrimeCalculatorSampleRunner</c> on what to configure to
-/// make this work.
+/// Example for a SimpleMemory-using algorithm. Also see <c>PrimeCalculatorSampleRunner</c> on what to configure to make
+/// this work.
 /// </summary>
 [SuppressMessage(
     "Minor Code Smell",
@@ -17,9 +17,10 @@ namespace Hast.Samples.SampleAssembly;
     Justification = "Helpers are moved together to a separate region")]
 public class PrimeCalculator
 {
-    // It's good to have common cell indices in constants like this, so they can be used from multiple methods
-    // like below. Note the Hungarian notation-like prefixes. These add some clarity but are not mandatory.
+    // It's good to have common cell indices in constants like this, so they can be used from multiple methods like
+    // below. Note the Hungarian notation-like prefixes. These add some clarity but are not mandatory.
     private const int IsPrimeNumberInputUInt32Index = 0;
+
     private const int IsPrimeNumberOutputBooleanIndex = 0;
     private const int ArePrimeNumbersInputUInt32CountIndex = 0;
     private const int ArePrimeNumbersInputUInt32SStartIndex = 1;
@@ -27,10 +28,10 @@ public class PrimeCalculator
 
     private const int MaxDegreeOfParallelism = 30;
 
-    // Note that below there are method pairs: one method with a SimpleMemory parameter and one with built-in types.
-    // The hardware entry points, i.e. the methods actually called from the host PC on the hardware device will be
-    // the ones with SimpleMemory: do every accelerated processing in there. The other methods are wrappers so you
-    // can execute the inner methods more easily but they won't be converted to hardware.
+    // Note that below there are method pairs: one method with a SimpleMemory parameter and one with built-in types. The
+    // hardware entry points, i.e. the methods actually called from the host PC on the hardware device will be the ones
+    // with SimpleMemory: do every accelerated processing in there. The other methods are wrappers so you can execute
+    // the inner methods more easily but they won't be converted to hardware.
 
     /// <summary>
     /// Calculates whether a number is prime.
@@ -42,8 +43,8 @@ public class PrimeCalculator
     /// should be void methods having a single <see cref="SimpleMemory"/> argument. You can find the corresponding
     /// wrapper method below as IsPrimeNumber(uint number).
     ///
-    /// Note that hardware entry points need to be public and virtual, and they mustn't have any other parameters
-    /// than a single SimpleMemory one.
+    /// Note that hardware entry points need to be public and virtual, and they mustn't have any other parameters than a
+    /// single SimpleMemory one.
     /// </para>
     /// </remarks>
     public virtual void IsPrimeNumberSync(SimpleMemory memory)
@@ -59,8 +60,8 @@ public class PrimeCalculator
     /// </summary>
     /// <remarks>
     /// <para>
-    /// For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized
-    /// hardware entry point method async like this.
+    /// For efficient parallel execution with multiple connected FPGA boards you can make a non-parallelized hardware
+    /// entry point method async like this.
     /// </para>
     /// </remarks>
     public virtual Task IsPrimeNumberAsync(SimpleMemory memory)
@@ -94,10 +95,10 @@ public class PrimeCalculator
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This demonstrates how you can write parallelized code that Hastlayer will process and turn into
-    /// hardware-level parallelization: the Tasks' bodies will be copied in hardware as many times as many Tasks you
-    /// start; thus, the actual level of parallelism you get on the hardware corresponds to the number of Tasks, not
-    /// the number of CPU cores.
+    /// This demonstrates how you can write parallelized code that Hastlayer will process and turn into hardware-level
+    /// parallelization: the Tasks' bodies will be copied in hardware as many times as many Tasks you start; thus, the
+    /// actual level of parallelism you get on the hardware corresponds to the number of Tasks, not the number of CPU
+    /// cores.
     /// </para>
     /// </remarks>
     public virtual void ParallelizedArePrimeNumbers(SimpleMemory memory)
@@ -105,8 +106,8 @@ public class PrimeCalculator
         // We need this information explicitly as we can't store arrays directly in memory.
         uint numberCount = memory.ReadUInt32(ArePrimeNumbersInputUInt32CountIndex);
 
-        // At the moment Hastlayer only supports a fixed degree of parallelism so we need to pad the input array
-        // if necessary, see PrimeCalculatorExtensions.
+        // At the moment Hastlayer only supports a fixed degree of parallelism so we need to pad the input array if
+        // necessary, see PrimeCalculatorExtensions.
         var tasks = new Task<bool>[MaxDegreeOfParallelism];
         int i = 0;
         while (i < numberCount)
@@ -137,30 +138,30 @@ public class PrimeCalculator
 
     /// <summary>
     /// Internal implementation of prime number checking. This is here so we can use it simpler from two methods.
-    /// Because when you want to pass data between methods you can freely use supported types as arguments, you
-    /// don't need to pass data through SimpleMemory.
+    /// Because when you want to pass data between methods you can freely use supported types as arguments, you don't
+    /// need to pass data through SimpleMemory.
     /// </summary>
     /// <remarks>
     /// <para>
     /// Note the usage of the AggressiveInlining option, which tells Hastlayer that the method can be inlined, i.e.
-    /// basically its implementation can be copied over to where it is called. This is a performance optimization:
-    /// this way the overhead of method calls is eliminated and thus execution will be faster (very useful if you
-    /// have small methods called frequently, like this one from ParallelizedArePrimeNumbers()) but the hardware
-    /// implementation will most possibly use more resources from the FPGA (though not always; since the method
-    /// invocation was cut out it can even utilize less resources, check for your program).
+    /// basically its implementation can be copied over to where it is called. This is a performance optimization: this
+    /// way the overhead of method calls is eliminated and thus execution will be faster (very useful if you have small
+    /// methods called frequently, like this one from ParallelizedArePrimeNumbers()) but the hardware implementation
+    /// will most possibly use more resources from the FPGA (though not always; since the method invocation was cut out
+    /// it can even utilize less resources, check for your program).
     ///
     /// In the case of the PrimeCalculator sample inlining this method had the following effects:
     /// - Execution time went down: ArePrimeNumbers() took 1151ms without and 1069ms with inlining (-7%),
-    ///   ParallelizedArePrimeNumbers() took 64ms without and 60ms with inlining (-6%).
-    /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that
-    ///   limits further use).
+    /// ParallelizedArePrimeNumbers() took 64ms without and 60ms with inlining (-6%).
+    /// - Resource usage went up from 77% to 79% (for the most utilized resource type on the FPGA, the one that limits
+    /// further use).
     ///
     /// Methods can also be inlined with the help of the
     /// <c>TransformerConfiguration().AddAdditionalInlinableMethod&lt;T&gt;()</c> configuration.
     ///
-    /// WARNING: be sure not to overdo inlining, because just inlining everything (especially if inlined methods
-    /// also call inlined methods...) can quickly create giant hardware implementations that won't be just most
-    /// possibly too big for the FPGA but also very slow to transform.
+    /// WARNING: be sure not to overdo inlining, because just inlining everything (especially if inlined methods also
+    /// call inlined methods...) can quickly create giant hardware implementations that won't be just most possibly too
+    /// big for the FPGA but also very slow to transform.
     /// </para>
     /// </remarks>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -180,12 +181,13 @@ public class PrimeCalculator
         return i == factor + 1;
     }
 
-    // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
-    // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
-    // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
-    // in them that is not Hastlayer-compatible.
+    // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These won't be
+    // transformed into hardware since they're automatically omitted by Hastlayer (because they're not hardware entry
+    // point members, nor are they used by any other transformed member). Thus you can do anything in them that is not
+    // Hastlayer-compatible.
 
     #region Helpers
+
     public bool IsPrimeNumberSync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
         RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
 
@@ -252,5 +254,5 @@ public class PrimeCalculator
         return output;
     }
 
-    #endregion
+    #endregion Helpers
 }

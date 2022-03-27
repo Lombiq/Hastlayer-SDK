@@ -14,8 +14,7 @@ internal class Posit32CalculatorSampleRunner : ISampleRunner
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<Posit32Calculator>();
 
-    // Use the below config if you just want to transform only ParallelizedCalculateIntegerSumUpToNumbers to
-    // hardware.
+    // Use the below config if you just want to transform only ParallelizedCalculateIntegerSumUpToNumbers to hardware.
     //// configuration.AddHardwareEntryPointMethod<Posit32Calculator>(p => p.ParallelizedCalculateIntegerSumUpToNumbers((SimpleMemory)null));
 
     public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)

@@ -38,6 +38,7 @@ public class CatapultCommunicationService : CommunicationServiceBase
         ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
 
     #region Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
+
     private static Memory<byte> HotfixInput(Memory<byte> memory)
     {
         if (memory.Length <= SimpleMemory.MemoryCellSizeBytes) return memory;
@@ -61,7 +62,8 @@ public class CatapultCommunicationService : CommunicationServiceBase
 
         return softwareCells;
     }
-    #endregion
+
+    #endregion Temporary solution while the role uses the 16x size hardware cells instead of SimpleMemory cells.
 
     public override async Task<IHardwareExecutionInformation> ExecuteAsync(
         SimpleMemory simpleMemory,
@@ -71,9 +73,9 @@ public class CatapultCommunicationService : CommunicationServiceBase
         _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
         {
             // Because the FPGA_GetNumberEndpoints function is not implemented in the current driver (and it's not
-            // included in the CatapultNativeLibrary interface because of that) it's not possible to know the
-            // number of endpoints. Instead this algorithm probes the first 8 indices. The single device is
-            // expected to be in endpoint 0 according to spec so this will get at least one result always.
+            // included in the CatapultNativeLibrary interface because of that) it's not possible to know the number of
+            // endpoints. Instead this algorithm probes the first 8 indices. The single device is expected to be in
+            // endpoint 0 according to spec so this will get at least one result always.
             var libraries = await Task.WhenAll(Enumerable.Range(0, 7).Select(i => Task.Run(() =>
                 {
                     try

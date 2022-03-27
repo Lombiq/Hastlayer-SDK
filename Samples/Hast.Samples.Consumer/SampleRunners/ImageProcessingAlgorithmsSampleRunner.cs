@@ -13,14 +13,13 @@ internal class ImageProcessingAlgorithmsSampleRunner : ISampleRunner
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<ImageContrastModifier>();
 
-    // ImageFilter is not parallelized, so not including it not to take away FPGA resources from
-    // ImageContrastModifier:
+    // ImageFilter is not parallelized, so not including it not to take away FPGA resources from ImageContrastModifier:
     //// configuration.AddHardwareEntryPointType<ImageFilter>();
 
     public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
     {
-        // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
-        // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
+        // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find a
+        // 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
         using var bitmap = await Image.LoadAsync<Rgba32>("fpga.jpg");
 
         var imageContrastModifier = await hastlayer

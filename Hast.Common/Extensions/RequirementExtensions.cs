@@ -13,8 +13,8 @@ public static class RequirementExtensions
 {
     /// <summary>
     /// Returns a new collection where the items required by others are guaranteed to be prior to the ones requiring
-    /// them. This way their load order will satisfy their requirements. Beside this, the order of items is an
-    /// undefined implementation detail. If there are no requirements the <paramref name="source"/> order is kept.
+    /// them. This way their load order will satisfy their requirements. Beside this, the order of items is an undefined
+    /// implementation detail. If there are no requirements the <paramref name="source"/> order is kept.
     /// </summary>
     /// <param name="source">The original collection.</param>
     /// <typeparam name="TItem">The <see cref="IRequirement{T}"/> type of <paramref name="source"/>.</typeparam>

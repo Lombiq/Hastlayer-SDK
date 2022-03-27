@@ -38,6 +38,7 @@ public static class Constants
     }
 
     #region Unique constants from header files
+
     public const int DefaultFlashAccessTimeoutInMilliseconds = 5 * 60 * 1_000;
     public const string ErrorLabels = "hr:min:sec:ms,cycles,pid,tid,filename,line,errmsg,";
     public const string DefaultVersionManifestFile = "FPGADefaultVersionManifest.ini";
@@ -47,13 +48,14 @@ public static class Constants
     public const int PcieHipNumber = 0;
     public const int MaxBufferSizeBytes = 65_536;
     public static readonly Version LibraryVersion = new(3, 40);
-    #endregion
+
+    #endregion Unique constants from header files
 
     #region Grouped constants from header files
 
     /// <summary>
-    /// The return value of the functions in the native Catapult FPGA library.
-    /// It indicates the success or error state of the function call.
+    /// The return value of the functions in the native Catapult FPGA library. It indicates the success or error state
+    /// of the function call.
     /// </summary>
     public enum Status
     {
@@ -190,7 +192,8 @@ public static class Constants
         public const uint Channel1 = 700;
         public const uint Interleaved = 800;
     }
-    #endregion
+
+    #endregion Grouped constants from header files
 
     #region Header sizes
 
@@ -210,17 +213,16 @@ public static class Constants
         public const int PayloadLengthCells = sizeof(int);
 
         /// <summary>
-        /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is
-        /// more than what would fit into a single slot then the header for the second slot will contain the
-        /// SliceIndex 1, for the third 2, and for the last one <see cref="SliceCount"/> - 1.
+        /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is more
+        /// than what would fit into a single slot then the header for the second slot will contain the SliceIndex 1,
+        /// for the third 2, and for the last one <see cref="SliceCount"/> - 1.
         /// </summary>
         public const int SliceIndex = sizeof(int);
 
         /// <summary>
-        /// The number of slices the data is transmitted in. If the data has fewer bytes than BufferPayloadSize
-        /// then it's always 1. Otherwise it's PayloadLengthCells / BufferPayloadSize rounded up. If there are
-        /// more input slices than slots on the hardware, then the response will behave as if the input sliceCount
-        /// was only 1.
+        /// The number of slices the data is transmitted in. If the data has fewer bytes than BufferPayloadSize then
+        /// it's always 1. Otherwise it's PayloadLengthCells / BufferPayloadSize rounded up. If there are more input
+        /// slices than slots on the hardware, then the response will behave as if the input sliceCount was only 1.
         /// </summary>
         public const int SliceCount = sizeof(int);
 
@@ -246,9 +248,9 @@ public static class Constants
         public const int PayloadLengthCells = sizeof(int);
 
         /// <summary>
-        /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is
-        /// more than what would fit into a single slot then the header for the second slot will contain the
-        /// SliceIndex 1, for the third 2, and for the last one <see cref="Total"/> - 1.
+        /// Zero-based index of the current data slice (at least zero and less than sliceCount). If the data is more
+        /// than what would fit into a single slot then the header for the second slot will contain the SliceIndex 1,
+        /// for the third 2, and for the last one <see cref="Total"/> - 1.
         /// </summary>
         public const int SliceIndex = sizeof(int);
 
@@ -257,5 +259,6 @@ public static class Constants
         /// </summary>
         public const int Total = HardwareExecutionTime + PayloadLengthCells + SliceIndex;
     }
-    #endregion
+
+    #endregion Header sizes
 }

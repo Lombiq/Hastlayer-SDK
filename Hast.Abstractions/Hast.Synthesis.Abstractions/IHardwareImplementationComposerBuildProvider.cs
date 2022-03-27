@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 namespace Hast.Synthesis.Abstractions;
 
 /// <summary>
-/// If <see cref="CanCompose"/> returns <see langword="true"/> it performs any build actions and fills in the
-/// <see cref="IHardwareImplementation"/> given by the <see cref="VhdlHardwareImplementationComposer"/>.
+/// If <see cref="CanCompose"/> returns <see langword="true"/> it performs any build actions and fills in the <see
+/// cref="IHardwareImplementation"/> given by the <see cref="VhdlHardwareImplementationComposer"/>.
 /// </summary>
 public interface IHardwareImplementationComposerBuildProvider : IRequirement<string>, IProgressInvoker, IDependency
 {
     /// <summary>
-    /// Gets the functions installed by other providers. If any of them returns <see langword="true"/> this provider
-    /// is skipped.
+    /// Gets the functions installed by other providers. If any of them returns <see langword="true"/> this provider is
+    /// skipped.
     /// </summary>
     IDictionary<string, BuildProviderShortcut> Shortcuts { get; }
 
     /// <summary>
-    /// Determines if the instance is applicable to the current composition task based on the
-    /// <paramref name="context"/>.
+    /// Determines if the instance is applicable to the current composition task based on the <paramref
+    /// name="context"/>.
     /// </summary>
     bool CanCompose(IHardwareImplementationCompositionContext context);
 

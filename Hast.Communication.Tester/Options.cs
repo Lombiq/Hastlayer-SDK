@@ -58,6 +58,7 @@ public class Options
         HelpText = "Sets the logging level for 'hastlayer', 0 for most verbose, 6 for nothing. (Trace, Debug, " +
         "Info, Warning, Error, Critical, None)")]
     public int LogLevelInt { get => (int)LogLevel; set => LogLevel = (LogLevel)value; }
+
     public LogLevel LogLevel { get; set; } = LogLevel.Information;
 
     [Option(

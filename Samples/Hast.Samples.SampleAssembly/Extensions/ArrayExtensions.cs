@@ -1,13 +1,12 @@
-﻿using System.Linq;
+using System.Linq;
 
 namespace System;
 
 internal static class ArrayExtensions
 {
     /// <summary>
-    /// Padding the input array as necessary to have a multiple of MaxDegreeOfParallelism. This is needed because
-    /// at the moment Hastlayer only supports a fixed degree of parallelism. This is the simplest way to overcome
-    /// this.
+    /// Padding the input array as necessary to have a multiple of MaxDegreeOfParallelism. This is needed because at the
+    /// moment Hastlayer only supports a fixed degree of parallelism. This is the simplest way to overcome this.
     /// </summary>
     public static T[] PadToMultipleOf<T>(this T[] arrayToPad, int multipleOf)
     {

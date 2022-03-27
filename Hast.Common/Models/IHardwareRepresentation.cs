@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer;
 
 /// <summary>
-/// Represents the implemented hardware that was created from the hardware description generated based on the
-/// original .NET assemblies.
+/// Represents the implemented hardware that was created from the hardware description generated based on the original
+/// .NET assemblies.
 /// </summary>
 public interface IHardwareRepresentation
 {

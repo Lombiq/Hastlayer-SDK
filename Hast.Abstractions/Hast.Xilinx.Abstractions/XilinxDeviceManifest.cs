@@ -20,9 +20,9 @@ public class VitisDeviceManifest : XilinxDeviceManifest
     public bool SupportsHbm { get; set; } = true;
 
     /// <summary>
-    /// Gets or sets the collection of supported platform names (can be partial, wildcard is considered at the end).
-    /// The full platform name is the name of the directory in $XILINX_PLATFORM (defaults to "$XILINX_XRT/platforms"
-    /// if not set) where that directory contains an .xpfm file.
+    /// Gets or sets the collection of supported platform names (can be partial, wildcard is considered at the end). The
+    /// full platform name is the name of the directory in $XILINX_PLATFORM (defaults to "$XILINX_XRT/platforms" if not
+    /// set) where that directory contains an .xpfm file.
     /// </summary>
     [SuppressMessage(
         "Usage",

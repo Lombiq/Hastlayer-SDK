@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Hast.Algorithms;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly;
 

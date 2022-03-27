@@ -49,9 +49,9 @@ public sealed class DevicePoolManager : IDevicePoolManager
                 throw new InvalidOperationException("There are no devices in the device pool (i.e. no connected devices could be detected).");
             }
 
-            // If there is an available device, return a handle to it. If not, then we put the request into a
-            // queue. The method then returns a TaskCompletionSource that will complete once the a reserved device
-            // is freed up and this request is the next in the queue.
+            // If there is an available device, return a handle to it. If not, then we put the request into a queue. The
+            // method then returns a TaskCompletionSource that will complete once the a reserved device is freed up and
+            // this request is the next in the queue.
 
             var firstAvailableDevice = _devicePool.Values.FirstOrDefault(device => !device.IsBusy);
 

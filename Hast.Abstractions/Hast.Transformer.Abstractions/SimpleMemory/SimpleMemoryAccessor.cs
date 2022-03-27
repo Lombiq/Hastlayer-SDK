@@ -24,8 +24,8 @@ public class SimpleMemoryAccessor
     /// Gets the memory contents with additional prefix.
     /// </summary>
     /// <param name="prefixCellCount">
-    /// The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>.
-    /// On what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>.
+    /// The length of the prefix in cells. It must not be greater than <see cref="SimpleMemory.PrefixCellCount"/>. On
+    /// what this means see the remarks on <see cref="Set(Memory{byte}, int)"/>.
     /// </param>
     public Memory<byte> Get(int prefixCellCount)
     {
@@ -53,13 +53,15 @@ public class SimpleMemoryAccessor
     /// </summary>
     /// <param name="data">The new data.</param>
     /// <param name="prefixCellCount">
-    /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying
-    /// <see cref="SimpleMemory"/>.
+    /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying <see
+    /// cref="SimpleMemory"/>.
     /// </param>
     /// <remarks>
-    /// <para>Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you
-    /// must use at least as many prefixCellCount for Set as for Get if the <see cref="SimpleMemory"/> is reused,
-    /// otherwise the memory has to be copied and that incurs a performance hit.</para>
+    /// <para>
+    /// Using prefixCellCount allows you to set the communication headers during Get without an extra copy, but you must
+    /// use at least as many prefixCellCount for Set as for Get if the <see cref="SimpleMemory"/> is reused, otherwise
+    /// the memory has to be copied and that incurs a performance hit.
+    /// </para>
     /// </remarks>
     public void Set(Memory<byte> data, int prefixCellCount = 0)
     {
@@ -74,8 +76,8 @@ public class SimpleMemoryAccessor
     public void Store(Stream stream) => stream.Write(Get().Span);
 
     /// <summary>
-    /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format to a file. Overwrites the file
-    /// if it exists, creates it otherwise.
+    /// Saves the underlying <see cref="SimpleMemory"/> to a binary storage format to a file. Overwrites the file if it
+    /// exists, creates it otherwise.
     /// </summary>
     /// <param name="filePath">The path under to write the storage data file to.</param>
     public void Store(string filePath)
@@ -90,8 +92,8 @@ public class SimpleMemoryAccessor
     /// </summary>
     /// <param name="stream">The stream to read the storage data from.</param>
     /// <param name="prefixCellCount">
-    /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying
-    /// <see cref="SimpleMemory"/>.
+    /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying <see
+    /// cref="SimpleMemory"/>.
     /// </param>
     public void Load(Stream stream, int prefixCellCount = 0)
     {
@@ -107,8 +109,8 @@ public class SimpleMemoryAccessor
     /// </summary>
     /// <param name="filePath">The path of the file to read the storage data from.</param>
     /// <param name="prefixCellCount">
-    /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying
-    /// <see cref="SimpleMemory"/>.
+    /// The number of cells to be used as the <see cref="SimpleMemory.PrefixCellCount"/> value for the underlying <see
+    /// cref="SimpleMemory"/>.
     /// </param>
     public void Load(string filePath, int prefixCellCount = 0)
     {

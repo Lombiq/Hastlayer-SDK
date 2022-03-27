@@ -9,37 +9,36 @@ namespace Hast.Algorithms;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Taken from https://github.com/asik/FixedMath.Net and modified to be Hastlayer-compatible. See the original
-/// license below:
+/// Taken from https://github.com/asik/FixedMath.Net and modified to be Hastlayer-compatible. See the original license
+/// below:
 ///
 /// Copyright 2012 André Slupik
 ///
-/// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance
-/// with the License. You may obtain a copy of the License at
+/// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+/// the License. You may obtain a copy of the License at
 ///
 /// http://www.apache.org/licenses/LICENSE-2.0
 ///
-/// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
-/// on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
-/// for the specific language governing permissions and limitations under the License.
+/// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+/// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+/// specific language governing permissions and limitations under the License.
 ///
 /// This project uses code from the libfixmath library, which is under the following license:
 ///
 /// Copyright (C) 2012 Petteri Aimonen
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-/// documentation files (the "Software"), to deal in the Software without restriction, including without limitation
-/// the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
-/// to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+/// documentation files (the "Software"), to deal in the Software without restriction, including without limitation the
+/// rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+/// permit persons to whom the Software is furnished to do so, subject to the following conditions:
 ///
-/// The above copyright notice and this permission notice shall be included in all copies or substantial portions of
-/// the Software.
+/// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+/// Software.
 ///
-/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-/// THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
-/// CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-/// DEALINGS IN THE SOFTWARE.
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+/// WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+/// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+/// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// </para>
 /// </remarks>
 public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
@@ -52,16 +51,18 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     private const uint UnsignedHalf = 0x_8000_0000;
 
     // Original static fields commented out because those are not yet supported by Hastlayer, see:
-    // https://github.com/Lombiq/Hastlayer-SDK/issues/24
-    // Precision is left in because due to decimal it won't be possible to transform any way, but can be used on
-    // CPU still.
+    // https://github.com/Lombiq/Hastlayer-SDK/issues/24 Precision is left in because due to decimal it won't be
+    // possible to transform any way, but can be used on CPU still.
 
     // Precision of this type is 2^-32, that is 2,3283064365386962890625E-10
     public static readonly decimal Precision = (decimal)new Fix64(1L);
 
     public static Fix64 MaxValue() => new(MaxRawValue);
+
     public static Fix64 MinValue() => new(MinRawValue);
+
     public static Fix64 One() => new(OneRawValue);
+
     public static Fix64 Zero() => default;
 
     /// <summary>
@@ -95,13 +96,13 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
         return new[] { low, high };
     }
 
-    #endregion
+    #endregion Instance methods
 
     #region Mathematical functions
 
     /// <summary>
-    /// Returns a number indicating the sign of a Fix64 number.
-    /// Returns 1 if the value is positive, 0 if is 0, and -1 if it is negative.
+    /// Returns a number indicating the sign of a Fix64 number. Returns 1 if the value is positive, 0 if is 0, and -1 if
+    /// it is negative.
     /// </summary>
     public static int Sign(Fix64 value) =>
         value.RawValue switch
@@ -153,8 +154,8 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     }
 
     /// <summary>
-    /// Rounds a value to the nearest integral value.
-    /// If the value is halfway between an even and an uneven value, returns the even value.
+    /// Rounds a value to the nearest integral value. If the value is halfway between an even and an uneven value,
+    /// returns the even value.
     /// </summary>
     public static Fix64 Round(Fix64 value)
     {
@@ -181,9 +182,7 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     /// <summary>
     /// Returns the square root of a specified number.
     /// </summary>
-    /// <exception cref="ArgumentOutOfRangeException">
-    /// The argument was negative.
-    /// </exception>
+    /// <exception cref="ArgumentOutOfRangeException">The argument was negative.</exception>
     public static Fix64 Sqrt(Fix64 x)
     {
         var xl = x.RawValue;
@@ -255,13 +254,13 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
         bit = 1UL << ((BitCount / 2) - 2);
     }
 
-    #endregion
+    #endregion Mathematical functions
 
     #region Operators
 
     /// <summary>
-    /// Adds x and y. Performs saturating addition, i.e. in case of overflow, rounds to MinValue or MaxValue
-    /// depending on sign of operands.
+    /// Adds x and y. Performs saturating addition, i.e. in case of overflow, rounds to MinValue or MaxValue depending
+    /// on sign of operands.
     /// </summary>
     public static Fix64 operator +(Fix64 x, Fix64 y)
     {
@@ -284,8 +283,8 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     public static Fix64 FastAdd(Fix64 x, Fix64 y) => new(x.RawValue + y.RawValue);
 
     /// <summary>
-    /// Subtracts y from x. Performs saturating subtraction, i.e. in case of overflow, rounds to MinValue or
-    /// MaxRawValue depending on sign of operands.
+    /// Subtracts y from x. Performs saturating subtraction, i.e. in case of overflow, rounds to MinValue or MaxRawValue
+    /// depending on sign of operands.
     /// </summary>
     public static Fix64 operator -(Fix64 x, Fix64 y)
     {
@@ -334,8 +333,8 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
 
         bool opSignsEqual = ((xl ^ yl) & MinRawValue) == 0;
 
-        // If signs of operands are equal and sign of result is negative, then multiplication overflowed positively
-        // the reverse is also true.
+        // If signs of operands are equal and sign of result is negative, then multiplication overflowed positively the
+        // reverse is also true.
         if (opSignsEqual)
         {
             if (sum < 0 || (overflow && xl > 0))
@@ -358,8 +357,8 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
 
         if (opSignsEqual) return new Fix64(sum);
 
-        // If signs differ, both operands' magnitudes are greater than 1, and the result is greater than the
-        // negative operand, then there was negative overflow.
+        // If signs differ, both operands' magnitudes are greater than 1, and the result is greater than the negative
+        // operand, then there was negative overflow.
         var (posOp, negOp) = xl > yl ? (xl, yl) : (yl, xl);
 
         return sum > negOp && negOp < -OneRawValue && posOp > OneRawValue
@@ -368,8 +367,8 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     }
 
     /// <summary>
-    /// Performs multiplication without checking for overflow. Useful for performance-critical code where the values
-    /// are guaranteed not to cause overflow.
+    /// Performs multiplication without checking for overflow. Useful for performance-critical code where the values are
+    /// guaranteed not to cause overflow.
     /// </summary>
     public static Fix64 FastMul(Fix64 x, Fix64 y)
     {
@@ -483,7 +482,7 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
 
     public static bool operator <=(Fix64 x, Fix64 y) => x.RawValue <= y.RawValue;
 
-    #endregion
+    #endregion Operators
 
     #region Casts
 
@@ -503,7 +502,7 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
 
     public static explicit operator decimal(Fix64 value) => (decimal)value.RawValue / OneRawValue;
 
-    #endregion
+    #endregion Casts
 
     #region Factories
 
@@ -518,7 +517,7 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
         return new Fix64(rawValue);
     }
 
-    #endregion
+    #endregion Factories
 
     private static long AddOverflowHelper(long x, long y, ref bool overflow)
     {

@@ -38,16 +38,24 @@ public static class KpzTargetExtensions
 [SuppressMessage("Minor Vulnerability", "S2228:Console logging should not be used", Justification = "Opt-in via setting.")]
 public partial class Kpz
 {
-    /// <summary>The probability of pyramid to hole change.</summary>
+    /// <summary>
+    /// The probability of pyramid to hole change.
+    /// </summary>
     private readonly double _probabilityP;
 
-    /// <summary>The probability of hole to pyramid change.</summary>
+    /// <summary>
+    /// The probability of hole to pyramid change.
+    /// </summary>
     private readonly double _probabilityQ;
 
-    /// <summary>The pseudorandom generator is used at various places in the algorithm.</summary>
+    /// <summary>
+    /// The pseudorandom generator is used at various places in the algorithm.
+    /// </summary>
     private readonly NonSecurityRandomizer _random = new();
 
-    /// <summary>See <see cref="StateLogger" />.</summary>
+    /// <summary>
+    /// See <see cref="StateLogger"/>.
+    /// </summary>
     private readonly bool _enableStateLogger;
 
     private readonly KpzTarget _kpzTarget;
@@ -63,16 +71,20 @@ public partial class Kpz
     public int GridHeight => Grid.GetLength(1);
 
 #pragma warning disable CA1819 // Properties should not return arrays
+
     /// <summary>
-    /// Gets or sets the 2D grid of <see cref="KpzNode" /> items on which the KPZ algorithm is performed.
+    /// Gets or sets the 2D grid of <see cref="KpzNode"/> items on which the KPZ algorithm is performed.
     /// </summary>
     public KpzNode[,] Grid { get; set; }
+
 #pragma warning restore CA1819 // Properties should not return arrays
 
     /// <summary>
-    /// <para>Gets or sets the <see cref="StateLogger" /> (if enabled) allows us to inspect the state of the algorithm at
-    /// given steps during its execution. This object can be later passed on to <see cref="InspectForm" />
-    /// to graphically represent it on a UI.</para>
+    /// <para>
+    /// Gets or sets the <see cref="StateLogger"/> (if enabled) allows us to inspect the state of the algorithm at given
+    /// steps during its execution. This object can be later passed on to <see cref="InspectForm"/> to graphically
+    /// represent it on a UI.
+    /// </para>
     /// <note type="caution">
     /// <para>Use a small grid and a low amount of iterations if enabled. It will use a lot of memory.</para>
     /// </note>
@@ -80,11 +92,9 @@ public partial class Kpz
     public KpzStateLogger StateLogger { get; set; }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Kpz"/> class.
-    /// The constructor initializes the parameters of <see cref="Kpz" />, see:
-    /// <see cref="GridWidth" />, <see cref="GridHeight" />,
-    /// <see cref="_probabilityP" />, <see cref="_probabilityQ" />,
-    /// <see cref="StateLogger" />.
+    /// Initializes a new instance of the <see cref="Kpz"/> class. The constructor initializes the parameters of <see
+    /// cref="Kpz"/>, see: <see cref="GridWidth"/>, <see cref="GridHeight"/>, <see cref="_probabilityP"/>, <see
+    /// cref="_probabilityQ"/>, <see cref="StateLogger"/>.
     /// </summary>
     public Kpz(
         int newGridWidth,
@@ -103,7 +113,9 @@ public partial class Kpz
         _kpzTarget = target;
     }
 
-    /// <summary>It fills the <see cref="Grid" /> with random data.</summary>
+    /// <summary>
+    /// It fills the <see cref="Grid"/> with random data.
+    /// </summary>
     public void RandomizeGrid()
     {
         for (int x = 0; x < GridWidth; x++)
@@ -143,9 +155,8 @@ public partial class Kpz
     }
 
     /// <summary>
-    /// It is used during heightmap generation.
-    /// It converts <see cref="KpzNode.Dx" /> and <see cref="KpzNode.Dy" /> boolean values to +1 and -1 integer
-    /// values.
+    /// It is used during heightmap generation. It converts <see cref="KpzNode.Dx"/> and <see cref="KpzNode.Dy"/>
+    /// boolean values to +1 and -1 integer values.
     /// </summary>
     private static int Bool2Delta(bool what) => what ? 1 : -1;
 
@@ -168,19 +179,19 @@ public partial class Kpz
     }
 
     /// <summary>
-    /// It generates a heightmap from the <see cref="Grid" />.
+    /// It generates a heightmap from the <see cref="Grid"/>.
     /// </summary>
-    /// <param name="mean"> output is the mean of the heightmap to be used in statistic calculations later.</param>
+    /// <param name="mean">output is the mean of the heightmap to be used in statistic calculations later.</param>
     /// <param name="periodicityValid">
-    /// output is true if the periodicity of <see cref="Grid" /> is correct at the boundaries.
+    /// output is true if the periodicity of <see cref="Grid"/> is correct at the boundaries.
     /// </param>
     /// <param name="periodicityInvalidXCount">
-    /// output is the number of periodicity errors counted at the borders in the X direction
-    /// (between left and right borders).
+    /// output is the number of periodicity errors counted at the borders in the X direction (between left and right
+    /// borders).
     /// </param>
     /// <param name="periodicityInvalidYCount">
-    /// output is the number of periodicity errors counted at the borders in the Y direction
-    /// (between top and bottom borders).
+    /// output is the number of periodicity errors counted at the borders in the Y direction (between top and bottom
+    /// borders).
     /// </param>
     /// <returns>the heightmap.</returns>
     private int[,] GenerateHeightMap(
@@ -236,11 +247,11 @@ public partial class Kpz
     }
 
     /// <summary>
-    /// It calculates the standard deviation of a heightmap created with <see cref="GenerateHeightMap" />.
-    /// The idea behind it is available at
-    /// <a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Two-pass_algorithm">Wikipedia</a>.
+    /// It calculates the standard deviation of a heightmap created with <see cref="GenerateHeightMap"/>. The idea
+    /// behind it is available at <a
+    /// href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Two-pass_algorithm">Wikipedia</a>.
     /// </summary>
-    /// <param name="mean">is the mean of the heightmap that was output by <see cref="GenerateHeightMap" />.</param>
+    /// <param name="mean">is the mean of the heightmap that was output by <see cref="GenerateHeightMap"/>.</param>
     private double HeightMapStandardDeviation(int[,] inputHeightMap, double mean)
     {
         double variance = 0;
@@ -263,11 +274,11 @@ public partial class Kpz
     }
 
     /// <summary>
-    /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="Grid" />, and randomly switch
-    /// between pyramid and hole, based on <see cref="_probabilityP" /> and <see cref="_probabilityQ" /> parameters.
+    /// Detects pyramid or hole (if any) at the given coordinates in the <see cref="Grid"/>, and randomly switch between
+    /// pyramid and hole, based on <see cref="_probabilityP"/> and <see cref="_probabilityQ"/> parameters.
     /// </summary>
     /// <param name="p">
-    /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="Grid" />.
+    /// contains the coordinates where the function looks if there is a pyramid or hole in the <see cref="Grid"/>.
     /// </param>
     private void RandomlySwitchFourCells(KpzNode[,] grid, KpzCoords p)
     {
@@ -334,8 +345,8 @@ public partial class Kpz
     }
 
     /// <summary>
-    /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps).
-    /// It allows us to debug the steps of the algorithms one by one.
+    /// Runs an iteration of the KPZ algorithm (with <see cref="GridWidth"/> × <see cref="GridHeight"/> steps). It
+    /// allows us to debug the steps of the algorithms one by one.
     /// </summary>
     public void DoHastIterationDebug(IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
     {
@@ -370,8 +381,7 @@ public partial class Kpz
 
         for (int i = 0; i < numberOfStepsInIteration; i++)
         {
-            // We randomly choose a point on the grid.
-            // If there is a pyramid or hole, we randomly switch them.
+            // We randomly choose a point on the grid. If there is a pyramid or hole, we randomly switch them.
 
             // Not crypto.
             var randomPoint = new KpzCoords { X = _random.GetFromRange(GridWidth), Y = _random.GetFromRange(GridHeight) };
@@ -380,8 +390,8 @@ public partial class Kpz
     }
 
     /// <summary>
-    /// Gets the right and bottom neighbours of the point given with the coordinates <paramref name="p"/>
-    /// in the <see cref="Grid" />.
+    /// Gets the right and bottom neighbours of the point given with the coordinates <paramref name="p"/> in the <see
+    /// cref="Grid"/>.
     /// </summary>
     private KpzNeighbours GetNeighbours(KpzNode[,] grid, KpzCoords p)
     {

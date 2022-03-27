@@ -1,13 +1,13 @@
-using System;
-using System.Text;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System;
+using System.Text;
 
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// Algorithm for running Smith-Waterman Genome Matcher. Also see <c>GenomeMatcherSampleRunner</c> on what to
-/// configure to make this work.
+/// Algorithm for running Smith-Waterman Genome Matcher. Also see <c>GenomeMatcherSampleRunner</c> on what to configure
+/// to make this work.
 ///
 /// NOTE: this sample is not parallelized and thus not really suitable for Hastlayer. We'll rework it in the future.
 /// </summary>
@@ -80,7 +80,8 @@ public class GenomeMatcher
                 if (column != 0 && row != 0)
                     diagonalCell = (ushort)memory.ReadUInt32(position - inputOneLength - 1);
 
-                // Increase the value of the diagonal cell if the current elements are the same, and the diagonal cell exists.
+                // Increase the value of the diagonal cell if the current elements are the same, and the diagonal cell
+                // exists.
                 if (memory.ReadUInt32(GetLCSInputOneStartIndex + column) == memory.ReadUInt32(inputTwoStartIndex + row))
                     diagonalCell++;
 

@@ -6,9 +6,9 @@ using System.Diagnostics.CodeAnalysis;
 namespace Hast.Samples.Kpz.Algorithms;
 
 /// <summary>
-/// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM
-/// or LUT RAM of the FPGA, thus it can only handle small table sizes.
-/// <see cref="KpzKernelsInterface"/> contains the entry points for the algorithms to be ran on the FPGA.
+/// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM or
+/// LUT RAM of the FPGA, thus it can only handle small table sizes. <see cref="KpzKernelsInterface"/> contains the entry
+/// points for the algorithms to be ran on the FPGA.
 /// </summary>
 public class KpzKernelsInterface
 {
@@ -36,8 +36,8 @@ public class KpzKernelsInterface
     }
 
     /// <summary>
-    /// This function is for testing how Hastlayer works by running a simple add operation between memory cells
-    /// 0 and 1, and writing the result to cell 2.
+    /// This function is for testing how Hastlayer works by running a simple add operation between memory cells 0 and 1,
+    /// and writing the result to cell 2.
     /// </summary>
     public virtual void TestAdd(SimpleMemory memory) => memory.WriteUInt32(2, memory.ReadUInt32(0) + memory.ReadUInt32(1));
 
@@ -103,16 +103,16 @@ public class KpzKernelsInterface
     /// <param name="hastlayer">The <see cref="Hastlayer"/> instance.</param>
     /// <param name="configuration">The hardware generation configuration.</param>
     /// <param name="hostGrid">
-    ///     This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.
+    /// This is the grid of initial <see cref="KpzNode"/> items for the algorithm to work on.
     /// </param>
     /// <param name="pushToFpga">
-    ///     If this parameter is false, the FPGA will work on the grid currently available in it,
-    ///     instead of the grid in the <paramref name="hostGrid"/> parameter.
+    /// If this parameter is false, the FPGA will work on the grid currently available in it, instead of the grid in the
+    /// <paramref name="hostGrid"/> parameter.
     /// </param>
     /// <param name="testMode">
-    ///     If <see langword="true"/> <see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the
-    ///     cells if it finds an adequate place. It also does only a single poke, then sends the grid back to the
-    ///     host so that the algorithm can be analyzed in the step-by-step window.
+    /// If <see langword="true"/><see cref="KpzKernels.RandomlySwitchFourCells(bool)"/> always switches the cells if it
+    /// finds an adequate place. It also does only a single poke, then sends the grid back to the host so that the
+    /// algorithm can be analyzed in the step-by-step window.
     /// </param>
     /// <param name="randomSeed1">The first random seed for the algorithm.</param>
     /// <param name="randomSeed2">The second random seed for the algorithm.</param>
@@ -145,19 +145,21 @@ public class KpzKernelsInterface
 }
 
 /// <summary>
-/// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM
-/// or LUT RAM of the FPGA, thus it can only handle small table sizes.
-/// <see cref="KpzKernels"/> contains the internal functions and constants to be ran on the FPGA.
+/// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, storing the whole table in the BRAM or
+/// LUT RAM of the FPGA, thus it can only handle small table sizes. <see cref="KpzKernels"/> contains the internal
+/// functions and constants to be ran on the FPGA.
 /// </summary>
 public class KpzKernels
 {
-    // ==== <CONFIGURABLE PARAMETERS> ====
-    // GridWidth and GridHeight should be 2^n
+    // ==== <CONFIGURABLE PARAMETERS> ==== GridWidth and GridHeight should be 2^n
     public const int GridWidth = 8;
+
     public const int GridHeight = 8;
-    // The probability of turning a pyramid into a hole (IntegerProbabilityP),
-    // or a hole into a pyramid (IntegerProbabilityQ).
+
+    // The probability of turning a pyramid into a hole (IntegerProbabilityP), or a hole into a pyramid
+    // (IntegerProbabilityQ).
     public const uint IntegerProbabilityP = 32_767;
+
     public const uint IntegerProbabilityQ = 32_767;
     // ==== </CONFIGURABLE PARAMETERS> ====
 
@@ -175,8 +177,8 @@ public class KpzKernels
     public uint NumberOfIterations = 1;
 
     /// <summary>
-    /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at
-    /// the beginning.
+    /// It loads the TestMode, NumberOfIterations parameters and also the PRNG seed from the SimpleMemory at the
+    /// beginning.
     /// </summary>
     public void InitializeParametersFromMemory(SimpleMemory memory)
     {
@@ -225,8 +227,8 @@ public class KpzKernels
     }
 
     /// <summary>
-    /// Detects pyramid or hole (if any) at the given coordinates in the grid, and randomly switches between pyramid
-    /// and hole, based on probabilityP and probabilityQ parameters (or switches anyway, if forceSwitch is on).
+    /// Detects pyramid or hole (if any) at the given coordinates in the grid, and randomly switches between pyramid and
+    /// hole, based on probabilityP and probabilityQ parameters (or switches anyway, if forceSwitch is on).
     /// </summary>
     public void RandomlySwitchFourCells(bool forceSwitch)
     {
@@ -273,26 +275,26 @@ public class KpzKernels
     private static int GetIndexFromXY(int x, int y) => x + (y * GridWidth);
 
     /// <summary>
-    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-    /// This function returns the dx value of the <see cref="KpzNode"/> from its serialized form.
+    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values. This function
+    /// returns the dx value of the <see cref="KpzNode"/> from its serialized form.
     /// </summary>
     private bool GetGridDx(int index) => (_gridRaw[index] & 1) > 0;
 
     /// <summary>
-    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-    /// This function returns the dy value of the <see cref="KpzNode"/> from its serialized form.
+    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values. This function
+    /// returns the dy value of the <see cref="KpzNode"/> from its serialized form.
     /// </summary>
     private bool GetGridDy(int index) => (_gridRaw[index] & 2) > 0;
 
     /// <summary>
-    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-    /// This function sets the dx value of the <see cref="KpzNode"/> in its serialized form.
+    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values. This function sets
+    /// the dx value of the <see cref="KpzNode"/> in its serialized form.
     /// </summary>
     private void SetGridDx(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~1U) | (value ? 1U : 0);
 
     /// <summary>
-    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values.
-    /// This function sets the dy value of the <see cref="KpzNode"/> in its serialized form.
+    /// In SimpleMemory, the <see cref="KpzNode"/> items are stored as serialized into 32-bit values. This function sets
+    /// the dy value of the <see cref="KpzNode"/> in its serialized form.
     /// </summary>
     private void SetGridDy(int index, bool value) => _gridRaw[index] = (_gridRaw[index] & ~2U) | (value ? 2U : 0);
 }
@@ -320,7 +322,9 @@ public static class KpzKernelsExtensions
         memoryDst.WriteUInt32(KpzKernels.MemIndexNumberOfIterations, numberOfIterations);
     }
 
-    /// <summary>Push table into FPGA.</summary>
+    /// <summary>
+    /// Push table into FPGA.
+    /// </summary>
     public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
     {
         for (int x = 0; x < KpzKernels.GridHeight; x++)
@@ -333,7 +337,9 @@ public static class KpzKernelsExtensions
         }
     }
 
-    /// <summary>Pull table from the FPGA.</summary>
+    /// <summary>
+    /// Pull table from the FPGA.
+    /// </summary>
     public static void CopyFromSimpleMemoryToGrid(KpzNode[,] gridDst, SimpleMemory memorySrc)
     {
         for (int x = 0; x < KpzKernels.GridWidth; x++)

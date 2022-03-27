@@ -14,6 +14,7 @@ internal static class Program
         using var hastlayer = Hastlayer.Create();
 
         #region Configuration
+
         var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
 
         configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
@@ -28,9 +29,11 @@ internal static class Program
                     " milliseconds (net) ",
                     e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds,
                     " milliseconds (all together)."));
-        #endregion
+
+        #endregion Configuration
 
         #region HardwareGeneration
+
         Console.WriteLine("Hardware generation starts.");
         var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
             new[]
@@ -38,9 +41,11 @@ internal static class Program
                 typeof(ParallelAlgorithm).Assembly,
             },
             configuration);
-        #endregion
+
+        #endregion HardwareGeneration
 
         #region Execution
+
         Console.WriteLine("Hardware generated, starting software execution.");
         Console.WriteLine();
 
@@ -59,6 +64,7 @@ internal static class Program
         var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         var output2 = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
         var output3 = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-        #endregion
+
+        #endregion Execution
     }
 }

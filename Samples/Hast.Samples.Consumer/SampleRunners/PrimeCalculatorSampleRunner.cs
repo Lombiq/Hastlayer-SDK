@@ -43,10 +43,9 @@ internal class PrimeCalculatorSampleRunner : ISampleRunner
                 hardwareRepresentation.HardwareGenerationConfiguration);
         }
 
-        // You can also launch hardware-executed method calls in parallel. If there are multiple boards
-        // connected then all of them will be utilized. If the whole device pool is utilized calls will
-        // wait for their turn.
-        // Uncomment if you have multiple boards connected.
+        // You can also launch hardware-executed method calls in parallel. If there are multiple boards connected then
+        // all of them will be utilized. If the whole device pool is utilized calls will wait for their turn. Uncomment
+        // if you have multiple boards connected.
         //// var parallelLaunchedIsPrimeTasks = new List<Task<bool>>();
         //// for (uint i = 100; i < 110; i++)
         //// {
@@ -55,12 +54,11 @@ internal class PrimeCalculatorSampleRunner : ISampleRunner
         //// }
         //// var parallelLaunchedArePrimes = await Task.WhenAll(parallelLaunchedIsPrimeTasks);
 
-        // In-algorithm parallelization:
-        // Note that if the amount of numbers used here can't be divided by PrimeCalculator.MaxDegreeOfParallelism
-        // then for ParallelizedArePrimeNumbers the input and output will be padded to a divisible amount (see
-        // comments in the method). Thus the communication round-trip will be slower for ParallelizedArePrimeNumbers.
-        // Because of this since PrimeCalculator.MaxDegreeOfParallelism is 30 we use 30 numbers here.
-        // All of these numbers except for 9999 are primes.
+        // In-algorithm parallelization: Note that if the amount of numbers used here can't be divided by
+        // PrimeCalculator.MaxDegreeOfParallelism then for ParallelizedArePrimeNumbers the input and output will be
+        // padded to a divisible amount (see comments in the method). Thus the communication round-trip will be slower
+        // for ParallelizedArePrimeNumbers. Because of this since PrimeCalculator.MaxDegreeOfParallelism is 30 we use 30
+        // numbers here. All of these numbers except for 9999 are primes.
         var numbers = new uint[]
         {
             9749, 9999, 902119, 907469, 915851,

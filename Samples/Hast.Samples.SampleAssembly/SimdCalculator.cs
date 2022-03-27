@@ -1,4 +1,4 @@
-﻿using Hast.Common.Numerics;
+using Hast.Common.Numerics;
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using System;
@@ -16,15 +16,14 @@ public enum SimdOperation
 }
 
 /// <summary>
-/// Sample to showcase SIMD (Simple Instruction Multiple Data) processing usage, i.e. operations executed in parallel
-/// on multiple elements of vectors. Also see <c>SimdCalculatorSampleRunner</c> on what to configure to make this
-/// work.
+/// Sample to showcase SIMD (Simple Instruction Multiple Data) processing usage, i.e. operations executed in parallel on
+/// multiple elements of vectors. Also see <c>SimdCalculatorSampleRunner</c> on what to configure to make this work.
 /// </summary>
 /// <remarks>
 /// <para>
-/// <c>System.Numerics.Vectors</c> could be used for SIMD processing on x64 systems. However <see cref="Vector{T}"/>
-/// can only contain that many elements that can fit into the processor's SIMD register and thus is quite
-/// inconvenient to use. So using a custom implementation.
+/// <c>System.Numerics.Vectors</c> could be used for SIMD processing on x64 systems. However <see cref="Vector{T}"/> can
+/// only contain that many elements that can fit into the processor's SIMD register and thus is quite inconvenient to
+/// use. So using a custom implementation.
 /// </para>
 /// </remarks>
 [SuppressMessage(
@@ -37,11 +36,10 @@ public class SimdCalculator
     private const int VectorElementsStartInt32Index = 1;
     private const int ResultVectorElementsStartInt32Index = 1;
 
-    // This needs to be this low to fit all operations on the Nexys A7 board's FPGA and for the design to remain
-    // stable. While only 69% of the FPGA's resources are used unfortunately we can't go above that.
-    // On the same board just transforming AddVectors or SubtractVectors could fit with a degree of parallelism of
-    // more than 500.
-    // On Catapult 170 will fit.
+    // This needs to be this low to fit all operations on the Nexys A7 board's FPGA and for the design to remain stable.
+    // While only 69% of the FPGA's resources are used unfortunately we can't go above that. On the same board just
+    // transforming AddVectors or SubtractVectors could fit with a degree of parallelism of more than 500. On Catapult
+    // 170 will fit.
     public const int MaxDegreeOfParallelism = 20;
 
     public virtual void AddVectors(SimpleMemory memory) => RunSimdOperation(memory, SimdOperation.Add);
@@ -78,8 +76,8 @@ public class SimdCalculator
                 vector2[m] = memory.ReadInt32(VectorElementsStartInt32Index + i + m + elementCount);
             }
 
-            // This prevents the code from turning into a switch expression during decompilation. Those aren't
-            // supported yet.
+            // This prevents the code from turning into a switch expression during decompilation. Those aren't supported
+            // yet.
 #pragma warning disable IDE0010 // Add missing cases
 #pragma warning disable S131 // "switch/Select" statements should contain a "default/Case Else" clauses
             switch (operation)
@@ -109,10 +107,10 @@ public class SimdCalculator
         }
     }
 
-    // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These
-    // won't be transformed into hardware since they're automatically omitted by Hastlayer (because they're not
-    // hardware entry point members, nor are they used by any other transformed member). Thus you can do anything
-    // in them that is not Hastlayer-compatible.
+    // Below are the methods that make the SimpleMemory-using methods easier to consume from the outside. These won't be
+    // transformed into hardware since they're automatically omitted by Hastlayer (because they're not hardware entry
+    // point members, nor are they used by any other transformed member). Thus you can do anything in them that is not
+    // Hastlayer-compatible.
 
     #region Helpers
 
@@ -180,5 +178,5 @@ public class SimdCalculator
         return result.CutToLength(originalElementCount);
     }
 
-    #endregion
+    #endregion Helpers
 }

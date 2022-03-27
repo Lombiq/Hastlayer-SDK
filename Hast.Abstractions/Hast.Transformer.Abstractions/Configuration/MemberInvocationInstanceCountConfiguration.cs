@@ -9,12 +9,12 @@ namespace Hast.Transformer.Abstractions.Configuration;
 public class MemberInvocationInstanceCountConfiguration
 {
     /// <summary>
-    /// Gets the prefix of the member's name. Use the same convention as with
-    /// <see cref="HardwareGenerationConfiguration.HardwareEntryPointMemberNamePrefixes"/>. For lambda expressions use
-    /// the pattern "Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0",
-    /// i.e. specify the name prefix of the calling member, then add ".LambdaExpression" and finally add the lambda's
-    /// index inside the calling member (so if it's the first lambda in the member then it should have the index 0,
-    /// if it's the second, the index 1 and so on).
+    /// Gets the prefix of the member's name. Use the same convention as with <see
+    /// cref="HardwareGenerationConfiguration.HardwareEntryPointMemberNamePrefixes"/>. For lambda expressions use the
+    /// pattern "Hast.Samples.SampleAssembly.PrimeCalculator.ParallelizedArePrimeNumbers.LambdaExpression.0", i.e.
+    /// specify the name prefix of the calling member, then add ".LambdaExpression" and finally add the lambda's index
+    /// inside the calling member (so if it's the first lambda in the member then it should have the index 0, if it's
+    /// the second, the index 1 and so on).
     /// </summary>
     public string MemberNamePrefix { get; private set; }
 
@@ -23,21 +23,18 @@ public class MemberInvocationInstanceCountConfiguration
     /// between members set the maximal depth here.
     /// </summary>
     /// <example>
-    /// A value of 3 would mean that the member can invoke itself three times recursively, i.e. there is the
-    /// member, then it calls itself (depth 1), then it calls itself (depth 2), then it calls itself (depth 3)
-    /// before returning.
+    /// A value of 3 would mean that the member can invoke itself three times recursively, i.e. there is the member,
+    /// then it calls itself (depth 1), then it calls itself (depth 2), then it calls itself (depth 3) before returning.
     /// </example>
     public int MaxRecursionDepth { get; set; }
 
     private int _maxDegreeOfParallelism;
 
     /// <summary>
-    /// Gets or sets the maximal degree of parallelism that will be attempted to build into the generated hardware
-    /// when constructs suitable for hardware-level parallelisation are found.
+    /// Gets or sets the maximal degree of parallelism that will be attempted to build into the generated hardware when
+    /// constructs suitable for hardware-level parallelisation are found.
     /// </summary>
-    /// <example>
-    /// A value of 3 would mean that maximally 3 instances will be able to be executed in parallel.
-    /// </example>
+    /// <example>A value of 3 would mean that maximally 3 instances will be able to be executed in parallel.</example>
     public int MaxDegreeOfParallelism
     {
         get => _maxDegreeOfParallelism;
@@ -70,8 +67,8 @@ public class MemberInvocationInstanceCountConfiguration
     }
 
     /// <summary>
-    /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix
-    /// when constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
+    /// Adds the index of a lambda expression to the simple name of a member, to be used as the member name prefix when
+    /// constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
     /// </summary>
     public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
         FormattableString.Invariant($"{simpleName}.LambdaExpression.{lambdaExpressionIndex}");

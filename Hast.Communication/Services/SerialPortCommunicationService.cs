@@ -57,10 +57,10 @@ public class SerialPortCommunicationService : CommunicationServiceBase
         using var device = await _devicePoolManager.ReserveDeviceAsync();
         var context = BeginExecution();
 
-        // Initializing some serial port connection settings (may be different with some FPGA boards).
-        // For detailed info on how the SerialPort class works see:
-        // https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e
-        // Also we might consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
+        // Initializing some serial port connection settings (may be different with some FPGA boards). For detailed info
+        // on how the SerialPort class works see:
+        // https://social.msdn.microsoft.com/Forums/vstudio/en-US/e36193cd-a708-42b3-86b7-adff82b19e5e Also we might
+        // consider this: http://www.sparxeng.com/blog/software/must-use-net-system-io-ports-serialport
 
         using var serialPort = CreateSerialPort(executionContext);
         serialPort.PortName = device.Identifier;
@@ -105,11 +105,9 @@ public class SerialPortCommunicationService : CommunicationServiceBase
         // Copying the member ID, represented as bytes, to the output buffer.
         MemoryMarshal.Write(memory.Span.Slice(1 + sizeof(int), sizeof(int)), ref memberId);
 
-        // Sending the data.
-        // Just using serialPort.Write() once with all the data would stop sending data after 16372 bytes so
-        // we need to create batches. Since the FPGA receives data in the multiples of 4 bytes we use a batch
-        // of 4 bytes. This seems to have no negative impact on performance compared to using
-        // serialPort.Write() once.
+        // Sending the data. Just using serialPort.Write() once with all the data would stop sending data after 16372
+        // bytes so we need to create batches. Since the FPGA receives data in the multiples of 4 bytes we use a batch
+        // of 4 bytes. This seems to have no negative impact on performance compared to using serialPort.Write() once.
         const int maxBytesToSendAtOnce = 4;
         var memoryAsArraySegment = memory.GetUnderlyingArray();
         for (int i = 0; i < (int)Math.Ceiling(memory.Length / (decimal)maxBytesToSendAtOnce); i++)
@@ -200,8 +198,8 @@ public class SerialPortCommunicationService : CommunicationServiceBase
                 outputByteCountBytes.Add(receivedByte);
                 if (outputByteCountBytes.Count < 4) return Serial.CommunicationState.ReceivingOutputByteCount;
 
-                // Since the output's size can differ from the input size for optimization reasons, we take the
-                // explicit size into account.
+                // Since the output's size can differ from the input size for optimization reasons, we take the explicit
+                // size into account.
                 outputBytes.Reset(
                     knownCount: BitConverter.ToInt32(outputByteCountBytes.Span),
                     startIndex: MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
@@ -211,8 +209,8 @@ public class SerialPortCommunicationService : CommunicationServiceBase
                 serialCommunicationContext.SerialPort.Write(Serial.Signals.Ready);
                 return Serial.CommunicationState.ReceivingOutput;
             case Serial.CommunicationState.ReceivingOutput:
-                // There is a padding of PrefixCellCount cells for the unlikely case that the user would directly
-                // feed back the output as the next call's input. This way Prefix space is maintained.
+                // There is a padding of PrefixCellCount cells for the unlikely case that the user would directly feed
+                // back the output as the next call's input. This way Prefix space is maintained.
                 outputBytes.Add(receivedByte);
 
                 if (outputBytes.Count < outputBytes.KnownCount) return Serial.CommunicationState.ReceivingOutput;

@@ -1,4 +1,4 @@
-﻿using Hast.Common.Helpers;
+using Hast.Common.Helpers;
 using Hast.Common.Models;
 using System.IO;
 using System.Threading.Tasks;
@@ -8,9 +8,9 @@ namespace Hast.Synthesis.Abstractions.Helpers;
 public static class VhdlHelper
 {
     /// <summary>
-    /// Creates the VHD and XDC files on the given path from the source codes contained in the
-    /// <paramref name="context"/>.<see cref="IHardwareImplementationCompositionContext.HardwareDescription"/> that
-    /// must be <see cref="VhdlHardwareDescription"/>.
+    /// Creates the VHD and XDC files on the given path from the source codes contained in the <paramref
+    /// name="context"/>. <see cref="IHardwareImplementationCompositionContext.HardwareDescription"/> that must be <see
+    /// cref="VhdlHardwareDescription"/>.
     /// </summary>
     /// <returns>
     /// The result is <see langword="true"/> if files were created, <see langword="false"/> if the hash matched and

@@ -11,6 +11,7 @@ public abstract class NexysManifestProviderBase : IDeviceManifestProvider
     protected string _deviceName;
 
     private IDeviceManifest deviceManifest;
+
     public IDeviceManifest DeviceManifest =>
         deviceManifest ??= new NexysDeviceManifest
         {

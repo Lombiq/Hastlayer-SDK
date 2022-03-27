@@ -18,7 +18,9 @@ internal static class EthernetCommunicationHelpers
     /// <param name="bindingEndpoint">Endpoint where the UDP clients (sender and receiver) will be bound.</param>
     /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent.</param>
     /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
-    /// <returns>Result object containing UDP datagram received from the remote host. It is null if nothing has arrived.</returns>
+    /// <returns>
+    /// Result object containing UDP datagram received from the remote host. It is null if nothing has arrived.
+    /// </returns>
     public static Task<UdpReceiveResult> UdpSendAndReceiveAsync(
         byte[] datagram,
         IPEndPoint bindingEndpoint,
@@ -32,13 +34,18 @@ internal static class EthernetCommunicationHelpers
             receiveTimeoutMilliseconds);
 
     /// <summary>
-    /// Sends an UDP datagram to an endpoint (possibly to a broadcast address) and receives every datagrams arriving within a period of time.
+    /// Sends an UDP datagram to an endpoint (possibly to a broadcast address) and receives every datagrams arriving
+    /// within a period of time.
     /// </summary>
     /// <param name="datagram">Datagram to send.</param>
     /// <param name="bindingEndpoint">Endpoint where the UDP clients (sender and receiver) will be binded.</param>
-    /// <param name="targetEndpoint">Endpoint where the datagram needs to be sent. Possibly it is a broadcast address.</param>
+    /// <param name="targetEndpoint">
+    /// Endpoint where the datagram needs to be sent. Possibly it is a broadcast address.
+    /// </param>
     /// <param name="receiveTimeoutMilliseconds">Timout within the answer datagram needs to arrive.</param>
-    /// <returns>Result objects containing UDP datagram received from the remote host. It is empty if nothing has arrived.</returns>
+    /// <returns>
+    /// Result objects containing UDP datagram received from the remote host. It is empty if nothing has arrived.
+    /// </returns>
     public static Task<IEnumerable<UdpReceiveResult>> UdpSendAndReceiveAllAsync(
         byte[] datagram,
         IPEndPoint bindingEndpoint,

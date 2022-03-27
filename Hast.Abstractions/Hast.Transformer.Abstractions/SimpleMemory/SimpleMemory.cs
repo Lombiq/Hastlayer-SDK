@@ -6,15 +6,16 @@ using System.Runtime.InteropServices;
 namespace Hast.Transformer.Abstractions.SimpleMemory;
 
 /// <summary>
-/// Represents a simplified memory model available on the FPGA for transformed algorithms. WARNING: SimpleMemory is
-/// NOT thread-safe, there shouldn't be any concurrent access to it.
+/// Represents a simplified memory model available on the FPGA for transformed algorithms. WARNING: SimpleMemory is NOT
+/// thread-safe, there shouldn't be any concurrent access to it.
 /// </summary>
 /// <remarks>
-/// <para>All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
+/// <para>
+/// All read/write methods' name MUST follow the convention to begin with "Read" or "Write" respectively.
 ///
-/// WARNING: changes here should be in sync with the VHDL library. The signatures of the methods of this class
-/// mustn't be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL
-/// library too.</para>
+/// WARNING: changes here should be in sync with the VHDL library. The signatures of the methods of this class mustn't
+/// be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL library too.
+/// </para>
 /// </remarks>
 public class SimpleMemory
 {
@@ -34,8 +35,8 @@ public class SimpleMemory
 
     /// <summary>
     /// Gets or sets the full memory including the <see cref="PrefixCellCount"/> cells of extra memory that is to be
-    /// used for passing in extra input parameters (like memberId) without having to copy the operative memory
-    /// contents into an auxiliary array.
+    /// used for passing in extra input parameters (like memberId) without having to copy the operative memory contents
+    /// into an auxiliary array.
     /// </summary>
     internal Memory<byte> PrefixedMemory { get; set; }
 
@@ -43,7 +44,9 @@ public class SimpleMemory
     /// Gets the contents of the memory representation.
     /// </summary>
     /// <remarks>
-    /// <para>This is internal so the property can be read when handling communication with the FPGA but not by user code.</para>
+    /// <para>
+    /// This is internal so the property can be read when handling communication with the FPGA but not by user code.
+    /// </para>
     /// </remarks>
     internal Memory<byte> Memory => PrefixedMemory[(PrefixCellCount * MemoryCellSizeBytes)..];
 
@@ -53,7 +56,8 @@ public class SimpleMemory
     public int ByteCount => Memory.Length;
 
     /// <summary>
-    /// Gets the number of cells of this memory allocation, indicating memory cells of size <see cref="MemoryCellSizeBytes"/>.
+    /// Gets the number of cells of this memory allocation, indicating memory cells of size <see
+    /// cref="MemoryCellSizeBytes"/>.
     /// </summary>
     public int CellCount => Memory.Length / MemoryCellSizeBytes;
 
@@ -64,8 +68,8 @@ public class SimpleMemory
     /// <param name="memory">The source data.</param>
     /// <param name="prefixCellCount">The amount of cells for header data. See <see cref="PrefixCellCount"/>.</param>
     /// <param name="alignment">
-    /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a
-    /// multiple of that number. It must be an integer and power of 2.
+    /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a multiple
+    /// of that number. It must be an integer and power of 2.
     /// </param>
     internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment)
     {
@@ -144,16 +148,16 @@ public class SimpleMemory
     public int ReadInt32(int cellIndex) => MemoryMarshal.Read<int>(this[cellIndex]);
 
     public void WriteBoolean(int cellIndex, bool boolean) =>
-        // Since the implementation of a boolean can depend on the system rather hard-coding the expected values
-        // here so on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because its second
-        // parameter must be passed using "ref" and you can't pass in constants or expressions by reference.
+        // Since the implementation of a boolean can depend on the system rather hard-coding the expected values here so
+        // on the FPGA-side we can depend on it. Can't call MemoryMarshal.Write directly because its second parameter
+        // must be passed using "ref" and you can't pass in constants or expressions by reference.
         WriteUInt32(cellIndex, boolean ? uint.MaxValue : uint.MinValue);
 
     public bool ReadBoolean(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]) != uint.MinValue;
 
     /// <summary>
-    /// Creates a new instance of <see cref="SimpleMemory"/> with a specific size of payload in cells using a
-    /// device's <see cref="MemoryConfiguration"/>.
+    /// Creates a new instance of <see cref="SimpleMemory"/> with a specific size of payload in cells using a device's
+    /// <see cref="MemoryConfiguration"/>.
     /// </summary>
     /// <param name="memoryConfiguration">Creation parameters associated with the selected device.</param>
     /// <param name="cellCount">The size of the usable memory.</param>

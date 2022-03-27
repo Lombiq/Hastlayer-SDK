@@ -19,55 +19,59 @@ public class KpzKernelsTaskState
 }
 
 // SimpleMemory map:
-// * 0  (1 address)  :
-//      The number of iterations to perform (NumberOfIterations).
-// * 1 .. 1+ParallelTasks*4+2  (ParallelTasks*4+2 addresses)  :
-//      Random seed for PRNGs in each task, and an additional one for generating random grid offsets at scheduler
-//      level. Each random seed number is 64-bit (2 uints)
-// * 1+ParallelTasks*4+2 .. 1+ParallelTasks*4+2+GridSize^2-1  (GridSize^2 addresses)  :
-//      The input KPZ nodes as 32 bit numbers, with bit 0 as dx and bit 1 as dy.
+// * 0 (1 address) : The number of iterations to perform (NumberOfIterations).
+// * 1 .. 1+ParallelTasks*4+2 (ParallelTasks*4+2 addresses) : Random seed for PRNGs in each task, and an additional one
+// for generating random grid offsets at scheduler level. Each random seed number is 64-bit (2 uints)
+// * 1+ParallelTasks*4+2 .. 1+ParallelTasks*4+2+GridSize^2-1 (GridSize^2 addresses) : The input KPZ nodes as 32 bit
+// numbers, with bit 0 as dx and bit 1 as dy.
 
 /// <summary>
 /// <para>
-/// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, with a parallelized architecture
-/// similar to GPUs. It makes use of a given number of Tasks as parallel execution engines
-/// (see <see cref="ReschedulesPerTaskIteration" />).
+/// This is an implementation of the KPZ algorithm for FPGAs through Hastlayer, with a parallelized architecture similar
+/// to GPUs. It makes use of a given number of Tasks as parallel execution engines (see <see
+/// cref="ReschedulesPerTaskIteration"/>).
 /// </para>
-///
-/// <para>
-/// For each iteration:
-/// </para>
+/// <para>For each iteration:</para>
 /// <list type="bullet">
-/// <item><description>it loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks,</description></item>
-/// <item><description>it runs the algorithm on these local tables,</description></item>
-/// <item><description>it loads back the local tables into the original grid.</description></item>
+/// <item>
+/// <description>
+/// it loads parts of the grid into local tables (see <see cref="LocalGridSize"/>) within Tasks,
+/// </description>
+/// </item>
+/// <item>
+/// <description>it runs the algorithm on these local tables,</description>
+/// </item>
+/// <item>
+/// <description>it loads back the local tables into the original grid.</description>
+/// </item>
 /// </list>
-///
 /// <para>
-/// It changes the offset of the local grids within the global grid a given number of times for each iteration
-/// (see <see cref="ReschedulesPerTaskIteration"/>).
+/// It changes the offset of the local grids within the global grid a given number of times for each iteration (see <see
+/// cref="ReschedulesPerTaskIteration"/>).
 /// </para>
 /// </summary>
 public class KpzKernelsParallelizedInterface
 {
-    // ==== <CONFIGURABLE PARAMETERS> ====
-    // Full grid width and height.
+    // ==== <CONFIGURABLE PARAMETERS> ==== Full grid width and height.
     public const int GridSize = 64;
+
     // Local grid width and height. Each Task has a local grid, on which it works.
     public const int LocalGridSize = 8;
+
     // Furthermore, for LocalGridSize and GridSize the following expressions should have an integer result:
-    //    (GridSize^2)/(LocalGridSize^2)
-    //    GridSize/LocalGridSize
-    // (Here the ^ operator means power.)
-    // Also both GridSize and LocalGridSize should be a power of two.
-    // The probability of turning a pyramid into a hole (IntegerProbabilityP),
+    // (GridSize^2)/(LocalGridSize^2) GridSize/LocalGridSize (Here the ^ operator means power.) Also both GridSize and
+    // LocalGridSize should be a power of two. The probability of turning a pyramid into a hole (IntegerProbabilityP),
     // or a hole into a pyramid (IntegerProbabilityQ).
     public const uint IntegerProbabilityP = 32_767;
+
     public const uint IntegerProbabilityQ = 32_767;
+
     // Number of parallel execution engines. (Should be a power of two.) Only 8 will fully fit on the Nexys A7.
     public const int ParallelTasks = 8;
+
     // The number of reschedules (thus global grid offset changing) within one iteration.
     public const int ReschedulesPerTaskIteration = 2;
+
     // This should be 1 or 2 (the latter if you want to be very careful).
     // ==== </CONFIGURABLE PARAMETERS> ====
 
@@ -100,8 +104,8 @@ public class KpzKernelsParallelizedInterface
         int iterationGroupSize = numberOfIterations * ReschedulesPerTaskIteration;
         const int PokesInsideTask = LocalGridSize * LocalGridSize / ReschedulesPerTaskIteration;
         const int LocalGridPartitions = GridSize / LocalGridSize;
-        // Note: TotalNumberOfTasks = TasksPerIteration * NumberOfIterations ==
-        //  ((GridSize * GridSize) / (LocalGridSize * LocalGridSize)) * NumberOfIterations
+        // Note: TotalNumberOfTasks = TasksPerIteration * NumberOfIterations == ((GridSize * GridSize) / (LocalGridSize
+        // * LocalGridSize)) * NumberOfIterations
         int parallelTaskRandomIndex = 0;
         uint randomSeedTemp;
         var random0 = new RandomMwc64X();
@@ -135,9 +139,8 @@ public class KpzKernelsParallelizedInterface
             taskLocals[taskLocalsIndex].Random2.State |= ((ulong)randomSeedTemp) << 32;
         }
 
-        // What is iterationGroupIndex good for?
-        // IterationPerTask needs to be between 0.5 and 1 based on the e-mail of Mate.
-        // If we want 10 iterations, and starting a full series of tasks makes half iteration on the full table,
+        // What is iterationGroupIndex good for? IterationPerTask needs to be between 0.5 and 1 based on the e-mail of
+        // Mate. If we want 10 iterations, and starting a full series of tasks makes half iteration on the full table,
         // then we need to start it 20 times (thus IterationGroupSize will be 20).
 
         parallelTaskRandomIndex++;
@@ -158,8 +161,8 @@ public class KpzKernelsParallelizedInterface
                 var tasks = new Task<KpzKernelsTaskState>[ParallelTasks];
                 for (int parallelTaskIndex = 0; parallelTaskIndex < ParallelTasks; parallelTaskIndex++)
                 {
-                    // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex
-                    // (and the random added value)
+                    // Decide the X and Y starting coordinates based on ScheduleIndex and ParallelTaskIndex (and the
+                    // random added value)
                     int localGridIndex = parallelTaskIndex + (scheduleIndex * ParallelTasks);
                     // The X and Y coordinate within the small table (local grid):
                     int partitionX = localGridIndex % LocalGridPartitions;
@@ -289,9 +292,8 @@ public class KpzKernelsParallelizedInterface
     /// <param name="hostGrid">The grid that we work on.</param>
     /// <param name="pushToFpga">Force pushing the grid into the FPGA (or work on the grid already there).</param>
     /// <param name="randomSeedEnable">
-    /// If it is disabled, preprogrammed random numbers will be written into
-    /// SimpleMemory instead of real random generated numbers. This helps debugging, keeping the output more
-    /// consistent across runs.
+    /// If it is disabled, preprogrammed random numbers will be written into SimpleMemory instead of real random
+    /// generated numbers. This helps debugging, keeping the output more consistent across runs.
     /// </param>
     /// <param name="numberOfIterations">The number of iterations to perform.</param>
     public void DoIterationsWrapper(
@@ -302,11 +304,10 @@ public class KpzKernelsParallelizedInterface
         bool randomSeedEnable,
         uint numberOfIterations)
     {
-        // The following numbers will be used when random seed is disabled in GUI.
-        // This makes the result more predictable while debugging.
-        // Add more random numbers manually if you get an out of bounds exception on notRandomSeed.
-        // This might happen if you increase KpzKernelsGInterface.ParallelTasks.
-        // You can generate these with the following python expression (even in an online tool like:
+        // The following numbers will be used when random seed is disabled in GUI. This makes the result more
+        // predictable while debugging. Add more random numbers manually if you get an out of bounds exception on
+        // notRandomSeed. This might happen if you increase KpzKernelsGInterface.ParallelTasks. You can generate these
+        // with the following python expression (even in an online tool like:
         // https://www.tutorialspoint.com/execute_python_online.php):
         //    import random
         //    print [random.randint(-2147483648, 2147483647) for x in range(32)]
@@ -374,7 +375,9 @@ public class KpzKernelsParallelizedInterface
 /// </summary>
 public static class KpzKernelsParallelizedExtensions
 {
-    /// <summary>Push table into FPGA.</summary>
+    /// <summary>
+    /// Push table into FPGA.
+    /// </summary>
     public static void CopyFromGridToSimpleMemory(KpzNode[,] gridSrc, SimpleMemory memoryDst)
     {
         for (int x = 0; x < KpzKernelsParallelizedInterface.GridSize; x++)
@@ -389,7 +392,9 @@ public static class KpzKernelsParallelizedExtensions
         }
     }
 
-    /// <summary>Pull table from the FPGA.</summary>
+    /// <summary>
+    /// Pull table from the FPGA.
+    /// </summary>
     public static void CopyFromSimpleMemoryToGrid(KpzNode[,] gridDst, SimpleMemory memorySrc)
     {
         for (int x = 0; x < KpzKernelsParallelizedInterface.GridSize; x++)

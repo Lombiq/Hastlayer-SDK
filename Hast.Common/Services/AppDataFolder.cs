@@ -43,6 +43,7 @@ public class AppDataFolder : IAppDataFolder
     }
 
     public string MapPath(string relativePath) => Path.Combine(_appDataFolder.FullName, relativePath);
+
     public string Combine(params string[] parts) => MapPath(Path.Combine(parts));
 
     public bool FileExists(string fileName) => File.Exists(MapPath(fileName));

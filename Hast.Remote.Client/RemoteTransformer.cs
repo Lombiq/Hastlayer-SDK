@@ -36,9 +36,8 @@ public class RemoteTransformer : ITransformer
         }
         catch (JsonReaderException ex)
         {
-            // This will happen also when authorization fails and Azure AD authentication takes over from the API,
-            // and redirects the client to the Microsoft login screen (there doesn't seem to be a way to prevent
-            // this).
+            // This will happen also when authorization fails and Azure AD authentication takes over from the API, and
+            // redirects the client to the Microsoft login screen (there doesn't seem to be a way to prevent this).
             throw new RemoteTransformationException(
                 "Remote transformation failed because Hastlayer Remote Services returned an unexpected " +
                 "response. This might be because authorization failed (check if you mistyped your credentials) " +

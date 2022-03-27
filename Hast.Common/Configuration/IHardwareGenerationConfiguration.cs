@@ -18,29 +18,29 @@ public interface IHardwareGenerationConfiguration
     IDictionary<string, object> CustomConfiguration { get; }
 
     /// <summary>
-    /// Gets or sets a name associated with the hardware generation operation that's meaningful to the consumer. It may be
-    /// logged or saved during hardware generation but otherwise it may not be used in any activities.
+    /// Gets or sets a name associated with the hardware generation operation that's meaningful to the consumer. It may
+    /// be logged or saved during hardware generation but otherwise it may not be used in any activities.
     /// </summary>
     string Label { get; set; }
 
     /// <summary>
-    /// Gets the collection of the full name of those public members that will be accessible as hardware
-    /// implementation from the host computer. By default all members implemented from interfaces and all public
-    /// virtual members will be included. You can use this to restrict what gets transformed into hardware; if
-    /// nothing is specified all suitable members will be transformed.
+    /// Gets the collection of the full name of those public members that will be accessible as hardware implementation
+    /// from the host computer. By default all members implemented from interfaces and all public virtual members will
+    /// be included. You can use this to restrict what gets transformed into hardware; if nothing is specified all
+    /// suitable members will be transformed.
     /// </summary>
     /// <example>
-    /// Specify members with their full name, including the full namespace of the parent type(s) as well as their
-    /// return type and the types of their (type) arguments, e.g.:
-    /// <c>"System.Boolean Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])</c>.
+    /// Specify members with their full name, including the full namespace of the parent type(s) as well as their return
+    /// type and the types of their (type) arguments, e.g.: <c>"System.Boolean
+    /// Contoso.ImageProcessing.FaceRecognition.FaceDetectors::IsFacePresent(System.Byte[])</c>.
     /// </example>
     IList<string> HardwareEntryPointMemberFullNames { get; }
 
     /// <summary>
     /// Gets the collection of the name prefixes of those public members that will be accessible as hardware
-    /// implementation from the host computer. By default all members implemented from interfaces and all public
-    /// virtual members will be included. You can use this to restrict what gets transformed into hardware; if
-    /// nothing is specified all suitable members will be transformed.
+    /// implementation from the host computer. By default all members implemented from interfaces and all public virtual
+    /// members will be included. You can use this to restrict what gets transformed into hardware; if nothing is
+    /// specified all suitable members will be transformed.
     /// </summary>
     /// <example>
     /// Specify members with the leading part of their name as you would access them in C#, e.g.:
@@ -56,33 +56,33 @@ public interface IHardwareGenerationConfiguration
     bool EnableCaching { get; }
 
     /// <summary>
-    /// Gets the name of the FPGA device (board) to transform for. Device-specific configurations are determined
-    /// by device drivers.
+    /// Gets the name of the FPGA device (board) to transform for. Device-specific configurations are determined by
+    /// device drivers.
     /// </summary>
     string DeviceName { get; }
 
     /// <summary>
-    /// Gets the file system path here where the hardware framework is located. The file describing the hardware to
-    /// be generated will be saved there as well as anything else necessary, and that framework will be used to
-    /// implement the hardware and configure the device.
+    /// Gets the file system path here where the hardware framework is located. The file describing the hardware to be
+    /// generated will be saved there as well as anything else necessary, and that framework will be used to implement
+    /// the hardware and configure the device.
     /// </summary>
     string HardwareFrameworkPath { get; }
 
     /// <summary>
-    /// Gets a value indicating whether hardware transformation takes place. If it doesn't then
-    /// <see cref="EnableHardwareImplementationComposition"/> will be implied to be <see langword="false"/> too.
+    /// Gets a value indicating whether hardware transformation takes place. If it doesn't then <see
+    /// cref="EnableHardwareImplementationComposition"/> will be implied to be <see langword="false"/> too.
     /// </summary>
     bool EnableHardwareTransformation { get; }
 
     /// <summary>
-    /// Gets a value indicating whether a hardware implementation composer should be used to synthesize hardware from the transformed
-    /// hardware description.
+    /// Gets a value indicating whether a hardware implementation composer should be used to synthesize hardware from
+    /// the transformed hardware description.
     /// </summary>
     bool EnableHardwareImplementationComposition { get; }
 
     /// <summary>
-    /// Gets or sets the path to a the only binary this application should support. If not <see langword="null"/>
-    /// and the binary exists, then all hardware generation is skipped.
+    /// Gets or sets the path to a the only binary this application should support. If not <see langword="null"/> and
+    /// the binary exists, then all hardware generation is skipped.
     /// </summary>
     string SingleBinaryPath { get; set; }
 }

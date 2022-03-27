@@ -22,18 +22,18 @@ namespace Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
 public enum PlatformInformation : uint
 {
     /// <summary>
-    /// OpenCL profile string. Returns the profile name supported by the implementation. The profile name returned
-    /// can be one of the following strings: FULL_PROFILE - if the implementation supports the OpenCL specification
-    /// (functionality defined as part of the core specification and does not require any extensions to be
-    /// supported). EMBEDDED_PROFILE - if the implementation supports the OpenCL embedded profile. The embedded
-    /// profile is defined to be a subset for each version of OpenCL.
+    /// OpenCL profile string. Returns the profile name supported by the implementation. The profile name returned can
+    /// be one of the following strings: FULL_PROFILE - if the implementation supports the OpenCL specification
+    /// (functionality defined as part of the core specification and does not require any extensions to be supported).
+    /// EMBEDDED_PROFILE - if the implementation supports the OpenCL embedded profile. The embedded profile is defined
+    /// to be a subset for each version of OpenCL.
     /// </summary>
     Profile = 0x_0900,
 
     /// <summary>
-    /// OpenCL version string. Returns the OpenCL version supported by the implementation. This version string has
-    /// the following format: OpenCL{space}{major_version}.{minor_version}{space}{platform-specific information}
-    /// The major_version.minor_version value returned will be 1.0.
+    /// OpenCL version string. Returns the OpenCL version supported by the implementation. This version string has the
+    /// following format: OpenCL{space}{major_version}.{minor_version}{space}{platform-specific information} The
+    /// major_version.minor_version value returned will be 1.0.
     /// </summary>
     Version = 0x_0901,
 
@@ -49,8 +49,8 @@ public enum PlatformInformation : uint
 
     /// <summary>
     /// Returns a space-separated list of extension names (the extension names themselves do not contain any
-    /// spaces) supported by the platform. Extensions defined here must be supported by all devices associated with
-    /// this platform.
+    /// spaces) supported by the platform. Extensions defined here must be supported by all devices associated with this
+    /// platform.
     /// </summary>
     Extensions = 0x_0904,
 }
@@ -121,22 +121,22 @@ public enum Result
 }
 
 /// <summary>
-/// A bitfield that identifies the type of OpenCL device. The device_type can be used to query specific OpenCL
-/// devices or all OpenCL devices available.
+/// A bitfield that identifies the type of OpenCL device. The device_type can be used to query specific OpenCL devices
+/// or all OpenCL devices available.
 /// </summary>
 [Flags]
 [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is ulong.")]
 public enum DeviceTypes : ulong
 {
     /// <summary>
-    /// An OpenCL device that is the host processor. The host processor runs the OpenCL implementations and is a
-    /// single or multi-core CPU.
+    /// An OpenCL device that is the host processor. The host processor runs the OpenCL implementations and is a single
+    /// or multi-core CPU.
     /// </summary>
     Cpu = 1 << 1,
 
     /// <summary>
-    /// An OpenCL device that is a GPU. By this we mean that the device can also be used to accelerate a 3D API
-    /// such as OpenGL or DirectX.
+    /// An OpenCL device that is a GPU. By this we mean that the device can also be used to accelerate a 3D API such as
+    /// OpenGL or DirectX.
     /// </summary>
     Gpu = 1 << 2,
 
@@ -153,8 +153,8 @@ public enum DeviceTypes : ulong
 }
 
 /// <summary>
-/// A bit-field that is used to specify allocation and usage information such as the memory arena that should be
-/// used to allocate the buffer object and how it will be used.
+/// A bit-field that is used to specify allocation and usage information such as the memory arena that should be used to
+/// allocate the buffer object and how it will be used.
 /// </summary>
 [Flags]
 [SuppressMessage(
@@ -170,48 +170,47 @@ public enum MemoryFlags : ulong
     ReadWrite = 1 << 0,
 
     /// <summary>
-    /// This flags specifies that the memory object will be written but not read by a kernel. Reading from a buffer
-    /// or image object created with <see cref="WriteOnly"/> inside a kernel is undefined.
+    /// This flags specifies that the memory object will be written but not read by a kernel. Reading from a buffer or
+    /// image object created with <see cref="WriteOnly"/> inside a kernel is undefined.
     /// </summary>
     WriteOnly = 1 << 1,
 
     /// <summary>
-    /// This flag specifies that the memory object is a read-only memory object when used inside a kernel. Writing
-    /// to a buffer or image object created with <see cref="ReadOnly"/> inside a kernel is undefined.
+    /// This flag specifies that the memory object is a read-only memory object when used inside a kernel. Writing to a
+    /// buffer or image object created with <see cref="ReadOnly"/> inside a kernel is undefined.
     /// </summary>
     ReadOnly = 1 << 2,
 
     /// <summary>
     /// This flag is valid only if host_ptr is not NULL. If specified, it indicates that the application wants the
-    /// OpenCL implementation to use memory referenced by host_ptr as the storage bits for the memory object.
-    /// OpenCL implementations are allowed to cache the buffer contents pointed to by host_ptr in device memory.
-    /// This cached copy can be used when kernels are executed on a device. The result of OpenCL commands that
-    /// operate on multiple buffer objects created with the same host_ptr or overlapping host regions is considered
-    /// to be undefined.
+    /// OpenCL implementation to use memory referenced by host_ptr as the storage bits for the memory object. OpenCL
+    /// implementations are allowed to cache the buffer contents pointed to by host_ptr in device memory. This cached
+    /// copy can be used when kernels are executed on a device. The result of OpenCL commands that operate on multiple
+    /// buffer objects created with the same host_ptr or overlapping host regions is considered to be undefined.
     /// </summary>
     UseHostPointer = 1 << 3,
 
     /// <summary>
-    /// This flag specifies that the application wants the OpenCL implementation to allocate memory from host
-    /// accessible memory.
-    /// <see cref="AllocateHostPointer"/> and <see cref="UseHostPointer"/> are mutually exclusive.
+    /// This flag specifies that the application wants the OpenCL implementation to allocate memory from host accessible
+    /// memory. <see cref="AllocateHostPointer"/> and <see cref="UseHostPointer"/> are mutually exclusive.
     /// </summary>
     AllocateHostPointer = 1 << 4,
 
     /// <summary>
     /// This flag is valid only if host_ptr is not NULL. If specified, it indicates that the application wants the
     /// OpenCL implementation to allocate memory for the memory object and copy the data from memory referenced by
-    /// host_ptr.
-    /// <see cref="CopyHostPointer"/> and <see cref="UseHostPointer"/> are mutually exclusive.
-    /// <see cref="CopyHostPointer"/> can be used with <see cref="AllocateHostPointer"/> to initialize the contents
-    /// of the cl_mem object allocated using host-accessible (e.g. PCIe) memory.
+    /// host_ptr. <see cref="CopyHostPointer"/> and <see cref="UseHostPointer"/> are mutually exclusive. <see
+    /// cref="CopyHostPointer"/> can be used with <see cref="AllocateHostPointer"/> to initialize the contents of the
+    /// cl_mem object allocated using host-accessible (e.g. PCIe) memory.
     /// </summary>
     CopyHostPointer = 1 << 5,
 
     /// <summary>
     /// Make clCreateBuffer to interpret host_ptr argument as cl_mem_ext_ptr_t.
     /// </summary>
-    /// <remarks><para>See <see href="https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h" />.</para></remarks>
+    /// <remarks>
+    /// <para>See <see href="https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h"/>.</para>
+    /// </remarks>
     ExtensionXilinxPointer = 1ul << 31,
 
     // Blame Xilinx.
@@ -238,15 +237,15 @@ public enum MemoryMigrationFlags : ulong
     None = 0,
 
     /// <summary>
-    /// This flag indicates that the specified set of memory objects are to be migrated to the host, regardless of
-    /// the target command-queue.
+    /// This flag indicates that the specified set of memory objects are to be migrated to the host, regardless of the
+    /// target command-queue.
     /// </summary>
     Host = 1 << 0,
 
     /// <summary>
-    /// This flag indicates that the contents of the set of memory objects are undefined after migration. The
-    /// specified set of memory objects are migrated to the device associated with command_queue without incurring
-    /// the overhead of migrating their contents.
+    /// This flag indicates that the contents of the set of memory objects are undefined after migration. The specified
+    /// set of memory objects are migrated to the device associated with command_queue without incurring the overhead of
+    /// migrating their contents.
     /// </summary>
     ContentUndefined = 1 << 1,
 }
@@ -258,8 +257,8 @@ public enum CommandQueueProperties : ulong
     None = 0,
 
     /// <summary>
-    /// Determines whether the commands queued in the command-queue are executed in-order or out-of-order. If set,
-    /// the commands in the command-queue are executed out-of-order. Otherwise, commands are executed in-order.
+    /// Determines whether the commands queued in the command-queue are executed in-order or out-of-order. If set, the
+    /// commands in the command-queue are executed out-of-order. Otherwise, commands are executed in-order.
     /// </summary>
     OutOfOrderExecutionModeEnable = 1 << 0,
 

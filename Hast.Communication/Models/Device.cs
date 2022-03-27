@@ -7,6 +7,7 @@ namespace Hast.Communication.Models;
 public class Device : IDevice
 {
     private bool _isDisposed;
+
     public event EventHandler Disposing;
 
     public string Identifier { get; set; }

@@ -1,11 +1,11 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// A sample that tests the memory access on an FPGA. It'll start incrementing all SimpleMemory cells' values
-/// starting at the given start index until the given length.
+/// A sample that tests the memory access on an FPGA. It'll start incrementing all SimpleMemory cells' values starting
+/// at the given start index until the given length.
 ///
 /// This is a bit more complex version of <see cref="Loopback"/>.
 /// </summary>
@@ -22,8 +22,8 @@ public class MemoryTest
 
         for (int i = startIndex; i < endIndex; i++)
         {
-            // Adding 1 to the input so it's visible whether this actually has run, not just the untouched data was
-            // sent back.
+            // Adding 1 to the input so it's visible whether this actually has run, not just the untouched data was sent
+            // back.
             memory.WriteInt32(i, memory.ReadInt32(i) + 1);
         }
     }

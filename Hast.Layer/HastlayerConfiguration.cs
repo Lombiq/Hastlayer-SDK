@@ -1,4 +1,4 @@
-﻿using Hast.Common.Enums;
+using Hast.Common.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;

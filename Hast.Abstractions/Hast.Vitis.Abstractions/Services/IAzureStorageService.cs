@@ -14,8 +14,8 @@ public interface IAzureStorageService
     Task UploadAsync(string localFilePath);
 
     /// <summary>
-    /// Downloads a files from the remote container given the file name and the directory where to store it. Returns
-    /// the full local path of the downloaded file.
+    /// Downloads a files from the remote container given the file name and the directory where to store it. Returns the
+    /// full local path of the downloaded file.
     /// </summary>
     Task<IEnumerable<string>> DownloadAsync(string localDirectoryPath, params string[] remoteFileNames);
 

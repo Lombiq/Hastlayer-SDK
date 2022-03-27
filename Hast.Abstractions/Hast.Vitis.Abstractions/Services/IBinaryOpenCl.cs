@@ -13,8 +13,8 @@ namespace Hast.Vitis.Abstractions.Services;
 /// </summary>
 /// <remarks>
 /// <para>
-/// It is of singleton lifecycle because it handles hardware and binary resources which are not expected to change
-/// while the application is running. This way subsequent runs don't have to suffer the same initialization costs.
+/// It is of singleton lifecycle because it handles hardware and binary resources which are not expected to change while
+/// the application is running. This way subsequent runs don't have to suffer the same initialization costs.
 /// </para>
 /// </remarks>
 public interface IBinaryOpenCl : ISingletonDependency, IDisposable
@@ -25,8 +25,8 @@ public interface IBinaryOpenCl : ISingletonDependency, IDisposable
     int DeviceCount { get; }
 
     /// <summary>
-    /// Creates a kernel from the already compiled <paramref name="binary"/> data and stores it with the
-    /// <paramref name="kernelName"/> identifier.
+    /// Creates a kernel from the already compiled <paramref name="binary"/> data and stores it with the <paramref
+    /// name="kernelName"/> identifier.
     /// </summary>
     void CreateBinaryKernel(byte[] binary, string kernelName);
 
@@ -44,23 +44,23 @@ public interface IBinaryOpenCl : ISingletonDependency, IDisposable
     /// <param name="deviceIndex">The numeric ID of the target device.</param>
     /// <param name="kernelName">The name passed to <see cref="CreateBinaryKernel"/>.</param>
     /// <param name="buffers">
-    /// The handler(s) received from <see cref="CreateBuffer"/>. It is necessary to call
-    /// <see cref="SetKernelArgumentWithNewBuffer"/> on each item before calling this method.
+    /// The handler(s) received from <see cref="CreateBuffer"/>. It is necessary to call <see
+    /// cref="SetKernelArgumentWithNewBuffer"/> on each item before calling this method.
     /// </param>
     /// <param name="copyBack">
-    /// If <see langword="true" />, the <paramref name="buffers"/> are overwritten by the kernel.
+    /// If <see langword="true"/>, the <paramref name="buffers"/> are overwritten by the kernel.
     /// </param>
     void LaunchKernel(int deviceIndex, string kernelName, IntPtr[] buffers, bool copyBack = true);
 
     /// <summary>
-    /// Asynchronously waits for the device identified by the numeric index <paramref name="deviceIndex"/> to finish
-    /// any scheduled executions.
+    /// Asynchronously waits for the device identified by the numeric index <paramref name="deviceIndex"/> to finish any
+    /// scheduled executions.
     /// </summary>
     Task AwaitDeviceAsync(int deviceIndex);
 
     /// <summary>
-    /// Registers the <paramref name="buffer"/> as an argument for the kernel. If the buffer doesn't yet exist, it
-    /// gets created and initialized with the provided <paramref name="data"/>.
+    /// Registers the <paramref name="buffer"/> as an argument for the kernel. If the buffer doesn't yet exist, it gets
+    /// created and initialized with the provided <paramref name="data"/>.
     /// </summary>
     /// <param name="kernelName">The name passed to <see cref="CreateBinaryKernel"/>.</param>
     /// <param name="index">The zero-based index of the argument position.</param>
@@ -68,7 +68,9 @@ public interface IBinaryOpenCl : ISingletonDependency, IDisposable
     /// The native pointer to data in memory. It can be acquired for example from <see cref="Memory{T}.Pin"/>.
     /// </param>
     /// <param name="length">The amount of bytes in the <paramref name="data"/>.</param>
-    /// <param name="buffer">The handle of the buffer from <see cref="CreateBuffer"/> or <see cref="IntPtr.Zero"/>.</param>
+    /// <param name="buffer">
+    /// The handle of the buffer from <see cref="CreateBuffer"/> or <see cref="IntPtr.Zero"/>.
+    /// </param>
     /// <returns>
     /// If <paramref name="buffer"/> is not <see cref="IntPtr.Zero"/> then its value. Otherwise the handler for the
     /// freshly created buffer.

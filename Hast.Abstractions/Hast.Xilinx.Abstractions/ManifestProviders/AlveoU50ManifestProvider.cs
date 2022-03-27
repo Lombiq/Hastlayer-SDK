@@ -16,8 +16,8 @@ public class AlveoU50ManifestProvider : IDeviceManifestProvider
             Name = DeviceName,
             ClockFrequencyHz = 300 * Mhz,
             SupportedCommunicationChannelNames = new[] { Constants.VitisCommunicationChannelName },
-            // While there is 64GB DDR RAM the max object size in .NET is 2GB. So until we add paging to
-            // SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
+            // While there is 64GB DDR RAM the max object size in .NET is 2GB. So until we add paging to SimpleMemory
+            // the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
             AvailableMemoryBytes = 2 * GigaByte,
             SupportedPlatforms = new[] { "xilinx_u50_gen3x16" },
         };

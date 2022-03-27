@@ -6,8 +6,8 @@ namespace Hast.Common.Helpers;
 public static class FileSystemHelper
 {
     /// <summary>
-    /// Returns a composed file system path from the <paramref name="pathComponents"/> and creates it as a directory
-    /// if it doesn't exist.
+    /// Returns a composed file system path from the <paramref name="pathComponents"/> and creates it as a directory if
+    /// it doesn't exist.
     /// </summary>
     public static string EnsureDirectoryExists(params string[] pathComponents)
     {
@@ -17,8 +17,8 @@ public static class FileSystemHelper
     }
 
     /// <summary>
-    /// Returns <see langword="true"/> if all items in <paramref name="paths"/> exist according to
-    /// <see cref="File.Exists"/>.
+    /// Returns <see langword="true"/> if all items in <paramref name="paths"/> exist according to <see
+    /// cref="File.Exists"/>.
     /// </summary>
     public static bool AllExist(params string[] paths) => paths.All(File.Exists);
 }

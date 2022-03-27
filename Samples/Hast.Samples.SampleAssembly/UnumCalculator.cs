@@ -34,16 +34,15 @@ public class UnumCalculator
         }
     }
 
-    // Needed so UnumCalculatorSampleRunner can retrieve BitMask.SegmentCount.
-    // On the Nexys 4 DDR only a total of 6b environment will fit and work (9b would fit but wouldn't execute for
-    // some reason).
+    // Needed so UnumCalculatorSampleRunner can retrieve BitMask.SegmentCount. On the Nexys 4 DDR only a total of 6b
+    // environment will fit and work (9b would fit but wouldn't execute for some reason).
     public static UnumEnvironment EnvironmentFactory() => new(2, 4);
 }
 
 public static class UnumCalculatorExtensions
 {
-    // While Hastlayer can figure out if an array is statically sized most of the time we need to specify the below
-    // ones manually. See UnumCalculatorSampleRunner.
+    // While Hastlayer can figure out if an array is statically sized most of the time we need to specify the below ones
+    // manually. See UnumCalculatorSampleRunner.
     public static readonly string[] ManuallySizedArrays = new[]
     {
         "System.UInt32[] Lombiq.Arithmetics.BitMask::Segments()",

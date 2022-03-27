@@ -1,8 +1,8 @@
+using Hast.Common.Interfaces;
+using Hast.Communication.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hast.Common.Interfaces;
-using Hast.Communication.Models;
 
 namespace Hast.Communication.Services;
 

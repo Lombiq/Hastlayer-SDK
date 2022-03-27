@@ -116,12 +116,12 @@ public sealed class CatapultLibrary : IDisposable
     /// </summary>
     /// <param name="libraryPath">The path of the FPGACoreLib DLL file without the extension.</param>
     /// <param name="versionDefinitionsFile">
-    /// The location of the version definitions file. If left as null, then "FPGAVersionDefinitions.ini" is expected
-    /// in the current working directory.
+    /// The location of the version definitions file. If left as null, then "FPGAVersionDefinitions.ini" is expected in
+    /// the current working directory.
     /// </param>
     /// <param name="versionManifestFile">
-    /// The location of the version manifest file. If left as null, then "FPGADefaultVersionManifest.ini" is expected
-    /// in the current working directory.
+    /// The location of the version manifest file. If left as null, then "FPGADefaultVersionManifest.ini" is expected in
+    /// the current working directory.
     /// </param>
     /// <param name="logFunction">
     /// Optional logging function that takes flag values from Hast.Communication.Constants.Constants.Log as its first
@@ -137,8 +137,7 @@ public sealed class CatapultLibrary : IDisposable
         LogFunction = logFunction;
         PcieEndpointNumber = endpointNumber;
 
-        // Initialize FPGA library and device.
-        // We don't use dllmap so create ALD without it.
+        // Initialize FPGA library and device. We don't use dllmap so create ALD without it.
         var builderWithoutDllMap = new NativeLibraryBuilder(NativeLibraryBuilder.Default.Options & ~ImplementationOptions.EnableDllMapSupport);
         NativeLibrary = builderWithoutDllMap.ActivateInterface<ICatapultNativeLibrary>(libraryPath);
         // Check if device is available and connect
@@ -232,8 +231,8 @@ public sealed class CatapultLibrary : IDisposable
         }
         catch
         {
-            // If the dispatched slots can't be successfully awaited that's not a critical problem since we are
-            // going to close the PICe connection via `PcieEnabled = false;` right after that anyway.
+            // If the dispatched slots can't be successfully awaited that's not a critical problem since we are going to
+            // close the PICe connection via `PcieEnabled = false;` right after that anyway.
         }
 
         LogLine(Constants.Log.Info, "Closing down the FPGA...");
@@ -256,8 +255,8 @@ public sealed class CatapultLibrary : IDisposable
     }
 
     /// <summary>
-    /// Verifies the result of an ICatapultLibrary function call. If the result is SUCCESS or WAIT_TIMEOUT then
-    /// nothing happens. Otherwise CatapultFunctionResultException is thrown with the error message form the library.
+    /// Verifies the result of an ICatapultLibrary function call. If the result is SUCCESS or WAIT_TIMEOUT then nothing
+    /// happens. Otherwise CatapultFunctionResultException is thrown with the error message form the library.
     /// </summary>
     /// <param name="status">The return value from the library function.</param>
     /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
@@ -291,8 +290,8 @@ public sealed class CatapultLibrary : IDisposable
     public void SetSoftRegister(uint address, ulong value) => VerifyResult(NativeLibrary.WriteSoftRegister(_handle, address, value));
 
     /// <summary>
-    /// Uploads the data to the selected slot's input buffer and awaits the output.
-    /// But first it checks if there are any other jobs in queue and awaits them if there are any.
+    /// Uploads the data to the selected slot's input buffer and awaits the output. But first it checks if there are any
+    /// other jobs in queue and awaits them if there are any.
     /// </summary>
     /// <param name="memberId">Identifies the program on the hardware.</param>
     /// <param name="inputData">The hardware program's input.</param>
@@ -428,8 +427,8 @@ public sealed class CatapultLibrary : IDisposable
     /// Uploads the data to the selected slot's input buffer and awaits the output.
     /// </summary>
     /// <param name="bufferIndex">
-    /// The numeric ID of the buffer that the hardware uses for interaction. It is called "slot" in the Mt Granite
-    /// Shell Architectural Specification and its value can range from 0 to BufferCount.
+    /// The numeric ID of the buffer that the hardware uses for interaction. It is called "slot" in the Mt Granite Shell
+    /// Architectural Specification and its value can range from 0 to BufferCount.
     /// </param>
     /// <param name="inputData">The hardware program's input.</param>
     /// <param name="ignoreResponse">If true, the scheduler won't wait for the output to appear.</param>
@@ -451,8 +450,8 @@ public sealed class CatapultLibrary : IDisposable
         {
             VerifyResult(NativeLibrary.GetInputBufferFull(
                 _handle, slot, out isInputBufferFull));
-            // While unlikely, it's possible that the device has provided a result (so the previous Task is
-            // completed), but the input buffer hasn't cleared yet. In this case we should wait for it.
+            // While unlikely, it's possible that the device has provided a result (so the previous Task is completed),
+            // but the input buffer hasn't cleared yet. In this case we should wait for it.
             if (isInputBufferFull) await Task.Delay(1);
         }
         while (isInputBufferFull);

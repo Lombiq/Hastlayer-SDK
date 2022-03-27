@@ -10,7 +10,7 @@ using System.Linq;
 namespace Hast.Samples.Kpz;
 
 /// <summary>
-/// A KPZ iteration to be logged consists of a list of <see cref="KpzAction" /> items.
+/// A KPZ iteration to be logged consists of a list of <see cref="KpzAction"/> items.
 /// </summary>
 public class KpzIteration
 {
@@ -22,15 +22,20 @@ public class KpzIteration
 }
 
 /// <summary>
-/// <para>A KPZ action consists of a description, the full grid or heightmap and the highlight in it.
-/// There are three typical types of KPZ actions:</para>
+/// <para>
+/// A KPZ action consists of a description, the full grid or heightmap and the highlight in it. There are three typical
+/// types of KPZ actions:
+/// </para>
 /// <list type="bullet">
-/// <item><description>Empty <see cref="Grid" /> and <see cref="HeightMap" />, only <see cref="Description" />.
-/// </description></item>
-/// <item><description>Only <see cref="Grid" />, <see cref="Description" /> and optional highlight.
-/// </description></item>
-/// <item><description>Only <see cref="HeightMap" />, <see cref="Description" /> and optional highlight.
-/// </description></item>
+/// <item>
+/// <description>Empty <see cref="Grid"/> and <see cref="HeightMap"/>, only <see cref="Description"/>.</description>
+/// </item>
+/// <item>
+/// <description>Only <see cref="Grid"/>, <see cref="Description"/> and optional highlight.</description>
+/// </item>
+/// <item>
+/// <description>Only <see cref="HeightMap"/>, <see cref="Description"/> and optional highlight.</description>
+/// </item>
 /// </list>
 /// </summary>
 public class KpzAction
@@ -49,11 +54,15 @@ public class KpzAction
 
 /// <summary>
 /// <para>It logs the state of the KPZ algorithm at particular steps.</para>
-/// <note type="caution"><para>As it stores the full KPZ grid at every step, it can use up a lot of memory.</para></note>
+/// <note type="caution">
+/// <para>As it stores the full KPZ grid at every step, it can use up a lot of memory.</para>
+/// </note>
 /// </summary>
 public class KpzStateLogger
 {
-    /// <summary>Gets the KPZ iteration list.</summary>
+    /// <summary>
+    /// Gets the KPZ iteration list.
+    /// </summary>
     [SuppressMessage(
         "Design",
         "MA0016:Prefer return collection abstraction instead of implementation",
@@ -61,16 +70,18 @@ public class KpzStateLogger
     public List<KpzIteration> Iterations { get; } = new List<KpzIteration>();
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="KpzStateLogger"/> class.We add an iteration when the
-    /// constructor is called, so actions can be added right away.
+    /// Initializes a new instance of the <see cref="KpzStateLogger"/> class.We add an iteration when the constructor is
+    /// called, so actions can be added right away.
     /// </summary>
     public KpzStateLogger() => NewKpzIteration();
 
-    /// <summary>Add a new <see cref="KpzIteration" />.</summary>
+    /// <summary>
+    /// Add a new <see cref="KpzIteration"/>.
+    /// </summary>
     public void NewKpzIteration() => Iterations.Add(new KpzIteration());
 
     /// <summary>
-    /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration.
+    /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger"/> iteration.
     /// </summary>
     public void AddKpzAction(string description, Kpz kpz) =>
         Iterations[^1].Actions.Add(new KpzAction
@@ -82,7 +93,7 @@ public class KpzStateLogger
         });
 
     /// <summary>
-    /// Adds a deep copy of the heightmap into the current <see cref="KpzStateLogger" /> iteration.
+    /// Adds a deep copy of the heightmap into the current <see cref="KpzStateLogger"/> iteration.
     /// </summary>
     internal void AddKpzAction(string description, int[,] heightMap) => Iterations[^1].Actions.Add(new KpzAction
     {
@@ -93,7 +104,7 @@ public class KpzStateLogger
     });
 
     /// <summary>
-    /// Adds an action with only description into the current <see cref="KpzStateLogger" /> iteration.
+    /// Adds an action with only description into the current <see cref="KpzStateLogger"/> iteration.
     /// </summary>
     public void AddKpzAction(FormattableString description) =>
         // Adds a deep copy of the grid into the current iteration
@@ -106,8 +117,8 @@ public class KpzStateLogger
         });
 
     /// <summary>
-    /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration, and highlights all
-    /// the cells changed between Grid and GridBefore with yellow color.
+    /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger"/> iteration, and highlights all the
+    /// cells changed between Grid and GridBefore with yellow color.
     /// </summary>
     internal void AddKpzAction(string description, KpzNode[,] grid, KpzNode[,] gridBefore)
     {
@@ -136,10 +147,10 @@ public class KpzStateLogger
     }
 
     /// <summary>
-    /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger" /> iteration, with cells
-    /// to highlight (<paramref name="center"/> and <paramref name="neighbours"/>). If the values in the grid were updated,
-    /// they are highlighted with a green color, else they are highlighted with a red color, based on the parameter
-    /// value of <paramref name="changedGrid"/>.
+    /// Adds a deep copy of the grid into the current <see cref="KpzStateLogger"/> iteration, with cells to highlight (
+    /// <paramref name="center"/> and <paramref name="neighbours"/>). If the values in the grid were updated, they are
+    /// highlighted with a green color, else they are highlighted with a red color, based on the parameter value of
+    /// <paramref name="changedGrid"/>.
     /// </summary>
     internal void AddKpzAction(
         string description,
@@ -199,10 +210,14 @@ public class KpzStateLogger
         }
     }
 
-    /// <summary>Make a deep copy of a heightmap (2D int array).</summary>
+    /// <summary>
+    /// Make a deep copy of a heightmap (2D int array).
+    /// </summary>
     private static int[,] CopyOfHeightMap(int[,] heightMap) => (int[,])heightMap.Clone();
 
-    /// <summary>Make a deep copy of a grid (2D <see cref="KpzNode" /> array).</summary>
+    /// <summary>
+    /// Make a deep copy of a grid (2D <see cref="KpzNode"/> array).
+    /// </summary>
     private static KpzNode[,] CopyOfGrid(KpzNode[,] grid)
     {
         var toReturn = new KpzNode[grid.GetLength(0), grid.GetLength(1)];

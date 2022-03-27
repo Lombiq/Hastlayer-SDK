@@ -1,10 +1,10 @@
+using Hast.Remote.Bridge.Models;
+using Hast.Remote.Configuration;
+using RestEase;
 using System;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Hast.Remote.Bridge.Models;
-using Hast.Remote.Configuration;
-using RestEase;
 
 namespace Hast.Remote.Client;
 
@@ -39,8 +39,8 @@ public static class ApiClientFactory
         Task<TransformationTicket> RequestTransformationAsync([Body] TransformationRequest transformationRequest);
 
         /// <summary>
-        /// Retrieves the result of the transformation when it's finished using the ticket from
-        /// <see cref="RequestTransformationAsync(TransformationRequest)"/>.
+        /// Retrieves the result of the transformation when it's finished using the ticket from <see
+        /// cref="RequestTransformationAsync(TransformationRequest)"/>.
         /// </summary>
         [Get("TransformationResults"), AllowAnyStatusCode]
         Task<Response<TransformationResult>> GetTransformationResultAsync([Query] string transformationToken);

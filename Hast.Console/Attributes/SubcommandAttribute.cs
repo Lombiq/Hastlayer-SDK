@@ -3,8 +3,8 @@ using System;
 namespace Hast.Console.Attributes;
 
 /// <summary>
-/// Indicates that if the first positional argument is the <see cref="Name"/> then an instance of the decorated
-/// class should take over from <see cref="Program"/>.
+/// Indicates that if the first positional argument is the <see cref="Name"/> then an instance of the decorated class
+/// should take over from <see cref="Program"/>.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class SubcommandAttribute : Attribute

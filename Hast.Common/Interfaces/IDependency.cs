@@ -41,7 +41,7 @@ public sealed class DependencyInitializerAttribute : Attribute
     public string MemberName { get; }
 
     /// <param name="memberName">
-    /// The name of a public static method that takes one <see cref="IServiceCollection" /> argument and returns void.
+    /// The name of a public static method that takes one <see cref="IServiceCollection"/> argument and returns void.
     /// </param>
     public DependencyInitializerAttribute(string memberName) => MemberName = memberName;
 }

@@ -38,9 +38,9 @@ public interface IHardwareDescription
     string Language { get; }
 
     /// <summary>
-    /// Gets a collection of the full name (including the full namespace of the parent type(s) as well as their
-    /// return type and the types of their - type - arguments of hardware entry members (that are accessible as
-    /// hardware implementation from the host) and their corresponding numerical IDs on the hardware.
+    /// Gets a collection of the full name (including the full namespace of the parent type(s) as well as their return
+    /// type and the types of their - type - arguments of hardware entry members (that are accessible as hardware
+    /// implementation from the host) and their corresponding numerical IDs on the hardware.
     /// </summary>
     IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
 
@@ -55,7 +55,8 @@ public interface IHardwareDescription
     /// </summary>
     /// <remarks>
     /// <para>
-    /// To deserialize you'll need a concrete implementation like <see cref="Hast.Common.Models.VhdlHardwareDescription"/>.
+    /// To deserialize you'll need a concrete implementation like <see
+    /// cref="Hast.Common.Models.VhdlHardwareDescription"/>.
     /// </para>
     /// </remarks>
     Task SerializeAsync(Stream stream);

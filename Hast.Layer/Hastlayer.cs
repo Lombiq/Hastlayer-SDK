@@ -37,6 +37,7 @@ public sealed class Hastlayer : IHastlayer
     private readonly HashSet<string> _serviceNames;
 
     public event EventHandler<ServiceEventArgs<IMemberHardwareExecutionContext>> ExecutedOnHardware;
+
     public event EventHandler<ServiceEventArgs<IMemberInvocationContext>> Invoking;
 
     // Private so the static factory should be used.
@@ -45,8 +46,8 @@ public sealed class Hastlayer : IHastlayer
         _configuration = configuration;
         var appDataFolder = new AppDataFolder(configuration.AppDataFolderPath);
 
-        // Since the DI prefers services in order of registration, we take the user assemblies first followed by
-        // dynamic lookup of Hast.*.dll files.
+        // Since the DI prefers services in order of registration, we take the user assemblies first followed by dynamic
+        // lookup of Hast.*.dll files.
         var assemblies = new List<Assembly>(configuration.Extensions);
         assemblies.AddRange(new[]
         {
@@ -129,8 +130,10 @@ public sealed class Hastlayer : IHastlayer
     /// Instantiates a new <see cref="IHastlayer"/> implementation.
     /// </summary>
     /// <remarks>
-    /// <para>Point of this factory is that it returns an interface type instead of the implementation and can throw
-    /// exceptions.</para>
+    /// <para>
+    /// Point of this factory is that it returns an interface type instead of the implementation and can throw
+    /// exceptions.
+    /// </para>
     /// </remarks>
     /// <param name="configuration">Configuration for Hastlayer.</param>
     /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
@@ -456,8 +459,8 @@ public sealed class Hastlayer : IHastlayer
             }
         }
 
-        // There won't be an Abstractions folder, nor a Core one when the app is being run from a deployment folder
-        // (as opposed to a solution).
+        // There won't be an Abstractions folder, nor a Core one when the app is being run from a deployment folder (as
+        // opposed to a solution).
         if (!string.IsNullOrEmpty(abstractionsPath))
         {
             moduleFolderPaths.Add(abstractionsPath);

@@ -4,8 +4,8 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// Object-oriented code can be written with Hastlayer as usual. This will also be directly mapped to hardware.
-/// Also see <c>ObjectOrientedShowcaseSampleRunner</c> on what to configure to make this work.
+/// Object-oriented code can be written with Hastlayer as usual. This will also be directly mapped to hardware. Also see
+/// <c>ObjectOrientedShowcaseSampleRunner</c> on what to configure to make this work.
 /// </summary>
 public class ObjectOrientedShowcase
 {
@@ -37,9 +37,9 @@ public class ObjectOrientedShowcase
         numberContainers1[3].IncreaseNumberByParameterTimes10(ref increaseBy, out uint originalNumber);
         numberContainers1[3].IncreaseNumber(increaseBy + originalNumber);
 
-        // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used
-        // when instantiating the array but the size argument needs to be resolvable compile-time (so if it's a
-        // variable then its value should be computable from all other values at compile-time).
+        // Note that array dimensions need to be defined compile-time. They needn't bee constants directly used when
+        // instantiating the array but the size argument needs to be resolvable compile-time (so if it's a variable then
+        // its value should be computable from all other values at compile-time).
         var numberContainers2 = new NumberContainer[1];
         var numberContainer = new NumberContainer
         {

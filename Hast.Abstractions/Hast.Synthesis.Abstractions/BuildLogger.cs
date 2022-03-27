@@ -1,4 +1,4 @@
-﻿using CliWrap;
+using CliWrap;
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
 using Hast.Common.Helpers;

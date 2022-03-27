@@ -1,6 +1,6 @@
+using Hast.Layer;
 using System.Collections.Generic;
 using System.Linq;
-using Hast.Layer;
 
 namespace Hast.Synthesis.Abstractions;
 

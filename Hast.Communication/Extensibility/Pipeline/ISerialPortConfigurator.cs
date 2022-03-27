@@ -1,6 +1,6 @@
-using System.IO.Ports;
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Models;
+using System.IO.Ports;
 
 namespace Hast.Communication.Extensibility.Pipeline;
 

@@ -1,4 +1,4 @@
-﻿using CliWrap;
+using CliWrap;
 using CliWrap.Buffered;
 using CliWrap.EventStream;
 using System;
@@ -13,8 +13,8 @@ namespace Hast.Common.Helpers;
 public static class CliHelper
 {
     /// <summary>
-    /// Returns an executable's full path by looking up its command name. Uses the <c>which</c> command in Unix and
-    /// the <c>where</c> command in Windows.
+    /// Returns an executable's full path by looking up its command name. Uses the <c>which</c> command in Unix and the
+    /// <c>where</c> command in Windows.
     /// </summary>
     /// <param name="name">The application name you can invoke directly in the command line.</param>
     public static async Task<IEnumerable<FileInfo>> WhichAsync(string name)

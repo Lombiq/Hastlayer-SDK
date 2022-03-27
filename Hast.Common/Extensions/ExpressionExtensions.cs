@@ -26,8 +26,8 @@ public static class ExpressionExtensions
 
     private static MethodInfo GetInvokedMethodInfo<T>(this Expression<Action<T>> expression)
     {
-        // Since we need a specific method (i.e. if there are multiple overloads of it, then still one of them)
-        // this can't be simpler than requiring an expression.
+        // Since we need a specific method (i.e. if there are multiple overloads of it, then still one of them) this
+        // can't be simpler than requiring an expression.
 
         if (expression.Body is not MethodCallExpression methodCallExpression)
         {

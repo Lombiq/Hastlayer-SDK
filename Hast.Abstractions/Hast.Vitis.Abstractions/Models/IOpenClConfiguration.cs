@@ -5,15 +5,14 @@ using Hast.Vitis.Abstractions.Services;
 namespace Hast.Vitis.Abstractions.Models;
 
 /// <summary>
-/// A configuration for the <see cref="OpenClCommunicationService"/>. The implementing class has sensible defaults
-/// that should work out of the box, but if configuration is necessary, the appconfig.json file should be edited.
+/// A configuration for the <see cref="OpenClCommunicationService"/>. The implementing class has sensible defaults that
+/// should work out of the box, but if configuration is necessary, the appconfig.json file should be edited.
 /// </summary>
 /// <remarks>
 /// <para>
-/// An example for the appsettings file can be seen below or in the Hast.Samples.Consumer project. Everything
-/// omitted will remain as default.
+/// An example for the appsettings file can be seen below or in the Hast.Samples.Consumer project. Everything omitted
+/// will remain as default.
 /// </para>
-///
 /// <code>
 /// {
 ///   "HardwareGenerationConfiguration": {
@@ -30,7 +29,8 @@ namespace Hast.Vitis.Abstractions.Models;
 public interface IOpenClConfiguration
 {
     /// <summary>
-    /// Gets or sets a value indicating whether any <see cref="long"/> value in the header is considered big endian, if false then little endian.
+    /// Gets or sets a value indicating whether any <see cref="long"/> value in the header is considered big endian, if
+    /// false then little endian.
     /// </summary>
     bool DeviceIsBigEndian { get; set; }
 
@@ -40,8 +40,8 @@ public interface IOpenClConfiguration
     DeviceTypes DeviceType { get; set; }
 
     /// <summary>
-    /// Gets or sets the number of cells (<see cref="SimpleMemory.MemoryCellSizeBytes"/> byte units) to be occupied in the
-    /// <see cref="SimpleMemory"/> as <see cref="SimpleMemory.PrefixCellCount"/>.
+    /// Gets or sets the number of cells ( <see cref="SimpleMemory.MemoryCellSizeBytes"/> byte units) to be occupied in
+    /// the <see cref="SimpleMemory"/> as <see cref="SimpleMemory.PrefixCellCount"/>.
     /// </summary>
     int HeaderCellCount { get; set; }
 
@@ -56,8 +56,8 @@ public interface IOpenClConfiguration
     bool UseEmulation { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether cache (for accelerating access to the on-board DDR or HBM memory on
-    /// the device) should be used. Default is <see langword="true"/>.
+    /// Gets or sets a value indicating whether cache (for accelerating access to the on-board DDR or HBM memory on the
+    /// device) should be used. Default is <see langword="true"/>.
     /// </summary>
     bool UseCache { get; set; }
 

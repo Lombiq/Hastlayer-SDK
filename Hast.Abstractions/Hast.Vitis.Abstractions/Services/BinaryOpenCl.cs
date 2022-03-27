@@ -43,7 +43,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
     private IntPtr[] Devices => _devicesLazy.Value;
     public int DeviceCount => Devices.Length;
 
-    #endregion
+    #endregion Fields and properties
 
     #region Constructors
 
@@ -69,7 +69,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
         });
     }
 
-    #endregion
+    #endregion Constructors
 
     #region Methods
 
@@ -301,7 +301,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
         return waitEvent;
     }
 
-    #endregion
+    #endregion Methods
 
     public static void InitializeService(IServiceCollection services) =>
         services.AddSingleton(_ => NativeLibraryBuilder.Default.ActivateInterface<IOpenCl>("OpenCL"));

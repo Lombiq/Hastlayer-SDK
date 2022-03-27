@@ -12,10 +12,10 @@ using System.Threading.Tasks;
 namespace Hast.Samples.Consumer.Models;
 
 /// <summary>
-/// This class contains the configuration options you can set through the command line arguments and the terminal
-/// GUI. The arguments are all case-insensitive and start with a single dash. The next argument after it is the
-/// value. The <see cref="ArgumentAttribute"/> lists additional aliases. For example <c>-devicename "Nexys A7"</c>
-///  or <c>-device "Nexys A7"</c>.
+/// This class contains the configuration options you can set through the command line arguments and the terminal GUI.
+/// The arguments are all case-insensitive and start with a single dash. The next argument after it is the value. The
+/// <see cref="ArgumentAttribute"/> lists additional aliases. For example <c>-devicename "Nexys A7"</c> or <c>-device
+/// "Nexys A7"</c>.
 /// </summary>
 public class ConsumerConfiguration
 {
@@ -98,20 +98,19 @@ public class ConsumerConfiguration
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This is <see langword="private"/> because it's only used by <see cref="FromCommandLine"/> to immediately
-    /// save the parsed object and doesn't need to be made available outside.
+    /// This is <see langword="private"/> because it's only used by <see cref="FromCommandLine"/> to immediately save
+    /// the parsed object and doesn't need to be made available outside.
     /// </para>
     /// </remarks>
     [Argument("save")]
     private string SaveName { get; set; }
 
     /// <summary>
-    /// Gets a lazy string dictionary that maps the property names that have <see cref="HintAttribute"/> in this
-    /// class to their hint texts.
+    /// Gets a lazy string dictionary that maps the property names that have <see cref="HintAttribute"/> in this class
+    /// to their hint texts.
     /// </summary>
     public static Lazy<Dictionary<string, string>> HintDictionary { get; } = new(() =>
-        GetPropertyAttributes<HintAttribute>()
-            .ToDictionary(pair => pair.Property.Name, pair => pair.Attribute.Text));
+        GetPropertyAttributes<HintAttribute>().ToDictionary(pair => pair.Property.Name, pair => pair.Attribute.Text));
 
     private static IEnumerable<(PropertyInfo Property, T Attribute)> GetPropertyAttributes<T>()
         where T : Attribute =>

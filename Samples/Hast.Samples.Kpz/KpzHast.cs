@@ -13,6 +13,7 @@ public partial class Kpz
     private bool _randomSeedEnable;
 
     public delegate void LogItDelegate(string toLog);
+
     public LogItDelegate LogItFunction { get; set; } // Should be AsyncLogIt from ChartForm
     public KpzKernelsInterface Kernels { get; set; }
     public KpzKernelsParallelizedInterface KernelsParallelized { get; set; }

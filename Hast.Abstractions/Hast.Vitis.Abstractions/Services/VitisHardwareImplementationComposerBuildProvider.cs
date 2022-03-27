@@ -29,6 +29,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
     private const string Value = XilinxReportSection.Value;
     private const string Vpp = "v++";
     private const string UtilizationPercent = "Utilization (%)";
+
     private const string TryToMakeItSmaller = "Try to make your code simpler (make it shorter, use smaller data " +
                                               "types, use a lower degree of parallelism) until it goes below 80%.";
 
@@ -212,10 +213,10 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         VitisDeviceManifest deviceManifest,
         List<DirectoryInfo> platformsDirectories)
     {
-        // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
-        // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
-        // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
-        // We are looking for platform directories first, then xpfm files. Then by SupportedPlatforms and location:
+        // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file in
+        // the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
+        // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3. We are looking for platform directories first, then
+        // xpfm files. Then by SupportedPlatforms and location:
         // 1. $XILINX_PLATFORM,
         // 2. /opt/xilinx/platforms
         // 3. ./HardwareFramework/platforms

@@ -4,8 +4,8 @@ using System.Runtime.InteropServices;
 namespace Hast.Samples.Kpz.Algorithms;
 
 /// <summary>
-/// This struct is used to built the grid that the KPZ algorithm works on.
-/// Every node on the grid stores the derivatives of a 2D function in X and Y direction.
+/// This struct is used to built the grid that the KPZ algorithm works on. Every node on the grid stores the derivatives
+/// of a 2D function in X and Y direction.
 /// </summary>
 public class KpzNode
 {
@@ -26,8 +26,8 @@ public class KpzNode
 }
 
 /// <summary>
-/// This struct stores the right and bottom neighbours of a particular node on the grid.
-/// It stores both their values and coordinates.
+/// This struct stores the right and bottom neighbours of a particular node on the grid. It stores both their values and
+/// coordinates.
 /// </summary>
 [SuppressMessage(
     "Performance",
@@ -46,7 +46,7 @@ public struct KpzNeighbours
 }
 
 /// <summary>
-/// This struct stores the coordinates of a <see cref="KpzNode" /> on the grid.
+/// This struct stores the coordinates of a <see cref="KpzNode"/> on the grid.
 /// </summary>
 [SuppressMessage(
     "Performance",

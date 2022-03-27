@@ -10,7 +10,9 @@ using System.Windows.Forms;
 
 namespace Hast.Samples.Kpz;
 
-/// <summary>The main form showing the log and the output graph of the algorithm.</summary>
+/// <summary>
+/// The main form showing the log and the output graph of the algorithm.
+/// </summary>
 public partial class ChartForm : Form
 {
     public int NumKpzIterations => (int)nudIterations.Value;
@@ -23,8 +25,8 @@ public partial class ChartForm : Form
     public bool RandomSeedEnable => checkRandomSeed.Checked;
 
     /// <summary>
-    /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI,
-    /// so that the GUI keeps responding while the algorithm is running.
+    /// The BackgroundWorker is used to run the algorithm on a different CPU thread than the GUI, so that the GUI keeps
+    /// responding while the algorithm is running.
     /// </summary>
     [SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Disposed in Closed event handler.")]
     private readonly BackgroundWorker _backgroundWorker;
@@ -34,7 +36,9 @@ public partial class ChartForm : Form
     /// </summary>
     private Kpz _kpz;
 
-    /// <summary>InspectForm allows us to inspect the results of the KPZ algorithm on a GUI interface.</summary>
+    /// <summary>
+    /// InspectForm allows us to inspect the results of the KPZ algorithm on a GUI interface.
+    /// </summary>
     [SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "Disposed in Closed event handler.")]
     private InspectForm _inspectForm;
 
@@ -50,7 +54,9 @@ public partial class ChartForm : Form
         comboTarget.SelectedIndex = 4;
     }
 
-    /// <summary>It adds a line to the log.</summary>
+    /// <summary>
+    /// It adds a line to the log.
+    /// </summary>
     private void LogIt(string what)
     {
         listLog.Items.Add(what);
@@ -58,8 +64,8 @@ public partial class ChartForm : Form
     }
 
     /// <summary>
-    /// Clicking on <see cref="buttonStart" /> starts the KPZ algorithm in the background.
-    /// When the algorithm is running, it can also be used to stop it.
+    /// Clicking on <see cref="buttonStart"/> starts the KPZ algorithm in the background. When the algorithm is running,
+    /// it can also be used to stop it.
     /// </summary>
     private void ButtonStart_Click(object sender, EventArgs e)
     {
@@ -82,13 +88,12 @@ public partial class ChartForm : Form
     }
 
     /// <summary>
-    /// It runs the KPZ algorithm in the background.
-    /// See also: <see cref="BackgroundWorker"/>.
+    /// It runs the KPZ algorithm in the background. See also: <see cref="BackgroundWorker"/>.
     /// </summary>
     private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
     {
-        // Do not access the form's BackgroundWorker reference directly.
-        // Instead, use the reference provided by the sender parameter.
+        // Do not access the form's BackgroundWorker reference directly. Instead, use the reference provided by the
+        // sender parameter.
         var bw = sender as BackgroundWorker;
         RunKpz(bw);
         // If the operation was canceled by the user, set the DoWorkEventArgs.Cancel property to true.
@@ -126,11 +131,9 @@ public partial class ChartForm : Form
     }
 
     /// <summary>
-    /// GUI controls cannot be directly updated from inside the <see cref="BackgroundWorker"/>.
-    /// One solution for this is using <c>Windows.Threading.Dispatcher.Invoke</c> to
-    /// schedule an update in the GUI thread.
-    /// AsyncLogIt schedules a <see cref="LogIt"/> operation on the GUI thread from within the
-    /// <see cref="BackgroundWorker"/>.
+    /// GUI controls cannot be directly updated from inside the <see cref="BackgroundWorker"/>. One solution for this is
+    /// using <c>Windows.Threading.Dispatcher.Invoke</c> to schedule an update in the GUI thread. AsyncLogIt schedules a
+    /// <see cref="LogIt"/> operation on the GUI thread from within the <see cref="BackgroundWorker"/>.
     /// </summary>
     private void AsyncLogIt(string what) => Invoke(new Action(() => LogIt(what)));
 
@@ -138,19 +141,19 @@ public partial class ChartForm : Form
         Invoke(new Action(() => LogIt(what.ToString(CultureInfo.InvariantCulture))));
 
     /// <summary>
-    /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the
-    /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
+    /// AsyncUpdateProgressBar schedules the progress bar value to be updated in GUI thread from within the <see
+    /// cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
     /// </summary>
     private void AsyncUpdateProgressBar(int progress) => Invoke(new Action(() => progressBar.Value = progress));
 
     /// <summary>
-    /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the
-    /// <see cref="BackgroundWorker"/>. For more info, see <see cref="AsyncLogIt"/>.
+    /// AsyncUpdateChart schedules the chart to be updated in GUI thread from within the <see cref="BackgroundWorker"/>.
+    /// For more info, see <see cref="AsyncLogIt"/>.
     /// </summary>
     private void AsyncUpdateChart(int iteration, bool forceUpdate = false)
     {
-        // The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g.
-        // in iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
+        // The chart is updated (and the statistics are calculated) 10 times in every logarithmic scale step, e.g. in
+        // iterations: 1,2,3,4,5,6,7,8,9, 10,20,30,40,50,60,70,80,90, 100,200,300,400,500...
         int iterationNext10Pow = (int)Math.Pow(10, Math.Floor(Math.Log10(iteration) + 1));
         bool updateChartInThisIteartion = forceUpdate || iteration < 10 ||
             (iteration + 1) % (iterationNext10Pow / 10) == 0;
@@ -274,8 +277,8 @@ public partial class ChartForm : Form
     }
 
     /// <summary>
-    /// <see cref="labelShowInspector" /> is next to <see cref="checkShowInspector" />, and clicking on it
-    /// can be used to toggle the checkbox.
+    /// <see cref="labelShowInspector"/> is next to <see cref="checkShowInspector"/>, and clicking on it can be used to
+    /// toggle the checkbox.
     /// </summary>
     private void LabelShowInspector_Click(object sender, EventArgs e) => checkShowInspector.Checked = !checkShowInspector.Checked;
 

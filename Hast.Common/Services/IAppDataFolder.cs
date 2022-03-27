@@ -13,8 +13,8 @@ public interface IAppDataFolder
     string MapPath(string relativePath);
 
     /// <summary>
-    /// Returns an absolute path like <see cref="MapPath(string)"/>, but builds the relative path from
-    /// <paramref name="parts"/>.
+    /// Returns an absolute path like <see cref="MapPath(string)"/>, but builds the relative path from <paramref
+    /// name="parts"/>.
     /// </summary>
     string Combine(params string[] parts);
 

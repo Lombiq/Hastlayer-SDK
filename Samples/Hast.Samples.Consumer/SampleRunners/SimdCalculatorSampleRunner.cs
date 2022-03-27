@@ -33,8 +33,8 @@ internal class SimdCalculatorSampleRunner : ISampleRunner
             calculator => calculator.DivideVectors(vector, vector, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration));
     }
 
-    // Checking if the hardware result is correct by running it against the software implementation. Note that this
-    // can be also done by Hastlayer automatically on the SimpleMemory level by setting
+    // Checking if the hardware result is correct by running it against the software implementation. Note that this can
+    // be also done by Hastlayer automatically on the SimpleMemory level by setting
     // ProxyGenerationConfiguration.VerifyHardwareResults to true when calling GenerateProxy().
     private static void ThrowIfNotCorrect(SimdCalculator proxied, Func<SimdCalculator, int[]> operation)
     {

@@ -55,5 +55,6 @@ public static class GuiExtensions
         };
 
     public static void OnEnterKeyPressed(this View view, Action action) => OnKeyPressed(view, Key.Enter, action);
+
     public static void OnEscKeyPressed(this View view, Action action) => OnKeyPressed(view, Key.Esc, action);
 }

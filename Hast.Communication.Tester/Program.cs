@@ -150,7 +150,8 @@ public static class Program
     }
 
     private static MethodInfo GetReferenceAction(Type type) =>
-        // In at least one case (ImageContrastModifier) Run can't be public because it would cause issues with the transformation.
+        // In at least one case (ImageContrastModifier) Run can't be public because it would cause issues with the
+        // transformation.
         type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
             .SingleOrDefault(x => x.Name == nameof(MemoryTest.Run) &&
                                   x.GetParameters().Length == 1 &&

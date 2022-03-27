@@ -8,8 +8,8 @@ namespace Hast.Layer;
 public static class HastlayerExtensions
 {
     /// <summary>
-    /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation
-    /// using the default proxy generation configuration.
+    /// Generates a proxy for the given object that will transfer suitable calls to the hardware implementation using
+    /// the default proxy generation configuration.
     /// </summary>
     /// <typeparam name="T">Type of the object to generate a proxy for.</typeparam>
     /// <param name="hardwareRepresentation">The representation of the assemblies implemented as hardware.</param>
@@ -26,8 +26,8 @@ public static class HastlayerExtensions
         hastlayer.GenerateProxyAsync(hardwareRepresentation, hardwareObject, ProxyGenerationConfiguration.Default);
 
     /// <summary>
-    /// Generates and implements a hardware representation of the given assemblies. Be sure to use assemblies built
-    /// with the Debug configuration.
+    /// Generates and implements a hardware representation of the given assemblies. Be sure to use assemblies built with
+    /// the Debug configuration.
     /// </summary>
     /// <param name="assemblies">The assemblies that should be implemented as hardware.</param>
     /// <param name="configuration">Configuration for how the hardware generation should happen.</param>

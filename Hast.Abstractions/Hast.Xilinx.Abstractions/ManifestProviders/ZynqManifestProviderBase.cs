@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Xilinx.Abstractions.Helpers;
 using System;
@@ -12,6 +12,7 @@ public abstract class ZynqManifestProviderBase : IDeviceManifestProvider
     protected string _deviceName;
 
     private IDeviceManifest _deviceManifest;
+
     public IDeviceManifest DeviceManifest =>
         _deviceManifest ??= new ZynqDeviceManifest
         {

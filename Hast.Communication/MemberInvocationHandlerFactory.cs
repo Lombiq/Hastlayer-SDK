@@ -27,6 +27,7 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
     private readonly ILogger<MemberInvocationHandlerFactory> _logger;
 
     public event EventHandler<ServiceEventArgs<IMemberHardwareExecutionContext>> MemberExecutedOnHardware;
+
     public event EventHandler<ServiceEventArgs<IMemberInvocationContext>> MemberInvoking;
 
     public MemberInvocationHandlerFactory(
@@ -155,8 +156,8 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
             invocation.SetArgumentValue(memoryArgumentIndex, softMemory);
 
             var softwareExecutionStopwatch = Stopwatch.StartNew();
-            // This needs to happen before the awaited Execute() call below, otherwise the Task
-            // in ReturnValue wouldn't be the original one any more.
+            // This needs to happen before the awaited Execute() call below, otherwise the Task in ReturnValue wouldn't
+            // be the original one any more.
             invocation.Proceed();
             softwareExecutionStopwatch.Stop();
             invocationContext.SoftwareExecutionInformation = new SoftwareExecutionInformation
