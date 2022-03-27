@@ -85,7 +85,7 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
         };
     }
 
-    private class UdpReceiveResultEqualityComparer : IEqualityComparer<UdpReceiveResult>
+    private sealed class UdpReceiveResultEqualityComparer : IEqualityComparer<UdpReceiveResult>
     {
         public bool Equals(UdpReceiveResult x, UdpReceiveResult y) => x.RemoteEndPoint.Equals(y.RemoteEndPoint);
 

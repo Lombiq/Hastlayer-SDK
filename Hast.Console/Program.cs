@@ -74,7 +74,7 @@ internal class Program
             .WithNotParsed(HandleParseError);
     }
 
-    private class SubcommandInfo
+    private sealed class SubcommandInfo
     {
         public string CommandName { get; set; }
         public ISubcommand Instance { get; set; }

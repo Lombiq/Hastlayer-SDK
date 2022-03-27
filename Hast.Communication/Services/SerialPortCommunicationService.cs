@@ -322,7 +322,7 @@ public class SerialPortCommunicationService : CommunicationServiceBase
         return serialPort;
     }
 
-    private class SerialCommunicationContext
+    private sealed class SerialCommunicationContext
     {
         public TaskCompletionSource<bool> TaskCompletionSource { get; set; }
         public Serial.CommunicationState CommunicationState { get; set; }

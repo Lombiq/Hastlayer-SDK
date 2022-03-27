@@ -21,7 +21,7 @@ internal static class EmptyHardwareDescriptionFactory
         return new HardwareDescription(mockHardwareEntryPointMappings);
     }
 
-    private class HardwareDescription : IHardwareDescription
+    private sealed class HardwareDescription : IHardwareDescription
     {
         public string TransformationId { get; } = Sha256Helper.Empty();
         public string Language => "VHDL";

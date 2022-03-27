@@ -122,13 +122,13 @@ public class ImageContrastModifier
         return (byte)correctedPixel;
     }
 
-    private class PixelProcessingTaskInput
+    private sealed class PixelProcessingTaskInput
     {
         public byte[] PixelBytes { get; set; }
         public int ContrastValue { get; set; }
     }
 
-    private class PixelProcessingTaskOutput
+    private sealed class PixelProcessingTaskOutput
     {
         public byte R { get; set; }
         public byte G { get; set; }

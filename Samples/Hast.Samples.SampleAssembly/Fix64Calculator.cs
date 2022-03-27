@@ -133,7 +133,7 @@ public class Fix64Calculator
         return results;
     }
 
-    private class TaskResult
+    private sealed class TaskResult
     {
         public int Fix64Low { get; set; }
         public int Fix64High { get; set; }

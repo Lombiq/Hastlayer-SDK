@@ -109,7 +109,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
         _isDisposed = true;
     }
 
-    private class ReservedDevice : Device, IReservedDevice
+    private sealed class ReservedDevice : Device, IReservedDevice
     {
         private readonly Action<ReservedDevice> _disposer;
 

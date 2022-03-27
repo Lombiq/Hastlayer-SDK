@@ -298,13 +298,13 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
         AsyncFunction,
     }
 
-    private class HardwareExecutionContext : IHardwareExecutionContext
+    private sealed class HardwareExecutionContext : IHardwareExecutionContext
     {
         public IProxyGenerationConfiguration ProxyGenerationConfiguration { get; set; }
         public IHardwareRepresentation HardwareRepresentation { get; set; }
     }
 
-    private class SoftwareExecutionInformation : ISoftwareExecutionInformation
+    private sealed class SoftwareExecutionInformation : ISoftwareExecutionInformation
     {
         public decimal SoftwareExecutionTimeMilliseconds { get; set; }
     }

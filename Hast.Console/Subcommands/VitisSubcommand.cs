@@ -159,7 +159,7 @@ public class VitisSubcommand : ISubcommand
         Json,
     }
 
-    private class DeveloperFlavorProvider : IHastlayerFlavorProvider
+    private sealed class DeveloperFlavorProvider : IHastlayerFlavorProvider
     {
         public HastlayerFlavor Flavor => HastlayerFlavor.Developer;
     }
