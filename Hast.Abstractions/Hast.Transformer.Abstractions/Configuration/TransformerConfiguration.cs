@@ -23,7 +23,9 @@ public class TransformerConfiguration
         // necessarily the same on all machines or during all executions. Thus we need sorting so the transformation ID
         // is deterministic (see DefaultTransformer in Hast.Transformer). Also, ToArray() and the setter are needed for
         // JSON de/serialization when doing remote transformation.
+#pragma warning disable S2365 // Properties should not make collection or array copies
         get => _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray();
+#pragma warning restore S2365 // Properties should not make collection or array copies
 
         // It does so indirectly via AddMemberInvocationInstanceCountConfiguration.
 #pragma warning disable S4275 // Getters and setters should access the expected fields
