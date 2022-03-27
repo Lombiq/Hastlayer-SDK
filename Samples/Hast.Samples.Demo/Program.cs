@@ -50,7 +50,7 @@ internal static class Program
         Console.WriteLine();
 
         var sw = System.Diagnostics.Stopwatch.StartNew();
-        var cpuOutput = new ParallelAlgorithm().Run(234234, hastlayer: null);
+        var cpuOutput = new ParallelAlgorithm().Run(234234);
         sw.Stop();
 
         Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, " milliseconds."));
