@@ -146,7 +146,10 @@ internal static class Program
                               "cause the hardware implementation to produce incorrect results.\n");
         }
 
+        // This is a sample app, we indeed want to exit.
+#pragma warning disable S1147 // Exit methods should not be called
         if (consumerConfiguration.GenerateHardwareOnly) Environment.Exit(0);
+#pragma warning restore S1147 // Exit methods should not be called
 
         Console.WriteLine("Starting hardware execution.");
 
