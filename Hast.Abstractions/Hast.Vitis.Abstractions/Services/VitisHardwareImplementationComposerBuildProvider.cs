@@ -56,7 +56,10 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         _logger = logger;
         _flavorProvider = flavorProvider;
 
+        // Only a reference is saved for "this" in BuildLogger.
+#pragma warning disable S3366 // "this" should not be exposed from constructors
         (_buildLogger, _buildOutput) = BuildLogger.Create(logger, this);
+#pragma warning restore S3366 // "this" should not be exposed from constructors
     }
 
     public bool CanCompose(IHardwareImplementationCompositionContext context) =>

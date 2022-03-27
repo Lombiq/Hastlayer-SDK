@@ -61,7 +61,12 @@ public sealed class Hastlayer : IHastlayer
         assemblies.AddRange(GetHastLibraries());
 
         var services = new ServiceCollection();
+
+        // Only a reference is saved.
+#pragma warning disable S3366 // "this" should not be exposed from constructors
         services.AddSingleton<IHastlayer>(this);
+
+#pragma warning restore S3366 // "this" should not be exposed from constructors
         services.AddSingleton(configuration);
         services.AddSingleton<IHastlayerFlavorProvider>(configuration);
         services.AddSingleton<IAppDataFolder>(appDataFolder);
