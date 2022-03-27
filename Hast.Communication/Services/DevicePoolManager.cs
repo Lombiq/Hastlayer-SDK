@@ -57,7 +57,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
 
             if (firstAvailableDevice != null)
             {
-                _logger.LogDebug("Found an available device with the identifier {0}.", (object)firstAvailableDevice.Identifier);
+                _logger.LogDebug("Found an available device with the identifier {0}.", firstAvailableDevice.Identifier);
 
                 firstAvailableDevice.IsBusy = true;
 
@@ -79,7 +79,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
                         {
                             _logger.LogDebug(
                                 "No device reservation requests are in the queue so freeing up the device with the ID {0}.",
-                                (object)thisReservedDevice.Identifier);
+                                thisReservedDevice.Identifier);
 
                             _devicePool[thisReservedDevice.Identifier].IsBusy = false;
                         }
