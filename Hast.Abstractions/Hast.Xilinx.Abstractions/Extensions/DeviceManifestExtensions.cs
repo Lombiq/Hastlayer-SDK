@@ -1,9 +1,8 @@
 ﻿using Hast.Xilinx.Abstractions;
 
-namespace Hast.Layer
+namespace Hast.Layer;
+
+public static class DeviceManifestExtensions
 {
-    public static class DeviceManifestExtensions
-    {
-        public static bool UsesVivadoInToolChain(this IDeviceManifest manifest) => manifest is XilinxDeviceManifest;
-    }
+    public static bool UsesVivadoInToolChain(this IDeviceManifest manifest) => manifest is XilinxDeviceManifest;
 }

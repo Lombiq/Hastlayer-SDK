@@ -1,21 +1,20 @@
 using System;
 
-namespace Hast.Remote.Client
+namespace Hast.Remote.Client;
+
+public class RemoteTransformationException : Exception
 {
-    public class RemoteTransformationException : Exception
+    public RemoteTransformationException(string message)
+        : base(message)
     {
-        public RemoteTransformationException(string message)
-            : base(message)
-        {
-        }
+    }
 
-        public RemoteTransformationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+    public RemoteTransformationException(string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
 
-        public RemoteTransformationException()
-        {
-        }
+    public RemoteTransformationException()
+    {
     }
 }

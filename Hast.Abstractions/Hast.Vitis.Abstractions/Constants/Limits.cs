@@ -1,9 +1,8 @@
 ﻿using static Hast.Common.Constants.DataSize;
 
-namespace Hast.Vitis.Abstractions.Constants
+namespace Hast.Vitis.Abstractions.Constants;
+
+public static class Limits
 {
-    public static class Limits
-    {
-        public const ulong HbmSizeBytes = 256 * MegaByte;
-    }
+    public const ulong HbmSizeBytes = 256 * MegaByte;
 }

@@ -1,8 +1,7 @@
-﻿namespace Hast.Communication.Constants
+﻿namespace Hast.Communication.Constants;
+
+public static class CommandTypes
 {
-    public static class CommandTypes
-    {
-        public const char Execution = 'x';
-        public const char WhoIsAvailable = 'w';
-    }
+    public const char Execution = 'x';
+    public const char WhoIsAvailable = 'w';
 }

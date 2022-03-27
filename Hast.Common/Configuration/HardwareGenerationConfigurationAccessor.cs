@@ -1,7 +1,6 @@
-﻿namespace Hast.Layer
+﻿namespace Hast.Layer;
+
+public class HardwareGenerationConfigurationAccessor : IHardwareGenerationConfigurationAccessor
 {
-    public class HardwareGenerationConfigurationAccessor : IHardwareGenerationConfigurationAccessor
-    {
-        public IHardwareGenerationConfiguration Value { get; set; }
-    }
+    public IHardwareGenerationConfiguration Value { get; set; }
 }

@@ -1,13 +1,12 @@
 ﻿using Hast.Remote.Client.Constants;
 using Hast.Remote.Configuration;
 
-namespace Hast.Layer
+namespace Hast.Layer;
+
+public static class RemoteClientConfigurationTransformerExtensions
 {
-    public static class RemoteClientConfigurationTransformerExtensions
-    {
-        public static RemoteClientConfiguration RemoteClientConfiguration(
-            this IHardwareGenerationConfiguration hardwareConfiguration) =>
-            hardwareConfiguration.GetOrAddCustomConfiguration<RemoteClientConfiguration>(
-                CustomConfigurationKeys.HastRemoteClientConfiguration);
-    }
+    public static RemoteClientConfiguration RemoteClientConfiguration(
+        this IHardwareGenerationConfiguration hardwareConfiguration) =>
+        hardwareConfiguration.GetOrAddCustomConfiguration<RemoteClientConfiguration>(
+            CustomConfigurationKeys.HastRemoteClientConfiguration);
 }

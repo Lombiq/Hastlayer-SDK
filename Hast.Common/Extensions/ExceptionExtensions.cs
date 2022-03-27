@@ -1,11 +1,10 @@
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace System
+namespace System;
+
+public static class ExceptionExtensions
 {
-    public static class ExceptionExtensions
-    {
-        public static bool IsFatal(this Exception ex) =>
-            ex is OutOfMemoryException or SecurityException or SEHException;
-    }
+    public static bool IsFatal(this Exception ex) =>
+        ex is OutOfMemoryException or SecurityException or SEHException;
 }

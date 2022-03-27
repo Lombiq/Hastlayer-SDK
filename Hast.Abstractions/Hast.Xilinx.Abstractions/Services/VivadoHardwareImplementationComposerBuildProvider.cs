@@ -7,29 +7,28 @@ using System.IO;
 using System.Threading.Tasks;
 using static Hast.Common.Helpers.FileSystemHelper;
 
-namespace Hast.Vitis.Abstractions.Services
+namespace Hast.Vitis.Abstractions.Services;
+
+public class VivadoHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
 {
-    public class VivadoHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
+    public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
+
+    public bool CanCompose(IHardwareImplementationCompositionContext context) =>
+        context.DeviceManifest is NexysDeviceManifest;
+
+    public Task BuildAsync(
+        IHardwareImplementationCompositionContext context,
+        IHardwareImplementation implementation)
     {
-        public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } = new Dictionary<string, BuildProviderShortcut>();
+        var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
+        return VhdlHelper.CreateVhdlAndXdcFilesAsync(
+            context,
+            Path.Combine(hardwareFrameworkPath, "Nexys4DDR_Master.xdc"),
+            Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "IPRepo"), "Hast_IP.vhd"));
+    }
 
-        public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest is NexysDeviceManifest;
-
-        public Task BuildAsync(
-            IHardwareImplementationCompositionContext context,
-            IHardwareImplementation implementation)
-        {
-            var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
-            return VhdlHelper.CreateVhdlAndXdcFilesAsync(
-                context,
-                Path.Combine(hardwareFrameworkPath, "Nexys4DDR_Master.xdc"),
-                Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "IPRepo"), "Hast_IP.vhd"));
-        }
-
-        public void InvokeProgress(BuildProgressEventArgs eventArgs)
-        {
-            // There are no progress steps for Vivado.
-        }
+    public void InvokeProgress(BuildProgressEventArgs eventArgs)
+    {
+        // There are no progress steps for Vivado.
     }
 }
