@@ -233,7 +233,7 @@ public class GenomeMatcher
     {
         var maxInputLength = Math.Max(inputOne.Length, inputTwo.Length);
 
-        var result = string.Empty;
+        var result = new StringBuilder();
         var startIndex = GetLCSInputOneStartIndex + inputOne.Length + inputTwo.Length + (inputOne.Length * inputTwo.Length * 2);
 
         for (int i = 0; i < maxInputLength; i++)
@@ -242,9 +242,9 @@ public class GenomeMatcher
             var currentCharBytes = BitConverter.GetBytes(currentChar);
             var chars = Encoding.UTF8.GetChars(currentCharBytes);
 
-            result += chars[0];
+            result.Append(chars[0]);
         }
 
-        return result.Replace("\0", string.Empty);
+        return result.ToString().Replace("\0", string.Empty);
     }
 }
