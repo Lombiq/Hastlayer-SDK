@@ -65,8 +65,10 @@ internal class Posit32CalculatorSampleRunner : ISampleRunner
         var integerSumUpToNumber = positCalculator.CalculateIntegerSumUpToNumber(100000);
         sw.Stop();
 
+        const string elapsed = "Elapsed: ";
+
         Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of counting up to 100000: ", integerSumUpToNumber));
-        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
 
         Console.WriteLine();
 
@@ -76,7 +78,7 @@ internal class Posit32CalculatorSampleRunner : ISampleRunner
         sw.Stop();
 
         Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of power of real number: ", powerOfReal));
-        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
 
         Console.WriteLine();
 
@@ -94,7 +96,7 @@ internal class Posit32CalculatorSampleRunner : ISampleRunner
         Console.WriteLine(
             "Result of counting up to ~100000 parallelized: " +
             string.Join(", ", integerSumsUpToNumbers.Select(number => number.ToTechnicalString())));
-        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
 
         Console.WriteLine();
 
@@ -113,7 +115,7 @@ internal class Posit32CalculatorSampleRunner : ISampleRunner
         sw.Stop();
 
         Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Result of addition of posits in array: ", positsInArraySum));
-        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("Elapsed: ", sw.ElapsedMilliseconds, "ms"));
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant(elapsed, sw.ElapsedMilliseconds, "ms"));
 
         Console.WriteLine();
     }
