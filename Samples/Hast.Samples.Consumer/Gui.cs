@@ -315,10 +315,10 @@ public sealed class Gui : IDisposable
 
     private void SaveConfiguration()
     {
-        var title = "Save";
-        var label = "Please enter the name of the configuration!";
-        var widthPercent = 60f;
-        var heightPercent = 30f;
+        const string title = "Save";
+        const string label = "Please enter the name of the configuration!";
+        const float widthPercent = 60f;
+        const float heightPercent = 30f;
 
         var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
 
@@ -348,10 +348,10 @@ public sealed class Gui : IDisposable
 
     private void LoadConfiguration()
     {
-        var title = "Load";
-        var label = "Please select the configuration to load!";
-        var widthPercent = 60f;
-        var heightPercent = 60f;
+        const string title = "Load";
+        const string label = "Please select the configuration to load!";
+        const float widthPercent = 60f;
+        const float heightPercent = 60f;
 
         var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
 
