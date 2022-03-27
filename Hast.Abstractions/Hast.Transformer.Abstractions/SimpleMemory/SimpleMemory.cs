@@ -112,7 +112,7 @@ public class SimpleMemory
                     FormattableString.Invariant($"64-bit: {Environment.Is64BitProcess}; ") +
                     FormattableString.Invariant($"address: {address}; ") +
                     FormattableString.Invariant($"addressLong: {addressLong}; ") +
-                    FormattableString.Invariant($"memory length: {memory.Length}; ") +
+                    FormattableString.Invariant($"{nameof(memory)} length: {memory.Length}; ") +
                     FormattableString.Invariant($"alignment: {alignment}; ") +
                     FormattableString.Invariant($"alignmentOffset: {alignmentOffset}; ") +
                     FormattableString.Invariant($"expectedLength: {expectedLength})"));
