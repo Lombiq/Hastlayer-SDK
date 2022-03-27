@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Hast.Transformer.Abstractions.Extensions;
@@ -8,14 +9,12 @@ public static class AssembliesEnumerableExtensions
 {
     public static void ThrowArgumentExceptionIfAnyInMemory(this IEnumerable<Assembly> assemblies)
     {
-        foreach (var assembly in assemblies)
+        var assembly = assemblies.FirstOrDefault(assembly => string.IsNullOrEmpty(assembly.Location));
+        if (assembly != null)
         {
-            if (string.IsNullOrEmpty(assembly.Location))
-            {
-                throw new ArgumentException(
-                    "No assembly used for hardware generation can be an in-memory one, but the assembly named \"" +
-                    assembly.FullName + "\" is.");
-            }
+            throw new ArgumentException(
+                "No assembly used for hardware generation can be an in-memory one, but the assembly named \"" +
+                assembly.FullName + "\" is.");
         }
     }
 }
