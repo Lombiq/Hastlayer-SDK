@@ -5,7 +5,7 @@ using Hast.Xilinx.Abstractions;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using static Hast.Common.Helpers.FileSystemHelper;
+using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
 namespace Hast.Vitis.Abstractions.Services;
 

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using static Hast.Common.Helpers.FileSystemHelper;
+using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
 using static Hast.Vitis.Abstractions.Services.VitisHardwareImplementationComposerBuildProvider;
 

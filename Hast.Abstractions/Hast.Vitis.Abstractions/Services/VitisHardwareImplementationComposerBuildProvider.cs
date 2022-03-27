@@ -18,7 +18,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static Hast.Common.Helpers.FileSystemHelper;
+using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
 
 namespace Hast.Vitis.Abstractions.Services;

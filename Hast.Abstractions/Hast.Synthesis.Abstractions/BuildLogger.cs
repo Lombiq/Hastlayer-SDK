@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Hast.Common.Helpers.FileSystemHelper;
+using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
 namespace Hast.Synthesis.Abstractions;
 
