@@ -65,7 +65,7 @@ public sealed class Gui : IDisposable
 
         // This task is used to request a logger inside the Application.Run call, so the exception is logged with NLog
         // normally. It's also used by the next task.
-        var hastlayerTask = Task.Run(() => (Hastlayer)Hastlayer.Create(new HastlayerConfiguration()));
+        var hastlayerTask = Task.Run(() => Hastlayer.Create(new HastlayerConfiguration()));
         // This task starts prefetching the device list in the background. Without it the application would hang for a
         // second or so, when you select the DeviceName option.
         _deviceNamesTask = hastlayerTask.ContinueWith(

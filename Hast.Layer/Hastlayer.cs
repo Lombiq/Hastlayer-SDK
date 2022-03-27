@@ -124,20 +124,19 @@ public sealed class Hastlayer : IHastlayer
         services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("hastlayer"));
     }
 
-    public static IHastlayer Create() => Create(HastlayerConfiguration.Default);
+    public static Hastlayer Create() => Create(HastlayerConfiguration.Default);
 
     /// <summary>
-    /// Instantiates a new <see cref="IHastlayer"/> implementation.
+    /// Instantiates a new <see cref="Hastlayer"/> instance.
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Point of this factory is that it returns an interface type instead of the implementation and can throw
-    /// exceptions.
+    /// Point of this factory is that it can throw exceptions.
     /// </para>
     /// </remarks>
     /// <param name="configuration">Configuration for Hastlayer.</param>
-    /// <returns>A newly created <see cref="IHastlayer"/> implementation.</returns>
-    public static IHastlayer Create(IHastlayerConfiguration configuration)
+    /// <returns>A newly created <see cref="Hastlayer"/> instance.</returns>
+    public static Hastlayer Create(IHastlayerConfiguration configuration)
     {
         Argument.ThrowIfNull(configuration, nameof(configuration));
         Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));

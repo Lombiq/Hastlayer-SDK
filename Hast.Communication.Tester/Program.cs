@@ -316,7 +316,7 @@ public static class Program
             hastlayerConfiguration.OnServiceRegistration += OnServiceGeneration;
 
             // It's not in the interface because the feature is for internal use only.
-            _hastlayer = (Hastlayer)Hastlayer.Create(hastlayerConfiguration);
+            _hastlayer = Hastlayer.Create(hastlayerConfiguration);
 
             _hastlayer.RunAsync<IServiceProvider>(MainTaskAsync).Wait();
         }
