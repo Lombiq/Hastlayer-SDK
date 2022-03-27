@@ -247,7 +247,7 @@ public sealed class Gui : IDisposable
                 break;
             case nameof(ConsumerConfiguration.SingleBinaryPath):
                 _optionsTextField.Text = _configuration.SingleBinaryPath ?? string.Empty;
-                _currentOptionsTextFieldEventHandler = text => { _configuration.SingleBinaryPath = text; };
+                _currentOptionsTextFieldEventHandler = text => _configuration.SingleBinaryPath = text;
                 ShowTextField(visible: true);
                 break;
             default:
