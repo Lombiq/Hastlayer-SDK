@@ -168,12 +168,8 @@ public class GenomeMatcher
                 previousCell = (ushort)memory.ReadUInt32(previousPosition);
 
             // Add the current character to the result if the pointer is diagonal and the cell value decreased.
-            if (pointer == GetLCSDiagonalCellPointerValue && (currentCell == previousCell + 1 || previousPosition < resultStartIndex))
-            {
-                var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
-                memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);
-            }
-            else if (pointer == GetLCSOutOfBorderDiagonalCellPointerValue)
+            if ((pointer == GetLCSDiagonalCellPointerValue && (currentCell == previousCell + 1 || previousPosition < resultStartIndex)) ||
+                pointer == GetLCSOutOfBorderDiagonalCellPointerValue)
             {
                 var originalValue = memory.ReadUInt32(GetLCSInputOneStartIndex + column);
                 memory.WriteUInt32(resultStartIndex + (2 * resultLength) + column, originalValue);
