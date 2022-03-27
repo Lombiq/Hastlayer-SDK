@@ -10,6 +10,14 @@ namespace Hast.Samples.Kpz.Algorithms;
 /// <summary>
 /// It contains the state of each Task instantiated within KpzKernelsG.ScheduleIterations.
 /// </summary>
+[SuppressMessage(
+    "Minor Code Smell",
+    "S1104:Fields should not have public accessibility",
+    Justification = "This is hardware code and simples this way.")]
+[SuppressMessage(
+    "Major Code Smell",
+    "S2357:Fields should be private",
+    Justification = "This is hardware code and simples this way.")]
 public class KpzKernelsTaskState
 {
     public bool[] BramDx;

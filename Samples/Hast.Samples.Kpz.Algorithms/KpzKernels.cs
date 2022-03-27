@@ -149,6 +149,14 @@ public class KpzKernelsInterface
 /// LUT RAM of the FPGA, thus it can only handle small table sizes. <see cref="KpzKernels"/> contains the internal
 /// functions and constants to be ran on the FPGA.
 /// </summary>
+[SuppressMessage(
+    "Minor Code Smell",
+    "S1104:Fields should not have public accessibility",
+    Justification = "This is hardware code and simples this way.")]
+[SuppressMessage(
+    "Major Code Smell",
+    "S2357:Fields should be private",
+    Justification = "This is hardware code and simples this way.")]
 public class KpzKernels
 {
     // ==== <CONFIGURABLE PARAMETERS> ==== GridWidth and GridHeight should be 2^n

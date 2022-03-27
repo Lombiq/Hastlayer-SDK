@@ -7,6 +7,14 @@ namespace Hast.Samples.Kpz.Algorithms;
 /// This struct is used to built the grid that the KPZ algorithm works on. Every node on the grid stores the derivatives
 /// of a 2D function in X and Y direction.
 /// </summary>
+[SuppressMessage(
+    "Minor Code Smell",
+    "S1104:Fields should not have public accessibility",
+    Justification = "This is hardware code and simples this way.")]
+[SuppressMessage(
+    "Major Code Smell",
+    "S2357:Fields should be private",
+    Justification = "This is hardware code and simples this way.")]
 public class KpzNode
 {
     public bool Dx; // Right
@@ -37,6 +45,10 @@ public class KpzNode
     "Major Code Smell",
     "S3898:Value types should implement \"IEquatable<T>\"",
     Justification = "Same.")]
+[SuppressMessage(
+    "Minor Code Smell",
+    "S1104:Fields should not have public accessibility",
+    Justification = "This is hardware code and simples this way.")]
 public struct KpzNeighbours
 {
     public KpzNode Nx; // Right neighbour value

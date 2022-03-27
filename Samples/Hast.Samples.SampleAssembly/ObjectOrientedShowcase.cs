@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.SampleAssembly;
 
@@ -86,6 +87,14 @@ public class ObjectOrientedShowcase
 }
 
 // Although this is a public class it could also be an inner class and/or a non-public one too.
+[SuppressMessage(
+    "Minor Code Smell",
+    "S1104:Fields should not have public accessibility",
+    Justification = "This is hardware code and simples this way.")]
+[SuppressMessage(
+    "Major Code Smell",
+    "S2357:Fields should be private",
+    Justification = "This is hardware code and simples this way.")]
 public class NumberContainer
 {
     // Auto-properties (also read-only ones) and custom properties can be used.
