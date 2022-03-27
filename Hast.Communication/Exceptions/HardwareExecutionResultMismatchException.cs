@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Hast.Communication.Exceptions;
@@ -8,6 +9,10 @@ namespace Hast.Communication.Exceptions;
 /// <summary>
 /// Exception thrown when there is a mismatch between the results of the hardware and standard software invocation.
 /// </summary>
+[SuppressMessage(
+    "Major Code Smell",
+    "S3925:\"ISerializable\" should be implemented correctly",
+    Justification = "This exception shouldn't be serialized.")]
 public class HardwareExecutionResultMismatchException : Exception
 {
     public IEnumerable<Mismatch> Mismatches { get; }
