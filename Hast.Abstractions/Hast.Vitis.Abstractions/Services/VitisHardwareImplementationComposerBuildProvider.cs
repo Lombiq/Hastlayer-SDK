@@ -585,7 +585,6 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         {
             // This is not logging but a prompt in select cases.
 #pragma warning disable S106 // Standard outputs should not be used directly to log anything
-#pragma warning disable S2228 // Console logging should not be used
             Console.WriteLine(
                 $"The source files have been written to:\n" +
                 $"    {vhdlFilePath}\n" +
@@ -593,7 +592,6 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
                 $"Expected result:\n" +
                 $"    {binaryPath}\n\n" +
                 $"Press [enter] when you are ready to continue.");
-#pragma warning restore S2228 // Console logging should not be used
 #pragma warning restore S106 // Standard outputs should not be used directly to log anything
             Console.ReadLine();
         }
