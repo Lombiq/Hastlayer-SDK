@@ -226,7 +226,7 @@ public sealed class Gui : IDisposable
             case nameof(ConsumerConfiguration.GenerateHardwareOnly):
                 _optionsListView.Source = new ListWrapper(new object[] { true, false });
                 _optionsListView.SelectedItem = _configuration.GenerateHardwareOnly ? 0 : 1;
-                _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = item.IsTrueString();
+                _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = IsTrueString(item);
                 ShowTextField(visible: false);
                 break;
             case nameof(ConsumerConfiguration.Endpoint):
@@ -249,7 +249,7 @@ public sealed class Gui : IDisposable
             case nameof(ConsumerConfiguration.VerifyResults):
                 _optionsListView.Source = new ListWrapper(new object[] { true, false });
                 _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
-                _currentOptionsListViewEventHandler = item => _configuration.VerifyResults = item.IsTrueString();
+                _currentOptionsListViewEventHandler = item => _configuration.VerifyResults = IsTrueString(item);
                 ShowTextField(visible: false);
                 break;
             case nameof(ConsumerConfiguration.SingleBinaryPath):
@@ -490,4 +490,6 @@ public sealed class Gui : IDisposable
         using var gui = new Gui(savedConfigurations);
         return gui.BuildConfiguration();
     }
+
+    private static bool IsTrueString(object value) => value?.ToString() == bool.TrueString;
 }
