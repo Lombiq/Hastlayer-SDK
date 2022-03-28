@@ -92,11 +92,11 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         await _buildLogger.ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
         MajorProgress("Frequency scaling profile created.");
 
-        const string input = "--input";
-
+        // The code is more readable with the commands inline.
+#pragma warning disable S1192 // String literals should not be duplicated
         await ExecuteXclbinutil(
             output: null,
-            input,
+            "--input",
             xclbinFilePath + ".org",
             "--replace-section",
             "CLOCK_FREQ_TOPOLOGY:json:" + Path.Join(tmpXclbinDirectoryPath, "clock_freq_topology.json"),
@@ -106,7 +106,7 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         MajorProgress("Xclbinutil update completed. (1/3)");
         await ExecuteXclbinutil(
             output: null,
-            input,
+            "--input",
             xclbinFilePath,
             "--info",
             xclbinFilePath + ".info",
@@ -114,7 +114,7 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         MajorProgress("Xclbinutil update completed. (2/3)");
         await ExecuteXclbinutil(
             output: null,
-            input,
+            "--input",
             xclbinFilePath,
             "--dump-section",
             "BITSTREAM:RAW:" + bitFilePath,
@@ -126,11 +126,12 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         {
             await ExecuteXclbinutil(
                 output: infoFileWriter,
-                input,
+                "--input",
                 xclbinFilePath,
                 "--info");
             MajorProgress("Xclbinutil info file recreated.");
         }
+#pragma warning restore S1192 // String literals should not be duplicated
 
         await ExecutePython3(
             GetScriptFile(hardwareFrameworkPath, "fpga-bit-to-bin.py"),
