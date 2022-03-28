@@ -9,3 +9,7 @@ using System.Diagnostics.CodeAnalysis;
     "CA1814:Prefer jagged arrays over multidimensional",
     Justification = "It is known to be a rectangle grid and all the code is written for it.",
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Blocker Code Smell",
+    "S2368:Public methods should not have multidimensional array parameters",
+    Justification = "KPZ operates with a grid, it's necessary to manage a two-dimensional array of KpzNodes.")]

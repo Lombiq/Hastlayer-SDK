@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
@@ -15,8 +15,8 @@
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Castle.Core" Version="4.4.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.IO.Ports" Version="4.7.0" />
   </ItemGroup>
 

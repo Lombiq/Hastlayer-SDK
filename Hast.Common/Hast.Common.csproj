@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
@@ -13,10 +13,8 @@
     <PackageReference Include="CliWrap" Version="3.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.2" />
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.csproj" />
+    <ProjectReference Include="..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj" />
   </ItemGroup>
 </Project>

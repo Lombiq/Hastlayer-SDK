@@ -1,16 +1,15 @@
 using Hast.Common.Interfaces;
 using System;
 
-namespace Hast.Common.Services
+namespace Hast.Common.Services;
+
+/// <summary>
+/// UTC time service.
+/// </summary>
+public interface IClock : ISingletonDependency
 {
     /// <summary>
-    /// UTC time service.
+    /// Gets the current time in UTC.
     /// </summary>
-    public interface IClock : ISingletonDependency
-    {
-        /// <summary>
-        /// Gets the current time in UTC.
-        /// </summary>
-        DateTime UtcNow { get; }
-    }
+    DateTime UtcNow { get; }
 }

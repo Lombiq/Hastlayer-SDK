@@ -1,9 +1,8 @@
 ﻿using Hast.Synthesis.Abstractions;
 
-namespace Hast.Layer.EmptyRepresentationFactories
+namespace Hast.Layer.EmptyRepresentationFactories;
+
+internal static class EmptyHardwareImplementationFactory
 {
-    internal static class EmptyHardwareImplementationFactory
-    {
-        public static IHardwareImplementation Create() => new HardwareImplementation();
-    }
+    public static IHardwareImplementation Create() => new HardwareImplementation();
 }

@@ -8,108 +8,107 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Hast.Common.Services
+namespace Hast.Common.Services;
+
+public static class DependencyInterfaceContainer
 {
-    public static class DependencyInterfaceContainer
+    // This is necessary because .Net Core Dependency Injection does not resolve Lazy<T> out of the box.
+    // https://stackoverflow.com/questions/44934511/does-net-core-dependency-injection-support-lazyt
+    internal class Lazier<T> : Lazy<T>
+        where T : class
     {
-        // This is necessary because .Net Core Dependency Injection does not resolve Lazy<T> out of the box.
-        // https://stackoverflow.com/questions/44934511/does-net-core-dependency-injection-support-lazyt
-        internal class Lazier<T> : Lazy<T>
-            where T : class
+        public Lazier(IServiceProvider provider)
+            : base(() => provider.GetRequiredService<T>()) { }
+    }
+
+    [SuppressMessage(
+        "Major Code Smell",
+        "S3885:\"Assembly.Load\" should be used",
+        Justification = "Necessary to prevent duplicate type declarations.")]
+    public static IEnumerable<Assembly> LoadAssemblies(IEnumerable<string> paths) =>
+        paths.Select(x => Assembly.LoadFrom(Path.GetFullPath(x)));
+
+    public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies = null)
+    {
+        var iDependencyType = typeof(IDependency);
+
+        assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
+        var types = assemblies
+            .Where(a => !a.IsDynamic)
+            .SelectMany(a => a.GetExportedTypes())
+            .Where(t => t.IsClass && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
+            .Distinct();
+
+        foreach (var implementationType in types)
         {
-            public Lazier(IServiceProvider provider)
-                : base(() => provider.GetRequiredService<T>()) { }
-        }
-
-        [SuppressMessage(
-            "Major Code Smell",
-            "S3885:\"Assembly.Load\" should be used",
-            Justification = "Necessary to prevent duplicate type declarations.")]
-        public static IEnumerable<Assembly> LoadAssemblies(IEnumerable<string> paths) =>
-            paths.Select(x => Assembly.LoadFrom(Path.GetFullPath(x)));
-
-        public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies = null)
-        {
-            var iDependencyType = typeof(IDependency);
-
-            assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
-            var types = assemblies
-                .Where(a => !a.IsDynamic)
-                .SelectMany(a => a.GetExportedTypes())
-                .Where(t => t.IsClass && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
-                .Distinct();
-
-            foreach (var implementationType in types)
+            var serviceTypes = new List<Type>();
+            var lifetime = ServiceLifetime.Scoped;
+            foreach (var implementedInterfaces in implementationType.GetInterfaces())
             {
-                var serviceTypes = new List<Type>();
-                var lifetime = ServiceLifetime.Scoped;
-                foreach (var implementedInterfaces in implementationType.GetInterfaces())
-                {
-                    lifetime = RegisterImplementation(services, implementationType, implementedInterfaces, serviceTypes, lifetime);
-                }
+                lifetime = RegisterImplementation(services, implementationType, implementedInterfaces, serviceTypes, lifetime);
+            }
 
-                foreach (var serviceType in serviceTypes)
-                {
-                    services.Add(new ServiceDescriptor(serviceType, implementationType, lifetime));
-                }
+            foreach (var serviceType in serviceTypes)
+            {
+                services.Add(new ServiceDescriptor(serviceType, implementationType, lifetime));
             }
         }
+    }
 
-        private static ServiceLifetime RegisterImplementation(
-            IServiceCollection services,
-            Type implementationType,
-            Type implementedInterfaces,
-            List<Type> serviceTypes,
-            ServiceLifetime lifetime)
+    private static ServiceLifetime RegisterImplementation(
+        IServiceCollection services,
+        Type implementationType,
+        Type implementedInterfaces,
+        List<Type> serviceTypes,
+        ServiceLifetime lifetime)
+    {
+        if (!implementedInterfaces.IsPublic || implementedInterfaces.Name == nameof(IDependency))
         {
-            if (!implementedInterfaces.IsPublic || implementedInterfaces.Name == nameof(IDependency))
-            {
-                return lifetime;
-            }
-
-            if (implementedInterfaces.Name == nameof(ISingletonDependency))
-            {
-                lifetime = ServiceLifetime.Singleton;
-            }
-            else if (implementedInterfaces.Name == nameof(ITransientDependency))
-            {
-                lifetime = ServiceLifetime.Transient;
-            }
-            else
-            {
-                serviceTypes.Add(implementedInterfaces);
-            }
-
-            var initializerName = implementationType.GetCustomAttribute<DependencyInitializerAttribute>()?.MemberName;
-            if (!string.IsNullOrEmpty(initializerName))
-            {
-                var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static);
-                if (method is null)
-                {
-                    throw new ArgumentException(
-                        $"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
-                }
-
-                method.Invoke(null, new object[] { services });
-            }
-
             return lifetime;
         }
 
-        public static IServiceCollection AddExternalHastlayerDependencies(this IServiceCollection services)
+        if (implementedInterfaces.Name == nameof(ISingletonDependency))
         {
-            services.AddScoped(typeof(Lazy<>), typeof(Lazier<>));
-            services.AddLogging();
-            services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("Hastlayer"));
-            services.AddMemoryCache();
-
-            return services;
+            lifetime = ServiceLifetime.Singleton;
+        }
+        else if (implementedInterfaces.Name == nameof(ITransientDependency))
+        {
+            lifetime = ServiceLifetime.Transient;
+        }
+        else
+        {
+            serviceTypes.Add(implementedInterfaces);
         }
 
-        public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+        var initializerName = implementationType.GetCustomAttribute<DependencyInitializerAttribute>()?.MemberName;
+        if (!string.IsNullOrEmpty(initializerName))
         {
-            RegisterIDependencies(services, assemblies);
-            return AddExternalHastlayerDependencies(services);
+            var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static);
+            if (method is null)
+            {
+                throw new ArgumentException(
+                    $"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
+            }
+
+            method.Invoke(null, new object[] { services });
         }
+
+        return lifetime;
+    }
+
+    public static IServiceCollection AddExternalHastlayerDependencies(this IServiceCollection services)
+    {
+        services.AddScoped(typeof(Lazy<>), typeof(Lazier<>));
+        services.AddLogging();
+        services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("Hastlayer"));
+        services.AddMemoryCache();
+
+        return services;
+    }
+
+    public static IServiceCollection AddIDependencyContainer(this IServiceCollection services, IEnumerable<Assembly> assemblies)
+    {
+        RegisterIDependencies(services, assemblies);
+        return AddExternalHastlayerDependencies(services);
     }
 }

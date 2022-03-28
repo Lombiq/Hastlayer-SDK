@@ -1,45 +1,44 @@
-using System.Threading.Tasks;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using System.Threading.Tasks;
 
-namespace Hast.Samples.Consumer.SampleRunners
+namespace Hast.Samples.Consumer.SampleRunners;
+
+internal class GenomeMatcherSampleRunner : ISampleRunner
 {
-    internal class GenomeMatcherSampleRunner : ISampleRunner
+    public void Configure(HardwareGenerationConfiguration configuration) =>
+        configuration.AddHardwareEntryPointType<GenomeMatcher>();
+
+    public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
     {
-        public void Configure(HardwareGenerationConfiguration configuration) =>
-            configuration.AddHardwareEntryPointType<GenomeMatcher>();
+        var genomeMatcher = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new GenomeMatcher(), configuration);
 
-        public async Task RunAsync(IHastlayer hastlayer, IHardwareRepresentation hardwareRepresentation, IProxyGenerationConfiguration configuration)
-        {
-            var genomeMatcher = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new GenomeMatcher(), configuration);
+        // Sample from IBM.
+        var inputOne = "GCCCTAGCG";
+        var inputTwo = "GCGCAATG";
+        _ = genomeMatcher.CalculateLongestCommonSubsequence(
+            inputOne,
+            inputTwo,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
 
-            // Sample from IBM.
-            var inputOne = "GCCCTAGCG";
-            var inputTwo = "GCGCAATG";
-            _ = genomeMatcher.CalculateLongestCommonSubsequence(
-                inputOne,
-                inputTwo,
-                hastlayer,
-                hardwareRepresentation.HardwareGenerationConfiguration);
+        // Sample from Wikipedia.
+        inputOne = "ACACACTA";
+        inputTwo = "AGCACACA";
 
-            // Sample from Wikipedia.
-            inputOne = "ACACACTA";
-            inputTwo = "AGCACACA";
+        _ = genomeMatcher.CalculateLongestCommonSubsequence(
+            inputOne,
+            inputTwo,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
 
-            _ = genomeMatcher.CalculateLongestCommonSubsequence(
-                inputOne,
-                inputTwo,
-                hastlayer,
-                hardwareRepresentation.HardwareGenerationConfiguration);
+        inputOne = "lombiqtech";
+        inputTwo = "coulombtech";
 
-            inputOne = "lombiqtech";
-            inputTwo = "coulombtech";
-
-            _ = genomeMatcher.CalculateLongestCommonSubsequence(
-                inputOne,
-                inputTwo,
-                hastlayer,
-                hardwareRepresentation.HardwareGenerationConfiguration);
-        }
+        _ = genomeMatcher.CalculateLongestCommonSubsequence(
+            inputOne,
+            inputTwo,
+            hastlayer,
+            hardwareRepresentation.HardwareGenerationConfiguration);
     }
 }

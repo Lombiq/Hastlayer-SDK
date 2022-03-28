@@ -1,12 +1,11 @@
-﻿namespace Hast.Communication.Models
-{
-    public class PooledDevice : Device, IPooledDevice
-    {
-        public bool IsBusy { get; set; }
+﻿namespace Hast.Communication.Models;
 
-        public PooledDevice(IDevice baseDevice)
-            : base(baseDevice)
-        {
-        }
+public class PooledDevice : Device, IPooledDevice
+{
+    public bool IsBusy { get; set; }
+
+    public PooledDevice(IDevice baseDevice)
+        : base(baseDevice)
+    {
     }
 }

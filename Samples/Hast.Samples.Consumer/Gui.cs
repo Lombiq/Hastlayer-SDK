@@ -9,478 +9,487 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Terminal.Gui;
 
-namespace Hast.Samples.Consumer
+namespace Hast.Samples.Consumer;
+
+public sealed class Gui : IDisposable
 {
-    public sealed class Gui : IDisposable
+    private readonly IDictionary<string, ConsumerConfiguration> _savedConfigurations;
+    private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
+
+    private readonly Label _hintLabel = new Label(string.Empty) { CanFocus = false }.Fill();
+
+    private readonly TextField _optionsTextField =
+        new TextField { CanFocus = true, Visible = false }.FillHorizontally();
+
+    private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
+
+    private Action<string> _currentOptionsTextFieldEventHandler;
+    private Action<object> _currentOptionsListViewEventHandler;
+
+    private FrameView _leftPane;
+    private FrameView _topRightPane;
+    private FrameView _bottomRightPane;
+
+    private MenuBar _menu;
+    private MenuBarItem _startMenuItem;
+
+    private ConsumerConfiguration _configuration;
+
+    private Task<List<string>> _deviceNamesTask;
+
+    private string _latestValue;
+
+    private TextField _input;
+    private ListView _list;
+    private ScrollView _scrollView;
+
+    public Gui(IDictionary<string, ConsumerConfiguration> savedConfigurations) =>
+        _savedConfigurations = savedConfigurations;
+
+    public ConsumerConfiguration BuildConfiguration()
     {
-        private readonly IDictionary<string, ConsumerConfiguration> _savedConfigurations;
-        private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
+        var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
 
-        private readonly Label _hintLabel = new Label(string.Empty) { CanFocus = false }.Fill();
+        // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there won't
+        // be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from the
+        // temporary variable before this method closes.
+        var originalBufferHeight = Console.BufferHeight;
+        if (isWindows) Console.BufferHeight = Console.WindowHeight;
 
-        private readonly TextField _optionsTextField =
-            new TextField { CanFocus = true, Visible = false }.FillHorizontally();
-        private readonly ListView _optionsListView = new ListView { CanFocus = true, Visible = false }.Fill();
+        _configuration = new ConsumerConfiguration();
 
-        private Action<string> _currentOptionsTextFieldEventHandler;
-        private Action<object> _currentOptionsListViewEventHandler;
+        // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and the
+        // device list are generated on a separate thread in the background. This is safe because there are no other
+        // async operations at the time so there is no danger of a deadlock. This class needs to create its own
+        // Hastlayer instance because it is used prior to the main one's creation, to configure it.
 
-        private FrameView _leftPane;
-        private FrameView _topRightPane;
-        private FrameView _bottomRightPane;
+        // This task is used to request a logger inside the Application.Run call, so the exception is logged with NLog
+        // normally. It's also used by the next task.
+        var hastlayerTask = Task.Run(() => Hastlayer.Create(new HastlayerConfiguration()));
+        // This task starts prefetching the device list in the background. Without it the application would hang for a
+        // second or so, when you select the DeviceName option.
+        _deviceNamesTask = hastlayerTask.ContinueWith(
+            hastlayer => hastlayer
+                .Result
+                .GetSupportedDevices()?
+                .Select(device => device.Name)
+                .ToList() ?? new List<string>(),
+            TaskScheduler.Current);
 
-        private MenuBar _menu;
-        private MenuBarItem _startMenuItem;
+        // We can expect the Windows API on Windows, but not all *nix has nCurses.
+        // This is how Terminal.Gui works.
+#pragma warning disable S2696 // Instance members should not write to "static" fields
+        Application.UseSystemConsole = !isWindows;
+#pragma warning restore S2696 // Instance members should not write to "static" fields
 
-        private ConsumerConfiguration _configuration;
+        Application.Init();
+        Application.HeightAsBuffer = false;
 
-        private Task<List<string>> _deviceNamesTask;
-
-        private string _latestValue;
-
-        private TextField _input;
-        private ListView _list;
-        private ScrollView _scrollView;
-
-        public Gui(IDictionary<string, ConsumerConfiguration> savedConfigurations) =>
-            _savedConfigurations = savedConfigurations;
-
-        public ConsumerConfiguration BuildConfiguration()
+        _startMenuItem = new MenuBarItem(
+            "_Start (F5)",
+            string.Empty,
+            () => { /* Intentionally empty. */ });
+        _menu = new MenuBar(new[]
         {
-            var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
-
-            // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there
-            // won't be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from
-            // the temporary variable before this method closes.
-            var originalBufferHeight = Console.BufferHeight;
-            if (isWindows) Console.BufferHeight = Console.WindowHeight;
-
-            _configuration = new ConsumerConfiguration();
-
-            // The GUI library works synchronously, but to improve user experience the internal Hastlayer instance and
-            // the device list are generated on a separate thread in the background. This is safe because there are no
-            // other async operations at the time so there is no danger of a deadlock. This class needs to create its
-            // own Hastlayer instance because it is used prior to the main one's creation, to configure it.
-
-            // This task is used to request a logger inside the Application.Run call, so the exception is logged with
-            // NLog normally. It's also used by the next task.
-            var hastlayerTask = Task.Run(() => (Hastlayer)Hastlayer.Create(new HastlayerConfiguration()));
-            // This task starts prefetching the device list in the background. Without it the application would hang for
-            // a second or so, when you select the DeviceName option.
-            _deviceNamesTask = hastlayerTask.ContinueWith(
-                hastlayer => hastlayer
-                    .Result
-                    .GetSupportedDevices()?
-                    .Select(device => device.Name)
-                    .ToList() ?? new List<string>(),
-                TaskScheduler.Current);
-
-            // We can expect the Windows API on Windows, but not all *nix has nCurses.
-            Application.UseSystemConsole = !isWindows;
-
-            Application.Init();
-            Application.HeightAsBuffer = false;
-
-            _startMenuItem = new MenuBarItem(
-                "_Start (F5)",
-                string.Empty,
-                () => { /* Intentionally empty. */ });
-            _menu = new MenuBar(new[]
+            new MenuBarItem("_File", new[]
             {
-                new MenuBarItem("_File", new[]
-                {
-                    new MenuItem(
-                        "_Load",
-                        "Selects a saved configuration.",
-                        LoadConfiguration,
-                        shortcut: Key.Q | Key.L),
-                    new MenuItem(
-                        "_Save",
-                        "Saves the current configuration.",
-                        SaveConfiguration,
-                        shortcut: Key.Q | Key.S),
-                    new MenuItem(
-                        "_Quit",
-                        "Closes the application.",
-                        SetConfigurationAndStop(set: null),
-                        shortcut: Key.Q | Key.CtrlMask),
-                }),
-                _startMenuItem,
-            });
+                new MenuItem(
+                    "_Load",
+                    "Selects a saved configuration.",
+                    LoadConfiguration,
+                    shortcut: Key.Q | Key.L),
+                new MenuItem(
+                    "_Save",
+                    "Saves the current configuration.",
+                    SaveConfiguration,
+                    shortcut: Key.Q | Key.S),
+                new MenuItem(
+                    "_Quit",
+                    "Closes the application.",
+                    SetConfigurationAndStop(set: null),
+                    shortcut: Key.Q | Key.CtrlMask),
+            }),
+            _startMenuItem,
+        });
 
-            _leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
-            _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
-            _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
+        _leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
+        _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
+        _bottomRightPane = new FrameView("Options") { ColorScheme = Colors.Base };
 
-            var configurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
-                    JsonConvert.SerializeObject(_configuration))?
-                .Keys
-                .Select(key => key.RegexReplace(@"[A-Z]", " $0").TrimStart())
-                .OrderBy(text => text)
-                .ToList();
-            _propertiesListView.SetSource(configurationKeys);
-            _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
-            _propertiesListView.OpenSelectedItem += _ =>
-            {
-                if (_optionsListView.Visible) _optionsListView.SetFocus();
-                if (_optionsTextField.Visible) _optionsTextField.SetFocus();
-            };
-
-            var top = Application.Top;
-            top.Add(_menu);
-            top.Add(_leftPane);
-            top.Add(_bottomRightPane);
-            top.Add(_topRightPane);
-
-            Retile(top);
-            Application.Resized = _ => Retile(top);
-
-            _leftPane.Add(_propertiesListView);
-            _topRightPane.Add(_hintLabel);
-            _bottomRightPane.Add(_optionsTextField);
-            _bottomRightPane.Add(_optionsListView);
-
-            top.KeyPress += args =>
-            {
-                if (args.KeyEvent.Key == Key.F5) Application.RequestStop();
-            };
-
-            AddKeyboardEventHandler(
-                _optionsTextField,
-                () => _currentOptionsTextFieldEventHandler?.Invoke(_optionsTextField.Text.ToString()));
-
-            AddKeyboardEventHandler(
-                _optionsListView,
-                () =>
-                {
-                    var item = _optionsListView.Source.ToList()[_optionsListView.SelectedItem];
-                    _currentOptionsListViewEventHandler?.Invoke(item);
-                });
-
-            _startMenuItem.Action += () => Application.RequestStop(top);
-
-            Application.Run(
-                top,
-                exception =>
-                {
-                    hastlayerTask
-                        .Result
-                        .GetLogger<Gui>()
-                        .LogError(exception, "an error during GUI operation");
-                    _configuration = null;
-                    Console.WriteLine(
-                        "An error occurred while in GUI mode. Please check the logs in the App_Data/logs directory.");
-                    Application.RequestStop();
-                    return false;
-                });
-
-            Application.Shutdown();
-            if (isWindows) Console.BufferHeight = originalBufferHeight;
-
-            var result = _configuration;
-            _configuration = null;
-            return result;
-        }
-
-        private void PropertiesListView_SelectedChanged(string value = null, bool forceUpdate = false)
+        var configurationKeys = JsonConvert.DeserializeObject<Dictionary<string, object>>(
+                JsonConvert.SerializeObject(_configuration))?
+            .Keys
+            .Select(key => key.RegexReplace(@"[A-Z]", " $0").TrimStart())
+            .OrderBy(text => text)
+            .ToList();
+        _propertiesListView.SetSource(configurationKeys);
+        _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
+        _propertiesListView.OpenSelectedItem += _ =>
         {
-            var selectedPropertyIndex = Math.Max(0, _propertiesListView.SelectedItem);
+            if (_optionsListView.Visible) _optionsListView.SetFocus();
+            if (_optionsTextField.Visible) _optionsTextField.SetFocus();
+        };
 
-            // This indicates that the same item has been reselected so nothing needs to be done.
-            if (!forceUpdate && value != null && _latestValue == value) return;
+        var top = Application.Top;
+        top.Add(_menu);
+        top.Add(_leftPane);
+        top.Add(_bottomRightPane);
+        top.Add(_topRightPane);
 
-            value ??= _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString() ?? string.Empty;
+        Retile(top);
 
-            var key = value.Replace(" ", string.Empty);
-            var hintDictionary = ConsumerConfiguration.HintDictionary.Value;
-            _hintLabel.Text = hintDictionary.TryGetValue(key, out var hint) ? hint : string.Empty;
+        // This is how Terminal.Gui works.
+#pragma warning disable S2696 // Instance members should not write to "static" fields
+        Application.Resized = _ => Retile(top);
+#pragma warning restore S2696 // Instance members should not write to "static" fields
 
-            switch (key)
-            {
-                case nameof(ConsumerConfiguration.AppName):
-                    _optionsTextField.Text = _configuration.AppName ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => _configuration.AppName = text;
-                    ShowTextField(visible: true);
-                    break;
-                case nameof(ConsumerConfiguration.AppSecret):
-                    _optionsTextField.Text = _configuration.AppSecret ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => _configuration.AppSecret = text;
-                    ShowTextField(visible: true);
-                    break;
-                case nameof(ConsumerConfiguration.BuildLabel):
-                    _optionsTextField.Text = _configuration.BuildLabel ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => _configuration.BuildLabel = text;
-                    ShowTextField(visible: true);
-                    break;
-                case nameof(ConsumerConfiguration.DeviceName):
-                    ShowDeviceNames();
-                    break;
-                case nameof(ConsumerConfiguration.GenerateHardwareOnly):
-                    _optionsListView.Source = new ListWrapper(new object[] { true, false });
-                    _optionsListView.SelectedItem = _configuration.GenerateHardwareOnly ? 0 : 1;
-                    _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = item.IsTrueString();
-                    ShowTextField(visible: false);
-                    break;
-                case nameof(ConsumerConfiguration.Endpoint):
-                    _optionsTextField.Text = _configuration.Endpoint ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => _configuration.Endpoint = text;
-                    ShowTextField(visible: true);
-                    break;
-                case nameof(ConsumerConfiguration.HardwareFrameworkPath):
-                    _optionsTextField.Text = _configuration.HardwareFrameworkPath ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => _configuration.HardwareFrameworkPath = text;
-                    ShowTextField(visible: true);
-                    break;
-                case nameof(ConsumerConfiguration.SampleToRun):
-                    var sampleNames = Enum.GetNames(typeof(Sample)).ToList();
-                    _optionsListView.Source = new ListWrapper(sampleNames);
-                    _optionsListView.SelectedItem = sampleNames.IndexOf(_configuration.SampleToRun.ToString());
-                    _currentOptionsListViewEventHandler = item => _configuration.SampleToRun = Enum.Parse<Sample>(item.ToString()!);
-                    ShowTextField(visible: false);
-                    break;
-                case nameof(ConsumerConfiguration.VerifyResults):
-                    _optionsListView.Source = new ListWrapper(new object[] { true, false });
-                    _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
-                    _currentOptionsListViewEventHandler = item => _configuration.VerifyResults = item.IsTrueString();
-                    ShowTextField(visible: false);
-                    break;
-                case nameof(ConsumerConfiguration.SingleBinaryPath):
-                    _optionsTextField.Text = _configuration.SingleBinaryPath ?? string.Empty;
-                    _currentOptionsTextFieldEventHandler = text => { _configuration.SingleBinaryPath = text; };
-                    ShowTextField(visible: true);
-                    break;
-                default:
-                    throw new InvalidOperationException($"Unknown menu item selected ({key}).");
-            }
+        _leftPane.Add(_propertiesListView);
+        _topRightPane.Add(_hintLabel);
+        _bottomRightPane.Add(_optionsTextField);
+        _bottomRightPane.Add(_optionsListView);
 
-            _latestValue = value;
-        }
-
-        private void ShowDeviceNames()
+        top.KeyPress += args =>
         {
-            var deviceNames = _deviceNamesTask.Result;
-            _optionsListView.Source = new ListWrapper(deviceNames);
-            if (_configuration.DeviceName is { } deviceName)
-            {
-                var index = deviceNames.IndexOf(deviceName);
-                if (index >= 0) _optionsListView.SelectedItem = index;
-            }
+            if (args.KeyEvent.Key == Key.F5) Application.RequestStop();
+        };
 
-            _currentOptionsListViewEventHandler = item => _configuration.DeviceName = item.ToString();
-            ShowTextField(visible: false);
-        }
+        AddKeyboardEventHandler(
+            _optionsTextField,
+            () => _currentOptionsTextFieldEventHandler?.Invoke(_optionsTextField.Text.ToString()));
 
-        private (Button Ok, FrameView Dialog, Action Close) CreateDialog(
-            string title,
-            string label,
-            float widthPercent,
-            float heightPercent)
-        {
-            var dialogFrame = new FrameView(title)
-            {
-                ColorScheme = Colors.Dialog,
-                X = Pos.Center() - Pos.Percent(widthPercent / 2),
-                Y = Pos.Center() - Pos.Percent(heightPercent / 2),
-                Width = Dim.Percent(widthPercent),
-                Height = Dim.Percent(heightPercent),
-            };
-            Application.Top.Add(dialogFrame);
-
-            void Close() => Application.Top.Remove(dialogFrame);
-
-            var buttonOk = new Button("_Ok")
-            {
-                X = 1,
-                Y = Pos.Percent(100) - 1,
-                Width = Dim.Percent(50),
-                Height = 1,
-            };
-            var buttonCancel = new Button("_Cancel")
-            {
-                X = Pos.Center() + 1,
-                Y = Pos.Percent(100) - 1,
-                Width = Dim.Percent(50),
-                Height = 1,
-            };
-            buttonCancel.Clicked += Close;
-
-            dialogFrame.Add(
-                new Label(label) { Y = 1, CanFocus = false }.FillHorizontally(verticalCenter: false),
-                buttonOk,
-                buttonCancel);
-
-            return (buttonOk, dialogFrame, Close);
-        }
-
-        private void SaveConfiguration()
-        {
-            var title = "Save";
-            var label = "Please enter the name of the configuration!";
-            var widthPercent = 60f;
-            var heightPercent = 30f;
-
-            var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
-
-            _input = new TextField().FillHorizontally();
-
-            void OkClicked()
-            {
-                var text = _input.Text.ToString();
-                if (string.IsNullOrWhiteSpace(text))
-                {
-                    _input.SetFocus();
-                    return;
-                }
-
-                _savedConfigurations[text] = _configuration;
-                close();
-                ConsumerConfiguration.SaveConfigurations(_savedConfigurations);
-            }
-
-            buttonOk.Clicked += OkClicked;
-            _input.OnEnterKeyPressed(OkClicked);
-            _input.OnEscKeyPressed(close);
-
-            dialogFrame.Add(_input);
-            _input.SetFocus();
-        }
-
-        private void LoadConfiguration()
-        {
-            var title = "Load";
-            var label = "Please select the configuration to load!";
-            var widthPercent = 60f;
-            var heightPercent = 60f;
-
-            var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
-
-            var names = _savedConfigurations.Keys.ToList();
-            _list = new ListView(names)
-            {
-                X = 0,
-                Y = 0,
-                Width = Dim.Percent(100),
-                Height = Dim.Percent(100),
-            };
-
-            _scrollView = new ScrollView
-            {
-                X = 1,
-                Y = 3,
-                Width = Dim.Percent(100) - 2,
-                Height = Dim.Percent(100) - 2,
-                CanFocus = false,
-                ContentSize = new Size(
-                    names.Select(name => name.Length).Concat(new[] { Console.WindowWidth / 2 }).Max(),
-                    names.Count),
-            };
-
-            void OkClicked()
-            {
-                var clone = JsonConvert.DeserializeObject<ConsumerConfiguration>(
-                    JsonConvert.SerializeObject(_savedConfigurations[names[_list.SelectedItem]]));
-                _configuration = clone; // This way the saved configuration is unaltered until you click Save.
-                close();
-
-                PropertiesListView_SelectedChanged(forceUpdate: true);
-            }
-
-            buttonOk.Clicked += OkClicked;
-            _list.OnEnterKeyPressed(OkClicked);
-            _list.OnEscKeyPressed(close);
-
-            dialogFrame.Add(_scrollView);
-            _scrollView.Add(_list);
-            _list.SetFocus();
-        }
-
-        private void ShowTextField(bool visible)
-        {
-            _optionsTextField.Visible = visible;
-            _optionsListView.Visible = !visible;
-            if (visible) _optionsTextField.CursorPosition = _optionsTextField.Text.Length;
-        }
-
-        private Action SetConfigurationAndStop(Func<ConsumerConfiguration> set) =>
+        AddKeyboardEventHandler(
+            _optionsListView,
             () =>
             {
-                _configuration = set?.Invoke();
+                var item = _optionsListView.Source.ToList()[_optionsListView.SelectedItem];
+                _currentOptionsListViewEventHandler?.Invoke(item);
+            });
+
+        _startMenuItem.Action += () => Application.RequestStop(top);
+
+        Application.Run(
+            top,
+            exception =>
+            {
+                hastlayerTask
+                    .Result
+                    .GetLogger<Gui>()
+                    .LogError(exception, "an error during GUI operation");
+                _configuration = null;
+                Console.WriteLine(
+                    "An error occurred while in GUI mode. Please check the logs in the App_Data/logs directory.");
                 Application.RequestStop();
-            };
+                return false;
+            });
 
-        private void AddKeyboardEventHandler(View view, Action onEnter)
+        Application.Shutdown();
+        if (isWindows) Console.BufferHeight = originalBufferHeight;
+
+        var result = _configuration;
+        _configuration = null;
+        return result;
+    }
+
+    private void PropertiesListView_SelectedChanged(string value = null, bool forceUpdate = false)
+    {
+        var selectedPropertyIndex = Math.Max(0, _propertiesListView.SelectedItem);
+
+        // This indicates that the same item has been reselected so nothing needs to be done.
+        if (!forceUpdate && value != null && _latestValue == value) return;
+
+        value ??= _propertiesListView.Source.ToList()[selectedPropertyIndex]?.ToString() ?? string.Empty;
+
+        var key = value.Replace(" ", string.Empty);
+        var hintDictionary = ConsumerConfiguration.HintDictionary.Value;
+        _hintLabel.Text = hintDictionary.TryGetValue(key, out var hint) ? hint : string.Empty;
+
+        switch (key)
         {
-            view.KeyPress += args =>
-            {
-                if (!view.HasFocus) return;
-
-                if (args.KeyEvent.Key == Key.Esc)
-                {
-                    PropertiesListView_SelectedChanged(forceUpdate: true);
-                }
-                else if (args.KeyEvent.Key != Key.Enter)
-                {
-                    return;
-                }
-
-                _propertiesListView.SetFocus();
-                args.Handled = true;
-            };
-
-            view.Leave += _ => onEnter();
-
-            _startMenuItem.Action += () =>
-            {
-                if (view.HasFocus) onEnter();
-            };
+            case nameof(ConsumerConfiguration.AppName):
+                _optionsTextField.Text = _configuration.AppName ?? string.Empty;
+                _currentOptionsTextFieldEventHandler = text => _configuration.AppName = text;
+                ShowTextField(visible: true);
+                break;
+            case nameof(ConsumerConfiguration.AppSecret):
+                _optionsTextField.Text = _configuration.AppSecret ?? string.Empty;
+                _currentOptionsTextFieldEventHandler = text => _configuration.AppSecret = text;
+                ShowTextField(visible: true);
+                break;
+            case nameof(ConsumerConfiguration.BuildLabel):
+                _optionsTextField.Text = _configuration.BuildLabel ?? string.Empty;
+                _currentOptionsTextFieldEventHandler = text => _configuration.BuildLabel = text;
+                ShowTextField(visible: true);
+                break;
+            case nameof(ConsumerConfiguration.DeviceName):
+                ShowDeviceNames();
+                break;
+            case nameof(ConsumerConfiguration.GenerateHardwareOnly):
+                _optionsListView.Source = new ListWrapper(new object[] { true, false });
+                _optionsListView.SelectedItem = _configuration.GenerateHardwareOnly ? 0 : 1;
+                _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = IsTrueString(item);
+                ShowTextField(visible: false);
+                break;
+            case nameof(ConsumerConfiguration.Endpoint):
+                _optionsTextField.Text = _configuration.Endpoint ?? string.Empty;
+                _currentOptionsTextFieldEventHandler = text => _configuration.Endpoint = text;
+                ShowTextField(visible: true);
+                break;
+            case nameof(ConsumerConfiguration.HardwareFrameworkPath):
+                _optionsTextField.Text = _configuration.HardwareFrameworkPath ?? string.Empty;
+                _currentOptionsTextFieldEventHandler = text => _configuration.HardwareFrameworkPath = text;
+                ShowTextField(visible: true);
+                break;
+            case nameof(ConsumerConfiguration.SampleToRun):
+                var sampleNames = Enum.GetNames(typeof(Sample)).ToList();
+                _optionsListView.Source = new ListWrapper(sampleNames);
+                _optionsListView.SelectedItem = sampleNames.IndexOf(_configuration.SampleToRun.ToString());
+                _currentOptionsListViewEventHandler = item => _configuration.SampleToRun = Enum.Parse<Sample>(item.ToString()!);
+                ShowTextField(visible: false);
+                break;
+            case nameof(ConsumerConfiguration.VerifyResults):
+                _optionsListView.Source = new ListWrapper(new object[] { true, false });
+                _optionsListView.SelectedItem = _configuration.VerifyResults ? 0 : 1;
+                _currentOptionsListViewEventHandler = item => _configuration.VerifyResults = IsTrueString(item);
+                ShowTextField(visible: false);
+                break;
+            case nameof(ConsumerConfiguration.SingleBinaryPath):
+                _optionsTextField.Text = _configuration.SingleBinaryPath ?? string.Empty;
+                _currentOptionsTextFieldEventHandler = text => _configuration.SingleBinaryPath = text;
+                ShowTextField(visible: true);
+                break;
+            default:
+                throw new InvalidOperationException($"Unknown menu item selected ({key}).");
         }
 
-        private void Retile(Toplevel top)
+        _latestValue = value;
+    }
+
+    private void ShowDeviceNames()
+    {
+        var deviceNames = _deviceNamesTask.Result;
+        _optionsListView.Source = new ListWrapper(deviceNames);
+        if (_configuration.DeviceName is { } deviceName)
         {
-            var longestOption = 0;
-            foreach (var item in _propertiesListView.Source.ToList())
+            var index = deviceNames.IndexOf(deviceName);
+            if (index >= 0) _optionsListView.SelectedItem = index;
+        }
+
+        _currentOptionsListViewEventHandler = item => _configuration.DeviceName = item.ToString();
+        ShowTextField(visible: false);
+    }
+
+    private (Button Ok, FrameView Dialog, Action Close) CreateDialog(
+        string title,
+        string label,
+        float widthPercent,
+        float heightPercent)
+    {
+        var dialogFrame = new FrameView(title)
+        {
+            ColorScheme = Colors.Dialog,
+            X = Pos.Center() - Pos.Percent(widthPercent / 2),
+            Y = Pos.Center() - Pos.Percent(heightPercent / 2),
+            Width = Dim.Percent(widthPercent),
+            Height = Dim.Percent(heightPercent),
+        };
+        Application.Top.Add(dialogFrame);
+
+        void Close() => Application.Top.Remove(dialogFrame);
+
+        var buttonOk = new Button("_Ok")
+        {
+            X = 1,
+            Y = Pos.Percent(100) - 1,
+            Width = Dim.Percent(50),
+            Height = 1,
+        };
+        var buttonCancel = new Button("_Cancel")
+        {
+            X = Pos.Center() + 1,
+            Y = Pos.Percent(100) - 1,
+            Width = Dim.Percent(50),
+            Height = 1,
+        };
+        buttonCancel.Clicked += Close;
+
+        dialogFrame.Add(
+            new Label(label) { Y = 1, CanFocus = false }.FillHorizontally(verticalCenter: false),
+            buttonOk,
+            buttonCancel);
+
+        return (buttonOk, dialogFrame, Close);
+    }
+
+    private void SaveConfiguration()
+    {
+        const string title = "Save";
+        const string label = "Please enter the name of the configuration!";
+        const float widthPercent = 60f;
+        const float heightPercent = 30f;
+
+        var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
+
+        _input = new TextField().FillHorizontally();
+
+        void OkClicked()
+        {
+            var text = _input.Text.ToString();
+            if (string.IsNullOrWhiteSpace(text))
             {
-                if (item?.ToString()?.Length is { } length && length > longestOption) longestOption = length;
+                _input.SetFocus();
+                return;
             }
 
-            var sidebarWidth = Math.Max(
-                longestOption + 2,
-                _leftPane.Title.Length + 5
-            );
-
-            top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 0, 0));
-            _topRightPane.Height = Dim.Percent(50) - 1;
-            _bottomRightPane.X = _topRightPane.X;
-            _bottomRightPane.Y = Pos.Bottom(_topRightPane);
-            _bottomRightPane.Width = _topRightPane.Width;
-            _bottomRightPane.Height = Dim.Fill();
+            _savedConfigurations[text] = _configuration;
+            close();
+            ConsumerConfiguration.SaveConfigurations(_savedConfigurations);
         }
 
-        public void Dispose()
-        {
-            // Application.Shutdown() sets Application.Top to null and recursively disposes all child objects. At that
-            // point disposing them again would cause many NREs.
-            if (Application.Top == null) return;
+        buttonOk.Clicked += OkClicked;
+        _input.OnEnterKeyPressed(OkClicked);
+        _input.OnEscKeyPressed(close);
 
-            _propertiesListView?.Dispose();
-            _hintLabel?.Dispose();
-            _optionsTextField?.Dispose();
-            _optionsListView?.Dispose();
-            _leftPane?.Dispose();
-            _topRightPane?.Dispose();
-            _bottomRightPane?.Dispose();
-            _deviceNamesTask?.Dispose();
-            _menu?.Dispose();
-            _input?.Dispose();
-            _list?.Dispose();
-            _scrollView?.Dispose();
-        }
-
-        public static ConsumerConfiguration BuildConfiguration(
-            IDictionary<string, ConsumerConfiguration> savedConfigurations)
-        {
-            using var gui = new Gui(savedConfigurations);
-            return gui.BuildConfiguration();
-        }
+        dialogFrame.Add(_input);
+        _input.SetFocus();
     }
+
+    private void LoadConfiguration()
+    {
+        const string title = "Load";
+        const string label = "Please select the configuration to load!";
+        const float widthPercent = 60f;
+        const float heightPercent = 60f;
+
+        var (buttonOk, dialogFrame, close) = CreateDialog(title, label, widthPercent, heightPercent);
+
+        var names = _savedConfigurations.Keys.ToList();
+        _list = new ListView(names)
+        {
+            X = 0,
+            Y = 0,
+            Width = Dim.Percent(100),
+            Height = Dim.Percent(100),
+        };
+
+        _scrollView = new ScrollView
+        {
+            X = 1,
+            Y = 3,
+            Width = Dim.Percent(100) - 2,
+            Height = Dim.Percent(100) - 2,
+            CanFocus = false,
+            ContentSize = new Size(
+                names.Select(name => name.Length).Concat(new[] { Console.WindowWidth / 2 }).Max(),
+                names.Count),
+        };
+
+        void OkClicked()
+        {
+            var clone = JsonConvert.DeserializeObject<ConsumerConfiguration>(
+                JsonConvert.SerializeObject(_savedConfigurations[names[_list.SelectedItem]]));
+            _configuration = clone; // This way the saved configuration is unaltered until you click Save.
+            close();
+
+            PropertiesListView_SelectedChanged(forceUpdate: true);
+        }
+
+        buttonOk.Clicked += OkClicked;
+        _list.OnEnterKeyPressed(OkClicked);
+        _list.OnEscKeyPressed(close);
+
+        dialogFrame.Add(_scrollView);
+        _scrollView.Add(_list);
+        _list.SetFocus();
+    }
+
+    private void ShowTextField(bool visible)
+    {
+        _optionsTextField.Visible = visible;
+        _optionsListView.Visible = !visible;
+        if (visible) _optionsTextField.CursorPosition = _optionsTextField.Text.Length;
+    }
+
+    private Action SetConfigurationAndStop(Func<ConsumerConfiguration> set) =>
+        () =>
+        {
+            _configuration = set?.Invoke();
+            Application.RequestStop();
+        };
+
+    private void AddKeyboardEventHandler(View view, Action onEnter)
+    {
+        view.KeyPress += args =>
+        {
+            if (!view.HasFocus) return;
+
+            if (args.KeyEvent.Key == Key.Esc)
+            {
+                PropertiesListView_SelectedChanged(forceUpdate: true);
+            }
+            else if (args.KeyEvent.Key != Key.Enter)
+            {
+                return;
+            }
+
+            _propertiesListView.SetFocus();
+            args.Handled = true;
+        };
+
+        view.Leave += _ => onEnter();
+
+        _startMenuItem.Action += () =>
+        {
+            if (view.HasFocus) onEnter();
+        };
+    }
+
+    private void Retile(Toplevel top)
+    {
+        var longestOption = 0;
+        foreach (var item in _propertiesListView.Source.ToList())
+        {
+            if (item?.ToString()?.Length is { } length && length > longestOption) longestOption = length;
+        }
+
+        var sidebarWidth = Math.Max(
+            longestOption + 2,
+            _leftPane.Title.Length + 5
+        );
+
+        top.TileHorizontally(_leftPane, _topRightPane, sidebarWidth, (1, 0, 0, 0));
+        _topRightPane.Height = Dim.Percent(50) - 1;
+        _bottomRightPane.X = _topRightPane.X;
+        _bottomRightPane.Y = Pos.Bottom(_topRightPane);
+        _bottomRightPane.Width = _topRightPane.Width;
+        _bottomRightPane.Height = Dim.Fill();
+    }
+
+    public void Dispose()
+    {
+        // Application.Shutdown() sets Application.Top to null and recursively disposes all child objects. At that point
+        // disposing them again would cause many NREs.
+        if (Application.Top == null) return;
+
+        _propertiesListView?.Dispose();
+        _hintLabel?.Dispose();
+        _optionsTextField?.Dispose();
+        _optionsListView?.Dispose();
+        _leftPane?.Dispose();
+        _topRightPane?.Dispose();
+        _bottomRightPane?.Dispose();
+        _deviceNamesTask?.Dispose();
+        _menu?.Dispose();
+        _input?.Dispose();
+        _list?.Dispose();
+        _scrollView?.Dispose();
+    }
+
+    public static ConsumerConfiguration BuildConfiguration(
+        IDictionary<string, ConsumerConfiguration> savedConfigurations)
+    {
+        using var gui = new Gui(savedConfigurations);
+        return gui.BuildConfiguration();
+    }
+
+    private static bool IsTrueString(object value) => value?.ToString() == bool.TrueString;
 }

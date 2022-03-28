@@ -1,31 +1,29 @@
-﻿using System.Linq;
+using System.Linq;
 
-namespace System
+namespace System;
+
+internal static class ArrayExtensions
 {
-    internal static class ArrayExtensions
+    /// <summary>
+    /// Padding the input array as necessary to have a multiple of MaxDegreeOfParallelism. This is needed because at the
+    /// moment Hastlayer only supports a fixed degree of parallelism. This is the simplest way to overcome this.
+    /// </summary>
+    public static T[] PadToMultipleOf<T>(this T[] arrayToPad, int multipleOf)
     {
-        /// <summary>
-        /// Padding the input array as necessary to have a multiple of MaxDegreeOfParallelism. This is needed because
-        /// at the moment Hastlayer only supports a fixed degree of parallelism. This is the simplest way to overcome
-        /// this.
-        /// </summary>
-        public static T[] PadToMultipleOf<T>(this T[] arrayToPad, int multipleOf)
+        var remainderToMaxDegreeOfParallelism = arrayToPad.Length % multipleOf;
+        if (remainderToMaxDegreeOfParallelism != 0)
         {
-            var remainderToMaxDegreeOfParallelism = arrayToPad.Length % multipleOf;
-            if (remainderToMaxDegreeOfParallelism != 0)
-            {
-                return arrayToPad
-                    .Concat(new T[multipleOf - remainderToMaxDegreeOfParallelism])
-                    .ToArray();
-            }
-
-            return arrayToPad;
+            return arrayToPad
+                .Concat(new T[multipleOf - remainderToMaxDegreeOfParallelism])
+                .ToArray();
         }
 
-        public static T[] CutToLength<T>(this T[] arrayToCut, int length)
-        {
-            if (arrayToCut.Length == length) return arrayToCut;
-            return arrayToCut.Take(length).ToArray();
-        }
+        return arrayToPad;
+    }
+
+    public static T[] CutToLength<T>(this T[] arrayToCut, int length)
+    {
+        if (arrayToCut.Length == length) return arrayToCut;
+        return arrayToCut.Take(length).ToArray();
     }
 }

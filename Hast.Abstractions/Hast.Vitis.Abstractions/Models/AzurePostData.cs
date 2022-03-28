@@ -1,16 +1,15 @@
-﻿namespace Hast.Vitis.Abstractions.Models
+﻿namespace Hast.Vitis.Abstractions.Models;
+
+public abstract class AzurePostData
 {
-    public abstract class AzurePostData
+    public string ClientSubscriptionId { get; set; }
+    public string ClientTenantId { get; set; }
+
+    protected AzurePostData(AzureAttestationConfiguration configuration)
     {
-        public string ClientSubscriptionId { get; set; }
-        public string ClientTenantId { get; set; }
+        if (configuration == null) return;
 
-        protected AzurePostData(AzureAttestationConfiguration configuration)
-        {
-            if (configuration == null) return;
-
-            ClientSubscriptionId = configuration.ClientSubscriptionId;
-            ClientTenantId = configuration.ClientTenantId;
-        }
+        ClientSubscriptionId = configuration.ClientSubscriptionId;
+        ClientTenantId = configuration.ClientTenantId;
     }
 }

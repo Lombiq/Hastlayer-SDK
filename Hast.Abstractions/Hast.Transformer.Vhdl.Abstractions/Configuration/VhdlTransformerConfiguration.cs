@@ -1,7 +1,6 @@
-﻿namespace Hast.Transformer.Vhdl.Abstractions.Configuration
+﻿namespace Hast.Transformer.Vhdl.Abstractions.Configuration;
+
+public class VhdlTransformerConfiguration
 {
-    public class VhdlTransformerConfiguration
-    {
-        public VhdlGenerationConfiguration VhdlGenerationConfiguration { get; set; } = VhdlGenerationConfiguration.Release;
-    }
+    public VhdlGenerationConfiguration VhdlGenerationConfiguration { get; set; } = VhdlGenerationConfiguration.Release;
 }

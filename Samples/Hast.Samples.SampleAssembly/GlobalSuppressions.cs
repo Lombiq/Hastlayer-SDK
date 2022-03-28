@@ -29,7 +29,6 @@ using System.Diagnostics.CodeAnalysis;
     "S4226:Extensions should be in separate namespaces",
     Justification = "Same.",
     Scope = "module")]
-
 [assembly: SuppressMessage(
     "Usage",
     "VSTHRD105:Avoid method overloads that assume TaskScheduler.Current",
@@ -45,7 +44,6 @@ using System.Diagnostics.CodeAnalysis;
     "VSTHRD104:Offer async methods",
     Justification = "Same.",
     Scope = "module")]
-
 [assembly: SuppressMessage(
     "Performance",
     "CA1802:Use literals where appropriate",
