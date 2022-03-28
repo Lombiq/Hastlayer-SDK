@@ -238,9 +238,12 @@ public class GenomeMatcher
             var currentCharBytes = BitConverter.GetBytes(currentChar);
             var chars = Encoding.UTF8.GetChars(currentCharBytes);
 
-            result.Append(chars[0]);
+            if (chars[0] != '\0')
+            {
+                result.Append(chars[0]);
+            }
         }
 
-        return result.ToString().Replace("\0", string.Empty);
+        return result.ToString();
     }
 }
