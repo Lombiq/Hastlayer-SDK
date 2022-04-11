@@ -12,7 +12,7 @@
 
 Hastlayer uses [FPGAs](https://en.wikipedia.org/wiki/Field-programmable_gate_array) (chips that can be "re-wired" on the fly): Simply select the compute-bound part of your .NET program, and Hastlayer seamlessly swaps it out with a generated FPGA implementation. Since .NET Intermediate Language assemblies (but not C#, VisualBasic or other code) are transformed, you can use any .NET language (e.g. C#, VB, F# - sample included, C++, Python, PHP, and JavaScript) in theory.
 
-Hastlayer was also featured on [.NET Conf 2017](https://channel9.msdn.com/events/dotnetConf/2017/T212) and [many other conferences and meetups](https://hastlayer.com/hastlayer-world-tour). The [recorded session](https://channel9.msdn.com/events/dotnetConf/2017/T212) covers interesting features of Hastlayer (it's also on [YouTube](https://www.youtube.com/watch?v=03Sq5m3eUSs)). Check out the [FAQ](https://hastlayer.com/faq) for more information.
+Hastlayer was also featured on .NET Conf 2017 and [many other conferences and meetups](https://hastlayer.com/hastlayer-world-tour). The [recorded session](https://www.youtube.com/watch?v=03Sq5m3eUSs) covers interesting features of Hastlayer. Check out the [FAQ](https://hastlayer.com/faq) for more information.
  
 This is the PC-side component of Hastlayer, the one that transforms .NET assemblies, programs attached FPGAs, and communicates with said FPGAs.
 
