@@ -3,13 +3,13 @@
 
 using System.Runtime.CompilerServices;
 
-namespace Hast.Samples.SampleAssembly.ImageSharpModifications
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications;
+
+/// <summary>
+/// Global inlining options. Helps temporarily disable inlining for better profiler output.
+/// </summary>
+internal static class InliningOptions
 {
-    /// <summary>
-    /// Global inlining options. Helps temporarily disable inlining for better profiler output.
-    /// </summary>
-    internal static class InliningOptions
-    {
 #if PROFILING
         public const MethodImplOptions HotPath = MethodImplOptions.NoInlining;
         public const MethodImplOptions ShortMethod = MethodImplOptions.NoInlining;
@@ -17,10 +17,9 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications
 #if SUPPORTS_HOTPATH
         public const MethodImplOptions HotPath = MethodImplOptions.AggressiveOptimization;
 #else
-        public const MethodImplOptions HotPath = MethodImplOptions.AggressiveInlining;
+    public const MethodImplOptions HotPath = MethodImplOptions.AggressiveInlining;
 #endif
-        public const MethodImplOptions ShortMethod = MethodImplOptions.AggressiveInlining;
+    public const MethodImplOptions ShortMethod = MethodImplOptions.AggressiveInlining;
 #endif
-        public const MethodImplOptions ColdPath = MethodImplOptions.NoInlining;
-    }
+    public const MethodImplOptions ColdPath = MethodImplOptions.NoInlining;
 }

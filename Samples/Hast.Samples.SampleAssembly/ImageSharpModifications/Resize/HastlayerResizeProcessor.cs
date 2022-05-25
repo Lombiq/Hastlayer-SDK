@@ -1,7 +1,7 @@
 // Copyright (c) Six Labors.
 // Licensed under the Apache License, Version 2.0.
-// Modified file, original is found at:  
-// https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeProcessor.cs 
+// Modified file, original is found at:
+// https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeProcessor.cs
 
 using Hast.Layer;
 using SixLabors.ImageSharp;
@@ -9,93 +9,92 @@ using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 
-namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize
+namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
+
+public class HastlayerResizeProcessor : CloningImageProcessor
 {
-    public class HastlayerResizeProcessor : CloningImageProcessor
+    public HastlayerResizeProcessor(
+        ResizeOptions options,
+        Size sourceSize,
+        int maxDegreeOfParallelism,
+        IHastlayer hastlayer,
+        IHardwareRepresentation hardwareRepresentation,
+        IProxyGenerationConfiguration configuration)
     {
-        public HastlayerResizeProcessor(
-            ResizeOptions options,
-            Size sourceSize,
-            int maxDegreeOfParallelism,
-            IHastlayer hastlayer,
-            IHardwareRepresentation hardwareRepresentation,
-            IProxyGenerationConfiguration configuration)
-        {
-            Guard.NotNull(options, nameof(options));
-            Guard.NotNull(options.Sampler, nameof(options.Sampler));
-            Guard.MustBeValueType(options.Sampler, nameof(options.Sampler));
+        Guard.NotNull(options, nameof(options));
+        Guard.NotNull(options.Sampler, nameof(options.Sampler));
+        Guard.MustBeValueType(options.Sampler, nameof(options.Sampler));
 
-            (var size, var rectangle) = ResizeHelper.CalculateTargetLocationAndBounds(sourceSize, options);
+        (var size, var rectangle) = ResizeHelper.CalculateTargetLocationAndBounds(sourceSize, options);
 
-            Sampler = options.Sampler;
-            DestinationWidth = size.Width;
-            DestinationHeight = size.Height;
-            DestinationRectangle = rectangle;
-            Compand = options.Compand;
-            MaxDegreeOfParallelism = maxDegreeOfParallelism;
-            Hastlayer = hastlayer;
-            HardwareRepresentation = hardwareRepresentation;
-            Configuration = configuration;
-        }
+        Sampler = options.Sampler;
+        DestinationWidth = size.Width;
+        DestinationHeight = size.Height;
+        DestinationRectangle = rectangle;
+        Compand = options.Compand;
+        MaxDegreeOfParallelism = maxDegreeOfParallelism;
+        Hastlayer = hastlayer;
+        HardwareRepresentation = hardwareRepresentation;
+        Configuration = configuration;
+    }
 
-        /// <summary>
-        /// Gets the sampler to perform the resize operation.
-        /// </summary>
-        public IResampler Sampler { get; }
+    /// <summary>
+    /// Gets the sampler to perform the resize operation.
+    /// </summary>
+    public IResampler Sampler { get; }
 
-        /// <summary>
-        /// Gets the destination width.
-        /// </summary>
-        public int DestinationWidth { get; }
+    /// <summary>
+    /// Gets the destination width.
+    /// </summary>
+    public int DestinationWidth { get; }
 
-        /// <summary>
-        /// Gets the destination height.
-        /// </summary>
-        public int DestinationHeight { get; }
+    /// <summary>
+    /// Gets the destination height.
+    /// </summary>
+    public int DestinationHeight { get; }
 
-        /// <summary>
-        /// Gets the resize rectangle.
-        /// </summary>
-        public Rectangle DestinationRectangle { get; }
+    /// <summary>
+    /// Gets the resize rectangle.
+    /// </summary>
+    public Rectangle DestinationRectangle { get; }
 
-        /// <summary>
-        /// Gets a value indicating whether to compress or expand individual pixel color values on processing.
-        /// </summary>
-        public bool Compand { get; }
+    /// <summary>
+    /// Gets a value indicating whether to compress or expand individual pixel color values on processing.
+    /// </summary>
+    public bool Compand { get; }
 
-        /// <summary>
-        /// Gets a value indicating whether to premultiply the alpha (if it exists) during the resize operation.
-        /// </summary>
-        public bool PremultiplyAlpha { get; }
+    /// <summary>
+    /// Gets a value indicating whether to premultiply the alpha (if it exists) during the resize operation.
+    /// </summary>
+    public bool PremultiplyAlpha { get; }
 
-        /// <summary>
-        /// Gets a value indicating the max degree of parallelism.
-        /// </summary>
-        public int MaxDegreeOfParallelism { get; }
+    /// <summary>
+    /// Gets a value indicating the max degree of parallelism.
+    /// </summary>
+    public int MaxDegreeOfParallelism { get; }
 
-        /// <summary>
-        /// Necessary values for hastlayer.
-        /// </summary>
-        public IHastlayer Hastlayer { get; }
+    /// <summary>
+    /// Gets necessary values for hastlayer.
+    /// </summary>
+    public IHastlayer Hastlayer { get; }
 
-        /// <summary>
-        /// Necessary values for hastlayer.
-        /// </summary>
-        public IHardwareRepresentation HardwareRepresentation { get; }
+    /// <summary>
+    /// Gets necessary values for hastlayer.
+    /// </summary>
+    public IHardwareRepresentation HardwareRepresentation { get; }
 
-        /// <summary>
-        /// Necessary values for hastlayer.
-        /// </summary>
-        public IProxyGenerationConfiguration Configuration { get; }
+    /// <summary>
+    /// Gets necessary values for hastlayer.
+    /// </summary>
+    public IProxyGenerationConfiguration Configuration { get; }
 
-        public override ICloningImageProcessor<TPixel> CreatePixelSpecificCloningProcessor<TPixel>(
-            Configuration configuration,
-            Image<TPixel> source,
-            Rectangle sourceRectangle)
-        {
-            configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
-            return new HastlayerResizeProcessor<TPixel>(
-                configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation, Configuration);
-        }
+    public override ICloningImageProcessor<TPixel> CreatePixelSpecificCloningProcessor<TPixel>(
+        Configuration configuration,
+        Image<TPixel> source,
+        Rectangle sourceRectangle)
+    {
+        configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
+        return new HastlayerResizeProcessor<TPixel>(
+            configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation, Configuration);
     }
 }
