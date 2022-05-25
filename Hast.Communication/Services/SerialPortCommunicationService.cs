@@ -283,6 +283,10 @@ public class SerialPortCommunicationService : CommunicationServiceBase
                             "Couldn't access device while trying to get port names. This may be because the port " +
                             "is used by another application. Checking the next port...");
                     }
+                    catch (ArgumentOutOfRangeException)
+                    {
+                        // This might happen if a non-FPGA port tries to be opened.
+                    }
 
                     // Waiting a maximum of 3s for a response from the port.
 #pragma warning disable AsyncFixer02 // Long-running or blocking operations inside an async method
