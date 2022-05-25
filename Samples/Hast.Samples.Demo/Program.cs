@@ -1,65 +1,70 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Threading.Tasks;
 
-namespace Hast.Samples.Demo
+namespace Hast.Samples.Demo;
+
+internal static class Program
 {
-    internal class Program
+    private static async Task Main()
     {
-        private static async Task Main()
-        {
-            using var hastlayer = Hastlayer.Create();
+        using var hastlayer = Hastlayer.Create();
 
-            #region Configuration
-            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+        #region Configuration
 
-            configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
+        var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
 
-            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+        configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
-            hastlayer.ExecutedOnHardware += (sender, e) =>
+        configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+
+        hastlayer.ExecutedOnHardware += (_, e) =>
+            Console.WriteLine(
+                StringHelper.ConcatenateConvertiblesInvariant(
+                    "Executing on hardware took ",
+                    e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds,
+                    " milliseconds (net) ",
+                    e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds,
+                    " milliseconds (all together)."));
+
+        #endregion Configuration
+
+        #region HardwareGeneration
+
+        Console.WriteLine("Hardware generation starts.");
+        var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
+            new[]
             {
-                Console.WriteLine(
-                    "Executing on hardware took " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds +
-                    " milliseconds (net) " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds +
-                    " milliseconds (all together).");
-            };
-            #endregion
+                typeof(ParallelAlgorithm).Assembly,
+            },
+            configuration);
 
-            #region HardwareGeneration
-            Console.WriteLine("Hardware generation starts.");
-            var hardwareRepresentation = await hastlayer.GenerateHardware(
-                new[]
-                {
-                    typeof(ParallelAlgorithm).Assembly,
-                },
-                configuration);
-            #endregion
+        #endregion HardwareGeneration
 
-            #region Execution
-            Console.WriteLine("Hardware generated, starting software execution.");
-            Console.WriteLine();
+        #region Execution
 
-            var sw = System.Diagnostics.Stopwatch.StartNew();
-            var cpuOutput = new ParallelAlgorithm().Run(234234, null);
-            sw.Stop();
+        Console.WriteLine("Hardware generated, starting software execution.");
+        Console.WriteLine();
 
-            Console.WriteLine("On CPU it took " + sw.ElapsedMilliseconds + " milliseconds.");
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        var cpuOutput = new ParallelAlgorithm().Run(234234);
+        sw.Stop();
 
-            Console.WriteLine();
-            Console.WriteLine("Starting hardware execution.");
+        Console.WriteLine(StringHelper.ConcatenateConvertiblesInvariant("On CPU it took ", sw.ElapsedMilliseconds, " milliseconds."));
 
-            var parallelAlgorithm = await hastlayer.GenerateProxy(hardwareRepresentation, new ParallelAlgorithm());
+        Console.WriteLine();
+        Console.WriteLine("Starting hardware execution.");
 
-            var memoryConfig = (hastlayer as Hastlayer).CreateMemoryConfiguration(hardwareRepresentation);
-            var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            var output2 = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            var output3 = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
-            #endregion
-        }
+        var parallelAlgorithm = await hastlayer.GenerateProxyAsync(hardwareRepresentation, new ParallelAlgorithm());
+
+        var memoryConfig = hastlayer.CreateMemoryConfiguration(hardwareRepresentation);
+        var output1 = parallelAlgorithm.Run(234234, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+        var output2 = parallelAlgorithm.Run(123, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+        var output3 = parallelAlgorithm.Run(9999, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
+
+        #endregion Execution
     }
 }

@@ -1,16 +1,15 @@
 using System.Runtime.InteropServices;
 
-namespace System
+namespace System;
+
+public static class SimpleMemoryExtensions
 {
-    public static class SimpleMemoryExtensions
+    public static void SetIntegers(this Span<byte> buffer, int startIndex, params int[] values)
     {
-        public static void SetIntegers(this Span<byte> buffer, int startIndex, params int[] values)
+        for (int i = 0, index = startIndex; i < values.Length; i++, index += sizeof(int))
         {
-            for (int i = 0, index = startIndex; i < values.Length; i++, index += sizeof(int))
-            {
-                var slide = buffer.Slice(index, sizeof(int));
-                MemoryMarshal.Write(slide, ref values[i]);
-            }
+            var slide = buffer.Slice(index, sizeof(int));
+            MemoryMarshal.Write(slide, ref values[i]);
         }
     }
 }

@@ -1,15 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Include="FSharpParallelAlgorithmContainer.fs"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="System.Memory" Version="4.5.3"/>
     </ItemGroup>
 
     <ItemGroup>

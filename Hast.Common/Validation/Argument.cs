@@ -1,55 +1,56 @@
-﻿using System;
+using System;
 
-namespace Hast.Common.Validation
+namespace Hast.Common.Validation;
+
+public static class Argument
 {
-    public class Argument
+    public static void Validate(bool condition, string name)
     {
-        public static void Validate(bool condition, string name)
+        if (!condition)
         {
-            if (!condition)
-            {
-                throw new ArgumentException("Invalid argument", name);
-            }
+            throw new ArgumentException("Invalid argument", name);
         }
+    }
 
-        public static void Validate(bool condition, string name, string message)
+    public static void Validate(bool condition, string name, string message)
+    {
+        if (!condition)
         {
-            if (!condition)
-            {
-                throw new ArgumentException(message, name);
-            }
+            throw new ArgumentException(message, name);
         }
+    }
 
-        public static void ThrowIfNull<T>(T value, string name) where T : class
+    public static void ThrowIfNull<T>(T value, string name)
+        where T : class
+    {
+        if (value == null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(name);
-            }
+            throw new ArgumentNullException(name);
         }
+    }
 
-        public static void ThrowIfNull<T>(T value, string name, string message) where T : class
+    public static void ThrowIfNull<T>(T value, string name, string message)
+        where T : class
+    {
+        if (value == null)
         {
-            if (value == null)
-            {
-                throw new ArgumentNullException(name, message);
-            }
+            throw new ArgumentNullException(name, message);
         }
+    }
 
-        public static void ThrowIfNullOrEmpty(string value, string name)
+    public static void ThrowIfNullOrEmpty(string value, string name)
+    {
+        if (string.IsNullOrEmpty(value))
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new ArgumentException("Argument must be a non-empty string.", name);
-            }
+            throw new ArgumentException("Argument must be a non-empty string.", name);
         }
+    }
 
-        public static void ThrowIfNullOrEmpty(string value, string name, string message)
+    public static void ThrowIfNullOrEmpty(string value, string name, string message)
+    {
+        if (string.IsNullOrEmpty(value))
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                throw new ArgumentException(message, name);
-            }
+            throw new ArgumentException(message, name);
         }
     }
 }

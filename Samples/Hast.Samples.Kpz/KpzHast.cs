@@ -2,141 +2,143 @@ using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.Kpz.Algorithms;
 using Hast.Transformer.Vhdl.Abstractions.Configuration;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 
-namespace Hast.Samples.Kpz
+namespace Hast.Samples.Kpz;
+
+public partial class Kpz
 {
-    public partial class Kpz
+    private bool _verifyOutput;
+    private bool _randomSeedEnable;
+
+    public delegate void LogItDelegate(string toLog);
+
+    public LogItDelegate LogItFunction { get; set; } // Should be AsyncLogIt from ChartForm
+    public KpzKernelsInterface Kernels { get; set; }
+    public KpzKernelsParallelizedInterface KernelsParallelized { get; set; }
+    public PrngTestInterface KernelsP { get; set; }
+
+    public async Task<(IHastlayer Hastlayer, IHardwareGenerationConfiguration Configuration)> InitializeHastlayerAsync(
+        bool verifyOutput,
+        bool randomSeedEnable)
     {
-        private bool _verifyOutput;
-        private bool _randomSeedEnable;
+        _verifyOutput = verifyOutput;
+        _randomSeedEnable = randomSeedEnable;
 
-        public delegate void LogItDelegate(string toLog);
-        public LogItDelegate LogItFunction; //Should be AsyncLogIt from ChartForm
-        public KpzKernelsInterface Kernels;
-        public KpzKernelsParallelizedInterface KernelsParallelized;
-        public PrngTestInterface KernelsP;
+        LogItFunction("Creating Hastlayer Factory...");
 
+        // No "using" here since we are returning this object.
+        var hastlayer = Hastlayer.Create();
 
-        public async Task<(IHastlayer, IHardwareGenerationConfiguration)> InitializeHastlayer(
-            bool verifyOutput,
-            bool randomSeedEnable)
+        hastlayer.ExecutedOnHardware += (_, e) =>
         {
-            _verifyOutput = verifyOutput;
-            _randomSeedEnable = randomSeedEnable;
+            var net = e.Arguments.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds;
+            var total = e.Arguments.HardwareExecutionInformation.FullExecutionTimeMilliseconds;
+            LogItFunction(FormattableString.Invariant($"Hastlayer timer: {net}ms (net) / {total}ms (total)"));
+        };
 
-            LogItFunction("Creating Hastlayer Factory...");
+        var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+        configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
+        configuration.EnableCaching = false;
 
-            // No "using" here since we are returning this object.
-            var hastlayer = Hastlayer.Create();
+        LogItFunction("Generating hardware...");
 
-            hastlayer.ExecutedOnHardware += (sender, e) =>
-            {
-                LogItFunction("Hastlayer timer: " +
-                    e.HardwareExecutionInformation.HardwareExecutionTimeMilliseconds + "ms (net) / " +
-                    e.HardwareExecutionInformation.FullExecutionTimeMilliseconds + " ms (total)"
-                );
-            };
-
-            var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
-            configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
-            configuration.EnableCaching = false;
-
-            LogItFunction("Generating hardware...");
-
-            if (_kpzTarget.HastlayerParallelizedAlgorithm())
-            {
-                configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
-                configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
-            }
-            else if (_kpzTarget.HastlayerPlainAlgorithm())
-            {
-                configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
-            }
-            else // if (kpzTarget == KpzTarget.PrngTest)
-            {
-                configuration.AddHardwareEntryPointType<PrngTestInterface>();
-            }
-
-
-            var hardwareRepresentation = await hastlayer.GenerateHardware(new[] {
-                    typeof(KpzKernelsParallelizedInterface).Assembly,
-                    typeof(RandomMwc64X).Assembly
-                }, configuration);
-
-            LogItFunction("Generating proxy...");
-
-            if (_kpzTarget.HastlayerOnFpga())
-            {
-                var proxyConf = new ProxyGenerationConfiguration
-                {
-                    VerifyHardwareResults = _verifyOutput
-                };
-
-                if (_kpzTarget == KpzTarget.Fpga)
-                {
-                    Kernels = await hastlayer.GenerateProxy(
-                        hardwareRepresentation,
-                        new KpzKernelsInterface(),
-                        proxyConf);
-                }
-                else if (_kpzTarget == KpzTarget.FpgaParallelized)
-                {
-                    KernelsParallelized = await hastlayer.GenerateProxy(
-                        hardwareRepresentation,
-                        new KpzKernelsParallelizedInterface(),
-                        proxyConf);
-                }
-                else //if(kpzTarget == KpzTarget.PrngTest)
-                {
-                    KernelsP = await hastlayer.GenerateProxy(
-                        hardwareRepresentation,
-                        new PrngTestInterface(),
-                        proxyConf);
-                }
-
-                LogItFunction("FPGA target detected");
-            }
-            else //if (kpzTarget == KpzTarget.HastlayerSimulation())
-            {
-                Kernels = new KpzKernelsInterface();
-                KernelsParallelized = new KpzKernelsParallelizedInterface();
-                LogItFunction("Simulation target detected");
-            }
-
-            if (_kpzTarget.HastlayerPlainAlgorithm())
-            {
-                LogItFunction("Running TestAdd...");
-                uint resultFpga = Kernels.TestAddWrapper(hastlayer, configuration, 4313, 123);
-                uint resultCpu = 4313 + 123;
-                if (resultCpu == resultFpga) LogItFunction(string.Format("Success: {0} == {1}", resultFpga, resultCpu));
-                else LogItFunction(string.Format("Fail: {0} != {1}", resultFpga, resultCpu));
-            }
-
-            if (_kpzTarget == KpzTarget.PrngTest)
-            {
-                LogItFunction("Running TestPrng...");
-
-                var kernelsCpu = new PrngTestInterface();
-                ulong randomSeed = 0x37a92d76a96ef210UL;
-                var smCpu = kernelsCpu.PushRandomSeed(randomSeed, null, null);
-                var smFpga = KernelsP.PushRandomSeed(randomSeed, hastlayer, configuration);
-                LogItFunction("PRNG results:");
-                bool success = true;
-
-                for (int PrngTestIndex = 0; PrngTestIndex < 10; PrngTestIndex++)
-                {
-                    uint prngCpuResult = kernelsCpu.GetNextRandom(smCpu);
-                    uint prngFpgaResult = KernelsP.GetNextRandom(smFpga);
-                    if (prngCpuResult != prngFpgaResult) { success = false; }
-                    LogItFunction(string.Format("{0}, {1}", prngCpuResult, prngFpgaResult));
-                }
-
-                if (success) LogItFunction("TestPrng succeeded!");
-                else LogItFunction("TestPrng failed!");
-            }
-            return (hastlayer, configuration);
+        if (_kpzTarget.HastlayerParallelizedAlgorithm())
+        {
+            configuration.AddHardwareEntryPointType<KpzKernelsParallelizedInterface>();
+            configuration.TransformerConfiguration().AddAdditionalInlinableMethod<RandomMwc64X>(r => r.NextUInt32());
         }
+        else if (_kpzTarget.HastlayerPlainAlgorithm())
+        {
+            configuration.AddHardwareEntryPointType<KpzKernelsInterface>();
+        }
+        else
+        {
+            configuration.AddHardwareEntryPointType<PrngTestInterface>();
+        }
+
+        LogItFunction("Generating proxy...");
+
+        if (_kpzTarget.HastlayerOnFpga())
+        {
+            await GenerateProxyAsync(hastlayer, configuration);
+        }
+        else
+        {
+            Kernels = new KpzKernelsInterface();
+            KernelsParallelized = new KpzKernelsParallelizedInterface();
+            LogItFunction("Simulation target detected");
+        }
+
+        if (_kpzTarget.HastlayerPlainAlgorithm())
+        {
+            LogItFunction("Running TestAdd...");
+            uint resultFpga = Kernels.TestAddWrapper(hastlayer, configuration, 4_313, 123);
+            const uint resultCpu = 4_313 + 123;
+            LogItFunction(resultFpga == resultCpu ? $"Success: {resultFpga} == {resultCpu}" : $"Fail: {resultFpga} != {resultCpu}");
+        }
+
+        if (_kpzTarget != KpzTarget.PrngTest) return (hastlayer, configuration);
+        LogItFunction("Running TestPrng...");
+
+        var kernelsCpu = new PrngTestInterface();
+        const ulong randomSeed = 0x37a9_2d76_a96e_f210;
+        var smCpu = PrngTestInterface.PushRandomSeed(randomSeed, hastlayer: null, configuration: null);
+        var smFpga = PrngTestInterface.PushRandomSeed(randomSeed, hastlayer, configuration);
+        LogItFunction("PRNG results:");
+        bool success = true;
+
+        for (int prngTestIndex = 0; prngTestIndex < 10; prngTestIndex++)
+        {
+            uint prngCpuResult = kernelsCpu.GetNextRandom(smCpu);
+            uint prngFpgaResult = KernelsP.GetNextRandom(smFpga);
+            if (prngCpuResult != prngFpgaResult) { success = false; }
+            LogItFunction($"{prngCpuResult}, {prngFpgaResult}");
+        }
+
+        LogItFunction(success ? "TestPrng succeeded!" : "TestPrng failed!");
+
+        return (hastlayer, configuration);
+    }
+
+    private async Task GenerateProxyAsync(IHastlayer hastlayer, IHardwareGenerationConfiguration configuration)
+    {
+        var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
+            new[]
+            {
+                typeof(KpzKernelsParallelizedInterface).Assembly,
+                typeof(RandomMwc64X).Assembly,
+            },
+            configuration);
+
+        var proxyConf = new ProxyGenerationConfiguration
+        {
+            VerifyHardwareResults = _verifyOutput,
+        };
+
+        if (_kpzTarget == KpzTarget.Fpga)
+        {
+            Kernels = await hastlayer.GenerateProxyAsync(
+                hardwareRepresentation,
+                new KpzKernelsInterface(),
+                proxyConf);
+        }
+        else if (_kpzTarget == KpzTarget.FpgaParallelized)
+        {
+            KernelsParallelized = await hastlayer.GenerateProxyAsync(
+                hardwareRepresentation,
+                new KpzKernelsParallelizedInterface(),
+                proxyConf);
+        }
+        else
+        {
+            KernelsP = await hastlayer.GenerateProxyAsync(
+                hardwareRepresentation,
+                new PrngTestInterface(),
+                proxyConf);
+        }
+
+        LogItFunction("FPGA target detected");
     }
 }

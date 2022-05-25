@@ -1,15 +1,14 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 
-namespace Hast.Communication.Extensibility.Events
+namespace Hast.Communication.Extensibility.Events;
+
+/// <summary>
+/// The context for a hardware execution of a hardware-implemented member.
+/// </summary>
+public interface IMemberHardwareExecutionContext : IMemberInvocationContext
 {
     /// <summary>
-    /// The context for a hardware execution of a hardware-implemented member.
+    /// Gets the debug and runtime information about the hardware execution.
     /// </summary>
-    public interface IMemberHardwareExecutionContext : IMemberInvocationContext
-    {
-        /// <summary>
-        /// Debug and runtime information about the hardware execution.
-        /// </summary>
-        IHardwareExecutionInformation HardwareExecutionInformation { get; }
-    }
+    IHardwareExecutionInformation HardwareExecutionInformation { get; }
 }

@@ -1,4 +1,4 @@
-﻿namespace Hast.Samples.FSharpSampleAssembly
+namespace Hast.Samples.FSharpSampleAssembly
 
 open Hast.Layer
 
@@ -20,7 +20,6 @@ module FSharpParallelAlgorithmContainer =
 
         [<Literal>]
         let Run_OutputUInt32Index = 0
-
 
         // Since there's no virtual in F# the hardware entry point methods need to be abstracts with the default
         // implementation following them.

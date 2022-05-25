@@ -1,46 +1,38 @@
-using Hast.Common.Helpers;
+using Lombiq.HelpfulLibraries.Common.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hast.Layer.EmptyRepresentationFactories
+namespace Hast.Layer.EmptyRepresentationFactories;
+
+internal static class EmptyHardwareDescriptionFactory
 {
-    internal static class EmptyHardwareDescriptionFactory
+    public static IHardwareDescription Create(IHardwareGenerationConfiguration configuration)
     {
-        public static IHardwareDescription Create(IHardwareGenerationConfiguration configuration)
+        var mockHardwareEntryPointMappings = new Dictionary<string, int>();
+
+        for (int i = 0; i < configuration.HardwareEntryPointMemberFullNames.Count; i++)
         {
-            var mockHardwareEntryPointMappings = new Dictionary<string, int>();
-
-            for (int i = 0; i < configuration.HardwareEntryPointMemberFullNames.Count; i++)
-            {
-                mockHardwareEntryPointMappings[configuration.HardwareEntryPointMemberFullNames[i]] = i;
-            }
-
-            return new HardwareDescription(mockHardwareEntryPointMappings);
+            mockHardwareEntryPointMappings[configuration.HardwareEntryPointMemberFullNames[i]] = i;
         }
 
+        return new HardwareDescription(mockHardwareEntryPointMappings);
+    }
 
-        private class HardwareDescription : IHardwareDescription
-        {
-            public string TransformationId { get; } = Sha2456Helper.Empty();
-            public string Language => "VHDL";
+    private sealed class HardwareDescription : IHardwareDescription
+    {
+        public string TransformationId { get; } = Sha256Helper.Empty();
+        public string Language => "VHDL";
 
-            public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
+        public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
 
-            public IEnumerable<ITransformationWarning> Warnings => Enumerable.Empty<ITransformationWarning>();
+        public IEnumerable<ITransformationWarning> Warnings => Enumerable.Empty<ITransformationWarning>();
 
+        public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings) =>
+            HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
 
-            public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings)
-            {
-                HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;
-            }
-
-
-            public Task Serialize(Stream stream)
-            {
-                throw new System.NotImplementedException();
-            }
-        }
+        public Task SerializeAsync(Stream stream) => throw new NotSupportedException();
     }
 }

@@ -7,6 +7,15 @@ Note that the Hardware Framework projects have their own release cycle and relea
 
 ## vNext
 
+- The consumer sample app now uses [Terminal.Gui](https://github.com/migueldeicaza/gui.cs) to provide an easy to use GUI within a terminal window. Command-line configurability remains and is even extended.
+
+## v1.2.1, 27.10.2021
+
+Bugfix release to make Hastlayer Remote Services reliably work. If you tried to connect to Hastlayer recently, and didn't get the transformation completed, this fixes it.
+
+
+## v1.2, 04.10.2021
+
 - Added support for the high-end [Xilinx Alveo U50, U200, U250 or U280 Data Center Accelerator Cards](https://www.xilinx.com/products/boards-and-kits/alveo.html). These are suitable hardware for any kind of demanding production-level workload. Apart from using such devices on-premise they're also available in the cloud.
 - Added support for the high-end [AWS EC2 F1 FPGA cloud instances](https://aws.amazon.com/ec2/instance-types/f1/).
 - Added support for [Azure NP-series VMs](https://docs.microsoft.com/en-us/azure/virtual-machines/np-series) that use Xilinx Alveo U250s.

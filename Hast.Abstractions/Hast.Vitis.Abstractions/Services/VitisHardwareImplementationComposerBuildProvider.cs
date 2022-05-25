@@ -1,8 +1,8 @@
 using CliWrap;
 using CliWrap.Buffered;
-using CliWrap.EventStream;
-using CliWrap.Exceptions;
+using Hast.Common.Enums;
 using Hast.Common.Helpers;
+using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Abstractions.Helpers;
@@ -17,647 +17,673 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using static Hast.Common.Helpers.FileSystemHelper;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
-using static System.Globalization.CultureInfo;
+using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
-namespace Hast.Vitis.Abstractions.Services
+namespace Hast.Vitis.Abstractions.Services;
+
+public sealed class VitisHardwareImplementationComposerBuildProvider
+    : IHardwareImplementationComposerBuildProvider, IDisposable
 {
-    public sealed class VitisHardwareImplementationComposerBuildProvider
-        : IHardwareImplementationComposerBuildProvider, IDisposable
+    private const string Value = XilinxReportSection.Value;
+    private const string Vpp = "v++";
+    private const string UtilizationPercent = "Utilization (%)";
+
+    private const string TryToMakeItSmaller = "Try to make your code simpler (make it shorter, use smaller data " +
+                                              "types, use a lower degree of parallelism) until it goes below 80%.";
+
+    private readonly ILogger<VitisHardwareImplementationComposerBuildProvider> _logger;
+    private readonly IHastlayerFlavorProvider _flavorProvider;
+    private readonly BuildLogger<VitisHardwareImplementationComposerBuildProvider> _buildLogger;
+    private readonly TextWriter _buildOutput;
+
+    private static bool _firstRun = true;
+
+    public event EventHandler<BuildProgressEventArgs> Progress;
+
+    public IDictionary<string, BuildProviderShortcut> Shortcuts { get; } =
+        new Dictionary<string, BuildProviderShortcut>();
+
+    public int MajorStepsTotal { get; private set; }
+    public int MajorStep { get; private set; }
+
+    public VitisHardwareImplementationComposerBuildProvider(
+        ILogger<VitisHardwareImplementationComposerBuildProvider> logger,
+        IHastlayerFlavorProvider flavorProvider)
     {
-        private const string Value = XilinxReportSection.Value;
-        private const string Vpp = "v++";
-        private const string UtilizationPercent = "Utilization (%)";
-        private const string TryToMakeItSmaller = "Try to make your code simpler (make it shorter, use smaller data " +
-                                                  "types, use a lower degree of parallelism) until it goes below 80%.";
+        Progress += OnProgress;
+        _logger = logger;
+        _flavorProvider = flavorProvider;
 
-        private static bool _firstRun = true;
-        private static readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
+        // Only a reference is saved for "this" in BuildLogger.
+#pragma warning disable S3366 // "this" should not be exposed from constructors
+        (_buildLogger, _buildOutput) = BuildLogger.Create(logger, this);
+#pragma warning restore S3366 // "this" should not be exposed from constructors
+    }
 
-        private readonly ILogger _logger;
-        private readonly string _buildOutputPath;
-        private readonly StreamWriter _buildOutput;
+    public bool CanCompose(IHardwareImplementationCompositionContext context) =>
+        context.DeviceManifest is VitisDeviceManifest;
 
-        public event EventHandler<BuildProgressEventArgs> Progress;
-
-        public Dictionary<string, BuildProviderShortcut> Shortcuts { get; } = new();
-
-        public int MajorStepsTotal { get; private set; } = 8;
-        public int MajorStep { get; private set; }
-
-
-        public VitisHardwareImplementationComposerBuildProvider(
-            ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
+    public Task BuildAsync(
+        IHardwareImplementationCompositionContext context,
+        IHardwareImplementation implementation)
+    {
+        if (context.DeviceManifest is not VitisDeviceManifest deviceManifest)
         {
-            Progress += OnProgress;
-            _logger = logger;
-
-            var buildOutputPath = EnsureDirectoryExists("App_Data", "logs");
-            for (var i = 0; i < 100 && _buildOutput == null; i++)
-            {
-                var fileName = i == 0 ? "build.out" : $"build~{i}.out";
-                _buildOutputPath = Path.Combine(buildOutputPath, fileName);
-
-                try
-                {
-                    _buildOutput = new StreamWriter(_buildOutputPath, append: false, Encoding.UTF8);
-                }
-                catch (IOException ex)
-                {
-                    _logger.LogWarning(ex, "Failed to open {0} for writing.", fileName);
-                }
-            }
+            throw new InvalidOperationException(
+                $"The device manifest must be {nameof(VitisDeviceManifest)} for " +
+                $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
         }
 
-
-        public bool CanCompose(IHardwareImplementationCompositionContext context) =>
-            context.DeviceManifest.ToolChainName == CommonToolChainNames.Vitis;
-
-        public Task BuildAsync(
-            IHardwareImplementationCompositionContext context,
-            IHardwareImplementation implementation)
+        if (deviceManifest.SupportedPlatforms?.Count == 0)
         {
-            if (!(context.DeviceManifest is XilinxDeviceManifest deviceManifest))
-            {
-                throw new InvalidOperationException(
-                    $"The device manifest must be {nameof(XilinxDeviceManifest)} for " +
-                    $"{nameof(VitisHardwareImplementationComposerBuildProvider)} to work.");
-            }
-
-            if (deviceManifest.SupportedPlatforms?.Count == 0)
-            {
-                throw new InvalidOperationException(
-                    $"The device manifest for '{deviceManifest.Name}' doesn't have any " +
-                    $"{nameof(XilinxDeviceManifest.SupportedPlatforms)} which is required to build.");
-            }
-
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
-            {
-                throw new InvalidOperationException(
-                    "XILINX_VITIS variable is not set. This is required to run Vivado. For further instructions see " +
-                    "https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html");
-            }
-
-            var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
-            if (!Directory.Exists(xilinxDirectoryPath))
-            {
-                throw new InvalidOperationException(
-                    "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
-            }
-
-            return BuildInnerAsync(context, implementation, deviceManifest, xilinxDirectoryPath);
+            throw new InvalidOperationException(
+                $"The device manifest for '{deviceManifest.Name}' doesn't have any " +
+                $"{nameof(VitisDeviceManifest.SupportedPlatforms)} which is required to build.");
         }
 
-        private async Task BuildInnerAsync(
-            IHardwareImplementationCompositionContext context,
-            IHardwareImplementation implementation,
-            XilinxDeviceManifest deviceManifest,
-            string xilinxDirectoryPath)
+        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("XILINX_VITIS")))
         {
-            var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
-            var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
-
-            if (buildConfiguration.SynthesisOnly)
-            {
-                MajorStepsTotal = 3;
-            }
-            // Synthesis doesn't need the device.
-            else if (buildConfiguration.ResetOnFirstRun && _firstRun)
-            {
-                _firstRun = false;
-                await EnsureDeviceReady();
-            }
-
-            ProgressMajor(
-                "Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more complex " +
-                "ones usually up to 4. Although 15 hours are also possible if the hardware is completely utilized " +
-                "with extremely complex and/or very highly parallelized algorithms.");
-
-            var hashId = context.HardwareDescription.TransformationId;
-            _logger.LogInformation("HASH ID: {0}", hashId);
-            var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
-            implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
-            Cleanup(hardwareFrameworkPath, hashId);
-
-            // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
-            var ipDirectoryPath = Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "src", "IP");
-            if (!Directory.Exists(ipDirectoryPath))
-            {
-                FileSystem.CopyDirectory(
-                    Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"),
-                    ipDirectoryPath);
-            }
-
-            await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration);
-
-            var platformsDirectoryPath = new DirectoryInfo(
-                Environment.GetEnvironmentVariable("XILINX_PLATFORM") is { } platformVariable &&
-                Directory.Exists(platformVariable)
-                    ? Path.GetFullPath(platformVariable)
-                    : Path.Combine(xilinxDirectoryPath!, "platforms"));
-
-            // Using the variable names in the Makefile.
-            var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
-            // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file
-            // in the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
-            // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3.
-            var device = deviceManifest.SupportedPlatforms!
-                             .SelectMany(platformName => platformsDirectoryPath.GetDirectories($"{platformName}*"))
-                             .SelectMany(directory => directory.GetFiles("*.xpfm").Select(file => file.FullName))
-                             .OrderByDescending(name => name)
-                             .FirstOrDefault() ??
-                         throw new InvalidOperationException(
-                             "No device platform was found. Did you set the $XILINX_PLATFORM environment variable?");
-
-            var xclbinDirectoryPath = EnsureDirectoryExists(
-                GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
-                "xclbin");
-
-            await CreateSourceFilesAwait(context, hardwareFrameworkPath, hashId);
-
-            // If the xclbin exists then we are done here.
-            if (AllExist(implementation.BinaryPath, implementation.BinaryPath + ".info"))
-            {
-                ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
-                return;
-            }
-
-            if (buildConfiguration.SynthesisOnly)
-            {
-                await SynthKernelAsync(hardwareFrameworkPath, hashId);
-
-                if (context.Configuration is HardwareGenerationConfiguration configuration)
-                {
-                    configuration.EnableHardwareImplementationComposition = false;
-                }
-
-                return;
-            }
-
-            ProgressMajor("Staring build.");
-            await BuildKernelAsync(
-                hardwareFrameworkPath,
-                target,
-                device,
-                hashId,
-                deviceManifest,
-                xclbinDirectoryPath,
-                openClConfiguration);
-
-            var disableHbm = deviceManifest.SupportsHbm && !openClConfiguration.UseHbm;
-            CopyBinaries(target, implementation.BinaryPath, hashId, disableHbm);
-
-            if (deviceManifest.RequiresDcpBinary)
-            {
-                ProgressMajor("There are no reports when then the project is compiled as netlist.");
-            }
-            else
-            {
-                ProgressMajor("Collecting reports.");
-                try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
-                catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
-            }
-
-            Cleanup(hardwareFrameworkPath, hashId);
+            // When cross-compiling, the build machine needs Vivado and XRT, but the FPGA machine only needs XRT.
+            _logger.LogWarning(
+                "XILINX_VITIS variable is not set. This is required to build using Vivado. For further instructions " +
+                "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html.");
         }
 
-        private void ProgressMajor(string message)
+        var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
+        if (!Directory.Exists(xilinxDirectoryPath))
         {
-            MajorStep++;
-            Progress?.Invoke(this, new BuildProgressEventArgs(message, isMajorStep: true));
+            throw new InvalidOperationException(
+                "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
         }
 
-        private async Task BuildKernelAsync(
-            string hardwareFrameworkPath,
-            string target,
-            string device,
-            string hashId,
-            XilinxDeviceManifest deviceManifest,
-            string xclbinDirectoryPath,
-            IOpenClConfiguration openClConfiguration)
+        return BuildInnerAsync(context, implementation, deviceManifest);
+    }
+
+    private async Task BuildInnerAsync(
+        IHardwareImplementationCompositionContext context,
+        IHardwareImplementation implementation,
+        VitisDeviceManifest deviceManifest)
+    {
+        var buildConfiguration = context.Configuration.GetOrAddVitisBuildConfiguration();
+        var openClConfiguration = context.Configuration.GetOrAddOpenClConfiguration();
+
+        var hashId = context.HardwareDescription.TransformationId;
+        _logger.LogInformation("HASH ID: {HashId}", hashId);
+
+        MajorStepsTotal = buildConfiguration.SynthesisOnly ? 3 : 8;
+
+        // Synthesis doesn't need the device.
+        await EnsureDeviceReadyAsync(buildConfiguration);
+
+        ProgressMajor(
+            "Environment is ready, starting build. Simpler algorithms take 2-3 hours to compile, more complex " +
+            "ones usually up to 4. Although 15 hours are also possible if the hardware is completely utilized " +
+            "with extremely complex and/or very highly parallelized algorithms.");
+
+        var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
+        implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
+        Cleanup(hardwareFrameworkPath, hashId);
+
+        var promptBeforeBuild =
+            buildConfiguration.PromptBeforeBuild &&
+            _flavorProvider.Flavor != HastlayerFlavor.Client;
+        await CreateSourceAsync(
+            context,
+            hardwareFrameworkPath,
+            hashId,
+            implementation.BinaryPath,
+            promptBeforeBuild);
+
+        if (CheckIfDoneAlready(implementation)) return;
+
+        _logger.LogInformation(
+            "The xclbin file (\"{BinaryPath}\") does not exist. Starting build...",
+            implementation.BinaryPath);
+
+        // Copy templates from ./HardwareFramework/rtl/src to the execution specific directory.
+        var ipDirectoryPath = Path.Combine(GetRtlDirectoryPath(hardwareFrameworkPath, hashId), "src", "IP");
+        if (!Directory.Exists(ipDirectoryPath))
         {
-            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
+            FileSystem.CopyDirectory(
+                Path.Combine(hardwareFrameworkPath, "rtl", "src", "IP"),
+                ipDirectoryPath);
+        }
 
-            var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
+        await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration, deviceManifest);
 
-            // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
-            //        $(PATH_TO_HDL) $(KERNEL_TCL) $(KERNEL_XML)
-            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
-            var vivadoArguments = new[]
+        var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
+        if (!Directory.Exists(xilinxDirectoryPath))
+        {
+            throw new InvalidOperationException(
+                "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
+        }
+
+        var platformsDirectories = new[]
             {
-                "-mode",
-                "batch",
-                "-source",
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "gen_xo.tcl"),
-                "-tclargs",
-                xoFilePath,
-                target,
-                device,
-                Path.Combine(rtlDirectoryPath, "src", "IP"),
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "package_kernel.tcl"),
-                Path.Combine(rtlDirectoryPath, "src", "xml", "kernel.xml"),
-            };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
-            ProgressMajor("Vivado build is finished.");
+                Environment.GetEnvironmentVariable("XILINX_PLATFORM"),
+                Path.Combine(xilinxDirectoryPath!, "platforms"),
+                Path.Combine(hardwareFrameworkPath, "platforms"),
+            }
+            .Where(path => path != null && Directory.Exists(path))
+            .Select(path => new DirectoryInfo(path))
+            .ToList();
+        var device = GetPlatformFilePath(deviceManifest, platformsDirectories);
 
+        // Using the variable names in the Makefile.
+        var target = openClConfiguration.UseEmulation ? "hw_emu" : "hw";
 
-            // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
-            //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
-            // endif
-            // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) --dk chipscope:hastip_1:m_axi_gmem
-            // v++ $(CLFLAGS) --kernel_frequency $(FREQUENCY) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
-            var vppExecutable = (await GetExecutablePathAsync(Vpp));
-            var vppArguments = new List<string>(
-                deviceManifest.SupportsHbm && openClConfiguration.UseHbm
-                ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
-                : Array.Empty<string>());
+        if (buildConfiguration.SynthesisOnly)
+        {
+            await SynthKernelAsync(hardwareFrameworkPath, hashId);
 
-            if (deviceManifest.RequiresDcpBinary)
+            if (context.Configuration is HardwareGenerationConfiguration configuration)
             {
-                vppArguments.Add("--advanced.param");
-                vppArguments.Add("compiler.acceleratorBinaryContent=dcp");
+                configuration.EnableHardwareImplementationComposition = false;
             }
 
+            return;
+        }
+
+        ProgressMajor("Staring build.");
+        await BuildKernelAsync(
+            context,
+            target,
+            device,
+            hashId,
+            deviceManifest,
+            openClConfiguration);
+
+        var disableHbm = deviceManifest.SupportsHbm && !openClConfiguration.UseHbm;
+        CopyBinaries(target, implementation.BinaryPath, hashId, disableHbm);
+
+        if (deviceManifest.RequiresDcpBinary)
+        {
+            ProgressMajor("There are no reports when then the project is compiled as netlist.");
+        }
+        else
+        {
+            ProgressMajor("Collecting reports.");
+            try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
+            catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
+        }
+
+        Cleanup(hardwareFrameworkPath, hashId);
+    }
+
+    private static string GetPlatformFilePath(
+        VitisDeviceManifest deviceManifest,
+        List<DirectoryInfo> platformsDirectories)
+    {
+        // Instead of the platform name like xilinx_u200_xdma_201830_2, you can use the full path of the .xpfm file in
+        // the platform directory. This way you can override the platform directory by setting $XILINX_PLATFORM.
+        // See: https://github.com/Xilinx/Vitis-Tutorials/issues/3. We are looking for platform directories first, then
+        // xpfm files. Then by SupportedPlatforms and location:
+        // 1. $XILINX_PLATFORM,
+        // 2. /opt/xilinx/platforms
+        // 3. ./HardwareFramework/platforms
+        var caseInsensitiveEnumerationOptions = new EnumerationOptions
+        {
+            RecurseSubdirectories = true,
+            MatchCasing = MatchCasing.CaseInsensitive,
+        };
+        var device = deviceManifest.SupportedPlatforms!
+            .SelectMany(platformName => platformsDirectories
+                .SelectMany(directoryInfo => directoryInfo
+                    .GetDirectories($"{platformName}*", caseInsensitiveEnumerationOptions)
+                    .SelectMany(directory => directory.GetFiles("*.xpfm", caseInsensitiveEnumerationOptions))
+                    .OrderByDescending(fileInfo => fileInfo.FullName))
+                .Union(platformsDirectories
+                    .SelectMany(directoryInfo => directoryInfo.GetFiles($"{platformName}*.xpfm"))
+                    .OrderByDescending(fileInfo => fileInfo.FullName))
+            )
+            .FirstOrDefault()?
+            .FullName;
+
+        if (device == null)
+        {
+            throw new FileNotFoundException(
+                "Unable to find the platform xpfm file. The supported platforms are: " +
+                string.Join(", ", deviceManifest.SupportedPlatforms));
+        }
+
+        return device;
+    }
+
+    private void ProgressMajor(string message)
+    {
+        MajorStep++;
+        InvokeProgress(new BuildProgressEventArgs(message, isMajorStep: true));
+    }
+
+    private async Task BuildKernelAsync(
+        IHardwareImplementationCompositionContext context,
+        string target,
+        string device,
+        string hashId,
+        VitisDeviceManifest deviceManifest,
+        IOpenClConfiguration openClConfiguration)
+    {
+        var (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, xclbinDirectoryPath) = GetBuildPaths(context);
+
+        var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
+        var xoFilePath = Path.Combine(xclbinDirectoryPath, $"hastip.{target}.xo");
+
+        // vivado -mode batch -source $(GEN_XO_TLC) -tclargs $(XCLBIN)/hastip.$(TARGET).xo $(TARGET) $(DEVICE)
+        //        $(PATH_TO_HDL) $(KERNEL_TCL) $(KERNEL_XML)
+        var vivadoExecutable = await GetExecutablePathAsync("vivado");
+        var vivadoArguments = new[]
+        {
+            "-mode",
+            "batch",
+            "-source",
+            GetScriptFile(hardwareFrameworkPath, "gen_xo.tcl"),
+            "-tclargs",
+            xoFilePath,
+            target,
+            device,
+            Path.Combine(rtlDirectoryPath, "src", "IP"),
+            GetScriptFile(hardwareFrameworkPath, "package_kernel.tcl"),
+            Path.Combine(rtlDirectoryPath, "src", "xml", "kernel.xml"),
+        };
+        await _buildLogger.ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments, tmpDirectoryPath);
+        ProgressMajor("Vivado build is finished.");
+
+        // But this is not C# code.
+#pragma warning disable S125 // Sections of code should not be commented out.
+        // ifeq ($(MEMTYPE),$(filter $(MEMTYPE),DDR HBM PLRAM))
+        //     CLFLAGS += --connectivity.sp hastip_1.buffer:$(MEMTYPE)[0:0]
+        // endif
+        // CLFLAGS += -g -R2 --save-temps -t $(TARGET) --platform $(DEVICE) \
+        //            --advanced.param compiler.skipTimingCheckAndFrequencyScaling=1 --optimize 3
+        // v++ $(CLFLAGS) -lo $(XCLBIN)/hastip.$(TARGET).xclbin $(XO_FILE)
+#pragma warning restore S125 // Sections of code should not be commented out.
+        var vppExecutable = await GetExecutablePathAsync(Vpp);
+        var vppArguments = new List<string>(
+            deviceManifest.SupportsHbm && openClConfiguration.UseHbm
+            ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
+            : Array.Empty<string>());
+
+        if (deviceManifest.RequiresDcpBinary)
+        {
+            vppArguments.Add("--advanced.param");
+            vppArguments.Add("compiler.acceleratorBinaryContent=dcp");
+        }
+
+        vppArguments.AddRange(new[]
+        {
+            "-g",
+            "-R2",
+            "--save-temps",
+            "-t",
+            target,
+            "--platform",
+            device,
+            "--advanced.param",
+            "compiler.skipTimingCheckAndFrequencyScaling=1",
+            "--optimize",
+            "3",
+        });
+
+        if (deviceManifest.BuildWithClockFrequencyHz)
+        {
             vppArguments.AddRange(new[]
             {
-                "-g",
-                "-R2",
-                "--save-temps",
-                "-t",
-                target,
-                "--platform",
-                device,
-                "--dk",
-                "chipscope:hastip_1:m_axi_gmem",
                 "--kernel_frequency",
-                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(InvariantCulture),
-                "-lo",
-                Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
-                xoFilePath,
+                (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.CurrentCulture),
             });
+        }
 
-            await ExecuteWithLogging(vppExecutable, vppArguments, tmpDirectoryPath);
-            ProgressMajor("v++ build is finished.");
+        vppArguments.AddRange(new[]
+        {
+            "-lo",
+            Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
+            xclbinFilePath,
+            xoFilePath,
+        });
 
-            if (target.ToUpperInvariant() == "HW_EMU")
+        await _buildLogger.ExecuteWithLoggingAsync(vppExecutable, vppArguments, tmpDirectoryPath);
+        ProgressMajor("v++ build is finished.");
+
+        if (target.ToUpperInvariant() == "HW_EMU")
+        {
+            // For example:
+            // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
+            var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
+            var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
+            await _buildLogger.ExecuteWithLoggingAsync(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
+            File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
+            ProgressMajor("Emulation configuration (emconfig) setup is finished.");
+        }
+    }
+
+    private async Task SynthKernelAsync(string hardwareFrameworkPath, string hashId)
+    {
+        ProgressMajor("Starting Vivado synthesis.");
+
+        var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
+
+        // vivado -mode batch -source synth_util.tcl $(VhdFileIn) $(RptFileOut)
+        var vivadoExecutable = await GetExecutablePathAsync("vivado");
+        var vivadoArguments = new[]
+        {
+            "-mode",
+            "batch",
+            "-source",
+            GetScriptFile(hardwareFrameworkPath, "synth_util.tcl"),
+            "-tclargs",
+            Path.Combine(rtlDirectoryPath, "src", "IP", "Hast_IP.vhd"),
+            Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
+        };
+        await _buildLogger.ExecuteWithLoggingAsync(vivadoExecutable, vivadoArguments);
+        ProgressMajor("Vivado synthesis is finished.");
+    }
+
+    private void CopyBinaries(
+        string target,
+        string binaryPath,
+        string hashId,
+        bool disableHbm)
+    {
+        var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
+        if (binaryDirectoryPath != null) EnsureDirectoryExists(binaryDirectoryPath);
+
+        var builtFilePath = Path.Combine(GetTmpDirectoryPath(hashId), $"hastip.{target}.xclbin");
+        File.Copy(builtFilePath, binaryPath);
+        File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
+        if (disableHbm) File.Create(binaryPath + NoHbmFlagExtension).Dispose();
+        ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
+    }
+
+    private async Task CollectReportsAsync(
+        string hardwareFrameworkPath,
+        IHardwareImplementationCompositionContext context,
+        IHardwareImplementation implementation,
+        string hashId)
+    {
+        var reportPath = Path.Combine(GetTmpDirectoryPath(hashId), "_x", "reports", "link", "imp");
+        if (!Directory.Exists(reportPath))
+        {
+            _logger.LogWarning("Report directory is missing!");
+            return;
+        }
+
+        var hash = context.HardwareDescription.TransformationId;
+        var reportSavePath = Path.Combine(hardwareFrameworkPath, "reports", hash);
+        if (!Directory.Exists(reportSavePath)) Directory.CreateDirectory(reportSavePath);
+
+        var reportFiles = Directory.GetFiles(reportPath, "*.rpt");
+        foreach (var reportFile in reportFiles)
+        {
+            File.Copy(reportFile, Path.Combine(reportSavePath, Path.GetFileName(reportFile)));
+        }
+
+        var reportFilePath =
+            Directory.GetFiles(reportSavePath, "*_bb_locked_power_routed.rpt").FirstOrDefault() ??
+            Directory.GetFiles(reportSavePath, "*_power_routed.rpt").FirstOrDefault();
+        if (reportFilePath == null)
+        {
+            throw new FileNotFoundException(
+                "The report file is missing. Utilization related verification is not performed.");
+        }
+
+        using var reader = File.OpenText(reportFilePath);
+        var report = await XilinxReport.ParseAsync(reader);
+
+        var jsonFilePath = Path.Combine(reportSavePath, "report.json");
+        await File.WriteAllTextAsync(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
+        _logger.LogInformation("A converted JSON file is saved to {JsonFilePath}.", jsonFilePath);
+
+        var componentsSection = report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn();
+        _logger.LogInformation(
+            "On-Chip Components: {Components}",
+            JsonConvert.SerializeObject(componentsSection, Formatting.Indented));
+        foreach (var (resourceType, row) in componentsSection)
+        {
+            if (!decimal.TryParse(
+                row[UtilizationPercent],
+                NumberStyles.Any,
+                CultureInfo.InvariantCulture,
+                out var utilization))
             {
-                // For example:
-                // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
-                var emConfigExecutable = (await GetExecutablePathAsync("emconfigutil"));
-                var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
-                await ExecuteWithLogging(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
-                File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
-                ProgressMajor("Emulation configuration (emconfig) setup is finished.");
+                continue;
+            }
+
+            if (resourceType.ContainsOrdinalIgnoreCase("LUT AS LOGIC"))
+            {
+                CheckLutUtilization(utilization);
+            }
+            else if (utilization > 99.0m)
+            {
+                throw new InvalidOperationException(
+                    $"The resulting hardware design is completely utilizing '{resourceType}' which likely also " +
+                    "means that it has used some other resource type to not go above 100% (eg. LUT instead of " +
+                    "DSP) which results in performance degradation and potential loss of accuracy. " +
+                    TryToMakeItSmaller);
+            }
+
+            implementation.ResourceUsagePercent[resourceType] = utilization;
+        }
+
+        try
+        {
+            implementation.PowerUsageWatts = decimal.Parse(
+                report.Sections["1. Summary"].ToDictionaryByFirstColumn()["Total On-Chip Power (W)"][Value],
+                CultureInfo.InvariantCulture);
+            _logger.LogInformation("Total on-chip power: {PowerUsageWatts} W", implementation.PowerUsageWatts);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException("Unable to acquire hardware wattage information.", ex);
+        }
+    }
+
+    private bool CheckIfDoneAlready(IHardwareImplementation implementation)
+    {
+        // If the xclbin exists then we are done here.
+        var exists = File.Exists(implementation.BinaryPath);
+
+        if (exists)
+        {
+            ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
+
+            if (!File.Exists(implementation.BinaryPath + InfoFileExtension))
+            {
+                _logger.LogInformation(
+                    "The info file (\"{FilePath}\") does not exist. You may generate it using `xclbinutil --info`.",
+                    implementation.BinaryPath + InfoFileExtension);
             }
         }
 
-        private async Task SynthKernelAsync(string hardwareFrameworkPath, string hashId)
+        return exists;
+    }
+
+    private void CheckLutUtilization(decimal lutUtilization)
+    {
+        if (lutUtilization > 90.0m)
         {
-            ProgressMajor("Starting Vivado synthesis.");
-
-            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-
-            // vivado -mode batch -source synth_util.tcl $(VhdFileIn) $(RptFileOut)
-            var vivadoExecutable = (await GetExecutablePathAsync("vivado"));
-            var vivadoArguments = new[]
-            {
-                "-mode",
-                "batch",
-                "-source",
-                Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", "synth_util.tcl"),
-                "-tclargs",
-                Path.Combine(rtlDirectoryPath, "src", "IP", "Hast_IP.vhd"),
-                Path.Combine(EnsureDirectoryExists(hardwareFrameworkPath, "reports", hashId), "Hast_IP_synth_util.rpt"),
-            };
-            await ExecuteWithLogging(vivadoExecutable, vivadoArguments);
-            ProgressMajor("Vivado synthesis is finished.");
+            throw new InvalidOperationException(
+                "The resulting hardware design is using more than 90% of the FPGA's resources. This will " +
+                "almost always be unstable and randomly give incorrect results. " + TryToMakeItSmaller);
         }
 
-        private void CopyBinaries(
-            string target,
-            string binaryPath,
-            string hashId,
-            bool disableHbm)
+        if (lutUtilization > 80.0m)
         {
-            var binaryDirectoryPath = Path.GetDirectoryName(binaryPath);
-            if (binaryDirectoryPath != null) EnsureDirectoryExists(binaryDirectoryPath);
-
-            var builtFilePath = Path.Combine(GetTmpDirectoryPath(hashId), $"hastip.{target}.xclbin");
-            File.Copy(builtFilePath, binaryPath);
-            File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
-            if (disableHbm) File.Create(binaryPath + NoHbmFlagExtension).Dispose();
-            ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
+            _logger.LogWarning(
+                "The resulting hardware design is using more than 80% of the FPGA's resources. While this " +
+                "may work fine the result can be potentially unstable and randomly give incorrect results. " +
+                TryToMakeItSmaller);
         }
+    }
 
-        private async Task CollectReportsAsync(
-            string hardwareFrameworkPath,
-            IHardwareImplementationCompositionContext context,
-            IHardwareImplementation implementation,
-            string hashId)
+    private void Cleanup(string hardwareFrameworkPath, string hashId)
+    {
+        var rtlDirectory = new DirectoryInfo(GetRtlDirectoryPath(hardwareFrameworkPath, hashId));
+        if (rtlDirectory.Exists)
         {
-            var reportPath = Path.Combine(GetTmpDirectoryPath(hashId), "_x", "reports", "link", "imp");
-            if (!Directory.Exists(reportPath))
-            {
-                _logger.LogWarning("Report directory is missing!");
-                return;
-            }
-
-            var hash = context.HardwareDescription.TransformationId;
-            var reportSavePath = Path.Combine(hardwareFrameworkPath, "reports", hash);
-            if (!Directory.Exists(reportSavePath)) Directory.CreateDirectory(reportSavePath);
-
-            var reportFiles = Directory.GetFiles(reportPath, "*.rpt");
-            foreach (var reportFile in reportFiles)
-            {
-                File.Copy(reportFile, Path.Combine(reportSavePath, Path.GetFileName(reportFile)));
-            }
-
-            var reportFilePath = Directory.GetFiles(reportSavePath, "*_bb_locked_power_routed.rpt").FirstOrDefault();
-            if (reportFilePath == null)
-            {
-                throw new FileNotFoundException(
-                    "The report file is missing. Utilization related verification is not performed.");
-            }
-
-            using var reader = File.OpenText(reportFilePath);
-            var report = await XilinxReport.ParseAsync(reader);
-
-            var jsonFilePath = Path.Combine(reportSavePath, "report.json");
-            await File.WriteAllTextAsync(jsonFilePath, JsonConvert.SerializeObject(report, Formatting.Indented));
-            _logger.LogInformation("A converted JSON file is saved to {0}.", jsonFilePath);
-
-            var componentsSection = report.Sections["1.1 On-Chip Components"].ToDictionaryByFirstColumn();
-            _logger.LogInformation(
-                "On-Chip Components: {0}",
-                JsonConvert.SerializeObject(componentsSection, Formatting.Indented));
-            foreach (var (resourceType, row) in componentsSection)
-            {
-                if (!decimal.TryParse(
-                    row[UtilizationPercent],
-                    NumberStyles.Any,
-                    InvariantCulture,
-                    out var utilization))
-                {
-                    continue;
-                }
-
-                if (resourceType.ToUpperInvariant().Contains("LUT AS LOGIC"))
-                {
-                    CheckLutUtilization(utilization);
-                }
-                else if (utilization > 99.0m)
-                {
-                    throw new InvalidOperationException(
-                        $"The resulting hardware design is completely utilizing '{resourceType}' which likely also " +
-                        "means that it has used some other resource type to not go above 100% (eg. LUT instead of " +
-                        "DSP) which results in performance degradation and potential loss of accuracy. " +
-                        TryToMakeItSmaller);
-                }
-
-                implementation.ResourceUsagePercent[resourceType] = utilization;
-            }
-
             try
             {
-                implementation.PowerUsageWatts = decimal.Parse(
-                    report.Sections["1. Summary"].ToDictionaryByFirstColumn()["Total On-Chip Power (W)"][Value],
-                    InvariantCulture);
-                _logger.LogInformation("Total on-chip power: {0}W", implementation.PowerUsageWatts);
+                foreach (var file in rtlDirectory.GetFiles()) file.Delete();
+                foreach (var subDirectory in rtlDirectory.GetDirectories().Where(sub => sub.Name != "src"))
+                {
+                    subDirectory.Delete(recursive: true);
+                }
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException("Unable to acquire hardware wattage information.", ex);
+                _logger.LogWarning(ex, "Failed to clean up.");
             }
         }
 
-        private void CheckLutUtilization(decimal lutUtilization)
+        var tmpDirectory = new DirectoryInfo(GetTmpDirectoryPath(hashId));
+        if (tmpDirectory.Exists) tmpDirectory.Delete(recursive: true);
+
+        ProgressMajor("Build directory cleaned up.");
+    }
+
+    private async Task EnsureDeviceReadyAsync(VitisBuildConfiguration buildConfiguration)
+    {
+        if (buildConfiguration.SynthesisOnly || !buildConfiguration.ResetOnFirstRun || !_firstRun) return;
+
+        // It's necessary to keep track of the first run to interact with the FPGA development pipeline.
+#pragma warning disable S2696 // Instance members should not write to "static" fields
+        _firstRun = false;
+#pragma warning restore S2696 // Instance members should not write to "static" fields
+
+        _logger.LogWarning(
+            "This is the first build with the current process. Resetting the devices for a clean state...");
+
+        var yes = PipeSource.FromString("y" + Environment.NewLine);
+        var xbutil = Cli.Wrap((await CliHelper.WhichAsync("xbutil")).First().FullName)
+            .WithArguments(new[] { "reset" })
+            .WithValidation(CommandResultValidation.None);
+        var result = await (yes | xbutil).ExecuteBufferedAsync();
+
+        _logger.LogWarning("xbutil: {StandardOutput}", result.StandardOutput);
+        await _buildOutput.WriteLineAsync($"xbutil stdout: {result.StandardOutput}");
+    }
+
+    private void OnProgress(object sender, BuildProgressEventArgs e) =>
+        BuildLogger.OnProgress(_logger, MajorStep, MajorStepsTotal, e);
+
+    private static async Task CreateSourceAsync(
+        IHardwareImplementationCompositionContext context,
+        string hardwareFrameworkPath,
+        string hashId,
+        string binaryPath,
+        bool promptBeforeBuild)
+    {
+        var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
+        var ipDirectoryPath = EnsureDirectoryExists(rtlDirectoryPath, "src", "IP");
+        var vhdlFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.vhd");
+        var xdcFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.xdc");
+
+        await VhdlHelper.CreateVhdlAndXdcFilesAsync(context, xdcFilePath, vhdlFilePath);
+
+        if (promptBeforeBuild)
         {
-            if (lutUtilization > 90.0m)
-            {
-                throw new InvalidOperationException(
-                    "The resulting hardware design is using more than 90% of the FPGA's resources. This will " +
-                    "almost always be unstable and randomly give incorrect results. " + TryToMakeItSmaller);
-            }
-
-            if (lutUtilization > 80.0m)
-            {
-                _logger.LogWarning(
-                    "The resulting hardware design is using more than 80% of the FPGA's resources. While this " +
-                    "may work fine the result can be potentially unstable and randomly give incorrect results. " +
-                    TryToMakeItSmaller);
-            }
+            // This is not logging but a prompt in select cases.
+#pragma warning disable S106 // Standard outputs should not be used directly to log anything
+            Console.WriteLine(
+                $"The source files have been written to:\n" +
+                $"    {vhdlFilePath}\n" +
+                $"    {xdcFilePath}\n" +
+                $"Expected result:\n" +
+                $"    {binaryPath}\n\n" +
+                $"Press [enter] when you are ready to continue.");
+#pragma warning restore S106 // Standard outputs should not be used directly to log anything
+            Console.ReadLine();
         }
+    }
 
-        private void Cleanup(string hardwareFrameworkPath, string hashId)
+    private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
+        Path.Combine(hardwareFrameworkPath, "rtl", hashId);
+
+    private static string GetTmpDirectoryPath(string hashId) =>
+        Path.Combine(Path.DirectorySeparatorChar.ToString(), "tmp", "hastlayer", hashId);
+
+    public static async Task<string> GetExecutablePathAsync(string executable)
+    {
+        var executableName = (await CliHelper.WhichAsync(executable))
+            .FirstOrDefault(fileInfo => fileInfo.Exists)?
+            .FullName;
+        if (executableName == null)
         {
-            var rtlDirectory = new DirectoryInfo(GetRtlDirectoryPath(hardwareFrameworkPath, hashId));
-            if (rtlDirectory.Exists)
-            {
-                try
-                {
-                    foreach (var file in rtlDirectory.GetFiles()) file.Delete();
-                    foreach (var subDirectory in rtlDirectory.GetDirectories().Where(sub => sub.Name != "src"))
-                    {
-                        subDirectory.Delete(recursive: true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogWarning(ex, "Failed to clean up.");
-                }
-            }
-
-            var tmpDirectory = new DirectoryInfo(GetTmpDirectoryPath(hashId));
-            if (tmpDirectory.Exists) tmpDirectory.Delete(recursive: true);
-
-            ProgressMajor("Build directory cleaned up.");
+            throw new FileNotFoundException($"The {nameof(executable)} '{executable}' was not found. Is it in your PATH?");
         }
 
-        private async Task EnsureDeviceReady()
+        return executableName;
+    }
+
+    private static async Task ApplyTemplatesAsync(
+        string hardwareFrameworkPath,
+        string hashId,
+        IOpenClConfiguration openClConfiguration,
+        VitisDeviceManifest manifest)
+    {
+        var sourceDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", "src");
+        var targetDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src");
+        var files = new[]
         {
-            _logger.LogWarning(
-                "This is the first build with the current process. Resetting the devices for a clean state...");
+            Path.Combine("xml", "kernel.xml"),
+            Path.Combine("IP", "hastip.v"),
+            Path.Combine("testbench", "slv_m00_axi_vip_pkg.sv"),
+            Path.Combine("testbench", "slv_m00_axi_vip.sv"),
+            Path.Combine("testbench", "hastip_tb.sv"),
+        };
 
-            var yes = PipeSource.FromString("y" + Environment.NewLine);
-            var xbutil = Cli.Wrap((await CliHelper.WhichAsync("xbutil")).First().FullName)
-                .WithArguments(new[] { "reset" })
-                .WithValidation(CommandResultValidation.None);
-            var result = await (yes | xbutil).ExecuteBufferedAsync();
-
-            _logger.LogWarning("xbutil: {0}", result.StandardOutput);
-            _buildOutput.WriteLine("xbutil stdout: {0}", result.StandardOutput);
-        }
-
-        private void OnProgress(object sender, BuildProgressEventArgs e) =>
-            _logger.LogInformation(
-                "Message on build step {0}/{1}{3}: {2}",
-                MajorStep,
-                MajorStepsTotal,
-                e.Message,
-                e.IsMajorStep ? " (new)" : string.Empty);
-
-        private Task ExecuteWithLogging(string executable, IList<string> arguments, string workingDirectory = null)
+        foreach (var file in files)
         {
-            var name = Path.GetFileName(executable);
-            void OnCommandEvent(CommandEvent commandEvent)
-            {
-                switch (commandEvent)
-                {
-                    case StartedCommandEvent started:
-                        Log(
-                            LogLevel.None,
-                            name,
-                            $"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}",
-                            "started");
-                        break;
-                    case StandardOutputCommandEvent output:
-                        Log(LogLevel.Trace, name, output.Text, "stdout");
-                        break;
-                    case StandardErrorCommandEvent error:
-                        Log(LogLevel.Warning, name, error.Text, "stderr");
-                        break;
-                    case ExitedCommandEvent exited:
-                        var message = (exited.ExitCode == 0 ? "success" : "failure") + "\n\n\n";
-                        Log(LogLevel.Information, name, message, "finished");
-
-                        if (exited.ExitCode != 0)
-                        {
-                            throw new CommandExecutionException(
-                                $"The command {name} exited with code {exited.ExitCode}. " +
-                                $"You can review the output at '{Path.GetFullPath(_buildOutputPath)}'.");
-                        }
-                        break;
-                }
-            }
-
-            var hasWorkingDirectory = Directory.Exists(workingDirectory);
-            Command Configure(Command command)
-            {
-                if (hasWorkingDirectory) command = command.WithWorkingDirectory(workingDirectory!);
-                return command.WithValidation(CommandResultValidation.None);
-            }
-
-
-            _logger.LogInformation(
-                "Starting program: {0} {1} (working directory: {2})",
-                executable,
-                string.Join(" ", arguments),
-                hasWorkingDirectory ? workingDirectory : ".");
-            return CliHelper.StreamAsync(executable, arguments, OnCommandEvent, Configure);
+            var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
+                .Replace("###hastipAxiDWidth###", manifest.AxiBusWith.ToTechnicalString())
+                .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
+            var targetFilePath = Path.Combine(targetDirectoryPath, file);
+            EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
+            await File.WriteAllTextAsync(targetFilePath, result);
         }
 
-        private void Log(LogLevel logLevel, string name, object message, string buildLogType)
+        // Also copy all IP files.
+        foreach (var file in Directory.GetFiles(Path.Combine(sourceDirectoryPath, "IP")))
         {
-            var text = message as string;
+            if (file.EndsWith(".template", StringComparison.OrdinalIgnoreCase)) continue;
 
-            // Find informational messages and escalate their log level since most of them will be "trace" by default.
-            if (text?.Contains(':') == true)
-            {
-                logLevel = text.Split(':')[0].Trim().ToUpperInvariant() switch
-                {
-                    "ERROR" => LogLevel.Error,
-                    "CRITICAL WARNING" => LogLevel.Warning,
-                    "WARNING" => LogLevel.Warning,
-                    "INFO" when logLevel < LogLevel.Information => LogLevel.Information,
-                    _ => logLevel,
-                };
-            }
-
-            // Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
-            if (name == Vpp && text?.StartsWith("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
-            {
-                if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
-                Progress?.Invoke(this, new BuildProgressEventArgs(text));
-            }
-
-            if (logLevel == LogLevel.Error && text?.Contains("Failed to finish platform linker") == true)
-            {
-                throw new InvalidOperationException(
-                    "The linker encountered an error. This is typically because the resulting hardware design won't " +
-                    "fit on the FPGA as it's too complex. Try to make your code simpler (make it shorter, use " +
-                    "smaller data types and a lower degree of parallelism) until this error goes away.");
-            }
-
-            _logger.Log(logLevel, "{0}: {1}", name, message);
-            _buildOutput.WriteLine("{0} {2}: {1}", name, message, buildLogType);
+            var targetFilePath = Path.Combine(targetDirectoryPath, "IP", Path.GetFileName(file));
+            if (!File.Exists(targetFilePath)) File.Copy(file, targetFilePath);
         }
+    }
 
+    public void Dispose() => _buildOutput?.Dispose();
 
-        private static Task<bool> CreateSourceFilesAwait(
-            IHardwareImplementationCompositionContext context,
-            string hardwareFrameworkPath,
-            string hashId)
-        {
-            var rtlDirectoryPath = GetRtlDirectoryPath(hardwareFrameworkPath, hashId);
-            var ipDirectoryPath = EnsureDirectoryExists(rtlDirectoryPath, "src", "IP");
-            var vhdlFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.vhd");
-            var xdcFilePath = Path.Combine(ipDirectoryPath, "Hast_IP.xdc");
+    public static string GetBinaryPath(
+        IHardwareGenerationConfiguration configuration,
+        IHardwareDescription hardwareDescription)
+    {
+        var hashId = hardwareDescription.TransformationId;
+        var hardwareFrameworkPath = Path.GetFullPath(configuration.HardwareFrameworkPath);
+        return Path.Combine(
+            EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
+            hashId + ".xclbin");
+    }
 
-            return VhdlHelper.CreateVhdlAndXdcFilesAsync(context, xdcFilePath, vhdlFilePath);
-        }
+    public static string GetScriptFile(string hardwareFrameworkPath, string fileName) =>
+        Path.Combine(hardwareFrameworkPath, "rtl", "src", "scripts", fileName);
 
-        private static string GetRtlDirectoryPath(string hardwareFrameworkPath, string hashId) =>
-            Path.Combine(hardwareFrameworkPath, "rtl", hashId);
+    public void InvokeProgress(BuildProgressEventArgs eventArgs) => Progress?.Invoke(this, eventArgs);
 
-        private static string GetTmpDirectoryPath(string hashId) =>
-            Path.Combine(Path.DirectorySeparatorChar.ToString(), "tmp", "hastlayer", hashId);
+    public static (string HardwareFrameworkPath, string TmpDirectoryPath, string XclbinFilePath, string XclbinDirectoryPath)
+        GetBuildPaths(IHardwareImplementationCompositionContext context)
+    {
+        var hashId = context.HardwareDescription.TransformationId;
+        var target = context.Configuration.GetOrAddOpenClConfiguration().UseEmulation ? "hw_emu" : "hw";
 
-        private static async Task<string> GetExecutablePathAsync(string executable)
-        {
-            var executableName = (await CliHelper.WhichAsync(executable))
-                .FirstOrDefault(fileInfo => fileInfo.Exists)?
-                .FullName;
-            if (executableName == null)
-            {
-                throw new FileNotFoundException($"The executable '{executable}' was not found. Is it in your PATH?");
-            }
+        var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
+        var tmpDirectoryPath = EnsureDirectoryExists(GetTmpDirectoryPath(hashId));
+        var xclbinFilePath = Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin");
+        var xclbinDirectoryPath = EnsureDirectoryExists(
+            GetRtlDirectoryPath(hardwareFrameworkPath, hashId),
+            "xclbin");
 
-            return executableName;
-        }
-
-        private static async Task ApplyTemplatesAsync(
-            string hardwareFrameworkPath,
-            string hashId,
-            IOpenClConfiguration openClConfiguration)
-        {
-            var sourceDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", "src");
-            var targetDirectoryPath = Path.Combine(hardwareFrameworkPath, "rtl", hashId, "src");
-            var files = new[]
-            {
-                Path.Combine("xml", "kernel.xml"),
-                Path.Combine("IP", "hastip.v"),
-                Path.Combine("testbench", "slv_m00_axi_vip_pkg.sv"),
-                Path.Combine("testbench", "slv_m00_axi_vip.sv"),
-                Path.Combine("testbench", "hastip_tb.sv"),
-            };
-
-            foreach (var file in files)
-            {
-                var result = (await File.ReadAllTextAsync(Path.Combine(sourceDirectoryPath, file) + ".template"))
-                    .Replace("###hastipAxiDWidth###", openClConfiguration.AxiBusWith.ToString(InvariantCulture))
-                    .Replace("###hastipCache###", openClConfiguration.UseCache ? "1" : "0");
-                var targetFilePath = Path.Combine(targetDirectoryPath, file);
-                EnsureDirectoryExists(Path.GetDirectoryName(targetFilePath));
-                await File.WriteAllTextAsync(targetFilePath, result);
-            }
-
-        }
-
-        public void Dispose() => _buildOutput?.Dispose();
-
-        public static string GetBinaryPath(
-            IHardwareGenerationConfiguration configuration,
-            IHardwareDescription hardwareDescription)
-        {
-            var hashId = hardwareDescription.TransformationId;
-            var hardwareFrameworkPath = Path.GetFullPath(configuration.HardwareFrameworkPath);
-            return Path.Combine(
-                EnsureDirectoryExists(hardwareFrameworkPath, "bin"),
-                hashId + ".xclbin");
-        }
+        return (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, xclbinDirectoryPath);
     }
 }

@@ -1,19 +1,20 @@
 using System;
 using System.Windows.Forms;
 
-namespace Hast.Samples.Kpz
+namespace Hast.Samples.Kpz;
+
+internal static class Program
 {
-    internal static class Program
+    /// <summary>
+    /// The main entry point for the application.
+    /// </summary>
+    [STAThread]
+    private static void Main()
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        [STAThread]
-        private static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ChartForm());
-        }
+        Application.EnableVisualStyles();
+        Application.SetCompatibleTextRenderingDefault(defaultValue: false);
+
+        using var form = new ChartForm();
+        Application.Run(form);
     }
 }

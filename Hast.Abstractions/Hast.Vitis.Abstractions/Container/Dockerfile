@@ -19,6 +19,7 @@ RUN yum install -y /root/platform/*.rpm
 RUN ["/bin/sh", "-c", "echo '[ -z $XILINX_XRT ] && [ -f /opt/xilinx/xrt/setup.sh ] && source /opt/xilinx/xrt/setup.sh' >> /root/.bashrc"]
 RUN ["/bin/sh", "-c", "echo '[ -f /tools/Xilinx/Vitis/2020.2/settings64.sh ] && source /tools/Xilinx/Vitis/2020.2/settings64.sh' >> /root/.bashrc"]
 RUN ["/bin/sh", "-c", "echo 'alias cls=clear' >> /root/.bashrc"]
+RUN ["/bin/sh", "-c", "echo 'function rebuild-hastlayer() { for x in {arm,x64}; do dotnet publish -c Release -r linux-$x -p:PublishReadyToRun=true Hastlayer.SDK.Linux.sln; done; }' >> /root/.bashrc"]
 
 # Cleanup
 RUN rm -Rf /root/Xilinx_Unified_2020.2 /root/platform/
