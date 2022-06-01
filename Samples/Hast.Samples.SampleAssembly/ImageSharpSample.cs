@@ -83,20 +83,20 @@ public class ImageSharpSample
         }
     }
 
-    // Serialized
+#pragma warning disable S125 // Sections of code should not be commented out
+    // Serialized code left here for example.
+    // for (int y = 0; y < destinationHeight; y++)
+    // {
+    //     int rowStartIndex = y * heightFactor; // Add value to an array
+    //     memory.WriteInt32(Resize_HeightStartIndex + y, rowStartIndex);
+    // }
 
-    //for (int y = 0; y < destinationHeight; y++)
-    //{
-    //    int rowStartIndex = y * heightFactor; // Add value to an array
-    //    memory.WriteInt32(Resize_HeightStartIndex + y, rowStartIndex);
-    //}
-
-    //for (int x = 0; x < destinationWidth; x++)
-    //{
-    //    int pixelIndex = x * widthFactor; // Add value to an array
-    //    memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
-    //}
-
+    // for (int x = 0; x < destinationWidth; x++)
+    // {
+    //     int pixelIndex = x * widthFactor; // Add value to an array
+    //     memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
+    // }
+#pragma warning restore S125 // Sections of code should not be commented out
     private sealed class IndexOutput
     {
         public int Index { get; set; }
