@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// A massively parallel algorithm that is well suited to be accelerated with Hastlayer. Also see
+/// An embarrassingly parallel algorithm that is well suited to be accelerated with Hastlayer. Also see
 /// <c>ParallelAlgorithmSampleRunner</c> on what to configure to make this work.
 /// </summary>
 public class ParallelAlgorithm
