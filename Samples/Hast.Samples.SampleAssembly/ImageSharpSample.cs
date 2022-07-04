@@ -26,19 +26,14 @@ public class ImageSharpSample
         var height = (ushort)memory.ReadUInt32(ResizeImageHeightIndex);
 
         var widthFactor = width / destinationWidth;
-        var heightFactor = height / destinationHeight;
 
-        var resizeWidthStartIndex = ResizeHeightStartIndex + destinationHeight;
-
+        // Divide Ceil ...
         var verticalSteps = 1 + ((height - 1) / MaxDegreeOfParallelism);
         var horizontalSteps = 1 + ((width - 1) / MaxDegreeOfParallelism);
 
         var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
 
-        var rowIndeces = new int[destinationHeight];
-        var pixelIndeces = new int[destinationWidth];
-
-        for (int x = 0; x < horizontalSteps; x++)
+        for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
@@ -60,7 +55,7 @@ public class ImageSharpSample
             }
         }
 
-        for (int y = 0; y < verticalSteps; y++)
+        for (int y = 0; y < verticalSteps; y+=MaxDegreeOfParallelism)
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
