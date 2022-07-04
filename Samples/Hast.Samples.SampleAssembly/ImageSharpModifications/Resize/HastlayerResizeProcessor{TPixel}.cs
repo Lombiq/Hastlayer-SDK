@@ -78,11 +78,11 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
 
         var accessor = new SimpleMemoryAccessor(memory);
 
-        var rowIndecesSpan = accessor.Get().Span.Slice(16, _destinationHeight * 4);
-        var pixelIndecesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth * 4);
+        var rowIndicesSpan = accessor.Get().Span.Slice(16, _destinationHeight * 4);
+        var pixelIndicesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth * 4);
 
-        var rowIndeces = MemoryMarshal.Cast<byte, int>(rowIndecesSpan);
-        var pixelIndeces = MemoryMarshal.Cast<byte, int>(pixelIndecesSpan);
+        var rowIndices = MemoryMarshal.Cast<byte, int>(rowIndicesSpan);
+        var pixelIndices = MemoryMarshal.Cast<byte, int>(pixelIndicesSpan);
 
         for (int i = 0; i < Source.Frames.Count; i++)
         {
@@ -93,11 +93,11 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
             {
                 var destinationRow = destinationFrame.GetPixelRowSpan(y);
 
-                var sourceRow = sourceFrame.GetPixelRowSpan(rowIndeces[y]);
+                var sourceRow = sourceFrame.GetPixelRowSpan(rowIndices[y]);
 
                 for (int x = 0; x < destinationFrame.Width; x++)
                 {
-                    destinationRow[x] = sourceRow[pixelIndeces[x]];
+                    destinationRow[x] = sourceRow[pixelIndices[x]];
                 }
             }
         }
