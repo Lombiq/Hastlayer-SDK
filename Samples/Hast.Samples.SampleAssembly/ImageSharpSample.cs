@@ -33,7 +33,7 @@ public class ImageSharpSample
 
         var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
 
-        for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
+        for (int x = 0; x < horizontalSteps; x++) // Use x += MaxDegreeOfParallelism?
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
@@ -55,7 +55,7 @@ public class ImageSharpSample
             }
         }
 
-        for (int y = 0; y < verticalSteps; y+=MaxDegreeOfParallelism)
+        for (int y = 0; y < verticalSteps; y++)
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
