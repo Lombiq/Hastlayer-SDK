@@ -37,7 +37,10 @@ public class ImageSharpSample
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
-                tasks[t] = Task.Factory.StartNew(() => new IndexOutput { Index = t + (x * widthFactor * MaxDegreeOfParallelism), });
+                tasks[t] = Task.Factory.StartNew(() => new IndexOutput
+                {
+                    Index = t + (x * widthFactor * MaxDegreeOfParallelism),
+                });
             }
 
             Task.WhenAll(tasks).Wait();
@@ -57,7 +60,10 @@ public class ImageSharpSample
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
-                tasks[t] = Task.Factory.StartNew(() => new IndexOutput { Index = t + (y * widthFactor * MaxDegreeOfParallelism), });
+                tasks[t] = Task.Factory.StartNew(() => new IndexOutput
+                {
+                    Index = t + (y * widthFactor * MaxDegreeOfParallelism),
+                });
             }
 
             Task.WhenAll(tasks).Wait();
