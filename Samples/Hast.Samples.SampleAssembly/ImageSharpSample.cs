@@ -33,25 +33,23 @@ public class ImageSharpSample
 
         var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
 
-        for (int x = 0; x < horizontalSteps; x++) // Use x += MaxDegreeOfParallelism?
+        for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
-                tasks[t] = Task.Factory.StartNew(() => new IndexOutput
-                {
-                    Index = t + (x * widthFactor * MaxDegreeOfParallelism),
-                });
+                tasks[t] = Task.Factory.StartNew(() => new IndexOutput { Index = t + (x * widthFactor * MaxDegreeOfParallelism), });
             }
 
             Task.WhenAll(tasks).Wait();
 
-            for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            var task = 0;
+            while ((x * MaxDegreeOfParallelism) + task > destinationWidth)
             {
-                if ((x * MaxDegreeOfParallelism) + t > destinationWidth) break;
-
                 memory.WriteInt32(
-                    ResizeHeightStartIndex + (x * MaxDegreeOfParallelism) + t,
-                    tasks[t].Result.Index);
+                    ResizeHeightStartIndex + (x * MaxDegreeOfParallelism) + task,
+                    tasks[task].Result.Index);
+
+                task++;
             }
         }
 
@@ -59,21 +57,19 @@ public class ImageSharpSample
         {
             for (int t = 0; t < MaxDegreeOfParallelism; t++)
             {
-                tasks[t] = Task.Factory.StartNew(() => new IndexOutput
-                {
-                    Index = t + (y * widthFactor * MaxDegreeOfParallelism),
-                });
+                tasks[t] = Task.Factory.StartNew(() => new IndexOutput { Index = t + (y * widthFactor * MaxDegreeOfParallelism), });
             }
 
             Task.WhenAll(tasks).Wait();
 
-            for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            var task = 0;
+            while ((y * MaxDegreeOfParallelism) + task > destinationHeight)
             {
-                if ((y * MaxDegreeOfParallelism) + t > destinationHeight) break;
-
                 memory.WriteInt32(
-                    ResizeHeightStartIndex + destinationHeight + (y * MaxDegreeOfParallelism) + t,
-                    tasks[t].Result.Index);
+                    ResizeHeightStartIndex + destinationHeight + (y * MaxDegreeOfParallelism) + task,
+                    tasks[task].Result.Index);
+
+                task++;
             }
         }
     }
