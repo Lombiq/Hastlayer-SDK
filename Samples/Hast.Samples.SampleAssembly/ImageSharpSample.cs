@@ -27,7 +27,7 @@ public class ImageSharpSample
 
         var widthFactor = width / destinationWidth;
 
-        // Divide Ceil ...
+        // Divide Ceiling.
         var verticalSteps = 1 + ((height - 1) / MaxDegreeOfParallelism);
         var horizontalSteps = 1 + ((width - 1) / MaxDegreeOfParallelism);
 
