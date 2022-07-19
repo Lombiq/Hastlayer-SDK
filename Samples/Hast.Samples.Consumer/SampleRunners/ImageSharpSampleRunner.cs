@@ -3,6 +3,7 @@ using Hast.Samples.SampleAssembly;
 using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -26,31 +27,36 @@ internal class ImageSharpSampleRunner : ISampleRunner
 
         // Accelerated by Hastlayer.
         using var image = await Image.LoadAsync("fpga.jpg");
+        var width = image.Width;
+        var height = image.Height;
 
         var sw = Stopwatch.StartNew();
         var newImage = image.Clone(img => img.HastResize(
-            image.Width / 2, image.Height / 2, System.Environment.ProcessorCount, hastlayer, hardwareRepresentation, configuration));
+            width / 2, height / 2, Environment.ProcessorCount, hastlayer, hardwareRepresentation, configuration));
         sw.Stop();
-        newImage.Save("FpgaResizedWithHastlayer.jpg");
-        System.Console.WriteLine(System.FormattableString.Invariant($"On CPU it took {sw.ElapsedMilliseconds} ms"));
+        await newImage.SaveAsync("FpgaResizedWithHastlayer.jpg");
+        Console.WriteLine(FormattableString.Invariant($"On FPGA it took {sw.ElapsedMilliseconds} ms"));
     }
 
-    public static void RunSoftwareBenchmarks()
+    private static void RunSoftwareBenchmarks()
     {
         using var image = Image.Load("fpga.jpg");
+        var width = image.Width;
+        var height = image.Height;
+
         var sw = Stopwatch.StartNew();
         var newImage = image.Clone(img =>
-            img.HastResize(image.Width / 2, image.Height / 2, System.Environment.ProcessorCount));
+            img.HastResize(width / 2, height / 2, Environment.ProcessorCount));
         sw.Stop();
         newImage.Save("FpgaResizedWithModifiedImageSharp.jpg");
-        System.Console.WriteLine(
-            System.FormattableString.Invariant($"Modified ImageSharp algorithm took {sw.ElapsedMilliseconds} ms"));
+        Console.WriteLine(
+            FormattableString.Invariant($"Modified ImageSharp algorithm took {sw.ElapsedMilliseconds} ms"));
 
         sw.Restart();
-        newImage = image.Clone(img => img.Resize(image.Width / 2, image.Height / 2));
+        newImage = image.Clone(img => img.Resize(width / 2, height / 2));
         sw.Stop();
         newImage.Save("FpgaResizedWithOriginalImageSharp.jpg");
-        System.Console.WriteLine(
-            System.FormattableString.Invariant($"Original ImageSharp algorithm took {sw.ElapsedMilliseconds} ms"));
+        Console.WriteLine(
+            FormattableString.Invariant($"Original ImageSharp algorithm took {sw.ElapsedMilliseconds} ms"));
     }
 }
