@@ -74,17 +74,17 @@ public class HastlayerResizeProcessor : CloningImageProcessor
     public int MaxDegreeOfParallelism { get; }
 
     /// <summary>
-    /// Gets necessary values for hastlayer.
+    /// Gets necessary values for Hastlayer.
     /// </summary>
     public IHastlayer Hastlayer { get; }
 
     /// <summary>
-    /// Gets necessary values for hastlayer.
+    /// Gets necessary values for Hastlayer.
     /// </summary>
     public IHardwareRepresentation HardwareRepresentation { get; }
 
     /// <summary>
-    /// Gets necessary values for hastlayer.
+    /// Gets necessary values for Hastlayer.
     /// </summary>
     public IProxyGenerationConfiguration Configuration { get; }
 

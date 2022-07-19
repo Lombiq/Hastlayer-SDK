@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace Hast.Samples.SampleAssembly;
 
 /// <summary>
-/// Algorithm for resizing images with a modified ImageSharp library.
+/// Algorithm for resizing images with a modified Hastlayer-accelerated ImageSharp library.
 /// </summary>
 public class ImageSharpSample
 {
