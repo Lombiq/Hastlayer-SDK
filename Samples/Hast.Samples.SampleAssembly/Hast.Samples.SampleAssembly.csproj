@@ -19,8 +19,4 @@
   <ItemGroup>
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ImageSharpModifications\ImageSharpInternals\" />
-    <Folder Include="ImageSharpModifications\Resize\" />
-  </ItemGroup>
 </Project>
