@@ -310,9 +310,9 @@ public class SerialPortCommunicationService : CommunicationServiceBase
                 "Couldn't access device while trying to get port names. This may be because the port " +
                 "is used by another application. Checking the next port...");
         }
-        catch (ArgumentOutOfRangeException)
+        catch (ArgumentOutOfRangeException ex)
         {
-            // This might happen if a non-FPGA port tries to be opened.
+            _logger.LogInformation(ex, "This might have happened because a non-FPGA port was tried to be opened.");
         }
     }
 
