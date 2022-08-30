@@ -11,11 +11,11 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications;
 internal static class InliningOptions
 {
 #if PROFILING
-        public const MethodImplOptions HotPath = MethodImplOptions.NoInlining;
-        public const MethodImplOptions ShortMethod = MethodImplOptions.NoInlining;
+    public const MethodImplOptions HotPath = MethodImplOptions.NoInlining;
+    public const MethodImplOptions ShortMethod = MethodImplOptions.NoInlining;
 #else
 #if SUPPORTS_HOTPATH
-        public const MethodImplOptions HotPath = MethodImplOptions.AggressiveOptimization;
+    public const MethodImplOptions HotPath = MethodImplOptions.AggressiveOptimization;
 #else
     public const MethodImplOptions HotPath = MethodImplOptions.AggressiveInlining;
 #endif

@@ -22,41 +22,43 @@ internal class ImageSharpSampleRunner : ISampleRunner
         // In case you wish to test the sample with a larger file, the fpga.jpg file must be replaced. You can find
         // a 100 megapixel jpeg here: https://photographingspace.com/100-megapixel-moon/
 
+        using var image = await Image.LoadAsync("fpga.jpg");
+
         // Not accelerated by Hastlayer.
-        RunSoftwareBenchmarks();
+        RunSoftwareBenchmarks(image);
 
         // Accelerated by Hastlayer.
-        using var image = await Image.LoadAsync("fpga.jpg");
-        var width = image.Width;
-        var height = image.Height;
+        var newWidth = image.Width / 2;
+        var newHeight = image.Height / 2;
 
-        var sw = Stopwatch.StartNew();
-        var newImage = image.Clone(img => img.HastResize(
-            width / 2, height / 2, Environment.ProcessorCount, hastlayer, hardwareRepresentation, configuration));
-        sw.Stop();
+        var stopwatch = Stopwatch.StartNew();
+        var newImage = image.Clone(context => context.HastResize(
+            newWidth, newHeight, Environment.ProcessorCount, hastlayer, hardwareRepresentation, configuration));
+        stopwatch.Stop();
         await newImage.SaveAsync("FpgaResizedWithHastlayer.jpg");
-        Console.WriteLine(FormattableString.Invariant($"On FPGA it took {sw.ElapsedMilliseconds} ms"));
+        Console.WriteLine(FormattableString.Invariant($"On FPGA it took {stopwatch.ElapsedMilliseconds} ms"));
     }
 
-    private static void RunSoftwareBenchmarks()
+    private static void RunSoftwareBenchmarks(Image image)
     {
-        using var image = Image.Load("fpga.jpg");
-        var width = image.Width;
-        var height = image.Height;
+        if (image == null) throw new ArgumentNullException(nameof(image));
 
-        var sw = Stopwatch.StartNew();
-        var newImage = image.Clone(img =>
-            img.HastResize(width / 2, height / 2, Environment.ProcessorCount));
-        sw.Stop();
+        var newWidth = image.Width / 2;
+        var newHeight = image.Height / 2;
+
+        var stopwatch = Stopwatch.StartNew();
+        var newImage = image.Clone(context =>
+            context.HastResize(newWidth, newHeight, Environment.ProcessorCount));
+        stopwatch.Stop();
         newImage.Save("FpgaResizedWithModifiedImageSharp.jpg");
         Console.WriteLine(
-            FormattableString.Invariant($"Modified ImageSharp algorithm took {sw.ElapsedMilliseconds} ms"));
+            FormattableString.Invariant($"Modified ImageSharp algorithm took {stopwatch.ElapsedMilliseconds} ms"));
 
-        sw.Restart();
-        newImage = image.Clone(img => img.Resize(width / 2, height / 2));
-        sw.Stop();
+        stopwatch.Restart();
+        newImage = image.Clone(context => context.Resize(newWidth, newHeight));
+        stopwatch.Stop();
         newImage.Save("FpgaResizedWithOriginalImageSharp.jpg");
         Console.WriteLine(
-            FormattableString.Invariant($"Original ImageSharp algorithm took {sw.ElapsedMilliseconds} ms"));
+            FormattableString.Invariant($"Original ImageSharp algorithm took {stopwatch.ElapsedMilliseconds} ms"));
     }
 }
