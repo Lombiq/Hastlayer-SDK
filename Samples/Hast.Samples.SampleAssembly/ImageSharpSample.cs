@@ -35,66 +35,62 @@ public class ImageSharpSample
 
         for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
         {
-            for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            var step = x * MaxDegreeOfParallelism;
+
+            for (int i = 0; i < MaxDegreeOfParallelism; i++)
             {
-                tasks[t] = Task.Factory.StartNew(() => new IndexOutput
-                {
-                    Index = t + (x * widthFactor * MaxDegreeOfParallelism),
-                });
+                tasks[i] = Task.Factory.StartNew(() => new IndexOutput { Index = i + (step * widthFactor), });
             }
 
             Task.WhenAll(tasks).Wait();
 
-            var task = 0;
-            while ((x * MaxDegreeOfParallelism) + task > destinationWidth)
+            var taskIndex = 0;
+            while ((x * MaxDegreeOfParallelism) + taskIndex > destinationWidth)
             {
                 memory.WriteInt32(
-                    ResizeHeightStartIndex + (x * MaxDegreeOfParallelism) + task,
-                    tasks[task].Result.Index);
+                    ResizeHeightStartIndex + step + taskIndex,
+                    tasks[taskIndex].Result.Index);
 
-                task++;
+                taskIndex++;
             }
         }
 
         for (int y = 0; y < verticalSteps; y++)
         {
-            for (int t = 0; t < MaxDegreeOfParallelism; t++)
+            var step = y * widthFactor;
+
+            for (int i = 0; i < MaxDegreeOfParallelism; i++)
             {
-                tasks[t] = Task.Factory.StartNew(() => new IndexOutput
-                {
-                    Index = t + (y * widthFactor * MaxDegreeOfParallelism),
-                });
+                tasks[i] = Task.Factory.StartNew(() => new IndexOutput { Index = i + (step * MaxDegreeOfParallelism), });
             }
 
             Task.WhenAll(tasks).Wait();
 
-            var task = 0;
-            while ((y * MaxDegreeOfParallelism) + task > destinationHeight)
+            var taskIndex = 0;
+            while ((y * MaxDegreeOfParallelism) + taskIndex > destinationHeight)
             {
                 memory.WriteInt32(
-                    ResizeHeightStartIndex + destinationHeight + (y * MaxDegreeOfParallelism) + task,
-                    tasks[task].Result.Index);
+                    ResizeHeightStartIndex + destinationHeight + step + taskIndex,
+                    tasks[taskIndex].Result.Index);
 
-                task++;
+                taskIndex++;
             }
         }
     }
 
-#pragma warning disable S125 // Sections of code should not be commented out
     // Serialized code left here for example.
-    // for (int y = 0; y < destinationHeight; y++)
-    // {
-    //     int rowStartIndex = y * heightFactor; // Add value to an array
-    //     memory.WriteInt32(Resize_HeightStartIndex + y, rowStartIndex);
-    // }
+    //// for (int y = 0; y < destinationHeight; y++)
+    //// {
+    ////     int rowStartIndex = y * heightFactor; // Add value to an array
+    ////     memory.WriteInt32(Resize_HeightStartIndex + y, rowStartIndex);
+    //// }
+    //// for (int x = 0; x < destinationWidth; x++)
+    //// {
+    ////     int pixelIndex = x * widthFactor; // Add value to an array
+    ////     memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
+    //// }
 
-    // for (int x = 0; x < destinationWidth; x++)
-    // {
-    //     int pixelIndex = x * widthFactor; // Add value to an array
-    //     memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
-    // }
-#pragma warning restore S125 // Sections of code should not be commented out
-    private sealed class IndexOutput
+    private struct IndexOutput
     {
         public int Index { get; set; }
     }
