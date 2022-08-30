@@ -7,7 +7,6 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System.Runtime.InteropServices;
