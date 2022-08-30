@@ -109,6 +109,10 @@ public static class ResizeHelper
                     targetY = height - sourceHeight;
                     targetX = 0;
                     break;
+#pragma warning disable S3458 // Empty "case" clauses that fall through to the "default" should be omitted
+                // This should fall through to the "default"
+                case AnchorPositionMode.Center:
+#pragma warning restore S3458 // Empty "case" clauses that fall through to the "default" should be omitted
                 default:
                     targetY = (height - sourceHeight) / 2;
                     targetX = (width - sourceWidth) / 2;
