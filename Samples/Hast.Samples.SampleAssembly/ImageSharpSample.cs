@@ -90,9 +90,9 @@ public class ImageSharpSample
     ////     memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
     //// }
 
-#pragma warning disable S3898 Implement 'IEquatable<T>'
+#pragma warning disable S3898 // Value types should implement "IEquatable<T>"
     private struct IndexOutput
-#pragma warning restore S3898
+#pragma warning restore S3898 // Value types should implement "IEquatable<T>"
     {
         public int Index { get; set; }
     }
