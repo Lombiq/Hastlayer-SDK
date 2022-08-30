@@ -6,6 +6,7 @@
 
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
+using SixLabors.ImageSharp.Memory;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
@@ -100,8 +101,8 @@ internal class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResampling
             intersect,
             widthFactor,
             heightFactor,
-            source,
-            destination);
+            source.PixelBuffer,
+            destination.PixelBuffer);
 
         IterateRows(configuration, intersect, operation);
     }
@@ -115,8 +116,8 @@ internal class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResampling
         private readonly Rectangle _intersect;
         private readonly float _widthFactor;
         private readonly float _heightFactor;
-        private readonly ImageFrame<TPixel> _source;
-        private readonly ImageFrame<TPixel> _destination;
+        private readonly Buffer2D<TPixel> _source;
+        private readonly Buffer2D<TPixel> _destination;
 
         [MethodImpl(InliningOptions.ShortMethod)]
         public NNRowOperation(
@@ -125,8 +126,8 @@ internal class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResampling
             Rectangle intersect,
             float widthFactor,
             float heightFactor,
-            ImageFrame<TPixel> source,
-            ImageFrame<TPixel> destination)
+            Buffer2D<TPixel> source,
+            Buffer2D<TPixel> destination)
         {
             _sourceBounds = sourceBounds;
             _destinationBounds = destinationBounds;
@@ -148,8 +149,8 @@ internal class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResampling
             var destRight = _intersect.Right;
 
             // Y coordinates of source points
-            var sourceRow = _source.GetPixelRowSpan((int)(((y - destOriginY) * _heightFactor) + sourceY));
-            var targetRow = _destination.GetPixelRowSpan(y);
+            var sourceRow = _source.DangerousGetRowSpan((int)(((y - destOriginY) * _heightFactor) + sourceY));
+            var targetRow = _destination.DangerousGetRowSpan(y);
 
             for (int x = destLeft; x < destRight; x++)
             {

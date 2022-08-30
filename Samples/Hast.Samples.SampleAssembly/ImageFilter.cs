@@ -271,22 +271,25 @@ public class ImageFilter
 
         int size = image.Width * image.Height;
 
-        for (int y = 0; y < image.Height; y++)
+        image.ProcessPixelRows(pixelAccessor =>
         {
-            var row = image.GetPixelRowSpan(y);
-            for (int x = 0; x < image.Width; x++)
+            for (int y = 0; y < image.Height; y++)
             {
-                var pixelValue = row[x];
+                var row = pixelAccessor.GetRowSpan(y);
+                for (int x = 0; x < image.Width; x++)
+                {
+                    var pixelValue = row[x];
 
-                memory.WriteUInt32((((y * image.Width) + x) * 3) + FilterImageImageStartIndex, pixelValue.R);
-                memory.WriteUInt32((((y * image.Width) + x) * 3) + 1 + FilterImageImageStartIndex, pixelValue.G);
-                memory.WriteUInt32((((y * image.Width) + x) * 3) + 2 + FilterImageImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + FilterImageImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 1 + FilterImageImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 2 + FilterImageImageStartIndex, pixelValue.B);
 
-                memory.WriteUInt32((((y * image.Width) + x) * 3) + (size * 3) + FilterImageImageStartIndex, pixelValue.R);
-                memory.WriteUInt32((((y * image.Width) + x) * 3) + 1 + (size * 3) + FilterImageImageStartIndex, pixelValue.G);
-                memory.WriteUInt32((((y * image.Width) + x) * 3) + 2 + (size * 3) + FilterImageImageStartIndex, pixelValue.B);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + (size * 3) + FilterImageImageStartIndex, pixelValue.R);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 1 + (size * 3) + FilterImageImageStartIndex, pixelValue.G);
+                    memory.WriteUInt32((((y * image.Width) + x) * 3) + 2 + (size * 3) + FilterImageImageStartIndex, pixelValue.B);
+                }
             }
-        }
+        });
 
         return memory;
     }
@@ -301,18 +304,21 @@ public class ImageFilter
     {
         var newImage = image.Clone();
 
-        for (int y = 0; y < newImage.Height; y++)
+        image.ProcessPixelRows(pixelAccessor =>
         {
-            var row = image.GetPixelRowSpan(y);
-            for (int x = 0; x < newImage.Width; x++)
+            for (int y = 0; y < newImage.Height; y++)
             {
-                var offset = (((y * newImage.Width) + x) * 3) + FilterImageImageStartIndex;
-                row[x] = new(
-                    memory.ReadInt32(offset),
-                    memory.ReadInt32(offset + 1),
-                    memory.ReadInt32(offset + 2));
+                var row = pixelAccessor.GetRowSpan(y);
+                for (int x = 0; x < newImage.Width; x++)
+                {
+                    var offset = (((y * newImage.Width) + x) * 3) + FilterImageImageStartIndex;
+                    row[x] = new(
+                        memory.ReadInt32(offset),
+                        memory.ReadInt32(offset + 1),
+                        memory.ReadInt32(offset + 2));
+                }
             }
-        }
+        });
 
         return newImage;
     }

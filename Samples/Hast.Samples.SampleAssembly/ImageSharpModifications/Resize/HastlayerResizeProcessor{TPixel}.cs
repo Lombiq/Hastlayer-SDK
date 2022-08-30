@@ -7,6 +7,7 @@
 using Hast.Layer;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System.Runtime.InteropServices;
@@ -14,7 +15,7 @@ using System.Runtime.InteropServices;
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
 internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
-     where TPixel : unmanaged, IPixel<TPixel>
+    where TPixel : unmanaged, IPixel<TPixel>
 {
     private readonly int _destinationWidth;
     private readonly int _destinationHeight;
@@ -91,9 +92,9 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
 
             for (int y = 0; y < destinationFrame.Height; y++)
             {
-                var destinationRow = destinationFrame.GetPixelRowSpan(y);
+                var destinationRow = destinationFrame.PixelBuffer.DangerousGetRowSpan(y);
 
-                var sourceRow = sourceFrame.GetPixelRowSpan(rowIndices[y]);
+                var sourceRow = sourceFrame.PixelBuffer.DangerousGetRowSpan(rowIndices[y]);
 
                 for (int x = 0; x < destinationFrame.Width; x++)
                 {
