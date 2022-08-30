@@ -15,16 +15,19 @@ public static class BitmapHelper
     {
         var newImage = new Image<Rgba32>(image.GetConfiguration(), image.Width, image.Height);
 
-        for (int y = 0; y < newImage.Height; y++)
+        newImage.ProcessPixelRows(accessor =>
         {
-            var row = newImage.GetPixelRowSpan(y);
-
-            for (int x = 0; x < newImage.Width; x++)
+            for (int y = 0; y < newImage.Height; y++)
             {
-                var bytes = memory.Read4Bytes((y * newImage.Width) + x + prependCellCount);
-                row[x] = new Rgba32(bytes[0], bytes[1], bytes[2], bytes[3]);
+                var row = accessor.GetRowSpan(y);
+
+                for (int x = 0; x < newImage.Width; x++)
+                {
+                    var bytes = memory.Read4Bytes((y * newImage.Width) + x + prependCellCount);
+                    row[x] = new Rgba32(bytes[0], bytes[1], bytes[2], bytes[3]);
+                }
             }
-        }
+        });
 
         return newImage;
     }
@@ -49,18 +52,21 @@ public static class BitmapHelper
             memory.WriteInt32(i, prependCells[i]);
         }
 
-        for (int y = 0; y < image.Height; y++)
+        image.ProcessPixelRows(accessor =>
         {
-            var row = image.GetPixelRowSpan(y);
-            for (int x = 0; x < image.Width; x++)
+            for (int y = 0; y < image.Height; y++)
             {
-                var pixel = row[x];
+                var row = accessor.GetRowSpan(y);
+                for (int x = 0; x < image.Width; x++)
+                {
+                    var pixel = row[x];
 
-                memory.Write4Bytes(
-                    (y * image.Width) + x + prependCells.Length,
-                    new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                    memory.Write4Bytes(
+                        (y * image.Width) + x + prependCells.Length,
+                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                }
             }
-        }
+        });
 
         return memory;
     }
