@@ -41,7 +41,7 @@ internal class ImageSharpSampleRunner : ISampleRunner
 
     private static void RunSoftwareBenchmarks(Image image)
     {
-        if (image == null) throw new ArgumentNullException(nameof(image));
+        ArgumentNullException.ThrowIfNull(image);
 
         var newWidth = image.Width / 2;
         var newHeight = image.Height / 2;
@@ -52,13 +52,13 @@ internal class ImageSharpSampleRunner : ISampleRunner
         stopwatch.Stop();
         newImage.Save("FpgaResizedWithModifiedImageSharp.jpg");
         Console.WriteLine(
-            FormattableString.Invariant($"Modified ImageSharp algorithm took {stopwatch.ElapsedMilliseconds} ms"));
+            FormattableString.Invariant($"On CPU Modified ImageSharp algorithm took {stopwatch.ElapsedMilliseconds} ms"));
 
         stopwatch.Restart();
         newImage = image.Clone(context => context.Resize(newWidth, newHeight));
         stopwatch.Stop();
         newImage.Save("FpgaResizedWithOriginalImageSharp.jpg");
         Console.WriteLine(
-            FormattableString.Invariant($"Original ImageSharp algorithm took {stopwatch.ElapsedMilliseconds} ms"));
+            FormattableString.Invariant($"On CPU Original ImageSharp algorithm took {stopwatch.ElapsedMilliseconds} ms"));
     }
 }

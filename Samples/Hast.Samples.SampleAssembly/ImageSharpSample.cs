@@ -45,7 +45,7 @@ public class ImageSharpSample
             Task.WhenAll(tasks).Wait();
 
             var taskIndex = 0;
-            while ((x * MaxDegreeOfParallelism) + taskIndex > destinationWidth)
+            while (step + taskIndex > destinationWidth)
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + step + taskIndex,
@@ -67,7 +67,7 @@ public class ImageSharpSample
             Task.WhenAll(tasks).Wait();
 
             var taskIndex = 0;
-            while ((y * MaxDegreeOfParallelism) + taskIndex > destinationHeight)
+            while (step + taskIndex > destinationHeight)
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + destinationHeight + step + taskIndex,

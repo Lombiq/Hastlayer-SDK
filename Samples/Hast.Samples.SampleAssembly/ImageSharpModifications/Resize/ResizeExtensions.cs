@@ -178,15 +178,13 @@ public static class ResizeExtensions
         IHastlayer hastlayer,
         IHardwareRepresentation hardwareRepresentation,
         IProxyGenerationConfiguration configuration) =>
-        hastlayer != null
-            ? source.ApplyProcessor(
-                new HastlayerResizeProcessor(
-                    options,
-                    source.GetCurrentSize(),
-                    maxDegreeOfParallelism,
-                    hastlayer,
-                    hardwareRepresentation,
-                    configuration)
-            )
-            : source.ApplyProcessor(new ResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));
+        source.ApplyProcessor(hastlayer != null
+            ? new HastlayerResizeProcessor(
+                options,
+                source.GetCurrentSize(),
+                maxDegreeOfParallelism,
+                hastlayer,
+                hardwareRepresentation,
+                configuration)
+            : new ResizeProcessor(options, source.GetCurrentSize(), maxDegreeOfParallelism));
 }
