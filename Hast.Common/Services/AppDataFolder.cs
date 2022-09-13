@@ -22,6 +22,7 @@ public class AppDataFolder : IAppDataFolder
             if (_assemblyDirectory == null)
             {
                 var location = Assembly.GetExecutingAssembly().Location;
+                if (!location.StartsWithOrdinal("file://")) location = $"file://{location}";
                 var uri = new UriBuilder(location);
                 var path = Uri.UnescapeDataString(uri.Path);
                 _assemblyDirectory = Path.GetDirectoryName(path);
