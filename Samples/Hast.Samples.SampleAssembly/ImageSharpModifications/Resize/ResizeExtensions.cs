@@ -7,7 +7,6 @@ using Hast.Layer;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
-using System;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
