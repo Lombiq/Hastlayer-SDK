@@ -30,7 +30,7 @@ public static class ResizeExtensions
             source,
             width,
             height,
-            Environment.ProcessorCount);
+            4);
 
     /// <summary>
     /// Resizes an image to the given width and height.
@@ -49,7 +49,7 @@ public static class ResizeExtensions
             source,
             width,
             height,
-            Environment.ProcessorCount,
+            4,
             hastlayer: null,
             hardwareRepresentation: null,
             configuration: null);
