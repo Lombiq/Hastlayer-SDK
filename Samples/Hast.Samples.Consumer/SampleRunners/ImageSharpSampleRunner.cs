@@ -12,7 +12,7 @@ namespace Hast.Samples.Consumer.SampleRunners;
 internal class ImageSharpSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
-        configuration.AddHardwareEntryPointType<ImageSharpSample>();
+        configuration.AddHardwareEntryPointType<HastlayerAcceleratedImageSharp>();
 
     public async Task RunAsync(
         IHastlayer hastlayer,

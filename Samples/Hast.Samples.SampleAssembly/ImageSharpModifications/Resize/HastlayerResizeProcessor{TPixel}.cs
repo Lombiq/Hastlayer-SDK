@@ -73,7 +73,7 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
             _hardwareRepresentation.HardwareGenerationConfiguration);
 
         var resizeImage = _hastlayer
-            .GenerateProxyAsync(_hardwareRepresentation, new ImageSharpSample(), _proxyConfiguration).Result;
+            .GenerateProxyAsync(_hardwareRepresentation, new HastlayerAcceleratedImageSharp(), _proxyConfiguration).Result;
         resizeImage.CreateMatrix(memory);
 
         var accessor = new SimpleMemoryAccessor(memory);

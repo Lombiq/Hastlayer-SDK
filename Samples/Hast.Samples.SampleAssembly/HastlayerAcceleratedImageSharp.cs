@@ -7,7 +7,7 @@ namespace Hast.Samples.SampleAssembly;
 /// <summary>
 /// Algorithm for resizing images with a modified Hastlayer-accelerated ImageSharp library.
 /// </summary>
-public class ImageSharpSample
+public class HastlayerAcceleratedImageSharp
 {
     private const int ResizeDestinationImageWidthIndex = 0;
     private const int ResizeDestinationImageHeightIndex = 1;
@@ -15,7 +15,7 @@ public class ImageSharpSample
     private const int ResizeImageHeightIndex = 3;
     private const int ResizeHeightStartIndex = 4;
 
-    [Replaceable(nameof(ImageSharpSample) + "." + nameof(MaxDegreeOfParallelism))]
+    [Replaceable(nameof(HastlayerAcceleratedImageSharp) + "." + nameof(MaxDegreeOfParallelism))]
     private static readonly int MaxDegreeOfParallelism = 25;
 
     public virtual void CreateMatrix(SimpleMemory memory)
