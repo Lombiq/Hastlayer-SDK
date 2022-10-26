@@ -33,14 +33,18 @@ public class HastlayerAcceleratedImageSharp
 
         var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
 
+        int index;
+
         for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
         {
             var step = x * MaxDegreeOfParallelism;
             var fullStep = step * widthFactor;
 
-            for (int i = 0; i < MaxDegreeOfParallelism; i++)
+            index = 0;
+            while (index < MaxDegreeOfParallelism)
             {
-                tasks[i] = Task.Factory.StartNew(() => new IndexOutput { Index = i + fullStep });
+                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
+                index++;
             }
 
             Task.WhenAll(tasks).Wait();
@@ -61,9 +65,11 @@ public class HastlayerAcceleratedImageSharp
             var step = y * widthFactor;
             var fullStep = step * MaxDegreeOfParallelism;
 
-            for (int i = 0; i < MaxDegreeOfParallelism; i++)
+            index = 0;
+            while (index < MaxDegreeOfParallelism)
             {
-                tasks[i] = Task.Factory.StartNew(() => new IndexOutput { Index = i + fullStep });
+                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
+                index++;
             }
 
             Task.WhenAll(tasks).Wait();
