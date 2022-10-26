@@ -1,0 +1,10 @@
+name: Validate Pull Request
+
+on:
+  push:
+  pull_request_target:
+    types: [synchronize]
+
+jobs:
+  call-check-merge-conflict:
+    uses: Lombiq/GitHub-Actions/.github/workflows/validate-pull-request.yml@dev
