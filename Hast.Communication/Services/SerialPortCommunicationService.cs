@@ -267,22 +267,7 @@ public class SerialPortCommunicationService : CommunicationServiceBase
 
                     serialPort.PortName = (string)portNameObject;
 
-                    try
-                    {
-                        serialPort.Open();
-                        serialPort.Write(CommandTypes.WhoIsAvailable);
-                    }
-                    catch (IOException ex)
-                    {
-                        _logger.LogError(ex, "IO error while getting port names.");
-                    }
-                    catch (UnauthorizedAccessException ex)
-                    {
-                        _logger.LogInformation(
-                            ex,
-                            "Couldn't access device while trying to get port names. This may be because the port " +
-                            "is used by another application. Checking the next port...");
-                    }
+                    TryOpenSerialPort(serialPort);
 
                     // Waiting a maximum of 3s for a response from the port.
 #pragma warning disable AsyncFixer02 // Long-running or blocking operations inside an async method
@@ -305,6 +290,30 @@ public class SerialPortCommunicationService : CommunicationServiceBase
         }
 
         return fpgaPortNames;
+    }
+
+    private void TryOpenSerialPort(SerialPort serialPort)
+    {
+        try
+        {
+            serialPort.Open();
+            serialPort.Write(CommandTypes.WhoIsAvailable);
+        }
+        catch (IOException ex)
+        {
+            _logger.LogError(ex, "IO error while getting port names.");
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            _logger.LogInformation(
+                ex,
+                "Couldn't access device while trying to get port names. This may be because the port " +
+                "is used by another application. Checking the next port...");
+        }
+        catch (ArgumentOutOfRangeException ex)
+        {
+            _logger.LogInformation(ex, "This might have happened because a non-FPGA port was tried to be opened.");
+        }
     }
 
     private SerialPort CreateSerialPort(IHardwareExecutionContext executionContext)

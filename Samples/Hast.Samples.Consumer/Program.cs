@@ -97,6 +97,7 @@ internal static class Program
             Sample.GenomeMatcher => new GenomeMatcherSampleRunner(),
             Sample.ParallelAlgorithm => new ParallelAlgorithmSampleRunner(),
             Sample.ImageProcessingAlgorithms => new ImageProcessingAlgorithmsSampleRunner(),
+            Sample.ImageSharpSample => new ImageSharpSampleRunner(),
             Sample.Loopback => new LoopbackSampleRunner(),
             Sample.MemoryTest => new MemoryTestSampleRunner(),
             Sample.MonteCarloPiEstimator => new MonteCarloPiEstimatorSampleRunner(),

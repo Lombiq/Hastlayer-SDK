@@ -338,7 +338,6 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         vppArguments.AddRange(new[]
         {
             "-lo",
-            Path.Combine(tmpDirectoryPath, $"hastip.{target}.xclbin"),
             xclbinFilePath,
             xoFilePath,
         });

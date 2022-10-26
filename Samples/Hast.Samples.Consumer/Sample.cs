@@ -10,6 +10,7 @@ public enum Sample
     FSharpParallelAlgorithm,
     GenomeMatcher,
     ImageProcessingAlgorithms,
+    ImageSharpSample,
     Loopback,
     MemoryTest,
     MonteCarloPiEstimator,

@@ -180,21 +180,24 @@ public class ImageContrastModifier
         memory.WriteUInt32(ChangeContrastImageHeightIndex, (uint)image.Height);
         memory.WriteInt32(ChangeContrastContrastValueIndex, contrastValue);
 
-        for (int y = 0; y < image.Height; y++)
+        image.ProcessPixelRows(pixelAccessor =>
         {
-            var row = image.GetPixelRowSpan(y);
-            for (int x = 0; x < image.Width; x++)
+            for (var y = 0; y < pixelAccessor.Height; y++)
             {
-                var pixel = row[x];
+                var row = pixelAccessor.GetRowSpan(y);
+                for (int x = 0; x < image.Width; x++)
+                {
+                    var pixel = row[x];
 
-                // This leaves 1 byte unused in each memory cell, but that would make the whole logic a lot more
-                // complicated, so good enough for a sample; if we'd want to optimize memory usage, that would be
-                // needed.
-                memory.Write4Bytes(
-                    (y * image.Width) + x + ChangeContrastImageStartIndex,
-                    new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                    // This leaves 1 byte unused in each memory cell, but that would make the whole logic a lot more
+                    // complicated, so good enough for a sample; if we'd want to optimize memory usage, that would be
+                    // needed.
+                    memory.Write4Bytes(
+                        (y * image.Width) + x + ChangeContrastImageStartIndex,
+                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                }
             }
-        }
+        });
 
         return memory;
     }
@@ -209,15 +212,18 @@ public class ImageContrastModifier
     {
         var newImage = image.Clone();
 
-        for (int y = 0; y < newImage.Height; y++)
+        newImage.ProcessPixelRows(pixelAccessor =>
         {
-            var row = newImage.GetPixelRowSpan(y);
-            for (int x = 0; x < newImage.Width; x++)
+            for (int y = 0; y < newImage.Height; y++)
             {
-                var bytes = memory.Read4Bytes((y * newImage.Width) + x + ChangeContrastImageStartIndex);
-                row[x] = new Rgba32(bytes[0], bytes[1], bytes[2], 255);
+                var row = pixelAccessor.GetRowSpan(y);
+                for (int x = 0; x < newImage.Width; x++)
+                {
+                    var bytes = memory.Read4Bytes((y * newImage.Width) + x + ChangeContrastImageStartIndex);
+                    row[x] = new Rgba32(bytes[0], bytes[1], bytes[2], 255);
+                }
             }
-        }
+        });
 
         return newImage;
     }
