@@ -70,8 +70,13 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
         // @xclbinutil --input ./xclbin/hastip.hw.xclbin --dump-section BITSTREAM:RAW:./xclbin/hastip.hw.bit --force
         // @python3 ./src/scripts/FPGA-BIT-TO-BIN.PY -f ./xclbin/hastip.hw.bit ./xclbin/hastip.hw.bit.bin
 
-        if (File.Exists(xclbinFilePath)) File.Move(xclbinFilePath, xclbinFilePath + ".org");
+        if (!File.Exists(xclbinFilePath))
+        {
+            throw new FileNotFoundException(
+                $"The file \"{xclbinFilePath}\" is missing. A previous step may have failed silently. Please check the logs.");
+        }
 
+        File.Move(xclbinFilePath, xclbinFilePath + ".org");
         await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.name"), context.Configuration.Label);
         await File.WriteAllTextAsync(Path.Combine(tmpDirectoryPath, "Hast_IP.vhd.hash"), context.HardwareDescription.TransformationId);
         var tmpXclbinDirectoryPath = EnsureDirectoryExists(tmpDirectoryPath, "xclbin");
