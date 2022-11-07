@@ -16,7 +16,7 @@ public class HastlayerAcceleratedImageSharp
     private const int ResizeHeightStartIndex = 4;
 
     [Replaceable(nameof(HastlayerAcceleratedImageSharp) + "." + nameof(MaxDegreeOfParallelism))]
-    private static readonly int MaxDegreeOfParallelism = 25;
+    private static readonly int MaxDegreeOfParallelism = 38;
 
     public virtual void CreateMatrix(SimpleMemory memory)
     {
