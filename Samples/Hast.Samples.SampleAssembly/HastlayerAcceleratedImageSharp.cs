@@ -31,7 +31,7 @@ public class HastlayerAcceleratedImageSharp
         var verticalSteps = 1 + ((height - 1) / MaxDegreeOfParallelism);
         var horizontalSteps = 1 + ((width - 1) / MaxDegreeOfParallelism);
 
-        var tasks = new Task<int>[MaxDegreeOfParallelism];
+        var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
 
         for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
         {
@@ -41,7 +41,7 @@ public class HastlayerAcceleratedImageSharp
             var index = 0;
             while (index < MaxDegreeOfParallelism)
             {
-                tasks[index] = Task.Factory.StartNew(index => (int)index + fullStep, index);
+                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
                 index++;
             }
 
@@ -52,7 +52,7 @@ public class HastlayerAcceleratedImageSharp
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + step + taskIndex,
-                    tasks[taskIndex].Result);
+                    tasks[taskIndex].Result.Index);
 
                 taskIndex++;
             }
@@ -66,7 +66,7 @@ public class HastlayerAcceleratedImageSharp
             var index = 0;
             while (index < MaxDegreeOfParallelism)
             {
-                tasks[index] = Task.Factory.StartNew(index => (int)index + fullStep, index);
+                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
                 index++;
             }
 
@@ -77,7 +77,7 @@ public class HastlayerAcceleratedImageSharp
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + destinationHeight + step + taskIndex,
-                    tasks[taskIndex].Result);
+                    tasks[taskIndex].Result.Index);
 
                 taskIndex++;
             }
@@ -95,4 +95,11 @@ public class HastlayerAcceleratedImageSharp
     ////     int pixelIndex = x * widthFactor; // Add value to an array
     ////     memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
     //// }
+
+#pragma warning disable S3898 // Value types should implement "IEquatable<T>"
+    private struct IndexOutput
+#pragma warning restore S3898 // Value types should implement "IEquatable<T>"
+    {
+        public int Index { get; set; }
+    }
 }
