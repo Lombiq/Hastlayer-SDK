@@ -71,7 +71,7 @@ internal class ImageSharpSampleRunner : ISampleRunner
 
         using var resizedOld = CloneAndMeasure(
             image,
-            context => context.Resize(newWidth, newHeight),
+            context => context.Resize(newWidth, newHeight, KnownResamplers.NearestNeighbor),
             out var timeOld);
         resizedOld.Save("FpgaResizedWithOriginalImageSharp.jpg");
         Console.WriteLine(
