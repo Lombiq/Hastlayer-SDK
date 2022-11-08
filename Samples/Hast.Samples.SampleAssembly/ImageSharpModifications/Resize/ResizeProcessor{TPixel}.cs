@@ -11,6 +11,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
@@ -217,7 +218,7 @@ internal class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResampling
     [MethodImpl(InliningOptions.ShortMethod)]
     private static int DivideCeil(int dividend, int divisor) => 1 + ((dividend - 1) / divisor);
 
-    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Auto)]
+    [StructLayout(LayoutKind.Auto)]
 #pragma warning disable S3898 // Value types should implement "IEquatable<T>"
     private readonly struct RowOperationWrapper<T>
 #pragma warning restore S3898 // Value types should implement "IEquatable<T>"
