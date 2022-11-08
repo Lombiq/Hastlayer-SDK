@@ -31,6 +31,8 @@ internal class ImageSharpSampleRunner : ISampleRunner
         var newWidth = image.Width / 2;
         var newHeight = image.Height / 2;
 
+        HastlayerResizeProcessor.LogPixelsWriter = Console.Out;
+
         // Execute the FPGA a couple times before measuring to avoid counting Hastlayer's initialization overhead,
         // because in a realistic scenario you would use this more than just once per process.
         _ = image.Clone(context => context.HastResize(

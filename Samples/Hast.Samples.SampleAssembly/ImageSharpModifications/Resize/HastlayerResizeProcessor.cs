@@ -5,14 +5,22 @@
 
 using Hast.Layer;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
+using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
 public class HastlayerResizeProcessor : CloningImageProcessor
 {
+    public static TextWriter LogPixelsWriter { get; set; }
+
     public HastlayerResizeProcessor(
         ResizeOptions options,
         Size sourceSize,
@@ -94,7 +102,31 @@ public class HastlayerResizeProcessor : CloningImageProcessor
         Rectangle sourceRectangle)
     {
         configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
-        return new HastlayerResizeProcessor<TPixel>(
+
+        if (LogPixelsWriter != null) PixelsToOutput(source, "before");
+        var result = new HastlayerResizeProcessor<TPixel>(
             configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation, Configuration);
+        if (LogPixelsWriter != null) PixelsToOutput(source, "after");
+
+        return result;
+    }
+
+    [SuppressMessage(
+        "Major Code Smell",
+        "S106:Standard outputs should not be used directly to log anything",
+        Justification = "This is a l")]
+    private void PixelsToOutput<TPixel>(Image<TPixel> source, string note)
+        where TPixel : unmanaged, IPixel<TPixel>
+    {
+        Console.WriteLine($"Pixels in the image {note}:");
+
+        for (int i = 0; i < source.Height; i++)
+        {
+            var row = MemoryMarshal.Cast<TPixel, byte>(source.DangerousGetPixelRowMemory(i).Span);
+            foreach (var pixelByte in row) Console.Write($"{pixelByte:X2} ");
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("\n\n\n");
     }
 }
