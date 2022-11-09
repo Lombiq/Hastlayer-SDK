@@ -31,7 +31,8 @@ internal class ImageSharpSampleRunner : ISampleRunner
         var newWidth = image.Width / 2;
         var newHeight = image.Height / 2;
 
-        HastlayerResizeProcessor.LogPixelsWriter = Console.Out;
+        // Uncomment this to also log a hexdump of the images:
+        //// HastlayerResizeProcessor.LogPixelsWriter = Console.Out;
 
         Image FpgaClone(out long milliseconds)
         {

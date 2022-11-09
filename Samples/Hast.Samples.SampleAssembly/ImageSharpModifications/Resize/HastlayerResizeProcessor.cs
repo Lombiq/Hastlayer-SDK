@@ -19,6 +19,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
 public class HastlayerResizeProcessor : CloningImageProcessor
 {
+    internal static HastlayerAcceleratedImageSharp ResizeProxy;
+
     public static TextWriter LogPixelsWriter { get; set; }
 
     public HastlayerResizeProcessor(
@@ -114,7 +116,7 @@ public class HastlayerResizeProcessor : CloningImageProcessor
     [SuppressMessage(
         "Major Code Smell",
         "S106:Standard outputs should not be used directly to log anything",
-        Justification = "This is a l")]
+        Justification = "This is a logger method.")]
     private void PixelsToOutput<TPixel>(Image<TPixel> source, string note)
         where TPixel : unmanaged, IPixel<TPixel>
     {
