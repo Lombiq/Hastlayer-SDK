@@ -181,7 +181,7 @@ public static class ResizeExtensions
             ? new HastlayerResizeProcessor(
                 options,
                 source.GetCurrentSize(),
-                maxDegreeOfParallelism,
+                HastlayerAcceleratedImageSharp.MaxDegreeOfParallelism,
                 hastlayer,
                 hardwareRepresentation,
                 configuration)
