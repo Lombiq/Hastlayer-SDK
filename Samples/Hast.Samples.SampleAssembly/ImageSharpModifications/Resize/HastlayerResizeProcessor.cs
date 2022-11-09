@@ -19,6 +19,8 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
 public class HastlayerResizeProcessor : CloningImageProcessor
 {
+    private static readonly object _lock = new();
+
     internal static HastlayerAcceleratedImageSharp ResizeProxy;
 
     public static TextWriter LogPixelsWriter { get; set; }
@@ -46,6 +48,19 @@ public class HastlayerResizeProcessor : CloningImageProcessor
         Hastlayer = hastlayer;
         HardwareRepresentation = hardwareRepresentation;
         Configuration = configuration;
+
+        if (ResizeProxy == null)
+        {
+            lock (_lock)
+            {
+                // We only want to create the proxy once, but it requires the IHastlayer instance that's not available
+                // from a static member.
+#pragma warning disable S3010 // S3010:Static fields should not be updated in constructors
+                ResizeProxy = hastlayer
+                    .GenerateProxyAsync(hardwareRepresentation, new HastlayerAcceleratedImageSharp(), configuration).Result;
+#pragma warning restore S3010 // S3010:Static fields should not be updated in constructors
+            }
+        }
     }
 
     /// <summary>

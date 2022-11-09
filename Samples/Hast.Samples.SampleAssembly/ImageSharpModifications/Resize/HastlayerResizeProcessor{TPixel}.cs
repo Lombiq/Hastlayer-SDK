@@ -16,7 +16,6 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
     where TPixel : unmanaged, IPixel<TPixel>
 {
-    private static readonly object _lock = new();
 
     private readonly int _destinationWidth;
     private readonly int _destinationHeight;
@@ -43,19 +42,6 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
         _hastlayer = hastlayer;
         _hardwareRepresentation = hardwareRepresentation;
         _proxyConfiguration = proxyConfiguration;
-
-        if (HastlayerResizeProcessor.ResizeProxy == null)
-        {
-            lock (_lock)
-            {
-                // We only want to create the proxy once, but it requires the IHastlayer instance that's not available
-                // from a static member.
-#pragma warning disable S3010 // S3010:Static fields should not be updated in constructors
-                HastlayerResizeProcessor.ResizeProxy = _hastlayer
-                    .GenerateProxyAsync(_hardwareRepresentation, new HastlayerAcceleratedImageSharp(), _proxyConfiguration).Result;
-#pragma warning restore S3010 // S3010:Static fields should not be updated in constructors
-            }
-        }
     }
 
     /// <inheritdoc/>
