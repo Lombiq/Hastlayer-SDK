@@ -21,6 +21,10 @@ public class HastlayerResizeProcessor : CloningImageProcessor
 {
     private static readonly object _lock = new();
 
+    [SuppressMessage(
+        "Critical Code Smell",
+        "S2223:Non-constant static fields should not be visible",
+        Justification = "Has to be initialized on first use.")]
     internal static HastlayerAcceleratedImageSharp ResizeProxy;
 
     public static TextWriter LogPixelsWriter { get; set; }
