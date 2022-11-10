@@ -16,13 +16,11 @@ namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
     where TPixel : unmanaged, IPixel<TPixel>
 {
-
     private readonly int _destinationWidth;
     private readonly int _destinationHeight;
     private readonly IResampler _resampler;
     private readonly IHastlayer _hastlayer;
     private readonly IHardwareRepresentation _hardwareRepresentation;
-    private readonly IProxyGenerationConfiguration _proxyConfiguration;
 
     private Image<TPixel> _destination;
 
@@ -32,8 +30,7 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
         Image<TPixel> source,
         Rectangle sourceRectangle,
         IHastlayer hastlayer,
-        IHardwareRepresentation hardwareRepresentation,
-        IProxyGenerationConfiguration proxyConfiguration)
+        IHardwareRepresentation hardwareRepresentation)
         : base(configuration, source, sourceRectangle)
     {
         _destinationWidth = definition.DestinationWidth;
@@ -41,7 +38,6 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
         _resampler = definition.Sampler;
         _hastlayer = hastlayer;
         _hardwareRepresentation = hardwareRepresentation;
-        _proxyConfiguration = proxyConfiguration;
     }
 
     /// <inheritdoc/>

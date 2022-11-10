@@ -126,7 +126,7 @@ public class HastlayerResizeProcessor : CloningImageProcessor
 
         if (LogPixelsWriter != null) PixelsToOutput(source, "before");
         var result = new HastlayerResizeProcessor<TPixel>(
-            configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation, Configuration);
+            configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation);
         if (LogPixelsWriter != null) PixelsToOutput(source, "after");
 
         return result;
