@@ -10,6 +10,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System.Runtime.InteropServices;
+using static Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
@@ -74,8 +75,8 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
 
         var accessor = new SimpleMemoryAccessor(memory);
 
-        var rowIndicesSpan = accessor.Get().Span.Slice(16, _destinationHeight * 4);
-        var pixelIndicesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth * 4);
+        var rowIndicesSpan = Slice(accessor, HeaderCellCount, _destinationHeight);
+        var pixelIndicesSpan = Slice(accessor, HeaderCellCount + _destinationHeight, _destinationWidth);
 
         var rowIndices = MemoryMarshal.Cast<byte, int>(rowIndicesSpan);
         var pixelIndices = MemoryMarshal.Cast<byte, int>(pixelIndicesSpan);
@@ -99,7 +100,7 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
         }
     }
 
-    public SimpleMemory CreateMatrixMemory(
+    public static SimpleMemory CreateMatrixMemory(
         Image<TPixel> image,
         int destinationWidth,
         int destinationHeight,
@@ -108,18 +109,22 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
     {
         var width = image.Width;
         var height = image.Height;
-
-        var cellCount = destinationWidth + destinationHeight + 4;
+        var cellCount = destinationWidth + destinationHeight + HeaderCellCount;
 
         var memory = hastlayer is null
             ? SimpleMemory.CreateSoftwareMemory(cellCount)
             : hastlayer.CreateMemory(hardwareGenerationConfiguration, cellCount);
 
-        memory.WriteUInt32(0, (uint)destinationWidth);
-        memory.WriteUInt32(1, (uint)destinationHeight);
-        memory.WriteUInt32(2, (uint)width);
-        memory.WriteUInt32(3, (uint)height);
+        memory.WriteUInt32(ResizeDestinationImageWidthIndex, (uint)destinationWidth);
+        memory.WriteUInt32(ResizeDestinationImageHeightIndex, (uint)destinationHeight);
+        memory.WriteUInt32(ResizeImageWidthIndex, (uint)width);
+        memory.WriteUInt32(ResizeImageHeightIndex, (uint)height);
 
         return memory;
     }
+
+    private static Span<byte> Slice(SimpleMemoryAccessor accessor, int cellOffset, int cellLength) =>
+        accessor.Get().Span.Slice(
+            cellOffset * SimpleMemory.MemoryCellSizeBytes,
+            cellLength * SimpleMemory.MemoryCellSizeBytes);
 }

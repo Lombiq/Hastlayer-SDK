@@ -9,11 +9,12 @@ namespace Hast.Samples.SampleAssembly;
 /// </summary>
 public class HastlayerAcceleratedImageSharp
 {
-    private const int ResizeDestinationImageWidthIndex = 0;
-    private const int ResizeDestinationImageHeightIndex = 1;
-    private const int ResizeImageWidthIndex = 2;
-    private const int ResizeImageHeightIndex = 3;
-    private const int ResizeHeightStartIndex = 4;
+    public const int HeaderCellCount = 4;
+    public const int ResizeDestinationImageWidthIndex = 0;
+    public const int ResizeDestinationImageHeightIndex = 1;
+    public const int ResizeImageWidthIndex = 2;
+    public const int ResizeImageHeightIndex = 3;
+    public const int ResizeHeightStartIndex = HeaderCellCount;
 
     [Replaceable(nameof(HastlayerAcceleratedImageSharp) + "." + nameof(MaxDegreeOfParallelism))]
     public static readonly int MaxDegreeOfParallelism = 38;
