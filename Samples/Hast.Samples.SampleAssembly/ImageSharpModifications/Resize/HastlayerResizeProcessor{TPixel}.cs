@@ -109,7 +109,7 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
     {
         var width = image.Width;
         var height = image.Height;
-        var cellCount = destinationWidth + destinationHeight + HeaderCellCount;
+        var cellCount = HeaderCellCount + destinationWidth + destinationHeight;
 
         var memory = hastlayer is null
             ? SimpleMemory.CreateSoftwareMemory(cellCount)

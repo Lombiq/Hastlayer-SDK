@@ -27,14 +27,15 @@ public class HastlayerAcceleratedImageSharp
         var height = (ushort)memory.ReadUInt32(ResizeImageHeightIndex);
 
         var widthFactor = width / destinationWidth;
+        var heightFactor = height / destinationHeight;
 
         // Divide Ceiling.
         var verticalSteps = 1 + ((height - 1) / MaxDegreeOfParallelism);
         var horizontalSteps = 1 + ((width - 1) / MaxDegreeOfParallelism);
 
-        var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
+        var tasks = new Task<int>[MaxDegreeOfParallelism];
 
-        for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
+        for (int x = 0; x < horizontalSteps; x++)
         {
             var step = x * MaxDegreeOfParallelism;
             var fullStep = step * widthFactor;
@@ -42,18 +43,18 @@ public class HastlayerAcceleratedImageSharp
             var index = 0;
             while (index < MaxDegreeOfParallelism)
             {
-                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
+                tasks[index] = Task.Factory.StartNew(index => (int)index + fullStep, index);
                 index++;
             }
 
             Task.WhenAll(tasks).Wait();
 
             var taskIndex = 0;
-            while (step + taskIndex > destinationWidth)
+            while (step + taskIndex < destinationWidth)
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + step + taskIndex,
-                    tasks[taskIndex].Result.Index);
+                    tasks[taskIndex].Result);
 
                 taskIndex++;
             }
@@ -62,23 +63,23 @@ public class HastlayerAcceleratedImageSharp
         for (int y = 0; y < verticalSteps; y++)
         {
             var step = y * widthFactor;
-            var fullStep = step * MaxDegreeOfParallelism;
+            var fullStep = step * heightFactor;
 
             var index = 0;
             while (index < MaxDegreeOfParallelism)
             {
-                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
+                tasks[index] = Task.Factory.StartNew(index => (int)index + fullStep, index);
                 index++;
             }
 
             Task.WhenAll(tasks).Wait();
 
             var taskIndex = 0;
-            while (step + taskIndex > destinationHeight)
+            while (step + taskIndex < destinationHeight)
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + destinationHeight + step + taskIndex,
-                    tasks[taskIndex].Result.Index);
+                    tasks[taskIndex].Result);
 
                 taskIndex++;
             }
@@ -96,11 +97,4 @@ public class HastlayerAcceleratedImageSharp
     ////     int pixelIndex = x * widthFactor; // Add value to an array
     ////     memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
     //// }
-
-#pragma warning disable S3898 // Value types should implement "IEquatable<T>"
-    private struct IndexOutput
-#pragma warning restore S3898 // Value types should implement "IEquatable<T>"
-    {
-        public int Index { get; set; }
-    }
 }
