@@ -113,11 +113,14 @@ Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same 
 
 ### Measurements
 
-| Algorithm                         | Speed advantage | Power advantage |   Parallelism  |    CPU   | CPU watts<sup>1</sup> | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts<sup>2</sup> | FPGA power |
-|:---------------------------------:|:---------------:|:---------------:|:--------------:|:--------:|:---------------------:|:---------:|:----------------:|:--------:|:----------:|:----------------------:|:----------:|
-| ImageContrastModifier<sup>3</sup> |       2324%     |     2580%       |        35      |  2788 ms |                4.8 W  |   13.4 Ws |     60.03%       |   26 ms  |   115 ms   |                 4.7 W  |   0.5 Ws   |
-| MonteCarloPiEstimator<sup>4</sup> |      10850%     |    15300%       |        97      |  3285 ms |                4.7 W  |   15.4 Ws |     37.76%       |   25 ms  |    30 ms   |                 4.6 W  |   0.1 Ws   |
-| ParallelAlgorithm<sup>5</sup>     |      11753%     |    11417%       |       280      | 29395 ms |                4.7 W  |  138.2 Ws |     58.81%       |  240 ms  |   248 ms   |                 4.7 W  |   1.2 Ws   |
+| Algorithm                         | Speed advantage | Power advantage | Parallelism |      CPU | CPU watts<sup>1</sup> | CPU power | FPGA utilization | Net FPGA | Total FPGA | FPGA watts<sup>2</sup> | FPGA power |
+|-----------------------------------|----------------:|----------------:|------------:|---------:|----------------------:|----------:|-----------------:|---------:|-----------:|-----------------------:|------------|
+| ImageContrastModifier<sup>3</sup> |           2324% |           2580% |          35 |  2788 ms |                 4.8 W |   13.4 Ws |           60.03% |    26 ms |     115 ms |                  4.7 W | 0.5 Ws     |
+| MonteCarloPiEstimator<sup>4</sup> |          10850% |          15300% |          97 |  3285 ms |                 4.7 W |   15.4 Ws |           37.76% |    25 ms |      30 ms |                  4.6 W | 0.1 Ws     |
+| ParallelAlgorithm<sup>5</sup>     |          11753% |          11417% |         280 | 29395 ms |                 4.7 W |  138.2 Ws |           58.81% |   240 ms |     248 ms |                  4.7 W | 1.2 Ws     |
+| ImageSharpSample (small)          |            -83% |                 |          38 |     9 ms |                       |        Ws |           18.46% | 0.076 ms |      54 ms |                      W | 1.935 Ws   |
+| ImageSharpSample (6.4 MP)         |            -69% |                 |          38 |    85 ms |                       |        Ws |           18.46% |     1 ms |     272 ms |                      W | 1.935 Ws   |
+| ImageSharpSample (73.2 MP)        |            -36% |                 |          38 |   762 ms |                       |        Ws |           18.46% |    22 ms |    1194 ms |                      W | 1.935 Ws   |
 
 You can find more measurements in the [attached table](Attachments/TE0715-04-30-1C%20benchmark.pdf).
 
