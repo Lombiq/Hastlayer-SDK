@@ -9,7 +9,9 @@ using Hast.Transformer.Abstractions.SimpleMemory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using System;
 using System.Runtime.InteropServices;
+using static Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
@@ -21,7 +23,7 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
     private readonly IResampler _resampler;
     private readonly IHastlayer _hastlayer;
     private readonly IHardwareRepresentation _hardwareRepresentation;
-    private readonly IProxyGenerationConfiguration _proxyConfiguration;
+
     private Image<TPixel> _destination;
 
     public HastlayerResizeProcessor(
@@ -30,8 +32,7 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
         Image<TPixel> source,
         Rectangle sourceRectangle,
         IHastlayer hastlayer,
-        IHardwareRepresentation hardwareRepresentation,
-        IProxyGenerationConfiguration proxyConfiguration)
+        IHardwareRepresentation hardwareRepresentation)
         : base(configuration, source, sourceRectangle)
     {
         _destinationWidth = definition.DestinationWidth;
@@ -39,7 +40,6 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
         _resampler = definition.Sampler;
         _hastlayer = hastlayer;
         _hardwareRepresentation = hardwareRepresentation;
-        _proxyConfiguration = proxyConfiguration;
     }
 
     /// <inheritdoc/>
@@ -72,17 +72,11 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
             _hastlayer,
             _hardwareRepresentation.HardwareGenerationConfiguration);
 
-        var resizeImage = _hastlayer
-            .GenerateProxyAsync(_hardwareRepresentation, new HastlayerAcceleratedImageSharp(), _proxyConfiguration).Result;
-        resizeImage.CreateMatrix(memory);
+        HastlayerResizeProcessor.ResizeProxy.CreateMatrix(memory);
 
         var accessor = new SimpleMemoryAccessor(memory);
-
-        var rowIndicesSpan = accessor.Get().Span.Slice(16, _destinationHeight * 4);
-        var pixelIndicesSpan = accessor.Get().Span.Slice((4 + _destinationHeight) * 4, _destinationWidth * 4);
-
-        var rowIndices = MemoryMarshal.Cast<byte, int>(rowIndicesSpan);
-        var pixelIndices = MemoryMarshal.Cast<byte, int>(pixelIndicesSpan);
+        var rowIndices = Slice(accessor, HeaderCellCount, _destinationHeight);
+        var pixelIndices = Slice(accessor, HeaderCellCount + _destinationHeight, _destinationWidth);
 
         for (int i = 0; i < Source.Frames.Count; i++)
         {
@@ -103,7 +97,7 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
         }
     }
 
-    public SimpleMemory CreateMatrixMemory(
+    public static SimpleMemory CreateMatrixMemory(
         Image<TPixel> image,
         int destinationWidth,
         int destinationHeight,
@@ -112,18 +106,23 @@ internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IR
     {
         var width = image.Width;
         var height = image.Height;
-
-        var cellCount = destinationWidth + destinationHeight + 4;
+        var cellCount = HeaderCellCount + destinationWidth + destinationHeight;
 
         var memory = hastlayer is null
             ? SimpleMemory.CreateSoftwareMemory(cellCount)
             : hastlayer.CreateMemory(hardwareGenerationConfiguration, cellCount);
 
-        memory.WriteUInt32(0, (uint)destinationWidth);
-        memory.WriteUInt32(1, (uint)destinationHeight);
-        memory.WriteUInt32(2, (uint)width);
-        memory.WriteUInt32(3, (uint)height);
+        memory.WriteUInt32(ResizeDestinationImageWidthIndex, (uint)destinationWidth);
+        memory.WriteUInt32(ResizeDestinationImageHeightIndex, (uint)destinationHeight);
+        memory.WriteUInt32(ResizeImageWidthIndex, (uint)width);
+        memory.WriteUInt32(ResizeImageHeightIndex, (uint)height);
 
         return memory;
     }
+
+    private static Span<int> Slice(SimpleMemoryAccessor accessor, int cellOffset, int cellLength) =>
+        MemoryMarshal.Cast<byte, int>(
+            accessor.Get().Span.Slice(
+                cellOffset * SimpleMemory.MemoryCellSizeBytes,
+                cellLength * SimpleMemory.MemoryCellSizeBytes));
 }

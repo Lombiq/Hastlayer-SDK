@@ -101,6 +101,36 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         return BuildInnerAsync(context, implementation, deviceManifest);
     }
 
+    public Task CleanupAsync(IHardwareImplementationCompositionContext context)
+    {
+        var hashId = context.HardwareDescription.TransformationId;
+        var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
+
+        var rtlDirectory = new DirectoryInfo(GetRtlDirectoryPath(hardwareFrameworkPath, hashId));
+        if (rtlDirectory.Exists)
+        {
+            try
+            {
+                foreach (var file in rtlDirectory.GetFiles()) file.Delete();
+                foreach (var subDirectory in rtlDirectory.GetDirectories().Where(sub => sub.Name != "src"))
+                {
+                    subDirectory.Delete(recursive: true);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex, "Failed to clean up.");
+            }
+        }
+
+        var tmpDirectory = new DirectoryInfo(GetTmpDirectoryPath(hashId));
+        if (tmpDirectory.Exists) tmpDirectory.Delete(recursive: true);
+
+        ProgressMajor("Build directory cleaned up.");
+
+        return Task.CompletedTask;
+    }
+
     private async Task BuildInnerAsync(
         IHardwareImplementationCompositionContext context,
         IHardwareImplementation implementation,
@@ -124,7 +154,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
 
         var hardwareFrameworkPath = Path.GetFullPath(context.Configuration.HardwareFrameworkPath);
         implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
-        Cleanup(hardwareFrameworkPath, hashId);
+        await CleanupAsync(context);
 
         var promptBeforeBuild =
             buildConfiguration.PromptBeforeBuild &&
@@ -208,8 +238,6 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             try { await CollectReportsAsync(hardwareFrameworkPath, context, implementation, hashId); }
             catch (Exception e) { _logger.LogError(e, "Failed to collect reports."); }
         }
-
-        Cleanup(hardwareFrameworkPath, hashId);
     }
 
     private static string GetPlatformFilePath(
@@ -485,7 +513,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
 
         if (exists)
         {
-            ProgressMajor("A suitable XCLBIN is ready, no new build necessary.");
+            ProgressMajor($"A suitable XCLBIN is ready at \"{implementation.BinaryPath}\", no new build necessary.");
 
             if (!File.Exists(implementation.BinaryPath + InfoFileExtension))
             {
@@ -514,31 +542,6 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
                 "may work fine the result can be potentially unstable and randomly give incorrect results. " +
                 TryToMakeItSmaller);
         }
-    }
-
-    private void Cleanup(string hardwareFrameworkPath, string hashId)
-    {
-        var rtlDirectory = new DirectoryInfo(GetRtlDirectoryPath(hardwareFrameworkPath, hashId));
-        if (rtlDirectory.Exists)
-        {
-            try
-            {
-                foreach (var file in rtlDirectory.GetFiles()) file.Delete();
-                foreach (var subDirectory in rtlDirectory.GetDirectories().Where(sub => sub.Name != "src"))
-                {
-                    subDirectory.Delete(recursive: true);
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogWarning(ex, "Failed to clean up.");
-            }
-        }
-
-        var tmpDirectory = new DirectoryInfo(GetTmpDirectoryPath(hashId));
-        if (tmpDirectory.Exists) tmpDirectory.Delete(recursive: true);
-
-        ProgressMajor("Build directory cleaned up.");
     }
 
     private async Task EnsureDeviceReadyAsync(VitisBuildConfiguration buildConfiguration)

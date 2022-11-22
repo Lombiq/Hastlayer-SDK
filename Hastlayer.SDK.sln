@@ -137,6 +137,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Base", "Has
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.Common", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj", "{5B2ED453-CC72-4593-8D7A-C123CA47F710}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F1C0595B-B01C-4087-9FED-0FA26A5CE7F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9B301050-AFCB-48B3-A35E-F1724FDE9FE6}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\create-jira-issues-for-community-activities.yml = .github\workflows\create-jira-issues-for-community-activities.yml
+		.github\workflows\validate-pull-request.yml = .github\workflows\validate-pull-request.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{05528761-FC1C-4308-BE90-2BB354A66EC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{2F987F44-0FF1-49D6-98FD-79492BDE1739}"
+	ProjectSection(SolutionItems) = preProject
+		Hast.Core\.github\workflows\verify-submodule-pull-request.yml = Hast.Core\.github\workflows\verify-submodule-pull-request.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -374,6 +389,9 @@ Global
 		{4C53D384-FDED-4608-8C9A-616531CA4832} = {75BB7270-46E1-47D9-91CA-2A7666251ED6}
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146} = {A5CA6F21-24E8-4EFE-A870-5CF8234AD56F}
 		{5B2ED453-CC72-4593-8D7A-C123CA47F710} = {75BB7270-46E1-47D9-91CA-2A7666251ED6}
+		{9B301050-AFCB-48B3-A35E-F1724FDE9FE6} = {F1C0595B-B01C-4087-9FED-0FA26A5CE7F5}
+		{05528761-FC1C-4308-BE90-2BB354A66EC3} = {B61218C3-CA60-4263-B6E3-C37AF87DA820}
+		{2F987F44-0FF1-49D6-98FD-79492BDE1739} = {05528761-FC1C-4308-BE90-2BB354A66EC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C7FC230-A7A8-4206-A533-E41B96D6E222}

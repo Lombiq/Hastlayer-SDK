@@ -48,7 +48,7 @@ public static class ResizeExtensions
             source,
             width,
             height,
-            4,
+            maxDegreeOfParallelism,
             hastlayer: null,
             hardwareRepresentation: null,
             configuration: null);
@@ -110,7 +110,7 @@ public static class ResizeExtensions
             width,
             height,
             maxDegreeOfParallelism,
-            KnownResamplers.NearestNeighbor,
+            sampler,
             new Rectangle(0, 0, width, height),
             compand: false,
             hastlayer,
@@ -181,7 +181,7 @@ public static class ResizeExtensions
             ? new HastlayerResizeProcessor(
                 options,
                 source.GetCurrentSize(),
-                maxDegreeOfParallelism,
+                HastlayerAcceleratedImageSharp.MaxDegreeOfParallelism,
                 hastlayer,
                 hardwareRepresentation,
                 configuration)

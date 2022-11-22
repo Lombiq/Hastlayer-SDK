@@ -9,14 +9,15 @@ namespace Hast.Samples.SampleAssembly;
 /// </summary>
 public class HastlayerAcceleratedImageSharp
 {
-    private const int ResizeDestinationImageWidthIndex = 0;
-    private const int ResizeDestinationImageHeightIndex = 1;
-    private const int ResizeImageWidthIndex = 2;
-    private const int ResizeImageHeightIndex = 3;
-    private const int ResizeHeightStartIndex = 4;
+    public const int HeaderCellCount = 4;
+    public const int ResizeDestinationImageWidthIndex = 0;
+    public const int ResizeDestinationImageHeightIndex = 1;
+    public const int ResizeImageWidthIndex = 2;
+    public const int ResizeImageHeightIndex = 3;
+    public const int ResizeHeightStartIndex = HeaderCellCount;
 
     [Replaceable(nameof(HastlayerAcceleratedImageSharp) + "." + nameof(MaxDegreeOfParallelism))]
-    private static readonly int MaxDegreeOfParallelism = 25;
+    public static readonly int MaxDegreeOfParallelism = 38;
 
     public virtual void CreateMatrix(SimpleMemory memory)
     {
@@ -25,59 +26,72 @@ public class HastlayerAcceleratedImageSharp
         var width = (ushort)memory.ReadUInt32(ResizeImageWidthIndex);
         var height = (ushort)memory.ReadUInt32(ResizeImageHeightIndex);
 
+        var heightFactor = height / destinationHeight;
         var widthFactor = width / destinationWidth;
 
         // Divide Ceiling.
         var verticalSteps = 1 + ((height - 1) / MaxDegreeOfParallelism);
         var horizontalSteps = 1 + ((width - 1) / MaxDegreeOfParallelism);
 
-        var tasks = new Task<IndexOutput>[MaxDegreeOfParallelism];
+        var tasks = new Task<int>[MaxDegreeOfParallelism];
 
-        for (int x = 0; x < horizontalSteps; x += MaxDegreeOfParallelism)
+        for (int y = 0; y < verticalSteps; y++)
         {
-            var step = x * MaxDegreeOfParallelism;
-            var fullStep = step * widthFactor;
+            var step = y * MaxDegreeOfParallelism;
 
             var index = 0;
             while (index < MaxDegreeOfParallelism)
             {
-                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
+                tasks[index] = Task.Factory.StartNew(
+                    stateObject =>
+                    {
+                        var state = (MapObject)stateObject;
+                        var fullIndex = state.Index + state.Step;
+                        return fullIndex * state.Factor;
+                    },
+                    new MapObject { Step = step, Factor = heightFactor, Index = index });
                 index++;
             }
 
             Task.WhenAll(tasks).Wait();
 
             var taskIndex = 0;
-            while (step + taskIndex > destinationWidth)
+            while (taskIndex < MaxDegreeOfParallelism)
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + step + taskIndex,
-                    tasks[taskIndex].Result.Index);
+                    tasks[taskIndex].Result);
 
                 taskIndex++;
             }
         }
 
-        for (int y = 0; y < verticalSteps; y++)
+        for (int x = 0; x < horizontalSteps; x++)
         {
-            var step = y * widthFactor;
-            var fullStep = step * MaxDegreeOfParallelism;
+            var step = x * MaxDegreeOfParallelism;
 
             var index = 0;
             while (index < MaxDegreeOfParallelism)
             {
-                tasks[index] = Task.Factory.StartNew(index => new IndexOutput { Index = (int)index + fullStep }, index);
+                tasks[index] = Task.Factory.StartNew(
+                    stateObject =>
+                    {
+                        var state = (MapObject)stateObject;
+                        var fullIndex = state.Index + state.Step;
+                        return fullIndex * state.Factor;
+                    },
+                    new MapObject { Step = step, Factor = widthFactor, Index = index });
                 index++;
             }
 
             Task.WhenAll(tasks).Wait();
 
             var taskIndex = 0;
-            while (step + taskIndex > destinationHeight)
+            while (step + taskIndex < destinationWidth)
             {
                 memory.WriteInt32(
                     ResizeHeightStartIndex + destinationHeight + step + taskIndex,
-                    tasks[taskIndex].Result.Index);
+                    tasks[taskIndex].Result);
 
                 taskIndex++;
             }
@@ -96,10 +110,10 @@ public class HastlayerAcceleratedImageSharp
     ////     memory.WriteInt32(Resize_WidthStartIndex + x, pixelIndex);
     //// }
 
-#pragma warning disable S3898 // Value types should implement "IEquatable<T>"
-    private struct IndexOutput
-#pragma warning restore S3898 // Value types should implement "IEquatable<T>"
+    private sealed class MapObject
     {
-        public int Index { get; set; }
+        public int Index;
+        public int Step;
+        public int Factor;
     }
 }

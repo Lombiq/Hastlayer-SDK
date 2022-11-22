@@ -5,14 +5,30 @@
 
 using Hast.Layer;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Advanced;
+using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
 using SixLabors.ImageSharp.Processing.Processors.Transforms;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
 public class HastlayerResizeProcessor : CloningImageProcessor
 {
+    private static readonly object _lock = new();
+
+    [SuppressMessage(
+        "Critical Code Smell",
+        "S2223:Non-constant static fields should not be visible",
+        Justification = "Has to be initialized on first use.")]
+    internal static HastlayerAcceleratedImageSharp ResizeProxy;
+
+    public static TextWriter LogPixelsWriter { get; set; }
+
     public HastlayerResizeProcessor(
         ResizeOptions options,
         Size sourceSize,
@@ -36,6 +52,19 @@ public class HastlayerResizeProcessor : CloningImageProcessor
         Hastlayer = hastlayer;
         HardwareRepresentation = hardwareRepresentation;
         Configuration = configuration;
+
+        if (ResizeProxy == null)
+        {
+            lock (_lock)
+            {
+                // We only want to create the proxy once, but it requires the IHastlayer instance that's not available
+                // from a static member.
+#pragma warning disable S3010 // S3010:Static fields should not be updated in constructors
+                ResizeProxy = hastlayer
+                    .GenerateProxyAsync(hardwareRepresentation, new HastlayerAcceleratedImageSharp(), configuration).Result;
+#pragma warning restore S3010 // S3010:Static fields should not be updated in constructors
+            }
+        }
     }
 
     /// <summary>
@@ -94,7 +123,31 @@ public class HastlayerResizeProcessor : CloningImageProcessor
         Rectangle sourceRectangle)
     {
         configuration.MaxDegreeOfParallelism = MaxDegreeOfParallelism;
-        return new HastlayerResizeProcessor<TPixel>(
-            configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation, Configuration);
+
+        if (LogPixelsWriter != null) PixelsToOutput(source, "before");
+        var result = new HastlayerResizeProcessor<TPixel>(
+            configuration, this, source, sourceRectangle, Hastlayer, HardwareRepresentation);
+        if (LogPixelsWriter != null) PixelsToOutput(source, "after");
+
+        return result;
+    }
+
+    [SuppressMessage(
+        "Major Code Smell",
+        "S106:Standard outputs should not be used directly to log anything",
+        Justification = "This is a logger method.")]
+    private void PixelsToOutput<TPixel>(Image<TPixel> source, string note)
+        where TPixel : unmanaged, IPixel<TPixel>
+    {
+        Console.WriteLine($"Pixels in the image {note}:");
+
+        for (int i = 0; i < source.Height; i++)
+        {
+            var row = MemoryMarshal.Cast<TPixel, byte>(source.DangerousGetPixelRowMemory(i).Span);
+            foreach (var pixelByte in row) Console.Write($"{pixelByte:X2} ");
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("\n\n\n");
     }
 }
