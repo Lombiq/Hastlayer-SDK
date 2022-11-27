@@ -2,11 +2,11 @@ name: Create Jira issues for community activities
 
 on:
   discussion:
-    types: created
+    types: [created]
   issues:
-    types: opened
+    types: [opened]
   pull_request:
-    types: opened
+    types: [opened]
 
 jobs:
   call-create-jira-issues-for-community-activities-workflow:
