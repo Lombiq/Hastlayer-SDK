@@ -12,5 +12,5 @@ jobs:
     name: Build and Test
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/HAST-290
     with:
-      machine-types: "[\"ubuntu-latest-4core\""
+      machine-types: "[\"ubuntu-latest-4core\"]"
       timeout-minutes: 30
