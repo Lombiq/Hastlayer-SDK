@@ -16,6 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="RestEase" Version="1.5.2" />
+    <PackageReference Include="RestEase" Version="1.5.5" />
   </ItemGroup>
 </Project>
