@@ -11,6 +11,8 @@ jobs:
   build-and-test:
     name: Build and Test
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/HAST-290
+    secrets:
+      CHECKOUT_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
     with:
       machine-types: "[\"ubuntu-latest-4core\"]"
       timeout-minutes: 30
