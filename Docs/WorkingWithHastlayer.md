@@ -1,7 +1,5 @@
 # Working with Hastlayer
 
-
-
 ## Creating a Hastlayer-using application
 
 The Hastlayer developer story is not ideal yet - we're working on improving it by [making the SDK available from NuGet](https://github.com/Lombiq/Hastlayer-SDK/issues/35). For now the below one is the easiest approach to add Hastlayer to your application:
@@ -48,11 +46,9 @@ Some general constraints you have to keep in mind:
 - Note that you can write unsupported code in a member of a type that will be transformed if that member won't be accessed on the hardware (since unused code is removed from transformation). So e.g. you can implement `ToString()`.
 - Check out the `Hast.Algorithms` library for some Hastlayer-compatible useful algorithms.
 
-
 ## Running your code on hardware
 
 Once you've written some Hastlayer-compatible algorithm you can then generate hardware from it. Be sure to use assemblies built in the Debug configuration. Once you've successfully generated hardware from your algorithm then you'll be able to execute it on an FPGA as hardware. At the moment this needs to be configured manually, so check out the docs of the Hastlayer Hardware repo on how to get started with that.
-
 
 ## Performance-optimizing your code
 
@@ -87,7 +83,6 @@ Note that FPGAs have a finite amount of resources that you can utilize, and the 
 
 Very broadly speaking if you performance-optimize your .NET code and it executes faster as software then most possibly it will also execute faster as hardware. But do measure if your optimizations have the desired effect.
 
-
 ## Troubleshooting
 
 ### Errors and warnings
@@ -117,7 +112,6 @@ When you're working with the Developer flavor of Hastlayer it can also help to s
 You can store the contents of a `SimpleMemory` instance in a binary format, also as a file. Similarly you can load them into a `SimpleMemory` too.
 
 You can read such files e.g. with Notepad++'s [HEX-Editor plugin](https://community.notepad-plus-plus.org/topic/17459/why-there-is-no-new-hexeditor-now/2). After the plugin's installation click the H icon to display the file contents in a hex format.
-
 
 ## Extensibility
 

@@ -1,9 +1,6 @@
 # Release notes
 
-
-
 Note that the Hardware Framework projects have their own release cycle and release notes.
-
 
 ## vNext
 
@@ -12,7 +9,6 @@ Note that the Hardware Framework projects have their own release cycle and relea
 ## v1.2.1, 27.10.2021
 
 Bugfix release to make Hastlayer Remote Services reliably work. If you tried to connect to Hastlayer recently, and didn't get the transformation completed, this fixes it.
-
 
 ## v1.2, 04.10.2021
 
@@ -29,7 +25,6 @@ Bugfix release to make Hastlayer Remote Services reliably work. If you tried to 
 - Various smaller bugfixes and improvements.
 
 Note that running Hastlayer now requires Visual Studio 2019 or greater (any edition will work).
-
 
 ## v1.1, 20.12.2019
 
@@ -51,13 +46,11 @@ After a lot of work we're finally ready with support for much larger FPGAs that 
 - Simplifying samples: no more extension methods for wrappers to be called by external consumers (all methods can be in the same classes).
 - Various smaller bugfixes and improvements.
 
-
 ## 1.0.10, 08.06.2018
 
 - Updating and fixing hardware timing values, making hardware execution more reliable, but in certain cases slightly slower, however also causing lower FPGA resource usage.
 - Fixing that hardware description caching didn't work with certain programs.
 - Improved documentation.
-
 
 ## 1.0.9, 18.03.2018
 
@@ -70,7 +63,6 @@ After a lot of work we're finally ready with support for much larger FPGAs that 
 
 Note that running Hastlayer now requires Visual Studio 2017 or greater (any edition will work).
 
-
 ## 1.0.8, 13.01.2018
 
 - Adding ability to inline methods to vastly improve performance if the method is small but called a lot of times.
@@ -82,7 +74,6 @@ Note that running Hastlayer now requires Visual Studio 2017 or greater (any edit
 
 For all publicly tracked issues resolved with this release [see the corresponding milestone](https://github.com/Lombiq/Hastlayer-SDK/milestone/1?closed=1).
 
-
 ## 1.0.7, 25.11.2017
 
 - Adding sample with an implementation of the 3D [Kardar-Parisi-Zhang](https://en.wikipedia.org/wiki/Kardar%E2%80%93Parisi%E2%80%93Zhang_equation) surface growth simulation algorithm. Made in collaboration with the [Wigner Research Centre for Physics](http://wigner.mta.hu/en/) to test against an existing GPU implementation (testing is upcoming).
@@ -90,7 +81,6 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Fixing exception when using public fields in certain cases.
 - More helpful exception when a type was not found.
 - The [Hastlayer Hardware Framework - Xilinx project](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Xilinx) got some scripts to automate updating the Vivado project with a new generated hardware design and to program the FPGA and launch the Xilinx SDK. From now on the project has a release cycle independent of the SDK.
-
 
 ## 1.0.6, 21.10.2017
 
@@ -102,13 +92,11 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Fixing a constant substitution edge-case for nested if and while statements.
 - Improved documentation.
 
-
 ## 1.0.5, 20.09.2017
 
 - Fixing `HardwareGenerationConfiguration.AddHardwareEntryPointType()`, it now only adds the actual type as an entry point, not other types with similar names too.
 - Improved documentation.
 - Various smaller bugfixes and improvements.
-
 
 ## 1.0.4, 08.09.2017
 
@@ -116,7 +104,6 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Fixing transformed shift operator behavior.
 - Improved documentation.
 - Various smaller bugfixes and improvements.
-
 
 ## 1.0.3, 02.08.2017
 
@@ -129,14 +116,12 @@ For all publicly tracked issues resolved with this release [see the correspondin
 
 **Note** that since Hastlayer Hardware changed as well you'll need to either regenerate the Vivado and SDK projects (after purging or re-cloning the Hardware repo) or manually upgrade Hast_IP if you want to run the sample hardware (in Vivado go to Tools/Report/Report IP Status, then after Hast_IP is listed in the IP Status window as changed you'll need to follow the steps under the Hardware docs' "Running hardware designs" page). Otherwise you'll be able to run your own custom generated hardware as usual, but you'll need to re-generate them after pulling in updates from both repos.
 
-
 ## v1.0.2, 19.07.2017
 
 - More reliable serial port selection.
 - Remote Worker is sending telemetry to Azure Application Insights, allowing better production diagnostics.
 - Improved documentation.
 - Various smaller bugfixes and improvements.
-
 
 ## v1.0.1, 17.07.2017
 
@@ -148,12 +133,10 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Improved documentation.
 - Various smaller bugfixes and improvements.
 
-
 ## v1.0.0.1, 13.07.2017
 
 - Improved documentation.
 - Improved the stability of the Remote Worker that does remote transformations.
-
 
 ## v1.0, 12.07.2017
 
@@ -167,7 +150,6 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Improved error messages.
 - Various smaller bugfixes and improvements.
 
-
 ## v0.9, 28.05.2017
 
 - Values resolvable at compile-time are substituted as constants, optimizing the resulting hardware and allowing more flexible array usage too.
@@ -178,14 +160,12 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Support for custom constructors.
 - Various smaller bugfixes and improvements.
 
-
 ## v0.8, 08.02.2017
 
 - Precise latencies determined for operations, thus making hardware execution more reliable.
 - Hardware project updated for Vivado 2016.4
 - Instance method support.
 - Various smaller bugfixes and improvements.
-
 
 ## v0.7, 29.08.2016
 
@@ -196,7 +176,6 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Operation-level parallelism.
 - Various smaller bugfixes and improvements.
 
-
 ## v0.6, 25.04.2016
 
 - Array support.
@@ -206,7 +185,6 @@ For all publicly tracked issues resolved with this release [see the correspondin
 - Hardware execution time is measured.
 - 64b primitive types support.
 - Various smaller bugfixes and improvements.
-
 
 ## v0.5, 28.02.2016
 

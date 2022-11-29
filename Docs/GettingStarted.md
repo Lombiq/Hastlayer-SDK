@@ -1,7 +1,5 @@
 # Getting started
 
-
-
 ## Overview
 
 To begin working with Hastlayer you'll need the following:
@@ -22,7 +20,6 @@ Catapult acknowledgment: The authors acknowledge the [Texas Advanced Computing C
 
 If you have a compatible FPGA board you can run the default sample even without having access to Hastlayer Remote Services.
 
-
 ## Flavors of Hastlayer
 
 The Hastlayer components come in two "flavors" with corresponding branches in their repositories:
@@ -31,7 +28,6 @@ The Hastlayer components come in two "flavors" with corresponding branches in th
 - Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service, i.e. Hastlayer Remote Services. *Hast.Core* encompasses those components of Hastlayer that do the heavy lifting of software to hardware transformation. Most possibly you need this one.
 
 You'll see this terminology be used further on.
-
 
 ## First steps
 
@@ -50,7 +46,6 @@ These would be your first steps on starting to work with Hastlayer by getting th
 6. You should be able to see the results of the sample in its console window.
 
 If everything is alright follow up with the rest of this documentation to write your first own Hastlayer-using algorithm. You can also check out the many documented samples under the *Samples* solution folder.
-
 
 ## Device-specific documentation
 

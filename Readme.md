@@ -18,11 +18,9 @@ Created by [Lombiq Technologies](https://lombiq.com/), an open source .NET web d
 
 Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies.
 
-
 ## Notes on Hastlayer's documentation
 
 These text files should only serve as a starting point. The samples are the best source of information on how to use Hastlayer. The public API of Hastlayer is also documented inline as code comments. Please check the comments for clarification. The projects also have README files.
-
 
 ## Table of contents
 
@@ -33,7 +31,6 @@ These text files should only serve as a starting point. The samples are the best
 - [Release notes](Docs/ReleaseNotes.md)
 - [Roadmap](Docs/Roadmap.md)
 - [Support](Docs/Support.md)
-
 
 ## Contributing and support
 
