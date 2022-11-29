@@ -9,14 +9,18 @@ on:
 
 jobs:
   build-and-test-larger-runners:
+    strategy:
+      matrix:
+        build: [ {solution: Hastlayer.SDK.Client.sln, machine-type: "[\"ubuntu-latest\"]"}, {solution: Hastlayer.SDK.Linux.sln, machine-type: "[\"ubuntu-latest-4core\"]"}, {solution: Hastlayer.SDK.sln, machine-type: "[\"windows-latest-8core\"]"} ]
     if: github.ref_name != github.event.repository.default_branch
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/HAST-290
     secrets:
       CHECKOUT_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
     with:
-      machine-types: "[\"ubuntu-latest-4core\"]"
+      machine-types: ${{ matrix.build.machine-type }} 
       timeout-minutes: 30
+      build-solution-path: ${{ matrix.build.solution }} 
 
   build-and-test-standard-runners:
     if: github.ref_name == github.event.repository.default_branch
