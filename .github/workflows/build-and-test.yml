@@ -8,7 +8,7 @@ on:
       - dev
 
 jobs:
-  call-build-and-test-workflow:
+  build-and-test:
     name: Build and Test
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/HAST-290
     with:
