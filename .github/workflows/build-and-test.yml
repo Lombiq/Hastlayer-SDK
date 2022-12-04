@@ -26,6 +26,7 @@ jobs:
     with:
       machine-types: ${{ matrix.build.machine-type }} 
       timeout-minutes: 30
+      build-configuration: Debug
       build-solution-path: ${{ matrix.build.solution }}
       test-disable: ${{ matrix.build.test-disable }}
 
@@ -45,5 +46,6 @@ jobs:
     with:
       machine-types: ${{ matrix.build.machine-type }} 
       timeout-minutes: 60
+      build-configuration: Debug
       build-solution-path: ${{ matrix.build.solution }}
       test-disable: ${{ matrix.build.test-disable }}
