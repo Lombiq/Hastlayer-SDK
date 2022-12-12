@@ -1,9 +1,6 @@
 # Hastlayer - Communication
 
-
-
 Component dealing with the communication between the host and the hardware implementation.
-
 
 ## Using Ethernet
 
@@ -27,7 +24,6 @@ You can set up a peer to peer connection as following:
 4. Start up the software on the FPGA board (make sure to configure the software to use Ethernet communication: change the `COMMUNICATION_CHANNEL` symbol's value to `ETHERNET` under the _HastlayerOperatingSystem_ project's properties, C/C++ Build, Settings, MicroBlaze g++ compiler, Symbols) and wait for it to receive an IP address.
 
 Also tried but don't recommend [Tftpd32](http://tftpd32.jounin.net/) (needs manual configuration for the given NICs), [Tiny DHCP Server](http://softcab.com/dhcp-server/index.php) (also needs manual configuration) and [haneWIN DHCP Server](http://www.hanewin.net/dhcp-e.htm) (30 days shareware).
-
 
 ## Using USB UART (virtual serial port)
 

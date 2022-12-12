@@ -1,14 +1,10 @@
 # Using Hastlayer with Zynq SoC modules
 
-
-
 This section has both generic instructions and specific steps for setting up `Hast.Samples.Consumer` for the _Trenz TE0715-04-30-1C_ module. Use the latter as template for your own projects.
-
 
 ## Before you Start
 
 You need to create your own PetaLinux 2020.2 boot image first. We have a tutorial for that in a separate document [here](ZynqPetaLinux.md)
-
 
 ## Cross Compilation
 
@@ -60,7 +56,6 @@ You need to upload some files to your microSD card to have a usable system. Pref
 
 > ℹ️ If you plan using the _Hast.Samples.Demo_ project, then copy the [_run-demo.sh_](Attachments/run-demo.sh) file to the root as well. This is a launcher script for presentations, it makes use of _zynq-benchmark.dot.sh_ to prepare and launch the Hastlayer demonstration. Just run it with `bash run-demo.sh`.
 
-
 ## Hardware and Network Setup
 
 Connect your device to your router with an Ethernet cable. For the TE0706 carrier board it's the port that's _not_ lit (and won't light up when you plug it in either). Then plug in the power adapter into the barrel jack.
@@ -68,7 +63,6 @@ Connect your device to your router with an Ethernet cable. For the TE0706 carrie
 Once powered up, you need to know its IP address. You can use your router's web UI or other network discovery tools (like [Advanced IP Scanner](https://www.advanced-ip-scanner.com/)). Alternatively, if your device has a JTAG connector you can connect using USB serial shell and type `ifconfig` (with e.g. [MobaXterm](https://mobaxterm.mobatek.net/) select the "Serial" session type, choose a serial port and set the speed to 115200 bps). When you have the IP address set up an SSH connection for future convenience. You should be able to log in with "root" as your user name and password.
 
 You can also transfer files via SSH using an SFTP client (e.g. FileZilla) so you won't need to take out the SD card from this point. **Don't** upload files to anywhere except _/media/sd-mmcblk0p1/_. The rest of the file system is volatile and will be reset after each reboot. 
-
 
 ## Running your Program through SSH
 

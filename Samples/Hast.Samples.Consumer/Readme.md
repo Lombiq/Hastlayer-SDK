@@ -1,13 +1,10 @@
 # Hastlayer consumer sample
 
-
 A simple console application that showcases how an app can utilize Hastlayer and details everything in code comments. First head to the *Program.cs* file.
 
 This is a complete, thoroughly documented sample. If you'd like to see a more stripped-down version of a minimal Hastlayer-using application, check out the *Hast.Samples.Demo* project instead.
 
-
 ## Using from the command line
-
 
 We encourage you to check out the code of the app to understand how it works. You can also do all the configuration in code. However, if you'd just like to run it to test whether everything is OK in your setup then you can execute it as a command-line app, e.g.:
 

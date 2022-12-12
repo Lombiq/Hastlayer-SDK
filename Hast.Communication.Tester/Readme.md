@@ -1,9 +1,6 @@
 # Hastlayer - Communication Tester
 
-
-
 Command line application for testing the communication layer.
-
 
 ## About
 
@@ -11,7 +8,6 @@ This application sends test data to any device that has a matching `ICommunicati
 the hardware or alter the input so automatic verification is only useful if the device is already behaving as loopback.
 You can upload generated content (see `--payload-type` switch) or any binary files. Both generated input and the output
 can be saved to file or displayed on the console.
-
 
 ## Usage
 
@@ -26,7 +22,6 @@ a hexdump style.
 If you need to iterate the output you can do so by using 
 
 `Hast.Communication.Tester.exe --device Catapult --bytes 1024 --member-id 0 -i CONSOLE -o CONSOLE -n`
-
 
 ## Switches
 
@@ -59,7 +54,6 @@ Display this help screen.
 - `--version`
 Display version information.
 
-
 ## Payload Types
 
 The first 3 options consider each 4 byte cell in the `SimpleMemory` as an `Int32`.
@@ -73,7 +67,6 @@ If it's set to BinaryFile then the input is read from `--input` instead of writt
 
 Random is non-repeatable so if that becomes an issue you can first export a generated input using the
 `-t Random -f Binary -i random.bin` options and then use `-t BinaryFile -i random.bin` in consecutive runs.
-
 
 ## File Types
 
