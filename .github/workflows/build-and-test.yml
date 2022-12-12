@@ -14,7 +14,9 @@ jobs:
         # This is an undocumented way of creating a matrix of multiple values, see:
         # https://stackoverflow.com/questions/66025220/paired-values-in-github-actions-matrix.
         build: [
-            {machine-type: "[\"ubuntu-latest\"]", test-disable: true},
+            {solution: Hastlayer.SDK.Client.sln, machine-type: "[\"ubuntu-latest\"]", test-disable: true},
+            {solution: Hastlayer.SDK.Linux.sln, machine-type: "[\"ubuntu-latest\"]", test-disable: true},
+            {solution: Hastlayer.SDK.sln, machine-type: "[\"windows-latest-8core\"]", test-disable: false}
           ]
     if: github.ref_name != github.event.repository.default_branch
     name: Build and Test (larger runners)
@@ -25,4 +27,25 @@ jobs:
       machine-types: ${{ matrix.build.machine-type }} 
       timeout-minutes: 30
       build-configuration: Debug
+      build-solution-path: ${{ matrix.build.solution }}
+      test-disable: ${{ matrix.build.test-disable }}
+
+  build-and-test-standard-runners:
+    strategy:
+      matrix:
+        build: [
+            {solution: Hastlayer.SDK.Client.sln, machine-type: "[\"ubuntu-latest\"]", test-disable: true},
+            {solution: Hastlayer.SDK.Linux.sln, machine-type: "[\"ubuntu-latest\"]", test-disable: false},
+            {solution: Hastlayer.SDK.sln, machine-type: "[\"windows-latest\"]", test-disable: false}
+          ]
+    if: github.ref_name == github.event.repository.default_branch
+    name: Build and Test (standard runners)
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/HAST-290
+    secrets:
+      CHECKOUT_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
+    with:
+      machine-types: ${{ matrix.build.machine-type }} 
+      timeout-minutes: 60
+      build-configuration: Debug
+      build-solution-path: ${{ matrix.build.solution }}
       test-disable: ${{ matrix.build.test-disable }}
