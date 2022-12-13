@@ -5,11 +5,6 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage(
-    "Minor Code Smell",
-    "S1481:Unused local variables should be removed",
-    Justification = "Information in the variable name.",
-    Scope = "module")]
-[assembly: SuppressMessage(
     "Globalization",
     "CA1303:Do not pass literals as localized parameters",
     Justification = "This app is not localized.",
