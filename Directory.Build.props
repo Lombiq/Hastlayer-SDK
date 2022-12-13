@@ -1,8 +1,3 @@
 <Project>
-  <!-- This is a temporary solution while we have problems compiling on Linux with static code analysis enabled. When
-  fixed, remove the Condition and the PropertyGroup.Langversion below. -->
-  <Import Project="tools/Lombiq.Analyzers/Lombiq.Analyzers/Build.props" Condition="$([MSBuild]::IsOSPlatform('Windows'))" />
-  <PropertyGroup Condition="$([MSBuild]::IsOSPlatform('Linux'))">
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+  <Import Project="tools/Lombiq.Analyzers/Lombiq.Analyzers/Build.props" />
 </Project>
