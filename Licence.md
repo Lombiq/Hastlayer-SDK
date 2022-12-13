@@ -1,8 +1,6 @@
-Copyright © 2017, [Lombiq Technologies Ltd.](lombiq.com)
+Copyright © 2017, [Lombiq Technologies Ltd.](https://lombiq.com)
 
 All rights reserved.
-
-For more information and requests about licensing please [contact us through our website](https://lombiq.com/contact-us).
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
