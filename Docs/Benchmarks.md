@@ -1,9 +1,6 @@
 # Benchmarks
 
-
-
 Here are some basic performance benchmarks on how Hastlayer-accelerated code compares to standard .NET. Since with FPGAs you're not running a program on a processor like a CPU or GPU but rather you create a processor out of your algorithm direct comparisons are hard. Nevertheless, here we tried to compare FPGAs and host PCs (CPUs) with roughly on the same level (e.g. comparing a mid-tier CPU to a mid-tier FPGA).
-
 
 ## Notes on the benchmarked algorithms
 
@@ -26,7 +23,6 @@ Here you can find some measurements of execution times of various algorithms on 
 - Power consumption is an approximation based on hardware details. For PCs it only contains the power consumption of the CPU(s). For FPGA measurements the "total" time is used (though presumably when just communication is running the power consumption is much lower than when computations are being executed).
 - FPGA resource utilization figures are based on the "main" resource's utilization with all other resource types assumed to be below 100%. For Xilinx FPGAs the main resource type is LUT, for Intel (Altera) ones ALM.
 - For FPGA measurements "total" means the total execution time, including the communication latency of the FPGA; since this varies because of the host PC's load the lowest achieved number is used. "Net" means just the execution of the algorithm itself on the FPGA, not including the time it took to send data to and receive from the device; FPGA execution time is deterministic and doesn't vary significantly. With faster communication channels "total" can be closer to "net". If the input and output data is small then the two measurements will practically be the same.
-
 
 ## Vitis
 
@@ -97,7 +93,6 @@ benchmark image ImageProcessingAlgorithms ImageContrastModifier > run.moon.log
 ```
 
 The utilization and power usage information was inside the *HardwareFramework/reports* directory.
-
 
 ## Zynq
 
@@ -178,12 +173,10 @@ Comparing the performance of the Nexys A7-100T FPGA board to a host PC with an I
 2. With a degree of parallelism of 79 the FPGA resource utilization would jump to 101% so this is the limit of efficiency.
 3. With a degree of parallelism of 270 the resource utilization goes above 90% (94% post-synthesis) and the implementation step of bitstream generation fails.
 
-
 ## Further data
 
 - In the ["High-level .NET Software Implementations of Unum Type I and Posit with Simultaneous FPGA Implementation Using Hastlayer" whitepaper](https://dl.acm.org/authorize?N659104) presented at the CoNGA 2018 conference the performance and clock cycle efficiency (which can be roughly equated to power efficiency) of operations of the posit floating point number format are compared. While the FPGA implementation is about 10x slower it's about 2-3x more power efficient.
 - While details can't be disclosed an Italian company observed a 10x speed increase of various high-frequency trading algorithms, compared to the original C++ implementation.
-
 
 ## Attribution
 

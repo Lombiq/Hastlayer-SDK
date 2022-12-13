@@ -431,15 +431,16 @@ public class Fix64Tests
         }
     }
 
-    [Fact(Skip = "On ignore because temporarily removed the interface implementations from Fix64")]
-    public void CompareTo()
-    {
-        var nums = _testCases.Select(Fix64.FromRaw).ToArray();
-        var numsDecimal = nums.Select(t => (decimal)t).ToArray();
-        Array.Sort(nums);
-        Array.Sort(numsDecimal);
-        Assert.True(nums.Select(t => (decimal)t).SequenceEqual(numsDecimal));
-    }
+    // Not needed temporarily because we removed the interface implementations from Fix64.
+    ////[Fact]
+    ////public void CompareTo()
+    ////{
+    ////    var nums = _testCases.Select(Fix64.FromRaw).ToArray();
+    ////    var numsDecimal = nums.Select(t => (decimal)t).ToArray();
+    ////    Array.Sort(nums);
+    ////    Array.Sort(numsDecimal);
+    ////    Assert.True(nums.Select(t => (decimal)t).SequenceEqual(numsDecimal));
+    ////}
 
     [Fact]
     public void SerializationToAndFromIntegers()

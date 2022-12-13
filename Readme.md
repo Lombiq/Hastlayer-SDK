@@ -1,10 +1,6 @@
 # Hastlayer SDK
 
-
-
-
-[![TeamCity build status](https://ci.lombiq.com/app/rest/builds/buildType:id:Hastlayer_Developer_PullAndBuild/statusIcon.svg)](https://ci.lombiq.com/buildConfiguration/Hastlayer_Developer_PullAndBuild?mode=builds#all-projects)
-
+[![Build and Test](https://github.com/Lombiq/Hastlayer-SDK/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Lombiq/Hastlayer-SDK/actions/workflows/build-and-test.yml)
 
 ## About
 
@@ -22,11 +18,9 @@ Created by [Lombiq Technologies](https://lombiq.com/), an open source .NET web d
 
 Hastlayer uses [ILSpy](http://ilspy.net/) to process CIL assemblies.
 
-
 ## Notes on Hastlayer's documentation
 
 These text files should only serve as a starting point. The samples are the best source of information on how to use Hastlayer. The public API of Hastlayer is also documented inline as code comments. Please check the comments for clarification. The projects also have README files.
-
 
 ## Table of contents
 
@@ -37,7 +31,6 @@ These text files should only serve as a starting point. The samples are the best
 - [Release notes](Docs/ReleaseNotes.md)
 - [Roadmap](Docs/Roadmap.md)
 - [Support](Docs/Support.md)
-
 
 ## Contributing and support
 

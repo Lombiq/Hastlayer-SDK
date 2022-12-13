@@ -1,5 +1,3 @@
-﻿# Hastlayer - Hast.Layer
-
-
+# Hastlayer - Hast.Layer
 
 The central component of Hastlayer.

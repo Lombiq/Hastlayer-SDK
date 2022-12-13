@@ -1,7 +1,5 @@
 # Hastlayer Vitis Driver
 
-
-
 ## Overview
 
 This project contains the communication service used to connect with [Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) devices, such as the [Xilinx Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html) FPGA accelerator card via the [OpenCL](https://www.khronos.org/opencl/) library.
@@ -10,13 +8,11 @@ Note that the SH scripts in this project should use LF line endings! You'll get 
 
 For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
 
-
 ## Requirements
 
 * The system running the FPGA card must be 64-bit Linux (e.g. Ubuntu 18.04.2 LTS or CentOS 7.6). The installation instructions can be found here [in the platform documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/vhc1571429852245.html).
 * The device-specific software requirements can be found in the card's Getting Started page, e.g. [Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html#gettingStarted).
 * Hastlayer has its own software requirements which can be found in the repository's *GettingStarted.md* file.
-
 
 ## Preparation
 
@@ -34,11 +30,9 @@ Be sure that all .NET software dependencies are on the same version on both the 
 * [Publish your program as self-contained](https://docs.microsoft.com/en-us/dotnet/core/deploying/#publish-self-contained), eg. `dotnet publish -c Release -r linux-x64 -p:PublishReadyToRun=true Hastlayer.SDK.Linux.sln`. Replace `linux-x64` with `linux-arm` to build the binaries for a 32-bit ARM device like the Zynq boards.
   * Note that Ready to Run [has its own restrictions](https://docs.microsoft.com/en-us/dotnet/core/deploying/ready-to-run#cross-platformarchitecture-restrictions). Up to .Net 5 you need a Linux platform for Linux builds. So if you are on Windows you need a Linux virtual machine (for example using Docker as described in the next chapter). Starting with .Net 6 you can build Linux targets from Windows and macOS too. 
 
-
 ### Cross Compilation with Docker
 
 If you are interested in using Docker, especially from a Windows host, [read this](Docs/Docker.md).
-
 
 ## Specialized Targets
 
@@ -46,7 +40,6 @@ Aside from general Vitis accelerator card support, there are a couple specialize
 - [Using Hastlayer with Vitis boards on Azure NP Servers](Docs/AzureReadme.md)
 - [Using Hastlayer with Zynq SoC modules](Docs/ZynqReadme.md)
   - [Building PetaLinux 2020.2 SD card image for Hastlayer](Docs/ZynqPetaLinux.md)
-
 
 ## Other Remarks
 

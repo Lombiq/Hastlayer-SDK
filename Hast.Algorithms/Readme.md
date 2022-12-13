@@ -1,7 +1,5 @@
 # Hastlayer Algorithms
 
-
-
 Some useful algorithms that are compatible with Hastlayer and thus can be used in hardware too.
 
 Includes:
