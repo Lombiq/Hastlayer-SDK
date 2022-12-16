@@ -82,8 +82,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5BF98C7-CE64-4E2E-B083-F987B33182D6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		tools\Lombiq.Analyzers\General.ruleset = tools\Lombiq.Analyzers\General.ruleset
 		Licence.md = Licence.md
 		NuGet.config = NuGet.config
+		Readme.md = Readme.md
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
 EndProject
@@ -129,7 +131,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Base", "Hast.Core\Hast.TestInputs.Base\Hast.TestInputs.Base.csproj", "{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.Common", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj", "{9A0DEDE2-CF33-48A6-A8ED-F0F0F45D5905}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.Common", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj", "{5B2ED453-CC72-4593-8D7A-C123CA47F710}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F1C0595B-B01C-4087-9FED-0FA26A5CE7F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{9B301050-AFCB-48B3-A35E-F1724FDE9FE6}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
+		.github\workflows\create-jira-issues-for-community-activities.yml = .github\workflows\create-jira-issues-for-community-activities.yml
+		.github\workflows\validate-pull-request.yml = .github\workflows\validate-pull-request.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{05528761-FC1C-4308-BE90-2BB354A66EC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{2F987F44-0FF1-49D6-98FD-79492BDE1739}"
+	ProjectSection(SolutionItems) = preProject
+		Hast.Core\.github\workflows\verify-submodule-pull-request.yml = Hast.Core\.github\workflows\verify-submodule-pull-request.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -309,10 +327,10 @@ Global
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A0DEDE2-CF33-48A6-A8ED-F0F0F45D5905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A0DEDE2-CF33-48A6-A8ED-F0F0F45D5905}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A0DEDE2-CF33-48A6-A8ED-F0F0F45D5905}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A0DEDE2-CF33-48A6-A8ED-F0F0F45D5905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -357,7 +375,10 @@ Global
 		{38198457-A60A-4F35-9604-29B39B6D03A7} = {B88EC5D8-5D8A-4C87-81B3-F4F8C7FB2BF8}
 		{4C53D384-FDED-4608-8C9A-616531CA4832} = {75BB7270-46E1-47D9-91CA-2A7666251ED6}
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146} = {A5CA6F21-24E8-4EFE-A870-5CF8234AD56F}
-		{9A0DEDE2-CF33-48A6-A8ED-F0F0F45D5905} = {75BB7270-46E1-47D9-91CA-2A7666251ED6}
+		{5B2ED453-CC72-4593-8D7A-C123CA47F710} = {75BB7270-46E1-47D9-91CA-2A7666251ED6}
+		{9B301050-AFCB-48B3-A35E-F1724FDE9FE6} = {F1C0595B-B01C-4087-9FED-0FA26A5CE7F5}
+		{05528761-FC1C-4308-BE90-2BB354A66EC3} = {B61218C3-CA60-4263-B6E3-C37AF87DA820}
+		{2F987F44-0FF1-49D6-98FD-79492BDE1739} = {05528761-FC1C-4308-BE90-2BB354A66EC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C7FC230-A7A8-4206-A533-E41B96D6E222}
