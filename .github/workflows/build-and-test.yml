@@ -15,7 +15,7 @@ jobs:
         # https://stackoverflow.com/questions/66025220/paired-values-in-github-actions-matrix.
         build: [
             {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
-            {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
+            {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
             {solution: Hastlayer.SDK.sln, machine-type: "['windows-2022-8core']", test-disable: false}
           ]
     if: github.ref_name != 'dev'
@@ -35,7 +35,7 @@ jobs:
       matrix:
         build: [
             {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
-            {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
+            {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
             {solution: Hastlayer.SDK.sln, machine-type: "['windows-2022']", test-disable: false}
           ]
     if: github.ref_name == 'dev'
