@@ -14,7 +14,7 @@ jobs:
         # This is an undocumented way of creating a matrix of multiple values, see:
         # https://stackoverflow.com/questions/66025220/paired-values-in-github-actions-matrix.
         build: [
-            {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
+            {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
             {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
             {solution: Hastlayer.SDK.sln, machine-type: "['windows-2022-8core']", test-disable: false}
           ]
@@ -34,7 +34,7 @@ jobs:
     strategy:
       matrix:
         build: [
-            {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
+            {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
             {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
             {solution: Hastlayer.SDK.sln, machine-type: "['windows-2022']", test-disable: false}
           ]
