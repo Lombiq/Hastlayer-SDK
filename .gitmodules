@@ -1,7 +1,3 @@
-[submodule "Hast.Core"]
-	path = Hast.Core
-	url = https://github.com/Lombiq/Hastlayer-Core.git
-	branch = dev
 [submodule "Lombiq.Arithmetics"]
 	path = Lombiq.Arithmetics
 	url = https://github.com/Lombiq/Arithmetics.git
