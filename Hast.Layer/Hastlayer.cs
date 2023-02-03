@@ -54,7 +54,7 @@ public sealed class Hastlayer : IHastlayer
             typeof(NexysA7ManifestProvider).Assembly,
             typeof(CatapultManifestProvider).Assembly,
         });
-        assemblies.AddRange(GetHastLibraries());
+        assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
 
         var services = new ServiceCollection();
 
@@ -425,13 +425,4 @@ public sealed class Hastlayer : IHastlayer
             throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
         }
     }
-
-    private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
-        DependencyInterfaceContainer.LoadAssemblies(
-            Directory
-                .GetFiles(path, "Hast.*.dll")
-                .Where(path => !Path.GetFileName(path)
-                    // Check any core project names that aren't referenced by Hastlayer to avoid accidental loading.
-                    .StartsWithOrdinalIgnoreCase("Hast.Remote.Worker")
-                ));
 }

@@ -5,7 +5,6 @@
 To begin working with Hastlayer you'll need the following:
 
 - The SDK and Hardware Framework repositories cloned.
-- Access to Hastlayer Remote Services, which does the actual .NET to hardware transformation. Evaluation, academic and personal access is currently free and you can sign up on [hastlayer.com](https://hastlayer.com).
 - A compatible FPGA board. You have the following options here:
   - For simpler workloads and testing: The [Nexys A7 (formerly known as Nexys 4 DDR)](https://store.digilentinc.com/nexys-a7-fpga-trainer-board-recommended-for-ece-curriculum/) board (which is **NOT** the same as the non-DDR Nexys 4, be sure to purchase the linked board!) is suitable. The **Nexys A7-100T** version is required. Note that this is a relatively low-end development board that can't fit huge algorithms and it only supports slow communication channels. So with this board Hastlayer is only suitable for simpler algorithms that only need to exchange small amount of data.
   - For academic workloads: Microsoft's FPGA platform, [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) is supported too, which offers high-end hardware. You'll need to apply for a cloud Catapult node via the [Project Catapult Academic Program](https://www.microsoft.com/en-us/research/academic-program/project-catapult-academic-program/). Be sure to [let us know](https://hastlayer.com/contact) if you'd like to use Catapult and we'll help you get going.
@@ -17,8 +16,6 @@ To begin working with Hastlayer you'll need the following:
 - On Linux if you are using `System.Drawing` we suggest transitioning to [ImageSharp](https://github.com/SixLabors/ImageSharp) instead. However if you need to stick with you `System.Drawing` you have to to install the [Mono project's](https://www.mono-project.com/) implementation of [libgdiplus](https://github.com/mono/libgdiplus) too. On CentOS you need the "libgdiplus" package, while on Debian systems such as Ubuntu you need "libgdiplus" and "libc6-dev" too.
 
 Catapult acknowledgment: The authors acknowledge the [Texas Advanced Computing Center (TACC)](http://www.tacc.utexas.edu) at The University of Texas at Austin for providing HPC resources that have contributed to the development of this project. This material is based on work supported by access to [Project Catapult](https://www.microsoft.com/en-us/research/project/project-catapult/) hardware and technology donated by Microsoft.
-
-If you have a compatible FPGA board you can run the default sample even without having access to Hastlayer Remote Services.
 
 ## First steps
 

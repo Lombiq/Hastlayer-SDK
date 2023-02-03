@@ -103,9 +103,8 @@ public class DefaultTransformer : ITransformer
     {
         var transformerConfiguration = configuration.TransformerConfiguration();
 
-        // Need to use assembly names instead of paths for the ID, because paths can change (as in the random ones with
-        // Remote Worker). Just file names wouldn't be enough because two assemblies can have the same simple name while
-        // their full names being different.
+        // Need to use assembly names instead of paths for the ID, because paths can change. Just file names wouldn't be
+        // enough because two assemblies can have the same simple name while their full names being different.
         var transformationIdComponents = new List<string>();
 
         var decompilers = new List<CSharpDecompiler>();
@@ -123,9 +122,8 @@ public class DefaultTransformer : ITransformer
                 PEStreamOptions.PrefetchMetadata);
 
             // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies
-            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. Also, if a remote
-            // transformation needs multiple assemblies those will need to be loaded like this too. So helping the
-            // decompiler find them here.
+            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail.So helping the decompiler
+            // find them here.
             resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
             var dependenciesFolderPath = _appDataFolder.MapPath("Dependencies");
             if (dependenciesFolderPath != null) resolver.AddSearchDirectory(dependenciesFolderPath);

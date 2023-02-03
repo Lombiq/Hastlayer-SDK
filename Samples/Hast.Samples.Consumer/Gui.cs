@@ -219,11 +219,6 @@ public sealed class Gui : IDisposable
                 _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = IsTrueString(item);
                 ShowTextField(visible: false);
                 break;
-            case nameof(ConsumerConfiguration.Endpoint):
-                _optionsTextField.Text = _configuration.Endpoint ?? string.Empty;
-                _currentOptionsTextFieldEventHandler = text => _configuration.Endpoint = text;
-                ShowTextField(visible: true);
-                break;
             case nameof(ConsumerConfiguration.HardwareFrameworkPath):
                 _optionsTextField.Text = _configuration.HardwareFrameworkPath ?? string.Empty;
                 _currentOptionsTextFieldEventHandler = text => _configuration.HardwareFrameworkPath = text;

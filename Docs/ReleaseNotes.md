@@ -5,6 +5,7 @@ Note that the Hardware Framework projects have their own release cycle and relea
 ## vNext
 
 - The consumer sample app now uses [Terminal.Gui](https://github.com/migueldeicaza/gui.cs) to provide an easy to use GUI within a terminal window. Command-line configurability remains and is even extended.
+- Hastlayer is now full open-source! Formerly, `Hast.Core`, the core logic that did the .NET to hardware transformation was private. But now, the whole of Hastlayer is available for you in fully open form!
 
 ## v1.2.1, 27.10.2021
 

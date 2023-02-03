@@ -17,26 +17,15 @@ public class TransformerConfiguration
     /// Gets the list of the member invocation instance counts, i.e. how many times a member can be invoked at a given
     /// time.
     /// </summary>
-    public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations
-    {
-        // Since _memberInvocationInstanceCountConfigurations is a ConcurrentDictionary the order of its items is not
-        // necessarily the same on all machines or during all executions. Thus we need sorting so the transformation ID
-        // is deterministic (see DefaultTransformer in Hast.Transformer). Also, ToArray() and the setter are needed for
-        // JSON de/serialization when doing remote transformation.
-#pragma warning disable S2365 // Properties should not make collection or array copies
-        get => _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix).ToArray();
-#pragma warning restore S2365 // Properties should not make collection or array copies
-
-        private set
-        {
-            _memberInvocationInstanceCountConfigurations.Clear();
-
-            foreach (var configuration in value)
-            {
-                AddMemberInvocationInstanceCountConfiguration(configuration);
-            }
-        }
-    }
+    /// <remarks>
+    /// <para>
+    /// Since _memberInvocationInstanceCountConfigurations is a ConcurrentDictionary the order of its items is not
+    /// necessarily the same on all machines or during all executions. Thus we need sorting so the transformation ID is
+    /// deterministic (see DefaultTransformer in Hast.Transformer).
+    /// </para>
+    /// </remarks>
+    public IEnumerable<MemberInvocationInstanceCountConfiguration> MemberInvocationInstanceCountConfigurations =>
+        _memberInvocationInstanceCountConfigurations.Values.OrderBy(config => config.MemberNamePrefix);
 
     /// <summary>
     /// Gets or sets a value indicating whether to use the SimpleMemory memory model that maps a runtime-defined memory

@@ -28,12 +28,6 @@ public class ConsumerConfiguration
         "for high-performance local or cloud FPGAs, or embedded devices, see the docs.")]
     public string DeviceName { get; set; }
 
-    [Argument]
-    [Hint(
-        "The base URL for the Hastlayer API. Unless you are testing the Hast.Remote services locally, you should",
-        "leave it empty.")]
-    public string Endpoint { get; set; }
-
     [Argument("sample")]
     [Hint(
         "Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not",
