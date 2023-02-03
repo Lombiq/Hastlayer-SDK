@@ -4076,11 +4076,11 @@ begin
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.flag\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.num14\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\: boolean := false;
-        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::FillTable(SimpleMemory).0.conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\: boolean := false;
         Variable \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\: boolean := false;
@@ -4141,11 +4141,11 @@ begin
                 \GenomeMatcher::FillTable(SimpleMemory).0.flag\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.21\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.num14\ := to_unsigned(0, 16);
-                \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\ := to_unsigned(0, 16);
+                \GenomeMatcher::FillTable(SimpleMemory).0.conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3\ := to_unsigned(0, 16);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.22\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.23\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.24\ := false;
-                \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\ := to_signed(0, 32);
+                \GenomeMatcher::FillTable(SimpleMemory).0.conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df\ := to_signed(0, 32);
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.26\ := false;
                 \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.27\ := false;
@@ -4281,25 +4281,25 @@ begin
                         -- 		bool flag;
                         -- 		flag = (int)(num11) > (int)(num10);
                         -- 		ushort num14;
-                        -- 		ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                        -- 		ushort conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3;
                         -- 		if (flag) {
-                        -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                        -- 			conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num11;
                         -- 		} else {
-                        -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- 			conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num10;
                         -- 		}
-                        -- 		num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                        -- 		num14 = (conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3);
                         -- 		if ((int)(num9) >= (int)(num14)) {
                         -- 			num12 = num9;
                         -- 			num13 = 0;
                         -- 		} else if (flag && (int)(num11) > (int)(num9)) {
                         -- 			num12 = num11;
-                        -- 			int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 			int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                         -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 				conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                         -- 			} else {
-                        -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 				conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                         -- 			}
-                        -- 			num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- 			num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                         -- 		} else {
                         -- 			num12 = num10;
                         -- 			num13 = 1;
@@ -4351,25 +4351,25 @@ begin
                             -- 		bool flag;
                             -- 		flag = (int)(num11) > (int)(num10);
                             -- 		ushort num14;
-                            -- 		ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                            -- 		ushort conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3;
                             -- 		if (flag) {
-                            -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                            -- 			conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num11;
                             -- 		} else {
-                            -- 			conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                            -- 			conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num10;
                             -- 		}
-                            -- 		num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                            -- 		num14 = (conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3);
                             -- 		if ((int)(num9) >= (int)(num14)) {
                             -- 			num12 = num9;
                             -- 			num13 = 0;
                             -- 		} else if (flag && (int)(num11) > (int)(num9)) {
                             -- 			num12 = num11;
-                            -- 			int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                            -- 			int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                             -- 			if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                            -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                            -- 				conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                             -- 			} else {
-                            -- 				conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                            -- 				conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                             -- 			}
-                            -- 			num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                            -- 			num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                             -- 		} else {
                             -- 			num12 = num10;
                             -- 			num13 = 1;
@@ -4417,25 +4417,25 @@ begin
                             -- 	bool flag;
                             -- 	flag = (int)(num11) > (int)(num10);
                             -- 	ushort num14;
-                            -- 	ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                            -- 	ushort conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3;
                             -- 	if (flag) {
-                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                            -- 		conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num11;
                             -- 	} else {
-                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                            -- 		conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num10;
                             -- 	}
-                            -- 	num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                            -- 	num14 = (conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3);
                             -- 	if ((int)(num9) >= (int)(num14)) {
                             -- 		num12 = num9;
                             -- 		num13 = 0;
                             -- 	} else if (flag && (int)(num11) > (int)(num9)) {
                             -- 		num12 = num11;
-                            -- 		int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                            -- 		int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                             -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                            -- 			conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                             -- 		} else {
-                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                            -- 			conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                             -- 		}
-                            -- 		num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                            -- 		num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                             -- 	} else {
                             -- 		num12 = num10;
                             -- 		num13 = 1;
@@ -4489,25 +4489,25 @@ begin
                             -- 	bool flag;
                             -- 	flag = (int)(num11) > (int)(num10);
                             -- 	ushort num14;
-                            -- 	ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                            -- 	ushort conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3;
                             -- 	if (flag) {
-                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                            -- 		conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num11;
                             -- 	} else {
-                            -- 		conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                            -- 		conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num10;
                             -- 	}
-                            -- 	num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                            -- 	num14 = (conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3);
                             -- 	if ((int)(num9) >= (int)(num14)) {
                             -- 		num12 = num9;
                             -- 		num13 = 0;
                             -- 	} else if (flag && (int)(num11) > (int)(num9)) {
                             -- 		num12 = num11;
-                            -- 		int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                            -- 		int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                             -- 		if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                            -- 			conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                             -- 		} else {
-                            -- 			conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                            -- 			conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                             -- 		}
-                            -- 		num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                            -- 		num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                             -- 	} else {
                             -- 		num12 = num10;
                             -- 		num13 = 1;
@@ -4797,13 +4797,13 @@ begin
                         -- ushort num14;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963;
+                        -- ushort conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
-                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                        -- 	conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num11;
                         -- } else {
-                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- 	conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num10;
                         -- }
                         -- 
 
@@ -4838,22 +4838,22 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_27\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num14 = (conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963);
+                        -- num14 = (conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3);
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num14\ := (\GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num14\ := (\GenomeMatcher::FillTable(SimpleMemory).0.conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3\);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((int)(num9) >= (int)(num14)) {
                         -- 	num12 = num9;
                         -- 	num13 = 0;
                         -- } else if (flag && (int)(num11) > (int)(num9)) {
                         -- 	num12 = num11;
-                        -- 	int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 	int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                         -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 		conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                         -- 	} else {
-                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 		conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                         -- 	}
-                        -- 	num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- 	num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                         -- } else {
                         -- 	num12 = num10;
                         -- 	num13 = 1;
@@ -4876,13 +4876,13 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                        -- 	conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num11;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num11;
+                        -- conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num11;
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_28\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
@@ -4892,13 +4892,13 @@ begin
                         -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- 	conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num10;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963 = num10;
+                        -- conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3 = num10;
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional93a05f9b1b15e63ca7b8fd470612e827af7bea556ce6ef8b4cd87a61e7372963\ := \GenomeMatcher::FillTable(SimpleMemory).0.num10\;
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional31953e884a711d7f09ad27d7a8312f19fd74643480ec65c7e66b8237605c96d3\ := \GenomeMatcher::FillTable(SimpleMemory).0.num10\;
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_25\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_29\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_27\;
@@ -4941,13 +4941,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag && (int)(num11) > (int)(num9)) {
                         -- 	num12 = num11;
-                        -- 	int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 	int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                         -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 		conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                         -- 	} else {
-                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 		conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                         -- 	}
-                        -- 	num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- 	num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                         -- } else {
                         -- 	num12 = num10;
                         -- 	num13 = 1;
@@ -4979,13 +4979,13 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	num12 = num11;
-                        -- 	int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- 	int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                         -- 	if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 		conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                         -- 	} else {
-                        -- 		conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 		conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                         -- 	}
-                        -- 	num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- 	num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -4993,13 +4993,13 @@ begin
                         -- 
                         \GenomeMatcher::FillTable(SimpleMemory).0.num12\ := \GenomeMatcher::FillTable(SimpleMemory).0.num11\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc;
+                        -- int conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (((int)(num6) == 0 || (int)(num7) == 0)) {
-                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 	conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                         -- } else {
-                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 	conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                         -- }
                         -- 
                         \GenomeMatcher::FillTable(SimpleMemory).0.binaryOperationResult.25\ := signed(SmartResize((\GenomeMatcher::FillTable(SimpleMemory).0.num6\), 32)) = to_signed(0, 32);
@@ -5020,9 +5020,9 @@ begin
                     when \GenomeMatcher::FillTable(SimpleMemory).0._State_35\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num13 = (ushort)(conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc);
+                        -- num13 = (ushort)(conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df);
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned((\GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\)), 16);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.num13\ := SmartResize(unsigned((\GenomeMatcher::FillTable(SimpleMemory).0.conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df\)), 16);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_32\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_35\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_33\;
@@ -5032,13 +5032,13 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- 	conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 3;
+                        -- conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 3;
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\ := to_signed(3, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df\ := to_signed(3, 32);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_36\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_35\;
@@ -5048,13 +5048,13 @@ begin
                         -- False branch of the if-else started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- 	conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc = 2;
+                        -- conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df = 2;
                         -- 
-                        \GenomeMatcher::FillTable(SimpleMemory).0.conditionala95bb342f2365b611f973c7a0f502bc2d2906eeabacd1d8170e213bfd0e1e9fc\ := to_signed(2, 32);
+                        \GenomeMatcher::FillTable(SimpleMemory).0.conditional82c92404f332e3072a23ca44dc9a46ee9a2fa95860cb8877d0ac6714fab738df\ := to_signed(2, 32);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::FillTable(SimpleMemory).0._State_34\.
                         if (\GenomeMatcher::FillTable(SimpleMemory).0._State\ = \GenomeMatcher::FillTable(SimpleMemory).0._State_37\) then 
                             \GenomeMatcher::FillTable(SimpleMemory).0._State\ := \GenomeMatcher::FillTable(SimpleMemory).0._State_35\;
@@ -5133,20 +5133,19 @@ begin
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.1\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num6\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num5\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num7\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.2\: std_logic_vector(31 downto 0) := (others => '0');
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.num8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.num9\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num10\: signed(15 downto 0) := to_signed(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.num11\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \GenomeMatcher::Traceback(SimpleMemory).0.num12\: signed(15 downto 0) := to_signed(0, 16);
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\: boolean := false;
         Variable \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.7\: boolean := false;
@@ -5200,20 +5199,19 @@ begin
                 \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.1\ := (others => '0');
                 \GenomeMatcher::Traceback(SimpleMemory).0.num3\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 16);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 16);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num5\ := to_signed(0, 32);
+                \GenomeMatcher::Traceback(SimpleMemory).0.num4\ := to_signed(0, 32);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num6\ := to_unsigned(0, 16);
+                \GenomeMatcher::Traceback(SimpleMemory).0.num5\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 16);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := to_unsigned(0, 16);
+                \GenomeMatcher::Traceback(SimpleMemory).0.num6\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.2\ := (others => '0');
+                \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := to_unsigned(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.num9\ := to_unsigned(0, 16);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := to_unsigned(0, 16);
+                \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := to_signed(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := to_signed(0, 16);
-                \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := to_signed(0, 16);
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\ := false;
                 \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.7\ := false;
@@ -5316,23 +5314,16 @@ begin
                             -- ushort num3;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num3 = (ushort)(2 + (int)(num));
+                            -- num3 = (ushort)((int)((ushort)(2 + (int)(num))) + (int)(num2));
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.0\ := SmartResize(unsigned(to_signed(2, 32) + signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num\), 32))), 16);
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num3\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.0\);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize(((\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.0\)), 32)) + signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num2\), 32))), 16);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num3\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.1\);
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort num4;
+                            -- int num4;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num4 = (ushort)((int)(num3) + (int)(num2));
-                            -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.1\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num3\), 32)) + signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num2\), 32))), 16);
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num4\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.1\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- int num5;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num5 = (int)((int)(num) * (int)(num2));
+                            -- num4 = (int)((int)(num) * (int)(num2));
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_6\;
                         end if;
@@ -5340,28 +5331,28 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.2\ := SmartResize(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num\), 32)) * signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num2\), 32)), 32);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num5\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.2\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num4\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.2\);
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort num6;
+                        -- ushort num5;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num6 = (ushort)((int)(num4) + (int)(num5) - 1);
+                        -- num5 = (ushort)((int)(num3) + (int)(num4) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.3\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.num5\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.3\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num3\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.num4\);
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_7\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_7\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.4\ := SmartResize(unsigned(\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.3\ - to_signed(1, 32)), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num6\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.4\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num5\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.4\);
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort num7;
+                        -- ushort num6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num7 = (ushort)memory.ReadUInt32 (num6);
+                        -- num6 = (ushort)memory.ReadUInt32 (num5);
                         -- 
                         -- Begin SimpleMemory read.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= signed(SmartResize(\GenomeMatcher::Traceback(SimpleMemory).0.num6\, 32));
+                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= signed(SmartResize(\GenomeMatcher::Traceback(SimpleMemory).0.num5\, 32));
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.3564
@@ -5371,7 +5362,14 @@ begin
                             -- SimpleMemory read finished.
                             \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.2\ := \DataIn\;
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.2\), 16);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num6\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.2\), 16);
+                            -- The following section was transformed from the .NET statement below:
+                            -- ushort num7;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num7 = 0;
+                            -- 
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                             -- The following section was transformed from the .NET statement below:
                             -- ushort num8;
                             -- 
@@ -5387,64 +5385,57 @@ begin
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0.num9\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort num10;
+                            -- short num10;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num10 = 0;
+                            -- num10 = (short)num;
                             -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := SmartResize(unsigned(to_signed(0, 32)), 16);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num\);
                             -- The following section was transformed from the .NET statement below:
                             -- short num11;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num11 = (short)num;
+                            -- num11 = (short)num2;
                             -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num\);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num2\);
                             -- The following section was transformed from the .NET statement below:
-                            -- short num12;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- num12 = (short)num2;
-                            -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := signed(\GenomeMatcher::Traceback(SimpleMemory).0.num2\);
-                            -- The following section was transformed from the .NET statement below:
-                            -- while ((int)(num11) >= 0 && (int)(num12) >= 0 && (int)(num7) > 0) {
+                            -- while ((int)(num10) >= 0 && (int)(num11) >= 0 && (int)(num6) > 0) {
+                            -- 	if ((int)(num10) == 0) {
+                            -- 		num10 = (short)((int)(num10) - 1);
+                            -- 	}
                             -- 	if ((int)(num11) == 0) {
                             -- 		num11 = (short)((int)(num11) - 1);
                             -- 	}
-                            -- 	if ((int)(num12) == 0) {
-                            -- 		num12 = (short)((int)(num12) - 1);
-                            -- 	}
-                            -- 	num10 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
-                            -- 	switch (num10) {
+                            -- 	num9 = (ushort)memory.ReadUInt32 ((int)((int)(num5) + (int)(num4)));
+                            -- 	switch (num9) {
                             -- 	case 2:
-                            -- 		num8 = (ushort)((int)(num6) - (int)(num) - 1);
+                            -- 		num7 = (ushort)((int)(num5) - (int)(num) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	case 1:
-                            -- 		num8 = (ushort)((int)(num6) - 1);
-                            -- 		num11 = (short)((int)(num11) - 1);
+                            -- 		num7 = (ushort)((int)(num5) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		break;
                             -- 	case 0:
-                            -- 		num8 = (ushort)((int)(num6) - (int)(num));
-                            -- 		num12 = (short)((int)(num12) - 1);
+                            -- 		num7 = (ushort)((int)(num5) - (int)(num));
+                            -- 		num11 = (short)((int)(num11) - 1);
                             -- 		break;
                             -- 	case 3:
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	}
-                            -- 	if ((int)(num8) >= (int)(num4)) {
-                            -- 		num9 = (ushort)memory.ReadUInt32 (num8);
+                            -- 	if ((int)(num7) >= (int)(num3)) {
+                            -- 		num8 = (ushort)memory.ReadUInt32 (num7);
                             -- 	}
-                            -- 	if (((int)(num10) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) || (int)(num10) == 3) {
+                            -- 	if (((int)(num9) == 2 && ((int)(num6) == (int)((int)(num8) + 1) || (int)(num7) < (int)(num3))) || (int)(num9) == 3) {
                             -- 		uint number;
-                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
+                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                            -- 		memory.WriteUInt32 ((int)((int)((int)(num3) + (int)(2 * num4)) + (int)(num10)), number);
                             -- 	}
-                            -- 	num7 = num9;
                             -- 	num6 = num8;
+                            -- 	num5 = num7;
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -5454,8 +5445,8 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_9\ => 
                         -- Repeated state of the while loop which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_8\.
                         -- The while loop's condition:
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) >= to_signed(0, 32);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) >= to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) >= to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) >= to_signed(0, 32);
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_11\;
                         -- Clock cycles needed to complete this state (approximation): 0.9636
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_10\ => 
@@ -5465,52 +5456,52 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_11\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.7\ := \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.5\ and \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.6\;
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num7\), 32)) > to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) > to_signed(0, 32);
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.9\ := \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.7\ and \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.8\;
                         if (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.9\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
+                            -- 	if ((int)(num10) == 0) {
+                            -- 		num10 = (short)((int)(num10) - 1);
+                            -- 	}
                             -- 	if ((int)(num11) == 0) {
                             -- 		num11 = (short)((int)(num11) - 1);
                             -- 	}
-                            -- 	if ((int)(num12) == 0) {
-                            -- 		num12 = (short)((int)(num12) - 1);
-                            -- 	}
-                            -- 	num10 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
-                            -- 	switch (num10) {
+                            -- 	num9 = (ushort)memory.ReadUInt32 ((int)((int)(num5) + (int)(num4)));
+                            -- 	switch (num9) {
                             -- 	case 2:
-                            -- 		num8 = (ushort)((int)(num6) - (int)(num) - 1);
+                            -- 		num7 = (ushort)((int)(num5) - (int)(num) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	case 1:
-                            -- 		num8 = (ushort)((int)(num6) - 1);
-                            -- 		num11 = (short)((int)(num11) - 1);
+                            -- 		num7 = (ushort)((int)(num5) - 1);
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		break;
                             -- 	case 0:
-                            -- 		num8 = (ushort)((int)(num6) - (int)(num));
-                            -- 		num12 = (short)((int)(num12) - 1);
+                            -- 		num7 = (ushort)((int)(num5) - (int)(num));
+                            -- 		num11 = (short)((int)(num11) - 1);
                             -- 		break;
                             -- 	case 3:
+                            -- 		num10 = (short)((int)(num10) - 1);
                             -- 		num11 = (short)((int)(num11) - 1);
-                            -- 		num12 = (short)((int)(num12) - 1);
                             -- 		break;
                             -- 	}
-                            -- 	if ((int)(num8) >= (int)(num4)) {
-                            -- 		num9 = (ushort)memory.ReadUInt32 (num8);
+                            -- 	if ((int)(num7) >= (int)(num3)) {
+                            -- 		num8 = (ushort)memory.ReadUInt32 (num7);
                             -- 	}
-                            -- 	if (((int)(num10) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) || (int)(num10) == 3) {
+                            -- 	if (((int)(num9) == 2 && ((int)(num6) == (int)((int)(num8) + 1) || (int)(num7) < (int)(num3))) || (int)(num9) == 3) {
                             -- 		uint number;
-                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                            -- 		memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
+                            -- 		number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                            -- 		memory.WriteUInt32 ((int)((int)((int)(num3) + (int)(2 * num4)) + (int)(num10)), number);
                             -- 	}
-                            -- 	num7 = num9;
                             -- 	num6 = num8;
+                            -- 	num5 = num7;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if ((int)(num11) == 0) {
-                            -- 	num11 = (short)((int)(num11) - 1);
+                            -- if ((int)(num10) == 0) {
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- }
                             -- 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_12\;
@@ -5520,7 +5511,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.74415
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_12\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.10\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) = to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.10\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) = to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_14\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_14\.
@@ -5536,11 +5527,11 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_13\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num12) == 0) {
-                        -- 	num12 = (short)((int)(num12) - 1);
+                        -- if ((int)(num11) == 0) {
+                        -- 	num11 = (short)((int)(num11) - 1);
                         -- }
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.12\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) = to_signed(0, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.12\ := SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) = to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_16\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_16\.
@@ -5557,14 +5548,14 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num11 = (short)((int)(num11) - 1);
+                        -- 	num10 = (short)((int)(num10) - 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num11 = (short)((int)(num11) - 1);
+                        -- num10 = (short)((int)(num10) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.11\);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_12\.
                         if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_14\) then 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_13\;
@@ -5573,9 +5564,9 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_15\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num10 = (ushort)memory.ReadUInt32 ((int)((int)(num6) + (int)(num5)));
+                        -- num9 = (ushort)memory.ReadUInt32 ((int)((int)(num5) + (int)(num4)));
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.14\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.num5\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.14\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num5\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.num4\);
                         -- Begin SimpleMemory read.
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.14\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -5585,14 +5576,14 @@ begin
                         -- True branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_13\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num12 = (short)((int)(num12) - 1);
+                        -- 	num11 = (short)((int)(num11) - 1);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
+                        -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.13\);
                         -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_13\.
                         if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_16\) then 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_15\;
@@ -5604,29 +5595,29 @@ begin
                             -- SimpleMemory read finished.
                             \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\ := \DataIn\;
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\), 16);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num9\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.3\), 16);
                             -- The following section was transformed from the .NET statement below:
-                            -- switch (num10) {
+                            -- switch (num9) {
                             -- case 2:
-                            -- 	num8 = (ushort)((int)(num6) - (int)(num) - 1);
+                            -- 	num7 = (ushort)((int)(num5) - (int)(num) - 1);
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- 	num11 = (short)((int)(num11) - 1);
-                            -- 	num12 = (short)((int)(num12) - 1);
                             -- 	break;
                             -- case 1:
-                            -- 	num8 = (ushort)((int)(num6) - 1);
-                            -- 	num11 = (short)((int)(num11) - 1);
+                            -- 	num7 = (ushort)((int)(num5) - 1);
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- 	break;
                             -- case 0:
-                            -- 	num8 = (ushort)((int)(num6) - (int)(num));
-                            -- 	num12 = (short)((int)(num12) - 1);
+                            -- 	num7 = (ushort)((int)(num5) - (int)(num));
+                            -- 	num11 = (short)((int)(num11) - 1);
                             -- 	break;
                             -- case 3:
+                            -- 	num10 = (short)((int)(num10) - 1);
                             -- 	num11 = (short)((int)(num11) - 1);
-                            -- 	num12 = (short)((int)(num12) - 1);
                             -- 	break;
                             -- }
                             -- 
-                            case \GenomeMatcher::Traceback(SimpleMemory).0.num10\ is 
+                            case \GenomeMatcher::Traceback(SimpleMemory).0.num9\ is 
                                 when SmartResize(unsigned(to_signed(2, 32)), 16) => 
                                     \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_19\;
                                 when SmartResize(unsigned(to_signed(1, 32)), 16) => 
@@ -5643,11 +5634,11 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_18\ => 
                         -- State after the case statement which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_17\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(num8) >= (int)(num4)) {
-                        -- 	num9 = (ushort)memory.ReadUInt32 (num8);
+                        -- if ((int)(num7) >= (int)(num3)) {
+                        -- 	num8 = (ushort)memory.ReadUInt32 (num7);
                         -- }
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.25\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num8\), 32)) >= signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32));
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.25\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num7\), 32)) >= signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num3\), 32));
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \GenomeMatcher::Traceback(SimpleMemory).0._State_25\ and ends in state \GenomeMatcher::Traceback(SimpleMemory).0._State_26\.
@@ -5662,25 +5653,25 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.4818
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_19\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- num8 = (ushort)((int)(num6) - (int)(num) - 1);
+                        -- num7 = (ushort)((int)(num5) - (int)(num) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.15\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) - signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num\), 32));
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.15\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num5\), 32)) - signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num\), 32));
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.16\ := SmartResize(unsigned(\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.15\ - to_signed(1, 32)), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.16\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.16\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num11 = (short)((int)(num11) - 1);
+                        -- num10 = (short)((int)(num10) - 1);
                         -- 
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_20\;
                         -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_20\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.17\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
+                        -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.18\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -5691,15 +5682,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_21\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- num8 = (ushort)((int)(num6) - 1);
+                        -- num7 = (ushort)((int)(num5) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) - to_signed(1, 32)), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.19\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num5\), 32)) - to_signed(1, 32)), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.19\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num11 = (short)((int)(num11) - 1);
+                        -- num10 = (short)((int)(num10) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.20\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -5710,15 +5701,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_22\ => 
                         -- The following section was transformed from the .NET statement below:
-                        -- num8 = (ushort)((int)(num6) - (int)(num));
+                        -- num7 = (ushort)((int)(num5) - (int)(num));
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.21\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) - signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num\), 32))), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.21\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.21\ := SmartResize(unsigned(signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num5\), 32)) - signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num\), 32))), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.21\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
+                        -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.22\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -5729,15 +5720,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_23\ => 
                         -- The following section was transformed from the .NET statement below:
+                        -- num10 = (short)((int)(num10) - 1);
+                        -- 
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num10\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\);
+                        -- The following section was transformed from the .NET statement below:
                         -- num11 = (short)((int)(num11) - 1);
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.23\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- num12 = (short)((int)(num12) - 1);
-                        -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num12\), 32) - to_signed(1, 32), 16);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num12\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\ := SmartResize(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32) - to_signed(1, 32), 16);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num11\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.24\);
                         -- The following section was transformed from the .NET statement below:
                         -- break;
                         -- 
@@ -5749,28 +5740,28 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_24\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(num10) == 2 && ((int)(num7) == (int)((int)(num9) + 1) || (int)(num8) < (int)(num4))) || (int)(num10) == 3) {
+                        -- if (((int)(num9) == 2 && ((int)(num6) == (int)((int)(num8) + 1) || (int)(num7) < (int)(num3))) || (int)(num9) == 3) {
                         -- 	uint number;
-                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
+                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                        -- 	memory.WriteUInt32 ((int)((int)((int)(num3) + (int)(2 * num4)) + (int)(num10)), number);
                         -- }
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32)) = to_signed(2, 32);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num9\), 32)) + to_signed(1, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num9\), 32)) = to_signed(2, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num8\), 32)) + to_signed(1, 32);
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_27\;
                         -- Clock cycles needed to complete this state (approximation): 0.7317
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_25\ => 
                         -- True branch of the if-else started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_18\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	num9 = (ushort)memory.ReadUInt32 (num8);
+                        -- 	num8 = (ushort)memory.ReadUInt32 (num7);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num9 = (ushort)memory.ReadUInt32 (num8);
+                        -- num8 = (ushort)memory.ReadUInt32 (num7);
                         -- 
                         -- Begin SimpleMemory read.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= signed(SmartResize(\GenomeMatcher::Traceback(SimpleMemory).0.num8\, 32));
+                        \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= signed(SmartResize(\GenomeMatcher::Traceback(SimpleMemory).0.num7\, 32));
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_26\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5780,7 +5771,7 @@ begin
                             -- SimpleMemory read finished.
                             \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.4\ := \DataIn\;
-                            \GenomeMatcher::Traceback(SimpleMemory).0.num9\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.4\), 16);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.num8\ := SmartResize(ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.4\), 16);
                             -- Going to the state after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_18\.
                             if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_26\) then 
                                 \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_24\;
@@ -5789,15 +5780,15 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_27\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.28\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num7\), 32)) = (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.27\);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.29\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num8\), 32)) < signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32));
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.28\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num6\), 32)) = (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.27\);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.29\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num7\), 32)) < signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num3\), 32));
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.30\ := \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.28\ or \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.29\;
                         \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_28\;
                         -- Clock cycles needed to complete this state (approximation): 0.91815
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_28\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.31\ := \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.26\ and (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.30\);
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32)) = to_signed(3, 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num9\), 32)) = to_signed(3, 32);
                         \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.33\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.31\) or \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.32\;
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -5814,13 +5805,13 @@ begin
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_29\ => 
                         -- State after the if-else which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num7 = num9;
-                        -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.num7\ := \GenomeMatcher::Traceback(SimpleMemory).0.num9\;
-                        -- The following section was transformed from the .NET statement below:
                         -- num6 = num8;
                         -- 
                         \GenomeMatcher::Traceback(SimpleMemory).0.num6\ := \GenomeMatcher::Traceback(SimpleMemory).0.num8\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num5 = num7;
+                        -- 
+                        \GenomeMatcher::Traceback(SimpleMemory).0.num5\ := \GenomeMatcher::Traceback(SimpleMemory).0.num7\;
                         -- Returning to the repeated state of the while loop which was started in state \GenomeMatcher::Traceback(SimpleMemory).0._State_8\ if the loop wasn't exited with a state change.
                         if (\GenomeMatcher::Traceback(SimpleMemory).0._State\ = \GenomeMatcher::Traceback(SimpleMemory).0._State_29\) then 
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_9\;
@@ -5831,17 +5822,17 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	uint number;
-                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
-                        -- 	memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
+                        -- 	number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
+                        -- 	memory.WriteUInt32 ((int)((int)((int)(num3) + (int)(2 * num4)) + (int)(num10)), number);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- uint number;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- number = memory.ReadUInt32 ((int)(2 + (int)(num11)));
+                        -- number = memory.ReadUInt32 ((int)(2 + (int)(num10)));
                         -- 
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\ := to_signed(2, 32) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory read.
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.34\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.ReadEnable\ <= true;
@@ -5855,16 +5846,16 @@ begin
                             \GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\ := \DataIn\;
                             \GenomeMatcher::Traceback(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\GenomeMatcher::Traceback(SimpleMemory).0.dataIn.5\);
                             -- The following section was transformed from the .NET statement below:
-                            -- memory.WriteUInt32 ((int)((int)((int)(num4) + (int)(2 * num5)) + (int)(num11)), number);
+                            -- memory.WriteUInt32 ((int)((int)((int)(num3) + (int)(2 * num4)) + (int)(num10)), number);
                             -- 
-                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\ := SmartResize(to_signed(2, 32) * \GenomeMatcher::Traceback(SimpleMemory).0.num5\, 32);
-                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num4\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\ := SmartResize(to_signed(2, 32) * \GenomeMatcher::Traceback(SimpleMemory).0.num4\, 32);
+                            \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\ := signed(SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num3\), 32)) + (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.35\);
                             \GenomeMatcher::Traceback(SimpleMemory).0._State\ := \GenomeMatcher::Traceback(SimpleMemory).0._State_32\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
                     when \GenomeMatcher::Traceback(SimpleMemory).0._State_32\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num11\), 32);
+                        \GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\ := (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.36\) + SmartResize((\GenomeMatcher::Traceback(SimpleMemory).0.num10\), 32);
                         -- Begin SimpleMemory write.
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.CellIndex\ <= (\GenomeMatcher::Traceback(SimpleMemory).0.binaryOperationResult.37\);
                         \GenomeMatcher::Traceback(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
@@ -5893,7 +5884,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -5903,7 +5893,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -5930,17 +5919,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -5955,7 +5937,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -5965,7 +5946,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -5992,17 +5972,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6017,7 +5990,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6027,7 +5999,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6054,17 +6025,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6079,7 +6043,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6089,7 +6052,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6116,17 +6078,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6141,7 +6096,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6151,7 +6105,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6178,17 +6131,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6203,7 +6149,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6213,7 +6158,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6240,17 +6184,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).1._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6265,7 +6202,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6275,7 +6211,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6302,17 +6237,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).2._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6327,7 +6255,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6337,7 +6264,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6364,17 +6290,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).3._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6389,7 +6308,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6399,7 +6317,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6426,17 +6343,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).4._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6451,7 +6361,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6461,7 +6370,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6488,17 +6396,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).5._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6513,7 +6414,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6523,7 +6423,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6550,17 +6449,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).6._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6575,7 +6467,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6585,7 +6476,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6612,17 +6502,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).7._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6637,7 +6520,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6647,7 +6529,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6674,17 +6555,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).8._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6699,7 +6573,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6709,7 +6582,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6736,17 +6608,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).9._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6761,7 +6626,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6771,7 +6635,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6798,17 +6661,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).10._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6823,7 +6679,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6833,7 +6688,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6860,17 +6714,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).11._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6885,7 +6732,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6895,7 +6741,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6922,17 +6767,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).12._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -6947,7 +6785,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -6957,7 +6794,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -6984,17 +6820,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).13._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7009,7 +6838,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7019,7 +6847,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7046,17 +6873,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).14._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7071,7 +6891,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7081,7 +6900,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7108,17 +6926,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).15._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7133,7 +6944,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7143,7 +6953,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7170,17 +6979,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).16._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7195,7 +6997,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7205,7 +7006,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7232,17 +7032,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).17._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7257,7 +7050,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7267,7 +7059,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7294,17 +7085,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).18._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7319,7 +7103,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7329,7 +7112,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7356,17 +7138,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).19._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7381,7 +7156,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7391,7 +7165,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7418,17 +7191,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).20._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7443,7 +7209,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7453,7 +7218,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7480,17 +7244,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).21._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7505,7 +7262,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7515,7 +7271,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7542,17 +7297,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).22._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7567,7 +7315,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7577,7 +7324,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7604,17 +7350,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).23._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7629,7 +7368,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7639,7 +7377,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7666,17 +7403,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).24._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7691,7 +7421,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7701,7 +7430,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7728,17 +7456,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).25._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7753,7 +7474,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7763,7 +7483,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7790,17 +7509,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).26._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7815,7 +7527,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7825,7 +7536,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7852,17 +7562,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).27._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7877,7 +7580,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7887,7 +7589,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7914,17 +7615,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).28._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -7939,7 +7633,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -7949,7 +7642,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -7976,17 +7668,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).29._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8001,7 +7686,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8011,7 +7695,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8038,17 +7721,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).30._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8063,7 +7739,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8073,7 +7748,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8100,17 +7774,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).31._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8125,7 +7792,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8135,7 +7801,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8162,17 +7827,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).32._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8187,7 +7845,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8197,7 +7854,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8224,17 +7880,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).33._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8249,7 +7898,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8259,7 +7907,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8286,17 +7933,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).34._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8311,7 +7951,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8321,7 +7960,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8348,17 +7986,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).35._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8373,7 +8004,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8383,7 +8013,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8410,17 +8039,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).36._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8435,7 +8057,6 @@ begin
     \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._StateMachine\: process (\Clock\) 
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._State\: \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._States\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._State_0\;
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.stateObject\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
-        Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -8445,7 +8066,6 @@ begin
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._Finished\ <= false;
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.return\ <= to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._State_0\;
-                \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.num\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.0\ := to_signed(0, 32);
                 \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.1\ := to_signed(0, 32);
             else 
@@ -8472,17 +8092,10 @@ begin
                     when \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._State_2\ => 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.stateObject\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.stateObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num = stateObject.Index + stateObject.Step;
+                        -- return (stateObject.Index + stateObject.Step) * stateObject.Factor;
                         -- 
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.0\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.stateObject\.\Index\ + \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.stateObject\.\Step\;
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.num\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.0\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- return num * stateObject.Factor;
-                        -- 
-                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.1\ := SmartResize(\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.num\ * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.stateObject\.\Factor\, 32);
+                        \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.1\ := SmartResize((\HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.0\) * \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.stateObject\.\Factor\, 32);
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.return\ <= \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37.binaryOperationResult.1\;
                         \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._State\ := \HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).37._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.7803
@@ -8527,7 +8140,7 @@ begin
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num9\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.10\: boolean := false;
-        Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
+        Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.return.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num10\: signed(31 downto 0) := to_signed(0, 32);
@@ -8542,7 +8155,7 @@ begin
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num13\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.19\: boolean := false;
-        Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
+        Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\: \Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+MapObject\;
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).invocationIndex\: integer range 0 to 37 := 0;
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.20\: signed(31 downto 0) := to_signed(0, 32);
         Variable \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.return.1\: signed(31 downto 0) := to_signed(0, 32);
@@ -8950,12 +8563,12 @@ begin
                         -- 	int num9;
                         -- 	num9 = 0;
                         -- 	while (num9 < 38) {
-                        -- 		MapObject object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02;
-                        -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02 = new MapObject { };
-                        -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Index = num9;
-                        -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Factor = factor;
-                        -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Step = num8;
-                        -- 		array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02);
+                        -- 		MapObject objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8;
+                        -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8 = new MapObject { };
+                        -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Index = num9;
+                        -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Factor = factor;
+                        -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Step = num8;
+                        -- 		array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8);
                         -- 		num9 = num9 + 1;
                         -- 	}
                         -- 	Task.WhenAll (array).Wait ();
@@ -8983,12 +8596,12 @@ begin
                             -- 	int num9;
                             -- 	num9 = 0;
                             -- 	while (num9 < 38) {
-                            -- 		MapObject object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02;
-                            -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02 = new MapObject { };
-                            -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Index = num9;
-                            -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Factor = factor;
-                            -- 		object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Step = num8;
-                            -- 		array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02);
+                            -- 		MapObject objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8;
+                            -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8 = new MapObject { };
+                            -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Index = num9;
+                            -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Factor = factor;
+                            -- 		objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Step = num8;
+                            -- 		array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8);
                             -- 		num9 = num9 + 1;
                             -- 	}
                             -- 	Task.WhenAll (array).Wait ();
@@ -9018,12 +8631,12 @@ begin
                             \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num9\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num9 < 38) {
-                            -- 	MapObject object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02;
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02 = new MapObject { };
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Index = num9;
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Factor = factor;
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Step = num8;
-                            -- 	array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02);
+                            -- 	MapObject objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8;
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8 = new MapObject { };
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Index = num9;
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Factor = factor;
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Step = num8;
+                            -- 	array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8);
                             -- 	num9 = num9 + 1;
                             -- }
                             -- 
@@ -9049,12 +8662,12 @@ begin
                         -- 	int num13;
                         -- 	num13 = 0;
                         -- 	while (num13 < 38) {
-                        -- 		MapObject objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a;
-                        -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a = new MapObject { };
-                        -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Index = num13;
-                        -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Factor = factor2;
-                        -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Step = num12;
-                        -- 		array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a);
+                        -- 		MapObject object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c;
+                        -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c = new MapObject { };
+                        -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Index = num13;
+                        -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Factor = factor2;
+                        -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Step = num12;
+                        -- 		array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c);
                         -- 		num13 = num13 + 1;
                         -- 	}
                         -- 	Task.WhenAll (array).Wait ();
@@ -9077,43 +8690,43 @@ begin
                         if (\HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.10\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	MapObject object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02;
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02 = new MapObject { };
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Index = num9;
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Factor = factor;
-                            -- 	object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Step = num8;
-                            -- 	array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02);
+                            -- 	MapObject objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8;
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8 = new MapObject { };
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Index = num9;
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Factor = factor;
+                            -- 	objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Step = num8;
+                            -- 	array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8);
                             -- 	num9 = num9 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- MapObject object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02;
+                            -- MapObject objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02 = new MapObject { };
+                            -- objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8 = new MapObject { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\.\IsNull\ := false;
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\.\Index\ := to_signed(0, 32);
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\.\Step\ := to_signed(0, 32);
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\.\Factor\ := to_signed(0, 32);
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\.\IsNull\ := false;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\.\Index\ := to_signed(0, 32);
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\.\Step\ := to_signed(0, 32);
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\.\Factor\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Index = num9;
+                            -- objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Index = num9;
                             -- 
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\.\Index\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num9\;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\.\Index\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num9\;
                             -- The following section was transformed from the .NET statement below:
-                            -- object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Factor = factor;
+                            -- objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Factor = factor;
                             -- 
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\.\Factor\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.factor\;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\.\Factor\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.factor\;
                             -- The following section was transformed from the .NET statement below:
-                            -- object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02.Step = num8;
+                            -- objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8.Step = num8;
                             -- 
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\.\Step\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num8\;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\.\Step\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num8\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02);
+                            -- array [num9] = Task.Factory.StartNew (<>c.<>9__7_0 ?? (<>c.<>9__7_0 = <>c.<>9.<CreateMatrix>b__7_0), objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8);
                             -- 
                             -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(System.Object)
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).stateObject.parameter.Out.0\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object9cb32929b1c04ae1ab1be01ef9b108684f309330924a732e3ff9f30da0753e02\;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object).stateObject.parameter.Out.0\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecta7f1b9181530d3fbe75a587a6cb9d803f2e023a53a492f584233835bf5746ff8\;
                             \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_0(Object)._Started.0\ <= true;
                             -- The following section was transformed from the .NET statement below:
                             -- num9 = num9 + 1;
@@ -9223,12 +8836,12 @@ begin
                             -- 	int num13;
                             -- 	num13 = 0;
                             -- 	while (num13 < 38) {
-                            -- 		MapObject objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a;
-                            -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a = new MapObject { };
-                            -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Index = num13;
-                            -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Factor = factor2;
-                            -- 		objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Step = num12;
-                            -- 		array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a);
+                            -- 		MapObject object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c;
+                            -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c = new MapObject { };
+                            -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Index = num13;
+                            -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Factor = factor2;
+                            -- 		object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Step = num12;
+                            -- 		array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c);
                             -- 		num13 = num13 + 1;
                             -- 	}
                             -- 	Task.WhenAll (array).Wait ();
@@ -9258,12 +8871,12 @@ begin
                             \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num13\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
                             -- while (num13 < 38) {
-                            -- 	MapObject objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a;
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a = new MapObject { };
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Index = num13;
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Factor = factor2;
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Step = num12;
-                            -- 	array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a);
+                            -- 	MapObject object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c;
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c = new MapObject { };
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Index = num13;
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Factor = factor2;
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Step = num12;
+                            -- 	array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c);
                             -- 	num13 = num13 + 1;
                             -- }
                             -- 
@@ -9284,156 +8897,156 @@ begin
                         if (\HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.binaryOperationResult.19\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	MapObject objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a;
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a = new MapObject { };
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Index = num13;
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Factor = factor2;
-                            -- 	objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Step = num12;
-                            -- 	array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a);
+                            -- 	MapObject object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c;
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c = new MapObject { };
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Index = num13;
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Factor = factor2;
+                            -- 	object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Step = num12;
+                            -- 	array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c);
                             -- 	num13 = num13 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- MapObject objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a;
+                            -- MapObject object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a = new MapObject { };
+                            -- object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c = new MapObject { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\.\IsNull\ := false;
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\.\Index\ := to_signed(0, 32);
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\.\Step\ := to_signed(0, 32);
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\.\Factor\ := to_signed(0, 32);
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\.\IsNull\ := false;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\.\Index\ := to_signed(0, 32);
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\.\Step\ := to_signed(0, 32);
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\.\Factor\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Index = num13;
+                            -- object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Index = num13;
                             -- 
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\.\Index\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num13\;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\.\Index\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num13\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Factor = factor2;
+                            -- object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Factor = factor2;
                             -- 
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\.\Factor\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.factor2\;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\.\Factor\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.factor2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a.Step = num12;
+                            -- object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c.Step = num12;
                             -- 
-                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\.\Step\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num12\;
+                            \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\.\Step\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.num12\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a);
+                            -- array [num13] = Task.Factory.StartNew (<>c.<>9__7_1 ?? (<>c.<>9__7_1 = <>c.<>9.<CreateMatrix>b__7_1), object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c);
                             -- 
                             -- Starting state machine invocation for the following method: System.Int32 Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(System.Object)
                             case \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).invocationIndex\ is 
                                 when 0 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.0\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.0\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.0\ <= true;
                                 when 1 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.1\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.1\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.1\ <= true;
                                 when 2 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.2\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.2\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.2\ <= true;
                                 when 3 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.3\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.3\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.3\ <= true;
                                 when 4 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.4\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.4\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.4\ <= true;
                                 when 5 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.5\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.5\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.5\ <= true;
                                 when 6 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.6\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.6\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.6\ <= true;
                                 when 7 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.7\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.7\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.7\ <= true;
                                 when 8 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.8\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.8\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.8\ <= true;
                                 when 9 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.9\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.9\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.9\ <= true;
                                 when 10 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.10\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.10\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.10\ <= true;
                                 when 11 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.11\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.11\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.11\ <= true;
                                 when 12 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.12\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.12\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.12\ <= true;
                                 when 13 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.13\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.13\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.13\ <= true;
                                 when 14 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.14\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.14\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.14\ <= true;
                                 when 15 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.15\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.15\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.15\ <= true;
                                 when 16 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.16\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.16\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.16\ <= true;
                                 when 17 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.17\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.17\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.17\ <= true;
                                 when 18 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.18\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.18\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.18\ <= true;
                                 when 19 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.19\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.19\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.19\ <= true;
                                 when 20 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.20\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.20\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.20\ <= true;
                                 when 21 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.21\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.21\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.21\ <= true;
                                 when 22 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.22\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.22\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.22\ <= true;
                                 when 23 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.23\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.23\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.23\ <= true;
                                 when 24 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.24\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.24\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.24\ <= true;
                                 when 25 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.25\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.25\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.25\ <= true;
                                 when 26 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.26\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.26\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.26\ <= true;
                                 when 27 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.27\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.27\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.27\ <= true;
                                 when 28 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.28\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.28\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.28\ <= true;
                                 when 29 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.29\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.29\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.29\ <= true;
                                 when 30 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.30\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.30\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.30\ <= true;
                                 when 31 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.31\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.31\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.31\ <= true;
                                 when 32 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.32\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.32\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.32\ <= true;
                                 when 33 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.33\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.33\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.33\ <= true;
                                 when 34 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.34\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.34\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.34\ <= true;
                                 when 35 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.35\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.35\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.35\ <= true;
                                 when 36 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.36\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.36\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.36\ <= true;
                                 when 37 => 
-                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.37\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.objecte909f0931ca3a21d4cf74e868fe142ba1c48741a957fecc81389fde4501d762a\;
+                                    \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).stateObject.parameter.Out.37\ <= \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.object98ec18909f5829b7f0915e75de5fcdd5ac1ad35d6d7dc087cb8d2fa405a7329c\;
                                     \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object)._Started.37\ <= true;
                             end case;
                             \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).invocationIndex\ := \HastlayerAcceleratedImageSharp::CreateMatrix(SimpleMemory).0.HastlayerAcceleratedImageSharp+<>c::<CreateMatrix>b__7_1(Object).invocationIndex\ + 1;
@@ -9694,7 +9307,7 @@ begin
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
+        Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).invocationIndex\: integer range 0 to 24 := 0;
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ImageContrastModifier::ChangeContrast(SimpleMemory).0.return.0\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
@@ -10084,11 +9697,11 @@ begin
                         -- 	while (num7 < 25) {
                         -- 		byte[] pixelBytes;
                         -- 		pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                        -- 		PixelProcessingTaskInput objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf;
-                        -- 		objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf = new PixelProcessingTaskInput { };
-                        -- 		objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.ContrastValue = num3;
-                        -- 		objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.PixelBytes = pixelBytes;
-                        -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf);
+                        -- 		PixelProcessingTaskInput object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99;
+                        -- 		object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99 = new PixelProcessingTaskInput { };
+                        -- 		object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.ContrastValue = num3;
+                        -- 		object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.PixelBytes = pixelBytes;
+                        -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99);
                         -- 		num7 = num7 + 1;
                         -- 	}
                         -- 	Task.WhenAll (array).Wait ();
@@ -10140,11 +9753,11 @@ begin
                             -- 	while (num7 < 25) {
                             -- 		byte[] pixelBytes;
                             -- 		pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                            -- 		PixelProcessingTaskInput objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf;
-                            -- 		objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf = new PixelProcessingTaskInput { };
-                            -- 		objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.ContrastValue = num3;
-                            -- 		objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.PixelBytes = pixelBytes;
-                            -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf);
+                            -- 		PixelProcessingTaskInput object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99;
+                            -- 		object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99 = new PixelProcessingTaskInput { };
+                            -- 		object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.ContrastValue = num3;
+                            -- 		object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.PixelBytes = pixelBytes;
+                            -- 		array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99);
                             -- 		num7 = num7 + 1;
                             -- 	}
                             -- 	Task.WhenAll (array).Wait ();
@@ -10175,11 +9788,11 @@ begin
                             -- while (num7 < 25) {
                             -- 	byte[] pixelBytes;
                             -- 	pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                            -- 	PixelProcessingTaskInput objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf;
-                            -- 	objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf = new PixelProcessingTaskInput { };
-                            -- 	objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.ContrastValue = num3;
-                            -- 	objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.PixelBytes = pixelBytes;
-                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf);
+                            -- 	PixelProcessingTaskInput object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99;
+                            -- 	object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99 = new PixelProcessingTaskInput { };
+                            -- 	object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.ContrastValue = num3;
+                            -- 	object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.PixelBytes = pixelBytes;
+                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99);
                             -- 	num7 = num7 + 1;
                             -- }
                             -- 
@@ -10202,11 +9815,11 @@ begin
                             -- {
                             -- 	byte[] pixelBytes;
                             -- 	pixelBytes = memory.Read4Bytes (num6 * 25 + num7 + 3);
-                            -- 	PixelProcessingTaskInput objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf;
-                            -- 	objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf = new PixelProcessingTaskInput { };
-                            -- 	objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.ContrastValue = num3;
-                            -- 	objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.PixelBytes = pixelBytes;
-                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf);
+                            -- 	PixelProcessingTaskInput object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99;
+                            -- 	object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99 = new PixelProcessingTaskInput { };
+                            -- 	object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.ContrastValue = num3;
+                            -- 	object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.PixelBytes = pixelBytes;
+                            -- 	array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99);
                             -- 	num7 = num7 + 1;
                             -- }
                             -- 
@@ -10246,102 +9859,102 @@ begin
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\ := \DataIn\;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\ := (unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(7 downto 0)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(15 downto 8)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(23 downto 16)), unsigned(\ImageContrastModifier::ChangeContrast(SimpleMemory).0.dataIn.3\(31 downto 24)));
                             -- The following section was transformed from the .NET statement below:
-                            -- PixelProcessingTaskInput objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf;
+                            -- PixelProcessingTaskInput object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf = new PixelProcessingTaskInput { };
+                            -- object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99 = new PixelProcessingTaskInput { };
                             -- 
                             -- Initializing record fields to their defaults.
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\.\IsNull\ := false;
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\.\PixelBytes\ := (others => to_unsigned(0, 8));
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\.\ContrastValue\ := to_signed(0, 32);
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\.\IsNull\ := false;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\.\PixelBytes\ := (others => to_unsigned(0, 8));
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\.\ContrastValue\ := to_signed(0, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.ContrastValue = num3;
+                            -- object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.ContrastValue = num3;
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\.\ContrastValue\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.num3\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf.PixelBytes = pixelBytes;
+                            -- object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99.PixelBytes = pixelBytes;
                             -- 
-                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
+                            \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\.\PixelBytes\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.pixelBytes\;
                             -- The following section was transformed from the .NET statement below:
-                            -- array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf);
+                            -- array [num7] = Task.Factory.StartNew ((Func<object, PixelProcessingTaskOutput>)this.<ChangeContrast>b__7_0, object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99);
                             -- 
                             -- Starting state machine invocation for the following method: Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput Hast.Samples.SampleAssembly.ImageContrastModifier::<ChangeContrast>b__7_0(System.Object)
                             case \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).invocationIndex\ is 
                                 when 0 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.0\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.0\ <= true;
                                 when 1 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.1\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.1\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.1\ <= true;
                                 when 2 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.2\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.2\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.2\ <= true;
                                 when 3 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.3\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.3\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.3\ <= true;
                                 when 4 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.4\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.4\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.4\ <= true;
                                 when 5 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.5\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.5\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.5\ <= true;
                                 when 6 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.6\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.6\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.6\ <= true;
                                 when 7 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.7\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.7\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.7\ <= true;
                                 when 8 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.8\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.8\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.8\ <= true;
                                 when 9 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.9\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.9\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.9\ <= true;
                                 when 10 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.10\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.10\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.10\ <= true;
                                 when 11 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.11\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.11\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.11\ <= true;
                                 when 12 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.12\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.12\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.12\ <= true;
                                 when 13 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.13\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.13\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.13\ <= true;
                                 when 14 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.14\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.14\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.14\ <= true;
                                 when 15 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.15\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.15\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.15\ <= true;
                                 when 16 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.16\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.16\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.16\ <= true;
                                 when 17 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.17\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.17\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.17\ <= true;
                                 when 18 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.18\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.18\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.18\ <= true;
                                 when 19 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.19\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.19\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.19\ <= true;
                                 when 20 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.20\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.20\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.20\ <= true;
                                 when 21 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.21\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.21\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.21\ <= true;
                                 when 22 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.22\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.22\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.22\ <= true;
                                 when 23 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.23\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.23\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.23\ <= true;
                                 when 24 => 
-                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.24\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.objecte152f956f9b6be7585fc1c80f0edc04392ad752829e30bb491a35a2ce29f38bf\;
+                                    \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).inputObject.parameter.Out.24\ <= \ImageContrastModifier::ChangeContrast(SimpleMemory).0.object6cdafe02120cdfb3a5f7988eb5d786708023d115543ce53eb8896bc1d8c97f99\;
                                     \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object)._Started.24\ <= true;
                             end case;
                             \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).invocationIndex\ := \ImageContrastModifier::ChangeContrast(SimpleMemory).0.ImageContrastModifier::<ChangeContrast>b__7_0(Object).invocationIndex\ + 1;
@@ -16463,7 +16076,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -16503,18 +16116,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -16527,9 +16140,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State_4\;
@@ -16551,9 +16164,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State_7\;
@@ -16575,11 +16188,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16594,7 +16207,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -16634,18 +16247,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -16658,9 +16271,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State_4\;
@@ -16682,9 +16295,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State_7\;
@@ -16706,11 +16319,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).1._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16725,7 +16338,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -16765,18 +16378,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -16789,9 +16402,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State_4\;
@@ -16813,9 +16426,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State_7\;
@@ -16837,11 +16450,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).2._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16856,7 +16469,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -16896,18 +16509,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -16920,9 +16533,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State_4\;
@@ -16944,9 +16557,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State_7\;
@@ -16968,11 +16581,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).3._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16987,7 +16600,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17027,18 +16640,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17051,9 +16664,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State_4\;
@@ -17075,9 +16688,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State_7\;
@@ -17099,11 +16712,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).4._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17118,7 +16731,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17158,18 +16771,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17182,9 +16795,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State_4\;
@@ -17206,9 +16819,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State_7\;
@@ -17230,11 +16843,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).5._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17249,7 +16862,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17289,18 +16902,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17313,9 +16926,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State_4\;
@@ -17337,9 +16950,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State_7\;
@@ -17361,11 +16974,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).6._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17380,7 +16993,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17420,18 +17033,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17444,9 +17057,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State_4\;
@@ -17468,9 +17081,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State_7\;
@@ -17492,11 +17105,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).7._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17511,7 +17124,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17551,18 +17164,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17575,9 +17188,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State_4\;
@@ -17599,9 +17212,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State_7\;
@@ -17623,11 +17236,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).8._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17642,7 +17255,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17682,18 +17295,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17706,9 +17319,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State_4\;
@@ -17730,9 +17343,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State_7\;
@@ -17754,11 +17367,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).9._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17773,7 +17386,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17813,18 +17426,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17837,9 +17450,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State_4\;
@@ -17861,9 +17474,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State_7\;
@@ -17885,11 +17498,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).10._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -17904,7 +17517,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -17944,18 +17557,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -17968,9 +17581,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State_4\;
@@ -17992,9 +17605,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State_7\;
@@ -18016,11 +17629,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).11._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18035,7 +17648,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18075,18 +17688,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -18099,9 +17712,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State_4\;
@@ -18123,9 +17736,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State_7\;
@@ -18147,11 +17760,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).12._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18166,7 +17779,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18206,18 +17819,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -18230,9 +17843,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State_4\;
@@ -18254,9 +17867,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State_7\;
@@ -18278,11 +17891,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).13._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18297,7 +17910,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18337,18 +17950,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -18361,9 +17974,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State_4\;
@@ -18385,9 +17998,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State_7\;
@@ -18409,11 +18022,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).14._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18428,7 +18041,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18468,18 +18081,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -18492,9 +18105,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State_4\;
@@ -18516,9 +18129,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State_7\;
@@ -18540,11 +18153,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).15._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18559,7 +18172,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18599,18 +18212,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -18623,9 +18236,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State_4\;
@@ -18647,9 +18260,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State_7\;
@@ -18671,11 +18284,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).16._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18690,7 +18303,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18730,18 +18343,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -18754,9 +18367,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State_4\;
@@ -18778,9 +18391,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State_7\;
@@ -18802,11 +18415,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).17._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18821,7 +18434,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18861,18 +18474,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -18885,9 +18498,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State_4\;
@@ -18909,9 +18522,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State_7\;
@@ -18933,11 +18546,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).18._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -18952,7 +18565,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -18992,18 +18605,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -19016,9 +18629,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State_4\;
@@ -19040,9 +18653,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State_7\;
@@ -19064,11 +18677,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).19._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19083,7 +18696,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -19123,18 +18736,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -19147,9 +18760,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State_4\;
@@ -19171,9 +18784,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State_7\;
@@ -19195,11 +18808,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).20._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19214,7 +18827,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -19254,18 +18867,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -19278,9 +18891,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State_4\;
@@ -19302,9 +18915,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State_7\;
@@ -19326,11 +18939,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).21._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19345,7 +18958,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -19385,18 +18998,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -19409,9 +19022,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State_4\;
@@ -19433,9 +19046,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State_7\;
@@ -19457,11 +19070,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).22._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19476,7 +19089,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -19516,18 +19129,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -19540,9 +19153,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State_4\;
@@ -19564,9 +19177,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State_7\;
@@ -19588,11 +19201,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).23._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -19607,7 +19220,7 @@ begin
     \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._StateMachine\: process (\Clock\) 
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State\: \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._States\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State_0\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.inputObject\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskInput\;
-        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
+        Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\: \Hast.Samples.SampleAssembly.ImageContrastModifier+PixelProcessingTaskOutput\;
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.2\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -19647,18 +19260,18 @@ begin
                     when \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State_2\ => 
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.inputObject\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.inputObject.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- PixelProcessingTaskOutput objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                        -- PixelProcessingTaskOutput object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7 = new PixelProcessingTaskOutput { };
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895 = new PixelProcessingTaskOutput { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\IsNull\ := false;
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := to_unsigned(0, 8);
-                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\IsNull\ := false;
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := to_unsigned(0, 8);
+                        \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := to_unsigned(0, 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
+                        -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.B = this.ChangePixelValue (inputObject.PixelBytes [2], inputObject.ContrastValue);
                         -- 
                         -- Starting state machine invocation for the following method: System.Byte Hast.Samples.SampleAssembly.ImageContrastModifier::ChangePixelValue(System.Byte,System.Int32)
                         \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32).pixel.parameter.Out.0\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.inputObject\.\PixelBytes\(to_integer(to_signed(2, 32)));
@@ -19671,9 +19284,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.0\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.0\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\B\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.G = this.ChangePixelValue (inputObject.PixelBytes [1], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State_4\;
@@ -19695,9 +19308,9 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.1\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.1\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\G\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
+                            -- object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895.R = this.ChangePixelValue (inputObject.PixelBytes [0], inputObject.ContrastValue);
                             -- 
                             -- The last invocation for the target state machine just finished, so need to start the next one in a later state.
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State_7\;
@@ -19719,11 +19332,11 @@ begin
                         if (\ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ = \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Finished.0\) then 
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32)._Started.0\ <= false;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.2\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.ImageContrastModifier::ChangePixelValue(Byte,Int32).return.0\;
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.2\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\.\R\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7;
+                            -- return object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895;
                             -- 
-                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.objecta9703dde4a7251bc2f667ebdc09be11866efcb506f55c0c9dbe4b8a4d4dde8f7\;
+                            \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.return\ <= \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24.object984d311e5fa13dd5b9e2b69ca479d97ac7618bd787c88b3071bb7c5b95450895\;
                             \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State\ := \ImageContrastModifier::<ChangeContrast>b__7_0(Object).24._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -20113,7 +19726,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -20121,7 +19734,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -20148,7 +19761,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num3\ := to_signed(0, 32);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.1\ := false;
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.3\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.4\ := to_unsigned(0, 16);
@@ -20156,7 +19769,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.8\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.9\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.10\ := to_unsigned(0, 16);
@@ -20229,22 +19842,22 @@ begin
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- 	ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                        -- 	return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- 	num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- 	ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                        -- 	return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- 	num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -20263,22 +19876,22 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- 	ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                            -- 	return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- 	num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                            -- 	ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                            -- 	return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                            -- 	num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -20290,7 +19903,7 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -20326,20 +19939,20 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                        -- return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -20368,14 +19981,14 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                        -- return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).0.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -20453,7 +20066,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -20461,7 +20074,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -20488,7 +20101,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num3\ := to_signed(0, 32);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.1\ := false;
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.3\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.4\ := to_unsigned(0, 16);
@@ -20496,7 +20109,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.8\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.9\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.10\ := to_unsigned(0, 16);
@@ -20569,22 +20182,22 @@ begin
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- 	ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                        -- 	return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- 	num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- 	ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                        -- 	return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- 	num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -20603,22 +20216,22 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- 	ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                            -- 	return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- 	num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                            -- 	ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                            -- 	return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                            -- 	num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -20630,7 +20243,7 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -20666,20 +20279,20 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                        -- return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -20708,14 +20321,14 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                        -- return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).1.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -20793,7 +20406,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\: boolean := false;
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -20801,7 +20414,7 @@ begin
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
@@ -20828,7 +20441,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num3\ := to_signed(0, 32);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.1\ := false;
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.2\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.3\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.4\ := to_unsigned(0, 16);
@@ -20836,7 +20449,7 @@ begin
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\ := to_unsigned(0, 32);
-                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := to_unsigned(0, 16);
+                \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.8\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.9\ := to_unsigned(0, 16);
                 \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.10\ := to_unsigned(0, 16);
@@ -20909,22 +20522,22 @@ begin
                         -- while ((long)(num3) < this.iterationsPerTask) {
                         -- 	uint num4;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- 	ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                        -- 	return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- 	num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 	uint num5;
                         -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- 	ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                         -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                        -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                        -- 	return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                         -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                        -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- 	num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 		num2 = (uint)((long)(num2) + 1L);
                         -- 	}
@@ -20943,22 +20556,22 @@ begin
                             -- {
                             -- 	uint num4;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- 	ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                            -- 	return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- 	num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 	uint num5;
                             -- 	// Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                            -- 	ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) << 9)));
                             -- 	randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 13)));
-                            -- 	return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                            -- 	return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                             -- 	// Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
-                            -- 	num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                            -- 	num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                             -- 	if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                             -- 		num2 = (uint)((long)(num2) + 1L);
                             -- 	}
@@ -20970,7 +20583,7 @@ begin
                             -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- ushort return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                            -- ushort return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -21006,20 +20619,20 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.6\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.7\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35 = randomXorshiftLfsr.State;
+                        -- return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num4 = return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35;
+                        -- num4 = return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_dba77f4a42e26f5b021109a2fcf7c5bd107feefdea3a2dbaa4059a0fc0385b35\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num4\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_ff55ea1347b2a8a34c3b72408756233462404bcec5ca2288cb5fdaa8771c2ae7\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- uint num5;
                         -- // Starting inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- ushort return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- randomXorshiftLfsr.State = (ushort)((int)(randomXorshiftLfsr.State) ^ (int)((ushort)((int)(randomXorshiftLfsr.State) >> 7)));
@@ -21048,14 +20661,14 @@ begin
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\), 32)) xor signed(SmartResize(((\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.12\)), 32))), 16);
                         \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\ := (\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d = randomXorshiftLfsr.State;
+                        -- return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604 = randomXorshiftLfsr.State;
                         -- // Ending inlined block of the method System.UInt16 Hast.Algorithms.Random.RandomXorshiftLfsr16::NextUInt16().
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\ := \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.randomXorshiftLfsr\.\State\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num5 = return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d;
+                        -- num5 = return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604;
                         -- 
-                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_7180f808f710fb52fb18dd6672bbdb004ff4bb0c497b2a035d0f38fda7af8f2d\, 32);
+                        \MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.num5\ := SmartResize(\MonteCarloPiEstimator+<>c__DisplayClass5_0::<EstimatePi>b__0(Object).2.return_66c2eb4db0c91ee6dc8e61c3f3190e1a783fc52f7e701394dd3c30a96b09d604\, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- if ((ulong)((long)(num4 * num4) + (long)(num5 * num5)) <= 4294836225uL) {
                         -- 	num2 = (uint)((long)(num2) + 1L);
@@ -21854,7 +21467,7 @@ begin
     \ObjectOrientedShowcase::Run(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0._State\: \ObjectOrientedShowcase::Run(SimpleMemory).0._States\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_0\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.input\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\: \Hast.Samples.SampleAssembly.MemoryContainer\;
+        Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e\: \Hast.Samples.SampleAssembly.MemoryContainer\;
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.array\: \Hast.Samples.SampleAssembly.NumberContainer_Array\(0 to 3);
         Variable \ObjectOrientedShowcase::Run(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -21944,16 +21557,16 @@ begin
                         -- uint input;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- MemoryContainer object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e;
+                        -- MemoryContainer object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e = new MemoryContainer (memory);
+                        -- object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e = new MemoryContainer (memory);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\.\IsNull\ := false;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e\.\IsNull\ := false;
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
-                        \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\;
+                        \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e\;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= true;
                         \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -21961,12 +21574,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Hast.Samples.SampleAssembly.MemoryContainer::.ctor(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory)
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory)._Started.0\ <= false;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::.ctor(SimpleMemory).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- input = Hast.Samples.SampleAssembly.MemoryContainer.GetInput (object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e);
+                            -- input = Hast.Samples.SampleAssembly.MemoryContainer.GetInput (object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e);
                             -- 
                             -- Starting state machine invocation for the following method: System.UInt32 Hast.Samples.SampleAssembly.MemoryContainer::GetInput()
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.Out.0\ <= \ObjectOrientedShowcase::Run(SimpleMemory).0.object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= true;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0._State\ := \ObjectOrientedShowcase::Run(SimpleMemory).0._State_4\;
                         end if;
@@ -21976,7 +21589,7 @@ begin
                         if (\ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ = \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Finished.0\) then 
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput()._Started.0\ <= false;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().return.0\;
-                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object7e7dc6d022987a25983ea8f5036696cfb72caafc2d5248454d6ba8a53092597e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
+                            \ObjectOrientedShowcase::Run(SimpleMemory).0.object1748bb72af04abe111093c971e06b0f727b6c792e1070847aa88eb931301f35e\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.MemoryContainer::GetInput().this.parameter.In.0\;
                             \ObjectOrientedShowcase::Run(SimpleMemory).0.input\ := \ObjectOrientedShowcase::Run(SimpleMemory).0.return.0\;
                             -- The following section was transformed from the .NET statement below:
                             -- NumberContainer[] array;
@@ -22458,7 +22071,7 @@ begin
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.flag\: boolean := false;
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.2\: boolean := false;
-        Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.unaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -22479,7 +22092,7 @@ begin
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.flag\ := false;
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num3\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.2\ := false;
-                \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := to_signed(0, 32);
+                \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.unaryOperationResult.0\ := false;
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -22538,13 +22151,13 @@ begin
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num3\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (num3 < 9999999) {
-                        -- 	int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                        -- 	int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                         -- 	if ((!flag)) {
-                        -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- 	} else {
-                        -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- 	}
-                        -- 	num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                        -- 	num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                         -- 	flag = !flag;
                         -- 	num3 = num3 + 1;
                         -- }
@@ -22559,25 +22172,25 @@ begin
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                            -- 	int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                             -- 	if ((!flag)) {
-                            -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                            -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                             -- 	} else {
-                            -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                            -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                             -- 	}
-                            -- 	num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                            -- 	num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                             -- 	flag = !flag;
                             -- 	num3 = num3 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                            -- int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((!flag)) {
-                            -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                            -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                             -- } else {
-                            -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                            -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                             -- }
                             -- 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.unaryOperationResult.0\ := not(\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.flag\);
@@ -22607,9 +22220,9 @@ begin
                     when \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_5\ => 
                         -- State after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                        -- num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                         -- 
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num2\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num2\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\);
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
@@ -22629,14 +22242,14 @@ begin
                         -- True branch of the if-else started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- 
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.3\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num2\ - \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num\;
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.3\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.3\);
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_3\.
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State\ = \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_6\) then 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_5\;
@@ -22646,14 +22259,14 @@ begin
                         -- False branch of the if-else started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- 
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.4\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num2\ + \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.num\;
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.4\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0.binaryOperationResult.4\);
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_3\.
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State\ = \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_7\) then 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).0._State_5\;
@@ -22677,7 +22290,7 @@ begin
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.flag\: boolean := false;
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.2\: boolean := false;
-        Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.unaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -22698,7 +22311,7 @@ begin
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.flag\ := false;
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num3\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.2\ := false;
-                \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := to_signed(0, 32);
+                \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.unaryOperationResult.0\ := false;
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.3\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.4\ := to_signed(0, 32);
@@ -22757,13 +22370,13 @@ begin
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num3\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (num3 < 9999999) {
-                        -- 	int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                        -- 	int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                         -- 	if ((!flag)) {
-                        -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- 	} else {
-                        -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- 	}
-                        -- 	num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                        -- 	num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                         -- 	flag = !flag;
                         -- 	num3 = num3 + 1;
                         -- }
@@ -22778,25 +22391,25 @@ begin
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                            -- 	int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                             -- 	if ((!flag)) {
-                            -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                            -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                             -- 	} else {
-                            -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                            -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                             -- 	}
-                            -- 	num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                            -- 	num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                             -- 	flag = !flag;
                             -- 	num3 = num3 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                            -- int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((!flag)) {
-                            -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                            -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                             -- } else {
-                            -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                            -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                             -- }
                             -- 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.unaryOperationResult.0\ := not(\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.flag\);
@@ -22826,9 +22439,9 @@ begin
                     when \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_5\ => 
                         -- State after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                        -- num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                         -- 
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num2\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num2\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\);
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
@@ -22848,14 +22461,14 @@ begin
                         -- True branch of the if-else started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- 
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.3\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num2\ - \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num\;
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.3\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.3\);
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_3\.
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State\ = \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_6\) then 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_5\;
@@ -22865,14 +22478,14 @@ begin
                         -- False branch of the if-else started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- 
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.4\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num2\ + \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.num\;
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.4\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1.binaryOperationResult.4\);
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_3\.
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State\ = \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_7\) then 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).1._State_5\;
@@ -22896,7 +22509,7 @@ begin
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.flag\: boolean := false;
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.2\: boolean := false;
-        Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.unaryOperationResult.0\: boolean := false;
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -22917,7 +22530,7 @@ begin
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.flag\ := false;
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num3\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.2\ := false;
-                \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := to_signed(0, 32);
+                \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.unaryOperationResult.0\ := false;
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.3\ := to_signed(0, 32);
                 \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.4\ := to_signed(0, 32);
@@ -22976,13 +22589,13 @@ begin
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num3\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- while (num3 < 9999999) {
-                        -- 	int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                        -- 	int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                         -- 	if ((!flag)) {
-                        -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- 	} else {
-                        -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- 	}
-                        -- 	num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                        -- 	num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                         -- 	flag = !flag;
                         -- 	num3 = num3 + 1;
                         -- }
@@ -22997,25 +22610,25 @@ begin
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.2\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                            -- 	int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                             -- 	if ((!flag)) {
-                            -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                            -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                             -- 	} else {
-                            -- 		conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                            -- 		conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                             -- 	}
-                            -- 	num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                            -- 	num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                             -- 	flag = !flag;
                             -- 	num3 = num3 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- int conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98;
+                            -- int conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- if ((!flag)) {
-                            -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                            -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                             -- } else {
-                            -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                            -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                             -- }
                             -- 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.unaryOperationResult.0\ := not(\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.flag\);
@@ -23045,9 +22658,9 @@ begin
                     when \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_5\ => 
                         -- State after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- num2 = (conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98);
+                        -- num2 = (conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57);
                         -- 
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num2\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num2\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\);
                         -- The following section was transformed from the .NET statement below:
                         -- flag = !flag;
                         -- 
@@ -23067,14 +22680,14 @@ begin
                         -- True branch of the if-else started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 - num);
+                        -- conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 - num);
                         -- 
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.3\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num2\ - \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num\;
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.3\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.3\);
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_3\.
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State\ = \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_6\) then 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_5\;
@@ -23084,14 +22697,14 @@ begin
                         -- False branch of the if-else started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- 	conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98 = (num2 + num);
+                        -- conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57 = (num2 + num);
                         -- 
                         \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.4\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num2\ + \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.num\;
-                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionaldf06b407998e7ef8314c91f14d040054a99fa414c44f08a48e44fb764b671e98\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.4\);
+                        \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.conditionalea389fcbd2b1cc069ed561ddc2056dcbaf62cbb11163519ce6f557503c922f57\ := (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2.binaryOperationResult.4\);
                         -- Going to the state after the if-else which was started in state \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_3\.
                         if (\ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State\ = \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_7\) then 
                             \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State\ := \ParallelAlgorithm+<>c__DisplayClass3_0::<Run>b__0(Object).2._State_5\;
@@ -23360,11 +22973,11 @@ begin
         Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\: \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._States\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_0\;
         Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\: boolean := false;
-        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\: boolean := false;
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -23387,11 +23000,11 @@ begin
                 \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_0\;
                 \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\ := to_unsigned(0, 32);
                 \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := false;
-                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := false;
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := to_unsigned(0, 32);
                 \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
-                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := to_unsigned(0, 32);
+                \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := to_unsigned(0, 32);
                 \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\ := false;
                 \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
@@ -23442,33 +23055,33 @@ begin
                             \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\ := \DataIn\;
                             \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- uint number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4;
+                            -- uint number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 = number;
+                            -- number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 = number;
                             -- 
-                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\;
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number\;
                             -- The following section was transformed from the .NET statement below:
-                            -- bool return_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- uint num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4;
+                            -- bool return_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 = number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 / 2u;
-                            -- 
-                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ / to_unsigned(2, 32);
-                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- uint num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4;
+                            -- uint num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 = 2u;
+                            -- num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 = number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 / 2u;
                             -- 
-                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := to_unsigned(2, 32);
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ / to_unsigned(2, 32);
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- while (num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 <= num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 && (long)(number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 - number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 / num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 * num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4) != 0L) {
-                            -- 	num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 = (uint)((long)(num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4) + 1L);
+                            -- uint num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 = 2u;
+                            -- 
+                            \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := to_unsigned(2, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 <= num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 && (long)(number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 - number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 / num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 * num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961) != 0L) {
+                            -- 	num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 = (uint)((long)(num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961) + 1L);
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -23478,25 +23091,25 @@ begin
                     when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_4\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\.
                         -- The while loop's condition:
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ <= \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.1\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ <= \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\;
                         \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_5\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 = (long)(num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4) == (long)(num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4) + 1L;
+                        -- return_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 = (long)(num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961) == (long)(num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961) + 1L;
                         -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\), 64)) + to_signed(1, 64);
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\), 64)) = \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\;
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\), 64)) + to_signed(1, 64);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\), 64)) = \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.8\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteBoolean (0, return_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4);
+                        -- memory.WriteBoolean (0, return_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961);
                         -- 
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.return_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\);
                         \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0.93705
                     when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_6\ => 
@@ -23508,11 +23121,11 @@ begin
                         else 
                             \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ / \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\;
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ / \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\;
                         -- Clock cycles needed to complete this state (approximation): 8
                     when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_7\ => 
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ * \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\, 32);
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.4\ := signed(SmartResize(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ - \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\, 64));
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\ := SmartResize(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.2\ * \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\, 32);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.4\ := signed(SmartResize(\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.number_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ - \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.3\, 64));
                         \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0.7386
                     when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_8\ => 
@@ -23522,11 +23135,11 @@ begin
                         if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.6\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 = (uint)((long)(num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4) + 1L);
+                            -- 	num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 = (uint)((long)(num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961) + 1L);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4 = (uint)((long)(num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4) + 1L);
+                            -- num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961 = (uint)((long)(num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961) + 1L);
                             -- 
                             \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_9\;
                         else 
@@ -23535,8 +23148,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.5556
                     when \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\), 64)) + to_signed(1, 64)), 32);
-                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_65edf02126ec999da8ed01ba559c6407e75facb2cf0b8edcf75f68a119ff33b4\ := (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(unsigned(signed(SmartResize((\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\), 64)) + to_signed(1, 64)), 32);
+                        \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.num2_7761382f599bf69753924e8b65ff4649cca573850f67065ef8816394c46bb961\ := (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0.binaryOperationResult.7\);
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_3\ if the loop wasn't exited with a state change.
                         if (\PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ = \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_9\) then 
                             \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State\ := \PrimeCalculator::IsPrimeNumberSync(SimpleMemory).0._State_4\;
@@ -23621,11 +23234,11 @@ begin
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\: boolean := false;
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\: boolean := false;
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\: boolean := false;
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
@@ -23655,11 +23268,11 @@ begin
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := (others => '0');
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := to_unsigned(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := false;
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := false;
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
-                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := to_unsigned(0, 32);
+                \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := false;
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
                 \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := to_signed(0, 32);
@@ -23722,19 +23335,19 @@ begin
                             -- 	uint number;
                             -- 	number = memory.ReadUInt32 (1 + num2);
                             -- 	// Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
-                            -- 	uint number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number;
-                            -- 	bool return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	uint num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 / 2u;
-                            -- 	uint num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = 2u;
-                            -- 	while (num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 <= num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 && (long)(number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 - number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 / num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 * num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) != 0L) {
-                            -- 		num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (uint)((long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L);
+                            -- 	uint number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = number;
+                            -- 	bool return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	uint num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c / 2u;
+                            -- 	uint num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = 2u;
+                            -- 	while (num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c <= num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c && (long)(number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c - number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c / num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c * num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) != 0L) {
+                            -- 		num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (uint)((long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L);
                             -- 	}
-                            -- 	return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) == (long)(num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L;
+                            -- 	return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) == (long)(num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L;
                             -- 	// Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
-                            -- 	memory.WriteBoolean (1 + num2, return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10);
+                            -- 	memory.WriteBoolean (1 + num2, return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
@@ -23752,19 +23365,19 @@ begin
                             -- 	uint number;
                             -- 	number = memory.ReadUInt32 (1 + num2);
                             -- 	// Starting inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
-                            -- 	uint number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number;
-                            -- 	bool return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	uint num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 / 2u;
-                            -- 	uint num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 	num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = 2u;
-                            -- 	while (num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 <= num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 && (long)(number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 - number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 / num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 * num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) != 0L) {
-                            -- 		num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (uint)((long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L);
+                            -- 	uint number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = number;
+                            -- 	bool return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	uint num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c / 2u;
+                            -- 	uint num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 	num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = 2u;
+                            -- 	while (num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c <= num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c && (long)(number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c - number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c / num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c * num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) != 0L) {
+                            -- 		num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (uint)((long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L);
                             -- 	}
-                            -- 	return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) == (long)(num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L;
+                            -- 	return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) == (long)(num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L;
                             -- 	// Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
-                            -- 	memory.WriteBoolean (1 + num2, return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10);
+                            -- 	memory.WriteBoolean (1 + num2, return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c);
                             -- 	num2 = num2 + 1;
                             -- }
                             -- 
@@ -23800,33 +23413,33 @@ begin
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\ := \DataIn\;
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\ := ConvertStdLogicVectorToUInt32(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.dataIn.1\);
                             -- The following section was transformed from the .NET statement below:
-                            -- uint number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
+                            -- uint number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number;
+                            -- number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = number;
                             -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\;
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number\;
                             -- The following section was transformed from the .NET statement below:
-                            -- bool return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- uint num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
+                            -- bool return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 / 2u;
-                            -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ / to_unsigned(2, 32);
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- uint num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10;
+                            -- uint num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = 2u;
+                            -- num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c / 2u;
                             -- 
-                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := to_unsigned(2, 32);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ / to_unsigned(2, 32);
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- while (num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 <= num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 && (long)(number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 - number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 / num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 * num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) != 0L) {
-                            -- 	num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (uint)((long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L);
+                            -- uint num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = 2u;
+                            -- 
+                            \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := to_unsigned(2, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- while (num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c <= num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c && (long)(number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c - number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c / num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c * num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) != 0L) {
+                            -- 	num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (uint)((long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L);
                             -- }
                             -- 
                             -- Starting a while loop.
@@ -23836,20 +23449,20 @@ begin
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\ => 
                         -- Repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\.
                         -- The while loop's condition:
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.3\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\;
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0.53625
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_9\ => 
                         -- State after the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) == (long)(num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L;
+                        -- return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) == (long)(num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L;
                         -- // Ending inlined block of the method System.Boolean Hast.Samples.SampleAssembly.PrimeCalculator::IsPrimeNumberInternal(System.UInt32).
                         -- 
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\), 64)) + to_signed(1, 64);
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\), 64)) = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\ := signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\), 64)) + to_signed(1, 64);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\ := signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\), 64)) = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.10\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.11\;
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteBoolean (1 + num2, return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10);
+                        -- memory.WriteBoolean (1 + num2, return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c);
                         -- 
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0.93705
@@ -23862,11 +23475,11 @@ begin
                         else 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.0\ + to_signed(1, 32);
                         end if;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ / \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\;
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ / \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\;
                         -- Clock cycles needed to complete this state (approximation): 8
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_11\ => 
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ * \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\, 32);
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := signed(SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ - \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\, 64));
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\ := SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ * \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\, 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.6\ := signed(SmartResize(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.number_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ - \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.5\, 64));
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.7386
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_12\ => 
@@ -23876,11 +23489,11 @@ begin
                         if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.8\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (uint)((long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L);
+                            -- 	num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (uint)((long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10 = (uint)((long)(num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10) + 1L);
+                            -- num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c = (uint)((long)(num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c) + 1L);
                             -- 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_13\;
                         else 
@@ -23889,8 +23502,8 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.5556
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_13\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\), 64)) + to_signed(1, 64)), 32);
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\ := (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(unsigned(signed(SmartResize((\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\), 64)) + to_signed(1, 64)), 32);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.num2_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\ := (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.9\);
                         -- Returning to the repeated state of the while loop which was started in state \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_7\ if the loop wasn't exited with a state change.
                         if (\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ = \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_13\) then 
                             \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_8\;
@@ -23902,7 +23515,7 @@ begin
                         -- Begin SimpleMemory write.
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.CellIndex\ <= \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.12\;
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_34478f687c77b7294b6488b7f6532e8a78dcd57f11c7406121f3f606bd60ed10\);
+                        \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertBooleanToStdLogicVector(\PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.return_05870bba049ef8759efde20f47ad88fcac2660a678d98d8a3409a2e44d61d56c\);
                         \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State\ := \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0._State_15\ => 
