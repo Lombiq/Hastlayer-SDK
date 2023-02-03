@@ -37,10 +37,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Transformer.Abstractio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Synthesis.Abstractions", "Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj", "{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Remote.Client", "Hast.Remote.Client\Hast.Remote.Client.csproj", "{86D47BE0-994E-48BA-B68C-1F0BCAB67F02}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Remote.Bridge", "Hast.Remote.Bridge\Hast.Remote.Bridge.csproj", "{A9D9FEC6-20CE-48F5-9D94-1919B2B0ACE2}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Xilinx.Abstractions", "Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj", "{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Drivers", "Drivers", "{B88EC5D8-5D8A-4C87-81B3-F4F8C7FB2BF8}"
@@ -118,14 +114,6 @@ Global
 		{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D1EC796-DFF6-4EC7-B749-62B89D1DEA92}.Release|Any CPU.Build.0 = Release|Any CPU
-		{86D47BE0-994E-48BA-B68C-1F0BCAB67F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86D47BE0-994E-48BA-B68C-1F0BCAB67F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86D47BE0-994E-48BA-B68C-1F0BCAB67F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86D47BE0-994E-48BA-B68C-1F0BCAB67F02}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9D9FEC6-20CE-48F5-9D94-1919B2B0ACE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9D9FEC6-20CE-48F5-9D94-1919B2B0ACE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9D9FEC6-20CE-48F5-9D94-1919B2B0ACE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9D9FEC6-20CE-48F5-9D94-1919B2B0ACE2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F637E57-95A4-4B3D-9056-FFED38F1A1F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
