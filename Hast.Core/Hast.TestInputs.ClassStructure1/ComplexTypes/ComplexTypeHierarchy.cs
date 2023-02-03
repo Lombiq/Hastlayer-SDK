@@ -14,13 +14,19 @@ public class ComplexTypeHierarchy : /*BaseClass,*/ IInterface1, IInterface2
     void IInterface1.Interface1Method1() => PrivateMethod();
 
     // Implicit interface implementation.
-    public void Interface1Method2(bool isTrue)
+    [SuppressMessage(
+        "Major Bug",
+        "S1145:Useless \"if(true) {...}\" and \"if(false){...}\" blocks should be removed",
+        Justification = ThatsThePoint)]
+    public void Interface1Method2()
     {
         //// var x = BaseClassMethod1(4);
         //// var y = x + 4;
         //// var z = x + y;
 
-        if (isTrue)
+        // Fine to test transformation.
+#pragma warning disable CS0162 // Unreachable code detected
+        if (true)
         {
             PrivateMethod();
             StaticMethod();
@@ -29,16 +35,19 @@ public class ComplexTypeHierarchy : /*BaseClass,*/ IInterface1, IInterface2
         {
             PrivateMethod();
         }
+#pragma warning restore CS0162 // Unreachable code detected
     }
 
     public void Interface2Method1() => BaseInterfaceMethod2();
 
     // Explicit interface implementation.
     [SuppressMessage("Design", "CA1033:Interface methods should be callable by child types", Justification = ThatsThePoint)]
+    [SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = ThatsThePoint)]
+    [SuppressMessage("Minor Code Smell", "S1481:Unused local variables should be removed", Justification = ThatsThePoint)]
     void IBaseInterface.BaseInterfaceMethod1()
     {
-        // Intentionally blank, anything here would be optimized out by the compiler anyway, this being a blank and pure
-        // method.
+        // This is the point of the exercise.
+        var x = 1;
     }
 
     public void BaseInterfaceMethod2() => StaticMethod();
@@ -59,16 +68,18 @@ public class ComplexTypeHierarchy : /*BaseClass,*/ IInterface1, IInterface2
     // Method not referenced anywhere.
     [SuppressMessage("Major Code Smell", "S1144:Unused private types or members should be removed", Justification = ThatsThePoint)]
     [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = ThatsThePoint)]
+    [SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = ThatsThePoint)]
+    [SuppressMessage("Minor Code Smell", "S1481:Unused local variables should be removed", Justification = ThatsThePoint)]
     [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = ThatsThePoint)]
     private void UnusedMethod()
     {
-        // Intentionally blank, anything here would be optimized out by the compiler anyway, this being a blank and pure
-        // method.
+        var x = 1;
     }
 
+    [SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = ThatsThePoint)]
+    [SuppressMessage("Minor Code Smell", "S1481:Unused local variables should be removed", Justification = ThatsThePoint)]
     private static void StaticMethod()
     {
-        // Intentionally blank, anything here would be optimized out by the compiler anyway, this being a blank and pure
-        // method.
+        var x = 1;
     }
 }
