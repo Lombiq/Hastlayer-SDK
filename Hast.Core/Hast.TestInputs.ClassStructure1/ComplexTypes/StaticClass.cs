@@ -7,6 +7,7 @@ public static class StaticClass
 {
     public static void StaticMethod()
     {
-        var x = 1;
+        // Intentionally blank, anything here would be optimized out by the compiler anyway, this being a blank and pure
+        // method.
     }
 }

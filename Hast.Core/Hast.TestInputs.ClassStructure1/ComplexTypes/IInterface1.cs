@@ -13,5 +13,5 @@ public interface IInterface1 : IBaseInterface
     /// <summary>
     /// Unused method.
     /// </summary>
-    void Interface1Method2();
+    void Interface1Method2(bool isTrue);
 }
