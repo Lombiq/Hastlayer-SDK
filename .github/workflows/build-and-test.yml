@@ -13,6 +13,8 @@ jobs:
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
+        # If we'll have another concurrent job in this workflow then the next line should be removed.
+      cancel-workflow-on-failure: "false"
       machine-types: "['ubuntu-22.04-4core']"
       timeout-minutes: 15
       build-configuration: Debug
@@ -22,6 +24,8 @@ jobs:
     name: Build and Test (standard runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
+      # If we'll have another concurrent job in this workflow then the next line should be removed.
+      cancel-workflow-on-failure: "false"
       timeout-minutes: 30
       build-configuration: Debug
 
