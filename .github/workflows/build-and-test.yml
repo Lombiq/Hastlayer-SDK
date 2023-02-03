@@ -13,7 +13,7 @@ jobs:
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
-      machine-types: "['ubuntu-latest-8core']"
+      machine-types: "['ubuntu-22.04-4core']"
       timeout-minutes: 15
       build-configuration: Debug
 
