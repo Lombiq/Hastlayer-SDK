@@ -86,9 +86,6 @@ internal static class Program
         };
         configuration.SingleBinaryPath = consumerConfiguration.SingleBinaryPath;
 
-        // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
-        ConfigureClientFlavor(configuration, hastlayerConfiguration, consumerConfiguration);
-
         // Letting the configuration of samples run. Check out those methods too!
         ISampleRunner sampleRunner = consumerConfiguration.SampleToRun switch
         {
@@ -216,30 +213,6 @@ internal static class Program
         foreach (var mismatch in mismatches)
         {
             Console.WriteLine("* " + mismatch);
-        }
-    }
-
-    private static void ConfigureClientFlavor(
-        HardwareGenerationConfiguration configuration,
-        HastlayerConfiguration hastlayerConfiguration,
-        ConsumerConfiguration consumerConfiguration)
-    {
-        if (hastlayerConfiguration.Flavor != HastlayerFlavor.Client) return;
-        var remoteClientConfiguration = configuration.RemoteClientConfiguration();
-
-        if (!string.IsNullOrWhiteSpace(consumerConfiguration.Endpoint) &&
-            Uri.TryCreate(consumerConfiguration.Endpoint, UriKind.Absolute, out var endpointUri))
-        {
-            remoteClientConfiguration.EndpointBaseUri = endpointUri;
-        }
-
-        remoteClientConfiguration.AppName = consumerConfiguration.AppName;
-        remoteClientConfiguration.AppSecret = consumerConfiguration.AppSecret;
-
-        if (string.IsNullOrEmpty(remoteClientConfiguration.AppSecret))
-        {
-            throw new InvalidOperationException(
-                "You haven't provided the remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
         }
     }
 

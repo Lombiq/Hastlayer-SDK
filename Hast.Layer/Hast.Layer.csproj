@@ -27,7 +27,6 @@
     <ProjectReference Include="..\Hast.Abstractions\Hast.Vitis.Abstractions\Hast.Vitis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
-    <ProjectReference Include="..\Hast.Remote.Client\Hast.Remote.Client.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

@@ -78,23 +78,6 @@ public sealed class Hastlayer : IHastlayer
 
         configuration.OnServiceRegistration?.Invoke(configuration, services);
 
-        var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
-        if (transformerServices.Count > 1)
-        {
-            switch (configuration.Flavor)
-            {
-                case HastlayerFlavor.Client:
-                    services.RemoveImplementationsExcept<ITransformer, Remote.Client.RemoteTransformer>();
-                    break;
-                case HastlayerFlavor.Developer:
-                    // Can't use the type directly because it won't be available in the Client flavor.
-                    services.RemoveImplementationsExcept<ITransformer>("Hast.Transformer.DefaultTransformer");
-                    break;
-                default:
-                    throw new ArgumentException($"Unknown flavor in configuration: '{configuration.Flavor}'");
-            }
-        }
-
         // To test that deferred logging works:
         //// services.Log(LogLevel.Critical, "Critical message!");
         //// services.Log(LogLevel.Error, "Error message!");
