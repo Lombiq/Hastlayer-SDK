@@ -1,7 +1,3 @@
-[submodule "Hast.Remote.Bridge"]
-	path = Hast.Remote.Bridge
-	url = https://github.com/Lombiq/Hastlayer-Remote-Bridge.git
-	branch = dev
 [submodule "Hast.Core"]
 	path = Hast.Core
 	url = https://github.com/Lombiq/Hastlayer-Core.git
