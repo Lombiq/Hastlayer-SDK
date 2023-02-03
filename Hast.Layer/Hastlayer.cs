@@ -405,55 +405,6 @@ public sealed class Hastlayer : IHastlayer
 
     private void LoadHost()
     {
-        var moduleFolderPaths = new List<string>();
-
-        // Since Hast.Core either exists or not we need to start by probing for the Hast.Abstractions folder.
-        var abstractionsPath = Path.GetDirectoryName(GetType().Assembly.Location);
-        var currentDirectory = Path.GetFileName(abstractionsPath);
-
-        if (currentDirectory?.EqualsOrdinalIgnoreCase("Debug") == true ||
-            currentDirectory?.EqualsOrdinalIgnoreCase("Release") == true)
-        {
-            abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-        }
-
-        currentDirectory = Path.GetFileName(abstractionsPath);
-        if (currentDirectory?.EqualsOrdinalIgnoreCase("bin") == true)
-        {
-            abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-        }
-
-        // Now we're at the level above the current project's folder.
-        abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-
-        var coreFound = false;
-        while (abstractionsPath != null && !coreFound)
-        {
-            var abstractionsSubFolder = Path.Combine(abstractionsPath, "Hast.Abstractions");
-            if (Directory.Exists(abstractionsSubFolder))
-            {
-                abstractionsPath = abstractionsSubFolder;
-                coreFound = true;
-            }
-            else
-            {
-                abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-            }
-        }
-
-        // There won't be an Abstractions folder, nor a Core one when the app is being run from a deployment folder (as
-        // opposed to a solution).
-        if (!string.IsNullOrEmpty(abstractionsPath))
-        {
-            moduleFolderPaths.Add(abstractionsPath);
-        }
-
-        var corePath = !string.IsNullOrEmpty(abstractionsPath) ?
-            Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core") :
-            null;
-
-        if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
-
         var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
         factory.MemberExecutedOnHardware += (_, context) =>
             ExecutedOnHardware?.Invoke(this, new ServiceEventArgs<IMemberHardwareExecutionContext>(context.Arguments));
