@@ -10,8 +10,9 @@ namespace Hast.Synthesis;
 /// </summary>
 /// <remarks>
 /// <para>
-/// Separated the manifest-providing part into <see cref="IDeviceManifestProvider"/> so that can be available in the
-/// Client flavor too but keeping the rest of the driver implementation only part of Hast.Core.
+/// This was originally separated from the rest of <see cref="IDeviceManifestProvider"/> so that can be available in the
+/// Client flavor, without Hast.Core. Now, after the open-sourcing, we can consider simplifying it, see
+/// <see href="https://github.com/Lombiq/Hastlayer-SDK/issues/99"/>.
 /// </para>
 /// </remarks>
 public interface IDeviceDriver : IDeviceManifestProvider

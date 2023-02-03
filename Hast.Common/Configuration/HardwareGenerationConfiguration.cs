@@ -48,8 +48,7 @@ public class HardwareGenerationConfiguration : IHardwareGenerationConfiguration
 
     /// <summary>
     /// Gets or sets a value indicating whether the caching of the generated hardware is allowed. If set to <see
-    /// langword="false"/> no caching will happen. Defaults to <see langword="false"/>. Note that this will have an
-    /// affect only on client-side caching when using the Client flavor.
+    /// langword="false"/> no caching will happen. Defaults to <see langword="false"/>.
     /// </summary>
     public bool EnableCaching { get; set; }
 

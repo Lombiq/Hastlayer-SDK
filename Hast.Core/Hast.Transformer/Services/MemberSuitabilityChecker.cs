@@ -3,9 +3,9 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services;
 
-// This should rather be in Hast.Communication because it depends on the Communication component and its proxy generator
-// on what can be used as hardware entry point members. However to have this there a lot of AST extensions would need to
-// be opened for Clients, and even in the Client flavor ILSpy NuGets would need to be installed.
+// This should perhaps rather be in Hast.Communication because it depends on the Communication component and its proxy
+// generator on what can be used as hardware entry point members. See / <see
+// href="https://github.com/Lombiq/Hastlayer-SDK/issues/99"/>.
 public class MemberSuitabilityChecker : IMemberSuitabilityChecker
 {
     public bool IsSuitableHardwareEntryPointMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)

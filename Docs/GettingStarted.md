@@ -20,29 +20,18 @@ Catapult acknowledgment: The authors acknowledge the [Texas Advanced Computing C
 
 If you have a compatible FPGA board you can run the default sample even without having access to Hastlayer Remote Services.
 
-## Flavors of Hastlayer
-
-The Hastlayer components come in two "flavors" with corresponding branches in their repositories:
-
-- Developer (*dev* branch): This is used by developers of Hastlayer itself. It includes the full source code. Most possibly you don't need this one.
-- Client (*client* branch): Used by end-users of Hastlayer who run Hastlayer in a client mode, accessing *Hast.Core* as a remote service, i.e. Hastlayer Remote Services. *Hast.Core* encompasses those components of Hastlayer that do the heavy lifting of software to hardware transformation. Most possibly you need this one.
-
-You'll see this terminology be used further on.
-
 ## First steps
 
 These would be your first steps on starting to work with Hastlayer by getting the samples working:
 
-1. Clone the necessary repositories with git. Always checkout the `client` or `dev` branch corresponding to your flavor. Make sure to allow Git to initialize submodules!
+1. Clone the necessary repositories with git. Make sure to allow Git to initialize submodules!
    1. Clone the [Hastlayer SDK repo](https://github.com/Lombiq/Hastlayer-SDK).
    2. Clone of the the Hardware Framework repos corresponding to your choice of hardware platform:
       - The [Hastlayer Hardware Framework - Xilinx repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Xilinx) for the Nexys A7.
       - The [Hastlayer Hardware Framework - Xilinx Vitis repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis) for Alveo Data Center Accelerator Cards is already included as a git submoule so you don't have to clone it separately.
       - The [Hastlayer Hardware Framework - Catapult repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Catapult) for Microsoft Catapult.
 2. Set up the hardware project as explained in the Hardware Framework's documentation and program the FPGA for the first time.
-3. Open the Visual Studio solution of the SDK corresponding to your flavor of Hastlayer.
-4. Set the `Hast.Samples.Consumer` project (under the *Samples* folder) as the startup project here. If you're working in the *client* flavor then you'll need to configure your credentials, see that project's documentation.
-5. Start the sample project. That will by default run the sample that is also added by default to the Hardware project.
+3. Open the Visual Studio solution and start the `Hast.Samples.Consumer`. That will by default run the sample that is also added by default to the Hardware project.
 6. You should be able to see the results of the sample in its console window.
 
 If everything is alright follow up with the rest of this documentation to write your first own Hastlayer-using algorithm. You can also check out the many documented samples under the *Samples* solution folder.
