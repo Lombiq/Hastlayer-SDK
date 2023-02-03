@@ -1,6 +1,4 @@
-using Castle.Core.Internal;
 using Hast.Algorithms;
-using Hast.Common.Enums;
 using Hast.Common.Services;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
@@ -60,7 +58,6 @@ internal static class Program
             ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
             : Gui.BuildConfiguration(savedConfigurations);
         if (consumerConfiguration == null) return ExitStatus.NothingToDo;
-        if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
         // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while the
         // program runs and re-use it continuously. No need to always wrap it into a using() like here, just make sure

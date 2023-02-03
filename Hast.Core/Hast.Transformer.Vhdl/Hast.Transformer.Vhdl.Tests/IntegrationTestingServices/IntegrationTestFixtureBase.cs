@@ -1,4 +1,3 @@
-using Hast.Common.Enums;
 using Hast.Layer;
 using System;
 using System.Collections.Generic;
@@ -10,10 +9,7 @@ public abstract class IntegrationTestFixtureBase : IDisposable
 {
     private readonly Lazy<Hastlayer> _host;
 
-    protected readonly HastlayerConfiguration _hostConfiguration = new()
-    {
-        Flavor = HastlayerFlavor.Developer,
-    };
+    protected readonly HastlayerConfiguration _hostConfiguration = new();
 
     private bool _disposed;
 

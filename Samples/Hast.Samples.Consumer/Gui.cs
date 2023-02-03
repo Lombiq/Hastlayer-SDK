@@ -205,16 +205,6 @@ public sealed class Gui : IDisposable
 
         switch (key)
         {
-            case nameof(ConsumerConfiguration.AppName):
-                _optionsTextField.Text = _configuration.AppName ?? string.Empty;
-                _currentOptionsTextFieldEventHandler = text => _configuration.AppName = text;
-                ShowTextField(visible: true);
-                break;
-            case nameof(ConsumerConfiguration.AppSecret):
-                _optionsTextField.Text = _configuration.AppSecret ?? string.Empty;
-                _currentOptionsTextFieldEventHandler = text => _configuration.AppSecret = text;
-                ShowTextField(visible: true);
-                break;
             case nameof(ConsumerConfiguration.BuildLabel):
                 _optionsTextField.Text = _configuration.BuildLabel ?? string.Empty;
                 _currentOptionsTextFieldEventHandler = text => _configuration.BuildLabel = text;

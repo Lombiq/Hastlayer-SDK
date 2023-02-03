@@ -1,6 +1,4 @@
 using Hast.Catapult.Abstractions;
-using Hast.Common.Enums;
-using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -32,7 +30,6 @@ public sealed class Hastlayer : IHastlayer
 {
     public const string AppsettingsJsonFileName = "appsettings.json";
 
-    private readonly IHastlayerConfiguration _configuration;
     private readonly ServiceProvider _serviceProvider;
     private readonly HashSet<string> _serviceNames;
 
@@ -43,7 +40,6 @@ public sealed class Hastlayer : IHastlayer
     // Private so the static factory should be used.
     private Hastlayer(IHastlayerConfiguration configuration)
     {
-        _configuration = configuration;
         var appDataFolder = new AppDataFolder(configuration.AppDataFolderPath);
 
         // Since the DI prefers services in order of registration, we take the user assemblies first followed by dynamic
@@ -68,7 +64,6 @@ public sealed class Hastlayer : IHastlayer
 
 #pragma warning restore S3366 // "this" should not be exposed from constructors
         services.AddSingleton(configuration);
-        services.AddSingleton<IHastlayerFlavorProvider>(configuration);
         services.AddSingleton<IAppDataFolder>(appDataFolder);
         services.AddSingleton(BuildConfiguration());
         services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
@@ -453,14 +448,11 @@ public sealed class Hastlayer : IHastlayer
             moduleFolderPaths.Add(abstractionsPath);
         }
 
-        if (_configuration.Flavor == HastlayerFlavor.Developer)
-        {
-            var corePath = !string.IsNullOrEmpty(abstractionsPath) ?
-                Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core") :
-                null;
+        var corePath = !string.IsNullOrEmpty(abstractionsPath) ?
+            Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core") :
+            null;
 
-            if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
-        }
+        if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
 
         var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
         factory.MemberExecutedOnHardware += (_, context) =>
