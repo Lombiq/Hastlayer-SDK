@@ -16,3 +16,4 @@ publish/
 TestResults/*.trx
 /global.json
 /.editorconfig
+*.received.vhdl
