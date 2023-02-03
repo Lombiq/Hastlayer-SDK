@@ -9,46 +9,21 @@ on:
 
 jobs:
   build-and-test-larger-runners:
-    strategy:
-      matrix:
-        # This is an undocumented way of creating a matrix of multiple values, see:
-        # https://stackoverflow.com/questions/66025220/paired-values-in-github-actions-matrix.
-        build: [
-            {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
-            {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
-            {solution: Hastlayer.SDK.sln, machine-type: "['windows-2022-8core']", test-disable: false}
-          ]
-    if: github.ref_name != 'dev'
+    if: github.ref_name != github.event.repository.default_branch
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
-    secrets:
-      CHECKOUT_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
     with:
-      machine-types: ${{ matrix.build.machine-type }} 
+      machine-types: "['ubuntu-22.04-8core']"
       timeout-minutes: 15
       build-configuration: Debug
-      build-solution-path: ${{ matrix.build.solution }}
-      test-disable: ${{ matrix.build.test-disable }}
 
   build-and-test-standard-runners:
-    strategy:
-      matrix:
-        build: [
-            {solution: Hastlayer.SDK.Client.sln, machine-type: "['ubuntu-22.04']", test-disable: true},
-            {solution: Hastlayer.SDK.Linux.sln, machine-type: "['ubuntu-22.04']", test-disable: false},
-            {solution: Hastlayer.SDK.sln, machine-type: "['windows-2022']", test-disable: false}
-          ]
-    if: github.ref_name == 'dev'
+    if: github.ref_name == github.event.repository.default_branch
     name: Build and Test (standard runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
-    secrets:
-      CHECKOUT_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
     with:
-      machine-types: ${{ matrix.build.machine-type }} 
       timeout-minutes: 30
       build-configuration: Debug
-      build-solution-path: ${{ matrix.build.solution }}
-      test-disable: ${{ matrix.build.test-disable }}
 
   post-pull-request-checks-automation:
     name: Post Pull Request Checks Automation
