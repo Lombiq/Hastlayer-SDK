@@ -256,13 +256,12 @@ public class DefaultTransformer : ITransformer
             arraySizeHolder);
     }
 
-    // We'd get a build warning when SaveSyntaxTree is false in Release mode.
+    // We'd get analyzer violations when SaveSyntaxTree is false in Release mode.
+#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable IDE0060 // Remove unused parameter
     private static async Task WriteSyntaxTreeAsync(SyntaxTree syntaxTree, string fileName)
     {
 #pragma warning restore CS0162 // Remove unused parameter
-        // We'd get a build warning when SaveSyntaxTree is false in Release mode.
-#pragma warning disable IDE0079 // Remove unnecessary suppression
 #pragma warning disable CS0162 // Unreachable code detected
         while (SaveSyntaxTree)
         {
