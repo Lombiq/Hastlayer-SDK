@@ -3,9 +3,8 @@ using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Transformer.Services;
 
-// This should perhaps rather be in Hast.Communication because it depends on the Communication component and its proxy
-// generator on what can be used as hardware entry point members. See / <see
-// href="https://github.com/Lombiq/Hastlayer-SDK/issues/99"/>.
+// This should rather be in Hast.Communication because it depends on the Communication component and its proxy generator
+// on what can be used as hardware entry point members. See https://github.com/Lombiq/Hastlayer-SDK/issues/99.
 public class MemberSuitabilityChecker : IMemberSuitabilityChecker
 {
     public bool IsSuitableHardwareEntryPointMember(EntityDeclaration member, ITypeDeclarationLookupTable typeDeclarationLookupTable)

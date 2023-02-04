@@ -2,7 +2,7 @@
 
 This is an FPGA implementation of the 3D [Kardar-Parisi-Zhang](https://en.wikipedia.org/wiki/Kardar%E2%80%93Parisi%E2%80%93Zhang_equation) surface growth simulation algorithm. Made in collaboration with the [Wigner Research Centre for Physics](http://wigner.mta.hu/en/).
 
-**Note:** This project is kept here because it's a useful example and also used for testing Hastlayer itself. Before the `` commit it also had a corresponding GUI project, but since that was Windows-only WinForms, we had to remove it.
+**Note:** This project is kept here because it's a useful example and also used for testing Hastlayer itself. Before the `d3581261b01e3430d40a6e8dd2f246510ad25e9a` commit it also had a corresponding GUI project, but since that was Windows-only WinForms, we had to remove it.
 
 ## Related papers
 
