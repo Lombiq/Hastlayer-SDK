@@ -17,9 +17,7 @@ https://arxiv.org/pdf/1606.00310.pdf
 We have a 2D grid, with 2-bit information in each node: derivatives in *x* and *y* directions.
 
 1. We choose a node randomly.
-
 2. We check the *dx* and *dy* values of the node, and also the *dx* of the neighbor at the right, and the *dy* of the neighbor at the bottom.
-
 3. If we find any of the following two patterns, we change them into the other...
 
 ```

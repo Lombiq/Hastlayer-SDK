@@ -5,7 +5,7 @@
 The Hastlayer developer story is not ideal yet - we're working on improving it by [making the SDK available from NuGet](https://github.com/Lombiq/Hastlayer-SDK/issues/35). For now the below one is the easiest approach to add Hastlayer to your application:
 
 1. Clone the Hastlayer repository into a subfolder of your application.
-2. Copy the Hastlayer solution file and use that to add your own projects to. This way you'll have all the necessary Hastlayer projects available. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
+2. Copy the Hastlayer solution file and add your own projects to it. This way you'll have all the necessary Hastlayer projects available. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
 3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
 
 When Hastlayer is updated you can just pull in changes from the official Hastlayer repository, but you'll need to keep your solution file up to date by hand.

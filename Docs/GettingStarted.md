@@ -29,7 +29,7 @@ These would be your first steps on starting to work with Hastlayer by getting th
       - The [Hastlayer Hardware Framework - Catapult repo](https://github.com/Lombiq/Hastlayer-Hardware-Framework---Catapult) for Microsoft Catapult.
 2. Set up the hardware project as explained in the Hardware Framework's documentation and program the FPGA for the first time.
 3. Open the Visual Studio solution and start the `Hast.Samples.Consumer`. That will by default run the sample that is also added by default to the Hardware project.
-6. You should be able to see the results of the sample in its console window.
+4. You should be able to see the results of the sample in its console window.
 
 If everything is alright follow up with the rest of this documentation to write your first own Hastlayer-using algorithm. You can also check out the many documented samples under the *Samples* solution folder.
 

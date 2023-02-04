@@ -122,8 +122,8 @@ public class DefaultTransformer : ITransformer
                 PEStreamOptions.PrefetchMetadata);
 
             // When executed as a Windows service not all Hastlayer assemblies references' from transformed assemblies
-            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail.So helping the decompiler
-            // find them here.
+            // will be found. Particularly loading Hast.Transformer.Abstractions seems to fail. So helping the
+            // decompiler find them here.
             resolver.AddSearchDirectory(Path.GetDirectoryName(GetType().Assembly.Location));
             var dependenciesFolderPath = _appDataFolder.MapPath("Dependencies");
             if (dependenciesFolderPath != null) resolver.AddSearchDirectory(dependenciesFolderPath);
