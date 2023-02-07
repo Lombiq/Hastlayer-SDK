@@ -1,6 +1,3 @@
-using Hast.Common.Enums;
-using Hast.Common.Interfaces;
-
 namespace Hast.Vitis.Abstractions.Models;
 
 public class VitisBuildConfiguration
@@ -23,10 +20,6 @@ public class VitisBuildConfiguration
     /// </summary>
     /// <remarks>
     /// <para>It prompts via the command line so this is not suitable for GUI applications.</para>
-    /// <para>
-    /// This setting is ignored in the <see cref="IHastlayerFlavorProvider.Flavor"/> is <see
-    /// cref="HastlayerFlavor.Client"/>.
-    /// </para>
     /// </remarks>
     public bool PromptBeforeBuild { get; set; }
 }

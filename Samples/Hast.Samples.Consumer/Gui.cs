@@ -205,16 +205,6 @@ public sealed class Gui : IDisposable
 
         switch (key)
         {
-            case nameof(ConsumerConfiguration.AppName):
-                _optionsTextField.Text = _configuration.AppName ?? string.Empty;
-                _currentOptionsTextFieldEventHandler = text => _configuration.AppName = text;
-                ShowTextField(visible: true);
-                break;
-            case nameof(ConsumerConfiguration.AppSecret):
-                _optionsTextField.Text = _configuration.AppSecret ?? string.Empty;
-                _currentOptionsTextFieldEventHandler = text => _configuration.AppSecret = text;
-                ShowTextField(visible: true);
-                break;
             case nameof(ConsumerConfiguration.BuildLabel):
                 _optionsTextField.Text = _configuration.BuildLabel ?? string.Empty;
                 _currentOptionsTextFieldEventHandler = text => _configuration.BuildLabel = text;
@@ -228,11 +218,6 @@ public sealed class Gui : IDisposable
                 _optionsListView.SelectedItem = _configuration.GenerateHardwareOnly ? 0 : 1;
                 _currentOptionsListViewEventHandler = item => _configuration.GenerateHardwareOnly = IsTrueString(item);
                 ShowTextField(visible: false);
-                break;
-            case nameof(ConsumerConfiguration.Endpoint):
-                _optionsTextField.Text = _configuration.Endpoint ?? string.Empty;
-                _currentOptionsTextFieldEventHandler = text => _configuration.Endpoint = text;
-                ShowTextField(visible: true);
                 break;
             case nameof(ConsumerConfiguration.HardwareFrameworkPath):
                 _optionsTextField.Text = _configuration.HardwareFrameworkPath ?? string.Empty;

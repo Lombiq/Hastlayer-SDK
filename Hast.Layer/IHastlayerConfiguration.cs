@@ -10,7 +10,7 @@ namespace Hast.Layer;
 /// <summary>
 /// Provides settings for <see cref="IHastlayer"/> initialization.
 /// </summary>
-public interface IHastlayerConfiguration : IHastlayerFlavorProvider
+public interface IHastlayerConfiguration
 {
     /// <summary>
     /// Gets the action to be invoked before the <see cref="IServiceProvider"/> for Hastlayer's dependency injection is

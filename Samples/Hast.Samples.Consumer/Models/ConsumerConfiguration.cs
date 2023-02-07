@@ -28,25 +28,6 @@ public class ConsumerConfiguration
         "for high-performance local or cloud FPGAs, or embedded devices, see the docs.")]
     public string DeviceName { get; set; }
 
-    [Argument]
-    [Hint(
-        "The base URL for the Hastlayer API. Unless you are testing the Hast.Remote services locally, you should",
-        "leave it empty.")]
-    public string Endpoint { get; set; }
-
-    [Argument]
-    [Hint(
-        "The application's name you've specified on the Hastlayer Application Management Dashboard. This is",
-        "necessary to authenticate if you're running Hastlayer in the Client flavor.")]
-    public string AppName { get; set; }
-
-    [Argument]
-    [Hint(
-        "The application's password you've received when creating the app in the Hastlayer Application Management",
-        "Dashboard. This is necessary to authenticate if you're running Hastlayer in the Client flavor. If this",
-        "value is specified (not null or empty) then the program switches into Client Flavor on its own.")]
-    public string AppSecret { get; set; }
-
     [Argument("sample")]
     [Hint(
         "Which sample algorithm to transform and run? Choose one. Currently the GenomeMatcher sample is not",

@@ -1,6 +1,4 @@
 using Hast.Catapult.Abstractions;
-using Hast.Common.Enums;
-using Hast.Common.Interfaces;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -32,7 +30,6 @@ public sealed class Hastlayer : IHastlayer
 {
     public const string AppsettingsJsonFileName = "appsettings.json";
 
-    private readonly IHastlayerConfiguration _configuration;
     private readonly ServiceProvider _serviceProvider;
     private readonly HashSet<string> _serviceNames;
 
@@ -43,7 +40,6 @@ public sealed class Hastlayer : IHastlayer
     // Private so the static factory should be used.
     private Hastlayer(IHastlayerConfiguration configuration)
     {
-        _configuration = configuration;
         var appDataFolder = new AppDataFolder(configuration.AppDataFolderPath);
 
         // Since the DI prefers services in order of registration, we take the user assemblies first followed by dynamic
@@ -58,7 +54,7 @@ public sealed class Hastlayer : IHastlayer
             typeof(NexysA7ManifestProvider).Assembly,
             typeof(CatapultManifestProvider).Assembly,
         });
-        assemblies.AddRange(GetHastLibraries());
+        assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
 
         var services = new ServiceCollection();
 
@@ -68,7 +64,6 @@ public sealed class Hastlayer : IHastlayer
 
 #pragma warning restore S3366 // "this" should not be exposed from constructors
         services.AddSingleton(configuration);
-        services.AddSingleton<IHastlayerFlavorProvider>(configuration);
         services.AddSingleton<IAppDataFolder>(appDataFolder);
         services.AddSingleton(BuildConfiguration());
         services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
@@ -77,23 +72,6 @@ public sealed class Hastlayer : IHastlayer
         ConfigureLogging(services, configuration.ConfigureLogging);
 
         configuration.OnServiceRegistration?.Invoke(configuration, services);
-
-        var transformerServices = services.Where(x => x.ServiceType == typeof(ITransformer)).ToList();
-        if (transformerServices.Count > 1)
-        {
-            switch (configuration.Flavor)
-            {
-                case HastlayerFlavor.Client:
-                    services.RemoveImplementationsExcept<ITransformer, Remote.Client.RemoteTransformer>();
-                    break;
-                case HastlayerFlavor.Developer:
-                    // Can't use the type directly because it won't be available in the Client flavor.
-                    services.RemoveImplementationsExcept<ITransformer>("Hast.Transformer.DefaultTransformer");
-                    break;
-                default:
-                    throw new ArgumentException($"Unknown flavor in configuration: '{configuration.Flavor}'");
-            }
-        }
 
         // To test that deferred logging works:
         //// services.Log(LogLevel.Critical, "Critical message!");
@@ -427,58 +405,6 @@ public sealed class Hastlayer : IHastlayer
 
     private void LoadHost()
     {
-        var moduleFolderPaths = new List<string>();
-
-        // Since Hast.Core either exists or not we need to start by probing for the Hast.Abstractions folder.
-        var abstractionsPath = Path.GetDirectoryName(GetType().Assembly.Location);
-        var currentDirectory = Path.GetFileName(abstractionsPath);
-
-        if (currentDirectory?.EqualsOrdinalIgnoreCase("Debug") == true ||
-            currentDirectory?.EqualsOrdinalIgnoreCase("Release") == true)
-        {
-            abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-        }
-
-        currentDirectory = Path.GetFileName(abstractionsPath);
-        if (currentDirectory?.EqualsOrdinalIgnoreCase("bin") == true)
-        {
-            abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-        }
-
-        // Now we're at the level above the current project's folder.
-        abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-
-        var coreFound = false;
-        while (abstractionsPath != null && !coreFound)
-        {
-            var abstractionsSubFolder = Path.Combine(abstractionsPath, "Hast.Abstractions");
-            if (Directory.Exists(abstractionsSubFolder))
-            {
-                abstractionsPath = abstractionsSubFolder;
-                coreFound = true;
-            }
-            else
-            {
-                abstractionsPath = Path.GetDirectoryName(abstractionsPath);
-            }
-        }
-
-        // There won't be an Abstractions folder, nor a Core one when the app is being run from a deployment folder (as
-        // opposed to a solution).
-        if (!string.IsNullOrEmpty(abstractionsPath))
-        {
-            moduleFolderPaths.Add(abstractionsPath);
-        }
-
-        if (_configuration.Flavor == HastlayerFlavor.Developer)
-        {
-            var corePath = !string.IsNullOrEmpty(abstractionsPath) ?
-                Path.Combine(Path.GetDirectoryName(abstractionsPath), "Hast.Core") :
-                null;
-
-            if (corePath != null && Directory.Exists(corePath)) moduleFolderPaths.Add(corePath);
-        }
-
         var factory = _serviceProvider.GetService<IMemberInvocationHandlerFactory>();
         factory.MemberExecutedOnHardware += (_, context) =>
             ExecutedOnHardware?.Invoke(this, new ServiceEventArgs<IMemberHardwareExecutionContext>(context.Arguments));
@@ -499,13 +425,4 @@ public sealed class Hastlayer : IHastlayer
             throw new InvalidOperationException($"The return type (used: {typeof(TOut).FullName}) must not be a registered service.");
         }
     }
-
-    private static IEnumerable<Assembly> GetHastLibraries(string path = ".") =>
-        DependencyInterfaceContainer.LoadAssemblies(
-            Directory
-                .GetFiles(path, "Hast.*.dll")
-                .Where(path => !Path.GetFileName(path)
-                    // Check any core project names that aren't referenced by Hastlayer to avoid accidental loading.
-                    .StartsWithOrdinalIgnoreCase("Hast.Remote.Worker")
-                ));
 }

@@ -1,6 +1,4 @@
-using Castle.Core.Internal;
 using Hast.Algorithms;
-using Hast.Common.Enums;
 using Hast.Common.Services;
 using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Events;
@@ -60,7 +58,6 @@ internal static class Program
             ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
             : Gui.BuildConfiguration(savedConfigurations);
         if (consumerConfiguration == null) return ExitStatus.NothingToDo;
-        if (!consumerConfiguration.AppSecret.IsNullOrEmpty()) hastlayerConfiguration.Flavor = HastlayerFlavor.Client;
 
         // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while the
         // program runs and re-use it continuously. No need to always wrap it into a using() like here, just make sure
@@ -85,9 +82,6 @@ internal static class Program
             VerifyHardwareResults = consumerConfiguration.VerifyResults,
         };
         configuration.SingleBinaryPath = consumerConfiguration.SingleBinaryPath;
-
-        // If you're running Hastlayer in the Client flavor, you also need to configure some credentials:
-        ConfigureClientFlavor(configuration, hastlayerConfiguration, consumerConfiguration);
 
         // Letting the configuration of samples run. Check out those methods too!
         ISampleRunner sampleRunner = consumerConfiguration.SampleToRun switch
@@ -216,30 +210,6 @@ internal static class Program
         foreach (var mismatch in mismatches)
         {
             Console.WriteLine("* " + mismatch);
-        }
-    }
-
-    private static void ConfigureClientFlavor(
-        HardwareGenerationConfiguration configuration,
-        HastlayerConfiguration hastlayerConfiguration,
-        ConsumerConfiguration consumerConfiguration)
-    {
-        if (hastlayerConfiguration.Flavor != HastlayerFlavor.Client) return;
-        var remoteClientConfiguration = configuration.RemoteClientConfiguration();
-
-        if (!string.IsNullOrWhiteSpace(consumerConfiguration.Endpoint) &&
-            Uri.TryCreate(consumerConfiguration.Endpoint, UriKind.Absolute, out var endpointUri))
-        {
-            remoteClientConfiguration.EndpointBaseUri = endpointUri;
-        }
-
-        remoteClientConfiguration.AppName = consumerConfiguration.AppName;
-        remoteClientConfiguration.AppSecret = consumerConfiguration.AppSecret;
-
-        if (string.IsNullOrEmpty(remoteClientConfiguration.AppSecret))
-        {
-            throw new InvalidOperationException(
-                "You haven't provided the remote credentials! Register on hastlayer.com to receive access if you don't have it yet.");
         }
     }
 

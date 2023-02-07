@@ -1,7 +1,5 @@
 using CommandLine;
 using CommandLine.Text;
-using Hast.Common.Enums;
-using Hast.Common.Interfaces;
 using Hast.Common.Models;
 using Hast.Console.Attributes;
 using Hast.Console.Options;
@@ -125,7 +123,7 @@ public class VitisSubcommand : ISubcommand
         HardwareImplementation implementation,
         ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
     {
-        using var buildProvider = new VitisHardwareImplementationComposerBuildProvider(logger, new DeveloperFlavorProvider());
+        using var buildProvider = new VitisHardwareImplementationComposerBuildProvider(logger);
         await buildProvider.BuildAsync(context, implementation);
 
         WriteLine("Build Completed. Find files under: {0}", Path.GetFullPath(implementation.BinaryPath));
@@ -157,10 +155,5 @@ public class VitisSubcommand : ISubcommand
         Help,
         Build,
         Json,
-    }
-
-    private sealed class DeveloperFlavorProvider : IHastlayerFlavorProvider
-    {
-        public HastlayerFlavor Flavor => HastlayerFlavor.Developer;
     }
 }

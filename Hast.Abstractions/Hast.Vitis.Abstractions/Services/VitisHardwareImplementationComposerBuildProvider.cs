@@ -1,8 +1,6 @@
 using CliWrap;
 using CliWrap.Buffered;
-using Hast.Common.Enums;
 using Hast.Common.Helpers;
-using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
 using Hast.Synthesis.Abstractions.Helpers;
@@ -34,7 +32,6 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
                                               "types, use a lower degree of parallelism) until it goes below 80%.";
 
     private readonly ILogger<VitisHardwareImplementationComposerBuildProvider> _logger;
-    private readonly IHastlayerFlavorProvider _flavorProvider;
     private readonly BuildLogger<VitisHardwareImplementationComposerBuildProvider> _buildLogger;
     private readonly TextWriter _buildOutput;
 
@@ -49,12 +46,10 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
     public int MajorStep { get; private set; }
 
     public VitisHardwareImplementationComposerBuildProvider(
-        ILogger<VitisHardwareImplementationComposerBuildProvider> logger,
-        IHastlayerFlavorProvider flavorProvider)
+        ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
     {
         Progress += OnProgress;
         _logger = logger;
-        _flavorProvider = flavorProvider;
 
         // Only a reference is saved for "this" in BuildLogger.
 #pragma warning disable S3366 // "this" should not be exposed from constructors
@@ -156,15 +151,12 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         implementation.BinaryPath = GetBinaryPath(context.Configuration, context.HardwareDescription);
         await CleanupAsync(context);
 
-        var promptBeforeBuild =
-            buildConfiguration.PromptBeforeBuild &&
-            _flavorProvider.Flavor != HastlayerFlavor.Client;
         await CreateSourceAsync(
             context,
             hardwareFrameworkPath,
             hashId,
             implementation.BinaryPath,
-            promptBeforeBuild);
+            buildConfiguration.PromptBeforeBuild);
 
         if (CheckIfDoneAlready(implementation)) return;
 

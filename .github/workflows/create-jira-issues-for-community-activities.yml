@@ -9,7 +9,7 @@ on:
     types: [opened]
 
 jobs:
-  call-create-jira-issues-for-community-activities-workflow:
+  create-jira-issues-for-community-activities:
     uses: Lombiq/GitHub-Actions/.github/workflows/create-jira-issues-for-community-activities.yml@dev
     secrets:
       JIRA_BASE_URL: ${{ secrets.DEFAULT_JIRA_BASE_URL }}

@@ -5,7 +5,7 @@
 The Hastlayer developer story is not ideal yet - we're working on improving it by [making the SDK available from NuGet](https://github.com/Lombiq/Hastlayer-SDK/issues/35). For now the below one is the easiest approach to add Hastlayer to your application:
 
 1. Clone the Hastlayer repository into a subfolder of your application.
-2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.SDK.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
+2. Copy the Hastlayer solution file and add your own projects to it. This way you'll have all the necessary Hastlayer projects available. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
 3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
 
 When Hastlayer is updated you can just pull in changes from the official Hastlayer repository, but you'll need to keep your solution file up to date by hand.
@@ -106,7 +106,7 @@ Think of these as breakpoints where you read out variable values with the debugg
 Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys A7 you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
 
 ### Checking the decompiled source
-When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `SaveSyntaxTree` (this is enabled in Debug mode by default).
+When you're working with the full source of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `SaveSyntaxTree` (this is enabled in Debug mode by default).
 
 ### Dumping (and loading) SimpleMemory content
 You can store the contents of a `SimpleMemory` instance in a binary format, also as a file. Similarly you can load them into a `SimpleMemory` too.
