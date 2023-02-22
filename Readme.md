@@ -28,7 +28,6 @@ These text files should only serve as a starting point. The samples are the best
 - [Working with Hastlayer](Docs/WorkingWithHastlayer.md)
 - [Developing Hastlayer](Docs/DevelopingHastlayer.md)
 - [Benchmarks](Docs/Benchmarks.md)
-- [Release notes](Docs/ReleaseNotes.md)
 - [Roadmap](Docs/Roadmap.md)
 - [Support](Docs/Support.md)
 
