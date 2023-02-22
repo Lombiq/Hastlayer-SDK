@@ -5,6 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Vitis.Abstractions.Constants.Extensions;
@@ -154,18 +155,18 @@ public sealed class ZynqHardwareImplementationComposerBuildProvider
 
     public void AddShortcuts(IEnumerable<IHardwareImplementationComposerBuildProvider> providers)
     {
-        foreach (var provider in providers)
-        {
-            if (provider.Name is
+        var filteredProviders = providers
+            .Where(provider => provider.Name is
                 nameof(VitisHardwareImplementationComposerBuildProvider) or
-                nameof(ZynqHardwareImplementationComposerBuildProvider))
-            {
-                provider
-                    .Shortcuts
-                    .Add(
+                nameof(ZynqHardwareImplementationComposerBuildProvider));
+
+        foreach (var provider in filteredProviders)
+        {
+            provider
+                .Shortcuts
+                .Add(
                     nameof(ZynqHardwareImplementationComposerBuildProvider),
                     context => File.Exists(GetBitBinPath(context)));
-            }
         }
     }
 

@@ -28,10 +28,10 @@ public static class VhdlElementEnumerableExtensions
         var lastElement = elementsList[^1];
         var resultArray = new string[elementsList.Count];
 
-        Threading.Tasks.Parallel.For(0, elementsList.Count - 1, i =>
-        {
-            resultArray[i] = elementsList[i].ToVhdl(vhdlGenerationOptions) + elementTerminator;
-        });
+        Threading.Tasks.Parallel.For(
+            0,
+            elementsList.Count - 1,
+            i => resultArray[i] = elementsList[i].ToVhdl(vhdlGenerationOptions) + elementTerminator);
 
         var stringBuilder = new StringBuilder();
         stringBuilder.AppendJoin(string.Empty, resultArray);

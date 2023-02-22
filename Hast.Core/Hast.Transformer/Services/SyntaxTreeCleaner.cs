@@ -240,11 +240,11 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
         {
             base.VisitTypeDeclaration(typeDeclaration);
 
-            var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced());
+            var unreferencedMembers = typeDeclaration.Members.Where(member => !member.IsReferenced()).ToList();
 
             // Removing the type if it's empty but leaving if it was referenced as a type (which is with an object
             // create expression or a default value expression).
-            if (typeDeclaration.Members.Count == unreferencedMembers.Count() && !typeDeclaration.IsReferenced())
+            if (typeDeclaration.Members.Count == unreferencedMembers.Count && !typeDeclaration.IsReferenced())
             {
                 typeDeclaration.Remove();
             }

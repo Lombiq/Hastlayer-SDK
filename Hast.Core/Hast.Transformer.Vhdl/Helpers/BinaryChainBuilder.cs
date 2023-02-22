@@ -9,22 +9,24 @@ internal static class BinaryChainBuilder
 {
     public static IVhdlElement BuildBinaryChain(IEnumerable<IVhdlElement> expressions, BinaryOperator binaryOperator)
     {
-        if (!expressions.Any()) return Empty.Instance;
+        var expressionsList = expressions.ToList();
 
-        var chainExpression = expressions.First();
+        if (!expressionsList.Any()) return Empty.Instance;
+
+        var chainExpression = expressionsList.First();
 
         // Iteratively build a binary expression chain to.
-        if (expressions.Count() > 1)
+        if (expressionsList.Count > 1)
         {
             var currentBinary = new Binary
             {
-                Left = expressions.Skip(1).First(),
+                Left = expressionsList.Skip(1).First(),
                 Operator = binaryOperator,
             };
 
             var firstBinary = currentBinary;
 
-            foreach (var expression in expressions.Skip(2))
+            foreach (var expression in expressionsList.Skip(2))
             {
                 var newBinary = new Binary
                 {
