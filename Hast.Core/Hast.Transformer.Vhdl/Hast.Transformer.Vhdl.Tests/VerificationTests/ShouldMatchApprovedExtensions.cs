@@ -68,7 +68,6 @@ public static class ShouldMatchConfigurationBuilderExtensions
     {
         RemoveDateComments,
         RemoveHastIpId,
-        ReplaceHashIdentifiers,
     };
 
     public static ShouldMatchConfigurationBuilder WithVhdlConfiguration(this ShouldMatchConfigurationBuilder configurationBuilder)
@@ -104,26 +103,4 @@ public static class ShouldMatchConfigurationBuilderExtensions
 
     private static string RemoveHastIpId(string source) =>
         source.RegexReplace(@"-- Hast_IP ID: ([0-9a-z]*)", "-- (Hast_IP ID removed for approval testing.)");
-
-    private static string ReplaceHashIdentifiers(string source)
-    {
-        // Matches words like "remainderOperand03b0c44298fc1c149426f4c8996fb92427ae41e4649b934ca495991b7852b855".
-        const string hashIdentifierPattern = @"([\p{L}\p{N}]+)([0-9a-f]{64})\b";
-
-        // The hashes are replaced by a simple integer, which is incremented in the order of appearance. This way it's
-        // enough if their relative order stays the same, the exact hash contributor information (e.g. the line numbers
-        // of the relevant ranges) can change. This makes the verification test less fragile.
-        var counter = 0;
-
-        while (source.RegexMatch(hashIdentifierPattern) is { Success: true } match)
-        {
-            var type = match.Groups[1].Value;
-            var hash = match.Groups[2].Value;
-
-            source = source.Replace(type + hash, type + counter.ToTechnicalString());
-            counter++;
-        }
-
-        return source;
-    }
 }

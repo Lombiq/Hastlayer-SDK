@@ -1149,7 +1149,7 @@ begin
         Variable \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._State\: \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._States\ := \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._State_0\;
         Variable \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.this\: \Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder1\;
         Variable \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.size\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.conditional0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.conditionalb63ca94e1d5893dc23a654922c939ddc1ae51fc0dfe3037e08a28aa0018364d3\: signed(31 downto 0) := to_signed(0, 32);
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -1157,7 +1157,7 @@ begin
                 \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._Finished\ <= false;
                 \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._State_0\;
                 \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.size\ := to_unsigned(0, 32);
-                \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.conditional0\ := to_signed(0, 32);
+                \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.conditionalb63ca94e1d5893dc23a654922c939ddc1ae51fc0dfe3037e08a28aa0018364d3\ := to_signed(0, 32);
             else 
                 case \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._State\ is 
                     when \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0._State_0\ => 
@@ -1183,12 +1183,12 @@ begin
                         \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.this\ := \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.this.parameter.In\;
                         \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.size\ := \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.size.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional0;
+                        -- int conditionalb63ca94e1d5893dc23a654922c939ddc1ae51fc0dfe3037e08a28aa0018364d3;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional0 = 5;
+                        -- conditionalb63ca94e1d5893dc23a654922c939ddc1ae51fc0dfe3037e08a28aa0018364d3 = 5;
                         -- 
-                        \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.conditional0\ := to_signed(5, 32);
+                        \ConstantsUsingCases+ArrayHolder1::.ctor(UInt32).0.conditionalb63ca94e1d5893dc23a654922c939ddc1ae51fc0dfe3037e08a28aa0018364d3\ := to_signed(5, 32);
                         -- The following section was transformed from the .NET statement below:
                         -- @this.ArrayLength = 5u;
                         -- 
@@ -1282,7 +1282,7 @@ begin
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\: \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._States\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_0\;
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\: \Hast.TestInputs.Static.ConstantsUsingCases+ArrayHolder2\;
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
@@ -1296,7 +1296,7 @@ begin
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._Finished\ <= false;
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_0\;
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\ := to_unsigned(0, 32);
-                \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional1\ := to_signed(0, 32);
+                \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\ := to_signed(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.2\ := to_signed(0, 64);
@@ -1328,13 +1328,13 @@ begin
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this.parameter.In\;
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int conditional1;
+                        -- int conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- if (((long)(size - size / 32u * 32u) != 0L)) {
-                        -- 	conditional1 = 5;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 5;
                         -- } else {
-                        -- 	conditional1 = 0;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 0;
                         -- }
                         -- 
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.0\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\ / to_unsigned(32, 32);
@@ -1356,10 +1356,10 @@ begin
                     when \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_3\ => 
                         -- State after the if-else which was started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.ArrayLength = (size >> 5) + (uint)(conditional1);
+                        -- @this.ArrayLength = (size >> 5) + (uint)(conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2);
                         -- 
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\ := shift_right(\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.size\, to_integer(unsigned(SmartResize(to_signed(5, 32), 5) and "11111")));
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\ := (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\) + unsigned((\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional1\));
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\ := (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.4\) + unsigned((\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\));
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.this\.\ArrayLength\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.binaryOperationResult.5\;
                         \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_1\;
                         -- Clock cycles needed to complete this state (approximation): 0.6395
@@ -1367,13 +1367,13 @@ begin
                         -- True branch of the if-else started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional1 = 5;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 5;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional1 = 5;
+                        -- conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 5;
                         -- 
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional1\ := to_signed(5, 32);
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\ := to_signed(5, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         if (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_4\) then 
                             \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_3\;
@@ -1383,13 +1383,13 @@ begin
                         -- False branch of the if-else started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional1 = 0;
+                        -- 	conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 0;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional1 = 0;
+                        -- conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2 = 0;
                         -- 
-                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditional1\ := to_signed(0, 32);
+                        \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0.conditionalbc2f54fcd430c48518a98792bed4a78cab2deaa37c4e5c2036e7f9f8890630b2\ := to_signed(0, 32);
                         -- Going to the state after the if-else which was started in state \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_2\.
                         if (\ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ = \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_5\) then 
                             \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State\ := \ConstantsUsingCases+ArrayHolder2::.ctor(UInt32).0._State_3\;
@@ -3013,7 +3013,7 @@ begin
     \ParallelCases+Calculator::IsEven().0._StateMachine\: process (\Clock\) 
         Variable \ParallelCases+Calculator::IsEven().0._State\: \ParallelCases+Calculator::IsEven().0._States\ := \ParallelCases+Calculator::IsEven().0._State_0\;
         Variable \ParallelCases+Calculator::IsEven().0.this\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
-        Variable \ParallelCases+Calculator::IsEven().0.remainderOperand2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases+Calculator::IsEven().0.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
@@ -3025,7 +3025,7 @@ begin
                 \ParallelCases+Calculator::IsEven().0._Finished\ <= false;
                 \ParallelCases+Calculator::IsEven().0.return\ <= false;
                 \ParallelCases+Calculator::IsEven().0._State\ := \ParallelCases+Calculator::IsEven().0._State_0\;
-                \ParallelCases+Calculator::IsEven().0.remainderOperand2\ := to_unsigned(0, 32);
+                \ParallelCases+Calculator::IsEven().0.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().0.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().0.binaryOperationResult.2\ := to_signed(0, 64);
@@ -3054,18 +3054,18 @@ begin
                     when \ParallelCases+Calculator::IsEven().0._State_2\ => 
                         \ParallelCases+Calculator::IsEven().0.this\ := \ParallelCases+Calculator::IsEven().0.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint remainderOperand2;
+                        -- uint remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand2 = @this.Number;
+                        -- remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd = @this.Number;
                         -- 
-                        \ParallelCases+Calculator::IsEven().0.remainderOperand2\ := \ParallelCases+Calculator::IsEven().0.this\.\Number\;
+                        \ParallelCases+Calculator::IsEven().0.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ := \ParallelCases+Calculator::IsEven().0.this\.\Number\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (long)(remainderOperand2 - remainderOperand2 / 2u * 2u) == 0L;
+                        -- return (long)(remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd - remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd / 2u * 2u) == 0L;
                         -- 
-                        \ParallelCases+Calculator::IsEven().0.binaryOperationResult.0\ := \ParallelCases+Calculator::IsEven().0.remainderOperand2\ / to_unsigned(2, 32);
+                        \ParallelCases+Calculator::IsEven().0.binaryOperationResult.0\ := \ParallelCases+Calculator::IsEven().0.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ / to_unsigned(2, 32);
                         \ParallelCases+Calculator::IsEven().0.binaryOperationResult.1\ := SmartResize(\ParallelCases+Calculator::IsEven().0.binaryOperationResult.0\ * to_unsigned(2, 32), 32);
-                        \ParallelCases+Calculator::IsEven().0.binaryOperationResult.2\ := signed(SmartResize(\ParallelCases+Calculator::IsEven().0.remainderOperand2\ - \ParallelCases+Calculator::IsEven().0.binaryOperationResult.1\, 64));
+                        \ParallelCases+Calculator::IsEven().0.binaryOperationResult.2\ := signed(SmartResize(\ParallelCases+Calculator::IsEven().0.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ - \ParallelCases+Calculator::IsEven().0.binaryOperationResult.1\, 64));
                         \ParallelCases+Calculator::IsEven().0.binaryOperationResult.3\ := (\ParallelCases+Calculator::IsEven().0.binaryOperationResult.2\) = to_signed(0, 64);
                         \ParallelCases+Calculator::IsEven().0.return\ <= \ParallelCases+Calculator::IsEven().0.binaryOperationResult.3\;
                         \ParallelCases+Calculator::IsEven().0._State\ := \ParallelCases+Calculator::IsEven().0._State_1\;
@@ -3081,7 +3081,7 @@ begin
     \ParallelCases+Calculator::IsEven().1._StateMachine\: process (\Clock\) 
         Variable \ParallelCases+Calculator::IsEven().1._State\: \ParallelCases+Calculator::IsEven().1._States\ := \ParallelCases+Calculator::IsEven().1._State_0\;
         Variable \ParallelCases+Calculator::IsEven().1.this\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
-        Variable \ParallelCases+Calculator::IsEven().1.remainderOperand2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases+Calculator::IsEven().1.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().1.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().1.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
@@ -3093,7 +3093,7 @@ begin
                 \ParallelCases+Calculator::IsEven().1._Finished\ <= false;
                 \ParallelCases+Calculator::IsEven().1.return\ <= false;
                 \ParallelCases+Calculator::IsEven().1._State\ := \ParallelCases+Calculator::IsEven().1._State_0\;
-                \ParallelCases+Calculator::IsEven().1.remainderOperand2\ := to_unsigned(0, 32);
+                \ParallelCases+Calculator::IsEven().1.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().1.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().1.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().1.binaryOperationResult.2\ := to_signed(0, 64);
@@ -3122,18 +3122,18 @@ begin
                     when \ParallelCases+Calculator::IsEven().1._State_2\ => 
                         \ParallelCases+Calculator::IsEven().1.this\ := \ParallelCases+Calculator::IsEven().1.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint remainderOperand2;
+                        -- uint remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand2 = @this.Number;
+                        -- remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd = @this.Number;
                         -- 
-                        \ParallelCases+Calculator::IsEven().1.remainderOperand2\ := \ParallelCases+Calculator::IsEven().1.this\.\Number\;
+                        \ParallelCases+Calculator::IsEven().1.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ := \ParallelCases+Calculator::IsEven().1.this\.\Number\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (long)(remainderOperand2 - remainderOperand2 / 2u * 2u) == 0L;
+                        -- return (long)(remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd - remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd / 2u * 2u) == 0L;
                         -- 
-                        \ParallelCases+Calculator::IsEven().1.binaryOperationResult.0\ := \ParallelCases+Calculator::IsEven().1.remainderOperand2\ / to_unsigned(2, 32);
+                        \ParallelCases+Calculator::IsEven().1.binaryOperationResult.0\ := \ParallelCases+Calculator::IsEven().1.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ / to_unsigned(2, 32);
                         \ParallelCases+Calculator::IsEven().1.binaryOperationResult.1\ := SmartResize(\ParallelCases+Calculator::IsEven().1.binaryOperationResult.0\ * to_unsigned(2, 32), 32);
-                        \ParallelCases+Calculator::IsEven().1.binaryOperationResult.2\ := signed(SmartResize(\ParallelCases+Calculator::IsEven().1.remainderOperand2\ - \ParallelCases+Calculator::IsEven().1.binaryOperationResult.1\, 64));
+                        \ParallelCases+Calculator::IsEven().1.binaryOperationResult.2\ := signed(SmartResize(\ParallelCases+Calculator::IsEven().1.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ - \ParallelCases+Calculator::IsEven().1.binaryOperationResult.1\, 64));
                         \ParallelCases+Calculator::IsEven().1.binaryOperationResult.3\ := (\ParallelCases+Calculator::IsEven().1.binaryOperationResult.2\) = to_signed(0, 64);
                         \ParallelCases+Calculator::IsEven().1.return\ <= \ParallelCases+Calculator::IsEven().1.binaryOperationResult.3\;
                         \ParallelCases+Calculator::IsEven().1._State\ := \ParallelCases+Calculator::IsEven().1._State_1\;
@@ -3149,7 +3149,7 @@ begin
     \ParallelCases+Calculator::IsEven().2._StateMachine\: process (\Clock\) 
         Variable \ParallelCases+Calculator::IsEven().2._State\: \ParallelCases+Calculator::IsEven().2._States\ := \ParallelCases+Calculator::IsEven().2._State_0\;
         Variable \ParallelCases+Calculator::IsEven().2.this\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
-        Variable \ParallelCases+Calculator::IsEven().2.remainderOperand2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \ParallelCases+Calculator::IsEven().2.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().2.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+Calculator::IsEven().2.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
@@ -3161,7 +3161,7 @@ begin
                 \ParallelCases+Calculator::IsEven().2._Finished\ <= false;
                 \ParallelCases+Calculator::IsEven().2.return\ <= false;
                 \ParallelCases+Calculator::IsEven().2._State\ := \ParallelCases+Calculator::IsEven().2._State_0\;
-                \ParallelCases+Calculator::IsEven().2.remainderOperand2\ := to_unsigned(0, 32);
+                \ParallelCases+Calculator::IsEven().2.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().2.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().2.binaryOperationResult.1\ := to_unsigned(0, 32);
                 \ParallelCases+Calculator::IsEven().2.binaryOperationResult.2\ := to_signed(0, 64);
@@ -3190,18 +3190,18 @@ begin
                     when \ParallelCases+Calculator::IsEven().2._State_2\ => 
                         \ParallelCases+Calculator::IsEven().2.this\ := \ParallelCases+Calculator::IsEven().2.this.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint remainderOperand2;
+                        -- uint remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand2 = @this.Number;
+                        -- remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd = @this.Number;
                         -- 
-                        \ParallelCases+Calculator::IsEven().2.remainderOperand2\ := \ParallelCases+Calculator::IsEven().2.this\.\Number\;
+                        \ParallelCases+Calculator::IsEven().2.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ := \ParallelCases+Calculator::IsEven().2.this\.\Number\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return (long)(remainderOperand2 - remainderOperand2 / 2u * 2u) == 0L;
+                        -- return (long)(remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd - remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd / 2u * 2u) == 0L;
                         -- 
-                        \ParallelCases+Calculator::IsEven().2.binaryOperationResult.0\ := \ParallelCases+Calculator::IsEven().2.remainderOperand2\ / to_unsigned(2, 32);
+                        \ParallelCases+Calculator::IsEven().2.binaryOperationResult.0\ := \ParallelCases+Calculator::IsEven().2.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ / to_unsigned(2, 32);
                         \ParallelCases+Calculator::IsEven().2.binaryOperationResult.1\ := SmartResize(\ParallelCases+Calculator::IsEven().2.binaryOperationResult.0\ * to_unsigned(2, 32), 32);
-                        \ParallelCases+Calculator::IsEven().2.binaryOperationResult.2\ := signed(SmartResize(\ParallelCases+Calculator::IsEven().2.remainderOperand2\ - \ParallelCases+Calculator::IsEven().2.binaryOperationResult.1\, 64));
+                        \ParallelCases+Calculator::IsEven().2.binaryOperationResult.2\ := signed(SmartResize(\ParallelCases+Calculator::IsEven().2.remainderOperanda17176910f602958a5265fc6d8012b6047fe73ddf347fffbb058652bd7701ddd\ - \ParallelCases+Calculator::IsEven().2.binaryOperationResult.1\, 64));
                         \ParallelCases+Calculator::IsEven().2.binaryOperationResult.3\ := (\ParallelCases+Calculator::IsEven().2.binaryOperationResult.2\) = to_signed(0, 64);
                         \ParallelCases+Calculator::IsEven().2.return\ <= \ParallelCases+Calculator::IsEven().2.binaryOperationResult.3\;
                         \ParallelCases+Calculator::IsEven().2._State\ := \ParallelCases+Calculator::IsEven().2._State_1\;
@@ -3453,7 +3453,7 @@ begin
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object3\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
+        Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3501,23 +3501,23 @@ begin
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.binaryOperationResult.0\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.num\ + \System.UInt32 Hast.TestInputs.Static.ParallelCases+<>c__DisplayClass1_0::input\;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.num\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Calculator object3;
+                        -- Calculator object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object3 = new Calculator { };
+                        -- object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42 = new Calculator { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object3\.\IsNull\ := false;
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object3\.\Number\ := to_unsigned(0, 32);
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\IsNull\ := false;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\Number\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- object3.Number = num;
+                        -- object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42.Number = num;
                         -- 
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object3\.\Number\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.num\;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\Number\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return Hast.TestInputs.Static.ParallelCases+Calculator.IsEven (object3);
+                        -- return Hast.TestInputs.Static.ParallelCases+Calculator.IsEven (object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42);
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Static.ParallelCases+Calculator::IsEven()
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object3\;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0._State\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -3526,7 +3526,7 @@ begin
                         if (\ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven()._Started.0\ = \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven()._Finished.0\) then 
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven()._Started.0\ <= false;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.return.0\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven().return.0\;
-                            \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object3\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven().this.parameter.In.0\;
+                            \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.ParallelCases+Calculator::IsEven().this.parameter.In.0\;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.return\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0.return.0\;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0._State\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).0._State_1\;
                         end if;
@@ -3544,7 +3544,7 @@ begin
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object3\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
+        Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3592,23 +3592,23 @@ begin
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.binaryOperationResult.0\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.num\ + \System.UInt32 Hast.TestInputs.Static.ParallelCases+<>c__DisplayClass1_0::input\;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.num\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Calculator object3;
+                        -- Calculator object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object3 = new Calculator { };
+                        -- object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42 = new Calculator { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object3\.\IsNull\ := false;
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object3\.\Number\ := to_unsigned(0, 32);
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\IsNull\ := false;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\Number\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- object3.Number = num;
+                        -- object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42.Number = num;
                         -- 
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object3\.\Number\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.num\;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\Number\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return Hast.TestInputs.Static.ParallelCases+Calculator.IsEven (object3);
+                        -- return Hast.TestInputs.Static.ParallelCases+Calculator.IsEven (object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42);
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Static.ParallelCases+Calculator::IsEven()
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object3\;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1._State\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -3617,7 +3617,7 @@ begin
                         if (\ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven()._Started.0\ = \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven()._Finished.0\) then 
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven()._Started.0\ <= false;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.return.0\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven().return.0\;
-                            \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object3\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven().this.parameter.In.0\;
+                            \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.ParallelCases+Calculator::IsEven().this.parameter.In.0\;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.return\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1.return.0\;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1._State\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).1._State_1\;
                         end if;
@@ -3635,7 +3635,7 @@ begin
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.indexObject\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object3\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
+        Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\: \Hast.TestInputs.Static.ParallelCases+Calculator\;
         Variable \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.return.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -3683,23 +3683,23 @@ begin
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.binaryOperationResult.0\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.num\ + \System.UInt32 Hast.TestInputs.Static.ParallelCases+<>c__DisplayClass1_0::input\;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.num\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Calculator object3;
+                        -- Calculator object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object3 = new Calculator { };
+                        -- object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42 = new Calculator { };
                         -- 
                         -- Initializing record fields to their defaults.
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object3\.\IsNull\ := false;
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object3\.\Number\ := to_unsigned(0, 32);
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\IsNull\ := false;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\Number\ := to_unsigned(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- object3.Number = num;
+                        -- object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42.Number = num;
                         -- 
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object3\.\Number\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.num\;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\.\Number\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return Hast.TestInputs.Static.ParallelCases+Calculator.IsEven (object3);
+                        -- return Hast.TestInputs.Static.ParallelCases+Calculator.IsEven (object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42);
                         -- 
                         -- Starting state machine invocation for the following method: System.Boolean Hast.TestInputs.Static.ParallelCases+Calculator::IsEven()
-                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object3\;
+                        \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven().this.parameter.Out.0\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven()._Started.0\ <= true;
                         \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2._State\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
@@ -3708,7 +3708,7 @@ begin
                         if (\ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven()._Started.0\ = \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven()._Finished.0\) then 
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven()._Started.0\ <= false;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.return.0\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven().return.0\;
-                            \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object3\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven().this.parameter.In.0\;
+                            \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.object821d1309860362c4b98c1dfa6f55910e50fe5780ab44fb1231bfdde4be1cfd42\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.ParallelCases+Calculator::IsEven().this.parameter.In.0\;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.return\ <= \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2.return.0\;
                             \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2._State\ := \ParallelCases+<>c__DisplayClass1_0::<ObjectUsingTasks>b__0(Object).2._State_1\;
                         end if;
