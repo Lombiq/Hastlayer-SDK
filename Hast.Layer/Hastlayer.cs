@@ -68,6 +68,7 @@ public sealed class Hastlayer : IHastlayer
         services.AddSingleton(BuildConfiguration());
         services.AddScoped<IHardwareGenerationConfigurationAccessor, HardwareGenerationConfigurationAccessor>();
         services.AddIDependencyContainer(assemblies);
+        services.AddScoped<IHashProvider, Sha256HashProvider>();
 
         ConfigureLogging(services, configuration.ConfigureLogging);
 
