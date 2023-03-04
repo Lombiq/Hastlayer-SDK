@@ -1,3 +1,4 @@
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
@@ -19,7 +20,10 @@ namespace Hast.Transformer.Services;
 /// </summary>
 public class ImmutableArraysToStandardArraysConverter : IConverter
 {
+    private readonly IHashProvider _hashProvider;
     public IEnumerable<string> Dependencies { get; } = new[] { nameof(ReadonlyToConstConverter) };
+
+    public ImmutableArraysToStandardArraysConverter(IHashProvider hashProvider) => _hashProvider = hashProvider;
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -32,14 +36,20 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
         // This implementation is partial, to the extent needed for unum and posit support. More value holders, like
         // fields, could also be handled for example.
 
-        syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(knownTypeLookupTable));
+        syntaxTree.AcceptVisitor(new ImmutableArraysToStandardArraysConvertingVisitor(_hashProvider, knownTypeLookupTable));
 
     private sealed class ImmutableArraysToStandardArraysConvertingVisitor : DepthFirstAstVisitor
     {
+        private readonly IHashProvider _hashProvider;
         private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
-        public ImmutableArraysToStandardArraysConvertingVisitor(IKnownTypeLookupTable knownTypeLookupTable) =>
+        public ImmutableArraysToStandardArraysConvertingVisitor(
+            IHashProvider hashProvider,
+            IKnownTypeLookupTable knownTypeLookupTable)
+        {
+            _hashProvider = hashProvider;
             _knownTypeLookupTable = knownTypeLookupTable;
+        }
 
         public override void VisitPropertyDeclaration(PropertyDeclaration propertyDeclaration)
         {
@@ -142,7 +152,8 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
                     var variableIdentifier = VariableHelper.DeclareAndReferenceArrayVariable(
                         memberReference.Target,
                         elementAstType,
-                        arrayType);
+                        arrayType,
+                        _hashProvider);
                     var arrayLengthExpression = CreateArrayLengthExpression();
 
                     var arrayCreate = new ArrayCreateExpression { Type = elementAstType };

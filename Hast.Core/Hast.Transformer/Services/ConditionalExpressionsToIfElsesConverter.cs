@@ -1,10 +1,10 @@
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.IL;
-using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,16 +21,23 @@ namespace Hast.Transformer.Services;
 /// </example>
 public class ConditionalExpressionsToIfElsesConverter : IConverter
 {
+    private readonly IHashProvider _hashProvider;
+
     public IEnumerable<string> Dependencies { get; } = new[] { nameof(InstanceMethodsToStaticConverter) };
+
+    public ConditionalExpressionsToIfElsesConverter(IHashProvider hashProvider) => _hashProvider = hashProvider;
 
     public void Convert(
         SyntaxTree syntaxTree,
         IHardwareGenerationConfiguration configuration,
         IKnownTypeLookupTable knownTypeLookupTable) =>
-        syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor());
+        syntaxTree.AcceptVisitor(new ConditionalExpressionsConvertingVisitor(_hashProvider));
 
     private sealed class ConditionalExpressionsConvertingVisitor : DepthFirstAstVisitor
     {
+        private readonly IHashProvider _hashProvider;
+        public ConditionalExpressionsConvertingVisitor(IHashProvider hashProvider) => _hashProvider = hashProvider;
+
         public override void VisitConditionalExpression(ConditionalExpression conditionalExpression)
         {
             base.VisitConditionalExpression(conditionalExpression);
@@ -41,7 +48,7 @@ public class ConditionalExpressionsToIfElsesConverter : IConverter
                 assignment.Left is not IdentifierExpression ||
                 assignment.Parent is not ExpressionStatement)
             {
-                var variableName = "conditional" + Sha256Helper.ComputeHash(conditionalExpression.GetFullName());
+                var variableName = _hashProvider.ComputeHash("conditional", conditionalExpression.GetFullName());
 
                 var resolveResult = conditionalExpression.GetResolveResult();
 

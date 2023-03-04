@@ -1,3 +1,4 @@
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
@@ -16,7 +17,11 @@ namespace Hast.Transformer.Services;
 /// </summary>
 public class MethodInliner : IConverter
 {
+    private readonly IHashProvider _hashProvider;
+
     public IEnumerable<string> Dependencies { get; } = new[] { nameof(OptionalParameterFiller) };
+
+    public MethodInliner(IHashProvider hashProvider) => _hashProvider = hashProvider;
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -66,7 +71,7 @@ public class MethodInliner : IConverter
         {
             codeOutput = syntaxTree.ToString();
 
-            syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(inlinableMethods));
+            syntaxTree.AcceptVisitor(new MethodCallChangingVisitor(_hashProvider, inlinableMethods));
 
             passCount++;
         }
@@ -90,9 +95,16 @@ public class MethodInliner : IConverter
 
     private sealed class MethodCallChangingVisitor : DepthFirstAstVisitor
     {
-        private readonly Dictionary<string, MethodDeclaration> _inlinableMethods;
+        private readonly IHashProvider _hashProvider;
+        private readonly IDictionary<string, MethodDeclaration> _inlinableMethods;
 
-        public MethodCallChangingVisitor(Dictionary<string, MethodDeclaration> inlinableMethods) => _inlinableMethods = inlinableMethods;
+        public MethodCallChangingVisitor(
+            IHashProvider hashProvider,
+            IDictionary<string, MethodDeclaration> inlinableMethods)
+        {
+            _hashProvider = hashProvider;
+            _inlinableMethods = inlinableMethods;
+        }
 
         public override void VisitInvocationExpression(InvocationExpression invocationExpression)
         {
@@ -124,7 +136,7 @@ public class MethodInliner : IConverter
             // Since the same method can be inlined multiple times in another method we also need to distinguish per
             // invocation. Furthermore, such inlined invocations can themselves be inlined too, so identifiers need to
             // be continued to suffixed on every level.
-            var methodIdentifierNameSuffix = Sha256Helper.ComputeHash(methodFullName + invocationExpression.GetFullName());
+            var methodIdentifierNameSuffix = _hashProvider.ComputeHash(string.Empty, methodFullName, invocationExpression.GetFullName());
 
             // Assigning all invocation arguments to newly created local variables which then will be used in the
             // inlined method's body.

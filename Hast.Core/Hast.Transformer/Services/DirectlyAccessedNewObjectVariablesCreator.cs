@@ -1,3 +1,4 @@
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
@@ -25,16 +26,23 @@ namespace Hast.Transformer.Services;
 /// </example>
 public class DirectlyAccessedNewObjectVariablesCreator : IConverter
 {
+    private readonly IHashProvider _hashProvider;
     public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConditionalExpressionsToIfElsesConverter) };
+
+    public DirectlyAccessedNewObjectVariablesCreator(IHashProvider hashProvider) => _hashProvider = hashProvider;
 
     public void Convert(
         SyntaxTree syntaxTree,
         IHardwareGenerationConfiguration configuration,
         IKnownTypeLookupTable knownTypeLookupTable) =>
-        syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor());
+        syntaxTree.AcceptVisitor(new DirectlyAccessedNewObjectVariableCreatingVisitor(_hashProvider));
 
     private sealed class DirectlyAccessedNewObjectVariableCreatingVisitor : DepthFirstAstVisitor
     {
+        private readonly IHashProvider _hashProvider;
+
+        public DirectlyAccessedNewObjectVariableCreatingVisitor(IHashProvider hashProvider) => _hashProvider = hashProvider;
+
         public override void VisitObjectCreateExpression(ObjectCreateExpression objectCreateExpression)
         {
             base.VisitObjectCreateExpression(objectCreateExpression);
@@ -52,7 +60,7 @@ public class DirectlyAccessedNewObjectVariablesCreator : IConverter
             HandleExpression(defaultValueExpression, defaultValueExpression.Type);
         }
 
-        private static void HandleExpression(Expression expression, AstType astType)
+        private void HandleExpression(Expression expression, AstType astType)
         {
             var resolveResult = expression.GetResolveResult();
             var typeName = astType.GetFullName();
@@ -64,7 +72,7 @@ public class DirectlyAccessedNewObjectVariablesCreator : IConverter
                 return;
             }
 
-            var variableIdentifier = VariableHelper.DeclareAndReferenceVariable("object", expression, astType);
+            var variableIdentifier = VariableHelper.DeclareAndReferenceVariable("object", expression, astType, _hashProvider);
             var assignment = new AssignmentExpression(variableIdentifier, expression.Clone())
                 .WithAnnotation(new OperatorResolveResult(
                     resolveResult.Type,

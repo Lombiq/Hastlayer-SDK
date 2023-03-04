@@ -1,3 +1,4 @@
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
@@ -34,16 +35,23 @@ namespace Hast.Transformer.Services;
 /// </remarks>
 public class EmbeddedAssignmentExpressionsExpander : IConverter
 {
+    private readonly IHashProvider _hashProvider;
     public IEnumerable<string> Dependencies { get; } = new[] { nameof(ObjectInitializerExpander) };
+
+    public EmbeddedAssignmentExpressionsExpander(IHashProvider hashProvider) => _hashProvider = hashProvider;
 
     public void Convert(
         SyntaxTree syntaxTree,
         IHardwareGenerationConfiguration configuration,
         IKnownTypeLookupTable knownTypeLookupTable) =>
-        syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor());
+        syntaxTree.AcceptVisitor(new EmbeddedAssignmentExpressionsExpandingVisitor(_hashProvider));
 
     private sealed class EmbeddedAssignmentExpressionsExpandingVisitor : DepthFirstAstVisitor
     {
+        private readonly IHashProvider _hashProvider;
+
+        public EmbeddedAssignmentExpressionsExpandingVisitor(IHashProvider hashProvider) => _hashProvider = hashProvider;
+
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {
             base.VisitAssignmentExpression(assignmentExpression);
@@ -64,7 +72,8 @@ public class EmbeddedAssignmentExpressionsExpander : IConverter
             var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
                 "assignment",
                 assignmentExpression,
-                TypeHelper.CreateAstType(type));
+                TypeHelper.CreateAstType(type),
+                _hashProvider);
 
             var firstParentStatement = assignmentExpression.FindFirstParentStatement();
             var resolveResult = assignmentExpression.CreateResolveResultFromActualType();

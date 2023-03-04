@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,17 +20,20 @@ public class TransformationContextCacheService : ITransformationContextCacheServ
     private readonly IJsonConverter _jsonConverter;
     private readonly ILogger<TransformationContextCacheService> _logger;
     private readonly ITransformingEngine _engine;
+    private readonly IHashProvider _hashProvider;
 
     public TransformationContextCacheService(
         IMemoryCache cache,
         IJsonConverter jsonConverter,
         ILogger<TransformationContextCacheService> logger,
-        ITransformingEngine engine)
+        ITransformingEngine engine,
+        IHashProvider hashProvider)
     {
         _cache = cache;
         _jsonConverter = jsonConverter;
         _logger = logger;
         _engine = engine;
+        _hashProvider = hashProvider;
     }
 
     public ITransformationContext GetTransformationContext(IEnumerable<string> assemblyPaths, string transformationId) =>
@@ -76,7 +80,7 @@ public class TransformationContextCacheService : ITransformationContextCacheServ
                     : transformationIdComponent);
         }
 
-        return Sha256Helper.ComputeHash(string.Join("\n", transformationIdComponents));
+        return _hashProvider.ComputeHash(string.Empty, transformationIdComponents.ToArray());
     }
 
     private static string GetCacheKey(IEnumerable<string> assemblyPaths, string transformationId)

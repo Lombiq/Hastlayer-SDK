@@ -1,16 +1,24 @@
+using Hast.Common.Services;
 using Hast.Transformer.Helpers;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Lombiq.HelpfulLibraries.Common.Utilities;
 
 namespace Hast.Transformer.Vhdl.SubTransformers;
 
 public class RemainderOperatorExpressionsExpander : IRemainderOperatorExpressionsExpander
 {
+    private readonly IHashProvider _hashProvider;
+
+    public RemainderOperatorExpressionsExpander(IHashProvider hashProvider) => _hashProvider = hashProvider;
+
     public void ExpandRemainderOperatorExpressions(SyntaxTree syntaxTree) =>
-        syntaxTree.AcceptVisitor(new RemainderOperatorExpressionsExpanderVisitor());
+        syntaxTree.AcceptVisitor(new RemainderOperatorExpressionsExpanderVisitor(_hashProvider));
 
     private sealed class RemainderOperatorExpressionsExpanderVisitor : DepthFirstAstVisitor
     {
+        private readonly IHashProvider _hashProvider;
+
+        public RemainderOperatorExpressionsExpanderVisitor(IHashProvider hashProvider) => _hashProvider = hashProvider;
+
         public override void VisitBinaryOperatorExpression(BinaryOperatorExpression binaryOperatorExpression)
         {
             base.VisitBinaryOperatorExpression(binaryOperatorExpression);
@@ -49,7 +57,7 @@ public class RemainderOperatorExpressionsExpander : IRemainderOperatorExpression
                 }
 
                 var variableIdentifier = VariableHelper.DeclareAndReferenceVariable(
-                    "remainderOperand" + Sha256Helper.ComputeHash(operand.GetFullName() + ilRangeName),
+                    _hashProvider.ComputeHash("remainderOperand", operand.GetFullName(), ilRangeName),
                     operand.GetActualType(),
                     TypeHelper.CreateAstType(operand.GetActualType()),
                     operand.FindFirstParentStatement());

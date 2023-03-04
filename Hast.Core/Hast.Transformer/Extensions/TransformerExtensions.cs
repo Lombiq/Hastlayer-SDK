@@ -1,6 +1,6 @@
+using Hast.Common.Services;
 using Hast.Layer;
 using Hast.Transformer.Abstractions;
-using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.CSharp;
 using Microsoft.VisualBasic;
 using System;
@@ -23,7 +23,8 @@ public static class TransformerExtensions
         this ITransformer transformer,
         string sourceCode,
         Language dotNetLanguage,
-        IHardwareGenerationConfiguration configuration)
+        IHardwareGenerationConfiguration configuration,
+        IHashProvider hashProvider)
     {
         CompilerResults result;
         var providerOptions = new Dictionary<string, string> { { "CompilerVersion", "v4.0" } };
@@ -31,7 +32,7 @@ public static class TransformerExtensions
         {
             GenerateInMemory = false,
             TreatWarningsAsErrors = false,
-            OutputAssembly = "DynamicHastAssembly" + Sha256Helper.ComputeHash(sourceCode),
+            OutputAssembly = hashProvider.ComputeHash("DynamicHastAssembly", sourceCode),
         };
 
         switch (dotNetLanguage)
