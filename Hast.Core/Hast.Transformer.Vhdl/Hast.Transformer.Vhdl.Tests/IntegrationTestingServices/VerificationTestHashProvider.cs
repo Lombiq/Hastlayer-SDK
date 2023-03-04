@@ -3,7 +3,7 @@ using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 
-namespace Hast.Transformer.Vhdl.Tests.Services;
+namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 
 /// <summary>
 /// Generates sequential numbers instead of hash codes. This is less efficient, but makes the samples used for VHDL
@@ -23,7 +23,8 @@ public class VerificationTestHashProvider : IHashProvider
         {
             if (!_generatedHashes.TryGetValue(hash, out id))
             {
-                _generatedHashes.Add(hash, _generatedHashes.Count);
+                id = _generatedHashes.Count;
+                _generatedHashes.Add(hash, id);
             }
         }
 
