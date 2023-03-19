@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\..\Hastlayer-Hardware-Framework---Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj" />
     <ProjectReference Include="..\..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj" />
     <ProjectReference Include="..\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />

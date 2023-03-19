@@ -13,8 +13,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj" />
+    <ProjectReference Include="..\..\Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj" />
-    <ProjectReference Include="..\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="FpgaCoreLib.dll">

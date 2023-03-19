@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Hast.Communication\Hast.Communication.csproj" />
-    <ProjectReference Include="..\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Hast.Core\Hast.Synthesis\Hast.Synthesis.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />

@@ -17,7 +17,6 @@
     <ProjectReference Include="..\Hast.Core\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
     <ProjectReference Include="..\Hast.Core\Hast.Xilinx\Hast.Xilinx.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Catapult.Abstractions\Hast.Catapult.Abstractions.csproj" />
-    <ProjectReference Include="..\Hast.Abstractions\Hast.Synthesis.Abstractions\Hast.Synthesis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Transformer.Abstractions\Hast.Transformer.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Vitis.Abstractions\Hast.Vitis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
