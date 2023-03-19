@@ -23,7 +23,6 @@
     <EmbeddedResource Include="VhdlLibraries\SimpleMemory.vhd" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Vitis.Abstractions\Hast.Vitis.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj" />
     <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />

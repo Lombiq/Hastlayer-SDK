@@ -11,7 +11,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj" />
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj" />
     <ProjectReference Include="..\..\..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />

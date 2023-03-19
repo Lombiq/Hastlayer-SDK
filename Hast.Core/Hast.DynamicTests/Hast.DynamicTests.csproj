@@ -32,8 +32,8 @@
     <None Remove="xunit.runner.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Abstractions\Hast.Xilinx.Abstractions\Hast.Xilinx.Abstractions.csproj" />
     <ProjectReference Include="..\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj" />
+    <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.Tests\Hast.Transformer.Vhdl.Tests.csproj" />
   </ItemGroup>
 </Project>

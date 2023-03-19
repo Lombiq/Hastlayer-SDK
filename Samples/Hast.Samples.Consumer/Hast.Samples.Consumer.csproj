@@ -10,7 +10,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Transformer.Vhdl.Abstractions\Hast.Transformer.Vhdl.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj" />
     <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
