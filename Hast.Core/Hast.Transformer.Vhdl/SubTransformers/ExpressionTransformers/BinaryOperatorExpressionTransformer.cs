@@ -1,4 +1,3 @@
-using Hast.Layer;
 using Hast.Synthesis;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Helpers;
@@ -20,13 +19,16 @@ public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTran
 {
     private readonly ITypeConverter _typeConverter;
     private readonly ITypeConversionTransformer _typeConversionTransformer;
+    private readonly IEnumerable<IBinaryOperatorExpressionTransformerMultiCycleHandler> _multiCycleHandlers;
 
     public BinaryOperatorExpressionTransformer(
         ITypeConverter typeConverter,
-        ITypeConversionTransformer typeConversionTransformer)
+        ITypeConversionTransformer typeConversionTransformer,
+        IEnumerable<IBinaryOperatorExpressionTransformerMultiCycleHandler> multiCycleHandlers)
     {
         _typeConverter = typeConverter;
         _typeConversionTransformer = typeConversionTransformer;
+        _multiCycleHandlers = multiCycleHandlers;
     }
 
     public IEnumerable<IVhdlElement> TransformParallelBinaryOperatorExpressions(
@@ -212,7 +214,7 @@ public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTran
 
         var operationIsMultiCycle = clockCyclesNeededForOperation > 1;
 
-        HandleMultiCycleForVivado(
+        HandleMultiCycle(
             context,
             stateMachine,
             operationIsMultiCycle,
@@ -265,30 +267,22 @@ public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTran
         return operationResultDataObjectReference;
     }
 
-    private static void HandleMultiCycleForVivado(
+    private void HandleMultiCycle(
         SubTransformerContext context,
         IMemberStateMachine stateMachine,
         bool operationIsMultiCycle,
         bool operationResultDataObjectIsVariable,
         IDataObject operationResultDataObjectReference)
     {
-        if (operationIsMultiCycle &&
-            context.TransformationContext.DeviceDriver.DeviceManifest.UsesVivadoInToolChain())
-        {
-            //// We need to add an attribute like the one below so Vivado won't merge this variable/signal with
-            //// others, thus allowing us to create XDC timing constraints for it.
-            //// attribute dont_touch of \PrimeCalculator::ArePrimeNumbers(SimpleMemory).0.binaryOperationResult.4\ : variable is "true";
+        if (!operationIsMultiCycle) return;
 
-            var attributes = operationResultDataObjectIsVariable
-                ? stateMachine.LocalAttributeSpecifications
-                : stateMachine.GlobalAttributeSpecifications;
-            attributes.Add(new AttributeSpecification
-            {
-                Attribute = KnownDataTypes.DontTouchAttribute,
-                Expression = new Value { DataType = KnownDataTypes.UnrangedString, Content = "true" },
-                ItemClass = operationResultDataObjectReference.DataObjectKind.ToString(),
-                Of = operationResultDataObjectReference,
-            });
+        foreach (var handler in _multiCycleHandlers)
+        {
+            handler.Handle(
+                context,
+                stateMachine,
+                operationResultDataObjectIsVariable,
+                operationResultDataObjectReference);
         }
     }
 
