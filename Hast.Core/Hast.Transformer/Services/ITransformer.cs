@@ -1,8 +1,6 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Hast.Transformer;
@@ -19,16 +17,4 @@ public interface ITransformer : IDependency
     /// <param name="configuration">Configuration for how the hardware generation should happen.</param>
     /// <returns>The hardware description created from the assemblies.</returns>
     Task<IHardwareDescription> TransformAsync(IList<string> assemblyPaths, IHardwareGenerationConfiguration configuration);
-}
-
-public static class TransformerExtensions
-{
-    public static Task<IHardwareDescription> TransformAsync(
-        this ITransformer transformer,
-        IList<Assembly> assemblies,
-        IHardwareGenerationConfiguration configuration)
-    {
-        assemblies.ThrowArgumentExceptionIfAnyInMemory();
-        return transformer.TransformAsync(assemblies.Select(assembly => assembly.Location).ToList(), configuration);
-    }
 }

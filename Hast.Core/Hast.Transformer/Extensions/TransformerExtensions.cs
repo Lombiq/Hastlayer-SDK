@@ -5,6 +5,8 @@ using Microsoft.VisualBasic;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,5 +58,14 @@ public static class TransformerExtensions
         }
 
         return transformer.TransformAsync(new[] { result.CompiledAssembly }, configuration);
+    }
+
+    public static Task<IHardwareDescription> TransformAsync(
+        this ITransformer transformer,
+        IList<Assembly> assemblies,
+        IHardwareGenerationConfiguration configuration)
+    {
+        assemblies.ThrowArgumentExceptionIfAnyInMemory();
+        return transformer.TransformAsync(assemblies.Select(assembly => assembly.Location).ToList(), configuration);
     }
 }
