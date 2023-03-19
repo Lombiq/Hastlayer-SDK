@@ -1,7 +1,7 @@
 using Hast.Common.Services;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 
@@ -11,22 +11,12 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 /// </summary>
 public class VerificationTestHashProvider : IHashProvider
 {
-    private static readonly object _lock = new();
-    private static readonly Dictionary<string, int> _generatedHashes = new();
+    private static readonly ConcurrentDictionary<string, int> _generatedHashes = new();
 
     public string ComputeHash(string prefix, params string[] sources)
     {
-        var hash = Sha256Helper.ComputeHash(string.Join(string.Empty, sources));
-        int id;
-
-        lock (_lock)
-        {
-            if (!_generatedHashes.TryGetValue(hash, out id))
-            {
-                id = _generatedHashes.Count;
-                _generatedHashes.Add(hash, id);
-            }
-        }
+        var hash = prefix + Sha256Helper.ComputeHash(string.Join(string.Empty, sources));
+        var id = _generatedHashes.GetOrAdd(hash, static (_, hashes) => hashes.Count, _generatedHashes);
 
         return prefix + id.ToTechnicalString();
     }
