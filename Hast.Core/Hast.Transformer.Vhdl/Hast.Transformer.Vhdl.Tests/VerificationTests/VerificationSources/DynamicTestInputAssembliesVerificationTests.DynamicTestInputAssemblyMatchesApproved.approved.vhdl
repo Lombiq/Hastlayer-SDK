@@ -1610,8 +1610,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -1627,8 +1627,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\: signed(7 downto 0) := to_signed(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand10\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
@@ -1644,8 +1644,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand11\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
@@ -1661,8 +1661,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand13\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
@@ -1678,7 +1678,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
@@ -1694,7 +1694,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand16\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -1710,7 +1710,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand17\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
@@ -1726,7 +1726,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand18\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.88\: signed(63 downto 0) := to_signed(0, 64);
@@ -1784,8 +1784,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -1801,8 +1801,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\ := to_signed(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand10\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
@@ -1818,8 +1818,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ := to_signed(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand11\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand12\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 32);
@@ -1835,8 +1835,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand13\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand14\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
@@ -1852,7 +1852,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand15\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 32);
@@ -1868,7 +1868,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375\ := to_unsigned(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand16\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\ := to_unsigned(0, 32);
@@ -1884,7 +1884,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand17\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 64);
@@ -1900,7 +1900,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand18\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.88\ := to_signed(0, 64);
@@ -2004,21 +2004,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76;
+                            -- int remainderOperand7;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76 = (int)b;
+                            -- remainderOperand7 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9;
+                            -- int remainderOperand8;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9 = (int)b2;
+                            -- remainderOperand8 = (int)b2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (int)((int)(b) + (int)(b2)), (int)((int)(b) - (int)(b2)), (int)((int)(b) * (int)(b2)), (int)b / (int)b2, remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76 - remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76 / remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9 * remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9, (int)((int)(b) & (int)(b2)), (int)((int)(b) | (int)(b2)), (int)((int)(b) ^ (int)(b2)));
+                            -- this.SaveResult (memory, 4, (int)((int)(b) + (int)(b2)), (int)((int)(b) - (int)(b2)), (int)((int)(b) * (int)(b2)), (int)b / (int)b2, remainderOperand7 - remainderOperand7 / remainderOperand8 * remainderOperand8, (int)((int)(b) & (int)(b2)), (int)((int)(b) | (int)(b2)), (int)((int)(b) ^ (int)(b2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32));
@@ -2053,11 +2053,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_12\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3af07f5432f298362c640a0abc417f14b1f2d4e2a4771f9ee6fdb61407fab4f9\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf62318ba9e8d71e4a95a0117d74d5d3fde9959a17c7a4124b2c15608dc2cca76\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -2128,21 +2128,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8;
+                            -- int remainderOperand9;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8 = (int)b;
+                            -- remainderOperand9 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478;
+                            -- int remainderOperand10;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478 = (int)b3;
+                            -- remainderOperand10 = (int)b3;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand10\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 24, (int)((int)(b) + (int)(b3)), (int)((int)(b) - (int)(b3)), (int)((int)(b) * (int)(b3)), (int)b / (int)b3, remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8 - remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8 / remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478 * remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478, (int)((int)(b) & (int)(b3)), (int)((int)(b) | (int)(b3)), (int)((int)(b) ^ (int)(b3)));
+                            -- this.SaveResult (memory, 24, (int)((int)(b) + (int)(b3)), (int)((int)(b) - (int)(b3)), (int)((int)(b) * (int)(b3)), (int)b / (int)b3, remainderOperand9 - remainderOperand9 / remainderOperand10 * remainderOperand10, (int)((int)(b) & (int)(b3)), (int)((int)(b) | (int)(b3)), (int)((int)(b) ^ (int)(b3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
@@ -2177,11 +2177,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand10\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_23\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9c476ff8f88a6b9a453de52d91f346b4fc6503fd9e3efddeac1784538c5ce478\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0813d68f8eddea6d06d8a4cbeccb22bd99c4abf628e2aa57930eca51cef2e1d8\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand10\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.21\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -2252,21 +2252,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858;
+                            -- int remainderOperand11;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858 = (int)b;
+                            -- remainderOperand11 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand11\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9;
+                            -- int remainderOperand12;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9 = (int)num2;
+                            -- remainderOperand12 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand12\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 44, (int)((int)(b) + (int)(num2)), (int)((int)(b) - (int)(num2)), (int)((int)(b) * (int)(num2)), (int)b / (int)num2, remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858 - remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858 / remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9 * remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9, (int)((int)(b) & (int)(num2)), (int)((int)(b) | (int)(num2)), (int)((int)(b) ^ (int)(num2)));
+                            -- this.SaveResult (memory, 44, (int)((int)(b) + (int)(num2)), (int)((int)(b) - (int)(num2)), (int)((int)(b) * (int)(num2)), (int)b / (int)num2, remainderOperand11 - remainderOperand11 / remainderOperand12 * remainderOperand12, (int)((int)(b) & (int)(num2)), (int)((int)(b) | (int)(num2)), (int)((int)(b) ^ (int)(num2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
@@ -2301,11 +2301,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand11\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand12\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_34\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand99fc561f3463ad84bc198b3552520151b58d78d11da913698cce2c9e704642e9\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandbb22bc70afc46b3b33b0ecf68bd2edca51fee277ba1bdb024170e509677ff858\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand12\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand11\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.33\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -2376,21 +2376,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4;
+                            -- int remainderOperand13;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4 = (int)b;
+                            -- remainderOperand13 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand13\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6;
+                            -- int remainderOperand14;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6 = (int)num3;
+                            -- remainderOperand14 = (int)num3;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand14\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 64, (int)((int)(b) + (int)(num3)), (int)((int)(b) - (int)(num3)), (int)((int)(b) * (int)(num3)), (int)b / (int)num3, remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4 - remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4 / remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6 * remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6, (int)((int)(b) & (int)(num3)), (int)((int)(b) | (int)(num3)), (int)((int)(b) ^ (int)(num3)));
+                            -- this.SaveResult (memory, 64, (int)((int)(b) + (int)(num3)), (int)((int)(b) - (int)(num3)), (int)((int)(b) * (int)(num3)), (int)b / (int)num3, remainderOperand13 - remainderOperand13 / remainderOperand14 * remainderOperand14, (int)((int)(b) & (int)(num3)), (int)((int)(b) | (int)(num3)), (int)((int)(b) ^ (int)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32));
@@ -2425,11 +2425,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand13\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand14\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_45\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand563d31132e30df141e7f2befe93833d68d7eccedfc14f5cd31ad03ca80ea3ec6\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc22b9ad8a2940bfb565a61f4a5f79a2eab68090271c67164c36d849acf217af4\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand14\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand13\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.45\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_46\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -2500,14 +2500,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3;
+                            -- int remainderOperand15;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3 = (int)b;
+                            -- remainderOperand15 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand15\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 84, (int)((int)(b) + (int)(num4)), (int)((int)(b) - (int)(num4)), (int)((int)(b) * (int)(num4)), (int)b / num4, remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3 - remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3 / num4 * num4, (int)((int)(b) & (int)(num4)), (int)((int)(b) | (int)(num4)), (int)((int)(b) ^ (int)(num4)));
+                            -- this.SaveResult (memory, 84, (int)((int)(b) + (int)(num4)), (int)((int)(b) - (int)(num4)), (int)((int)(b) * (int)(num4)), (int)b / num4, remainderOperand15 - remainderOperand15 / num4 * num4, (int)((int)(b) & (int)(num4)), (int)((int)(b) | (int)(num4)), (int)((int)(b) ^ (int)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) + (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) - (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
@@ -2542,11 +2542,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand15\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_56\ => 
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda1013911a535fda7f586e80b08d7dc9e13cccf3f82dd8b67d4d38d01668fa5f3\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand15\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.57\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32)) and (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_57\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -2617,14 +2617,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- uint remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375;
+                            -- uint remainderOperand16;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375 = (uint)(b);
+                            -- remainderOperand16 = (uint)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand16\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 104, (uint)((uint)(b) + num5), (uint)((uint)(b) - num5), (uint)((uint)(b) * num5), (uint)((uint)(b) / num5), (uint)(remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375 - remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375 / num5 * num5), (uint)((uint)(b) & num5), (uint)((uint)(b) | num5), (uint)((uint)(b) ^ num5));
+                            -- this.SaveResult (memory, 104, (uint)((uint)(b) + num5), (uint)((uint)(b) - num5), (uint)((uint)(b) * num5), (uint)((uint)(b) / num5), (uint)(remainderOperand16 - remainderOperand16 / num5 * num5), (uint)((uint)(b) & num5), (uint)((uint)(b) | num5), (uint)((uint)(b) ^ num5));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) + \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\;
@@ -2659,11 +2659,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand16\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\;
                         -- Clock cycles needed to complete this state (approximation): 9
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_67\ => 
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc056ca185bb18516855c77d48b7748f3ca02e37d0d972ea5cafa99dd524a1375\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand16\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.69\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) and \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -2734,14 +2734,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21;
+                            -- long remainderOperand17;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21 = (long)b;
+                            -- remainderOperand17 = (long)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand17\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 124, (long)((long)(b) + num6), (long)((long)(b) - num6), (long)((long)(b) * num6), (long)b / num6, remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21 - remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21 / num6 * num6, (long)((long)(b) & num6), (long)((long)(b) | num6), (long)((long)(b) ^ num6));
+                            -- this.SaveResult (memory, 124, (long)((long)(b) + num6), (long)((long)(b) - num6), (long)((long)(b) * num6), (long)b / num6, remainderOperand17 - remainderOperand17 / num6 * num6, (long)((long)(b) & num6), (long)((long)(b) | num6), (long)((long)(b) ^ num6));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64)) + \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64)) - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
@@ -2776,7 +2776,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand17\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_78\ => 
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 64);
@@ -2784,7 +2784,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_79\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ae4436a368b59827bd1ace1d76007621213065cc6395e383e0e5f9112da1c21\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand17\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.81\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64)) and \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.82\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64)) or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.83\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64)) xor \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
@@ -2851,14 +2851,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- ulong remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956;
+                            -- ulong remainderOperand18;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956 = (ulong)(b);
+                            -- remainderOperand18 = (ulong)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand18\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 144, (long)((ulong)(b) + num7), (long)((ulong)(b) - num7), (long)((ulong)(b) * num7), (long)((ulong)(b) / num7), (long)(remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956 - remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956 / num7 * num7), (long)((ulong)(b) & num7), (long)((ulong)(b) | num7), (long)((ulong)(b) ^ num7));
+                            -- this.SaveResult (memory, 144, (long)((ulong)(b) + num7), (long)((ulong)(b) - num7), (long)((ulong)(b) * num7), (long)((ulong)(b) / num7), (long)(remainderOperand18 - remainderOperand18 / num7 * num7), (long)((ulong)(b) & num7), (long)((ulong)(b) | num7), (long)((ulong)(b) ^ num7));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) + \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\);
@@ -2893,7 +2893,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ := \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand18\ / \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_89\ => 
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ * \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 64);
@@ -2901,7 +2901,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0._State_90\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.92\ := signed(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand2e5c2992737cf3edad58007701a8005ee63f32844cc2cc702d89c39f77937956\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\);
+                        \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.92\ := signed(\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand18\ - \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) and \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) or \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\);
                         \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) xor \BinaryAndUnaryOperatorExpressionCases::ByteBinaryOperatorExpressionVariations(SimpleMemory).0.num7\);
@@ -2941,8 +2941,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand19\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -2958,8 +2958,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\: signed(7 downto 0) := to_signed(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand21\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand22\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
@@ -2975,8 +2975,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\: signed(15 downto 0) := to_signed(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand23\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
@@ -2992,8 +2992,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand25\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
@@ -3009,8 +3009,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand27\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
@@ -3026,8 +3026,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand29\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand30\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\: signed(63 downto 0) := to_signed(0, 64);
@@ -3043,7 +3043,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand31\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
@@ -3102,8 +3102,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand19\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -3119,8 +3119,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\ := to_signed(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand21\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand22\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
@@ -3136,8 +3136,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ := to_signed(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand23\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand24\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 32);
@@ -3153,8 +3153,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand25\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
@@ -3170,8 +3170,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand27\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 32);
@@ -3187,8 +3187,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand29\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand30\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\ := to_signed(0, 64);
@@ -3204,7 +3204,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand31\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 64);
@@ -3311,21 +3311,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671;
+                            -- int remainderOperand19;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671 = (int)b;
+                            -- remainderOperand19 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451;
+                            -- int remainderOperand20;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451 = (int)b2;
+                            -- remainderOperand20 = (int)b2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (int)((int)(b) + (int)(b2)), (int)((int)(b) - (int)(b2)), (int)((int)(b) * (int)(b2)), (int)b / (int)b2, remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671 - remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671 / remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451 * remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451, (int)((int)(b) & (int)(b2)), (int)((int)(b) | (int)(b2)), (int)((int)(b) ^ (int)(b2)));
+                            -- this.SaveResult (memory, 4, (int)((int)(b) + (int)(b2)), (int)((int)(b) - (int)(b2)), (int)((int)(b) * (int)(b2)), (int)b / (int)b2, remainderOperand19 - remainderOperand19 / remainderOperand20 * remainderOperand20, (int)((int)(b) & (int)(b2)), (int)((int)(b) | (int)(b2)), (int)((int)(b) ^ (int)(b2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32));
@@ -3360,11 +3360,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand19\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_12\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand01401b8dfdaaff63f3dcb2fdb508f83d94840e017b8c14ec29a18c43e9c94451\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37da802aa94ba9b68cad0b46131ef39dbd9762ec4822ce6dea036a76dcc00671\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand19\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.9\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -3435,21 +3435,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145;
+                            -- int remainderOperand21;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145 = (int)(b);
+                            -- remainderOperand21 = (int)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand21\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b;
+                            -- int remainderOperand22;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b = (int)(b3);
+                            -- remainderOperand22 = (int)(b3);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand22\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 24, (int)((int)(b) + (int)(b3)), (int)((int)(b) - (int)(b3)), (int)((int)(b) * (int)(b3)), (int)((int)(b) / (int)(b3)), (int)(remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145 - remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145 / remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b * remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b), (int)((int)(b) & (int)(b3)), (int)((int)(b) | (int)(b3)), (int)((int)(b) ^ (int)(b3)));
+                            -- this.SaveResult (memory, 24, (int)((int)(b) + (int)(b3)), (int)((int)(b) - (int)(b3)), (int)((int)(b) * (int)(b3)), (int)((int)(b) / (int)(b3)), (int)(remainderOperand21 - remainderOperand21 / remainderOperand22 * remainderOperand22), (int)((int)(b) & (int)(b3)), (int)((int)(b) | (int)(b3)), (int)((int)(b) ^ (int)(b3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
@@ -3484,11 +3484,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand21\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand22\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_23\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand276dea1ed2007cd8fec1954ddfd7fc0cfa57a82352b9067bdc62b7ed519dc43b\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf9042aa5824d14503040a09d2d7a7ed501c89446dc09e1dbb297631480c56145\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand22\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand21\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.21\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -3559,21 +3559,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503;
+                            -- int remainderOperand23;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503 = (int)(b);
+                            -- remainderOperand23 = (int)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand23\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3;
+                            -- int remainderOperand24;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3 = (int)(num2);
+                            -- remainderOperand24 = (int)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand24\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 44, (int)((int)(b) + (int)(num2)), (int)((int)(b) - (int)(num2)), (int)((int)(b) * (int)(num2)), (int)((int)(b) / (int)(num2)), (int)(remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503 - remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503 / remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3 * remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3), (int)((int)(b) & (int)(num2)), (int)((int)(b) | (int)(num2)), (int)((int)(b) ^ (int)(num2)));
+                            -- this.SaveResult (memory, 44, (int)((int)(b) + (int)(num2)), (int)((int)(b) - (int)(num2)), (int)((int)(b) * (int)(num2)), (int)((int)(b) / (int)(num2)), (int)(remainderOperand23 - remainderOperand23 / remainderOperand24 * remainderOperand24), (int)((int)(b) & (int)(num2)), (int)((int)(b) | (int)(num2)), (int)((int)(b) ^ (int)(num2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
@@ -3608,11 +3608,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand23\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand24\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_34\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand6b9ebc14761c8c2967f3f68f1119c044679d5b02215523168ae65c48ea1e34a3\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7df257661cebefdc0c153916129e324b2d67408233999c7dc90adb50c14df503\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand24\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand23\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.33\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -3683,21 +3683,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73;
+                            -- int remainderOperand25;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73 = (int)b;
+                            -- remainderOperand25 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand25\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973;
+                            -- int remainderOperand26;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973 = (int)num3;
+                            -- remainderOperand26 = (int)num3;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 64, (int)((int)(b) + (int)(num3)), (int)((int)(b) - (int)(num3)), (int)((int)(b) * (int)(num3)), (int)b / (int)num3, remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73 - remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73 / remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973 * remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973, (int)((int)(b) & (int)(num3)), (int)((int)(b) | (int)(num3)), (int)((int)(b) ^ (int)(num3)));
+                            -- this.SaveResult (memory, 64, (int)((int)(b) + (int)(num3)), (int)((int)(b) - (int)(num3)), (int)((int)(b) * (int)(num3)), (int)b / (int)num3, remainderOperand25 - remainderOperand25 / remainderOperand26 * remainderOperand26, (int)((int)(b) & (int)(num3)), (int)((int)(b) | (int)(num3)), (int)((int)(b) ^ (int)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32));
@@ -3732,11 +3732,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand25\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_45\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand96d9f1d63b2b3911576802e14405db1e5d24ec78dbe896ef7f58aafa4bc3c973\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60a1f7ec682d45878acf8d41910a8a47a78fef540813f74b7b347d525bd54f73\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand25\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.45\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_46\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -3807,21 +3807,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c;
+                            -- int remainderOperand27;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c = (int)(b);
+                            -- remainderOperand27 = (int)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand27\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7;
+                            -- int remainderOperand28;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7 = (int)(num4);
+                            -- remainderOperand28 = (int)(num4);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7\ := (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28\ := (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 84, (int)((int)(b) + (int)(num4)), (int)((int)(b) - (int)(num4)), (int)((int)(b) * (int)(num4)), (int)((int)(b) / (int)(num4)), (int)(remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c - remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c / remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7 * remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7), (int)((int)(b) & (int)(num4)), (int)((int)(b) | (int)(num4)), (int)((int)(b) ^ (int)(num4)));
+                            -- this.SaveResult (memory, 84, (int)((int)(b) + (int)(num4)), (int)((int)(b) - (int)(num4)), (int)((int)(b) * (int)(num4)), (int)((int)(b) / (int)(num4)), (int)(remainderOperand27 - remainderOperand27 / remainderOperand28 * remainderOperand28), (int)((int)(b) & (int)(num4)), (int)((int)(b) | (int)(num4)), (int)((int)(b) ^ (int)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) + (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) - (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
@@ -3856,11 +3856,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand27\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_56\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand663f670545ecae14e40e0031ce2d121076a5685e3249f5161a303d0bc31face7\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffaee23e750d442d37de2b994901d5193695e36a14ee44f998c39fc5980db98c\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand27\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.57\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32) and (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num4\);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_57\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -3931,21 +3931,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb;
+                            -- long remainderOperand29;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb = (long)b;
+                            -- remainderOperand29 = (long)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand29\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6;
+                            -- long remainderOperand30;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6 = (long)num5;
+                            -- remainderOperand30 = (long)num5;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand30\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 104, (long)((long)(b) + (long)(num5)), (long)((long)(b) - (long)(num5)), (long)((long)(b) * (long)(num5)), (long)b / (long)num5, remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb - remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb / remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6 * remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6, (long)((long)(b) & (long)(num5)), (long)((long)(b) | (long)(num5)), (long)((long)(b) ^ (long)(num5)));
+                            -- this.SaveResult (memory, 104, (long)((long)(b) + (long)(num5)), (long)((long)(b) - (long)(num5)), (long)((long)(b) * (long)(num5)), (long)b / (long)num5, remainderOperand29 - remainderOperand29 / remainderOperand30 * remainderOperand30, (long)((long)(b) & (long)(num5)), (long)((long)(b) | (long)(num5)), (long)((long)(b) ^ (long)(num5)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64));
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64));
@@ -3980,15 +3980,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand29\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand30\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_67\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda207ac55100994cd064b79d3c9669944fc59d1ced9f4c4d0042e6a4fbdf4cbc6\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand30\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanddf399a77b1a67f06f25f156e5516043f8a94b009b7b9cc656c2f2d555ab4c7fb\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand29\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.69\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64));
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.70\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64));
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.71\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64));
@@ -4055,14 +4055,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0;
+                            -- long remainderOperand31;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0 = (long)(b);
+                            -- remainderOperand31 = (long)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand31\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 124, (long)((long)(b) + num6), (long)((long)(b) - num6), (long)((long)(b) * num6), (long)((long)(b) / num6), (long)(remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0 - remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0 / num6 * num6), (long)((long)(b) & num6), (long)((long)(b) | num6), (long)((long)(b) ^ num6));
+                            -- this.SaveResult (memory, 124, (long)((long)(b) + num6), (long)((long)(b) - num6), (long)((long)(b) * num6), (long)((long)(b) / num6), (long)(remainderOperand31 - remainderOperand31 / num6 * num6), (long)((long)(b) & num6), (long)((long)(b) | num6), (long)((long)(b) ^ num6));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) + \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
@@ -4097,7 +4097,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand31\ / \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_78\ => 
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ * \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 64);
@@ -4105,7 +4105,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0._State_79\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand28c2bc428b94bc1d55d3d5a8627c7144405d101415becf1eb980f8587d5d9bd0\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
+                        \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand31\ - \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.81\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) and \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.82\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) or \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.83\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 64) xor \BinaryAndUnaryOperatorExpressionCases::SbyteBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
@@ -4190,8 +4190,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand32\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand33\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -4207,8 +4207,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\: signed(7 downto 0) := to_signed(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand34\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand35\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
@@ -4224,8 +4224,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand36\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
@@ -4241,8 +4241,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand38\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
@@ -4258,8 +4258,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand40\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand41\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
@@ -4275,8 +4275,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand42\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand43\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\: signed(63 downto 0) := to_signed(0, 64);
@@ -4292,7 +4292,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand44\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
@@ -4351,8 +4351,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand32\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand33\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -4368,8 +4368,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := to_signed(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand34\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand35\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
@@ -4385,8 +4385,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := to_signed(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand36\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 32);
@@ -4402,8 +4402,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand38\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand39\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
@@ -4419,8 +4419,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand40\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand41\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 32);
@@ -4436,8 +4436,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand42\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand43\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\ := to_signed(0, 64);
@@ -4453,7 +4453,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand44\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 64);
@@ -4560,21 +4560,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee;
+                            -- int remainderOperand32;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee = (int)num2;
+                            -- remainderOperand32 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand32\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e;
+                            -- int remainderOperand33;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e = (int)b;
+                            -- remainderOperand33 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand33\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (int)((int)(num2) + (int)(b)), (int)((int)(num2) - (int)(b)), (int)((int)(num2) * (int)(b)), (int)num2 / (int)b, remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee - remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee / remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e * remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e, (int)((int)(num2) & (int)(b)), (int)((int)(num2) | (int)(b)), (int)((int)(num2) ^ (int)(b)));
+                            -- this.SaveResult (memory, 4, (int)((int)(num2) + (int)(b)), (int)((int)(num2) - (int)(b)), (int)((int)(num2) * (int)(b)), (int)num2 / (int)b, remainderOperand32 - remainderOperand32 / remainderOperand33 * remainderOperand33, (int)((int)(num2) & (int)(b)), (int)((int)(num2) | (int)(b)), (int)((int)(num2) ^ (int)(b)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
@@ -4609,11 +4609,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand32\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand33\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_12\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9ba2bd91c5f9621e1065ffbb5211f1192a46f7ab3a2dd5f8f349e2e8fb4b7c2e\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandccd7b29224178482664a6ed0fa0f79cdcac4b7686bba925b1502e48243368eee\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand33\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand32\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.9\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -4684,21 +4684,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb;
+                            -- int remainderOperand34;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb = (int)(num2);
+                            -- remainderOperand34 = (int)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand34\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c;
+                            -- int remainderOperand35;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c = (int)(b2);
+                            -- remainderOperand35 = (int)(b2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand35\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 24, (int)((int)(num2) + (int)(b2)), (int)((int)(num2) - (int)(b2)), (int)((int)(num2) * (int)(b2)), (int)((int)(num2) / (int)(b2)), (int)(remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb - remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb / remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c * remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c), (int)((int)(num2) & (int)(b2)), (int)((int)(num2) | (int)(b2)), (int)((int)(num2) ^ (int)(b2)));
+                            -- this.SaveResult (memory, 24, (int)((int)(num2) + (int)(b2)), (int)((int)(num2) - (int)(b2)), (int)((int)(num2) * (int)(b2)), (int)((int)(num2) / (int)(b2)), (int)(remainderOperand34 - remainderOperand34 / remainderOperand35 * remainderOperand35), (int)((int)(num2) & (int)(b2)), (int)((int)(num2) | (int)(b2)), (int)((int)(num2) ^ (int)(b2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
@@ -4733,11 +4733,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand34\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand35\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_23\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand3e755c072826a131b29cba789af5d9dd7b5ffde5fb4a93041d57d932b410485c\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand8ea640d0e16809b65bcbb523693c79ef22c3644a74c5ed493265b60168b6ecfb\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand35\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand34\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.21\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -4808,21 +4808,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c;
+                            -- int remainderOperand36;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c = (int)(num2);
+                            -- remainderOperand36 = (int)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand36\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93;
+                            -- int remainderOperand37;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93 = (int)(num3);
+                            -- remainderOperand37 = (int)(num3);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 44, (int)((int)(num2) + (int)(num3)), (int)((int)(num2) - (int)(num3)), (int)((int)(num2) * (int)(num3)), (int)((int)(num2) / (int)(num3)), (int)(remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c - remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c / remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93 * remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93), (int)((int)(num2) & (int)(num3)), (int)((int)(num2) | (int)(num3)), (int)((int)(num2) ^ (int)(num3)));
+                            -- this.SaveResult (memory, 44, (int)((int)(num2) + (int)(num3)), (int)((int)(num2) - (int)(num3)), (int)((int)(num2) * (int)(num3)), (int)((int)(num2) / (int)(num3)), (int)(remainderOperand36 - remainderOperand36 / remainderOperand37 * remainderOperand37), (int)((int)(num2) & (int)(num3)), (int)((int)(num2) | (int)(num3)), (int)((int)(num2) ^ (int)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
@@ -4857,11 +4857,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand36\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_34\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda8d2e50afe7e57a28e2201b97ff02e9f3f6fa85339e68c797e658934c519ab93\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4a13d9649837bdfb99d58d78ff4335a594355010f59a37fb9eb941a2296aa96c\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand37\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand36\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.33\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -4932,21 +4932,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82;
+                            -- int remainderOperand38;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82 = (int)num2;
+                            -- remainderOperand38 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand38\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6;
+                            -- int remainderOperand39;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6 = (int)num4;
+                            -- remainderOperand39 = (int)num4;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand39\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 64, (int)((int)(num2) + (int)(num4)), (int)((int)(num2) - (int)(num4)), (int)((int)(num2) * (int)(num4)), (int)num2 / (int)num4, remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82 - remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82 / remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6 * remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6, (int)((int)(num2) & (int)(num4)), (int)((int)(num2) | (int)(num4)), (int)((int)(num2) ^ (int)(num4)));
+                            -- this.SaveResult (memory, 64, (int)((int)(num2) + (int)(num4)), (int)((int)(num2) - (int)(num4)), (int)((int)(num2) * (int)(num4)), (int)num2 / (int)num4, remainderOperand38 - remainderOperand38 / remainderOperand39 * remainderOperand39, (int)((int)(num2) & (int)(num4)), (int)((int)(num2) | (int)(num4)), (int)((int)(num2) ^ (int)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
@@ -4981,11 +4981,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand38\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand39\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_45\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperanda3d3e80577d7b9f901b315a7b248e0aedf0d841ed5a63f5548dd647598d817f6\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandc04c0a4641758875e9751d1b487062c76f954455fba4ef78d3d1b69c15fe3e82\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand39\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand38\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.45\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_46\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -5056,21 +5056,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a;
+                            -- int remainderOperand40;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a = (int)(num2);
+                            -- remainderOperand40 = (int)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand40\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d;
+                            -- int remainderOperand41;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d = (int)(num5);
+                            -- remainderOperand41 = (int)(num5);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d\ := (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand41\ := (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 84, (int)((int)(num2) + (int)(num5)), (int)((int)(num2) - (int)(num5)), (int)((int)(num2) * (int)(num5)), (int)((int)(num2) / (int)(num5)), (int)(remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a - remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a / remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d * remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d), (int)((int)(num2) & (int)(num5)), (int)((int)(num2) | (int)(num5)), (int)((int)(num2) ^ (int)(num5)));
+                            -- this.SaveResult (memory, 84, (int)((int)(num2) + (int)(num5)), (int)((int)(num2) - (int)(num5)), (int)((int)(num2) * (int)(num5)), (int)((int)(num2) / (int)(num5)), (int)(remainderOperand40 - remainderOperand40 / remainderOperand41 * remainderOperand41), (int)((int)(num2) & (int)(num5)), (int)((int)(num2) | (int)(num5)), (int)((int)(num2) ^ (int)(num5)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) + (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) - (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
@@ -5105,11 +5105,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand40\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand41\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_56\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1a5405f7746609f513d44b51ec627c6ad82a7ee17fecf701d6b5d1c7165e851d\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperande4d66d27461ddf0725dd9d40507478690d25e6d085143b8ebfeb64a8a069703a\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand41\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand40\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.57\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) and (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_57\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -5180,21 +5180,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67;
+                            -- long remainderOperand42;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67 = (long)num2;
+                            -- remainderOperand42 = (long)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand42\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c;
+                            -- long remainderOperand43;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c = (long)num6;
+                            -- remainderOperand43 = (long)num6;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand43\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 104, (long)((long)(num2) + (long)(num6)), (long)((long)(num2) - (long)(num6)), (long)((long)(num2) * (long)(num6)), (long)num2 / (long)num6, remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67 - remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67 / remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c * remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c, (long)((long)(num2) & (long)(num6)), (long)((long)(num2) | (long)(num6)), (long)((long)(num2) ^ (long)(num6)));
+                            -- this.SaveResult (memory, 104, (long)((long)(num2) + (long)(num6)), (long)((long)(num2) - (long)(num6)), (long)((long)(num2) * (long)(num6)), (long)num2 / (long)num6, remainderOperand42 - remainderOperand42 / remainderOperand43 * remainderOperand43, (long)((long)(num2) & (long)(num6)), (long)((long)(num2) | (long)(num6)), (long)((long)(num2) ^ (long)(num6)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
@@ -5229,15 +5229,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand42\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand43\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_67\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand589dc96097f819c6fc51631911f8b6820df4e70e2c55ec4532f85104f6d7410c\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand43\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1b4cd82a13575a253c4ff863cd6d9b01a8890143db0728d08c34704ecc3d1a67\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand42\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.69\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.70\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.71\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
@@ -5304,14 +5304,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008;
+                            -- long remainderOperand44;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008 = (long)(num2);
+                            -- remainderOperand44 = (long)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand44\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)((long)(num2) / num7), (long)(remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008 - remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008 / num7 * num7), (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
+                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)((long)(num2) / num7), (long)(remainderOperand44 - remainderOperand44 / num7 * num7), (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) + \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -5346,7 +5346,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand44\ / \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_78\ => 
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ * \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 64);
@@ -5354,7 +5354,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0._State_79\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandeff2f730d7305d5207bc822ce727e544b59d119271e5d819e76f7f33143e9008\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
+                        \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand44\ - \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.81\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) and \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.82\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) or \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.83\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) xor \BinaryAndUnaryOperatorExpressionCases::ShortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -5439,8 +5439,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand45\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand46\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -5456,8 +5456,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\: signed(7 downto 0) := to_signed(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand47\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
@@ -5473,8 +5473,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
@@ -5490,8 +5490,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand51\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand52\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
@@ -5507,7 +5507,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand53\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\: signed(31 downto 0) := to_signed(0, 32);
@@ -5523,7 +5523,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand54\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -5539,7 +5539,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand55\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
@@ -5555,7 +5555,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand56\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.88\: signed(63 downto 0) := to_signed(0, 64);
@@ -5613,8 +5613,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand45\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand46\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -5630,8 +5630,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := to_signed(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand47\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand48\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
@@ -5647,8 +5647,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := to_signed(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand50\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 32);
@@ -5664,8 +5664,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand51\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand52\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
@@ -5681,7 +5681,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand53\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 32);
@@ -5697,7 +5697,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a\ := to_unsigned(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand54\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\ := to_unsigned(0, 32);
@@ -5713,7 +5713,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand55\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 64);
@@ -5729,7 +5729,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand56\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.88\ := to_signed(0, 64);
@@ -5833,21 +5833,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee;
+                            -- int remainderOperand45;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee = (int)num2;
+                            -- remainderOperand45 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand45\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f;
+                            -- int remainderOperand46;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f = (int)b;
+                            -- remainderOperand46 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand46\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (int)((int)(num2) + (int)(b)), (int)((int)(num2) - (int)(b)), (int)((int)(num2) * (int)(b)), (int)num2 / (int)b, remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee - remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee / remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f * remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f, (int)((int)(num2) & (int)(b)), (int)((int)(num2) | (int)(b)), (int)((int)(num2) ^ (int)(b)));
+                            -- this.SaveResult (memory, 4, (int)((int)(num2) + (int)(b)), (int)((int)(num2) - (int)(b)), (int)((int)(num2) * (int)(b)), (int)num2 / (int)b, remainderOperand45 - remainderOperand45 / remainderOperand46 * remainderOperand46, (int)((int)(num2) & (int)(b)), (int)((int)(num2) | (int)(b)), (int)((int)(num2) ^ (int)(b)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
@@ -5882,11 +5882,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand45\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand46\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_12\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandffa700ee920bef4cb002a1450b1be7e08829bac8b05ce5036fa869545d665e7f\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand637698073a447ebb3185efd72bcec8821b6698e3af2fdb669078efcf4f371fee\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand46\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand45\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.9\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_13\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -5957,21 +5957,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755;
+                            -- int remainderOperand47;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755 = (int)num2;
+                            -- remainderOperand47 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand47\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7;
+                            -- int remainderOperand48;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7 = (int)b2;
+                            -- remainderOperand48 = (int)b2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand48\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 24, (int)((int)(num2) + (int)(b2)), (int)((int)(num2) - (int)(b2)), (int)((int)(num2) * (int)(b2)), (int)num2 / (int)b2, remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755 - remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755 / remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7 * remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7, (int)((int)(num2) & (int)(b2)), (int)((int)(num2) | (int)(b2)), (int)((int)(num2) ^ (int)(b2)));
+                            -- this.SaveResult (memory, 24, (int)((int)(num2) + (int)(b2)), (int)((int)(num2) - (int)(b2)), (int)((int)(num2) * (int)(b2)), (int)num2 / (int)b2, remainderOperand47 - remainderOperand47 / remainderOperand48 * remainderOperand48, (int)((int)(num2) & (int)(b2)), (int)((int)(num2) | (int)(b2)), (int)((int)(num2) ^ (int)(b2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
@@ -6006,11 +6006,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand47\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand48\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_23\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb271e28b80d0eb699abec811be694edbdb5f2e42dff339490bd93cdcd4b6dff7\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb56bc90e297ce82da6c0f2ae167ba0ef9165b9ff596f4a695ea8f0833f0ff755\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand48\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand47\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.21\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -6081,21 +6081,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129;
+                            -- int remainderOperand49;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129 = (int)num2;
+                            -- remainderOperand49 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf;
+                            -- int remainderOperand50;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf = (int)num3;
+                            -- remainderOperand50 = (int)num3;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand50\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 44, (int)((int)(num2) + (int)(num3)), (int)((int)(num2) - (int)(num3)), (int)((int)(num2) * (int)(num3)), (int)num2 / (int)num3, remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129 - remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129 / remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf * remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf, (int)((int)(num2) & (int)(num3)), (int)((int)(num2) | (int)(num3)), (int)((int)(num2) ^ (int)(num3)));
+                            -- this.SaveResult (memory, 44, (int)((int)(num2) + (int)(num3)), (int)((int)(num2) - (int)(num3)), (int)((int)(num2) * (int)(num3)), (int)num2 / (int)num3, remainderOperand49 - remainderOperand49 / remainderOperand50 * remainderOperand50, (int)((int)(num2) & (int)(num3)), (int)((int)(num2) | (int)(num3)), (int)((int)(num2) ^ (int)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
@@ -6130,11 +6130,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand50\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_34\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7677c7664aba722b03a7f319f2d123d61d3ae98ee51e50e63db274317d0d6ebf\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand459346acadde97802dcc50484ada0c40103bace93e52f7257beccb7c51bc6129\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand50\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.33\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -6205,21 +6205,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d;
+                            -- int remainderOperand51;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d = (int)num2;
+                            -- remainderOperand51 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand51\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723;
+                            -- int remainderOperand52;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723 = (int)num4;
+                            -- remainderOperand52 = (int)num4;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand52\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 64, (int)((int)(num2) + (int)(num4)), (int)((int)(num2) - (int)(num4)), (int)((int)(num2) * (int)(num4)), (int)num2 / (int)num4, remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d - remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d / remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723 * remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723, (int)((int)(num2) & (int)(num4)), (int)((int)(num2) | (int)(num4)), (int)((int)(num2) ^ (int)(num4)));
+                            -- this.SaveResult (memory, 64, (int)((int)(num2) + (int)(num4)), (int)((int)(num2) - (int)(num4)), (int)((int)(num2) * (int)(num4)), (int)num2 / (int)num4, remainderOperand51 - remainderOperand51 / remainderOperand52 * remainderOperand52, (int)((int)(num2) & (int)(num4)), (int)((int)(num2) | (int)(num4)), (int)((int)(num2) ^ (int)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
@@ -6254,11 +6254,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand51\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand52\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_45\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0b7ee47f99eaf211d52f53985b8d22af469b044af6dc66dbc95e4f28de7ad723\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf5ba991b0b9a0c631648eaed8d8211c7203ea310a4695ac62d9ebf94c990416d\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand52\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand51\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.45\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_46\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -6329,14 +6329,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1;
+                            -- int remainderOperand53;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1 = (int)num2;
+                            -- remainderOperand53 = (int)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand53\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 84, (int)((int)(num2) + (int)(num5)), (int)((int)(num2) - (int)(num5)), (int)((int)(num2) * (int)(num5)), (int)num2 / num5, remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1 - remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1 / num5 * num5, (int)((int)(num2) & (int)(num5)), (int)((int)(num2) | (int)(num5)), (int)((int)(num2) ^ (int)(num5)));
+                            -- this.SaveResult (memory, 84, (int)((int)(num2) + (int)(num5)), (int)((int)(num2) - (int)(num5)), (int)((int)(num2) * (int)(num5)), (int)num2 / num5, remainderOperand53 - remainderOperand53 / num5 * num5, (int)((int)(num2) & (int)(num5)), (int)((int)(num2) | (int)(num5)), (int)((int)(num2) ^ (int)(num5)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) + (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) - (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
@@ -6371,11 +6371,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand53\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_56\ => 
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand126f8648dd7b643820d45dd5996443d7be87af6af9e3e0dd930e094a388b62e1\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand53\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.57\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32)) and (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num5\);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_57\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -6446,14 +6446,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- uint remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a;
+                            -- uint remainderOperand54;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a = (uint)(num2);
+                            -- remainderOperand54 = (uint)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand54\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 104, (uint)((uint)(num2) + num6), (uint)((uint)(num2) - num6), (uint)((uint)(num2) * num6), (uint)((uint)(num2) / num6), (uint)(remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a - remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a / num6 * num6), (uint)((uint)(num2) & num6), (uint)((uint)(num2) | num6), (uint)((uint)(num2) ^ num6));
+                            -- this.SaveResult (memory, 104, (uint)((uint)(num2) + num6), (uint)((uint)(num2) - num6), (uint)((uint)(num2) * num6), (uint)((uint)(num2) / num6), (uint)(remainderOperand54 - remainderOperand54 / num6 * num6), (uint)((uint)(num2) & num6), (uint)((uint)(num2) | num6), (uint)((uint)(num2) ^ num6));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) + \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
@@ -6488,11 +6488,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand54\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         -- Clock cycles needed to complete this state (approximation): 9
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_67\ => 
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand771d8291577f6697bff057d41b414169b8df1ac5f42b7ddb1682ae623c9de31a\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand54\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.69\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 32) and \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num6\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -6563,14 +6563,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d;
+                            -- long remainderOperand55;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d = (long)num2;
+                            -- remainderOperand55 = (long)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand55\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)num2 / num7, remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d - remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d / num7 * num7, (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
+                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)num2 / num7, remainderOperand55 - remainderOperand55 / num7 * num7, (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) + \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -6605,7 +6605,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand55\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_78\ => 
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 64);
@@ -6613,7 +6613,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_79\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfc26f8b7ed9f92ce75824fde74940806f36656e9320fa0c6e21ac2db13031f5d\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand55\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.81\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) and \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.82\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.83\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) xor \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -6680,14 +6680,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- ulong remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c;
+                            -- ulong remainderOperand56;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c = (ulong)(num2);
+                            -- remainderOperand56 = (ulong)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand56\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 144, (long)((ulong)(num2) + num8), (long)((ulong)(num2) - num8), (long)((ulong)(num2) * num8), (long)((ulong)(num2) / num8), (long)(remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c - remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c / num8 * num8), (long)((ulong)(num2) & num8), (long)((ulong)(num2) | num8), (long)((ulong)(num2) ^ num8));
+                            -- this.SaveResult (memory, 144, (long)((ulong)(num2) + num8), (long)((ulong)(num2) - num8), (long)((ulong)(num2) * num8), (long)((ulong)(num2) / num8), (long)(remainderOperand56 - remainderOperand56 / num8 * num8), (long)((ulong)(num2) & num8), (long)((ulong)(num2) | num8), (long)((ulong)(num2) ^ num8));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) + \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
@@ -6722,7 +6722,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\;
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ := \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand56\ / \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_89\ => 
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ * \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 64);
@@ -6730,7 +6730,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0._State_90\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.92\ := signed(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand94392bf8ca2c863a53319bd7b263c5444cd8403480557afd2b88fe62fb93613c\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\);
+                        \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.92\ := signed(\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand56\ - \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) and \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) or \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
                         \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) xor \BinaryAndUnaryOperatorExpressionCases::UshortBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
@@ -6770,7 +6770,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand57\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
@@ -6786,8 +6786,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b2\: signed(7 downto 0) := to_signed(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand58\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand59\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
@@ -6803,8 +6803,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand61\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\: signed(31 downto 0) := to_signed(0, 32);
@@ -6820,7 +6820,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand62\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\: signed(31 downto 0) := to_signed(0, 32);
@@ -6851,8 +6851,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand63\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand64\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\: signed(63 downto 0) := to_signed(0, 64);
@@ -6868,7 +6868,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand65\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
@@ -6927,7 +6927,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand57\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 32);
@@ -6943,8 +6943,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := to_signed(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand58\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand59\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 32);
@@ -6960,8 +6960,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := to_signed(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand61\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 32);
@@ -6977,7 +6977,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753\ := to_signed(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand62\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 32);
@@ -7008,8 +7008,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.60\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.61\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand63\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand64\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.64\ := to_signed(0, 64);
@@ -7025,7 +7025,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := to_signed(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand65\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 64);
@@ -7132,14 +7132,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25;
+                            -- int remainderOperand57;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25 = (int)b;
+                            -- remainderOperand57 = (int)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand57\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (int)((int)(num2) + (int)(b)), (int)((int)(num2) - (int)(b)), (int)((int)(num2) * (int)(b)), num2 / (int)b, num2 - num2 / remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25 * remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25, (int)((int)(num2) & (int)(b)), (int)((int)(num2) | (int)(b)), (int)((int)(num2) ^ (int)(b)));
+                            -- this.SaveResult (memory, 4, (int)((int)(num2) + (int)(b)), (int)((int)(num2) - (int)(b)), (int)((int)(num2) * (int)(b)), num2 / (int)b, num2 - num2 / remainderOperand57 * remainderOperand57, (int)((int)(num2) & (int)(b)), (int)((int)(num2) | (int)(b)), (int)((int)(num2) ^ (int)(b)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
@@ -7174,10 +7174,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand57\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_12\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfcd55882e961103166000db1f02ef2997c2b18d97c1cca6917cb3ca0e4643c25\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand57\, 32);
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.9\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_13\;
@@ -7249,21 +7249,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc;
+                            -- int remainderOperand58;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc = (int)(num2);
+                            -- remainderOperand58 = (int)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\);
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand58\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f;
+                            -- int remainderOperand59;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f = (int)(b2);
+                            -- remainderOperand59 = (int)(b2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand59\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 24, (int)((int)(num2) + (int)(b2)), (int)((int)(num2) - (int)(b2)), (int)((int)(num2) * (int)(b2)), (int)((int)(num2) / (int)(b2)), (int)(remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc - remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc / remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f * remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f), (int)((int)(num2) & (int)(b2)), (int)((int)(num2) | (int)(b2)), (int)((int)(num2) ^ (int)(b2)));
+                            -- this.SaveResult (memory, 24, (int)((int)(num2) + (int)(b2)), (int)((int)(num2) - (int)(b2)), (int)((int)(num2) * (int)(b2)), (int)((int)(num2) / (int)(b2)), (int)(remainderOperand58 - remainderOperand58 / remainderOperand59 * remainderOperand59), (int)((int)(num2) & (int)(b2)), (int)((int)(num2) | (int)(b2)), (int)((int)(num2) ^ (int)(b2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
@@ -7298,11 +7298,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand58\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand59\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_23\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandfb8f3372fd7221556ababe29f9123d556d218a6d44ec53f2999cb67b2c5ebd9f\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand0d8796807bf76d885cff0bc2d8f964743dcea6f6eef3b26daccc58a16abe8fcc\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand59\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand58\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.21\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -7373,21 +7373,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14;
+                            -- int remainderOperand60;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14 = (int)(num2);
+                            -- remainderOperand60 = (int)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\);
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\);
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec;
+                            -- int remainderOperand61;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec = (int)(num3);
+                            -- remainderOperand61 = (int)(num3);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand61\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 44, (int)((int)(num2) + (int)(num3)), (int)((int)(num2) - (int)(num3)), (int)((int)(num2) * (int)(num3)), (int)((int)(num2) / (int)(num3)), (int)(remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14 - remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14 / remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec * remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec), (int)((int)(num2) & (int)(num3)), (int)((int)(num2) | (int)(num3)), (int)((int)(num2) ^ (int)(num3)));
+                            -- this.SaveResult (memory, 44, (int)((int)(num2) + (int)(num3)), (int)((int)(num2) - (int)(num3)), (int)((int)(num2) * (int)(num3)), (int)((int)(num2) / (int)(num3)), (int)(remainderOperand60 - remainderOperand60 / remainderOperand61 * remainderOperand61), (int)((int)(num2) & (int)(num3)), (int)((int)(num2) | (int)(num3)), (int)((int)(num2) ^ (int)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
@@ -7422,11 +7422,11 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand61\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_34\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand1f8bf1efa1644697fc067afd5de6889954c9eb751ae1c186aee5cdaf8d8833ec\, 32);
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandd56fc59e72e1559e4d8e9c08e6f0d03771ef493a6ba693ea3ccf380ca45f4b14\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand61\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand60\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.33\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0.8857
@@ -7497,14 +7497,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- int remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753;
+                            -- int remainderOperand62;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753 = (int)num4;
+                            -- remainderOperand62 = (int)num4;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32));
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand62\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num4\, 32));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 64, (int)((int)(num2) + (int)(num4)), (int)((int)(num2) - (int)(num4)), (int)((int)(num2) * (int)(num4)), num2 / (int)num4, num2 - num2 / remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753 * remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753, (int)((int)(num2) & (int)(num4)), (int)((int)(num2) | (int)(num4)), (int)((int)(num2) ^ (int)(num4)));
+                            -- this.SaveResult (memory, 64, (int)((int)(num2) + (int)(num4)), (int)((int)(num2) - (int)(num4)), (int)((int)(num2) * (int)(num4)), num2 / (int)num4, num2 - num2 / remainderOperand62 * remainderOperand62, (int)((int)(num2) & (int)(num4)), (int)((int)(num2) | (int)(num4)), (int)((int)(num2) ^ (int)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
@@ -7539,10 +7539,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand62\;
                         -- Clock cycles needed to complete this state (approximation): 10
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_45\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandf8bf869f4ffe0c6a8d8456a5f3da55cdb8a5469a34148acb4792a9f3f6c5b753\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand62\, 32);
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.45\ := (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32));
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_46\;
@@ -7724,21 +7724,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8;
+                            -- long remainderOperand63;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8 = (long)num2;
+                            -- remainderOperand63 = (long)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand63\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3;
+                            -- long remainderOperand64;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3 = (long)num6;
+                            -- remainderOperand64 = (long)num6;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand64\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 104, (long)((long)(num2) + (long)(num6)), (long)((long)(num2) - (long)(num6)), (long)((long)(num2) * (long)(num6)), (long)num2 / (long)num6, remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8 - remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8 / remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3 * remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3, (long)((long)(num2) & (long)(num6)), (long)((long)(num2) | (long)(num6)), (long)((long)(num2) ^ (long)(num6)));
+                            -- this.SaveResult (memory, 104, (long)((long)(num2) + (long)(num6)), (long)((long)(num2) - (long)(num6)), (long)((long)(num2) * (long)(num6)), (long)num2 / (long)num6, remainderOperand63 - remainderOperand63 / remainderOperand64 * remainderOperand64, (long)((long)(num2) & (long)(num6)), (long)((long)(num2) | (long)(num6)), (long)((long)(num2) ^ (long)(num6)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.62\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.63\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
@@ -7773,15 +7773,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.11\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand63\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand64\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_67\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand86d362f3f66e5e9c8d3715357365ea1ffc1fb6f2aaf7c8380b7e24774692d8c3\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.66\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand64\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_68\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandb028614a2ed93af7b1652796aed6f3f55d927729cc6e94e50208de087b116ee8\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.68\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand63\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.67\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.69\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) and signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.70\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) or signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.71\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) xor signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num6\), 64));
@@ -7848,14 +7848,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35;
+                            -- long remainderOperand65;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35 = (long)(num2);
+                            -- remainderOperand65 = (long)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand65\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)((long)(num2) / num7), (long)(remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35 - remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35 / num7 * num7), (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
+                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)((long)(num2) / num7), (long)(remainderOperand65 - remainderOperand65 / num7 * num7), (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) + \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -7890,7 +7890,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand65\ / \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_78\ => 
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ * \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 64);
@@ -7898,7 +7898,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0._State_79\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand49d1a894fdb64448eb887869c66341757c56039fa7bfc5a4ba06fc77253bfe35\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
+                        \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand65\ - \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.81\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) and \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.82\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) or \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.83\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) xor \BinaryAndUnaryOperatorExpressionCases::IntBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -7983,7 +7983,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand66\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -7999,8 +7999,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\: signed(7 downto 0) := to_signed(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand67\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand68\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\: signed(63 downto 0) := to_signed(0, 64);
@@ -8016,8 +8016,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand69\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand70\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\: signed(63 downto 0) := to_signed(0, 64);
@@ -8033,7 +8033,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand71\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -8049,8 +8049,8 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand72\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand73\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\: signed(63 downto 0) := to_signed(0, 64);
@@ -8081,7 +8081,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand74\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\: signed(63 downto 0) := to_signed(0, 64);
@@ -8097,7 +8097,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand75\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.88\: signed(63 downto 0) := to_signed(0, 64);
@@ -8155,7 +8155,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.0\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.1\ := to_unsigned(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0\ := to_unsigned(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand66\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.4\ := to_unsigned(0, 32);
@@ -8171,8 +8171,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\ := to_signed(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.12\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand67\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand68\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 64);
@@ -8188,8 +8188,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\ := to_signed(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.24\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.25\ := to_unsigned(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand69\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand70\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 64);
@@ -8205,7 +8205,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.36\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.37\ := to_unsigned(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223\ := to_unsigned(0, 32);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand71\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.40\ := to_unsigned(0, 32);
@@ -8221,8 +8221,8 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.48\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.49\ := to_unsigned(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand72\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand73\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.52\ := to_signed(0, 64);
@@ -8253,7 +8253,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.72\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.73\ := to_unsigned(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand74\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.76\ := to_signed(0, 64);
@@ -8269,7 +8269,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.84\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.85\ := to_unsigned(0, 32);
-                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand75\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.88\ := to_signed(0, 64);
@@ -8373,14 +8373,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- uint remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0;
+                            -- uint remainderOperand66;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0 = (uint)(b);
+                            -- remainderOperand66 = (uint)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand66\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (uint)(num2 + (uint)(b)), (uint)(num2 - (uint)(b)), (uint)(num2 * (uint)(b)), (uint)(num2 / (uint)(b)), (uint)(num2 - num2 / remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0 * remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0), (uint)(num2 & (uint)(b)), (uint)(num2 | (uint)(b)), (uint)(num2 ^ (uint)(b)));
+                            -- this.SaveResult (memory, 4, (uint)(num2 + (uint)(b)), (uint)(num2 - (uint)(b)), (uint)(num2 * (uint)(b)), (uint)(num2 / (uint)(b)), (uint)(num2 - num2 / remainderOperand66 * remainderOperand66), (uint)(num2 & (uint)(b)), (uint)(num2 | (uint)(b)), (uint)(num2 ^ (uint)(b)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.2\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
@@ -8415,10 +8415,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand66\;
                         -- Clock cycles needed to complete this state (approximation): 9
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_12\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand5ebf2e90f41e8d2cefd3b346b1a55af206989d37c077b4fdcf15e353c555f0c0\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.6\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand66\, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.7\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ and SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_13\;
@@ -8490,21 +8490,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345;
+                            -- long remainderOperand67;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345 = (long)num2;
+                            -- remainderOperand67 = (long)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand67\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0;
+                            -- long remainderOperand68;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0 = (long)b2;
+                            -- remainderOperand68 = (long)b2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand68\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 24, (long)((long)(num2) + (long)(b2)), (long)((long)(num2) - (long)(b2)), (long)((long)(num2) * (long)(b2)), (long)num2 / (long)b2, remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345 - remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345 / remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0 * remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0, (long)((long)(num2) & (long)(b2)), (long)((long)(num2) | (long)(b2)), (long)((long)(num2) ^ (long)(b2)));
+                            -- this.SaveResult (memory, 24, (long)((long)(num2) + (long)(b2)), (long)((long)(num2) - (long)(b2)), (long)((long)(num2) * (long)(b2)), (long)num2 / (long)b2, remainderOperand67 - remainderOperand67 / remainderOperand68 * remainderOperand68, (long)((long)(num2) & (long)(b2)), (long)((long)(num2) | (long)(b2)), (long)((long)(num2) ^ (long)(b2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.14\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.15\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 64);
@@ -8539,15 +8539,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand67\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand68\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_23\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand9957199a4c683aaab2d29308d31f0f8f4101f05a34d69b467d1e3e8d82a19dd0\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.18\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand68\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_24\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_24\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand7c23cbbfdbb7d336bbd0e75218005652c6b5083c1c7d7147c0089ec4207f8345\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand67\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.19\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.21\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.22\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.23\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.b2\), 64);
@@ -8614,21 +8614,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca;
+                            -- long remainderOperand69;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca = (long)num2;
+                            -- remainderOperand69 = (long)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand69\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af;
+                            -- long remainderOperand70;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af = (long)num3;
+                            -- remainderOperand70 = (long)num3;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand70\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 44, (long)((long)(num2) + (long)(num3)), (long)((long)(num2) - (long)(num3)), (long)((long)(num2) * (long)(num3)), (long)num2 / (long)num3, remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca - remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca / remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af * remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af, (long)((long)(num2) & (long)(num3)), (long)((long)(num2) | (long)(num3)), (long)((long)(num2) ^ (long)(num3)));
+                            -- this.SaveResult (memory, 44, (long)((long)(num2) + (long)(num3)), (long)((long)(num2) - (long)(num3)), (long)((long)(num2) * (long)(num3)), (long)num2 / (long)num3, remainderOperand69 - remainderOperand69 / remainderOperand70 * remainderOperand70, (long)((long)(num2) & (long)(num3)), (long)((long)(num2) | (long)(num3)), (long)((long)(num2) ^ (long)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.26\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.27\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 64);
@@ -8663,15 +8663,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand69\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand70\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_34\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand300bcdad20bcf2806f97c4b254451dc58197846319feda281f202b8eaa2600af\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.30\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand70\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_35\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand26b26b479210df511190bc572bfe51b70f46353cd3da4ec4882d127b4ecfdcca\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand69\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.31\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.33\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.34\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.35\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num3\), 64);
@@ -8738,14 +8738,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- uint remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223;
+                            -- uint remainderOperand71;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223 = (uint)(num4);
+                            -- remainderOperand71 = (uint)(num4);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand71\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 64, (uint)(num2 + (uint)(num4)), (uint)(num2 - (uint)(num4)), (uint)(num2 * (uint)(num4)), (uint)(num2 / (uint)(num4)), (uint)(num2 - num2 / remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223 * remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223), (uint)(num2 & (uint)(num4)), (uint)(num2 | (uint)(num4)), (uint)(num2 ^ (uint)(num4)));
+                            -- this.SaveResult (memory, 64, (uint)(num2 + (uint)(num4)), (uint)(num2 - (uint)(num4)), (uint)(num2 * (uint)(num4)), (uint)(num2 / (uint)(num4)), (uint)(num2 - num2 / remainderOperand71 * remainderOperand71), (uint)(num2 & (uint)(num4)), (uint)(num2 | (uint)(num4)), (uint)(num2 ^ (uint)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.38\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32);
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.39\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32);
@@ -8780,10 +8780,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand71\;
                         -- Clock cycles needed to complete this state (approximation): 9
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_45\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand20a8ae8c936f1ab9b4d34f8b780df90ae5df55d4aa847749ef9b67c73456c223\, 32);
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.42\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand71\, 32);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.43\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.45\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\ and SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num4\), 32);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_46\;
@@ -8855,21 +8855,21 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9;
+                            -- long remainderOperand72;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9 = (long)num2;
+                            -- remainderOperand72 = (long)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand72\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724;
+                            -- long remainderOperand73;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724 = (long)num5;
+                            -- remainderOperand73 = (long)num5;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand73\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 84, (long)((long)(num2) + (long)(num5)), (long)((long)(num2) - (long)(num5)), (long)((long)(num2) * (long)(num5)), (long)num2 / (long)num5, remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9 - remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9 / remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724 * remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724, (long)((long)(num2) & (long)(num5)), (long)((long)(num2) | (long)(num5)), (long)((long)(num2) ^ (long)(num5)));
+                            -- this.SaveResult (memory, 84, (long)((long)(num2) + (long)(num5)), (long)((long)(num2) - (long)(num5)), (long)((long)(num2) * (long)(num5)), (long)num2 / (long)num5, remainderOperand72 - remainderOperand72 / remainderOperand73 * remainderOperand73, (long)((long)(num2) & (long)(num5)), (long)((long)(num2) | (long)(num5)), (long)((long)(num2) ^ (long)(num5)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.50\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.51\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64);
@@ -8904,15 +8904,15 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.9\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand72\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand73\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_56\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperandab902363a5064d2afd3189e8f10503ac151637f29a5a88a36c3df9b099e19724\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.54\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand73\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_57\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_57\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4b7443b97d5b3ccd3634a174221904d7c9a5b20cefd3313d7d7a46a5838f02c9\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.56\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand72\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.55\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.57\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) and SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.58\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) or SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.59\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) xor SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num5\), 64);
@@ -9089,14 +9089,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b;
+                            -- long remainderOperand74;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b = (long)num2;
+                            -- remainderOperand74 = (long)num2;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand74\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)num2 / num7, remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b - remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b / num7 * num7, (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
+                            -- this.SaveResult (memory, 124, (long)((long)(num2) + num7), (long)((long)(num2) - num7), (long)((long)(num2) * num7), (long)num2 / num7, remainderOperand74 - remainderOperand74 / num7 * num7, (long)((long)(num2) & num7), (long)((long)(num2) | num7), (long)((long)(num2) ^ num7));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.74\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) + \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.75\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -9131,7 +9131,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.13\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand74\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_78\ => 
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.78\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\, 64);
@@ -9139,7 +9139,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_79\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand4012fdbf615d7b888efcabd59e9497707c9b5cdef90af28aca3c96d68333830b\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.80\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand74\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.79\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.81\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) and \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.82\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.83\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64)) xor \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num7\;
@@ -9206,14 +9206,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- ulong remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc;
+                            -- ulong remainderOperand75;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc = (ulong)(num2);
+                            -- remainderOperand75 = (ulong)(num2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand75\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 144, (long)((ulong)(num2) + num8), (long)((ulong)(num2) - num8), (long)((ulong)(num2) * num8), (long)((ulong)(num2) / num8), (long)(remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc - remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc / num8 * num8), (long)((ulong)(num2) & num8), (long)((ulong)(num2) | num8), (long)((ulong)(num2) ^ num8));
+                            -- this.SaveResult (memory, 144, (long)((ulong)(num2) + num8), (long)((ulong)(num2) - num8), (long)((ulong)(num2) * num8), (long)((ulong)(num2) / num8), (long)(remainderOperand75 - remainderOperand75 / num8 * num8), (long)((ulong)(num2) & num8), (long)((ulong)(num2) | num8), (long)((ulong)(num2) ^ num8));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.86\ := SmartResize(signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) + \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.87\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
@@ -9248,7 +9248,7 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.15\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\;
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ := \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand75\ / \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_89\ => 
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.90\ * \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\, 64);
@@ -9256,7 +9256,7 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0._State_90\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.92\ := signed(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand07d836fd9b048d783cf964dfb78fbd5cb09d1f84583892ba0f1d1de86521e4fc\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\);
+                        \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.92\ := signed(\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.remainderOperand75\ - \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.91\);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.93\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) and \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.94\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) or \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
                         \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.binaryOperationResult.95\ := signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num2\), 64) xor \BinaryAndUnaryOperatorExpressionCases::UintBinaryOperatorExpressionVariations(SimpleMemory).0.num8\);
@@ -9299,7 +9299,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand76\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
@@ -9315,7 +9315,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b2\: signed(7 downto 0) := to_signed(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand77\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.16\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.17\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.18\: signed(63 downto 0) := to_signed(0, 64);
@@ -9331,7 +9331,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num3\: signed(15 downto 0) := to_signed(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.26\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.27\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand78\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.28\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.29\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.30\: signed(63 downto 0) := to_signed(0, 64);
@@ -9347,7 +9347,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.38\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.39\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand79\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.40\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.41\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.42\: signed(63 downto 0) := to_signed(0, 64);
@@ -9400,7 +9400,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand76\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 64);
@@ -9416,7 +9416,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b2\ := to_signed(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand77\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 64);
@@ -9432,7 +9432,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num3\ := to_signed(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.26\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.27\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand78\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.28\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.29\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.30\ := to_signed(0, 64);
@@ -9448,7 +9448,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.38\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.39\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand79\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.40\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.41\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.42\ := to_signed(0, 64);
@@ -9570,14 +9570,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650;
+                            -- long remainderOperand76;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650 = (long)b;
+                            -- remainderOperand76 = (long)b;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand76\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (long)(num2 + (long)(b)), (long)(num2 - (long)(b)), (long)(num2 * (long)(b)), num2 / (long)b, num2 - num2 / remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650 * remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650, (long)(num2 & (long)(b)), (long)(num2 | (long)(b)), (long)(num2 ^ (long)(b)));
+                            -- this.SaveResult (memory, 4, (long)(num2 + (long)(b)), (long)(num2 - (long)(b)), (long)(num2 * (long)(b)), num2 / (long)b, num2 - num2 / remainderOperand76 * remainderOperand76, (long)(num2 & (long)(b)), (long)(num2 | (long)(b)), (long)(num2 ^ (long)(b)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.4\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\), 64));
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\), 64));
@@ -9612,10 +9612,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650\;
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand76\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_14\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandc70189420f6ec0567136361700e13a713886e328e738439e49b6ddd548d01650\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand76\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_15\ => 
@@ -9687,14 +9687,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9;
+                            -- long remainderOperand77;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9 = (long)(b2);
+                            -- remainderOperand77 = (long)(b2);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b2\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand77\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b2\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 24, (long)(num2 + (long)(b2)), (long)(num2 - (long)(b2)), (long)(num2 * (long)(b2)), (long)(num2 / (long)(b2)), (long)(num2 - num2 / remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9 * remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9), (long)(num2 & (long)(b2)), (long)(num2 | (long)(b2)), (long)(num2 ^ (long)(b2)));
+                            -- this.SaveResult (memory, 24, (long)(num2 + (long)(b2)), (long)(num2 - (long)(b2)), (long)(num2 * (long)(b2)), (long)(num2 / (long)(b2)), (long)(num2 - num2 / remainderOperand77 * remainderOperand77), (long)(num2 & (long)(b2)), (long)(num2 | (long)(b2)), (long)(num2 ^ (long)(b2)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.16\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b2\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.17\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b2\), 64);
@@ -9729,10 +9729,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9\;
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand77\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_25\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.21\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf5c418a31d4b2a89742d44c1484174fe0678d18725d0b6c608f3cecaa9d80dc9\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.21\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand77\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_26\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_26\ => 
@@ -9804,14 +9804,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a;
+                            -- long remainderOperand78;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a = (long)(num3);
+                            -- remainderOperand78 = (long)(num3);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num3\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand78\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num3\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 44, (long)(num2 + (long)(num3)), (long)(num2 - (long)(num3)), (long)(num2 * (long)(num3)), (long)(num2 / (long)(num3)), (long)(num2 - num2 / remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a * remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a), (long)(num2 & (long)(num3)), (long)(num2 | (long)(num3)), (long)(num2 ^ (long)(num3)));
+                            -- this.SaveResult (memory, 44, (long)(num2 + (long)(num3)), (long)(num2 - (long)(num3)), (long)(num2 * (long)(num3)), (long)(num2 / (long)(num3)), (long)(num2 - num2 / remainderOperand78 * remainderOperand78), (long)(num2 & (long)(num3)), (long)(num2 | (long)(num3)), (long)(num2 ^ (long)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.28\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num3\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.29\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num3\), 64);
@@ -9846,10 +9846,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.5\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a\;
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.32\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand78\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_36\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.33\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.32\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand6392da9b87e69ab0d0b02fdb90528b623aced1d34955c797b3f65da359f58c1a\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.33\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.32\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand78\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_37\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_37\ => 
@@ -9921,14 +9921,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c;
+                            -- long remainderOperand79;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c = (long)num4;
+                            -- remainderOperand79 = (long)num4;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand79\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 64, (long)(num2 + (long)(num4)), (long)(num2 - (long)(num4)), (long)(num2 * (long)(num4)), num2 / (long)num4, num2 - num2 / remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c * remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c, (long)(num2 & (long)(num4)), (long)(num2 | (long)(num4)), (long)(num2 ^ (long)(num4)));
+                            -- this.SaveResult (memory, 64, (long)(num2 + (long)(num4)), (long)(num2 - (long)(num4)), (long)(num2 * (long)(num4)), num2 / (long)num4, num2 - num2 / remainderOperand79 * remainderOperand79, (long)(num2 & (long)(num4)), (long)(num2 | (long)(num4)), (long)(num2 ^ (long)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.40\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\), 64));
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.41\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\), 64));
@@ -9963,10 +9963,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.7\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c\;
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.44\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand79\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_47\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.45\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.44\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperandf51c379e747243f9e73805c548f3cd8f9e1f7e3a2901502d570471573d73520c\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.45\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.44\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand79\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_48\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_48\ => 
@@ -10014,7 +10014,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand80\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
@@ -10030,7 +10030,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.14\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.15\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand81\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.16\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.17\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.18\: signed(63 downto 0) := to_signed(0, 64);
@@ -10099,7 +10099,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num3\ := to_signed(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand80\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 64);
@@ -10115,7 +10115,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.14\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.15\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db\ := to_signed(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand81\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.16\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.17\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 64);
@@ -10255,14 +10255,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775;
+                            -- long remainderOperand80;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775 = (long)(num3);
+                            -- remainderOperand80 = (long)(num3);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num3\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand80\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num3\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 84, (long)(num2 + (long)(num3)), (long)(num2 - (long)(num3)), (long)(num2 * (long)(num3)), (long)(num2 / (long)(num3)), (long)(num2 - num2 / remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775 * remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775), (long)(num2 & (long)(num3)), (long)(num2 | (long)(num3)), (long)(num2 ^ (long)(num3)));
+                            -- this.SaveResult (memory, 84, (long)(num2 + (long)(num3)), (long)(num2 - (long)(num3)), (long)(num2 * (long)(num3)), (long)(num2 / (long)(num3)), (long)(num2 - num2 / remainderOperand80 * remainderOperand80), (long)(num2 & (long)(num3)), (long)(num2 | (long)(num3)), (long)(num2 ^ (long)(num3)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.4\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num3\), 64);
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.5\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num3\), 64);
@@ -10297,10 +10297,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775\;
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand80\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_14\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandc5579d34f67b53357a429c3f5db085aaf864c72fadb2e07a77651667f567b775\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand80\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_15\ => 
@@ -10372,14 +10372,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- long remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db;
+                            -- long remainderOperand81;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db = (long)num4;
+                            -- remainderOperand81 = (long)num4;
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\, 64));
+                            \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand81\ := signed(SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\, 64));
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 104, (long)(num2 + (long)(num4)), (long)(num2 - (long)(num4)), (long)(num2 * (long)(num4)), num2 / (long)num4, num2 - num2 / remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db * remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db, (long)(num2 & (long)(num4)), (long)(num2 | (long)(num4)), (long)(num2 ^ (long)(num4)));
+                            -- this.SaveResult (memory, 104, (long)(num2 + (long)(num4)), (long)(num2 - (long)(num4)), (long)(num2 * (long)(num4)), num2 / (long)num4, num2 - num2 / remainderOperand81 * remainderOperand81, (long)(num2 & (long)(num4)), (long)(num2 | (long)(num4)), (long)(num2 ^ (long)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.16\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ + signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\), 64));
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.17\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ - signed(SmartResize((\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\), 64));
@@ -10414,10 +10414,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db\;
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.20\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand81\;
                         -- Clock cycles needed to complete this state (approximation): 27
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_25\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.21\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.20\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperandd28099cfa2cc6d3aad25e38e6b165897ea97ad652c433bd34cc2263c11db07db\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.21\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.20\ * \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand81\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_26\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::LongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_26\ => 
@@ -10620,7 +10620,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.3\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand82\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
@@ -10642,7 +10642,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.18\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.19\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand83\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.21\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.22\: signed(63 downto 0) := to_signed(0, 64);
@@ -10691,7 +10691,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\ := to_unsigned(0, 8);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.3\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand82\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 64);
@@ -10713,7 +10713,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\ := to_unsigned(0, 16);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.18\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.19\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand83\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.21\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.22\ := to_signed(0, 64);
@@ -10835,14 +10835,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- ulong remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07;
+                            -- ulong remainderOperand82;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07 = (ulong)(b);
+                            -- remainderOperand82 = (ulong)(b);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand82\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 4, (long)(num2 + (ulong)(b)), (long)(num2 - (ulong)(b)), (long)(num2 * (ulong)(b)), (long)(num2 / (ulong)(b)), (long)(num2 - num2 / remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07 * remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07), (long)(num2 & (ulong)(b)), (long)(num2 | (ulong)(b)), (long)(num2 ^ (ulong)(b)));
+                            -- this.SaveResult (memory, 4, (long)(num2 + (ulong)(b)), (long)(num2 - (ulong)(b)), (long)(num2 * (ulong)(b)), (long)(num2 / (ulong)(b)), (long)(num2 - num2 / remainderOperand82 * remainderOperand82), (long)(num2 & (ulong)(b)), (long)(num2 | (ulong)(b)), (long)(num2 ^ (ulong)(b)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.4\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\), 64)), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.5\ := signed(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.b\), 64));
@@ -10877,10 +10877,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07\;
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand82\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_14\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ * \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperanddb39e2f5dc4618507785c9efd0b635ad02e162da87bb1b5e69d0df76a2e05a07\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.9\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.8\ * \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand82\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_15\ => 
@@ -11058,14 +11058,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- ulong remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26;
+                            -- ulong remainderOperand83;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26 = (ulong)(num4);
+                            -- remainderOperand83 = (ulong)(num4);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand83\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 32, (long)(num2 + (ulong)(num4)), (long)(num2 - (ulong)(num4)), (long)(num2 * (ulong)(num4)), (long)(num2 / (ulong)(num4)), (long)(num2 - num2 / remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26 * remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26), (long)(num2 & (ulong)(num4)), (long)(num2 | (ulong)(num4)), (long)(num2 ^ (ulong)(num4)));
+                            -- this.SaveResult (memory, 32, (long)(num2 + (ulong)(num4)), (long)(num2 - (ulong)(num4)), (long)(num2 * (ulong)(num4)), (long)(num2 / (ulong)(num4)), (long)(num2 - num2 / remainderOperand83 * remainderOperand83), (long)(num2 & (ulong)(num4)), (long)(num2 | (ulong)(num4)), (long)(num2 ^ (ulong)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.20\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\), 64)), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.21\ := signed(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num4\), 64));
@@ -11100,10 +11100,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.3\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.24\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26\;
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.24\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand83\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_37\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.25\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.24\ * \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand5511ec0ae15eefa49e5cbc1440a374da809d53aa50c9e550a4151e2519219f26\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.25\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.binaryOperationResult.24\ * \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0.remainderOperand83\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_38\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsLow(SimpleMemory).0._State_38\ => 
@@ -11154,7 +11154,7 @@ begin
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.4\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.5\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand84\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.6\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.7\: signed(63 downto 0) := to_signed(0, 64);
         Variable \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\: signed(63 downto 0) := to_signed(0, 64);
@@ -11224,7 +11224,7 @@ begin
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\ := to_unsigned(0, 32);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.4\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.5\ := to_signed(0, 64);
-                \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7\ := to_unsigned(0, 64);
+                \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand84\ := to_unsigned(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.6\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.7\ := to_signed(0, 64);
                 \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.8\ := to_signed(0, 64);
@@ -11417,14 +11417,14 @@ begin
                         if (\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ = \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Finished.0\) then 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.BinaryAndUnaryOperatorExpressionCases::SaveResult(SimpleMemory,Int32,Int64)._Started.0\ <= false;
                             -- The following section was transformed from the .NET statement below:
-                            -- ulong remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7;
+                            -- ulong remainderOperand84;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7 = (ulong)(num4);
+                            -- remainderOperand84 = (ulong)(num4);
                             -- 
-                            \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\), 64);
+                            \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand84\ := SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\), 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- this.SaveResult (memory, 56, (long)(num2 + (ulong)(num4)), (long)(num2 - (ulong)(num4)), (long)(num2 * (ulong)(num4)), (long)(num2 / (ulong)(num4)), (long)(num2 - num2 / remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7 * remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7), (long)(num2 & (ulong)(num4)), (long)(num2 | (ulong)(num4)), (long)(num2 ^ (ulong)(num4)));
+                            -- this.SaveResult (memory, 56, (long)(num2 + (ulong)(num4)), (long)(num2 - (ulong)(num4)), (long)(num2 * (ulong)(num4)), (long)(num2 / (ulong)(num4)), (long)(num2 - num2 / remainderOperand84 * remainderOperand84), (long)(num2 & (ulong)(num4)), (long)(num2 | (ulong)(num4)), (long)(num2 ^ (ulong)(num4)));
                             -- 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.6\ := SmartResize(signed(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ + SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\), 64)), 64);
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.7\ := signed(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ - SmartResize((\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num4\), 64));
@@ -11459,10 +11459,10 @@ begin
                         else 
                             \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.clockCyclesWaitedForBinaryOperationResult.1\ + to_signed(1, 32);
                         end if;
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.10\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7\;
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.10\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.num2\ / \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand84\;
                         -- Clock cycles needed to complete this state (approximation): 26
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_20\ => 
-                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.10\ * \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand96de663d26659060daaf7d7e55a01277a99f7e1a1796c574fac37b97361ca4a7\, 64);
+                        \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.11\ := SmartResize(\BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.binaryOperationResult.10\ * \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0.remainderOperand84\, 64);
                         \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State\ := \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_21\;
                         -- Clock cycles needed to complete this state (approximation): 0.7638
                     when \BinaryAndUnaryOperatorExpressionCases::UlongBinaryOperatorExpressionVariationsHigh(SimpleMemory).0._State_21\ => 
@@ -14323,9 +14323,9 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \InlinedCases::InlinedMultiReturn(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\: \InlinedCases::InlinedMultiReturn(SimpleMemory).0._States\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
-        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
     begin 
         if (rising_edge(\Clock\)) then 
@@ -14337,9 +14337,9 @@ begin
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_0\;
-                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_1\ := to_signed(0, 32);
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(0, 32);
+                \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_1\ := to_signed(0, 32);
                 \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := false;
             else 
                 case \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ is 
@@ -14366,10 +14366,10 @@ begin
                         -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                        -- int input_1;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = memory.ReadInt32 (0);
+                        -- input_1 = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
@@ -14377,14 +14377,14 @@ begin
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\ => 
-                        -- State for the label Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092.
+                        -- State for the label Exit_1.
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteInt32 (0, return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092);
+                        -- memory.WriteInt32 (0, return_1);
                         -- 
                         -- Begin SimpleMemory write.
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_1\);
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_8\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\ => 
@@ -14393,17 +14393,17 @@ begin
                             -- SimpleMemory read finished.
                             \InlinedCases::InlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := ConvertStdLogicVectorToInt32(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\);
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_1\ := ConvertStdLogicVectorToInt32(\InlinedCases::InlinedMultiReturn(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- int return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                            -- int return_1;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 > 0) {
-                            -- 	return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 1;
-                            -- 	goto Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                            -- if (input_1 > 0) {
+                            -- 	return_1 = 1;
+                            -- 	goto Exit_1;
                             -- }
                             -- 
-                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ > to_signed(0, 32);
+                            \InlinedCases::InlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0.input_1\ > to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_6\ and ends in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_7\.
@@ -14420,11 +14420,11 @@ begin
                     when \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_5\ => 
                         -- State after the if-else which was started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 2;
+                        -- return_1 = 2;
                         -- 
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(2, 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_1\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092:
+                        -- Exit_1:
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
@@ -14433,16 +14433,16 @@ begin
                         -- True branch of the if-else started in state \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 1;
-                        -- 	goto Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                        -- 	return_1 = 1;
+                        -- 	goto Exit_1;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092 = 1;
+                        -- return_1 = 1;
                         -- 
-                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092\ := to_signed(1, 32);
+                        \InlinedCases::InlinedMultiReturn(SimpleMemory).0.return_1\ := to_signed(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- goto Exit_d49f108eac4f4cae4788dd47514293f9c66132b090574af40e0204b436fc0092;
+                        -- goto Exit_1;
                         -- 
                         \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::InlinedMultiReturn(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14470,14 +14470,14 @@ begin
     -- System.Void Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturn(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory).0 state machine start
     \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._StateMachine\: process (\Clock\) 
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\: \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._States\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\;
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\: std_logic_vector(31 downto 0) := (others => '0');
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\: boolean := false;
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_6\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_6\: signed(31 downto 0) := to_signed(0, 32);
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\: boolean := false;
         Variable \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
     begin 
@@ -14490,14 +14490,14 @@ begin
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= false;
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_0\;
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_2\ := to_signed(0, 32);
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\ := (others => '0');
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := to_signed(0, 32);
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(0, 32);
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_2\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5\ := to_signed(0, 32);
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := false;
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(0, 32);
-                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_6\ := to_signed(0, 32);
+                \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_6\ := to_signed(0, 32);
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := false;
                 \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := to_signed(0, 32);
             else 
@@ -14525,10 +14525,10 @@ begin
                         -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturnInternal(System.Int32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                        -- int input_2;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c = memory.ReadInt32 (0);
+                        -- input_2 = memory.ReadInt32 (0);
                         -- 
                         -- Begin SimpleMemory read.
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
@@ -14536,24 +14536,24 @@ begin
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\ => 
-                        -- State for the label Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73.
+                        -- State for the label Exit_5.
                         -- The following section was transformed from the .NET statement below:
-                        -- int input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- int input_6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                        -- input_6 = input_2;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_6\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- int return_6;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 > 0) {
-                        -- 	return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 1;
-                        -- 	goto Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- if (input_6 > 0) {
+                        -- 	return_6 = 1;
+                        -- 	goto Exit_6;
                         -- }
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ > to_signed(0, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.1\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_6\ > to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_10\ and ends in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_11\.
@@ -14567,20 +14567,20 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2753
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\ => 
-                        -- State for the label Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81.
+                        -- State for the label Exit_6.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c = return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 + return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- return_2 = return_5 + return_6;
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::NestedInlinedMultiReturnInternal(System.Int32).
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ + \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\;
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5\ + \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_6\;
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_2\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.2\;
                         -- The following section was transformed from the .NET statement below:
-                        -- memory.WriteInt32 (0, return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c);
+                        -- memory.WriteInt32 (0, return_2);
                         -- 
                         -- Begin SimpleMemory write.
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.CellIndex\ <= to_signed(0, 32);
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.WriteEnable\ <= true;
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.DataOut\ <= ConvertInt32ToStdLogicVector(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_2\);
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.3263
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\ => 
@@ -14589,28 +14589,28 @@ begin
                             -- SimpleMemory read finished.
                             \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.SimpleMemory.ReadEnable\ <= false;
                             \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\ := \DataIn\;
-                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\ := ConvertStdLogicVectorToInt32(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\);
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_2\ := ConvertStdLogicVectorToInt32(\InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.dataIn.0\);
                             -- The following section was transformed from the .NET statement below:
-                            -- int return_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                            -- int return_2;
                             -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- int input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                            -- int input_5;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c;
+                            -- input_5 = input_2;
                             -- 
-                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5a46a9b9a168f9241bbdd58682568261d23e7c51f4975c0399047547b914a94c\;
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_2\;
                             -- The following section was transformed from the .NET statement below:
-                            -- int return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                            -- int return_5;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- if (input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 > 0) {
-                            -- 	return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 1;
-                            -- 	goto Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                            -- if (input_5 > 0) {
+                            -- 	return_5 = 1;
+                            -- 	goto Exit_5;
                             -- }
                             -- 
-                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ > to_signed(0, 32);
+                            \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.binaryOperationResult.0\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.input_5\ > to_signed(0, 32);
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                             --     * The true branch starts in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_7\ and ends in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_8\.
@@ -14627,11 +14627,11 @@ begin
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_6\ => 
                         -- State after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 2;
+                        -- return_5 = 2;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(2, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73:
+                        -- Exit_5:
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- // Starting inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
@@ -14641,16 +14641,16 @@ begin
                         -- True branch of the if-else started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_5\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 1;
-                        -- 	goto Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                        -- 	return_5 = 1;
+                        -- 	goto Exit_5;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73 = 1;
+                        -- return_5 = 1;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73\ := to_signed(1, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_5\ := to_signed(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- goto Exit_78ee68e27cfe85ece42073473380b958b07c1e2e52e62d2d8988a17af0f7bf73;
+                        -- goto Exit_5;
                         -- 
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -14663,11 +14663,11 @@ begin
                     when \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_9\ => 
                         -- State after the if-else which was started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 2;
+                        -- return_6 = 2;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(2, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_6\ := to_signed(2, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81:
+                        -- Exit_6:
                         -- // Ending inlined block of the method System.Int32 Hast.TestInputs.Dynamic.InlinedCases::InlinedMultiReturnInternal(System.Int32).
                         -- 
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\;
@@ -14676,16 +14676,16 @@ begin
                         -- True branch of the if-else started in state \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 1;
-                        -- 	goto Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- 	return_6 = 1;
+                        -- 	goto Exit_6;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81 = 1;
+                        -- return_6 = 1;
                         -- 
-                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81\ := to_signed(1, 32);
+                        \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0.return_6\ := to_signed(1, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- goto Exit_a23304aa8fc57dabd800b31a0dd1f7b0fbe99a65ebfbd1d1e8d881c3c2959a81;
+                        -- goto Exit_6;
                         -- 
                         \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State\ := \InlinedCases::NestedInlinedMultiReturn(SimpleMemory).0._State_4\;
                         -- Clock cycles needed to complete this state (approximation): 0
