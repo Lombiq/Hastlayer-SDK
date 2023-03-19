@@ -11,7 +11,7 @@ namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 /// </summary>
 public class VerificationTestHashProvider : IHashProvider
 {
-    private static readonly ConcurrentDictionary<string, int> _generatedHashes = new();
+    private readonly ConcurrentDictionary<string, int> _generatedHashes = new();
 
     public string ComputeHash(string prefix, params string[] sources)
     {
