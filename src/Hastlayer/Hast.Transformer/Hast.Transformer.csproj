@@ -14,12 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
   </ItemGroup>
 

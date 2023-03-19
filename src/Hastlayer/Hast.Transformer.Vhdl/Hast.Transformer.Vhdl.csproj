@@ -14,11 +14,6 @@
     <None Remove="Hast.Transformer.Vhdl.Tests\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="VhdlLibraries\TypeConversion.vhd" />
     <EmbeddedResource Include="VhdlLibraries\SimpleMemory.vhd" />
   </ItemGroup>

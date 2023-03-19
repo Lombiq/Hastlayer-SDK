@@ -6,11 +6,6 @@
     <OutputPath>bin\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />

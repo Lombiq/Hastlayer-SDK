@@ -5,11 +5,6 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
   </ItemGroup>

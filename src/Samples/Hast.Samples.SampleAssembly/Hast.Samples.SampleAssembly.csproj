@@ -6,11 +6,6 @@
     <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\..\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Hastlayer\Hast.Algorithms\Hast.Algorithms.csproj" />
     <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\..\Libraries\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
