@@ -3,12 +3,11 @@ using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.ManifestProviders;
 
-namespace Hast.Xilinx;
+namespace Hast.Xilinx.Drivers;
 
-public class AwsF1Driver : AwsF1ManifestProvider, IDeviceDriver
+public class AzureAlveoU250Driver : AzureAlveoU250ManifestProvider, IDeviceDriver
 {
     private readonly ITimingReportParser _timingReportParser;
-
     private readonly object _timingReportParserLock = new();
 
     private ITimingReport _timingReport;
@@ -19,12 +18,10 @@ public class AwsF1Driver : AwsF1ManifestProvider, IDeviceDriver
         {
             lock (_timingReportParserLock)
             {
-                _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AwsF1Driver)));
-
-                return _timingReport;
+                return _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AlveoU250Driver)));
             }
         }
     }
 
-    public AwsF1Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
+    public AzureAlveoU250Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
 }

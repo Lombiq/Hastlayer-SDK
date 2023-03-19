@@ -3,7 +3,7 @@ using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.ManifestProviders;
 
-namespace Hast.Xilinx;
+namespace Hast.Xilinx.Drivers;
 
 public class AlveoU250Driver : AlveoU250ManifestProvider, IDeviceDriver
 {

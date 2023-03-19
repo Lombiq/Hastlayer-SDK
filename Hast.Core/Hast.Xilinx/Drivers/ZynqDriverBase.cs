@@ -3,9 +3,9 @@ using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.ManifestProviders;
 
-namespace Hast.Xilinx;
+namespace Hast.Xilinx.Drivers;
 
-public class AlveoU50Driver : AlveoU50ManifestProvider, IDeviceDriver
+public abstract class ZynqDriverBase : ZynqManifestProviderBase, IDeviceDriver
 {
     private readonly ITimingReportParser _timingReportParser;
     private readonly object _timingReportParserLock = new();
@@ -18,12 +18,12 @@ public class AlveoU50Driver : AlveoU50ManifestProvider, IDeviceDriver
         {
             lock (_timingReportParserLock)
             {
-                _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AlveoU50Driver)));
+                _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(ZynqDriverBase)));
 
                 return _timingReport;
             }
         }
     }
 
-    public AlveoU50Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
+    protected ZynqDriverBase(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
 }

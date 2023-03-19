@@ -3,9 +3,9 @@ using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx.ManifestProviders;
 
-namespace Hast.Xilinx;
+namespace Hast.Xilinx.Drivers;
 
-public abstract class NexysDriverBase : NexysManifestProviderBase, IDeviceDriver
+public class AlveoU200Driver : AlveoU200ManifestProvider, IDeviceDriver
 {
     private readonly ITimingReportParser _timingReportParser;
     private readonly object _timingReportParserLock = new();
@@ -18,12 +18,12 @@ public abstract class NexysDriverBase : NexysManifestProviderBase, IDeviceDriver
         {
             lock (_timingReportParserLock)
             {
-                _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(NexysDriverBase)));
+                _timingReport ??= _timingReportParser.Parse(ResourceHelper.GetTimingReport(nameof(AlveoU200Driver)));
 
                 return _timingReport;
             }
         }
     }
 
-    protected NexysDriverBase(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
+    public AlveoU200Driver(ITimingReportParser timingReportParser) => _timingReportParser = timingReportParser;
 }

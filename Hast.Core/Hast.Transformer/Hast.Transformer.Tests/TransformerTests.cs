@@ -8,6 +8,7 @@ using Hast.Transformer.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Xilinx;
+using Hast.Xilinx.Drivers;
 using Hast.Xilinx.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;

@@ -1,7 +1,7 @@
 ﻿using Hast.Synthesis.Services;
 using Hast.Xilinx.ManifestProviders;
 
-namespace Hast.Xilinx;
+namespace Hast.Xilinx.Drivers;
 
 public class TrenzTE071504301CDriver : ZynqDriverBase
 {

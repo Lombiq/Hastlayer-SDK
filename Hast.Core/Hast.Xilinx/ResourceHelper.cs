@@ -1,3 +1,4 @@
+using Hast.Xilinx.Drivers;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using System.Reflection;
