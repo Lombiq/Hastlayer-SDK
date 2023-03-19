@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
+    <ProjectReference Include="..\Hast.TestInputs.Base\Hast.TestInputs.Base.csproj" />
+  </ItemGroup>
+
+</Project>

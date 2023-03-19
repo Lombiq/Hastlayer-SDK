@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="FSharpParallelAlgorithmContainer.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
+    </ItemGroup>
+
+</Project>
