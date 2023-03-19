@@ -97,7 +97,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.DynamicTests", "Hast.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Dynamic", "Hast.Core\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj", "{91E069F5-88DC-4918-AA0D-791BF1C9B4DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.Abstractions.HardwareFramework", "Hastlayer-Hardware-Framework---Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj", "{38198457-A60A-4F35-9604-29B39B6D03A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.Abstractions.HardwareFramework", "src\Hardware Frameworks\Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj", "{38198457-A60A-4F35-9604-29B39B6D03A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.RestEase", "Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj", "{4C53D384-FDED-4608-8C9A-616531CA4832}"
 EndProject

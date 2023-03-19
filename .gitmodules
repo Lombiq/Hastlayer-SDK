@@ -2,10 +2,6 @@
 	path = Lombiq.Arithmetics
 	url = https://github.com/Lombiq/Arithmetics.git
 	branch = dev
-[submodule "Hastlayer-Hardware-Framework---Vitis"]
-	path = Hastlayer-Hardware-Framework---Vitis
-	url = https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis
-	branch = dev
 [submodule "tools/Lombiq.Analyzers"]
 	path = tools/Lombiq.Analyzers
 	url = https://github.com/Lombiq/.NET-Analyzers.git
@@ -14,3 +10,7 @@
 	path = Libraries/Lombiq.HelpfulLibraries
 	url = https://github.com/Lombiq/Helpful-Libraries.git
 	branch = orchard-core-preview
+[submodule "src/Hardware Frameworks/Vitis"]
+	path = src/Hardware Frameworks/Vitis
+	url = https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis
+	branch = dev
