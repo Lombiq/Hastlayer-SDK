@@ -1,9 +1,10 @@
 using Hast.Layer;
+using Hast.Synthesis.Abstractions.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Hast.Synthesis.Abstractions;
+namespace Hast.Synthesis.Abstractions.Models;
 
 public class MemoryConfiguration : IMemoryConfiguration
 {

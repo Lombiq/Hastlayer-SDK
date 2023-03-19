@@ -1,6 +1,9 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Delegates;
+using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Abstractions.Services;
 using Hast.Vitis.Abstractions.Extensions;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Xilinx.Abstractions;

@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 

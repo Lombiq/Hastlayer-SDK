@@ -1,6 +1,8 @@
 using Hast.Communication.Constants.CommunicationConstants;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Abstractions.Services;
 using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;
 

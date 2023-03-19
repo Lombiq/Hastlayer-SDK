@@ -1,4 +1,5 @@
 ﻿using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
 
 namespace Hast.Layer.EmptyRepresentationFactories;
 

@@ -1,6 +1,9 @@
 ﻿using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Delegates;
 using Hast.Synthesis.Abstractions.Helpers;
+using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Abstractions.Services;
 using Hast.Xilinx.Abstractions;
 using System.Collections.Generic;
 using System.IO;

@@ -2,6 +2,7 @@ using CliWrap;
 using CliWrap.EventStream;
 using CliWrap.Exceptions;
 using Hast.Common.Helpers;
+using Hast.Synthesis.Abstractions.Models;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,7 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
-namespace Hast.Synthesis.Abstractions;
+namespace Hast.Synthesis.Abstractions.Services;
 
 public class BuildLogger<T>
 {

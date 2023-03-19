@@ -1,5 +1,7 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Abstractions.Services;
 using System.Threading.Tasks;
 
 namespace Hast.Catapult.Abstractions;

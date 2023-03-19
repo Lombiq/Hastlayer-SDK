@@ -1,4 +1,7 @@
-namespace Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Abstractions.Services;
+
+namespace Hast.Synthesis.Abstractions.Delegates;
 
 /// <summary>
 /// If it returns <see langword="true"/> the associated build provider should be skipped.

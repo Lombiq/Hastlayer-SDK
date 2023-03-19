@@ -1,5 +1,7 @@
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Abstractions.Services;
 using Hast.Xilinx.Abstractions.Helpers;
 using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;

@@ -5,6 +5,7 @@ using Hast.Console.Attributes;
 using Hast.Console.Options;
 using Hast.Layer;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
 using Hast.Vitis.Abstractions.Models;
 using Hast.Vitis.Abstractions.Services;
 using Hast.Xilinx.Abstractions;

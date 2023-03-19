@@ -5,6 +5,7 @@ using Hast.Communication.Tester.Helpers;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Lombiq.HelpfulLibraries.Common.Utilities;

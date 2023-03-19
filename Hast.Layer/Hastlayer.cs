@@ -8,6 +8,8 @@ using Hast.Layer.EmptyRepresentationFactories;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Abstractions.Services;
 using Hast.Transformer.Abstractions;
 using Hast.Transformer.Abstractions.SimpleMemory;
 using Hast.Xilinx.Abstractions.ManifestProviders;

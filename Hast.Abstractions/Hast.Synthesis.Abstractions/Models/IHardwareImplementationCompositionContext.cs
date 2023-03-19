@@ -1,6 +1,7 @@
 using Hast.Layer;
+using Hast.Synthesis.Abstractions.Services;
 
-namespace Hast.Synthesis.Abstractions;
+namespace Hast.Synthesis.Abstractions.Models;
 
 /// <summary>
 /// The required data for <see cref="IHardwareImplementationComposer"/> and <see

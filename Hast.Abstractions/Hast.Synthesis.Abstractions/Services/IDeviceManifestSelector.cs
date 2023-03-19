@@ -2,7 +2,7 @@ using Hast.Common.Interfaces;
 using Hast.Layer;
 using System.Collections.Generic;
 
-namespace Hast.Synthesis.Abstractions;
+namespace Hast.Synthesis.Abstractions.Services;
 
 /// <summary>
 /// Service for retrieving device manifests.

@@ -2,7 +2,7 @@ using Hast.Layer;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Hast.Synthesis.Abstractions;
+namespace Hast.Synthesis.Abstractions.Services;
 
 public class DeviceManifestSelector : IDeviceManifestSelector
 {

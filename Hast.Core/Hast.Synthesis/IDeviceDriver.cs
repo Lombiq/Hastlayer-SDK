@@ -1,4 +1,5 @@
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Services;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;

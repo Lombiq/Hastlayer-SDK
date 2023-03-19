@@ -1,4 +1,5 @@
 using Hast.Common.Models;
+using Hast.Synthesis.Abstractions.Models;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.IO;
 using System.Threading.Tasks;

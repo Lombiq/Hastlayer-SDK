@@ -1,4 +1,5 @@
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Runtime.InteropServices;

@@ -1,4 +1,5 @@
 using Hast.Synthesis.Abstractions;
+using Hast.Synthesis.Abstractions.Attributes;
 using Hast.Transformer.Abstractions.Configuration;
 using System.Collections.Generic;
 

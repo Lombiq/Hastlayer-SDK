@@ -1,7 +1,7 @@
 ﻿using Hast.Layer;
 using System.Collections.Generic;
 
-namespace Hast.Synthesis.Abstractions;
+namespace Hast.Synthesis.Abstractions.Models;
 
 public class HardwareImplementation : IHardwareImplementation
 {

@@ -1,7 +1,8 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
+using Hast.Synthesis.Abstractions.Models;
 
-namespace Hast.Synthesis.Abstractions;
+namespace Hast.Synthesis.Abstractions.Services;
 
 /// <summary>
 /// Provides a <see cref="IDeviceManifest"/> and <c>SimpleMemory</c> creation.
