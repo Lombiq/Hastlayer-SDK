@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Hast.Abstractions\Hast.Vitis.Abstractions\Hast.Vitis.Abstractions.csproj" />
     <ProjectReference Include="..\..\Hast.Core\Hast.TestBase\Hast.TestBase.csproj" />
   </ItemGroup>
 
