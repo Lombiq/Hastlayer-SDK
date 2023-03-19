@@ -1,6 +1,5 @@
 ﻿using Hast.Common.Interfaces;
 using Hast.Layer;
-using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;

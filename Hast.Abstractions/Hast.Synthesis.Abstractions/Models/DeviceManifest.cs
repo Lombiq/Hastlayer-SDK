@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Hast.Synthesis.Abstractions.Models;
+namespace Hast.Synthesis.Models;
 
 [DebuggerDisplay("{Name}")]
 public class DeviceManifest : IDeviceManifest

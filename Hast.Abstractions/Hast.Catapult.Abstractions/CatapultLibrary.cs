@@ -1,5 +1,6 @@
 using AdvancedDLSupport;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Catapult.Exceptions;
+using Hast.Transformer.SimpleMemory;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,10 +11,10 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using InputHeaderSizes = Hast.Catapult.Abstractions.Constants.InputHeaderSizes;
-using OutputHeaderSizes = Hast.Catapult.Abstractions.Constants.OutputHeaderSizes;
+using InputHeaderSizes = Hast.Catapult.Constants.InputHeaderSizes;
+using OutputHeaderSizes = Hast.Catapult.Constants.OutputHeaderSizes;
 
-namespace Hast.Catapult.Abstractions;
+namespace Hast.Catapult;
 
 /// <summary>
 /// Job and configuration manager for the Catapult FPGA driver.

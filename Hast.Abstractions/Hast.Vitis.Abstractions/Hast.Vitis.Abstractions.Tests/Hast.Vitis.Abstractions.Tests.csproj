@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
+    <RootNamespace>Hast.Vitis.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

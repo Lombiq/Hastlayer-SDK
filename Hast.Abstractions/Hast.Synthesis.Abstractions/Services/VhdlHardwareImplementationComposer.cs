@@ -1,13 +1,13 @@
 using Hast.Common.Extensions;
 using Hast.Common.Models;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hast.Synthesis.Abstractions.Services;
+namespace Hast.Synthesis.Services;
 
 public class VhdlHardwareImplementationComposer : IHardwareImplementationComposer
 {

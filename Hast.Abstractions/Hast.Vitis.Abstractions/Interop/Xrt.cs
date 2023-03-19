@@ -1,9 +1,9 @@
-using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
+using Hast.Vitis.Interop.Enums;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-namespace Hast.Vitis.Abstractions.Interop;
+namespace Hast.Vitis.Interop;
 
 /// <summary>
 /// Xilinx-specific memory extensions. Control bank allocation of buffer object.

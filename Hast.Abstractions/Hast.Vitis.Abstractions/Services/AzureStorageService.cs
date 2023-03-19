@@ -1,6 +1,6 @@
 using Azure.Storage.Blobs;
 using Azure.Storage.Sas;
-using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 public class AzureStorageService
     : IAzureStorageService

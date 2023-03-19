@@ -1,4 +1,4 @@
-using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Configuration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;

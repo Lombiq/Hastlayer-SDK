@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <DefaultItemExcludes>$(DefaultItemExcludes);Hast.Vitis.Abstractions.Tests\**;Container\**</DefaultItemExcludes>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Hast.Vitis</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

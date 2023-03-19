@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hast.Vitis.Abstractions.Models;
+namespace Hast.Vitis.Models;
 
 public class AzurePollResponseData : AzureResponseData
 {

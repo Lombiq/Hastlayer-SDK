@@ -1,6 +1,6 @@
-using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
+using Hast.Vitis.Interop.Enums;
 
-namespace Hast.Vitis.Abstractions.Models;
+namespace Hast.Vitis.Models;
 
 public class OpenClConfiguration : IOpenClConfiguration
 {

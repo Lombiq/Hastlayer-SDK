@@ -1,10 +1,10 @@
 using Hast.Common.Extensibility.Pipeline;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
-using Hast.Xilinx.Abstractions.ManifestProviders;
+using Hast.Xilinx.ManifestProviders;
 using System.IO.Ports;
 
-namespace Hast.Xilinx.Abstractions;
+namespace Hast.Xilinx;
 
 public class SerialPortConfigurator : PipelineStepBase, ISerialPortConfigurator
 {

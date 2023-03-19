@@ -1,9 +1,9 @@
 using AdvancedDLSupport;
-using Hast.Vitis.Abstractions.Interop.Delegates.OpenCl;
-using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
+using Hast.Vitis.Interop.Delegates;
+using Hast.Vitis.Interop.Enums;
 using System;
 
-namespace Hast.Vitis.Abstractions.Interop;
+namespace Hast.Vitis.Interop;
 
 /// <summary>
 /// ADL Interoperability interface for the OpenCL native library. The method documentation is copied from source as-is

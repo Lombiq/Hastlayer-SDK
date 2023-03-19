@@ -1,5 +1,4 @@
 using Hast.TestInputs.Dynamic;
-using Hast.Transformer.Abstractions;
 using System.Threading.Tasks;
 using Xunit;
 

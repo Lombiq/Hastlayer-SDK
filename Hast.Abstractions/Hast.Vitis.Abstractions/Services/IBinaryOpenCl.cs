@@ -1,11 +1,11 @@
 using Hast.Common.Interfaces;
-using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
-using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Interop.Enums;
+using Hast.Vitis.Models;
 using System;
 using System.Buffers;
 using System.Threading.Tasks;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 /// <summary>
 /// A managed wrapper around OpenCL for using precompiled binary kernels. It abstracts resource management and hides

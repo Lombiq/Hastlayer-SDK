@@ -1,4 +1,4 @@
-﻿namespace Hast.Xilinx.Abstractions.ManifestProviders;
+﻿namespace Hast.Xilinx.ManifestProviders;
 
 public class ZedBoardManifestProvider : ZynqManifestProviderBase
 {

@@ -1,6 +1,6 @@
 using Hast.Communication.Models;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 
 namespace Hast.Communication.Services;
 

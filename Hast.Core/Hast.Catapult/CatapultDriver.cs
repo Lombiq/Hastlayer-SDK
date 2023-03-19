@@ -1,4 +1,4 @@
-using Hast.Catapult.Abstractions;
+using Hast.Catapult.Models;
 using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;

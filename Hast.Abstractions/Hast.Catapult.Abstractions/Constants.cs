@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Hast.Catapult.Abstractions;
+namespace Hast.Catapult;
 
 public static class Constants
 {

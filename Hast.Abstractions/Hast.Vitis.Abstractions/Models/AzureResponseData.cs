@@ -1,4 +1,4 @@
-﻿namespace Hast.Vitis.Abstractions.Models;
+﻿namespace Hast.Vitis.Models;
 
 public class AzureResponseData
 {

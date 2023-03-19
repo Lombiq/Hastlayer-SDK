@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Transformer.Configuration;
 using Lombiq.Arithmetics;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;

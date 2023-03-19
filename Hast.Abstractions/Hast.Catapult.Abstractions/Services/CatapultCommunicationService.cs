@@ -1,15 +1,16 @@
+using Hast.Catapult.Exceptions;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using static Hast.Catapult.Abstractions.Constants;
+using static Hast.Catapult.Constants;
 
-namespace Hast.Catapult.Abstractions;
+namespace Hast.Catapult.Services;
 
 public class CatapultCommunicationService : CommunicationServiceBase
 {

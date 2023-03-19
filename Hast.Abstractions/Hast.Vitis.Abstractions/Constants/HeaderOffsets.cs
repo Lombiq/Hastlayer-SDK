@@ -1,6 +1,6 @@
-﻿using Hast.Transformer.Abstractions.SimpleMemory;
+﻿using Hast.Transformer.SimpleMemory;
 
-namespace Hast.Vitis.Abstractions.Constants;
+namespace Hast.Vitis.Constants;
 
 public static class HeaderOffsets
 {

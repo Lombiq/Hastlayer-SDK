@@ -1,6 +1,6 @@
 ﻿using Hast.Layer;
 
-namespace Hast.Transformer.Abstractions.SimpleMemory;
+namespace Hast.Transformer.SimpleMemory;
 
 public static class SimpleMemoryDeviceManifestExtensions
 {

@@ -3,7 +3,7 @@ namespace Hast.Samples.FSharpSampleAssembly
 open Hast.Layer
 
 module FSharpParallelAlgorithmContainer =
-    open Hast.Transformer.Abstractions.SimpleMemory
+    open Hast.Transformer.SimpleMemory
     open System.Threading.Tasks
 
     // A simple parallelized sample showcasing what you can also see in ParallelAlgorithm, but in F#.

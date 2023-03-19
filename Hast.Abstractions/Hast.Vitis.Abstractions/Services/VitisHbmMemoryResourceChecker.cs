@@ -1,14 +1,14 @@
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Vitis.Abstractions.Constants;
-using Hast.Vitis.Abstractions.Models;
-using Hast.Xilinx.Abstractions;
+using Hast.Transformer.SimpleMemory;
+using Hast.Vitis.Constants;
+using Hast.Vitis.Models;
+using Hast.Xilinx;
 using System.IO;
-using static Hast.Vitis.Abstractions.Constants.Extensions;
+using static Hast.Vitis.Constants.Extensions;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 public class VitisHbmMemoryResourceChecker : IMemoryResourceChecker
 {
@@ -30,7 +30,7 @@ public class VitisHbmMemoryResourceChecker : IMemoryResourceChecker
                 Sender = this,
                 Message = $"The device uses HMB memory. If it also has DDR memory, disabling HMB via the " +
                           $"{nameof(IOpenClConfiguration)}.{nameof(IOpenClConfiguration.UseHbm)} option might " +
-                          $"help, see the readme of Hast.Vitis.Abstractions.",
+                          $"help, see the readme of the Hast.Vitis library.",
                 AvailableByteCount = Limits.HbmSizeBytes,
                 MemoryByteCount = memoryByteCount,
             };

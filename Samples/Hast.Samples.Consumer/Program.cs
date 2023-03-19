@@ -7,7 +7,7 @@ using Hast.Samples.Consumer.Models;
 using Hast.Samples.Consumer.SampleRunners;
 using Hast.Samples.FSharpSampleAssembly;
 using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Hast.Transformer.Vhdl.Configuration;
 using Lombiq.Arithmetics;
 using System;
 using System.Collections.Generic;

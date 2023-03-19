@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Hast.Transformer.Abstractions.SimpleMemory;
+namespace Hast.Transformer.SimpleMemory;
 
 /// <summary>
 /// Facilitates read and overwrite of the <see cref="SimpleMemory.Memory"/> for outside users (like DMA).

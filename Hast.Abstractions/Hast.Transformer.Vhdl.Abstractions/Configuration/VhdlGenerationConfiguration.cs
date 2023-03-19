@@ -1,4 +1,4 @@
-namespace Hast.Transformer.Vhdl.Abstractions.Configuration;
+namespace Hast.Transformer.Vhdl.Configuration;
 
 public class VhdlGenerationConfiguration
 {

@@ -1,10 +1,10 @@
+using Hast.Catapult.Models;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Models;
-using Hast.Synthesis.Abstractions.Services;
+using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
 using System.Threading.Tasks;
 
-namespace Hast.Catapult.Abstractions;
+namespace Hast.Catapult.Services;
 
 public class CatapultHardwareImplementationComposer : IHardwareImplementationComposer
 {

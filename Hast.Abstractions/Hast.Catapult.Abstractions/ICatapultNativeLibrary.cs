@@ -3,7 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Hast.Catapult.Abstractions;
+namespace Hast.Catapult;
 
 /// <summary>
 /// The function used by logging in FpgaCoreLib.dll and the CatapultLibrary class.

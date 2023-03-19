@@ -1,6 +1,5 @@
 using Hast.Common.Services;
 using Hast.Layer;
-using Hast.Transformer.Abstractions;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Constants;
 using Hast.Transformer.Vhdl.Helpers;

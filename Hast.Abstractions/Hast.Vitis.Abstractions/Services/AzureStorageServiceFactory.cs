@@ -1,7 +1,7 @@
-﻿using Hast.Vitis.Abstractions.Models;
+﻿using Hast.Vitis.Models;
 using Microsoft.Extensions.Logging;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 public class AzureStorageServiceFactory : IAzureStorageServiceFactory
 {

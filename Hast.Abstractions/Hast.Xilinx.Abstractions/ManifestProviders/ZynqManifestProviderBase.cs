@@ -1,13 +1,12 @@
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Models;
-using Hast.Synthesis.Abstractions.Services;
-using Hast.Xilinx.Abstractions.Helpers;
+using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
+using Hast.Xilinx.Helpers;
 using System;
 using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;
 
-namespace Hast.Xilinx.Abstractions.ManifestProviders;
+namespace Hast.Xilinx.ManifestProviders;
 
 public abstract class ZynqManifestProviderBase : IDeviceManifestProvider
 {

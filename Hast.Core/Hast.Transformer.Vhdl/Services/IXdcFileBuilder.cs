@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Abstractions;
+namespace Hast.Transformer.Vhdl.Services;
 
 /// <summary>
 /// Creates the device-specific <see cref="XdcFile"/> for the <see cref="TransformedVhdlManifest"/>.

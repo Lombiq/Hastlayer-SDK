@@ -1,7 +1,7 @@
 using Hast.Common.Models;
 using Hast.Layer;
 using Hast.TestInputs.Invalid;
-using Hast.Transformer.Abstractions;
+using Hast.Transformer.Configuration;
 using Shouldly;
 using System;
 using System.Linq.Expressions;

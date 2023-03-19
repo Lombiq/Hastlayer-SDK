@@ -5,7 +5,7 @@ using Hast.Communication.Exceptions;
 using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;

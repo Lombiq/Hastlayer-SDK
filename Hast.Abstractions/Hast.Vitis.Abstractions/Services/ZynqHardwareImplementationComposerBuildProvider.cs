@@ -1,9 +1,8 @@
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Delegates;
-using Hast.Synthesis.Abstractions.Models;
-using Hast.Synthesis.Abstractions.Services;
-using Hast.Xilinx.Abstractions;
+using Hast.Synthesis.Delegates;
+using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
+using Hast.Xilinx;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,11 +10,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Hast.Vitis.Abstractions.Constants.Extensions;
-using static Hast.Vitis.Abstractions.Services.VitisHardwareImplementationComposerBuildProvider;
+using static Hast.Vitis.Constants.Extensions;
+using static Hast.Vitis.Services.VitisHardwareImplementationComposerBuildProvider;
 using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 public sealed class ZynqHardwareImplementationComposerBuildProvider
     : IHardwareImplementationComposerBuildProvider, IDisposable

@@ -1,9 +1,8 @@
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Attributes;
-using Hast.Transformer.Abstractions.Configuration;
+using Hast.Layer;
+using Hast.Synthesis.Attributes;
 using System.Collections.Generic;
 
-namespace Hast.Layer;
+namespace Hast.Transformer.Configuration;
 
 public static class HardwareGenerationConfigurationTransformerExtensions
 {

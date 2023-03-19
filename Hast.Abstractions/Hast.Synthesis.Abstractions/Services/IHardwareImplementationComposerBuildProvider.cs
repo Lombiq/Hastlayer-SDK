@@ -1,11 +1,11 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions.Delegates;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Delegates;
+using Hast.Synthesis.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Hast.Synthesis.Abstractions.Services;
+namespace Hast.Synthesis.Services;
 
 /// <summary>
 /// If <see cref="CanCompose"/> returns <see langword="true"/> it performs any build actions and fills in the <see

@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Hast.Transformer.Abstractions.Configuration;
+namespace Hast.Transformer.Configuration;
 
 public class TransformerConfiguration
 {

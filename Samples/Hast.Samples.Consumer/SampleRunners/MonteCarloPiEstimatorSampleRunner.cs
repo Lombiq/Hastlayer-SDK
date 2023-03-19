@@ -1,6 +1,7 @@
 using Hast.Algorithms.Random;
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Transformer.Configuration;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Threading.Tasks;

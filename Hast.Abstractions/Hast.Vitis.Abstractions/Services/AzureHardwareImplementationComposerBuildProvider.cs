@@ -1,12 +1,11 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Delegates;
-using Hast.Synthesis.Abstractions.Models;
-using Hast.Synthesis.Abstractions.Services;
-using Hast.Vitis.Abstractions.Extensions;
-using Hast.Vitis.Abstractions.Models;
-using Hast.Xilinx.Abstractions;
+using Hast.Synthesis.Delegates;
+using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
+using Hast.Vitis.Extensions;
+using Hast.Vitis.Models;
+using Hast.Xilinx;
 using Lombiq.HelpfulLibraries.RestEase;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +16,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 [DependencyInitializer(nameof(InitializeService))]
 public class AzureHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider

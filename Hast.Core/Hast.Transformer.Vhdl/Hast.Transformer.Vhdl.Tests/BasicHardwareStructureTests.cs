@@ -1,8 +1,7 @@
 using Hast.Common.Models;
-using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
-using Hast.Transformer.Abstractions;
+using Hast.Transformer.Configuration;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Testing;

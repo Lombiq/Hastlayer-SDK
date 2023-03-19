@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Hast.Vitis.Abstractions.Models;
+namespace Hast.Vitis.Models;
 
 public class AzureStartPostData : AzurePostData
 {

@@ -1,7 +1,7 @@
 using Hast.Common.Interfaces;
 using Hast.Communication.Models;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using System.Collections.Generic;
 
 namespace Hast.Communication.Services;

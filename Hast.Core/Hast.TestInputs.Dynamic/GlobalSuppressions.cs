@@ -11,7 +11,7 @@ using static Hast.TestInputs.Base.SuppressionConstants;
     "S107:Methods should not have too many parameters",
     Justification = "It's easy to follow and reducing the argument count would only make the code more complicated and harder to read.",
     Scope = "member",
-    Target = "~M:Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases.SaveResult(Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory,System.Int32,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64)")]
+    Target = "~M:Hast.TestInputs.Dynamic.BinaryAndUnaryOperatorExpressionCases.SaveResult(Hast.Transformer.SimpleMemory.SimpleMemory,System.Int32,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64,System.Int64)")]
 [assembly: SuppressMessage(
     "Style",
     "IDE0059:Unnecessary assignment of a value",

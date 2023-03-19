@@ -2,14 +2,13 @@ using CliWrap;
 using CliWrap.Buffered;
 using Hast.Common.Helpers;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Delegates;
-using Hast.Synthesis.Abstractions.Helpers;
-using Hast.Synthesis.Abstractions.Models;
-using Hast.Synthesis.Abstractions.Services;
-using Hast.Vitis.Abstractions.Extensions;
-using Hast.Vitis.Abstractions.Models;
-using Hast.Xilinx.Abstractions;
+using Hast.Synthesis.Delegates;
+using Hast.Synthesis.Helpers;
+using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
+using Hast.Vitis.Extensions;
+using Hast.Vitis.Models;
+using Hast.Xilinx;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
@@ -19,10 +18,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static Hast.Vitis.Abstractions.Constants.Extensions;
+using static Hast.Vitis.Constants.Extensions;
 using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 public sealed class VitisHardwareImplementationComposerBuildProvider
     : IHardwareImplementationComposerBuildProvider, IDisposable

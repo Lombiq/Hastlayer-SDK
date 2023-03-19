@@ -1,4 +1,4 @@
-using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Models;
 using Shouldly;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Hast.Vitis.Abstractions.Tests;
+namespace Hast.Vitis.Tests;
 
 public class XilinxReportTests
 {

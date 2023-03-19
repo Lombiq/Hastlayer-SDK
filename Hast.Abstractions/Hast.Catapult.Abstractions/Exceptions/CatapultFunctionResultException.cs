@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace Hast.Catapult.Abstractions;
+namespace Hast.Catapult.Exceptions;
 
 /// <summary>
 /// An exception which is fired when an FpgaCoreLib function returns something other than the SUCCESS status.

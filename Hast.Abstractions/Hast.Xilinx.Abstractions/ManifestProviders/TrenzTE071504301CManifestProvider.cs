@@ -1,4 +1,4 @@
-﻿namespace Hast.Xilinx.Abstractions.ManifestProviders;
+﻿namespace Hast.Xilinx.ManifestProviders;
 
 public class TrenzTE071504301CManifestProvider : ZynqManifestProviderBase
 {

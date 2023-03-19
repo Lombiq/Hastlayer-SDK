@@ -1,6 +1,6 @@
 using Hast.Common.Numerics;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;

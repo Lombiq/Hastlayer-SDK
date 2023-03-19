@@ -1,11 +1,11 @@
-using Hast.Vitis.Abstractions.Interop.Enums;
+using Hast.Vitis.Interop.Enums;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace Hast.Vitis.Abstractions.Models;
+namespace Hast.Vitis.Models;
 
 public class XclbinClockInfo
 {

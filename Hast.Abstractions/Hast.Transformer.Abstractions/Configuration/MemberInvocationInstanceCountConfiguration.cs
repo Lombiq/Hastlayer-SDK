@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
 
-namespace Hast.Transformer.Abstractions.Configuration;
+namespace Hast.Transformer.Configuration;
 
 [DebuggerDisplay("{MemberNamePrefix + \": \" + MaxInvocationInstanceCount}")]
 public class MemberInvocationInstanceCountConfiguration

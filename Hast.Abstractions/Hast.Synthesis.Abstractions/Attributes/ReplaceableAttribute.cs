@@ -1,6 +1,6 @@
 using System;
 
-namespace Hast.Synthesis.Abstractions.Attributes;
+namespace Hast.Synthesis.Attributes;
 
 /// <summary>
 /// When a <see langword="static"/><see langword="readonly"/> field is decorated with this attribute, its value (or a

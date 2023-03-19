@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using static Hast.Vitis.Abstractions.Models.XilinxReport;
+using static Hast.Vitis.Models.XilinxReport;
 
-namespace Hast.Vitis.Abstractions.Models;
+namespace Hast.Vitis.Models;
 
 public class XilinxReportSection
 {

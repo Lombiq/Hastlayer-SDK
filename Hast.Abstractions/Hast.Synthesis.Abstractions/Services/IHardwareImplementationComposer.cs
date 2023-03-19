@@ -1,9 +1,9 @@
 using Hast.Common.Interfaces;
 using Hast.Layer;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 using System.Threading.Tasks;
 
-namespace Hast.Synthesis.Abstractions.Services;
+namespace Hast.Synthesis.Services;
 
 /// <summary>
 /// Service for composing the hardware implementation for a given hardware description, e.g. putting all the source

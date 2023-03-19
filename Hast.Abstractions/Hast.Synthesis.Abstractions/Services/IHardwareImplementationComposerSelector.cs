@@ -1,7 +1,7 @@
 using Hast.Common.Interfaces;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 
-namespace Hast.Synthesis.Abstractions.Services;
+namespace Hast.Synthesis.Services;
 
 /// <summary>
 /// Service for selecting an <see cref="IHardwareImplementationComposer"/> instance based on the given hardware

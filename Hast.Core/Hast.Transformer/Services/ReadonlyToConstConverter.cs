@@ -1,6 +1,6 @@
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Attributes;
+using Hast.Synthesis.Attributes;
+using Hast.Transformer.Configuration;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp;
 using ICSharpCode.Decompiler.CSharp.Syntax;

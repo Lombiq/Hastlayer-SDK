@@ -1,6 +1,6 @@
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Hast.Layer;
 
-namespace Hast.Layer;
+namespace Hast.Transformer.Vhdl.Configuration;
 
 public static class HardwareGenerationConfigurationTransformerExtensions
 {

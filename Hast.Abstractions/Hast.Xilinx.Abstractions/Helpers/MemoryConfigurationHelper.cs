@@ -1,10 +1,9 @@
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 
-namespace Hast.Xilinx.Abstractions.Helpers;
+namespace Hast.Xilinx.Helpers;
 
 public static class MemoryConfigurationHelper
 {

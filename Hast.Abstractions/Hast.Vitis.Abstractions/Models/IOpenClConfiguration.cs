@@ -1,8 +1,8 @@
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Vitis.Abstractions.Interop.Enums.OpenCl;
-using Hast.Vitis.Abstractions.Services;
+using Hast.Transformer.SimpleMemory;
+using Hast.Vitis.Interop.Enums;
+using Hast.Vitis.Services;
 
-namespace Hast.Vitis.Abstractions.Models;
+namespace Hast.Vitis.Models;
 
 /// <summary>
 /// A configuration for the <see cref="OpenClCommunicationService"/>. The implementing class has sensible defaults that

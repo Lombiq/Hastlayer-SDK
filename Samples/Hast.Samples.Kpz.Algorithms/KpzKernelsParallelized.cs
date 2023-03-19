@@ -1,6 +1,6 @@
 using Hast.Algorithms.Random;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;

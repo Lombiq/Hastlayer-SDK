@@ -1,4 +1,4 @@
-using Hast.Xilinx.Abstractions.ManifestProviders;
+using Hast.Xilinx.ManifestProviders;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

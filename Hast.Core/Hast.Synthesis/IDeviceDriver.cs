@@ -1,7 +1,6 @@
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Services;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 
 namespace Hast.Synthesis;

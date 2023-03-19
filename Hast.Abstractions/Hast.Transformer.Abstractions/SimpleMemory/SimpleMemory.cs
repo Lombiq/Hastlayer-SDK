@@ -1,10 +1,9 @@
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Runtime.InteropServices;
 
-namespace Hast.Transformer.Abstractions.SimpleMemory;
+namespace Hast.Transformer.SimpleMemory;
 
 /// <summary>
 /// Represents a simplified memory model available on the FPGA for transformed algorithms. WARNING: SimpleMemory is NOT

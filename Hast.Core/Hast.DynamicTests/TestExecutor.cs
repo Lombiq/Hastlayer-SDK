@@ -1,6 +1,6 @@
 using Hast.Layer;
 using Hast.TestInputs.Dynamic;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Hast.Transformer.Vhdl.Configuration;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;

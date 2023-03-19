@@ -1,7 +1,6 @@
 using Hast.Common.Models;
 using Hast.Layer;
-using Hast.Transformer.Abstractions;
-using Hast.Transformer.Vhdl.Abstractions.Configuration;
+using Hast.Transformer.Vhdl.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Reflection;

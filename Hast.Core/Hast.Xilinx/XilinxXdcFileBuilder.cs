@@ -1,7 +1,6 @@
-﻿using Hast.Transformer.Abstractions;
-using Hast.Transformer.Vhdl.Models;
+﻿using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.Services;
 using Hast.VhdlBuilder.Representation.Declaration;
-using Hast.Xilinx.Abstractions;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,9 +1,7 @@
-using Hast.Layer;
 using Hast.TestInputs.ClassStructure1;
 using Hast.TestInputs.ClassStructure2;
 using Hast.TestInputs.Static;
-using Hast.Transformer.Abstractions;
-using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Configuration;
 using System.Threading.Tasks;
 using Xunit;
 

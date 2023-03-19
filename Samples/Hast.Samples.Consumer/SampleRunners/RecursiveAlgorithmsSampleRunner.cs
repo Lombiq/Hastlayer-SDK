@@ -1,6 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
-using Hast.Transformer.Abstractions.Configuration;
+using Hast.Transformer.Configuration;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;

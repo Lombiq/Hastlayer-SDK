@@ -1,9 +1,8 @@
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Hast.Xilinx.Abstractions;
+namespace Hast.Xilinx;
 
 public class XilinxDeviceManifest : DeviceManifest
 {

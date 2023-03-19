@@ -2,7 +2,7 @@ using Hast.Common.Services;
 using Hast.Communication.Extensibility;
 using Hast.Communication.Extensibility.Events;
 using Hast.Communication.Services;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,4 +1,4 @@
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using System.Diagnostics.CodeAnalysis;
 
 // ReSharper disable RedundantCast

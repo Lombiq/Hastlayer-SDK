@@ -1,10 +1,9 @@
-using Hast.Vitis.Abstractions.Constants;
+using Hast.Vitis.Constants;
 using System;
 using System.Runtime.InteropServices;
+using static Hast.Transformer.SimpleMemory.SimpleMemory;
 
-using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
-
-namespace Hast.Vitis.Abstractions.Models;
+namespace Hast.Vitis.Models;
 
 public class OpenClResultMetadata
 {

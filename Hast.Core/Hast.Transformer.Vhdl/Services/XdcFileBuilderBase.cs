@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Hast.Transformer.Abstractions;
+namespace Hast.Transformer.Vhdl.Services;
 
 public abstract class XdcFileBuilderBase<T> : IXdcFileBuilder
     where T : IDeviceManifest

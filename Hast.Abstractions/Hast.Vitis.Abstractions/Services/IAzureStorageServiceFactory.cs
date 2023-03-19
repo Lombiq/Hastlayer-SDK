@@ -1,7 +1,7 @@
 ﻿using Hast.Common.Interfaces;
-using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Models;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 /// <summary>
 /// A factory service for <see cref="AzureStorageService"/>.

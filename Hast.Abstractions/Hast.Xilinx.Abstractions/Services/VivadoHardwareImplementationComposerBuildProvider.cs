@@ -1,16 +1,14 @@
 ﻿using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Delegates;
-using Hast.Synthesis.Abstractions.Helpers;
-using Hast.Synthesis.Abstractions.Models;
-using Hast.Synthesis.Abstractions.Services;
-using Hast.Xilinx.Abstractions;
+using Hast.Synthesis.Delegates;
+using Hast.Synthesis.Helpers;
+using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Xilinx.Services;
 
 public class VivadoHardwareImplementationComposerBuildProvider : IHardwareImplementationComposerBuildProvider
 {

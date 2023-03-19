@@ -1,7 +1,6 @@
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Attributes;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Synthesis.Attributes;
+using Hast.Transformer.SimpleMemory;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using System.Threading.Tasks;

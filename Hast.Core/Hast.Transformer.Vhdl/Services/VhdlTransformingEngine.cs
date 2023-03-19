@@ -1,6 +1,7 @@
 ﻿using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Transformer.Models;
+using Hast.Transformer.Vhdl.Configuration;
 using Hast.Transformer.Vhdl.Models;
 using Hast.VhdlBuilder.Representation;
 using System;

@@ -1,9 +1,9 @@
 using Hast.Common.Validation;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Hast.Synthesis.Abstractions.Services;
+namespace Hast.Synthesis.Services;
 
 public class HardwareImplementationComposerSelector : IHardwareImplementationComposerSelector
 {

@@ -1,6 +1,6 @@
-using Hast.Catapult.Abstractions;
-using Hast.Transformer.Abstractions;
+using Hast.Catapult.Models;
 using Hast.Transformer.Vhdl.Models;
+using Hast.Transformer.Vhdl.Services;
 using Hast.VhdlBuilder;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;

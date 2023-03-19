@@ -1,8 +1,8 @@
-using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Models;
 using RestEase;
 using System.Threading.Tasks;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 /// <summary>
 /// Web API for the attestation service required to run xclbin on Azure servers.

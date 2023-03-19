@@ -1,5 +1,5 @@
 using CommandLine;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
 

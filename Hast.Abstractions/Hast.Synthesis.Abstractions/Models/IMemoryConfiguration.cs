@@ -1,4 +1,4 @@
-namespace Hast.Synthesis.Abstractions.Models;
+namespace Hast.Synthesis.Models;
 
 /// <summary>
 /// Configuration used to specify the hardware memory allocation requirements of the target device.

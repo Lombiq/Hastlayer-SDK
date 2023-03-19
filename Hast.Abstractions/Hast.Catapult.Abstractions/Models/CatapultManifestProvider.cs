@@ -1,11 +1,10 @@
 using Hast.Layer;
-using Hast.Synthesis.Abstractions;
-using Hast.Synthesis.Abstractions.Models;
-using Hast.Synthesis.Abstractions.Services;
+using Hast.Synthesis.Models;
+using Hast.Synthesis.Services;
 using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;
 
-namespace Hast.Catapult.Abstractions;
+namespace Hast.Catapult.Models;
 
 public class CatapultManifestProvider : IDeviceManifestProvider
 {

@@ -1,10 +1,10 @@
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
-using Hast.Vitis.Abstractions.Extensions;
-using Hast.Vitis.Abstractions.Interop.Enums;
-using Hast.Vitis.Abstractions.Models;
+using Hast.Transformer.SimpleMemory;
+using Hast.Vitis.Extensions;
+using Hast.Vitis.Interop.Enums;
+using Hast.Vitis.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
@@ -15,10 +15,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using static Hast.Transformer.Abstractions.SimpleMemory.SimpleMemory;
-using static Hast.Vitis.Abstractions.Constants.Extensions;
+using static Hast.Transformer.SimpleMemory.SimpleMemory;
+using static Hast.Vitis.Constants.Extensions;
 
-namespace Hast.Vitis.Abstractions.Services;
+namespace Hast.Vitis.Services;
 
 public abstract class OpenClCommunicationService : CommunicationServiceBase
 {

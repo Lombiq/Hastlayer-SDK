@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Hast.Transformer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

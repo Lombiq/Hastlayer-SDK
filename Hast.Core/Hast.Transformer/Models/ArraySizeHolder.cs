@@ -1,5 +1,6 @@
 using Hast.Common.Validation;
 using Hast.Layer;
+using Hast.Transformer.Configuration;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;

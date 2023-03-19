@@ -1,4 +1,4 @@
-namespace Hast.Xilinx.Abstractions;
+namespace Hast.Xilinx;
 
 public static class Constants
 {

@@ -9,7 +9,7 @@ using Hast.Communication.Extensibility.Pipeline;
 using Hast.Communication.Models;
 using Hast.Communication.Services;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;

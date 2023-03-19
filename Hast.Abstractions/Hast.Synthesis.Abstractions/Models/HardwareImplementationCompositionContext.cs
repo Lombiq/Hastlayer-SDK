@@ -1,6 +1,6 @@
 ﻿using Hast.Layer;
 
-namespace Hast.Synthesis.Abstractions.Models;
+namespace Hast.Synthesis.Models;
 
 public class HardwareImplementationCompositionContext : IHardwareImplementationCompositionContext
 {

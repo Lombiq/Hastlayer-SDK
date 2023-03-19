@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Hast.Synthesis.Abstractions.Models;
+namespace Hast.Synthesis.Models;
 
 public class BuildProgressEventArgs : EventArgs
 {

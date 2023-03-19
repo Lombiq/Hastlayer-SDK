@@ -1,7 +1,7 @@
 ﻿using Hast.Layer;
-using Hast.Vitis.Abstractions.Models;
+using Hast.Vitis.Models;
 
-namespace Hast.Vitis.Abstractions.Extensions;
+namespace Hast.Vitis.Extensions;
 
 public static class ConfigurationExtensions
 {

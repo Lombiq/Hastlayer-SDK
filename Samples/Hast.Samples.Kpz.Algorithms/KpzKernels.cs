@@ -1,6 +1,6 @@
 using Hast.Algorithms.Random;
 using Hast.Layer;
-using Hast.Transformer.Abstractions.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Samples.Kpz.Algorithms;

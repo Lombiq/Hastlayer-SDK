@@ -11,7 +11,7 @@ A subcommand must be the very first argument after `dotnet Hast.Console.dll`, ot
 
 ### Vitis
 
-Features related to `Hast.Vitis.Abstractions`.
+Features related to `Hast.Vitis`.
 
 - `dotnet Hast.Console.dll vitis help`: Get help specific to this subcommand.
 - `dotnet Hast.Console.dll vitis build --input HardwareFramework --output kernel_binary.xclbin --platform xilinx_u200_xdma_201830_2 --hash some_text`: Build RTL source like the ones generated during Hastlayer usage into xclbin files with the "Xilinx Vitis" toolchain. The `--input` sets the `HardwareFramework` directory that contains the `rtl` directory. The `--platform` is the directory name in `/opt/xilinx/platforms`. 

@@ -1,4 +1,4 @@
-﻿namespace Hast.Vitis.Abstractions.Constants;
+﻿namespace Hast.Vitis.Constants;
 
 public static class Extensions
 {

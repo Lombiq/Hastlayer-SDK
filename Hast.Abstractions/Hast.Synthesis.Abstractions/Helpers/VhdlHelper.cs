@@ -1,10 +1,10 @@
 using Hast.Common.Models;
-using Hast.Synthesis.Abstractions.Models;
+using Hast.Synthesis.Models;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Hast.Synthesis.Abstractions.Helpers;
+namespace Hast.Synthesis.Helpers;
 
 public static class VhdlHelper
 {
