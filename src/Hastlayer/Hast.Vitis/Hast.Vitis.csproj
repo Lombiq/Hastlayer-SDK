@@ -16,13 +16,12 @@
     <None Update="*.sh">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Remove="Hast.Vitis.Abstractions.Tests\**" />
     <None Remove="Container\**" />
     <None Include="Container\Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Hardware Frameworks\Vitis\Hast.Vitis.Abstractions.HardwareFramework.csproj" />
+    <ProjectReference Include="..\..\Hardware Frameworks\Vitis\Hast.Vitis.HardwareFramework.csproj" />
     <ProjectReference Include="..\..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
