@@ -1,11 +1,12 @@
 ﻿using Hast.Synthesis.Services;
-using Hast.Xilinx.ManifestProviders;
 
 namespace Hast.Xilinx.Drivers;
 
 public class TrenzTE071504301CDriver : ZynqDriverBase
 {
+    public const string DeviceName = "TE0715-04-30-1C";
+
     public TrenzTE071504301CDriver(ITimingReportParser timingReportParser)
-        : base(timingReportParser) =>
-        _deviceName = TrenzTE071504301CManifestProvider.DeviceName;
+        : base(DeviceName, timingReportParser)
+    { }
 }

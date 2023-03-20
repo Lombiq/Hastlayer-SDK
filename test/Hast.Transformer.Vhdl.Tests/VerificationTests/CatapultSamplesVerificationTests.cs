@@ -1,4 +1,5 @@
 using Hast.Catapult;
+using Hast.Catapult.Drivers;
 using Hast.Catapult.Models;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests;
 public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
 {
     protected override bool UseStubMemberSuitabilityChecker => false;
-    protected override string DeviceName => CatapultManifestProvider.DeviceName;
+    protected override string DeviceName => CatapultDriver.DeviceName;
 
     public CatapultSamplesVerificationTests() =>
         _hostConfiguration.Extensions = _hostConfiguration.Extensions.Union(new[] { typeof(CatapultDriver).Assembly });

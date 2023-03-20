@@ -30,11 +30,11 @@ public class MemoryConfiguration : IMemoryConfiguration
 
     public static IMemoryConfiguration Create(
         IHardwareGenerationConfiguration hardwareGenerationConfiguration,
-        IEnumerable<IDeviceManifestProvider> deviceManifestProviders)
+        IEnumerable<IDeviceDriver> deviceDrivers)
     {
         var memoryConfiguration = new MemoryConfiguration();
-        var deviceManifestProvider = deviceManifestProviders.First(manifestProvider =>
-            manifestProvider.DeviceManifest.Name == hardwareGenerationConfiguration.DeviceName);
+        var deviceManifestProvider = deviceDrivers.First(driver =>
+            driver.DeviceManifest.Name == hardwareGenerationConfiguration.DeviceName);
         deviceManifestProvider.ConfigureMemory(memoryConfiguration, hardwareGenerationConfiguration);
         return memoryConfiguration;
     }

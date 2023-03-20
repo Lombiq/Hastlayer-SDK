@@ -1,4 +1,4 @@
-using Hast.Xilinx.ManifestProviders;
+using Hast.Xilinx.Drivers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,8 +10,8 @@ public class XilinxSamplesVerificationTests : SamplesVerificationTestsBase
 {
     private static readonly string[] _devicesToTest =
     {
-        Nexys4DdrManifestProvider.DeviceName,
-        AlveoU50ManifestProvider.DeviceName,
+        Nexys4DdrDriver.DeviceName,
+        AlveoU50Driver.DeviceName,
     };
 
     public static IEnumerable<object[]> AllDevices => _devicesToTest.Select(name => new object[] { name });

@@ -6,14 +6,13 @@ namespace Hast.Synthesis.Services;
 
 public class DeviceManifestSelector : IDeviceManifestSelector
 {
-    private readonly IEnumerable<IDeviceManifestProvider> _deviceManifestProviders;
-
-    public DeviceManifestSelector(IEnumerable<IDeviceManifestProvider> deviceManifestProviders) =>
-        _deviceManifestProviders = deviceManifestProviders;
+    private readonly IEnumerable<IDeviceDriver> _deviceDrivers;
+    public DeviceManifestSelector(IEnumerable<IDeviceDriver> deviceDrivers) =>
+        _deviceDrivers = deviceDrivers;
 
     public IEnumerable<IDeviceManifest> GetSupportedDevices() =>
-        _deviceManifestProviders
-            .Select(provider => provider.DeviceManifest)
+        _deviceDrivers
+            .Select(driver => driver.DeviceManifest)
             .GroupBy(manifest => manifest.Name)
             .Select(group => group.First());
 }

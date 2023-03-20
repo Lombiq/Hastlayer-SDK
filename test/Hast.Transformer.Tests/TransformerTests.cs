@@ -7,9 +7,7 @@ using Hast.TestInputs.ClassStructure2;
 using Hast.Transformer.Configuration;
 using Hast.Transformer.Models;
 using Hast.Transformer.Services;
-using Hast.Xilinx;
 using Hast.Xilinx.Drivers;
-using Hast.Xilinx.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Moq;
 using Moq.AutoMock;
@@ -216,7 +214,7 @@ public class TransformerTests
 
     private static HardwareGenerationConfiguration CreateConfig()
     {
-        var configuration = new HardwareGenerationConfiguration(Nexys4DdrManifestProvider.DeviceName, hardwareFrameworkPath: null);
+        var configuration = new HardwareGenerationConfiguration(Nexys4DdrDriver.DeviceName, hardwareFrameworkPath: null);
         configuration.TransformerConfiguration().UseSimpleMemory = false;
         return configuration;
     }

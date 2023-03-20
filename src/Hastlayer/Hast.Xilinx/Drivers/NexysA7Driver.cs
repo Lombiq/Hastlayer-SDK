@@ -1,11 +1,12 @@
 ﻿using Hast.Synthesis.Services;
-using Hast.Xilinx.ManifestProviders;
 
 namespace Hast.Xilinx.Drivers;
 
 public class NexysA7Driver : NexysDriverBase
 {
+    public const string DeviceName = "Nexys A7";
+
     public NexysA7Driver(ITimingReportParser timingReportParser)
-        : base(timingReportParser) =>
-        _deviceName = NexysA7ManifestProvider.DeviceName;
+        : base(DeviceName, timingReportParser)
+    { }
 }

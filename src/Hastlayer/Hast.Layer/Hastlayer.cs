@@ -1,4 +1,5 @@
 using Hast.Catapult;
+using Hast.Catapult.Drivers;
 using Hast.Catapult.Models;
 using Hast.Common.Services;
 using Hast.Common.Validation;
@@ -8,11 +9,12 @@ using Hast.Communication.Extensibility.Events;
 using Hast.Layer.EmptyRepresentationFactories;
 using Hast.Layer.Extensibility.Events;
 using Hast.Layer.Models;
+using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Transformer;
 using Hast.Transformer.SimpleMemory;
-using Hast.Xilinx.ManifestProviders;
+using Hast.Xilinx.Drivers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -53,8 +55,8 @@ public sealed class Hastlayer : IHastlayer
             typeof(IProxyGenerator).Assembly,
             typeof(IHardwareImplementationComposer).Assembly,
             typeof(ITransformer).Assembly,
-            typeof(NexysA7ManifestProvider).Assembly,
-            typeof(CatapultManifestProvider).Assembly,
+            typeof(NexysA7Driver).Assembly,
+            typeof(CatapultDriver).Assembly,
         });
         assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
 
@@ -361,12 +363,12 @@ public sealed class Hastlayer : IHastlayer
 
     public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, int cellCount) =>
         RunGet(provider => SimpleMemory.Create(
-            MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
+            MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceDriver>>()),
             cellCount));
 
     public SimpleMemory CreateMemory(IHardwareGenerationConfiguration configuration, Memory<byte> data, int withPrefixCells = 0) =>
         RunGet(provider => SimpleMemory.Create(
-            MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceManifestProvider>>()),
+            MemoryConfiguration.Create(configuration, provider.GetService<IEnumerable<IDeviceDriver>>()),
             data,
             provider.GetService<ILogger>(),
             withPrefixCells));
@@ -374,7 +376,7 @@ public sealed class Hastlayer : IHastlayer
     public IMemoryConfiguration CreateMemoryConfiguration(IHardwareRepresentation hardwareRepresentation) =>
         RunGet(provider => MemoryConfiguration.Create(
                 hardwareRepresentation.HardwareGenerationConfiguration,
-                provider.GetService<IEnumerable<IDeviceManifestProvider>>())
+                provider.GetService<IEnumerable<IDeviceDriver>>())
         );
 
     public IEnumerable<IDeviceManifest> GetSupportedDevices()

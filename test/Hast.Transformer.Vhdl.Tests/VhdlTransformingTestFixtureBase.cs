@@ -5,9 +5,7 @@ using Hast.Transformer.Models;
 using Hast.Transformer.Services;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
-using Hast.Xilinx;
 using Hast.Xilinx.Drivers;
-using Hast.Xilinx.ManifestProviders;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -21,7 +19,7 @@ namespace Hast.Transformer.Vhdl.Tests;
 public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBase
 {
     protected virtual bool UseStubMemberSuitabilityChecker => true;
-    protected virtual string DeviceName => Nexys4DdrManifestProvider.DeviceName;
+    protected virtual string DeviceName => Nexys4DdrDriver.DeviceName;
 
     protected VhdlTransformingTestFixtureBase()
     {
