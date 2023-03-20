@@ -23,10 +23,10 @@ public static class ConfigurationExtensions
 
         // retrieve all keys from your settings
         var configs = config.AsEnumerable();
-        foreach (var kvp in configs)
+        foreach (var pair in configs)
         {
             var parent = (IDictionary<string, object>)result;
-            var path = kvp.Key.Split(':');
+            var path = pair.Key.Split(':');
 
             // create or retrieve the hierarchy (keep last path item for later)
             int lastIndex = 0;
@@ -40,47 +40,45 @@ public static class ConfigurationExtensions
                 parent = parent[path[i]] as IDictionary<string, object>;
             }
 
-            if (kvp.Value == null)
-                continue;
+            if (pair.Value == null) continue;
 
             // add the value to the parent
             // note: in case of an array, key will be an integer and will be dealt with later
             var key = path[lastIndex];
-            parent.Add(key, kvp.Value);
+            parent.Add(key, pair.Value);
         }
 
         // at this stage, all arrays are seen as dictionaries with integer keys
-        ReplaceWithArray(parent: null, key: null, result);
+        ReplaceWithArray(parent: null, keyInParent: null, result);
 
         return result;
     }
 
-    private static void ReplaceWithArray(ExpandoObject parent, string key, ExpandoObject input)
+    private static void ReplaceWithArray(ExpandoObject parent, string keyInParent, ExpandoObject input)
     {
-        if (input == null)
-            return;
+        if (input == null) return;
 
-        var dict = input as IDictionary<string, object>;
-        var keys = dict.Keys.ToArray();
+        var inputDictionary = (IDictionary<string, object>)input;
+        var keys = inputDictionary.Keys.ToArray();
 
-        // it's an array if all keys are integers
-        if (keys.All(k => int.TryParse(k, out var dummy)))
+        // It's an array if all keys are integers.
+        if (keys.All(key => int.TryParse(key, out var index) && index >= 0 && index < keys.Length))
         {
             var array = new object[keys.Length];
-            foreach (var kvp in dict)
+            foreach (var (key, value) in inputDictionary)
             {
-                array[kvp.Key.ToTechnicalInt()] = kvp.Value;
+                array[key.ToTechnicalInt()] = value;
             }
 
-            var parentDict = parent as IDictionary<string, object>;
-            parentDict.Remove(key);
-            parentDict.Add(key, array);
+            var parentDictionary = (IDictionary<string, object>)parent;
+            parentDictionary.Remove(keyInParent);
+            parentDictionary.Add(keyInParent, array);
         }
         else
         {
-            foreach (var childKey in dict.Keys.ToList())
+            foreach (var childKey in inputDictionary.Keys.ToList())
             {
-                ReplaceWithArray(input, childKey, dict[childKey] as ExpandoObject);
+                ReplaceWithArray(input, childKey, inputDictionary[childKey] as ExpandoObject);
             }
         }
     }

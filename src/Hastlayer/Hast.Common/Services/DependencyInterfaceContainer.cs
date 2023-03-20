@@ -18,7 +18,7 @@ public static class DependencyInterfaceContainer
         where T : class
     {
         public Lazier(IServiceProvider provider)
-            : base(() => provider.GetRequiredService<T>()) { }
+            : base(provider.GetRequiredService<T>) { }
     }
 
     [SuppressMessage(
@@ -26,7 +26,7 @@ public static class DependencyInterfaceContainer
         "S3885:\"Assembly.Load\" should be used",
         Justification = "Necessary to prevent duplicate type declarations.")]
     public static IEnumerable<Assembly> LoadAssemblies(IEnumerable<string> paths) =>
-        paths.Select(x => Assembly.LoadFrom(Path.GetFullPath(x)));
+        paths.Select(path => Assembly.LoadFrom(Path.GetFullPath(path)));
 
     public static void RegisterIDependencies(IServiceCollection services, IEnumerable<Assembly> assemblies = null)
     {
@@ -34,9 +34,9 @@ public static class DependencyInterfaceContainer
 
         assemblies ??= AppDomain.CurrentDomain.GetAssemblies();
         var types = assemblies
-            .Where(a => !a.IsDynamic)
-            .SelectMany(a => a.GetExportedTypes())
-            .Where(t => t.IsClass && !t.IsAbstract && iDependencyType.IsAssignableFrom(t))
+            .Where(assembly => !assembly.IsDynamic)
+            .SelectMany(assembly => assembly.GetExportedTypes())
+            .Where(type => type.IsClass && !type.IsAbstract && iDependencyType.IsAssignableFrom(type))
             .Distinct();
 
         foreach (var implementationType in types)

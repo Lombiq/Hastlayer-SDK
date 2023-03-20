@@ -685,10 +685,10 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         if (!receivingParameters.Any()) return Enumerable.Empty<IVhdlElement>();
 
-        return passedBackParameters.Select(parameter => new Assignment
+        return passedBackParameters.Select(passedBack => new Assignment
         {
-            AssignTo = receivingParameters.Single(p => p.TargetParameterName == parameter.TargetParameterName),
-            Expression = parameter.ToReference(),
+            AssignTo = receivingParameters.Single(receiving => receiving.TargetParameterName == passedBack.TargetParameterName),
+            Expression = passedBack.ToReference(),
         });
     }
 
@@ -797,11 +797,10 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         if (!targetParameters.Any()) return Enumerable.Empty<IVhdlElement>();
 
-        return passedParameters.Select(parameter => new Assignment
+        return passedParameters.Select(passed => new Assignment
         {
-            AssignTo = targetParameters
-                        .Single(p => p.TargetParameterName == parameter.TargetParameterName),
-            Expression = parameter.ToReference(),
+            AssignTo = targetParameters.Single(target => target.TargetParameterName == passed.TargetParameterName),
+            Expression = passed.ToReference(),
         });
     }
 

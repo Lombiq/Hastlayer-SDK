@@ -13,9 +13,9 @@ public static class MemoryConfigurationHelper
         memory.MinimumPrefix = 4;
 
         if (!hardwareGeneration.CustomConfiguration.TryGetValue("OpenClConfiguration", out var value)) return;
-        var custom = (value is JObject jObject ? jObject : JObject.FromObject(value))
+        var custom = (value as JObject ?? JObject.FromObject(value))
             .Properties()
-            .ToDictionary(x => x.Name, x => x.Value);
+            .ToDictionary(property => property.Name, property => property.Value);
         if (custom.TryGetValue(nameof(memory.Alignment), out var alignment)) memory.Alignment = alignment.Value<int>();
         if (custom.TryGetValue(nameof(memory.MinimumPrefix), out var prefix)) memory.MinimumPrefix = prefix.Value<int>();
     }

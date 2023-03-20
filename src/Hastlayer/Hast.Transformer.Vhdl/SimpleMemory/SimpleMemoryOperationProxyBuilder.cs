@@ -14,7 +14,7 @@ public class SimpleMemoryOperationProxyBuilder : ISimpleMemoryOperationProxyBuil
 {
     public IArchitectureComponent BuildProxy(IEnumerable<IArchitectureComponent> components)
     {
-        var simpleMemoryUsingComponents = components.Where(c => c.AreSimpleMemorySignalsAdded());
+        var simpleMemoryUsingComponents = components.Where(component => component.AreSimpleMemorySignalsAdded());
 
         const string proxyComponentName = "System.Void Hast::SimpleMemoryOperationProxy()";
 
@@ -97,7 +97,7 @@ public class SimpleMemoryOperationProxyBuilder : ISimpleMemoryOperationProxyBuil
         {
             AssignTo = portName.ToExtendedVhdlId().ToVhdlSignalReference(),
             Expression = BinaryChainBuilder.BuildBinaryChain(
-                components.Select(c => c.CreateSimpleMemorySignalReference(portName)),
+                components.Select(component => component.CreateSimpleMemorySignalReference(portName)),
                 BinaryOperator.Or),
         };
 }

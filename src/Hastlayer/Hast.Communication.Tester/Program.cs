@@ -309,7 +309,7 @@ public static class Program
     {
         try
         {
-            Parser.Default.ParseArguments<Options>(args).WithParsed(o => CommandLineOptions = o);
+            Parser.Default.ParseArguments<Options>(args).WithParsed(options => CommandLineOptions = options);
             if (CommandLineOptions == null) return;
 
             var hastlayerConfiguration = new HastlayerConfiguration();

@@ -15,7 +15,7 @@ public class TypeDeclarationLookupTableFactory : ITypeDeclarationLookupTableFact
             // Attributes can be copied into multiple assemblies having the exact same name and everything so excluding
             // them here.
             .Where(declaration => !declaration.GetActualType().IsAttribute())
-            .ToDictionary(d => d.GetActualTypeFullName());
+            .ToDictionary(declaration => declaration.GetActualTypeFullName());
 
         return new TypeDeclarationLookupTable(typeDeclarations);
     }

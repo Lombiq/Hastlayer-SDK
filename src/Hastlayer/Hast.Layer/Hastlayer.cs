@@ -213,7 +213,7 @@ public sealed class Hastlayer : IHastlayer
                 .GetSection(nameof(HardwareGenerationConfiguration))
                 .GetSection(nameof(HardwareGenerationConfiguration.CustomConfiguration))
                 .GetChildren()
-                .Where(x => !configuration.CustomConfiguration.ContainsKey(x.Key));
+                .Where(section => !configuration.CustomConfiguration.ContainsKey(section.Key));
             foreach (var item in newCustomConfigurations)
             {
                 configuration.CustomConfiguration[item.Key] =

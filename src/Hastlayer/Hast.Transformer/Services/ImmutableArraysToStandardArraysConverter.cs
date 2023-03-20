@@ -324,7 +324,7 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
         private static void ThrowIfMultipleMembersWithTheNameExist(EntityDeclaration entityDeclaration)
         {
             var fullName = entityDeclaration.GetFullName();
-            if (entityDeclaration.FindFirstParentTypeDeclaration().Members.Count(m => m.GetFullName() == fullName) > 1)
+            if (entityDeclaration.FindFirstParentTypeDeclaration().Members.Count(member => member.GetFullName() == fullName) > 1)
             {
                 throw new NotSupportedException(
                     $"ImmutableArrays are converted into standard arrays. After such conversions a new member " +

@@ -11,7 +11,7 @@ public class SimpleMemoryUsageVerifier : ISimpleMemoryUsageVerifier
     {
         foreach (var type in syntaxTree.GetAllTypeDeclarations())
         {
-            foreach (var member in type.Members.Where(m => m.IsHardwareEntryPointMember()))
+            foreach (var member in type.Members.Where(member => member.IsHardwareEntryPointMember()))
             {
                 if (member is not MethodDeclaration method) continue;
 

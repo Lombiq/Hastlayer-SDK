@@ -26,10 +26,10 @@ public static class CliHelper
             .ExecuteBufferedAsync();
 
         return result.StandardOutput
-            .Split('\n')
-            .Select(x => x.Trim())
+            .SplitByNewLines()
+            .Select(line => line.Trim())
             .Where(File.Exists)
-            .Select(x => new FileInfo(x));
+            .Select(line => new FileInfo(line));
     }
 
     public static async Task StreamAsync(

@@ -172,9 +172,9 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
         Func<Result, int, Exception> mapper)
     {
         var errors = results
-            .Select((x, i) => (Result: x, Index: i))
-            .Where(x => x.Result != Result.Success)
-            .Select(x => mapper(x.Result, x.Index))
+            .Select((result, index) => (Value: result, Index: index))
+            .Where(result => result.Value != Result.Success)
+            .Select(result => mapper(result.Value, result.Index))
             .ToList();
         return errors.Count > 0 ? new AggregateException(errors) : null;
     }

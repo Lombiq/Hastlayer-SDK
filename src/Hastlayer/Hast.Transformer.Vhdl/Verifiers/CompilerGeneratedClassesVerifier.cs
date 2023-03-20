@@ -50,8 +50,9 @@ public class CompilerGeneratedClassesVerifier : IVerifyer
 
         var fullName = memberReferenceExpression.GetMemberResolveResult().GetFullName();
 
-        var field = fields.Values
-            .SingleOrDefault(f => f.GetMemberResolveResult().GetFullName() == fullName);
+        var field = fields
+            .Values
+            .SingleOrDefault(field => field.GetMemberResolveResult().GetFullName() == fullName);
 
         // The field won't be on the compiler-generated class if the member reference accesses a user-defined type's
         // field.

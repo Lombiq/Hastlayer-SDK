@@ -36,7 +36,7 @@ public static class TypeExtensions
 
     public static bool IsAttribute(this IType type) =>
         // ILSpy has such an IsAttributeType() method but it's private.
-        type.GetNonInterfaceBaseTypes().Any(t => t.IsKnownType(KnownTypeCode.Attribute));
+        type.GetNonInterfaceBaseTypes().Any(baseType => baseType.IsKnownType(KnownTypeCode.Attribute));
 
     public static bool IsClass(this IType type) => type.Kind == TypeKind.Class;
 

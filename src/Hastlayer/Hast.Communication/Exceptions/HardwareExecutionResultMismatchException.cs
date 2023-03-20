@@ -62,9 +62,9 @@ public class HardwareExecutionResultMismatchException : Exception
                 "The hardware or software result was not supplied." :
                 $"index: {ResultMemoryIndex}, " +
                     $"hardware result: {{ {string.Join(", ", HardwareResult)} }} " +
-                    $"{{ {string.Join(", ", HardwareResult.Select(r => Convert.ToString(r, 16)))} }}, " +
+                    $"{{ {string.Join(", ", HardwareResult.Select(result => Convert.ToString(result, 16)))} }}, " +
                     $"software result: {{ {string.Join(", ", SoftwareResult)} }} " +
-                    $"{{ {string.Join(", ", SoftwareResult.Select(r => Convert.ToString(r, 16)))} }}";
+                    $"{{ {string.Join(", ", SoftwareResult.Select(result => Convert.ToString(result, 16)))} }}";
     }
 
     [DebuggerDisplay("{ToString()}")]

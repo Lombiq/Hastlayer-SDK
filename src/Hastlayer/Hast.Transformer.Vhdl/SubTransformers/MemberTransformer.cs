@@ -96,7 +96,7 @@ public class MemberTransformer : IMemberTransformer
                     memberTransformerTasks.Add(_pocoTransformer.TransformAsync(typeDeclaration, transformationContext));
                 }
 
-                traverseTo = traverseTo.Where(n => n.NodeType is NodeType.Member or NodeType.TypeDeclaration);
+                traverseTo = traverseTo.Where(childNode => childNode.NodeType is NodeType.Member or NodeType.TypeDeclaration);
                 return TransformChildMembers(memberTransformerTasks, traverseTo, transformationContext);
             case ClassType.Enum:
                 return memberTransformerTasks; // Enums are transformed separately.

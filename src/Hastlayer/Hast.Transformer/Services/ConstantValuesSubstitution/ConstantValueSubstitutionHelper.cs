@@ -22,9 +22,9 @@ internal static class ConstantValueSubstitutionHelper
         string memberFullName,
         ITypeDeclarationLookupTable typeDeclarationLookupTable) =>
         constructorDeclaration
-            .FindFirstChildOfType<MemberReferenceExpression>(m =>
-                m.FindMemberDeclaration(typeDeclarationLookupTable, findLeftmostMemberIfRecursive: true)?.GetFullName() == memberFullName &&
-                m.Target.Is<IdentifierExpression>(identifier => identifier.Identifier == "this"));
+            .FindFirstChildOfType<MemberReferenceExpression>(member =>
+                member.FindMemberDeclaration(typeDeclarationLookupTable, findLeftmostMemberIfRecursive: true)?.GetFullName() == memberFullName &&
+                member.Target.Is<IdentifierExpression>(identifier => identifier.Identifier == "this"));
 
     public static ParameterDeclaration FindConstructorParameterForPassedExpression(
         ObjectCreateExpression objectCreateExpression,

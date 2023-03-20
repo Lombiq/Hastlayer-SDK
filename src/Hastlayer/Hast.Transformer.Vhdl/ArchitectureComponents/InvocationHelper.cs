@@ -72,7 +72,7 @@ internal static class InvocationHelper
         return new IfElse<IBlockElement>
         {
             Condition = BinaryChainBuilder.BuildBinaryChain(
-                Enumerable.Range(0, degreeOfParallelism).Select(i => CreateStartedEqualsFinishedBinary(i)),
+                Enumerable.Range(0, degreeOfParallelism).Select(CreateStartedEqualsFinishedBinary),
                 waitForAll ? BinaryOperator.And : BinaryOperator.Or),
             True = allInvokedStateMachinesFinishedIfElseTrue,
         };
