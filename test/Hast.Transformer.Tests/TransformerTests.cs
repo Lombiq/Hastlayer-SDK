@@ -32,6 +32,7 @@ public class TransformerTests
         _mocker = new AutoMocker();
 
         // The order here is important because some of the earlier services are dependencies of later ones.
+        _mocker.Use<IHashProvider>(_mocker.CreateInstance<Sha256HashProvider>());
         _mocker.Use<IJsonConverter>(_mocker.CreateInstance<DefaultJsonConverter>());
         _mocker.Use<IMemberSuitabilityChecker>(_mocker.CreateInstance<MemberSuitabilityChecker>());
         _mocker.Use<ITypeDeclarationLookupTableFactory>(_mocker.CreateInstance<TypeDeclarationLookupTableFactory>());
