@@ -768,11 +768,7 @@ public class ExpressionTransformer : IExpressionTransformer
             var initializationValue = field.DataType.DefaultValue;
 
             // Initializing fields with their explicit defaults.
-            var fieldDeclaration = typeDeclaration?
-                .Members
-                .SingleOrDefault(member =>
-                    member.Is<FieldDeclaration>(f =>
-                        f.Variables.Single().Name == field.Name.TrimExtendedVhdlIdDelimiters()));
+            var fieldDeclaration = GetFieldDeclaration<FieldDeclaration>(typeDeclaration, member => member.Variables.Single().Name, field);
             if ((fieldDeclaration as FieldDeclaration)?.Variables?.SingleOrDefault()?.Initializer is { } fieldInitializer &&
                 fieldInitializer != Expression.Null)
             {
@@ -781,11 +777,7 @@ public class ExpressionTransformer : IExpressionTransformer
 
             // Initializing properties with their explicit defaults.
             else if (
-                typeDeclaration?
-                    .Members
-                    .SingleOrDefault(member =>
-                        member.Is<PropertyDeclaration>(p =>
-                            p.Name == field.Name.TrimExtendedVhdlIdDelimiters())) is PropertyDeclaration propertyDeclaration &&
+                GetFieldDeclaration<PropertyDeclaration>(typeDeclaration, member => member.Name, field) is PropertyDeclaration propertyDeclaration &&
                 propertyDeclaration.Initializer != Expression.Null)
             {
                 initializationValue = Transform(propertyDeclaration.Initializer, context) as Value;
@@ -818,6 +810,17 @@ public class ExpressionTransformer : IExpressionTransformer
 
         return result;
     }
+
+    private static EntityDeclaration GetFieldDeclaration<T>(
+        TypeDeclaration typeDeclaration,
+        Func<T, string> nameSelector,
+        IDataObject field)
+        where T : AstNode =>
+        typeDeclaration?
+            .Members
+            .SingleOrDefault(member =>
+                member.Is<T>(member =>
+                    nameSelector(member) == field.Name.TrimExtendedVhdlIdDelimiters()));
 
     private static MethodDeclaration GetTargetMethod(Expression firstArgument, ITypeDeclarationLookupTable typeDeclarationLookupTable)
     {
