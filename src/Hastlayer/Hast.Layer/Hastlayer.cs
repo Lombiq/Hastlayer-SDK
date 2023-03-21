@@ -1,6 +1,4 @@
-using Hast.Catapult;
 using Hast.Catapult.Drivers;
-using Hast.Catapult.Models;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;

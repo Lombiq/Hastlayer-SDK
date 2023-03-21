@@ -1,6 +1,4 @@
-using Hast.Catapult;
 using Hast.Catapult.Drivers;
-using Hast.Catapult.Models;
 using System.Linq;
 using System.Threading.Tasks;
 using Xunit;

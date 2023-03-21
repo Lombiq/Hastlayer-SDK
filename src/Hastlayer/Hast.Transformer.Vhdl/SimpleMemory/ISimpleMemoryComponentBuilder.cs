@@ -1,5 +1,4 @@
 using Hast.Common.Interfaces;
-using Hast.Transformer.SimpleMemory;
 using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.VhdlBuilder.Representation.Declaration;
 using System.Collections.Generic;
