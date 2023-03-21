@@ -104,7 +104,7 @@ Comparing the Zynq-7000 FPGA accelerated performance to the ARM CPU on the same 
 - Host: [ARM dual-core Cortex-A9 MPCore APU with a base clock of 667 MHz.](https://www.xilinx.com/support/documentation/data_sheets/ds190-Zynq-7000-Overview.pdf)
 - Both have access to 1 GB (32-bit) DDR3L SDRAM.
 - Trenz reported the typical power consumption as about 5W. Using an inline mains energy meter we've measured 4.6W minimum. The numbers in the table below show the measured maximums. Two separate builds were repeatedly executed in a loops during measurement. One build only executed the CPU version, while the other only the FPGA version.
-- The script _[zynq-benchmark.dot.sh](../Hast.Abstractions/Hast.Vitis.Abstractions/Docs/Attachments/zynq-benchmark.dot.sh)_ with helpful functions used for the benchmarking is attached. The _dot_ in the name indicates that it should be sourced with the [dot command](https://en.wikipedia.org/wiki/Dot_(command)) in Bash.
+- The script _[zynq-benchmark.dot.sh](../src/Hastlayer/Hast.Vitis/Docs/Attachments/zynq-benchmark.dot.sh)_ with helpful functions used for the benchmarking is attached. The _dot_ in the name indicates that it should be sourced with the [dot command](https://en.wikipedia.org/wiki/Dot_(command)) in Bash.
 
 ### Measurements
 

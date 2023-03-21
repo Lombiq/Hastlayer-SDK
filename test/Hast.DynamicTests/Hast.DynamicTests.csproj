@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <StartupObject>Hast.DynamicTests.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Properties\AssemblyInfo.cs" />
+    <Content Include="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="xunit.runner.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestInputAssemblies\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj" />
+    <ProjectReference Include="..\Hast.Transformer.Vhdl.Tests\Hast.Transformer.Vhdl.Tests.csproj" />
+  </ItemGroup>
+</Project>

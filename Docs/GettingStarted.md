@@ -36,4 +36,4 @@ If everything is alright follow up with the rest of this documentation to write 
 ## Device-specific documentation
 
 You can find out more about these devices from their Hastlayer driver's documentation:
-- [Xilinx Vitis, Azure NP, Zynq](../Hast.Abstractions/Hast.Vitis.Abstractions/Readme.md)
+- [Xilinx Vitis, Azure NP, Zynq](../src/Hastlayer/Hast.Vitis/Readme.md)

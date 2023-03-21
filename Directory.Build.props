@@ -1,3 +1,9 @@
 <Project>
   <Import Project="tools/Lombiq.Analyzers/Lombiq.Analyzers/Build.props" />
+
+  <ItemGroup Condition="$(ProjectName.StartsWith('Hast.')) and $(GenerateAssemblyInfo) == 'false'">
+    <Compile Include="$(SolutionDir)\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
 </Project>

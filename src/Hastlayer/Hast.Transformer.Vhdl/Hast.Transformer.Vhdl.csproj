@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Events\**" />
+    <Compile Remove="Hast.Transformer.Vhdl.Tests\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <EmbeddedResource Remove="Hast.Transformer.Vhdl.Tests\**" />
+    <None Remove="Events\**" />
+    <None Remove="Hast.Transformer.Vhdl.Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VhdlLibraries\TypeConversion.vhd" />
+    <EmbeddedResource Include="VhdlLibraries\SimpleMemory.vhd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj" />
+    <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="JsonNet.PrivateSettersContractResolvers.Source">
+      <Version>0.1.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Memory" Version="4.5.4" />
+  </ItemGroup>
+</Project>
