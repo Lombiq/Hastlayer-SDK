@@ -20,8 +20,8 @@ public abstract class VitisDeviceDriverBase : DeviceDriverBase
             Name = DeviceName,
             ClockFrequencyHz = ClockFrequencyMhz * Mhz,
             SupportedCommunicationChannelNames = new[] { Constants.VitisCommunicationChannelName },
-            // While there is 64GB DDR RAM the max object size in .NET is 2GB. So until we add paging to SimpleMemory
-            // the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
+            // While there is much more DDR RAM on the device, the max object size in .NET is 2GB. So until we add
+            // paging to SimpleMemory the limit is 2GB, see: https://github.com/Lombiq/Hastlayer-SDK/issues/27
             AvailableMemoryBytes = 2 * GigaByte,
             SupportedPlatforms = string.IsNullOrEmpty(PlatformName) ? Array.Empty<string>() : new[] { PlatformName },
         });
