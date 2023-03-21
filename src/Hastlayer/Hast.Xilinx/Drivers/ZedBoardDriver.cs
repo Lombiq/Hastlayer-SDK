@@ -4,9 +4,9 @@ namespace Hast.Xilinx.Drivers;
 
 public class ZedBoardDriver : ZynqDriverBase
 {
-    public const string DeviceName = "ZedBoard";
+    public override string DeviceName => "ZedBoard";
 
     public ZedBoardDriver(ITimingReportParser timingReportParser)
-        : base(DeviceName, timingReportParser)
+        : base(timingReportParser)
     { }
 }

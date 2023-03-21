@@ -11,13 +11,8 @@ namespace Hast.Xilinx.Drivers;
 
 public abstract class VitisDeviceDriverBase : DeviceDriverBase
 {
-    private readonly Lazy<IDeviceManifest> _deviceManifest;
-
-    public abstract string DeviceName { get; }
     public abstract string PlatformName { get; }
     public abstract uint ClockFrequencyMhz { get; }
-
-    public override IDeviceManifest DeviceManifest => _deviceManifest.Value;
 
     protected VitisDeviceDriverBase(ITimingReportParser timingReportParser)
         : base(timingReportParser) =>
