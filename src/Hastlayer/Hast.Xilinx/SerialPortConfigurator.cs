@@ -11,8 +11,8 @@ public class SerialPortConfigurator : PipelineStepBase, ISerialPortConfigurator
     public void ConfigureSerialPort(SerialPort serialPort, IHardwareExecutionContext hardwareExecutionContext)
     {
         if (hardwareExecutionContext.HardwareRepresentation.DeviceManifest.Name is
-            not Nexys4DdrDriver.DeviceName and
-            not NexysA7Driver.DeviceName)
+            not Nexys4DdrDriver.Nexys4Ddr and
+            not NexysA7Driver.NexysA7)
         {
             return;
         }

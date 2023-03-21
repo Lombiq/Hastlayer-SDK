@@ -4,9 +4,11 @@ namespace Hast.Xilinx.Drivers;
 
 public class NexysA7Driver : NexysDriverBase
 {
-    public override string DeviceName => "Nexys A7";
+    public const string NexysA7 = "Nexys A7";
 
-    public NexysA7Driver(ITimingReportParser timingReportParser)
+    public override string DeviceName => NexysA7;
+
+    public NexysA7Driver(ITimingReportParser timingReportParser = null)
         : base(timingReportParser)
     { }
 }

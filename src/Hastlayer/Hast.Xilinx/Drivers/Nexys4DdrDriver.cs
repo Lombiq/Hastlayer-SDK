@@ -4,9 +4,11 @@ namespace Hast.Xilinx.Drivers;
 
 public class Nexys4DdrDriver : NexysDriverBase
 {
-    public override string DeviceName => "Nexys4 DDR";
+    public const string Nexys4Ddr = "Nexys4 DDR";
 
-    public Nexys4DdrDriver(ITimingReportParser timingReportParser)
+    public override string DeviceName => Nexys4Ddr;
+
+    public Nexys4DdrDriver(ITimingReportParser timingReportParser = null)
         : base(timingReportParser)
     { }
 }

@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.TestInputs.Dynamic;
 using Hast.Transformer.Vhdl.Configuration;
+using Hast.Xilinx.Drivers;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -23,7 +24,7 @@ internal static class TestExecutor
         where T : DynamicTestInputBase, new()
     {
         using var hastlayer = Hastlayer.Create();
-        var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+        var configuration = new NexysA7Driver().ToHardwareGenerationConfiguration("HardwareFramework");
 
         configurator(configuration);
 

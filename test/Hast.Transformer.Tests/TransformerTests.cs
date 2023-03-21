@@ -214,7 +214,7 @@ public class TransformerTests
 
     private static HardwareGenerationConfiguration CreateConfig()
     {
-        var configuration = new HardwareGenerationConfiguration(Nexys4DdrDriver.DeviceName, hardwareFrameworkPath: null);
+        var configuration = new Nexys4DdrDriver().ToHardwareGenerationConfiguration();
         configuration.TransformerConfiguration().UseSimpleMemory = false;
         return configuration;
     }

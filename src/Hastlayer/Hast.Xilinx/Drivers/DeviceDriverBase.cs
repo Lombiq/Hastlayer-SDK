@@ -3,6 +3,7 @@ using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using System;
+using System.Collections.Generic;
 
 namespace Hast.Xilinx.Drivers;
 
@@ -22,6 +23,8 @@ public abstract class DeviceDriverBase : IDeviceDriver
     {
         get
         {
+            if (_timingReportParser == null) return null;
+
             lock (_timingReportParserLock)
             {
                 _timingReport ??= _timingReportParser.Parse(
@@ -39,4 +42,16 @@ public abstract class DeviceDriverBase : IDeviceDriver
         _timingReportParser = timingReportParser;
 
     public abstract void ConfigureMemory(MemoryConfiguration memory, IHardwareGenerationConfiguration hardwareGeneration);
+
+    public HardwareGenerationConfiguration ToHardwareGenerationConfiguration(
+        string hardwareFrameworkPath = null,
+        IDictionary<string, object> customConfiguration = null,
+        IList<string> hardwareEntryPointMemberFullNames = null,
+        IList<string> hardwareEntryPointMemberNamePrefixes = null) =>
+        new(
+            DeviceName,
+            hardwareFrameworkPath,
+            customConfiguration,
+            hardwareEntryPointMemberFullNames,
+            hardwareEntryPointMemberNamePrefixes);
 }

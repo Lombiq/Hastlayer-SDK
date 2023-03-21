@@ -10,8 +10,8 @@ public class XilinxSamplesVerificationTests : SamplesVerificationTestsBase
 {
     private static readonly string[] _devicesToTest =
     {
-        Nexys4DdrDriver.DeviceName,
-        AlveoU50Driver.DeviceName,
+        new Nexys4DdrDriver(timingReportParser: null).DeviceName,
+        new AlveoU50Driver(timingReportParser: null).DeviceName,
     };
 
     public static IEnumerable<object[]> AllDevices => _devicesToTest.Select(name => new object[] { name });

@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
+using Hast.Xilinx.Drivers;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 
@@ -8,7 +9,7 @@ using var hastlayer = Hastlayer.Create();
 
 #region Configuration
 
-var configuration = new HardwareGenerationConfiguration("Nexys A7", "HardwareFramework");
+var configuration = new NexysA7Driver().ToHardwareGenerationConfiguration("HardwareFramework");
 
 configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 

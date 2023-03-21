@@ -19,7 +19,7 @@ namespace Hast.Transformer.Vhdl.Tests;
 public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBase
 {
     protected virtual bool UseStubMemberSuitabilityChecker => true;
-    protected virtual string DeviceName => Nexys4DdrDriver.DeviceName;
+    protected virtual string DeviceName => Nexys4DdrDriver.Nexys4Ddr;
 
     protected VhdlTransformingTestFixtureBase()
     {
@@ -49,7 +49,7 @@ public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBa
         string deviceName = null)
     {
         deviceName ??= DeviceName;
-        var configuration = new HardwareGenerationConfiguration(deviceName, hardwareFrameworkPath: null) { EnableCaching = false };
+        var configuration = new HardwareGenerationConfiguration(deviceName) { EnableCaching = false };
         configurationModifier?.Invoke(configuration);
         return (VhdlHardwareDescription)await transformer.TransformAsync(assemblies, configuration);
     }
