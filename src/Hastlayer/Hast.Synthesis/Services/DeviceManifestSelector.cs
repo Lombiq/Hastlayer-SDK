@@ -7,6 +7,7 @@ namespace Hast.Synthesis.Services;
 public class DeviceManifestSelector : IDeviceManifestSelector
 {
     private readonly IEnumerable<IDeviceDriver> _deviceDrivers;
+    
     public DeviceManifestSelector(IEnumerable<IDeviceDriver> deviceDrivers) =>
         _deviceDrivers = deviceDrivers;
 
