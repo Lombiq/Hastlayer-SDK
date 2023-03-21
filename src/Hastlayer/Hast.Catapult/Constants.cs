@@ -5,7 +5,8 @@ namespace Hast.Catapult;
 
 public static class Constants
 {
-    public const string ChannelName = "Catapult";
+    public const string Catapult = nameof(Catapult);
+    public const string ChannelName = Catapult;
 
     public const string DefaultLibraryPath = "FpgaCoreLib";
 
