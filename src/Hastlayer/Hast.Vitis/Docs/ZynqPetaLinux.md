@@ -44,7 +44,7 @@ Continue with the PetaLinux installation:
 ./petalinux-v2020.2-final-installer.run --dir ~/petalinux20202 --platform "arm"
 ```
 
-If everything was all right the above command will prompt you with several licence viewers. Naturally you carefully read through each navigating with <kbd>PageDown</kbd> and then exiting with <kbd>Q</kbd>.
+If everything was all right the above command will prompt you with several license viewers. Naturally you carefully read through each navigating with <kbd>PageDown</kbd> and then exiting with <kbd>Q</kbd>.
 
 Before using the PetaLinux tools you first have to set up the environment:
 
