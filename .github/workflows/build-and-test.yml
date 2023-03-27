@@ -15,8 +15,8 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
-      timeout-minutes: 15
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      timeout-minutes: 60
       build-configuration: Debug
 
   build-and-test-larger-runners1:
@@ -26,8 +26,8 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
-      timeout-minutes: 15
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      timeout-minutes: 60
       build-configuration: Debug
 
   build-and-test-larger-runners2:
@@ -37,8 +37,8 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
-      timeout-minutes: 15
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      timeout-minutes: 60
       build-configuration: Debug
 
   build-and-test-larger-runners3:
@@ -48,8 +48,8 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
-      timeout-minutes: 15
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      timeout-minutes: 60
       build-configuration: Debug
 
   build-and-test-larger-runners4:
@@ -59,7 +59,7 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
-      timeout-minutes: 15
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      timeout-minutes: 60
       build-configuration: Debug
 
