@@ -15,7 +15,7 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-2vcpu']"
       timeout-minutes: 60
       build-configuration: Debug
 
@@ -26,7 +26,7 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-2vcpu']"
       timeout-minutes: 60
       build-configuration: Debug
 
@@ -37,7 +37,7 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-2vcpu']"
       timeout-minutes: 60
       build-configuration: Debug
 
@@ -48,7 +48,7 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-2vcpu']"
       timeout-minutes: 60
       build-configuration: Debug
 
@@ -59,7 +59,7 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-1vcpu']"
+      machine-types: "['ubuntu-22.04', 'gitrunners-ubuntu-2204-x64-2vcpu']"
       timeout-minutes: 60
       build-configuration: Debug
 
