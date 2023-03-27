@@ -8,34 +8,58 @@ on:
       - dev
 
 jobs:
-  build-and-test-larger-runners:
+  build-and-test-larger-runners0:
     if: github.ref_name != github.event.repository.default_branch
-    name: Build and Test (larger runners)
+    name: Build and Test (larger runners)0
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04-4core']"
+      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
       timeout-minutes: 15
       build-configuration: Debug
 
-  build-and-test-standard-runners:
-    if: github.ref_name == github.event.repository.default_branch
-    name: Build and Test (standard runners)
+  build-and-test-larger-runners1:
+    if: github.ref_name != github.event.repository.default_branch
+    name: Build and Test (larger runners)1
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
-      # If we'll have another concurrent job in this workflow then the next line should be removed.
+        # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      timeout-minutes: 30
+      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
+      timeout-minutes: 15
       build-configuration: Debug
 
-  post-pull-request-checks-automation:
-    name: Post Pull Request Checks Automation
-    needs: [build-and-test-larger-runners]
-    if: github.event.pull_request != ''
-    uses: Lombiq/GitHub-Actions/.github/workflows/post-pull-request-checks-automation.yml@dev
-    secrets:
-      JIRA_BASE_URL: ${{ secrets.DEFAULT_JIRA_BASE_URL }}
-      JIRA_USER_EMAIL: ${{ secrets.DEFAULT_JIRA_USER_EMAIL }}
-      JIRA_API_TOKEN: ${{ secrets.DEFAULT_JIRA_API_TOKEN }}
-      MERGE_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
+  build-and-test-larger-runners2:
+    if: github.ref_name != github.event.repository.default_branch
+    name: Build and Test (larger runners)2
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
+    with:
+        # If we'll have another concurrent job in this workflow then the next line should be removed.
+      cancel-workflow-on-failure: "false"
+      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
+      timeout-minutes: 15
+      build-configuration: Debug
+
+  build-and-test-larger-runners3:
+    if: github.ref_name != github.event.repository.default_branch
+    name: Build and Test (larger runners)3
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
+    with:
+        # If we'll have another concurrent job in this workflow then the next line should be removed.
+      cancel-workflow-on-failure: "false"
+      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
+      timeout-minutes: 15
+      build-configuration: Debug
+
+  build-and-test-larger-runners4:
+    if: github.ref_name != github.event.repository.default_branch
+    name: Build and Test (larger runners)4
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
+    with:
+        # If we'll have another concurrent job in this workflow then the next line should be removed.
+      cancel-workflow-on-failure: "false"
+      machine-types: "['ubuntu-22.04-4core', 'gitrunners-ubuntu-2204-x64-4vcpu']"
+      timeout-minutes: 15
+      build-configuration: Debug
+
