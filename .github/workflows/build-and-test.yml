@@ -15,7 +15,7 @@ jobs:
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
-      machine-types: "['ubuntu-22.04-4core']"
+      machine-types: "['gitrunners-ubuntu-2204-x64-4vcpu']"
       timeout-minutes: 15
       build-configuration: Debug
 
