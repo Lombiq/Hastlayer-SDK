@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{895E632F-FA72-4736-8701-229B8C2F4052}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{765A6EB0-438E-422C-ACDD-13544EFE6467}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Samples.Consumer", "src\Samples\Hast.Samples.Consumer\Hast.Samples.Consumer.csproj", "{7249D1E5-ABEC-40BB-9238-5E54AB0E1E94}"
@@ -118,8 +120,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.Tests", "test\Hast.Vitis.Tests\Hast.Vitis.Tests.csproj", "{2C35ED12-118F-4953-B767-AC57E00FCF6D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis", "src\Hastlayer\Hast.Vitis\Hast.Vitis.csproj", "{24D02197-141A-4048-87D0-DA32003AAA9B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{895E632F-FA72-4736-8701-229B8C2F4052}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hastlayer", "Hastlayer", "{888BD5E2-5A38-4168-9D25-126806B5B38B}"
 EndProject
