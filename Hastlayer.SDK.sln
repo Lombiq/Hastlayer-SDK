@@ -62,6 +62,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 		License.md = License.md
 		NuGet.config = NuGet.config
+		NuGetIcon.png = NuGetIcon.png
 		Readme.md = Readme.md
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection
