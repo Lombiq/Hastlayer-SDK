@@ -4,7 +4,12 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
+    <Title></Title>
+    <Description> See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
+    <PackageProjectUrl></PackageProjectUrl>
   </PropertyGroup>
+  
   <ItemGroup>
     <Compile Remove="Events\**" />
     <Compile Remove="Hast.Transformer.Vhdl.Tests\**" />
@@ -13,14 +18,17 @@
     <None Remove="Events\**" />
     <None Remove="Hast.Transformer.Vhdl.Tests\**" />
   </ItemGroup>
+  
   <ItemGroup>
     <EmbeddedResource Include="VhdlLibraries\TypeConversion.vhd" />
     <EmbeddedResource Include="VhdlLibraries\SimpleMemory.vhd" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Hast.Transformer\Hast.Transformer.csproj" />
     <ProjectReference Include="..\Hast.VhdlBuilder\Hast.VhdlBuilder.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="JsonNet.PrivateSettersContractResolvers.Source">
       <Version>0.1.0</Version>

@@ -1,12 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.7.82" />
   </ItemGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\..\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
     <ProjectReference Include="..\Hast.Communication\Hast.Communication.csproj" />
