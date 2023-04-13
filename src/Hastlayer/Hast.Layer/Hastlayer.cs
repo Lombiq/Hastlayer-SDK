@@ -184,14 +184,10 @@ public sealed class Hastlayer : IHastlayer
 
             var deviceManifest = deviceManifestSelector
                 .GetSupportedDevices()
-                .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
-
-            if (deviceManifest == null)
-            {
+                .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName) ??
                 throw new HastlayerException(
                     "There is no supported device with the name \"" + configuration.DeviceName + "\". Did you install" +
                     " the necessary NuGet packages for the device you intend to use?");
-            }
 
             if (File.Exists(configuration.SingleBinaryPath))
             {
