@@ -13,7 +13,14 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Hastlayer\Hast.Algorithms\Hast.Algorithms.csproj" />
     <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(NuGetBuild)' != 'true'">
     <ProjectReference Include="..\..\Libraries\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(NuGetBuild)' == 'true'">
+    <PackageReference Include="Lombiq.Arithmetics" Version="0.0.1-alpha.0.hast-175" />
   </ItemGroup>
   
   <ItemGroup>
