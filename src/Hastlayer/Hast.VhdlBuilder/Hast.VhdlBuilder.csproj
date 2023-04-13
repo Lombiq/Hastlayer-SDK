@@ -4,10 +4,10 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
-    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
+    <Title>Hastlayer - VHDL Builder</Title>
+    <Description>A .NET VHDL code builder, i.e. you can build syntactically valid VHDL code with .NET constructs. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;VHDL;AST</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.VhdlBuilder</PackageProjectUrl>
   </PropertyGroup>
   
   <ItemGroup>

@@ -5,10 +5,10 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
+    <Title>Hastlayer - Transformer</Title>
+    <Description>Component dealing with transforming .NET assemblies into hardware description. See the project website for detailed documentation.</Description>
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Transformer</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

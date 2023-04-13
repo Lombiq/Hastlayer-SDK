@@ -1,3 +1,3 @@
-# Hastlayer - Xilinx
+# Hastlayer - Xilinx Driver
 
-Component specific to supporting Xilinx FPGAs.
+Driver and associated services to support Xilinx FPGAs.

@@ -4,10 +4,10 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
-    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
+    <Title>Hastlayer - VHDL</Title>
+    <Description>Component containing implementations for transforming .NET assemblies into VHDL hardware description. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;VHDL</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Transformer.Vhdl</PackageProjectUrl>
   </PropertyGroup>
   
   <ItemGroup>

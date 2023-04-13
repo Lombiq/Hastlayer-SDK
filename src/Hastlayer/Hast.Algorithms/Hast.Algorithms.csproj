@@ -3,10 +3,10 @@
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
-    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
+    <Title>Hastlayer - Algorithms</Title>
+    <Description>Some useful algorithms that are compatible with Hastlayer and thus can be used in hardware too. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Algorithms;MWC64X;RandomNumberGenerator;FixPoint</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Algorithms</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,10 +3,10 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
-    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
+    <Title>Hastlayer - Communication</Title>
+    <Description>Component dealing with the communication between the host and the hardware implementation. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Ethernet;UsbUart;Serial</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Communication</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

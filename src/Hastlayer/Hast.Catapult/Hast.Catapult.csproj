@@ -5,17 +5,19 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
-    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
+    <Title>Hastlayer - Catapult Driver</Title>
+    <Description>Driver and associated services to support Microsoft's Catapult FPGA platform. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Catapult</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Catapult</PackageProjectUrl>
   </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Transformer.Vhdl\Hast.Transformer.Vhdl.csproj" />
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="AdvancedDLSupport" Version="3.2.0" />
@@ -24,6 +26,7 @@
     <PackageReference Include="System.Reflection.Emit.ILGeneration" Version="4.7.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Remove="TimingReports\*.tsv" />
     <EmbeddedResource Include="TimingReports\*.tsv" />

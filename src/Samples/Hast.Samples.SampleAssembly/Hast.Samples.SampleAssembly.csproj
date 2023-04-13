@@ -4,8 +4,8 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>false</UseWindowsForms>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
+    <Title>Hastlayer - Sample Assembly</Title>
+    <Description>A project that contains Hastlayer-compatible sample algorithms that can be transformed from another project. See the project website for detailed documentation.</Description>
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
     <PackageProjectUrl></PackageProjectUrl>
   </PropertyGroup>

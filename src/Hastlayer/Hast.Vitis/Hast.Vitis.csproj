@@ -5,10 +5,10 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);Container\**</DefaultItemExcludes>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>Hast.Vitis</RootNamespace>
-    <Title></Title>
-    <Description> See the project website for detailed documentation.</Description>
-    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
+    <Title>Hastlayer - Vitis Driver</Title>
+    <Description>This project contains the communication service used to connect with Xilinx's Vitis Unified Software Platform devices, such as the Xilinx Alveo U250 FPGA accelerator card via the OpenCL library. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Xilinx;Vitis;Vivado;Alveo</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Vitis</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
