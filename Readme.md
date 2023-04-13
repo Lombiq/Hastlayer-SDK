@@ -1,5 +1,7 @@
 # Hastlayer SDK
 
+[![Hast.Layer NuGet](https://img.shields.io/nuget/v/Hast.Layer?label=Hast.Layer)](https://www.nuget.org/packages/Hast.Layer/)
+
 [![Build and Test](https://github.com/Lombiq/Hastlayer-SDK/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Lombiq/Hastlayer-SDK/actions/workflows/build-and-test.yml)
 
 ## About

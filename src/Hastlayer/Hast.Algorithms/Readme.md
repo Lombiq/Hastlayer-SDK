@@ -1,5 +1,7 @@
 # Hastlayer - Algorithms
 
+[![Hast.Algorithms NuGet](https://img.shields.io/nuget/v/Hast.Algorithms?label=Hast.Algorithms)](https://www.nuget.org/packages/Hast.Algorithms/)
+
 Some useful algorithms that are compatible with Hastlayer and thus can be used in hardware too.
 
 Includes:

@@ -1,5 +1,7 @@
 # Hastlayer - Communication
 
+[![Hast.Communication NuGet](https://img.shields.io/nuget/v/Hast.Communication?label=Hast.Communication)](https://www.nuget.org/packages/Hast.Communication/)
+
 Component dealing with the communication between the host and the hardware implementation.
 
 ## Using Ethernet

@@ -1,5 +1,7 @@
 # Hastlayer - Vitis Driver
 
+[![Hast.Vitis NuGet](https://img.shields.io/nuget/v/Hast.Vitis?label=Hast.Vitis)](https://www.nuget.org/packages/Hast.Vitis/)
+
 ## Overview
 
 This project contains the communication service used to connect with Xilinx's [Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) devices, such as the [Xilinx Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html) FPGA accelerator card via the [OpenCL](https://www.khronos.org/opencl/) library.
