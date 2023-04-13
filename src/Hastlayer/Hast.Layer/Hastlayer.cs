@@ -189,7 +189,8 @@ public sealed class Hastlayer : IHastlayer
             if (deviceManifest == null)
             {
                 throw new HastlayerException(
-                    "There is no supported device with the name \"" + configuration.DeviceName + "\".");
+                    "There is no supported device with the name \"" + configuration.DeviceName + "\". Did you install" +
+                    " the necessary NuGet packages for the device you intend to use?");
             }
 
             if (File.Exists(configuration.SingleBinaryPath))
@@ -258,8 +259,10 @@ public sealed class Hastlayer : IHastlayer
                 };
 
                 var hardwareImplementationComposer = hardwareImplementationComposerSelector
-                                                         .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
-                                                     throw new HastlayerException("No suitable hardware implementation composer was found.");
+                    .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
+                    throw new HastlayerException(
+                        "No suitable hardware implementation composer was found.  Did you install the necessary " +
+                        "NuGet packages for the device you intend to use?");
 
                 hardwareImplementation = await hardwareImplementationComposer
                     .ComposeAsync(hardwareImplementationCompositionContext);
