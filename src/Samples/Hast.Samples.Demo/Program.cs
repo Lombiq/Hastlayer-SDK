@@ -32,7 +32,7 @@ Console.WriteLine("Hardware generation starts.");
 var hardwareRepresentation = await hastlayer.GenerateHardwareAsync(
     new[]
     {
-                typeof(ParallelAlgorithm).Assembly,
+        typeof(ParallelAlgorithm).Assembly,
     },
     configuration);
 
