@@ -56,7 +56,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.ClassStruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Invalid", "test\TestInputAssemblies\Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj", "{BB94F93A-F607-4A19-8127-7C8D333F8131}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hardware Frameworks", "Hardware Frameworks", "{D7193B9D-DDDA-49ED-9503-C63F1206FA2E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HardwareFrameworks", "HardwareFrameworks", "{D7193B9D-DDDA-49ED-9503-C63F1206FA2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5BF98C7-CE64-4E2E-B083-F987B33182D6}"
 	ProjectSection(SolutionItems) = preProject
@@ -95,7 +95,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.DynamicTests", "test\H
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Dynamic", "test\TestInputAssemblies\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj", "{91E069F5-88DC-4918-AA0D-791BF1C9B4DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.HardwareFramework", "src\Hardware Frameworks\Vitis\Hast.Vitis.HardwareFramework.csproj", "{38198457-A60A-4F35-9604-29B39B6D03A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.HardwareFramework", "src\HardwareFrameworks\Vitis\Hast.Vitis.HardwareFramework.csproj", "{38198457-A60A-4F35-9604-29B39B6D03A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.RestEase", "src\Libraries\External\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj", "{4C53D384-FDED-4608-8C9A-616531CA4832}"
 EndProject
