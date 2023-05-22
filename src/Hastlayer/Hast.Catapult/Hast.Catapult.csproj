@@ -9,6 +9,7 @@
     <Description>Driver and associated services to support Microsoft's Catapult FPGA platform. See the project website for detailed documentation.</Description>
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Catapult</PackageTags>
     <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Catapult</PackageProjectUrl>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
   
   <ItemGroup>

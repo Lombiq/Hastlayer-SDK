@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(NuGetBuild)' != 'true'">
-    <ProjectReference Include="..\..\Libraries\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
+    <ProjectReference Include="..\..\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(NuGetBuild)' == 'true'">
