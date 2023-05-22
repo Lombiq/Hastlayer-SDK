@@ -28,6 +28,7 @@
     <None Remove="xunit.runner.json" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Hastlayer\Hast.Catapult\Hast.Catapult.csproj" />
     <ProjectReference Include="..\..\src\Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj" />
     <ProjectReference Include="..\..\src\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj" />
     <ProjectReference Include="..\..\src\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />

@@ -1,4 +1,3 @@
-using Hast.Catapult.Drivers;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -54,7 +53,6 @@ public sealed class Hastlayer : IHastlayer
             typeof(IHardwareImplementationComposer).Assembly,
             typeof(ITransformer).Assembly,
             typeof(NexysA7Driver).Assembly,
-            typeof(CatapultDriver).Assembly,
         });
         assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
 
