@@ -11,3 +11,5 @@ jobs:
     uses: Lombiq/GitHub-Actions/.github/workflows/publish-nuget.yml@dev
     secrets:
       API_KEY: ${{ secrets.DEFAULT_NUGET_PUBLISH_API_KEY }}
+    with:
+      verbosity: detailed
