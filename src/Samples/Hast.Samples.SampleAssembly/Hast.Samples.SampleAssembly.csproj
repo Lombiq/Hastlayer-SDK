@@ -4,10 +4,6 @@
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>false</UseWindowsForms>
-    <Title>Hastlayer - Sample Assembly</Title>
-    <Description>A project that contains Hastlayer-compatible sample algorithms that can be transformed from another project. See the project website for detailed documentation.</Description>
-    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
-    <PackageProjectUrl></PackageProjectUrl>
   </PropertyGroup>
   
   <ItemGroup>
@@ -15,12 +11,8 @@
     <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(NuGetBuild)' != 'true'">
+  <ItemGroup>
     <ProjectReference Include="..\..\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(NuGetBuild)' == 'true'">
-    <PackageReference Include="Lombiq.Arithmetics" Version="0.0.1-alpha.0.hast-175" />
   </ItemGroup>
   
   <ItemGroup>
