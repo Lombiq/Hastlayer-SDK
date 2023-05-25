@@ -7,7 +7,7 @@
     </Compile>
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(IsPackable)' != 'false'">
+  <PropertyGroup>
     <Authors>Lombiq Technologies</Authors>
     <Copyright>Copyright © 2017, Lombiq Technologies Ltd.</Copyright>
     <Description>See the project website for detailed documentation.</Description>
@@ -18,7 +18,7 @@
     <PackageLicenseFile>License.md</PackageLicenseFile>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+  <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)License.md" Pack="true" PackagePath="" />
     <None Include="$(ProjectDir)Readme.md" />
     <None Include="$(MSBuildThisFileDirectory)NuGetIcon.png" Pack="true" PackagePath="" />
