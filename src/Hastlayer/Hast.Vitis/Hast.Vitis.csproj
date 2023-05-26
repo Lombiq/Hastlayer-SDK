@@ -25,16 +25,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\HardwareFrameworks\Vitis\Hast.Vitis.HardwareFramework.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(NuGetBuild)' != 'true'">
+    <ProjectReference Include="..\..\HardwareFrameworks\Vitis\Hast.Vitis.HardwareFramework.csproj" />
     <ProjectReference Include="..\..\Libraries\External\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(NuGetBuild)' == 'true'">
+    <PackageReference Include="Hast.Vitis.HardwareFramework" Version="0.0.1-alpha.0.hast-175" />
     <PackageReference Include="Lombiq.HelpfulLibraries.RestEase" Version="5.1.2" />
   </ItemGroup>
 
