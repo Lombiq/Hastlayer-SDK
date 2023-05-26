@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Title>Hastlayer - Communication</Title>
     <Description>Component dealing with the communication between the host and the hardware implementation. See the project website for detailed documentation.</Description>
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Ethernet;UsbUart;Serial</PackageTags>

@@ -1,12 +1,6 @@
 <Project>
   <Import Project="tools/Lombiq.Analyzers/Lombiq.Analyzers/Build.props" />
 
-  <ItemGroup Condition="$(ProjectName.StartsWith('Hast.')) and $(GenerateAssemblyInfo) == 'false'">
-    <Compile Include="$(SolutionDir)\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(IsPackable)' != 'false'">
     <Authors>Lombiq Technologies</Authors>
     <Copyright>Copyright © 2017, Lombiq Technologies Ltd.</Copyright>

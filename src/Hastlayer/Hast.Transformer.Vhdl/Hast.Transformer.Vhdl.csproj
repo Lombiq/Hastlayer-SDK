@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
     <Title>Hastlayer - VHDL</Title>
     <Description>Component containing implementations for transforming .NET assemblies into VHDL hardware description. See the project website for detailed documentation.</Description>

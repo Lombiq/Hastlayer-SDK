@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
     <Title>Hastlayer - Xilinx Driver</Title>
     <Description>Driver and associated services to support Xilinx FPGAs. See the project website for detailed documentation.</Description>

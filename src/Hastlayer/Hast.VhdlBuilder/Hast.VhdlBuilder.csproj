@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
     <Title>Hastlayer - VHDL Builder</Title>
     <Description>A .NET VHDL code builder, i.e. you can build syntactically valid VHDL code with .NET constructs. See the project website for detailed documentation.</Description>

@@ -2,7 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Title>Hastlayer - Algorithms</Title>
     <Description>Some useful algorithms that are compatible with Hastlayer and thus can be used in hardware too. See the project website for detailed documentation.</Description>
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Algorithms;MWC64X;RandomNumberGenerator;FixPoint</PackageTags>
