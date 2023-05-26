@@ -13,8 +13,6 @@ jobs:
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
-        # If we'll have another concurrent job in this workflow then the next line should be removed.
-      cancel-workflow-on-failure: "false"
       machine-types: "['gitrunners-ubuntu-2204-x64-4vcpu']"
       timeout-minutes: 15
       build-configuration: Debug
@@ -24,14 +22,19 @@ jobs:
     name: Build and Test (standard runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
-      # If we'll have another concurrent job in this workflow then the next line should be removed.
-      cancel-workflow-on-failure: "false"
       timeout-minutes: 30
       build-configuration: Debug
 
+  build-and-test-nuget-test:
+    name: Build and Test - NuGetTest solution
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-orchard-core.yml@dev
+    with:
+      build-directory: NuGetTest
+      timeout-minutes: 10
+
   post-pull-request-checks-automation:
     name: Post Pull Request Checks Automation
-    needs: [build-and-test-larger-runners]
+    needs: [build-and-test-larger-runners, build-and-test-nuget-test]
     if: github.event.pull_request != ''
     uses: Lombiq/GitHub-Actions/.github/workflows/post-pull-request-checks-automation.yml@dev
     secrets:
