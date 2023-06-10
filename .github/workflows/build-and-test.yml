@@ -27,7 +27,7 @@ jobs:
 
   build-and-test-nuget-test:
     name: Build and Test - NuGetTest solution
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-orchard-core.yml@issue/HAST-175
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/HAST-175
     with:
       build-directory: NuGetTest
       timeout-minutes: 10
