@@ -18,3 +18,4 @@ TestResults/*.trx
 /.editorconfig
 artifacts/
 /NuGetTest/**/.editorconfig
+*.received.vhdl

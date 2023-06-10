@@ -124,6 +124,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hastlayer", "Hastlayer", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{7801A347-ABC2-44FC-8DBC-3953EACF3886}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Transformer.Vhdl.Tests.Common", "test\Hast.Transformer.Vhdl.Tests.Common\Hast.Transformer.Vhdl.Tests.Common.csproj", "{562D7F26-5492-4F6F-870C-FDF9381A19AB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -270,6 +272,10 @@ Global
 		{24D02197-141A-4048-87D0-DA32003AAA9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24D02197-141A-4048-87D0-DA32003AAA9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24D02197-141A-4048-87D0-DA32003AAA9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562D7F26-5492-4F6F-870C-FDF9381A19AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562D7F26-5492-4F6F-870C-FDF9381A19AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562D7F26-5492-4F6F-870C-FDF9381A19AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562D7F26-5492-4F6F-870C-FDF9381A19AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -319,6 +325,7 @@ Global
 		{24D02197-141A-4048-87D0-DA32003AAA9B} = {51A02816-8D25-480F-9D28-EC7D05DC3F63}
 		{888BD5E2-5A38-4168-9D25-126806B5B38B} = {895E632F-FA72-4736-8701-229B8C2F4052}
 		{7801A347-ABC2-44FC-8DBC-3953EACF3886} = {75BB7270-46E1-47D9-91CA-2A7666251ED6}
+		{562D7F26-5492-4F6F-870C-FDF9381A19AB} = {5F3574F0-8780-4EB3-BB6B-9C9DC4D03F6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5C7FC230-A7A8-4206-A533-E41B96D6E222}
