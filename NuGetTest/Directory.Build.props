@@ -2,7 +2,6 @@
   
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <IsNuGetSolution>true</IsNuGetSolution>
   </PropertyGroup>
   
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />

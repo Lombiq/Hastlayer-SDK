@@ -4,14 +4,14 @@
     <OutputType>Library</OutputType>
     <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
-  
-  <ItemGroup Condition="$(IsNuGetSolution) != 'true'">
+
+  <ItemGroup Condition="$(SolutionName) != 'Hastlayer.SDK.NuGet'">
     <ProjectReference Include="..\..\Hastlayer\Hast.Algorithms\Hast.Algorithms.csproj" />
     <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
     <ProjectReference Include="..\..\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
   </ItemGroup>
 
-  <ItemGroup Condition="$(IsNuGetSolution) == 'true'">
+  <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK.NuGet'">
     <PackageReference Include="Hast.Algorithms" Version="0.0.1-alpha.5.hast-175" />
     <PackageReference Include="Hast.Layer" Version="0.0.1-alpha.5.hast-175" />
     <PackageReference Include="Lombiq.Arithmetics" Version="0.0.1-alpha.3.hast-175" />
