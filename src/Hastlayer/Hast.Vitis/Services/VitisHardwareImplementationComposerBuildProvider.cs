@@ -680,7 +680,8 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         if (!Directory.Exists(xilinxDirectoryPath))
         {
             throw new InvalidOperationException(
-                "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
+                "XILINX_XRT variable is not set or it is not pointing to an existing directory. Be sure to follow the" +
+                "Vits Hardware Framework's setup guidelines.");
         }
 
         return xilinxDirectoryPath;
