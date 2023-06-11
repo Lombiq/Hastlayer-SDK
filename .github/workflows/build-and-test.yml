@@ -11,7 +11,7 @@ jobs:
   build-and-test-larger-runners:
     if: github.ref_name != github.event.repository.default_branch
     name: Build and Test (larger runners)
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@fdc39377fc2f44ecda009310aa5373ee25df5d35
     with:
         # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
