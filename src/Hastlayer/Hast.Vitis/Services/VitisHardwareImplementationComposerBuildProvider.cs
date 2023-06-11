@@ -676,11 +676,13 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
     private static string GetXilinxDirectoryPathOrThrow()
     {
         var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
+
         if (!Directory.Exists(xilinxDirectoryPath))
         {
             throw new InvalidOperationException(
                 "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
         }
+
         return xilinxDirectoryPath;
     }
 }
