@@ -14,8 +14,3 @@ using System.Diagnostics.CodeAnalysis;
     "CA1303:Do not pass literals as localized parameters",
     Justification = "This app is not localized.",
     Scope = "module")]
-[assembly: SuppressMessage(
-    "StyleCop.CSharp.ReadabilityRules",
-    "SA1123:Do not place regions within elements",
-    Justification = "Regions help sectioning the demo making it more suitable for presentation.",
-    Scope = "module")]
