@@ -13,11 +13,12 @@ jobs:
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
-        # If we'll have another concurrent job in this workflow then the next line should be removed.
+      # If we'll have another concurrent job in this workflow then the next line should be removed.
       cancel-workflow-on-failure: "false"
       machine-types: "['gitrunners-ubuntu-2204-x64-4vcpu']"
       timeout-minutes: 15
       build-configuration: Debug
+      dotnet-version: 6.0.408
 
   build-and-test-standard-runners:
     if: github.ref_name == github.event.repository.default_branch
