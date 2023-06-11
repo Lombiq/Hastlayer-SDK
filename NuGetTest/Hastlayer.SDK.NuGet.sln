@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F0720CF4-F7EE-474C-9ED3-9EAF87809CE6}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.NuGet.Console", "Hast.NuGet.Console\Hast.NuGet.Console.csproj", "{B4127269-5C48-407D-8047-D52ACC457E9A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9012F5F2-D129-48A6-8FAF-4AF319B022A3}"
@@ -16,8 +18,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.NuGet.Vhdl.Tests", "Hast.NuGet.Vhdl.Tests\Hast.NuGet.Vhdl.Tests.csproj", "{2632CB8B-581E-4416-A591-7FB677860E87}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Transformer.Vhdl.Tests.Common", "..\test\Hast.Transformer.Vhdl.Tests.Common\Hast.Transformer.Vhdl.Tests.Common.csproj", "{E4625F85-397B-491B-AA4A-9B8F6269BE52}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F0720CF4-F7EE-474C-9ED3-9EAF87809CE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7BE5D360-7719-4F55-AD6B-8C86675D3CEB}"
 EndProject
