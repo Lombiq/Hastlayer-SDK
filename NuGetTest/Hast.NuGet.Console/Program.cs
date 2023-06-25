@@ -1,11 +1,12 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
+using Hast.Xilinx.Drivers;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 
 using var hastlayer = Hastlayer.Create();
 
-var configuration = new HardwareGenerationConfiguration("Alveo U250");
+var configuration = new HardwareGenerationConfiguration(AlveoU250Driver.AlveoU250);
 
 configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
