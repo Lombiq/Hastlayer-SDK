@@ -4,6 +4,8 @@
     <OutputType>Library</OutputType>
     <OutputPath>bin\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Note that while the NuGet properties are here for a possible future NuGet publishing, due to the platform being
+    deprecated, it's not actually published on NuGet. -->
     <Title>Hastlayer - Catapult Driver</Title>
     <Description>Driver and associated services to support Microsoft's Catapult FPGA platform. See the project website for detailed documentation.</Description>
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Catapult</PackageTags>
