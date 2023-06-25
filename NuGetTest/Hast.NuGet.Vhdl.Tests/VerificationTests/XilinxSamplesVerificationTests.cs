@@ -2,6 +2,7 @@ using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Configuration;
 using Hast.Transformer.Vhdl.Configuration;
+using Hast.Xilinx.Drivers;
 using Shouldly;
 using Xunit;
 
@@ -14,7 +15,7 @@ public class XilinxSamplesVerificationTests
     {
         using var hastlayer = Hastlayer.Create();
 
-        var configuration = new HardwareGenerationConfiguration("Nexys A7");
+        var configuration = new HardwareGenerationConfiguration(NexysA7Driver.NexysA7);
 
         configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
         configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
@@ -34,7 +35,7 @@ public class XilinxSamplesVerificationTests
             configuration);
 
         // Basic assertions.
-        hardwareRepresentation.DeviceManifest.Name.ShouldBe("Nexys A7");
+        hardwareRepresentation.DeviceManifest.Name.ShouldBe(NexysA7Driver.NexysA7);
         hardwareRepresentation.HardwareDescription.Language.ShouldBe("VHDL");
 
         // Verification of the VHDL source, from file, to make sure it's actually written too.

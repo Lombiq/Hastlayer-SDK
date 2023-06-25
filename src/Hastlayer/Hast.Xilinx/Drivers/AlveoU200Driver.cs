@@ -4,7 +4,9 @@ namespace Hast.Xilinx.Drivers;
 
 public class AlveoU200Driver : VitisDeviceDriverBase
 {
-    public override string DeviceName => "Alveo U200";
+    public const string AlveoU200 = "Alveo U200";
+
+    public override string DeviceName => AlveoU200;
     public override string PlatformName => "xilinx_u200";
     public override uint ClockFrequencyMhz => 300;
 
