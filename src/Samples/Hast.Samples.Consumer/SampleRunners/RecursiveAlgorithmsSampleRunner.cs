@@ -27,7 +27,8 @@ internal class RecursiveAlgorithmsSampleRunner : ISampleRunner
         // 720
         _ = recursiveAlgorithms.CalculateFactorial(6, hastlayer, hardwareRepresentation.HardwareGenerationConfiguration);
 
-        // The Fibonacci sample is deactivated because it gives wrong results on hardware. 233
+        // The Fibonacci sample is deactivated because it gives wrong results on hardware.
+        // 233
         //// var fibonacci = recursiveAlgorithms.CalculateFibonacchiSeries(
         ////     13,
         ////     hastlayer,
