@@ -18,7 +18,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Hast.Vitis.HardwareFramework" Version="0.0.1-alpha.0.hast-175" />
+    <PackageReference Include="Hast.Vitis.HardwareFramework" Version="1.2.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
   </ItemGroup>
 </Project>
