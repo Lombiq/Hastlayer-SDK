@@ -2,15 +2,23 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
-  <ItemGroup>
+
+  <ItemGroup Condition="$(SolutionName) != 'Hastlayer.SDK.NuGet'">
     <ProjectReference Include="..\..\Hastlayer\Hast.Algorithms\Hast.Algorithms.csproj" />
     <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
-    <ProjectReference Include="..\..\Libraries\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
+    <ProjectReference Include="..\..\Libraries\External\Lombiq.Arithmetics\Lombiq.Arithmetics.csproj" />
   </ItemGroup>
+
+  <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK.NuGet'">
+    <PackageReference Include="Hast.Algorithms" Version="0.0.1-alpha.6.hast-175" />
+    <PackageReference Include="Hast.Layer" Version="0.0.1-alpha.6.hast-175" />
+    <PackageReference Include="Lombiq.Arithmetics" Version="0.0.1-alpha.3.hast-175" />
+  </ItemGroup>
+  
   <ItemGroup>
+    <PackageReference Include="Hast.Vitis.HardwareFramework" Version="0.0.1-alpha.0.hast-175" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
   </ItemGroup>
 </Project>

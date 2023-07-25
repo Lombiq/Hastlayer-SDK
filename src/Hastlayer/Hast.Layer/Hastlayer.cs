@@ -1,4 +1,3 @@
-using Hast.Catapult.Drivers;
 using Hast.Common.Services;
 using Hast.Common.Validation;
 using Hast.Communication;
@@ -54,7 +53,6 @@ public sealed class Hastlayer : IHastlayer
             typeof(IHardwareImplementationComposer).Assembly,
             typeof(ITransformer).Assembly,
             typeof(NexysA7Driver).Assembly,
-            typeof(CatapultDriver).Assembly,
         });
         assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
 
@@ -184,13 +182,10 @@ public sealed class Hastlayer : IHastlayer
 
             var deviceManifest = deviceManifestSelector
                 .GetSupportedDevices()
-                .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName);
-
-            if (deviceManifest == null)
-            {
+                .FirstOrDefault(manifest => manifest.Name == configuration.DeviceName) ??
                 throw new HastlayerException(
-                    "There is no supported device with the name \"" + configuration.DeviceName + "\".");
-            }
+                    "There is no supported device with the name \"" + configuration.DeviceName + "\". Did you install" +
+                    " the necessary NuGet packages for the device you intend to use?");
 
             if (File.Exists(configuration.SingleBinaryPath))
             {
@@ -258,8 +253,10 @@ public sealed class Hastlayer : IHastlayer
                 };
 
                 var hardwareImplementationComposer = hardwareImplementationComposerSelector
-                                                         .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
-                                                     throw new HastlayerException("No suitable hardware implementation composer was found.");
+                    .GetHardwareImplementationComposer(hardwareImplementationCompositionContext) ??
+                    throw new HastlayerException(
+                        "No suitable hardware implementation composer was found.  Did you install the necessary " +
+                        "NuGet packages for the device you intend to use?");
 
                 hardwareImplementation = await hardwareImplementationComposer
                     .ComposeAsync(hardwareImplementationCompositionContext);

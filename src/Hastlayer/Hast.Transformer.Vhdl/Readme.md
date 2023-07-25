@@ -1,5 +1,7 @@
 # Hastlayer - VHDL
 
+[![Hast.Transformer.Vhdl NuGet](https://img.shields.io/nuget/v/Hast.Transformer.Vhdl?label=)](https://www.nuget.org/packages//)
+
 Component containing implementations for transforming .NET assemblies into VHDL hardware description.
 
 Note that when editing the VHDL libraries the changes should also be added to the Timing Tester too.

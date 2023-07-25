@@ -1,8 +1,10 @@
-# Hastlayer Vitis Driver
+# Hastlayer - Vitis Driver
+
+[![Hast.Vitis NuGet](https://img.shields.io/nuget/v/Hast.Vitis?label=Hast.Vitis)](https://www.nuget.org/packages/Hast.Vitis/)
 
 ## Overview
 
-This project contains the communication service used to connect with [Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) devices, such as the [Xilinx Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html) FPGA accelerator card via the [OpenCL](https://www.khronos.org/opencl/) library.
+This project contains the communication service used to connect with Xilinx's [Vitis Unified Software Platform](https://www.xilinx.com/products/design-tools/vitis/vitis-platform.html) devices, such as the [Xilinx Alveo U250](https://www.xilinx.com/products/boards-and-kits/alveo/u250.html) FPGA accelerator card via the [OpenCL](https://www.khronos.org/opencl/) library.
 
 Note that the SH scripts in this project should use LF line endings! You'll get errors such as `-bash: $'\r': command not found` otherwise.
 
@@ -16,7 +18,7 @@ For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
 
 ## Preparation
 
-Even after everything is installed, you have to make sure that the executing user's environment variables are correctly set by sourcing the setup scripts [as described in the documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/rbk1547656041291.html). You can add these commands into the `~/.bashrc` file to avoid having to type them every time. If running from the cloud, like Nimbix, this is probably handled automatically.
+Even after everything is installed, you have to make sure that the executing user's environment variables are correctly set by sourcing the setup scripts [as described in the documentation](https://docs.xilinx.com/r/en-US/ug1400-vitis-embedded/Setting-Up-the-Environment-to-Run-the-Vitis-Software-Platform). You can add these commands into the `~/.bashrc` file to avoid having to type them every time. If running from the cloud, like Nimbix, this is probably handled automatically.
 
 For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions](Docs/Nimbix.md).
 

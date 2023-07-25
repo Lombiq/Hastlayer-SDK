@@ -1,13 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
+    <Title>Hastlayer - Synthesis</Title>
+    <Description>Component dealing with synthesizing hardware from hardware description. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;HardwareSynthesis</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Synthesis</PackageProjectUrl>
   </PropertyGroup>
+  
   <ItemGroup>
     <ProjectReference Include="..\Hast.Common\Hast.Common.csproj" />
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="15.0.0" />
     <PackageReference Include="ICSharpCode.Decompiler" Version="7.1.0.6543" />

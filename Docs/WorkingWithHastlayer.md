@@ -2,18 +2,14 @@
 
 ## Creating a Hastlayer-using application
 
-The Hastlayer developer story is not ideal yet - we're working on improving it by [making the SDK available from NuGet](https://github.com/Lombiq/Hastlayer-SDK/issues/35). For now the below one is the easiest approach to add Hastlayer to your application:
+You can add Hastlayer to your app from NuGet, and then get going, see the steps below. You can also check out a sample solution right away, in [the _NuGetTest_ folder of this repo](../NuGetTest).
 
-1. Clone the Hastlayer repository into a subfolder of your application.
-2. Copy the Hastlayer solution file and add your own projects to it. This way you'll have all the necessary Hastlayer projects available. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
-3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
-
-When Hastlayer is updated you can just pull in changes from the official Hastlayer repository, but you'll need to keep your solution file up to date by hand.
-
-We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications. You can check out all the samples in the *Samples* solution folder.
+1. Install the latest version of the `Hast.Layer` NuGet package.
+2. You'll need a hardware framework too; currently, there's only one, so also install the latest version of the `Hast.Vitis.HardwareFramework` NuGet package. 
+3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples).
+4. You're ready to start working with Hastlayer! We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications. You can check out all the samples in the _Samples_ solution folder of the SDK.
 
 Since it's possible that due to bugs with some corner cases the hardware code will produce incorrect results it's good to configure Hastlayer to verify the hardware output while testing (and do tell Lombiq if you've found issues): You can do this by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects.
-
 
 ## Writing Hastlayer-compatible .NET code
 
@@ -119,7 +115,6 @@ Hastlayer, apart from the standard dependency injection extensibility (e.g. the 
 
 - .NET-style events: standard .NET events.
 - Pipeline steps: unlike event handlers, pipeline steps are executed in deterministic order and usually have a return value that is fed to the next pipeline step.
-
 
 ## Using dynamic constants
 

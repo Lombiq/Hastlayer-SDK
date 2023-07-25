@@ -9,7 +9,7 @@ using var hastlayer = Hastlayer.Create();
 
 #region Configuration
 
-var configuration = new NexysA7Driver().ToHardwareGenerationConfiguration("HardwareFramework");
+var configuration = new HardwareGenerationConfiguration(NexysA7Driver.NexysA7);
 
 configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 

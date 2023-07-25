@@ -3,14 +3,14 @@
 	url = https://github.com/Lombiq/.NET-Analyzers.git
 	branch = dev
 [submodule "src/Hardware Frameworks/Vitis"]
-	path = src/Hardware Frameworks/Vitis
+	path = src/HardwareFrameworks/Vitis
 	url = https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis
 	branch = dev
 [submodule "src/Libraries/Lombiq.HelpfulLibraries"]
-	path = src/Libraries/Lombiq.HelpfulLibraries
+	path = src/Libraries/External/Lombiq.HelpfulLibraries
 	url = https://github.com/Lombiq/Helpful-Libraries.git
 	branch = dev
 [submodule "src/Libraries/Lombiq.Arithmetics"]
-	path = src/Libraries/Lombiq.Arithmetics
+	path = src/Libraries/External/Lombiq.Arithmetics
 	url = https://github.com/Lombiq/Arithmetics.git
 	branch = dev

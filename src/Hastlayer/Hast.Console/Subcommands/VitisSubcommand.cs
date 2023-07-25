@@ -83,15 +83,17 @@ public class VitisSubcommand : ISubcommand
         var hardwareFrameworkPath = options.InputFilePath ?? "HardwareFramework";
         if (!Directory.Exists(hardwareFrameworkPath))
         {
-            throw new ArgumentException("Please set the -i option to point to the directory that contains the " +
-                                        "rtl directory! (eg. ./HardwareFramework)");
+            throw new ArgumentException(
+                "Please set the -i option to point to the directory that contains the rtl directory! (eg. " +
+                "./HardwareFramework)");
         }
 
         var outputSet = !string.IsNullOrWhiteSpace(options.OutputFilePath);
         if (outputSet && !options.OutputFilePath.EndsWithOrdinalIgnoreCase(".xclbin"))
         {
-            throw new ArgumentException("Please set the -o option to point to the location of the xclbin file " +
-                                        "(eg. ./VitisOutput/Hastlayer.xclbin) or omit it!");
+            throw new ArgumentException(
+                "Please set the -o option to point to the location of the xclbin file (eg. " +
+                "./VitisOutput/Hastlayer.xclbin) or omit it!");
         }
 
         var manifest = new VitisDeviceManifest { SupportedPlatforms = new[] { options.Platform ?? string.Empty } };

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hast.Algorithms" Version="0.0.1-alpha.6.hast-175" />
+    <PackageReference Include="Hast.Layer" Version="0.0.1-alpha.6.hast-175" />
+    <PackageReference Include="Hast.Vitis.HardwareFramework" Version="0.0.1-alpha.0.hast-175" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
+  </ItemGroup>
+
+</Project>

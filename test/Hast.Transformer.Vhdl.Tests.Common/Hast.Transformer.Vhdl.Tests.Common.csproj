@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Shouldly" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(SolutionName) != 'Hastlayer.SDK.NuGet'">
+    <ProjectReference Include="..\..\src\Libraries\External\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK.NuGet'">
+    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="5.1.2" />
+  </ItemGroup>
+  
+</Project>

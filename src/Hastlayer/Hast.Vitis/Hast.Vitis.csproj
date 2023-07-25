@@ -5,11 +5,15 @@
     <DefaultItemExcludes>$(DefaultItemExcludes);Container\**</DefaultItemExcludes>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <RootNamespace>Hast.Vitis</RootNamespace>
+    <Title>Hastlayer - Vitis Driver</Title>
+    <Description>This project contains the communication service used to connect with Xilinx's Vitis Unified Software Platform devices, such as the Xilinx Alveo U250 FPGA accelerator card via the OpenCL library. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;Xilinx;Vitis;Vivado;Alveo</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Vitis</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AdvancedDLSupport" Version="3.2.0" />
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.7.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,10 +25,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Hardware Frameworks\Vitis\Hast.Vitis.HardwareFramework.csproj" />
-    <ProjectReference Include="..\..\Libraries\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj" />
     <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
     <ProjectReference Include="..\Hast.Xilinx\Hast.Xilinx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(NuGetBuild)' != 'true'">
+    <ProjectReference Include="..\..\HardwareFrameworks\Vitis\Hast.Vitis.HardwareFramework.csproj" />
+    <ProjectReference Include="..\..\Libraries\External\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(NuGetBuild)' == 'true'">
+    <PackageReference Include="Hast.Vitis.HardwareFramework" Version="0.0.1-alpha.0.hast-175" />
+    <PackageReference Include="Lombiq.HelpfulLibraries.RestEase" Version="5.1.2" />
   </ItemGroup>
 
 </Project>

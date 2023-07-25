@@ -88,12 +88,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
                 "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html.");
         }
 
-        var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
-        if (!Directory.Exists(xilinxDirectoryPath))
-        {
-            throw new InvalidOperationException(
-                "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
-        }
+        GetXilinxDirectoryPathOrThrow();
 
         return BuildInnerAsync(context, implementation, deviceManifest);
     }
@@ -177,12 +172,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
 
         await ApplyTemplatesAsync(hardwareFrameworkPath, hashId, openClConfiguration, deviceManifest);
 
-        var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
-        if (!Directory.Exists(xilinxDirectoryPath))
-        {
-            throw new InvalidOperationException(
-                "XILINX_XRT variable is not set or it is not pointing to an existing directory.");
-        }
+        var xilinxDirectoryPath = GetXilinxDirectoryPathOrThrow();
 
         var platformsDirectories = new[]
             {
@@ -681,5 +671,19 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             "xclbin");
 
         return (hardwareFrameworkPath, tmpDirectoryPath, xclbinFilePath, xclbinDirectoryPath);
+    }
+
+    private static string GetXilinxDirectoryPathOrThrow()
+    {
+        var xilinxDirectoryPath = Path.GetDirectoryName(Environment.GetEnvironmentVariable("XILINX_XRT"));
+
+        if (!Directory.Exists(xilinxDirectoryPath))
+        {
+            throw new InvalidOperationException(
+                "XILINX_XRT variable is not set or it is not pointing to an existing directory. Be sure to follow the" +
+                "Vits Hardware Framework's setup guidelines.");
+        }
+
+        return xilinxDirectoryPath;
     }
 }

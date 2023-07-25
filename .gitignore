@@ -16,3 +16,6 @@ publish/
 TestResults/*.trx
 /global.json
 /.editorconfig
+artifacts/
+/NuGetTest/**/.editorconfig
+*.received.vhdl
