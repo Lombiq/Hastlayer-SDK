@@ -85,7 +85,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             // When cross-compiling, the build machine needs Vivado and XRT, but the FPGA machine only needs XRT.
             _logger.LogWarning(
                 "XILINX_VITIS variable is not set. This is required to build using Vivado. For further instructions " +
-                "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html.");
+                "see https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Building-and-Running-the-Application.");
         }
 
         GetXilinxDirectoryPathOrThrow();
