@@ -18,8 +18,8 @@ Note that the SH scripts in this project should use LF line endings! You'll get 
 
 Even after everything is installed, you have to make sure that the executing user's environment variables are correctly set by sourcing the setup scripts [as described in the documentation](https://docs.xilinx.com/r/en-US/ug1400-vitis-embedded/Setting-Up-the-Environment-to-Run-the-Vitis-Software-Platform). You can add these commands into the `~/.bashrc` file to avoid having to type them every time. If running from the cloud, like Nimbix, this is probably handled automatically.
 
-For Azure-specific instructions see [the Azure NP docs](Docs/AzureReadme.md).
-For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
+- For Azure-specific instructions see [the Azure NP docs](Docs/AzureReadme.md).
+- For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
 
 
 ## Cross Compilation
