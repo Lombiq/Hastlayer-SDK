@@ -13,8 +13,8 @@ yes | sudo apt-get --yes --force-yes install apt-transport-https
 sudo apt-get update
 # This installs the full SDK allowing you to build from source. If you only want to run the compiled application, you
 # can install just the runtime by swapping the comment on the two lines below.
-yes | sudo apt-get --yes --force-yes install dotnet-sdk-3.1
-# yes | sudo apt-get --yes --force-yes install dotnet-runtime-3.1
+yes | sudo apt-get --yes --force-yes install dotnet-sdk-7.0.x86_64
+# yes | sudo apt-get --yes --force-yes install dotnet-runtime-7.0.x86_64
 
 
 
