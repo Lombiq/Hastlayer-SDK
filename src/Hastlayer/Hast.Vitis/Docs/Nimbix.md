@@ -1,6 +1,8 @@
 # Nimbix usage
 
 
+> ⚠️ The instructions below are outdated, as the mentioned Alveo trial is no longer available. Some of the names have changed since Nibix has been acquired by Atos, and they only seem to offer enterprise solutions now. The rest of the document is retained in case it may be a useful reference for anyone who wants to use their services with Hastlayer.
+
 
 To run a Hastlayer applications on the [Nimbix HPC cloud](https://www.nimbix.net/), a compute instance must be launched, the dependencies installed and the host & device applications uploaded. You can find the necessary instructions here.
 
@@ -10,7 +12,7 @@ Be sure to also check out the [general docs](../Readme.md).
 ## Administrative steps
 
 1. Sign up for the [Nimbix Alveo Trial](https://www.nimbix.net/alveotrial).
-2. [Log into the Nimbix platform](https://platform.jarvice.com/) after the registration is complete. [Here](https://support.nimbix.net/hc/en-us/articles/360035258971-Getting-Started-With-Alveo-Trial) is also some more getting started information (note that the costs indicator only updates when you shut down your job).
+2. [Log into the Nimbix platform](https://cloud.nimbix.net/) after the registration is complete. [Here](https://support.nimbix.net/hc/en-us/articles/360035258971-Getting-Started-With-Alveo-Trial) is also some more getting started information (note that the costs indicator only updates when you shut down your job).
 3. On the right sidebar click "Compute" and find "Xilinx Vitis Unified Software Platform 2020.1" in the search bar. At the time of writing this that option lets you pick U50, U200, and U280.
 4. Activate "Desktop Mode with FPGA" and select the machine type with the appropriate board. Note that Nimbix might be overloaded and not every board you can select will actually be available, resulting in the job being queued forever. Check out the availability on the [Nimbix status page](https://status.jarvice.com/) first.
 5. You should be sent to the Dashboard section with a thumbnail for the running instance.

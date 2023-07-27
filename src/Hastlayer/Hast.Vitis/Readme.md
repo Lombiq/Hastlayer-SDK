@@ -8,8 +8,6 @@ This project contains the communication service used to connect with Xilinx's [V
 
 Note that the SH scripts in this project should use LF line endings! You'll get errors such as `-bash: $'\r': command not found` otherwise.
 
-For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
-
 ## Requirements
 
 * The system running the FPGA card must be 64-bit Linux (e.g. Ubuntu 18.04.2 LTS or CentOS 7.6). The installation instructions can be found here [in the platform documentation](https://www.xilinx.com/html_docs/xilinx2019_2/vitis_doc/vhc1571429852245.html).
@@ -20,7 +18,8 @@ For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
 
 Even after everything is installed, you have to make sure that the executing user's environment variables are correctly set by sourcing the setup scripts [as described in the documentation](https://docs.xilinx.com/r/en-US/ug1400-vitis-embedded/Setting-Up-the-Environment-to-Run-the-Vitis-Software-Platform). You can add these commands into the `~/.bashrc` file to avoid having to type them every time. If running from the cloud, like Nimbix, this is probably handled automatically.
 
-For setup instructions on the Nimbix cloud see the [Nimbix-specific instructions](Docs/Nimbix.md).
+For Azure-specific instructions see [the Azure NP docs](Docs/AzureReadme.md).
+For Nimbix-specific instructions see [the Nimbix docs](Docs/Nimbix.md).
 
 
 ## Cross Compilation
