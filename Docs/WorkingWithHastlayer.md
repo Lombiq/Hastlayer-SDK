@@ -4,7 +4,7 @@
 
 You can add Hastlayer to your app from NuGet, and then get going, see the steps below. You can also check out a sample solution right away, in [the _NuGetTest_ folder of this repo](../NuGetTest).
 
-1. Install the latest version of the `Hast.Layer` NuGet package.
+1. Install the latest version of the [`Hast.Layer` NuGet package](https://www.nuget.org/packages/Hast.Layer/).
 2. You'll need a hardware framework too; currently, there's only one, so also install the latest version of the `Hast.Vitis.HardwareFramework` NuGet package. 
 3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples).
 4. You're ready to start working with Hastlayer! We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications. You can check out all the samples in the _Samples_ solution folder of the SDK.
