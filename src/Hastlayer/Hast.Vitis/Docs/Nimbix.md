@@ -1,7 +1,7 @@
 # Nimbix usage
 
 
-> ⚠️ The instructions below are outdated, as the mentioned Alveo trial is no longer available. Some of the names have changed since Nibix has been acquired by Atos, and they only seem to offer enterprise solutions now. The rest of the document is retained in case it may be a useful reference for anyone who wants to use their services with Hastlayer.
+> ⚠️ The instructions below are outdated, as the mentioned Alveo trial is no longer available. Some of the names have changed since Nimbix has been acquired by Atos, and they only seem to offer enterprise solutions now. The rest of the document is retained in case it may be a useful reference for anyone who wants to use their services with Hastlayer.
 
 
 To run a Hastlayer applications on the [Nimbix HPC cloud](https://www.nimbix.net/), a compute instance must be launched, the dependencies installed and the host & device applications uploaded. You can find the necessary instructions here.
