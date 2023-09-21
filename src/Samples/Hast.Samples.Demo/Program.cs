@@ -1,5 +1,6 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Hast.Transformer.Configuration;
 using Hast.Transformer.Vhdl.Configuration;
 using Hast.Xilinx.Drivers;
 using Lombiq.HelpfulLibraries.Common.Utilities;
@@ -12,6 +13,12 @@ using var hastlayer = Hastlayer.Create();
 var configuration = new HardwareGenerationConfiguration(NexysA7Driver.NexysA7);
 
 configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
+
+#pragma warning disable S103 // Lines should not be too long
+configuration.TransformerConfiguration().ArrayLengths.Add(
+    "Hast.Samples.SampleAssembly.ParallelAlgorithm+TaskOutput Hast.Samples.SampleAssembly.ParallelAlgorithm+<>c::<Run>b__4_0(System.Object).arrayObject",
+    ParallelAlgorithm.ArrayLength);
+#pragma warning restore S103 // Lines should not be too long
 
 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 

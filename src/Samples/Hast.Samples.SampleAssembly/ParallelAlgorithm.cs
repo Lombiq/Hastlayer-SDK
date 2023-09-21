@@ -5,70 +5,61 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly;
 
-/// <summary>
-/// An embarrassingly parallel algorithm that is well suited to be accelerated with Hastlayer. Also see
-/// <c>ParallelAlgorithmSampleRunner</c> on what to configure to make this work.
-/// </summary>
 public class ParallelAlgorithm
 {
+    public const int ArrayLength = 10;
+
     private const int RunInputInt32Index = 0;
     private const int RunOutputInt32Index = 0;
 
-    // While 270 will also fit with ~77% of the resources being used that's very slow to compile in the Xilinx toolchain
-    // for the Nexys A7. The [Replaceable] enables the substitution of this static readonly field into constant literals
-    // wherever it is used. Check out the xmldoc of ReplaceableAttribute for further instructions.
-    // Warning: the outcome of the algorithm depends on this value so if you are running a prepared binary using the
-    // HardwareGenerationConfiguration.SingleBinaryPath make sure you are running with the same value it was built with.
-    // Otherwise you'll get mismatches.
     [Replaceable(nameof(ParallelAlgorithm) + "." + nameof(MaxDegreeOfParallelism))]
-    private static readonly int MaxDegreeOfParallelism = 260;
+    private static readonly int MaxDegreeOfParallelism = 2;
 
     public virtual void Run(SimpleMemory memory)
     {
-        var input = memory.ReadInt32(RunInputInt32Index);
-        var tasks = new Task<int>[MaxDegreeOfParallelism];
+        var someInput = memory.ReadInt32(RunInputInt32Index);
 
-        // Hastlayer will figure out how many Tasks you want to start if you kick them off in a loop like this. If this
-        // is more involved then you'll need to tell Hastlayer the level of parallelism, see the comment in
-        // ParallelAlgorithmSampleRunner.
+        var commonArray = new int[ArrayLength];
+
+        commonArray[0] = someInput;
+
+        var tasks = new Task<TaskOutput>[MaxDegreeOfParallelism];
+
         for (int i = 0; i < MaxDegreeOfParallelism; i++)
         {
             tasks[i] = Task.Factory.StartNew(
-                indexObject =>
+                arrayObject =>
                 {
-                    var index = (int)indexObject;
-                    int result = input + (index * 2);
+                    var localArray = (int[])arrayObject;
 
-                    var even = true;
-                    for (int j = 2; j < 9_999_999; j++)
+                    // You can read or write the local array here, but you can't access the common array.
+
+                    localArray[0] = 123;
+
+                    // Since Hastlayer doesn't yet support multi-dimensional arrays (see
+                    // https://github.com/Lombiq/Hastlayer-SDK/issues/10) you'll need to use some other type for output.
+
+                    return new TaskOutput
                     {
-                        if (even)
-                        {
-                            result += index;
-                        }
-                        else
-                        {
-                            result -= index;
-                        }
-
-                        even = !even;
-                    }
-
-                    return result;
+                        OutputArray = localArray,
+                        SomeOtherOutput = 42,
+                    };
                 },
-                i);
+                commonArray);
         }
 
-        // Task.WhenAny() can be used too.
         Task.WhenAll(tasks).Wait();
 
-        int output = 0;
         for (int i = 0; i < MaxDegreeOfParallelism; i++)
         {
-            output += tasks[i].Result;
+            // Do something with tasks[i].Result here.
         }
 
-        memory.WriteInt32(RunOutputInt32Index, output);
+        // Use memory.Write*() to write the output to the memory. You'll be able to read it from the host PC.
+        // You can also use the memory (which is actual RAM on the FPGA board) to store temporary data but usually
+        // that's not necessary and you can just use local variables. Keep in mind that on the FPGA there's no memory
+        // allocation for objects, a variable and any object you put into it will be just a bunch of hardware wires and
+        // registers.
     }
 
     public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
@@ -79,5 +70,11 @@ public class ParallelAlgorithm
         memory.WriteInt32(RunInputInt32Index, input);
         Run(memory);
         return memory.ReadInt32(RunOutputInt32Index);
+    }
+
+    private sealed class TaskOutput
+    {
+        public int[] OutputArray { get; set; }
+        public int SomeOtherOutput { get; set; }
     }
 }
