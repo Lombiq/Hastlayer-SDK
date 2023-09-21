@@ -215,6 +215,13 @@ internal class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
             {
                 AssignmentHandler = assignmentExpression =>
                 {
+                    // Only assignments where an array is assigned to another member/variable matters (excluding cases
+                    // where e.g. the right side is a method call with an array as an argument).
+                    if (assignmentExpression.Right is not IdentifierExpression or IndexerExpression or MemberReferenceExpression)
+                    {
+                        return;
+                    }
+
                     if (assignmentExpression.Left is MemberReferenceExpression memberReferenceExpression)
                     {
                         _arraySizeHolder.SetSize(
