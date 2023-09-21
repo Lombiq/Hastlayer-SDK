@@ -215,9 +215,12 @@ internal class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
             {
                 AssignmentHandler = assignmentExpression =>
                 {
-                    // Only assignments where an array is assigned to another member/variable matters (excluding cases
-                    // where e.g. the right side is a method call with an array as an argument).
-                    if (assignmentExpression.Right is not IdentifierExpression or IndexerExpression or MemberReferenceExpression)
+                    // Only assignments where an array is assigned to another member/variable matters, not just any
+                    // assignment where arrayHolder is on the right (excluding cases where e.g. the right side is a
+                    // method call with an array as an argument).
+                    if (assignmentExpression.Right != arrayHolder &&
+                        assignmentExpression.Right is InvocationExpression invocationExpression &&
+                            invocationExpression.Target != arrayHolder)
                     {
                         return;
                     }
