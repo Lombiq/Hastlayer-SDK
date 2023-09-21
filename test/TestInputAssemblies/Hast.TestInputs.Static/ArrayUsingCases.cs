@@ -4,9 +4,11 @@ namespace Hast.TestInputs.Static;
 
 public class ArrayUsingCases
 {
+    public const int TaskArrayLength = 10;
+
     public void PassArrayToTask()
     {
-        var array = new int[10];
+        var array = new int[TaskArrayLength];
         var tasks = new Task<int>[15];
 
         tasks[0] = Task.Factory.StartNew(
