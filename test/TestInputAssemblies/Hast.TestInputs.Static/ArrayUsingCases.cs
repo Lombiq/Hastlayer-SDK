@@ -1,7 +1,26 @@
+using System.Threading.Tasks;
+
 namespace Hast.TestInputs.Static;
 
 public class ArrayUsingCases
 {
+    public const int TaskArrayLength = 10;
+
+    public void PassArrayToTask()
+    {
+        var array = new int[TaskArrayLength];
+        var tasks = new Task<int>[15];
+
+        tasks[0] = Task.Factory.StartNew(
+            arrayObject =>
+            {
+                var localArray = (int[])arrayObject;
+                localArray[0] = 123;
+                return localArray[0];
+            },
+            array);
+    }
+
     public void PassArrayToConstructor()
     {
         var array = new int[5];

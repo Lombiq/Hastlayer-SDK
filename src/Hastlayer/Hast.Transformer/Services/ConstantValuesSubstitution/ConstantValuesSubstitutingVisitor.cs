@@ -256,9 +256,10 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
             }
         }
 
-        // Is this a const? Then we can just substitute it directly.
+        // Is this a const expression? Then we can just substitute it directly.
         var resolveResult = node.GetResolveResult();
-        if (resolveResult?.IsCompileTimeConstant == true &&
+        if (node is Expression &&
+            resolveResult?.IsCompileTimeConstant == true &&
             resolveResult.ConstantValue != null &&
             node is not PrimitiveExpression)
         {

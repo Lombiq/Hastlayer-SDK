@@ -10,9 +10,6 @@ public class ParallelCases
 
         for (uint i = 0; i < 3; i++)
         {
-            // Can't do it without passing CancellationToken which is not supported.
-#pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
-#pragma warning disable VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
             tasks[i] = Task.Factory.StartNew(
                 indexObject =>
                 {
@@ -21,8 +18,6 @@ public class ParallelCases
                     return index % 2 == 0;
                 },
                 i);
-#pragma warning restore VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
-#pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
         }
 
         // These two after each other don't make sense, but the test result will be still usable just for static
@@ -37,9 +32,6 @@ public class ParallelCases
 
         for (uint i = 0; i < 3; i++)
         {
-            // Can't do it without passing CancellationToken which is not supported.
-#pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
-#pragma warning disable VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
             tasks[i] = Task.Factory.StartNew(
                 indexObject =>
                 {
@@ -48,8 +40,6 @@ public class ParallelCases
                     return new Calculator { Number = index }.IsEven();
                 },
                 i);
-#pragma warning restore VSTHRD105 // Avoid method overloads that assume TaskScheduler.Current
-#pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
         }
 
         Task.WhenAll(tasks).Wait();

@@ -36,7 +36,9 @@ public class HardwareEntryPointsVerifier : IVerifyer
         {
             var unsupportedMembers = type
                 .Members
-                .Where(member => member is FieldDeclaration || member is PropertyDeclaration || member.GetFullName().IsConstructorName());
+                .Where(member =>
+                    (member is FieldDeclaration or PropertyDeclaration && !member.HasModifier(Modifiers.Const)) ||
+                    member.GetFullName().IsConstructorName());
             if (unsupportedMembers.Any())
             {
                 throw new NotSupportedException(

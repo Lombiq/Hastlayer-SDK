@@ -35,3 +35,11 @@ using static Hast.TestInputs.Base.SuppressionConstants;
     "S3353:Unchanged local variables should be \"const\"",
     Justification = ThatsThePoint,
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Reliability",
+    "CA2008:Do not create tasks without passing a TaskScheduler",
+    Justification = "Can't do it without passing CancellationToken which is not supported.")]
+[assembly: SuppressMessage(
+    "Usage",
+    "VSTHRD105:Avoid method overloads that assume TaskScheduler.Current",
+    Justification = "Can't do it without passing CancellationToken which is not supported.")]
