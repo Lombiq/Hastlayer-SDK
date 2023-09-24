@@ -1,4 +1,6 @@
+using Hast.Layer;
 using Hast.Synthesis.Services;
+using System;
 
 namespace Hast.Xilinx.Drivers;
 
@@ -13,6 +15,6 @@ public class AzureAlveoU250Driver : VitisDeviceDriverBase
     protected override string TimingReportFileName => nameof(AlveoU250Driver);
 
     public AzureAlveoU250Driver(ITimingReportParser timingReportParser)
-        : base(timingReportParser)
-    { }
+        : base(timingReportParser) =>
+        _deviceManifest = new Lazy<IDeviceManifest>(() => InitializeManifest(new AzureNpDeviceManifest()));
 }
