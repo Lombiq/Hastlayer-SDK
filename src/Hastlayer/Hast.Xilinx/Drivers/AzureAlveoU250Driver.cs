@@ -16,6 +16,9 @@ public class AzureAlveoU250Driver : VitisDeviceDriverBase
 
     public AzureAlveoU250Driver(ITimingReportParser timingReportParser)
         : base(timingReportParser) =>
-        _deviceManifest = new Lazy<IDeviceManifest>(() =>
-            InitializeManifest(new AzureNpDeviceManifest { RequiresDcpBinary = true }));
+        _deviceManifest = new Lazy<IDeviceManifest>(() => InitializeManifest(new AzureNpDeviceManifest
+        {
+            SupportsHbm = false,
+            RequiresDcpBinary = true,
+        }));
 }
