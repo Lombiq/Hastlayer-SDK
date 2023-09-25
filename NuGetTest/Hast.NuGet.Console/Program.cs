@@ -12,9 +12,11 @@ configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
-if (Environment.GetCommandLineArgs().FirstOrDefault() is { } path && File.Exists(path))
+var binaryPath = Environment.GetCommandLineArgs().FirstOrDefault(item => item.EndsWithOrdinalIgnoreCase(".xclbin"));
+if (File.Exists(binaryPath))
 {
-    configuration.SingleBinaryPath = path;
+    configuration.SingleBinaryPath = binaryPath;
+    Console.WriteLine($"Using the existing binary file \"{binaryPath}\". Compilation will be skipped.");
 }
 
 hastlayer.ExecutedOnHardware += (_, e) =>
