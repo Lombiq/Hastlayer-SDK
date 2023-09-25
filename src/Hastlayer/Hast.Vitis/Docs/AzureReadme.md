@@ -1,6 +1,6 @@
 # Using Hastlayer with Vitis boards on Azure NP Servers
 
-If you want work with an Alveo card on an Azure VM, you need to pick the Azure-specific device (currently only `Azure Alveo U250`). This alters some of the automatic compilation steps. After compilation it submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
+If you want work with an Alveo card on an [Azure NP-series VM](https://learn.microsoft.com/en-us/azure/virtual-machines/np-series), you need to pick the Azure-specific device (currently only `Azure Alveo U250`). This alters some of the automatic compilation steps. After compilation it submits your binary to an attestation server (via Azure Blob Storage) for automatic approval.
 
 ## Preparation
 

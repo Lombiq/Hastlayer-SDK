@@ -30,7 +30,12 @@ public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtur
                 new[] { typeof(ArrayUsingCases).Assembly },
                 configuration =>
                 {
-                    configuration.TransformerConfiguration().UseSimpleMemory = false;
+                    var transformerConfiguration = configuration.TransformerConfiguration();
+                    transformerConfiguration.UseSimpleMemory = false;
+                    // This shouldn't be necessary: https://github.com/Lombiq/Hastlayer-SDK/issues/112.
+                    transformerConfiguration.ArrayLengths.Add(
+                        "System.Int32 Hast.TestInputs.Static.ArrayUsingCases+<>c::<PassArrayToTask>b__1_0(System.Object).arrayObject",
+                        ArrayUsingCases.TaskArrayLength);
 
                     configuration
                         .TransformerConfiguration()
