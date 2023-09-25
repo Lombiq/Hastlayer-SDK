@@ -12,6 +12,11 @@ configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
+if (Environment.GetCommandLineArgs().FirstOrDefault() is { } path && File.Exists(path))
+{
+    configuration.SingleBinaryPath = path;
+}
+
 hastlayer.ExecutedOnHardware += (_, e) =>
     Console.WriteLine(
         StringHelper.ConcatenateConvertiblesInvariant(
