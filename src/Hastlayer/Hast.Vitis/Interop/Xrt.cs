@@ -12,7 +12,7 @@ namespace Hast.Vitis.Interop;
 /// <para>Source: <see href="https://github.com/Xilinx/XRT/blob/master/src/include/1_2/CL/cl_ext_xilinx.h"/>.</para>
 /// <para>
 /// Legacy layout is used since that's the one in the examples <see
-/// href="https://github.com/Xilinx/Vitis_Accel_Examples/blob/master/host/hbm_bandwidth/src/host.cpp">here</see>.
+/// href="https://github.com/Xilinx/Vitis_Accel_Examples/blob/2021.1/host/hbm_bandwidth/src/host.cpp">here</see>.
 /// </para>
 /// </remarks>
 // LayoutKind can't be Auto because this struct is exposed to unmanaged code.

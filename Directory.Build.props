@@ -1,6 +1,13 @@
 <Project>
   <Import Project="tools/Lombiq.Analyzers/Lombiq.Analyzers/Build.props" />
 
+  <!-- Prevents error NETSDK1152 (Found multiple publish output files with the same relative path) when publishing. This
+       error shows up in projects that have multiple indirect dependencies on Hast.Vitis.HardwareFramework that copies
+       HardwareFramework/opencl/src to the build directory. -->
+  <PropertyGroup>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(IsPackable)' != 'false'">
     <Authors>Lombiq Technologies</Authors>
     <Copyright>Copyright © 2017, Lombiq Technologies Ltd.</Copyright>

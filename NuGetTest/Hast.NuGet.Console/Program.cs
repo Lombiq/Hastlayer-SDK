@@ -12,6 +12,16 @@ configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
 
 configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlGenerationConfiguration.Debug;
 
+// To cross-compile, first run without any arguments (this will throw an exception during execution), then copy the
+// HardwareFramework directory to the remote device and pass the binary's path as the argument, e.g.:
+// dotnet Hast.NuGet.Console.dll HardwareFramework/bin/*.azure.xclbin
+var binaryPath = Environment.GetCommandLineArgs().FirstOrDefault(item => item.EndsWithOrdinalIgnoreCase(".xclbin"));
+if (File.Exists(binaryPath))
+{
+    configuration.SingleBinaryPath = binaryPath;
+    Console.WriteLine($"Using the existing binary file \"{binaryPath}\". Compilation will be skipped.");
+}
+
 hastlayer.ExecutedOnHardware += (_, e) =>
     Console.WriteLine(
         StringHelper.ConcatenateConvertiblesInvariant(

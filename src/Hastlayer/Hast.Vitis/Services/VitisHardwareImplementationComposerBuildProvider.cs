@@ -85,7 +85,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             // When cross-compiling, the build machine needs Vivado and XRT, but the FPGA machine only needs XRT.
             _logger.LogWarning(
                 "XILINX_VITIS variable is not set. This is required to build using Vivado. For further instructions " +
-                "see https://www.xilinx.com/html_docs/xilinx2020_1/vitis_doc/settingupvitisenvironment.html.");
+                "see https://docs.xilinx.com/r/en-US/ug1393-vitis-application-acceleration/Building-and-Running-the-Application.");
         }
 
         GetXilinxDirectoryPathOrThrow();
@@ -364,7 +364,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
             var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
             await _buildLogger.ExecuteWithLoggingAsync(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
-            File.Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json");
+            Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json", overwrite: false);
             ProgressMajor("Emulation configuration (emconfig) setup is finished.");
         }
     }
@@ -401,8 +401,8 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         if (binaryDirectoryPath != null) EnsureDirectoryExists(binaryDirectoryPath);
 
         var builtFilePath = Path.Combine(GetTmpDirectoryPath(hashId), $"hastip.{target}.xclbin");
-        File.Copy(builtFilePath, binaryPath);
-        File.Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension);
+        Copy(builtFilePath, binaryPath, overwrite: true);
+        Copy(builtFilePath + InfoFileExtension, binaryPath + InfoFileExtension, overwrite: true);
         if (disableHbm) File.Create(binaryPath + NoHbmFlagExtension).Dispose();
         ProgressMajor($"Files copied to binary folder ({builtFilePath}).");
     }
@@ -427,7 +427,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         var reportFiles = Directory.GetFiles(reportPath, "*.rpt");
         foreach (var reportFile in reportFiles)
         {
-            File.Copy(reportFile, Path.Combine(reportSavePath, Path.GetFileName(reportFile)));
+            Copy(reportFile, Path.Combine(reportSavePath, Path.GetFileName(reportFile)), overwrite: true);
         }
 
         var reportFilePath =
@@ -635,7 +635,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             if (file.EndsWith(".template", StringComparison.OrdinalIgnoreCase)) continue;
 
             var targetFilePath = Path.Combine(targetDirectoryPath, "IP", Path.GetFileName(file));
-            if (!File.Exists(targetFilePath)) File.Copy(file, targetFilePath);
+            Copy(file, targetFilePath, overwrite: false);
         }
     }
 
@@ -685,5 +685,16 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         }
 
         return xilinxDirectoryPath;
+    }
+
+    private static void Copy(string from, string to, bool overwrite)
+    {
+        ArgumentNullException.ThrowIfNull(from);
+        ArgumentNullException.ThrowIfNull(to);
+
+        if (overwrite || !File.Exists(to))
+        {
+            File.Copy(from, to, overwrite: true);
+        }
     }
 }
