@@ -40,7 +40,7 @@ That won't have an effect on the build machine because no file will be on that p
 
 Then rename each file replacing the _003494f20d9b2a7a3a8cc1d42a18a5ce6313962e565ad03d38cffd1505c391ee_ with _my-payload_ and copy them to the SD card using SFTP (_/media/sd-mmcblk0p1/_ directory).
 
-You can see an example of `HardwareGenerationConfiguration.SingleBinaryPath` usage in _Samples/Hast.Samples.Consumer/Program.cs_.
+You can see an example of `HardwareGenerationConfiguration.SingleBinaryPath` usage in _src/Samples/Hast.Samples.Consumer/Program.cs_.
 
 
 ## SD Card Preparation Steps
