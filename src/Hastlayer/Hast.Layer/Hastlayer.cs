@@ -144,6 +144,8 @@ public sealed class Hastlayer : IHastlayer
         IEnumerable<string> assemblyPaths,
         IHardwareGenerationConfiguration configuration)
     {
+        using var workingDirectory = new DirectoryScope(configuration.HardwareGenerationPath ?? AppDataFolder.AssemblyDirectory);
+
         // Avoid repeated multiple enumerations.
         var assembliesPaths = assemblyPaths.AsList();
 
