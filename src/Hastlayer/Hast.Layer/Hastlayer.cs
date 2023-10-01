@@ -119,12 +119,16 @@ public sealed class Hastlayer : IHastlayer
     /// </para>
     /// </remarks>
     /// <param name="configuration">Configuration for Hastlayer.</param>
+    /// <param name="inAssemblyDirectory">
+    /// If <see langword="true"/>, the executing assembly's directory is used instead of the current working directory.
+    /// </param>
     /// <returns>A newly created <see cref="Hastlayer"/> instance.</returns>
-    public static Hastlayer Create(IHastlayerConfiguration configuration)
+    public static Hastlayer Create(IHastlayerConfiguration configuration, bool inAssemblyDirectory = true)
     {
         Argument.ThrowIfNull(configuration, nameof(configuration));
         Argument.ThrowIfNull(configuration.Extensions, nameof(configuration.Extensions));
 
+        using var workingDirectory = new DirectoryScope(inAssemblyDirectory ? AppDataFolder.AssemblyDirectory : ".");
         var hastlayer = new Hastlayer(configuration);
         hastlayer.LoadHost();
         return hastlayer;

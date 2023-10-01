@@ -15,7 +15,7 @@ public class DirectoryScope : IDisposable
     public DirectoryScope(string path)
     {
         _oldPath = Environment.CurrentDirectory;
-        Environment.CurrentDirectory = path;
+        Directory.SetCurrentDirectory(string.IsNullOrWhiteSpace(path) ? "." : path.Trim());
     }
 
     public void Dispose()
@@ -28,7 +28,7 @@ public class DirectoryScope : IDisposable
     {
         if (!_disposed && Directory.Exists(_oldPath))
         {
-            Environment.CurrentDirectory = _oldPath;
+            Directory.SetCurrentDirectory(_oldPath);
         }
 
         _disposed = true;
