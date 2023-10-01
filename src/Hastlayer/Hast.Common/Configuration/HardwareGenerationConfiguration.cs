@@ -56,6 +56,9 @@ public class HardwareGenerationConfiguration : IHardwareGenerationConfiguration
     public string DeviceName { get; }
 
     /// <inheritdoc/>
+    public string HardwareGenerationPath { get; set; }
+
+    /// <inheritdoc/>
     public string HardwareFrameworkPath { get; }
 
     /// <summary>
