@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK.NuGet'">
-    <PackageReference Include="Hast.Algorithms" Version="2.1.1-alpha.2.hast-325" />
-    <PackageReference Include="Hast.Layer" Version="2.1.1-alpha.2.hast-325" />
+    <PackageReference Include="Hast.Algorithms" Version="2.1.1" />
+    <PackageReference Include="Hast.Layer" Version="2.1.1" />
     <PackageReference Include="Lombiq.Arithmetics" Version="0.0.1-alpha.3.hast-175" />
   </ItemGroup>
 
