@@ -62,9 +62,17 @@ public interface IHardwareGenerationConfiguration
     string DeviceName { get; }
 
     /// <summary>
+    /// Gets the file system path that's temporarily set as the working directory when
+    /// <c>IHastlayer.GenerateHardwareAsync()</c> is executed. If it's left <see langword="null"/> then the current
+    /// executing assembly's location is used.
+    /// </summary>
+    string HardwareGenerationPath { get; }
+
+    /// <summary>
     /// Gets the file system path here where the hardware framework is located. The file describing the hardware to be
     /// generated will be saved there as well as anything else necessary, and that framework will be used to implement
-    /// the hardware and configure the device.
+    /// the hardware and configure the device. If it's a relative path, it will be resolved inside the <see
+    /// cref="HardwareGenerationPath"/>.
     /// </summary>
     string HardwareFrameworkPath { get; }
 
