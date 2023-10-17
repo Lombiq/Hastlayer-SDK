@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
-internal class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
+internal sealed class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
 {
     private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
     private readonly IAstExpressionEvaluator _astExpressionEvaluator;

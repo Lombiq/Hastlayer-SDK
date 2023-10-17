@@ -10,7 +10,7 @@ namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 /// what's returned from a method can only be substituted if they have a globally unique value, since these are used not
 /// just from a single method (in contrast to variables). Thus these need special care, handling them here.
 /// </summary>
-internal class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
+internal sealed class GlobalValueHoldersHandlingVisitor : DepthFirstAstVisitor
 {
     private readonly ConstantValuesTable _constantValuesTable;
     private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;

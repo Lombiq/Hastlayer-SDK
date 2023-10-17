@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class RecursiveAlgorithmsSampleRunner : ISampleRunner
+internal sealed class RecursiveAlgorithmsSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration)
     {

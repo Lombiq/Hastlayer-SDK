@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class ParallelAlgorithmSampleRunner : ISampleRunner
+internal sealed class ParallelAlgorithmSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<ParallelAlgorithm>();

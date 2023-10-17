@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class MonteCarloPiEstimatorSampleRunner : ISampleRunner
+internal sealed class MonteCarloPiEstimatorSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration)
     {

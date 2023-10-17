@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class Fix64CalculatorSampleRunner : ISampleRunner
+internal sealed class Fix64CalculatorSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<Fix64Calculator>();

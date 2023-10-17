@@ -8,7 +8,7 @@ namespace Hast.Samples.Consumer.SampleRunners;
 /// <summary>
 /// See <see cref="Posit32CalculatorSampleRunner"/> for a more usable example.
 /// </summary>
-internal class PositCalculatorSampleRunner : ISampleRunner
+internal sealed class PositCalculatorSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration)
     {

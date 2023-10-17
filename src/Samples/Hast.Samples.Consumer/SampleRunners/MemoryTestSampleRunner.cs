@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class MemoryTestSampleRunner : ISampleRunner
+internal sealed class MemoryTestSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<MemoryTest>();

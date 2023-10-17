@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Models;
 
-internal class DeclarationReferenceMetadata
+internal sealed class DeclarationReferenceMetadata
 {
     public HashSet<AstNode> ReferencedFrom { get; private set; }
     public int ReferenceCount => ReferencedFrom.Count;

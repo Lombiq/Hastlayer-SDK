@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
-internal class ConstantValuesSubstitutingAstProcessor
+internal sealed class ConstantValuesSubstitutingAstProcessor
 {
     public ConstantValuesTable ConstantValuesTable { get; }
     public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
@@ -78,7 +78,7 @@ internal class ConstantValuesSubstitutingAstProcessor
         }
     }
 
-    public class ConstructorReference
+    public sealed class ConstructorReference
     {
         public MethodDeclaration Constructor { get; set; }
         public Expression OriginalAssignmentTarget { get; set; }

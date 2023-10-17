@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class ImageProcessingAlgorithmsSampleRunner : ISampleRunner
+internal sealed class ImageProcessingAlgorithmsSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<ImageContrastModifier>();
