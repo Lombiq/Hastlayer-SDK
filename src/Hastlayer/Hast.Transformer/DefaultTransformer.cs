@@ -214,7 +214,7 @@ public class DefaultTransformer : ITransformer
         }
 
         // Since this is about known (i.e. .NET built-in) types it doesn't matter which type system we use.
-        var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers.First().TypeSystem);
+        var knownTypeLookupTable = _knownTypeLookupTableFactory.Create(decompilers[0].TypeSystem);
         var arraySizeHolder = ArraySizeHolder.FromConfiguration(configuration);
 
         var convertersByName = _converters.ToDictionary(converter => converter.Name ?? converter.GetType().Name);

@@ -13,14 +13,14 @@ internal static class BinaryChainBuilder
 
         if (!expressionsList.Any()) return Empty.Instance;
 
-        var chainExpression = expressionsList.First();
+        var chainExpression = expressionsList[0];
 
         // Iteratively build a binary expression chain to.
         if (expressionsList.Count > 1)
         {
             var currentBinary = new Binary
             {
-                Left = expressionsList.Skip(1).First(),
+                Left = expressionsList[1],
                 Operator = binaryOperator,
             };
 
