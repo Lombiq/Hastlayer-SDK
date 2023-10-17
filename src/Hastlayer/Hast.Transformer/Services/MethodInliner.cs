@@ -78,7 +78,7 @@ public class MethodInliner : IConverter
         }
         while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
 
-        if (passCount == maxPassCount)
+        if (passCount >= maxPassCount)
         {
             throw new InvalidOperationException(StringHelper.CreateInvariant(
                 $"Method inlining needs more than {maxPassCount} passes through the syntax tree. This most possibly " +

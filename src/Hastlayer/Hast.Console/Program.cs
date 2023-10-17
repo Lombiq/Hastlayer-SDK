@@ -24,7 +24,7 @@ internal sealed class Program
             WriteLine("Subcommands:\n* {0}", allSubcommands);
         }
         else if (mainOptions.Subcommand?.ToUpperInvariant() is { } name &&
-                 _subcommands.SingleOrDefault(sub => sub.Key.ToUpperInvariant() == name) is { })
+                 _subcommands.Any(sub => sub.Key.ToUpperInvariant() == name))
         {
             WriteLine("Please put the subcommand name as the first argument!");
         }

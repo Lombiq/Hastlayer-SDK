@@ -104,13 +104,7 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     /// Returns a number indicating the sign of a Fix64 number. Returns 1 if the value is positive, 0 if is 0, and -1 if
     /// it is negative.
     /// </summary>
-    public static int Sign(Fix64 value) =>
-        value.RawValue switch
-        {
-            { } when value.RawValue < 0 => -1,
-            { } when value.RawValue > 0 => 1,
-            _ => 0,
-        };
+    public static int Sign(Fix64 value) => Math.Sign(value.RawValue);
 
     /// <summary>
     /// Returns the absolute value of a Fix64 number. Note: Abs(Fix64.MinValue) == Fix64.MaxValue.

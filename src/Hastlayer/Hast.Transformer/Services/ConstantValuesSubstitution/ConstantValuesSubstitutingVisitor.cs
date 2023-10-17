@@ -421,7 +421,7 @@ internal sealed class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
             {
                 ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
             }
-            else if (right != null)
+            else
             {
                 ConstantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, right, _constructor);
             }
