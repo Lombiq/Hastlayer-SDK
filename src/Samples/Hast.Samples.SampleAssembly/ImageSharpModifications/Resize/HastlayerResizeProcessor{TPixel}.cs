@@ -15,7 +15,7 @@ using static Hast.Samples.SampleAssembly.HastlayerAcceleratedImageSharp;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
-internal class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
+internal sealed class HastlayerResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
     where TPixel : unmanaged, IPixel<TPixel>
 {
     private readonly int _destinationWidth;
