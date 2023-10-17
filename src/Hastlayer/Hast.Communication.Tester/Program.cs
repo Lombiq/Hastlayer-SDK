@@ -65,9 +65,9 @@ public static class Program
         }
 
         // Try to load selected device or pick the first available if none were selected.
-        if (string.IsNullOrEmpty(CommandLineOptions.DeviceName)) CommandLineOptions.DeviceName = devices.First().Name;
-        var selectedDevice = devices.FirstOrDefault(device => device.Name == CommandLineOptions.DeviceName);
-        if (selectedDevice == null) throw new InvalidOperationException($"Target device '{CommandLineOptions.DeviceName}' not found!");
+        if (string.IsNullOrEmpty(CommandLineOptions.DeviceName)) CommandLineOptions.DeviceName = devices[0].Name;
+        var selectedDevice = devices.Find(device => device.Name == CommandLineOptions.DeviceName) ??
+            throw new InvalidOperationException($"Target device '{CommandLineOptions.DeviceName}' not found!");
         var channelName = selectedDevice.DefaultCommunicationChannelName;
 
         var prepend = Array.Empty<int>();

@@ -72,10 +72,9 @@ internal static class Program
         if (devices == null || !devices.Any()) throw new InvalidOperationException("No devices are available!");
 
         // Let's just use the first one that is available unless it's specified.
-        var targetDeviceName = consumerConfiguration.DeviceName.OrIfEmpty(devices.First().Name);
-        var selectedDevice = devices.FirstOrDefault(device => device.Name == targetDeviceName);
-        if (selectedDevice == null) throw new InvalidOperationException($"Target device '{targetDeviceName}' not found!");
-
+        var targetDeviceName = consumerConfiguration.DeviceName.OrIfEmpty(devices[0].Name);
+        var selectedDevice = devices.Find(device => device.Name == targetDeviceName) ??
+            throw new InvalidOperationException($"Target device '{targetDeviceName}' not found!");
         var configuration = new HardwareGenerationConfiguration(selectedDevice.Name, consumerConfiguration.HardwareFrameworkPath);
         var proxyConfiguration = new ProxyGenerationConfiguration
         {
