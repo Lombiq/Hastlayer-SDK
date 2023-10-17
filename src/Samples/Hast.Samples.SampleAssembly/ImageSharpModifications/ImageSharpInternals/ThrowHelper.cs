@@ -1,6 +1,7 @@
 // Copyright (c) Six Labors.
 // Licensed under the Apache License, Version 2.0.
 
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -77,7 +78,7 @@ internal static class ThrowHelper
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void ThrowArgumentOutOfRangeExceptionForMustBeSizedAtLeast(int minLength, string parameterName) =>
         ThrowArgumentException(
-            FormattableString.Invariant($"Spans must be at least of length {minLength}!"),
+            StringHelper.CreateInvariant($"Spans must be at least of length {minLength}!"),
             parameterName);
 
     /// <summary>

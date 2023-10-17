@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics;
 
@@ -18,7 +19,7 @@ public class ArrayType : ArrayTypeBase // Not named "Array" to avoid naming clas
         var vhdl = ElementType.ToReference().ToVhdl(vhdlGenerationOptions);
 
         return Terminated.Terminate(
-            FormattableString.Invariant($"type {shortName} is array ({range}) of {vhdl}"),
+            StringHelper.CreateInvariant($"type {shortName} is array ({range}) of {vhdl}"),
             vhdlGenerationOptions);
     }
 }

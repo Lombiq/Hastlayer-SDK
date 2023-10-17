@@ -1,4 +1,5 @@
 using Hast.VhdlBuilder.Extensions;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents;
@@ -24,7 +25,7 @@ public static class ArchitectureComponentNameHelper
         CreatePrefixedObjectName(componentName, NameSuffixes.Finished);
 
     public static string CreateIndexedComponentName(string componentName, int index) =>
-        FormattableString.Invariant($"{componentName}.{index}");
+        StringHelper.CreateInvariant($"{componentName}.{index}");
 
     public static string CreatePrefixedSegmentedObjectName(string componentName, params string[] segments) =>
         CreatePrefixedObjectName(componentName, string.Join(".", segments));

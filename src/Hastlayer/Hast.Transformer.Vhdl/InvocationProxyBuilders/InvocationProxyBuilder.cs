@@ -9,6 +9,7 @@ using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -713,7 +714,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
                 var targetComponentName = GetTargetMemberComponentNameLocal(targetIndex);
                 var invokerIndex = invokedFromSingleComponent ? j : 0;
 
-                signalConnectionsBlock.Add(new LineComment(FormattableString.Invariant(
+                signalConnectionsBlock.Add(new LineComment(StringHelper.CreateInvariant(
                     $"Signal connections for {invokerName} (#{targetIndex}):")));
 
                 signalConnectionsBlock.Add(new Assignment

@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics;
 
@@ -36,8 +37,8 @@ public class SizedDataType : DataType
         var state = (SizeNumber > 0 ? hasNumericSize : 0) + (SizeExpression != null ? hasSizeExpression : 0);
         return state switch
         {
-            hasNumericSize => FormattableString.Invariant($"{Name}({SizeNumber - 1} downto 0)"),
-            hasSizeExpression => FormattableString.Invariant($"{Name}({SizeExpression.ToVhdl(vhdlGenerationOptions)} downto 0)"),
+            hasNumericSize => StringHelper.CreateInvariant($"{Name}({SizeNumber - 1} downto 0)"),
+            hasSizeExpression => StringHelper.CreateInvariant($"{Name}({SizeExpression.ToVhdl(vhdlGenerationOptions)} downto 0)"),
             hasBoth => throw new InvalidOperationException(
                 "VHDL sized data types should have their size specified either as an integer value or as an expression, but not both."),
             _ => Name,
@@ -55,6 +56,6 @@ public class SizedDataType : DataType
     }
 
     public override int GetHashCode() =>
-        FormattableString.Invariant($"{Name}{TypeCategory}{SizeNumber}")
+        StringHelper.CreateInvariant($"{Name}{TypeCategory}{SizeNumber}")
             .GetHashCode(StringComparison.InvariantCulture);
 }

@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -142,7 +143,7 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
         memoryIndex += 16;
         // The long cast will be unnecessary most of the time but determining when it's needed is complex so good
         // enough. Awkward indentation is so the generated code can be properly formatted.
-        return FormattableString.Invariant($@"SaveResult(
+        return StringHelper.CreateInvariant($@"SaveResult(
                 memory,
                 {originalMemoryIndex},
                 (long)({code0}), // {originalMemoryIndex}
@@ -195,6 +196,6 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
         // The long cast will be unnecessary most of the time but determining when it's needed is complex so good
         // enough.
         if (addLongCast) code = $"(long)({code})";
-        return FormattableString.Invariant($@"SaveResult(memory, {originalMemoryIndex}, {code});");
+        return StringHelper.CreateInvariant($@"SaveResult(memory, {originalMemoryIndex}, {code});");
     }
 }

@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics;
 
@@ -28,7 +29,7 @@ public class RangedDataType : DataType
     public override DataType ToReference() => this;
 
     public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-        FormattableString.Invariant($"{Name} range {RangeMin} to {RangeMax}");
+        StringHelper.CreateInvariant($"{Name} range {RangeMin} to {RangeMax}");
 
     public override bool Equals(object obj)
     {
@@ -38,6 +39,6 @@ public class RangedDataType : DataType
     }
 
     public override int GetHashCode() =>
-        FormattableString.Invariant($"{Name}{TypeCategory}{RangeMin}{RangeMax}")
+        StringHelper.CreateInvariant($"{Name}{TypeCategory}{RangeMin}{RangeMax}")
             .GetHashCode(StringComparison.InvariantCulture);
 }

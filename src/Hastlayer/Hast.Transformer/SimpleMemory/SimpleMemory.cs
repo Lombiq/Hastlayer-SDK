@@ -109,13 +109,13 @@ public class SimpleMemory
 #else
                 throw new InvalidOperationException(
                     "Alignment failed! (" +
-                    FormattableString.Invariant($"64-bit: {Environment.Is64BitProcess}; ") +
-                    FormattableString.Invariant($"address: {address}; ") +
-                    FormattableString.Invariant($"addressLong: {addressLong}; ") +
-                    FormattableString.Invariant($"{nameof(memory)} length: {memory.Length}; ") +
-                    FormattableString.Invariant($"alignment: {alignment}; ") +
-                    FormattableString.Invariant($"alignmentOffset: {alignmentOffset}; ") +
-                    FormattableString.Invariant($"expectedLength: {expectedLength})"));
+                    StringHelper.CreateInvariant($"64-bit: {Environment.Is64BitProcess}; ") +
+                    StringHelper.CreateInvariant($"address: {address}; ") +
+                    StringHelper.CreateInvariant($"addressLong: {addressLong}; ") +
+                    StringHelper.CreateInvariant($"{nameof(memory)} length: {memory.Length}; ") +
+                    StringHelper.CreateInvariant($"alignment: {alignment}; ") +
+                    StringHelper.CreateInvariant($"alignmentOffset: {alignmentOffset}; ") +
+                    StringHelper.CreateInvariant($"expectedLength: {expectedLength})"));
 #endif
             }
         }

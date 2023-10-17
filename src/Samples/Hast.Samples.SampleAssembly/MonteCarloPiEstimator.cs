@@ -86,7 +86,7 @@ public class MonteCarloPiEstimator
         if (iterationsCount % MaxDegreeOfParallelism != 0)
         {
             throw new InvalidOperationException(
-                FormattableString.Invariant(
+                StringHelper.CreateInvariant(
                     $"The number of iterations must be divisible by {MaxDegreeOfParallelism}."));
         }
 

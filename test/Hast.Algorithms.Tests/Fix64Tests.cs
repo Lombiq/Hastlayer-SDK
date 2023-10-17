@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -367,7 +368,7 @@ public class Fix64Tests
                 deltas.Add(delta);
                 Assert.True(
                     delta <= 60 * Fix64.Precision,
-                    FormattableString.Invariant($"{f1} % {f2} = expected {expected} but got {actual}"));
+                    StringHelper.CreateInvariant($"{f1} % {f2} = expected {expected} but got {actual}"));
             }
         }
 

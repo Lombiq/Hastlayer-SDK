@@ -3,6 +3,7 @@
 // Modified file, original is found at:
 // https://github.com/SixLabors/ImageSharp/blob/master/src/ImageSharp/Processing/Processors/Transforms/Resize/ResizeHelper.cs
 
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System;
@@ -19,7 +20,7 @@ public static class ResizeHelper
         if (width <= 0 && height <= 0)
         {
             ThrowInvalid(
-                FormattableString.Invariant($"Target width {width} and height {height} must be greater than zero."));
+                StringHelper.CreateInvariant($"Target width {width} and height {height} must be greater than zero."));
         }
 
         // Ensure target size is populated across both dimensions.

@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics;
 
@@ -15,5 +16,5 @@ public class UnconstrainedArrayInstantiation : ArrayTypeBase
     public override DataType ToReference() => this;
 
     public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-         FormattableString.Invariant($"{vhdlGenerationOptions.NameShortener(Name)}({RangeFrom} to {RangeTo})");
+         StringHelper.CreateInvariant($"{vhdlGenerationOptions.NameShortener(Name)}({RangeFrom} to {RangeTo})");
 }

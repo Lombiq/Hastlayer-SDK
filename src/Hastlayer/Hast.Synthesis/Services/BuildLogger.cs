@@ -76,7 +76,7 @@ public class BuildLogger<T>
                 Log(
                     LogLevel.None,
                     name,
-                    FormattableString.Invariant($"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}"),
+                    StringHelper.CreateInvariant($"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}"),
                     "started");
                 break;
             case StandardOutputCommandEvent output:
@@ -158,8 +158,8 @@ public static class BuildLogger
         for (var i = 0; i < 100 && buildOutput == null; i++)
         {
             var fileName = i == 0
-                ? FormattableString.Invariant($"{outFileName}.out")
-                : FormattableString.Invariant($"{outFileName}~{i}.out");
+                ? StringHelper.CreateInvariant($"{outFileName}.out")
+                : StringHelper.CreateInvariant($"{outFileName}~{i}.out");
             buildOutputPath = Path.Combine(buildOutputDirectoryPath, fileName);
 
             try

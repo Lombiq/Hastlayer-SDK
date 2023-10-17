@@ -31,7 +31,7 @@ public sealed class CatapultLibrary : IDisposable
     /// <summary>
     /// Gets the name of the instance (Catapult:N where N is the PCIe endpoint number).
     /// </summary>
-    public string InstanceName => FormattableString.Invariant($"{Constants.ChannelName}:{PcieEndpointNumber}");
+    public string InstanceName => StringHelper.CreateInvariant($"{Constants.ChannelName}:{PcieEndpointNumber}");
 
     /// <summary>
     /// Contains the latest tasks to be awaited when starting a new task.
@@ -352,7 +352,7 @@ public sealed class CatapultLibrary : IDisposable
         var jobResult = await job;
         if (TesterOutput == null) return jobResult;
 
-        var message = FormattableString.Invariant(
+        var message = StringHelper.CreateInvariant(
             $"Job Finished{Environment.NewLine}************{Environment.NewLine}Slot: {currentSlot}{Environment.NewLine}");
         if (!ignoreResponse)
         {
@@ -377,7 +377,7 @@ public sealed class CatapultLibrary : IDisposable
         int totalDataSize,
         int currentSliceCount)
     {
-        await TesterWriteLineAsync(FormattableString.Invariant($"Slices: {currentSliceCount}"));
+        await TesterWriteLineAsync(StringHelper.CreateInvariant($"Slices: {currentSliceCount}"));
         bool slotOverflow = currentSliceCount > BufferCount;
 
         // If the data exceeds buffer size limit, then cut it into maximal slices.
@@ -443,10 +443,10 @@ public sealed class CatapultLibrary : IDisposable
         LogLineInvariant(Constants.Log.Info, $"Job on slot #{bufferIndex} starting...");
         Debug.Assert(
             bufferIndex < BufferCount,
-            FormattableString.Invariant($"The buffer index is out of range. (current: {bufferIndex}, max: {BufferCount})"));
+            StringHelper.CreateInvariant($"The buffer index is out of range. (current: {bufferIndex}, max: {BufferCount})"));
         Debug.Assert(
             inputData.Length <= BufferSize,
-            FormattableString.Invariant($"The input data doesn't fit in the buffer. (current: {inputData.Length}, max: {BufferSize})"));
+            StringHelper.CreateInvariant($"The input data doesn't fit in the buffer. (current: {inputData.Length}, max: {BufferSize})"));
         var slot = (uint)bufferIndex;
 
         // Makes sure the buffer is ready to be written.

@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Linq;
 
@@ -39,7 +40,7 @@ public static class ArchitectureComponentNameExtensions
             component.InternallyDrivenSignals.Any(signal => signal.Name == component.CreatePrefixedObjectName(objectName)))
         {
             objectNameIndex++;
-            objectName = FormattableString.Invariant($"{name}.{objectNameIndex}");
+            objectName = StringHelper.CreateInvariant($"{name}.{objectNameIndex}");
         }
 
         return component.CreatePrefixedObjectName(objectName);
