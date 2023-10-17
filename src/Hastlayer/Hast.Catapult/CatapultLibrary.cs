@@ -180,13 +180,9 @@ public sealed class CatapultLibrary : IDisposable
         ILogger<CatapultLibrary> logger,
         int endpointNumber = Constants.PcieHipNumber)
     {
-        var libraryPath = config.ContainsKey(Constants.ConfigKeys.LibraryPath) ?
-            config[Constants.ConfigKeys.LibraryPath] ?? Constants.DefaultLibraryPath :
-            Constants.DefaultLibraryPath;
-        var versionDefinitionsFile = config.ContainsKey(Constants.ConfigKeys.VersionDefinitionsFile) ?
-            config[Constants.ConfigKeys.VersionDefinitionsFile] : null;
-        var versionManifestFile = config.ContainsKey(Constants.ConfigKeys.VersionManifestFile) ?
-            config[Constants.ConfigKeys.VersionManifestFile] : null;
+        var libraryPath = GetOrDefault(config, Constants.ConfigKeys.LibraryPath, Constants.DefaultLibraryPath);
+        var versionDefinitionsFile = GetOrDefault(config, Constants.ConfigKeys.VersionDefinitionsFile);
+        var versionManifestFile = GetOrDefault(config, Constants.ConfigKeys.VersionManifestFile);
 
         return new CatapultLibrary(
             (string)libraryPath,
@@ -551,4 +547,9 @@ public sealed class CatapultLibrary : IDisposable
         LogFunction?.Invoke((uint)level, text.ToString(CultureInfo.InvariantCulture) + Environment.NewLine);
 
     public override string ToString() => InstanceName;
+
+    private static object GetOrDefault(IDictionary<string, object> config, string key, object fallback = null) =>
+        config.TryGetValue(key, out var result)
+            ? result ?? fallback
+            : fallback;
 }
