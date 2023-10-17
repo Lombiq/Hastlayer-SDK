@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
@@ -124,7 +123,7 @@ public class BuildLogger<T>
         }
 
         //// Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
-        if (name == Vpp && text?.StartsWithOrdinal("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
+        if (name == Vpp && text?.StartsWithOrdinal("[") == true && _vppStatusLogs.Exists(text.Contains))
         {
             if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
             _progressInvoker.InvokeProgress(new BuildProgressEventArgs(text));

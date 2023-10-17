@@ -40,7 +40,7 @@ internal sealed class Program
 
         // This is from an interactive Console, we want to exit.
 #pragma warning disable S1147 // Exit methods should not be called
-        if (errorList.Any(error => error.Tag == ErrorType.HelpRequestedError)) Environment.Exit(0);
+        if (errorList.Exists(error => error.Tag == ErrorType.HelpRequestedError)) Environment.Exit(0);
 #pragma warning restore S1147 // Exit methods should not be called
 
         if (errorList.Any())

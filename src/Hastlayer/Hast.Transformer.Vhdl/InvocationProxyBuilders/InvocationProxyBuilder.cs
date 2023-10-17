@@ -93,7 +93,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
             // are a sufficient number of target components available? Then we can pair them together.
             var invocationsCanBePaired =
                 !invokedFromSingleComponent &&
-                !invokedFromComponents.Any(componentInvocation => componentInvocation.Value > 1) &&
+                !invokedFromComponents.Exists(componentInvocation => componentInvocation.Value > 1) &&
                 invokedFromComponents.Sum(invokingComponent => invokingComponent.Value) <= targetComponentCount;
 
             if (invokedFromSingleComponent || invocationsCanBePaired)
