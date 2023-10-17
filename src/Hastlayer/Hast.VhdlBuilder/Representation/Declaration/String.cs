@@ -1,3 +1,4 @@
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
@@ -15,5 +16,5 @@ public class String : DataType
     }
 
     public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
-        "string" + (Length > 0 ? "(1 to " + Length + ")" : string.Empty);
+        Length > 0 ? StringHelper.CreateInvariant($"string(1 to {Length})") : "string";
 }

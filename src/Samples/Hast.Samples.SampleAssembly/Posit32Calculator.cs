@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -154,9 +155,9 @@ public static class Posit32CalculatorExtensions
     {
         if (numbers.Length != Posit32Calculator.MaxDegreeOfParallelism)
         {
-            throw new ArgumentException(
-                $"Provide as many {nameof(numbers)} as the degree of parallelism of Posit32Calculator is (" +
-                Posit32Calculator.MaxDegreeOfParallelism + ")");
+            throw new ArgumentException(StringHelper.CreateInvariant(
+                $"Provide as many {nameof(numbers)} as the degree of parallelism of Posit32Calculator is " +
+                $"({Posit32Calculator.MaxDegreeOfParallelism})"));
         }
 
         var memory = hastlayer is null

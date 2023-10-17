@@ -90,7 +90,7 @@ public class EthernetCommunicationService : CommunicationServiceBase
             {
                 throw new EthernetCommunicationException(
                     "Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " +
-                    executionCommandTypeResponseByte[0]);
+                    executionCommandTypeResponseByte[0].ToTechnicalString());
             }
 
             // Here we put together the data stream.
