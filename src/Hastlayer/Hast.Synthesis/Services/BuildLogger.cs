@@ -55,7 +55,7 @@ public class BuildLogger<T>
         _logger.LogInformation(
             "Starting program: {Executable} {Arguments} (working directory: {WorkingDirectory})",
             executable,
-            string.Join(" ", arguments),
+            string.Join(' ', arguments),
             hasWorkingDirectory ? workingDirectory : ".");
         return CliHelper.StreamAsync(
             executable,

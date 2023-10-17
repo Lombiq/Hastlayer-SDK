@@ -28,7 +28,7 @@ public static class ArchitectureComponentNameHelper
         StringHelper.CreateInvariant($"{componentName}.{index}");
 
     public static string CreatePrefixedSegmentedObjectName(string componentName, params string[] segments) =>
-        CreatePrefixedObjectName(componentName, string.Join(".", segments));
+        CreatePrefixedObjectName(componentName, string.Join('.', segments));
 
     public static string CreatePrefixedObjectName(string componentName, string name) =>
         CreatePrefixedExtendedVhdlId(componentName, "." + name);

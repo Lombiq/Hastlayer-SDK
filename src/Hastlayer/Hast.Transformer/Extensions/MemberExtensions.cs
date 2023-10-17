@@ -13,7 +13,7 @@ public static class MemberExtensions
         if (member is IMethod method)
         {
             // There shouldn't be a space after commas so it follows Cecil naming conventions.
-            name += $"({string.Join(",", method.Parameters.Select(parameter => parameter.Type.GetFullName()))})";
+            name += $"({string.Join(',', method.Parameters.Select(parameter => parameter.Type.GetFullName()))})";
         }
 
         return name;

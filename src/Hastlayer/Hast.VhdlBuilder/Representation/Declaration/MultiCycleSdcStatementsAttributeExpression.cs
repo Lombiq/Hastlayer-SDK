@@ -48,7 +48,7 @@ public class MultiCycleSdcStatementsAttributeExpression : IVhdlElement
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
         Terminated.Terminate(
             "\"" +
-            string.Join(";", _paths.Select(statement => statement.ToVhdl(vhdlGenerationOptions))) +
+            string.Join(';', _paths.Select(statement => statement.ToVhdl(vhdlGenerationOptions))) +
             "\"",
             vhdlGenerationOptions);
 

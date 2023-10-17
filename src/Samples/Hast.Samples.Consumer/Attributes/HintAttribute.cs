@@ -11,5 +11,5 @@ public sealed class HintAttribute : Attribute
 {
     public string Text { get; }
 
-    public HintAttribute(params string[] text) => Text = string.Join(" ", text.Select(fragment => fragment.Trim()));
+    public HintAttribute(params string[] text) => Text = string.Join(' ', text.Select(fragment => fragment.Trim()));
 }
