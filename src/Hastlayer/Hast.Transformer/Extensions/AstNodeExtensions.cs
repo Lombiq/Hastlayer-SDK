@@ -4,6 +4,7 @@ using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
@@ -345,6 +346,10 @@ public static class AstNodeExtensions
         return node.CreateNameForUnnamedNode();
     }
 
+    [SuppressMessage(
+        "Minor Code Smell",
+        "S2094:Classes should not be empty",
+        Justification = "Only used for annotation.")]
     private sealed class WasRemoved
     {
     }
