@@ -1,5 +1,4 @@
 using Lombiq.HelpfulLibraries.Common.Utilities;
-using System;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;

@@ -1,13 +1,15 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Hast.TestInputs.Static;
 
 public class ObjectUsingCases
 {
+    [SuppressMessage("Style", "IDE0270:Use coalesce expression", Justification = "We want to test this specific syntax.")]
+    [SuppressMessage("Style", "IDE0074:Use compound assignment", Justification = "Same.")]
+    [SuppressMessage("Minor Code Smell", "S3240:The simplest possible condition syntax should be used", Justification = "Same.")]
     public void NullUsage()
     {
         var customObject = new MyClass { MyProperty = 5 };
-        // We want to test this specific syntax.
-#pragma warning disable S3240 // The simplest possible condition syntax should be used
-#pragma warning disable IDE0074 // Use compound assignment
         if (customObject == null)
         {
             customObject = new MyClass();
