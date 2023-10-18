@@ -1,5 +1,4 @@
 using Lombiq.HelpfulLibraries.Common.Utilities;
-using System;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents;

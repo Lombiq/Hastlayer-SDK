@@ -1,6 +1,5 @@
 using Hast.VhdlBuilder.Extensions;
 using Lombiq.HelpfulLibraries.Common.Utilities;
-using System;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents;
 
