@@ -137,9 +137,14 @@ public static class ResizeExtensions
     /// during processing.</param>
     /// <param name="hastlayer">Parameters for Hastlayer.</param>
     /// <returns>The <see cref="IImageProcessingContext"/> to allow chaining of operations.</returns>
-    /// <remarks><para>Passing zero for one of height or width will automatically preserve the aspect ratio of the
-    /// original image or the nearest possible ratio.</para></remarks>
-#pragma warning disable S107 // Methods should not have too many parameters
+    /// <remarks><para>
+    /// Passing zero for one of height or width will automatically preserve the aspect ratio of the original image or
+    /// the nearest possible ratio.
+    /// </para></remarks>
+    [SuppressMessage(
+        "Major Code Smell",
+        "S107:Methods should not have too many parameters",
+        Justification = "All of these are necessary and wrapping them in an object wouldn't improve readability.")]
     public static IImageProcessingContext HastResize(
         this IImageProcessingContext source,
         int width,
@@ -151,7 +156,6 @@ public static class ResizeExtensions
         IHastlayer hastlayer,
         IHardwareRepresentation hardwareRepresentation,
         IProxyGenerationConfiguration configuration)
-#pragma warning restore S107 // Methods should not have too many parameters
     {
         var options = new ResizeOptions
         {
