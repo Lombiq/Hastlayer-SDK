@@ -94,7 +94,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
 
             var reservationCompletionSource = new TaskCompletionSource<IReservedDevice>();
 
-            _waitQueue.Enqueue(freedUpDevice => reservationCompletionSource.SetResult(freedUpDevice));
+            _waitQueue.Enqueue(reservationCompletionSource.SetResult);
 
             return reservationCompletionSource.Task;
         }

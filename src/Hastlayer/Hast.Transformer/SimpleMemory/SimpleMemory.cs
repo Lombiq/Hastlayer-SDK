@@ -79,7 +79,7 @@ public class SimpleMemory
     /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a multiple
     /// of that number. It must be an integer and power of 2.
     /// </param>
-    internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment)
+    internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment, bool isDebug)
     {
         if (alignment > 0)
         {
@@ -102,7 +102,7 @@ public class SimpleMemory
             {
                 memory = memory.Slice(alignmentOffset, memory.Length - alignment);
             }
-            else if (IsDebug)
+            else if (isDebug)
             {
                 // This should never happen in production.
                 Console.Error.WriteLine("Alignment failed!");
@@ -174,7 +174,7 @@ public class SimpleMemory
     {
         var memory = new byte[((cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes) +
                               memoryConfiguration.Alignment];
-        return new SimpleMemory(memory, memoryConfiguration.MinimumPrefix, memoryConfiguration.Alignment);
+        return new SimpleMemory(memory, memoryConfiguration.MinimumPrefix, memoryConfiguration.Alignment, IsDebug);
     }
 
     /// <summary>
@@ -209,7 +209,7 @@ public class SimpleMemory
             withPrefixCells = memoryConfiguration.MinimumPrefix;
         }
 
-        return new SimpleMemory(memory, withPrefixCells, 0);
+        return new SimpleMemory(memory, withPrefixCells, 0, IsDebug);
     }
 
     /// <summary>
@@ -219,7 +219,7 @@ public class SimpleMemory
     /// <param name="cellCount">The size of the usable memory.</param>
     /// <returns>The instance with a <c>byte[]</c> of capacity for the require payload size.</returns>
     public static SimpleMemory CreateSoftwareMemory(int cellCount) =>
-        new(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
+        new(new byte[cellCount * MemoryCellSizeBytes], 0, 0, IsDebug);
 }
 
 /// <summary>
