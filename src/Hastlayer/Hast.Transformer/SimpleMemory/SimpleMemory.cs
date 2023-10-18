@@ -1,4 +1,5 @@
 using Hast.Synthesis.Models;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Runtime.InteropServices;
@@ -20,6 +21,13 @@ namespace Hast.Transformer.SimpleMemory;
 public class SimpleMemory
 {
     public const int MemoryCellSizeBytes = sizeof(int);
+
+    private const bool IsDebug =
+#if DEBUG
+        true;
+#else
+        false;
+#endif
 
     /// <summary>
     /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.
@@ -94,10 +102,9 @@ public class SimpleMemory
             {
                 memory = memory.Slice(alignmentOffset, memory.Length - alignment);
             }
-            else
+            else if (IsDebug)
             {
                 // This should never happen in production.
-#if DEBUG
                 Console.Error.WriteLine("Alignment failed!");
                 Console.Error.WriteLine("  64-bit: {0}", Environment.Is64BitProcess);
                 Console.Error.WriteLine("  address: {0}", address);
@@ -106,7 +113,9 @@ public class SimpleMemory
                 Console.Error.WriteLine("  alignment: {0}", alignment);
                 Console.Error.WriteLine("  alignmentOffset: {0}", alignmentOffset);
                 Console.Error.WriteLine("  expectedLength: {0}", expectedLength);
-#else
+            }
+            else
+            {
                 throw new InvalidOperationException(
                     "Alignment failed! (" +
                     StringHelper.CreateInvariant($"64-bit: {Environment.Is64BitProcess}; ") +
@@ -116,7 +125,6 @@ public class SimpleMemory
                     StringHelper.CreateInvariant($"alignment: {alignment}; ") +
                     StringHelper.CreateInvariant($"alignmentOffset: {alignmentOffset}; ") +
                     StringHelper.CreateInvariant($"expectedLength: {expectedLength})"));
-#endif
             }
         }
 
