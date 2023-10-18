@@ -236,11 +236,11 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
                 Replace(_knownTypeLookupTable.Lookup(KnownTypeCode.Int64));
             }
             else if (unaryOperatorExpression.Operator == UnaryOperatorType.Minus &&
-                ((unaryOperatorExpression.Expression as CastExpression)?.Type as PrimitiveType)?.KnownTypeCode == KnownTypeCode.UInt32)
+                unaryOperatorExpression.Expression is CastExpression { Type: PrimitiveType { KnownTypeCode: KnownTypeCode.UInt32 } } castExpression)
             {
                 // For an int value the AST can contain -(uint)value if the original code was (uint)-value. Fixing that
                 // here.
-                unaryOperatorExpression.Expression.ReplaceWith(((CastExpression)unaryOperatorExpression.Expression).Expression);
+                castExpression.ReplaceWith(castExpression.Expression);
             }
         }
 
