@@ -5,6 +5,8 @@ using System.Text;
 
 namespace Hast.Catapult;
 
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix, but the names in this file refer to external resources.
+
 /// <summary>
 /// The function used by logging in FpgaCoreLib.dll and the CatapultLibrary class.
 /// </summary>
