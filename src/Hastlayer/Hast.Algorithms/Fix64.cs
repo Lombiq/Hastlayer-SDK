@@ -41,7 +41,7 @@ namespace Hast.Algorithms;
 /// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 /// </para>
 /// </remarks>
-public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
+public readonly struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
 {
     private const long MaxRawValue = long.MaxValue;
     private const long MinRawValue = long.MinValue;
@@ -79,17 +79,17 @@ public struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
 
     #region Instance methods
 
-    public override int GetHashCode() => RawValue.GetHashCode();
+    public override readonly int GetHashCode() => RawValue.GetHashCode();
 
-    public override bool Equals(object obj) => obj is Fix64 fix64 && fix64.RawValue == RawValue;
+    public override readonly bool Equals(object obj) => obj is Fix64 fix64 && fix64.RawValue == RawValue;
 
-    public bool Equals(Fix64 other) => RawValue == other.RawValue;
+    public readonly bool Equals(Fix64 other) => RawValue == other.RawValue;
 
-    public int CompareTo(Fix64 other) => RawValue.CompareTo(other.RawValue);
+    public readonly int CompareTo(Fix64 other) => RawValue.CompareTo(other.RawValue);
 
-    public override string ToString() => ((decimal)this).ToString(CultureInfo.InvariantCulture);
+    public override readonly string ToString() => ((decimal)this).ToString(CultureInfo.InvariantCulture);
 
-    public int[] ToIntegers()
+    public readonly int[] ToIntegers()
     {
         var low = (int)(RawValue & uint.MaxValue);
         int high = (int)(RawValue >> 32);
