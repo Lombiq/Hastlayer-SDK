@@ -240,7 +240,8 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             RecurseSubdirectories = true,
             MatchCasing = MatchCasing.CaseInsensitive,
         };
-        var device = deviceManifest.SupportedPlatforms!
+
+        return deviceManifest.SupportedPlatforms!
             .SelectMany(platformName => platformsDirectories
                 .SelectMany(directoryInfo => directoryInfo
                     .GetDirectories($"{platformName}*", caseInsensitiveEnumerationOptions)
@@ -251,16 +252,9 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
                     .OrderByDescending(fileInfo => fileInfo.FullName))
             )
             .FirstOrDefault()?
-            .FullName;
-
-        if (device == null)
-        {
-            throw new FileNotFoundException(
-                "Unable to find the platform xpfm file. The supported platforms are: " +
-                string.Join(", ", deviceManifest.SupportedPlatforms));
-        }
-
-        return device;
+            .FullName ?? throw new FileNotFoundException(
+            "Unable to find the platform xpfm file. The supported platforms are: " +
+            string.Join(", ", deviceManifest.SupportedPlatforms));
     }
 
     private void ProgressMajor(string message)
@@ -432,12 +426,8 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
 
         var reportFilePath =
             Directory.GetFiles(reportSavePath, "*_bb_locked_power_routed.rpt").FirstOrDefault() ??
-            Directory.GetFiles(reportSavePath, "*_power_routed.rpt").FirstOrDefault();
-        if (reportFilePath == null)
-        {
-            throw new FileNotFoundException(
-                "The report file is missing. Utilization related verification is not performed.");
-        }
+            Directory.GetFiles(reportSavePath, "*_power_routed.rpt").FirstOrDefault() ??
+            throw new FileNotFoundException("The report file is missing. Utilization related verification is not performed.");
 
         using var reader = File.OpenText(reportFilePath);
         var report = await XilinxReport.ParseAsync(reader);
@@ -593,11 +583,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
     {
         var executableName = (await CliHelper.WhichAsync(executable))
             .FirstOrDefault(fileInfo => fileInfo.Exists)?
-            .FullName;
-        if (executableName == null)
-        {
-            throw new FileNotFoundException($"The {nameof(executable)} '{executable}' was not found. Is it in your PATH?");
-        }
+            .FullName ?? throw new FileNotFoundException($"The {nameof(executable)} '{executable}' was not found. Is it in your PATH?");
 
         return executableName;
     }
