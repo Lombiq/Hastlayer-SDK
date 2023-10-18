@@ -6,4 +6,5 @@ global_level = 10
 # Microsoft.CodeAnalysis.NetAnalyzers rules
 dotnet_diagnostic.CA1062.severity = silent
 dotnet_diagnostic.CA1724.severity = silent
+dotnet_diagnostic.CA1848.severity = none
 dotnet_diagnostic.CA2007.severity = silent
