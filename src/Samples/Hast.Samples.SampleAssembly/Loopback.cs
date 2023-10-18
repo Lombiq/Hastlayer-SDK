@@ -12,9 +12,8 @@ public class Loopback
 {
     private const int RunInputOutputInt32Index = 0;
 
+    // We add 1 to the input to verify that it actually runs instead of sending back the input as-is.
     public virtual void Run(SimpleMemory memory) =>
-        // Adding 1 to the input so it's visible whether this actually has run, not just the untouched data was sent
-        // back.
         memory.WriteInt32(RunInputOutputInt32Index, memory.ReadInt32(RunInputOutputInt32Index) + 1);
 
     public int Run(int input, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
