@@ -6,6 +6,7 @@ using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
@@ -48,7 +49,7 @@ public class EthernetCommunicationService : CommunicationServiceBase
         _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
             {
                 // Get the IP addresses of the FPGA boards.
-                var fpgaEndpoints = await _fpgaIpEndpointFinder.FindFpgaEndpointsAsync();
+                var fpgaEndpoints = (await _fpgaIpEndpointFinder.FindFpgaEndpointsAsync()).AsList();
 
                 if (!fpgaEndpoints.Any())
                 {
@@ -81,8 +82,7 @@ public class EthernetCommunicationService : CommunicationServiceBase
 
             using var stream = client.GetStream();
             // We send an execution signal to make the FPGA ready to receive the data stream.
-            var executionCommandTypeByte = new[] { (byte)CommandTypes.Execution };
-            await stream.WriteAsync(executionCommandTypeByte.AsMemory(0, executionCommandTypeByte.Length));
+            await stream.WriteAsync(CommandTypes.Execution.AsMemory(0, CommandTypes.Execution.Length));
 
             var executionCommandTypeResponseByte = await GetBytesFromStreamAsync(stream, 1);
 

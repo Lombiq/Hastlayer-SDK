@@ -6,6 +6,7 @@ using Hast.Communication.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -28,10 +29,13 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
         _logger = logger;
     }
 
+    [SuppressMessage(
+        "Style",
+        "IDE0230:Use UTF-8 string literal",
+        Justification = "False positive, shouldn't replace the char constant with a literal.")]
     public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpointsAsync()
     {
         var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, Ethernet.Ports.WhoIsAvailableRequest);
-        var inputBuffer = new[] { (byte)CommandTypes.WhoIsAvailable };
 
         // We need retries because somehow the FPGA doesn't always catch our request.
         _logger.LogInformation(
@@ -45,21 +49,21 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
             var endpoints = new List<IPEndPoint>();
 
             // Send request to all broadcast addresses on all the supported network interfaces.
-            foreach (var suppertedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
+            foreach (var supportedNetworkInterface in NetworkInterface.GetAllNetworkInterfaces()
                 .Where(networkInterface => networkInterface.OperationalStatus == OperationalStatus.Up &&
                     networkInterface.SupportsMulticast))
             {
                 // Currently we are supporting only IPv4 addresses.
-                var ipv4AddressInformations = suppertedNetworkInterface.GetIPProperties().UnicastAddresses
+                var ipv4AddressInformation = supportedNetworkInterface.GetIPProperties().UnicastAddresses
                     .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork);
 
-                endpoints.AddRange(ipv4AddressInformations.Select(addressInformation =>
+                endpoints.AddRange(ipv4AddressInformation.Select(addressInformation =>
                     new IPEndPoint(addressInformation.Address, Ethernet.Ports.WhoIsAvailableResponse)));
             }
 
             // Sending requests to all the found IP endpoints at the same time.
             var currentReceiveResultLists = await Task.WhenAll(endpoints.Select(endpoint => EthernetCommunicationHelpers
-                .UdpSendAndReceiveAllAsync(inputBuffer, endpoint, broadcastEndpoint, AvailabilityCheckerTimeout)));
+                .UdpSendAndReceiveAllAsync(CommandTypes.WhoIsAvailable, endpoint, broadcastEndpoint, AvailabilityCheckerTimeout)));
             foreach (var currentReceiveResults in currentReceiveResultLists)
             {
                 receiveResults = receiveResults.Union(currentReceiveResults, new UdpReceiveResultEqualityComparer());

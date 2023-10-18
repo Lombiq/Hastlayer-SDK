@@ -118,13 +118,10 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
                 "\" is not supported by the current device.");
         }
 
-        var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory);
-        if (memory == null)
-        {
+        var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory) ??
             throw new NotSupportedException(
-                "Only SimpleMemory-using implementations are supported for hardware execution. " +
-                $"The {nameof(invocation)} didn't include a SimpleMemory argument.");
-        }
+                $"Only SimpleMemory-using implementations are supported for hardware execution. The " +
+                $"{nameof(invocation)} didn't include a SimpleMemory argument.");
 
         if (memoryResourceCheckers.Check(memory, hardwareRepresentation) is { } problem)
         {
@@ -179,13 +176,8 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
         var communicationService = scope
             .ServiceProvider
             .GetService<ICommunicationServiceSelector>()
-            .GetCommunicationService(communicationChannelName);
-
-        if (communicationService == null)
-        {
-            throw new InvalidOperationException(
+            .GetCommunicationService(communicationChannelName) ?? throw new InvalidOperationException(
                 $"No communication service was found for the channel \"{communicationChannelName}\".");
-        }
 
         _logger.LogInformation("Starting communication service execution...");
         invocationContext.HardwareExecutionInformation = await communicationService
