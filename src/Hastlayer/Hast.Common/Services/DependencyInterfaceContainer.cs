@@ -73,17 +73,11 @@ public static class DependencyInterfaceContainer
         }
 
         var initializerName = implementationType.GetCustomAttribute<DependencyInitializerAttribute>()?.MemberName;
-        if (!string.IsNullOrEmpty(initializerName))
-        {
-            var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static);
-            if (method is null)
-            {
-                throw new ArgumentException(
-                    $"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
-            }
+        if (string.IsNullOrEmpty(initializerName)) return lifetime;
 
-            method.Invoke(null, new object[] { services });
-        }
+        var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static) ??
+            throw new ArgumentException($"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
+        method.Invoke(null, new object[] { services });
 
         return lifetime;
     }
