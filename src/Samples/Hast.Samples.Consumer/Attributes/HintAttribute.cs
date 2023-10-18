@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Hast.Samples.Consumer.Attributes;
@@ -11,5 +12,10 @@ public sealed class HintAttribute : Attribute
 {
     public string Text { get; }
 
-    public HintAttribute(params string[] text) => Text = string.Join(' ', text.Select(fragment => fragment.Trim()));
+    [SuppressMessage(
+        "Design",
+        "CA1019:Define accessors for attribute arguments",
+        Justification = $"They are merged together into the {nameof(Text)} property.")]
+    public HintAttribute(params string[] fragments) =>
+        Text = string.Join(' ', fragments.Select(fragment => fragment.Trim()));
 }
