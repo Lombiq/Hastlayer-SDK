@@ -11,7 +11,7 @@ using Terminal.Gui;
 
 namespace Hast.Samples.Consumer;
 
-public sealed class Gui : IDisposable
+public sealed class ConfigurationGui : IDisposable
 {
     private readonly IDictionary<string, ConsumerConfiguration> _savedConfigurations;
     private readonly ListView _propertiesListView = new ListView { CanFocus = true }.Fill();
@@ -43,7 +43,7 @@ public sealed class Gui : IDisposable
     private ListView _list;
     private ScrollView _scrollView;
 
-    public Gui(IDictionary<string, ConsumerConfiguration> savedConfigurations) =>
+    public ConfigurationGui(IDictionary<string, ConsumerConfiguration> savedConfigurations) =>
         _savedConfigurations = savedConfigurations;
 
     public ConsumerConfiguration BuildConfiguration()
@@ -173,7 +173,7 @@ public sealed class Gui : IDisposable
             {
                 hastlayerTask
                     .Result
-                    .GetLogger<Gui>()
+                    .GetLogger<ConfigurationGui>()
                     .LogError(exception, "an error during GUI operation");
                 _configuration = null;
                 Console.WriteLine(
@@ -472,7 +472,7 @@ public sealed class Gui : IDisposable
     public static ConsumerConfiguration BuildConfiguration(
         IDictionary<string, ConsumerConfiguration> savedConfigurations)
     {
-        using var gui = new Gui(savedConfigurations);
+        using var gui = new ConfigurationGui(savedConfigurations);
         return gui.BuildConfiguration();
     }
 

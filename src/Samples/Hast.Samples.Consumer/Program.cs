@@ -56,7 +56,7 @@ internal static class Program
         var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
         var consumerConfiguration = args.Any()
             ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
-            : Gui.BuildConfiguration(savedConfigurations);
+            : ConfigurationGui.BuildConfiguration(savedConfigurations);
         if (consumerConfiguration == null) return ExitStatus.NothingToDo;
 
         // Initializing a Hastlayer shell. Since this is non-trivial to do you can cache this shell object while the
