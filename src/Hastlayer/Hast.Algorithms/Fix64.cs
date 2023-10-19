@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -104,7 +105,11 @@ public readonly struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     /// Returns a number indicating the sign of a Fix64 number. Returns 1 if the value is positive, 0 if is 0, and -1 if
     /// it is negative.
     /// </summary>
-    public static int Sign(Fix64 value) => Math.Sign(value.RawValue);
+    [SuppressMessage(
+        "Major Code Smell",
+        "S3358:Ternary operators should not be nested",
+        Justification = "The generated code is simpler this way.")]
+    public static int Sign(Fix64 value) => value.RawValue == 0 ? 0 : (value.RawValue > 0 ? 1 : -1);
 
     /// <summary>
     /// Returns the absolute value of a Fix64 number. Note: Abs(Fix64.MinValue) == Fix64.MaxValue.
