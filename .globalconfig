@@ -1,5 +1,4 @@
 is_global = true
-global_level = 10
 
 # Code analysis rules for Hastlayer, extending Lombiq.Analyzers.globalconfig.
 

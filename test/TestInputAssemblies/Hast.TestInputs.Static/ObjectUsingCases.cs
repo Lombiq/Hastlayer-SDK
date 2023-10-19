@@ -14,8 +14,6 @@ public class ObjectUsingCases
         {
             customObject = new MyClass();
         }
-#pragma warning restore IDE0074 // Use compound assignment
-#pragma warning restore S3240 // The simplest possible condition syntax should be used
 
         customObject = null;
 
