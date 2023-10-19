@@ -2,6 +2,7 @@ using Hast.Synthesis.Models;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.SimpleMemory;
@@ -18,6 +19,7 @@ namespace Hast.Transformer.SimpleMemory;
 /// be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL library too.
 /// </para>
 /// </remarks>
+[SuppressMessage("Naming", "CA1724: Type names should not match namespaces", Justification = "This name may not be changed.")]
 public class SimpleMemory
 {
     public const int MemoryCellSizeBytes = sizeof(int);

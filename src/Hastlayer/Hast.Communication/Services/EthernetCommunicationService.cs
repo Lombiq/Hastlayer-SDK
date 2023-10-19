@@ -86,7 +86,7 @@ public class EthernetCommunicationService : CommunicationServiceBase
 
             var executionCommandTypeResponseByte = await GetBytesFromStreamAsync(stream, 1);
 
-            if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
+            if (executionCommandTypeResponseByte[0] != EthernetSignals.Ready)
             {
                 throw new EthernetCommunicationException(
                     "Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " +

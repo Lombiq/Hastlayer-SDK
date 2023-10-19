@@ -15,7 +15,7 @@ namespace Hast.Vitis.Services;
 public class VitisCommunicationService : OpenClCommunicationService
 {
     private const int HbmSizeBytes = (int)Constants.Limits.HbmSizeBytes;
-    public override string ChannelName { get; } = Xilinx.Constants.VitisCommunicationChannelName;
+    public override string ChannelName { get; } = Xilinx.Constants.Vitis.CommunicationChannelName;
 
     public VitisCommunicationService(
         IDevicePoolPopulator devicePoolPopulator,

@@ -36,7 +36,7 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
         Justification = "False positive, shouldn't replace the char constant with a literal.")]
     public async Task<IEnumerable<IFpgaEndpoint>> FindFpgaEndpointsAsync()
     {
-        var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, Ethernet.Ports.WhoIsAvailableRequest);
+        var broadcastEndpoint = new IPEndPoint(IPAddress.Broadcast, EthernetPorts.WhoIsAvailableRequest);
 
         // We need retries because somehow the FPGA doesn't always catch our request.
         _logger.LogInformation(
@@ -59,7 +59,7 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
                     .Where(addressInformation => addressInformation.Address.AddressFamily == AddressFamily.InterNetwork);
 
                 endpoints.AddRange(ipv4AddressInformation.Select(addressInformation =>
-                    new IPEndPoint(addressInformation.Address, Ethernet.Ports.WhoIsAvailableResponse)));
+                    new IPEndPoint(addressInformation.Address, EthernetPorts.WhoIsAvailableResponse)));
             }
 
             // Sending requests to all the found IP endpoints at the same time.

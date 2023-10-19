@@ -1,12 +1,16 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace Hast.Catapult;
+namespace Hast.Catapult.Constants;
 
-public static class CatapultConstants
+[SuppressMessage(
+    "Naming",
+    "CA1724: Type names should not match namespaces",
+    Justification = "This class contains the Catapult-specific constants so this is an appropriate name.")]
+public static class Catapult
 {
-    public const string Catapult = nameof(Catapult);
-    public const string ChannelName = Catapult;
+    public const string DeviceName = nameof(Catapult);
+    public const string ChannelName = DeviceName;
 
     public const string DefaultLibraryPath = "FpgaCoreLib";
 

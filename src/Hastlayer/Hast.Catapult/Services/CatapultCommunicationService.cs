@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using static Hast.Catapult.CatapultConstants;
+using static Hast.Catapult.Constants.Catapult;
 
 namespace Hast.Catapult.Services;
 
@@ -21,7 +21,7 @@ public class CatapultCommunicationService : CommunicationServiceBase
     private readonly IDevicePoolManager _devicePoolManager;
     private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
 
-    public override string ChannelName => CatapultConstants.ChannelName;
+    public override string ChannelName => Constants.Catapult.ChannelName;
 
     public CatapultCommunicationService(
         IDevicePoolPopulator devicePoolPopulator,

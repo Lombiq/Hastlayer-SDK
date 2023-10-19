@@ -4,6 +4,6 @@ is_global = true
 
 # Microsoft.CodeAnalysis.NetAnalyzers rules
 dotnet_diagnostic.CA1062.severity = none
-dotnet_diagnostic.CA1724.severity = none
+
 dotnet_diagnostic.CA1848.severity = none
 dotnet_diagnostic.CA2007.severity = none

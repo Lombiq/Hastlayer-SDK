@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
+using Hast.Xilinx.Constants;
 using Hast.Xilinx.Helpers;
 using System;
 using static Hast.Common.Constants.DataSize;
@@ -18,7 +19,7 @@ public abstract class ZynqDriverBase : DeviceDriverBase
         {
             Name = DeviceName,
             ClockFrequencyHz = 150 * Mhz,
-            SupportedCommunicationChannelNames = new[] { Constants.VitisCommunicationChannelName },
+            SupportedCommunicationChannelNames = new[] { Vitis.CommunicationChannelName },
             AvailableMemoryBytes = 1 * GigaByte,
             SupportsHbm = false,
             SupportedPlatforms = new[]

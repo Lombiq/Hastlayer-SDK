@@ -8,10 +8,15 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage(
     "Naming",
     "CA1716:Identifiers should not match keywords",
-    Justification = "This assembly contains representations of exactly those keywords.",
+    Justification = "This assembly contains representations of .NET/C# code, so partial or full overlap with magic words is expected.",
     Scope = "module")]
 [assembly: SuppressMessage(
     "Naming",
     "CA1711:Identifiers should not have incorrect suffix",
-    Justification = "This assembly contains representations of data types including those representing the types of the suffixes in question.",
+    Justification = "Same.",
+    Scope = "module")]
+[assembly: SuppressMessage(
+    "Naming",
+    "CA1724: Type names should not match namespaces",
+    Justification = "Same.",
     Scope = "module")]
