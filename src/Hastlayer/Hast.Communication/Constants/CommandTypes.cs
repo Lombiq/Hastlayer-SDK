@@ -1,7 +1,7 @@
 ﻿namespace Hast.Communication.Constants;
 
-public static class CommandTypes
+internal static class CommandTypes
 {
-    public const char Execution = 'x';
-    public const char WhoIsAvailable = 'w';
+    public static readonly byte[] Execution = "x"u8.ToArray();
+    public static readonly byte[] WhoIsAvailable = "w"u8.ToArray();
 }

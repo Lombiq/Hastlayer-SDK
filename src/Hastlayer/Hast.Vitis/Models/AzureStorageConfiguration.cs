@@ -20,7 +20,7 @@ public class AzureStorageConfiguration
 
     public string GenerateStorageConnectionString() =>
         string.Join(
-            separator: ";",
+            separator: ';',
             "DefaultEndpointsProtocol=https",
             $"AccountName={StorageAccountName}",
             $"AccountKey={StorageAccountKey}",

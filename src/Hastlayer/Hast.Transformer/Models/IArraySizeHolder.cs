@@ -42,19 +42,10 @@ public interface IArraySizeHolder
 
 public static class ArraySizeHolderExtensions
 {
-    public static IArraySize GetSizeOrThrow(this IArraySizeHolder arraySizeHolder, AstNode arrayHolder)
-    {
-        var size = arraySizeHolder.GetSize(arrayHolder);
-
-        if (size == null)
-        {
-            throw new NotSupportedException(
-                "The length of the array holder \"" + arrayHolder.GetFullName() + "\" couldn't be statically " +
-                "determined. Only arrays with dimensions defined at compile-time are supported. If the array size is " +
-                "actually static just Hastlayer can't figure it out for some reason then you can configure it " +
-                "manually via TransformerConfiguration by using the quoted full name.");
-        }
-
-        return size;
-    }
+    public static IArraySize GetSizeOrThrow(this IArraySizeHolder arraySizeHolder, AstNode arrayHolder) =>
+        arraySizeHolder.GetSize(arrayHolder) ?? throw new NotSupportedException(
+            $"The length of the array holder \"{arrayHolder.GetFullName()}\" couldn't be statically determined. Only " +
+            $"arrays with dimensions defined at compile-time are supported. If the array size is actually static " +
+            $"just Hastlayer can't figure it out for some reason then you can configure it manually via " +
+            $"TransformerConfiguration by using the quoted full name.");
 }

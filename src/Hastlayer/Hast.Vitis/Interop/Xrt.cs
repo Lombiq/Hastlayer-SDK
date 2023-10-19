@@ -37,12 +37,12 @@ public struct XilinxMemoryExtension : IEquatable<XilinxMemoryExtension>
             Parameters = IntPtr.Zero,
         };
 
-    public bool Equals(XilinxMemoryExtension other) =>
+    public readonly bool Equals(XilinxMemoryExtension other) =>
         Flags == other.Flags && Object.Equals(other.Object) && Parameters.Equals(other.Parameters);
 
-    public override bool Equals(object obj) => obj is XilinxMemoryExtension other && Equals(other);
+    public override readonly bool Equals(object obj) => obj is XilinxMemoryExtension other && Equals(other);
 
-    public override int GetHashCode() => base.GetHashCode();
+    public override readonly int GetHashCode() => base.GetHashCode();
 
     public static bool operator ==(XilinxMemoryExtension left, XilinxMemoryExtension right) => left.Equals(right);
 

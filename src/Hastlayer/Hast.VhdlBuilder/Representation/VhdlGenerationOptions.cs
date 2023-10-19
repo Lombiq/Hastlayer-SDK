@@ -96,9 +96,9 @@ public class VhdlGenerationOptions : IVhdlGenerationOptions
             var (before, _, temporary) = shortName.Partition("(");
             var (arguments, _, after) = temporary.Partition(")");
 
-            var shortenedParameters = string.Join(",", arguments
+            var shortenedParameters = string.Join(',', arguments
                 .Split(',')
-                .Select(parameter => parameter.Split('.').Last()));
+                .Select(parameter => parameter.Split('.')[^1]));
 
             shortName = $"{before}({shortenedParameters}){after}";
         }

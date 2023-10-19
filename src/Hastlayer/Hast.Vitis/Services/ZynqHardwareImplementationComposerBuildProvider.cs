@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Hast.Vitis.Constants.Extensions;
+using static Hast.Vitis.Constants.FileNameExtensions;
 using static Hast.Vitis.Services.VitisHardwareImplementationComposerBuildProvider;
 using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
 

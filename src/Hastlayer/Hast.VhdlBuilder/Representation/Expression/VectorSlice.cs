@@ -1,4 +1,4 @@
-using System;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
@@ -17,6 +17,6 @@ public class VectorSlice : IVhdlElement
     {
         var vhdl = Vector.ToVhdl(vhdlGenerationOptions);
         var direction = IsDownTo ? "downto" : "to";
-        return FormattableString.Invariant($"{vhdl}({IndexFrom} {direction} {IndexTo})");
+        return StringHelper.CreateInvariant($"{vhdl}({IndexFrom} {direction} {IndexTo})");
     }
 }

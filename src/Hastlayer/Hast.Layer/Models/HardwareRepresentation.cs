@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 namespace Hast.Layer.Models;
 
-internal class HardwareRepresentation : IHardwareRepresentation
+internal sealed class HardwareRepresentation : IHardwareRepresentation
 {
     public IEnumerable<string> SoftAssemblyPaths { get; set; }
     public IHardwareDescription HardwareDescription { get; set; }

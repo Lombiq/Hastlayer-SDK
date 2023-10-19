@@ -12,8 +12,7 @@ public class VhdlStructureAssertionFailedException : Exception
 
     public string CodeExcerpt { get; set; }
 
-    public override string Message =>
-        string.Join(Environment.NewLine, new[] { Description, "Affected code:", CodeExcerpt });
+    public override string Message => string.Join(Environment.NewLine, Description, "Affected code:", CodeExcerpt);
 
     public VhdlStructureAssertionFailedException() { }
 

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Hast.Transformer.Models;
 
-internal class ArraySizeHolder : IArraySizeHolder
+internal sealed class ArraySizeHolder : IArraySizeHolder
 {
     private readonly Dictionary<string, IArraySize> _arraySizes = new();
 

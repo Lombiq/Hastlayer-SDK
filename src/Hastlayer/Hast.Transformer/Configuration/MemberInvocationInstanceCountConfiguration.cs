@@ -1,4 +1,5 @@
 using Hast.Layer;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
@@ -71,7 +72,7 @@ public class MemberInvocationInstanceCountConfiguration
     /// constructing a <see cref="MemberInvocationInstanceCountConfiguration"/>.
     /// </summary>
     public static string AddLambdaExpressionIndexToSimpleName(string simpleName, int lambdaExpressionIndex) =>
-        FormattableString.Invariant($"{simpleName}.LambdaExpression.{lambdaExpressionIndex}");
+        StringHelper.CreateInvariant($"{simpleName}.LambdaExpression.{lambdaExpressionIndex}");
 }
 
 public class MemberInvocationInstanceCountConfigurationForMethod<T> : MemberInvocationInstanceCountConfiguration

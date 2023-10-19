@@ -1,11 +1,12 @@
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
-internal class ConstantValuesSubstitutingAstProcessor
+internal sealed class ConstantValuesSubstitutingAstProcessor
 {
     public ConstantValuesTable ConstantValuesTable { get; }
     public ITypeDeclarationLookupTable TypeDeclarationLookupTable { get; }
@@ -69,16 +70,16 @@ internal class ConstantValuesSubstitutingAstProcessor
             constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count != hiddenlyUpdatedNodesUpdatedCount) &&
                 passCount < maxPassCount);
 
-        if (passCount == maxPassCount)
+        if (passCount >= maxPassCount)
         {
-            throw new InvalidOperationException(
-                "Constant substitution needs more than " + maxPassCount +
-                "passes through the syntax tree starting with the root node " + rootNode.GetFullName() +
-                ". This most possibly indicates some error or the assembly being processed is exceptionally big.");
+            throw new InvalidOperationException(StringHelper.CreateInvariant(
+                $"Constant substitution needs more than {maxPassCount} passes through the syntax tree starting with " +
+                $"the root node {rootNode.GetFullName()}. This most possibly indicates some error or the assembly " +
+                $"being processed is exceptionally big."));
         }
     }
 
-    public class ConstructorReference
+    public sealed class ConstructorReference
     {
         public MethodDeclaration Constructor { get; set; }
         public Expression OriginalAssignmentTarget { get; set; }

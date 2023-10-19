@@ -1,4 +1,4 @@
-using System;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Linq;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents;
@@ -39,7 +39,7 @@ public static class ArchitectureComponentNameExtensions
             component.InternallyDrivenSignals.Any(signal => signal.Name == component.CreatePrefixedObjectName(objectName)))
         {
             objectNameIndex++;
-            objectName = FormattableString.Invariant($"{name}.{objectNameIndex}");
+            objectName = StringHelper.CreateInvariant($"{name}.{objectNameIndex}");
         }
 
         return component.CreatePrefixedObjectName(objectName);

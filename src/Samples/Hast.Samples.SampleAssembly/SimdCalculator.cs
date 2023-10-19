@@ -115,28 +115,28 @@ public class SimdCalculator
     #region Helpers
 
     public int[] AddVectors(int[] vector1, int[] vector2, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-        RunSimdOperation(vector1, vector2, memory => AddVectors(memory), hastlayer, configuration);
+        RunSimdOperation(vector1, vector2, AddVectors, hastlayer, configuration);
 
     public int[] SubtractVectors(
         int[] vector1,
         int[] vector2,
         IHastlayer hastlayer = null,
         IHardwareGenerationConfiguration configuration = null) =>
-        RunSimdOperation(vector1, vector2, memory => SubtractVectors(memory), hastlayer, configuration);
+        RunSimdOperation(vector1, vector2, SubtractVectors, hastlayer, configuration);
 
     public int[] MultiplyVectors(
         int[] vector1,
         int[] vector2,
         IHastlayer hastlayer = null,
         IHardwareGenerationConfiguration configuration = null) =>
-        RunSimdOperation(vector1, vector2, memory => MultiplyVectors(memory), hastlayer, configuration);
+        RunSimdOperation(vector1, vector2, MultiplyVectors, hastlayer, configuration);
 
     public int[] DivideVectors(
         int[] vector1,
         int[] vector2,
         IHastlayer hastlayer = null,
         IHardwareGenerationConfiguration configuration = null) =>
-        RunSimdOperation(vector1, vector2, memory => DivideVectors(memory), hastlayer, configuration);
+        RunSimdOperation(vector1, vector2, DivideVectors, hastlayer, configuration);
 
     private int[] RunSimdOperation(
         int[] vector1,

@@ -36,7 +36,7 @@ public static class Program
 
     public const int HexDumpBlocksPerLine = 8;
 
-    public static Options CommandLineOptions { get; set; }
+    public static CommandLineOptions CommandLineOptions { get; set; }
 
     private static Hastlayer _hastlayer;
 
@@ -65,9 +65,9 @@ public static class Program
         }
 
         // Try to load selected device or pick the first available if none were selected.
-        if (string.IsNullOrEmpty(CommandLineOptions.DeviceName)) CommandLineOptions.DeviceName = devices.First().Name;
-        var selectedDevice = devices.FirstOrDefault(device => device.Name == CommandLineOptions.DeviceName);
-        if (selectedDevice == null) throw new InvalidOperationException($"Target device '{CommandLineOptions.DeviceName}' not found!");
+        if (string.IsNullOrEmpty(CommandLineOptions.DeviceName)) CommandLineOptions.DeviceName = devices[0].Name;
+        var selectedDevice = devices.Find(device => device.Name == CommandLineOptions.DeviceName) ??
+            throw new InvalidOperationException($"Target device '{CommandLineOptions.DeviceName}' not found!");
         var channelName = selectedDevice.DefaultCommunicationChannelName;
 
         var prepend = Array.Empty<int>();
@@ -223,7 +223,7 @@ public static class Program
             case OutputFileType.Hexdump:
                 if (string.IsNullOrEmpty(fileName)) fileName = fileNamePrefix + DefaultHexdumpFileName;
                 Console.WriteLine("Saving {0} hexdump to '{1}'...", direction, fileName);
-                if (fileName == Options.OutputFileNameConsole)
+                if (fileName == CommandLineOptions.OutputFileNameConsole)
                 {
                     WriteHexdump(Console.Out, memory);
                 }
@@ -309,7 +309,7 @@ public static class Program
     {
         try
         {
-            Parser.Default.ParseArguments<Options>(args).WithParsed(options => CommandLineOptions = options);
+            Parser.Default.ParseArguments<CommandLineOptions>(args).WithParsed(options => CommandLineOptions = options);
             if (CommandLineOptions == null) return;
 
             var hastlayerConfiguration = new HastlayerConfiguration();

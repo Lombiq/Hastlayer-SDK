@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
-internal class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
+internal sealed class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IResamplingTransformImageProcessor<TPixel>
     where TPixel : unmanaged, IPixel<TPixel>
 {
     private readonly int _destinationWidth;

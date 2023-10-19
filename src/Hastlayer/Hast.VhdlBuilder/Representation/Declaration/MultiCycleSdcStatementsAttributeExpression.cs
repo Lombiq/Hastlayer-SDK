@@ -1,5 +1,5 @@
 using Hast.VhdlBuilder.Extensions;
-using System;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -47,7 +47,7 @@ public class MultiCycleSdcStatementsAttributeExpression : IVhdlElement
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
         Terminated.Terminate(
             "\"" +
-            string.Join(";", _paths.Select(statement => statement.ToVhdl(vhdlGenerationOptions))) +
+            string.Join(';', _paths.Select(statement => statement.ToVhdl(vhdlGenerationOptions))) +
             "\"",
             vhdlGenerationOptions);
 
@@ -70,7 +70,7 @@ public class MultiCycleSdcStatementsAttributeExpression : IVhdlElement
 
             var vhdl = PathReference.ToVhdl(vhdlGenerationOptions).TrimExtendedVhdlIdDelimiters().Replace(" ", "\\ ");
 
-            return FormattableString.Invariant(
+            return StringHelper.CreateInvariant(
                 $"-name SDC_STATEMENT \"\"set_multicycle_path {ClockCycles} -{Type} -to {{*{name}{vhdl}[*]}}\"\"");
         }
     }

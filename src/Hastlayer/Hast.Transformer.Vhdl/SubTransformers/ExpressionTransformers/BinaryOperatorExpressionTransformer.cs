@@ -8,6 +8,7 @@ using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -306,7 +307,7 @@ public class BinaryOperatorExpressionTransformer : IBinaryOperatorExpressionTran
             new GeneratedComment(vhdlGenerationOptions =>
             {
                 var vhdl = operationResultDataObjectReference.ToVhdl(vhdlGenerationOptions);
-                return FormattableString.Invariant(
+                return StringHelper.CreateInvariant(
                     $"Waiting for the result to appear in {vhdl} (have to wait {clockCyclesToWait} clock cycles in this state).");
             }),
             new LineComment(

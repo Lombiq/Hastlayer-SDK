@@ -6,6 +6,7 @@ using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
@@ -48,7 +49,7 @@ public class EthernetCommunicationService : CommunicationServiceBase
         _devicePoolPopulator.PopulateDevicePoolIfNew(async () =>
             {
                 // Get the IP addresses of the FPGA boards.
-                var fpgaEndpoints = await _fpgaIpEndpointFinder.FindFpgaEndpointsAsync();
+                var fpgaEndpoints = (await _fpgaIpEndpointFinder.FindFpgaEndpointsAsync()).AsList();
 
                 if (!fpgaEndpoints.Any())
                 {
@@ -81,16 +82,15 @@ public class EthernetCommunicationService : CommunicationServiceBase
 
             using var stream = client.GetStream();
             // We send an execution signal to make the FPGA ready to receive the data stream.
-            var executionCommandTypeByte = new[] { (byte)CommandTypes.Execution };
-            await stream.WriteAsync(executionCommandTypeByte.AsMemory(0, executionCommandTypeByte.Length));
+            await stream.WriteAsync(CommandTypes.Execution.AsMemory(0, CommandTypes.Execution.Length));
 
             var executionCommandTypeResponseByte = await GetBytesFromStreamAsync(stream, 1);
 
-            if (executionCommandTypeResponseByte[0] != Ethernet.Signals.Ready)
+            if (executionCommandTypeResponseByte[0] != EthernetSignals.Ready)
             {
                 throw new EthernetCommunicationException(
                     "Awaited a ready signal from the FPGA after the execution byte was sent but received the following byte instead: " +
-                    executionCommandTypeResponseByte[0]);
+                    executionCommandTypeResponseByte[0].ToTechnicalString());
             }
 
             // Here we put together the data stream.

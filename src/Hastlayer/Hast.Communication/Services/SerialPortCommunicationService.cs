@@ -98,7 +98,7 @@ public class SerialPortCommunicationService : CommunicationServiceBase
 
         // Execute Order 66.
         // Set command type
-        var commandType = (byte)CommandTypes.Execution;
+        var commandType = CommandTypes.Execution[0];
         MemoryMarshal.Write(memory.Span, ref commandType);
         // Copying the input length, represented as bytes, to the output buffer.
         MemoryMarshal.Write(memory.Span.Slice(1, sizeof(int)), ref memoryLength);
@@ -297,7 +297,7 @@ public class SerialPortCommunicationService : CommunicationServiceBase
         try
         {
             serialPort.Open();
-            serialPort.Write(CommandTypes.WhoIsAvailable);
+            serialPort.Write(CommandTypes.WhoIsAvailable, offset: 0, count: CommandTypes.WhoIsAvailable.Length);
         }
         catch (IOException ex)
         {

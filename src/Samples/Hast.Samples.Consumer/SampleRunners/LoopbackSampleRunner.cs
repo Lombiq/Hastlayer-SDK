@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class LoopbackSampleRunner : ISampleRunner
+internal sealed class LoopbackSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<Loopback>();

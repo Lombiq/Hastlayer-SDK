@@ -1,12 +1,13 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class ParallelAlgorithmSampleRunner : ISampleRunner
+internal sealed class ParallelAlgorithmSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<ParallelAlgorithm>();
@@ -50,7 +51,7 @@ internal class ParallelAlgorithmSampleRunner : ISampleRunner
         parallel = new ParallelAlgorithm(); // Replace proxy with CPU implementation.
         foreach (var number in numbers)
         {
-            Console.WriteLine(FormattableString.Invariant($"On CPU it took {RunLogAndTime(parallel, number)}ms."));
+            Console.WriteLine(StringHelper.CreateInvariant($"On CPU it took {RunLogAndTime(parallel, number)}ms."));
         }
     }
 }

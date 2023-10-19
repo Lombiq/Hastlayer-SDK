@@ -12,7 +12,7 @@ using static System.Console;
 namespace Hast.Console;
 
 [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
-internal class Program
+internal sealed class Program
 {
     private static Dictionary<string, SubcommandInfo> _subcommands;
 
@@ -24,7 +24,7 @@ internal class Program
             WriteLine("Subcommands:\n* {0}", allSubcommands);
         }
         else if (mainOptions.Subcommand?.ToUpperInvariant() is { } name &&
-                 _subcommands.SingleOrDefault(sub => sub.Key.ToUpperInvariant() == name) is { })
+                 _subcommands.Any(sub => sub.Key.ToUpperInvariant() == name))
         {
             WriteLine("Please put the subcommand name as the first argument!");
         }
@@ -40,7 +40,7 @@ internal class Program
 
         // This is from an interactive Console, we want to exit.
 #pragma warning disable S1147 // Exit methods should not be called
-        if (errorList.Any(error => error.Tag == ErrorType.HelpRequestedError)) Environment.Exit(0);
+        if (errorList.Exists(error => error.Tag == ErrorType.HelpRequestedError)) Environment.Exit(0);
 #pragma warning restore S1147 // Exit methods should not be called
 
         if (errorList.Any())

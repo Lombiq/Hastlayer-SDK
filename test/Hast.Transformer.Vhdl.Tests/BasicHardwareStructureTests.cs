@@ -46,7 +46,7 @@ public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
         return Host.RunAsync<ITransformer>(async transformer =>
          {
              await TransformClassStrutureExamplesToVhdlAsync(transformer);
-             var topModule = (Module)manifest.Modules.Last();
+             var topModule = (Module)manifest.Modules[^1];
 
              var architecture = topModule.Architecture;
              architecture.Name.ShouldNotBeNullOrEmpty();

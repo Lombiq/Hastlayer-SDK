@@ -5,6 +5,7 @@ using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,11 +78,11 @@ public class MethodInliner : IConverter
         }
         while (codeOutput != syntaxTree.ToString() && passCount < maxPassCount);
 
-        if (passCount == maxPassCount)
+        if (passCount >= maxPassCount)
         {
-            throw new InvalidOperationException(
-                "Method inlining needs more than " + maxPassCount +
-                " passes through the syntax tree. This most possibly indicates some error or the assembly being processed is exceptionally big.");
+            throw new InvalidOperationException(StringHelper.CreateInvariant(
+                $"Method inlining needs more than {maxPassCount} passes through the syntax tree. This most possibly " +
+                $"indicates some error or the assembly being processed is exceptionally big."));
         }
     }
 

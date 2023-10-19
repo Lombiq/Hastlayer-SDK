@@ -161,6 +161,7 @@ public enum DeviceTypes : ulong
     "Minor Code Smell",
     "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes",
     Justification = "This is the name in the original library and changing it would be confusing.")]
+[SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "Same.")]
 [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is ulong.")]
 public enum MemoryFlags : ulong
 {
@@ -227,6 +228,7 @@ public enum MemoryFlags : ulong
     "Minor Code Smell",
     "S2344:Enumeration type names should not have \"Flags\" or \"Enum\" suffixes",
     Justification = "This is the name in the original library and changing it would be confusing.")]
+[SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "Same.")]
 [SuppressMessage("Design", "CA1028:Enum Storage should be Int32", Justification = "The external type is ulong.")]
 public enum MemoryMigrationFlags : ulong
 {

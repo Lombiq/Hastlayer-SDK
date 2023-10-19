@@ -5,7 +5,7 @@ using System;
 
 namespace Hast.Communication.Tester;
 
-public class Options
+public class CommandLineOptions
 {
     // Be sure to update the when changing these!
 

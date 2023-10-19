@@ -1,6 +1,8 @@
 using Hast.Synthesis.Models;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
 namespace Hast.Transformer.SimpleMemory;
@@ -17,9 +19,17 @@ namespace Hast.Transformer.SimpleMemory;
 /// be changed (i.e. no renames, new or re-ordered arguments) without making adequate changes to the VHDL library too.
 /// </para>
 /// </remarks>
+[SuppressMessage("Naming", "CA1724: Type names should not match namespaces", Justification = "This name may not be changed.")]
 public class SimpleMemory
 {
     public const int MemoryCellSizeBytes = sizeof(int);
+
+    private const bool IsDebug =
+#if DEBUG
+        true;
+#else
+        false;
+#endif
 
     /// <summary>
     /// Gets the span of memory at the cellIndex, the length is <see cref="MemoryCellSizeBytes"/>.
@@ -71,7 +81,7 @@ public class SimpleMemory
     /// The alignment value. If set to greater than 0, the starting address of the content is aligned to be a multiple
     /// of that number. It must be an integer and power of 2.
     /// </param>
-    internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment)
+    internal SimpleMemory(Memory<byte> memory, int prefixCellCount, int alignment, bool isDebug)
     {
         if (alignment > 0)
         {
@@ -94,10 +104,9 @@ public class SimpleMemory
             {
                 memory = memory.Slice(alignmentOffset, memory.Length - alignment);
             }
-            else
+            else if (isDebug)
             {
                 // This should never happen in production.
-#if DEBUG
                 Console.Error.WriteLine("Alignment failed!");
                 Console.Error.WriteLine("  64-bit: {0}", Environment.Is64BitProcess);
                 Console.Error.WriteLine("  address: {0}", address);
@@ -106,17 +115,18 @@ public class SimpleMemory
                 Console.Error.WriteLine("  alignment: {0}", alignment);
                 Console.Error.WriteLine("  alignmentOffset: {0}", alignmentOffset);
                 Console.Error.WriteLine("  expectedLength: {0}", expectedLength);
-#else
+            }
+            else
+            {
                 throw new InvalidOperationException(
                     "Alignment failed! (" +
-                    FormattableString.Invariant($"64-bit: {Environment.Is64BitProcess}; ") +
-                    FormattableString.Invariant($"address: {address}; ") +
-                    FormattableString.Invariant($"addressLong: {addressLong}; ") +
-                    FormattableString.Invariant($"{nameof(memory)} length: {memory.Length}; ") +
-                    FormattableString.Invariant($"alignment: {alignment}; ") +
-                    FormattableString.Invariant($"alignmentOffset: {alignmentOffset}; ") +
-                    FormattableString.Invariant($"expectedLength: {expectedLength})"));
-#endif
+                    StringHelper.CreateInvariant($"64-bit: {Environment.Is64BitProcess}; ") +
+                    StringHelper.CreateInvariant($"address: {address}; ") +
+                    StringHelper.CreateInvariant($"addressLong: {addressLong}; ") +
+                    StringHelper.CreateInvariant($"{nameof(memory)} length: {memory.Length}; ") +
+                    StringHelper.CreateInvariant($"alignment: {alignment}; ") +
+                    StringHelper.CreateInvariant($"alignmentOffset: {alignmentOffset}; ") +
+                    StringHelper.CreateInvariant($"expectedLength: {expectedLength})"));
             }
         }
 
@@ -166,7 +176,7 @@ public class SimpleMemory
     {
         var memory = new byte[((cellCount + memoryConfiguration.MinimumPrefix) * MemoryCellSizeBytes) +
                               memoryConfiguration.Alignment];
-        return new SimpleMemory(memory, memoryConfiguration.MinimumPrefix, memoryConfiguration.Alignment);
+        return new SimpleMemory(memory, memoryConfiguration.MinimumPrefix, memoryConfiguration.Alignment, IsDebug);
     }
 
     /// <summary>
@@ -201,7 +211,7 @@ public class SimpleMemory
             withPrefixCells = memoryConfiguration.MinimumPrefix;
         }
 
-        return new SimpleMemory(memory, withPrefixCells, 0);
+        return new SimpleMemory(memory, withPrefixCells, 0, IsDebug);
     }
 
     /// <summary>
@@ -211,7 +221,7 @@ public class SimpleMemory
     /// <param name="cellCount">The size of the usable memory.</param>
     /// <returns>The instance with a <c>byte[]</c> of capacity for the require payload size.</returns>
     public static SimpleMemory CreateSoftwareMemory(int cellCount) =>
-        new(new byte[cellCount * MemoryCellSizeBytes], 0, 0);
+        new(new byte[cellCount * MemoryCellSizeBytes], 0, 0, IsDebug);
 }
 
 /// <summary>

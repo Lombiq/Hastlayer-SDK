@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class UnumCalculatorSampleRunner : ISampleRunner
+internal sealed class UnumCalculatorSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration)
     {

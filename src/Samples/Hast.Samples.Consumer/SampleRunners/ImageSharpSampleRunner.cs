@@ -1,6 +1,7 @@
 using Hast.Layer;
 using Hast.Samples.SampleAssembly;
 using Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class ImageSharpSampleRunner : ISampleRunner
+internal sealed class ImageSharpSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<HastlayerAcceleratedImageSharp>();
@@ -52,7 +53,7 @@ internal class ImageSharpSampleRunner : ISampleRunner
 
         using var newImage = FpgaClone(out var timeFpga);
         await newImage.SaveAsync("FpgaResizedWithHastlayer.jpg");
-        Console.WriteLine(FormattableString.Invariant($"On FPGA it took {timeFpga} ms"));
+        Console.WriteLine(StringHelper.CreateInvariant($"On FPGA it took {timeFpga} ms"));
     }
 
     private static void RunSoftwareBenchmarks(Image image)
@@ -68,7 +69,7 @@ internal class ImageSharpSampleRunner : ISampleRunner
             out var timeNew);
         resizedNew.Save("FpgaResizedWithModifiedImageSharp.jpg");
         Console.WriteLine(
-            FormattableString.Invariant($"On CPU Modified ImageSharp algorithm took {timeNew} ms"));
+            StringHelper.CreateInvariant($"On CPU Modified ImageSharp algorithm took {timeNew} ms"));
 
         using var resizedOld = CloneAndMeasure(
             image,
@@ -76,7 +77,7 @@ internal class ImageSharpSampleRunner : ISampleRunner
             out var timeOld);
         resizedOld.Save("FpgaResizedWithOriginalImageSharp.jpg");
         Console.WriteLine(
-            FormattableString.Invariant($"On CPU Original ImageSharp algorithm took {timeOld} ms"));
+            StringHelper.CreateInvariant($"On CPU Original ImageSharp algorithm took {timeOld} ms"));
     }
 
     private static Image CloneAndMeasure(

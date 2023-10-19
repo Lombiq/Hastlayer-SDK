@@ -1,6 +1,7 @@
 using Hast.Algorithms;
 using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -101,9 +102,8 @@ public class Fix64Calculator
     {
         if (numbers.Length != MaxDegreeOfParallelism)
         {
-            throw new ArgumentException(
-                $"Provide as many {nameof(numbers)} as the degree of parallelism of Fix64Calculator is (" +
-                MaxDegreeOfParallelism + ")");
+            throw new ArgumentException(StringHelper.CreateInvariant(
+                $"Provide as many {nameof(numbers)} as the degree of parallelism of Fix64Calculator is ({MaxDegreeOfParallelism})"));
         }
 
         var memory = hastlayer is null ?

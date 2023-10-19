@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class Posit32FusedCalculatorSampleRunner : ISampleRunner
+internal sealed class Posit32FusedCalculatorSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration)
     {

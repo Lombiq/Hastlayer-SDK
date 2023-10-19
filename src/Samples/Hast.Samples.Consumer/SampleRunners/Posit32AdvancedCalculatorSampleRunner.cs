@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Hast.Samples.Consumer.SampleRunners;
 
 [SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "This application is not localized.")]
-internal class Posit32AdvancedCalculatorSampleRunner : ISampleRunner
+internal sealed class Posit32AdvancedCalculatorSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<Posit32AdvancedCalculator>();

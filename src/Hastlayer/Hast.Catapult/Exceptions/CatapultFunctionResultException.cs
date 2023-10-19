@@ -12,11 +12,11 @@ public class CatapultFunctionResultException : Exception
     /// <summary>
     /// Gets the status returned by the native function call.
     /// </summary>
-    public Constants.Status Status { get; private set; }
+    public Constants.Catapult.Status Status { get; private set; }
 
     public CatapultFunctionResultException() { }
 
-    public CatapultFunctionResultException(Constants.Status status, string message)
+    public CatapultFunctionResultException(Constants.Catapult.Status status, string message)
         : this(string.IsNullOrWhiteSpace(message) ? status.ToString() : message) => Status = status;
 
     public CatapultFunctionResultException(string message)

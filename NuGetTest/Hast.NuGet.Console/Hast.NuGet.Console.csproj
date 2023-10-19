@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hast.Algorithms" Version="2.1.1" />
-    <PackageReference Include="Hast.Layer" Version="2.1.1" />
+    <PackageReference Include="Hast.Algorithms" Version="2.1.2-alpha.0.hast-327" />
+    <PackageReference Include="Hast.Layer" Version="2.1.2-alpha.0.hast-327" />
     <PackageReference Include="Hast.Vitis.HardwareFramework" Version="1.2.0" />
   </ItemGroup>
 

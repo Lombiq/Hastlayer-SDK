@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class SimdCalculatorSampleRunner : ISampleRunner
+internal sealed class SimdCalculatorSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<SimdCalculator>();

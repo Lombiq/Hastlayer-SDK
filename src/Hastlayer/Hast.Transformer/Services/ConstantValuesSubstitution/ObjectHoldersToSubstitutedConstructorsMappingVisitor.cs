@@ -6,7 +6,7 @@ using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValues
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
-internal class ObjectHoldersToSubstitutedConstructorsMappingVisitor : DepthFirstAstVisitor
+internal sealed class ObjectHoldersToSubstitutedConstructorsMappingVisitor : DepthFirstAstVisitor
 {
     private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
 

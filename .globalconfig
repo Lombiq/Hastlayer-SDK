@@ -1,0 +1,19 @@
+is_global = true
+
+# Code analysis rules for Hastlayer, extending Lombiq.Analyzers.globalconfig.
+
+# Microsoft.CodeAnalysis.NetAnalyzers rules
+
+# CA1062: Validate arguments of public methods. We disabled it, because it makes the code bloated and doesn't support
+# `ArgumentNullException.ThrowIfNull()` either.
+dotnet_diagnostic.CA1062.severity = none
+
+# CA1848: Use the LoggerMessage delegates. While this might slightly improve performance, it deters logging by turning
+# it into a huge chore by breaking up the code flow and creating an unreasonable amount of boilerplate.
+dotnet_diagnostic.CA1848.severity = none
+
+# CA2007 : Consider calling ConfigureAwait on the awaited task. This warning is relevant to desktop apps that have a GUI
+# thread. While Hastlayer can be used in GUI applications, itself does not operate a user interface so this warning is
+# not relevant internally. A consumer of the library may call ConfigureAwait on one of the asynchronous public API
+# methods if needed.
+dotnet_diagnostic.CA2007.severity = none

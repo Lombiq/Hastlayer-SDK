@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.Models;
 
-internal class ArchitectureComponentResult : IArchitectureComponentResult
+internal sealed class ArchitectureComponentResult : IArchitectureComponentResult
 {
     public IArchitectureComponent ArchitectureComponent { get; set; }
     public IVhdlElement Declarations { get; set; }

@@ -9,7 +9,7 @@ using static Hast.Transformer.Services.ConstantValuesSubstitution.ConstantValues
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
-internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
+internal sealed class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
 {
     private readonly ConstantValuesSubstitutingAstProcessor _constantValuesSubstitutingAstProcessor;
     private readonly ConstantValuesTable _constantValuesTable;
@@ -421,7 +421,7 @@ internal class ConstantValuesSubstitutingVisitor : DepthFirstAstVisitor
             {
                 ConstantValuesTable.MarkAsNonConstant(assignmentExpression.Left, _constructor);
             }
-            else if (right != null)
+            else
             {
                 ConstantValuesTable.MarkAsPotentiallyConstant(assignmentExpression.Left, right, _constructor);
             }

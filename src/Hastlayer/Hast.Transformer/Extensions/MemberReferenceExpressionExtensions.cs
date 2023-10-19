@@ -82,8 +82,8 @@ public static class MemberReferenceExpressionExtensions
             // The member is in the base class (because of single class inheritance in C#, there can be only one base
             // class).
             return memberReferenceExpression.FindFirstParentTypeDeclaration().BaseTypes
-                .Select(type => typeDeclarationLookupTable.Lookup(type))
-                .SingleOrDefault(typeDeclaration => typeDeclaration != null && typeDeclaration.ClassType == ClassType.Class);
+                .Select(typeDeclarationLookupTable.Lookup)
+                .SingleOrDefault(typeDeclaration => typeDeclaration is { ClassType: ClassType.Class });
         }
 
         if (target is IdentifierExpression or IndexerExpression)

@@ -5,6 +5,7 @@ using Hast.Transformer.SimpleMemory;
 using Hast.Vitis.Extensions;
 using Hast.Vitis.Interop.Enums;
 using Hast.Vitis.Models;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
@@ -16,7 +17,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Transformer.SimpleMemory.SimpleMemory;
-using static Hast.Vitis.Constants.Extensions;
+using static Hast.Vitis.Constants.FileNameExtensions;
 
 namespace Hast.Vitis.Services;
 
@@ -74,7 +75,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
             {
                 devices.Add(new Device
                 {
-                    Identifier = FormattableString.Invariant($"{ChannelName}:{configuration.VendorName ?? "any"}:{i}"),
+                    Identifier = StringHelper.CreateInvariant($"{ChannelName}:{configuration.VendorName ?? "any"}:{i}"),
                     Metadata = i,
                 });
                 _binaryOpenCl.CreateCommandQueue(i);
@@ -102,7 +103,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
         if (hostMemory.Length <= headerSize)
         {
             throw new InvalidOperationException(
-                FormattableString.Invariant(
+                StringHelper.CreateInvariant(
                     $"The result size is only {hostMemory.Length}b but it must be more than the header size of {headerSize}b."));
         }
 
@@ -238,7 +239,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
         if (bufferSpan.Length <= headerSize)
         {
             throw new InvalidOperationException(
-                FormattableString.Invariant(
+                StringHelper.CreateInvariant(
                 $"The result size is only {bufferSpan.Length}b but it must be more than the header size of {headerSize}b."));
         }
 

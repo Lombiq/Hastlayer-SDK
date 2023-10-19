@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents;
 
-internal class MemberStateMachine : ArchitectureComponentBase, IMemberStateMachine
+internal sealed class MemberStateMachine : ArchitectureComponentBase, IMemberStateMachine
 {
     private readonly Enum _statesEnum;
     private readonly Variable _stateVariable;
@@ -132,7 +132,7 @@ internal class MemberStateMachine : ArchitectureComponentBase, IMemberStateMachi
             new LineComment(Name + " state machine end"));
     }
 
-    public class MemberStateMachineState : IMemberStateMachineState
+    public sealed class MemberStateMachineState : IMemberStateMachineState
     {
         public IBlockElement Body { get; set; }
         public decimal RequiredClockCycles { get; set; }

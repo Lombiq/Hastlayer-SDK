@@ -15,8 +15,7 @@ public class DeclarableTypeCreator : IDeclarableTypeCreator
 
     public DataType CreateDeclarableType(AstNode valueHolder, IType type, IVhdlTransformationContext context)
     {
-        if ((valueHolder.GetMemberResolveResult()?.Member.ReturnType as ITypeDefinition)?
-                .KnownTypeCode == KnownTypeCode.Void)
+        if (valueHolder.GetMemberResolveResult()?.Member.ReturnType is ITypeDefinition { KnownTypeCode: KnownTypeCode.Void })
         {
             return _typeConverter.ConvertAstType(new PrimitiveType("void"), context);
         }

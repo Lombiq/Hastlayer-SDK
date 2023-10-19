@@ -192,10 +192,10 @@ public class PrimeCalculator
         RunIsPrimeNumberAsync(number, memory => Task.Run(() => IsPrimeNumberSync(memory)), hastlayer, configuration).Result;
 
     public Task<bool> IsPrimeNumberAsync(uint number, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-        RunIsPrimeNumberAsync(number, memory => IsPrimeNumberAsync(memory), hastlayer, configuration);
+        RunIsPrimeNumberAsync(number, IsPrimeNumberAsync, hastlayer, configuration);
 
     public bool[] ArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null) =>
-        RunArePrimeNumbersMethod(numbers, memory => ArePrimeNumbers(memory), hastlayer, configuration);
+        RunArePrimeNumbersMethod(numbers, ArePrimeNumbers, hastlayer, configuration);
 
     public bool[] ParallelizedArePrimeNumbers(uint[] numbers, IHastlayer hastlayer = null, IHardwareGenerationConfiguration configuration = null)
     {

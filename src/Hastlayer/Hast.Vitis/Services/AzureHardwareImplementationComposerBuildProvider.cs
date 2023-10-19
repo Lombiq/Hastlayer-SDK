@@ -147,7 +147,7 @@ public class AzureHardwareImplementationComposerBuildProvider : IHardwareImpleme
             }
 
             var outputString = outputList.Any()
-                ? string.Join("\n", outputList.Select(item => "- " + item.Trim()))
+                ? string.Join('\n', outputList.Select(item => "- " + item.Trim()))
                 : "- Unknown issue";
             _logger.LogError("Attestation failed:\n{OutputString}", outputString);
 

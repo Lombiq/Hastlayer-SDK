@@ -37,7 +37,7 @@ public class VitisSubcommand : ISubcommand
         var result = Parser.Default.ParseArguments<VitisOptions>(_rawArguments);
         result
             .WithParsed(options => RunOptionsAsync(options, result, BuildLogger).Wait())
-            .WithNotParsed(errors => WriteLine(string.Join("\n", errors)));
+            .WithNotParsed(errors => WriteLine(string.Join('\n', errors)));
     }
 
     private static async Task RunOptionsAsync(

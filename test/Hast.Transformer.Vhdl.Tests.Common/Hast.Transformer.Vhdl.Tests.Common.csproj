@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup Condition="$(SolutionName) == 'Hastlayer.SDK.NuGet'">
-    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="5.1.2" />
+    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="8.0.2" />
   </ItemGroup>
-  
+
 </Project>

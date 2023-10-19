@@ -62,7 +62,7 @@ public static class ConfigurationExtensions
         var keys = inputDictionary.Keys.ToArray();
 
         // It's an array if all keys are integers.
-        if (keys.All(key => int.TryParse(key, out var index) && index >= 0 && index < keys.Length))
+        if (keys.TrueForAll(key => int.TryParse(key, out var index) && index >= 0 && index < keys.Length))
         {
             var array = new object[keys.Length];
             foreach (var (key, value) in inputDictionary)

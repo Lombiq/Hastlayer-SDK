@@ -8,16 +8,16 @@
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;VHDL;AST</PackageTags>
     <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.VhdlBuilder</PackageProjectUrl>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(NuGetBuild)' != 'true'">
     <ProjectReference Include="..\..\Libraries\External\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(NuGetBuild)' == 'true'">
-    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="5.1.2" />
+    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="8.0.2" />
   </ItemGroup>
 </Project>

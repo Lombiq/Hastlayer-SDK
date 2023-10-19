@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Hast.Samples.Consumer.SampleRunners;
 
-internal class GenomeMatcherSampleRunner : ISampleRunner
+internal sealed class GenomeMatcherSampleRunner : ISampleRunner
 {
     public void Configure(HardwareGenerationConfiguration configuration) =>
         configuration.AddHardwareEntryPointType<GenomeMatcher>();

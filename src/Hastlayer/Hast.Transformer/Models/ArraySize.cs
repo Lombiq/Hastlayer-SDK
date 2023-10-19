@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace Hast.Transformer.Models;
 
 [DebuggerDisplay("{ToString()}")]
 // Used in ArraySizeHolder.
-internal class ArraySize : IArraySize
+internal sealed class ArraySize : IArraySize
 {
     public int Length { get; set; }
 

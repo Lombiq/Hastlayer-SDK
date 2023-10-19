@@ -1,4 +1,5 @@
 using Hast.Common.Interfaces;
+using Lombiq.HelpfulLibraries.Common.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,6 @@ namespace Hast.Common.Services;
 
 public static class DependencyInterfaceContainer
 {
-    // This is necessary because .Net Core Dependency Injection does not resolve Lazy<T> out of the box.
-    // https://stackoverflow.com/questions/44934511/does-net-core-dependency-injection-support-lazyt
-    internal class Lazier<T> : Lazy<T>
-        where T : class
-    {
-        public Lazier(IServiceProvider provider)
-            : base(provider.GetRequiredService<T>) { }
-    }
-
     [SuppressMessage(
         "Major Code Smell",
         "S3885:\"Assembly.Load\" should be used",
@@ -81,24 +73,18 @@ public static class DependencyInterfaceContainer
         }
 
         var initializerName = implementationType.GetCustomAttribute<DependencyInitializerAttribute>()?.MemberName;
-        if (!string.IsNullOrEmpty(initializerName))
-        {
-            var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static);
-            if (method is null)
-            {
-                throw new ArgumentException(
-                    $"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
-            }
+        if (string.IsNullOrEmpty(initializerName)) return lifetime;
 
-            method.Invoke(null, new object[] { services });
-        }
+        var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static) ??
+            throw new ArgumentException($"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
+        method.Invoke(null, new object[] { services });
 
         return lifetime;
     }
 
     public static IServiceCollection AddExternalHastlayerDependencies(this IServiceCollection services)
     {
-        services.AddScoped(typeof(Lazy<>), typeof(Lazier<>));
+        services.AddLazyInjectionSupport();
         services.AddLogging();
         services.AddSingleton(provider => provider.GetService<ILoggerFactory>().CreateLogger("Hastlayer"));
         services.AddMemoryCache();

@@ -7,7 +7,7 @@
     <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
     <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Common</PackageProjectUrl>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="CliWrap" Version="3.2.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -19,6 +19,6 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(NuGetBuild)' == 'true'">
-    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="5.1.2" />
+    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="8.0.2" />
   </ItemGroup>
 </Project>

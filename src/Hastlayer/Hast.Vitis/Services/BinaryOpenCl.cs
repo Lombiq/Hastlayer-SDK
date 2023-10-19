@@ -3,6 +3,7 @@ using Hast.Common.Interfaces;
 using Hast.Vitis.Interop;
 using Hast.Vitis.Interop.Enums;
 using Hast.Vitis.Models;
+using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -250,7 +251,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
         VerifyResults(
             resultsPerDevice,
             (deviceResult, i) => new InvalidOperationException(
-                FormattableString.Invariant($"Error while creating program on device #{i}: {deviceResult}")));
+                StringHelper.CreateInvariant($"Error while creating program on device #{i}: {deviceResult}")));
 
         VerifyResult(_cl.BuildProgram(
             program,
@@ -330,7 +331,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
         var queueReleaseExceptions = VerifyResults(
             _queues.Values.Select(_cl.ReleaseCommandQueue),
             (result, index) => new InvalidOperationException(
-                FormattableString.Invariant($"Error releasing queue for device #{queues[index].Key}: {result}")));
+                StringHelper.CreateInvariant($"Error releasing queue for device #{queues[index].Key}: {result}")));
 
         if (queueReleaseExceptions != null) exceptions.AddRange(queueReleaseExceptions.InnerExceptions);
 
@@ -356,7 +357,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
     {
         if (_queues.TryGetValue(queueIndex, out var queue)) return queue;
         throw new InvalidOperationException(
-            FormattableString.Invariant(
+            StringHelper.CreateInvariant(
                 $"There is no command queue for device #{queueIndex}. Please use {nameof(CreateCommandQueue)} to create one!"));
     }
 
@@ -364,7 +365,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
     {
         if (_kernels.TryGetValue(kernelName, out var kernel)) return kernel;
         throw new InvalidOperationException(
-            FormattableString.Invariant(
+            StringHelper.CreateInvariant(
                 $"The kernel '{kernelName}' does not exit. You can create a kernel with {nameof(CreateBinaryKernel)}."));
     }
 

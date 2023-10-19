@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static Lombiq.HelpfulLibraries.Common.Utilities.FileSystemHelper;
@@ -55,7 +54,7 @@ public class BuildLogger<T>
         _logger.LogInformation(
             "Starting program: {Executable} {Arguments} (working directory: {WorkingDirectory})",
             executable,
-            string.Join(" ", arguments),
+            string.Join(' ', arguments),
             hasWorkingDirectory ? workingDirectory : ".");
         return CliHelper.StreamAsync(
             executable,
@@ -76,7 +75,7 @@ public class BuildLogger<T>
                 Log(
                     LogLevel.None,
                     name,
-                    FormattableString.Invariant($"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}"),
+                    StringHelper.CreateInvariant($"#{started.ProcessId} arguments:\n\t{string.Join("\n\t", arguments)}"),
                     "started");
                 break;
             case StandardOutputCommandEvent output:
@@ -124,7 +123,7 @@ public class BuildLogger<T>
         }
 
         //// Raise the v++ status outputs like "[21:17:26] Phase 1 Build RT Design" trough the Progress event.
-        if (name == Vpp && text?.StartsWithOrdinal("[") == true && _vppStatusLogs.Any(fragment => text.Contains(fragment)))
+        if (name == Vpp && text?.StartsWithOrdinal("[") == true && _vppStatusLogs.Exists(text.Contains))
         {
             if (logLevel < LogLevel.Information) logLevel = LogLevel.Information;
             _progressInvoker.InvokeProgress(new BuildProgressEventArgs(text));
@@ -158,8 +157,8 @@ public static class BuildLogger
         for (var i = 0; i < 100 && buildOutput == null; i++)
         {
             var fileName = i == 0
-                ? FormattableString.Invariant($"{outFileName}.out")
-                : FormattableString.Invariant($"{outFileName}~{i}.out");
+                ? StringHelper.CreateInvariant($"{outFileName}.out")
+                : StringHelper.CreateInvariant($"{outFileName}~{i}.out");
             buildOutputPath = Path.Combine(buildOutputDirectoryPath, fileName);
 
             try

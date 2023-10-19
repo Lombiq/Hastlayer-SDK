@@ -15,7 +15,7 @@ configuration.VhdlTransformerConfiguration().VhdlGenerationConfiguration = VhdlG
 // To cross-compile, first run without any arguments (this will throw an exception during execution), then copy the
 // HardwareFramework directory to the remote device and pass the binary's path as the argument, e.g.:
 // dotnet Hast.NuGet.Console.dll HardwareFramework/bin/*.azure.xclbin
-var binaryPath = Environment.GetCommandLineArgs().FirstOrDefault(item => item.EndsWithOrdinalIgnoreCase(".xclbin"));
+var binaryPath = Environment.GetCommandLineArgs().Find(item => item.EndsWithOrdinalIgnoreCase(".xclbin"));
 if (File.Exists(binaryPath))
 {
     configuration.SingleBinaryPath = binaryPath;

@@ -43,3 +43,8 @@ using static Hast.TestInputs.Base.SuppressionConstants;
     "Usage",
     "VSTHRD105:Avoid method overloads that assume TaskScheduler.Current",
     Justification = "Can't do it without passing CancellationToken which is not supported.")]
+[assembly: SuppressMessage(
+    "Naming",
+    "CA1716:Identifiers should not match keywords",
+    Justification = "Using single word suffix 'Static' to fit the pattern of the other test assembly names.",
+    Scope = "module")]
