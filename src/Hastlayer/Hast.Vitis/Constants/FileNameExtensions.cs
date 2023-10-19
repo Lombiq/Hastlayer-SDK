@@ -1,6 +1,6 @@
 ﻿namespace Hast.Vitis.Constants;
 
-public static class Extensions
+public static class FileNameExtensions
 {
     public const string InfoFileExtension = ".info";
     public const string NameExtension = ".name";

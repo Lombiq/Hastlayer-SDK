@@ -17,7 +17,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static Hast.Transformer.SimpleMemory.SimpleMemory;
-using static Hast.Vitis.Constants.Extensions;
+using static Hast.Vitis.Constants.FileNameExtensions;
 
 namespace Hast.Vitis.Services;
 

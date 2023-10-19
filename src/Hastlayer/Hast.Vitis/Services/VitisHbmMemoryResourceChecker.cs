@@ -6,7 +6,7 @@ using Hast.Vitis.Constants;
 using Hast.Vitis.Models;
 using Hast.Xilinx;
 using System.IO;
-using static Hast.Vitis.Constants.Extensions;
+using static Hast.Vitis.Constants.FileNameExtensions;
 
 namespace Hast.Vitis.Services;
 

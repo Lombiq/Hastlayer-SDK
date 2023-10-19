@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Buffers;
 using System.IO;
-using static Hast.Vitis.Constants.Extensions;
+using static Hast.Vitis.Constants.FileNameExtensions;
 
 namespace Hast.Vitis.Services;
 
