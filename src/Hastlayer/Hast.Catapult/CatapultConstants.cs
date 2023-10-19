@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Catapult;
 
-public static class Constants
+public static class CatapultConstants
 {
     public const string Catapult = nameof(Catapult);
     public const string ChannelName = Catapult;

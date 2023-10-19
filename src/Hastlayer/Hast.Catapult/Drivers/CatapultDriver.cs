@@ -11,7 +11,7 @@ namespace Hast.Catapult.Drivers;
 
 public class CatapultDriver : IDeviceDriver
 {
-    public const string DeviceName = Constants.Catapult;
+    public const string DeviceName = CatapultConstants.Catapult;
 
     private readonly ITimingReportParser _timingReportParser;
     private readonly object _timingReportParserLock = new();

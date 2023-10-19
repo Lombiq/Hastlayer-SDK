@@ -11,8 +11,8 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using InputHeaderSizes = Hast.Catapult.Constants.InputHeaderSizes;
-using OutputHeaderSizes = Hast.Catapult.Constants.OutputHeaderSizes;
+using InputHeaderSizes = Hast.Catapult.CatapultConstants.InputHeaderSizes;
+using OutputHeaderSizes = Hast.Catapult.CatapultConstants.OutputHeaderSizes;
 
 namespace Hast.Catapult;
 
@@ -31,7 +31,7 @@ public sealed class CatapultLibrary : IDisposable
     /// <summary>
     /// Gets the name of the instance (Catapult:N where N is the PCIe endpoint number).
     /// </summary>
-    public string InstanceName => StringHelper.CreateInvariant($"{Constants.ChannelName}:{PcieEndpointNumber}");
+    public string InstanceName => StringHelper.CreateInvariant($"{CatapultConstants.ChannelName}:{PcieEndpointNumber}");
 
     /// <summary>
     /// Contains the latest tasks to be awaited when starting a new task.
@@ -96,15 +96,15 @@ public sealed class CatapultLibrary : IDisposable
         get
         {
             VerifyResult(NativeLibrary.ReadShellRegister(_handle, 0, out uint pcie));
-            return (pcie & Constants.RegisterMaskPcieEnabled) != 0;
+            return (pcie & CatapultConstants.RegisterMaskPcieEnabled) != 0;
         }
         private set
         {
             VerifyResult(NativeLibrary.ReadShellRegister(_handle, 0, out uint pcie));
 
             // Set control_register[6]
-            if (value) pcie |= Constants.RegisterMaskPcieEnabled;
-            else pcie &= ~Constants.RegisterMaskPcieEnabled;
+            if (value) pcie |= CatapultConstants.RegisterMaskPcieEnabled;
+            else pcie &= ~CatapultConstants.RegisterMaskPcieEnabled;
 
             VerifyResult(NativeLibrary.WriteShellRegister(_handle, 0, pcie));
         }
@@ -129,10 +129,10 @@ public sealed class CatapultLibrary : IDisposable
     /// parameter and a string as its second. Note that the strings all end with newline character.
     /// </param>
     public CatapultLibrary(
-        string libraryPath = Constants.DefaultLibraryPath,
+        string libraryPath = CatapultConstants.DefaultLibraryPath,
         string versionDefinitionsFile = null,
         string versionManifestFile = null,
-        int endpointNumber = Constants.PcieHipNumber,
+        int endpointNumber = CatapultConstants.PcieHipNumber,
         CatapultLogFunction logFunction = null)
     {
         LogFunction = logFunction;
@@ -153,7 +153,7 @@ public sealed class CatapultLibrary : IDisposable
         VerifyResult(createStatus);
 
         // Configure hardware settings & enable hardware.
-        SetSoftRegister(Constants.ConfigDram.Channel0, 0);
+        SetSoftRegister(CatapultConstants.ConfigDram.Channel0, 0);
         PcieEnabled = true;
 
         // Query device info.
@@ -165,9 +165,9 @@ public sealed class CatapultLibrary : IDisposable
         BufferSize = (int)count;
 
         // Load in configuration from the soft registers
-        var allowedSlots = (int)GetSoftRegister(Constants.SoftRegisters.AllowedSlots);
+        var allowedSlots = (int)GetSoftRegister(CatapultConstants.SoftRegisters.AllowedSlots);
         if (allowedSlots > 0 && allowedSlots < BufferCount) BufferCount = allowedSlots;
-        var bufferPayloadSize = (int)GetSoftRegister(Constants.SoftRegisters.BufferPayloadSize);
+        var bufferPayloadSize = (int)GetSoftRegister(CatapultConstants.SoftRegisters.BufferPayloadSize);
         if (bufferPayloadSize > 0 && bufferPayloadSize < BufferPayloadSize) BufferPayloadSize = bufferPayloadSize;
 
         // Set up the task tracker.
@@ -178,11 +178,11 @@ public sealed class CatapultLibrary : IDisposable
     public static CatapultLibrary Create(
         IDictionary<string, object> config,
         ILogger<CatapultLibrary> logger,
-        int endpointNumber = Constants.PcieHipNumber)
+        int endpointNumber = CatapultConstants.PcieHipNumber)
     {
-        var libraryPath = config.GetMaybe(Constants.DefaultLibraryPath) ?? Constants.DefaultLibraryPath;
-        var versionDefinitionsFile = config.GetMaybe(Constants.ConfigKeys.VersionDefinitionsFile);
-        var versionManifestFile = config.GetMaybe(Constants.ConfigKeys.VersionManifestFile);
+        var libraryPath = config.GetMaybe(CatapultConstants.DefaultLibraryPath) ?? CatapultConstants.DefaultLibraryPath;
+        var versionDefinitionsFile = config.GetMaybe(CatapultConstants.ConfigKeys.VersionDefinitionsFile);
+        var versionManifestFile = config.GetMaybe(CatapultConstants.ConfigKeys.VersionManifestFile);
 
         return new CatapultLibrary(
             (string)libraryPath,
@@ -191,28 +191,28 @@ public sealed class CatapultLibrary : IDisposable
             endpointNumber: endpointNumber,
             logFunction: (flagValue, text) =>
             {
-                var flag = (Constants.Log)flagValue;
+                var flag = (CatapultConstants.Log)flagValue;
 
                 // This function proxies special log entries so they can't be static.
 #pragma warning disable CA2254 // Template should be a static expression
                 switch (flag)
                 {
-                    case Constants.Log.None:
+                    case CatapultConstants.Log.None:
                         return;
-                    case Constants.Log.Info:
+                    case CatapultConstants.Log.Info:
                         logger.LogInformation(text);
                         break;
-                    case Constants.Log.Debug:
-                    case Constants.Log.Verbose:
+                    case CatapultConstants.Log.Debug:
+                    case CatapultConstants.Log.Verbose:
                         logger.LogDebug(text);
                         break;
-                    case Constants.Log.Error:
+                    case CatapultConstants.Log.Error:
                         logger.LogError(text);
                         break;
-                    case Constants.Log.Fatal:
+                    case CatapultConstants.Log.Fatal:
                         logger.LogCritical(text);
                         break;
-                    case Constants.Log.Warn:
+                    case CatapultConstants.Log.Warn:
                         logger.LogWarning(text);
                         break;
                     default:
@@ -236,12 +236,12 @@ public sealed class CatapultLibrary : IDisposable
             // close the PICe connection via `PcieEnabled = false;` right after that anyway.
         }
 
-        LogLine(Constants.Log.Info, "Closing down the FPGA...");
+        LogLine(CatapultConstants.Log.Info, "Closing down the FPGA...");
         PcieEnabled = false;
         NativeLibrary.CloseHandle(Handle);
 
         NativeLibrary.Dispose();
-        LogLine(Constants.Log.Info, "Closed down the FPGA...");
+        LogLine(CatapultConstants.Log.Info, "Closed down the FPGA...");
 
         _isDisposed = true;
     }
@@ -261,9 +261,9 @@ public sealed class CatapultLibrary : IDisposable
     /// </summary>
     /// <param name="status">The return value from the library function.</param>
     /// <exception cref="CatapultFunctionResultException">Thrown when the status isn't SUCCESS.</exception>
-    public void VerifyResult(Constants.Status status)
+    public void VerifyResult(CatapultConstants.Status status)
     {
-        if (status == Constants.Status.Success) return;
+        if (status == CatapultConstants.Status.Success) return;
 
         var errorMessage = new StringBuilder(512);
         NativeLibrary.GetLastError();
@@ -436,7 +436,7 @@ public sealed class CatapultLibrary : IDisposable
     /// <returns>The resulting output from the FPGA.</returns>
     private async Task<Memory<byte>> RunJobAsync(int bufferIndex, Memory<byte> inputData, bool ignoreResponse)
     {
-        LogLineInvariant(Constants.Log.Info, $"Job on slot #{bufferIndex} starting...");
+        LogLineInvariant(CatapultConstants.Log.Info, $"Job on slot #{bufferIndex} starting...");
         Debug.Assert(
             bufferIndex < BufferCount,
             StringHelper.CreateInvariant($"The buffer index is out of range. (current: {bufferIndex}, max: {BufferCount})"));
@@ -459,16 +459,16 @@ public sealed class CatapultLibrary : IDisposable
 
         // If the input message isn't 64B aligned, pad it with zeros.
         var payloadBytes = inputData.Length - InputHeaderSizes.Total;
-        if (payloadBytes % Constants.BufferChunkBytes != 0)
+        if (payloadBytes % CatapultConstants.BufferChunkBytes != 0)
         {
-            int paddedPayloadSize = Constants.BufferChunkBytes * ((payloadBytes / Constants.BufferChunkBytes) + 1);
+            int paddedPayloadSize = CatapultConstants.BufferChunkBytes * ((payloadBytes / CatapultConstants.BufferChunkBytes) + 1);
             if (paddedPayloadSize <= BufferPayloadSize)
             {
                 LogLine(
-                    Constants.Log.Warn,
+                    CatapultConstants.Log.Warn,
                     StringHelper.Concatenate(
-                        $"Incoming payload ({payloadBytes}B) must be aligned to {Constants.BufferChunkBytes}B! ",
-                        $"Padding for {Constants.BufferChunkBytes - paddedPayloadSize}B..."));
+                        $"Incoming payload ({payloadBytes}B) must be aligned to {CatapultConstants.BufferChunkBytes}B! ",
+                        $"Padding for {CatapultConstants.BufferChunkBytes - paddedPayloadSize}B..."));
                 var padded = new byte[paddedPayloadSize + InputHeaderSizes.Total];
                 inputData.CopyTo(padded);
                 inputData = padded;
@@ -478,7 +478,7 @@ public sealed class CatapultLibrary : IDisposable
         VerifyResult(NativeLibrary.GetInputBufferPointer(_handle, slot, out var inputBuffer));
 
         LogLineInvariant(
-            Constants.Log.Debug,
+            CatapultConstants.Log.Debug,
             $"Buffer #{slot} @ {inputBuffer.ToInt64()} input start: {Marshal.PtrToStructure<byte>(inputBuffer)}");
 
         // Upload data into input buffer.
@@ -522,13 +522,13 @@ public sealed class CatapultLibrary : IDisposable
         }
 
         LogLineInvariant(
-            Constants.Log.Debug,
+            CatapultConstants.Log.Debug,
             $"Buffer #{slot} @ {outputBuffer.ToInt64()} output start: {Marshal.PtrToStructure<byte>(outputBuffer)}");
 
         // Signal that we are done.
         NativeLibrary.DiscardOutputBuffer(_handle, slot);
 
-        LogFunction?.Invoke((uint)Constants.Log.Info, $"Job on slot #{slot} finished!{Environment.NewLine}");
+        LogFunction?.Invoke((uint)CatapultConstants.Log.Info, $"Job on slot #{slot} finished!{Environment.NewLine}");
         return resultMemory;
     }
 
@@ -540,10 +540,10 @@ public sealed class CatapultLibrary : IDisposable
         return TesterOutput.WriteLineAsync(format);
     }
 
-    private void LogLine(Constants.Log level, string text) =>
+    private void LogLine(CatapultConstants.Log level, string text) =>
         LogFunction?.Invoke((uint)level, text + Environment.NewLine);
 
-    private void LogLineInvariant(Constants.Log level, FormattableString text) =>
+    private void LogLineInvariant(CatapultConstants.Log level, FormattableString text) =>
         LogFunction?.Invoke((uint)level, text.ToString(CultureInfo.InvariantCulture) + Environment.NewLine);
 
     public override string ToString() => InstanceName;
