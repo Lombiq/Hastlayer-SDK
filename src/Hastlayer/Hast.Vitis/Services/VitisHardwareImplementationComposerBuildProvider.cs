@@ -252,9 +252,10 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
                     .OrderByDescending(fileInfo => fileInfo.FullName))
             )
             .FirstOrDefault()?
-            .FullName ?? throw new FileNotFoundException(
-            "Unable to find the platform xpfm file. The supported platforms are: " +
-            string.Join(", ", deviceManifest.SupportedPlatforms));
+            .FullName ??
+            throw new FileNotFoundException(
+                "Unable to find the platform xpfm file. The supported platforms are: " +
+                string.Join(", ", deviceManifest.SupportedPlatforms));
     }
 
     private void ProgressMajor(string message)
