@@ -29,6 +29,7 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
         _logger = logger;
     }
 
+    [SuppressMessage("CodeQuality", "IDE0079:Remove unnecessary suppression", Justification = "False positive in VS only.")]
     [SuppressMessage(
         "Style",
         "IDE0230:Use UTF-8 string literal",
