@@ -13,7 +13,7 @@ jobs:
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/INFRA-156
     with:
-      machine-types: "['buildjet-4vcpu-ubuntu-2204']"
+      machine-types: "['buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204']"
       timeout-minutes: 15
       build-configuration: Debug
       build-enable-nuget-caching: "true"
