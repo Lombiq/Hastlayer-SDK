@@ -16,4 +16,3 @@ jobs:
       machine-types: "['gitrunners-ubuntu-2204-x64-4vcpu', 'gitrunners-ubuntu-2204-x64-4vcpu', 'gitrunners-ubuntu-2204-x64-4vcpu', 'gitrunners-ubuntu-2204-x64-4vcpu', 'gitrunners-ubuntu-2204-x64-4vcpu', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-4vcpu-ubuntu-2204', 'buildjet-8vcpu-ubuntu-2204', 'buildjet-8vcpu-ubuntu-2204', 'buildjet-8vcpu-ubuntu-2204', 'buildjet-8vcpu-ubuntu-2204', 'buildjet-8vcpu-ubuntu-2204']"
       timeout-minutes: 15
       build-configuration: Debug
-
