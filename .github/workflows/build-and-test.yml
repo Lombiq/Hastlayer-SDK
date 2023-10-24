@@ -16,29 +16,3 @@ jobs:
       machine-types: "['gitrunners-ubuntu-2204-x64-4vcpu']"
       timeout-minutes: 15
       build-configuration: Debug
-
-  build-and-test-standard-runners:
-    if: github.ref_name == github.event.repository.default_branch
-    name: Build and Test (standard runners)
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
-    with:
-      timeout-minutes: 30
-      build-configuration: Debug
-
-  build-and-test-nuget-test:
-    name: Build and Test - NuGetTest solution
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
-    with:
-      build-directory: NuGetTest
-      timeout-minutes: 10
-
-  post-pull-request-checks-automation:
-    name: Post Pull Request Checks Automation
-    needs: [build-and-test-larger-runners, build-and-test-nuget-test]
-    if: github.event.pull_request != ''
-    uses: Lombiq/GitHub-Actions/.github/workflows/post-pull-request-checks-automation.yml@dev
-    secrets:
-      JIRA_BASE_URL: ${{ secrets.DEFAULT_JIRA_BASE_URL }}
-      JIRA_USER_EMAIL: ${{ secrets.DEFAULT_JIRA_USER_EMAIL }}
-      JIRA_API_TOKEN: ${{ secrets.DEFAULT_JIRA_API_TOKEN }}
-      MERGE_TOKEN: ${{ secrets.LOMBIQBOT_GITHUB_PERSONAL_ACCESS_TOKEN }}
