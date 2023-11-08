@@ -13,9 +13,11 @@ jobs:
     name: Build and Test (larger runners)
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
-      machine-types: "['gitrunners-ubuntu-2204-x64-4vcpu']"
+      machine-types: "['buildjet-4vcpu-ubuntu-2204']"
       timeout-minutes: 15
       build-configuration: Debug
+      build-enable-nuget-caching: "true"
+      build-enable-npm-caching: "true"
 
   build-and-test-standard-runners:
     if: github.ref_name == github.event.repository.default_branch
