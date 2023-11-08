@@ -11,7 +11,7 @@ jobs:
   build-and-test-larger-runners:
     if: github.ref_name != github.event.repository.default_branch
     name: Build and Test (larger runners)
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/INFRA-156
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
       machine-types: "['buildjet-4vcpu-ubuntu-2204']"
       timeout-minutes: 15
