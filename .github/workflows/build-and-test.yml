@@ -11,8 +11,9 @@ jobs:
   build-and-test-larger-runners:
     if: github.ref_name != github.event.repository.default_branch
     name: Build and Test (larger runners)
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/OSOE-743
     with:
+      parent-job-name: "root-solution-larger-runners"
       machine-types: "['buildjet-4vcpu-ubuntu-2204']"
       timeout-minutes: 15
       build-configuration: Debug
@@ -22,15 +23,17 @@ jobs:
   build-and-test-standard-runners:
     if: github.ref_name == github.event.repository.default_branch
     name: Build and Test (standard runners)
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/OSOE-743
     with:
+      parent-job-name: "root-solution-standard-runners"
       timeout-minutes: 30
       build-configuration: Debug
 
   build-and-test-nuget-test:
     name: Build and Test - NuGetTest solution
-    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
+    uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@issue/OSOE-743
     with:
+      parent-job-name: "nuget-solution"
       build-directory: NuGetTest
       timeout-minutes: 10
 
