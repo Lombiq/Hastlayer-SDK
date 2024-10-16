@@ -14,7 +14,7 @@ jobs:
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
       parent-job-name: root-solution-larger-runners
-      machine-types: "['warp-ubuntu-2204-x64-4x']"
+      machine-types: "['warp-ubuntu-2404-x64-4x']"
       timeout-minutes: 15
       build-configuration: Debug
       build-enable-nuget-caching: 'true'
