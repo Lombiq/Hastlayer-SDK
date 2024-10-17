@@ -14,11 +14,14 @@ jobs:
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
       parent-job-name: root-solution-larger-runners
-      machine-types: "['warp-ubuntu-2204-x64-4x']"
+      machine-types: "['warp-ubuntu-2404-x64-4x']"
       timeout-minutes: 15
       build-configuration: Debug
       build-enable-nuget-caching: 'true'
       build-enable-npm-caching: 'true'
+      dotnet-version: |
+        6.0.427
+        8.0.301
 
   build-and-test-standard-runners:
     if: github.ref_name == github.event.repository.default_branch
@@ -26,16 +29,24 @@ jobs:
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
       parent-job-name: 'root-solution-standard-runners'
+      machine-types: "['ubuntu-24.04']"
       timeout-minutes: 30
       build-configuration: Debug
+      dotnet-version: |
+        6.0.427
+        8.0.301
 
   build-and-test-nuget-test:
     name: Build and Test - NuGetTest solution
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
       parent-job-name: 'nuget-solution'
+      machine-types: "['ubuntu-24.04']"
       build-directory: NuGetTest
       timeout-minutes: 10
+      dotnet-version: |
+        6.0.427
+        8.0.301
 
   post-pull-request-checks-automation:
     name: Post Pull Request Checks Automation
