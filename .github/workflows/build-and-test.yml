@@ -29,7 +29,7 @@ jobs:
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
       parent-job-name: 'root-solution-standard-runners'
-      machine-types: "['ubuntu-2404']"
+      machine-types: "['ubuntu-24.04']"
       timeout-minutes: 30
       build-configuration: Debug
       dotnet-version: |
@@ -41,7 +41,7 @@ jobs:
     uses: Lombiq/GitHub-Actions/.github/workflows/build-and-test-dotnet.yml@dev
     with:
       parent-job-name: 'nuget-solution'
-      machine-types: "['ubuntu-2404']"
+      machine-types: "['ubuntu-24.04']"
       build-directory: NuGetTest
       timeout-minutes: 10
       dotnet-version: |
