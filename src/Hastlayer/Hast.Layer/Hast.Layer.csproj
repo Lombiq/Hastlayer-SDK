@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <Title>Hastlayer - Hast.Layer</Title>
     <Description>The central component of Hastlayer. See the project website for detailed documentation.</Description>
