@@ -16,7 +16,7 @@ public class BasicExecutionContext : Models.IHardwareExecutionContext
         Dictionary<string, object> customConfiguration = null)
     {
         var assemblies = new[] { typeof(Program).Assembly };
-        var configuration = new HardwareGenerationConfiguration(deviceName, hardwareFrameworkPath: null)
+        var configuration = new HardwareGenerationConfiguration(deviceName)
         {
             EnableHardwareTransformation = false,
         };

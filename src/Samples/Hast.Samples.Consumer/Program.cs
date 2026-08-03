@@ -192,7 +192,7 @@ internal static class Program
         // is any mismatch. This shouldn't normally happen, but it's not impossible in corner cases.
         var mismatches = exception
             .Mismatches?
-            .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
+            .ToList() ?? [];
 
         var mismatchCount = mismatches.Count;
         if (mismatchCount == 0)

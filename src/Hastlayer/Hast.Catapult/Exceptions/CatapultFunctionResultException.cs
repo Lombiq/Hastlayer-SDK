@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Hast.Catapult.Exceptions;
 
@@ -24,10 +23,4 @@ public class CatapultFunctionResultException : Exception
 
     public CatapultFunctionResultException(string message, Exception inner)
         : base(message, inner) { }
-
-    protected CatapultFunctionResultException(
-      SerializationInfo info,
-      StreamingContext context)
-        : base(info, context)
-    { }
 }

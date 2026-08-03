@@ -46,14 +46,14 @@ public sealed class Hastlayer : IHastlayer
         // Since the DI prefers services in order of registration, we take the user assemblies first followed by dynamic
         // lookup of Hast.*.dll files.
         var assemblies = new List<Assembly>(configuration.Extensions);
-        assemblies.AddRange(new[]
-        {
+        assemblies.AddRange(
+        [
             typeof(Hastlayer).Assembly,
             typeof(IProxyGenerator).Assembly,
             typeof(IHardwareImplementationComposer).Assembly,
             typeof(ITransformer).Assembly,
             typeof(NexysA7Driver).Assembly,
-        });
+        ]);
         assemblies.AddRange(DependencyInterfaceContainer.LoadAssemblies(Directory.GetFiles(".", "Hast.*.dll")));
 
         var services = new ServiceCollection();
