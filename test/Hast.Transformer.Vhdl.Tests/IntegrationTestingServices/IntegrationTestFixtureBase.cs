@@ -42,7 +42,7 @@ public abstract class IntegrationTestFixtureBase : IDisposable
 
     private static void OnServiceRegistration(IHastlayerConfiguration configuration, IServiceCollection services)
     {
-        services.RemoveImplementations<IHashProvider>();
+        services.RemoveImplementationsOf<IHashProvider>();
         services.AddSingleton<IHashProvider, VerificationTestHashProvider>();
     }
 }

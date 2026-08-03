@@ -36,7 +36,7 @@ public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBa
         {
             if (UseStubMemberSuitabilityChecker)
             {
-                services.RemoveImplementations<IMemberSuitabilityChecker>();
+                services.RemoveImplementationsOf<IMemberSuitabilityChecker>();
                 services.AddSingleton<IMemberSuitabilityChecker>(new StubMemberSuitabilityChecker());
             }
         };

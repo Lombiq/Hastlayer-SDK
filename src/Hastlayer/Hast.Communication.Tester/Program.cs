@@ -41,7 +41,7 @@ public static class Program
     private static Hastlayer _hastlayer;
 
     private static void OnServiceGeneration(object sender, IServiceCollection services) =>
-        services.RemoveImplementations<ITransformer>();
+        services.RemoveImplementationsOf<ITransformer>();
 
     private static async Task MainTaskAsync(IServiceProvider provider)
     {

@@ -14,6 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hast.Vitis.Services;
@@ -161,12 +162,15 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
                     "connected. If you are cross-compiling for a different machine and the compilation has " +
                     "finished you can disregard this error. (error: CL_PLATFORM_NOT_FOUND_KHR)");
             default:
-                var errorSymbol = "CL_" + status.ToString().ToSnakeCase().ToUpper(CultureInfo.InvariantCulture);
+                var errorSymbol = "CL_" + ToSnakeCase(status.ToString()).ToUpper(CultureInfo.InvariantCulture);
                 throw new InvalidOperationException(
                     $"OpenCL error with {nameof(status)} '{status}'. You may find more information by searching for " +
                     $"\"opencl {status} OR {errorSymbol}\" on the web.");
         }
     }
+
+    private static string ToSnakeCase(string value) =>
+        Regex.Replace(value, "(?<!^)([A-Z])", "_$1", RegexOptions.CultureInvariant);
 
     private static AggregateException VerifyResults(
         IEnumerable<Result> results,
