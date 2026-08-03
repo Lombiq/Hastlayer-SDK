@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Hast.Layer;
 
@@ -22,7 +21,4 @@ public class HastlayerException : Exception
     public HastlayerException()
     {
     }
-
-    protected HastlayerException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        : base(serializationInfo, streamingContext) { }
 }

@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Hast.Communication.Exceptions;
 
@@ -16,7 +15,4 @@ public class EthernetCommunicationException : Exception
         : base(message, innerException) { }
 
     public EthernetCommunicationException() { }
-
-    protected EthernetCommunicationException(SerializationInfo info, StreamingContext context)
-        : base(info, context) { }
 }

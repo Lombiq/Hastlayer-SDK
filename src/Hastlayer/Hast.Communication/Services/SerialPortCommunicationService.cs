@@ -99,11 +99,11 @@ public class SerialPortCommunicationService : CommunicationServiceBase
         // Execute Order 66.
         // Set command type
         var commandType = CommandTypes.Execution[0];
-        MemoryMarshal.Write(memory.Span, ref commandType);
+        MemoryMarshal.Write(memory.Span, in commandType);
         // Copying the input length, represented as bytes, to the output buffer.
-        MemoryMarshal.Write(memory.Span.Slice(1, sizeof(int)), ref memoryLength);
+        MemoryMarshal.Write(memory.Span.Slice(1, sizeof(int)), in memoryLength);
         // Copying the member ID, represented as bytes, to the output buffer.
-        MemoryMarshal.Write(memory.Span.Slice(1 + sizeof(int), sizeof(int)), ref memberId);
+        MemoryMarshal.Write(memory.Span.Slice(1 + sizeof(int), sizeof(int)), in memberId);
 
         // Sending the data. Just using serialPort.Write() once with all the data would stop sending data after 16372
         // bytes so we need to create batches. Since the FPGA receives data in the multiples of 4 bytes we use a batch

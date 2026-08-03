@@ -246,7 +246,7 @@ public static class Program
             case OutputFileType.BitmapJpeg:
                 await using (var stream = File.OpenRead(CommandLineOptions.InputFileName))
                 {
-                    using var input = await Image.LoadAsync<Rgba32>(stream, new BmpDecoder());
+                    using var input = await Image.LoadAsync<Rgba32>(stream);
                     using var output = BitmapHelper.FromSimpleMemory(memory, input, CommandLineOptions.Prepend?.Length ?? 0);
 
                     await output.SaveAsync(fileName, new JpegEncoder());

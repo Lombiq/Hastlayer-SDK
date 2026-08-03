@@ -73,7 +73,7 @@ public sealed class ConfigurationGui : IDisposable
                 .Result
                 .GetSupportedDevices()?
                 .Select(device => device.Name)
-                .ToList() ?? new List<string>(),
+                .ToList() ?? [],
             TaskScheduler.Current);
 
         // We can expect the Windows API on Windows, but not all *nix has nCurses.
@@ -89,10 +89,10 @@ public sealed class ConfigurationGui : IDisposable
             "_Start (F5)",
             string.Empty,
             () => { /* Intentionally empty. */ });
-        _menu = new MenuBar(new[]
-        {
-            new MenuBarItem("_File", new[]
-            {
+        _menu = new MenuBar(
+        [
+            new MenuBarItem("_File",
+            [
                 new MenuItem(
                     "_Load",
                     "Selects a saved configuration.",
@@ -108,9 +108,9 @@ public sealed class ConfigurationGui : IDisposable
                     "Closes the application.",
                     SetConfigurationAndStop(set: null),
                     shortcut: Key.Q | Key.CtrlMask),
-            }),
+            ]),
             _startMenuItem,
-        });
+        ]);
 
         _leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
         _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };

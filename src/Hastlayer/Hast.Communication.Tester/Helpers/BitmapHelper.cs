@@ -1,7 +1,6 @@
 using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
 
@@ -13,7 +12,7 @@ public static class BitmapHelper
 
     public static Image<Rgba32> FromSimpleMemory(SimpleMemory memory, Image<Rgba32> image, int prependCellCount = 0)
     {
-        var newImage = new Image<Rgba32>(image.GetConfiguration(), image.Width, image.Height);
+        var newImage = new Image<Rgba32>(image.Configuration, image.Width, image.Height);
 
         newImage.ProcessPixelRows(accessor =>
         {

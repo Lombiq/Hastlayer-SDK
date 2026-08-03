@@ -99,9 +99,9 @@ public class EthernetCommunicationService : CommunicationServiceBase
             var memoryDataLength = memory.Length - (MemoryPrefixCellCount * SimpleMemory.MemoryCellSizeBytes);
 
             // Copying the input length, represented as bytes, to the output buffer.
-            MemoryMarshal.Write(memory.Span, ref memoryDataLength);
+            MemoryMarshal.Write(memory.Span, in memoryDataLength);
             // Copying the member ID, represented as bytes, to the output buffer.
-            MemoryMarshal.Write(memory.Span[sizeof(int)..], ref memberId);
+            MemoryMarshal.Write(memory.Span[sizeof(int)..], in memberId);
 
             // Sending data to the FPGA board.
             var segment = memory.GetUnderlyingArray();

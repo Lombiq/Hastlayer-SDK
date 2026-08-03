@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Hast.Communication.Exceptions;
 
@@ -16,7 +15,4 @@ public class SerialPortCommunicationException : Exception
         : base(message, inner) { }
 
     public SerialPortCommunicationException() { }
-
-    protected SerialPortCommunicationException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        : base(serializationInfo, streamingContext) { }
 }

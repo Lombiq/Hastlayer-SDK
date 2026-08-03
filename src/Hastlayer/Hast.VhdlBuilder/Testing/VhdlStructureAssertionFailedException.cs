@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Hast.VhdlBuilder.Testing;
 
@@ -27,7 +26,4 @@ public class VhdlStructureAssertionFailedException : Exception
         Description = description;
         CodeExcerpt = codeExcerpt;
     }
-
-    protected VhdlStructureAssertionFailedException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        : base(serializationInfo, streamingContext) { }
 }
