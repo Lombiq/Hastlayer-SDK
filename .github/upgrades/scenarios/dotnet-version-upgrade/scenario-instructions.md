@@ -33,6 +33,10 @@
 - Do not remove legacy targets from shared libraries until every consuming application and test project has moved to net10.0.
 - Finish with full solution build and test validation after the consolidation pass.
 
+## Build Tool Decisions
+- **Hastlayer.SDK.sln**: `dotnet build` (solution projects are SDK-style and validated against a compatible .NET 10 SDK; no `global.json` pin is present)
+- **Submodule projects participating in the solution**: `dotnet build` (current Vitis, Lombiq.Arithmetics, and Helpful Libraries projects are SDK-style and part of the same modern .NET build flow)
+
 ## User Preferences
 ### Technical Preferences
 - Update all git submodules to their latest `dev` state before upgrading the main solution.
