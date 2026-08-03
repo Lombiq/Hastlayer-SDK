@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.1.32319.34
+# Visual Studio Version 18
+VisualStudioVersion = 18.8.12023.21 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{895E632F-FA72-4736-8701-229B8C2F4052}"
 EndProject
@@ -61,12 +61,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D5BF98C7-CE64-4E2E-B083-F987B33182D6}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.globalconfig = .globalconfig
 		Directory.Build.props = Directory.Build.props
 		License.md = License.md
 		NuGet.config = NuGet.config
 		NuGetIcon.png = NuGetIcon.png
 		Readme.md = Readme.md
-		.globalconfig = .globalconfig
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Samples.Demo", "src\Samples\Hast.Samples.Demo\Hast.Samples.Demo.csproj", "{CBAC105A-E50F-4202-A647-CFD674E6C0F8}"
@@ -97,13 +97,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Dynamic", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.Vitis.HardwareFramework", "src\HardwareFrameworks\Vitis\Hast.Vitis.HardwareFramework.csproj", "{38198457-A60A-4F35-9604-29B39B6D03A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.RestEase", "src\Libraries\External\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.RestEase\Lombiq.HelpfulLibraries.RestEase.csproj", "{4C53D384-FDED-4608-8C9A-616531CA4832}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{75BB7270-46E1-47D9-91CA-2A7666251ED6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hast.TestInputs.Base", "test\TestInputAssemblies\Hast.TestInputs.Base\Hast.TestInputs.Base.csproj", "{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lombiq.HelpfulLibraries.Common", "src\Libraries\External\Lombiq.HelpfulLibraries\Lombiq.HelpfulLibraries.Common\Lombiq.HelpfulLibraries.Common.csproj", "{5B2ED453-CC72-4593-8D7A-C123CA47F710}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{F1C0595B-B01C-4087-9FED-0FA26A5CE7F5}"
 EndProject
@@ -253,18 +249,10 @@ Global
 		{38198457-A60A-4F35-9604-29B39B6D03A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38198457-A60A-4F35-9604-29B39B6D03A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38198457-A60A-4F35-9604-29B39B6D03A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C53D384-FDED-4608-8C9A-616531CA4832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C53D384-FDED-4608-8C9A-616531CA4832}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C53D384-FDED-4608-8C9A-616531CA4832}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C53D384-FDED-4608-8C9A-616531CA4832}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5B2ED453-CC72-4593-8D7A-C123CA47F710}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C35ED12-118F-4953-B767-AC57E00FCF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C35ED12-118F-4953-B767-AC57E00FCF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C35ED12-118F-4953-B767-AC57E00FCF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -317,10 +305,8 @@ Global
 		{E845722C-4E75-46E1-990F-EAB163006E8E} = {5F3574F0-8780-4EB3-BB6B-9C9DC4D03F6F}
 		{91E069F5-88DC-4918-AA0D-791BF1C9B4DF} = {A5CA6F21-24E8-4EFE-A870-5CF8234AD56F}
 		{38198457-A60A-4F35-9604-29B39B6D03A7} = {D7193B9D-DDDA-49ED-9503-C63F1206FA2E}
-		{4C53D384-FDED-4608-8C9A-616531CA4832} = {7801A347-ABC2-44FC-8DBC-3953EACF3886}
 		{75BB7270-46E1-47D9-91CA-2A7666251ED6} = {895E632F-FA72-4736-8701-229B8C2F4052}
 		{EFA790EA-C576-4EF9-BB0F-39E0BC72A146} = {A5CA6F21-24E8-4EFE-A870-5CF8234AD56F}
-		{5B2ED453-CC72-4593-8D7A-C123CA47F710} = {7801A347-ABC2-44FC-8DBC-3953EACF3886}
 		{9B301050-AFCB-48B3-A35E-F1724FDE9FE6} = {F1C0595B-B01C-4087-9FED-0FA26A5CE7F5}
 		{2C35ED12-118F-4953-B767-AC57E00FCF6D} = {5F3574F0-8780-4EB3-BB6B-9C9DC4D03F6F}
 		{24D02197-141A-4048-87D0-DA32003AAA9B} = {51A02816-8D25-480F-9D28-EC7D05DC3F63}
