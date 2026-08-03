@@ -14,7 +14,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Castle.Core" Version="4.4.1" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.IO.Ports" Version="4.7.0" />
   </ItemGroup>
 

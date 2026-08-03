@@ -8,7 +8,4 @@
     <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Algorithms</PackageProjectUrl>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-  </ItemGroup>
 </Project>
