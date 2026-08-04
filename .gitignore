@@ -19,3 +19,4 @@ TestResults/*.trx
 artifacts/
 /NuGetTest/**/.editorconfig
 *.received.vhdl
+/.github/upgrades/
