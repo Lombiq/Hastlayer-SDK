@@ -1,7 +1,6 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using System.Collections.Generic;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
@@ -26,7 +25,7 @@ public class ConstantValuesSubstitutor : IConstantValuesSubstitutor
             new ConstantValuesTable(),
             _typeDeclarationLookupTableFactory.Create(syntaxTree),
             arraySizeHolder,
-            new Dictionary<string, ConstantValuesSubstitutingAstProcessor.ConstructorReference>(),
+            [],
             _astExpressionEvaluator,
             knownTypeLookupTable)
             .SubstituteConstantValuesInSubTree(syntaxTree, reUseOriginalConstantValuesTable: false);

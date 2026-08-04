@@ -32,7 +32,7 @@ public class TaskBodyInvocationInstanceCountsSetter : IConverter
 {
     // Many other dependencies are just leftovers from the previous linear execution order. However in this case we know
     // explicitly that ConstantValuesSubstitutor must come before TaskBodyInvocationInstanceCountsSetter.
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConstantValuesSubstitutor) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(ConstantValuesSubstitutor)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -42,7 +42,7 @@ public class TaskBodyInvocationInstanceCountsSetter : IConverter
 
     private sealed class TaskBodyInvocationInstanceCountsSetterVisitor : DepthFirstAstVisitor
     {
-        private readonly Dictionary<string, int> _taskStartsCountInMembers = new();
+        private readonly Dictionary<string, int> _taskStartsCountInMembers = [];
         private readonly TransformerConfiguration _configuration;
 
         public TaskBodyInvocationInstanceCountsSetterVisitor(TransformerConfiguration configuration) => _configuration = configuration;

@@ -27,8 +27,8 @@ public class SimpleMemoryUsageVerifier : ISimpleMemoryUsageVerifier
                 {
                     throw new InvalidOperationException(
                         $"The method {methodName} contains parameters apart from the SimpleMemory parameter." +
-                        $" Hardware entry points should only have a single SimpleMemory parameter and " +
-                        $"nothing else.");
+                        " Hardware entry points should only have a single SimpleMemory parameter and " +
+                        "nothing else.");
                 }
             }
         }

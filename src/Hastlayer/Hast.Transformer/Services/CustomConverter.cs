@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
@@ -8,7 +8,7 @@ namespace Hast.Transformer.Services;
 
 public class CustomConverter : IConverter
 {
-    private readonly List<string> _dependencies = new();
+    private readonly List<string> _dependencies = [];
 
     public string Name { get; set; }
     public IEnumerable<string> Dependencies => _dependencies;

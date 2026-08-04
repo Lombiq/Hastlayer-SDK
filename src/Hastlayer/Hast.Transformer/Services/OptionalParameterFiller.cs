@@ -33,7 +33,7 @@ namespace Hast.Transformer.Services;
 /// </example>
 public class OptionalParameterFiller : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(EmbeddedAssignmentExpressionsExpander) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(EmbeddedAssignmentExpressionsExpander)];
     private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 
     public OptionalParameterFiller(ITypeDeclarationLookupTableFactory typeDeclarationLookupTableFactory) =>
@@ -76,7 +76,7 @@ public class OptionalParameterFiller : IConverter
             if (objectCreateExpression.FindConstructorDeclaration(_typeDeclarationLookupTable) is not MethodDeclaration constructor) return;
 
             // Need to skip the first "this" parameter.
-            FillOptionalParameters(objectCreateExpression.Arguments, constructor.Parameters.Skip(1).ToList());
+            FillOptionalParameters(objectCreateExpression.Arguments, [.. constructor.Parameters.Skip(1)]);
         }
 
         private static void FillOptionalParameters(

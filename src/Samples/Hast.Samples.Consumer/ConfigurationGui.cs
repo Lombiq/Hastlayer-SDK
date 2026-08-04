@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Terminal.Gui;
 
@@ -48,7 +47,7 @@ public sealed class ConfigurationGui : IDisposable
 
     public ConsumerConfiguration BuildConfiguration()
     {
-        var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        var isWindows = OperatingSystem.IsWindows();
 
         // We manually change the buffer height to remove the scroll bar while the GUI is active. This way there won't
         // be an unseemly blank bar at the right edge of the screen on first draw. The buffer is restored from the
@@ -108,9 +107,9 @@ public sealed class ConfigurationGui : IDisposable
                     "Closes the application.",
                     SetConfigurationAndStop(set: null),
                     shortcut: Key.Q | Key.CtrlMask),
-            ]),
+           ]),
             _startMenuItem,
-        ]);
+       ]);
 
         _leftPane = new FrameView("Properties") { ColorScheme = Colors.Base };
         _topRightPane = new FrameView("Hint") { ColorScheme = Colors.Base };
@@ -120,7 +119,7 @@ public sealed class ConfigurationGui : IDisposable
                 JsonConvert.SerializeObject(_configuration))?
             .Keys
             .Select(key => key.RegexReplace(@"[A-Z]", " $0").TrimStart())
-            .OrderBy(text => text)
+            .Order()
             .ToList();
         _propertiesListView.SetSource(configurationKeys);
         _propertiesListView.SelectedItemChanged += args => PropertiesListView_SelectedChanged(args.Value?.ToString());
@@ -225,7 +224,7 @@ public sealed class ConfigurationGui : IDisposable
                 ShowTextField(visible: true);
                 break;
             case nameof(ConsumerConfiguration.SampleToRun):
-                var sampleNames = Enum.GetNames(typeof(Sample)).ToList();
+                var sampleNames = Enum.GetNames<Sample>().ToList();
                 _optionsListView.Source = new ListWrapper(sampleNames);
                 _optionsListView.SelectedItem = sampleNames.IndexOf(_configuration.SampleToRun.ToString());
                 _currentOptionsListViewEventHandler = item => _configuration.SampleToRun = Enum.Parse<Sample>(item.ToString()!);
@@ -364,7 +363,7 @@ public sealed class ConfigurationGui : IDisposable
             Height = Dim.Percent(100) - 2,
             CanFocus = false,
             ContentSize = new Size(
-                names.Select(name => name.Length).Concat(new[] { Console.WindowWidth / 2 }).Max(),
+                names.Select(name => name.Length).Concat([Console.WindowWidth / 2]).Max(),
                 names.Count),
         };
 

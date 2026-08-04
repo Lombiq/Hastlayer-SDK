@@ -11,7 +11,7 @@ namespace Hast.Transformer.Models;
 
 internal sealed class ArraySizeHolder : IArraySizeHolder
 {
-    private readonly Dictionary<string, IArraySize> _arraySizes = new();
+    private readonly Dictionary<string, IArraySize> _arraySizes = [];
 
     public ArraySizeHolder()
     {

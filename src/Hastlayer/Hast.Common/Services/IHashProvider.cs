@@ -1,4 +1,4 @@
-﻿namespace Hast.Common.Services;
+namespace Hast.Common.Services;
 
 /// <summary>
 /// A  hash provider to generate low-collusion unique strings that can be safely used to identify a section of code or a

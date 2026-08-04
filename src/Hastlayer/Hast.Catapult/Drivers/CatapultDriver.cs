@@ -24,7 +24,7 @@ public class CatapultDriver : IDeviceDriver
             Name = DeviceName,
             ClockFrequencyHz = 150 * Mhz,
             // Since it's completely Catapult-specific, not using e.g. "PCIe" here.
-            SupportedCommunicationChannelNames = new[] { DeviceName },
+            SupportedCommunicationChannelNames = [DeviceName],
             // Right now the whole memory is not available due to one physical cell being equal to one logical one.
             AvailableMemoryBytes = 8 * GigaByte / 16,
         };

@@ -41,7 +41,7 @@ namespace Hast.Transformer.Services;
 /// </remarks>
 public class InstanceMethodsToStaticConverter : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(CustomPropertiesToMethodsConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(CustomPropertiesToMethodsConverter)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -83,7 +83,7 @@ public class InstanceMethodsToStaticConverter : IConverter
             // Adding a "@this" parameter and using that instead of the "this" reference.
             var thisParameter = new ParameterDeclaration(parentAstType, "this")
                 .WithAnnotation(VariableHelper.CreateILVariableResolveResult(VariableKind.Parameter, parentTypeResolveResult.Type, "this"));
-            if (!methodDeclaration.Parameters.Any())
+            if (methodDeclaration.Parameters.Count == 0)
             {
                 methodDeclaration.Parameters.Add(thisParameter);
             }
@@ -147,7 +147,7 @@ public class InstanceMethodsToStaticConverter : IConverter
                 targetMemberReference.Target.ReplaceWith(new TypeReferenceExpression(_parentAstType.Clone())
                     .WithAnnotation(new TypeResolveResult(_parentAstType.GetActualType())));
 
-                if (!invocationExpression.Arguments.Any())
+                if (invocationExpression.Arguments.Count == 0)
                 {
                     invocationExpression.Arguments.Add(originalTarget);
                 }

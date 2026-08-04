@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using System.Collections.Generic;
 
 namespace Hast.Synthesis.Models;

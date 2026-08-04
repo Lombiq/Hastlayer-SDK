@@ -1,6 +1,5 @@
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
-using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 
@@ -72,10 +71,10 @@ internal sealed class ConstantValuesSubstitutingAstProcessor
 
         if (passCount >= maxPassCount)
         {
-            throw new InvalidOperationException(StringHelper.CreateInvariant(
+            throw new InvalidOperationException(
                 $"Constant substitution needs more than {maxPassCount} passes through the syntax tree starting with " +
                 $"the root node {rootNode.GetFullName()}. This most possibly indicates some error or the assembly " +
-                $"being processed is exceptionally big."));
+                "being processed is exceptionally big.");
         }
     }
 

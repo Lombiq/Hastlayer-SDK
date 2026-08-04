@@ -1,4 +1,4 @@
-﻿namespace Hast.Transformer.Vhdl.Configuration;
+namespace Hast.Transformer.Vhdl.Configuration;
 
 public class VhdlTransformerConfiguration
 {

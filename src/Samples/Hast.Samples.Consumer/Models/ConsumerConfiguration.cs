@@ -129,7 +129,7 @@ public class ConsumerConfiguration
         foreach (var (property, aliases) in properties)
         {
             var names = aliases
-                .Concat(new[] { property.Name.ToUpperInvariant() })
+                .Concat([property.Name.ToUpperInvariant()])
                 .Select(name => "-" + name)
                 .ToList();
 
@@ -157,7 +157,7 @@ public class ConsumerConfiguration
         var configurations = File.Exists(StorageFileName)
             ? JsonConvert.DeserializeObject<Dictionary<string, ConsumerConfiguration>>(
                 await File.ReadAllTextAsync(StorageFileName))
-            : new Dictionary<string, ConsumerConfiguration>();
+            : [];
 
         // Make the name case-insensitive.
         configurations = new Dictionary<string, ConsumerConfiguration>(

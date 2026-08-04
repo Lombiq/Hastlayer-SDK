@@ -52,7 +52,7 @@ public class XclbinClockInfo
 
     private static void ParseLine(string line, XclbinClockInfo item)
     {
-        var parts = line.Split(new[] { ':' }, 2);
+        var parts = line.Split([':'], 2);
         var key = parts[0].Trim();
         var value = parts[1].Trim();
 
@@ -65,7 +65,7 @@ public class XclbinClockInfo
                 item.Index = value.ToTechnicalInt();
                 break;
             case nameof(Type):
-                item.Type = (XclbinClockInfoType)Enum.Parse(typeof(XclbinClockInfoType), value, ignoreCase: true);
+                item.Type = Enum.Parse<XclbinClockInfoType>(value, ignoreCase: true);
                 break;
             case nameof(Frequency):
                 parts = value.Split();

@@ -1,4 +1,4 @@
-﻿namespace Hast.Communication.Tester;
+namespace Hast.Communication.Tester;
 
 public enum OutputFileType
 {

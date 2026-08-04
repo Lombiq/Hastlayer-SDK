@@ -1,4 +1,4 @@
-﻿namespace Hast.Common.Constants;
+namespace Hast.Common.Constants;
 
 public static class DataSize
 {

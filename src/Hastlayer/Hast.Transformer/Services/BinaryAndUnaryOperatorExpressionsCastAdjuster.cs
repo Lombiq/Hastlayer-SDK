@@ -35,7 +35,7 @@ namespace Hast.Transformer.Services;
 /// </summary>
 public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ImmutableArraysToStandardArraysConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(ImmutableArraysToStandardArraysConverter)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -51,8 +51,8 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
         // (https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators)
         // mentions that "When operands are of different integral types, their values are converted to the closest
         // containing integral type."
-        private static readonly BinaryOperatorType[] _binaryOperatorsWithNumericPromotions = new[]
-        {
+        private static readonly BinaryOperatorType[] _binaryOperatorsWithNumericPromotions =
+        [
             BinaryOperatorType.Add,
             BinaryOperatorType.Subtract,
             BinaryOperatorType.Multiply,
@@ -69,10 +69,10 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
             BinaryOperatorType.LessThanOrEqual,
             BinaryOperatorType.ShiftLeft,
             BinaryOperatorType.ShiftRight,
-        };
+       ];
 
-        private static readonly BinaryOperatorType[] _binaryOperatorsProducingNumericResults = new[]
-        {
+        private static readonly BinaryOperatorType[] _binaryOperatorsProducingNumericResults =
+        [
             BinaryOperatorType.Add,
             BinaryOperatorType.Subtract,
             BinaryOperatorType.Multiply,
@@ -83,10 +83,10 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
             BinaryOperatorType.ExclusiveOr,
             BinaryOperatorType.ShiftLeft,
             BinaryOperatorType.ShiftRight,
-        };
+       ];
 
-        private static readonly string[] _numericTypes = new[]
-        {
+        private static readonly string[] _numericTypes =
+        [
             typeof(byte).FullName,
             typeof(sbyte).FullName,
             typeof(short).FullName,
@@ -95,33 +95,33 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
             typeof(uint).FullName,
             typeof(long).FullName,
             typeof(ulong).FullName,
-        };
+       ];
 
         // Those types that have arithmetic, relational and bitwise operations defined for them, see:
         // https://github.com/dotnet/csharplang/blob/master/spec/expressions.md#arithmetic-operators
-        private static readonly string[] _numericTypesSupportingNumericPromotionOperations = new[]
-        {
+        private static readonly string[] _numericTypesSupportingNumericPromotionOperations =
+        [
             typeof(int).FullName,
             typeof(uint).FullName,
             typeof(long).FullName,
             typeof(ulong).FullName,
-        };
+       ];
 
-        private static readonly UnaryOperatorType[] _unaryOperatorsWithNumericPromotions = new[]
-        {
+        private static readonly UnaryOperatorType[] _unaryOperatorsWithNumericPromotions =
+        [
             UnaryOperatorType.Plus,
             UnaryOperatorType.Minus,
             UnaryOperatorType.BitNot,
-        };
+       ];
 
-        private static readonly string[] _typesConvertedToIntInUnaryOperations = new[]
-        {
+        private static readonly string[] _typesConvertedToIntInUnaryOperations =
+        [
             typeof(byte).FullName,
             typeof(sbyte).FullName,
             typeof(short).FullName,
             typeof(ushort).FullName,
             typeof(char).FullName,
-        };
+       ];
 
         private readonly IKnownTypeLookupTable _knownTypeLookupTable;
 
@@ -256,7 +256,7 @@ public class BinaryAndUnaryOperatorExpressionsCastAdjuster : IConverter
             var ulongFullName = typeof(ulong).FullName;
             var intFullName = typeof(int).FullName;
             var uintFullName = typeof(uint).FullName;
-            var typesConvertedToLongForUint = new[] { typeof(sbyte).FullName, typeof(short).FullName, intFullName };
+            string[] typesConvertedToLongForUint = [typeof(sbyte).FullName, typeof(short).FullName, intFullName];
 
             // First handling shifts which are different from other affected binary operators because only the left
             // operand is promoted, and only everything below int to int.

@@ -72,9 +72,7 @@ public static class Program
         var prepend = Array.Empty<int>();
         if (!string.IsNullOrEmpty(CommandLineOptions.Prepend))
         {
-            prepend = CommandLineOptions.Prepend.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
-                .ToArray();
+            prepend = [.. CommandLineOptions.Prepend.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse)];
         }
 
         var hardwareGenerationConfiguration = new HardwareGenerationConfiguration(selectedDevice.Name);
@@ -108,11 +106,11 @@ public static class Program
                     .Assembly
                     .GetTypes()
                     .Single(currentType =>
-                        currentType.Name.ToUpperInvariant() == name &&
-                        currentType.GetConstructor(Array.Empty<Type>()) != null &&
+                        currentType.Name.EqualsOrdinalIgnoreCase(name) &&
+                        currentType.GetConstructor([]) != null &&
                         GetReferenceAction(currentType) != null);
-                var sample = type.GetConstructor(Array.Empty<Type>())?.Invoke(Array.Empty<object>());
-                GetReferenceAction(type)?.Invoke(sample, new object[] { referenceMemory });
+                var sample = type.GetConstructor([])?.Invoke([]);
+                GetReferenceAction(type)?.Invoke(sample, [referenceMemory]);
             }
         }
 

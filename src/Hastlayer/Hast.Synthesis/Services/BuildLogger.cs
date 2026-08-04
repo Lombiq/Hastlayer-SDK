@@ -17,7 +17,7 @@ namespace Hast.Synthesis.Services;
 public class BuildLogger<T>
 {
     private const string Vpp = "v++";
-    private readonly string[] _vppStatusLogs = { "] Starting ", "] Phase ", "] Finished " };
+    private readonly string[] _vppStatusLogs = ["] Starting ", "] Phase ", "] Finished "];
 
     private readonly ILogger<T> _logger;
     private readonly string _buildOutputPath;

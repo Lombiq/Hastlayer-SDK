@@ -1,7 +1,6 @@
 using Hast.VhdlBuilder.Representation.Declaration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Hast.Transformer.Vhdl.Models;
 
@@ -22,7 +21,7 @@ public class DependentTypesTable
     {
         if (!_dependencies.TryGetValue(type, out var dependencies))
         {
-            dependencies = _dependencies[type] = new HashSet<string>();
+            dependencies = _dependencies[type] = [];
         }
 
         dependencies.Add(dependencyTypeName);
@@ -43,7 +42,7 @@ public class DependentTypesTable
     /// </summary>
     public IEnumerable<string> GetDependencies(DataType type)
     {
-        if (!_dependencies.TryGetValue(type, out var dependencies)) return Enumerable.Empty<string>();
+        if (!_dependencies.TryGetValue(type, out var dependencies)) return [];
         return dependencies;
     }
 

@@ -1,4 +1,4 @@
-﻿using Hast.TestInputs.Dynamic;
+using Hast.TestInputs.Dynamic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -9,8 +9,8 @@ public class InlinedCasesTests
     [Fact]
     public Task InlinedMultiReturn() =>
         TestExecutor.ExecuteSelectedTestAsync<InlinedCases>(
-            g => g.InlinedMultiReturn(null),
-            g =>
+            caseSelector: g => g.InlinedMultiReturn(null),
+            testExecutor: g =>
             {
                 g.InlinedMultiReturn(3);
                 g.InlinedMultiReturn(-3);

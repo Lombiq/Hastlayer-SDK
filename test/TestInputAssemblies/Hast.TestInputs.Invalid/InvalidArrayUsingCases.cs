@@ -10,9 +10,9 @@ public class InvalidArrayUsingCases
         // Since array size can only be statically defined using the same method (which has only one hardware array
         // "instance") invocations with different array sizes are invalid.
 
-        var array1 = new[] { 1 };
+        int[] array1 = [1];
         var value1 = GetItemValuePlusOne(array1, 0);
-        var array2 = new[] { 1, 2 };
+        int[] array2 = [1, 2];
         var value2 = GetItemValuePlusOne(array2, 0);
     }
 
@@ -28,9 +28,11 @@ public class InvalidArrayUsingCases
         Array.Copy(array1, array2, input);
     }
 
+    private static readonly int[] _items = [1];
+
     public void UnsupportedImmutableArrayCreateRangeUsage()
     {
-        var immutableArray1 = ImmutableArray.CreateRange(new[] { 1 });
+        var immutableArray1 = ImmutableArray.CreateRange(_items);
         var immutableArray2 = ImmutableArray.CreateRange(immutableArray1, item => item);
     }
 

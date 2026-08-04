@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.SimpleMemory;
+using Hast.Transformer.SimpleMemory;
 
 namespace Hast.Vitis.Constants;
 

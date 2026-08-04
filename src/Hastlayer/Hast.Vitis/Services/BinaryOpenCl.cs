@@ -36,9 +36,9 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
     private readonly Lazy<IntPtr> _context;
 
-    private readonly Dictionary<int, IntPtr> _queues = new();
-    private readonly Dictionary<string, IntPtr> _kernels = new();
-    private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = new();
+    private readonly Dictionary<int, IntPtr> _queues = [];
+    private readonly Dictionary<string, IntPtr> _kernels = [];
+    private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = [];
 
     private Lazy<IntPtr[]> _devicesLazy;
 
@@ -58,11 +58,11 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
         _context = new Lazy<IntPtr>(() =>
         {
-            if (!Devices.Any()) return IntPtr.Zero;
+            if (Devices.Length == 0) return IntPtr.Zero;
             var context = _cl.CreateContext(
                 IntPtr.Zero,
                 (uint)Devices.Length,
-                Devices.ToArray(),
+                [.. Devices],
                 IntPtr.Zero,
                 IntPtr.Zero,
                 out var result);
@@ -77,7 +77,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
     public void PrepareDevices(IOpenClConfiguration configuration) =>
         _devicesLazy ??= new Lazy<IntPtr[]>(() =>
-            GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
+            [.. GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType)]);
 
     public void CreateCommandQueue(
         int deviceIndex,
@@ -103,7 +103,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
                 var kernel = _cl.CreateKernel(program, kernelName, out var result);
                 VerifyResult(result);
                 _kernels[kernelName] = kernel;
-                _kernelBuffers[kernelName] = new List<IntPtr>();
+                _kernelBuffers[kernelName] = [];
             }
         }
     }
@@ -247,8 +247,8 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
             _context.Value,
             Devices.Length,
             Devices,
-            new[] { binaryLength },
-            new[] { binary },
+            [binaryLength],
+            [binary],
             resultsPerDevice,
             out var result);
         VerifyResult(result);
@@ -290,7 +290,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
             memoryObjects,
             flags,
             waitEvent == IntPtr.Zero ? 0u : 1,
-            waitEvent == IntPtr.Zero ? null : new[] { waitEvent },
+            waitEvent == IntPtr.Zero ? null : [waitEvent],
             out waitEvent));
         return waitEvent;
     }
@@ -301,7 +301,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
             queue,
             kernel,
             waitEvent == IntPtr.Zero ? 0u : 1,
-            waitEvent == IntPtr.Zero ? null : new[] { waitEvent },
+            waitEvent == IntPtr.Zero ? null : [waitEvent],
             out waitEvent));
         return waitEvent;
     }

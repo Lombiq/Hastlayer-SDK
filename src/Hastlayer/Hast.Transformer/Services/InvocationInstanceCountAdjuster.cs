@@ -27,8 +27,8 @@ public class InvocationInstanceCountAdjuster : IInvocationInstanceCountAdjuster
     {
         private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
         private readonly TransformerConfiguration _transformerConfiguration;
-        private readonly HashSet<EntityDeclaration> _membersInvokedFromNonParallel = new();
-        private readonly HashSet<EntityDeclaration> _membersInvokedFromNonRecursive = new();
+        private readonly HashSet<EntityDeclaration> _membersInvokedFromNonParallel = [];
+        private readonly HashSet<EntityDeclaration> _membersInvokedFromNonRecursive = [];
 
         public InvocationInstanceCountAdjustingVisitor(
             ITypeDeclarationLookupTable typeDeclarationLookupTable,

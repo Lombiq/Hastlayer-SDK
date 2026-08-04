@@ -120,13 +120,13 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
 
         var memory = (SimpleMemory)invocation.Arguments.SingleOrDefault(argument => argument is SimpleMemory) ??
             throw new NotSupportedException(
-                $"Only SimpleMemory-using implementations are supported for hardware execution. The " +
+                "Only SimpleMemory-using implementations are supported for hardware execution. The " +
                 $"{nameof(invocation)} didn't include a SimpleMemory argument.");
 
         if (memoryResourceCheckers.Check(memory, hardwareRepresentation) is { } problem)
         {
             var exception = new InvalidOperationException(
-                $"The input is too large to fit into the device's memory. The input is " +
+                "The input is too large to fit into the device's memory. The input is " +
                 $"{problem.MemoryByteCount} bytes, the available memory is " +
                 $"{problem.AvailableByteCount} bytes. (Reported by {problem.GetType().FullName}.) " +
                 $"{problem.Message}");
@@ -197,10 +197,7 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
 
     private static void OnVerifying(SimpleMemory softMemory, SimpleMemory memory)
     {
-        if (softMemory == null)
-        {
-            throw new ArgumentNullException(nameof(softMemory));
-        }
+        ArgumentNullException.ThrowIfNull(softMemory);
 
         var mismatches = new List<HardwareExecutionResultMismatchException.Mismatch>();
 
@@ -211,10 +208,10 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
                 memory.CellCount,
                 softMemory.CellCount,
                 overflowIndex,
-                memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : Array.Empty<byte>(),
+                memory.CellCount > softMemory.CellCount ? memory.Read4Bytes(overflowIndex) : [],
                 softMemory.CellCount > memory.CellCount
                     ? softMemory.Read4Bytes(overflowIndex)
-                    : Array.Empty<byte>()));
+                    : []));
         }
         else
         {
@@ -231,7 +228,7 @@ public class MemberInvocationHandlerFactory : IMemberInvocationHandlerFactory
             }
         }
 
-        if (mismatches.Any())
+        if (mismatches.Count != 0)
         {
             throw new HardwareExecutionResultMismatchException(mismatches, memory.CellCount);
         }

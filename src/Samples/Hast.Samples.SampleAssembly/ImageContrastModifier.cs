@@ -85,7 +85,7 @@ public class ImageContrastModifier
                 // It's no problem that we write just 3 bytes to a 4-byte slot.
                 memory.Write4Bytes(
                     (i * MaxDegreeOfParallelism) + t + ChangeContrastImageStartIndex,
-                    new[] { tasks[t].Result.R, tasks[t].Result.G, tasks[t].Result.B });
+                    [tasks[t].Result.R, tasks[t].Result.G, tasks[t].Result.B]);
             }
         }
     }
@@ -194,7 +194,7 @@ public class ImageContrastModifier
                     // needed.
                     memory.Write4Bytes(
                         (y * image.Width) + x + ChangeContrastImageStartIndex,
-                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                        [pixel.R, pixel.G, pixel.B, pixel.A]);
                 }
             }
         });

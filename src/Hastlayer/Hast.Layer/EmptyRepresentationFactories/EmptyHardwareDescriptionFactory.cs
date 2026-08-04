@@ -2,7 +2,6 @@ using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Hast.Layer.EmptyRepresentationFactories;
@@ -28,7 +27,7 @@ internal static class EmptyHardwareDescriptionFactory
 
         public IReadOnlyDictionary<string, int> HardwareEntryPointNamesToMemberIdMappings { get; }
 
-        public IEnumerable<ITransformationWarning> Warnings => Enumerable.Empty<ITransformationWarning>();
+        public IEnumerable<ITransformationWarning> Warnings => [];
 
         public HardwareDescription(IReadOnlyDictionary<string, int> hardwareEntryPointNamesToMemberIdMappings) =>
             HardwareEntryPointNamesToMemberIdMappings = hardwareEntryPointNamesToMemberIdMappings;

@@ -1,4 +1,4 @@
-﻿using Hast.TestInputs.Dynamic;
+using Hast.TestInputs.Dynamic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -9,8 +9,8 @@ public class CastExpressionCasesTests
     [Fact]
     public Task AllNumberCastingVariations() =>
         TestExecutor.ExecuteSelectedTestAsync<CastExpressionCases>(
-            c => c.AllNumberCastingVariations(null),
-            c =>
+            caseSelector: c => c.AllNumberCastingVariations(null),
+            testExecutor: c =>
             {
                 c.AllNumberCastingVariations(long.MinValue + 1);
                 c.AllNumberCastingVariations(123);

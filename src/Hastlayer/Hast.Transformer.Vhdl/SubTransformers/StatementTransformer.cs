@@ -84,8 +84,8 @@ public class StatementTransformer : IStatementTransformer
                 scope.Warnings.AddWarning(
                     "ThrowStatementOmitted",
                     $"The exception throw statement \"{statement}\" was omitted during transformation to be able to " +
-                    $"transform the code. However this can cause issues for certain algorithms; if it is an issue " +
-                    $"for this one then this code can't be transformed.");
+                    "transform the code. However this can cause issues for certain algorithms; if it is an issue " +
+                    "for this one then this code can't be transformed.");
 
                 currentBlock.Add(new LineComment("A throw statement was here, which was omitted during transformation."));
 
@@ -99,7 +99,7 @@ public class StatementTransformer : IStatementTransformer
                 return;
             case BreakStatement:
                 var afterWhileStack = GetOrCreateAfterWhileStateIndexStack(context);
-                if (afterWhileStack.Any())
+                if (afterWhileStack.Count != 0)
                 {
                     currentBlock.Add(new LineComment("Exiting the while loop with a break statement."));
                     currentBlock.Add(stateMachine.CreateStateChange(afterWhileStack.Peek()));

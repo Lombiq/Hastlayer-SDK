@@ -47,11 +47,11 @@ public class Fix64Calculator
 
         CalculateIntegerSumUpToNumber(memory);
 
-        return Fix64.FromRawInts(new[]
-        {
+        return Fix64.FromRawInts(
+        [
             memory.ReadInt32(CalculateLargeIntegerSumOutputInt32Index),
             memory.ReadInt32(CalculateLargeIntegerSumOutputInt32Index + 1),
-        });
+        ]);
     }
 
     public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
@@ -123,11 +123,11 @@ public class Fix64Calculator
         {
             var itemOutputStartIndex = ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex + (i * 2);
 
-            results[i] = Fix64.FromRawInts(new[]
-            {
+            results[i] = Fix64.FromRawInts(
+            [
                 memory.ReadInt32(itemOutputStartIndex),
                 memory.ReadInt32(itemOutputStartIndex + 1),
-            });
+            ]);
         }
 
         return results;

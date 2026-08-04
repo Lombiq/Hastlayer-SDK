@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis.Models;
+using Hast.Synthesis.Models;
 
 namespace Hast.Layer.EmptyRepresentationFactories;
 

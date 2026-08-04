@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Vhdl.ArchitectureComponents;
+using Hast.Transformer.Vhdl.ArchitectureComponents;
 using Hast.Transformer.Vhdl.Models;
 using Hast.Transformer.Vhdl.SubTransformers.ExpressionTransformers;
 using Hast.VhdlBuilder.Extensions;
@@ -70,7 +70,7 @@ public class DisplayClassFieldTransformer : IDisplayClassFieldTransformer
             {
                 IsHardwareEntryPointMember = false,
                 Member = field,
-                ArchitectureComponentResults = new[] { new ArchitectureComponentResult(fieldComponent) },
+                ArchitectureComponentResults = [new ArchitectureComponentResult(fieldComponent)],
             };
         });
 

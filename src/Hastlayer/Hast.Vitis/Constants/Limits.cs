@@ -1,4 +1,4 @@
-﻿using static Hast.Common.Constants.DataSize;
+using static Hast.Common.Constants.DataSize;
 
 namespace Hast.Vitis.Constants;
 

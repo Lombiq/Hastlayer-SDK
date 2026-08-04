@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 
 namespace Hast.TestInputs.Dynamic;

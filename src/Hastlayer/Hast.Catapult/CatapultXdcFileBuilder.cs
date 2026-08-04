@@ -29,7 +29,7 @@ public class CatapultXdcFileBuilder : XdcFileBuilderBase<CatapultDeviceManifest>
                 // should be empty.
                 sdcExpression.AddPath(
                     operation.OperationResultReference.DataObjectKind == DataObjectKind.Variable ?
-                        ProcessUtility.FindProcesses(new[] { architectureComponentResult.Body }).Single().Name :
+                        ProcessUtility.FindProcesses([architectureComponentResult.Body]).Single().Name :
                         string.Empty,
                     operation.OperationResultReference,
                     operation.RequiredClockCyclesCeiling);

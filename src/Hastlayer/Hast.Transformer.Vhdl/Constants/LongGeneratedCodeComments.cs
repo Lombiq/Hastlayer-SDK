@@ -1,4 +1,4 @@
-﻿namespace Hast.Transformer.Vhdl.Constants;
+namespace Hast.Transformer.Vhdl.Constants;
 
 /// <summary>
 /// Stores long comments that are inserted into the generated VHDL code to help understand it.

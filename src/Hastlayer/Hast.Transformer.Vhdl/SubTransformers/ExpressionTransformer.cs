@@ -544,7 +544,7 @@ public class ExpressionTransformer : IExpressionTransformer
             scope.Warnings.AddWarning(
                 "LossyCast",
                 $"A cast from {fromVhdlType.ToVhdl()} to {toVhdlType.ToVhdl()} was lossy. If the result can " +
-                $"indeed reach values outside the target type's limits then underflow or overflow errors will " +
+                "indeed reach values outside the target type's limits then underflow or overflow errors will " +
                 $"occur. The affected expression: {castExpression} in method {scope.Method.GetFullName()}.");
         }
 
@@ -680,7 +680,7 @@ public class ExpressionTransformer : IExpressionTransformer
             // original variable.
             throw new NotSupportedException(
                 $"The {nameof(assignment)} {expression} is not supported. You can't at the moment assign to a " +
-                $"variable that you previously assigned to using a reference type-holding variable."
+                "variable that you previously assigned to using a reference type-holding variable."
                 .AddParentEntityName(assignment));
         }
 

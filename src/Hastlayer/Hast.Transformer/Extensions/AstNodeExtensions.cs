@@ -24,7 +24,7 @@ public static class AstNodeExtensions
                 return primitiveType.Keyword;
             case ComposedType composedType:
                 var name = composedType.BaseType.GetFullName();
-                if (!composedType.ArraySpecifiers.Any()) return name;
+                if (composedType.ArraySpecifiers.Count == 0) return name;
 
                 var nameBuilder = new StringBuilder(name);
                 foreach (var arraySpecifier in composedType.ArraySpecifiers.Select(nameBuilder.Append)) nameBuilder.Append(arraySpecifier);

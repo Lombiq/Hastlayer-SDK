@@ -94,7 +94,7 @@ public readonly struct Fix64 : IEquatable<Fix64>, IComparable<Fix64>
     {
         var low = (int)(RawValue & uint.MaxValue);
         int high = (int)(RawValue >> 32);
-        return new[] { low, high };
+        return [low, high];
     }
 
     #endregion Instance methods

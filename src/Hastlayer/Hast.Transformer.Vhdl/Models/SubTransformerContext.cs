@@ -64,7 +64,7 @@ public class SubTransformerScope
     /// <summary>
     /// Gets the warnings issued during transformation.
     /// </summary>
-    public IList<ITransformationWarning> Warnings { get; } = new List<ITransformationWarning>();
+    public IList<ITransformationWarning> Warnings { get; } = [];
 }
 
 public class CurrentBlock

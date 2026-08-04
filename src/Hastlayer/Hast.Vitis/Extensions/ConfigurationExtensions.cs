@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Vitis.Models;
 
 namespace Hast.Vitis.Extensions;

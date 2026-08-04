@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{DebugDisplay,nq}")]
 public class Enum : DataType
 {
     public ICollection<Value> Values { get; } = new List<Value>();

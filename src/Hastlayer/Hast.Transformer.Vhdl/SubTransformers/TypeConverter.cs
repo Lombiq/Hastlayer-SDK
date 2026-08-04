@@ -147,7 +147,7 @@ public class TypeConverter : ITypeConverter
         catch (Exception ex)
         {
             throw new NotSupportedException(
-                $"Tasks can't return arrays as that would result in multi-dimensional arrays which is not " +
+                "Tasks can't return arrays as that would result in multi-dimensional arrays which is not " +
                 $"supported. Affected type: {type}.",
                 ex);
         }

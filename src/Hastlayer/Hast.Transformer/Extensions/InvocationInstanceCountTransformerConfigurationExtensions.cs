@@ -76,7 +76,7 @@ public static class InvocationInstanceCountTransformerConfigurationExtensions
     private sealed class IndexedNameHolderSettingVisitor : DepthFirstAstVisitor
     {
         private readonly Dictionary<string, EntityDeclaration> _compilerGeneratedMembers;
-        private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = new();
+        private readonly Dictionary<EntityDeclaration, int> _lambdaCounts = [];
 
         public IndexedNameHolderSettingVisitor(Dictionary<string, EntityDeclaration> compilerGeneratedMembers) =>
             _compilerGeneratedMembers = compilerGeneratedMembers;
@@ -101,18 +101,19 @@ public static class InvocationInstanceCountTransformerConfigurationExtensions
             {
                 var parentMember = memberReferenceExpression.FindFirstParentOfType<EntityDeclaration>();
 
-                if (!_lambdaCounts.ContainsKey(parentMember))
+                if (!_lambdaCounts.TryGetValue(parentMember, out int value))
                 {
-                    _lambdaCounts[parentMember] = 0;
+                    value = 0;
+                    _lambdaCounts[parentMember] = value;
                 }
 
                 member.AddAnnotation(new LambdaExpressionIndexedNameHolder
                 {
                     IndexedName = MemberInvocationInstanceCountConfiguration
-                        .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), _lambdaCounts[parentMember]),
+                        .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), value),
                 });
 
-                _lambdaCounts[parentMember]++;
+                _lambdaCounts[parentMember] = ++value;
             }
         }
     }

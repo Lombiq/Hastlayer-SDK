@@ -11,7 +11,7 @@ public class CatapultSamplesVerificationTests : SamplesVerificationTestsBase
     protected override string DeviceName => CatapultDriver.DeviceName;
 
     public CatapultSamplesVerificationTests() =>
-        _hostConfiguration.Extensions = _hostConfiguration.Extensions.Union(new[] { typeof(CatapultDriver).Assembly });
+        _hostConfiguration.Extensions = _hostConfiguration.Extensions.Union([typeof(CatapultDriver).Assembly]);
 
     [Fact]
     public async Task BasicSamplesMatchApproved() =>

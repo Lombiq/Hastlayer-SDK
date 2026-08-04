@@ -80,7 +80,7 @@ public sealed class Hastlayer : IHastlayer
         //// services.Log(LogLevel.Warning, "Warning message!");
         //// services.Log(LogLevel.Critical, "Critical message {0} {1} {2}!", "with", 3, "parameters");
 
-        _serviceNames = new HashSet<string>(services.Select(serviceDescriptor => serviceDescriptor.ServiceType.FullName));
+        _serviceNames = [.. services.Select(serviceDescriptor => serviceDescriptor.ServiceType.FullName)];
         _serviceProvider = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = true, ValidateScopes = true });
 
         var logger = GetLogger<IDeferredLogEntry>();

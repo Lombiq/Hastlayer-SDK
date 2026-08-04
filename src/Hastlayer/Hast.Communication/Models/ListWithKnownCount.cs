@@ -75,7 +75,7 @@ public class ListWithKnownCount<T>
     public Memory<T> HandOver()
     {
         var currentData = (Memory<T>)_data;
-        _data = Array.Empty<T>();
+        _data = [];
         Count = 0;
         KnownCount = 0;
 

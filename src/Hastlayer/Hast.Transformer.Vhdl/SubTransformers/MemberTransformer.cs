@@ -29,7 +29,7 @@ public class MemberTransformer : IMemberTransformer
         VhdlTransformationContext transformationContext,
         ICollection<Task<IMemberTransformerResult>> memberTransformerTasks = null)
     {
-        memberTransformerTasks ??= new List<Task<IMemberTransformerResult>>();
+        memberTransformerTasks ??= [];
 
         var traverseTo = node.Children;
 

@@ -23,7 +23,7 @@ public static class RequirementExtensions
         where TItem : IRequirement<TKey>
         where TKey : IEquatable<TKey>
     {
-        var items = source is IList<TItem> list ? list : source.ToList();
+        var items = source is IList<TItem> list ? list : [.. source];
         var keys = items.Select(item => item.Name).ToList();
         CheckRequirements(items, keys);
 

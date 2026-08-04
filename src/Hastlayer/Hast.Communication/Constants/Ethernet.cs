@@ -1,4 +1,4 @@
-﻿namespace Hast.Communication.Constants.CommunicationConstants;
+namespace Hast.Communication.Constants.CommunicationConstants;
 
 public static class Ethernet
 {

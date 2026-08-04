@@ -71,7 +71,7 @@ public class VitisSubcommand : ISubcommand
 #pragma warning disable CA1308
                 var validOptions = string.Join(
                     ", ",
-                    Enum.GetNames(typeof(Instruction)).Select(value => value.ToLowerInvariant()));
+                    Enum.GetNames<Instruction>().Select(value => value.ToLowerInvariant()));
 #pragma warning restore CA1308
                 await System.Console.Error.WriteLineAsync($"The valid options are: {validOptions}");
                 throw new ArgumentOutOfRangeException(options.Instruction);
@@ -96,7 +96,7 @@ public class VitisSubcommand : ISubcommand
                 "./VitisOutput/Hastlayer.xclbin) or omit it!");
         }
 
-        var manifest = new VitisDeviceManifest { SupportedPlatforms = new[] { options.Platform ?? string.Empty } };
+        var manifest = new VitisDeviceManifest { SupportedPlatforms = [options.Platform ?? string.Empty] };
         var context = new HardwareImplementationCompositionContext
         {
             DeviceManifest = manifest,
@@ -107,7 +107,7 @@ public class VitisSubcommand : ISubcommand
             {
                 HardwareEntryPointNamesToMemberIdMappings = new Dictionary<string, int>(),
                 TransformationId = options.Hash ?? "Hastlayer",
-                Warnings = Array.Empty<ITransformationWarning>(),
+                Warnings = [],
             },
         };
         var implementation = new HardwareImplementation

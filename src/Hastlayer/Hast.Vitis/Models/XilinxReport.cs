@@ -24,7 +24,7 @@ public class XilinxReport
         foreach (var metaLine in await ReadWhileAsync(reader, line => !line.StartsWithOrdinal(HorizontalLine)))
         {
             if (!metaLine.Contains(':')) continue;
-            var parts = metaLine.TrimStart('|').Split(new[] { ':' }, 2);
+            var parts = metaLine.TrimStart('|').Split([':'], 2);
             report.MetaData[parts[0].Trim()] = parts[1].Trim();
         }
 

@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{DebugDisplay,nq}")]
 public class ArrayType : ArrayTypeBase // Not named "Array" to avoid naming clash with System.Array.
 {
     public DataType RangeType { get; set; } = KnownDataTypes.UnrangedInt;

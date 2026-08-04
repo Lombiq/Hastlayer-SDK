@@ -18,7 +18,7 @@ public abstract class NexysDriverBase : DeviceDriverBase
         {
             Name = DeviceName,
             ClockFrequencyHz = 100 * Mhz,
-            SupportedCommunicationChannelNames = new[] { Serial.ChannelName, Ethernet.ChannelName },
+            SupportedCommunicationChannelNames = [Serial.ChannelName, Ethernet.ChannelName],
             AvailableMemoryBytes = 110 * MebiByte,
         });
 

@@ -1,4 +1,4 @@
-﻿namespace Hast.Layer;
+namespace Hast.Layer;
 
 public class HardwareGenerationConfigurationAccessor : IHardwareGenerationConfigurationAccessor
 {

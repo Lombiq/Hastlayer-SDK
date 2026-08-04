@@ -1,4 +1,4 @@
-﻿namespace Hast.Transformer.Vhdl.ArchitectureComponents;
+namespace Hast.Transformer.Vhdl.ArchitectureComponents;
 
 public static class NameSuffixes
 {

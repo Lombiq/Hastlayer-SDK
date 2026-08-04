@@ -10,5 +10,5 @@ internal sealed class DeclarationReferenceMetadata
     public bool IsReferenced => ReferenceCount > 0;
     public bool WasVisited { get; set; }
 
-    public DeclarationReferenceMetadata() => ReferencedFrom = new HashSet<AstNode>();
+    public DeclarationReferenceMetadata() => ReferencedFrom = [];
 }

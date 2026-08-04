@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{DebugDisplay,nq}")]
 public class StdLogicVector : SizedDataType
 {
     private Value _defaultValue;

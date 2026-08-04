@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.VhdlBuilder.Representation.Declaration;
 using System.Collections.Generic;
 

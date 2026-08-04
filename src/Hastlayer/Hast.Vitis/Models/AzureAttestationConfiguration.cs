@@ -50,5 +50,5 @@ public class AzureAttestationConfiguration : AzureStorageConfiguration
         throw new InvalidOperationException(
             $"The property \"{name}\" is missing or empty. It is required to use the attestation service. Please " +
             $"specify it in the appsettings.json or otherwise set the {nameof(IHardwareGenerationConfiguration)}. " +
-            $"See the Readme of the Hast.Vitis library for further details.");
+            "See the Readme of the Hast.Vitis library for further details.");
 }

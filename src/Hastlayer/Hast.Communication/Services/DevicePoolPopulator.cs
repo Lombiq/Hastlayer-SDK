@@ -1,4 +1,4 @@
-﻿using Hast.Communication.Models;
+using Hast.Communication.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

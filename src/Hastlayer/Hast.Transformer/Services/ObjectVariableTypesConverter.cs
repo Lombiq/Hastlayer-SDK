@@ -40,7 +40,7 @@ namespace Hast.Transformer.Services;
 /// </remarks>
 public class ObjectVariableTypesConverter : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(GeneratedTaskArraysInliner) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(GeneratedTaskArraysInliner)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -86,7 +86,7 @@ public class ObjectVariableTypesConverter : IConverter
                             actualType,
                             objectParameter.Name);
                     objectParameter.Type = castExpression.Type.Clone();
-                    objectParameter.RemoveAnnotations(typeof(ILVariableResolveResult));
+                    objectParameter.RemoveAnnotations<ILVariableResolveResult>();
                     objectParameter.AddAnnotation(resolveResult);
                     castExpression.ReplaceWith(castExpression.Expression);
                     castExpression.Remove();

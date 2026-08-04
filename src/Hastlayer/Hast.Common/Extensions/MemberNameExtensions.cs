@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Hast.Common.Extensions;
@@ -24,25 +23,25 @@ public static class MemberNameExtensions
     /// <returns>Alternate member names, if any.</returns>
     public static IEnumerable<string> GetMemberNameAlternates(this string memberFullName)
     {
-        var sides = memberFullName.Split(new[] { "::" }, StringSplitOptions.RemoveEmptyEntries);
+        var sides = memberFullName.Split(["::"], StringSplitOptions.RemoveEmptyEntries);
 
         // If there are no dots before the member name that means this full name doesn't contain an interface reference.
         if (sides.Length != 2 ||
             !sides[1].Contains('.') ||
             sides[1].IndexOfOrdinal(".") > sides[1].IndexOfOrdinal("("))
         {
-            return Enumerable.Empty<string>();
+            return [];
         }
 
         var methodName = memberFullName.RegexMatch(@"\.([a-z0-9]*)\(", RegexOptions.Compiled | RegexOptions.IgnoreCase).Groups[1];
-        var returnType = sides[0].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[0];
+        var returnType = sides[0].Split([' '], StringSplitOptions.RemoveEmptyEntries)[0];
 
-        return new[]
-        {
+        return
+        [
             // 1. alternate:
             sides[0] + "::" + sides[1][sides[1].IndexOfOrdinal(methodName + "(")..],
             // 2. alternate:
             returnType + " " + sides[1].Replace($".{methodName}(", $"::{methodName}("),
-        };
+        ];
     }
 }

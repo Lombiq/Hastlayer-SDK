@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
@@ -11,7 +11,7 @@ namespace Hast.Transformer.Services;
 /// </summary>
 public class OperatorsToMethodsConverter : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConstructorsToMethodsConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(ConstructorsToMethodsConverter)];
 
     public void Convert(
         SyntaxTree syntaxTree,

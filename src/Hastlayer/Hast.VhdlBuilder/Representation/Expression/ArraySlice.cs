@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
 /// <summary>
 /// A slice of an array data object, i.e. array(fromIndex to toIndex).
 /// </summary>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{DebugDisplay,nq}")]
 public class ArraySlice : ArrayAccessBase
 {
     public int IndexFrom { get; set; }

@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation.Expression;
+using Hast.VhdlBuilder.Representation.Expression;
 using Newtonsoft.Json;
 
 namespace Hast.VhdlBuilder;

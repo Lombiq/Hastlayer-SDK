@@ -44,7 +44,7 @@ public static class InvocationProxyBuilderExtensions
         var hardwareEntryPointMemberResults = transformerResults
             .Where(result => result.IsHardwareEntryPointMember)
             .ToList();
-        if (!hardwareEntryPointMemberResults.Any())
+        if (hardwareEntryPointMemberResults.Count == 0)
         {
             throw new InvalidOperationException(
                 "There aren't any hardware entry point members, however at least one is needed to execute " +

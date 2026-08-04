@@ -1,4 +1,4 @@
-﻿namespace Hast.Communication.Constants;
+namespace Hast.Communication.Constants;
 
 internal static class CommandTypes
 {

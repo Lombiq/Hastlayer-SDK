@@ -30,12 +30,12 @@ public static class ResizeHelper
         const int Min = 1;
         if (width == 0 && height > 0)
         {
-            width = (int)MathF.Max(Min, MathF.Round(sourceSize.Width * height / (float)sourceSize.Height));
+            width = (int)MathF.Max(Min, MathF.Round(sourceSize.Width * height / (float)sourceSize.Height, MidpointRounding.AwayFromZero));
         }
 
         if (height == 0 && width > 0)
         {
-            height = (int)MathF.Max(Min, MathF.Round(sourceSize.Height * width / (float)sourceSize.Width));
+            height = (int)MathF.Max(Min, MathF.Round(sourceSize.Height * width / (float)sourceSize.Width, MidpointRounding.AwayFromZero));
         }
 
         return options.Mode switch
@@ -63,8 +63,8 @@ public static class ResizeHelper
         float percentHeight = MathF.Abs(height / (float)sourceHeight);
         float percentWidth = MathF.Abs(width / (float)sourceWidth);
 
-        int boxPadHeight = height > 0 ? height : (int)MathF.Round(sourceHeight * percentWidth);
-        int boxPadWidth = width > 0 ? width : (int)MathF.Round(sourceWidth * percentHeight);
+        int boxPadHeight = height > 0 ? height : (int)MathF.Round(sourceHeight * percentWidth, MidpointRounding.AwayFromZero);
+        int boxPadWidth = width > 0 ? width : (int)MathF.Round(sourceWidth * percentHeight, MidpointRounding.AwayFromZero);
 
         // Only calculate if upscaling.
         if (sourceWidth < boxPadWidth && sourceHeight < boxPadHeight)
@@ -154,16 +154,16 @@ public static class ResizeHelper
             if (options.CenterCoordinates.HasValue)
             {
                 float center = -(ratio * sourceHeight) * options.CenterCoordinates.Value.Y;
-                targetY = (int)MathF.Round(center + (height / 2F));
+                targetY = (int)MathF.Round(center + (height / 2F), MidpointRounding.AwayFromZero);
 
                 if (targetY > 0)
                 {
                     targetY = 0;
                 }
 
-                if (targetY < (int)MathF.Round(height - (sourceHeight * ratio)))
+                if (targetY < (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero))
                 {
-                    targetY = (int)MathF.Round(height - (sourceHeight * ratio));
+                    targetY = (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero);
                 }
             }
             else
@@ -173,13 +173,13 @@ public static class ResizeHelper
                     AnchorPositionMode.Top => 0,
                     AnchorPositionMode.TopLeft => 0,
                     AnchorPositionMode.TopRight => 0,
-                    AnchorPositionMode.Bottom => (int)MathF.Round(height - (sourceHeight * ratio)),
-                    AnchorPositionMode.BottomLeft => (int)MathF.Round(height - (sourceHeight * ratio)),
-                    AnchorPositionMode.BottomRight => (int)MathF.Round(height - (sourceHeight * ratio)),
-                    AnchorPositionMode.Center => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
-                    AnchorPositionMode.Left => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
-                    AnchorPositionMode.Right => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
-                    _ => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
+                    AnchorPositionMode.Bottom => (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.BottomLeft => (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.BottomRight => (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.Center => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.Left => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.Right => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                    _ => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
                 };
             }
 
@@ -192,16 +192,16 @@ public static class ResizeHelper
             if (options.CenterCoordinates.HasValue)
             {
                 float center = -(ratio * sourceWidth) * options.CenterCoordinates.Value.X;
-                targetX = (int)MathF.Round(center + (width / 2F));
+                targetX = (int)MathF.Round(center + (width / 2F), MidpointRounding.AwayFromZero);
 
                 if (targetX > 0)
                 {
                     targetX = 0;
                 }
 
-                if (targetX < (int)MathF.Round(width - (sourceWidth * ratio)))
+                if (targetX < (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero))
                 {
-                    targetX = (int)MathF.Round(width - (sourceWidth * ratio));
+                    targetX = (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero);
                 }
             }
             else
@@ -211,13 +211,13 @@ public static class ResizeHelper
                     AnchorPositionMode.Left => 0,
                     AnchorPositionMode.TopLeft => 0,
                     AnchorPositionMode.BottomLeft => 0,
-                    AnchorPositionMode.Right => (int)MathF.Round(width - (sourceWidth * ratio)),
-                    AnchorPositionMode.TopRight => (int)MathF.Round(width - (sourceWidth * ratio)),
-                    AnchorPositionMode.BottomRight => (int)MathF.Round(width - (sourceWidth * ratio)),
-                    AnchorPositionMode.Center => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
-                    AnchorPositionMode.Top => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
-                    AnchorPositionMode.Bottom => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
-                    _ => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
+                    AnchorPositionMode.Right => (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.TopRight => (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.BottomRight => (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.Center => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.Top => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                    AnchorPositionMode.Bottom => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                    _ => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
                 };
             }
 
@@ -246,11 +246,11 @@ public static class ResizeHelper
 
         if (sourceRatio < ratio)
         {
-            targetHeight = (int)MathF.Round(source.Height * percentWidth);
+            targetHeight = (int)MathF.Round(source.Height * percentWidth, MidpointRounding.AwayFromZero);
         }
         else
         {
-            targetWidth = (int)MathF.Round(source.Width * percentHeight);
+            targetWidth = (int)MathF.Round(source.Width * percentHeight, MidpointRounding.AwayFromZero);
         }
 
         // Replace the size to match the rectangle.
@@ -280,24 +280,24 @@ public static class ResizeHelper
         if (widthDiff < heightDiff)
         {
             float sourceRatio = (float)sourceHeight / sourceWidth;
-            targetHeight = (int)MathF.Round(width * sourceRatio);
+            targetHeight = (int)MathF.Round(width * sourceRatio, MidpointRounding.AwayFromZero);
         }
         else if (widthDiff > heightDiff)
         {
             float sourceRatioInverse = (float)sourceWidth / sourceHeight;
-            targetWidth = (int)MathF.Round(height * sourceRatioInverse);
+            targetWidth = (int)MathF.Round(height * sourceRatioInverse, MidpointRounding.AwayFromZero);
         }
         else
         {
             if (height > width)
             {
                 float percentWidth = MathF.Abs(width / (float)sourceWidth);
-                targetHeight = (int)MathF.Round(sourceHeight * percentWidth);
+                targetHeight = (int)MathF.Round(sourceHeight * percentWidth, MidpointRounding.AwayFromZero);
             }
             else
             {
                 float percentHeight = MathF.Abs(height / (float)sourceHeight);
-                targetWidth = (int)MathF.Round(sourceWidth * percentHeight);
+                targetWidth = (int)MathF.Round(sourceWidth * percentHeight, MidpointRounding.AwayFromZero);
             }
         }
 
@@ -327,39 +327,39 @@ public static class ResizeHelper
         if (percentHeight < percentWidth)
         {
             ratio = percentHeight;
-            targetWidth = (int)MathF.Round(sourceWidth * percentHeight);
+            targetWidth = (int)MathF.Round(sourceWidth * percentHeight, MidpointRounding.AwayFromZero);
 
             targetX = options.Position switch
             {
                 AnchorPositionMode.Left => 0,
                 AnchorPositionMode.TopLeft => 0,
                 AnchorPositionMode.BottomLeft => 0,
-                AnchorPositionMode.Right => (int)MathF.Round(width - (sourceWidth * ratio)),
-                AnchorPositionMode.TopRight => (int)MathF.Round(width - (sourceWidth * ratio)),
-                AnchorPositionMode.BottomRight => (int)MathF.Round(width - (sourceWidth * ratio)),
-                AnchorPositionMode.Center => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
-                AnchorPositionMode.Top => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
-                AnchorPositionMode.Bottom => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
-                _ => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F),
+                AnchorPositionMode.Right => (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero),
+                AnchorPositionMode.TopRight => (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero),
+                AnchorPositionMode.BottomRight => (int)MathF.Round(width - (sourceWidth * ratio), MidpointRounding.AwayFromZero),
+                AnchorPositionMode.Center => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                AnchorPositionMode.Top => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                AnchorPositionMode.Bottom => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                _ => (int)MathF.Round((width - (sourceWidth * ratio)) / 2F, MidpointRounding.AwayFromZero),
             };
         }
         else
         {
             ratio = percentWidth;
-            targetHeight = (int)MathF.Round(sourceHeight * percentWidth);
+            targetHeight = (int)MathF.Round(sourceHeight * percentWidth, MidpointRounding.AwayFromZero);
 
             targetY = options.Position switch
             {
                 AnchorPositionMode.Top => 0,
                 AnchorPositionMode.TopLeft => 0,
                 AnchorPositionMode.TopRight => 0,
-                AnchorPositionMode.Bottom => (int)MathF.Round(height - (sourceHeight * ratio)),
-                AnchorPositionMode.BottomLeft => (int)MathF.Round(height - (sourceHeight * ratio)),
-                AnchorPositionMode.BottomRight => (int)MathF.Round(height - (sourceHeight * ratio)),
-                AnchorPositionMode.Center => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
-                AnchorPositionMode.Left => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
-                AnchorPositionMode.Right => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
-                _ => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F),
+                AnchorPositionMode.Bottom => (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero),
+                AnchorPositionMode.BottomLeft => (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero),
+                AnchorPositionMode.BottomRight => (int)MathF.Round(height - (sourceHeight * ratio), MidpointRounding.AwayFromZero),
+                AnchorPositionMode.Center => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                AnchorPositionMode.Left => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                AnchorPositionMode.Right => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
+                _ => (int)MathF.Round((height - (sourceHeight * ratio)) / 2F, MidpointRounding.AwayFromZero),
             };
         }
 

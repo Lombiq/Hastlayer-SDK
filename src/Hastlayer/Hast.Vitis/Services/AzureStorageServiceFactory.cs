@@ -1,4 +1,4 @@
-﻿using Hast.Vitis.Models;
+using Hast.Vitis.Models;
 using Microsoft.Extensions.Logging;
 
 namespace Hast.Vitis.Services;

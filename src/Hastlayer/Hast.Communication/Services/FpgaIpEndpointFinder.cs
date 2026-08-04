@@ -79,7 +79,7 @@ public class FpgaIpEndpointFinder : IFpgaIpEndpointFinder
     private FpgaEndpoint CreateFpgaEndpoint(byte[] answerBytes)
     {
         var isAvailable = Convert.ToBoolean(answerBytes[0]);
-        var ipAddress = new IPAddress(answerBytes.Skip(1).Take(4).ToArray());
+        var ipAddress = new IPAddress([.. answerBytes.Skip(1).Take(4)]);
         var port = BitConverter.ToUInt16(answerBytes, 5);
 
         return new FpgaEndpoint

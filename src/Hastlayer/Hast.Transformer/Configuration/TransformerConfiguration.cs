@@ -46,7 +46,7 @@ public class TransformerConfiguration
     /// <c>MethodImpl</c> attribute. Will only work if <see cref="EnableMethodInlining"/> is <see langword="true"/>.
     /// Fore more information check the documentation.
     /// </summary>
-    public IList<string> AdditionalInlinableMethodsFullNames { get; } = new List<string>();
+    public IList<string> AdditionalInlinableMethodsFullNames { get; } = [];
 
     /// <summary>
     /// Gets the lengths of arrays used in the code. Array sizes should be possible to determine statically and

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Hast.Common.Helpers;
@@ -19,7 +18,7 @@ public static class CliHelper
     /// <param name="name">The application name you can invoke directly in the command line.</param>
     public static async Task<IEnumerable<FileInfo>> WhichAsync(string name)
     {
-        var appName = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "where" : "which";
+        var appName = OperatingSystem.IsWindows() ? "where" : "which";
         var result = await Cli.Wrap(appName)
             .WithArguments(name)
             .WithValidation(CommandResultValidation.None)

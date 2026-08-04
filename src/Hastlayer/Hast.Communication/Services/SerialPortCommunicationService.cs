@@ -282,7 +282,7 @@ public class SerialPortCommunicationService : CommunicationServiceBase
 
         await Task.WhenAll(serialPortPingingTasks);
 
-        if (!fpgaPortNames.Any())
+        if (fpgaPortNames.IsEmpty)
         {
             throw new SerialPortCommunicationException(
                 "No compatible FPGA board connected to any serial port or a connected FPGA is not answering. Is " +

@@ -36,7 +36,7 @@ public class MethodTransformer : IMethodTransformer
             {
                 throw new InvalidOperationException(
                     $"The {nameof(method)} {method.GetFullName()} can't be transformed because it's extern. Only " +
-                    $"managed code can be transformed.");
+                    "managed code can be transformed.");
             }
 
             var stateMachineCount = context

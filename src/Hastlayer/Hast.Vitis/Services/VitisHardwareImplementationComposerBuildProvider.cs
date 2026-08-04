@@ -47,6 +47,8 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
     public int MajorStepsTotal { get; private set; }
     public int MajorStep { get; private set; }
 
+    private static readonly string[] _arguments = ["reset"];
+
     public VitisHardwareImplementationComposerBuildProvider(
         ILogger<VitisHardwareImplementationComposerBuildProvider> logger)
     {
@@ -309,7 +311,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
         var vppExecutable = await GetExecutablePathAsync(Vpp);
         var vppArguments = new List<string>(
             deviceManifest.SupportsHbm && openClConfiguration.UseHbm
-            ? new[] { "--connectivity.sp", "hastip_1.buffer:HBM[0:0]" }
+            ? ["--connectivity.sp", "hastip_1.buffer:HBM[0:0]"]
             : Array.Empty<string>());
 
         if (deviceManifest.RequiresDcpBinary)
@@ -318,8 +320,8 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             vppArguments.Add("compiler.acceleratorBinaryContent=dcp");
         }
 
-        vppArguments.AddRange(new[]
-        {
+        vppArguments.AddRange(
+        [
             "-g",
             "-R2",
             "--save-temps",
@@ -331,33 +333,33 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             "compiler.skipTimingCheckAndFrequencyScaling=1",
             "--optimize",
             "3",
-        });
+        ]);
 
         if (deviceManifest.BuildWithClockFrequencyHz)
         {
-            vppArguments.AddRange(new[]
-            {
+            vppArguments.AddRange(
+            [
                 "--kernel_frequency",
                 (deviceManifest.ClockFrequencyHz / 1_000_000).ToString(CultureInfo.CurrentCulture),
-            });
+            ]);
         }
 
-        vppArguments.AddRange(new[]
-        {
+        vppArguments.AddRange(
+        [
             "-lo",
             xclbinFilePath,
             xoFilePath,
-        });
+        ]);
 
         await _buildLogger.ExecuteWithLoggingAsync(vppExecutable, vppArguments, tmpDirectoryPath);
         ProgressMajor("v++ build is finished.");
 
-        if (target.ToUpperInvariant() == "HW_EMU")
+        if (target.EqualsOrdinalIgnoreCase("HW_EMU"))
         {
             // For example:
             // emconfigutil --platform xilinx_u200_xdma_201830_2 --od ./HardwareFramework/rtl/xclbin/
             var emConfigExecutable = await GetExecutablePathAsync("emconfigutil");
-            var emConfigArguments = new[] { "--platform", device, "--od", tmpDirectoryPath, };
+            string[] emConfigArguments = ["--platform", device, "--od", tmpDirectoryPath];
             await _buildLogger.ExecuteWithLoggingAsync(emConfigExecutable, emConfigArguments, rtlDirectoryPath);
             Copy(Path.Combine(tmpDirectoryPath, "emconfig.json"), "emconfig.json", overwrite: false);
             ProgressMajor("Emulation configuration (emconfig) setup is finished.");
@@ -533,7 +535,7 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
 
         var yes = PipeSource.FromString("y" + Environment.NewLine);
         var xbutil = Cli.Wrap((await CliHelper.WhichAsync("xbutil")).First().FullName)
-            .WithArguments(new[] { "reset" })
+            .WithArguments(_arguments)
             .WithValidation(CommandResultValidation.None);
         var result = await (yes | xbutil).ExecuteBufferedAsync();
 
@@ -563,12 +565,12 @@ public sealed class VitisHardwareImplementationComposerBuildProvider
             // This is not logging but a prompt in select cases.
 #pragma warning disable S106 // Standard outputs should not be used directly to log anything
             Console.WriteLine(
-                $"The source files have been written to:\n" +
+                "The source files have been written to:\n" +
                 $"    {vhdlFilePath}\n" +
                 $"    {xdcFilePath}\n" +
-                $"Expected result:\n" +
+                "Expected result:\n" +
                 $"    {binaryPath}\n\n" +
-                $"Press [enter] when you are ready to continue.");
+                "Press [enter] when you are ready to continue.");
 #pragma warning restore S106 // Standard outputs should not be used directly to log anything
             Console.ReadLine();
         }

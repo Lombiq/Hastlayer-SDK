@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{DebugDisplay,nq}")]
 public class DataTypeReference : DataType
 {
     private readonly Func<IVhdlGenerationOptions, string> _vhdlGenerator;

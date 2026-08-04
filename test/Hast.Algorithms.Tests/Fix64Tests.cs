@@ -14,8 +14,8 @@ public class Fix64Tests
 {
     private readonly ITestOutputHelper _testOutputHelper;
 
-    private readonly long[] _testCases = new[]
-    {
+    private readonly long[] _testCases =
+    [
         // Small numbers
         0L, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
         -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,
@@ -48,7 +48,7 @@ public class Fix64Tests
         - 171,
         -359, 491, 844, 158, -413, -422, -737, -575, -330,
         -376, 435, -311, 116, 715, -1_024, -487, 59, 724, 993,
-    };
+    ];
 
     public Fix64Tests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 

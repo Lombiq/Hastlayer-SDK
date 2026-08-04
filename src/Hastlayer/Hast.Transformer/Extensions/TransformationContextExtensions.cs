@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Configuration;
+using Hast.Transformer.Configuration;
 
 namespace Hast.Transformer.Models;
 

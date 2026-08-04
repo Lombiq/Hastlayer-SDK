@@ -6,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 /// <summary>
 /// Instantiation of an unconstrained VHDL array.
 /// </summary>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{DebugDisplay,nq}")]
 public class UnconstrainedArrayInstantiation : ArrayTypeBase
 {
     public int RangeFrom { get; set; }

@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Expression;
 
 namespace Hast.Transformer.Vhdl.Helpers;

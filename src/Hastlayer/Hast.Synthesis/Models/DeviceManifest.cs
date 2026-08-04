@@ -10,7 +10,7 @@ public class DeviceManifest : IDeviceManifest
 {
     public string Name { get; set; }
     public uint ClockFrequencyHz { get; set; }
-    public IEnumerable<string> SupportedCommunicationChannelNames { get; set; } = Enumerable.Empty<string>();
+    public IEnumerable<string> SupportedCommunicationChannelNames { get; set; } = [];
     public virtual string DefaultCommunicationChannelName => SupportedCommunicationChannelNames.First();
     public ulong AvailableMemoryBytes { get; set; }
     public uint DataBusWidthBytes { get; set; }

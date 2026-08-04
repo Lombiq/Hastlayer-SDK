@@ -4,7 +4,6 @@ using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Hast.Transformer.Services;
 
@@ -33,7 +32,7 @@ namespace Hast.Transformer.Services;
 /// </remarks>
 public class ObjectInitializerExpander : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(DirectlyAccessedNewObjectVariablesCreator) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(DirectlyAccessedNewObjectVariablesCreator)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -47,7 +46,7 @@ public class ObjectInitializerExpander : IConverter
         {
             base.VisitObjectCreateExpression(objectCreateExpression);
 
-            if (!objectCreateExpression.Initializer.Elements.Any()) return;
+            if (objectCreateExpression.Initializer.Elements.Count == 0) return;
 
             // At this point there will be a parent assignment due to IDirectlyAccessedNewObjectVariablesCreator.
             var parentAssignment = objectCreateExpression
