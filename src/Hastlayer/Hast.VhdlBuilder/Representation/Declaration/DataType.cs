@@ -18,14 +18,12 @@ public enum DataTypeCategory
 /// <summary>
 /// VHDL object data type, e.g. std_logic or std_logic_vector.
 /// </summary>
-[DebuggerDisplay("{DebugDisplay,nq}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class DataType : INamedElement, IReferenceableDeclaration<DataType>
 {
     public DataTypeCategory TypeCategory { get; set; }
     public string Name { get; set; }
     public virtual Value DefaultValue { get; set; }
-
-    protected string DebugDisplay => ToVhdl(VhdlGenerationOptions.Debug);
 
     public DataType(DataType previous)
         : this()

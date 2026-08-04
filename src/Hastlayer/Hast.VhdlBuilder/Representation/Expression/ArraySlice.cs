@@ -5,7 +5,7 @@ namespace Hast.VhdlBuilder.Representation.Expression;
 /// <summary>
 /// A slice of an array data object, i.e. array(fromIndex to toIndex).
 /// </summary>
-[DebuggerDisplay("{DebugDisplay,nq}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class ArraySlice : ArrayAccessBase
 {
     public int IndexFrom { get; set; }

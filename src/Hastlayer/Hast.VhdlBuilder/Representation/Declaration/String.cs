@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{DebugDisplay,nq}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "Intentional.")]
 public class String : DataType
 {

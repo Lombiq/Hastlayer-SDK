@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{DebugDisplay,nq}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Variable : TypedDataObject
 {
     public bool Shared { get; set; }

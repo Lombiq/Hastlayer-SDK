@@ -7,7 +7,7 @@ namespace Hast.VhdlBuilder.Representation.Expression;
 /// Represents a reference to a VHLD data object (e.g. signal, variable, constant), so e.g. in variable assignments such
 /// references should be used.
 /// </summary>
-[DebuggerDisplay("{DebugDisplay,nq}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class DataObjectReference : DataObjectBase
 {
     public override IDataObject ToReference() => this;
