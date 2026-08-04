@@ -14,12 +14,13 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Hast.Samples.SampleAssembly.ImageSharpModifications.Resize;
 
 public class HastlayerResizeProcessor : CloningImageProcessor
 {
-    private static readonly object _lock = new();
+    private static readonly Lock _lock = new();
 
     [SuppressMessage(
         "Critical Code Smell",

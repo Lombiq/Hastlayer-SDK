@@ -29,7 +29,7 @@ public class XilinxReportSection
             .Select((item, columnIndex) => new { Cell = item, ColumnIndex = columnIndex })
             .ToDictionary(item => Columns[item.ColumnIndex], item => item.Cell);
 
-    public XilinxReportSection(string[][] data, IReadOnlyList<string> columns, IReadOnlyList<string> comments)
+    private XilinxReportSection(string[][] data, IReadOnlyList<string> columns, IReadOnlyList<string> comments)
     {
         _data = data;
         Rows = data.Length;

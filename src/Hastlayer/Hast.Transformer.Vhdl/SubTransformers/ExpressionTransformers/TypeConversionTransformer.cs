@@ -267,7 +267,7 @@ public class TypeConversionTransformer : ITypeConversionTransformer
         }
     }
 
-    private static ITypeConversionResult ImplementTypeConversionWithMatchingTypes(
+    private static TypeConversionResult ImplementTypeConversionWithMatchingTypes(
         DataType fromType,
         DataType toType,
         IVhdlElement fromExpression)

@@ -151,7 +151,10 @@ public class SerialPortCommunicationService : CommunicationServiceBase
             }
         };
 
+        // The TaskCompletionSource is completed by the DataReceived event handler below, not by the current context.
+#pragma warning disable VSTHRD003 // This TaskCompletionSource pattern is necessary for serial event-based async.
         await serialCommunicationContext.TaskCompletionSource.Task;
+#pragma warning restore VSTHRD003
 
         EndExecution(context);
 

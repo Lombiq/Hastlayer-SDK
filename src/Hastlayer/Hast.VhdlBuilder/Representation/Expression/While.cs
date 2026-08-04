@@ -5,11 +5,11 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class While : IBlockElement
 {
     public IVhdlElement Condition { get; set; }
-    public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+    public IList<IVhdlElement> Body { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
         Terminated.Terminate(

@@ -77,7 +77,7 @@ public class MethodTransformer : IMethodTransformer
             };
         });
 
-    private IArchitectureComponentResult BuildStateMachineFromMethod(
+    private ArchitectureComponentResult BuildStateMachineFromMethod(
         MethodDeclaration method,
         IVhdlTransformationContext context,
         int stateMachineIndex)

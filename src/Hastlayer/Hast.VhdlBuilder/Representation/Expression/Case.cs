@@ -6,11 +6,11 @@ using System.Text;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Case : IVhdlElement
 {
     public IVhdlElement Expression { get; set; }
-    public IList<CaseWhen> Whens { get; } = new List<CaseWhen>();
+    public IList<CaseWhen> Whens { get; } = [];
 
     /// <summary>
     /// Gets or sets a value indicating whether the case expression is a matching case (case?) new to VHDL 2008.
@@ -42,15 +42,15 @@ public class Case : IVhdlElement
     }
 }
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class CaseWhen : IBlockElement
 {
     public IVhdlElement Expression { get; set; }
-    public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+    public IList<IVhdlElement> Body { get; } = [];
 
     public CaseWhen() { }
 
-    public CaseWhen(IVhdlElement expression, List<IVhdlElement> body)
+    public CaseWhen(IVhdlElement expression, IList<IVhdlElement> body)
     {
         Expression = expression;
         Body = body;

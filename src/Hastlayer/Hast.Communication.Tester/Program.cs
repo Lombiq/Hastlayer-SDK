@@ -48,7 +48,7 @@ public static class Program
 
         // Get devices and if asked exit with the device list.
         var devices = provider.GetService<IDeviceManifestSelector>().GetSupportedDevices()?.ToList();
-        if (devices?.Any() != true) throw new InvalidOperationException("No devices are available!");
+        if (devices == null || devices.Count == 0) throw new InvalidOperationException("No devices are available!");
 
         if (CommandLineOptions.ListDevices)
         {

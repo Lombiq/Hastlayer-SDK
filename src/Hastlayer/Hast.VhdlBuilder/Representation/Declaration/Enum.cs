@@ -9,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 [DebuggerDisplay("{DebugDisplay,nq}")]
 public class Enum : DataType
 {
-    public ICollection<Value> Values { get; } = new List<Value>();
+    public ICollection<Value> Values { get; } = [];
 
     public Enum() => TypeCategory = DataTypeCategory.Composite;
 

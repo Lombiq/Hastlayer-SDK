@@ -7,6 +7,4 @@ namespace Hast.Catapult.Models;
     "Minor Code Smell",
     "S2094:Classes should not be empty",
     Justification = "The type is used to indetify the device.")]
-public class CatapultDeviceManifest : DeviceManifest
-{
-}
+public class CatapultDeviceManifest : DeviceManifest;

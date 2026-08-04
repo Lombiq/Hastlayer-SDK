@@ -20,3 +20,10 @@ using System.Diagnostics.CodeAnalysis;
     "CA1724: Type names should not match namespaces",
     Justification = "Same.",
     Scope = "module")]
+[assembly: SuppressMessage(
+    "Major Bug",
+    "S4545:Operands of \"DebuggerDisplay\" should be valid",
+    Justification =
+        "The DebuggerDisplay strings use fully-qualified type references which are valid at runtime, " +
+        "but Sonar does not resolve them statically.",
+    Scope = "module")]

@@ -463,7 +463,7 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
         return (HasResult: true, ResultBlock: resultBlock);
     }
 
-    private static IVhdlElement TransformArrayCopy(
+    private static Assignment TransformArrayCopy(
         InvocationExpression expression,
         SubTransformerContext context,
         ICollection<TransformedInvocationParameter> transformedParameters)

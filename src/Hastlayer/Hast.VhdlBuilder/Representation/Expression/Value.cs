@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Value : IVhdlElement
 {
     // These below need to be Lazy, because otherwise there would be a circular dependency between the static ctors with

@@ -24,7 +24,7 @@ namespace Hast.Vitis.Services;
     "Major Code Smell",
     "S4002:Disposable types should declare finalizers",
     Justification = "Doesn't need finalizer because it's registered in the DI container and will automatically be disposed.")]
-public sealed class BinaryOpenCl : IBinaryOpenCl
+public sealed partial class BinaryOpenCl : IBinaryOpenCl
 {
     #region Fields and properties
 
@@ -169,8 +169,11 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
         }
     }
 
+    [GeneratedRegex("(?<!^)([A-Z])", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.NonBacktracking)]
+    private static partial Regex ToSnakeCaseRegex { get; }
+
     private static string ToSnakeCase(string value) =>
-        Regex.Replace(value, "(?<!^)([A-Z])", "_$1", RegexOptions.CultureInvariant);
+        ToSnakeCaseRegex.Replace(value, "_$1");
 
     private static AggregateException VerifyResults(
         IEnumerable<Result> results,
@@ -353,7 +356,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
         foreach (var exception in exceptions)
         {
-            _logger.LogError(exception, "Error while disposing " + nameof(BinaryOpenCl) + ".");
+            _logger.LogError(exception, "Error while disposing {Name}.", nameof(BinaryOpenCl));
         }
     }
 

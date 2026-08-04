@@ -13,8 +13,7 @@ internal static class ArrayExtensions
         var remainderToMaxDegreeOfParallelism = arrayToPad.Length % multipleOf;
         if (remainderToMaxDegreeOfParallelism != 0)
         {
-            return [.. arrayToPad
-, .. new T[multipleOf - remainderToMaxDegreeOfParallelism]];
+            return [.. arrayToPad, .. new T[multipleOf - remainderToMaxDegreeOfParallelism]];
         }
 
         return arrayToPad;

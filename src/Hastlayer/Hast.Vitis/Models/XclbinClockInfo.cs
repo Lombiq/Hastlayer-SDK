@@ -86,7 +86,7 @@ public class XclbinClockInfo
         }
     }
 
-    private static void ReadUntilTitle(TextReader reader, string lineText)
+    private static void ReadUntilTitle(StreamReader reader, string lineText)
     {
         while (reader.ReadLine() is { } line)
         {

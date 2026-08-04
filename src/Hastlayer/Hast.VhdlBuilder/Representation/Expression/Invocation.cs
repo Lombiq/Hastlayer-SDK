@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Invocation : IVhdlElement
 {
     public IVhdlElement Target { get; set; }
-    public IList<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
+    public IList<IVhdlElement> Parameters { get; } = [];
 
     public Invocation()
     {
@@ -19,13 +19,13 @@ public class Invocation : IVhdlElement
     public Invocation(IVhdlElement target, params IVhdlElement[] parameters)
     {
         Target = target;
-        Parameters = parameters.ToList();
+        Parameters = [.. parameters];
     }
 
     public Invocation(string targetId, params IVhdlElement[] parameters)
     {
         Target = targetId.ToVhdlIdValue();
-        Parameters = parameters.ToList();
+        Parameters = [.. parameters];
     }
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
@@ -46,7 +46,7 @@ public class Invocation : IVhdlElement
         new(functionName.ToVhdlIdValue(), value, size.ToVhdlValue(KnownDataTypes.UnrangedInt));
 }
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class NamedInvocationParameter : IVhdlElement
 {
     public INamedElement FormalParameter { get; set; }

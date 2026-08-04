@@ -257,7 +257,7 @@ public class ExpressionTransformer : IExpressionTransformer
             : ImplementTypeConversionForBinaryExpressionParent(reference);
     }
 
-    private IVhdlElement TransformPrimitiveExpression(PrimitiveExpression primitive, SubTransformerContext context)
+    private Value TransformPrimitiveExpression(PrimitiveExpression primitive, SubTransformerContext context)
     {
         var vhdlType = _typeConverter.ConvertType(primitive.GetActualType(), context.TransformationContext);
         var valueString = primitive.Value.ToString() ?? string.Empty;
@@ -505,7 +505,7 @@ public class ExpressionTransformer : IExpressionTransformer
         return operationResultDataObjectReference;
     }
 
-    private static IVhdlElement TransformTypeReference(TypeReferenceExpression typeReferenceExpression, SubTransformerContext context)
+    private static Value TransformTypeReference(TypeReferenceExpression typeReferenceExpression, SubTransformerContext context)
     {
         var type = typeReferenceExpression.Type;
         var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
@@ -551,7 +551,7 @@ public class ExpressionTransformer : IExpressionTransformer
         return typeConversionResult.ConvertedFromExpression;
     }
 
-    private IVhdlElement TransformIndexer(IndexerExpression indexerExpression, SubTransformerContext context)
+    private ArrayElementAccess TransformIndexer(IndexerExpression indexerExpression, SubTransformerContext context)
     {
         if (Transform(indexerExpression.Target, context) is not IDataObject targetVariableReference)
         {
@@ -580,7 +580,7 @@ public class ExpressionTransformer : IExpressionTransformer
         };
     }
 
-    private IVhdlElement TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
+    private Empty TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
     {
         var initializationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
 
@@ -625,7 +625,7 @@ public class ExpressionTransformer : IExpressionTransformer
         return Empty.Instance;
     }
 
-    private IVhdlElement TransformDefaultValue(DefaultValueExpression defaultValueExpression, SubTransformerContext context)
+    private Empty TransformDefaultValue(DefaultValueExpression defaultValueExpression, SubTransformerContext context)
     {
         // The only case when a default() will remain in the syntax tree is for composed types. For primitives a
         // constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
@@ -814,7 +814,7 @@ public class ExpressionTransformer : IExpressionTransformer
     private static EntityDeclaration GetFieldDeclaration<T>(
         TypeDeclaration typeDeclaration,
         Func<T, string> nameSelector,
-        IDataObject field)
+        RecordField field)
         where T : AstNode =>
         typeDeclaration?
             .Members

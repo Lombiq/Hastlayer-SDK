@@ -5,7 +5,6 @@ namespace Hast.Catapult.Exceptions;
 /// <summary>
 /// An exception which is fired when an FpgaCoreLib function returns something other than the SUCCESS status.
 /// </summary>
-[Serializable]
 public class CatapultFunctionResultException : Exception
 {
     /// <summary>

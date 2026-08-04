@@ -19,6 +19,7 @@ public class BuildLogger<T>
     private const string Vpp = "v++";
     private readonly string[] _vppStatusLogs = ["] Starting ", "] Phase ", "] Finished "];
 
+#pragma warning disable S6672 // Generic logger type T is intentional for categorized logging.
     private readonly ILogger<T> _logger;
     private readonly string _buildOutputPath;
     private readonly IProgressInvoker _progressInvoker;
@@ -29,6 +30,7 @@ public class BuildLogger<T>
         string buildOutputPath,
         IProgressInvoker progressInvoker,
         TextWriter buildOutput)
+#pragma warning restore S6672
     {
         _logger = logger;
         _buildOutputPath = buildOutputPath;

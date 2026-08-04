@@ -15,10 +15,10 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 /// See <c>Expression.MultiCycleSdcStatementsAttributeExpression</c> for something similar for Quartus Prime.
 /// </para>
 /// </remarks>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class XdcFile : IVhdlElement
 {
-    public IList<IVhdlElement> Lines { get; } = new List<IVhdlElement>();
+    public IList<IVhdlElement> Lines { get; } = [];
 
     public void AddPath(IDataObject pathReference, int clockCycles, bool isHierarchical)
     {

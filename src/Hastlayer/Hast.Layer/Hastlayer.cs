@@ -144,7 +144,7 @@ public sealed class Hastlayer : IHastlayer
 
     public void Dispose() => _serviceProvider?.Dispose();
 
-    public Task<IHardwareRepresentation> GenerateHardwareAsync(
+    public async Task<IHardwareRepresentation> GenerateHardwareAsync(
         IEnumerable<string> assemblyPaths,
         IHardwareGenerationConfiguration configuration)
     {
@@ -165,7 +165,7 @@ public sealed class Hastlayer : IHastlayer
                 "The same assembly was included multiple times. Only supply each assembly to generate hardware from once.");
         }
 
-        return GenerateHardwareInnerAsync(assembliesPaths, configuration);
+        return await GenerateHardwareInnerAsync(assembliesPaths, configuration);
     }
 
     public async Task<IHardwareRepresentation> GenerateHardwareInnerAsync(

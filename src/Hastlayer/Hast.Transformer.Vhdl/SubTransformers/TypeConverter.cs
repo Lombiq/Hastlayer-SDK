@@ -175,8 +175,8 @@ public class TypeConverter : ITypeConverter
             "The type " + type.GetFullName() + " is not supported for transforming.");
     }
 
-    private static DataType CreateArrayType(DataType elementType) =>
-        new ArrayType
+    private static ArrayType CreateArrayType(DataType elementType) =>
+        new()
         {
             ElementType = elementType,
             Name = ArrayHelper.CreateArrayTypeName(elementType),

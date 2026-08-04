@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class If<T> : IVhdlElement
     where T : IVhdlElement
 {
@@ -18,7 +18,5 @@ public class If<T> : IVhdlElement
             vhdlGenerationOptions);
 }
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-public class If : If<IVhdlElement>
-{
-}
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
+public class If : If<IVhdlElement>;

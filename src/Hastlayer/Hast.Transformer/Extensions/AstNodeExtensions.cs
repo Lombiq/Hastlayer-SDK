@@ -350,7 +350,5 @@ public static class AstNodeExtensions
         "Minor Code Smell",
         "S2094:Classes should not be empty",
         Justification = "Only used for annotation.")]
-    private sealed class WasRemoved
-    {
-    }
+    private sealed class WasRemoved;
 }

@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class ConditionalSignalAssignment : IVhdlElement
 {
     private IDataObject _assignTo;
@@ -24,7 +24,7 @@ public class ConditionalSignalAssignment : IVhdlElement
         }
     }
 
-    public IList<SignalAssignmentWhen> Whens { get; } = new List<SignalAssignmentWhen>();
+    public IList<SignalAssignmentWhen> Whens { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
     {
@@ -41,7 +41,7 @@ public class ConditionalSignalAssignment : IVhdlElement
     }
 }
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class SignalAssignmentWhen : IVhdlElement
 {
     public IVhdlElement Value { get; set; }

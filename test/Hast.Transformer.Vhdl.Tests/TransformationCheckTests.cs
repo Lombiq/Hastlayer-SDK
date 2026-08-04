@@ -87,7 +87,7 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
         bool useSimpleMemory = false) =>
         TransformAssembliesToVhdlAsync(
             transformer,
-            new[] { typeof(InvalidParallelCases).Assembly },
+            [typeof(InvalidParallelCases).Assembly],
             configuration =>
             {
                 configuration.TransformerConfiguration().UseSimpleMemory = useSimpleMemory;

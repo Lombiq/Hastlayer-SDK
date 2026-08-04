@@ -44,12 +44,13 @@ public static class RequirementExtensions
         return results;
     }
 
-    private static void CheckRequirements<TItem, TKey>(IList<TItem> items, IList<TKey> keys)
+    private static void CheckRequirements<TItem, TKey>(IList<TItem> items, List<TKey> keys)
         where TItem : IRequirement<TKey>
     {
         // Look for impossible requirements.
         foreach (var item in items)
         {
+#pragma warning disable S3267 // The loop body throws an exception so it cannot be simplified to Where().
             foreach (var requirement in item.Requirements)
             {
                 if (!keys.Contains(requirement))
@@ -57,6 +58,7 @@ public static class RequirementExtensions
                     throw new KeyNotFoundException($"The required service \"{requirement}\" was not found!");
                 }
             }
+#pragma warning restore S3267
         }
     }
 

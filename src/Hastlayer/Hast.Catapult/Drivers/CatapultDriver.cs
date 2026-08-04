@@ -4,6 +4,7 @@ using Hast.Synthesis;
 using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using Hast.Xilinx;
+using System.Threading;
 using static Hast.Common.Constants.DataSize;
 using static Hast.Common.Constants.Frequency;
 
@@ -14,7 +15,7 @@ public class CatapultDriver : IDeviceDriver
     public const string DeviceName = Constants.Catapult.DeviceName;
 
     private readonly ITimingReportParser _timingReportParser;
-    private readonly object _timingReportParserLock = new();
+    private readonly Lock _timingReportParserLock = new();
 
     private ITimingReport _timingReport;
 

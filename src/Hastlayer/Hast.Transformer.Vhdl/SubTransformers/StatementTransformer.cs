@@ -442,7 +442,7 @@ public class StatementTransformer : IStatementTransformer
     /// Creates a conditional state change to the destination state that will only take place if the state wasn't
     /// already changed in the current state.
     /// </summary>
-    private static IVhdlElement CreateConditionalStateChange(int destinationStateIndex, SubTransformerContext context)
+    private static IfElse CreateConditionalStateChange(int destinationStateIndex, SubTransformerContext context)
     {
         // We need an if to check whether the state was changed in the logic. If it was then that means that the
         // subroutine was exited so we mustn't overwrite the new state.

@@ -113,7 +113,7 @@ public static class InvocationInstanceCountTransformerConfigurationExtensions
                         .AddLambdaExpressionIndexToSimpleName(parentMember.GetSimpleName(), value),
                 });
 
-                _lambdaCounts[parentMember] = ++value;
+                _lambdaCounts[parentMember] = value + 1;
             }
         }
     }

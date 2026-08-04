@@ -19,11 +19,11 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 /// <remarks>
 /// <para>See <see cref="XdcFile"/> for something similar for Xilinx.</para>
 /// </remarks>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 #pragma warning restore S103 // Lines should not be too long
 public class MultiCycleSdcStatementsAttributeExpression : IVhdlElement
 {
-    private readonly List<SdcStatement> _paths = new();
+    private readonly List<SdcStatement> _paths = [];
 
     public void AddPath(string parentName, IDataObject pathReference, int clockCycles)
     {

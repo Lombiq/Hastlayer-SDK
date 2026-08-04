@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Procedure : ISubProgram
 {
     public string Name { get; set; }
-    public IList<ProcedureParameter> Parameters { get; } = new List<ProcedureParameter>();
-    public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
-    public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+    public IList<ProcedureParameter> Parameters { get; } = [];
+    public IList<IVhdlElement> Declarations { get; } = [];
+    public IList<IVhdlElement> Body { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
     {
@@ -39,7 +39,7 @@ public enum ProcedureParameterType
     Out,
 }
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class ProcedureParameter : TypedDataObjectBase
 {
     public ProcedureParameterType ParameterType { get; set; }

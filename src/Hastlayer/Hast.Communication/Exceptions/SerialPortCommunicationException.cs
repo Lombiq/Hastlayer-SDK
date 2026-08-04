@@ -5,7 +5,6 @@ namespace Hast.Communication.Exceptions;
 /// <summary>
 /// This exception is thrown when something is wrong with the FPGA board connected through serial connection.
 /// </summary>
-[Serializable]
 public class SerialPortCommunicationException : Exception
 {
     public SerialPortCommunicationException(string message)

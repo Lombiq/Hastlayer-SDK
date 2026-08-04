@@ -4,13 +4,14 @@ using Hast.Synthesis.Models;
 using Hast.Synthesis.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace Hast.Xilinx.Drivers;
 
 public abstract class DeviceDriverBase : IDeviceDriver
 {
     private readonly ITimingReportParser _timingReportParser;
-    private readonly object _timingReportParserLock = new();
+    private readonly Lock _timingReportParserLock = new();
 
     protected Lazy<IDeviceManifest> _deviceManifest;
     private ITimingReport _timingReport;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
@@ -6,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 /// <summary>
 /// A VHDL comment that produces its value when VHDL code is generated.
 /// </summary>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class GeneratedComment : IVhdlElement
 {
     private readonly Func<IVhdlGenerationOptions, string> _generator;

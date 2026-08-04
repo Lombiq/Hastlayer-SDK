@@ -5,16 +5,16 @@ using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Process : ISubProgram
 {
     public string Label { get; set; }
 
     public string Name { get => Label; set => Label = value; }
 
-    public IList<IDataObject> SensitivityList { get; } = new List<IDataObject>();
-    public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
-    public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+    public IList<IDataObject> SensitivityList { get; } = [];
+    public IList<IVhdlElement> Declarations { get; } = [];
+    public IList<IVhdlElement> Body { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>
         Terminated.Terminate(

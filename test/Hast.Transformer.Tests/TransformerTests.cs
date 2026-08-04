@@ -23,8 +23,8 @@ namespace Hast.Transformer.Vhdl.Tests;
 public class TransformerTests
 {
     private readonly AutoMocker _mocker;
-    private ITransformationContext _producedContext;
     private static readonly string[] _second = ["Interface1Method1", "PrivateMethod", "StaticMethod"];
+    private ITransformationContext _producedContext;
 
     public TransformerTests()
     {
@@ -200,13 +200,13 @@ public class TransformerTests
             .ShouldBeTrue();
     }
 
-    private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
+    private DefaultTransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 
     private Dictionary<string, TypeDeclaration> BuildTypeLookup() =>
         _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
 
-    private static IConverter MockConverter<T>() =>
-        new CustomConverter
+    private static CustomConverter MockConverter<T>() =>
+        new()
         {
             Name = typeof(T).Name,
             ConverterAction = (_, _, _) => { },

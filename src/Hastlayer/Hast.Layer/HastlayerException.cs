@@ -5,7 +5,6 @@ namespace Hast.Layer;
 /// <summary>
 /// Top-level exception thrown from <see cref="IHastlayer"/> implementations.
 /// </summary>
-[Serializable]
 public class HastlayerException : Exception
 {
     public HastlayerException(string message)

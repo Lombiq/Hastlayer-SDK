@@ -88,7 +88,7 @@ public static class KnownDataTypes
         DefaultValue = default(long).ToTechnicalString().ToVhdlValue(_int64),
     };
 
-    public static readonly SizedDataType[] SignedIntegers = new[] { Int8, Int16, Int32, Int64 };
+    public static readonly SizedDataType[] SignedIntegers = [Int8, Int16, Int32, Int64];
 
     private static readonly SizedDataType _uint8 = new(_int16) { Name = "unsigned", SizeNumber = 8 };
 
@@ -118,7 +118,7 @@ public static class KnownDataTypes
         DefaultValue = default(ulong).ToTechnicalString().ToVhdlValue(_uint64),
     };
 
-    public static readonly SizedDataType[] UnsignedIntegers = new[] { UInt8, UInt16, UInt32, UInt64 };
+    public static readonly SizedDataType[] UnsignedIntegers = [UInt8, UInt16, UInt32, UInt64];
 
     public static readonly IReadOnlyList<SizedDataType> Integers = SignedIntegers.Union(UnsignedIntegers).ToArray();
 

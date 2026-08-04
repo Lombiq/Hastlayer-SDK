@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hast.Communication.Services;
@@ -10,7 +11,7 @@ namespace Hast.Communication.Services;
 public sealed class DevicePoolManager : IDevicePoolManager
 {
     private readonly ILogger<DevicePoolManager> _logger;
-    private readonly object _lock = new();
+    private readonly Lock _lock = new();
     private readonly Queue<Action<IReservedDevice>> _waitQueue = new();
 
     private bool _isDisposed;

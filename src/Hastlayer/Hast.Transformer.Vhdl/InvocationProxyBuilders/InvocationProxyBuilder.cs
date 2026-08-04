@@ -464,7 +464,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         for (int componentIndex = 0; componentIndex < context.TargetComponentCount; componentIndex++)
         {
-            var caseWhenBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(
+            IVhdlElement caseWhenBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(
                 componentIndex,
                 context.TargetMemberName,
                 context.InvokerName);
@@ -648,7 +648,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
     /// <summary>
     /// Check if the component would invoke itself. This can happen with recursive calls.
     /// </summary>
-    private static IVhdlElement CreateNullOperationIfTargetComponentEqualsInvokingComponent(
+    private static InlineBlock CreateNullOperationIfTargetComponentEqualsInvokingComponent(
         int index,
         string targetMemberName,
         string invokerName)
@@ -825,7 +825,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
         }
     }
 
-    private static IVhdlElement CreateBooleanIndicatorValue(SizedDataType targetAvailableIndicatorDataType, int indicatedIndex)
+    private static Value CreateBooleanIndicatorValue(SizedDataType targetAvailableIndicatorDataType, int indicatedIndex)
     {
         // This will create a boolean array where the everything is false except for the element with the given index.
 

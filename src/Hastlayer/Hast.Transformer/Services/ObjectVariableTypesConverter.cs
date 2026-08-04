@@ -10,7 +10,7 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be determined.
+/// Converts the type of variables of type <see langword="object"/> to the actual type they'll contain if this can be determined.
 /// </summary>
 /// <example>
 /// <para>Currently the following kind of constructs are supported:</para>

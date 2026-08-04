@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Library : INamedElement
 {
     public string Name { get; set; }
-    public IList<string> Uses { get; } = new List<string>();
+    public IList<string> Uses { get; } = [];
 
     public Library() { }
 
-    public Library(string name, List<string> uses)
+    public Library(string name, IList<string> uses)
     {
         Name = name;
         Uses = uses;

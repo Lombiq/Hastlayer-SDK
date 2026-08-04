@@ -5,10 +5,10 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Generic : IVhdlElement
 {
-    public IList<GenericItem> Items { get; } = new List<GenericItem>();
+    public IList<GenericItem> Items { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
     {

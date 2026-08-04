@@ -34,16 +34,9 @@ public static class TypeDeclarationExtensions
 
             if (currentMethod.Parameters.Count != methodToMatch.Parameters.Count) return true;
 
-            foreach (var interfaceMethodParameter in currentMethod.Parameters)
-            {
-                if (!methodToMatch.Parameters.Any(
-                    parameter => parameter.Type.AstTypeEquals(interfaceMethodParameter.Type, lookupDeclaration)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return currentMethod.Parameters.All(interfaceMethodParameter =>
+                methodToMatch.Parameters.Any(
+                    parameter => parameter.Type.AstTypeEquals(interfaceMethodParameter.Type, lookupDeclaration)));
         });
     }
 }
