@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.8.12023.21 stable
+VisualStudioVersion = 18.8.12023.21
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{895E632F-FA72-4736-8701-229B8C2F4052}"
 EndProject
@@ -108,6 +108,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\build-and-test.yml = .github\workflows\build-and-test.yml
 		.github\workflows\create-jira-issues-for-community-activities.yml = .github\workflows\create-jira-issues-for-community-activities.yml
 		.github\workflows\publish-nuget.yml = .github\workflows\publish-nuget.yml
+		.github\workflows\validate-nuget-publish.yml = .github\workflows\validate-nuget-publish.yml
 		.github\workflows\validate-pull-request.yml = .github\workflows\validate-pull-request.yml
 	EndProjectSection
 EndProject
