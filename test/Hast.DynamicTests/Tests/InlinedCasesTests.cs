@@ -9,7 +9,7 @@ public class InlinedCasesTests
     [Fact]
     public Task InlinedMultiReturn() =>
         TestExecutor.ExecuteSelectedTestAsync<InlinedCases>(
-            caseSelector: g => g.InlinedMultiReturn(null),
+            caseSelector: g => g.InlinedMultiReturn(memory: null),
             testExecutor: g =>
             {
                 g.InlinedMultiReturn(3);

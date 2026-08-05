@@ -21,39 +21,39 @@ public class BinaryAndUnaryOperatorExpressionCasesTests
     [Fact]
     public Task ByteBinaryOperatorExpressionVariations() =>
     ExecuteIntTestAsync(
-         b => b.ByteBinaryOperatorExpressionVariations(null),
+         b => b.ByteBinaryOperatorExpressionVariations(memory: null),
          b => b.ByteBinaryOperatorExpressionVariations,
          noMinValue: true);
 
     [Fact]
     public Task SbyteBinaryOperatorExpressionVariations() =>
         ExecuteIntTestAsync(
-             b => b.SbyteBinaryOperatorExpressionVariations(null),
+             b => b.SbyteBinaryOperatorExpressionVariations(memory: null),
              b => b.SbyteBinaryOperatorExpressionVariations);
 
     [Fact]
     public Task ShortBinaryOperatorExpressionVariations() =>
         ExecuteIntTestAsync(
-             b => b.ShortBinaryOperatorExpressionVariations(null),
+             b => b.ShortBinaryOperatorExpressionVariations(memory: null),
              b => b.ShortBinaryOperatorExpressionVariations);
 
     [Fact]
     public Task UshortBinaryOperatorExpressionVariations() =>
         ExecuteIntTestAsync(
-             b => b.UshortBinaryOperatorExpressionVariations(null),
+             b => b.UshortBinaryOperatorExpressionVariations(memory: null),
              b => b.UshortBinaryOperatorExpressionVariations,
              noMinValue: true);
 
     [Fact]
     public Task IntBinaryOperatorExpressionVariations() =>
         ExecuteIntTestAsync(
-             b => b.IntBinaryOperatorExpressionVariations(null),
+             b => b.IntBinaryOperatorExpressionVariations(memory: null),
              b => b.IntBinaryOperatorExpressionVariations);
 
     [Fact]
     public Task UintBinaryOperatorExpressionVariations() =>
         ExecuteTestAsync(
-            b => b.UintBinaryOperatorExpressionVariations(null),
+            b => b.UintBinaryOperatorExpressionVariations(memory: null),
             b =>
             {
                 b.UintBinaryOperatorExpressionVariations(uint.MinValue + 1);
@@ -65,19 +65,19 @@ public class BinaryAndUnaryOperatorExpressionCasesTests
     [Fact]
     public Task LongBinaryOperatorExpressionVariationsLow() =>
         ExecuteLongTestAsync(
-             b => b.LongBinaryOperatorExpressionVariationsLow(null),
+             b => b.LongBinaryOperatorExpressionVariationsLow(memory: null),
              b => b.LongBinaryOperatorExpressionVariationsLow);
 
     [Fact]
     public Task LongBinaryOperatorExpressionVariationsHigh() =>
         ExecuteLongTestAsync(
-             b => b.LongBinaryOperatorExpressionVariationsHigh(null),
+             b => b.LongBinaryOperatorExpressionVariationsHigh(memory: null),
              b => b.LongBinaryOperatorExpressionVariationsHigh);
 
     [Fact]
     public Task UlongBinaryOperatorExpressionVariationsLow() =>
         ExecuteTestAsync(
-            b => b.UlongBinaryOperatorExpressionVariationsLow(null),
+            b => b.UlongBinaryOperatorExpressionVariationsLow(memory: null),
             b =>
             {
                 b.UlongBinaryOperatorExpressionVariationsLow(ulong.MinValue + 1);
@@ -89,7 +89,7 @@ public class BinaryAndUnaryOperatorExpressionCasesTests
     [Fact]
     public Task UlongBinaryOperatorExpressionVariationsHigh() =>
         ExecuteTestAsync(
-            b => b.UlongBinaryOperatorExpressionVariationsHigh(null),
+            b => b.UlongBinaryOperatorExpressionVariationsHigh(memory: null),
             b =>
             {
                 b.UlongBinaryOperatorExpressionVariationsHigh(ulong.MinValue + 1);
@@ -101,7 +101,7 @@ public class BinaryAndUnaryOperatorExpressionCasesTests
     [Fact]
     public Task AllUnaryOperatorExpressionVariations() =>
         ExecuteLongTestAsync(
-             b => b.AllUnaryOperatorExpressionVariations(null),
+             b => b.AllUnaryOperatorExpressionVariations(memory: null),
              b => b.AllUnaryOperatorExpressionVariations);
 
     private static Task ExecuteIntTestAsync(

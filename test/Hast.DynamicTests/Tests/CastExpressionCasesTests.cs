@@ -9,7 +9,7 @@ public class CastExpressionCasesTests
     [Fact]
     public Task AllNumberCastingVariations() =>
         TestExecutor.ExecuteSelectedTestAsync<CastExpressionCases>(
-            caseSelector: c => c.AllNumberCastingVariations(null),
+            caseSelector: c => c.AllNumberCastingVariations(memory: null),
             testExecutor: c =>
             {
                 c.AllNumberCastingVariations(long.MinValue + 1);
