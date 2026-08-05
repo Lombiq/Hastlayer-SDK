@@ -1,4 +1,3 @@
-using Hast.Common.Models;
 using Hast.Layer;
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Configuration;
@@ -24,28 +23,27 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
         Host.RunAsync<ITransformer>(async transformer =>
         {
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
+                () => TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.InvalidArrayAssignment()),
                 typeof(NotSupportedException));
 
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.ArraySizeIsNotStatic(0)),
+                () => TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.ArraySizeIsNotStatic(0)),
                 typeof(NotSupportedException));
 
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.ArrayCopyToIsNotStaticCopy(0)),
+                () => TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.ArrayCopyToIsNotStaticCopy(0)),
                 typeof(NotSupportedException));
 
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(
-                    transformer, c => c.UnsupportedImmutableArrayCreateRangeUsage()),
+                () => TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.UnsupportedImmutableArrayCreateRangeUsage()),
                 typeof(NotSupportedException));
 
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.MultiDimensionalArray()),
+                () => TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.MultiDimensionalArray()),
                 typeof(NotSupportedException));
 
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.NullAssignment()),
+                () => TransformInvalidTestInputsAsync<InvalidArrayUsingCases>(transformer, c => c.NullAssignment()),
                 typeof(NotSupportedException));
         });
 
@@ -61,12 +59,11 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
         Host.RunAsync<ITransformer>(async transformer =>
         {
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidLanguageConstructCases>(
-                    transformer, c => c.CustomValueTypeReferenceEquals()),
+                () => TransformInvalidTestInputsAsync<InvalidLanguageConstructCases>(transformer, c => c.CustomValueTypeReferenceEquals()),
                 typeof(InvalidOperationException));
 
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidLanguageConstructCases>(transformer, c => c.InvalidModelUsage()),
+                () => TransformInvalidTestInputsAsync<InvalidLanguageConstructCases>(transformer, c => c.InvalidModelUsage()),
                 typeof(NotSupportedException));
         });
 
@@ -75,19 +72,20 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
         Host.RunAsync<ITransformer>(async transformer =>
         {
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),
+                () => TransformInvalidTestInputsAsync<InvalidObjectUsingCases>(transformer, c => c.ReferenceAssignment(0)),
                 typeof(NotSupportedException));
 
             await Should.ThrowAsync(
-                async () => await TransformInvalidTestInputsAsync<InvalidObjectUsingCases>(transformer, c => c.SelfReferencingType()),
+                () => TransformInvalidTestInputsAsync<InvalidObjectUsingCases>(transformer, c => c.SelfReferencingType()),
                 typeof(NotSupportedException));
         });
 
-    private Task<VhdlHardwareDescription> TransformInvalidTestInputsAsync<T>(
+    private async Task TransformInvalidTestInputsAsync<T>(
         ITransformer transformer,
         Expression<Action<T>> expression,
-        bool useSimpleMemory = false) =>
-        TransformAssembliesToVhdlAsync(
+        bool useSimpleMemory = false)
+    {
+        await TransformAssembliesToVhdlAsync(
             transformer,
             [typeof(InvalidParallelCases).Assembly],
             configuration =>
@@ -95,4 +93,7 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
                 configuration.TransformerConfiguration().UseSimpleMemory = useSimpleMemory;
                 configuration.AddHardwareEntryPointMethod(expression);
             });
+
+        return;
+    }
 }
