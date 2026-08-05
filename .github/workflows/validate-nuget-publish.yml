@@ -10,3 +10,7 @@ jobs:
   validate-nuget-publish:
     name: Validate NuGet Publish
     uses: Lombiq/GitHub-Actions/.github/workflows/validate-nuget-publish.yml@dev
+    with:
+      dotnet-version: |
+        6.0.427
+        10.0.x
