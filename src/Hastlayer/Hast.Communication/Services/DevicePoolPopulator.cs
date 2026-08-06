@@ -42,7 +42,6 @@ public class DevicePoolPopulator : IDevicePoolPopulator
                 _logger.LogCritical(ex, "An exception has occurred during device pool population.");
                 throw;
             }
-
 #pragma warning restore S2139
         }
     }
