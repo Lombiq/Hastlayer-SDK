@@ -49,7 +49,7 @@ public class BuildLogger<T>
         var hasWorkingDirectory = Directory.Exists(workingDirectory);
         Command Configure(Command command)
         {
-            if (hasWorkingDirectory) command = command.WithWorkingDirectory(workingDirectory!);
+            if (hasWorkingDirectory) command = command.WithWorkingDirectory(workingDirectory);
             return command.WithValidation(CommandResultValidation.None);
         }
 
