@@ -1,4 +1,4 @@
-﻿using Hast.Synthesis.Services;
+using Hast.Synthesis.Services;
 
 namespace Hast.Xilinx.Drivers;
 

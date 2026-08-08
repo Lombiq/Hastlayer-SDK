@@ -11,7 +11,7 @@ namespace Hast.Transformer.Services;
 
 public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(FSharpIdiosyncrasiesAdjuster) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(FSharpIdiosyncrasiesAdjuster)];
 
     private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
     private readonly IMemberSuitabilityChecker _memberSuitabilityChecker;
@@ -33,8 +33,8 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
     public void CleanUnusedDeclarations(SyntaxTree syntaxTree, IHardwareGenerationConfiguration configuration)
     {
         var typeDeclarationLookupTable = _typeDeclarationLookupTableFactory.Create(syntaxTree);
-        var noIncludedMembers = !configuration.HardwareEntryPointMemberFullNames.Any() &&
-            !configuration.HardwareEntryPointMemberNamePrefixes.Any();
+        var noIncludedMembers = configuration.HardwareEntryPointMemberFullNames.Count == 0 &&
+            configuration.HardwareEntryPointMemberNamePrefixes.Count == 0;
         var referencedNodesFlaggingVisitor = new ReferencedNodesFlaggingVisitor(typeDeclarationLookupTable, configuration);
 
         // Starting with hardware entry point members we walk through the references to see which declarations are used
@@ -84,7 +84,7 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
             .Members
             .Where(member =>
                 member is NamespaceDeclaration namespaceDeclaration &&
-                !namespaceDeclaration.Members.Any());
+                namespaceDeclaration.Members.Count == 0);
         foreach (var namespaceDeclaration in emptyNamespaceDeclarations) namespaceDeclaration.Remove();
 
         // Note that at this point the reference counters are out of date and would need to be refreshed to be used.
@@ -145,7 +145,7 @@ public class SyntaxTreeCleaner : ISyntaxTreeCleaner, IConverter
             }
 
             // Also marking those members referenced that are used in an object initializer.
-            if (objectCreateExpression.Initializer.Elements.Any())
+            if (objectCreateExpression.Initializer.Elements.Count != 0)
             {
                 foreach (var element in objectCreateExpression.Initializer.Elements)
                 {

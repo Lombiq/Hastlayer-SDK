@@ -33,7 +33,7 @@ internal sealed class PrimeCalculatorSampleRunner : ISampleRunner
         }
 
         // Only 2341 is prime.
-        foreach (var numbersToCheck in new[] { new uint[] { 15, 493, 2341, 99237 }, new uint[] { 13, 493 } })
+        foreach (var numbersToCheck in new[] { new uint[] { 15, 493, 2341, 99237 }, [13, 493] })
         {
             WriteOutPrimes(
                 nameof(primeCalculator.ArePrimeNumbers),

@@ -1,4 +1,4 @@
-﻿namespace Hast.Vitis.Constants;
+namespace Hast.Vitis.Constants;
 
 public static class FileNameExtensions
 {

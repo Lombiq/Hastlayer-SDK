@@ -28,9 +28,9 @@ public class VitisHbmMemoryResourceChecker : IMemoryResourceChecker
             return new MemoryResourceProblem
             {
                 Sender = this,
-                Message = $"The device uses HMB memory. If it also has DDR memory, disabling HMB via the " +
+                Message = "The device uses HMB memory. If it also has DDR memory, disabling HMB via the " +
                           $"{nameof(IOpenClConfiguration)}.{nameof(IOpenClConfiguration.UseHbm)} option might " +
-                          $"help, see the readme of the Hast.Vitis library.",
+                          "help, see the readme of the Hast.Vitis library.",
                 AvailableByteCount = Limits.HbmSizeBytes,
                 MemoryByteCount = memoryByteCount,
             };

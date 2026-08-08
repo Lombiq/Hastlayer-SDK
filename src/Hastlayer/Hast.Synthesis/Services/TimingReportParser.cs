@@ -246,7 +246,7 @@ public class TimingReportParser : ITimingReportParser
 
     private sealed class TimingReport : ITimingReport
     {
-        private readonly Dictionary<string, decimal> _timings = new();
+        private readonly Dictionary<string, decimal> _timings = [];
 
         public void SetLatencyNs(
             dynamic operatorType,

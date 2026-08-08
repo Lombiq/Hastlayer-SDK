@@ -12,5 +12,5 @@ public sealed class ArgumentAttribute : Attribute
     public string[] Aliases { get; }
 
     public ArgumentAttribute(params string[] aliases) =>
-        Aliases = aliases.Select(argument => argument.Trim().ToUpperInvariant()).ToArray();
+        Aliases = [.. aliases.Select(argument => argument.Trim().ToUpperInvariant())];
 }

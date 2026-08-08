@@ -4,10 +4,10 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Record : DataType
 {
-    public IList<RecordField> Fields { get; } = new List<RecordField>();
+    public IList<RecordField> Fields { get; } = [];
 
     public Record() => TypeCategory = DataTypeCategory.Composite;
 
@@ -19,7 +19,7 @@ public class Record : DataType
             vhdlGenerationOptions);
 }
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class RecordField : TypedDataObjectBase
 {
     public RecordField() => DataObjectKind = DataObjectKind.Variable;

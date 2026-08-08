@@ -21,7 +21,7 @@ namespace Hast.Transformer.Services;
 public class ImmutableArraysToStandardArraysConverter : IConverter
 {
     private readonly IHashProvider _hashProvider;
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ReadonlyToConstConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(ReadonlyToConstConverter)];
 
     public ImmutableArraysToStandardArraysConverter(IHashProvider hashProvider) => _hashProvider = hashProvider;
 
@@ -160,8 +160,8 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
                     arrayCreate.Arguments.Add(arrayLengthExpression);
                     arrayCreate.AddAnnotation(new ArrayCreateResolveResult(
                         arrayType,
-                        new[] { arrayLengthExpression.GetResolveResult() }.ToList(),
-                        Enumerable.Empty<ResolveResult>().ToList()));
+                        [arrayLengthExpression.GetResolveResult()],
+                        []));
                     var arrayCreateAssignment = new AssignmentExpression(
                         variableIdentifier,
                         arrayCreate);
@@ -199,8 +199,8 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
 
                     arrayCreate.AddAnnotation(new ArrayCreateResolveResult(
                         CreateArrayType(elementAstType.GetActualType()),
-                        new[] { sizeExpression.GetResolveResult() }.ToList(),
-                        Enumerable.Empty<ResolveResult>().ToList()));
+                        [sizeExpression.GetResolveResult()],
+                        []));
 
                     invocationExpression.ReplaceWith(arrayCreate);
                 }
@@ -327,10 +327,10 @@ public class ImmutableArraysToStandardArraysConverter : IConverter
             if (entityDeclaration.FindFirstParentTypeDeclaration().Members.Count(member => member.GetFullName() == fullName) > 1)
             {
                 throw new NotSupportedException(
-                    $"ImmutableArrays are converted into standard arrays. After such conversions a new member " +
+                    "ImmutableArrays are converted into standard arrays. After such conversions a new member " +
                     $"with the signature {fullName} was created, tough a previously existing member has the " +
-                    $"same signature. Change the members so even after converting ImmutableArrays they will " +
-                    $"have unique signatures. The full declaration of the converted member: " +
+                    "same signature. Change the members so even after converting ImmutableArrays they will " +
+                    "have unique signatures. The full declaration of the converted member: " +
                     $"{Environment.NewLine}{entityDeclaration}");
             }
         }

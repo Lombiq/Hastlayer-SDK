@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 
 namespace Hast.Transformer.SimpleMemory;
 

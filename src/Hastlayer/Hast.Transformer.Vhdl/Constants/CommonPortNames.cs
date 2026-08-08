@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Extensions;
+using Hast.VhdlBuilder.Extensions;
 
 namespace Hast.Transformer.Vhdl.Constants;
 

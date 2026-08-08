@@ -23,7 +23,7 @@ public class XilinxReportTests
     };
 
     private static readonly string[] _expectedSections =
-    {
+    [
         "1. CLB Logic",
         "1.1 Summary of Registers by Type",
         "2. BLOCKRAM",
@@ -39,19 +39,19 @@ public class XilinxReportTests
         "12. SLR Connectivity Matrix",
         "13. SLR CLB Logic and Dedicated Block Utilization",
         "14. SLR IO Utilization",
-    };
+    ];
 
     private static readonly string[] _expectedColumns =
-    {
+    [
         "Site Type",
         "Used",
         "Fixed",
         "Available",
         "Util%",
-    };
+    ];
 
     private static readonly Dictionary<string, string>[] _expectedTableData =
-    {
+    [
         new Dictionary<string, string>
         {
             ["Site Type"] = "CLB LUTs*",
@@ -132,7 +132,7 @@ public class XilinxReportTests
             ["Available"] = "216000",
             ["Util%"] = "0.00",
         },
-    };
+    ];
 
     [Fact]
     public async Task SampleShouldParseAsExpected()
@@ -145,7 +145,7 @@ public class XilinxReportTests
 
         foreach (var (key, value) in _expectedMetaData) report.MetaData[key].ShouldBe(value);
 
-        report.Sections.Keys.OrderBy(x => x).ToArray().ShouldBe(_expectedSections.OrderBy(x => x).ToArray());
+        report.Sections.Keys.Order().ToArray().ShouldBe([.. _expectedSections.Order()]);
 
         var section = report.Sections["1. CLB Logic"];
         section.Columns.ToArray().ShouldBe(_expectedColumns);
@@ -155,7 +155,7 @@ public class XilinxReportTests
             _expectedColumns
                 .Select(column => section[i][column])
                 .ToArray()
-                .ShouldBe(_expectedColumns.Select(column => section[i][column]).ToArray());
+                .ShouldBe([.. _expectedColumns.Select(column => section[i][column])]);
         }
     }
 

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hast.Communication.Services;
@@ -10,12 +11,12 @@ namespace Hast.Communication.Services;
 public sealed class DevicePoolManager : IDevicePoolManager
 {
     private readonly ILogger<DevicePoolManager> _logger;
-    private readonly object _lock = new();
+    private readonly Lock _lock = new();
     private readonly Queue<Action<IReservedDevice>> _waitQueue = new();
 
     private bool _isDisposed;
 
-    private Dictionary<string, PooledDevice> _devicePool = new();
+    private Dictionary<string, PooledDevice> _devicePool = [];
 
     public DevicePoolManager(ILogger<DevicePoolManager> logger) => _logger = logger;
 
@@ -36,7 +37,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
         lock (_lock)
         {
             // Copying the collection so no issue can arise in multi-thread access.
-            return _devicePool.Values.ToArray();
+            return [.. _devicePool.Values];
         }
     }
 
@@ -44,7 +45,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
     {
         lock (_lock)
         {
-            if (!_devicePool.Any())
+            if (_devicePool.Count == 0)
             {
                 throw new InvalidOperationException("There are no devices in the device pool (i.e. no connected devices could be detected).");
             }
@@ -65,7 +66,7 @@ public sealed class DevicePoolManager : IDevicePoolManager
                 {
                     lock (_lock)
                     {
-                        if (_waitQueue.Any())
+                        if (_waitQueue.Count != 0)
                         {
                             _logger.LogDebug(
                                 "Dequeuing a device reservation request. Will re-use the device with the ID " +

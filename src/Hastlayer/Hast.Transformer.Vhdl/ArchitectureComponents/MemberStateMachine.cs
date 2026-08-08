@@ -74,11 +74,11 @@ internal sealed class MemberStateMachine : ArchitectureComponentBase, IMemberSta
                     this.ChangeToStartState()),
             });
 
-        _states = new List<IMemberStateMachineState>
-        {
+        _states =
+        [
             new MemberStateMachineState { Body = startStateBlock },
             new MemberStateMachineState { Body = finalStateBlock },
-        };
+        ];
     }
 
     public int AddState(IBlockElement state)

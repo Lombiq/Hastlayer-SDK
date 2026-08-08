@@ -41,7 +41,7 @@ namespace Hast.Transformer.Services;
 /// </example>
 public class ReadonlyToConstConverter : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(SyntaxTreeCleaner) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(SyntaxTreeCleaner)];
 
     /// <summary>
     /// Finds and replaces any <see langword="public"/><see langword="static"/><see langword="readonly"/> fields in
@@ -114,7 +114,7 @@ public class ReadonlyToConstConverter : IConverter
                     short => short.Parse(resultString, CultureInfo.InvariantCulture),
                     ushort => ushort.Parse(resultString, CultureInfo.InvariantCulture),
                     byte => byte.Parse(resultString, CultureInfo.InvariantCulture),
-                    bool => resultString.ToUpperInvariant() == "TRUE",
+                    bool => resultString.EqualsOrdinalIgnoreCase("TRUE"),
                     _ => value.Value,
                 };
             }

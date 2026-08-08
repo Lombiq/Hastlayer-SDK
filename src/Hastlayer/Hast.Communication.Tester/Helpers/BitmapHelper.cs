@@ -1,9 +1,7 @@
 using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.PixelFormats;
-using System;
 
 namespace Hast.Communication.Tester.Helpers;
 
@@ -13,7 +11,7 @@ public static class BitmapHelper
 
     public static Image<Rgba32> FromSimpleMemory(SimpleMemory memory, Image<Rgba32> image, int prependCellCount = 0)
     {
-        var newImage = new Image<Rgba32>(image.GetConfiguration(), image.Width, image.Height);
+        var newImage = new Image<Rgba32>(image.Configuration, image.Width, image.Height);
 
         newImage.ProcessPixelRows(accessor =>
         {
@@ -38,7 +36,7 @@ public static class BitmapHelper
         Image<Rgba32> image,
         int[] prependCells = null)
     {
-        prependCells ??= Array.Empty<int>();
+        prependCells ??= [];
 
         var pixelCount = image.Width * image.Height;
         var cellCount =
@@ -63,7 +61,7 @@ public static class BitmapHelper
 
                     memory.Write4Bytes(
                         (y * image.Width) + x + prependCells.Length,
-                        new[] { pixel.R, pixel.G, pixel.B, pixel.A });
+                        [pixel.R, pixel.G, pixel.B, pixel.A]);
                 }
             }
         });

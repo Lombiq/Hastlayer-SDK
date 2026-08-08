@@ -1,4 +1,4 @@
-﻿using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
 

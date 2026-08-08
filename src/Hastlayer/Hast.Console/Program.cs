@@ -24,7 +24,7 @@ internal sealed class Program
             WriteLine("Subcommands:\n* {0}", allSubcommands);
         }
         else if (mainOptions.Subcommand?.ToUpperInvariant() is { } name &&
-                 _subcommands.Any(sub => sub.Key.ToUpperInvariant() == name))
+                 _subcommands.Any(sub => sub.Key.EqualsOrdinalIgnoreCase(name)))
         {
             WriteLine("Please put the subcommand name as the first argument!");
         }
@@ -43,7 +43,7 @@ internal sealed class Program
         if (errorList.Exists(error => error.Tag == ErrorType.HelpRequestedError)) Environment.Exit(0);
 #pragma warning restore S1147 // Exit methods should not be called
 
-        if (errorList.Any())
+        if (errorList.Count != 0)
         {
             WriteLine("Bad arguments.");
             ReadKey();
@@ -58,8 +58,8 @@ internal sealed class Program
             {
                 CommandName = ((SubcommandAttribute)result.Attribute)!.Name,
                 Instance = (ISubcommand)result.Type!
-                        .GetConstructor(new[] { typeof(string[]) })!
-                    .Invoke(new object[] { args }),
+                        .GetConstructor([typeof(string[])])!
+                    .Invoke([args]),
             })
             .ToDictionary(info => info.CommandName);
 

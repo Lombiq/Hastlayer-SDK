@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Variable : TypedDataObject
 {
     public bool Shared { get; set; }

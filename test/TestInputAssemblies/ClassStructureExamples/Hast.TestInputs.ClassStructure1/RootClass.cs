@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.ClassStructure1;
+namespace Hast.TestInputs.ClassStructure1;
 
 /// <summary>
 /// A class in the root namespace.

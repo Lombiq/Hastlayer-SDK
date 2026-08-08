@@ -6,7 +6,7 @@ namespace Hast.VhdlBuilder.Representation.Expression;
 /// <summary>
 /// A record's field's access expression, i.e. myRecord.Member.
 /// </summary>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class RecordFieldAccess : DataObjectBase
 {
     private IDataObject _instance;

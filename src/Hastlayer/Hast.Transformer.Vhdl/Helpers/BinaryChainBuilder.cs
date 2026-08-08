@@ -11,7 +11,7 @@ internal static class BinaryChainBuilder
     {
         var expressionsList = expressions.ToList();
 
-        if (!expressionsList.Any()) return Empty.Instance;
+        if (expressionsList.Count == 0) return Empty.Instance;
 
         var chainExpression = expressionsList[0];
 

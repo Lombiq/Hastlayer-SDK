@@ -1,4 +1,4 @@
-﻿namespace Hast.Vitis.Models;
+namespace Hast.Vitis.Models;
 
 public abstract class AzurePostData
 {

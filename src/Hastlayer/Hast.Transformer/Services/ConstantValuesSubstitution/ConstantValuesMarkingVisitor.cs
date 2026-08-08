@@ -16,7 +16,7 @@ internal sealed class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
     private readonly IArraySizeHolder _arraySizeHolder;
     private readonly ITypeDeclarationLookupTable _typeDeclarationLookupTable;
 
-    public HashSet<string> HiddenlyUpdatedNodesUpdated { get; } = new();
+    public HashSet<string> HiddenlyUpdatedNodesUpdated { get; } = [];
 
     public ConstantValuesMarkingVisitor(
         ConstantValuesSubstitutingAstProcessor constantValuesSubstitutingAstProcessor,

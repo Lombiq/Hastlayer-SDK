@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis.Delegates;
 using Hast.Synthesis.Helpers;
 using Hast.Synthesis.Models;

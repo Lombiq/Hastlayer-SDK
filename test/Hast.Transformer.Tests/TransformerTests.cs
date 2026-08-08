@@ -23,6 +23,7 @@ namespace Hast.Transformer.Vhdl.Tests;
 public class TransformerTests
 {
     private readonly AutoMocker _mocker;
+    private static readonly string[] _second = ["Interface1Method1", "PrivateMethod", "StaticMethod"];
     private ITransformationContext _producedContext;
 
     public TransformerTests()
@@ -39,15 +40,14 @@ public class TransformerTests
 
         // Moq has a problem with resolving IEnumerable<Tservice> in the constructor even when Tservice is already
         // registered, so these have to be added manually. See: https://github.com/moq/Moq.AutoMocker/issues/76
-        _mocker.Use<IEnumerable<EventHandler<ITransformationContext>>>(Array.Empty<EventHandler<ITransformationContext>>());
-        _mocker.Use<IDeviceDriverSelector>(new DeviceDriverSelector(new[] { _mocker.CreateInstance<Nexys4DdrDriver>() }));
+        _mocker.Use<IEnumerable<EventHandler<ITransformationContext>>>([]);
+        _mocker.Use<IDeviceDriverSelector>(new DeviceDriverSelector([_mocker.CreateInstance<Nexys4DdrDriver>()]));
 
         _mocker.Use<IEnumerable<IConverter>>(
-            new[]
-            {
-                _mocker.CreateInstance<MemberIdentifiersFixer>(),
-                MockConverter<UnneededReferenceVariablesRemover>(),
-            });
+        [
+            _mocker.CreateInstance<MemberIdentifiersFixer>(),
+            MockConverter<UnneededReferenceVariablesRemover>(),
+        ]);
 
         _mocker
             .GetMock<ITransformingEngine>()
@@ -70,7 +70,7 @@ public class TransformerTests
         var configuration = CreateConfig();
         var transformer = GetTransformer();
 
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, configuration);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], configuration);
 
         _mocker
             .GetMock<ITransformingEngine>()
@@ -90,9 +90,9 @@ public class TransformerTests
         var config = CreateConfig();
         var transformer = GetTransformer();
 
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], config);
         var firstId = _producedContext.Id;
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly], config);
         firstId.ShouldNotBe(
             _producedContext.Id,
             "The transformation context ID isn't different despite the set of assemblies transformed being different.");
@@ -102,28 +102,28 @@ public class TransformerTests
             {
                 MaxDegreeOfParallelism = 5,
             });
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], config);
         firstId = _producedContext.Id;
         config.TransformerConfiguration().MemberInvocationInstanceCountConfigurations.Single().MaxDegreeOfParallelism = 15;
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], config);
         firstId.ShouldNotBe(
             _producedContext.Id,
             "The transformation context ID isn't different despite the max degree of parallelism being different.");
 
         config.HardwareEntryPointMemberFullNames.Add("aaa");
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], config);
         firstId = _producedContext.Id;
         config.HardwareEntryPointMemberFullNames.Add("bbb");
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], config);
         firstId.ShouldNotBe(
             _producedContext.Id,
             "The transformation context ID isn't different despite the set of included members being different.");
 
         config.HardwareEntryPointMemberNamePrefixes.Add("aaa");
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], config);
         firstId = _producedContext.Id;
         config.HardwareEntryPointMemberNamePrefixes.Add("bbb");
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly }, config);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly], config);
         firstId.ShouldNotBe(
             _producedContext.Id,
             "The transformation context ID isn't different despite the set of included members prefixed being different.");
@@ -133,7 +133,7 @@ public class TransformerTests
     public async Task UnusedDeclarationsArentInTheSyntaxTree()
     {
         var transformer = GetTransformer();
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, CreateConfig());
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly], CreateConfig());
         var typeLookup = BuildTypeLookup();
 
         typeLookup.Count.ShouldBe(7, "Not the number of types remained in the syntax tree than there are used.");
@@ -154,7 +154,7 @@ public class TransformerTests
                  $"{typeof(IInterface1).FullName}.{nameof(IInterface1.Interface1Method1)}()");
         var transformer = GetTransformer();
 
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly], configuration);
         var typeLookup = BuildTypeLookup();
 
         typeLookup.Count.ShouldBe(3, "Not the number of types remained in the syntax tree than there are used.");
@@ -162,11 +162,11 @@ public class TransformerTests
         typeLookup[nameof(RootClass)].Members.Single().Name.ShouldBe("VirtualMethod");
         typeLookup[nameof(ComplexTypeHierarchy)].Members.Count.ShouldBe(3);
         typeLookup[nameof(ComplexTypeHierarchy)].Members.Select(member => member.Name)
-            .SequenceEqual(new[] { "Interface1Method1", "PrivateMethod", "StaticMethod" })
+            .SequenceEqual(_second)
             .ShouldBeTrue();
         typeLookup[nameof(IInterface1)].Members.Count.ShouldBe(1);
         typeLookup[nameof(IInterface1)].Members.Select(member => member.Name)
-            .SequenceEqual(new[] { "Interface1Method1" })
+            .SequenceEqual(["Interface1Method1"])
             .ShouldBeTrue();
     }
 
@@ -178,7 +178,7 @@ public class TransformerTests
         configuration.HardwareEntryPointMemberNamePrefixes.Add(typeof(ComplexTypeHierarchy).Namespace);
         var transformer = GetTransformer();
 
-        await transformer.TransformAsync(new[] { typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly }, configuration);
+        await transformer.TransformAsync([typeof(ComplexTypeHierarchy).Assembly, typeof(StaticReference).Assembly], configuration);
         var typeLookup = BuildTypeLookup();
 
         typeLookup.Count.ShouldBe(5, "Not the number of types remained in the syntax tree than there are used.");
@@ -187,8 +187,8 @@ public class TransformerTests
         typeLookup[nameof(ComplexTypeHierarchy)].Members.Count.ShouldBe(7);
         typeLookup[nameof(ComplexTypeHierarchy)].Members
             .Select(member => member.Name)
-            .SequenceEqual(new[]
-            {
+            .SequenceEqual(
+            [
                 "Interface1Method1",
                 "Interface1Method2",
                 "Interface2Method1",
@@ -196,17 +196,17 @@ public class TransformerTests
                 "BaseInterfaceMethod2",
                 "PrivateMethod",
                 "StaticMethod",
-            })
+            ])
             .ShouldBeTrue();
     }
 
-    private ITransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
+    private DefaultTransformer GetTransformer() => _mocker.CreateInstance<DefaultTransformer>();
 
     private Dictionary<string, TypeDeclaration> BuildTypeLookup() =>
         _producedContext.SyntaxTree.GetAllTypeDeclarations().ToDictionary(type => type.Name);
 
-    private static IConverter MockConverter<T>() =>
-        new CustomConverter
+    private static CustomConverter MockConverter<T>() =>
+        new()
         {
             Name = typeof(T).Name,
             ConverterAction = (_, _, _) => { },

@@ -149,7 +149,7 @@ public class SimpleMemory
         return output;
     }
 
-    public void WriteUInt32(int cellIndex, uint number) => MemoryMarshal.Write(this[cellIndex], ref number);
+    public void WriteUInt32(int cellIndex, uint number) => MemoryMarshal.Write(this[cellIndex], in number);
 
     public uint ReadUInt32(int cellIndex) => MemoryMarshal.Read<uint>(this[cellIndex]);
 

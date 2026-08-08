@@ -257,7 +257,7 @@ public class ExpressionTransformer : IExpressionTransformer
             : ImplementTypeConversionForBinaryExpressionParent(reference);
     }
 
-    private IVhdlElement TransformPrimitiveExpression(PrimitiveExpression primitive, SubTransformerContext context)
+    private Value TransformPrimitiveExpression(PrimitiveExpression primitive, SubTransformerContext context)
     {
         var vhdlType = _typeConverter.ConvertType(primitive.GetActualType(), context.TransformationContext);
         var valueString = primitive.Value.ToString() ?? string.Empty;
@@ -505,7 +505,7 @@ public class ExpressionTransformer : IExpressionTransformer
         return operationResultDataObjectReference;
     }
 
-    private static IVhdlElement TransformTypeReference(TypeReferenceExpression typeReferenceExpression, SubTransformerContext context)
+    private static Value TransformTypeReference(TypeReferenceExpression typeReferenceExpression, SubTransformerContext context)
     {
         var type = typeReferenceExpression.Type;
         var declaration = context.TransformationContext.TypeDeclarationLookupTable.Lookup(type);
@@ -544,14 +544,14 @@ public class ExpressionTransformer : IExpressionTransformer
             scope.Warnings.AddWarning(
                 "LossyCast",
                 $"A cast from {fromVhdlType.ToVhdl()} to {toVhdlType.ToVhdl()} was lossy. If the result can " +
-                $"indeed reach values outside the target type's limits then underflow or overflow errors will " +
+                "indeed reach values outside the target type's limits then underflow or overflow errors will " +
                 $"occur. The affected expression: {castExpression} in method {scope.Method.GetFullName()}.");
         }
 
         return typeConversionResult.ConvertedFromExpression;
     }
 
-    private IVhdlElement TransformIndexer(IndexerExpression indexerExpression, SubTransformerContext context)
+    private ArrayElementAccess TransformIndexer(IndexerExpression indexerExpression, SubTransformerContext context)
     {
         if (Transform(indexerExpression.Target, context) is not IDataObject targetVariableReference)
         {
@@ -580,7 +580,7 @@ public class ExpressionTransformer : IExpressionTransformer
         };
     }
 
-    private IVhdlElement TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
+    private Empty TransformObjectCreate(ObjectCreateExpression objectCreateExpression, SubTransformerContext context)
     {
         var initializationResult = InitializeRecord(objectCreateExpression, objectCreateExpression.Type, context);
 
@@ -625,7 +625,7 @@ public class ExpressionTransformer : IExpressionTransformer
         return Empty.Instance;
     }
 
-    private IVhdlElement TransformDefaultValue(DefaultValueExpression defaultValueExpression, SubTransformerContext context)
+    private Empty TransformDefaultValue(DefaultValueExpression defaultValueExpression, SubTransformerContext context)
     {
         // The only case when a default() will remain in the syntax tree is for composed types. For primitives a
         // constant will be substituted. E.g. instead of default(int) a 0 will be in the AST.
@@ -680,7 +680,7 @@ public class ExpressionTransformer : IExpressionTransformer
             // original variable.
             throw new NotSupportedException(
                 $"The {nameof(assignment)} {expression} is not supported. You can't at the moment assign to a " +
-                $"variable that you previously assigned to using a reference type-holding variable."
+                "variable that you previously assigned to using a reference type-holding variable."
                 .AddParentEntityName(assignment));
         }
 
@@ -814,7 +814,7 @@ public class ExpressionTransformer : IExpressionTransformer
     private static EntityDeclaration GetFieldDeclaration<T>(
         TypeDeclaration typeDeclaration,
         Func<T, string> nameSelector,
-        IDataObject field)
+        RecordField field)
         where T : AstNode =>
         typeDeclaration?
             .Members

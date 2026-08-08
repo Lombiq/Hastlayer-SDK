@@ -37,7 +37,7 @@ public class TypesCreator : ITypesCreator
 
         // Adding enum types (avoid multiple enumerations).
         var enumDeclarations = _enumTypesCreator.CreateEnumTypes(syntaxTree);
-        var listDeclarations = enumDeclarations is IList<IVhdlElement> list ? list : enumDeclarations.ToList();
+        var listDeclarations = enumDeclarations is IList<IVhdlElement> list ? list : [.. enumDeclarations];
 
         if (listDeclarations.Any())
         {

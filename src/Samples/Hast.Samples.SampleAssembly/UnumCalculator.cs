@@ -43,8 +43,8 @@ public static class UnumCalculatorExtensions
 {
     // While Hastlayer can figure out if an array is statically sized most of the time we need to specify the below ones
     // manually. See UnumCalculatorSampleRunner.
-    public static readonly string[] ManuallySizedArrays = new[]
-    {
+    public static readonly string[] ManuallySizedArrays =
+    [
         "System.UInt32[] Lombiq.Arithmetics.BitMask::Segments()",
         "System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32,System.UInt16).array",
         "System.Void Lombiq.Arithmetics.BitMask::.ctor(System.UInt32[],System.UInt16).segments",
@@ -63,7 +63,7 @@ public static class UnumCalculatorExtensions
         "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32[],System.Boolean).value",
         "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.Int32).array",
         "System.Void Lombiq.Arithmetics.Unum::.ctor(Lombiq.Arithmetics.UnumEnvironment,System.UInt32).array",
-    };
+    ];
 
     public static uint[] CalculateSumOfPowersofTwo(
         this UnumCalculator unumCalculator,

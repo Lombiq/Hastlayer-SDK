@@ -23,7 +23,7 @@ public class ConditionalExpressionsToIfElsesConverter : IConverter
 {
     private readonly IHashProvider _hashProvider;
 
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(InstanceMethodsToStaticConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(InstanceMethodsToStaticConverter)];
 
     public ConditionalExpressionsToIfElsesConverter(IHashProvider hashProvider) => _hashProvider = hashProvider;
 

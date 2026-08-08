@@ -47,10 +47,10 @@ public class PocoTransformer : IPocoTransformer
                 if (!hasDependency) component.DependentTypesTable.AddBaseType(record);
             }
 
-            result.ArchitectureComponentResults = new List<IArchitectureComponentResult>
-            {
+            result.ArchitectureComponentResults =
+            [
                 new ArchitectureComponentResult(component),
-            };
+            ];
 
             return result;
         });

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
@@ -10,7 +9,7 @@ namespace Hast.VhdlBuilder.Representation.Declaration;
 /// A VHDL block comment, consisting of multiple comment lines.
 /// </summary>
 /// <seealso cref="LineComment"/>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class BlockComment : IVhdlElement
 {
     public IList<string> Lines { get; }
@@ -26,14 +25,14 @@ public class BlockComment : IVhdlElement
     /// newline character-delimited block of text, corresponding to lines of the block comment.
     /// </summary>
     public BlockComment(string textBlock)
-        : this(textBlock.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+        : this(textBlock.Split([Environment.NewLine], StringSplitOptions.None))
     {
     }
 
     public BlockComment(params string[] lines)
-        : this() => Lines = lines.ToList();
+        : this() => Lines = [.. lines];
 
-    public BlockComment() => Lines = new List<string>();
+    public BlockComment() => Lines = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
     {

@@ -12,7 +12,7 @@ namespace Hast.Transformer.Services;
 /// </summary>
 public class FSharpIdiosyncrasiesAdjuster : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(MemberIdentifiersFixer) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(MemberIdentifiersFixer)];
 
     private readonly ITypeDeclarationLookupTableFactory _typeDeclarationLookupTableFactory;
 

@@ -104,7 +104,7 @@ public class HardwareGenerationConfiguration : IHardwareGenerationConfiguration
             ? "HardwareFramework"
             : hardwareFrameworkPath;
         CustomConfiguration = customConfiguration ?? new Dictionary<string, object>();
-        HardwareEntryPointMemberFullNames = hardwareEntryPointMemberFullNames ?? new List<string>();
-        HardwareEntryPointMemberNamePrefixes = hardwareEntryPointMemberNamePrefixes ?? new List<string>();
+        HardwareEntryPointMemberFullNames = hardwareEntryPointMemberFullNames ?? [];
+        HardwareEntryPointMemberNamePrefixes = hardwareEntryPointMemberNamePrefixes ?? [];
     }
 }

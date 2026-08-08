@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.Static;
+namespace Hast.TestInputs.Static;
 
 public class UnaryCases
 {

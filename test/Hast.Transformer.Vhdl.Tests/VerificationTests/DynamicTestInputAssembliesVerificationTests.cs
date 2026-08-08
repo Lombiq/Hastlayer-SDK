@@ -14,7 +14,7 @@ public class DynamicTestInputAssembliesVerificationTests : VerificationTestFixtu
         {
             var hardwareDescription = await TransformAssembliesToVhdlAsync(
                 transformer,
-                new[] { typeof(BinaryAndUnaryOperatorExpressionCases).Assembly },
+                [typeof(BinaryAndUnaryOperatorExpressionCases).Assembly],
                 _ => { });
 
             hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();

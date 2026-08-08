@@ -2,8 +2,6 @@ using Hast.Common.Services;
 using Hast.Layer;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace Hast.Transformer.Vhdl.Tests.IntegrationTestingServices;
 
@@ -19,7 +17,7 @@ public abstract class IntegrationTestFixtureBase : IDisposable
 
     protected IntegrationTestFixtureBase()
     {
-        _hostConfiguration.Extensions = new List<Assembly>();
+        _hostConfiguration.Extensions = [];
         _hostConfiguration.OnServiceRegistration = OnServiceRegistration;
         _host = new Lazy<Hastlayer>(() => Hastlayer.Create(_hostConfiguration));
     }
@@ -42,7 +40,7 @@ public abstract class IntegrationTestFixtureBase : IDisposable
 
     private static void OnServiceRegistration(IHastlayerConfiguration configuration, IServiceCollection services)
     {
-        services.RemoveImplementations<IHashProvider>();
+        services.RemoveImplementationsOf<IHashProvider>();
         services.AddSingleton<IHashProvider, VerificationTestHashProvider>();
     }
 }

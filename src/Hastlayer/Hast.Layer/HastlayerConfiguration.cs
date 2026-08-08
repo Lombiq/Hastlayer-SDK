@@ -14,7 +14,7 @@ public class HastlayerConfiguration : IHastlayerConfiguration
     public Action<IHastlayerConfiguration, IServiceCollection> OnServiceRegistration { get; set; }
 
     /// <inheritdoc/>
-    public IEnumerable<Assembly> Extensions { get; set; } = new List<Assembly>();
+    public IEnumerable<Assembly> Extensions { get; set; } = [];
 
     /// <inheritdoc/>
     public string AppDataFolderPath { get; set; }

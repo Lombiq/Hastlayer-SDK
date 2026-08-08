@@ -5,7 +5,6 @@ using Hast.Transformer.Helpers;
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 using ICSharpCode.Decompiler.TypeSystem;
-using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +19,7 @@ public class MethodInliner : IConverter
 {
     private readonly IHashProvider _hashProvider;
 
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(OptionalParameterFiller) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(OptionalParameterFiller)];
 
     public MethodInliner(IHashProvider hashProvider) => _hashProvider = hashProvider;
 
@@ -80,9 +79,9 @@ public class MethodInliner : IConverter
 
         if (passCount >= maxPassCount)
         {
-            throw new InvalidOperationException(StringHelper.CreateInvariant(
+            throw new InvalidOperationException(
                 $"Method inlining needs more than {maxPassCount} passes through the syntax tree. This most possibly " +
-                $"indicates some error or the assembly being processed is exceptionally big."));
+                "indicates some error or the assembly being processed is exceptionally big.");
         }
     }
 

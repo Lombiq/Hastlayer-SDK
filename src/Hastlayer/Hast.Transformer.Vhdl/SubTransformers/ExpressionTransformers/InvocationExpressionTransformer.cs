@@ -376,7 +376,7 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
         {
             throw new InvalidOperationException(
                 $"The invoked method {targetMethodName} can't be found and thus can't be transformed. Did you " +
-                $"forget to add an assembly to the list of the assemblies to generate hardware from?"
+                "forget to add an assembly to the list of the assemblies to generate hardware from?"
                     .AddParentEntityName(expression));
         }
 
@@ -427,7 +427,7 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
         {
             throw new InvalidOperationException(
                 $"You declared a Task array with the name \"{taskArrayIdentifier}\" but didn't actually start " +
-                $"any tasks. Temporarily remove/comment out the array if you'll only use it in the future."
+                "any tasks. Temporarily remove/comment out the array if you'll only use it in the future."
                     .AddParentEntityName(expression));
         }
 
@@ -463,7 +463,7 @@ public class InvocationExpressionTransformer : IInvocationExpressionTransformer
         return (HasResult: true, ResultBlock: resultBlock);
     }
 
-    private static IVhdlElement TransformArrayCopy(
+    private static Assignment TransformArrayCopy(
         InvocationExpression expression,
         SubTransformerContext context,
         ICollection<TransformedInvocationParameter> transformedParameters)

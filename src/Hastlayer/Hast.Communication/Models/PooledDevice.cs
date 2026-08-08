@@ -1,4 +1,4 @@
-﻿namespace Hast.Communication.Models;
+namespace Hast.Communication.Models;
 
 public class PooledDevice : Device, IPooledDevice
 {

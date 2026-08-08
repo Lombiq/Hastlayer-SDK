@@ -73,11 +73,11 @@ public static class Posit32FusedCalculatorExtensions
         return (float)new Posit32(memory.ReadUInt32(Posit32FusedCalculator.CalculateFusedSumOutputPosit32Index), fromBitMask: true);
     }
 
-    public static readonly string[] ManuallySizedArrays = new[]
-    {
+    public static readonly string[] ManuallySizedArrays =
+    [
        "System.UInt64[] Lombiq.Arithmetics.Quire::Segments()",
        "Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire).array",
        "Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_RightShift(Lombiq.Arithmetics.Quire,System.Int32).array",
        "Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32).array",
-    };
+    ];
 }

@@ -8,15 +8,15 @@ public static class ArrayCreateExpressionExtensions
     public static int GetStaticLength(this ArrayCreateExpression expression)
     {
         // The array has its length explicitly specified, i.e. new int[5]-style.
-        if (expression.Arguments.Any())
+        if (expression.Arguments.Count != 0)
         {
             var lengthArgument = expression.Arguments.Single();
 
             if (lengthArgument is not PrimitiveExpression)
             {
                 throw new NotSupportedException(
-                    $"Only arrays with statically defined dimension length are supported. Consider adding the " +
-                    $"dimension sizes directly into the array initialization or use a const field. The " +
+                    "Only arrays with statically defined dimension length are supported. Consider adding the " +
+                    "dimension sizes directly into the array initialization or use a const field. The " +
                     $"dynamically sized array creation was: {expression}{".".AddParentEntityName(expression)}");
             }
 

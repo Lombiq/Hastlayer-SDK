@@ -62,7 +62,7 @@ public static class DeviceDriverHelper
 
         throw new InvalidOperationException(
             $"No latency data found for the {nameof(expression)} {expression}. This is most possibly a bug in " +
-            $"Hastlayer, please submit a bug report with the affected code snippet: " +
-            $"https://github.com/Lombiq/Hastlayer-SDK/issues.");
+            "Hastlayer, please submit a bug report with the affected code snippet: " +
+            "https://github.com/Lombiq/Hastlayer-SDK/issues.");
     }
 }

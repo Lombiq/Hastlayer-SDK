@@ -11,7 +11,6 @@ using Lombiq.HelpfulLibraries.Common.Utilities;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Bmp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.PixelFormats;
 using System;
@@ -41,7 +40,7 @@ public static class Program
     private static Hastlayer _hastlayer;
 
     private static void OnServiceGeneration(object sender, IServiceCollection services) =>
-        services.RemoveImplementations<ITransformer>();
+        services.RemoveImplementationsOf<ITransformer>();
 
     private static async Task MainTaskAsync(IServiceProvider provider)
     {
@@ -49,7 +48,7 @@ public static class Program
 
         // Get devices and if asked exit with the device list.
         var devices = provider.GetService<IDeviceManifestSelector>().GetSupportedDevices()?.ToList();
-        if (devices?.Any() != true) throw new InvalidOperationException("No devices are available!");
+        if (devices == null || devices.Count == 0) throw new InvalidOperationException("No devices are available!");
 
         if (CommandLineOptions.ListDevices)
         {
@@ -73,9 +72,7 @@ public static class Program
         var prepend = Array.Empty<int>();
         if (!string.IsNullOrEmpty(CommandLineOptions.Prepend))
         {
-            prepend = CommandLineOptions.Prepend.Split(',', StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
-                .ToArray();
+            prepend = [.. CommandLineOptions.Prepend.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(int.Parse)];
         }
 
         var hardwareGenerationConfiguration = new HardwareGenerationConfiguration(selectedDevice.Name);
@@ -109,11 +106,11 @@ public static class Program
                     .Assembly
                     .GetTypes()
                     .Single(currentType =>
-                        currentType.Name.ToUpperInvariant() == name &&
-                        currentType.GetConstructor(Array.Empty<Type>()) != null &&
+                        currentType.Name.EqualsOrdinalIgnoreCase(name) &&
+                        currentType.GetConstructor([]) != null &&
                         GetReferenceAction(currentType) != null);
-                var sample = type.GetConstructor(Array.Empty<Type>())?.Invoke(Array.Empty<object>());
-                GetReferenceAction(type)?.Invoke(sample, new object[] { referenceMemory });
+                var sample = type.GetConstructor([])?.Invoke([]);
+                GetReferenceAction(type)?.Invoke(sample, [referenceMemory]);
             }
         }
 
@@ -246,7 +243,7 @@ public static class Program
             case OutputFileType.BitmapJpeg:
                 await using (var stream = File.OpenRead(CommandLineOptions.InputFileName))
                 {
-                    using var input = await Image.LoadAsync<Rgba32>(stream, new BmpDecoder());
+                    using var input = await Image.LoadAsync<Rgba32>(stream);
                     using var output = BitmapHelper.FromSimpleMemory(memory, input, CommandLineOptions.Prepend?.Length ?? 0);
 
                     await output.SaveAsync(fileName, new JpegEncoder());

@@ -38,7 +38,7 @@ namespace Hast.Transformer.Services;
 /// </example>
 public class CustomPropertiesToMethodsConverter : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(OperatorsToMethodsConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(OperatorsToMethodsConverter)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -74,7 +74,7 @@ public class CustomPropertiesToMethodsConverter : IConverter
                     name: getter.GetMemberResolveResult().Member.Name,
                     annotations: getter.Annotations,
                     attributes: getter.Attributes,
-                    parameters: Enumerable.Empty<ParameterDeclaration>(),
+                    parameters: [],
                     body: getter.Body,
                     returnType: propertyDeclaration.ReturnType);
                 parentType.Members.Add(getterMethod);
@@ -89,7 +89,7 @@ public class CustomPropertiesToMethodsConverter : IConverter
                     name: setter.GetMemberResolveResult().Member.Name,
                     annotations: setter.Annotations,
                     attributes: setter.Attributes,
-                    parameters: new[] { valueParameter },
+                    parameters: [valueParameter],
                     body: setter.Body,
                     returnType: new ICSharpCode.Decompiler.CSharp.Syntax.PrimitiveType("void"));
                 parentType.Members.Add(setterMethod);

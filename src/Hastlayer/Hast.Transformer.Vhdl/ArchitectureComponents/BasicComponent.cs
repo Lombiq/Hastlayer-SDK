@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation;
+using Hast.VhdlBuilder.Representation;
 using Hast.VhdlBuilder.Representation.Declaration;
 
 namespace Hast.Transformer.Vhdl.ArchitectureComponents;

@@ -124,7 +124,7 @@ public abstract class OpenClCommunicationService : CommunicationServiceBase
         var timeKernelArgumentSet = context.Stopwatch.ElapsedMilliseconds;
         Logger.LogInformation("KERNEL ARGUMENT #{Argument} SET", 0);
         Logger.LogInformation("LAUNCHING KERNEL...");
-        _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, new[] { fpgaBuffer });
+        _binaryOpenCl.LaunchKernel(deviceIndex, KernelName, [fpgaBuffer]);
         Logger.LogInformation("KERNEL LAUNCHED, AWAITING RESULTS");
         var timeKernelLaunched = context.Stopwatch.ElapsedMilliseconds;
         await _binaryOpenCl.AwaitDeviceAsync(deviceIndex);

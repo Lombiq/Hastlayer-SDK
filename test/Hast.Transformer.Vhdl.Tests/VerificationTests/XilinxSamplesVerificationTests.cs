@@ -9,10 +9,10 @@ namespace Hast.Transformer.Vhdl.Tests.VerificationTests;
 public class XilinxSamplesVerificationTests : SamplesVerificationTestsBase
 {
     private static readonly string[] _devicesToTest =
-    {
+    [
         Nexys4DdrDriver.Nexys4Ddr,
         AlveoU50Driver.AlveoU50,
-    };
+    ];
 
     public static IEnumerable<object[]> AllDevices => _devicesToTest.Select(name => new object[] { name });
 

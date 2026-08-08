@@ -18,4 +18,6 @@ TestResults/*.trx
 /.editorconfig
 artifacts/
 /NuGetTest/**/.editorconfig
+/NuGetTest/global.json
 *.received.vhdl
+/.github/upgrades/

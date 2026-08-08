@@ -1,11 +1,11 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
 /// <summary>
 /// An array element access expression, i.e. array(index).
 /// </summary>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class ArrayElementAccess : ArrayAccessBase
 {
     public IVhdlElement IndexExpression { get; set; }

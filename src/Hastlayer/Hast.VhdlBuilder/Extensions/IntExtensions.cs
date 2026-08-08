@@ -1,4 +1,4 @@
-﻿using Hast.VhdlBuilder.Representation.Declaration;
+using Hast.VhdlBuilder.Representation.Declaration;
 using Hast.VhdlBuilder.Representation.Expression;
 using System;
 

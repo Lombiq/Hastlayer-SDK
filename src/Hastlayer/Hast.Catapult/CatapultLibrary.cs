@@ -321,12 +321,12 @@ public sealed class CatapultLibrary : IDisposable
         }
 
         Memory<byte> data = new byte[InputHeaderSizes.Total + inputData.Length];
-        MemoryMarshal.Write(data.Span, ref memberId);
-        MemoryMarshal.Write(data.Span[InputHeaderSizes.MemberId..], ref totalDataSize);
-        MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], ref sliceIndex);
+        MemoryMarshal.Write(data.Span, in memberId);
+        MemoryMarshal.Write(data.Span[InputHeaderSizes.MemberId..], in totalDataSize);
+        MemoryMarshal.Write(data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells)..], in sliceIndex);
         MemoryMarshal.Write(
             data.Span[(InputHeaderSizes.MemberId + InputHeaderSizes.PayloadLengthCells + InputHeaderSizes.SliceIndex)..],
-            ref sliceCountValue);
+            in sliceCountValue);
         inputData.CopyTo(data[InputHeaderSizes.Total..]);
 
         // This job will contain the current call.

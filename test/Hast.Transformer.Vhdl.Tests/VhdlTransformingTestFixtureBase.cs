@@ -24,19 +24,19 @@ public abstract class VhdlTransformingTestFixtureBase : IntegrationTestFixtureBa
     protected VhdlTransformingTestFixtureBase()
     {
         _hostConfiguration.Extensions = _hostConfiguration.Extensions
-            .Union(new[]
-                {
-                    typeof(DefaultTransformer).Assembly,
-                    typeof(MemberIdTable).Assembly,
-                    typeof(IDeviceDriverSelector).Assembly,
-                    typeof(Nexys4DdrDriver).Assembly,
-                });
+            .Union(
+            [
+                typeof(DefaultTransformer).Assembly,
+                typeof(MemberIdTable).Assembly,
+                typeof(IDeviceDriverSelector).Assembly,
+                typeof(Nexys4DdrDriver).Assembly,
+            ]);
 
         _hostConfiguration.OnServiceRegistration += (_, services) =>
         {
             if (UseStubMemberSuitabilityChecker)
             {
-                services.RemoveImplementations<IMemberSuitabilityChecker>();
+                services.RemoveImplementationsOf<IMemberSuitabilityChecker>();
                 services.AddSingleton<IMemberSuitabilityChecker>(new StubMemberSuitabilityChecker());
             }
         };

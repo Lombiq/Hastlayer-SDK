@@ -8,11 +8,11 @@ namespace Hast.VhdlBuilder.Representation;
 /// <summary>
 /// Any VHDL code that's not implemented as a class.
 /// </summary>
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Raw : IVhdlElement
 {
     public string Source { get; set; }
-    public IList<IVhdlElement> Parameters { get; } = new List<IVhdlElement>();
+    public IList<IVhdlElement> Parameters { get; } = [];
 
     public Raw()
     {
@@ -25,7 +25,7 @@ public class Raw : IVhdlElement
     public Raw(string source, params IVhdlElement[] parameters)
     {
         Source = source;
-        Parameters = parameters.ToList();
+        Parameters = [.. parameters];
     }
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) =>

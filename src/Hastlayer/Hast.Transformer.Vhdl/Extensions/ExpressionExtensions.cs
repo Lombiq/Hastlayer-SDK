@@ -1,4 +1,4 @@
-﻿namespace ICSharpCode.Decompiler.CSharp.Syntax;
+namespace ICSharpCode.Decompiler.CSharp.Syntax;
 
 public static class ExpressionExtensions
 {

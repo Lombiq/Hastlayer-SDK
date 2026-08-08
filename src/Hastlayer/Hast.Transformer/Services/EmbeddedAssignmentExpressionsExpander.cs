@@ -36,7 +36,7 @@ namespace Hast.Transformer.Services;
 public class EmbeddedAssignmentExpressionsExpander : IConverter
 {
     private readonly IHashProvider _hashProvider;
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ObjectInitializerExpander) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(ObjectInitializerExpander)];
 
     public EmbeddedAssignmentExpressionsExpander(IHashProvider hashProvider) => _hashProvider = hashProvider;
 

@@ -1,4 +1,4 @@
-﻿// The same namespace as KnownDataTypes so common types can be checked simply.
+// The same namespace as KnownDataTypes so common types can be checked simply.
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
 public static class SpecialTypes

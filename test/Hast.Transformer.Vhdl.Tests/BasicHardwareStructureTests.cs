@@ -8,7 +8,6 @@ using Hast.VhdlBuilder.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Shouldly;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -59,13 +58,13 @@ public class BasicHardwareStructureTests : VhdlTransformingTestFixtureBase
              entity.Ports.Count.ShouldBe(5);
              entity.ShouldBe(topModule.Architecture.Entity, "The top module's entity is not referenced by the architecture.");
 
-             topModule.Libraries.Any().ShouldBeTrue();
+             topModule.Libraries.Count.ShouldBePositive();
          });
     }
 
     private Task<VhdlHardwareDescription> TransformClassStrutureExamplesToVhdlAsync(ITransformer transformer) =>
         TransformAssembliesToVhdlAsync(
             transformer,
-            new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
+            [typeof(RootClass).Assembly, typeof(StaticReference).Assembly],
             configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
 }

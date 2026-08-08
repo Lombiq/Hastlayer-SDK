@@ -1,4 +1,4 @@
-﻿namespace Hast.TestInputs.ClassStructure1.ComplexTypes;
+namespace Hast.TestInputs.ClassStructure1.ComplexTypes;
 
 public class BaseClass
 {

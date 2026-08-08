@@ -14,20 +14,20 @@ namespace Hast.Transformer.Vhdl.ArchitectureComponents;
 public abstract class ArchitectureComponentBase : IArchitectureComponent
 {
     public string Name { get; private set; }
-    public IList<Variable> LocalVariables { get; private set; } = new List<Variable>();
-    public IList<Alias> LocalAliases { get; private set; } = new List<Alias>();
-    public IList<AttributeSpecification> LocalAttributeSpecifications { get; } = new List<AttributeSpecification>();
-    public IList<Variable> GlobalVariables { get; private set; } = new List<Variable>();
-    public IList<Signal> InternallyDrivenSignals { get; private set; } = new List<Signal>();
-    public IList<Signal> ExternallyDrivenSignals { get; private set; } = new List<Signal>();
-    public IList<AttributeSpecification> GlobalAttributeSpecifications { get; } = new List<AttributeSpecification>();
+    public IList<Variable> LocalVariables { get; private set; } = [];
+    public IList<Alias> LocalAliases { get; private set; } = [];
+    public IList<AttributeSpecification> LocalAttributeSpecifications { get; } = [];
+    public IList<Variable> GlobalVariables { get; private set; } = [];
+    public IList<Signal> InternallyDrivenSignals { get; private set; } = [];
+    public IList<Signal> ExternallyDrivenSignals { get; private set; } = [];
+    public IList<AttributeSpecification> GlobalAttributeSpecifications { get; } = [];
 
     public IDictionary<EntityDeclaration, int> OtherMemberMaxInvocationInstanceCounts { get; private set; } =
         new Dictionary<EntityDeclaration, int>();
 
     public DependentTypesTable DependentTypesTable { get; private set; } = new DependentTypesTable();
 
-    protected readonly IList<IMultiCycleOperation> _multiCycleOperations = new List<IMultiCycleOperation>();
+    protected readonly IList<IMultiCycleOperation> _multiCycleOperations = [];
     public IEnumerable<IMultiCycleOperation> MultiCycleOperations => _multiCycleOperations;
 
     protected ArchitectureComponentBase(string name) => Name = name;
@@ -80,7 +80,7 @@ public abstract class ArchitectureComponentBase : IArchitectureComponent
     {
         var process = new Process { Name = Name.ToExtendedVhdlId() };
 
-        process.Declarations.AddRange(LocalVariables.Cast<IVhdlElement>().ToList());
+        process.Declarations.AddRange([.. LocalVariables.Cast<IVhdlElement>()]);
         process.Declarations.AddRange(LocalAliases);
         process.Declarations.AddRange(LocalAttributeSpecifications);
 

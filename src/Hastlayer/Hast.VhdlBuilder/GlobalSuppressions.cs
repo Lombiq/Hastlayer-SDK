@@ -1,4 +1,4 @@
-﻿// This file is used by Code Analysis to maintain SuppressMessage
+// This file is used by Code Analysis to maintain SuppressMessage
 // attributes that are applied to this project.
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
@@ -19,4 +19,11 @@ using System.Diagnostics.CodeAnalysis;
     "Naming",
     "CA1724: Type names should not match namespaces",
     Justification = "Same.",
+    Scope = "module")]
+[assembly: SuppressMessage(
+    "Major Bug",
+    "S4545:Operands of \"DebuggerDisplay\" should be valid",
+    Justification =
+        "The DebuggerDisplay strings use fully-qualified type references which are valid at runtime, " +
+        "but Sonar does not resolve them statically.",
     Scope = "module")]

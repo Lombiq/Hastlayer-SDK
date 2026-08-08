@@ -27,7 +27,9 @@ public class CatapultCommunicationService : CommunicationServiceBase
         IDevicePoolPopulator devicePoolPopulator,
         IDevicePoolManager devicePoolManager,
         ILogger<CatapultCommunicationService> logger,
+#pragma warning disable S6672 // Logger is intentionally typed to CatapultLibrary for its logging category.
         ILogger<CatapultLibrary> catapultLibraryLogger)
+#pragma warning restore S6672
         : base(logger)
     {
         _devicePoolPopulator = devicePoolPopulator;

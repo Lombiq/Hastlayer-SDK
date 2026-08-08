@@ -1,4 +1,4 @@
-﻿using Hast.Common.Models;
+using Hast.Common.Models;
 using Hast.Layer;
 using Hast.Transformer.Models;
 using Hast.Transformer.Vhdl.Configuration;

@@ -1,4 +1,4 @@
-﻿using Hast.Common.Interfaces;
+using Hast.Common.Interfaces;
 using Hast.Vitis.Models;
 
 namespace Hast.Vitis.Services;

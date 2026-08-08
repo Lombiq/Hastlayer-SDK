@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +13,7 @@ public class XilinxReportSection
     public const string Key = nameof(Key);
     public const string Value = nameof(Value);
     private const string TableBorderLine = "+---";
-    private static readonly List<string> SimpleColumns = new() { "Key", "Value" };
+    private static readonly List<string> SimpleColumns = ["Key", "Value"];
 
     private readonly string[][] _data;
 
@@ -29,7 +29,7 @@ public class XilinxReportSection
             .Select((item, columnIndex) => new { Cell = item, ColumnIndex = columnIndex })
             .ToDictionary(item => Columns[item.ColumnIndex], item => item.Cell);
 
-    public XilinxReportSection(string[][] data, IReadOnlyList<string> columns, IReadOnlyList<string> comments)
+    private XilinxReportSection(string[][] data, IReadOnlyList<string> columns, IReadOnlyList<string> comments)
     {
         _data = data;
         Rows = data.Length;
@@ -51,8 +51,7 @@ public class XilinxReportSection
         await ReadUntilAsync(reader, TableBorderLine);
         if (!title.EndsWithOrdinal(". Summary"))
         {
-            columnNames = (await reader.ReadLineAsync())!.Trim('|').Split('|').Select(columnName => columnName.Trim())
-                .ToList();
+            columnNames = [.. (await reader.ReadLineAsync())!.Trim('|').Split('|').Select(columnName => columnName.Trim())];
             await ReadUntilAsync(reader, TableBorderLine);
         }
 

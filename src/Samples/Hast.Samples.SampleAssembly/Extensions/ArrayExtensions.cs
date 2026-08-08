@@ -13,9 +13,7 @@ internal static class ArrayExtensions
         var remainderToMaxDegreeOfParallelism = arrayToPad.Length % multipleOf;
         if (remainderToMaxDegreeOfParallelism != 0)
         {
-            return arrayToPad
-                .Concat(new T[multipleOf - remainderToMaxDegreeOfParallelism])
-                .ToArray();
+            return [.. arrayToPad, .. new T[multipleOf - remainderToMaxDegreeOfParallelism]];
         }
 
         return arrayToPad;
@@ -24,6 +22,6 @@ internal static class ArrayExtensions
     public static T[] CutToLength<T>(this T[] arrayToCut, int length)
     {
         if (arrayToCut.Length == length) return arrayToCut;
-        return arrayToCut.Take(length).ToArray();
+        return [.. arrayToCut.Take(length)];
     }
 }

@@ -66,6 +66,6 @@ public static class TransformerExtensions
         IHardwareGenerationConfiguration configuration)
     {
         assemblies.ThrowArgumentExceptionIfAnyInMemory();
-        return transformer.TransformAsync(assemblies.Select(assembly => assembly.Location).ToList(), configuration);
+        return transformer.TransformAsync([.. assemblies.Select(assembly => assembly.Location)], configuration);
     }
 }

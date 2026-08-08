@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 
 namespace ICSharpCode.Decompiler.CSharp.Syntax;
 

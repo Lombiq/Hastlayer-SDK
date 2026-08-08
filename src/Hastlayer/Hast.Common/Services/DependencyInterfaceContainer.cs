@@ -77,7 +77,7 @@ public static class DependencyInterfaceContainer
 
         var method = implementationType.GetMethod(initializerName, BindingFlags.Public | BindingFlags.Static) ??
             throw new ArgumentException($"The initializer method does not exist: '{implementationType.FullName}.{initializerName}'");
-        method.Invoke(null, new object[] { services });
+        method.Invoke(null, [services]);
 
         return lifetime;
     }

@@ -6,10 +6,10 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Enum : DataType
 {
-    public ICollection<Value> Values { get; } = new List<Value>();
+    public ICollection<Value> Values { get; } = [];
 
     public Enum() => TypeCategory = DataTypeCategory.Composite;
 

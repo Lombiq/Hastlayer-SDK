@@ -4,7 +4,6 @@ using ICSharpCode.Decompiler.Semantics;
 using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
@@ -24,7 +23,7 @@ public static class AstNodeExtensions
                 return primitiveType.Keyword;
             case ComposedType composedType:
                 var name = composedType.BaseType.GetFullName();
-                if (!composedType.ArraySpecifiers.Any()) return name;
+                if (composedType.ArraySpecifiers.Count == 0) return name;
 
                 var nameBuilder = new StringBuilder(name);
                 foreach (var arraySpecifier in composedType.ArraySpecifiers.Select(nameBuilder.Append)) nameBuilder.Append(arraySpecifier);
@@ -346,11 +345,5 @@ public static class AstNodeExtensions
         return node.CreateNameForUnnamedNode();
     }
 
-    [SuppressMessage(
-        "Minor Code Smell",
-        "S2094:Classes should not be empty",
-        Justification = "Only used for annotation.")]
-    private sealed class WasRemoved
-    {
-    }
+    private sealed class WasRemoved;
 }

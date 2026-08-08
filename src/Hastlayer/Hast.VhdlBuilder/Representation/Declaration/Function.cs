@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Function : ISubProgram
 {
     public string Name { get; set; }
-    public IList<FunctionArgument> Arguments { get; } = new List<FunctionArgument>();
+    public IList<FunctionArgument> Arguments { get; } = [];
     public DataType ReturnType { get; set; }
-    public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
-    public IList<IVhdlElement> Body { get; } = new List<IVhdlElement>();
+    public IList<IVhdlElement> Declarations { get; } = [];
+    public IList<IVhdlElement> Body { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
     {

@@ -27,7 +27,7 @@ namespace Hast.Transformer.Services;
 public class DirectlyAccessedNewObjectVariablesCreator : IConverter
 {
     private readonly IHashProvider _hashProvider;
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ConditionalExpressionsToIfElsesConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(ConditionalExpressionsToIfElsesConverter)];
 
     public DirectlyAccessedNewObjectVariablesCreator(IHashProvider hashProvider) => _hashProvider = hashProvider;
 

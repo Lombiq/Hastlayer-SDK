@@ -15,7 +15,7 @@ public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtur
         {
             var hardwareDescription = await TransformAssembliesToVhdlAsync(
                 transformer,
-                new[] { typeof(RootClass).Assembly, typeof(StaticReference).Assembly },
+                [typeof(RootClass).Assembly, typeof(StaticReference).Assembly],
                 configuration => configuration.TransformerConfiguration().UseSimpleMemory = false);
 
             hardwareDescription.VhdlSource.ShouldMatchApprovedWithVhdlConfiguration();
@@ -27,7 +27,7 @@ public class StaticTestInputAssembliesVerificationTests : VerificationTestFixtur
         {
             var hardwareDescription = await TransformAssembliesToVhdlAsync(
                 transformer,
-                new[] { typeof(ArrayUsingCases).Assembly },
+                [typeof(ArrayUsingCases).Assembly],
                 configuration =>
                 {
                     var transformerConfiguration = configuration.TransformerConfiguration();

@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class Entity : INamedElement, IDeclarableElement
 {
     private const string SafeNameCharacterSet = "a-z0-9_";
@@ -32,9 +32,9 @@ public class Entity : INamedElement, IDeclarableElement
         }
     }
 
-    public IList<Generic> Generics { get; } = new List<Generic>();
-    public IList<Port> Ports { get; } = new List<Port>();
-    public IList<IVhdlElement> Declarations { get; } = new List<IVhdlElement>();
+    public IList<Generic> Generics { get; } = [];
+    public IList<Port> Ports { get; } = [];
+    public IList<IVhdlElement> Declarations { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
     {

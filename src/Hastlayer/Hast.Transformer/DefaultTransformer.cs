@@ -281,7 +281,7 @@ public class DefaultTransformer : ITransformer
     private static async Task<SyntaxTree> DecompileTogetherAsync(IEnumerable<CSharpDecompiler> decompilers)
     {
         var decompilerTasks = await Task.WhenAll(decompilers
-            .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(sortTypes: true))));
+            .Select(decompiler => Task.Run(() => decompiler.DecompileWholeModuleAsSingleFile(sortTypes: true), decompiler.CancellationToken)));
 
         // Unlike with the ILSpy v2 libraries multiple unrelated assemblies can't be decompiled into a single AST so we
         // need to decompile them separately and merge them like this.

@@ -345,7 +345,7 @@ public class StateMachineInvocationBuilder : IStateMachineInvocationBuilder
         var returnType = _declarableTypeCreator
             .CreateDeclarableType(targetDeclaration, targetDeclaration.ReturnType, context.TransformationContext);
 
-        var returnVariableReferences = new List<IDataObject>();
+        var returnVariableReferences = new List<IVhdlElement>();
 
         void BuildInvocationWaitBlock(int targetIndex)
         {

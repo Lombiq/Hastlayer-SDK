@@ -1,9 +1,7 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Hast.VhdlBuilder.Testing;
 
-[Serializable]
 public class VhdlStructureAssertionFailedException : Exception
 {
     // Putting the whole information into the Message is a bit ugly but the Shouldly test assertion package will only
@@ -27,7 +25,4 @@ public class VhdlStructureAssertionFailedException : Exception
         Description = description;
         CodeExcerpt = codeExcerpt;
     }
-
-    protected VhdlStructureAssertionFailedException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        : base(serializationInfo, streamingContext) { }
 }

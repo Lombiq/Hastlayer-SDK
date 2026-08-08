@@ -1,4 +1,3 @@
-using Hast.Common.Models;
 using Hast.Layer;
 using Hast.TestInputs.Invalid;
 using Hast.Transformer.Configuration;
@@ -14,9 +13,9 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
 {
     [Fact]
     public Task InvalidExternalVariableAssignmentIsPrevented() =>
-        Host.RunAsync<ITransformer>(transformer =>
-            Should.ThrowAsync(
-                () => TransformInvalidTestInputsAsync<InvalidParallelCases>(transformer, c => c.InvalidExternalVariableAssignment(0)),
+        Host.RunAsync<ITransformer>(async transformer =>
+            await Should.ThrowAsync(
+                async () => await TransformInvalidTestInputsAsync<InvalidParallelCases>(transformer, c => c.InvalidExternalVariableAssignment(0)),
                 typeof(NotSupportedException)));
 
     [Fact]
@@ -50,9 +49,9 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
 
     [Fact]
     public Task InvalidHardwareEntryPointsArePrevented() =>
-        Host.RunAsync<ITransformer>(transformer =>
-            Should.ThrowAsync(
-                () => TransformInvalidTestInputsAsync<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
+        Host.RunAsync<ITransformer>(async transformer =>
+            await Should.ThrowAsync(
+                async () => await TransformInvalidTestInputsAsync<InvalidHardwareEntryPoint>(transformer, c => c.EntryPointMethod()),
                 typeof(NotSupportedException)));
 
     [Fact]
@@ -81,16 +80,20 @@ public class TransformationCheckTests : VhdlTransformingTestFixtureBase
                 typeof(NotSupportedException));
         });
 
-    private Task<VhdlHardwareDescription> TransformInvalidTestInputsAsync<T>(
+    private async Task TransformInvalidTestInputsAsync<T>(
         ITransformer transformer,
         Expression<Action<T>> expression,
-        bool useSimpleMemory = false) =>
-        TransformAssembliesToVhdlAsync(
+        bool useSimpleMemory = false)
+    {
+        await TransformAssembliesToVhdlAsync(
             transformer,
-            new[] { typeof(InvalidParallelCases).Assembly },
+            [typeof(InvalidParallelCases).Assembly],
             configuration =>
             {
                 configuration.TransformerConfiguration().UseSimpleMemory = useSimpleMemory;
                 configuration.AddHardwareEntryPointMethod(expression);
             });
+
+        return;
+    }
 }

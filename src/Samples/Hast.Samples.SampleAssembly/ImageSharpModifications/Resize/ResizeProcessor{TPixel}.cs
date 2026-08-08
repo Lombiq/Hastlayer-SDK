@@ -65,7 +65,7 @@ internal sealed class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IRes
         var sourceRectangle = SourceRectangle;
         var destinationRectangle = _destinationRectangle;
 
-        var intersect = Rectangle.Intersect(destinationRectangle, destination.Bounds());
+        var intersect = Rectangle.Intersect(destinationRectangle, destination.Bounds);
 
         if (sampler is not NearestNeighborResampler) return;
 
@@ -186,9 +186,10 @@ internal sealed class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IRes
         // Avoid TPL overhead in this trivial case:
         if (numOfSteps == 1)
         {
+            var operationCopy = operation;
             for (int y = top; y < bottom; y++)
             {
-                Unsafe.AsRef(operation).Invoke(y);
+                operationCopy.Invoke(y);
             }
 
             return;
@@ -254,10 +255,10 @@ internal sealed class ResizeProcessor<TPixel> : TransformProcessor<TPixel>, IRes
 
             var yMax = Math.Min(yMin + _stepY, _maxY);
 
+            var action = _action;
             for (int y = yMin; y < yMax; y++)
             {
-                // Skip the safety copy when invoking a potentially impure method on a readonly field
-                Unsafe.AsRef(_action).Invoke(y);
+                action.Invoke(y);
             }
         }
     }

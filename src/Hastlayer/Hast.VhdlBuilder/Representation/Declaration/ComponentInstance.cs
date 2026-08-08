@@ -4,12 +4,12 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class ComponentInstance : IVhdlElement
 {
     public Component Component { get; set; }
     public string Label { get; set; }
-    public IList<PortMapping> PortMappings { get; } = new List<PortMapping>();
+    public IList<PortMapping> PortMappings { get; } = [];
 
     public string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions) => Terminated.Terminate(
             Label + " : " + vhdlGenerationOptions.ShortenName(Component.Name) + vhdlGenerationOptions.NewLineIfShouldFormat() +

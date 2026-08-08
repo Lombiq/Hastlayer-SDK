@@ -10,7 +10,6 @@ using Hast.Samples.SampleAssembly;
 using Hast.Transformer.Vhdl.Configuration;
 using Lombiq.Arithmetics;
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -54,7 +53,7 @@ internal static class Program
         // <c>-save name</c>
         // command line arguments to save/load configurations into the ConsumerConfiguration.json file without the GUI.
         var savedConfigurations = await ConsumerConfiguration.LoadConfigurationsAsync();
-        var consumerConfiguration = args.Any()
+        var consumerConfiguration = args.Length != 0
             ? ConsumerConfiguration.FromCommandLine(args, savedConfigurations)
             : ConfigurationGui.BuildConfiguration(savedConfigurations);
         if (consumerConfiguration == null) return ExitStatus.NothingToDo;
@@ -69,7 +68,7 @@ internal static class Program
 
         // We need to set what kind of device (FPGA/FPGA board) to generate the hardware for.
         var devices = hastlayer.GetSupportedDevices()?.ToList();
-        if (devices == null || !devices.Any()) throw new InvalidOperationException("No devices are available!");
+        if (devices == null || devices.Count == 0) throw new InvalidOperationException("No devices are available!");
 
         // Let's just use the first one that is available unless it's specified.
         var targetDeviceName = consumerConfiguration.DeviceName.OrIfEmpty(devices[0].Name);
@@ -192,7 +191,7 @@ internal static class Program
         // is any mismatch. This shouldn't normally happen, but it's not impossible in corner cases.
         var mismatches = exception
             .Mismatches?
-            .ToList() ?? new List<HardwareExecutionResultMismatchException.Mismatch>();
+            .ToList() ?? [];
 
         var mismatchCount = mismatches.Count;
         if (mismatchCount == 0)

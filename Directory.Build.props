@@ -1,4 +1,9 @@
 <Project>
+  <!--Uncomment this to run .NET static code analyzers during rebuilds.-->
+  <!--<PropertyGroup>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+  </PropertyGroup>--> 
+  
   <Import Project="tools/Lombiq.Analyzers/Lombiq.Analyzers/Build.props" />
 
   <!-- Prevents error NETSDK1152 (Found multiple publish output files with the same relative path) when publishing. This

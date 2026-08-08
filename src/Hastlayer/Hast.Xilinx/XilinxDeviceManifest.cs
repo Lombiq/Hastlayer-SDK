@@ -4,15 +4,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Xilinx;
 
-#pragma warning disable S2094 // Classes should not be empty, but here only the type is used to identify the device.
+public class XilinxDeviceManifest : DeviceManifest;
 
-public class XilinxDeviceManifest : DeviceManifest
-{
-}
-
-public class NexysDeviceManifest : XilinxDeviceManifest
-{
-}
+public class NexysDeviceManifest : XilinxDeviceManifest;
 
 public class VitisDeviceManifest : XilinxDeviceManifest
 {
@@ -50,10 +44,6 @@ public class VitisDeviceManifest : XilinxDeviceManifest
     public int AxiBusWith { get; set; } = 512;
 }
 
-public class AzureNpDeviceManifest : VitisDeviceManifest
-{
-}
+public class AzureNpDeviceManifest : VitisDeviceManifest;
 
-public class ZynqDeviceManifest : VitisDeviceManifest
-{
-}
+public class ZynqDeviceManifest : VitisDeviceManifest;

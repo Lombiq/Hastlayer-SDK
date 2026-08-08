@@ -20,7 +20,7 @@ namespace Hast.Transformer.Services;
 /// </example>
 public class RefLocalVariablesRemover : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(MethodInliner) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(MethodInliner)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -30,7 +30,7 @@ public class RefLocalVariablesRemover : IConverter
 
     private sealed class InitializersChangingVisitor : DepthFirstAstVisitor
     {
-        private readonly Dictionary<string, Expression> _substitutes = new();
+        private readonly Dictionary<string, Expression> _substitutes = [];
 
         public override void VisitVariableDeclarationStatement(VariableDeclarationStatement variableDeclarationStatement)
         {

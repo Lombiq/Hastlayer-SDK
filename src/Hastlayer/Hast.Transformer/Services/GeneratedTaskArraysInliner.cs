@@ -36,7 +36,7 @@ public class GeneratedTaskArraysInliner : IConverter
 {
     private const string TaskStart = "System.Threading.Tasks.Task`1<";
 
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(BinaryAndUnaryOperatorExpressionsCastAdjuster) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(BinaryAndUnaryOperatorExpressionsCastAdjuster)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -53,7 +53,7 @@ public class GeneratedTaskArraysInliner : IConverter
 
     private sealed class InlinableTaskArraysFindingVisitor : DepthFirstAstVisitor
     {
-        public Dictionary<string, string> InlinableVariableMapping { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> InlinableVariableMapping { get; set; } = [];
 
         public override void VisitAssignmentExpression(AssignmentExpression assignmentExpression)
         {

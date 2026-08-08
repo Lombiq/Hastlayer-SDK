@@ -19,14 +19,14 @@ public abstract class ZynqDriverBase : DeviceDriverBase
         {
             Name = DeviceName,
             ClockFrequencyHz = 150 * Mhz,
-            SupportedCommunicationChannelNames = new[] { Vitis.CommunicationChannelName },
+            SupportedCommunicationChannelNames = [Vitis.CommunicationChannelName],
             AvailableMemoryBytes = 1 * GigaByte,
             SupportsHbm = false,
-            SupportedPlatforms = new[]
-            {
+            SupportedPlatforms =
+            [
                 DeviceName.RegexReplace(@"[^A-Za-z0-9]+", "-"),
                 "hw_platform",
-            },
+            ],
             // The frequency is set by ZynqHardwareImplementationComposerBuildProvider after build.
             BuildWithClockFrequencyHz = false,
             AxiBusWith = 1024,

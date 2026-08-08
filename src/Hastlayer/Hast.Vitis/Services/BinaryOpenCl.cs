@@ -14,6 +14,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Hast.Vitis.Services;
@@ -23,7 +24,7 @@ namespace Hast.Vitis.Services;
     "Major Code Smell",
     "S4002:Disposable types should declare finalizers",
     Justification = "Doesn't need finalizer because it's registered in the DI container and will automatically be disposed.")]
-public sealed class BinaryOpenCl : IBinaryOpenCl
+public sealed partial class BinaryOpenCl : IBinaryOpenCl
 {
     #region Fields and properties
 
@@ -35,9 +36,9 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
     private readonly Lazy<IntPtr> _context;
 
-    private readonly Dictionary<int, IntPtr> _queues = new();
-    private readonly Dictionary<string, IntPtr> _kernels = new();
-    private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = new();
+    private readonly Dictionary<int, IntPtr> _queues = [];
+    private readonly Dictionary<string, IntPtr> _kernels = [];
+    private readonly Dictionary<string, List<IntPtr>> _kernelBuffers = [];
 
     private Lazy<IntPtr[]> _devicesLazy;
 
@@ -57,11 +58,11 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
         _context = new Lazy<IntPtr>(() =>
         {
-            if (!Devices.Any()) return IntPtr.Zero;
+            if (Devices.Length == 0) return IntPtr.Zero;
             var context = _cl.CreateContext(
                 IntPtr.Zero,
                 (uint)Devices.Length,
-                Devices.ToArray(),
+                [.. Devices],
                 IntPtr.Zero,
                 IntPtr.Zero,
                 out var result);
@@ -76,7 +77,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
     public void PrepareDevices(IOpenClConfiguration configuration) =>
         _devicesLazy ??= new Lazy<IntPtr[]>(() =>
-            GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType).ToArray());
+            [.. GetDeviceHandlesOfVendor(configuration.VendorName, configuration.DeviceType)]);
 
     public void CreateCommandQueue(
         int deviceIndex,
@@ -102,7 +103,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
                 var kernel = _cl.CreateKernel(program, kernelName, out var result);
                 VerifyResult(result);
                 _kernels[kernelName] = kernel;
-                _kernelBuffers[kernelName] = new List<IntPtr>();
+                _kernelBuffers[kernelName] = [];
             }
         }
     }
@@ -161,12 +162,18 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
                     "connected. If you are cross-compiling for a different machine and the compilation has " +
                     "finished you can disregard this error. (error: CL_PLATFORM_NOT_FOUND_KHR)");
             default:
-                var errorSymbol = "CL_" + status.ToString().ToSnakeCase().ToUpper(CultureInfo.InvariantCulture);
+                var errorSymbol = "CL_" + ToSnakeCase(status.ToString()).ToUpper(CultureInfo.InvariantCulture);
                 throw new InvalidOperationException(
                     $"OpenCL error with {nameof(status)} '{status}'. You may find more information by searching for " +
                     $"\"opencl {status} OR {errorSymbol}\" on the web.");
         }
     }
+
+    [GeneratedRegex("(?<!^)([A-Z])", RegexOptions.CultureInvariant | RegexOptions.ExplicitCapture | RegexOptions.NonBacktracking)]
+    private static partial Regex ToSnakeCaseRegex { get; }
+
+    private static string ToSnakeCase(string value) =>
+        ToSnakeCaseRegex.Replace(value, "_$1");
 
     private static AggregateException VerifyResults(
         IEnumerable<Result> results,
@@ -243,8 +250,8 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
             _context.Value,
             Devices.Length,
             Devices,
-            new[] { binaryLength },
-            new[] { binary },
+            [binaryLength],
+            [binary],
             resultsPerDevice,
             out var result);
         VerifyResult(result);
@@ -286,7 +293,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
             memoryObjects,
             flags,
             waitEvent == IntPtr.Zero ? 0u : 1,
-            waitEvent == IntPtr.Zero ? null : new[] { waitEvent },
+            waitEvent == IntPtr.Zero ? null : [waitEvent],
             out waitEvent));
         return waitEvent;
     }
@@ -297,7 +304,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
             queue,
             kernel,
             waitEvent == IntPtr.Zero ? 0u : 1,
-            waitEvent == IntPtr.Zero ? null : new[] { waitEvent },
+            waitEvent == IntPtr.Zero ? null : [waitEvent],
             out waitEvent));
         return waitEvent;
     }
@@ -349,7 +356,7 @@ public sealed class BinaryOpenCl : IBinaryOpenCl
 
         foreach (var exception in exceptions)
         {
-            _logger.LogError(exception, "Error while disposing " + nameof(BinaryOpenCl) + ".");
+            _logger.LogError(exception, "Error while disposing {Name}.", nameof(BinaryOpenCl));
         }
     }
 

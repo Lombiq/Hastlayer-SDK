@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class IfElse<T> : If<T>, IVhdlElement
     where T : IVhdlElement
 {
-    public IList<If<T>> ElseIfs { get; } = new List<If<T>>();
+    public IList<If<T>> ElseIfs { get; } = [];
     public T Else { get; set; }
 
     public override string ToVhdl(IVhdlGenerationOptions vhdlGenerationOptions)
@@ -39,7 +39,5 @@ public class IfElse<T> : If<T>, IVhdlElement
     }
 }
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
-public class IfElse : IfElse<IVhdlElement>
-{
-}
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
+public class IfElse : IfElse<IVhdlElement>;

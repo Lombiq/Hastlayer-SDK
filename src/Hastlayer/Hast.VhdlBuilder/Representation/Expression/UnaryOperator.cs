@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.VhdlBuilder.Representation.Expression;
 
-[DebuggerDisplay("{ToVhdl(VhdlGenerationOptions.Debug)}")]
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public class UnaryOperator : IVhdlElement
 {
     private readonly string _source;

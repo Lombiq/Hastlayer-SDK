@@ -1,4 +1,4 @@
-﻿using Hast.Layer;
+using Hast.Layer;
 using Hast.Synthesis;
 using ICSharpCode.Decompiler.CSharp.Syntax;
 

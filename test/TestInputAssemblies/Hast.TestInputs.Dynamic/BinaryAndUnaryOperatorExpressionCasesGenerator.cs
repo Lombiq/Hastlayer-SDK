@@ -13,11 +13,12 @@ public static class BinaryAndUnaryOperatorExpressionCasesGenerator
     private const string UInt = "uint";
     private const string Long = "long";
     private const string ULong = "ulong";
-    private static readonly string[] _needsShiftCastTypes = new[] { UInt, Long, ULong };
+    private static readonly string[] _needsShiftCastTypes = [UInt, Long, ULong];
+    private static readonly string[] _first = ["byte", "sbyte", "short", "ushort", "int"];
 
     public static void Generate()
     {
-        var types = new[] { "byte", "sbyte", "short", "ushort", "int" }.Union(_needsShiftCastTypes).ToArray();
+        var types = _first.Union(_needsShiftCastTypes).ToArray();
         var codeBuilder = new StringBuilder();
 
         int memoryIndex;

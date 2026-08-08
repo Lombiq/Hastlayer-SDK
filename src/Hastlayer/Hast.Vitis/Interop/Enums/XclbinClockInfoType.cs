@@ -1,4 +1,4 @@
-﻿namespace Hast.Vitis.Interop.Enums;
+namespace Hast.Vitis.Interop.Enums;
 
 public enum XclbinClockInfoType
 {

@@ -1,4 +1,4 @@
-﻿using Hast.Transformer.Models;
+using Hast.Transformer.Models;
 
 namespace Hast.Transformer.Vhdl.Models;
 

@@ -10,7 +10,7 @@ internal sealed class ArchitectureComponentResult : IArchitectureComponentResult
     public IArchitectureComponent ArchitectureComponent { get; set; }
     public IVhdlElement Declarations { get; set; }
     public IVhdlElement Body { get; set; }
-    public IEnumerable<ITransformationWarning> Warnings { get; set; } = new List<ITransformationWarning>();
+    public IEnumerable<ITransformationWarning> Warnings { get; set; } = [];
 
     public ArchitectureComponentResult(IArchitectureComponent component)
     {

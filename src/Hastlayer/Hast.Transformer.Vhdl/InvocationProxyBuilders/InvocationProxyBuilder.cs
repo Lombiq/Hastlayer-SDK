@@ -424,8 +424,8 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
             .Whens
             .Add(new CaseWhen(
                 expression: _afterFinishedStateValue,
-                body: new List<IVhdlElement>
-                {
+                body:
+                [
                     new LineComment("Invoking components need to pull down the Started signal to false."),
                     new IfElse
                     {
@@ -453,7 +453,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
                                 Expression = Value.False,
                             }),
                     },
-                }));
+                ]));
 
     private void WaitForFinished(WaitContext context)
     {
@@ -464,7 +464,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         for (int componentIndex = 0; componentIndex < context.TargetComponentCount; componentIndex++)
         {
-            var caseWhenBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(
+            IVhdlElement caseWhenBody = CreateNullOperationIfTargetComponentEqualsInvokingComponent(
                 componentIndex,
                 context.TargetMemberName,
                 context.InvokerName);
@@ -528,7 +528,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         context.RunningStateCase.Whens.Add(new CaseWhen(
             expression: _waitingForFinishedStateValue,
-            body: new List<IVhdlElement> { runningIndexCase }));
+            body: [runningIndexCase]));
     }
 
     private void WaitForStarted(WaitContext context)
@@ -618,8 +618,8 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
         context.RunningStateCase.Whens.Add(new CaseWhen(
             expression: _waitingForStartedStateValue,
-            body: new List<IVhdlElement>
-            {
+            body:
+            [
                 new If
                 {
                     Condition = InvocationHelper
@@ -639,7 +639,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
                         },
                         waitingForStartedInnnerBlock),
                 },
-            }));
+            ]));
     }
 
     private static string GetTargetMemberComponentName(int index, string targetMemberName) =>
@@ -648,7 +648,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
     /// <summary>
     /// Check if the component would invoke itself. This can happen with recursive calls.
     /// </summary>
-    private static IVhdlElement CreateNullOperationIfTargetComponentEqualsInvokingComponent(
+    private static InlineBlock CreateNullOperationIfTargetComponentEqualsInvokingComponent(
         int index,
         string targetMemberName,
         string invokerName)
@@ -684,7 +684,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
                         !parameter.IsOwn)
                     .ToList();
 
-        if (!receivingParameters.Any()) return Enumerable.Empty<IVhdlElement>();
+        if (receivingParameters.Count == 0) return [];
 
         return passedBackParameters.Select(passedBack => new Assignment
         {
@@ -796,7 +796,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
                 parameter.IsOwn)
             .ToList();
 
-        if (!targetParameters.Any()) return Enumerable.Empty<IVhdlElement>();
+        if (targetParameters.Count == 0) return [];
 
         return passedParameters.Select(passed => new Assignment
         {
@@ -809,7 +809,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
         IEnumerable<IArchitectureComponent> components,
         Dictionary<EntityDeclaration, List<KeyValuePair<string, int>>> invokedMembers)
     {
-        foreach (var component in components.Where(component => component.OtherMemberMaxInvocationInstanceCounts.Any()))
+        foreach (var component in components.Where(component => component.OtherMemberMaxInvocationInstanceCounts.Count != 0))
         {
             foreach (var memberInvocationCount in component.OtherMemberMaxInvocationInstanceCounts)
             {
@@ -817,7 +817,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
 
                 if (!invokedMembers.TryGetValue(targetMember, out var invokedFromList))
                 {
-                    invokedMembers[targetMember] = invokedFromList = new List<KeyValuePair<string, int>>();
+                    invokedMembers[targetMember] = invokedFromList = [];
                 }
 
                 invokedFromList.Add(new KeyValuePair<string, int>(component.Name, memberInvocationCount.Value));
@@ -825,7 +825,7 @@ public class InvocationProxyBuilder : IInvocationProxyBuilder
         }
     }
 
-    private static IVhdlElement CreateBooleanIndicatorValue(SizedDataType targetAvailableIndicatorDataType, int indicatedIndex)
+    private static Value CreateBooleanIndicatorValue(SizedDataType targetAvailableIndicatorDataType, int indicatedIndex)
     {
         // This will create a boolean array where the everything is false except for the element with the given index.
 

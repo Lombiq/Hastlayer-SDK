@@ -10,7 +10,7 @@ internal sealed class ConstantValuesTable
     // The outer dictionary is keyed by value holder names. In the inner dictionary the scope is the key and the value
     // is the primitive value.
     private Dictionary<string, Dictionary<AstNode, PrimitiveExpression>> _valueHoldersAndValueDescriptors =
-        new();
+        [];
 
     public ConstantValuesTable()
     {
@@ -56,7 +56,7 @@ internal sealed class ConstantValuesTable
     public bool RetrieveAndDeleteConstantValue(AstNode valueHolder, out PrimitiveExpression valueExpression)
     {
         if (_valueHoldersAndValueDescriptors.TryGetValue(valueHolder.GetFullName(), out var valueDescriptors) &&
-            valueDescriptors.Any())
+            valueDescriptors.Count != 0)
         {
             // Finding the value defined for the scope which is closest.
             var closestValueDescriptorWithHeight = valueDescriptors
@@ -91,7 +91,7 @@ internal sealed class ConstantValuesTable
 
         foreach (var descriptor in _valueHoldersAndValueDescriptors)
         {
-            var newScopeToExpression = valueHoldersAndValueDescriptors[descriptor.Key] = new Dictionary<AstNode, PrimitiveExpression>();
+            var newScopeToExpression = valueHoldersAndValueDescriptors[descriptor.Key] = [];
 
             foreach (var scopeToExpressions in descriptor.Value)
             {
@@ -109,7 +109,7 @@ internal sealed class ConstantValuesTable
     {
         if (!_valueHoldersAndValueDescriptors.TryGetValue(holderName, out var valueDescriptors))
         {
-            valueDescriptors = new Dictionary<AstNode, PrimitiveExpression>();
+            valueDescriptors = [];
             _valueHoldersAndValueDescriptors[holderName] = valueDescriptors;
         }
 

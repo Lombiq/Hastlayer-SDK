@@ -31,7 +31,7 @@ public class UnneededReferenceVariablesRemover : IConverter
 {
     // Many other dependencies are just leftovers from the previous linear execution order. However in this case we know
     // explicitly that RefLocalVariablesRemover must come before UnneededReferenceVariablesRemover.
-    public virtual IEnumerable<string> Dependencies { get; } = new[] { nameof(RefLocalVariablesRemover) };
+    public virtual IEnumerable<string> Dependencies { get; } = [nameof(RefLocalVariablesRemover)];
 
     public void Convert(
         SyntaxTree syntaxTree,

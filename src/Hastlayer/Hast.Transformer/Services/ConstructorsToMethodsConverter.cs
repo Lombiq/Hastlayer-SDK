@@ -18,7 +18,7 @@ namespace Hast.Transformer.Services;
 /// </summary>
 public class ConstructorsToMethodsConverter : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(ObjectVariableTypesConverter) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(ObjectVariableTypesConverter)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -33,7 +33,7 @@ public class ConstructorsToMethodsConverter : IConverter
             base.VisitConstructorDeclaration(constructorDeclaration);
 
             // If the ctor is empty then no need to keep it.
-            if (!constructorDeclaration.Body.Statements.Any() &&
+            if (constructorDeclaration.Body.Statements.Count == 0 &&
                 constructorDeclaration.Initializer == ConstructorInitializer.Null)
             {
                 constructorDeclaration.Remove();
@@ -50,7 +50,7 @@ public class ConstructorsToMethodsConverter : IConverter
 
             // If the type has no base type then remove the automatically added base.ctor() call from the constructor as
             // it won't reference anything transformable.
-            if (!constructorDeclaration.FindFirstParentTypeDeclaration().BaseTypes.Any())
+            if (constructorDeclaration.FindFirstParentTypeDeclaration().BaseTypes.Count == 0)
             {
                 method.Body
                     .OfType<ExpressionStatement>()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,8 +14,8 @@ public class Fix64Tests
 {
     private readonly ITestOutputHelper _testOutputHelper;
 
-    private readonly long[] _testCases = new[]
-    {
+    private readonly long[] _testCases =
+    [
         // Small numbers
         0L, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
         -1, -2, -3, -4, -5, -6, -7, -8, -9, -10,
@@ -47,7 +48,7 @@ public class Fix64Tests
         - 171,
         -359, 491, 844, 158, -413, -422, -737, -575, -330,
         -376, 435, -311, 116, 715, -1_024, -487, 59, 724, 993,
-    };
+    ];
 
     public Fix64Tests(ITestOutputHelper testOutputHelper) => _testOutputHelper = testOutputHelper;
 
@@ -360,10 +361,8 @@ public class Fix64Tests
             }
             else
             {
-                var d1 = (decimal)f1;
-                var d2 = (decimal)f2;
                 var actual = (decimal)(f1 % f2);
-                var expected = d1 % d2;
+                var expected = GetExpectedModulus(operand1, operand2);
                 var delta = Math.Abs(expected - actual);
                 deltas.Add(delta);
                 Assert.True(
@@ -459,6 +458,14 @@ public class Fix64Tests
 
     private static void EqualWithinPrecision(double value1, double value2) =>
         Assert.True(Math.Abs(value2 - value1) < (double)Fix64.Precision);
+
+    private static decimal GetExpectedModulus(long operand1, long operand2)
+    {
+        var dividend = new BigInteger(operand1);
+        var divisor = new BigInteger(operand2);
+        var remainder = dividend % divisor;
+        return (decimal)Fix64.FromRaw((long)remainder);
+    }
 
     [SuppressMessage(
         "Major Code Smell",

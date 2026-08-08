@@ -77,7 +77,7 @@ public class TypeConversionTransformer : ITypeConversionTransformer
             context.Scope.Warnings.AddWarning(
                 "LossyBinaryExpressionCast",
                 $"Converting from {fromType?.Name} to {toType?.Name} to fix a binary expression. Although valid in" +
-                $" .NET this could cause information loss due to rounding. The affected expression is " +
+                " .NET this could cause information loss due to rounding. The affected expression is " +
                 $"{binaryOperatorExpression} in member {binaryOperatorExpression.FindFirstParentOfType<EntityDeclaration>().GetFullName()}.");
         }
 
@@ -267,7 +267,7 @@ public class TypeConversionTransformer : ITypeConversionTransformer
         }
     }
 
-    private static ITypeConversionResult ImplementTypeConversionWithMatchingTypes(
+    private static TypeConversionResult ImplementTypeConversionWithMatchingTypes(
         DataType fromType,
         DataType toType,
         IVhdlElement fromExpression)

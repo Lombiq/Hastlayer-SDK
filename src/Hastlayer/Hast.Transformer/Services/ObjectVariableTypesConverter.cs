@@ -10,7 +10,7 @@ using System.Linq;
 namespace Hast.Transformer.Services;
 
 /// <summary>
-/// Converts the type of variables of type <c>object</c> to the actual type they'll contain if this can be determined.
+/// Converts the type of variables of type <see langword="object"/> to the actual type they'll contain if this can be determined.
 /// </summary>
 /// <example>
 /// <para>Currently the following kind of constructs are supported:</para>
@@ -40,7 +40,7 @@ namespace Hast.Transformer.Services;
 /// </remarks>
 public class ObjectVariableTypesConverter : IConverter
 {
-    public IEnumerable<string> Dependencies { get; } = new[] { nameof(GeneratedTaskArraysInliner) };
+    public IEnumerable<string> Dependencies { get; } = [nameof(GeneratedTaskArraysInliner)];
 
     public void Convert(
         SyntaxTree syntaxTree,
@@ -86,7 +86,7 @@ public class ObjectVariableTypesConverter : IConverter
                             actualType,
                             objectParameter.Name);
                     objectParameter.Type = castExpression.Type.Clone();
-                    objectParameter.RemoveAnnotations(typeof(ILVariableResolveResult));
+                    objectParameter.RemoveAnnotations<ILVariableResolveResult>();
                     objectParameter.AddAnnotation(resolveResult);
                     castExpression.ReplaceWith(castExpression.Expression);
                     castExpression.Remove();

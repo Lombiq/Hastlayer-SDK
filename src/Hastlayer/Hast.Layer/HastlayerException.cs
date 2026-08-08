@@ -1,12 +1,10 @@
 using System;
-using System.Runtime.Serialization;
 
 namespace Hast.Layer;
 
 /// <summary>
 /// Top-level exception thrown from <see cref="IHastlayer"/> implementations.
 /// </summary>
-[Serializable]
 public class HastlayerException : Exception
 {
     public HastlayerException(string message)
@@ -22,7 +20,4 @@ public class HastlayerException : Exception
     public HastlayerException()
     {
     }
-
-    protected HastlayerException(SerializationInfo serializationInfo, StreamingContext streamingContext)
-        : base(serializationInfo, streamingContext) { }
 }

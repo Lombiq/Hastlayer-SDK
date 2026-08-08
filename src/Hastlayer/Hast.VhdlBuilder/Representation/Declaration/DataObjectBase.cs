@@ -1,5 +1,8 @@
+using System.Diagnostics;
+
 namespace Hast.VhdlBuilder.Representation.Declaration;
 
+[DebuggerDisplay("{ToVhdl(Hast.VhdlBuilder.Representation.VhdlGenerationOptions.Debug)}")]
 public abstract class DataObjectBase : IDataObject
 {
     public virtual DataObjectKind DataObjectKind { get; set; }
