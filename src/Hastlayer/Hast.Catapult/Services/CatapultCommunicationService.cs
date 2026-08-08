@@ -29,13 +29,13 @@ public class CatapultCommunicationService : CommunicationServiceBase
         ILogger<CatapultCommunicationService> logger,
 #pragma warning disable S6672 // Logger is intentionally typed to CatapultLibrary for its logging category.
         ILogger<CatapultLibrary> catapultLibraryLogger)
+#pragma warning restore S6672
         : base(logger)
     {
         _devicePoolPopulator = devicePoolPopulator;
         _devicePoolManager = devicePoolManager;
         _catapultLibraryLogger = catapultLibraryLogger;
     }
-#pragma warning restore S6672
 
     private void Device_Disposing(object sender, EventArgs e) =>
         ((sender as IDevice).Metadata as CatapultLibrary).Dispose();
