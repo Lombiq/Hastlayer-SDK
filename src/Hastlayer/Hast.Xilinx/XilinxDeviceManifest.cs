@@ -4,8 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Hast.Xilinx;
 
-#pragma warning disable S2094 // Classes should not be empty, but here only the type is used to identify the device.
-
 public class XilinxDeviceManifest : DeviceManifest;
 
 public class NexysDeviceManifest : XilinxDeviceManifest;

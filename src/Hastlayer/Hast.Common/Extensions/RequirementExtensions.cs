@@ -23,7 +23,7 @@ public static class RequirementExtensions
         where TItem : IRequirement<TKey>
         where TKey : IEquatable<TKey>
     {
-        var items = source is IList<TItem> list ? list : [.. source];
+        var items = source as IList<TItem> ?? [.. source];
         var keys = items.Select(item => item.Name).ToList();
         CheckRequirements(items, keys);
 
@@ -50,15 +50,10 @@ public static class RequirementExtensions
         // Look for impossible requirements.
         foreach (var item in items)
         {
-#pragma warning disable S3267 // The loop body throws an exception so it cannot be simplified to Where().
-            foreach (var requirement in item.Requirements)
+            if (item.Requirements.FirstOrDefault(requirement => !keys.Contains(requirement)) is { } missingRequirement)
             {
-                if (!keys.Contains(requirement))
-                {
-                    throw new KeyNotFoundException($"The required service \"{requirement}\" was not found!");
-                }
+                throw new KeyNotFoundException($"The required service \"{missingRequirement}\" was not found!");
             }
-#pragma warning restore S3267
         }
     }
 

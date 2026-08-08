@@ -19,7 +19,6 @@ public class CatapultCommunicationService : CommunicationServiceBase
 
     private readonly IDevicePoolPopulator _devicePoolPopulator;
     private readonly IDevicePoolManager _devicePoolManager;
-#pragma warning disable S6672 // Logger is intentionally typed to CatapultLibrary for its logging category.
     private readonly ILogger<CatapultLibrary> _catapultLibraryLogger;
 
     public override string ChannelName => Constants.Catapult.ChannelName;
@@ -28,14 +27,15 @@ public class CatapultCommunicationService : CommunicationServiceBase
         IDevicePoolPopulator devicePoolPopulator,
         IDevicePoolManager devicePoolManager,
         ILogger<CatapultCommunicationService> logger,
+#pragma warning disable S6672 // Logger is intentionally typed to CatapultLibrary for its logging category.
         ILogger<CatapultLibrary> catapultLibraryLogger)
+#pragma warning restore S6672
         : base(logger)
     {
         _devicePoolPopulator = devicePoolPopulator;
         _devicePoolManager = devicePoolManager;
         _catapultLibraryLogger = catapultLibraryLogger;
     }
-#pragma warning restore S6672
 
     private void Device_Disposing(object sender, EventArgs e) =>
         ((sender as IDevice).Metadata as CatapultLibrary).Dispose();

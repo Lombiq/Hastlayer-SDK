@@ -79,10 +79,9 @@ public class OptionalParameterFiller : IConverter
             FillOptionalParameters(objectCreateExpression.Arguments, [.. constructor.Parameters.Skip(1)]);
         }
 
-        // CA1859: The two call sites pass different concrete types (AstNodeCollection and array), so ICollection is intentional.
-#pragma warning disable CA1859
         private static void FillOptionalParameters(
-            ICollection<Expression> arguments,
+            AstNodeCollection<Expression> arguments,
+#pragma warning disable CA1859 // The two call sites pass different types (AstNodeCollection and array), so ICollection is necessary.
             ICollection<ParameterDeclaration> parameters)
 #pragma warning restore CA1859
         {
