@@ -1,7 +1,10 @@
 using Hast.Transformer.Models;
 using ICSharpCode.Decompiler.CSharp.Syntax;
+using ICSharpCode.Decompiler.Semantics;
+using ICSharpCode.Decompiler.TypeSystem;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hast.Transformer.Services.ConstantValuesSubstitution;
 
@@ -13,6 +16,12 @@ internal sealed class ConstantValuesSubstitutingAstProcessor
     public Dictionary<string, ConstructorReference> ObjectHoldersToConstructorsMappings { get; }
     public IAstExpressionEvaluator AstExpressionEvaluator { get; }
     public IKnownTypeLookupTable KnownTypeLookupTable { get; }
+
+    /// <summary>
+    /// Gets the method invocations and object creations in the processed sub-tree, keyed by the full name of the invoked
+    /// method or constructor. Rebuilt at the start of every pass.
+    /// </summary>
+    public ILookup<string, Expression> CallsByTargetFullName { get; private set; }
 
     public ConstantValuesSubstitutingAstProcessor(
         ConstantValuesTable constantValuesTable,
@@ -55,6 +64,8 @@ internal sealed class ConstantValuesSubstitutingAstProcessor
             ////System.IO.File.WriteAllText("ConstantSubstitution.cs", codeOutput);
             hiddenlyUpdatedNodesUpdatedCount = constantValuesMarkingVisitor.HiddenlyUpdatedNodesUpdated.Count;
 
+            CallsByTargetFullName = CollectCalls(rootNode);
+
             rootNode.AcceptVisitor(constantValuesMarkingVisitor);
             rootNode.AcceptVisitor(objectHoldersToSubstitutedConstructorsMappingVisitor);
             rootNode.AcceptVisitor(globalValueHoldersHandlingVisitor);
@@ -78,9 +89,34 @@ internal sealed class ConstantValuesSubstitutingAstProcessor
         }
     }
 
+    private static ILookup<string, Expression> CollectCalls(AstNode rootNode) =>
+        rootNode
+            .Descendants
+            .Where(node => node is InvocationExpression or ObjectCreateExpression)
+            .Select(node => (
+                Call: (Expression)node,
+                TargetFullName: node.GetResolveResult<InvocationResolveResult>()?.Member.GetFullName()))
+            .Where(call => call.TargetFullName != null)
+            .ToLookup(call => call.TargetFullName, call => call.Call);
+
     public sealed class ConstructorReference
     {
+        private string _constructorCode;
+
         public MethodDeclaration Constructor { get; set; }
         public Expression OriginalAssignmentTarget { get; set; }
+
+        /// <summary>
+        /// Determines whether the objects referenced by this and the other mapping were created by the same constructor
+        /// with the same constant values substituted, i.e. whether their read-only members can be substituted the same
+        /// way. Mappings are re-created in every pass, so reference equality alone is not enough.
+        /// </summary>
+        public bool IsEquivalentTo(ConstructorReference other) =>
+            ReferenceEquals(this, other) ||
+            (other != null &&
+                Constructor.GetFullName() == other.Constructor.GetFullName() &&
+                GetConstructorCode() == other.GetConstructorCode());
+
+        private string GetConstructorCode() => _constructorCode ??= Constructor.ToString();
     }
 }

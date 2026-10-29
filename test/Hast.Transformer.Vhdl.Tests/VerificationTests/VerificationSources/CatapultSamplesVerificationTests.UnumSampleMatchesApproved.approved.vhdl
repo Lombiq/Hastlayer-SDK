@@ -3664,13 +3664,13 @@ begin
                         \BitMask::.ctor(BitMask).0.this\ := \BitMask::.ctor(BitMask).0.this.parameter.In\;
                         \BitMask::.ctor(BitMask).0.source\ := \BitMask::.ctor(BitMask).0.source.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Size = 32;
+                        -- @this.Size = source.Size;
                         -- 
-                        \BitMask::.ctor(BitMask).0.this\.\Size\ := to_unsigned(32, 16);
+                        \BitMask::.ctor(BitMask).0.this\.\Size\ := \BitMask::.ctor(BitMask).0.source\.\Size\;
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.SegmentCount = 1;
+                        -- @this.SegmentCount = source.SegmentCount;
                         -- 
-                        \BitMask::.ctor(BitMask).0.this\.\SegmentCount\ := to_unsigned(1, 16);
+                        \BitMask::.ctor(BitMask).0.this\.\SegmentCount\ := \BitMask::.ctor(BitMask).0.source\.\SegmentCount\;
                         -- The following section was transformed from the .NET statement below:
                         -- @this.Segments = source.Segments;
                         -- 
@@ -8208,7 +8208,7 @@ begin
                         -- 
                         \BitMask::FindLeastSignificantOnePosition().0.num2\ := SmartResize(unsigned(to_signed(0, 32)), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2) < 1) {
+                        -- while ((int)(num2) < (int)(@this.SegmentCount)) {
                         -- 	uint num3;
                         -- 	num3 = @this.Segments [num2];
                         -- 	if ((long)(num3) == 0L) {
@@ -8231,7 +8231,7 @@ begin
                     when \BitMask::FindLeastSignificantOnePosition().0._State_3\ => 
                         -- Repeated state of the while loop which was started in state \BitMask::FindLeastSignificantOnePosition().0._State_2\.
                         -- The while loop's condition:
-                        \BitMask::FindLeastSignificantOnePosition().0.binaryOperationResult.0\ := signed(SmartResize((\BitMask::FindLeastSignificantOnePosition().0.num2\), 32)) < to_signed(1, 32);
+                        \BitMask::FindLeastSignificantOnePosition().0.binaryOperationResult.0\ := signed(SmartResize((\BitMask::FindLeastSignificantOnePosition().0.num2\), 32)) < signed(SmartResize((\BitMask::FindLeastSignificantOnePosition().0.this\.\SegmentCount\), 32));
                         if (\BitMask::FindLeastSignificantOnePosition().0.binaryOperationResult.0\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {

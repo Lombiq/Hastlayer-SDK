@@ -125,14 +125,29 @@ internal sealed class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
                 _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings[parent.GetFullName()] =
                 constructorReference;
 
+            // A parameter can only take over the mapping if every call passes an equivalent object. Otherwise the
+            // members of the object passed at one call would be substituted for every call.
+            void ParameterHandler(ParameterDeclaration parameter)
+            {
+                if (IsEquivalentObjectPassedByAllCalls(parameter, constructorReference))
+                {
+                    Handler(parameter);
+                }
+                else
+                {
+                    _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
+                        .Remove(parameter.GetFullName());
+                }
+            }
+
             ProcessParent(
                 node,
                 new ProcessParentActions
                 {
                     AssignmentHandler = assignment => Handler(assignment.Left),
                     MemberReferenceHandler = memberReference => MemberReferenceHandler(Handler, memberReference, ref constructorReference),
-                    InvocationParameterHandler = Handler,
-                    ObjectCreationParameterHandler = Handler,
+                    InvocationParameterHandler = ParameterHandler,
+                    ObjectCreationParameterHandler = ParameterHandler,
                     VariableInitializerHandler = Handler,
                     ReturnStatementHandler = returnStatement => Handler(returnStatement.FindFirstParentEntityDeclaration()),
                     NamedExpressionHandler = Handler,
@@ -174,6 +189,25 @@ internal sealed class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
         {
             handler(memberReference);
         }
+    }
+
+    private bool IsEquivalentObjectPassedByAllCalls(
+        ParameterDeclaration parameter,
+        ConstantValuesSubstitutingAstProcessor.ConstructorReference constructorReference)
+    {
+        var parameterFullName = parameter.GetFullName();
+        var calls = _constantValuesSubstitutingAstProcessor.CallsByTargetFullName[parameter.Parent.GetFullName()].ToList();
+
+        return calls.Count != 0 && calls.TrueForAll(call =>
+        {
+            var argument = ConstantValueSubstitutionHelper
+                .FindArgumentPassedToParameter(call, parameterFullName, _typeDeclarationLookupTable);
+
+            return argument is IdentifierExpression or MemberReferenceExpression &&
+                _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
+                    .TryGetValue(argument.GetFullName(), out var argumentConstructorReference) &&
+                argumentConstructorReference.IsEquivalentTo(constructorReference);
+        });
     }
 
     private void VisitBinaryPrimitiveExpression(
