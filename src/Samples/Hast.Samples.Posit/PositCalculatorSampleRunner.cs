@@ -1,7 +1,3 @@
-
-
-
-
 // Generated helper templates
 // Generated items
 // D:\DEV\Hastlayer\Hastlayer-SDK\Hast.Samples.Posit\Posit32E4CalculatorSampleRunner.cs

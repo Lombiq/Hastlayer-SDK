@@ -7,7 +7,7 @@
 <#
     var positSizes = new byte[] { 8, 16, 32, 64 };
     var calculatorTypes = new string[] { "Calculator", "AdvancedCalculator", "FusedCalculator" };
-    var exponentSizes = Enumerable.Range(0, 4);
+    var exponentSizes = Enumerable.Range(0, 5);
 
     List<string> calculatorNames = new List<string>();
 
@@ -22,13 +22,13 @@
         }
     }
 #>
-namespace Hast.Samples.Posit
+namespace Hast.Samples.Posit;
+
+internal enum Sample
 {
-    internal enum Sample
-    {
-    <#
-    foreach (var name in calculatorNames)
-    {#>
+<#
+foreach (var name in calculatorNames)
+{#>
     <#= name #>,
-    <#}#>}
+<#}#>
 }
