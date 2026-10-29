@@ -1,203 +1,204 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Hast.Layer;
+﻿using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Common.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace Hast.Samples.Posit
+namespace Hast.Samples.Posit;
+
+public class Posit32E3Calculator
 {
+    public const int CalculateLargeIntegerSumInputInt32Index = 0;
+    public const int CalculateLargeIntegerSumOutputInt32Index = 0;
+    public const int ParallelizedCalculateLargeIntegerSumInt32NumbersStartIndex = 0;
+    public const int ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex = 0;
+    public const int AddPositsInArrayInputPosit32CountIndex = 0;
+    public const int AddPositsInArrayInputPosit32sStartIndex = 1;
+    public const int AddPositsInArrayOutputPosit32Index = 2;
+    public const int CalculatePowerOfRealInputInt32Index = 0;
+    public const int CalculatePowerOfRealInputPosit32Index = 1;
+    public const int CalculatePowerOfRealOutputPosit32Index = 0;
 
-    public class Posit32E3Calculator
+    public const int MaxDegreeOfParallelism = 5;
+
+    public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
     {
-        public const int CalculateLargeIntegerSum_InputInt32Index = 0;
-        public const int CalculateLargeIntegerSum_OutputInt32Index = 0;
-        public const int ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex = 0;
-        public const int ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex = 0;
-        public const int AddPositsInArray_InputPosit32CountIndex = 0;
-        public const int AddPositsInArray_InputPosit32sStartIndex = 1;
-        public const int AddPositsInArray_OutputPosit32Index = 2;
-        public const int CalculatePowerOfReal_InputInt32Index = 0;
-        public const int CalculatePowerOfReal_InputPosit32Index = 1;
-        public const int CalculatePowerOfReal_OutputPosit32Index = 0;
-       
-        public const int MaxDegreeOfParallelism = 5;
+        var number = memory.ReadUInt32(CalculateLargeIntegerSumInputInt32Index);
 
+        var a = new Posit32E3(1U);
+        var b = a;
 
-        public virtual void CalculateIntegerSumUpToNumber(SimpleMemory memory)
+        for (uint i = 1; i < number; i++)
         {
-            var number = memory.ReadUInt32(CalculateLargeIntegerSum_InputInt32Index);
-
-            var a = new Posit32E3((uint)1);
-            var b = a;
-
-            for (uint i = 1; i < number; i++)
-            {
-                a += b;
-            }
-
-            var result = (int)a;
-            memory.WriteInt32(CalculateLargeIntegerSum_OutputInt32Index, result);
+            a += b;
         }
 
-        public virtual void CalculatePowerOfReal(SimpleMemory memory)
+        var result = (int)a;
+        memory.WriteInt32(CalculateLargeIntegerSumOutputInt32Index, result);
+    }
+
+    public virtual void CalculatePowerOfReal(SimpleMemory memory)
+    {
+        var number = memory.ReadInt32(CalculatePowerOfRealInputInt32Index);
+        var positToMultiply = memory.ReadUInt32(CalculatePowerOfRealInputPosit32Index);
+
+        var a = new Posit32E3(positToMultiply, fromBitMask: true);
+        var b = a;
+
+        for (uint i = 0; i < number; i++)
         {
-            var number = memory.ReadInt32(CalculatePowerOfReal_InputInt32Index);
-            var positToMultiply = (uint)memory.ReadUInt32(CalculatePowerOfReal_InputPosit32Index);
-
-            var a = new Posit32E3(positToMultiply, true);
-            var b = a;
-
-            for (uint i = 0; i < number; i++)
-            {
-                a *= b;
-            }
-
-            var result = a.PositBits;
-            memory.WriteUInt32(CalculatePowerOfReal_OutputPosit32Index, result);
+            a *= b;
         }
 
-        public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
+        var result = a.PositBits;
+        memory.WriteUInt32(CalculatePowerOfRealOutputPosit32Index, result);
+    }
+
+    public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
+    {
+        var tasks = new Task<int>[MaxDegreeOfParallelism];
+
+        for (int i = 0; i < MaxDegreeOfParallelism; i++)
         {
-            var numbers = new int[MaxDegreeOfParallelism];
+            var upToNumber = memory.ReadInt32(ParallelizedCalculateLargeIntegerSumInt32NumbersStartIndex + i);
 
-            var tasks = new Task<int>[MaxDegreeOfParallelism];
+            tasks[i] = Task.Factory.StartNew(
+                upToNumberObject =>
+                {
+                    var a = new Posit32E3(1);
+                    var b = a;
 
-            for (int i = 0; i < MaxDegreeOfParallelism; i++)
-            {
-                var upToNumber = memory.ReadInt32(ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex + i);
-
-                tasks[i] = Task.Factory.StartNew(
-                    upToNumberObject =>
+                    for (int j = 1; j < (int)upToNumberObject; j++)
                     {
-                        var a = new Posit32E3(1);
-                        var b = a;
+                        a += b;
+                    }
 
-                        for (int j = 1; j < (int)upToNumberObject; j++)
-                        {
-                            a += b;
-                        }
-
-                        return (int)a;
-                    }, upToNumber);
-            }
-
-            Task.WhenAll(tasks).Wait();
-
-            for (int i = 0; i < MaxDegreeOfParallelism; i++)
-            {
-                memory.WriteInt32(ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex + i, tasks[i].Result);
-            }
+                    return (int)a;
+                },
+                upToNumber);
         }
 
-        public virtual void AddPositsInArray(SimpleMemory memory)
+        Task.WhenAll(tasks).Wait();
+
+        for (int i = 0; i < MaxDegreeOfParallelism; i++)
         {
-            uint numberCount = memory.ReadUInt32(AddPositsInArray_InputPosit32CountIndex);
-
-            var result = new Posit32E3((uint)memory.ReadUInt32(AddPositsInArray_InputPosit32sStartIndex), true);
-
-            for (int i = 1; i < numberCount; i++)
-            {
-                result += new Posit32E3((uint)memory.ReadUInt32(AddPositsInArray_InputPosit32sStartIndex + i), true);
-            }
-
-            memory.WriteUInt32(AddPositsInArray_OutputPosit32Index, result.PositBits);
+            memory.WriteInt32(ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex + i, tasks[i].Result);
         }
     }
 
-
-    public static class Posit32E3CalculatorCalculatorExtensions
+    public virtual void AddPositsInArray(SimpleMemory memory)
     {
-        public static int CalculateIntegerSumUpToNumber(
-            this  Posit32E3Calculator  positCalculator,
-            int number,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
+        uint numberCount = memory.ReadUInt32(AddPositsInArrayInputPosit32CountIndex);
+
+        var result = new Posit32E3(
+            memory.ReadUInt32(AddPositsInArrayInputPosit32sStartIndex),
+            fromBitMask: true);
+
+        for (int i = 1; i < numberCount; i++)
         {
-             var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(1)
-                : hastlayer.CreateMemory(configuration, 1);
-
-            memory.WriteInt32( Posit32E3Calculator.CalculateLargeIntegerSum_InputInt32Index, number);
-            positCalculator.CalculateIntegerSumUpToNumber(memory);
-
-            return memory.ReadInt32( Posit32E3Calculator.CalculateLargeIntegerSum_OutputInt32Index);
+            result += new Posit32E3(
+                memory.ReadUInt32(AddPositsInArrayInputPosit32sStartIndex + i),
+                fromBitMask: true);
         }
 
-        public static float CalculatePowerOfReal(
-            this  Posit32E3Calculator  positCalculator,
-            int number,
-            float real,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
-        {
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(2)
-                : hastlayer.CreateMemory(configuration, 2);
-
-            memory.WriteInt32( Posit32E3Calculator.CalculatePowerOfReal_InputInt32Index, number);
-            memory.WriteUInt32( Posit32E3Calculator.CalculatePowerOfReal_InputPosit32Index, new  Posit32E3(real).PositBits);
-
-            positCalculator.CalculatePowerOfReal(memory);
-
-            return (float)new Posit32E3((uint)memory.ReadUInt32( Posit32E3Calculator.CalculatePowerOfReal_OutputPosit32Index), true);
-        }
-
-        public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(
-            this  Posit32E3Calculator positCalculator,
-            int[] numbers,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
-        {
-            if (numbers.Length !=  Posit32E3Calculator.MaxDegreeOfParallelism)
-            {
-                throw new ArgumentException(
-                    "Provide as many numbers as the degree of parallelism of  Posit32E3Calculator is (" +
-                     Posit32E3Calculator.MaxDegreeOfParallelism + ")");
-            }
-
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(Posit32E3Calculator.MaxDegreeOfParallelism)
-                : hastlayer.CreateMemory(configuration, Posit32E3Calculator.MaxDegreeOfParallelism);
-
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                memory.WriteInt32( Posit32E3Calculator.ParallelizedCalculateLargeIntegerSum_Int32NumbersStartIndex + i, numbers[i]);
-            }
-
-            positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(memory);
-
-            var results = new int[ Posit32E3Calculator.MaxDegreeOfParallelism];
-
-            for (int i = 0; i < numbers.Length; i++)
-            {
-                results[i] = memory.ReadInt32( Posit32E3Calculator.ParallelizedCalculateLargeIntegerSum_OutputInt32sStartIndex + i);
-            }
-
-            return results;
-        }
-
-        public static float AddPositsInArray(
-            this  Posit32E3Calculator positCalculator,
-            uint[] positArray,
-            IHastlayer hastlayer = null,
-            IHardwareGenerationConfiguration configuration = null)
-        {
-            var memory = hastlayer is null
-                ? SimpleMemory.CreateSoftwareMemory(positArray.Length + 1)
-                : hastlayer.CreateMemory(configuration, positArray.Length + 1);
-
-            memory.WriteUInt32( Posit32E3Calculator.AddPositsInArray_InputPosit32CountIndex, (uint) positArray.Length);
-
-            for (var i = 0; i <  positArray.Length; i++)
-            {
-                memory.WriteUInt32( Posit32E3Calculator.AddPositsInArray_InputPosit32sStartIndex + i, positArray[i]);
-            }
-
-            positCalculator.AddPositsInArray(memory);
-
-            return (float)new Posit32(memory.ReadUInt32( Posit32E3Calculator.AddPositsInArray_OutputPosit32Index), true);
-        }
+        memory.WriteUInt32(AddPositsInArrayOutputPosit32Index, result.PositBits);
     }
 }
 
+public static class Posit32E3CalculatorCalculatorExtensions
+{
+    public static int CalculateIntegerSumUpToNumber(
+        this Posit32E3Calculator positCalculator,
+        int number,
+        IHastlayer hastlayer = null,
+        IHardwareGenerationConfiguration configuration = null)
+    {
+        var memory = hastlayer is null
+            ? SimpleMemory.CreateSoftwareMemory(1)
+            : hastlayer.CreateMemory(configuration, 1);
+
+        memory.WriteInt32(Posit32E3Calculator.CalculateLargeIntegerSumInputInt32Index, number);
+        positCalculator.CalculateIntegerSumUpToNumber(memory);
+
+        return memory.ReadInt32(Posit32E3Calculator.CalculateLargeIntegerSumOutputInt32Index);
+    }
+
+    public static float CalculatePowerOfReal(
+        this Posit32E3Calculator positCalculator,
+        int number,
+        float real,
+        IHastlayer hastlayer = null,
+        IHardwareGenerationConfiguration configuration = null)
+    {
+        var memory = hastlayer is null
+            ? SimpleMemory.CreateSoftwareMemory(2)
+            : hastlayer.CreateMemory(configuration, 2);
+
+        memory.WriteInt32(Posit32E3Calculator.CalculatePowerOfRealInputInt32Index, number);
+        memory.WriteUInt32(Posit32E3Calculator.CalculatePowerOfRealInputPosit32Index, new Posit32E3(real).PositBits);
+
+        positCalculator.CalculatePowerOfReal(memory);
+
+        return (float)new Posit32E3(
+            memory.ReadUInt32(Posit32E3Calculator.CalculatePowerOfRealOutputPosit32Index),
+            fromBitMask: true);
+    }
+
+    public static IEnumerable<int> ParallelizedCalculateIntegerSumUpToNumbers(
+        this Posit32E3Calculator positCalculator,
+        int[] numbers,
+        IHastlayer hastlayer = null,
+        IHardwareGenerationConfiguration configuration = null)
+    {
+        if (numbers.Length != Posit32E3Calculator.MaxDegreeOfParallelism)
+        {
+            throw new ArgumentException(StringHelper.CreateInvariant(
+                $"Provide as many {nameof(numbers)} as the degree of parallelism of Posit32E3Calculator is " +
+                $"({Posit32E3Calculator.MaxDegreeOfParallelism})"));
+        }
+
+        var memory = hastlayer is null
+            ? SimpleMemory.CreateSoftwareMemory(Posit32E3Calculator.MaxDegreeOfParallelism)
+            : hastlayer.CreateMemory(configuration, Posit32E3Calculator.MaxDegreeOfParallelism);
+
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            memory.WriteInt32(Posit32E3Calculator.ParallelizedCalculateLargeIntegerSumInt32NumbersStartIndex + i, numbers[i]);
+        }
+
+        positCalculator.ParallelizedCalculateIntegerSumUpToNumbers(memory);
+
+        var results = new int[Posit32E3Calculator.MaxDegreeOfParallelism];
+
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            results[i] = memory.ReadInt32(Posit32E3Calculator.ParallelizedCalculateLargeIntegerSumOutputInt32sStartIndex + i);
+        }
+
+        return results;
+    }
+
+    public static float AddPositsInArray(
+        this Posit32E3Calculator positCalculator,
+        uint[] positArray,
+        IHastlayer hastlayer = null,
+        IHardwareGenerationConfiguration configuration = null)
+    {
+        var memory = hastlayer is null
+            ? SimpleMemory.CreateSoftwareMemory(positArray.Length + 1)
+            : hastlayer.CreateMemory(configuration, positArray.Length + 1);
+
+        memory.WriteUInt32(Posit32E3Calculator.AddPositsInArrayInputPosit32CountIndex, (uint)positArray.Length);
+
+        for (var i = 0; i < positArray.Length; i++)
+        {
+            memory.WriteUInt32(Posit32E3Calculator.AddPositsInArrayInputPosit32sStartIndex + i, positArray[i]);
+        }
+
+        positCalculator.AddPositsInArray(memory);
+
+        return (float)new Posit32(memory.ReadUInt32(Posit32E3Calculator.AddPositsInArrayOutputPosit32Index), fromBitMask: true);
+    }
+}
