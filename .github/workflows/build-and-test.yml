@@ -21,6 +21,7 @@ jobs:
       build-enable-npm-caching: 'true'
       dotnet-version: |
         10.0.x
+      test-platform: VSTest
 
   build-and-test-standard-runners:
     if: github.ref_name == github.event.repository.default_branch
@@ -32,6 +33,7 @@ jobs:
       build-configuration: Debug
       dotnet-version: |
         10.0.x
+      test-platform: VSTest
 
   build-and-test-nuget-test:
     name: Build and Test - NuGetTest solution
@@ -42,6 +44,7 @@ jobs:
       timeout-minutes: 10
       dotnet-version: |
         10.0.x
+      test-platform: VSTest
 
   post-pull-request-checks-automation:
     name: Post Pull Request Checks Automation
