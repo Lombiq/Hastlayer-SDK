@@ -13,6 +13,18 @@
     <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
   </PropertyGroup>
 
+  <!-- SixLabors.ImageSharp is intentionally kept at 3.1.12: the releases that fix these advisories (3.2.0 and 4.x)
+       require a Six Labors license key to build. It is only used by non-packable sample, test and tester projects, so
+       it isn't shipped in any published package. Remove these entries when ImageSharp is updated or replaced. -->
+  <ItemGroup>
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-gwg2-r3hj-4w44" />
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-j3p4-wp97-rph4" />
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-j9gm-c75j-xc9q" />
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-jjfr-hcj7-qf5w" />
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-v76p-62qx-wwq2" />
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-wmxv-xphr-5c9g" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(IsPackable)' != 'false'">
     <Authors>Lombiq Technologies</Authors>
     <Copyright>Copyright © 2017, Lombiq Technologies Ltd.</Copyright>
