@@ -19,8 +19,7 @@ jobs:
       build-configuration: Debug
       build-enable-nuget-caching: 'true'
       build-enable-npm-caching: 'true'
-      dotnet-version: |
-        10.0.x
+      dotnet-version: 10.0.x
       test-platform: VSTest
 
   build-and-test-standard-runners:
@@ -31,8 +30,7 @@ jobs:
       parent-job-name: 'root-solution-standard-runners'
       timeout-minutes: 30
       build-configuration: Debug
-      dotnet-version: |
-        10.0.x
+      dotnet-version: 10.0.x
       test-platform: VSTest
 
   build-and-test-nuget-test:
@@ -42,8 +40,7 @@ jobs:
       parent-job-name: 'nuget-solution'
       build-directory: NuGetTest
       timeout-minutes: 10
-      dotnet-version: |
-        10.0.x
+      dotnet-version: 10.0.x
       test-platform: VSTest
 
   post-pull-request-checks-automation:
