@@ -532,6 +532,164 @@ architecture Imp of Hast_IP is
     -- System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32).0 declarations end
 
 
+    -- System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().0 declarations start
+    -- State machine states:
+    type \Posit32::GetRegimeKValue().0._States\ is (
+        \Posit32::GetRegimeKValue().0._State_0\, 
+        \Posit32::GetRegimeKValue().0._State_1\, 
+        \Posit32::GetRegimeKValue().0._State_2\, 
+        \Posit32::GetRegimeKValue().0._State_3\);
+    -- Signals:
+    Signal \Posit32::GetRegimeKValue().0._Finished\: boolean := false;
+    Signal \Posit32::GetRegimeKValue().0.return\: signed(7 downto 0) := to_signed(0, 8);
+    Signal \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\: boolean := false;
+    Signal \Posit32::GetRegimeKValue().0._Started\: boolean := false;
+    Signal \Posit32::GetRegimeKValue().0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\: boolean := false;
+    Signal \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    -- System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().0 declarations end
+
+
+    -- System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().0 declarations start
+    -- State machine states:
+    type \Posit32::CalculateScaleFactor().0._States\ is (
+        \Posit32::CalculateScaleFactor().0._State_0\, 
+        \Posit32::CalculateScaleFactor().0._State_1\, 
+        \Posit32::CalculateScaleFactor().0._State_2\, 
+        \Posit32::CalculateScaleFactor().0._State_3\, 
+        \Posit32::CalculateScaleFactor().0._State_4\, 
+        \Posit32::CalculateScaleFactor().0._State_5\, 
+        \Posit32::CalculateScaleFactor().0._State_6\, 
+        \Posit32::CalculateScaleFactor().0._State_7\);
+    -- Signals:
+    Signal \Posit32::CalculateScaleFactor().0._Finished\: boolean := false;
+    Signal \Posit32::CalculateScaleFactor().0.return\: signed(15 downto 0) := to_signed(0, 16);
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Started.0\: boolean := false;
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\: boolean := false;
+    Signal \Posit32::CalculateScaleFactor().0._Started\: boolean := false;
+    Signal \Posit32::CalculateScaleFactor().0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Finished.0\: boolean := false;
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue().return.0\: signed(7 downto 0) := to_signed(0, 8);
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Finished.0\: boolean := false;
+    Signal \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().0 declarations end
+
+
+    -- System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().0 declarations start
+    -- State machine states:
+    type \Posit32::ExponentSize().0._States\ is (
+        \Posit32::ExponentSize().0._State_0\, 
+        \Posit32::ExponentSize().0._State_1\, 
+        \Posit32::ExponentSize().0._State_2\, 
+        \Posit32::ExponentSize().0._State_3\, 
+        \Posit32::ExponentSize().0._State_4\, 
+        \Posit32::ExponentSize().0._State_5\, 
+        \Posit32::ExponentSize().0._State_6\, 
+        \Posit32::ExponentSize().0._State_7\, 
+        \Posit32::ExponentSize().0._State_8\, 
+        \Posit32::ExponentSize().0._State_9\, 
+        \Posit32::ExponentSize().0._State_10\);
+    -- Signals:
+    Signal \Posit32::ExponentSize().0._Finished\: boolean := false;
+    Signal \Posit32::ExponentSize().0.return\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\: boolean := false;
+    Signal \Posit32::ExponentSize().0._Started\: boolean := false;
+    Signal \Posit32::ExponentSize().0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\: boolean := false;
+    Signal \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    -- System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().0 declarations end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0 declarations start
+    -- State machine states:
+    type \Posit32::GetExponentValue().0._States\ is (
+        \Posit32::GetExponentValue().0._State_0\, 
+        \Posit32::GetExponentValue().0._State_1\, 
+        \Posit32::GetExponentValue().0._State_2\, 
+        \Posit32::GetExponentValue().0._State_3\, 
+        \Posit32::GetExponentValue().0._State_4\, 
+        \Posit32::GetExponentValue().0._State_5\, 
+        \Posit32::GetExponentValue().0._State_6\, 
+        \Posit32::GetExponentValue().0._State_7\, 
+        \Posit32::GetExponentValue().0._State_8\, 
+        \Posit32::GetExponentValue().0._State_9\);
+    -- Signals:
+    Signal \Posit32::GetExponentValue().0._Finished\: boolean := false;
+    Signal \Posit32::GetExponentValue().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().0._Started\: boolean := false;
+    Signal \Posit32::GetExponentValue().0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\: boolean := false;
+    Signal \Posit32::GetExponentValue().0.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0 declarations end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().0 declarations start
+    -- State machine states:
+    type \Posit32::FractionSize().0._States\ is (
+        \Posit32::FractionSize().0._State_0\, 
+        \Posit32::FractionSize().0._State_1\, 
+        \Posit32::FractionSize().0._State_2\, 
+        \Posit32::FractionSize().0._State_3\, 
+        \Posit32::FractionSize().0._State_4\, 
+        \Posit32::FractionSize().0._State_5\, 
+        \Posit32::FractionSize().0._State_6\, 
+        \Posit32::FractionSize().0._State_7\);
+    -- Signals:
+    Signal \Posit32::FractionSize().0._Finished\: boolean := false;
+    Signal \Posit32::FractionSize().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    Signal \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\: boolean := false;
+    Signal \Posit32::FractionSize().0._Started\: boolean := false;
+    Signal \Posit32::FractionSize().0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\: boolean := false;
+    Signal \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().0 declarations end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().0 declarations start
+    -- State machine states:
+    type \Posit32::FractionWithHiddenBit().0._States\ is (
+        \Posit32::FractionWithHiddenBit().0._State_0\, 
+        \Posit32::FractionWithHiddenBit().0._State_1\, 
+        \Posit32::FractionWithHiddenBit().0._State_2\, 
+        \Posit32::FractionWithHiddenBit().0._State_3\, 
+        \Posit32::FractionWithHiddenBit().0._State_4\, 
+        \Posit32::FractionWithHiddenBit().0._State_5\, 
+        \Posit32::FractionWithHiddenBit().0._State_6\, 
+        \Posit32::FractionWithHiddenBit().0._State_7\, 
+        \Posit32::FractionWithHiddenBit().0._State_8\, 
+        \Posit32::FractionWithHiddenBit().0._State_9\, 
+        \Posit32::FractionWithHiddenBit().0._State_10\);
+    -- Signals:
+    Signal \Posit32::FractionWithHiddenBit().0._Finished\: boolean := false;
+    Signal \Posit32::FractionWithHiddenBit().0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\: boolean := false;
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\: boolean := false;
+    Signal \Posit32::FractionWithHiddenBit().0._Started\: boolean := false;
+    Signal \Posit32::FractionWithHiddenBit().0.this.parameter.In\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Finished.0\: boolean := false;
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\: boolean := false;
+    Signal \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().0 declarations end
+
+
     -- System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).0 declarations start
     -- State machine states:
     type \Posit32::GetMostSignificantOnePosition(UInt32).0._States\ is (
@@ -547,6 +705,21 @@ architecture Imp of Hast_IP is
     Signal \Posit32::GetMostSignificantOnePosition(UInt32).0._Started\: boolean := false;
     Signal \Posit32::GetMostSignificantOnePosition(UInt32).0.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
     -- System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).0 declarations end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 declarations start
+    -- State machine states:
+    type \Posit32::SetOne(UInt32,UInt16).0._States\ is (
+        \Posit32::SetOne(UInt32,UInt16).0._State_0\, 
+        \Posit32::SetOne(UInt32,UInt16).0._State_1\, 
+        \Posit32::SetOne(UInt32,UInt16).0._State_2\);
+    -- Signals:
+    Signal \Posit32::SetOne(UInt32,UInt16).0._Finished\: boolean := false;
+    Signal \Posit32::SetOne(UInt32,UInt16).0.return\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::SetOne(UInt32,UInt16).0._Started\: boolean := false;
+    Signal \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 declarations end
 
 
     -- System.UInt32 Lombiq.Arithmetics.Posit32::SetZero(System.UInt32,System.UInt16).0 declarations start
@@ -666,18 +839,41 @@ architecture Imp of Hast_IP is
         \Quire Posit32::op_Explicit(Posit32).0._State_0\, 
         \Quire Posit32::op_Explicit(Posit32).0._State_1\, 
         \Quire Posit32::op_Explicit(Posit32).0._State_2\, 
-        \Quire Posit32::op_Explicit(Posit32).0._State_3\);
+        \Quire Posit32::op_Explicit(Posit32).0._State_3\, 
+        \Quire Posit32::op_Explicit(Posit32).0._State_4\, 
+        \Quire Posit32::op_Explicit(Posit32).0._State_5\, 
+        \Quire Posit32::op_Explicit(Posit32).0._State_6\, 
+        \Quire Posit32::op_Explicit(Posit32).0._State_7\);
     -- Signals:
     Signal \Quire Posit32::op_Explicit(Posit32).0._Finished\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.return\: \Lombiq.Arithmetics.Quire\;
-    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.Quire\;
-    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
-    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
-    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\: \Lombiq.Arithmetics.Quire\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().this.parameter.Out.0\: \Lombiq.Arithmetics.Posit32\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\: \Lombiq.Arithmetics.Quire\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\: signed(31 downto 0) := to_signed(0, 32);
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0._Started\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.x.parameter.In\: \Lombiq.Arithmetics.Posit32\;
-    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\: \Lombiq.Arithmetics.Quire\;
-    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Finished.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\: \Lombiq.Arithmetics.Quire\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Finished.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().return.0\: signed(15 downto 0) := to_signed(0, 16);
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\: \Lombiq.Arithmetics.Quire\;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\: boolean := false;
+    Signal \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).return.0\: \Lombiq.Arithmetics.Quire\;
     -- Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0 declarations end
 
 
@@ -858,7 +1054,8 @@ architecture Imp of Hast_IP is
         \Quire Quire::op_RightShift(Quire,Int32).0._State_8\, 
         \Quire Quire::op_RightShift(Quire,Int32).0._State_9\, 
         \Quire Quire::op_RightShift(Quire,Int32).0._State_10\, 
-        \Quire Quire::op_RightShift(Quire,Int32).0._State_11\);
+        \Quire Quire::op_RightShift(Quire,Int32).0._State_11\, 
+        \Quire Quire::op_RightShift(Quire,Int32).0._State_12\);
     -- Signals:
     Signal \Quire Quire::op_RightShift(Quire,Int32).0._Finished\: boolean := false;
     Signal \Quire Quire::op_RightShift(Quire,Int32).0.return\: \Lombiq.Arithmetics.Quire\;
@@ -3524,6 +3721,1039 @@ begin
     -- System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32).0 state machine end
 
 
+    -- System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().0 state machine start
+    \Posit32::GetRegimeKValue().0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::GetRegimeKValue().0._State\: \Posit32::GetRegimeKValue().0._States\ := \Posit32::GetRegimeKValue().0._State_0\;
+        Variable \Posit32::GetRegimeKValue().0.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::GetRegimeKValue().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetRegimeKValue().0.conditional13\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetRegimeKValue().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetRegimeKValue().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetRegimeKValue().0.conditional14\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Posit32::GetRegimeKValue().0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::GetRegimeKValue().0._Finished\ <= false;
+                \Posit32::GetRegimeKValue().0.return\ <= to_signed(0, 8);
+                \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(0, 8);
+                \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
+                \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_0\;
+                \Posit32::GetRegimeKValue().0.num\ := to_unsigned(0, 32);
+                \Posit32::GetRegimeKValue().0.conditional13\ := to_unsigned(0, 32);
+                \Posit32::GetRegimeKValue().0.b\ := to_unsigned(0, 8);
+                \Posit32::GetRegimeKValue().0.return.0\ := to_unsigned(0, 8);
+                \Posit32::GetRegimeKValue().0.conditional14\ := to_signed(0, 8);
+                \Posit32::GetRegimeKValue().0.unaryOperationResult.0\ := to_signed(0, 32);
+            else 
+                case \Posit32::GetRegimeKValue().0._State\ is 
+                    when \Posit32::GetRegimeKValue().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::GetRegimeKValue().0._Started\ = true) then 
+                            \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetRegimeKValue().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::GetRegimeKValue().0._Started\ = true) then 
+                            \Posit32::GetRegimeKValue().0._Finished\ <= true;
+                        else 
+                            \Posit32::GetRegimeKValue().0._Finished\ <= false;
+                            \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetRegimeKValue().0._State_2\ => 
+                        \Posit32::GetRegimeKValue().0.this\ := \Posit32::GetRegimeKValue().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional13;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional13 = 0u;
+                        -- 
+                        \Posit32::GetRegimeKValue().0.conditional13\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0u;
+                        -- 
+                        \Posit32::GetRegimeKValue().0.num\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- b = Posit32.LengthOfRunOfBits (0u, 31);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
+                        \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                        \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= SmartResize(unsigned(to_signed(31, 32)), 8);
+                        \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
+                        \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetRegimeKValue().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
+                        if (\Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
+                            \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
+                            \Posit32::GetRegimeKValue().0.return.0\ := \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
+                            \Posit32::GetRegimeKValue().0.b\ := \Posit32::GetRegimeKValue().0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- sbyte conditional14;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- conditional14 = ((sbyte)(-(int)(b)));
+                            -- 
+                            \Posit32::GetRegimeKValue().0.unaryOperationResult.0\ := -signed(SmartResize((\Posit32::GetRegimeKValue().0.b\), 32));
+                            \Posit32::GetRegimeKValue().0.conditional14\ := (SmartResize((\Posit32::GetRegimeKValue().0.unaryOperationResult.0\), 8));
+                            -- The following section was transformed from the .NET statement below:
+                            -- return conditional14;
+                            -- 
+                            \Posit32::GetRegimeKValue().0.return\ <= \Posit32::GetRegimeKValue().0.conditional14\;
+                            \Posit32::GetRegimeKValue().0._State\ := \Posit32::GetRegimeKValue().0._State_1\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3369
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().0 state machine end
+
+
+    -- System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().0 state machine start
+    \Posit32::CalculateScaleFactor().0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::CalculateScaleFactor().0._State\: \Posit32::CalculateScaleFactor().0._States\ := \Posit32::CalculateScaleFactor().0._State_0\;
+        Variable \Posit32::CalculateScaleFactor().0.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::CalculateScaleFactor().0.regimeKValue\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Posit32::CalculateScaleFactor().0.return.0\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Posit32::CalculateScaleFactor().0.conditional15\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::CalculateScaleFactor().0.binaryOperationResult.0\: boolean := false;
+        Variable \Posit32::CalculateScaleFactor().0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Posit32::CalculateScaleFactor().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::CalculateScaleFactor().0.binaryOperationResult.2\: signed(15 downto 0) := to_signed(0, 16);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::CalculateScaleFactor().0._Finished\ <= false;
+                \Posit32::CalculateScaleFactor().0.return\ <= to_signed(0, 16);
+                \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Started.0\ <= false;
+                \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\ <= false;
+                \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_0\;
+                \Posit32::CalculateScaleFactor().0.regimeKValue\ := to_signed(0, 8);
+                \Posit32::CalculateScaleFactor().0.return.0\ := to_signed(0, 8);
+                \Posit32::CalculateScaleFactor().0.conditional15\ := to_signed(0, 32);
+                \Posit32::CalculateScaleFactor().0.binaryOperationResult.0\ := false;
+                \Posit32::CalculateScaleFactor().0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Posit32::CalculateScaleFactor().0.return.1\ := to_unsigned(0, 32);
+                \Posit32::CalculateScaleFactor().0.binaryOperationResult.2\ := to_signed(0, 16);
+            else 
+                case \Posit32::CalculateScaleFactor().0._State\ is 
+                    when \Posit32::CalculateScaleFactor().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::CalculateScaleFactor().0._Started\ = true) then 
+                            \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CalculateScaleFactor().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::CalculateScaleFactor().0._Started\ = true) then 
+                            \Posit32::CalculateScaleFactor().0._Finished\ <= true;
+                        else 
+                            \Posit32::CalculateScaleFactor().0._Finished\ <= false;
+                            \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CalculateScaleFactor().0._State_2\ => 
+                        \Posit32::CalculateScaleFactor().0.this\ := \Posit32::CalculateScaleFactor().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- sbyte regimeKValue;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- regimeKValue = Lombiq.Arithmetics.Posit32.GetRegimeKValue (@this);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue()
+                        \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue().this.parameter.Out.0\ <= \Posit32::CalculateScaleFactor().0.this\;
+                        \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Started.0\ <= true;
+                        \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CalculateScaleFactor().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue()
+                        if (\Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Started.0\ = \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Finished.0\) then 
+                            \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Started.0\ <= false;
+                            \Posit32::CalculateScaleFactor().0.return.0\ := \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue().return.0\;
+                            \Posit32::CalculateScaleFactor().0.regimeKValue\ := \Posit32::CalculateScaleFactor().0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- int conditional15;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- if (((int)(regimeKValue) != -31)) {
+                            -- 	conditional15 = ((short)((long)((int)(regimeKValue) * 4) + (long)(Lombiq.Arithmetics.Posit32.GetExponentValue (@this))));
+                            -- } else {
+                            -- 	conditional15 = 0;
+                            -- }
+                            -- 
+                            \Posit32::CalculateScaleFactor().0.binaryOperationResult.0\ := SmartResize((\Posit32::CalculateScaleFactor().0.regimeKValue\), 32) /= to_signed(-31, 32);
+
+                            -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                            --     * The true branch starts in state \Posit32::CalculateScaleFactor().0._State_5\ and ends in state \Posit32::CalculateScaleFactor().0._State_6\.
+                            --     * The false branch starts in state \Posit32::CalculateScaleFactor().0._State_7\ and ends in state \Posit32::CalculateScaleFactor().0._State_7\.
+                            --     * Execution after either branch will continue in the following state: \Posit32::CalculateScaleFactor().0._State_4\.
+
+                            if ((\Posit32::CalculateScaleFactor().0.binaryOperationResult.0\)) then 
+                                \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_5\;
+                            else 
+                                \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_7\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.33405
+                    when \Posit32::CalculateScaleFactor().0._State_4\ => 
+                        -- State after the if-else which was started in state \Posit32::CalculateScaleFactor().0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return (short)(conditional15);
+                        -- 
+                        \Posit32::CalculateScaleFactor().0.return\ <= SmartResize((\Posit32::CalculateScaleFactor().0.conditional15\), 16);
+                        \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::CalculateScaleFactor().0._State_5\ => 
+                        -- True branch of the if-else started in state \Posit32::CalculateScaleFactor().0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional15 = ((short)((long)((int)(regimeKValue) * 4) + (long)(Lombiq.Arithmetics.Posit32.GetExponentValue (@this))));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional15 = ((short)((long)((int)(regimeKValue) * 4) + (long)(Lombiq.Arithmetics.Posit32.GetExponentValue (@this))));
+                        -- 
+                        \Posit32::CalculateScaleFactor().0.binaryOperationResult.1\ := SmartResize(SmartResize((\Posit32::CalculateScaleFactor().0.regimeKValue\), 32) * to_signed(4, 32), 64);
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue()
+                        \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().this.parameter.Out.0\ <= \Posit32::CalculateScaleFactor().0.this\;
+                        \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\ <= true;
+                        \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0.14535
+                    when \Posit32::CalculateScaleFactor().0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue()
+                        if (\Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\ = \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Finished.0\) then 
+                            \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\ <= false;
+                            \Posit32::CalculateScaleFactor().0.return.1\ := \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().return.0\;
+                            \Posit32::CalculateScaleFactor().0.binaryOperationResult.2\ := SmartResize((\Posit32::CalculateScaleFactor().0.binaryOperationResult.1\) + signed(SmartResize((\Posit32::CalculateScaleFactor().0.return.1\), 64)), 16);
+                            \Posit32::CalculateScaleFactor().0.conditional15\ := SmartResize(((\Posit32::CalculateScaleFactor().0.binaryOperationResult.2\)), 32);
+                            -- Going to the state after the if-else which was started in state \Posit32::CalculateScaleFactor().0._State_3\.
+                            if (\Posit32::CalculateScaleFactor().0._State\ = \Posit32::CalculateScaleFactor().0._State_6\) then 
+                                \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_4\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.49995
+                    when \Posit32::CalculateScaleFactor().0._State_7\ => 
+                        -- False branch of the if-else started in state \Posit32::CalculateScaleFactor().0._State_3\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional15 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional15 = 0;
+                        -- 
+                        \Posit32::CalculateScaleFactor().0.conditional15\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::CalculateScaleFactor().0._State_3\.
+                        if (\Posit32::CalculateScaleFactor().0._State\ = \Posit32::CalculateScaleFactor().0._State_7\) then 
+                            \Posit32::CalculateScaleFactor().0._State\ := \Posit32::CalculateScaleFactor().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().0 state machine end
+
+
+    -- System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().0 state machine start
+    \Posit32::ExponentSize().0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::ExponentSize().0._State\: \Posit32::ExponentSize().0._States\ := \Posit32::ExponentSize().0._State_0\;
+        Variable \Posit32::ExponentSize().0.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::ExponentSize().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::ExponentSize().0.conditional16\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::ExponentSize().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.result\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.1\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.3\: boolean := false;
+        Variable \Posit32::ExponentSize().0.conditional17\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.5\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.6\: boolean := false;
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.7\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::ExponentSize().0.binaryOperationResult.8\: unsigned(7 downto 0) := to_unsigned(0, 8);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::ExponentSize().0._Finished\ <= false;
+                \Posit32::ExponentSize().0.return\ <= to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
+                \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_0\;
+                \Posit32::ExponentSize().0.bits\ := to_unsigned(0, 32);
+                \Posit32::ExponentSize().0.conditional16\ := to_unsigned(0, 32);
+                \Posit32::ExponentSize().0.b\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.return.0\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.result\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.1\ := to_unsigned(0, 8);
+                \Posit32::ExponentSize().0.binaryOperationResult.2\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.3\ := false;
+                \Posit32::ExponentSize().0.conditional17\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.4\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.5\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.6\ := false;
+                \Posit32::ExponentSize().0.binaryOperationResult.7\ := to_signed(0, 32);
+                \Posit32::ExponentSize().0.binaryOperationResult.8\ := to_unsigned(0, 8);
+            else 
+                case \Posit32::ExponentSize().0._State\ is 
+                    when \Posit32::ExponentSize().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::ExponentSize().0._Started\ = true) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::ExponentSize().0._Started\ = true) then 
+                            \Posit32::ExponentSize().0._Finished\ <= true;
+                        else 
+                            \Posit32::ExponentSize().0._Finished\ <= false;
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_2\ => 
+                        \Posit32::ExponentSize().0.this\ := \Posit32::ExponentSize().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional16;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional16 = 0u;
+                        -- 
+                        \Posit32::ExponentSize().0.conditional16\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits = 0u;
+                        -- 
+                        \Posit32::ExponentSize().0.bits\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- b = Posit32.LengthOfRunOfBits (0u, 31);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
+                        \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                        \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= SmartResize(unsigned(to_signed(31, 32)), 8);
+                        \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
+                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
+                        if (\Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
+                            \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
+                            \Posit32::ExponentSize().0.return.0\ := \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
+                            \Posit32::ExponentSize().0.b\ := \Posit32::ExponentSize().0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- byte result;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- result = (byte)(32 - (int)(b) - 1);
+                            -- 
+                            \Posit32::ExponentSize().0.binaryOperationResult.0\ := to_signed(32, 32) - signed(SmartResize((\Posit32::ExponentSize().0.b\), 32));
+                            \Posit32::ExponentSize().0.binaryOperationResult.1\ := SmartResize(unsigned(\Posit32::ExponentSize().0.binaryOperationResult.0\ - to_signed(1, 32)), 8);
+                            \Posit32::ExponentSize().0.result\ := (\Posit32::ExponentSize().0.binaryOperationResult.1\);
+                            -- The following section was transformed from the .NET statement below:
+                            -- if ((int)(b) + 2 <= 32) {
+                            -- 	int conditional17;
+                            -- 	if ((32 - ((int)(b) + 2) > 2)) {
+                            -- 		conditional17 = 2;
+                            -- 	} else {
+                            -- 		conditional17 = ((byte)(32 - ((int)(b) + 2)));
+                            -- 	}
+                            -- 	result = (byte)(conditional17);
+                            -- }
+                            -- 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7128
+                    when \Posit32::ExponentSize().0._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::ExponentSize().0.binaryOperationResult.2\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.3\ := \Posit32::ExponentSize().0.binaryOperationResult.2\ <= to_signed(32, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::ExponentSize().0._State_6\ and ends in state \Posit32::ExponentSize().0._State_8\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_5\.
+
+                        if (\Posit32::ExponentSize().0.binaryOperationResult.3\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_6\;
+                        else 
+                            -- There was no false branch, so going directly to the state after the if-else.
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.93435
+                    when \Posit32::ExponentSize().0._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return result;
+                        -- 
+                        \Posit32::ExponentSize().0.return\ <= \Posit32::ExponentSize().0.result\;
+                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	int conditional17;
+                        -- 	if ((32 - ((int)(b) + 2) > 2)) {
+                        -- 		conditional17 = 2;
+                        -- 	} else {
+                        -- 		conditional17 = ((byte)(32 - ((int)(b) + 2)));
+                        -- 	}
+                        -- 	result = (byte)(conditional17);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditional17;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((32 - ((int)(b) + 2) > 2)) {
+                        -- 	conditional17 = 2;
+                        -- } else {
+                        -- 	conditional17 = ((byte)(32 - ((int)(b) + 2)));
+                        -- }
+                        -- 
+                        \Posit32::ExponentSize().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.5\ := to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.4\);
+                        \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_7\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7545
+                    when \Posit32::ExponentSize().0._State_7\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::ExponentSize().0.binaryOperationResult.6\ := \Posit32::ExponentSize().0.binaryOperationResult.5\ > to_signed(2, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::ExponentSize().0._State_9\ and ends in state \Posit32::ExponentSize().0._State_9\.
+                        --     * The false branch starts in state \Posit32::ExponentSize().0._State_10\ and ends in state \Posit32::ExponentSize().0._State_10\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::ExponentSize().0._State_8\.
+
+                        if ((\Posit32::ExponentSize().0.binaryOperationResult.6\)) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_9\;
+                        else 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_10\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.50535
+                    when \Posit32::ExponentSize().0._State_8\ => 
+                        -- State after the if-else which was started in state \Posit32::ExponentSize().0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result = (byte)(conditional17);
+                        -- 
+                        \Posit32::ExponentSize().0.result\ := SmartResize(unsigned((\Posit32::ExponentSize().0.conditional17\)), 8);
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_4\.
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_8\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_9\ => 
+                        -- True branch of the if-else started in state \Posit32::ExponentSize().0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional17 = 2;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional17 = 2;
+                        -- 
+                        \Posit32::ExponentSize().0.conditional17\ := to_signed(2, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_7\.
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_9\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::ExponentSize().0._State_10\ => 
+                        -- False branch of the if-else started in state \Posit32::ExponentSize().0._State_7\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional17 = ((byte)(32 - ((int)(b) + 2)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional17 = ((byte)(32 - ((int)(b) + 2)));
+                        -- 
+                        \Posit32::ExponentSize().0.binaryOperationResult.7\ := signed(SmartResize((\Posit32::ExponentSize().0.b\), 32)) + to_signed(2, 32);
+                        \Posit32::ExponentSize().0.binaryOperationResult.8\ := SmartResize(unsigned(to_signed(32, 32) - (\Posit32::ExponentSize().0.binaryOperationResult.7\)), 8);
+                        \Posit32::ExponentSize().0.conditional17\ := signed(SmartResize(((\Posit32::ExponentSize().0.binaryOperationResult.8\)), 32));
+                        -- Going to the state after the if-else which was started in state \Posit32::ExponentSize().0._State_7\.
+                        if (\Posit32::ExponentSize().0._State\ = \Posit32::ExponentSize().0._State_10\) then 
+                            \Posit32::ExponentSize().0._State\ := \Posit32::ExponentSize().0._State_8\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7545
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().0 state machine end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0 state machine start
+    \Posit32::GetExponentValue().0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::GetExponentValue().0._State\: \Posit32::GetExponentValue().0._States\ := \Posit32::GetExponentValue().0._State_0\;
+        Variable \Posit32::GetExponentValue().0.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::GetExponentValue().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.conditional18\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetExponentValue().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::GetExponentValue().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::GetExponentValue().0.binaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.conditional19\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::GetExponentValue().0.binaryOperationResult.4\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::GetExponentValue().0._Finished\ <= false;
+                \Posit32::GetExponentValue().0.return\ <= to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= false;
+                \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= false;
+                \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_0\;
+                \Posit32::GetExponentValue().0.num\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.conditional18\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.b\ := to_unsigned(0, 8);
+                \Posit32::GetExponentValue().0.return.0\ := to_unsigned(0, 8);
+                \Posit32::GetExponentValue().0.return.1\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit32::GetExponentValue().0.binaryOperationResult.2\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.conditional19\ := to_unsigned(0, 32);
+                \Posit32::GetExponentValue().0.binaryOperationResult.4\ := false;
+            else 
+                case \Posit32::GetExponentValue().0._State\ is 
+                    when \Posit32::GetExponentValue().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::GetExponentValue().0._Started\ = true) then 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::GetExponentValue().0._Started\ = true) then 
+                            \Posit32::GetExponentValue().0._Finished\ <= true;
+                        else 
+                            \Posit32::GetExponentValue().0._Finished\ <= false;
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_2\ => 
+                        \Posit32::GetExponentValue().0.this\ := \Posit32::GetExponentValue().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional18;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional18 = 0u;
+                        -- 
+                        \Posit32::GetExponentValue().0.conditional18\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 0u;
+                        -- 
+                        \Posit32::GetExponentValue().0.num\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- b = Lombiq.Arithmetics.Posit32.ExponentSize (@this);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
+                        \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
+                        \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= true;
+                        \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::ExponentSize()
+                        if (\Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ = \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\) then 
+                            \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\ <= false;
+                            \Posit32::GetExponentValue().0.return.0\ := \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\;
+                            \Posit32::GetExponentValue().0.b\ := \Posit32::GetExponentValue().0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- num = 0u >> (int)Lombiq.Arithmetics.Posit32.FractionSize (@this) << 32 - (int)(b) >> 30;
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::GetExponentValue().0.this\;
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= true;
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_4\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                        if (\Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ = \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\) then 
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ <= false;
+                            \Posit32::GetExponentValue().0.return.1\ := \Posit32::GetExponentValue().0.Posit32::FractionSize().return.0\;
+                            \Posit32::GetExponentValue().0.binaryOperationResult.0\ := shift_right(to_unsigned(0, 32), to_integer(unsigned(SmartResize(signed(\Posit32::GetExponentValue().0.return.1\), 5) and "11111")));
+                            \Posit32::GetExponentValue().0.binaryOperationResult.1\ := to_signed(32, 32) - signed(SmartResize((\Posit32::GetExponentValue().0.b\), 32));
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.99165
+                    when \Posit32::GetExponentValue().0._State_5\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::GetExponentValue().0.binaryOperationResult.2\ := shift_left(\Posit32::GetExponentValue().0.binaryOperationResult.0\, to_integer(unsigned(SmartResize(\Posit32::GetExponentValue().0.binaryOperationResult.1\, 5))));
+                        \Posit32::GetExponentValue().0.binaryOperationResult.3\ := shift_right(\Posit32::GetExponentValue().0.binaryOperationResult.2\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
+                        \Posit32::GetExponentValue().0.num\ := \Posit32::GetExponentValue().0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional19;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (((int)(b) != 0)) {
+                        -- 	conditional19 = num;
+                        -- } else {
+                        -- 	conditional19 = 0u;
+                        -- }
+                        -- 
+                        \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0.75555
+                    when \Posit32::GetExponentValue().0._State_6\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::GetExponentValue().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::GetExponentValue().0.b\), 32)) /= to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::GetExponentValue().0._State_8\ and ends in state \Posit32::GetExponentValue().0._State_8\.
+                        --     * The false branch starts in state \Posit32::GetExponentValue().0._State_9\ and ends in state \Posit32::GetExponentValue().0._State_9\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::GetExponentValue().0._State_7\.
+
+                        if ((\Posit32::GetExponentValue().0.binaryOperationResult.4\)) then 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_8\;
+                        else 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.33405
+                    when \Posit32::GetExponentValue().0._State_7\ => 
+                        -- State after the if-else which was started in state \Posit32::GetExponentValue().0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditional19;
+                        -- 
+                        \Posit32::GetExponentValue().0.return\ <= \Posit32::GetExponentValue().0.conditional19\;
+                        \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_8\ => 
+                        -- True branch of the if-else started in state \Posit32::GetExponentValue().0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional19 = num;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional19 = num;
+                        -- 
+                        \Posit32::GetExponentValue().0.conditional19\ := \Posit32::GetExponentValue().0.num\;
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().0._State_6\.
+                        if (\Posit32::GetExponentValue().0._State\ = \Posit32::GetExponentValue().0._State_8\) then 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::GetExponentValue().0._State_9\ => 
+                        -- False branch of the if-else started in state \Posit32::GetExponentValue().0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional19 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional19 = 0u;
+                        -- 
+                        \Posit32::GetExponentValue().0.conditional19\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::GetExponentValue().0._State_6\.
+                        if (\Posit32::GetExponentValue().0._State\ = \Posit32::GetExponentValue().0._State_9\) then 
+                            \Posit32::GetExponentValue().0._State\ := \Posit32::GetExponentValue().0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0 state machine end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().0 state machine start
+    \Posit32::FractionSize().0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::FractionSize().0._State\: \Posit32::FractionSize().0._States\ := \Posit32::FractionSize().0._State_0\;
+        Variable \Posit32::FractionSize().0.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::FractionSize().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionSize().0.conditional20\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionSize().0.num\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.return.0\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::FractionSize().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionSize().0.conditional21\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionSize().0.binaryOperationResult.3\: boolean := false;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::FractionSize().0._Finished\ <= false;
+                \Posit32::FractionSize().0.return\ <= to_unsigned(0, 32);
+                \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= to_unsigned(0, 8);
+                \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
+                \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_0\;
+                \Posit32::FractionSize().0.bits\ := to_unsigned(0, 32);
+                \Posit32::FractionSize().0.conditional20\ := to_unsigned(0, 32);
+                \Posit32::FractionSize().0.num\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.return.0\ := to_unsigned(0, 8);
+                \Posit32::FractionSize().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.binaryOperationResult.1\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(0, 32);
+                \Posit32::FractionSize().0.conditional21\ := to_unsigned(0, 32);
+                \Posit32::FractionSize().0.binaryOperationResult.3\ := false;
+            else 
+                case \Posit32::FractionSize().0._State\ is 
+                    when \Posit32::FractionSize().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::FractionSize().0._Started\ = true) then 
+                            \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionSize().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::FractionSize().0._Started\ = true) then 
+                            \Posit32::FractionSize().0._Finished\ <= true;
+                        else 
+                            \Posit32::FractionSize().0._Finished\ <= false;
+                            \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionSize().0._State_2\ => 
+                        \Posit32::FractionSize().0.this\ := \Posit32::FractionSize().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional20;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional20 = 0u;
+                        -- 
+                        \Posit32::FractionSize().0.conditional20\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits = 0u;
+                        -- 
+                        \Posit32::FractionSize().0.bits\ := to_unsigned(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = 32 - ((int)(Posit32.LengthOfRunOfBits (0u, 31)) + 2 + 2);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
+                        \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                        \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\ <= SmartResize(unsigned(to_signed(31, 32)), 8);
+                        \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= true;
+                        \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionSize().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte)
+                        if (\Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\) then 
+                            \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ <= false;
+                            \Posit32::FractionSize().0.return.0\ := \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\;
+                            \Posit32::FractionSize().0.binaryOperationResult.0\ := signed(SmartResize((\Posit32::FractionSize().0.return.0\), 32)) + to_signed(2, 32);
+                            \Posit32::FractionSize().0.binaryOperationResult.1\ := SmartResize(\Posit32::FractionSize().0.binaryOperationResult.0\ + to_signed(2, 32), 32);
+                            \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7962
+                    when \Posit32::FractionSize().0._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::FractionSize().0.binaryOperationResult.2\ := to_signed(32, 32) - (\Posit32::FractionSize().0.binaryOperationResult.1\);
+                        \Posit32::FractionSize().0.num\ := \Posit32::FractionSize().0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional21;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((num > 0)) {
+                        -- 	conditional21 = ((uint)num);
+                        -- } else {
+                        -- 	conditional21 = 0u;
+                        -- }
+                        -- 
+                        \Posit32::FractionSize().0.binaryOperationResult.3\ := \Posit32::FractionSize().0.num\ > to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::FractionSize().0._State_6\ and ends in state \Posit32::FractionSize().0._State_6\.
+                        --     * The false branch starts in state \Posit32::FractionSize().0._State_7\ and ends in state \Posit32::FractionSize().0._State_7\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::FractionSize().0._State_5\.
+
+                        if ((\Posit32::FractionSize().0.binaryOperationResult.3\)) then 
+                            \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_6\;
+                        else 
+                            \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.86175
+                    when \Posit32::FractionSize().0._State_5\ => 
+                        -- State after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditional21;
+                        -- 
+                        \Posit32::FractionSize().0.return\ <= \Posit32::FractionSize().0.conditional21\;
+                        \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionSize().0._State_6\ => 
+                        -- True branch of the if-else started in state \Posit32::FractionSize().0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional21 = ((uint)num);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional21 = ((uint)num);
+                        -- 
+                        \Posit32::FractionSize().0.conditional21\ := (unsigned(\Posit32::FractionSize().0.num\));
+                        -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
+                        if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_6\) then 
+                            \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionSize().0._State_7\ => 
+                        -- False branch of the if-else started in state \Posit32::FractionSize().0._State_4\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional21 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional21 = 0u;
+                        -- 
+                        \Posit32::FractionSize().0.conditional21\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::FractionSize().0._State_4\.
+                        if (\Posit32::FractionSize().0._State\ = \Posit32::FractionSize().0._State_7\) then 
+                            \Posit32::FractionSize().0._State\ := \Posit32::FractionSize().0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().0 state machine end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().0 state machine start
+    \Posit32::FractionWithHiddenBit().0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::FractionWithHiddenBit().0._State\: \Posit32::FractionWithHiddenBit().0._States\ := \Posit32::FractionWithHiddenBit().0._State_0\;
+        Variable \Posit32::FractionWithHiddenBit().0.this\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::FractionWithHiddenBit().0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.num2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.conditional22\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.conditional23\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\: boolean := false;
+        Variable \Posit32::FractionWithHiddenBit().0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::FractionWithHiddenBit().0._Finished\ <= false;
+                \Posit32::FractionWithHiddenBit().0.return\ <= to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\ <= false;
+                \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
+                \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_0\;
+                \Posit32::FractionWithHiddenBit().0.num\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.return.0\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.num2\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.conditional22\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.bits\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\ := to_signed(0, 32);
+                \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\ := to_signed(0, 32);
+                \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.conditional23\ := to_unsigned(0, 32);
+                \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := false;
+                \Posit32::FractionWithHiddenBit().0.return.1\ := to_unsigned(0, 32);
+            else 
+                case \Posit32::FractionWithHiddenBit().0._State\ is 
+                    when \Posit32::FractionWithHiddenBit().0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::FractionWithHiddenBit().0._Started\ = true) then 
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::FractionWithHiddenBit().0._Started\ = true) then 
+                            \Posit32::FractionWithHiddenBit().0._Finished\ <= true;
+                        else 
+                            \Posit32::FractionWithHiddenBit().0._Finished\ <= false;
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_2\ => 
+                        \Posit32::FractionWithHiddenBit().0.this\ := \Posit32::FractionWithHiddenBit().0.this.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num = Lombiq.Arithmetics.Posit32.FractionSize (@this);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                        \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().this.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.this\;
+                        \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\ <= true;
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_3\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                        if (\Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\ = \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Finished.0\) then 
+                            \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\ <= false;
+                            \Posit32::FractionWithHiddenBit().0.return.0\ := \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().return.0\;
+                            \Posit32::FractionWithHiddenBit().0.num\ := \Posit32::FractionWithHiddenBit().0.return.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint num2;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint conditional22;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- conditional22 = 0u;
+                            -- 
+                            \Posit32::FractionWithHiddenBit().0.conditional22\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- num2 = 0u;
+                            -- 
+                            \Posit32::FractionWithHiddenBit().0.num2\ := to_unsigned(0, 32);
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint bits;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- bits = 0u << (int)(32L - (long)(num)) >> (int)(32L - (long)(num));
+                            -- 
+                            \Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Posit32::FractionWithHiddenBit().0.num\), 64)), 32);
+                            \Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\ := shift_left(to_unsigned(0, 32), to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.0\), 5))));
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.83745
+                    when \Posit32::FractionWithHiddenBit().0._State_4\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Posit32::FractionWithHiddenBit().0.num\), 64)), 32);
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_5\;
+                        -- Clock cycles needed to complete this state (approximation): 0.39855
+                    when \Posit32::FractionWithHiddenBit().0._State_5\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\ := shift_right(\Posit32::FractionWithHiddenBit().0.binaryOperationResult.1\, to_integer(unsigned(SmartResize((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.2\), 5) and "11111")));
+                        \Posit32::FractionWithHiddenBit().0.bits\ := \Posit32::FractionWithHiddenBit().0.binaryOperationResult.3\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional23;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (((long)(num) == 0L)) {
+                        -- 	conditional23 = 1u;
+                        -- } else {
+                        -- 	conditional23 = Posit32.SetOne (bits, (ushort)num);
+                        -- }
+                        -- 
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_6\;
+                        -- Clock cycles needed to complete this state (approximation): 0.63525
+                    when \Posit32::FractionWithHiddenBit().0._State_6\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::FractionWithHiddenBit().0.num\), 64)) = to_signed(0, 64);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Posit32::FractionWithHiddenBit().0._State_8\ and ends in state \Posit32::FractionWithHiddenBit().0._State_8\.
+                        --     * The false branch starts in state \Posit32::FractionWithHiddenBit().0._State_9\ and ends in state \Posit32::FractionWithHiddenBit().0._State_10\.
+                        --     * Execution after either branch will continue in the following state: \Posit32::FractionWithHiddenBit().0._State_7\.
+
+                        if ((\Posit32::FractionWithHiddenBit().0.binaryOperationResult.4\)) then 
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_8\;
+                        else 
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_9\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.4371
+                    when \Posit32::FractionWithHiddenBit().0._State_7\ => 
+                        -- State after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return conditional23;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().0.return\ <= \Posit32::FractionWithHiddenBit().0.conditional23\;
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_8\ => 
+                        -- True branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional23 = 1u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional23 = 1u;
+                        -- 
+                        \Posit32::FractionWithHiddenBit().0.conditional23\ := to_unsigned(1, 32);
+                        -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_6\.
+                        if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_8\) then 
+                            \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_9\ => 
+                        -- False branch of the if-else started in state \Posit32::FractionWithHiddenBit().0._State_6\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional23 = Posit32.SetOne (bits, (ushort)num);
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional23 = Posit32.SetOne (bits, (ushort)num);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
+                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\ <= \Posit32::FractionWithHiddenBit().0.bits\;
+                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\ <= SmartResize(\Posit32::FractionWithHiddenBit().0.num\, 16);
+                        \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= true;
+                        \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::FractionWithHiddenBit().0._State_10\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16)
+                        if (\Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ = \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\) then 
+                            \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\ <= false;
+                            \Posit32::FractionWithHiddenBit().0.return.1\ := \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).return.0\;
+                            \Posit32::FractionWithHiddenBit().0.conditional23\ := \Posit32::FractionWithHiddenBit().0.return.1\;
+                            -- Going to the state after the if-else which was started in state \Posit32::FractionWithHiddenBit().0._State_6\.
+                            if (\Posit32::FractionWithHiddenBit().0._State\ = \Posit32::FractionWithHiddenBit().0._State_10\) then 
+                                \Posit32::FractionWithHiddenBit().0._State\ := \Posit32::FractionWithHiddenBit().0._State_7\;
+                            end if;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().0 state machine end
+
+
     -- System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).0 state machine start
     \Posit32::GetMostSignificantOnePosition(UInt32).0._StateMachine\: process (\Clock\) 
         Variable \Posit32::GetMostSignificantOnePosition(UInt32).0._State\: \Posit32::GetMostSignificantOnePosition(UInt32).0._States\ := \Posit32::GetMostSignificantOnePosition(UInt32).0._State_0\;
@@ -3627,6 +4857,61 @@ begin
         end if;
     end process;
     -- System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).0 state machine end
+
+
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 state machine start
+    \Posit32::SetOne(UInt32,UInt16).0._StateMachine\: process (\Clock\) 
+        Variable \Posit32::SetOne(UInt32,UInt16).0._State\: \Posit32::SetOne(UInt32,UInt16).0._States\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
+        Variable \Posit32::SetOne(UInt32,UInt16).0.bits\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::SetOne(UInt32,UInt16).0.index\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Posit32::SetOne(UInt32,UInt16).0._Finished\ <= false;
+                \Posit32::SetOne(UInt32,UInt16).0.return\ <= to_unsigned(0, 32);
+                \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
+                \Posit32::SetOne(UInt32,UInt16).0.bits\ := to_unsigned(0, 32);
+                \Posit32::SetOne(UInt32,UInt16).0.index\ := to_unsigned(0, 16);
+                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := to_unsigned(0, 32);
+                \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := to_unsigned(0, 32);
+            else 
+                case \Posit32::SetOne(UInt32,UInt16).0._State\ is 
+                    when \Posit32::SetOne(UInt32,UInt16).0._State_0\ => 
+                        -- Start state
+                        -- Waiting for the start signal.
+                        if (\Posit32::SetOne(UInt32,UInt16).0._Started\ = true) then 
+                            \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_2\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::SetOne(UInt32,UInt16).0._State_1\ => 
+                        -- Final state
+                        -- Signaling finished until Started is pulled back to false, then returning to the start state.
+                        if (\Posit32::SetOne(UInt32,UInt16).0._Started\ = true) then 
+                            \Posit32::SetOne(UInt32,UInt16).0._Finished\ <= true;
+                        else 
+                            \Posit32::SetOne(UInt32,UInt16).0._Finished\ <= false;
+                            \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_0\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Posit32::SetOne(UInt32,UInt16).0._State_2\ => 
+                        \Posit32::SetOne(UInt32,UInt16).0.bits\ := \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\;
+                        \Posit32::SetOne(UInt32,UInt16).0.index\ := \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- return bits | (uint)(1 << (int)index);
+                        -- 
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::SetOne(UInt32,UInt16).0.index\, 32)), 5)))));
+                        \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\ := \Posit32::SetOne(UInt32,UInt16).0.bits\ or (\Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.0\);
+                        \Posit32::SetOne(UInt32,UInt16).0.return\ <= \Posit32::SetOne(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Posit32::SetOne(UInt32,UInt16).0._State\ := \Posit32::SetOne(UInt32,UInt16).0._State_1\;
+                        -- Clock cycles needed to complete this state (approximation): 0.5685
+                end case;
+            end if;
+        end if;
+    end process;
+    -- System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).0 state machine end
 
 
     -- System.UInt32 Lombiq.Arithmetics.Posit32::SetZero(System.UInt32,System.UInt16).0 state machine start
@@ -4203,16 +5488,34 @@ begin
     \Quire Posit32::op_Explicit(Posit32).0._StateMachine\: process (\Clock\) 
         Variable \Quire Posit32::op_Explicit(Posit32).0._State\: \Quire Posit32::op_Explicit(Posit32).0._States\ := \Quire Posit32::op_Explicit(Posit32).0._State_0\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.x\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.object36\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.quire\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return.2\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return.3\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
                 \Quire Posit32::op_Explicit(Posit32).0._Finished\ <= false;
-                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
-                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= (others => to_unsigned(0, 64));
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= to_unsigned(0, 16);
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
                 \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_0\;
+                \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
+                \Quire Posit32::op_Explicit(Posit32).0.return.0\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return.1\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.return.2\ := to_signed(0, 16);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := to_signed(0, 32);
             else 
                 case \Quire Posit32::op_Explicit(Posit32).0._State\ is 
                     when \Quire Posit32::op_Explicit(Posit32).0._State_0\ => 
@@ -4235,33 +5538,97 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_2\ => 
                         \Quire Posit32::op_Explicit(Posit32).0.x\ := \Quire Posit32::op_Explicit(Posit32).0.x.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object36;
+                        -- ulong[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object36 = new Quire (0u, 512);
+                        -- array = new ulong[8];
                         -- 
-                        -- Initializing record fields to their defaults.
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\IsNull\ := false;
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\Size\ := to_unsigned(0, 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\Segments\ := (others => to_unsigned(0, 64));
-                        -- Invoking the target's constructor.
-                        -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.object36\;
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(0, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(512, 32)), 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
+                        \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
+                        -- The following section was transformed from the .NET statement below:
+                        -- array [0] = Lombiq.Arithmetics.Posit32.FractionWithHiddenBit (x);
+                        -- 
+                        -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
+                        \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
+                        \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ <= true;
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_3\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Quire Posit32::op_Explicit(Posit32).0.object36\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit()
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Finished.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\ <= false;
+                            \Quire Posit32::op_Explicit(Posit32).0.return.0\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().return.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.array\(to_integer(to_signed(0, 32))) := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.return.0\, 64);
                             -- The following section was transformed from the .NET statement below:
-                            -- return object36;
+                            -- Quire quire;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.object36\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- quire = new Quire (array, 0);
+                            -- 
+                            -- Initializing record fields to their defaults.
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\IsNull\ := false;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\Size\ := to_unsigned(0, 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\SegmentCount\ := to_unsigned(0, 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\.\Segments\ := (others => to_unsigned(0, 64));
+                            -- Invoking the target's constructor.
+                            -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.array\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_4\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_4\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.array\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- quire = Quire.op_LeftShift (quire, (int)(240L - (long)(Lombiq.Arithmetics.Posit32.FractionSize (x)) + (long)(Lombiq.Arithmetics.Posit32.CalculateScaleFactor (x))));
+                            -- 
+                            -- Starting state machine invocation for the following method: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ <= true;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_5\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_5\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize()
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ <= false;
+                            \Quire Posit32::op_Explicit(Posit32).0.return.1\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().return.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := to_signed(240, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return.1\), 64));
+                            -- Starting state machine invocation for the following method: System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor()
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.x\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ <= true;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_6\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.39855
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_6\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor()
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Finished.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\ <= false;
+                            \Quire Posit32::op_Explicit(Posit32).0.return.2\ := \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().return.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ + SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return.2\), 64), 32);
+                            -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\);
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.49995
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_7\ => 
+                        -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
+                            \Quire Posit32::op_Explicit(Posit32).0.return.3\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).return.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
+                            \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.return.3\;
+                            -- The following section was transformed from the .NET statement below:
+                            -- return quire;
+                            -- 
+                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -4393,7 +5760,7 @@ begin
         Variable \Quire::.ctor(UInt32,UInt16).0.firstSegment\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire::.ctor(UInt32,UInt16).0.conditional25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
@@ -4412,7 +5779,7 @@ begin
                 \Quire::.ctor(UInt32,UInt16).0.firstSegment\ := to_unsigned(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.size\ := to_unsigned(0, 16);
                 \Quire::.ctor(UInt32,UInt16).0.conditional25\ := to_signed(0, 32);
-                \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ := to_signed(0, 32);
+                \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
@@ -4455,26 +5822,26 @@ begin
                         -- int conditional25;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand41;
+                        -- int remainderOperand40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand41 = (int)size;
+                        -- remainderOperand40 = (int)size;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
+                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((remainderOperand41 - remainderOperand41 / 32 * 32 != 0)) {
+                        -- if ((remainderOperand40 - remainderOperand40 / 32 * 32 != 0)) {
                         -- 	conditional25 = 1;
                         -- } else {
                         -- 	conditional25 = 0;
                         -- }
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ / to_signed(32, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ / to_signed(32, 32);
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := SmartResize(\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ * to_signed(32, 32), 32);
                         \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.70365
                     when \Quire::.ctor(UInt32,UInt16).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ /= to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -4501,9 +5868,9 @@ begin
                         -- 
                         \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\ := (others => to_unsigned(0, 64));
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Segments [0] = firstSegment;
+                        -- @this.Segments [0] = 1u;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := SmartResize(\Quire::.ctor(UInt32,UInt16).0.firstSegment\, 64);
+                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := SmartResize(to_unsigned(1, 32), 64);
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -4627,7 +5994,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.21\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.22\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.23\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.object37\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.object36\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -4870,19 +6237,19 @@ begin
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_6\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object37;
+                        -- Quire object36;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object37 = new Quire (array, 0);
+                        -- object36 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\IsNull\ := false;
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\IsNull\ := false;
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.object37\;
+                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.object36\;
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.array\;
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
@@ -5217,12 +6584,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_Addition(Quire,Quire).0.object37\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,Quire).0.object36\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_Addition(Quire,Quire).0.array\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object37;
+                            -- return object36;
                             -- 
-                            \Quire Quire::op_Addition(Quire,Quire).0.return\ <= \Quire Quire::op_Addition(Quire,Quire).0.object37\;
+                            \Quire Quire::op_Addition(Quire,Quire).0.return\ <= \Quire Quire::op_Addition(Quire,Quire).0.object36\;
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5238,7 +6605,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,UInt32).0._State\: \Quire Quire::op_Addition(Quire,UInt32).0._States\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_0\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.right\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Quire::op_Addition(Quire,UInt32).0.object38\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_Addition(Quire,UInt32).0.object37\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.return.0\: \Lombiq.Arithmetics.Quire\;
     begin 
@@ -5278,20 +6645,20 @@ begin
                         \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.left.parameter.In\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.right\ := \Quire Quire::op_Addition(Quire,UInt32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object38;
+                        -- Quire object37;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object38 = new Quire (1u, (ushort)((int)(left.SegmentCount) << 6));
+                        -- object37 = new Quire (1u, (ushort)((int)(left.SegmentCount) << 6));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\IsNull\ := false;
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\IsNull\ := false;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(signed(SmartResize((\Quire Quire::op_Addition(Quire,UInt32).0.left\.\SegmentCount\), 32)), to_integer(unsigned(SmartResize(to_signed(6, 32), 5))))), 16);
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object38\;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object37\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(1, 32);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= (\Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
@@ -5301,13 +6668,13 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
                         if (\Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.object38\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.object37\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return Quire.op_Addition (left, object38);
+                            -- return Quire.op_Addition (left, object37);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire)
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.left\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object38\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object37\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= true;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_4\;
                         end if;
@@ -5318,7 +6685,7 @@ begin
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= false;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return.0\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.In.0\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.object38\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.object37\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return\ <= \Quire Quire::op_Addition(Quire,UInt32).0.return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_1\;
                         end if;
@@ -5623,22 +6990,23 @@ begin
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag2\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object39\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object38\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -5652,21 +7020,22 @@ begin
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.array\ := (others => to_unsigned(0, 64));
                 \Quire Quire::op_RightShift(Quire,Int32).0.num\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := to_unsigned(0, 16);
             else 
                 case \Quire Quire::op_RightShift(Quire,Int32).0._State\ is 
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_0\ => 
@@ -5692,12 +7061,17 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.left\ := \Quire Quire::op_RightShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = right & ((int)(left.SegmentCount) * 64 - 1);
+                        -- right = right & ((1 << (int)(left.SegmentCount) * 6) - 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(64, 32), 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ - to_signed(1, 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(6, 32), 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\, 5))));
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8211
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\) - to_signed(1, 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong[] array;
                         -- 
@@ -5738,13 +7112,13 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.63075
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\.
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.486
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) < (\Quire Quire::op_RightShift(Quire,Int32).0.right\);
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\) then 
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) < (\Quire Quire::op_RightShift(Quire,Int32).0.right\);
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bool flag;
@@ -5795,37 +7169,37 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
                         else 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.46515
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ => 
-                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_5\ => 
+                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object39;
+                        -- Quire object38;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object39 = new Quire (array, 0);
+                        -- object38 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\IsNull\ := false;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\IsNull\ := false;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object39\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object38\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.array\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_11\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_5\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_6\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) <= to_signed(8, 32);
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\) then 
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) <= to_signed(8, 32);
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	ushort num3;
@@ -5846,45 +7220,45 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = (ushort)(8 - (int)(num2));
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32))), 16);
-                            \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\);
+                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32))), 16);
+                            \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\);
                             -- The following section was transformed from the .NET statement below:
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- flag2 = (array [num3] & 1uL) == 1uL;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_7\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
                         else 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.89265
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_6\ => 
-                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_7\ => 
+                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- num = (ushort)((int)(num) + 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) + to_signed(1, 32)), 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.num\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\);
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_6\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) + to_signed(1, 32)), 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.num\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\);
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ if the loop wasn't exited with a state change.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_7\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_7\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) and to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\) = to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) and to_unsigned(1, 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
                         -- array [num3] = array [num3] >> 1;
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.66
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_8\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	array [num3] = array [num3] | 0x8000000000000000uL;
@@ -5892,18 +7266,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ and ends in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
+                        --     * The true branch starts in state \Quire Quire::op_RightShift(Quire,Int32).0._State_11\ and ends in state \Quire Quire::op_RightShift(Quire,Int32).0._State_11\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_RightShift(Quire,Int32).0._State_10\.
 
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.flag\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_11\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4668
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_9\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ => 
+                        -- State after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag = flag2;
                         -- 
@@ -5911,15 +7285,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (ushort)((int)(num2) + 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) + to_signed(1, 32)), 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ if the loop wasn't exited with a state change.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_9\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) + to_signed(1, 32)), 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\);
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ if the loop wasn't exited with a state change.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_11\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	array [num3] = array [num3] | 0x8000000000000000uL;
@@ -5929,23 +7303,23 @@ begin
                         -- array [num3] = array [num3] | 0x8000000000000000uL;
                         -- 
                         -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) or "1000000000000000000000000000000000000000000000000000000000000000";
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) or "1000000000000000000000000000000000000000000000000000000000000000";
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\;
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_11\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2229
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_11\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_RightShift(Quire,Int32).0.object39\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.object38\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_RightShift(Quire,Int32).0.array\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object39;
+                            -- return object38;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object39\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object38\;
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -5975,7 +7349,7 @@ begin
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.object40\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.object39\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6025,9 +7399,9 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.left\ := \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = right & 511;
+                        -- right = right & 65535;
                         -- 
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(511, 32);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(65535, 32);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong[] array;
@@ -6128,19 +7502,19 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_4\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object40;
+                        -- Quire object39;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object40 = new Quire (array, 0);
+                        -- object39 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\IsNull\ := false;
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\IsNull\ := false;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object40\;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object39\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.array\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
@@ -6252,12 +7626,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.object40\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.object39\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0.array\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object40;
+                            -- return object39;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object40\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object39\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -6570,6 +7944,8 @@ begin
         Variable \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Posit32::.ctor(Quire).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Posit32::FusedSum(Posit32[],Quire).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -6578,8 +7954,11 @@ begin
                 \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Posit32::.ctor(Quire).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Posit32::FusedSum(Posit32[],Quire).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
                 \Posit32::.ctor(Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\ <= false;
                 \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\ <= false;
             else 
 
                 -- Invocation handler #0 out of 1 corresponding to System.Void Lombiq.Arithmetics.Posit32::.ctor(Lombiq.Arithmetics.Quire).0
@@ -6640,6 +8019,37 @@ begin
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\ := WaitingForStarted;
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0
+                case \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0._Started\ <= true;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.right.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Quire Quire::op_LeftShift(Quire,Int32).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\ <= true;
+                                    \Quire Quire::op_LeftShift(Quire,Int32).0._Started\ <= false;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).return.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.return\;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.Out\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Quire Quire::op_LeftShift(Quire,Int32).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -6772,12 +8182,155 @@ begin
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte) start
-    -- Signal connections for System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32).0 (#0):
-    \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\;
-    \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\;
-    \Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\;
-    \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Finished\;
-    \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\ <= \Posit32::LengthOfRunOfBits(UInt32,Byte).0.return\;
+    \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte)\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningState.0\ := WaitingForStarted;
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+            else 
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::AssemblePositBitsWithRounding(System.Boolean,System.Int32,System.UInt32,System.UInt32).0
+                case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\) then 
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningIndex.0\ := 0;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= true;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\ <= \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningState.0\ := AfterFinished;
+                                    \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= true;
+                                    \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= false;
+                                    \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\ <= \Posit32::LengthOfRunOfBits(UInt32,Byte).0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.runningState.0\ := WaitingForStarted;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().0
+                case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\) then 
+                            \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningIndex.0\ := 0;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= true;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\ <= \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= true;
+                                    \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= false;
+                                    \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\ <= \Posit32::LengthOfRunOfBits(UInt32,Byte).0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::GetRegimeKValue().0.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetRegimeKValue().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().0
+                case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\) then 
+                            \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningIndex.0\ := 0;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= true;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\ <= \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= true;
+                                    \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= false;
+                                    \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\ <= \Posit32::LengthOfRunOfBits(UInt32,Byte).0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::ExponentSize().0.runningState.0\ := WaitingForStarted;
+                            \Posit32::ExponentSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().0
+                case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\) then 
+                            \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningIndex.0\ := 0;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= true;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.bits.parameter.In\ <= \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).bits.parameter.Out.0\;
+                            \Posit32::LengthOfRunOfBits(UInt32,Byte).0.startingPosition.parameter.In\ <= \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).startingPosition.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::LengthOfRunOfBits(UInt32,Byte).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= true;
+                                    \Posit32::LengthOfRunOfBits(UInt32,Byte).0._Started\ <= false;
+                                    \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte).return.0\ <= \Posit32::LengthOfRunOfBits(UInt32,Byte).0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::LengthOfRunOfBits(UInt32,Byte).Posit32::FractionSize().0.runningState.0\ := WaitingForStarted;
+                            \Posit32::FractionSize().0.Posit32::LengthOfRunOfBits(UInt32,Byte)._Finished.0\ <= false;
+                        end if;
+                end case;
+
+            end if;
+        end if;
+    end process;
     -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte) end
 
 
@@ -6800,12 +8353,162 @@ begin
     -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::SetZero(System.UInt32,System.UInt16) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue() start
+    -- Signal connections for System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().0 (#0):
+    \Posit32::GetRegimeKValue().0._Started\ <= \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Started.0\;
+    \Posit32::GetRegimeKValue().0.this.parameter.In\ <= \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue().this.parameter.Out.0\;
+    \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue()._Finished.0\ <= \Posit32::GetRegimeKValue().0._Finished\;
+    \Posit32::CalculateScaleFactor().0.Posit32::GetRegimeKValue().return.0\ <= \Posit32::GetRegimeKValue().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue() start
+    -- Signal connections for System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().0 (#0):
+    \Posit32::GetExponentValue().0._Started\ <= \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Started.0\;
+    \Posit32::GetExponentValue().0.this.parameter.In\ <= \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().this.parameter.Out.0\;
+    \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue()._Finished.0\ <= \Posit32::GetExponentValue().0._Finished\;
+    \Posit32::CalculateScaleFactor().0.Posit32::GetExponentValue().return.0\ <= \Posit32::GetExponentValue().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::ExponentSize() start
+    -- Signal connections for System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0 (#0):
+    \Posit32::ExponentSize().0._Started\ <= \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Started.0\;
+    \Posit32::ExponentSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::ExponentSize().this.parameter.Out.0\;
+    \Posit32::GetExponentValue().0.Posit32::ExponentSize()._Finished.0\ <= \Posit32::ExponentSize().0._Finished\;
+    \Posit32::GetExponentValue().0.Posit32::ExponentSize().return.0\ <= \Posit32::ExponentSize().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Byte Lombiq.Arithmetics.Posit32::ExponentSize() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize() start
+    \Hast::InternalInvocationProxy().Posit32::FractionSize()\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+        Variable \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
+    begin 
+        if (rising_edge(\Clock\)) then 
+            if (\Reset\ = '1') then 
+                -- Synchronous reset
+                \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForStarted;
+                \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
+                \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\ <= false;
+                \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Finished.0\ <= false;
+                \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\ <= false;
+            else 
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().0
+                case \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\) then 
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningIndex.0\ := 0;
+                            \Posit32::FractionSize().0._Started\ <= true;
+                            \Posit32::FractionSize().0.this.parameter.In\ <= \Posit32::GetExponentValue().0.Posit32::FractionSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::FractionSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningState.0\ := AfterFinished;
+                                    \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\ <= true;
+                                    \Posit32::FractionSize().0._Started\ <= false;
+                                    \Posit32::GetExponentValue().0.Posit32::FractionSize().return.0\ <= \Posit32::FractionSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::GetExponentValue().0.Posit32::FractionSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::GetExponentValue().0.runningState.0\ := WaitingForStarted;
+                            \Posit32::GetExponentValue().0.Posit32::FractionSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().0
+                case \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\) then 
+                            \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningIndex.0\ := 0;
+                            \Posit32::FractionSize().0._Started\ <= true;
+                            \Posit32::FractionSize().0.this.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::FractionSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningState.0\ := AfterFinished;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Finished.0\ <= true;
+                                    \Posit32::FractionSize().0._Started\ <= false;
+                                    \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize().return.0\ <= \Posit32::FractionSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Posit32::FractionWithHiddenBit().0.runningState.0\ := WaitingForStarted;
+                            \Posit32::FractionWithHiddenBit().0.Posit32::FractionSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0
+                case \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                            \Posit32::FractionSize().0._Started\ <= true;
+                            \Posit32::FractionSize().0.this.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().this.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Posit32::FractionSize().0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\ <= true;
+                                    \Posit32::FractionSize().0._Started\ <= false;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize().return.0\ <= \Posit32::FractionSize().0.return\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Posit32::FractionSize().Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
+                            \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionSize()._Finished.0\ <= false;
+                        end if;
+                end case;
+
+            end if;
+        end if;
+    end process;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize() end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16) start
+    -- Signal connections for System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().0 (#0):
+    \Posit32::SetOne(UInt32,UInt16).0._Started\ <= \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Started.0\;
+    \Posit32::SetOne(UInt32,UInt16).0.bits.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).bits.parameter.Out.0\;
+    \Posit32::SetOne(UInt32,UInt16).0.index.parameter.In\ <= \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).index.parameter.Out.0\;
+    \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16)._Finished.0\ <= \Posit32::SetOne(UInt32,UInt16).0._Finished\;
+    \Posit32::FractionWithHiddenBit().0.Posit32::SetOne(UInt32,UInt16).return.0\ <= \Posit32::SetOne(UInt32,UInt16).0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16) end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16) start
     \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16)\: process (\Clock\) 
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
-        Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\: integer range 0 to 0 := 0;
-        Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
     begin 
@@ -6814,12 +8517,9 @@ begin
                 -- Synchronous reset
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\ := WaitingForStarted;
-                \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
-                \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Quire::op_Addition(Quire,UInt32).0.runningState.0\ := WaitingForStarted;
                 \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
-                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                 \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
             else 
 
@@ -6850,37 +8550,6 @@ begin
                         if (\Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = false) then 
                             \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Posit32::FusedSum(Posit32[],Quire).0.runningState.0\ := WaitingForStarted;
                             \Posit32::FusedSum(Posit32[],Quire).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
-                        end if;
-                end case;
-
-
-                -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0
-                case \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ is 
-                    when WaitingForStarted => 
-                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
-                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
-                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
-                            \Quire::.ctor(UInt32,UInt16).0._Started\ <= true;
-                            \Quire::.ctor(UInt32,UInt16).0.this.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\;
-                            \Quire::.ctor(UInt32,UInt16).0.firstSegment.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\;
-                            \Quire::.ctor(UInt32,UInt16).0.size.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\;
-                        end if;
-                    when WaitingForFinished => 
-                        case \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ is 
-                            when 0 => 
-                                if (\Quire::.ctor(UInt32,UInt16).0._Finished\) then 
-                                    \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
-                                    \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= true;
-                                    \Quire::.ctor(UInt32,UInt16).0._Started\ <= false;
-                                    \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\ <= \Quire::.ctor(UInt32,UInt16).0.this.parameter.Out\;
-                                end if;
-                        end case;
-                    when AfterFinished => 
-                        -- Invoking components need to pull down the Started signal to false.
-                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = false) then 
-                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt32,UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\ <= false;
                         end if;
                 end case;
 
@@ -7029,8 +8698,19 @@ begin
     -- System.Void Hast::InternalInvocationProxy().Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire) end
 
 
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit() start
+    -- Signal connections for Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0 (#0):
+    \Posit32::FractionWithHiddenBit().0._Started\ <= \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Started.0\;
+    \Posit32::FractionWithHiddenBit().0.this.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().this.parameter.Out.0\;
+    \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit()._Finished.0\ <= \Posit32::FractionWithHiddenBit().0._Finished\;
+    \Quire Posit32::op_Explicit(Posit32).0.Posit32::FractionWithHiddenBit().return.0\ <= \Posit32::FractionWithHiddenBit().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit() end
+
+
     -- System.Void Hast::InternalInvocationProxy().System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16) start
     \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16)\: process (\Clock\) 
+        Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\: integer range 0 to 0 := 0;
+        Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_Addition(Quire,Quire).0.runningIndex.0\: integer range 0 to 0 := 0;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_Addition(Quire,Quire).0.runningState.0\: \Hast::InternalInvocationProxy()._RunningStates\ := WaitingForStarted;
         Variable \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_RightShift(Quire,Int32).0.runningIndex.0\: integer range 0 to 0 := 0;
@@ -7041,16 +8721,51 @@ begin
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
                 -- Synchronous reset
+                \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_Addition(Quire,Quire).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_Addition(Quire,Quire).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_RightShift(Quire,Int32).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_RightShift(Quire,Int32).0.runningState.0\ := WaitingForStarted;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_LeftShift(Quire,Int32).0.runningIndex.0\ := 0;
                 \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_LeftShift(Quire,Int32).0.runningState.0\ := WaitingForStarted;
+                \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\ <= false;
                 \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\ <= false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\ <= false;
                 \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\ <= false;
             else 
+
+                -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0
+                case \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ is 
+                    when WaitingForStarted => 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\ <= false;
+                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForFinished;
+                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ := 0;
+                            \Quire::.ctor(UInt64[],UInt16).0._Started\ <= true;
+                            \Quire::.ctor(UInt64[],UInt16).0.this.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\;
+                            \Quire::.ctor(UInt64[],UInt16).0.segments.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\;
+                            \Quire::.ctor(UInt64[],UInt16).0.size.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\;
+                        end if;
+                    when WaitingForFinished => 
+                        case \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningIndex.0\ is 
+                            when 0 => 
+                                if (\Quire::.ctor(UInt64[],UInt16).0._Finished\) then 
+                                    \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := AfterFinished;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\ <= true;
+                                    \Quire::.ctor(UInt64[],UInt16).0._Started\ <= false;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\ <= \Quire::.ctor(UInt64[],UInt16).0.this.parameter.Out\;
+                                    \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\ <= \Quire::.ctor(UInt64[],UInt16).0.segments.parameter.Out\;
+                                end if;
+                        end case;
+                    when AfterFinished => 
+                        -- Invoking components need to pull down the Started signal to false.
+                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = false) then 
+                            \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Posit32::op_Explicit(Posit32).0.runningState.0\ := WaitingForStarted;
+                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\ <= false;
+                        end if;
+                end case;
+
 
                 -- Invocation handler #0 out of 1 corresponding to Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire).0
                 case \Hast::InternalInvocationProxy().Quire::.ctor(UInt64[],UInt16).Quire Quire::op_Addition(Quire,Quire).0.runningState.0\ is 
@@ -7151,6 +8866,15 @@ begin
         end if;
     end process;
     -- System.Void Hast::InternalInvocationProxy().System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16) end
+
+
+    -- System.Void Hast::InternalInvocationProxy().System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor() start
+    -- Signal connections for Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Posit32::op_Explicit(Lombiq.Arithmetics.Posit32).0 (#0):
+    \Posit32::CalculateScaleFactor().0._Started\ <= \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Started.0\;
+    \Posit32::CalculateScaleFactor().0.this.parameter.In\ <= \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().this.parameter.Out.0\;
+    \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor()._Finished.0\ <= \Posit32::CalculateScaleFactor().0._Finished\;
+    \Quire Posit32::op_Explicit(Posit32).0.Posit32::CalculateScaleFactor().return.0\ <= \Posit32::CalculateScaleFactor().0.return\;
+    -- System.Void Hast::InternalInvocationProxy().System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor() end
 
 
     -- System.Void Hast::InternalInvocationProxy().System.Void Hast.Samples.SampleAssembly.Posit32FusedCalculator::CalculateFusedSum(Hast.Transformer.SimpleMemory.SimpleMemory) start
@@ -7804,10 +9528,7 @@ architecture Imp of Hast_IP is
         \Quire Posit32::op_Explicit(Posit32).0._State_86\, 
         \Quire Posit32::op_Explicit(Posit32).0._State_87\, 
         \Quire Posit32::op_Explicit(Posit32).0._State_88\, 
-        \Quire Posit32::op_Explicit(Posit32).0._State_89\, 
-        \Quire Posit32::op_Explicit(Posit32).0._State_90\, 
-        \Quire Posit32::op_Explicit(Posit32).0._State_91\, 
-        \Quire Posit32::op_Explicit(Posit32).0._State_92\);
+        \Quire Posit32::op_Explicit(Posit32).0._State_89\);
     -- Signals:
     Signal \Quire Posit32::op_Explicit(Posit32).0._Finished\: boolean := false;
     Signal \Quire Posit32::op_Explicit(Posit32).0.return\: \Lombiq.Arithmetics.Quire\;
@@ -8023,7 +9744,8 @@ architecture Imp of Hast_IP is
         \Quire Quire::op_RightShift(Quire,Int32).0._State_8\, 
         \Quire Quire::op_RightShift(Quire,Int32).0._State_9\, 
         \Quire Quire::op_RightShift(Quire,Int32).0._State_10\, 
-        \Quire Quire::op_RightShift(Quire,Int32).0._State_11\);
+        \Quire Quire::op_RightShift(Quire,Int32).0._State_11\, 
+        \Quire Quire::op_RightShift(Quire,Int32).0._State_12\);
     -- Signals:
     Signal \Quire Quire::op_RightShift(Quire,Int32).0._Finished\: boolean := false;
     Signal \Quire Quire::op_RightShift(Quire,Int32).0.return\: \Lombiq.Arithmetics.Quire\;
@@ -9379,16 +11101,16 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_46\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_45\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\: boolean := false;
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_45\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_45_46\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45_46\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_45_46\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_44_45\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_44_45\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_44_45\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\: unsigned(7 downto 0) := to_unsigned(0, 8);
@@ -9398,17 +11120,17 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_47\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_47\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_46\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_46\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_47\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_47\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_46\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\: boolean := false;
@@ -9433,8 +11155,8 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional6\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.35\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional7\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -9443,21 +11165,21 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.38\: signed(63 downto 0) := to_signed(0, 64);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.39\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.40\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_50\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_49\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.41\: boolean := false;
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.42\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.43\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.44\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_51\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_50\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.45\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\: unsigned(31 downto 0) := to_unsigned(0, 32);
@@ -9485,8 +11207,8 @@ begin
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.62\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.63\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional12\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_52\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_52\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.64\: unsigned(31 downto 0) := to_unsigned(0, 32);
     begin 
@@ -9501,16 +11223,16 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.exponentBits\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_46\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_45\ := to_signed(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := false;
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_45\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_45_46\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45_46\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_45_46\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_44_45\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_44_45\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_44_45\ := to_unsigned(0, 8);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\ := to_unsigned(0, 8);
@@ -9520,17 +11242,17 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_47\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_47\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_46\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_46\ := to_unsigned(0, 8);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_47\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_47\ := to_signed(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_46\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\ := false;
@@ -9555,8 +11277,8 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.33\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.34\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional6\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.35\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional7\ := to_unsigned(0, 32);
@@ -9565,21 +11287,21 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.38\ := to_signed(0, 64);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.39\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.3\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.40\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\ := to_unsigned(0, 8);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_50\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\ := to_unsigned(0, 8);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_49\ := to_unsigned(0, 8);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.41\ := false;
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.42\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.43\ := to_unsigned(0, 8);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.44\ := to_signed(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_51\ := to_unsigned(0, 16);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_50\ := to_unsigned(0, 16);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.45\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.4\ := to_signed(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\ := to_unsigned(0, 32);
@@ -9607,8 +11329,8 @@ begin
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.62\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.63\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional12\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_52\ := to_unsigned(0, 32);
-                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_52\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\ := to_unsigned(0, 32);
+                \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\ := to_unsigned(0, 32);
                 \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.64\ := to_unsigned(0, 32);
             else 
@@ -9640,36 +11362,36 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::EncodeRegimeBits(System.Int32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int regimeKValue_46;
+                        -- int regimeKValue_45;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- regimeKValue_46 = regimeKValue;
+                        -- regimeKValue_45 = regimeKValue;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_45\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_46;
+                        -- uint return_45;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (regimeKValue_46 > 0) {
-                        -- 	uint num_46;
-                        -- 	num_46 = (uint)((1 << regimeKValue_46 + 1) - 1);
+                        -- if (regimeKValue_45 > 0) {
+                        -- 	uint num_45;
+                        -- 	num_45 = (uint)((1 << regimeKValue_45 + 1) - 1);
                         -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
-                        -- 	uint bits_45_46;
-                        -- 	bits_45_46 = num_46;
-                        -- 	byte return_45_46;
-                        -- 	byte b_45_46;
-                        -- 	b_45_46 = 0;
-                        -- 	while ((long)(bits_45_46) != 0L) {
-                        -- 		bits_45_46 = bits_45_46 >> 1;
-                        -- 		b_45_46 = (byte)((int)(b_45_46) + 1);
+                        -- 	uint bits_44_45;
+                        -- 	bits_44_45 = num_45;
+                        -- 	byte return_44_45;
+                        -- 	byte b_44_45;
+                        -- 	b_44_45 = 0;
+                        -- 	while ((long)(bits_44_45) != 0L) {
+                        -- 		bits_44_45 = bits_44_45 >> 1;
+                        -- 		b_44_45 = (byte)((int)(b_44_45) + 1);
                         -- 	}
-                        -- 	return_45_46 = b_45_46;
+                        -- 	return_44_45 = b_44_45;
                         -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
-                        -- 	return_46 = num_46 << 32 - (int)(return_45_46) - 1;
-                        -- 	goto Exit_46;
+                        -- 	return_45 = num_45 << 32 - (int)(return_44_45) - 1;
+                        -- 	goto Exit_45;
                         -- }
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_46\ > to_signed(0, 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.0\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_45\ > to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_5\ and ends in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_11\.
@@ -9683,63 +11405,63 @@ begin
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.50535
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_3\ => 
-                        -- State for the label Exit_46.
+                        -- State for the label Exit_45.
                         -- The following section was transformed from the .NET statement below:
-                        -- num = return_46;
+                        -- num = return_45;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45\;
                         -- The following section was transformed from the .NET statement below:
                         -- byte b;
                         -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_47;
+                        -- uint bits_46;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_47 = num;
+                        -- bits_46 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- byte startingPosition_47;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- startingPosition_47 = 31;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_47\ := SmartResize(unsigned(to_signed(31, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte return_47;
+                        -- byte startingPosition_46;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- byte b_47;
+                        -- startingPosition_46 = 31;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_46\ := SmartResize(unsigned(to_signed(31, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte return_46;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b_47 = 1;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_47\ := SmartResize(unsigned(to_signed(1, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_47 = bits_47 << 32 - (int)(startingPosition_47);
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\ := to_signed(32, 32) - signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_47\), 32));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\, 5))));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_47;
+                        -- byte b_46;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_47 = (bits_47 >> 31) & 1u;
+                        -- b_46 = 1;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_46\ := SmartResize(unsigned(to_signed(1, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_46 = bits_46 << 32 - (int)(startingPosition_46);
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\ := to_signed(32, 32) - signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_46\), 32));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.11\, 5))));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.12\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_46;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_46 = (bits_46 >> 31) & 1u;
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.7953
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_4\ => 
                         -- State after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_46 = 1073741824u >> -regimeKValue_46;
+                        -- return_45 = 1073741824u >> -regimeKValue_45;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\ := -\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_46\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\ := -\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_45\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\ := shift_right(to_unsigned(1073741824, 32), to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.0\, 5) and "11111")));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.10\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Exit_46:
+                        -- Exit_45:
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::EncodeRegimeBits(System.Int32).
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_3\;
@@ -9748,60 +11470,60 @@ begin
                         -- True branch of the if-else started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	uint num_46;
-                        -- 	num_46 = (uint)((1 << regimeKValue_46 + 1) - 1);
+                        -- 	uint num_45;
+                        -- 	num_45 = (uint)((1 << regimeKValue_45 + 1) - 1);
                         -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
-                        -- 	uint bits_45_46;
-                        -- 	bits_45_46 = num_46;
-                        -- 	byte return_45_46;
-                        -- 	byte b_45_46;
-                        -- 	b_45_46 = 0;
-                        -- 	while ((long)(bits_45_46) != 0L) {
-                        -- 		bits_45_46 = bits_45_46 >> 1;
-                        -- 		b_45_46 = (byte)((int)(b_45_46) + 1);
+                        -- 	uint bits_44_45;
+                        -- 	bits_44_45 = num_45;
+                        -- 	byte return_44_45;
+                        -- 	byte b_44_45;
+                        -- 	b_44_45 = 0;
+                        -- 	while ((long)(bits_44_45) != 0L) {
+                        -- 		bits_44_45 = bits_44_45 >> 1;
+                        -- 		b_44_45 = (byte)((int)(b_44_45) + 1);
                         -- 	}
-                        -- 	return_45_46 = b_45_46;
+                        -- 	return_44_45 = b_44_45;
                         -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
-                        -- 	return_46 = num_46 << 32 - (int)(return_45_46) - 1;
-                        -- 	goto Exit_46;
+                        -- 	return_45 = num_45 << 32 - (int)(return_44_45) - 1;
+                        -- 	goto Exit_45;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint num_46;
+                        -- uint num_45;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_46 = (uint)((1 << regimeKValue_46 + 1) - 1);
+                        -- num_45 = (uint)((1 << regimeKValue_45 + 1) - 1);
                         -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_46\ + to_signed(1, 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.regimeKValue_45\ + to_signed(1, 32);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.1\, 5))));
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\;
                         -- Clock cycles needed to complete this state (approximation): 0.837
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\ := unsigned((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.2\) - to_signed(1, 32));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_45\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_45_46;
+                        -- uint bits_44_45;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_45_46 = num_46;
+                        -- bits_44_45 = num_45;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_45_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_44_45\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_45\;
                         -- The following section was transformed from the .NET statement below:
-                        -- byte return_45_46;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_45_46;
+                        -- byte return_44_45;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b_45_46 = 0;
+                        -- byte b_44_45;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_45_46\ := SmartResize(unsigned(to_signed(0, 32)), 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)(bits_45_46) != 0L) {
-                        -- 	bits_45_46 = bits_45_46 >> 1;
-                        -- 	b_45_46 = (byte)((int)(b_45_46) + 1);
+                        -- b_44_45 = 0;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_44_45\ := SmartResize(unsigned(to_signed(0, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((long)(bits_44_45) != 0L) {
+                        -- 	bits_44_45 = bits_44_45 >> 1;
+                        -- 	b_44_45 = (byte)((int)(b_44_45) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -9810,21 +11532,21 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_7\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\.
                         -- The while loop's condition:
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_45_46\), 64)) /= to_signed(0, 64);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_44_45\), 64)) /= to_signed(0, 64);
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_45_46 = bits_45_46 >> 1;
-                            -- 	b_45_46 = (byte)((int)(b_45_46) + 1);
+                            -- 	bits_44_45 = bits_44_45 >> 1;
+                            -- 	b_44_45 = (byte)((int)(b_44_45) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_45_46 = bits_45_46 >> 1;
+                            -- bits_44_45 = bits_44_45 >> 1;
                             -- 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_45_46\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_45_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_44_45\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_44_45\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.5\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_45_46 = (byte)((int)(b_45_46) + 1);
+                            -- b_44_45 = (byte)((int)(b_44_45) + 1);
                             -- 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\;
                         else 
@@ -9834,21 +11556,21 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_8\ => 
                         -- State after the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_45_46 = b_45_46;
+                        -- return_44_45 = b_44_45;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_45_46\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_44_45\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_44_45\;
                         -- The following section was transformed from the .NET statement below:
-                        -- return_46 = num_46 << 32 - (int)(return_45_46) - 1;
+                        -- return_45 = num_45 << 32 - (int)(return_44_45) - 1;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\ := to_signed(32, 32) - signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45_46\), 32));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\ := to_signed(32, 32) - signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_44_45\), 32));
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.7\ - to_signed(1, 32);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\;
                         -- Clock cycles needed to complete this state (approximation): 0.7128
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_45_46\), 32)) + to_signed(1, 32)), 8);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_45_46\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_44_45\), 32)) + to_signed(1, 32)), 8);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_44_45\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.6\);
                         -- Returning to the repeated state of the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_6\ if the loop wasn't exited with a state change.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_9\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_7\;
@@ -9856,10 +11578,10 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_10\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\, 5))));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_45\, to_integer(unsigned(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.8\, 5))));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_45\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
-                        -- goto Exit_46;
+                        -- goto Exit_45;
                         -- 
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.4389
@@ -9871,26 +11593,26 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.13\) and to_unsigned(1, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.14\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_47 = bits_47 << 1;
+                        -- bits_46 = bits_46 << 1;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.15\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num2_47;
+                        -- int num2_46;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_47 = 0;
+                        -- num2_46 = 0;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_47\ := to_signed(0, 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_46\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2_47) < (int)(startingPosition_47) && bits_47 >> 31 == num_47) {
-                        -- 	bits_47 = bits_47 << 1;
-                        -- 	b_47 = (byte)((int)(b_47) + 1);
-                        -- 	num2_47 = num2_47 + 1;
+                        -- while ((int)(num2_46) < (int)(startingPosition_46) && bits_46 >> 31 == num_46) {
+                        -- 	bits_46 = bits_46 << 1;
+                        -- 	b_46 = (byte)((int)(b_46) + 1);
+                        -- 	num2_46 = num2_46 + 1;
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -9899,21 +11621,21 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\.
                         -- The while loop's condition:
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_47\) < signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_47\), 32));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_46\) < signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.startingPosition_46\), 32));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_15\;
                         -- Clock cycles needed to complete this state (approximation): 0.78375
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_14\ => 
                         -- State after the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_47 = b_47;
+                        -- return_46 = b_46;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_47\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_46\;
                         -- The following section was transformed from the .NET statement below:
-                        -- b = return_47;
+                        -- b = return_46;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_46\;
                         -- The following section was transformed from the .NET statement below:
                         -- int num2;
                         -- 
@@ -9947,23 +11669,23 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.8382
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_15\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_47\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.17\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num_46\;
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.16\ and \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.18\;
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.19\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_47 = bits_47 << 1;
-                            -- 	b_47 = (byte)((int)(b_47) + 1);
-                            -- 	num2_47 = num2_47 + 1;
+                            -- 	bits_46 = bits_46 << 1;
+                            -- 	b_46 = (byte)((int)(b_46) + 1);
+                            -- 	num2_46 = num2_46 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_47 = bits_47 << 1;
+                            -- bits_46 = bits_46 << 1;
                             -- 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\ := shift_left(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.20\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_47 = (byte)((int)(b_47) + 1);
+                            -- b_46 = (byte)((int)(b_46) + 1);
                             -- 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_16\;
                         else 
@@ -9972,13 +11694,13 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.6051
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_16\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_47\), 32)) + to_signed(1, 32)), 8);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_47\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_46\), 32)) + to_signed(1, 32)), 8);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_46\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.21\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_47 = num2_47 + 1;
+                        -- num2_46 = num2_46 + 1;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_47\ + to_signed(1, 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_46\ + to_signed(1, 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num2_46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.22\;
                         -- Returning to the repeated state of the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_12\ if the loop wasn't exited with a state change.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_16\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_13\;
@@ -10005,12 +11727,12 @@ begin
                         -- 		if (signBit) {
                         -- 			;
                         -- 			// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 			uint bits_48;
-                        -- 			bits_48 = num;
-                        -- 			uint return_48;
-                        -- 			return_48 = (uint)((long)(~bits_48) + 1L);
+                        -- 			uint bits_47;
+                        -- 			bits_47 = num;
+                        -- 			uint return_47;
+                        -- 			return_47 = (uint)((long)(~bits_47) + 1L);
                         -- 			// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 			conditional6 = return_48;
+                        -- 			conditional6 = return_47;
                         -- 		} else {
                         -- 			conditional6 = num;
                         -- 		}
@@ -10027,12 +11749,12 @@ begin
                         -- 	if (signBit) {
                         -- 		;
                         -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_49;
-                        -- 		bits_49 = num;
-                        -- 		uint return_49;
-                        -- 		return_49 = (uint)((long)(~bits_49) + 1L);
+                        -- 		uint bits_48;
+                        -- 		bits_48 = num;
+                        -- 		uint return_48;
+                        -- 		return_48 = (uint)((long)(~bits_48) + 1L);
                         -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional8 = return_49;
+                        -- 		conditional8 = return_48;
                         -- 	} else {
                         -- 		conditional8 = num;
                         -- 	}
@@ -10094,26 +11816,26 @@ begin
                         -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_50;
+                        -- uint bits_49;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_50 = fractionBits;
+                        -- bits_49 = fractionBits;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- byte return_50;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_50;
+                        -- byte return_49;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b_50 = 0;
+                        -- byte b_49;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_50\ := SmartResize(unsigned(to_signed(0, 32)), 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((long)(bits_50) != 0L) {
-                        -- 	bits_50 = bits_50 >> 1;
-                        -- 	b_50 = (byte)((int)(b_50) + 1);
+                        -- b_49 = 0;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_49\ := SmartResize(unsigned(to_signed(0, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((long)(bits_49) != 0L) {
+                        -- 	bits_49 = bits_49 >> 1;
+                        -- 	b_49 = (byte)((int)(b_49) + 1);
                         -- }
                         -- 
                         -- Starting a while loop.
@@ -10135,12 +11857,12 @@ begin
                         -- 		if (signBit) {
                         -- 			;
                         -- 			// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 			uint bits_48;
-                        -- 			bits_48 = num;
-                        -- 			uint return_48;
-                        -- 			return_48 = (uint)((long)(~bits_48) + 1L);
+                        -- 			uint bits_47;
+                        -- 			bits_47 = num;
+                        -- 			uint return_47;
+                        -- 			return_47 = (uint)((long)(~bits_47) + 1L);
                         -- 			// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 			conditional6 = return_48;
+                        -- 			conditional6 = return_47;
                         -- 		} else {
                         -- 			conditional6 = num;
                         -- 		}
@@ -10157,12 +11879,12 @@ begin
                         -- 	if (signBit) {
                         -- 		;
                         -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_49;
-                        -- 		bits_49 = num;
-                        -- 		uint return_49;
-                        -- 		return_49 = (uint)((long)(~bits_49) + 1L);
+                        -- 		uint bits_48;
+                        -- 		bits_48 = num;
+                        -- 		uint return_48;
+                        -- 		return_48 = (uint)((long)(~bits_48) + 1L);
                         -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional8 = return_49;
+                        -- 		conditional8 = return_48;
                         -- 	} else {
                         -- 		conditional8 = num;
                         -- 	}
@@ -10204,12 +11926,12 @@ begin
                         -- 	if (signBit) {
                         -- 		;
                         -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_48;
-                        -- 		bits_48 = num;
-                        -- 		uint return_48;
-                        -- 		return_48 = (uint)((long)(~bits_48) + 1L);
+                        -- 		uint bits_47;
+                        -- 		bits_47 = num;
+                        -- 		uint return_47;
+                        -- 		return_47 = (uint)((long)(~bits_47) + 1L);
                         -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional6 = return_48;
+                        -- 		conditional6 = return_47;
                         -- 	} else {
                         -- 		conditional6 = num;
                         -- 	}
@@ -10304,12 +12026,12 @@ begin
                         -- 	if (signBit) {
                         -- 		;
                         -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_48;
-                        -- 		bits_48 = num;
-                        -- 		uint return_48;
-                        -- 		return_48 = (uint)((long)(~bits_48) + 1L);
+                        -- 		uint bits_47;
+                        -- 		bits_47 = num;
+                        -- 		uint return_47;
+                        -- 		return_47 = (uint)((long)(~bits_47) + 1L);
                         -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional6 = return_48;
+                        -- 		conditional6 = return_47;
                         -- 	} else {
                         -- 		conditional6 = num;
                         -- 	}
@@ -10323,12 +12045,12 @@ begin
                         -- if (signBit) {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_48;
-                        -- 	bits_48 = num;
-                        -- 	uint return_48;
-                        -- 	return_48 = (uint)((long)(~bits_48) + 1L);
+                        -- 	uint bits_47;
+                        -- 	bits_47 = num;
+                        -- 	uint return_47;
+                        -- 	return_47 = (uint)((long)(~bits_47) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional6 = return_48;
+                        -- 	conditional6 = return_47;
                         -- } else {
                         -- 	conditional6 = num;
                         -- }
@@ -10363,12 +12085,12 @@ begin
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_48;
-                        -- 	bits_48 = num;
-                        -- 	uint return_48;
-                        -- 	return_48 = (uint)((long)(~bits_48) + 1L);
+                        -- 	uint bits_47;
+                        -- 	bits_47 = num;
+                        -- 	uint return_47;
+                        -- 	return_47 = (uint)((long)(~bits_47) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional6 = return_48;
+                        -- 	conditional6 = return_47;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -10376,26 +12098,26 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_48;
+                        -- uint bits_47;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_48 = num;
+                        -- bits_47 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_48;
+                        -- uint return_47;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_48 = (uint)((long)(~bits_48) + 1L);
+                        -- return_47 = (uint)((long)(~bits_47) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_47\);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.35\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.2\), 64)) + to_signed(1, 64)), 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.35\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.35\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional6 = return_48;
+                        -- conditional6 = return_47;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional6\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_47\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_27\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_29\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_28\;
@@ -10430,12 +12152,12 @@ begin
                         -- if (signBit) {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_49;
-                        -- 	bits_49 = num;
-                        -- 	uint return_49;
-                        -- 	return_49 = (uint)((long)(~bits_49) + 1L);
+                        -- 	uint bits_48;
+                        -- 	bits_48 = num;
+                        -- 	uint return_48;
+                        -- 	return_48 = (uint)((long)(~bits_48) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional8 = return_49;
+                        -- 	conditional8 = return_48;
                         -- } else {
                         -- 	conditional8 = num;
                         -- }
@@ -10505,12 +12227,12 @@ begin
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_49;
-                        -- 	bits_49 = num;
-                        -- 	uint return_49;
-                        -- 	return_49 = (uint)((long)(~bits_49) + 1L);
+                        -- 	uint bits_48;
+                        -- 	bits_48 = num;
+                        -- 	uint return_48;
+                        -- 	return_48 = (uint)((long)(~bits_48) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional8 = return_49;
+                        -- 	conditional8 = return_48;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -10518,26 +12240,26 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_49;
+                        -- uint bits_48;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_49 = num;
+                        -- bits_48 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_49;
+                        -- uint return_48;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_49 = (uint)((long)(~bits_49) + 1L);
+                        -- return_48 = (uint)((long)(~bits_48) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.3\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.3\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_48\);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.40\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.3\), 64)) + to_signed(1, 64)), 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.40\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.40\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional8 = return_49;
+                        -- conditional8 = return_48;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional8\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_48\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_31\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_35\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_34\;
@@ -10562,21 +12284,21 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\ => 
                         -- Repeated state of the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
                         -- The while loop's condition:
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.41\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\), 64)) /= to_signed(0, 64);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.41\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\), 64)) /= to_signed(0, 64);
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.41\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_50 = bits_50 >> 1;
-                            -- 	b_50 = (byte)((int)(b_50) + 1);
+                            -- 	bits_49 = bits_49 >> 1;
+                            -- 	b_49 = (byte)((int)(b_49) + 1);
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_50 = bits_50 >> 1;
+                            -- bits_49 = bits_49 >> 1;
                             -- 
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.42\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
-                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.42\;
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.42\ := shift_right(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5) and "11111")));
+                            \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_49\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.42\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_50 = (byte)((int)(b_50) + 1);
+                            -- b_49 = (byte)((int)(b_49) + 1);
                             -- 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\;
                         else 
@@ -10586,45 +12308,45 @@ begin
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_38\ => 
                         -- State after the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_50 = b_50;
+                        -- return_49 = b_49;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::GetMostSignificantOnePosition(System.UInt32).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_50\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_49\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num3 = (int)((int)(return_50) - 1);
+                        -- num3 = (int)((int)(return_49) - 1);
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetZero(System.UInt32,System.UInt16).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.44\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\), 32)) - to_signed(1, 32);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.44\ := signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_49\), 32)) - to_signed(1, 32);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.44\);
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_51;
+                        -- uint bits_50;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_51 = fractionBits;
+                        -- bits_50 = fractionBits;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort index_51;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- index_51 = (ushort)num3;
-                        -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_51\ := SmartResize(unsigned(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint return_51;
+                        -- ushort index_50;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_51 = bits_51 & (uint)(~(1 << (int)index_51));
+                        -- index_50 = (ushort)num3;
+                        -- 
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_50\ := SmartResize(unsigned(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num3\), 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint return_50;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_50 = bits_50 & (uint)(~(1 << (int)index_50));
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetZero(System.UInt32,System.UInt16).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.45\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_51\, 32)), 5))));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.45\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.index_50\, 32)), 5))));
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.4\ := not((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.45\));
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\;
                         -- Clock cycles needed to complete this state (approximation): 0.91545
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.43\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_50\), 32)) + to_signed(1, 32)), 8);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_50\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.43\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.43\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_49\), 32)) + to_signed(1, 32)), 8);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.b_49\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.43\);
                         -- Returning to the repeated state of the while loop which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_20\ if the loop wasn't exited with a state change.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_39\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_37\;
@@ -10632,12 +12354,12 @@ begin
                         -- Clock cycles needed to complete this state (approximation): 0.3981
                     when \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_40\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\ and unsigned((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.4\));
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_50\ and unsigned((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.4\));
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.46\;
                         -- The following section was transformed from the .NET statement below:
-                        -- fractionBits = return_51;
+                        -- fractionBits = return_50;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.fractionBits\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_50\;
                         -- The following section was transformed from the .NET statement below:
                         -- int num4;
                         -- 
@@ -10758,12 +12480,12 @@ begin
                         -- if (signBit) {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_52;
-                        -- 	bits_52 = num;
-                        -- 	uint return_52;
-                        -- 	return_52 = (uint)((long)(~bits_52) + 1L);
+                        -- 	uint bits_51;
+                        -- 	bits_51 = num;
+                        -- 	uint return_51;
+                        -- 	return_51 = (uint)((long)(~bits_51) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional12 = return_52;
+                        -- 	conditional12 = return_51;
                         -- } else {
                         -- 	conditional12 = num;
                         -- }
@@ -11001,12 +12723,12 @@ begin
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_52;
-                        -- 	bits_52 = num;
-                        -- 	uint return_52;
-                        -- 	return_52 = (uint)((long)(~bits_52) + 1L);
+                        -- 	uint bits_51;
+                        -- 	bits_51 = num;
+                        -- 	uint return_51;
+                        -- 	return_51 = (uint)((long)(~bits_51) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional12 = return_52;
+                        -- 	conditional12 = return_51;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -11014,26 +12736,26 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_52;
+                        -- uint bits_51;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_52 = num;
+                        -- bits_51 = num;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_52\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.num\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_52;
+                        -- uint return_51;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_52 = (uint)((long)(~bits_52) + 1L);
+                        -- return_51 = (uint)((long)(~bits_51) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_52\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\ := not(\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.bits_51\);
                         \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.64\ := SmartResize(unsigned(signed(SmartResize((\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.unaryOperationResult.7\), 64)) + to_signed(1, 64)), 32);
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_52\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.64\);
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\ := (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.binaryOperationResult.64\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional12 = return_52;
+                        -- conditional12 = return_51;
                         -- 
-                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional12\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_52\;
+                        \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.conditional12\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0.return_51\;
                         -- Going to the state after the if-else which was started in state \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_45\.
                         if (\Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ = \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_57\) then 
                             \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State\ := \Posit32::AssemblePositBitsWithRounding(Boolean,Int32,UInt32,UInt32).0._State_56\;
@@ -11073,8 +12795,8 @@ begin
         Variable \Posit32::FusedSum(Posit32[],Quire).0.return.1\: boolean := false;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.num\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.0\: boolean := false;
-        Variable \Posit32::FusedSum(Posit32[],Quire).0.this_72\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Posit32::FusedSum(Posit32[],Quire).0.return_72\: boolean := false;
+        Variable \Posit32::FusedSum(Posit32[],Quire).0.this_71\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Posit32::FusedSum(Posit32[],Quire).0.return_71\: boolean := false;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\: boolean := false;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.return.2\: \Lombiq.Arithmetics.Quire\;
         Variable \Posit32::FusedSum(Posit32[],Quire).0.return.3\: \Lombiq.Arithmetics.Quire\;
@@ -11096,7 +12818,7 @@ begin
                 \Posit32::FusedSum(Posit32[],Quire).0.return.1\ := false;
                 \Posit32::FusedSum(Posit32[],Quire).0.num\ := to_signed(0, 32);
                 \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.0\ := false;
-                \Posit32::FusedSum(Posit32[],Quire).0.return_72\ := false;
+                \Posit32::FusedSum(Posit32[],Quire).0.return_71\ := false;
                 \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\ := false;
                 \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.2\ := to_signed(0, 32);
             else 
@@ -11213,12 +12935,12 @@ begin
                         -- while (num < 160) {
                         -- 	;
                         -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
-                        -- 	Lombiq.Arithmetics.Posit32 this_72;
-                        -- 	this_72 = posits [num];
-                        -- 	bool return_72;
-                        -- 	return_72 = this_72.PositBits == 2147483648u;
+                        -- 	Lombiq.Arithmetics.Posit32 this_71;
+                        -- 	this_71 = posits [num];
+                        -- 	bool return_71;
+                        -- 	return_71 = this_71.PositBits == 2147483648u;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
-                        -- 	if (return_72) {
+                        -- 	if (return_71) {
                         -- 		return quire;
                         -- 	}
                         -- 	startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [num]));
@@ -11254,12 +12976,12 @@ begin
                             -- {
                             -- 	;
                             -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
-                            -- 	Lombiq.Arithmetics.Posit32 this_72;
-                            -- 	this_72 = posits [num];
-                            -- 	bool return_72;
-                            -- 	return_72 = this_72.PositBits == 2147483648u;
+                            -- 	Lombiq.Arithmetics.Posit32 this_71;
+                            -- 	this_71 = posits [num];
+                            -- 	bool return_71;
+                            -- 	return_71 = this_71.PositBits == 2147483648u;
                             -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
-                            -- 	if (return_72) {
+                            -- 	if (return_71) {
                             -- 		return quire;
                             -- 	}
                             -- 	startingValue = Quire.op_Addition (startingValue, Posit32.op_Explicit (posits [num]));
@@ -11271,24 +12993,24 @@ begin
                             -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Lombiq.Arithmetics.Posit32 this_72;
+                            -- Lombiq.Arithmetics.Posit32 this_71;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- this_72 = posits [num];
+                            -- this_71 = posits [num];
                             -- 
-                            \Posit32::FusedSum(Posit32[],Quire).0.this_72\ := \Posit32::FusedSum(Posit32[],Quire).0.posits\(to_integer(\Posit32::FusedSum(Posit32[],Quire).0.num\));
+                            \Posit32::FusedSum(Posit32[],Quire).0.this_71\ := \Posit32::FusedSum(Posit32[],Quire).0.posits\(to_integer(\Posit32::FusedSum(Posit32[],Quire).0.num\));
                             -- The following section was transformed from the .NET statement below:
-                            -- bool return_72;
+                            -- bool return_71;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- return_72 = this_72.PositBits == 2147483648u;
+                            -- return_71 = this_71.PositBits == 2147483648u;
                             -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
                             -- 
                             -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                            \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\ := \Posit32::FusedSum(Posit32[],Quire).0.this_72\.\PositBits\ = "10000000000000000000000000000000";
-                            \Posit32::FusedSum(Posit32[],Quire).0.return_72\ := \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\;
+                            \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\ := \Posit32::FusedSum(Posit32[],Quire).0.this_71\.\PositBits\ = "10000000000000000000000000000000";
+                            \Posit32::FusedSum(Posit32[],Quire).0.return_71\ := \Posit32::FusedSum(Posit32[],Quire).0.binaryOperationResult.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (return_72) {
+                            -- if (return_71) {
                             -- 	return quire;
                             -- }
                             -- 
@@ -11297,7 +13019,7 @@ begin
                             --     * The true branch starts in state \Posit32::FusedSum(Posit32[],Quire).0._State_11\ and ends in state \Posit32::FusedSum(Posit32[],Quire).0._State_11\.
                             --     * Execution after either branch will continue in the following state: \Posit32::FusedSum(Posit32[],Quire).0._State_10\.
 
-                            if (\Posit32::FusedSum(Posit32[],Quire).0.return_72\) then 
+                            if (\Posit32::FusedSum(Posit32[],Quire).0.return_71\) then 
                                 \Posit32::FusedSum(Posit32[],Quire).0._State\ := \Posit32::FusedSum(Posit32[],Quire).0._State_11\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
@@ -11384,256 +13106,252 @@ begin
     \Quire Posit32::op_Explicit(Posit32).0._StateMachine\: process (\Clock\) 
         Variable \Quire Posit32::op_Explicit(Posit32).0._State\: \Quire Posit32::op_Explicit(Posit32).0._States\ := \Quire Posit32::op_Explicit(Posit32).0._State_0\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.x\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_73\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_73\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_72\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_72\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.object35\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.0\: \Lombiq.Arithmetics.Quire\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_74\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_74\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.object36\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_75\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_68_75\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional20_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_65_68_75\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_65_68_75\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_66_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_66_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_73\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_67_73\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional20_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_64_67_73\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_64_67_73\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_65_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_65_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_67_73\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_67_73\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_66_67_73\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_66_67_73\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_68_75\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_68_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_67_68_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_67_68_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_66_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_67_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_67_68_75\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_66_67_73\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.11\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.15\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional21_68_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional22_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_69_75\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_69_75\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_70_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_70_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional21_67_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional22_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_68_73\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_68_73\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_69_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_69_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.1\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional23_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_71_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.index_71_75\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_71_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional23_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_70_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.index_70_73\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_70_73\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.quire\: \Lombiq.Arithmetics.Quire\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_76\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional20_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_65_76\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_65_76\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_66_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_66_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_74\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional20_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_64_74\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_64_74\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_65_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_65_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.2\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_74\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_66_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_74\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_66_74\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_66_74\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.32\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_67_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_76\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_67_76\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_67_76\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_66_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_67_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_67_76\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_66_74\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.39\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.43\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.44\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional21_76\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_77\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_77\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.regimeKValue_77\: signed(7 downto 0) := to_signed(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_56_77\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_56_77\: signed(7 downto 0) := to_signed(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_56_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional13_56_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_53_56_77\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_53_56_77\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_54_56_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_54_56_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional21_74\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_75\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_75\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.regimeKValue_75\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_55_75\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_55_75\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_55_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional13_55_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_52_55_75\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_52_55_75\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_53_55_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_53_55_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.3\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_55_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_54_55_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_54_55_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_54_55_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_56_77\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_55_56_77\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_55_56_77\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_55_56_77\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_54_55_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.51\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_55_56_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_55_56_77\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_54_55_75\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.57\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional14_56_77\: signed(7 downto 0) := to_signed(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional14_55_75\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.4\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\: signed(7 downto 0) := to_signed(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional15_77\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_57_77\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_57_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_57_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional18_57_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_86\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_86\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\: signed(7 downto 0) := to_signed(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional15_75\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_56_75\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_56_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_56_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional18_56_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_84\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_84\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_85\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_85\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.5\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_57_77\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_88\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_88\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_88\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional16_88\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_58_88\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_58_88\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_59_88\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_59_88\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_56_75\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_86\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_86\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_86\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional16_86\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_57_86\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_57_86\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_58_86\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_58_86\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.6\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_86\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_59_86\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_59_86\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_59_86\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_59_86\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_88\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_60_88\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_60_88\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_60_88\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_60_88\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_59_86\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_60_88\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.73\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_60_88\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_59_86\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.result_86\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.82\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.result_88\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional17_88\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional17_86\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.87\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_89\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional20_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_65_89\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_65_89\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_66_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_66_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_87\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional20_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_64_87\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_64_87\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_65_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_65_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.7\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_87\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_66_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_87\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_66_87\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.b_66_87\: unsigned(7 downto 0) := to_unsigned(0, 8);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.94\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_89\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.bits_67_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_89\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_67_89\: unsigned(7 downto 0) := to_unsigned(0, 8);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.b_67_89\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num_66_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num_67_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.97\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_67_89\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.num2_66_87\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\: unsigned(7 downto 0) := to_unsigned(0, 8);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.105\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.106\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.107\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional21_89\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional21_87\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional19_57_77\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\: signed(15 downto 0) := to_signed(0, 16);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.conditional19_56_75\: unsigned(31 downto 0) := to_unsigned(0, 32);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\: signed(15 downto 0) := to_signed(0, 16);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.1\: \Lombiq.Arithmetics.Quire\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.this_78\: \Lombiq.Arithmetics.Posit32\;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.return_78\: boolean := false;
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\: signed(63 downto 0) := to_signed(0, 64);
-        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.120\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.this_76\: \Lombiq.Arithmetics.Posit32\;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.return_76\: boolean := false;
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\: signed(63 downto 0) := to_signed(0, 64);
+        Variable \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\: boolean := false;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.2\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Posit32::op_Explicit(Posit32).0.return.3\: \Lombiq.Arithmetics.Quire\;
     begin 
@@ -11653,233 +13371,231 @@ begin
                 \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32).right.parameter.Out.0\ <= to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32)._Started.0\ <= false;
                 \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_0\;
-                \Quire Posit32::op_Explicit(Posit32).0.return_73\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.return_72\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.return_74\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
-                \Quire Posit32::op_Explicit(Posit32).0.return_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_68_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_68_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional20_68_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_65_68_75\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_66_68_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_66_68_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_67_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_67_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional20_67_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_64_67_73\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_65_67_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_65_67_73\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num_67_73\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_67_73\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_66_67_73\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.b_66_67_73\ := to_unsigned(0, 8);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_68_75\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_68_75\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_67_68_75\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.b_67_68_75\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.num_66_67_73\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_67_68_75\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num2_67_68_75\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num2_66_67_73\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.11\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.15\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional21_68_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.num2_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional22_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_69_75\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_70_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_70_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional21_67_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.num2_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional22_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_68_73\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_69_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_69_73\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.1\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional23_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_71_75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.index_71_75\ := to_unsigned(0, 16);
-                \Quire Posit32::op_Explicit(Posit32).0.return_71_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional23_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_70_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.index_70_73\ := to_unsigned(0, 16);
+                \Quire Posit32::op_Explicit(Posit32).0.return_70_73\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_76\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_76\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional20_76\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_65_76\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_66_76\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_66_76\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_74\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_74\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional20_74\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_64_74\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_65_74\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_65_74\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.2\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num_74\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_66_74\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_74\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_66_74\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.b_66_74\ := to_unsigned(0, 8);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.32\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_76\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_67_76\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_76\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_67_76\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.b_67_76\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.num_66_74\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_67_76\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num2_67_76\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num2_66_74\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.39\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.43\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.44\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional21_76\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.return_77\ := to_signed(0, 16);
-                \Quire Posit32::op_Explicit(Posit32).0.regimeKValue_77\ := to_signed(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_56_77\ := to_signed(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.num_56_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional13_56_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_53_56_77\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_54_56_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_54_56_77\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional21_74\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.return_75\ := to_signed(0, 16);
+                \Quire Posit32::op_Explicit(Posit32).0.regimeKValue_75\ := to_signed(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_55_75\ := to_signed(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.num_55_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional13_55_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_52_55_75\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_53_55_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_53_55_75\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.3\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.b_55_75\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_54_55_75\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_54_55_75\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.b_54_55_75\ := to_unsigned(0, 8);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.b_56_77\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_55_56_77\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_55_56_77\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.b_55_56_77\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.num_54_55_75\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.51\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_55_56_77\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num2_55_56_77\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num2_54_55_75\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.57\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional14_56_77\ := to_signed(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional14_55_75\ := to_signed(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.4\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\ := to_signed(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional15_77\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.return_57_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_57_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional18_57_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_86\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_87\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_87\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\ := to_signed(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional15_75\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.return_56_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num_56_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional18_56_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_84\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_85\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_85\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.5\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.b_57_77\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_88\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_88\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional16_88\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_58_88\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_59_88\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_59_88\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.b_56_75\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_86\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_86\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional16_86\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_57_86\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_58_86\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_58_86\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.6\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.b_86\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_59_86\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_59_86\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_59_86\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.b_59_86\ := to_unsigned(0, 8);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.b_88\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_60_88\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_60_88\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_60_88\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.b_60_88\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.num_59_86\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_60_88\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.73\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num2_60_88\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num2_59_86\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.result_86\ := to_unsigned(0, 8);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.82\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.result_88\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.conditional17_88\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.conditional17_86\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.87\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_89\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_89\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional20_89\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_65_89\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.bits_66_89\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_66_89\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_87\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_87\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional20_87\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_64_87\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.bits_65_87\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_65_87\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.7\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num_87\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.bits_66_87\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_87\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.return_66_87\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.b_66_87\ := to_unsigned(0, 8);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.94\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_89\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.bits_67_89\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_89\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.return_67_89\ := to_unsigned(0, 8);
-                \Quire Posit32::op_Explicit(Posit32).0.b_67_89\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.num_66_87\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num_67_89\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.97\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.num2_67_89\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.num2_66_87\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := false;
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\ := to_unsigned(0, 8);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.105\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.106\ := to_signed(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.107\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional21_89\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.conditional21_87\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\ := to_unsigned(0, 32);
                 \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.conditional19_57_77\ := to_unsigned(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\ := to_signed(0, 16);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\ := to_signed(0, 32);
-                \Quire Posit32::op_Explicit(Posit32).0.return_78\ := false;
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\ := to_signed(0, 64);
-                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.120\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.conditional19_56_75\ := to_unsigned(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\ := to_signed(0, 16);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\ := to_signed(0, 32);
+                \Quire Posit32::op_Explicit(Posit32).0.return_76\ := false;
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\ := to_signed(0, 64);
+                \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\ := false;
             else 
                 case \Quire Posit32::op_Explicit(Posit32).0._State\ is 
                     when \Quire Posit32::op_Explicit(Posit32).0._State_0\ => 
@@ -11906,36 +13622,35 @@ begin
                         -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_73;
+                        -- Lombiq.Arithmetics.Posit32 this_72;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_73 = x;
+                        -- this_72 = x;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_73\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
+                        \Quire Posit32::op_Explicit(Posit32).0.this_72\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool return_73;
+                        -- bool return_72;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_73 = this_73.PositBits == 2147483648u;
+                        -- return_72 = this_72.PositBits == 2147483648u;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsNaN().
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := \Quire Posit32::op_Explicit(Posit32).0.this_73\.\PositBits\ = "10000000000000000000000000000000";
-                        \Quire Posit32::op_Explicit(Posit32).0.return_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\ := \Quire Posit32::op_Explicit(Posit32).0.this_72\.\PositBits\ = "10000000000000000000000000000000";
+                        \Quire Posit32::op_Explicit(Posit32).0.return_72\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (return_73) {
+                        -- if (return_72) {
                         -- 	Quire object35;
                         -- 	object35 = new Quire (1u, 512);
                         -- 	return Quire.op_LeftShift (object35, 511);
                         -- }
-                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsZero().
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_4\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_6\.
                         --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_3\.
 
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_73\) then 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.return_72\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_4\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
@@ -11945,40 +13660,88 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_3\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_74;
+                        -- ulong[] array;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_74 = x;
+                        -- array = new ulong[8];
+                        -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_74\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
+                        \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
                         -- The following section was transformed from the .NET statement below:
-                        -- bool return_74;
+                        -- Lombiq.Arithmetics.Posit32 this_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_74 = (long)(this_74.PositBits) == 0L;
-                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsZero().
+                        -- this_73 = x;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.this_74\.\PositBits\), 64)) = to_signed(0, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\;
+                        \Quire Posit32::op_Explicit(Posit32).0.this_73\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (return_74) {
-                        -- 	Quire object36;
-                        -- 	object36 = new Quire (0u, 512);
-                        -- 	return object36;
+                        -- uint return_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_73;
+                        -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_67_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_67_73 = this_73;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.this_73\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint return_67_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits_67_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional20_67_73;
+                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_64_67_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_64_67_73 = this_67_73;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_64_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.this_67_73\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_64_67_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_64_67_73 = (long)((this_64_67_73.PositBits & 0x80000000u)) == 0L;
+                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_64_67_73\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.1\)), 64)) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_64_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (return_64_67_73) {
+                        -- 	conditional20_67_73 = this_67_73.PositBits;
+                        -- } else {
+                        -- 	;
+                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	uint bits_65_67_73;
+                        -- 	bits_65_67_73 = this_67_73.PositBits;
+                        -- 	uint return_65_67_73;
+                        -- 	return_65_67_73 = (uint)((long)(~bits_65_67_73) + 1L);
+                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	conditional20_67_73 = return_65_67_73;
                         -- }
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_8\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_9\.
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_8\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_8\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_9\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_9\.
                         --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_7\.
 
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_74\) then 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.return_64_67_73\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_8\;
                         else 
-                            -- There was no false branch, so going directly to the state after the if-else.
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_9\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.4371
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
                     when \Quire Posit32::op_Explicit(Posit32).0._State_4\ => 
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
@@ -12039,230 +13802,101 @@ begin
                     when \Quire Posit32::op_Explicit(Posit32).0._State_7\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- ulong[] array;
+                        -- bits_67_73 = (conditional20_67_73);
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_73\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional20_67_73\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num_67_73;
+                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- array = new ulong[8];
-                        -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.array\ := (others => to_unsigned(0, 64));
-                        -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_75;
+                        -- uint bits_66_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_75 = x;
+                        -- bits_66_67_73 = bits_67_73;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_75\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.bits_67_73\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_75;
-                        -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
+                        -- byte startingPosition_66_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_68_75;
+                        -- startingPosition_66_67_73 = 31;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_67_73\ := SmartResize(unsigned(to_signed(31, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte return_66_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_68_75 = this_75;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_75\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint return_68_75;
+                        -- byte b_66_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_68_75;
+                        -- b_66_67_73 = 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.b_66_67_73\ := SmartResize(unsigned(to_signed(1, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_66_67_73 = bits_66_67_73 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_66_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional20_68_75;
-                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- num_66_67_73 = (bits_66_67_73 >> 31) & 1u;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_66_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_66_67_73 = bits_66_67_73 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2_66_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_65_68_75;
+                        -- num2_66_67_73 = 0;
                         -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_66_67_73\ := to_signed(0, 32);
                         -- The following section was transformed from the .NET statement below:
-                        -- this_65_68_75 = this_68_75;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_65_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_68_75\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool return_65_68_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_65_68_75 = (long)((this_65_68_75.PositBits & 0x80000000u)) == 0L;
-                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_65_68_75\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.2\)), 64)) = to_signed(0, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_65_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (return_65_68_75) {
-                        -- 	conditional20_68_75 = this_68_75.PositBits;
-                        -- } else {
-                        -- 	;
-                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_66_68_75;
-                        -- 	bits_66_68_75 = this_68_75.PositBits;
-                        -- 	uint return_66_68_75;
-                        -- 	return_66_68_75 = (uint)((long)(~bits_66_68_75) + 1L);
-                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional20_68_75 = return_66_68_75;
+                        -- while ((int)(num2_66_67_73) < (int)(startingPosition_66_67_73) && bits_66_67_73 >> 31 == num_66_67_73) {
+                        -- 	bits_66_67_73 = bits_66_67_73 << 1;
+                        -- 	b_66_67_73 = (byte)((int)(b_66_67_73) + 1);
+                        -- 	num2_66_67_73 = num2_66_67_73 + 1;
                         -- }
                         -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_11\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_11\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_12\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_12\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_10\.
-
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_65_68_75\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_11\;
-                        else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_12\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5667
+                        -- Starting a while loop.
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_10\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7524
                     when \Quire Posit32::op_Explicit(Posit32).0._State_8\ => 
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	Quire object36;
-                        -- 	object36 = new Quire (0u, 512);
-                        -- 	return object36;
+                        -- 	conditional20_67_73 = this_67_73.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object36;
+                        -- conditional20_67_73 = this_67_73.PositBits;
                         -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- object36 = new Quire (0u, 512);
-                        -- 
-                        -- Initializing record fields to their defaults.
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\IsNull\ := false;
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\Size\ := to_unsigned(0, 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.object36\.\Segments\ := (others => to_unsigned(0, 64));
-                        -- Invoking the target's constructor.
-                        -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.object36\;
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(0, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(512, 32)), 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_9\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.this_67_73\.\PositBits\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_3\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_8\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
+                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_9\ => 
-                        -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Quire Posit32::op_Explicit(Posit32).0.object36\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
-                            -- The following section was transformed from the .NET statement below:
-                            -- return object36;
-                            -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.object36\;
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
-                            -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_3\.
-                            if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_9\) then 
-                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
-                            end if;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_10\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_68_75 = (conditional20_68_75);
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_68_75\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional20_68_75\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num_68_75;
-                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_67_68_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_67_68_75 = bits_68_75;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.bits_68_75\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte startingPosition_67_68_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- startingPosition_67_68_75 = 31;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_68_75\ := SmartResize(unsigned(to_signed(31, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte return_67_68_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_67_68_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- b_67_68_75 = 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_67_68_75\ := SmartResize(unsigned(to_signed(1, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_67_68_75 = bits_67_68_75 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.5\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_67_68_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num_67_68_75 = (bits_67_68_75 >> 31) & 1u;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.6\) and to_unsigned(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_67_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.7\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_67_68_75 = bits_67_68_75 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num2_67_68_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2_67_68_75 = 0;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_67_68_75\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2_67_68_75) < (int)(startingPosition_67_68_75) && bits_67_68_75 >> 31 == num_67_68_75) {
-                        -- 	bits_67_68_75 = bits_67_68_75 << 1;
-                        -- 	b_67_68_75 = (byte)((int)(b_67_68_75) + 1);
-                        -- 	num2_67_68_75 = num2_67_68_75 + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_13\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7524
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_11\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional20_68_75 = this_68_75.PositBits;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional20_68_75 = this_68_75.PositBits;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_68_75\.\PositBits\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_11\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_10\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_12\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\.
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_66_68_75;
-                        -- 	bits_66_68_75 = this_68_75.PositBits;
-                        -- 	uint return_66_68_75;
-                        -- 	return_66_68_75 = (uint)((long)(~bits_66_68_75) + 1L);
+                        -- 	uint bits_65_67_73;
+                        -- 	bits_65_67_73 = this_67_73.PositBits;
+                        -- 	uint return_65_67_73;
+                        -- 	return_65_67_73 = (uint)((long)(~bits_65_67_73) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional20_68_75 = return_66_68_75;
+                        -- 	conditional20_67_73 = return_65_67_73;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -12270,256 +13904,256 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_66_68_75;
+                        -- uint bits_65_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_66_68_75 = this_68_75.PositBits;
+                        -- bits_65_67_73 = this_67_73.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_68_75\.\PositBits\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_65_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.this_67_73\.\PositBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_66_68_75;
+                        -- uint return_65_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_66_68_75 = (uint)((long)(~bits_66_68_75) + 1L);
+                        -- return_65_67_73 = (uint)((long)(~bits_65_67_73) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_66_68_75\);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\), 64)) + to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_66_68_75\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.4\);
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_65_67_73\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.0\), 64)) + to_signed(1, 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_65_67_73\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.3\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional20_68_75 = return_66_68_75;
+                        -- conditional20_67_73 = return_65_67_73;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_66_68_75\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_12\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_10\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.return_65_67_73\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_3\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_9\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6201
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_13\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_10\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_10\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\.
                         -- The while loop's condition:
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_67_68_75\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_68_75\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_15\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_66_67_73\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_67_73\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0.78375
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_14\ => 
-                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_10\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_11\ => 
+                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_67_68_75 = b_67_68_75;
+                        -- return_66_67_73 = b_66_67_73;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_67_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.b_67_68_75\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_66_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.b_66_67_73\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num_68_75 = 32 - ((int)(return_67_68_75) + 2 + 2);
+                        -- num_67_73 = 32 - ((int)(return_66_67_73) + 2 + 2);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_67_68_75\), 32)) + to_signed(2, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\ + to_signed(2, 32), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_17\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.15\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_66_67_73\), 32)) + to_signed(2, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.15\ + to_signed(2, 32), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_14\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_15\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_12\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.11\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\ = \Quire Posit32::op_Explicit(Posit32).0.num_67_68_75\;
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.11\;
-                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\) then 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.9\ = \Quire Posit32::op_Explicit(Posit32).0.num_66_67_73\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.11\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.8\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.10\;
+                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.11\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_67_68_75 = bits_67_68_75 << 1;
-                            -- 	b_67_68_75 = (byte)((int)(b_67_68_75) + 1);
-                            -- 	num2_67_68_75 = num2_67_68_75 + 1;
+                            -- 	bits_66_67_73 = bits_66_67_73 << 1;
+                            -- 	b_66_67_73 = (byte)((int)(b_66_67_73) + 1);
+                            -- 	num2_66_67_73 = num2_66_67_73 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_67_68_75 = bits_67_68_75 << 1;
+                            -- bits_66_67_73 = bits_66_67_73 << 1;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                            \Quire Posit32::op_Explicit(Posit32).0.bits_67_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                            \Quire Posit32::op_Explicit(Posit32).0.bits_66_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.12\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_67_68_75 = (byte)((int)(b_67_68_75) + 1);
+                            -- b_66_67_73 = (byte)((int)(b_66_67_73) + 1);
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_16\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_13\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_14\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_11\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6051
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_16\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_13\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_67_68_75\), 32)) + to_signed(1, 32)), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.b_67_68_75\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_66_67_73\), 32)) + to_signed(1, 32)), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.b_66_67_73\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.13\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_67_68_75 = num2_67_68_75 + 1;
+                        -- num2_66_67_73 = num2_66_67_73 + 1;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.15\ := \Quire Posit32::op_Explicit(Posit32).0.num2_67_68_75\ + to_signed(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_67_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.15\;
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_10\ if the loop wasn't exited with a state change.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_16\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_13\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\ := \Quire Posit32::op_Explicit(Posit32).0.num2_66_67_73\ + to_signed(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_66_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.14\;
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_7\ if the loop wasn't exited with a state change.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_13\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_17\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_14\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.16\);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.17\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional21_68_75;
+                        -- uint conditional21_67_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((num_68_75 > 0)) {
-                        -- 	conditional21_68_75 = ((uint)num_68_75);
+                        -- if ((num_67_73 > 0)) {
+                        -- 	conditional21_67_73 = ((uint)num_67_73);
                         -- } else {
-                        -- 	conditional21_68_75 = 0u;
+                        -- 	conditional21_67_73 = 0u;
                         -- }
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\ := \Quire Posit32::op_Explicit(Posit32).0.num_68_75\ > to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\ := \Quire Posit32::op_Explicit(Posit32).0.num_67_73\ > to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_16\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_16\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_17\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_17\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_15\.
+
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.18\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_16\;
+                        else 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_17\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.86175
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_15\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_14\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_67_73 = conditional21_67_73;
+                        -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.return_67_73\ := \Quire Posit32::op_Explicit(Posit32).0.conditional21_67_73\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_73 = return_67_73;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num_73\ := \Quire Posit32::op_Explicit(Posit32).0.return_67_73\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num2_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional22_73;
+                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_68_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_68_73 = this_73;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_68_73\ := \Quire Posit32::op_Explicit(Posit32).0.this_73\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_68_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_68_73 = (long)((this_68_73.PositBits & 0x80000000u)) == 0L;
+                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_68_73\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\)), 64)) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_68_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (return_68_73) {
+                        -- 	conditional22_73 = this_73.PositBits;
+                        -- } else {
+                        -- 	;
+                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	uint bits_69_73;
+                        -- 	bits_69_73 = this_73.PositBits;
+                        -- 	uint return_69_73;
+                        -- 	return_69_73 = (uint)((long)(~bits_69_73) + 1L);
+                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	conditional22_73 = return_69_73;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_19\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_19\.
                         --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_20\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_20\.
                         --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_18\.
 
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.19\)) then 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.return_68_73\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_19\;
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_20\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.86175
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_18\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_17\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_68_75 = conditional21_68_75;
-                        -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_68_75\ := \Quire Posit32::op_Explicit(Posit32).0.conditional21_68_75\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- num_75 = return_68_75;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_68_75\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num2_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional22_75;
-                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_69_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- this_69_75 = this_75;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_69_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_75\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool return_69_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_69_75 = (long)((this_69_75.PositBits & 0x80000000u)) == 0L;
-                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_69_75\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.20\)), 64)) = to_signed(0, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_69_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (return_69_75) {
-                        -- 	conditional22_75 = this_75.PositBits;
-                        -- } else {
-                        -- 	;
-                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_70_75;
-                        -- 	bits_70_75 = this_75.PositBits;
-                        -- 	uint return_70_75;
-                        -- 	return_70_75 = (uint)((long)(~bits_70_75) + 1L);
-                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional22_75 = return_70_75;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_22\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_22\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_23\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_23\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_21\.
-
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_69_75\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_22\;
-                        else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_23\;
-                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5667
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_19\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_17\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_16\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_14\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional21_68_75 = ((uint)num_68_75);
+                        -- 	conditional21_67_73 = ((uint)num_67_73);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional21_68_75 = ((uint)num_68_75);
+                        -- conditional21_67_73 = ((uint)num_67_73);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_68_75\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_68_75\));
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_17\.
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_67_73\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_67_73\));
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_14\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_16\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_17\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_14\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional21_67_73 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional21_67_73 = 0u;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_67_73\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_14\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_17\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_15\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_18\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_15\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_73 = (conditional22_73);
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_73\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional22_73\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_73 = num2_73 << (int)(32L - (long)(num_73)) >> (int)(32L - (long)(num_73));
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_73\), 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.num2_73\, to_integer(unsigned(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_21\;
+                        -- Clock cycles needed to complete this state (approximation): 0.83745
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_19\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_15\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional22_73 = this_73.PositBits;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional22_73 = this_73.PositBits;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional22_73\ := \Quire Posit32::op_Explicit(Posit32).0.this_73\.\PositBits\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_15\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_19\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_20\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_17\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional21_68_75 = 0u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional21_68_75 = 0u;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_68_75\ := to_unsigned(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_17\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_20\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_18\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_21\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_18\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2_75 = (conditional22_75);
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_75\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional22_75\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_75 = num2_75 << (int)(32L - (long)(num_75)) >> (int)(32L - (long)(num_75));
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_75\), 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.num2_75\, to_integer(unsigned(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_24\;
-                        -- Clock cycles needed to complete this state (approximation): 0.83745
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_22\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_18\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional22_75 = this_75.PositBits;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional22_75 = this_75.PositBits;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional22_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_75\.\PositBits\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_18\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_22\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_21\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_23\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_18\.
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_15\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_70_75;
-                        -- 	bits_70_75 = this_75.PositBits;
-                        -- 	uint return_70_75;
-                        -- 	return_70_75 = (uint)((long)(~bits_70_75) + 1L);
+                        -- 	uint bits_69_73;
+                        -- 	bits_69_73 = this_73.PositBits;
+                        -- 	uint return_69_73;
+                        -- 	return_69_73 = (uint)((long)(~bits_69_73) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional22_75 = return_70_75;
+                        -- 	conditional22_73 = return_69_73;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -12527,87 +14161,87 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_70_75;
+                        -- uint bits_69_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_70_75 = this_75.PositBits;
+                        -- bits_69_73 = this_73.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_70_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_75\.\PositBits\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_69_73\ := \Quire Posit32::op_Explicit(Posit32).0.this_73\.\PositBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_70_75;
+                        -- uint return_69_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_70_75 = (uint)((long)(~bits_70_75) + 1L);
+                        -- return_69_73 = (uint)((long)(~bits_69_73) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.1\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_70_75\);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.1\), 64)) + to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_70_75\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.22\);
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.1\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_69_73\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.1\), 64)) + to_signed(1, 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_69_73\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.21\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional22_75 = return_70_75;
+                        -- conditional22_73 = return_69_73;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional22_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_70_75\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_18\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_23\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_21\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional22_73\ := \Quire Posit32::op_Explicit(Posit32).0.return_69_73\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_15\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_20\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_18\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6201
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_24\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_21\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_75\), 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_25\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\ := SmartResize(to_signed(32, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_73\), 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_22\;
                         -- Clock cycles needed to complete this state (approximation): 0.39855
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_25\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_22\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\, to_integer(unsigned(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.23\, to_integer(unsigned(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.24\), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.25\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional23_75;
+                        -- uint conditional23_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (((long)(num_75) == 0L)) {
-                        -- 	conditional23_75 = 1u;
+                        -- if (((long)(num_73) == 0L)) {
+                        -- 	conditional23_73 = 1u;
                         -- } else {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	uint bits_71_75;
-                        -- 	bits_71_75 = bits_75;
-                        -- 	ushort index_71_75;
-                        -- 	index_71_75 = (ushort)num_75;
-                        -- 	uint return_71_75;
-                        -- 	return_71_75 = bits_71_75 | (uint)(1 << (int)index_71_75);
+                        -- 	uint bits_70_73;
+                        -- 	bits_70_73 = bits_73;
+                        -- 	ushort index_70_73;
+                        -- 	index_70_73 = (ushort)num_73;
+                        -- 	uint return_70_73;
+                        -- 	return_70_73 = bits_70_73 | (uint)(1 << (int)index_70_73);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	conditional23_75 = return_71_75;
+                        -- 	conditional23_73 = return_70_73;
                         -- }
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_26\;
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_23\;
                         -- Clock cycles needed to complete this state (approximation): 0.63525
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_26\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_23\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_75\), 64)) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_73\), 64)) = to_signed(0, 64);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_28\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_28\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_29\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_29\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_27\.
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_25\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_25\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_26\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_26\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_24\.
 
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\)) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_28\;
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.26\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_25\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_29\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_26\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4371
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_27\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_26\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_24\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_75 = conditional23_75;
+                        -- return_73 = conditional23_73;
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionWithHiddenBit().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_75\ := \Quire Posit32::op_Explicit(Posit32).0.conditional23_75\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_73\ := \Quire Posit32::op_Explicit(Posit32).0.conditional23_73\;
                         -- The following section was transformed from the .NET statement below:
-                        -- array [0] = return_75;
+                        -- array [0] = return_73;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.array\(to_integer(to_signed(0, 32))) := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.return_75\, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.array\(to_integer(to_signed(0, 32))) := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.return_73\, 64);
                         -- The following section was transformed from the .NET statement below:
                         -- Quire quire;
                         -- 
@@ -12626,38 +14260,38 @@ begin
                         \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.array\;
                         \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_30\;
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_27\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_28\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_26\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_25\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional23_75 = 1u;
+                        -- 	conditional23_73 = 1u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional23_75 = 1u;
+                        -- conditional23_73 = 1u;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional23_75\ := to_unsigned(1, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_26\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_28\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_27\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional23_73\ := to_unsigned(1, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_23\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_25\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_24\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_29\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_26\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_26\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_23\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	uint bits_71_75;
-                        -- 	bits_71_75 = bits_75;
-                        -- 	ushort index_71_75;
-                        -- 	index_71_75 = (ushort)num_75;
-                        -- 	uint return_71_75;
-                        -- 	return_71_75 = bits_71_75 | (uint)(1 << (int)index_71_75);
+                        -- 	uint bits_70_73;
+                        -- 	bits_70_73 = bits_73;
+                        -- 	ushort index_70_73;
+                        -- 	index_70_73 = (ushort)num_73;
+                        -- 	uint return_70_73;
+                        -- 	return_70_73 = bits_70_73 | (uint)(1 << (int)index_70_73);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
-                        -- 	conditional23_75 = return_71_75;
+                        -- 	conditional23_73 = return_70_73;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -12665,204 +14299,204 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_71_75;
+                        -- uint bits_70_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_71_75 = bits_75;
+                        -- bits_70_73 = bits_73;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_71_75\ := \Quire Posit32::op_Explicit(Posit32).0.bits_75\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_70_73\ := \Quire Posit32::op_Explicit(Posit32).0.bits_73\;
                         -- The following section was transformed from the .NET statement below:
-                        -- ushort index_71_75;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- index_71_75 = (ushort)num_75;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.index_71_75\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.num_75\, 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint return_71_75;
+                        -- ushort index_70_73;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_71_75 = bits_71_75 | (uint)(1 << (int)index_71_75);
+                        -- index_70_73 = (ushort)num_73;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.index_70_73\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.num_73\, 16);
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint return_70_73;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_70_73 = bits_70_73 | (uint)(1 << (int)index_70_73);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::SetOne(System.UInt32,System.UInt16).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.index_71_75\, 32)), 5)))));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\ := \Quire Posit32::op_Explicit(Posit32).0.bits_71_75\ or (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_71_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\ := unsigned(shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.index_70_73\, 32)), 5)))));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\ := \Quire Posit32::op_Explicit(Posit32).0.bits_70_73\ or (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.27\);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_70_73\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.28\;
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional23_75 = return_71_75;
+                        -- conditional23_73 = return_70_73;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional23_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_71_75\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_26\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_29\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_27\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional23_73\ := \Quire Posit32::op_Explicit(Posit32).0.return_70_73\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_23\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_26\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_24\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5685
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_30\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_27\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
                             \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.array\ := \Quire Posit32::op_Explicit(Posit32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- Lombiq.Arithmetics.Posit32 this_76;
+                            -- Lombiq.Arithmetics.Posit32 this_74;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- this_76 = x;
+                            -- this_74 = x;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.this_76\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
+                            \Quire Posit32::op_Explicit(Posit32).0.this_74\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
                             -- The following section was transformed from the .NET statement below:
-                            -- uint return_76;
-                            -- 
-                            -- The following section was transformed from the .NET statement below:
-                            -- uint bits_76;
+                            -- uint return_74;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- uint conditional20_76;
+                            -- uint bits_74;
+                            -- 
+                            -- The following section was transformed from the .NET statement below:
+                            -- uint conditional20_74;
                             -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- Lombiq.Arithmetics.Posit32 this_65_76;
+                            -- Lombiq.Arithmetics.Posit32 this_64_74;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- this_65_76 = this_76;
+                            -- this_64_74 = this_74;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.this_65_76\ := \Quire Posit32::op_Explicit(Posit32).0.this_76\;
+                            \Quire Posit32::op_Explicit(Posit32).0.this_64_74\ := \Quire Posit32::op_Explicit(Posit32).0.this_74\;
                             -- The following section was transformed from the .NET statement below:
-                            -- bool return_65_76;
+                            -- bool return_64_74;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- return_65_76 = (long)((this_65_76.PositBits & 0x80000000u)) == 0L;
+                            -- return_64_74 = (long)((this_64_74.PositBits & 0x80000000u)) == 0L;
                             -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                             -- 
                             -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_65_76\.\PositBits\ and "10000000000000000000000000000000", 64));
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\)), 64)) = to_signed(0, 64);
-                            \Quire Posit32::op_Explicit(Posit32).0.return_65_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_64_74\.\PositBits\ and "10000000000000000000000000000000", 64));
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.29\)), 64)) = to_signed(0, 64);
+                            \Quire Posit32::op_Explicit(Posit32).0.return_64_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.30\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (return_65_76) {
-                            -- 	conditional20_76 = this_76.PositBits;
+                            -- if (return_64_74) {
+                            -- 	conditional20_74 = this_74.PositBits;
                             -- } else {
                             -- 	;
                             -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                            -- 	uint bits_66_76;
-                            -- 	bits_66_76 = this_76.PositBits;
-                            -- 	uint return_66_76;
-                            -- 	return_66_76 = (uint)((long)(~bits_66_76) + 1L);
+                            -- 	uint bits_65_74;
+                            -- 	bits_65_74 = this_74.PositBits;
+                            -- 	uint return_65_74;
+                            -- 	return_65_74 = (uint)((long)(~bits_65_74) + 1L);
                             -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                            -- 	conditional20_76 = return_66_76;
+                            -- 	conditional20_74 = return_65_74;
                             -- }
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_32\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_32\.
-                            --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_33\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_33\.
-                            --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_31\.
+                            --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_29\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_29\.
+                            --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_30\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_30\.
+                            --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_28\.
 
-                            if (\Quire Posit32::op_Explicit(Posit32).0.return_65_76\) then 
-                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_32\;
+                            if (\Quire Posit32::op_Explicit(Posit32).0.return_64_74\) then 
+                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_29\;
                             else 
-                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_33\;
+                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_30\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5667
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_31\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_30\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_28\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_76 = (conditional20_76);
+                        -- bits_74 = (conditional20_74);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_76\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional20_76\);
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_74\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional20_74\);
                         -- The following section was transformed from the .NET statement below:
-                        -- int num_76;
+                        -- int num_74;
                         -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_67_76;
+                        -- uint bits_66_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_67_76 = bits_76;
+                        -- bits_66_74 = bits_74;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_76\ := \Quire Posit32::op_Explicit(Posit32).0.bits_76\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_74\ := \Quire Posit32::op_Explicit(Posit32).0.bits_74\;
                         -- The following section was transformed from the .NET statement below:
-                        -- byte startingPosition_67_76;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- startingPosition_67_76 = 31;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_76\ := SmartResize(unsigned(to_signed(31, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte return_67_76;
+                        -- byte startingPosition_66_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- byte b_67_76;
+                        -- startingPosition_66_74 = 31;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_74\ := SmartResize(unsigned(to_signed(31, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte return_66_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- b_67_76 = 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_67_76\ := SmartResize(unsigned(to_signed(1, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_67_76 = bits_67_76 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_76\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_67_76;
+                        -- byte b_66_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num_67_76 = (bits_67_76 >> 31) & 1u;
+                        -- b_66_74 = 1;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_67_76\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\) and to_unsigned(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_67_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\;
+                        \Quire Posit32::op_Explicit(Posit32).0.b_66_74\ := SmartResize(unsigned(to_signed(1, 32)), 8);
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_67_76 = bits_67_76 << 1;
+                        -- bits_66_74 = bits_66_74 << 1;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_76\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.32\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_74\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.32\;
                         -- The following section was transformed from the .NET statement below:
-                        -- int num2_67_76;
+                        -- uint num_66_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_67_76 = 0;
+                        -- num_66_74 = (bits_66_74 >> 31) & 1u;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_67_76\ := to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_66_74\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.33\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_66_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.34\;
                         -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2_67_76) < (int)(startingPosition_67_76) && bits_67_76 >> 31 == num_67_76) {
-                        -- 	bits_67_76 = bits_67_76 << 1;
-                        -- 	b_67_76 = (byte)((int)(b_67_76) + 1);
-                        -- 	num2_67_76 = num2_67_76 + 1;
+                        -- bits_66_74 = bits_66_74 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_74\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.35\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2_66_74;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_66_74 = 0;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_66_74\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num2_66_74) < (int)(startingPosition_66_74) && bits_66_74 >> 31 == num_66_74) {
+                        -- 	bits_66_74 = bits_66_74 << 1;
+                        -- 	b_66_74 = (byte)((int)(b_66_74) + 1);
+                        -- 	num2_66_74 = num2_66_74 + 1;
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_34\;
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_31\;
                         -- Clock cycles needed to complete this state (approximation): 0.7524
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_32\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_30\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_29\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional20_76 = this_76.PositBits;
+                        -- 	conditional20_74 = this_74.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional20_76 = this_76.PositBits;
+                        -- conditional20_74 = this_74.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_76\ := \Quire Posit32::op_Explicit(Posit32).0.this_76\.\PositBits\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_30\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_32\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_31\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_74\ := \Quire Posit32::op_Explicit(Posit32).0.this_74\.\PositBits\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_27\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_29\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_33\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_30\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_30\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_27\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_66_76;
-                        -- 	bits_66_76 = this_76.PositBits;
-                        -- 	uint return_66_76;
-                        -- 	return_66_76 = (uint)((long)(~bits_66_76) + 1L);
+                        -- 	uint bits_65_74;
+                        -- 	bits_65_74 = this_74.PositBits;
+                        -- 	uint return_65_74;
+                        -- 	return_65_74 = (uint)((long)(~bits_65_74) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional20_76 = return_66_76;
+                        -- 	conditional20_74 = return_65_74;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -12870,331 +14504,331 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_66_76;
+                        -- uint bits_65_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_66_76 = this_76.PositBits;
+                        -- bits_65_74 = this_74.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_76\ := \Quire Posit32::op_Explicit(Posit32).0.this_76\.\PositBits\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_65_74\ := \Quire Posit32::op_Explicit(Posit32).0.this_74\.\PositBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_66_76;
+                        -- uint return_65_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_66_76 = (uint)((long)(~bits_66_76) + 1L);
+                        -- return_65_74 = (uint)((long)(~bits_65_74) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.2\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_66_76\);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.32\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.2\), 64)) + to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_66_76\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.32\);
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.2\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_65_74\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.2\), 64)) + to_signed(1, 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_65_74\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.31\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional20_76 = return_66_76;
+                        -- conditional20_74 = return_65_74;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_76\ := \Quire Posit32::op_Explicit(Posit32).0.return_66_76\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_30\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_33\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_31\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_74\ := \Quire Posit32::op_Explicit(Posit32).0.return_65_74\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_27\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_30\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_28\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6201
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_34\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_31\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_31\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_28\.
                         -- The while loop's condition:
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_67_76\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_76\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_67_76\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_36\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_66_74\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_74\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_66_74\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_33\;
                         -- Clock cycles needed to complete this state (approximation): 0.78375
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_35\ => 
-                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_31\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_32\ => 
+                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_28\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_67_76 = b_67_76;
+                        -- return_66_74 = b_66_74;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_67_76\ := \Quire Posit32::op_Explicit(Posit32).0.b_67_76\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_66_74\ := \Quire Posit32::op_Explicit(Posit32).0.b_66_74\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num_76 = 32 - ((int)(return_67_76) + 2 + 2);
+                        -- num_74 = 32 - ((int)(return_66_74) + 2 + 2);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.44\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_67_76\), 32)) + to_signed(2, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.44\ + to_signed(2, 32), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_38\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.43\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_66_74\), 32)) + to_signed(2, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.44\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.43\ + to_signed(2, 32), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_35\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_36\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_33\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.39\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\ = \Quire Posit32::op_Explicit(Posit32).0.num_67_76\;
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.39\;
-                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\) then 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.37\ = \Quire Posit32::op_Explicit(Posit32).0.num_66_74\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.39\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.36\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.38\;
+                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.39\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_67_76 = bits_67_76 << 1;
-                            -- 	b_67_76 = (byte)((int)(b_67_76) + 1);
-                            -- 	num2_67_76 = num2_67_76 + 1;
+                            -- 	bits_66_74 = bits_66_74 << 1;
+                            -- 	b_66_74 = (byte)((int)(b_66_74) + 1);
+                            -- 	num2_66_74 = num2_66_74 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_67_76 = bits_67_76 << 1;
+                            -- bits_66_74 = bits_66_74 << 1;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_76\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                            \Quire Posit32::op_Explicit(Posit32).0.bits_67_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_74\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                            \Quire Posit32::op_Explicit(Posit32).0.bits_66_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.40\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_67_76 = (byte)((int)(b_67_76) + 1);
+                            -- b_66_74 = (byte)((int)(b_66_74) + 1);
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_37\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_34\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_35\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_32\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6051
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_37\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_34\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_67_76\), 32)) + to_signed(1, 32)), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.b_67_76\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_66_74\), 32)) + to_signed(1, 32)), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.b_66_74\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.41\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_67_76 = num2_67_76 + 1;
+                        -- num2_66_74 = num2_66_74 + 1;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.43\ := \Quire Posit32::op_Explicit(Posit32).0.num2_67_76\ + to_signed(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_67_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.43\;
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_31\ if the loop wasn't exited with a state change.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_37\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_34\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\ := \Quire Posit32::op_Explicit(Posit32).0.num2_66_74\ + to_signed(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_66_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.42\;
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_28\ if the loop wasn't exited with a state change.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_34\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_31\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_38\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_35\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.44\);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_74\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.45\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional21_76;
+                        -- uint conditional21_74;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((num_76 > 0)) {
-                        -- 	conditional21_76 = ((uint)num_76);
+                        -- if ((num_74 > 0)) {
+                        -- 	conditional21_74 = ((uint)num_74);
                         -- } else {
-                        -- 	conditional21_76 = 0u;
+                        -- 	conditional21_74 = 0u;
                         -- }
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\ := \Quire Posit32::op_Explicit(Posit32).0.num_76\ > to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\ := \Quire Posit32::op_Explicit(Posit32).0.num_74\ > to_signed(0, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_37\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_37\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_38\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_36\.
+
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.46\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_37\;
+                        else 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_38\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.86175
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_36\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_35\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_74 = conditional21_74;
+                        -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
+                        -- // Starting inlined block of the method System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.return_74\ := \Quire Posit32::op_Explicit(Posit32).0.conditional21_74\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_75 = x;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_75\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- short return_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- sbyte regimeKValue_75;
+                        -- // Starting inlined block of the method System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_55_75 = this_75;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_75\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- sbyte return_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional13_55_75;
+                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_52_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_52_55_75 = this_55_75;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_52_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_55_75\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_52_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_52_55_75 = (long)((this_52_55_75.PositBits & 0x80000000u)) == 0L;
+                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_52_55_75\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\)), 64)) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_52_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (return_52_55_75) {
+                        -- 	conditional13_55_75 = this_55_75.PositBits;
+                        -- } else {
+                        -- 	;
+                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	uint bits_53_55_75;
+                        -- 	bits_53_55_75 = this_55_75.PositBits;
+                        -- 	uint return_53_55_75;
+                        -- 	return_53_55_75 = (uint)((long)(~bits_53_55_75) + 1L);
+                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	conditional13_55_75 = return_53_55_75;
+                        -- }
+                        -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_40\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_40\.
                         --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_41\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_41\.
                         --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_39\.
 
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.47\)) then 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.return_52_55_75\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_40\;
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_41\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.86175
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_39\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_76 = conditional21_76;
-                        -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
-                        -- // Starting inlined block of the method System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_76\ := \Quire Posit32::op_Explicit(Posit32).0.conditional21_76\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- this_77 = x;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_77\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- short return_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- sbyte regimeKValue_77;
-                        -- // Starting inlined block of the method System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- this_56_77 = this_77;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.this_77\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- sbyte return_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional13_56_77;
-                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_53_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- this_53_56_77 = this_56_77;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_53_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_77\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool return_53_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_53_56_77 = (long)((this_53_56_77.PositBits & 0x80000000u)) == 0L;
-                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_53_56_77\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.48\)), 64)) = to_signed(0, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_53_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (return_53_56_77) {
-                        -- 	conditional13_56_77 = this_56_77.PositBits;
-                        -- } else {
-                        -- 	;
-                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_54_56_77;
-                        -- 	bits_54_56_77 = this_56_77.PositBits;
-                        -- 	uint return_54_56_77;
-                        -- 	return_54_56_77 = (uint)((long)(~bits_54_56_77) + 1L);
-                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional13_56_77 = return_54_56_77;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_43\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_43\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_44\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_44\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_42\.
-
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_53_56_77\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_43\;
-                        else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_44\;
-                        end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5667
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_40\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_37\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_35\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional21_76 = ((uint)num_76);
+                        -- 	conditional21_74 = ((uint)num_74);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional21_76 = ((uint)num_76);
+                        -- conditional21_74 = ((uint)num_74);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_76\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_76\));
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_74\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_74\));
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_35\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_37\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_36\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_38\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_35\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional21_74 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional21_74 = 0u;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_74\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_35\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_38\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_36\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_39\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_36\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_55_75 = (conditional13_55_75);
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num_55_75\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional13_55_75\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b_55_75;
+                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits_54_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_54_55_75 = num_55_75;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.num_55_75\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte startingPosition_54_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- startingPosition_54_55_75 = 31;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_54_55_75\ := SmartResize(unsigned(to_signed(31, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte return_54_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b_54_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- b_54_55_75 = 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.b_54_55_75\ := SmartResize(unsigned(to_signed(1, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_54_55_75 = bits_54_55_75 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_54_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_54_55_75 = (bits_54_55_75 >> 31) & 1u;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.51\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.51\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_54_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_54_55_75 = bits_54_55_75 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2_54_55_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_54_55_75 = 0;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_54_55_75\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num2_54_55_75) < (int)(startingPosition_54_55_75) && bits_54_55_75 >> 31 == num_54_55_75) {
+                        -- 	bits_54_55_75 = bits_54_55_75 << 1;
+                        -- 	b_54_55_75 = (byte)((int)(b_54_55_75) + 1);
+                        -- 	num2_54_55_75 = num2_54_55_75 + 1;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_42\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7524
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_40\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_36\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional13_55_75 = this_55_75.PositBits;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional13_55_75 = this_55_75.PositBits;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional13_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_55_75\.\PositBits\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_36\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_40\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_39\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_41\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional21_76 = 0u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional21_76 = 0u;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_76\ := to_unsigned(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_38\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_41\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_39\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_42\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num_56_77 = (conditional13_56_77);
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num_56_77\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional13_56_77\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_56_77;
-                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_55_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_55_56_77 = num_56_77;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.num_56_77\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte startingPosition_55_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- startingPosition_55_56_77 = 31;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_55_56_77\ := SmartResize(unsigned(to_signed(31, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte return_55_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_55_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- b_55_56_77 = 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_55_56_77\ := SmartResize(unsigned(to_signed(1, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_55_56_77 = bits_55_56_77 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.51\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.51\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_55_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num_55_56_77 = (bits_55_56_77 >> 31) & 1u;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.52\) and to_unsigned(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_55_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.53\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_55_56_77 = bits_55_56_77 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num2_55_56_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2_55_56_77 = 0;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_55_56_77\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2_55_56_77) < (int)(startingPosition_55_56_77) && bits_55_56_77 >> 31 == num_55_56_77) {
-                        -- 	bits_55_56_77 = bits_55_56_77 << 1;
-                        -- 	b_55_56_77 = (byte)((int)(b_55_56_77) + 1);
-                        -- 	num2_55_56_77 = num2_55_56_77 + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_45\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7524
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_43\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional13_56_77 = this_56_77.PositBits;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional13_56_77 = this_56_77.PositBits;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional13_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_77\.\PositBits\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_43\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_42\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_44\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\.
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_36\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_54_56_77;
-                        -- 	bits_54_56_77 = this_56_77.PositBits;
-                        -- 	uint return_54_56_77;
-                        -- 	return_54_56_77 = (uint)((long)(~bits_54_56_77) + 1L);
+                        -- 	uint bits_53_55_75;
+                        -- 	bits_53_55_75 = this_55_75.PositBits;
+                        -- 	uint return_53_55_75;
+                        -- 	return_53_55_75 = (uint)((long)(~bits_53_55_75) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional13_56_77 = return_54_56_77;
+                        -- 	conditional13_55_75 = return_53_55_75;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -13202,512 +14836,512 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_54_56_77;
+                        -- uint bits_53_55_75;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_54_56_77 = this_56_77.PositBits;
+                        -- bits_53_55_75 = this_55_75.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_54_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_77\.\PositBits\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_53_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_55_75\.\PositBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_54_56_77;
+                        -- uint return_53_55_75;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_54_56_77 = (uint)((long)(~bits_54_56_77) + 1L);
+                        -- return_53_55_75 = (uint)((long)(~bits_53_55_75) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.3\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_54_56_77\);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.3\), 64)) + to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_54_56_77\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.50\);
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.3\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_53_55_75\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.3\), 64)) + to_signed(1, 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_53_55_75\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.49\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional13_56_77 = return_54_56_77;
+                        -- conditional13_55_75 = return_53_55_75;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional13_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.return_54_56_77\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_44\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_42\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional13_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_53_55_75\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_36\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_41\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_39\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6201
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_45\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_42\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_42\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\.
                         -- The while loop's condition:
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_55_56_77\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_55_56_77\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_47\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_54_55_75\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_54_55_75\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_44\;
                         -- Clock cycles needed to complete this state (approximation): 0.78375
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_46\ => 
-                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_42\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_43\ => 
+                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_55_56_77 = b_55_56_77;
+                        -- return_54_55_75 = b_54_55_75;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_55_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.b_55_56_77\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_54_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.b_54_55_75\;
                         -- The following section was transformed from the .NET statement below:
-                        -- b_56_77 = return_55_56_77;
+                        -- b_55_75 = return_54_55_75;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.return_55_56_77\;
+                        \Quire Posit32::op_Explicit(Posit32).0.b_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_54_55_75\;
                         -- The following section was transformed from the .NET statement below:
-                        -- sbyte conditional14_56_77;
+                        -- sbyte conditional14_55_75;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((((long)(num_56_77) & 1073741824L) == 0L)) {
-                        -- 	conditional14_56_77 = ((sbyte)(-(int)(b_56_77)));
+                        -- if ((((long)(num_55_75) & 1073741824L) == 0L)) {
+                        -- 	conditional14_55_75 = ((sbyte)(-(int)(b_55_75)));
                         -- } else {
-                        -- 	conditional14_56_77 = ((sbyte)((int)(b_56_77) - 1));
+                        -- 	conditional14_55_75 = ((sbyte)((int)(b_55_75) - 1));
                         -- }
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_56_77\), 64)) and to_signed(1073741824, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.num_55_75\), 64)) and to_signed(1073741824, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\) = to_signed(0, 64);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_50\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_50\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_51\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_51\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_49\.
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_47\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_47\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_48\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_48\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_46\.
 
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\)) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_50\;
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.62\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_47\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_51\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_48\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.66
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_47\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_44\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.57\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\ = \Quire Posit32::op_Explicit(Posit32).0.num_55_56_77\;
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.57\;
-                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\) then 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.55\ = \Quire Posit32::op_Explicit(Posit32).0.num_54_55_75\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.57\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.54\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.56\;
+                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.57\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_55_56_77 = bits_55_56_77 << 1;
-                            -- 	b_55_56_77 = (byte)((int)(b_55_56_77) + 1);
-                            -- 	num2_55_56_77 = num2_55_56_77 + 1;
+                            -- 	bits_54_55_75 = bits_54_55_75 << 1;
+                            -- 	b_54_55_75 = (byte)((int)(b_54_55_75) + 1);
+                            -- 	num2_54_55_75 = num2_54_55_75 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_55_56_77 = bits_55_56_77 << 1;
+                            -- bits_54_55_75 = bits_54_55_75 << 1;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                            \Quire Posit32::op_Explicit(Posit32).0.bits_55_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                            \Quire Posit32::op_Explicit(Posit32).0.bits_54_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.58\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_55_56_77 = (byte)((int)(b_55_56_77) + 1);
+                            -- b_54_55_75 = (byte)((int)(b_54_55_75) + 1);
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_48\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_45\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_46\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_43\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6051
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_48\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_45\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_55_56_77\), 32)) + to_signed(1, 32)), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.b_55_56_77\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_54_55_75\), 32)) + to_signed(1, 32)), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.b_54_55_75\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.59\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_55_56_77 = num2_55_56_77 + 1;
+                        -- num2_54_55_75 = num2_54_55_75 + 1;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\ := \Quire Posit32::op_Explicit(Posit32).0.num2_55_56_77\ + to_signed(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_55_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.61\;
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_42\ if the loop wasn't exited with a state change.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_48\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_45\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\ := \Quire Posit32::op_Explicit(Posit32).0.num2_54_55_75\ + to_signed(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_54_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.60\;
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_39\ if the loop wasn't exited with a state change.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_45\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_42\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_46\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_43\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_55_75 = conditional14_55_75;
+                        -- // Ending inlined block of the method System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.return_55_75\ := \Quire Posit32::op_Explicit(Posit32).0.conditional14_55_75\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- regimeKValue_75 = return_55_75;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.regimeKValue_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_55_75\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int conditional15_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (((int)(regimeKValue_75) != -31)) {
+                        -- 	;
+                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
+                        -- 	Lombiq.Arithmetics.Posit32 this_56_75;
+                        -- 	this_56_75 = this_75;
+                        -- 	uint return_56_75;
+                        -- 	uint num_56_75;
+                        -- 	uint conditional18_56_75;
+                        -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 	Lombiq.Arithmetics.Posit32 this_84;
+                        -- 	this_84 = this_56_75;
+                        -- 	bool return_84;
+                        -- 	return_84 = (long)((this_84.PositBits & 0x80000000u)) == 0L;
+                        -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 	if (return_84) {
+                        -- 		conditional18_56_75 = this_56_75.PositBits;
+                        -- 	} else {
+                        -- 		;
+                        -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 		uint bits_85;
+                        -- 		bits_85 = this_56_75.PositBits;
+                        -- 		uint return_85;
+                        -- 		return_85 = (uint)((long)(~bits_85) + 1L);
+                        -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 		conditional18_56_75 = return_85;
+                        -- 	}
+                        -- 	num_56_75 = (conditional18_56_75);
+                        -- 	byte b_56_75;
+                        -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
+                        -- 	Lombiq.Arithmetics.Posit32 this_86;
+                        -- 	this_86 = this_56_75;
+                        -- 	byte return_86;
+                        -- 	uint bits_86;
+                        -- 	uint conditional16_86;
+                        -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 	Lombiq.Arithmetics.Posit32 this_57_86;
+                        -- 	this_57_86 = this_86;
+                        -- 	bool return_57_86;
+                        -- 	return_57_86 = (long)((this_57_86.PositBits & 0x80000000u)) == 0L;
+                        -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 	if (return_57_86) {
+                        -- 		conditional16_86 = this_86.PositBits;
+                        -- 	} else {
+                        -- 		;
+                        -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 		uint bits_58_86;
+                        -- 		bits_58_86 = this_86.PositBits;
+                        -- 		uint return_58_86;
+                        -- 		return_58_86 = (uint)((long)(~bits_58_86) + 1L);
+                        -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 		conditional16_86 = return_58_86;
+                        -- 	}
+                        -- 	bits_86 = (conditional16_86);
+                        -- 	byte b_86;
+                        -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
+                        -- 	uint bits_59_86;
+                        -- 	bits_59_86 = bits_86;
+                        -- 	byte startingPosition_59_86;
+                        -- 	startingPosition_59_86 = 31;
+                        -- 	byte return_59_86;
+                        -- 	byte b_59_86;
+                        -- 	b_59_86 = 1;
+                        -- 	bits_59_86 = bits_59_86 << 1;
+                        -- 	uint num_59_86;
+                        -- 	num_59_86 = (bits_59_86 >> 31) & 1u;
+                        -- 	bits_59_86 = bits_59_86 << 1;
+                        -- 	int num2_59_86;
+                        -- 	num2_59_86 = 0;
+                        -- 	while ((int)(num2_59_86) < (int)(startingPosition_59_86) && bits_59_86 >> 31 == num_59_86) {
+                        -- 		bits_59_86 = bits_59_86 << 1;
+                        -- 		b_59_86 = (byte)((int)(b_59_86) + 1);
+                        -- 		num2_59_86 = num2_59_86 + 1;
+                        -- 	}
+                        -- 	return_59_86 = b_59_86;
+                        -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
+                        -- 	b_86 = return_59_86;
+                        -- 	byte result_86;
+                        -- 	result_86 = (byte)(32 - (int)(b_86) - 1);
+                        -- 	if ((int)(b_86) + 2 <= 32) {
+                        -- 		int conditional17_86;
+                        -- 		if ((32 - ((int)(b_86) + 2) > 2)) {
+                        -- 			conditional17_86 = 2;
+                        -- 		} else {
+                        -- 			conditional17_86 = ((byte)(32 - ((int)(b_86) + 2)));
+                        -- 		}
+                        -- 		result_86 = (byte)(conditional17_86);
+                        -- 	}
+                        -- 	return_86 = result_86;
+                        -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
+                        -- 	b_56_75 = return_86;
+                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
+                        -- 	Lombiq.Arithmetics.Posit32 this_87;
+                        -- 	this_87 = this_56_75;
+                        -- 	uint return_87;
+                        -- 	uint bits_87;
+                        -- 	uint conditional20_87;
+                        -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 	Lombiq.Arithmetics.Posit32 this_64_87;
+                        -- 	this_64_87 = this_87;
+                        -- 	bool return_64_87;
+                        -- 	return_64_87 = (long)((this_64_87.PositBits & 0x80000000u)) == 0L;
+                        -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 	if (return_64_87) {
+                        -- 		conditional20_87 = this_87.PositBits;
+                        -- 	} else {
+                        -- 		;
+                        -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 		uint bits_65_87;
+                        -- 		bits_65_87 = this_87.PositBits;
+                        -- 		uint return_65_87;
+                        -- 		return_65_87 = (uint)((long)(~bits_65_87) + 1L);
+                        -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 		conditional20_87 = return_65_87;
+                        -- 	}
+                        -- 	bits_87 = (conditional20_87);
+                        -- 	int num_87;
+                        -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
+                        -- 	uint bits_66_87;
+                        -- 	bits_66_87 = bits_87;
+                        -- 	byte startingPosition_66_87;
+                        -- 	startingPosition_66_87 = 31;
+                        -- 	byte return_66_87;
+                        -- 	byte b_66_87;
+                        -- 	b_66_87 = 1;
+                        -- 	bits_66_87 = bits_66_87 << 1;
+                        -- 	uint num_66_87;
+                        -- 	num_66_87 = (bits_66_87 >> 31) & 1u;
+                        -- 	bits_66_87 = bits_66_87 << 1;
+                        -- 	int num2_66_87;
+                        -- 	num2_66_87 = 0;
+                        -- 	while ((int)(num2_66_87) < (int)(startingPosition_66_87) && bits_66_87 >> 31 == num_66_87) {
+                        -- 		bits_66_87 = bits_66_87 << 1;
+                        -- 		b_66_87 = (byte)((int)(b_66_87) + 1);
+                        -- 		num2_66_87 = num2_66_87 + 1;
+                        -- 	}
+                        -- 	return_66_87 = b_66_87;
+                        -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
+                        -- 	num_87 = 32 - ((int)(return_66_87) + 2 + 2);
+                        -- 	uint conditional21_87;
+                        -- 	if ((num_87 > 0)) {
+                        -- 		conditional21_87 = ((uint)num_87);
+                        -- 	} else {
+                        -- 		conditional21_87 = 0u;
+                        -- 	}
+                        -- 	return_87 = conditional21_87;
+                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
+                        -- 	num_56_75 = num_56_75 >> (int)return_87 << 32 - (int)(b_56_75) >> 30;
+                        -- 	uint conditional19_56_75;
+                        -- 	if (((int)(b_56_75) != 0)) {
+                        -- 		conditional19_56_75 = num_56_75;
+                        -- 	} else {
+                        -- 		conditional19_56_75 = 0u;
+                        -- 	}
+                        -- 	return_56_75 = conditional19_56_75;
+                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
+                        -- 	conditional15_75 = ((short)((long)((int)(regimeKValue_75) * 4) + (long)(return_56_75)));
+                        -- } else {
+                        -- 	conditional15_75 = 0;
+                        -- }
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\ := SmartResize((\Quire Posit32::op_Explicit(Posit32).0.regimeKValue_75\), 32) /= to_signed(-31, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_50\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_81\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_84\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_84\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_49\.
+
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_50\;
+                        else 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_84\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.33405
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_47\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_43\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional14_55_75 = ((sbyte)(-(int)(b_55_75)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional14_55_75 = ((sbyte)(-(int)(b_55_75)));
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.4\ := -signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_55_75\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional14_55_75\ := (SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.4\), 8));
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_43\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_47\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_46\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3369
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_48\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_43\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional14_55_75 = ((sbyte)((int)(b_55_75) - 1));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional14_55_75 = ((sbyte)((int)(b_55_75) - 1));
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\ := SmartResize(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_55_75\), 32)) - to_signed(1, 32), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional14_55_75\ := ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.63\));
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_43\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_48\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_46\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.3564
                     when \Quire Posit32::op_Explicit(Posit32).0._State_49\ => 
                         -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_56_77 = conditional14_56_77;
-                        -- // Ending inlined block of the method System.SByte Lombiq.Arithmetics.Posit32::GetRegimeKValue().
+                        -- return_75 = (short)(conditional15_75);
+                        -- // Ending inlined block of the method System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_56_77\ := \Quire Posit32::op_Explicit(Posit32).0.conditional14_56_77\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_75\ := SmartResize((\Quire Posit32::op_Explicit(Posit32).0.conditional15_75\), 16);
                         -- The following section was transformed from the .NET statement below:
-                        -- regimeKValue_77 = return_56_77;
+                        -- quire = Quire.op_LeftShift (quire, (int)(240L - (long)(return_74) + (long)(return_75)));
+                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.regimeKValue_77\ := \Quire Posit32::op_Explicit(Posit32).0.return_56_77\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional15_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(regimeKValue_77) != -31)) {
-                        -- 	;
-                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
-                        -- 	Lombiq.Arithmetics.Posit32 this_57_77;
-                        -- 	this_57_77 = this_77;
-                        -- 	uint return_57_77;
-                        -- 	uint num_57_77;
-                        -- 	uint conditional18_57_77;
-                        -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	Lombiq.Arithmetics.Posit32 this_86;
-                        -- 	this_86 = this_57_77;
-                        -- 	bool return_86;
-                        -- 	return_86 = (long)((this_86.PositBits & 0x80000000u)) == 0L;
-                        -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	if (return_86) {
-                        -- 		conditional18_57_77 = this_57_77.PositBits;
-                        -- 	} else {
-                        -- 		;
-                        -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_87;
-                        -- 		bits_87 = this_57_77.PositBits;
-                        -- 		uint return_87;
-                        -- 		return_87 = (uint)((long)(~bits_87) + 1L);
-                        -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional18_57_77 = return_87;
-                        -- 	}
-                        -- 	num_57_77 = (conditional18_57_77);
-                        -- 	byte b_57_77;
-                        -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
-                        -- 	Lombiq.Arithmetics.Posit32 this_88;
-                        -- 	this_88 = this_57_77;
-                        -- 	byte return_88;
-                        -- 	uint bits_88;
-                        -- 	uint conditional16_88;
-                        -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	Lombiq.Arithmetics.Posit32 this_58_88;
-                        -- 	this_58_88 = this_88;
-                        -- 	bool return_58_88;
-                        -- 	return_58_88 = (long)((this_58_88.PositBits & 0x80000000u)) == 0L;
-                        -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	if (return_58_88) {
-                        -- 		conditional16_88 = this_88.PositBits;
-                        -- 	} else {
-                        -- 		;
-                        -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_59_88;
-                        -- 		bits_59_88 = this_88.PositBits;
-                        -- 		uint return_59_88;
-                        -- 		return_59_88 = (uint)((long)(~bits_59_88) + 1L);
-                        -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional16_88 = return_59_88;
-                        -- 	}
-                        -- 	bits_88 = (conditional16_88);
-                        -- 	byte b_88;
-                        -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	uint bits_60_88;
-                        -- 	bits_60_88 = bits_88;
-                        -- 	byte startingPosition_60_88;
-                        -- 	startingPosition_60_88 = 31;
-                        -- 	byte return_60_88;
-                        -- 	byte b_60_88;
-                        -- 	b_60_88 = 1;
-                        -- 	bits_60_88 = bits_60_88 << 1;
-                        -- 	uint num_60_88;
-                        -- 	num_60_88 = (bits_60_88 >> 31) & 1u;
-                        -- 	bits_60_88 = bits_60_88 << 1;
-                        -- 	int num2_60_88;
-                        -- 	num2_60_88 = 0;
-                        -- 	while ((int)(num2_60_88) < (int)(startingPosition_60_88) && bits_60_88 >> 31 == num_60_88) {
-                        -- 		bits_60_88 = bits_60_88 << 1;
-                        -- 		b_60_88 = (byte)((int)(b_60_88) + 1);
-                        -- 		num2_60_88 = num2_60_88 + 1;
-                        -- 	}
-                        -- 	return_60_88 = b_60_88;
-                        -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	b_88 = return_60_88;
-                        -- 	byte result_88;
-                        -- 	result_88 = (byte)(32 - (int)(b_88) - 1);
-                        -- 	if ((int)(b_88) + 2 <= 32) {
-                        -- 		int conditional17_88;
-                        -- 		if ((32 - ((int)(b_88) + 2) > 2)) {
-                        -- 			conditional17_88 = 2;
-                        -- 		} else {
-                        -- 			conditional17_88 = ((byte)(32 - ((int)(b_88) + 2)));
-                        -- 		}
-                        -- 		result_88 = (byte)(conditional17_88);
-                        -- 	}
-                        -- 	return_88 = result_88;
-                        -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
-                        -- 	b_57_77 = return_88;
-                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
-                        -- 	Lombiq.Arithmetics.Posit32 this_89;
-                        -- 	this_89 = this_57_77;
-                        -- 	uint return_89;
-                        -- 	uint bits_89;
-                        -- 	uint conditional20_89;
-                        -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	Lombiq.Arithmetics.Posit32 this_65_89;
-                        -- 	this_65_89 = this_89;
-                        -- 	bool return_65_89;
-                        -- 	return_65_89 = (long)((this_65_89.PositBits & 0x80000000u)) == 0L;
-                        -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	if (return_65_89) {
-                        -- 		conditional20_89 = this_89.PositBits;
-                        -- 	} else {
-                        -- 		;
-                        -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_66_89;
-                        -- 		bits_66_89 = this_89.PositBits;
-                        -- 		uint return_66_89;
-                        -- 		return_66_89 = (uint)((long)(~bits_66_89) + 1L);
-                        -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional20_89 = return_66_89;
-                        -- 	}
-                        -- 	bits_89 = (conditional20_89);
-                        -- 	int num_89;
-                        -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	uint bits_67_89;
-                        -- 	bits_67_89 = bits_89;
-                        -- 	byte startingPosition_67_89;
-                        -- 	startingPosition_67_89 = 31;
-                        -- 	byte return_67_89;
-                        -- 	byte b_67_89;
-                        -- 	b_67_89 = 1;
-                        -- 	bits_67_89 = bits_67_89 << 1;
-                        -- 	uint num_67_89;
-                        -- 	num_67_89 = (bits_67_89 >> 31) & 1u;
-                        -- 	bits_67_89 = bits_67_89 << 1;
-                        -- 	int num2_67_89;
-                        -- 	num2_67_89 = 0;
-                        -- 	while ((int)(num2_67_89) < (int)(startingPosition_67_89) && bits_67_89 >> 31 == num_67_89) {
-                        -- 		bits_67_89 = bits_67_89 << 1;
-                        -- 		b_67_89 = (byte)((int)(b_67_89) + 1);
-                        -- 		num2_67_89 = num2_67_89 + 1;
-                        -- 	}
-                        -- 	return_67_89 = b_67_89;
-                        -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	num_89 = 32 - ((int)(return_67_89) + 2 + 2);
-                        -- 	uint conditional21_89;
-                        -- 	if ((num_89 > 0)) {
-                        -- 		conditional21_89 = ((uint)num_89);
-                        -- 	} else {
-                        -- 		conditional21_89 = 0u;
-                        -- 	}
-                        -- 	return_89 = conditional21_89;
-                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
-                        -- 	num_57_77 = num_57_77 >> (int)return_89 << 32 - (int)(b_57_77) >> 30;
-                        -- 	uint conditional19_57_77;
-                        -- 	if (((int)(b_57_77) != 0)) {
-                        -- 		conditional19_57_77 = num_57_77;
-                        -- 	} else {
-                        -- 		conditional19_57_77 = 0u;
-                        -- 	}
-                        -- 	return_57_77 = conditional19_57_77;
-                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
-                        -- 	conditional15_77 = ((short)((long)((int)(regimeKValue_77) * 4) + (long)(return_57_77)));
-                        -- } else {
-                        -- 	conditional15_77 = 0;
-                        -- }
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\ := SmartResize((\Quire Posit32::op_Explicit(Posit32).0.regimeKValue_77\), 32) /= to_signed(-31, 32);
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_53\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_84\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_87\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_87\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_52\.
-
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\)) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_53\;
-                        else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_87\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.33405
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\ := to_signed(240, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_74\), 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\ + SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_75\), 64), 32);
+                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\);
+                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_85\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8985
                     when \Quire Posit32::op_Explicit(Posit32).0._State_50\ => 
                         -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional14_56_77 = ((sbyte)(-(int)(b_56_77)));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional14_56_77 = ((sbyte)(-(int)(b_56_77)));
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.4\ := -signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_56_77\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional14_56_77\ := (SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.4\), 8));
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_50\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_49\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3369
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_51\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional14_56_77 = ((sbyte)((int)(b_56_77) - 1));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional14_56_77 = ((sbyte)((int)(b_56_77) - 1));
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\ := SmartResize(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_56_77\), 32)) - to_signed(1, 32), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional14_56_77\ := ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.64\));
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_51\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_49\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.3564
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_52\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_49\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_77 = (short)(conditional15_77);
-                        -- // Ending inlined block of the method System.Int16 Lombiq.Arithmetics.Posit32::CalculateScaleFactor().
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_77\ := SmartResize((\Quire Posit32::op_Explicit(Posit32).0.conditional15_77\), 16);
-                        -- The following section was transformed from the .NET statement below:
-                        -- quire = Quire.op_LeftShift (quire, (int)(240L - (long)(return_76) + (long)(return_77)));
-                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\ := to_signed(240, 64) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_76\), 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.117\ + SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_77\), 64), 32);
-                        -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).right.parameter.Out.0\ <= (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\);
-                        \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= true;
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_88\;
-                        -- Clock cycles needed to complete this state (approximation): 0.8985
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_53\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_49\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
-                        -- 	Lombiq.Arithmetics.Posit32 this_57_77;
-                        -- 	this_57_77 = this_77;
-                        -- 	uint return_57_77;
-                        -- 	uint num_57_77;
-                        -- 	uint conditional18_57_77;
+                        -- 	Lombiq.Arithmetics.Posit32 this_56_75;
+                        -- 	this_56_75 = this_75;
+                        -- 	uint return_56_75;
+                        -- 	uint num_56_75;
+                        -- 	uint conditional18_56_75;
                         -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	Lombiq.Arithmetics.Posit32 this_86;
-                        -- 	this_86 = this_57_77;
-                        -- 	bool return_86;
-                        -- 	return_86 = (long)((this_86.PositBits & 0x80000000u)) == 0L;
+                        -- 	Lombiq.Arithmetics.Posit32 this_84;
+                        -- 	this_84 = this_56_75;
+                        -- 	bool return_84;
+                        -- 	return_84 = (long)((this_84.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	if (return_86) {
-                        -- 		conditional18_57_77 = this_57_77.PositBits;
+                        -- 	if (return_84) {
+                        -- 		conditional18_56_75 = this_56_75.PositBits;
                         -- 	} else {
                         -- 		;
                         -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_87;
-                        -- 		bits_87 = this_57_77.PositBits;
-                        -- 		uint return_87;
-                        -- 		return_87 = (uint)((long)(~bits_87) + 1L);
+                        -- 		uint bits_85;
+                        -- 		bits_85 = this_56_75.PositBits;
+                        -- 		uint return_85;
+                        -- 		return_85 = (uint)((long)(~bits_85) + 1L);
                         -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional18_57_77 = return_87;
+                        -- 		conditional18_56_75 = return_85;
                         -- 	}
-                        -- 	num_57_77 = (conditional18_57_77);
-                        -- 	byte b_57_77;
+                        -- 	num_56_75 = (conditional18_56_75);
+                        -- 	byte b_56_75;
                         -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
-                        -- 	Lombiq.Arithmetics.Posit32 this_88;
-                        -- 	this_88 = this_57_77;
-                        -- 	byte return_88;
-                        -- 	uint bits_88;
-                        -- 	uint conditional16_88;
+                        -- 	Lombiq.Arithmetics.Posit32 this_86;
+                        -- 	this_86 = this_56_75;
+                        -- 	byte return_86;
+                        -- 	uint bits_86;
+                        -- 	uint conditional16_86;
                         -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	Lombiq.Arithmetics.Posit32 this_58_88;
-                        -- 	this_58_88 = this_88;
-                        -- 	bool return_58_88;
-                        -- 	return_58_88 = (long)((this_58_88.PositBits & 0x80000000u)) == 0L;
+                        -- 	Lombiq.Arithmetics.Posit32 this_57_86;
+                        -- 	this_57_86 = this_86;
+                        -- 	bool return_57_86;
+                        -- 	return_57_86 = (long)((this_57_86.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	if (return_58_88) {
-                        -- 		conditional16_88 = this_88.PositBits;
+                        -- 	if (return_57_86) {
+                        -- 		conditional16_86 = this_86.PositBits;
                         -- 	} else {
                         -- 		;
                         -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_59_88;
-                        -- 		bits_59_88 = this_88.PositBits;
-                        -- 		uint return_59_88;
-                        -- 		return_59_88 = (uint)((long)(~bits_59_88) + 1L);
+                        -- 		uint bits_58_86;
+                        -- 		bits_58_86 = this_86.PositBits;
+                        -- 		uint return_58_86;
+                        -- 		return_58_86 = (uint)((long)(~bits_58_86) + 1L);
                         -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional16_88 = return_59_88;
+                        -- 		conditional16_86 = return_58_86;
                         -- 	}
-                        -- 	bits_88 = (conditional16_88);
-                        -- 	byte b_88;
+                        -- 	bits_86 = (conditional16_86);
+                        -- 	byte b_86;
                         -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	uint bits_60_88;
-                        -- 	bits_60_88 = bits_88;
-                        -- 	byte startingPosition_60_88;
-                        -- 	startingPosition_60_88 = 31;
-                        -- 	byte return_60_88;
-                        -- 	byte b_60_88;
-                        -- 	b_60_88 = 1;
-                        -- 	bits_60_88 = bits_60_88 << 1;
-                        -- 	uint num_60_88;
-                        -- 	num_60_88 = (bits_60_88 >> 31) & 1u;
-                        -- 	bits_60_88 = bits_60_88 << 1;
-                        -- 	int num2_60_88;
-                        -- 	num2_60_88 = 0;
-                        -- 	while ((int)(num2_60_88) < (int)(startingPosition_60_88) && bits_60_88 >> 31 == num_60_88) {
-                        -- 		bits_60_88 = bits_60_88 << 1;
-                        -- 		b_60_88 = (byte)((int)(b_60_88) + 1);
-                        -- 		num2_60_88 = num2_60_88 + 1;
+                        -- 	uint bits_59_86;
+                        -- 	bits_59_86 = bits_86;
+                        -- 	byte startingPosition_59_86;
+                        -- 	startingPosition_59_86 = 31;
+                        -- 	byte return_59_86;
+                        -- 	byte b_59_86;
+                        -- 	b_59_86 = 1;
+                        -- 	bits_59_86 = bits_59_86 << 1;
+                        -- 	uint num_59_86;
+                        -- 	num_59_86 = (bits_59_86 >> 31) & 1u;
+                        -- 	bits_59_86 = bits_59_86 << 1;
+                        -- 	int num2_59_86;
+                        -- 	num2_59_86 = 0;
+                        -- 	while ((int)(num2_59_86) < (int)(startingPosition_59_86) && bits_59_86 >> 31 == num_59_86) {
+                        -- 		bits_59_86 = bits_59_86 << 1;
+                        -- 		b_59_86 = (byte)((int)(b_59_86) + 1);
+                        -- 		num2_59_86 = num2_59_86 + 1;
                         -- 	}
-                        -- 	return_60_88 = b_60_88;
+                        -- 	return_59_86 = b_59_86;
                         -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	b_88 = return_60_88;
-                        -- 	byte result_88;
-                        -- 	result_88 = (byte)(32 - (int)(b_88) - 1);
-                        -- 	if ((int)(b_88) + 2 <= 32) {
-                        -- 		int conditional17_88;
-                        -- 		if ((32 - ((int)(b_88) + 2) > 2)) {
-                        -- 			conditional17_88 = 2;
+                        -- 	b_86 = return_59_86;
+                        -- 	byte result_86;
+                        -- 	result_86 = (byte)(32 - (int)(b_86) - 1);
+                        -- 	if ((int)(b_86) + 2 <= 32) {
+                        -- 		int conditional17_86;
+                        -- 		if ((32 - ((int)(b_86) + 2) > 2)) {
+                        -- 			conditional17_86 = 2;
                         -- 		} else {
-                        -- 			conditional17_88 = ((byte)(32 - ((int)(b_88) + 2)));
+                        -- 			conditional17_86 = ((byte)(32 - ((int)(b_86) + 2)));
                         -- 		}
-                        -- 		result_88 = (byte)(conditional17_88);
+                        -- 		result_86 = (byte)(conditional17_86);
                         -- 	}
-                        -- 	return_88 = result_88;
+                        -- 	return_86 = result_86;
                         -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
-                        -- 	b_57_77 = return_88;
+                        -- 	b_56_75 = return_86;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
-                        -- 	Lombiq.Arithmetics.Posit32 this_89;
-                        -- 	this_89 = this_57_77;
-                        -- 	uint return_89;
-                        -- 	uint bits_89;
-                        -- 	uint conditional20_89;
+                        -- 	Lombiq.Arithmetics.Posit32 this_87;
+                        -- 	this_87 = this_56_75;
+                        -- 	uint return_87;
+                        -- 	uint bits_87;
+                        -- 	uint conditional20_87;
                         -- 	// Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	Lombiq.Arithmetics.Posit32 this_65_89;
-                        -- 	this_65_89 = this_89;
-                        -- 	bool return_65_89;
-                        -- 	return_65_89 = (long)((this_65_89.PositBits & 0x80000000u)) == 0L;
+                        -- 	Lombiq.Arithmetics.Posit32 this_64_87;
+                        -- 	this_64_87 = this_87;
+                        -- 	bool return_64_87;
+                        -- 	return_64_87 = (long)((this_64_87.PositBits & 0x80000000u)) == 0L;
                         -- 	// Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 	if (return_65_89) {
-                        -- 		conditional20_89 = this_89.PositBits;
+                        -- 	if (return_64_87) {
+                        -- 		conditional20_87 = this_87.PositBits;
                         -- 	} else {
                         -- 		;
                         -- 		// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		uint bits_66_89;
-                        -- 		bits_66_89 = this_89.PositBits;
-                        -- 		uint return_66_89;
-                        -- 		return_66_89 = (uint)((long)(~bits_66_89) + 1L);
+                        -- 		uint bits_65_87;
+                        -- 		bits_65_87 = this_87.PositBits;
+                        -- 		uint return_65_87;
+                        -- 		return_65_87 = (uint)((long)(~bits_65_87) + 1L);
                         -- 		// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 		conditional20_89 = return_66_89;
+                        -- 		conditional20_87 = return_65_87;
                         -- 	}
-                        -- 	bits_89 = (conditional20_89);
-                        -- 	int num_89;
+                        -- 	bits_87 = (conditional20_87);
+                        -- 	int num_87;
                         -- 	// Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	uint bits_67_89;
-                        -- 	bits_67_89 = bits_89;
-                        -- 	byte startingPosition_67_89;
-                        -- 	startingPosition_67_89 = 31;
-                        -- 	byte return_67_89;
-                        -- 	byte b_67_89;
-                        -- 	b_67_89 = 1;
-                        -- 	bits_67_89 = bits_67_89 << 1;
-                        -- 	uint num_67_89;
-                        -- 	num_67_89 = (bits_67_89 >> 31) & 1u;
-                        -- 	bits_67_89 = bits_67_89 << 1;
-                        -- 	int num2_67_89;
-                        -- 	num2_67_89 = 0;
-                        -- 	while ((int)(num2_67_89) < (int)(startingPosition_67_89) && bits_67_89 >> 31 == num_67_89) {
-                        -- 		bits_67_89 = bits_67_89 << 1;
-                        -- 		b_67_89 = (byte)((int)(b_67_89) + 1);
-                        -- 		num2_67_89 = num2_67_89 + 1;
+                        -- 	uint bits_66_87;
+                        -- 	bits_66_87 = bits_87;
+                        -- 	byte startingPosition_66_87;
+                        -- 	startingPosition_66_87 = 31;
+                        -- 	byte return_66_87;
+                        -- 	byte b_66_87;
+                        -- 	b_66_87 = 1;
+                        -- 	bits_66_87 = bits_66_87 << 1;
+                        -- 	uint num_66_87;
+                        -- 	num_66_87 = (bits_66_87 >> 31) & 1u;
+                        -- 	bits_66_87 = bits_66_87 << 1;
+                        -- 	int num2_66_87;
+                        -- 	num2_66_87 = 0;
+                        -- 	while ((int)(num2_66_87) < (int)(startingPosition_66_87) && bits_66_87 >> 31 == num_66_87) {
+                        -- 		bits_66_87 = bits_66_87 << 1;
+                        -- 		b_66_87 = (byte)((int)(b_66_87) + 1);
+                        -- 		num2_66_87 = num2_66_87 + 1;
                         -- 	}
-                        -- 	return_67_89 = b_67_89;
+                        -- 	return_66_87 = b_66_87;
                         -- 	// Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 	num_89 = 32 - ((int)(return_67_89) + 2 + 2);
-                        -- 	uint conditional21_89;
-                        -- 	if ((num_89 > 0)) {
-                        -- 		conditional21_89 = ((uint)num_89);
+                        -- 	num_87 = 32 - ((int)(return_66_87) + 2 + 2);
+                        -- 	uint conditional21_87;
+                        -- 	if ((num_87 > 0)) {
+                        -- 		conditional21_87 = ((uint)num_87);
                         -- 	} else {
-                        -- 		conditional21_89 = 0u;
+                        -- 		conditional21_87 = 0u;
                         -- 	}
-                        -- 	return_89 = conditional21_89;
+                        -- 	return_87 = conditional21_87;
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
-                        -- 	num_57_77 = num_57_77 >> (int)return_89 << 32 - (int)(b_57_77) >> 30;
-                        -- 	uint conditional19_57_77;
-                        -- 	if (((int)(b_57_77) != 0)) {
-                        -- 		conditional19_57_77 = num_57_77;
+                        -- 	num_56_75 = num_56_75 >> (int)return_87 << 32 - (int)(b_56_75) >> 30;
+                        -- 	uint conditional19_56_75;
+                        -- 	if (((int)(b_56_75) != 0)) {
+                        -- 		conditional19_56_75 = num_56_75;
                         -- 	} else {
-                        -- 		conditional19_57_77 = 0u;
+                        -- 		conditional19_56_75 = 0u;
                         -- 	}
-                        -- 	return_57_77 = conditional19_57_77;
+                        -- 	return_56_75 = conditional19_56_75;
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
-                        -- 	conditional15_77 = ((short)((long)((int)(regimeKValue_77) * 4) + (long)(return_57_77)));
+                        -- 	conditional15_75 = ((short)((long)((int)(regimeKValue_75) * 4) + (long)(return_56_75)));
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -13715,52 +15349,123 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_57_77;
+                        -- Lombiq.Arithmetics.Posit32 this_56_75;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_57_77 = this_77;
+                        -- this_56_75 = this_75;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_57_77\ := \Quire Posit32::op_Explicit(Posit32).0.this_77\;
+                        \Quire Posit32::op_Explicit(Posit32).0.this_56_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_75\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_57_77;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_57_77;
+                        -- uint return_56_75;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional18_57_77;
+                        -- uint num_56_75;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional18_56_75;
                         -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_84;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_84 = this_56_75;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_84\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_75\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_84;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_84 = (long)((this_84.PositBits & 0x80000000u)) == 0L;
+                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_84\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.65\)), 64)) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_84\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- if (return_84) {
+                        -- 	conditional18_56_75 = this_56_75.PositBits;
+                        -- } else {
+                        -- 	;
+                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	uint bits_85;
+                        -- 	bits_85 = this_56_75.PositBits;
+                        -- 	uint return_85;
+                        -- 	return_85 = (uint)((long)(~bits_85) + 1L);
+                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	conditional18_56_75 = return_85;
+                        -- }
+                        -- 
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_52\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_52\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_53\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_53\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_51\.
+
+                        if (\Quire Posit32::op_Explicit(Posit32).0.return_84\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_52\;
+                        else 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_53\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_51\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_50\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_56_75 = (conditional18_56_75);
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num_56_75\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional18_56_75\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b_56_75;
+                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
                         -- 
                         -- The following section was transformed from the .NET statement below:
                         -- Lombiq.Arithmetics.Posit32 this_86;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_86 = this_57_77;
+                        -- this_86 = this_56_75;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_86\ := \Quire Posit32::op_Explicit(Posit32).0.this_57_77\;
+                        \Quire Posit32::op_Explicit(Posit32).0.this_86\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_75\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool return_86;
+                        -- byte return_86;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_86 = (long)((this_86.PositBits & 0x80000000u)) == 0L;
+                        -- uint bits_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional16_86;
+                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- Lombiq.Arithmetics.Posit32 this_57_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- this_57_86 = this_86;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.this_57_86\ := \Quire Posit32::op_Explicit(Posit32).0.this_86\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bool return_57_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_57_86 = (long)((this_57_86.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_86\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.66\)), 64)) = to_signed(0, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_57_86\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\)), 64)) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_57_86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (return_86) {
-                        -- 	conditional18_57_77 = this_57_77.PositBits;
+                        -- if (return_57_86) {
+                        -- 	conditional16_86 = this_86.PositBits;
                         -- } else {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_87;
-                        -- 	bits_87 = this_57_77.PositBits;
-                        -- 	uint return_87;
-                        -- 	return_87 = (uint)((long)(~bits_87) + 1L);
+                        -- 	uint bits_58_86;
+                        -- 	bits_58_86 = this_86.PositBits;
+                        -- 	uint return_58_86;
+                        -- 	return_58_86 = (uint)((long)(~bits_58_86) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional18_57_77 = return_87;
+                        -- 	conditional16_86 = return_58_86;
                         -- }
                         -- 
 
@@ -13769,111 +15474,170 @@ begin
                         --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_56\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_56\.
                         --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_54\.
 
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_86\) then 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.return_57_86\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_55\;
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_56\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5667
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_54\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_53\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- num_57_77 = (conditional18_57_77);
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num_57_77\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional18_57_77\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_57_77;
-                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- this_88 = this_57_77;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_88\ := \Quire Posit32::op_Explicit(Posit32).0.this_57_77\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte return_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint conditional16_88;
-                        -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_58_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- this_58_88 = this_88;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_58_88\ := \Quire Posit32::op_Explicit(Posit32).0.this_88\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bool return_58_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_58_88 = (long)((this_58_88.PositBits & 0x80000000u)) == 0L;
-                        -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
-                        -- 
-                        -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_58_88\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.69\)), 64)) = to_signed(0, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_58_88\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- if (return_58_88) {
-                        -- 	conditional16_88 = this_88.PositBits;
-                        -- } else {
-                        -- 	;
-                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_59_88;
-                        -- 	bits_59_88 = this_88.PositBits;
-                        -- 	uint return_59_88;
-                        -- 	return_59_88 = (uint)((long)(~bits_59_88) + 1L);
-                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional16_88 = return_59_88;
-                        -- }
-                        -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_58\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_58\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_59\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_59\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_57\.
-
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_58_88\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_58\;
-                        else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_59\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5667
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_55\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_53\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_52\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_50\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional18_57_77 = this_57_77.PositBits;
+                        -- 	conditional18_56_75 = this_56_75.PositBits;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional18_57_77 = this_57_77.PositBits;
+                        -- conditional18_56_75 = this_56_75.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional18_57_77\ := \Quire Posit32::op_Explicit(Posit32).0.this_57_77\.\PositBits\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_53\.
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional18_56_75\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_75\.\PositBits\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_50\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_52\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_51\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_53\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_50\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	;
+                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	uint bits_85;
+                        -- 	bits_85 = this_56_75.PositBits;
+                        -- 	uint return_85;
+                        -- 	return_85 = (uint)((long)(~bits_85) + 1L);
+                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 	conditional18_56_75 = return_85;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- ;
+                        -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits_85;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_85 = this_56_75.PositBits;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_85\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_75\.\PositBits\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint return_85;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- return_85 = (uint)((long)(~bits_85) + 1L);
+                        -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.5\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_85\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.5\), 64)) + to_signed(1, 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_85\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.67\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional18_56_75 = return_85;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional18_56_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_85\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_50\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_53\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_51\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.6201
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_54\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_51\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_86 = (conditional16_86);
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_86\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional16_86\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b_86;
+                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits_59_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_59_86 = bits_86;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_59_86\ := \Quire Posit32::op_Explicit(Posit32).0.bits_86\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte startingPosition_59_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- startingPosition_59_86 = 31;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_59_86\ := SmartResize(unsigned(to_signed(31, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte return_59_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b_59_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- b_59_86 = 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.b_59_86\ := SmartResize(unsigned(to_signed(1, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_59_86 = bits_59_86 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_59_86\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_59_86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_59_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_59_86 = (bits_59_86 >> 31) & 1u;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_59_86\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.73\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_59_86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.73\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_59_86 = bits_59_86 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_59_86\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_59_86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2_59_86;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_59_86 = 0;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_59_86\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num2_59_86) < (int)(startingPosition_59_86) && bits_59_86 >> 31 == num_59_86) {
+                        -- 	bits_59_86 = bits_59_86 << 1;
+                        -- 	b_59_86 = (byte)((int)(b_59_86) + 1);
+                        -- 	num2_59_86 = num2_59_86 + 1;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_57\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7524
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_55\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_51\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional16_86 = this_86.PositBits;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional16_86 = this_86.PositBits;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional16_86\ := \Quire Posit32::op_Explicit(Posit32).0.this_86\.\PositBits\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_51\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_55\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_54\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_56\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_53\.
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_51\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_87;
-                        -- 	bits_87 = this_57_77.PositBits;
-                        -- 	uint return_87;
-                        -- 	return_87 = (uint)((long)(~bits_87) + 1L);
+                        -- 	uint bits_58_86;
+                        -- 	bits_58_86 = this_86.PositBits;
+                        -- 	uint return_58_86;
+                        -- 	return_58_86 = (uint)((long)(~bits_58_86) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional18_57_77 = return_87;
+                        -- 	conditional16_86 = return_58_86;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -13881,514 +15645,384 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_87;
+                        -- uint bits_58_86;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_87 = this_57_77.PositBits;
+                        -- bits_58_86 = this_86.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_87\ := \Quire Posit32::op_Explicit(Posit32).0.this_57_77\.\PositBits\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_58_86\ := \Quire Posit32::op_Explicit(Posit32).0.this_86\.\PositBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_87;
+                        -- uint return_58_86;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_87 = (uint)((long)(~bits_87) + 1L);
+                        -- return_58_86 = (uint)((long)(~bits_58_86) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.5\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_87\);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.5\), 64)) + to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_87\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.68\);
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.6\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_58_86\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.6\), 64)) + to_signed(1, 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_58_86\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.70\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional18_57_77 = return_87;
+                        -- conditional16_86 = return_58_86;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional18_57_77\ := \Quire Posit32::op_Explicit(Posit32).0.return_87\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_53\.
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional16_86\ := \Quire Posit32::op_Explicit(Posit32).0.return_58_86\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_51\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_56\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_54\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6201
                     when \Quire Posit32::op_Explicit(Posit32).0._State_57\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_88 = (conditional16_88);
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_88\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional16_88\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_88;
-                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_60_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_60_88 = bits_88;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_60_88\ := \Quire Posit32::op_Explicit(Posit32).0.bits_88\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte startingPosition_60_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- startingPosition_60_88 = 31;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_60_88\ := SmartResize(unsigned(to_signed(31, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte return_60_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_60_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- b_60_88 = 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_60_88\ := SmartResize(unsigned(to_signed(1, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_60_88 = bits_60_88 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_60_88\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_60_88\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.72\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_60_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num_60_88 = (bits_60_88 >> 31) & 1u;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.73\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_60_88\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.73\) and to_unsigned(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_60_88\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.74\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_60_88 = bits_60_88 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_60_88\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_60_88\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num2_60_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2_60_88 = 0;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_60_88\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2_60_88) < (int)(startingPosition_60_88) && bits_60_88 >> 31 == num_60_88) {
-                        -- 	bits_60_88 = bits_60_88 << 1;
-                        -- 	b_60_88 = (byte)((int)(b_60_88) + 1);
-                        -- 	num2_60_88 = num2_60_88 + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_60\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7524
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_58\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional16_88 = this_88.PositBits;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional16_88 = this_88.PositBits;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional16_88\ := \Quire Posit32::op_Explicit(Posit32).0.this_88\.\PositBits\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_58\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_57\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_59\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	;
-                        -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_59_88;
-                        -- 	bits_59_88 = this_88.PositBits;
-                        -- 	uint return_59_88;
-                        -- 	return_59_88 = (uint)((long)(~bits_59_88) + 1L);
-                        -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional16_88 = return_59_88;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- ;
-                        -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_59_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_59_88 = this_88.PositBits;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_59_88\ := \Quire Posit32::op_Explicit(Posit32).0.this_88\.\PositBits\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint return_59_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- return_59_88 = (uint)((long)(~bits_59_88) + 1L);
-                        -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.6\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_59_88\);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.6\), 64)) + to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_59_88\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.71\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional16_88 = return_59_88;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional16_88\ := \Quire Posit32::op_Explicit(Posit32).0.return_59_88\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_59\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_57\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.6201
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_60\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_57\.
+                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
                         -- The while loop's condition:
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_60_88\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_60_88\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_60_88\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_62\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_59_86\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_59_86\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_59_86\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_59\;
                         -- Clock cycles needed to complete this state (approximation): 0.78375
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_61\ => 
-                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_57\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_58\ => 
+                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_60_88 = b_60_88;
+                        -- return_59_86 = b_59_86;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_60_88\ := \Quire Posit32::op_Explicit(Posit32).0.b_60_88\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_59_86\ := \Quire Posit32::op_Explicit(Posit32).0.b_59_86\;
                         -- The following section was transformed from the .NET statement below:
-                        -- b_88 = return_60_88;
+                        -- b_86 = return_59_86;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_88\ := \Quire Posit32::op_Explicit(Posit32).0.return_60_88\;
+                        \Quire Posit32::op_Explicit(Posit32).0.b_86\ := \Quire Posit32::op_Explicit(Posit32).0.return_59_86\;
                         -- The following section was transformed from the .NET statement below:
-                        -- byte result_88;
+                        -- byte result_86;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- result_88 = (byte)(32 - (int)(b_88) - 1);
+                        -- result_86 = (byte)(32 - (int)(b_86) - 1);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\ := to_signed(32, 32) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_88\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\ := SmartResize(unsigned(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\ - to_signed(1, 32)), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.result_88\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.82\ := to_signed(32, 32) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_86\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\ := SmartResize(unsigned(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.82\ - to_signed(1, 32)), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.result_86\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.83\);
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((int)(b_88) + 2 <= 32) {
-                        -- 	int conditional17_88;
-                        -- 	if ((32 - ((int)(b_88) + 2) > 2)) {
-                        -- 		conditional17_88 = 2;
+                        -- if ((int)(b_86) + 2 <= 32) {
+                        -- 	int conditional17_86;
+                        -- 	if ((32 - ((int)(b_86) + 2) > 2)) {
+                        -- 		conditional17_86 = 2;
                         -- 	} else {
-                        -- 		conditional17_88 = ((byte)(32 - ((int)(b_88) + 2)));
+                        -- 		conditional17_86 = ((byte)(32 - ((int)(b_86) + 2)));
                         -- 	}
-                        -- 	result_88 = (byte)(conditional17_88);
+                        -- 	result_86 = (byte)(conditional17_86);
                         -- }
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_64\;
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_61\;
                         -- Clock cycles needed to complete this state (approximation): 0.7128
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_62\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_59\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ = \Quire Posit32::op_Explicit(Posit32).0.num_60_88\;
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\;
-                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\) then 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.76\ = \Quire Posit32::op_Explicit(Posit32).0.num_59_86\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.75\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.77\;
+                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.78\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_60_88 = bits_60_88 << 1;
-                            -- 	b_60_88 = (byte)((int)(b_60_88) + 1);
-                            -- 	num2_60_88 = num2_60_88 + 1;
+                            -- 	bits_59_86 = bits_59_86 << 1;
+                            -- 	b_59_86 = (byte)((int)(b_59_86) + 1);
+                            -- 	num2_59_86 = num2_59_86 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_60_88 = bits_60_88 << 1;
+                            -- bits_59_86 = bits_59_86 << 1;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_60_88\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                            \Quire Posit32::op_Explicit(Posit32).0.bits_60_88\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_59_86\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                            \Quire Posit32::op_Explicit(Posit32).0.bits_59_86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.79\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_60_88 = (byte)((int)(b_60_88) + 1);
+                            -- b_59_86 = (byte)((int)(b_59_86) + 1);
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_63\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_60\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_61\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_58\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6051
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_63\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_60\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_60_88\), 32)) + to_signed(1, 32)), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.b_60_88\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_59_86\), 32)) + to_signed(1, 32)), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.b_59_86\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.80\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_60_88 = num2_60_88 + 1;
+                        -- num2_59_86 = num2_59_86 + 1;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.82\ := \Quire Posit32::op_Explicit(Posit32).0.num2_60_88\ + to_signed(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_60_88\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.82\;
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_57\ if the loop wasn't exited with a state change.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_63\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_60\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\ := \Quire Posit32::op_Explicit(Posit32).0.num2_59_86\ + to_signed(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_59_86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.81\;
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_54\ if the loop wasn't exited with a state change.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_60\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_57\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_64\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_61\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_88\), 32)) + to_signed(2, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\ <= to_signed(32, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_86\), 32)) + to_signed(2, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.84\ <= to_signed(32, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_66\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_68\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_65\.
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_63\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_65\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_62\.
 
-                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_66\;
+                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.85\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_63\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_65\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_62\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.93435
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_65\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_62\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_61\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_88 = result_88;
+                        -- return_86 = result_86;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::ExponentSize().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_88\ := \Quire Posit32::op_Explicit(Posit32).0.result_88\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_86\ := \Quire Posit32::op_Explicit(Posit32).0.result_86\;
                         -- The following section was transformed from the .NET statement below:
-                        -- b_57_77 = return_88;
+                        -- b_56_75 = return_86;
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_57_77\ := \Quire Posit32::op_Explicit(Posit32).0.return_88\;
+                        \Quire Posit32::op_Explicit(Posit32).0.b_56_75\ := \Quire Posit32::op_Explicit(Posit32).0.return_86\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_89;
+                        -- Lombiq.Arithmetics.Posit32 this_87;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_89 = this_57_77;
+                        -- this_87 = this_56_75;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_89\ := \Quire Posit32::op_Explicit(Posit32).0.this_57_77\;
+                        \Quire Posit32::op_Explicit(Posit32).0.this_87\ := \Quire Posit32::op_Explicit(Posit32).0.this_56_75\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_89;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_89;
+                        -- uint return_87;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional20_89;
+                        -- uint bits_87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint conditional20_87;
                         -- // Starting inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- Lombiq.Arithmetics.Posit32 this_65_89;
+                        -- Lombiq.Arithmetics.Posit32 this_64_87;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- this_65_89 = this_89;
+                        -- this_64_87 = this_87;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.this_65_89\ := \Quire Posit32::op_Explicit(Posit32).0.this_89\;
+                        \Quire Posit32::op_Explicit(Posit32).0.this_64_87\ := \Quire Posit32::op_Explicit(Posit32).0.this_87\;
                         -- The following section was transformed from the .NET statement below:
-                        -- bool return_65_89;
+                        -- bool return_64_87;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_65_89 = (long)((this_65_89.PositBits & 0x80000000u)) == 0L;
+                        -- return_64_87 = (long)((this_64_87.PositBits & 0x80000000u)) == 0L;
                         -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                         -- 
                         -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_65_89\.\PositBits\ and "10000000000000000000000000000000", 64));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\)), 64)) = to_signed(0, 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_65_89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_64_87\.\PositBits\ and "10000000000000000000000000000000", 64));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\)), 64)) = to_signed(0, 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_64_87\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.92\;
                         -- The following section was transformed from the .NET statement below:
-                        -- if (return_65_89) {
-                        -- 	conditional20_89 = this_89.PositBits;
+                        -- if (return_64_87) {
+                        -- 	conditional20_87 = this_87.PositBits;
                         -- } else {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_66_89;
-                        -- 	bits_66_89 = this_89.PositBits;
-                        -- 	uint return_66_89;
-                        -- 	return_66_89 = (uint)((long)(~bits_66_89) + 1L);
+                        -- 	uint bits_65_87;
+                        -- 	bits_65_87 = this_87.PositBits;
+                        -- 	uint return_65_87;
+                        -- 	return_65_87 = (uint)((long)(~bits_65_87) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional20_89 = return_66_89;
+                        -- 	conditional20_87 = return_65_87;
                         -- }
                         -- 
-
-                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_72\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_72\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_73\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_73\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_71\.
-
-                        if (\Quire Posit32::op_Explicit(Posit32).0.return_65_89\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_72\;
-                        else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_73\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.5667
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_66\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	int conditional17_88;
-                        -- 	if ((32 - ((int)(b_88) + 2) > 2)) {
-                        -- 		conditional17_88 = 2;
-                        -- 	} else {
-                        -- 		conditional17_88 = ((byte)(32 - ((int)(b_88) + 2)));
-                        -- 	}
-                        -- 	result_88 = (byte)(conditional17_88);
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- int conditional17_88;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- if ((32 - ((int)(b_88) + 2) > 2)) {
-                        -- 	conditional17_88 = 2;
-                        -- } else {
-                        -- 	conditional17_88 = ((byte)(32 - ((int)(b_88) + 2)));
-                        -- }
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.87\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_88\), 32)) + to_signed(2, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.87\);
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_67\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7545
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_67\ => 
-                        -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\ > to_signed(2, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
                         --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_69\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_69\.
                         --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_70\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_70\.
                         --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_68\.
 
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\)) then 
+                        if (\Quire Posit32::op_Explicit(Posit32).0.return_64_87\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_69\;
                         else 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_70\;
                         end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.50535
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_68\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_67\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- result_88 = (byte)(conditional17_88);
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.result_88\ := SmartResize(unsigned((\Quire Posit32::op_Explicit(Posit32).0.conditional17_88\)), 8);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_68\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_65\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_69\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_67\.
+                        -- Clock cycles needed to complete this state (approximation): 0.5667
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_63\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_61\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional17_88 = 2;
+                        -- 	int conditional17_86;
+                        -- 	if ((32 - ((int)(b_86) + 2) > 2)) {
+                        -- 		conditional17_86 = 2;
+                        -- 	} else {
+                        -- 		conditional17_86 = ((byte)(32 - ((int)(b_86) + 2)));
+                        -- 	}
+                        -- 	result_86 = (byte)(conditional17_86);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional17_88 = 2;
+                        -- int conditional17_86;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional17_88\ := to_signed(2, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_67\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- if ((32 - ((int)(b_86) + 2) > 2)) {
+                        -- 	conditional17_86 = 2;
+                        -- } else {
+                        -- 	conditional17_86 = ((byte)(32 - ((int)(b_86) + 2)));
+                        -- }
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_86\), 32)) + to_signed(2, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.87\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.86\);
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_64\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7545
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_64\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.87\ > to_signed(2, 32);
+
+                        -- This if-else was transformed from a .NET if-else. It spans across multiple states:
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_66\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_66\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_67\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_67\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_65\.
+
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.88\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_66\;
+                        else 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_67\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.50535
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_65\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- result_86 = (byte)(conditional17_86);
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.result_86\ := SmartResize(unsigned((\Quire Posit32::op_Explicit(Posit32).0.conditional17_86\)), 8);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_61\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_65\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_62\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_66\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional17_86 = 2;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional17_86 = 2;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional17_86\ := to_signed(2, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_66\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_65\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_67\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional17_86 = ((byte)(32 - ((int)(b_86) + 2)));
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional17_86 = ((byte)(32 - ((int)(b_86) + 2)));
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_86\), 32)) + to_signed(2, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\ := SmartResize(unsigned(to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.89\)), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional17_86\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\)), 32));
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_64\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_67\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_65\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0.7545
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_68\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_62\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_87 = (conditional20_87);
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_87\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional20_87\);
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num_87;
+                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint bits_66_87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_66_87 = bits_87;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_87\ := \Quire Posit32::op_Explicit(Posit32).0.bits_87\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte startingPosition_66_87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- startingPosition_66_87 = 31;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_87\ := SmartResize(unsigned(to_signed(31, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte return_66_87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- byte b_66_87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- b_66_87 = 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.b_66_87\ := SmartResize(unsigned(to_signed(1, 32)), 8);
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_66_87 = bits_66_87 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.94\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_87\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_87\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.94\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- uint num_66_87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num_66_87 = (bits_66_87 >> 31) & 1u;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_66_87\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\) and to_unsigned(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_66_87\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- bits_66_87 = bits_66_87 << 1;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.97\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_87\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_87\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.97\;
+                        -- The following section was transformed from the .NET statement below:
+                        -- int num2_66_87;
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- num2_66_87 = 0;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_66_87\ := to_signed(0, 32);
+                        -- The following section was transformed from the .NET statement below:
+                        -- while ((int)(num2_66_87) < (int)(startingPosition_66_87) && bits_66_87 >> 31 == num_66_87) {
+                        -- 	bits_66_87 = bits_66_87 << 1;
+                        -- 	b_66_87 = (byte)((int)(b_66_87) + 1);
+                        -- 	num2_66_87 = num2_66_87 + 1;
+                        -- }
+                        -- 
+                        -- Starting a while loop.
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_71\;
+                        -- Clock cycles needed to complete this state (approximation): 0.7524
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_69\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_62\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional20_87 = this_87.PositBits;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional20_87 = this_87.PositBits;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_87\ := \Quire Posit32::op_Explicit(Posit32).0.this_87\.\PositBits\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_62\.
                         if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_69\) then 
                             \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_68\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_70\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_67\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional17_88 = ((byte)(32 - ((int)(b_88) + 2)));
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional17_88 = ((byte)(32 - ((int)(b_88) + 2)));
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_88\), 32)) + to_signed(2, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\ := SmartResize(unsigned(to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.90\)), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional17_88\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.91\)), 32));
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_67\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_70\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_68\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0.7545
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_71\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_65\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_89 = (conditional20_89);
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_89\ := (\Quire Posit32::op_Explicit(Posit32).0.conditional20_89\);
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num_89;
-                        -- // Starting inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint bits_67_89;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_67_89 = bits_89;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_89\ := \Quire Posit32::op_Explicit(Posit32).0.bits_89\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte startingPosition_67_89;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- startingPosition_67_89 = 31;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_89\ := SmartResize(unsigned(to_signed(31, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte return_67_89;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- byte b_67_89;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- b_67_89 = 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.b_67_89\ := SmartResize(unsigned(to_signed(1, 32)), 8);
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_67_89 = bits_67_89 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_89\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.95\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- uint num_67_89;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num_67_89 = (bits_67_89 >> 31) & 1u;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_67_89\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.97\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.96\) and to_unsigned(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_67_89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.97\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- bits_67_89 = bits_67_89 << 1;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_89\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_67_89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\;
-                        -- The following section was transformed from the .NET statement below:
-                        -- int num2_67_89;
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- num2_67_89 = 0;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_67_89\ := to_signed(0, 32);
-                        -- The following section was transformed from the .NET statement below:
-                        -- while ((int)(num2_67_89) < (int)(startingPosition_67_89) && bits_67_89 >> 31 == num_67_89) {
-                        -- 	bits_67_89 = bits_67_89 << 1;
-                        -- 	b_67_89 = (byte)((int)(b_67_89) + 1);
-                        -- 	num2_67_89 = num2_67_89 + 1;
-                        -- }
-                        -- 
-                        -- Starting a while loop.
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_74\;
-                        -- Clock cycles needed to complete this state (approximation): 0.7524
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_72\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_65\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional20_89 = this_89.PositBits;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional20_89 = this_89.PositBits;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_89\ := \Quire Posit32::op_Explicit(Posit32).0.this_89\.\PositBits\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_65\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_72\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_71\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_73\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_65\.
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_62\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	;
                         -- 	// Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	uint bits_66_89;
-                        -- 	bits_66_89 = this_89.PositBits;
-                        -- 	uint return_66_89;
-                        -- 	return_66_89 = (uint)((long)(~bits_66_89) + 1L);
+                        -- 	uint bits_65_87;
+                        -- 	bits_65_87 = this_87.PositBits;
+                        -- 	uint return_65_87;
+                        -- 	return_65_87 = (uint)((long)(~bits_65_87) + 1L);
                         -- 	// Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
-                        -- 	conditional20_89 = return_66_89;
+                        -- 	conditional20_87 = return_65_87;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
@@ -14396,263 +16030,263 @@ begin
                         -- // Starting inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- uint bits_66_89;
+                        -- uint bits_65_87;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- bits_66_89 = this_89.PositBits;
+                        -- bits_65_87 = this_87.PositBits;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.bits_66_89\ := \Quire Posit32::op_Explicit(Posit32).0.this_89\.\PositBits\;
+                        \Quire Posit32::op_Explicit(Posit32).0.bits_65_87\ := \Quire Posit32::op_Explicit(Posit32).0.this_87\.\PositBits\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint return_66_89;
+                        -- uint return_65_87;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- return_66_89 = (uint)((long)(~bits_66_89) + 1L);
+                        -- return_65_87 = (uint)((long)(~bits_65_87) + 1L);
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetTwosComplement(System.UInt32).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.7\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_66_89\);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.94\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.7\), 64)) + to_signed(1, 64)), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.return_66_89\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.94\);
+                        \Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.7\ := not(\Quire Posit32::op_Explicit(Posit32).0.bits_65_87\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.unaryOperationResult.7\), 64)) + to_signed(1, 64)), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.return_65_87\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.93\);
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional20_89 = return_66_89;
+                        -- conditional20_87 = return_65_87;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_89\ := \Quire Posit32::op_Explicit(Posit32).0.return_66_89\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_65\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_73\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_71\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional20_87\ := \Quire Posit32::op_Explicit(Posit32).0.return_65_87\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_62\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_70\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_68\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6201
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_74\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_71\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_71\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_68\.
                         -- The while loop's condition:
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_67_89\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_67_89\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_67_89\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_76\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\ := (\Quire Posit32::op_Explicit(Posit32).0.num2_66_87\) < signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.startingPosition_66_87\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.bits_66_87\, to_integer(unsigned(SmartResize(to_signed(31, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_73\;
                         -- Clock cycles needed to complete this state (approximation): 0.78375
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_75\ => 
-                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_71\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_72\ => 
+                        -- State after the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_68\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_67_89 = b_67_89;
+                        -- return_66_87 = b_66_87;
                         -- // Ending inlined block of the method System.Byte Lombiq.Arithmetics.Posit32::LengthOfRunOfBits(System.UInt32,System.Byte).
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_67_89\ := \Quire Posit32::op_Explicit(Posit32).0.b_67_89\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_66_87\ := \Quire Posit32::op_Explicit(Posit32).0.b_66_87\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num_89 = 32 - ((int)(return_67_89) + 2 + 2);
+                        -- num_87 = 32 - ((int)(return_66_87) + 2 + 2);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.106\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_67_89\), 32)) + to_signed(2, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.107\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.106\ + to_signed(2, 32), 32);
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_78\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.105\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_66_87\), 32)) + to_signed(2, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.106\ := SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.105\ + to_signed(2, 32), 32);
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_75\;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_76\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_73\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ = \Quire Posit32::op_Explicit(Posit32).0.num_67_89\;
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\;
-                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\) then 
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.99\ = \Quire Posit32::op_Explicit(Posit32).0.num_66_87\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.98\ and \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.100\;
+                        if (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.101\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
-                            -- 	bits_67_89 = bits_67_89 << 1;
-                            -- 	b_67_89 = (byte)((int)(b_67_89) + 1);
-                            -- 	num2_67_89 = num2_67_89 + 1;
+                            -- 	bits_66_87 = bits_66_87 << 1;
+                            -- 	b_66_87 = (byte)((int)(b_66_87) + 1);
+                            -- 	num2_66_87 = num2_66_87 + 1;
                             -- }
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- bits_67_89 = bits_67_89 << 1;
+                            -- bits_66_87 = bits_66_87 << 1;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_67_89\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
-                            \Quire Posit32::op_Explicit(Posit32).0.bits_67_89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.bits_66_87\, to_integer(unsigned(SmartResize(to_signed(1, 32), 5))));
+                            \Quire Posit32::op_Explicit(Posit32).0.bits_66_87\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.102\;
                             -- The following section was transformed from the .NET statement below:
-                            -- b_67_89 = (byte)((int)(b_67_89) + 1);
+                            -- b_66_87 = (byte)((int)(b_66_87) + 1);
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_77\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_74\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_75\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_72\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6051
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_77\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_74\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_67_89\), 32)) + to_signed(1, 32)), 8);
-                        \Quire Posit32::op_Explicit(Posit32).0.b_67_89\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\ := SmartResize(unsigned(signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_66_87\), 32)) + to_signed(1, 32)), 8);
+                        \Quire Posit32::op_Explicit(Posit32).0.b_66_87\ := (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.103\);
                         -- The following section was transformed from the .NET statement below:
-                        -- num2_67_89 = num2_67_89 + 1;
+                        -- num2_66_87 = num2_66_87 + 1;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.105\ := \Quire Posit32::op_Explicit(Posit32).0.num2_67_89\ + to_signed(1, 32);
-                        \Quire Posit32::op_Explicit(Posit32).0.num2_67_89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.105\;
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_71\ if the loop wasn't exited with a state change.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_77\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_74\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\ := \Quire Posit32::op_Explicit(Posit32).0.num2_66_87\ + to_signed(1, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.num2_66_87\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.104\;
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_68\ if the loop wasn't exited with a state change.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_74\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_71\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.7962
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_78\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_75\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.107\);
-                        \Quire Posit32::op_Explicit(Posit32).0.num_89\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.107\ := to_signed(32, 32) - (\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.106\);
+                        \Quire Posit32::op_Explicit(Posit32).0.num_87\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.107\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional21_89;
+                        -- uint conditional21_87;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((num_89 > 0)) {
-                        -- 	conditional21_89 = ((uint)num_89);
+                        -- if ((num_87 > 0)) {
+                        -- 	conditional21_87 = ((uint)num_87);
                         -- } else {
-                        -- 	conditional21_89 = 0u;
+                        -- 	conditional21_87 = 0u;
                         -- }
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\ := \Quire Posit32::op_Explicit(Posit32).0.num_89\ > to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\ := \Quire Posit32::op_Explicit(Posit32).0.num_87\ > to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_80\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_80\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_81\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_81\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_79\.
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_77\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_77\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_78\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_78\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_76\.
 
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\)) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_80\;
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.108\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_77\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_81\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_78\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.86175
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_79\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_78\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_76\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_75\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_89 = conditional21_89;
+                        -- return_87 = conditional21_87;
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::FractionSize().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_89\ := \Quire Posit32::op_Explicit(Posit32).0.conditional21_89\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_87\ := \Quire Posit32::op_Explicit(Posit32).0.conditional21_87\;
                         -- The following section was transformed from the .NET statement below:
-                        -- num_57_77 = num_57_77 >> (int)return_89 << 32 - (int)(b_57_77) >> 30;
+                        -- num_56_75 = num_56_75 >> (int)return_87 << 32 - (int)(b_56_75) >> 30;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.num_57_77\, to_integer(unsigned(SmartResize(signed(\Quire Posit32::op_Explicit(Posit32).0.return_89\), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\ := to_signed(32, 32) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_57_77\), 32));
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_82\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.num_56_75\, to_integer(unsigned(SmartResize(signed(\Quire Posit32::op_Explicit(Posit32).0.return_87\), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\ := to_signed(32, 32) - signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_56_75\), 32));
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_79\;
                         -- Clock cycles needed to complete this state (approximation): 0.99165
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_80\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_78\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_77\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_75\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional21_89 = ((uint)num_89);
+                        -- 	conditional21_87 = ((uint)num_87);
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional21_89 = ((uint)num_89);
+                        -- conditional21_87 = ((uint)num_87);
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_89\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_89\));
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_78\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_80\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_79\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_87\ := (unsigned(\Quire Posit32::op_Explicit(Posit32).0.num_87\));
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_75\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_77\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_76\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_81\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_78\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_78\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_75\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
-                        -- 	conditional21_89 = 0u;
+                        -- 	conditional21_87 = 0u;
                         -- }
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional21_89 = 0u;
+                        -- conditional21_87 = 0u;
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_89\ := to_unsigned(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_78\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_81\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_79\;
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional21_87\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_75\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_78\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_76\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_82\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_79\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\, to_integer(unsigned(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\, 5))));
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
-                        \Quire Posit32::op_Explicit(Posit32).0.num_57_77\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\ := shift_left(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.109\, to_integer(unsigned(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.110\, 5))));
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\ := shift_right(\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.111\, to_integer(unsigned(SmartResize(to_signed(30, 32), 5) and "11111")));
+                        \Quire Posit32::op_Explicit(Posit32).0.num_56_75\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.112\;
                         -- The following section was transformed from the .NET statement below:
-                        -- uint conditional19_57_77;
+                        -- uint conditional19_56_75;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- if (((int)(b_57_77) != 0)) {
-                        -- 	conditional19_57_77 = num_57_77;
+                        -- if (((int)(b_56_75) != 0)) {
+                        -- 	conditional19_56_75 = num_56_75;
                         -- } else {
-                        -- 	conditional19_57_77 = 0u;
+                        -- 	conditional19_56_75 = 0u;
                         -- }
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_83\;
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_80\;
                         -- Clock cycles needed to complete this state (approximation): 0.75555
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_83\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_80\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_57_77\), 32)) /= to_signed(0, 32);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\ := signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.b_56_75\), 32)) /= to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_85\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_85\.
-                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_86\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_86\.
-                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_84\.
+                        --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_82\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_82\.
+                        --     * The false branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_83\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_83\.
+                        --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_81\.
 
-                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\)) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_85\;
+                        if ((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.113\)) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_82\;
                         else 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_86\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_83\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.33405
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_84\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_83\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_81\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_80\.
                         -- The following section was transformed from the .NET statement below:
-                        -- return_57_77 = conditional19_57_77;
+                        -- return_56_75 = conditional19_56_75;
                         -- // Ending inlined block of the method System.UInt32 Lombiq.Arithmetics.Posit32::GetExponentValue().
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.return_57_77\ := \Quire Posit32::op_Explicit(Posit32).0.conditional19_57_77\;
+                        \Quire Posit32::op_Explicit(Posit32).0.return_56_75\ := \Quire Posit32::op_Explicit(Posit32).0.conditional19_56_75\;
                         -- The following section was transformed from the .NET statement below:
-                        -- conditional15_77 = ((short)((long)((int)(regimeKValue_77) * 4) + (long)(return_57_77)));
+                        -- conditional15_75 = ((short)((long)((int)(regimeKValue_75) * 4) + (long)(return_56_75)));
                         -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\ := SmartResize(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.regimeKValue_77\), 32) * to_signed(4, 32), 64);
-                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\ := SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\) + signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_57_77\), 64)), 16);
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional15_77\ := SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.116\)), 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_49\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_84\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_52\;
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\ := SmartResize(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.regimeKValue_75\), 32) * to_signed(4, 32), 64);
+                        \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\ := SmartResize((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.114\) + signed(SmartResize((\Quire Posit32::op_Explicit(Posit32).0.return_56_75\), 64)), 16);
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional15_75\ := SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.115\)), 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_81\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_49\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.6453
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_82\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_80\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional19_56_75 = num_56_75;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional19_56_75 = num_56_75;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional19_56_75\ := \Quire Posit32::op_Explicit(Posit32).0.num_56_75\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_80\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_82\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_81\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_83\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_80\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional19_56_75 = 0u;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional19_56_75 = 0u;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional19_56_75\ := to_unsigned(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_80\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_83\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_81\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_84\ => 
+                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
+                        -- The following section was transformed from the .NET statement below:
+                        -- {
+                        -- 	conditional15_75 = 0;
+                        -- }
+                        -- 
+                        -- The following section was transformed from the .NET statement below:
+                        -- conditional15_75 = 0;
+                        -- 
+                        \Quire Posit32::op_Explicit(Posit32).0.conditional15_75\ := to_signed(0, 32);
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_46\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_84\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_49\;
+                        end if;
+                        -- Clock cycles needed to complete this state (approximation): 0
                     when \Quire Posit32::op_Explicit(Posit32).0._State_85\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_83\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional19_57_77 = num_57_77;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional19_57_77 = num_57_77;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional19_57_77\ := \Quire Posit32::op_Explicit(Posit32).0.num_57_77\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_83\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_85\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_84\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_86\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_83\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional19_57_77 = 0u;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional19_57_77 = 0u;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional19_57_77\ := to_unsigned(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_83\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_86\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_84\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_87\ => 
-                        -- False branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_49\.
-                        -- The following section was transformed from the .NET statement below:
-                        -- {
-                        -- 	conditional15_77 = 0;
-                        -- }
-                        -- 
-                        -- The following section was transformed from the .NET statement below:
-                        -- conditional15_77 = 0;
-                        -- 
-                        \Quire Posit32::op_Explicit(Posit32).0.conditional15_77\ := to_signed(0, 32);
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_49\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_87\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_52\;
-                        end if;
-                        -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_88\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_LeftShift(Lombiq.Arithmetics.Quire,System.Int32)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32)._Started.0\ <= false;
@@ -14660,53 +16294,53 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_LeftShift(Quire,Int32).left.parameter.In.0\;
                             \Quire Posit32::op_Explicit(Posit32).0.quire\ := \Quire Posit32::op_Explicit(Posit32).0.return.1\;
                             -- The following section was transformed from the .NET statement below:
-                            -- Lombiq.Arithmetics.Posit32 this_78;
+                            -- Lombiq.Arithmetics.Posit32 this_76;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- this_78 = x;
+                            -- this_76 = x;
                             -- 
-                            \Quire Posit32::op_Explicit(Posit32).0.this_78\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
+                            \Quire Posit32::op_Explicit(Posit32).0.this_76\ := \Quire Posit32::op_Explicit(Posit32).0.x\;
                             -- The following section was transformed from the .NET statement below:
-                            -- bool return_78;
+                            -- bool return_76;
                             -- 
                             -- The following section was transformed from the .NET statement below:
-                            -- return_78 = (long)((this_78.PositBits & 0x80000000u)) == 0L;
+                            -- return_76 = (long)((this_76.PositBits & 0x80000000u)) == 0L;
                             -- // Ending inlined block of the method System.Boolean Lombiq.Arithmetics.Posit32::IsPositive().
                             -- 
                             -- Since the integer literal 2147483648 was out of the VHDL integer range it was substituted with a binary literal (10000000000000000000000000000000).
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_78\.\PositBits\ and "10000000000000000000000000000000", 64));
-                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.120\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\)), 64)) = to_signed(0, 64);
-                            \Quire Posit32::op_Explicit(Posit32).0.return_78\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.120\;
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\ := signed(SmartResize(\Quire Posit32::op_Explicit(Posit32).0.this_76\.\PositBits\ and "10000000000000000000000000000000", 64));
+                            \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\ := signed(SmartResize(((\Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.118\)), 64)) = to_signed(0, 64);
+                            \Quire Posit32::op_Explicit(Posit32).0.return_76\ := \Quire Posit32::op_Explicit(Posit32).0.binaryOperationResult.119\;
                             -- The following section was transformed from the .NET statement below:
-                            -- if (return_78) {
+                            -- if (return_76) {
                             -- 	return quire;
                             -- }
                             -- 
 
                             -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                            --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_90\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_90\.
-                            --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_89\.
+                            --     * The true branch starts in state \Quire Posit32::op_Explicit(Posit32).0._State_87\ and ends in state \Quire Posit32::op_Explicit(Posit32).0._State_87\.
+                            --     * Execution after either branch will continue in the following state: \Quire Posit32::op_Explicit(Posit32).0._State_86\.
 
-                            if (\Quire Posit32::op_Explicit(Posit32).0.return_78\) then 
-                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_90\;
+                            if (\Quire Posit32::op_Explicit(Posit32).0.return_76\) then 
+                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_87\;
                             else 
                                 -- There was no false branch, so going directly to the state after the if-else.
-                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_89\;
+                                \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_86\;
                             end if;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.5667
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_89\ => 
-                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_88\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_86\ => 
+                        -- State after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_85\.
                         -- The following section was transformed from the .NET statement below:
                         -- return Quire.op_Addition (Quire.op_OnesComplement (quire), 1u);
                         -- 
                         -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_OnesComplement(Lombiq.Arithmetics.Quire)
                         \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire).q.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                         \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Started.0\ <= true;
-                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_91\;
+                        \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_88\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_90\ => 
-                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_88\.
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_87\ => 
+                        -- True branch of the if-else started in state \Quire Posit32::op_Explicit(Posit32).0._State_85\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	return quire;
@@ -14717,12 +16351,12 @@ begin
                         -- 
                         \Quire Posit32::op_Explicit(Posit32).0.return\ <= \Quire Posit32::op_Explicit(Posit32).0.quire\;
                         \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_1\;
-                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_88\.
-                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_90\) then 
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_89\;
+                        -- Going to the state after the if-else which was started in state \Quire Posit32::op_Explicit(Posit32).0._State_85\.
+                        if (\Quire Posit32::op_Explicit(Posit32).0._State\ = \Quire Posit32::op_Explicit(Posit32).0._State_87\) then 
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_86\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_91\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_88\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_OnesComplement(Lombiq.Arithmetics.Quire)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_OnesComplement(Quire)._Started.0\ <= false;
@@ -14732,10 +16366,10 @@ begin
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32).left.parameter.Out.0\ <= \Quire Posit32::op_Explicit(Posit32).0.return.2\;
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32).right.parameter.Out.0\ <= to_unsigned(1, 32);
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32)._Started.0\ <= true;
-                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_92\;
+                            \Quire Posit32::op_Explicit(Posit32).0._State\ := \Quire Posit32::op_Explicit(Posit32).0._State_89\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Posit32::op_Explicit(Posit32).0._State_92\ => 
+                    when \Quire Posit32::op_Explicit(Posit32).0._State_89\ => 
                         -- Waiting for the state machine invocation of the following method to finish: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,System.UInt32)
                         if (\Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32)._Started.0\ = \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32)._Finished.0\) then 
                             \Quire Posit32::op_Explicit(Posit32).0.Quire Quire::op_Addition(Quire,UInt32)._Started.0\ <= false;
@@ -14873,7 +16507,7 @@ begin
         Variable \Quire::.ctor(UInt32,UInt16).0.firstSegment\: unsigned(31 downto 0) := to_unsigned(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.size\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire::.ctor(UInt32,UInt16).0.conditional25\: signed(31 downto 0) := to_signed(0, 32);
-        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
@@ -14892,7 +16526,7 @@ begin
                 \Quire::.ctor(UInt32,UInt16).0.firstSegment\ := to_unsigned(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.size\ := to_unsigned(0, 16);
                 \Quire::.ctor(UInt32,UInt16).0.conditional25\ := to_signed(0, 32);
-                \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ := to_signed(0, 32);
+                \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := to_signed(0, 32);
@@ -14935,26 +16569,26 @@ begin
                         -- int conditional25;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- int remainderOperand41;
+                        -- int remainderOperand40;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- remainderOperand41 = (int)size;
+                        -- remainderOperand40 = (int)size;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
+                        \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ := signed(SmartResize(\Quire::.ctor(UInt32,UInt16).0.size\, 32));
                         -- The following section was transformed from the .NET statement below:
-                        -- if ((remainderOperand41 - remainderOperand41 / 32 * 32 != 0)) {
+                        -- if ((remainderOperand40 - remainderOperand40 / 32 * 32 != 0)) {
                         -- 	conditional25 = 1;
                         -- } else {
                         -- 	conditional25 = 0;
                         -- }
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ / to_signed(32, 32);
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ / to_signed(32, 32);
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\ := SmartResize(\Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.0\ * to_signed(32, 32), 32);
                         \Quire::.ctor(UInt32,UInt16).0._State\ := \Quire::.ctor(UInt32,UInt16).0._State_3\;
                         -- Clock cycles needed to complete this state (approximation): 0.70365
                     when \Quire::.ctor(UInt32,UInt16).0._State_3\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand41\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
+                        \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ := \Quire::.ctor(UInt32,UInt16).0.remainderOperand40\ - \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.1\;
                         \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.3\ := \Quire::.ctor(UInt32,UInt16).0.binaryOperationResult.2\ /= to_signed(0, 32);
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
@@ -14981,9 +16615,9 @@ begin
                         -- 
                         \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\ := (others => to_unsigned(0, 64));
                         -- The following section was transformed from the .NET statement below:
-                        -- @this.Segments [0] = firstSegment;
+                        -- @this.Segments [0] = 1u;
                         -- 
-                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := SmartResize(\Quire::.ctor(UInt32,UInt16).0.firstSegment\, 64);
+                        \Quire::.ctor(UInt32,UInt16).0.this\.\Segments\(to_integer(to_signed(0, 32))) := SmartResize(to_unsigned(1, 32), 64);
                         -- The following section was transformed from the .NET statement below:
                         -- int num;
                         -- 
@@ -15107,7 +16741,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.21\: boolean := false;
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.22\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,Quire).0.binaryOperationResult.23\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_Addition(Quire,Quire).0.object37\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_Addition(Quire,Quire).0.object36\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -15350,19 +16984,19 @@ begin
                     when \Quire Quire::op_Addition(Quire,Quire).0._State_6\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_Addition(Quire,Quire).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object37;
+                        -- Quire object36;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object37 = new Quire (array, 0);
+                        -- object36 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\IsNull\ := false;
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,Quire).0.object37\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\IsNull\ := false;
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,Quire).0.object36\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.object37\;
+                        \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.object36\;
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,Quire).0.array\;
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
@@ -15697,12 +17331,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_Addition(Quire,Quire).0.object37\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,Quire).0.object36\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_Addition(Quire,Quire).0.array\ := \Quire Quire::op_Addition(Quire,Quire).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object37;
+                            -- return object36;
                             -- 
-                            \Quire Quire::op_Addition(Quire,Quire).0.return\ <= \Quire Quire::op_Addition(Quire,Quire).0.object37\;
+                            \Quire Quire::op_Addition(Quire,Quire).0.return\ <= \Quire Quire::op_Addition(Quire,Quire).0.object36\;
                             \Quire Quire::op_Addition(Quire,Quire).0._State\ := \Quire Quire::op_Addition(Quire,Quire).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -15718,7 +17352,7 @@ begin
         Variable \Quire Quire::op_Addition(Quire,UInt32).0._State\: \Quire Quire::op_Addition(Quire,UInt32).0._States\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_0\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.left\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.right\: unsigned(31 downto 0) := to_unsigned(0, 32);
-        Variable \Quire Quire::op_Addition(Quire,UInt32).0.object38\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_Addition(Quire,UInt32).0.object37\: \Lombiq.Arithmetics.Quire\;
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_Addition(Quire,UInt32).0.return.0\: \Lombiq.Arithmetics.Quire\;
     begin 
@@ -15758,20 +17392,20 @@ begin
                         \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.left.parameter.In\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.right\ := \Quire Quire::op_Addition(Quire,UInt32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object38;
+                        -- Quire object37;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object38 = new Quire (1u, (ushort)((int)(left.SegmentCount) << 6));
+                        -- object37 = new Quire (1u, (ushort)((int)(left.SegmentCount) << 6));
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\IsNull\ := false;
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_Addition(Quire,UInt32).0.object38\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\IsNull\ := false;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_Addition(Quire,UInt32).0.object37\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         \Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\ := SmartResize(unsigned(shift_left(signed(SmartResize((\Quire Quire::op_Addition(Quire,UInt32).0.left\.\SegmentCount\), 32)), to_integer(unsigned(SmartResize(to_signed(6, 32), 5))))), 16);
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
-                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object38\;
+                        \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object37\;
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).firstSegment.parameter.Out.0\ <= to_unsigned(1, 32);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).size.parameter.Out.0\ <= (\Quire Quire::op_Addition(Quire,UInt32).0.binaryOperationResult.0\);
                         \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= true;
@@ -15781,13 +17415,13 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt32,System.UInt16)
                         if (\Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ = \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Finished.0\) then 
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.object38\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.object37\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire::.ctor(UInt32,UInt16).this.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return Quire.op_Addition (left, object38);
+                            -- return Quire.op_Addition (left, object37);
                             -- 
                             -- Starting state machine invocation for the following method: Lombiq.Arithmetics.Quire Lombiq.Arithmetics.Quire::op_Addition(Lombiq.Arithmetics.Quire,Lombiq.Arithmetics.Quire)
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.left\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object38\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.Out.0\ <= \Quire Quire::op_Addition(Quire,UInt32).0.object37\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= true;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_4\;
                         end if;
@@ -15798,7 +17432,7 @@ begin
                             \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire)._Started.0\ <= false;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return.0\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.left\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).left.parameter.In.0\;
-                            \Quire Quire::op_Addition(Quire,UInt32).0.object38\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
+                            \Quire Quire::op_Addition(Quire,UInt32).0.object37\ := \Quire Quire::op_Addition(Quire,UInt32).0.Quire Quire::op_Addition(Quire,Quire).right.parameter.In.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0.return\ <= \Quire Quire::op_Addition(Quire,UInt32).0.return.0\;
                             \Quire Quire::op_Addition(Quire,UInt32).0._State\ := \Quire Quire::op_Addition(Quire,UInt32).0._State_1\;
                         end if;
@@ -16103,22 +17737,23 @@ begin
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\: signed(31 downto 0) := to_signed(0, 32);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\: signed(31 downto 0) := to_signed(0, 32);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.array\: \unsigned64_Array\(0 to 7) := (others => to_unsigned(0, 64));
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num2\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\: boolean := false;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.num3\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.flag2\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: boolean := false;
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(63 downto 0) := to_unsigned(0, 64);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\: boolean := false;
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\: unsigned(63 downto 0) := to_unsigned(0, 64);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object39\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\: unsigned(15 downto 0) := to_unsigned(0, 16);
+        Variable \Quire Quire::op_RightShift(Quire,Int32).0.object38\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16132,21 +17767,22 @@ begin
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := to_signed(0, 32);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := to_signed(0, 32);
                 \Quire Quire::op_RightShift(Quire,Int32).0.array\ := (others => to_unsigned(0, 64));
                 \Quire Quire::op_RightShift(Quire,Int32).0.num\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := false;
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := to_unsigned(0, 16);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 16);
                 \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := false;
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := to_unsigned(0, 64);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := false;
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := to_unsigned(0, 64);
-                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := to_unsigned(0, 64);
                 \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := to_unsigned(0, 16);
+                \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := to_unsigned(0, 16);
             else 
                 case \Quire Quire::op_RightShift(Quire,Int32).0._State\ is 
                     when \Quire Quire::op_RightShift(Quire,Int32).0._State_0\ => 
@@ -16172,12 +17808,17 @@ begin
                         \Quire Quire::op_RightShift(Quire,Int32).0.left\ := \Quire Quire::op_RightShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = right & ((int)(left.SegmentCount) * 64 - 1);
+                        -- right = right & ((1 << (int)(left.SegmentCount) * 6) - 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(64, 32), 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ - to_signed(1, 32);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\ := SmartResize(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.left\.\SegmentCount\), 32)) * to_signed(6, 32), 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\ := shift_left(to_signed(1, 32), to_integer(unsigned(SmartResize(\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.0\, 5))));
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
+                        -- Clock cycles needed to complete this state (approximation): 0.8211
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ => 
+                        -- This state was added because the previous state would go over one clock cycle with any more operations.
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.1\) - to_signed(1, 32);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := \Quire Quire::op_RightShift(Quire,Int32).0.right\ and (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.2\);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.right\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong[] array;
                         -- 
@@ -16218,13 +17859,13 @@ begin
                         -- }
                         -- 
                         -- Starting a while loop.
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
-                        -- Clock cycles needed to complete this state (approximation): 0.63075
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\.
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
+                        -- Clock cycles needed to complete this state (approximation): 0.486
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) < (\Quire Quire::op_RightShift(Quire,Int32).0.right\);
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.3\) then 
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) < (\Quire Quire::op_RightShift(Quire,Int32).0.right\);
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	bool flag;
@@ -16275,37 +17916,37 @@ begin
                             -- }
                             -- 
                             -- Starting a while loop.
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
                         else 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.46515
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ => 
-                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_5\ => 
+                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object39;
+                        -- Quire object38;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object39 = new Quire (array, 0);
+                        -- object38 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\IsNull\ := false;
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.object39\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\IsNull\ := false;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.object38\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object39\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object38\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_RightShift(Quire,Int32).0.array\;
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_11\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_12\;
                         -- Clock cycles needed to complete this state (approximation): 0
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_5\ => 
-                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_6\ => 
+                        -- Repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
                         -- The while loop's condition:
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) <= to_signed(8, 32);
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.4\) then 
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) <= to_signed(8, 32);
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\) then 
                             -- The following section was transformed from the .NET statement below:
                             -- {
                             -- 	ushort num3;
@@ -16326,45 +17967,45 @@ begin
                             -- The following section was transformed from the .NET statement below:
                             -- num3 = (ushort)(8 - (int)(num2));
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32))), 16);
-                            \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.5\);
+                            \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := SmartResize(unsigned(to_signed(8, 32) - signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32))), 16);
+                            \Quire Quire::op_RightShift(Quire,Int32).0.num3\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\);
                             -- The following section was transformed from the .NET statement below:
                             -- bool flag2;
                             -- 
                             -- The following section was transformed from the .NET statement below:
                             -- flag2 = (array [num3] & 1uL) == 1uL;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_7\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
                         else 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_7\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.89265
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_6\ => 
-                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_7\ => 
+                        -- State after the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\.
                         -- The following section was transformed from the .NET statement below:
                         -- num = (ushort)((int)(num) + 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) + to_signed(1, 32)), 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.num\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\);
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_2\ if the loop wasn't exited with a state change.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_6\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_3\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num\), 32)) + to_signed(1, 32)), 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.num\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.12\);
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ if the loop wasn't exited with a state change.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_7\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_4\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_7\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_8\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) and to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.6\) = to_unsigned(1, 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) and to_unsigned(1, 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.7\) = to_unsigned(1, 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.flag2\ := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
                         -- The following section was transformed from the .NET statement below:
                         -- array [num3] = array [num3] >> 1;
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_8\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
                         -- Clock cycles needed to complete this state (approximation): 0.66
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_8\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_9\ => 
                         -- This state was added because the previous state would go over one clock cycle with any more operations.
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.8\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := SmartResize(shift_right(\Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)), to_integer(unsigned(SmartResize(to_signed(1, 32), 6) and "111111"))), 64);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
                         -- The following section was transformed from the .NET statement below:
                         -- if (flag) {
                         -- 	array [num3] = array [num3] | 0x8000000000000000uL;
@@ -16372,18 +18013,18 @@ begin
                         -- 
 
                         -- This if-else was transformed from a .NET if-else. It spans across multiple states:
-                        --     * The true branch starts in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ and ends in state \Quire Quire::op_RightShift(Quire,Int32).0._State_10\.
-                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
+                        --     * The true branch starts in state \Quire Quire::op_RightShift(Quire,Int32).0._State_11\ and ends in state \Quire Quire::op_RightShift(Quire,Int32).0._State_11\.
+                        --     * Execution after either branch will continue in the following state: \Quire Quire::op_RightShift(Quire,Int32).0._State_10\.
 
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.flag\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_11\;
                         else 
                             -- There was no false branch, so going directly to the state after the if-else.
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.4668
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_9\ => 
-                        -- State after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ => 
+                        -- State after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- flag = flag2;
                         -- 
@@ -16391,15 +18032,15 @@ begin
                         -- The following section was transformed from the .NET statement below:
                         -- num2 = (ushort)((int)(num2) + 1);
                         -- 
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) + to_signed(1, 32)), 16);
-                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\);
-                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_3\ if the loop wasn't exited with a state change.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_9\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_5\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\ := SmartResize(unsigned(signed(SmartResize((\Quire Quire::op_RightShift(Quire,Int32).0.num2\), 32)) + to_signed(1, 32)), 16);
+                        \Quire Quire::op_RightShift(Quire,Int32).0.num2\ := (\Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.11\);
+                        -- Returning to the repeated state of the while loop which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_4\ if the loop wasn't exited with a state change.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_6\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.3981
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_10\ => 
-                        -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_11\ => 
+                        -- True branch of the if-else started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
                         -- The following section was transformed from the .NET statement below:
                         -- {
                         -- 	array [num3] = array [num3] | 0x8000000000000000uL;
@@ -16409,23 +18050,23 @@ begin
                         -- array [num3] = array [num3] | 0x8000000000000000uL;
                         -- 
                         -- Since the integer literal 9223372036854775808 was out of the VHDL integer range it was substituted with a binary literal (1000000000000000000000000000000000000000000000000000000000000000).
-                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) or "1000000000000000000000000000000000000000000000000000000000000000";
-                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.9\;
-                        -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_8\.
-                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_10\) then 
-                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_9\;
+                        \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\ := \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) or "1000000000000000000000000000000000000000000000000000000000000000";
+                        \Quire Quire::op_RightShift(Quire,Int32).0.array\(to_integer(\Quire Quire::op_RightShift(Quire,Int32).0.num3\)) := \Quire Quire::op_RightShift(Quire,Int32).0.binaryOperationResult.10\;
+                        -- Going to the state after the if-else which was started in state \Quire Quire::op_RightShift(Quire,Int32).0._State_9\.
+                        if (\Quire Quire::op_RightShift(Quire,Int32).0._State\ = \Quire Quire::op_RightShift(Quire,Int32).0._State_11\) then 
+                            \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_10\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0.2229
-                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_11\ => 
+                    when \Quire Quire::op_RightShift(Quire,Int32).0._State_12\ => 
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_RightShift(Quire,Int32).0.object39\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.object38\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_RightShift(Quire,Int32).0.array\ := \Quire Quire::op_RightShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object39;
+                            -- return object38;
                             -- 
-                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object39\;
+                            \Quire Quire::op_RightShift(Quire,Int32).0.return\ <= \Quire Quire::op_RightShift(Quire,Int32).0.object38\;
                             \Quire Quire::op_RightShift(Quire,Int32).0._State\ := \Quire Quire::op_RightShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
@@ -16455,7 +18096,7 @@ begin
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.6\: unsigned(63 downto 0) := to_unsigned(0, 64);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.7\: unsigned(15 downto 0) := to_unsigned(0, 16);
         Variable \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.8\: unsigned(15 downto 0) := to_unsigned(0, 16);
-        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.object40\: \Lombiq.Arithmetics.Quire\;
+        Variable \Quire Quire::op_LeftShift(Quire,Int32).0.object39\: \Lombiq.Arithmetics.Quire\;
     begin 
         if (rising_edge(\Clock\)) then 
             if (\Reset\ = '1') then 
@@ -16505,9 +18146,9 @@ begin
                         \Quire Quire::op_LeftShift(Quire,Int32).0.left\ := \Quire Quire::op_LeftShift(Quire,Int32).0.left.parameter.In\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right.parameter.In\;
                         -- The following section was transformed from the .NET statement below:
-                        -- right = right & 511;
+                        -- right = right & 65535;
                         -- 
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(511, 32);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\ := \Quire Quire::op_LeftShift(Quire,Int32).0.right\ and to_signed(65535, 32);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.right\ := \Quire Quire::op_LeftShift(Quire,Int32).0.binaryOperationResult.0\;
                         -- The following section was transformed from the .NET statement below:
                         -- ulong[] array;
@@ -16608,19 +18249,19 @@ begin
                     when \Quire Quire::op_LeftShift(Quire,Int32).0._State_4\ => 
                         -- State after the while loop which was started in state \Quire Quire::op_LeftShift(Quire,Int32).0._State_2\.
                         -- The following section was transformed from the .NET statement below:
-                        -- Quire object40;
+                        -- Quire object39;
                         -- 
                         -- The following section was transformed from the .NET statement below:
-                        -- object40 = new Quire (array, 0);
+                        -- object39 = new Quire (array, 0);
                         -- 
                         -- Initializing record fields to their defaults.
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\IsNull\ := false;
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\Size\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\SegmentCount\ := to_unsigned(0, 16);
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.object40\.\Segments\ := (others => to_unsigned(0, 64));
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\IsNull\ := false;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\Size\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\SegmentCount\ := to_unsigned(0, 16);
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.object39\.\Segments\ := (others => to_unsigned(0, 64));
                         -- Invoking the target's constructor.
                         -- Starting state machine invocation for the following method: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
-                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object40\;
+                        \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object39\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.Out.0\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.array\;
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).size.parameter.Out.0\ <= SmartResize(unsigned(to_signed(0, 32)), 16);
                         \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= true;
@@ -16732,12 +18373,12 @@ begin
                         -- Waiting for the state machine invocation of the following method to finish: System.Void Lombiq.Arithmetics.Quire::.ctor(System.UInt64[],System.UInt16)
                         if (\Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ = \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Finished.0\) then 
                             \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16)._Started.0\ <= false;
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.object40\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.object39\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).this.parameter.In.0\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0.array\ := \Quire Quire::op_LeftShift(Quire,Int32).0.Quire::.ctor(UInt64[],UInt16).segments.parameter.In.0\;
                             -- The following section was transformed from the .NET statement below:
-                            -- return object40;
+                            -- return object39;
                             -- 
-                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object40\;
+                            \Quire Quire::op_LeftShift(Quire,Int32).0.return\ <= \Quire Quire::op_LeftShift(Quire,Int32).0.object39\;
                             \Quire Quire::op_LeftShift(Quire,Int32).0._State\ := \Quire Quire::op_LeftShift(Quire,Int32).0._State_1\;
                         end if;
                         -- Clock cycles needed to complete this state (approximation): 0
