@@ -1,0 +1,12 @@
+name: Validate NuGet Publish
+
+on:
+  pull_request:
+  push:
+    branches:
+      - dev
+
+jobs:
+  validate-nuget-publish:
+    name: Validate NuGet Publish
+    uses: Lombiq/GitHub-Actions/.github/workflows/validate-nuget-publish.yml@dev

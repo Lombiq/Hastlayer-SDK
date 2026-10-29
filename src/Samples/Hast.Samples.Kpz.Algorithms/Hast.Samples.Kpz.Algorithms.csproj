@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\..\Hastlayer\Hast.Algorithms\Hast.Algorithms.csproj" />
+    <ProjectReference Include="..\..\Hastlayer\Hast.Layer\Hast.Layer.csproj" />
+  </ItemGroup>
+  
+</Project>

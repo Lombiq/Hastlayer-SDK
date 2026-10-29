@@ -1,21 +1,15 @@
 # Working with Hastlayer
 
-
-
 ## Creating a Hastlayer-using application
 
-The Hastlayer developer story is not ideal yet - we're working on improving it by [making the SDK available from NuGet](https://github.com/Lombiq/Hastlayer-SDK/issues/35). For now the below one is the easiest approach to add Hastlayer to your application:
+You can add Hastlayer to your app from NuGet, and then get going, see the steps below. You can also check out a sample solution right away, in [the _NuGetTest_ folder of this repo](../NuGetTest).
 
-1. Clone the Hastlayer repository into a subfolder of your application.
-2. Copy the Hastlayer solution file corresponding to your Hastlayer flavor and use that to add your own projects to (you'll need to change project paths there to point to the Hastlayer subdirectory; [this example](Attachments/Hastlayer.SDK.Client.sln) shows how a Client solution file looks if Hastlayer is cloned to a folder named "Hastlayer", but this is just a static sample, do copy the latest one!). This way you'll have all the necessary projects added. Alternatively you can also add the Hastlayer projects to your existing solution, just make sure to add all of them.
-3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples) and the necessary project references (Visual Studio will suggest adding the right projects most of the time, otherwise also take a look at the samples).
-
-When Hastlayer is updated you can just pull in changes from the official Hastlayer repository, but you'll need to keep your solution file up to date by hand.
-
-We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications. You can check out all the samples in the *Samples* solution folder.
+1. Install the latest version of the [`Hast.Layer` NuGet package](https://www.nuget.org/packages/Hast.Layer/).
+2. You'll need a hardware framework too; currently, there's only one, so also install the latest version of the `Hast.Vitis.HardwareFramework` NuGet package. 
+3. In the project where you want to use Hastlayer add the necessary initialization code (as shown in the samples).
+4. You're ready to start working with Hastlayer! We suggest starting with the included samples then taking your first Hastlayer steps by writing some small algorithm, then gradually stepping up to more complex applications. You can check out all the samples in the _Samples_ solution folder of the SDK.
 
 Since it's possible that due to bugs with some corner cases the hardware code will produce incorrect results it's good to configure Hastlayer to verify the hardware output while testing (and do tell Lombiq if you've found issues): You can do this by setting `ProxyGenerationConfiguration.VerifyHardwareResults` to `true` when generating proxy objects.
-
 
 ## Writing Hastlayer-compatible .NET code
 
@@ -48,11 +42,9 @@ Some general constraints you have to keep in mind:
 - Note that you can write unsupported code in a member of a type that will be transformed if that member won't be accessed on the hardware (since unused code is removed from transformation). So e.g. you can implement `ToString()`.
 - Check out the `Hast.Algorithms` library for some Hastlayer-compatible useful algorithms.
 
-
 ## Running your code on hardware
 
 Once you've written some Hastlayer-compatible algorithm you can then generate hardware from it. Be sure to use assemblies built in the Debug configuration. Once you've successfully generated hardware from your algorithm then you'll be able to execute it on an FPGA as hardware. At the moment this needs to be configured manually, so check out the docs of the Hastlayer Hardware repo on how to get started with that.
-
 
 ## Performance-optimizing your code
 
@@ -87,7 +79,6 @@ Note that FPGAs have a finite amount of resources that you can utilize, and the 
 
 Very broadly speaking if you performance-optimize your .NET code and it executes faster as software then most possibly it will also execute faster as hardware. But do measure if your optimizations have the desired effect.
 
-
 ## Troubleshooting
 
 ### Errors and warnings
@@ -111,13 +102,12 @@ Think of these as breakpoints where you read out variable values with the debugg
 Even if the algorithm doesn't properly terminate you can use this technique, but you'll need to inspect the content of the memory on the FPGA; for the Nexys A7 you can do this in the Xilinx SDK's Memory window (everything written with `SimpleMemory` starts at the address `0x48fffff0`).
 
 ### Checking the decompiled source
-When you're working with the Developer flavor of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `SaveSyntaxTree` (this is enabled in Debug mode by default).
+When you're working with the full source of Hastlayer it can also help to see what the decompiled C# source code looks like. You can save that to files, see `Hast.Transformer.DefaultTransformer` and look for `SaveSyntaxTree` (this is enabled in Debug mode by default).
 
 ### Dumping (and loading) SimpleMemory content
 You can store the contents of a `SimpleMemory` instance in a binary format, also as a file. Similarly you can load them into a `SimpleMemory` too.
 
 You can read such files e.g. with Notepad++'s [HEX-Editor plugin](https://community.notepad-plus-plus.org/topic/17459/why-there-is-no-new-hexeditor-now/2). After the plugin's installation click the H icon to display the file contents in a hex format.
-
 
 ## Extensibility
 
@@ -125,7 +115,6 @@ Hastlayer, apart from the standard dependency injection extensibility (e.g. the 
 
 - .NET-style events: standard .NET events.
 - Pipeline steps: unlike event handlers, pipeline steps are executed in deterministic order and usually have a return value that is fed to the next pipeline step.
-
 
 ## Using dynamic constants
 

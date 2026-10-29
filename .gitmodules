@@ -1,28 +1,12 @@
-[submodule "Hast.Remote.Bridge"]
-	path = Hast.Remote.Bridge
-	url = https://github.com/Lombiq/Hastlayer-Remote-Bridge.git
-	branch = dev
-[submodule "Hast.Core"]
-	path = Hast.Core
-	url = https://github.com/Lombiq/Hastlayer-Core.git
-	branch = dev
-[submodule "Lombiq.Arithmetics"]
-	path = Lombiq.Arithmetics
-	url = https://github.com/Lombiq/Arithmetics.git
-	branch = dev
-[submodule "Hastlayer-Hardware-Framework---Vitis"]
-	path = Hastlayer-Hardware-Framework---Vitis
-	url = https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis
-	branch = dev
 [submodule "tools/Lombiq.Analyzers"]
 	path = tools/Lombiq.Analyzers
 	url = https://github.com/Lombiq/.NET-Analyzers.git
 	branch = dev
-[submodule "Libraries/Lombiq.HelpfulLibraries"]
-	path = Libraries/Lombiq.HelpfulLibraries
-	url = https://github.com/Lombiq/Helpful-Libraries.git
-	branch = orchard-core-preview
-[submodule "Libraries/Terminal.Gui"]
-	path = Libraries/Terminal.Gui
-	url = https://github.com/Lombiq/gui.cs.git
-	branch = issue/HAST-180
+[submodule "src/Hardware Frameworks/Vitis"]
+	path = src/HardwareFrameworks/Vitis
+	url = https://github.com/Lombiq/Hastlayer-Hardware-Framework---Vitis
+	branch = dev
+[submodule "src/Libraries/Lombiq.Arithmetics"]
+	path = src/Libraries/External/Lombiq.Arithmetics
+	url = https://github.com/Lombiq/Arithmetics.git
+	branch = dev

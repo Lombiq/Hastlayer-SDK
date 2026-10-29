@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Title>Hastlayer - Transformer</Title>
+    <Description>Component dealing with transforming .NET assemblies into hardware description. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.Transformer</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Hast.Transformer.Tests\**" />
+    <EmbeddedResource Remove="Hast.Transformer.Tests\**" />
+    <None Remove="Hast.Transformer.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hast.Synthesis\Hast.Synthesis.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MedallionTopologicalSort" Version="1.0.0" />
+    <PackageReference Include="System.CodeDom" Version="4.7.0" />
+  </ItemGroup>
+</Project>

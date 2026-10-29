@@ -1,0 +1,1 @@
+This file is only here to have an empty folder for the build. Otherwise, you'll get an "error NU1301: The local source '.../NuGetTest/packages' doesn't exist."

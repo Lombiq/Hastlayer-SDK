@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.8.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Shouldly" Version="4.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="xunit.runner.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Hastlayer\Hast.Catapult\Hast.Catapult.csproj" />
+    <ProjectReference Include="..\..\src\Samples\Hast.Samples.FSharpSampleAssembly\Hast.Samples.FSharpSampleAssembly.fsproj" />
+    <ProjectReference Include="..\..\src\Samples\Hast.Samples.Kpz.Algorithms\Hast.Samples.Kpz.Algorithms.csproj" />
+    <ProjectReference Include="..\..\src\Samples\Hast.Samples.SampleAssembly\Hast.Samples.SampleAssembly.csproj" />
+    <ProjectReference Include="..\Hast.TestBase\Hast.TestBase.csproj" />
+    <ProjectReference Include="..\Hast.Transformer.Tests\Hast.Transformer.Tests.csproj" />
+    <ProjectReference Include="..\Hast.Transformer.Vhdl.Tests.Common\Hast.Transformer.Vhdl.Tests.Common.csproj" />
+    <ProjectReference Include="..\TestInputAssemblies\Hast.TestInputs.Dynamic\Hast.TestInputs.Dynamic.csproj" />
+    <ProjectReference Include="..\TestInputAssemblies\Hast.TestInputs.Invalid\Hast.TestInputs.Invalid.csproj" />
+    <ProjectReference Include="..\TestInputAssemblies\Hast.TestInputs.Static\Hast.TestInputs.Static.csproj" />
+  </ItemGroup>
+</Project>

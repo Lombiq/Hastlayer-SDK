@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <OutputPath>bin\</OutputPath>
+    <Title>Hastlayer - VHDL Builder</Title>
+    <Description>A .NET VHDL code builder, i.e. you can build syntactically valid VHDL code with .NET constructs. See the project website for detailed documentation.</Description>
+    <PackageTags>Lombiq;Hastlayer;FPGA;HardwareAcceleration;Performance;VHDL;AST</PackageTags>
+    <PackageProjectUrl>https://github.com/Lombiq/Hastlayer-SDK/tree/dev/src/Hastlayer/Hast.VhdlBuilder</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lombiq.HelpfulLibraries.Common" Version="13.0.0" />
+  </ItemGroup>
+</Project>
