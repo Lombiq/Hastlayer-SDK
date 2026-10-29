@@ -3,6 +3,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <StartupObject>Hast.DynamicTests.Program</StartupObject>
+    <!-- These tests need an FPGA board, so they shouldn't be executed by dotnet test, e.g. in CI. -->
+    <IsTestProject>false</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="xunit.runner.json">
