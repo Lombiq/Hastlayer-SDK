@@ -16,12 +16,9 @@ for (var i = 0; i<3; i++){
         var one = i < 2 ? "1" : "1U";
         manager.StartNewFile(className + ".cs");
 #>
-using Hast.Layer;
 using Hast.Transformer.SimpleMemory;
 using Lombiq.Arithmetics;
-using Lombiq.HelpfulLibraries.Common.Utilities;
-using System;
-using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace Hast.Samples.Posit;
@@ -74,6 +71,15 @@ public class <#= className #>
         memory.WriteUInt32(CalculatePowerOfRealOutputPosit32Index, result);
     }
 
+    [SuppressMessage(
+        "Reliability",
+        "CA2008:Do not create tasks without passing a TaskScheduler",
+        Justification = "There is no task scheduler in hardware.")]
+    [SuppressMessage(
+        "Usage",
+        "VSTHRD105:Avoid method overloads that assume TaskScheduler.Current",
+        Justification = "Same.")]
+    [SuppressMessage("Usage", "VSTHRD104:Offer async methods", Justification = "Same.")]
     public virtual void ParallelizedCalculateIntegerSumUpToNumbers(SimpleMemory memory)
     {
         var tasks = new Task<int>[MaxDegreeOfParallelism];
@@ -124,6 +130,17 @@ public class <#= className #>
         memory.WriteUInt32(AddPositsInArrayOutputPosit32Index, result.PositBits);
     }
 }
+<#
+        manager.StartNewFile(className + "CalculatorExtensions.cs");
+#>
+using Hast.Layer;
+using Hast.Transformer.SimpleMemory;
+using Lombiq.Arithmetics;
+using Lombiq.HelpfulLibraries.Common.Utilities;
+using System;
+using System.Collections.Generic;
+
+namespace Hast.Samples.Posit.Extensions;
 
 public static class <#= className #>CalculatorExtensions
 {

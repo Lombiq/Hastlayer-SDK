@@ -1,4 +1,5 @@
 ﻿using Hast.Layer;
+using Hast.Samples.Posit.Extensions;
 using Lombiq.Arithmetics;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;

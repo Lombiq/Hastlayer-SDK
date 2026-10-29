@@ -16,6 +16,7 @@ for (var i = 0; i<3; i++){
         manager.StartNewFile(className + ".cs");
 #>
 using Hast.Layer;
+using Hast.Samples.Posit.Extensions;
 using Lombiq.Arithmetics;
 using Lombiq.HelpfulLibraries.Common.Utilities;
 using System;
