@@ -129,15 +129,14 @@ internal sealed class ConstantValuesMarkingVisitor : DepthFirstAstVisitor
             // members of the object passed at one call would be substituted for every call.
             void ParameterHandler(ParameterDeclaration parameter)
             {
-                if (IsEquivalentObjectPassedByAllCalls(parameter, constructorReference))
-                {
-                    Handler(parameter);
-                }
-                else
+                if (!IsEquivalentObjectPassedByAllCalls(parameter, constructorReference))
                 {
                     _constantValuesSubstitutingAstProcessor.ObjectHoldersToConstructorsMappings
                         .Remove(parameter.GetFullName());
+                    return;
                 }
+
+                Handler(parameter);
             }
 
             ProcessParent(
