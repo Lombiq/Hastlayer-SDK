@@ -564,7 +564,13 @@ public class DynamicTextTransformation2
         Type type = _instance.GetType();
         _write = type.GetMethod("Write", new Type[] { typeof(string) });
         _writeLine = type.GetMethod("WriteLine", new Type[] { typeof(string) });
-        _generationEnvironment = type.GetProperty("GenerationEnvironment", BindingFlags.Instance | BindingFlags.NonPublic);
+        _generationEnvironment = type.GetProperty(
+            "GenerationEnvironment",
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+        if (_generationEnvironment == null)
+        {
+            throw new MissingMemberException(type.FullName, "GenerationEnvironment");
+        }
         _host = type.GetProperty("Host");
         _errors = type.GetProperty("Errors");
     }
